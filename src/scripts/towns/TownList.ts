@@ -1560,9 +1560,7 @@ const AzaleaElder = new NPC('Elder Li', [
     'I remember, back in the day, it was the Guardian of Ilex Forest. It was a playful Pokémon. It loved playing with children.',
     'It was especially close to a kid named Samuel Oak. When he suddenly moved to Kanto, Celebi was quite sad. He never even said goodbye! I wonder what became of that boy. Maybe he knows more of where Celebi is right now. They certainly have Unfinished Business.',
     'Celebi got over it very quick, playful as it is. There are always other kids to play with. Then, some time later, a strange figure went into the forest with a golden Poké Ball. The Guardian hasn\'t been seen since.',
-], {
-    image: 'assets/images/npcs/Elder Li.png',
-});
+], { image: 'assets/images/npcs/Elder Li.png' });
 
 const AzaleaHiker = new NPC('Hiker Daniel', [
     'The PokéManiacs in Union Cave are restless. They have been ranting and raving about a weekly visitor.',
@@ -1738,7 +1736,6 @@ const EcruteakEusine = new NPC('Eusine', [
 ], {
     image: 'assets/images/npcs/Eusine.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('The Legendary Beasts'), new QuestLineStepCompletedRequirement('The Legendary Beasts', 2, GameConstants.AchievementOption.less )]),
-    mentionsPokemon: ['Raikou', 'Entei', 'Suicune'],
 });
 const EcruteakPokéfan = new NPC('Pokéfan Derek', [
     'I saw it! Did you see it?! I saw you go in there! I don\'t know what you did in the Burned Tower, but three great Beasts came running out of there!',
@@ -1796,7 +1793,6 @@ const KimonoGirlsEcruteak = new NPC('Kimono Girls', [
 ], {
     image: 'assets/images/npcs/Kimono Girl.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Rainbow Guardian'), new QuestLineStepCompletedRequirement('Rainbow Guardian', 1, GameConstants.AchievementOption.less)]),
-    mentionsPokemon: ['Ho-Oh'],
 });
 
 const OlivineSSAquaCaptain = new NPC('S.S. Aqua Captain', [
@@ -2404,10 +2400,8 @@ const SkepticalFisherman = new NPC('Skeptical Fisherman', [
 
 const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'Oh! Welcome, welcome. Do you by any chance have any Meteorites? No? Ah well, I’m studying the Pokémon Deoxys and I’ve heard that a Meteorite can cause it to change forms!',
-    'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms… but I’m not strong enough to find out...'],
-{
-    requirement: new QuestLineStartedRequirement('The Delta Episode', GameConstants.AchievementOption.less),
-});
+    'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms… but I’m not strong enough to find out...',
+], {requirement: new QuestLineStartedRequirement('The Delta Episode', GameConstants.AchievementOption.less)});
 
 const LavaridgeSootCollector = new NPC('Soot Collector', [
     'Blegh! I\'ve taken three soaks in the hot springs and I can still taste the soot!',
@@ -2483,7 +2477,6 @@ const WeatherBattle1 = new NPC('The Super-Ancient Pokémon Clash', [
     '<i>The locals in Sootopolis City take shelter from the raging battle. Some say that this sort of thing would never happen if Wallace was still around.</i>',
 ], {image: 'assets/images/npcs/other/WeatherBattle1.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('The Weather Trio'), new QuestLineStepCompletedRequirement('The Weather Trio', 1, GameConstants.AchievementOption.less)]),
-    mentionsPokemon: ['Groudon', 'Kyogre'],
 });
 
 const WeatherBattle2 = new NPC('The Super-Ancient Pokémon Clash', [
@@ -2688,7 +2681,6 @@ const SouthernIsland1 = new NPC('Explore the Southern Island', [
     '<i>Latios and Latias are resting in the clearing. You can approach one of them, but the other will probably flee.</i>',
 ], {
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 2), new QuestLineStepCompletedRequirement('The Eon Duo', 3, GameConstants.AchievementOption.less)]),
-    mentionsPokemon: ['Latios', 'Latias'],
 });
 
 const Cozmo1 = new NPC('Dr. Cozmo', [
@@ -4201,7 +4193,7 @@ const CanalaveRiley = new NPC('Riley', [
 const CanalaveYoungBoy = new NPC('Young Boy', [
     'Oh, hello! Say, have you ever heard of Cresselia? Once when I was really little I had a really bad dream I couldn’t wake up from, but then a kind trainer went to an island near here and got help from Cresselia to cure me!',
     'Maybe if you can prove yourself by conquering that island, you could find Cresselia roaming around the region...',
-], {mentionsPokemon: ['Cresselia']});
+]);
 
 const CanalaveSinnohMyth = new NPC('Sinnoh\'s Myth', [
     '<i>Three Pokémon there were.</i>',
@@ -4214,7 +4206,6 @@ const CanalaveSinnohMyth = new NPC('Sinnoh\'s Myth', [
     '<i>Bearing with them the power to make vast lands, they rise again.</i>',
 ],{
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 0), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 2, GameConstants.AchievementOption.less)]),
-    mentionsPokemon: ['Uxie', 'Mesprit', 'Azelf'],
 });
 
 const VerityMesprit = new NPC('Mesprit', [
@@ -5086,10 +5077,7 @@ const ExcitedChild = new NPC('Excited Child', [
     'I was just watching my favorite show, The National Gymquirer. It was a live segment! Some hot shot trainer from Kanto defeated Drayden! It was amazing! That trainer is so cool! Drayden is like unbeatable.',
     'Then my programme got interrupted by an emergency broadcast. A report on the first confirmed sightings of Tornadus and Thundurus in over twenty-five years! I\'ve read so much about them, they are my favorites.',
     'Last time they were spotted they just roamed around, causing all kinds of mischief. According to my books anyway. I\'m sure that amazing trainer from the TV will want to catch these mighty forces of nature.',
-], {
-    image: 'assets/images/npcs/School Kid (female).png',
-    mentionsPokemon: ['Tornadus', 'Thundurus'],
-});
+], {image: 'assets/images/npcs/School Kid (female).png'});
 
 const CasteliaMusician = new NPC('Musician', [
     'Sup. Ya like jazz? No? Well then you should check out me and my band at the Sonata Cafe where we never play Jazz.',
@@ -6218,7 +6206,6 @@ const ProfessorSycamore1 = new NPC('Prof. Sycamore', [
     'By the way, I heard Frost Cavern has a lot of cool Pokémon, why don\'t you go check it out?',
 ], {image: 'assets/images/npcs/Sycamore.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 15), new QuestLineStepCompletedRequirement('A Beautiful World', 17, GameConstants.AchievementOption.less)]),
-    mentionsPokemon: ['Xerneas', 'Yveltal'],
 });
 
 const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
@@ -9016,7 +9003,6 @@ const BirdPeony1 = new NPC ('Peony', [
 ], {
     image: 'assets/images/npcs/Peony.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('The Birds of the Dyna Tree'), new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 2, GameConstants.AchievementOption.less )]),
-    mentionsPokemon: ['Galarian Articuno', 'Galarian Zapdos', 'Galarian Moltres'],
 });
 const BirdPeony2 = new NPC ('Peony', [
     'You\'re saying you saw some Pokémon that looked like.... Hang on, Chief! There\'s breaking news on the telly! They\'re sayin\' dodgy bird Pokémon are poppin\' up left and right!',

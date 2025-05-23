@@ -1,5 +1,5 @@
 class RoamerNPC extends NPC {
-    public subRegionGroup: number;
+    public subRegionRoamerGroup: number;
 
     constructor(
         public name: string,
@@ -9,10 +9,10 @@ class RoamerNPC extends NPC {
         image: string = undefined,
         requirement?: Requirement | MultiRequirement | OneFromManyRequirement
     ) {
-        this.subRegionGroup = RoamingPokemonList.findGroup(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Kanto);
         super(name, dialog, { image: image, requirement: requirement,
             mentionsPokemon: () => RoamingPokemonList.getSubRegionalGroupRoamers(this.region, this.subRegionRoamerGroup).map(r => r.pokemonName),
         });
+        this.subRegionRoamerGroup = RoamingPokemonList.findGroup(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Kanto);
     }
 
     get dialogHTML(): string {
