@@ -1082,27 +1082,6 @@ export enum StoneType {
     'Metal_alloy',
 }
 
-export enum FossilType {
-    'Helix_fossil',
-    'Dome_fossil',
-    'Old_amber',
-    'Root_fossil',
-    'Claw_fossil',
-    'Armor_fossil',
-    'Skull_fossil',
-    'Cover_fossil',
-    'Plume_fossil',
-    'Jaw_fossil',
-    'Sail_fossil',
-}
-
-export enum FossilPieceType {
-    'Fossilized_bird',
-    'Fossilized_fish',
-    'Fossilized_drake',
-    'Fossilized_dino',
-}
-
 export enum BattleItemType {
     'xAttack' = 'xAttack',
     'xClick' = 'xClick',
