@@ -1,9 +1,9 @@
 import PokemonType from '../enums/PokemonType';
-import { AlolaSubRegions, Region } from '../GameConstants';
+import { Region } from '../GameConstants';
 import WeatherType from '../weather/WeatherType';
 import { getPokemonByName } from '../pokemons/PokemonHelper';
 import GameHelper from '../GameHelper';
-import type { PokemonNameType } from '../pokemons/PokemonNameType';
+import type { TmpPartyPokemonType } from '../TemporaryScriptTypes';
 
 export default class DamageCalculator {
     public static type1 = ko.observable(PokemonType.None).extend({ numeric: 0 });
@@ -47,14 +47,11 @@ export default class DamageCalculator {
     public static getDamageByTypes(): number[] {
         const typedamage = new Array(GameHelper.enumLength(PokemonType) - 1).fill(0);
         const ignoreRegionMultiplier = DamageCalculator.region() == Region.none;
+        const activePokemon  = App.game.party.partyPokemonActiveInSubRegion(DamageCalculator.region(), DamageCalculator.subregion());
 
-        for (const pokemon of App.game.party.caughtPokemon) {
+        for (const pokemon of activePokemon) {
             const dataPokemon = getPokemonByName(pokemon.name);
             if (dataPokemon.type1 === PokemonType.None) {
-                continue;
-            }
-
-            if (DamageCalculator.region() == Region.alola && DamageCalculator.subregion() == AlolaSubRegions.MagikarpJump && Math.floor(pokemon.id) != 129) {
                 continue;
             }
 
@@ -70,7 +67,7 @@ export default class DamageCalculator {
     }
 
     // TODO replace temporary type with PartyPokemon type once that class is ported
-    public static getOneTypeDetail(pokemon: { name: PokemonNameType, displayName: string }): TypeDetail {
+    public static getOneTypeDetail(pokemon: TmpPartyPokemonType): TypeDetail {
         const ignoreRegionMultiplier = DamageCalculator.region() == Region.none;
         const dataPokemon = getPokemonByName(pokemon.name);
         return {
@@ -89,14 +86,13 @@ export default class DamageCalculator {
                 DamageCalculator.weather(),
                 DamageCalculator.ignoreLevel(),
             	true,
-                DamageCalculator.subregion(),
             ),
             displayName: pokemon.displayName,
         };
     }
 
     public static getTypeDetail(): TypeDetail[] {
-        return App.game.party.caughtPokemon.filter(pokemon => {
+        return App.game.party.partyPokemonActiveInSubRegion(DamageCalculator.region(), DamageCalculator.subregion()).filter(pokemon => {
             const dataPokemon = getPokemonByName(pokemon.name);
             return dataPokemon.type1 == DamageCalculator.detailType() || dataPokemon.type2 == DamageCalculator.detailType();
         }).reduce((details, pokemon) => {

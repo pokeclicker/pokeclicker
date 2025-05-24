@@ -5,7 +5,7 @@ class ShardTraderShop extends Shop {
         public location: GameConstants.ShardTraderLocations,
         public name: string = 'Shard Trader',
         public hidePlayerInventory: boolean = false,
-        public currencyName: string = 'Shards'
+        public currencyName: string = 'Item'
     ) {
         super([], name);
     }
@@ -16,7 +16,7 @@ class ShardTraderShop extends Shop {
     }
 
     public areaStatus() {
-        const itemStatusArray = [super.areaStatus()];
+        const itemStatusArray = super.areaStatus();
 
         const deals = ShardDeal.getDeals(this.location)?.();
         if (deals) {
@@ -34,7 +34,7 @@ class ShardTraderShop extends Shop {
                 itemStatusArray.push(areaStatus.missingResistant);
             }
         }
-        return Math.min(...itemStatusArray);
+        return itemStatusArray;
     }
 
     public isVisible(): boolean {

@@ -19,7 +19,7 @@ enum PartyPokemonSaveKeys {
     showShadowImage,
 }
 
-class PartyPokemon implements Saveable {
+class PartyPokemon implements Saveable, TmpPartyPokemonType {
     saveKey: string;
     public exp = 0;
     public evs: KnockoutComputed<number>;
@@ -334,6 +334,21 @@ class PartyPokemon implements Saveable {
 
         GameHelper.incrementObservable(this.vitaminsUsed[vitamin], -amount);
         GameHelper.incrementObservable(player.itemList[vitaminName], amount);
+    }
+
+    public setVitaminAmount(vitamin: GameConstants.VitaminType, amount: number) {
+        if (this.breeding || isNaN(amount) || amount < 0) {
+            return;
+        }
+
+        const diff = Math.floor(amount) - this.vitaminsUsed[vitamin]();
+        if (diff === 0) {
+            return;
+        } else if (diff > 0) {
+            this.useVitamin(vitamin, diff);
+        } else if (diff < 0) {
+            this.removeVitamin(vitamin, Math.abs(diff));
+        }
     }
 
     public useConsumable(type: GameConstants.ConsumableType, amount: number): void {
@@ -667,7 +682,13 @@ class PartyPokemon implements Saveable {
 
         // Don't save anything that is the default option
         Object.entries(output).forEach(([key, value]) => {
-            if (value === this.defaults[PartyPokemonSaveKeys[key]]) {
+            const defaultValue = this.defaults[PartyPokemonSaveKeys[key]];
+            if (Array.isArray(value) && Array.isArray(defaultValue)) {
+                // Compare array contents
+                if (value.length === defaultValue.length && value.every((v, i) => v === defaultValue[i])) {
+                    delete output[key];
+                }
+            } else if (value === defaultValue) {
                 delete output[key];
             }
         });

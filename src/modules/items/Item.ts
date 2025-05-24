@@ -63,8 +63,10 @@ export default class Item {
     }
 
     totalPrice(amount: number): number {
+        const targetAmount = Math.min(amount, this.maxAmount);
+
         if (this.multiplier === 1) {
-            return Math.max(0, this.basePrice * amount);
+            return Math.max(0, this.basePrice * targetAmount);
         }
 
         // multiplier should be capped at 100, so work out how many to buy at increasing price and how many at max
@@ -74,10 +76,10 @@ export default class Item {
         const k = (mStart < 100)
             ? Math.ceil((2 - Math.log10(mStart)) / Math.log10(this.multiplier))
             : 0;
-        const incAmount = Math.min(k, amount);
+        const incAmount = Math.min(k, targetAmount);
 
         const incCost = (this.price() * (1 - (this.multiplier ** incAmount))) / (1 - this.multiplier);
-        const maxCost = (this.basePrice * 100 * (amount - incAmount));
+        const maxCost = (this.basePrice * 100 * (targetAmount - incAmount));
         const total = incCost + maxCost;
 
         return Math.max(0, Math.round(total));

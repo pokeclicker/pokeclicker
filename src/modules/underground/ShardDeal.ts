@@ -483,7 +483,7 @@ export class ShardDeal {
                     1),
             ],
         );
-        ShardDeal.list[ShardTraderLocations['Pokemon HQ Lab']] = ko.observableArray(
+        ShardDeal.list[ShardTraderLocations['Pokémon HQ Lab']] = ko.observableArray(
             [
                 new ShardDeal(
                     [{ shardTypeString: 'Blue Shard', amount: 40 }],
@@ -1840,38 +1840,6 @@ export class ShardDeal {
                         { shardTypeString: 'Purple Shard', amount: 30 },
                     ],
                     ItemList.Dragon_scale,
-                    1),
-            ],
-        );
-        ShardDeal.list[ShardTraderLocations['Route 6']] = ko.observableArray(
-            [
-                new ShardDeal(
-                    [
-                        { shardTypeString: 'Fossilized Bird', amount: 1 },
-                        { shardTypeString: 'Fossilized Drake', amount: 1 },
-                    ],
-                    ItemList.Dracozolt,
-                    1),
-                new ShardDeal(
-                    [
-                        { shardTypeString: 'Fossilized Bird', amount: 1 },
-                        { shardTypeString: 'Fossilized Dino', amount: 1 },
-                    ],
-                    ItemList.Arctozolt,
-                    1),
-                new ShardDeal(
-                    [
-                        { shardTypeString: 'Fossilized Fish', amount: 1 },
-                        { shardTypeString: 'Fossilized Drake', amount: 1 },
-                    ],
-                    ItemList.Dracovish,
-                    1),
-                new ShardDeal(
-                    [
-                        { shardTypeString: 'Fossilized Fish', amount: 1 },
-                        { shardTypeString: 'Fossilized Dino', amount: 1 },
-                    ],
-                    ItemList.Arctovish,
                     1),
             ],
         );
