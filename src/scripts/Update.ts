@@ -2894,6 +2894,9 @@ class Update implements Saveable {
             // Remove unused pokemon egg item
             delete playerData._itemList.Pokemon_egg;
 
+            // Rename pokemonSeen statistic to pokemonDiscovered for clarity
+            saveData.statistics.pokemonDiscovered = saveData.statistics.pokemonSeen;
+            delete saveData.statistics.pokemonSeen;
         },
     };
 

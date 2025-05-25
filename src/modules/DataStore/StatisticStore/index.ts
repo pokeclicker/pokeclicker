@@ -135,7 +135,7 @@ export default class Statistics implements Saveable {
      */
     pokemonCaptured: PokemonStats;
     pokemonDefeated: PokemonStats;
-    pokemonSeen: PokemonStats;
+    pokemonDiscovered: PokemonStats;
     pokemonEncountered: PokemonStats;
     pokemonHatched: PokemonStats;
     shinyPokemonCaptured: PokemonStats;
@@ -241,7 +241,7 @@ export default class Statistics implements Saveable {
     objectObservables = [
         'pokemonCaptured',
         'pokemonDefeated',
-        'pokemonSeen',
+        'pokemonDiscovered',
         'pokemonEncountered',
         'pokemonHatched',
         'shinyPokemonCaptured',

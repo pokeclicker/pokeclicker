@@ -473,7 +473,7 @@ const LaprasGift = new GiftNPC('Silph Co. Employee', [
 
 const FuchsiaKantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
     'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
-], GameConstants.Region.kanto, RoamingPokemonList.findGroup(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Kanto));
+], GameConstants.Region.kanto, GameConstants.KantoSubRegions.Kanto);
 
 const FuchsiaEusine = new NPC('Eusine', [
     'You! Not again! I\'ll be there first next time! Having followed it here, I\'m starting to understand what Suicune is after.',
@@ -631,7 +631,7 @@ const SeviiGideon2 = new NPC ('Gideon', [
 });
 const SixIslandSeviiRoamerNPC = new RoamerNPC('Bug Catcher John', [
     'Apparently some kid released one of his Pokémon around here. That Pokémon, its partner, and for whatever reason, the Legendary Beasts from Johto have been seen roaming on {ROUTE_NAME}.',
-], GameConstants.Region.kanto, RoamingPokemonList.findGroup(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii4567), 'assets/images/npcs/Bug Catcher.png', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion));
+], GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii4567, 'assets/images/npcs/Bug Catcher.png', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion));
 const AlteringCaveRuinManiac1 = new NPC ('Ruin Maniac', [
     'Hello. You want to know what I\'m doing in this pointless dead end cave?',
     'Well, I\'m trying to dig to a secluded island north of here. I\'ve heard there are some unusual Pokémon there.',
@@ -772,7 +772,7 @@ const RedSpearow = new NPC('Red Spearow', [
 
 const NewIslandJessieAndJames = new RoamerNPC('Jessie & James',
     ['Mewtwo\'s Clones have escaped and are Roaming freely across Kanto. Will you help us track them down? It\'s for a good cause, we swear.'],
-    GameConstants.Region.kanto, 0, 'assets/images/npcs/Jessie and James.png',
+    GameConstants.Region.kanto, GameConstants.KantoSubRegions.Kanto, 'assets/images/npcs/Jessie and James.png',
     new ClearDungeonRequirement(1,  GameConstants.getDungeonIndex('New Island'))
 );
 
@@ -1744,8 +1744,7 @@ const EcruteakPokéfan = new NPC('Pokéfan Derek', [
 ], {
     image: 'assets/images/npcs/PokéManiac.png',
     requirement: new QuestLineStepCompletedRequirement('The Legendary Beasts', 2),
-}
-);
+});
 
 const Zuki = new NPC('Kimono Girl Zuki', [
     'Professor Elm tells me you are a master trainer. Please, show me your skills by training your Pokémon.',
@@ -1836,7 +1835,7 @@ const MahoganyEusine = new NPC('Eusine', [
 
 const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
     'On the news, they are getting more reports of roaming Pokémon appearing on {ROUTE_NAME}!',
-], GameConstants.Region.johto, RoamingPokemonList.findGroup(GameConstants.Region.johto, GameConstants.JohtoSubRegions.Johto), 'assets/images/npcs/Pokéfan (male).png');
+], GameConstants.Region.johto, GameConstants.JohtoSubRegions.Johto, 'assets/images/npcs/Pokéfan (male).png');
 
 const RedOldManJohtoNPC = new NPC('Old Man', [
     'This young fellow comes here every day.',
@@ -2392,7 +2391,7 @@ const HoennFossilNpc = new NPC('Laid-Back Angler', [
 
 const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
     'Our sources indicate that roaming Pokémon are gathering on {ROUTE_NAME}!',
-], GameConstants.Region.hoenn, RoamingPokemonList.findGroup(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Hoenn), 'assets/images/npcs/Reporter.png');
+], GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Hoenn, 'assets/images/npcs/Reporter.png');
 
 const SkepticalFisherman = new NPC('Skeptical Fisherman', [
     'There\'s some salesman offering rare fish east of New Mauville, out on the water.',
@@ -2401,9 +2400,8 @@ const SkepticalFisherman = new NPC('Skeptical Fisherman', [
 
 const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'Oh! Welcome, welcome. Do you by any chance have any Meteorites? No? Ah well, I’m studying the Pokémon Deoxys and I’ve heard that a Meteorite can cause it to change forms!',
-    'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms… but I’m not strong enough to find out...'],
-{requirement: new QuestLineStartedRequirement('The Delta Episode', GameConstants.AchievementOption.less),
-});
+    'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms… but I’m not strong enough to find out...',
+], {requirement: new QuestLineStartedRequirement('The Delta Episode', GameConstants.AchievementOption.less)});
 
 const LavaridgeSootCollector = new NPC('Soot Collector', [
     'Blegh! I\'ve taken three soaks in the hot springs and I can still taste the soot!',
@@ -2501,7 +2499,8 @@ const Butler1 = new NPC('Butler', [
     'I have been preparing for the Millennium Festival my whole life, and have big plans for the wish-granting powers it possesses.',
     'I have found what appears to be a crystalline cocoon that contains Jirachi, the Wish Pokémon! I would be honored if you would take this cocoon as thanks for helping me. Legend has it that Jirachi will appear for a trainer who is pure of heart and grant them a wish!',
     '<i>Butler gives you a crystalline cocoon containing Jirachi.</i>',
-], {image: 'assets/images/npcs/Butler.png',
+], {
+    image: 'assets/images/npcs/Butler.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Wish Maker', 1), new QuestLineStepCompletedRequirement('Wish Maker', 3, GameConstants.AchievementOption.less)]),
 });
 
@@ -2680,7 +2679,8 @@ const SeaMauvilleRocket2 = new NPC('Rocket Grunt', [
 const SouthernIsland1 = new NPC('Explore the Southern Island', [
     '<i>The Southern Island is a small but lush forest. The clearing near the center of the island is the perfect place for a tired Pokémon to rest.</i>',
     '<i>Latios and Latias are resting in the clearing. You can approach one of them, but the other will probably flee.</i>',
-],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 2), new QuestLineStepCompletedRequirement('The Eon Duo', 3, GameConstants.AchievementOption.less)]),
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 2), new QuestLineStepCompletedRequirement('The Eon Duo', 3, GameConstants.AchievementOption.less)]),
 });
 
 const Cozmo1 = new NPC('Dr. Cozmo', [
@@ -3136,7 +3136,7 @@ const EsCade2 = new NPC('Mayor Es Cade', [
 });
 const EviceEscape = new NPC('Watch Evice Escape', [
     '<i>Before the helicopter can land, a fireball shoots across the sky, blowing it up!</i>',
-    '<i>A Ho-oh flies low, screeching a thanks to you for stopping the evil Team Cipher.</i>',
+    '<i>A Ho-Oh flies low, screeching a thanks to you for stopping the evil Team Cipher.</i>',
     '</br><img src="assets/images/pokemon/250.png"/>',
 ], {image: 'assets/images/npcs/other/EviceHelicopter.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 25), new QuestLineCompletedRequirement('Shadows in the Desert', GameConstants.AchievementOption.less)]),
@@ -3148,7 +3148,7 @@ const PhenacRoller = new NPC('Cool Dude', [
 ], {image: 'assets/images/npcs/Roller Boy.png'});
 const OrreRoamerNPC = new RoamerNPC('Fateen\'s Fortune Telling', [
     'I sense the presence of rare Pokémon at the {ROUTE_NAME}! Hurry, before the fates intervene!',
-], GameConstants.Region.hoenn, RoamingPokemonList.findGroup(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre), 'assets/images/npcs/Psychic (female).png');
+], GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre, 'assets/images/npcs/Psychic (female).png');
 const AgateAthlete = new NPC('Jogger', [
     'This town is pretty quiet. Most folks here are retired trainers.',
     'We\'re always happy to help out any young folks who come through though!',
@@ -4205,7 +4205,8 @@ const CanalaveSinnohMyth = new NPC('Sinnoh\'s Myth', [
     '<i>From the lake floor they rise.</i>',
     '<i>Bearing with them the power to make vast lands, they rise again.</i>',
 ],{
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 0), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 2, GameConstants.AchievementOption.less)])});
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 0), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 2, GameConstants.AchievementOption.less)]),
+});
 
 const VerityMesprit = new NPC('Mesprit', [
     '<i>You are the trainer looking for the Distortion World, right?</i>',
@@ -4275,7 +4276,7 @@ const FightAreaZero2 = new NPC('Zero', [
 
 const SurvivalAreaSinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
     'I spotted a bunch of roaming Pokémon on {ROUTE_NAME}!',
-], GameConstants.Region.sinnoh, RoamingPokemonList.findGroup(GameConstants.Region.sinnoh, GameConstants.SinnohSubRegions.Sinnoh), 'assets/images/npcs/Hiker.png');
+], GameConstants.Region.sinnoh, GameConstants.SinnohSubRegions.Sinnoh, 'assets/images/npcs/Hiker.png');
 
 const SendoffSpringLakeTrio = new NPC('Lake Trio', [
     '<i>You are finally here.</i>',
@@ -5160,7 +5161,7 @@ const P2LaboratoryColress = new NPC('Colress', [
 
 const UnovaRoamerNPC = new RoamerNPC('Professor Juniper\'s Aide', [
     'Our research indicates a higher concentration of roaming Pokémon on {ROUTE_NAME}!',
-], GameConstants.Region.unova, RoamingPokemonList.findGroup(GameConstants.Region.unova, GameConstants.UnovaSubRegions.Unova));
+], GameConstants.Region.unova, GameConstants.UnovaSubRegions.Unova);
 
 const ProfJuniper = new ProfNPC('Prof. Juniper',
     GameConstants.Region.unova,
@@ -6209,7 +6210,7 @@ const ProfessorSycamore1 = new NPC('Prof. Sycamore', [
 
 const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
     'The spirits tell me roaming Pokémon have been spotted on {ROUTE_NAME}!',
-], GameConstants.Region.kalos, RoamingPokemonList.findGroup(GameConstants.Region.kalos, GameConstants.KalosSubRegions.Kalos), 'assets/images/npcs/Hex Maniac.png');
+], GameConstants.Region.kalos, GameConstants.KalosSubRegions.Kalos, 'assets/images/npcs/Hex Maniac.png');
 
 const KalosTVNews = new NPC('Kalos TV News', [
     'Pokémon Trainers. I come to you to make an important announcement. Listen well.',
@@ -7109,7 +7110,7 @@ const ReconSquadAltar = new NPC('Ultra Recon Squad', [
 
 const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [
     'Some very rare Pokémon have been sighted on {ROUTE_NAME}. I hope we can learn more about them.',
-], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.AkalaIsland), 'assets/images/npcs/Assistant Branch Chief Wicke.png');
+], GameConstants.Region.alola, GameConstants.AlolaSubRegions.AkalaIsland, 'assets/images/npcs/Assistant Branch Chief Wicke.png');
 
 const ProfKukui = new ProfNPC('Prof. Kukui',
     GameConstants.Region.alola,
@@ -7703,7 +7704,7 @@ const MayorKarp = new NPC('Mayor Karp', [
 
 const MagikarpJumpRoamerNPC = new RoamerNPC('Roddy Tackle', [
     'There are some singularly stunning individuals down at {ROUTE_NAME}! Some Magikarp with real personality!',
-], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump), 'assets/images/npcs/Roddy Tackle.png', new OneFromManyRequirement([new ObtainedPokemonRequirement('Magikarp'), new ObtainedPokemonRequirement('Magikarp (Feebas)')]));
+], GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump, 'assets/images/npcs/Roddy Tackle.png', new OneFromManyRequirement([new ObtainedPokemonRequirement('Magikarp'), new ObtainedPokemonRequirement('Magikarp (Feebas)')]));
 const HoppyManOfMystery = new NPC('Man of Mystery', [
     'We have been looking for a Shady Salesman.',
     'He is trying to sell overpriced Magikarps to clueless children.',
@@ -8545,6 +8546,7 @@ const StowonSideSonia = new NPC ('Sonia', [
 ], {
     image: 'assets/images/npcs/Sonia.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 1), new QuestLineStepCompletedRequirement('The Darkest Day', 3, GameConstants.AchievementOption.less)]),
+    mentionsPokemon: ['Zacian (Crowned Sword)', 'Zamazenta (Crowned Shield)'],
 });
 
 const Archaeologist = new NPC('Archaeologist', [
@@ -8728,12 +8730,12 @@ const EnergyPlantHop = new NPC('Hop', [
 
 const SouthGalarRoamerNPC = new RoamerNPC('Professor Sonia', [
     'I’ve heard there’s been sightings of a never-before-seen, super strong Pokémon on {ROUTE_NAME}! You should go check it out!',
-], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.SouthGalar), 'assets/images/npcs/Professor Sonia.png');
+], GameConstants.Region.galar, GameConstants.GalarSubRegions.SouthGalar, 'assets/images/npcs/Professor Sonia.png');
 
 //Isle of Armor NPCs
 const IsleofArmorRoamerNPC = new RoamerNPC('Master Dojo Student', [
     'One of the other students said they saw a rare Pokémon on {ROUTE_NAME}. Might be worth having a look.',
-], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.IsleofArmor), 'assets/images/npcs/Master Dojo.png');
+], GameConstants.Region.galar, GameConstants.GalarSubRegions.IsleofArmor, 'assets/images/npcs/Master Dojo.png');
 
 const Mustard1 = new NPC ('Mustard', [
     '... ... ... Why hello there! My name is Mustard! I\'m rather good at Pokémon battles, you know! I\'m pleased as cheese that you could join us!',
@@ -8902,6 +8904,7 @@ const JungleKoko5 = new NPC ('Koko', [
 ], {
     image: 'assets/images/npcs/Koko.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 9), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 11, GameConstants.AchievementOption.less )]),
+    mentionsPokemon: ['Zarude (Dada)'],
 });
 const JungleAsh3 = new NPC ('Ash Ketchum', [
     'Amazing, you even beat Dada! It\'s really clear that he is really amazed by your strength!',
@@ -8927,7 +8930,7 @@ const CrownShrineExplorer = new NPC('Explorer', [
 //Crown Tundra NPCs
 const CrownTundraRoamerNPC = new RoamerNPC('Freezington Mayor', [
     'If my eyes didn\'t deceive me, I saw a rare Pokémon at {ROUTE_NAME}. Go and see if you can find it if you\'re interested.',
-], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.CrownTundra));
+], GameConstants.Region.galar, GameConstants.GalarSubRegions.CrownTundra);
 
 const GalarFossilHiker = new NPC('Spelunker', [
     'Wow! The Crown Tundra is filled with wild fossil Pokémon! I\'ve heard stories of these snowfields protecting the Pokémon living here, but this level of sanctuary is insane!',
@@ -8948,7 +8951,7 @@ const Calyrex1 = new NPC ('Calyrex', [
     'Would you do me the favour of protecting me from wild Pokémon at the Old Cemetery and Snowslide Slope? I wish to grow a Shaderoot Carrot and an Iceroot Carrot which I believe could draw out my loyal steeds.',
 ], {
     image: 'assets/images/npcs/specialNPCs/Possessed Peony.png',
-    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 1), new QuestLineStepCompletedRequirement('The Crown of Galar', 3, GameConstants.AchievementOption.less )]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 1), new QuestLineStepCompletedRequirement('The Crown of Galar', 3, GameConstants.AchievementOption.less )]),
 });
 
 const Calyrex2 = new NPC ('Calyrex', [
@@ -8977,6 +8980,7 @@ const Calyrex4 = new NPC ('Calyrex', [
 ], {
     image: 'assets/images/npcs/specialNPCs/Possessed Peony.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 7), new QuestLineStepCompletedRequirement('The Crown of Galar', 9, GameConstants.AchievementOption.less )]),
+    mentionsPokemon: ['Ice Rider Calyrex', 'Shadow Rider Calyrex'],
 });
 const Calyrex5 = new NPC ('Calyrex', [
     '<i>Human child... I look forward to what adventures we might have together.</i>',
@@ -9974,7 +9978,7 @@ const ZapapicoShop = new Shop([
 // Paldea NPCs
 const PaldeaRoamerNPC = new RoamerNPC('Student Emily', [
     'Hey, hey, did you hear? A group of students saw some super rare Pokémon on {ROUTE_NAME}!',
-], GameConstants.Region.paldea, RoamingPokemonList.findGroup(GameConstants.Region.paldea, GameConstants.PaldeaSubRegions.Paldea));
+], GameConstants.Region.paldea, GameConstants.PaldeaSubRegions.Paldea);
 
 //Paldea Towns
 TownList['Cabo Poco'] = new Town(
