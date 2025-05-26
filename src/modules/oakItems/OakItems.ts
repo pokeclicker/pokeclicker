@@ -23,7 +23,6 @@ export default class OakItems implements Feature {
     public selectedOakItem: KnockoutObservable<number> = ko.observable(-1);
     public maxLevelOakItems: PureComputed<OakItem[]>;
 
-
     constructor(unlockRequirements: Requirement[], private multiplier: Multiplier) {
         this.itemList = [
             new OakItem({
@@ -181,8 +180,7 @@ export default class OakItems implements Feature {
 
     // eslint-disable-next-line class-methods-use-this
     canAccess(): boolean {
-        return true;
-        // return App.game.party.caughtPokemon.length >= 20;
+        return this.unlockRequirements.some(value => value.isCompleted());
     }
 
     initialize() {
