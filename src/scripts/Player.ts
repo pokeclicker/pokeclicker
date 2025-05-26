@@ -72,7 +72,7 @@ class Player implements TmpPlayerType {
                 if (i != GameConstants.Region.kanto) { // Kanto has it's own starter code
                     if (this.region != i) {
                         this.region = i;
-                        this.subregion = 0;
+                        this._subregion(0);
                         this.route = undefined;
                         this._townName = GameConstants.StartingTowns[i];
                         this.town = TownList[this._townName];

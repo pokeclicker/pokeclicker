@@ -7846,7 +7846,7 @@ dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
             new CustomRequirement(
                 ko.pureComputed(() => darkraiDungeonMoonReq.isCompleted()),
                 true,
-                'Darkrai roams Sinnoh around New Moon, and live on the island during other moon phases.'),
+                'Darkrai roams Sinnoh around New Moon, and lives on the island during other moon phases.'),
         ])}),
     ],
     96500, 230);
