@@ -2894,6 +2894,19 @@ class Update implements Saveable {
             // Remove unused pokemon egg item
             delete playerData._itemList.Pokemon_egg;
 
+            // Give the player a bought oak item if they had previously purchased it
+            if (saveData.oakItems.Squirtbottle?.purchased) {
+                playerData._itemList.Squirtbottle = 1;
+            }
+            if (saveData.oakItems.Sprinklotad?.purchased) {
+                playerData._itemList.Sprinklotad = 1;
+            }
+            if (saveData.oakItems.Explosive_Charge?.purchased) {
+                playerData._itemList.Explosive_Charge = 1;
+            }
+            if (saveData.oakItems.Treasure_Scanner?.purchased) {
+                playerData._itemList.Treasure_Scanner = 1;
+            }
         },
     };
 
