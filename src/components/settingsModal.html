@@ -46,7 +46,6 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyLostAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayReduced')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayExtended')}"></tr>
                             </tbody>
                             <thead>
                                 <tr><th colspan="2">Hatchery</th></tr>
@@ -84,21 +83,22 @@
                             <thead>
                                 <tr><th colspan="2">Map Colors</th></tr>
                             </thead>
+                            <tbody
+                            data-bind="sortable: {
+                                foreach: Settings.getSetting('mapAreaStateOrder').observableValue,
+                                options: {
+                                    group: 'mapAreaStateOrder',
+                                    draggable: '.mapAreaStateWrapper',
+                                    handle: '.mapAreaStateWrapper td:first-of-type',
+                                    dataIdAttr: 'data-key',
+                                    getId: (state) => state,
+                                }
+                            }">
+                            <!-- ko with: Settings.getSetting(`--${areaStatus[$data]}`), as: 'setting' -->
+                                <tr class="mapAreaStateWrapper" data-bind="visible: setting.isUnlocked(), attr: { 'data-areastate': areaStatus[$parent] }, template: { name: 'ColorChoiceSettingTemplate', data: setting}"></tr>
+                            <!-- /ko -->
+                            </tbody>
                             <tbody>
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--locked')}"></tr>
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--incomplete')}"></tr>
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--questAtLocation')}"></tr>
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtPokemon')}"></tr>
-                                <!-- ko if: Settings.getSetting('--uncaughtShadowPokemon').isUnlocked() -->
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShadowPokemon')}"></tr>
-                                <!-- /ko -->
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShinyPokemonAndMissingAchievement')}"></tr>
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShinyPokemon')}"></tr>
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--missingAchievement')}"></tr>
-                                <!-- ko if: Settings.getSetting('--missingResistant').isUnlocked() -->
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--missingResistant')}"></tr>
-                                <!-- /ko -->
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--completed')}"></tr>
                                 <tr>
                                     <td colspan="2">
                                         <button type="button" class="btn btn-primary" data-bind="click: () => {
@@ -222,6 +222,12 @@
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.oakItems')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.pokeballSelection')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dailyQuests')}"></tr>
+                                <!-- ko if: Settings.getSetting('hotkey.castformApp').isUnlocked() -->
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.castformApp')}"></tr>
+                                <!-- /ko -->
+                                <!-- ko if: Settings.getSetting('hotkey.purifyChamber').isUnlocked() -->
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.purifyChamber')}"></tr>
+                                <!-- /ko -->
                             </tbody>
                             <thead>
                                 <tr><th colspan="2">Farm</th></tr>

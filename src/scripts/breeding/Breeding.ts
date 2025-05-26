@@ -20,25 +20,8 @@ class Breeding implements Feature {
     private _queueList: KnockoutObservableArray<number>;
     public queueSlots: KnockoutObservable<number>;
 
-    public hatchList: { [name: number]: PokemonNameType[][] } = {};
-
-    constructor(private multiplier: Multiplier) {
-        this._eggList = this.defaults.eggList;
-        this._eggSlots = ko.observable(this.defaults.eggSlots);
-        this._queueList = ko.observableArray(this.defaults.queueList);
-        this.queueSlots = ko.observable(this.defaults.queueSlots);
-
-        this._eggList.forEach((egg) => {
-            egg.extend({deferred: true});
-        });
-
-        Settings.getSetting('breedingQueueSizeSetting').observableValue.subscribe(() => {
-            this.updateQueueSizeLimit();
-        });
-    }
-
-    initialize(): void {
-        this.hatchList[EggType.Fire] = [
+    public readonly hatchList: Record<GameConstants.EggItemType, PokemonNameType[][]> = {
+        [GameConstants.EggItemType.Fire_egg]: [
             ['Charmander', 'Vulpix', 'Growlithe', 'Magmar'],
             ['Cyndaquil', 'Slugma', 'Houndour', 'Magby'],
             ['Torchic', 'Numel'],
@@ -48,8 +31,8 @@ class Breeding implements Feature {
             ['Litten', 'Salandit'],
             ['Scorbunny', 'Sizzlipede'],
             ['Fuecoco', 'Charcadet'],
-        ];
-        this.hatchList[EggType.Water] = [
+        ],
+        [GameConstants.EggItemType.Water_egg]: [
             ['Squirtle', 'Lapras', 'Staryu', 'Slowpoke'],
             ['Totodile', 'Wooper', 'Marill', 'Qwilfish'],
             ['Mudkip', 'Feebas', 'Clamperl'],
@@ -59,8 +42,8 @@ class Breeding implements Feature {
             ['Popplio', 'Wimpod', 'Mareanie'],
             ['Sobble', 'Chewtle', 'Arrokuda'],
             ['Quaxly'],
-        ];
-        this.hatchList[EggType.Grass] = [
+        ],
+        [GameConstants.EggItemType.Grass_egg]: [
             ['Bulbasaur', 'Oddish', 'Tangela', 'Paras'],
             ['Chikorita', 'Hoppip', 'Sunkern'],
             ['Treecko', 'Tropius', 'Roselia'],
@@ -70,8 +53,8 @@ class Breeding implements Feature {
             ['Rowlet', 'Morelull', 'Fomantis'],
             ['Grookey', 'Gossifleur','Applin'],
             ['Sprigatito'],
-        ];
-        this.hatchList[EggType.Fighting] = [
+        ],
+        [GameConstants.EggItemType.Fighting_egg]: [
             ['Hitmonlee', 'Hitmonchan', 'Machop', 'Mankey'],
             ['Tyrogue', 'Heracross'],
             ['Makuhita', 'Meditite'],
@@ -80,8 +63,8 @@ class Breeding implements Feature {
             ['Pancham', 'Hawlucha'],
             ['Crabrawler', 'Stufful'],
             ['Falinks', 'Clobbopus', 'Galarian Farfetch\'d'],
-        ];
-        this.hatchList[EggType.Electric] = [
+        ],
+        [GameConstants.EggItemType.Electric_egg]: [
             ['Magnemite', 'Pikachu', 'Voltorb', 'Electabuzz'],
             ['Chinchou', 'Mareep', 'Elekid'],
             ['Plusle', 'Minun', 'Electrike'],
@@ -90,8 +73,8 @@ class Breeding implements Feature {
             ['Helioptile', 'Dedenne'],
             ['Togedemaru'],
             ['Toxel', 'Pincurchin', 'Morpeko'],
-        ];
-        this.hatchList[EggType.Dragon] = [
+        ],
+        [GameConstants.EggItemType.Dragon_egg]: [
             ['Dratini', 'Dragonair', 'Dragonite'],
             [],
             ['Bagon', 'Shelgon', 'Salamence'],
@@ -101,8 +84,8 @@ class Breeding implements Feature {
             ['Turtonator', 'Drampa', 'Jangmo-o', 'Hakamo-o', 'Kommo-o'],
             ['Dreepy', 'Drakloak', 'Dragapult', 'Duraludon'],
             ['Frigibax', 'Arctibax', 'Baxcalibur'],
-        ];
-        this.hatchList[EggType.Mystery] = [
+        ],
+        [GameConstants.EggItemType.Mystery_egg]: [
             ['Gastly', 'Jigglypuff', 'Geodude', 'Doduo'],
             ['Yanma', 'Stantler'],
             ['Trapinch', 'Sableye', 'Spoink'],
@@ -111,7 +94,21 @@ class Breeding implements Feature {
             ['Carbink', 'Honedge'],
             ['Mudbray', 'Rockruff'],
             ['Rolycoly', 'Milcery'],
-        ];
+        ],
+    };
+
+    constructor(private multiplier: Multiplier) {
+        this._eggList = this.defaults.eggList;
+        this._eggSlots = ko.observable(this.defaults.eggSlots);
+        this._queueList = ko.observableArray(this.defaults.queueList);
+        this.queueSlots = ko.observable(this.defaults.queueSlots);
+
+        Settings.getSetting('breedingQueueSizeSetting').observableValue.subscribe(() => {
+            this.updateQueueSizeLimit();
+        });
+    }
+
+    initialize(): void {
         BreedingController.initialize();
     }
 
@@ -201,10 +198,6 @@ class Breeding implements Feature {
         return false;
     }
 
-    public gainRandomEgg() {
-        return this.gainEgg(this.createRandomEgg());
-    }
-
     public progressEggsBattle(route: number, region: GameConstants.Region) {
         route = MapHelper.normalizeRoute(route, region);
         return this.progressEggs(+Math.sqrt(route).toFixed(2));
@@ -281,6 +274,33 @@ class Breeding implements Feature {
         return false;
     }
 
+    public addEggItemToHatchery(eggItem: GameConstants.EggItemType) {
+        if (GameConstants.EggItemType[eggItem] == undefined) {
+            // Only allow hatchable items
+            console.error('Undefined EggItem could not be added to the hatchery!');
+            return false;
+        }
+        const item = ItemList[GameConstants.EggItemType[eggItem]];
+        if (player.itemList[item.name]() <= 0) {
+            return false;
+        }
+        // If they have a free eggslot, create an egg for this item now
+        if (this.hasFreeEggSlot()) {
+            return this.gainItemEgg(eggItem);
+        }
+        const message = 'You don\'t have any free egg slots';
+        /*
+        if (this.queueSlots()) {
+            message += '<br/>Your queue is full';
+        }
+        */
+        Notifier.notify({
+            message,
+            type: NotificationConstants.NotificationOption.warning,
+        });
+        return false;
+    }
+
     public addToQueue(pokemon: PartyPokemon): boolean {
         const queueSize = this._queueList().length;
         if (queueSize < this.usableQueueSlots()) {
@@ -342,6 +362,15 @@ class Breeding implements Feature {
         return success;
     }
 
+    private gainItemEgg(eggItem: GameConstants.EggItemType) {
+        const egg = this.createItemEgg(eggItem);
+        const success = this.gainEgg(egg);
+        if (success) {
+            player.loseItem(GameConstants.EggItemType[eggItem], 1);
+        }
+        return success;
+    }
+
     public hatchPokemonEgg(index: number, nextEgg = true): void {
         const egg: Egg = this._eggList[index]();
         const hatched = egg.hatch();
@@ -386,43 +415,18 @@ class Breeding implements Feature {
         return new Egg(type, this.getSteps(dataPokemon.eggCycles), pokemonId);
     }
 
-    public createTypedEgg(type: EggType): Egg {
-        const hatchList = this.hatchList[type];
+    private createItemEgg(eggItem: GameConstants.EggItemType): Egg {
+        const hatchIndex = eggItem === GameConstants.EggItemType.Mystery_egg ? Rand.fromEnum(GameConstants.EggItemType) : eggItem;
+        const hatchList = this.hatchList[hatchIndex] as PokemonNameType[][];
         const hatchable = hatchList.slice(0, player.highestRegion() + 1).filter(list => list.length);
 
         // highest region has 1/ratio chance, next highest has 1/(ratio ^ 2), etc.
         // Leftover is given to Kanto, making Kanto and Johto equal chance
         const ratio = 2;
         const possibleHatches = GameConstants.expRandomElement(hatchable, ratio);
-
         const pokemonName = Rand.fromArray(possibleHatches);
         const pokemonId = PokemonHelper.getPokemonByName(pokemonName).id;
-        return this.createEgg(pokemonId, type);
-    }
-
-    public createRandomEgg(): Egg {
-        const type = +Rand.fromArray(Object.keys(this.hatchList));
-        const egg = this.createTypedEgg(type);
-        egg.type = EggType.Mystery;
-        return egg;
-    }
-
-    public createFossilEgg(fossil: string): Egg {
-        const pokemonName: PokemonNameType = GameConstants.FossilToPokemon[fossil];
-        const pokemonNativeRegion = PokemonHelper.calcNativeRegion(pokemonName);
-        let fossilEgg: Egg;
-        if (pokemonNativeRegion > player.highestRegion()) {
-            Notifier.notify({
-                message: `You must reach ${GameConstants.camelCaseToString(GameConstants.Region[pokemonNativeRegion])} before you can uncover this fossil Pokémon!`,
-                type: NotificationConstants.NotificationOption.warning,
-                timeout: 5e3,
-            });
-            fossilEgg = new Egg();
-        } else {
-            const pokemonId = PokemonHelper.getPokemonByName(pokemonName).id;
-            fossilEgg = this.createEgg(pokemonId, EggType.Fossil);
-        }
-        return fossilEgg;
+        return this.createEgg(pokemonId, EggType.EggItem);
     }
 
     public getSteps(eggCycles: number) {
@@ -500,14 +504,14 @@ class Breeding implements Feature {
     }
 
     getAllCaughtStatus(): CaughtStatus {
-        return GameHelper.enumNumbers(EggType).reduce((status: CaughtStatus, type: EggType) => {
+        return GameHelper.enumNumbers(GameConstants.EggItemType).reduce((status: CaughtStatus, type: GameConstants.EggItemType) => {
             return this.hatchList[type]
                 ? Math.min(status, this.getTypeCaughtStatus(type))
                 : status;
         }, CaughtStatus.CaughtShiny);
     }
 
-    getTypeCaughtStatus(type: EggType): CaughtStatus {
+    getTypeCaughtStatus(type: GameConstants.EggItemType): CaughtStatus {
         const hatchList = this.hatchList[type];
         if (!hatchList) {
             return CaughtStatus.NotCaught;

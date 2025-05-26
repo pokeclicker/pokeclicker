@@ -171,9 +171,10 @@ class Party implements Feature, TmpPartyType {
     ): number {
         let attack = 0;
         const pokemon = this.partyPokemonActiveInSubRegion(region, subregion);
+        const ignoreRegionMultiplierOrMKJ = ignoreRegionMultiplier || region == GameConstants.Region.alola && subregion == GameConstants.AlolaSubRegions.MagikarpJump;
 
         for (const p of pokemon) {
-            attack += this.calculateOnePokemonAttack(p, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeTempBonuses);
+            attack += this.calculateOnePokemonAttack(p, type1, type2, region, ignoreRegionMultiplierOrMKJ, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeTempBonuses);
         }
 
         const bonus = this.multiplier.getBonus('pokemonAttack');
@@ -315,6 +316,32 @@ class Party implements Feature, TmpPartyType {
         const bonus = this.multiplier.getBonus('clickAttack', useItem);
         return Math.floor(clickAttack * bonus);
     }
+
+    public clickAttackBreakdown = ko.pureComputed((): ClickAttackBreakdown => {
+        let numShiny = 0, numResistant = 0, numPurified = 0;
+        this.activePartyPokemon.forEach((p) => {
+            if (p.shiny) {
+                numShiny += 1;
+            }
+            if (p.pokerus >= GameConstants.Pokerus.Resistant) {
+                numResistant += 1;
+            }
+            if (p.shadow >= GameConstants.ShadowStatus.Purified) {
+                numPurified += 1;
+            }
+        });
+
+        return {
+            caughtPokemon: this.activePartyPokemon.length,
+            shinyPokemon: numShiny,
+            resistantPokemon: numResistant,
+            purifiedPokemon: numPurified,
+            xClickModifier: EffectEngineRunner.isActive(ItemList.xClick.name)() ? (ItemList.xClick as BattleItem).multiplyBy : 1,
+            blackFluteModifier: FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Black_Flute),
+            rockyHelmetModifier: App.game.oakItems.calculateBonus(OakItemType.Rocky_Helmet),
+            baseClickAttack: Math.floor(App.game.party.calculateBaseClickAttack() * (1 + AchievementHandler.achievementBonus())),
+        };
+    });
 
     canAccess(): boolean {
         return true;

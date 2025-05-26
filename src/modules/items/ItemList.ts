@@ -50,7 +50,7 @@ ItemList.xAttack         = new BattleItem(BattleItemType.xAttack, '+50% Bonus to
 ItemList.xClick          = new BattleItem(BattleItemType.xClick, '+50% Bonus to click attack for 30 seconds', 400, undefined, 'X Click', 'clickAttack', 1.5);
 ItemList.Lucky_egg       = new BattleItem(BattleItemType.Lucky_egg, '+50% Bonus to experience gained for 30 seconds', 800, undefined, 'Lucky Egg', 'exp', 1.5);
 ItemList.Token_collector = new BattleItem(BattleItemType.Token_collector, '+50% Bonus to Dungeon Tokens gained for 30 seconds', 1000, undefined, 'Token Collector', 'dungeonToken', 1.5);
-ItemList.Dowsing_machine = new BattleItem(BattleItemType.Dowsing_machine, 'Increases chance for Pokémon to drop rare hold items; chance to multiply loot from dungeon chests, for 30 seconds.', 1500, undefined, 'Dowsing Machine');
+ItemList.Dowsing_machine = new BattleItem(BattleItemType.Dowsing_machine, 'Increases chance for Pokémon to drop rare hold items and chance to multiply loot from dungeon chests, for 30 seconds.', 1500, undefined, 'Dowsing Machine');
 ItemList.Lucky_incense   = new BattleItem(BattleItemType.Lucky_incense, '+50% Bonus to Pokédollars gained for 30 seconds', 2000, undefined, 'Lucky Incense', 'money', 1.5);
 
 ItemList.ChopleBerry     = new BerryItem(BerryType.Chople, 10000, Currency.farmPoint, BerryType.Spelon);
@@ -187,11 +187,10 @@ ItemList.Grass_egg = new EggItem(EggItemType.Grass_egg, 1000, undefined, 'Grass 
 ItemList.Fighting_egg = new EggItem(EggItemType.Fighting_egg, 1000, undefined, 'Fighting Egg');
 ItemList.Electric_egg = new EggItem(EggItemType.Electric_egg, 1000, undefined, 'Electric Egg');
 ItemList.Dragon_egg = new EggItem(EggItemType.Dragon_egg, 1000, undefined, 'Dragon Egg');
-ItemList.Pokemon_egg = new EggItem(EggItemType.Pokemon_egg, 1000, undefined, 'Pokémon Egg');
 ItemList.Mystery_egg = new EggItem(EggItemType.Mystery_egg, 700, undefined, 'Mystery Egg');
 
 // Quest Items
-ItemList.Meteorite_Bills_Errand = new QuestItem('Meteorite_Bills_Errand', 'Meteorite', 'A Meteorite the Game Corner owner gave you for find his daughter', 'Bill\'s Errand');
+ItemList.Meteorite_Bills_Errand = new QuestItem('Meteorite_Bills_Errand', 'Meteorite for Celio', 'A Meteorite the Game Corner owner gave you for find his daughter', 'Bill\'s Errand');
 ItemList.Tidal_Bell_Lugia = new QuestItem('Tidal_Bell_Lugia', 'Tidal Bell', 'A Bell that can summon the Legendary Pokémon Lugia', 'Whirl Guardian');
 ItemList.Clear_Bell_Hooh = new QuestItem('Clear_Bell_Hooh', 'Clear Bell', 'A Bell that can summon the Legendary Pokémon Ho-oh', 'Rainbow Guardian');
 ItemList.GS_Ball_Celebi = new QuestItem('GS_Ball_Celebi', 'GS Ball', 'A Strange Pokéball that Professor Ivy gave you', 'Unfinished Business');
@@ -502,3 +501,26 @@ ItemList['Pikachu (Libre)'] = new PokemonItem('Pikachu (Libre)', 1000, Currency.
 // Event
 ItemList['Elf Munchlax'] = new PokemonItem('Elf Munchlax', 3108, Currency.questPoint, undefined, undefined,
     { visible: new MultiRequirement([new SpecialEventRequirement('Merry Christmas!'), new ObtainedPokemonRequirement('Santa Snorlax')]) });
+// Fossils
+ItemList.Omanyte = new PokemonItem('Omanyte');
+ItemList.Omastar = new PokemonItem('Omastar');
+ItemList.Kabuto = new PokemonItem('Kabuto');
+ItemList.Kabutops = new PokemonItem('Kabutops');
+ItemList.Aerodactyl = new PokemonItem('Aerodactyl');
+ItemList.Lileep = new PokemonItem('Lileep');
+ItemList.Cradily = new PokemonItem('Cradily');
+ItemList.Anorith = new PokemonItem('Anorith');
+ItemList.Armaldo = new PokemonItem('Armaldo');
+ItemList.Cranidos = new PokemonItem('Cranidos');
+ItemList.Rampardos = new PokemonItem('Rampardos');
+ItemList.Shieldon = new PokemonItem('Shieldon');
+ItemList.Bastiodon = new PokemonItem('Bastiodon');
+ItemList.Tirtouga = new PokemonItem('Tirtouga');
+ItemList.Carracosta = new PokemonItem('Carracosta');
+ItemList.Archen = new PokemonItem('Archen');
+ItemList.Archeops = new PokemonItem('Archeops');
+ItemList.Tyrunt = new PokemonItem('Tyrunt');
+ItemList.Tyrantrum = new PokemonItem('Tyrantrum');
+ItemList.Amaura = new PokemonItem('Amaura');
+ItemList.Aurorus = new PokemonItem('Aurorus');
+
