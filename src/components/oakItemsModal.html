@@ -59,65 +59,67 @@
                     <!-- /ko -->
 
                     <!-- Oak Item Table -->
-                    <table class="table table-striped table-hover table-bordered table-sm table-responsive-md m-0 mb-2">
-                        <tbody>
-                        <!-- ko foreach: App.game.oakItems.itemList -->
-                        <!-- ko if: $data.isUnlocked() -->
-                        <tr data-bind="
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
+                            <tbody>
+                            <!-- ko foreach: App.game.oakItems.itemList -->
+                            <!-- ko if: $data.isUnlocked() -->
+                            <tr data-bind="
                             css: {
                                 'highlight-success': $data.isUpgradeAvailable()
                             }
                         ">
-                            <td class="vertical-middle"><img height="36" data-bind="attr: { src: `assets/images/oakitems/${OakItemType[$data.name]}.png` }"></td>
-                            <td class="vertical-middle text-left">
-                                <div class="font-weight-bold" data-bind="text: $data.displayName"></div>
-                                <div data-bind="text: $data.description"></div>
-                            </td>
-                            <td class="vertical-middle text-center text-nowrap">
-                                <div style="line-height: 1.2rem;" data-bind="text: $data.formatBonus($data.level, true)"></div>
-                                <div style="font-size: 0.6rem; line-height: 0.5rem;" data-bind="text: `Level ${$data.level}`"></div>
-                            </td>
-                            <td class="vertical-middle">
-                                <!-- ko if: $data.isActive -->
-                                <button type="button" class="btn btn-danger w-100" data-bind="click: () => App.game.oakItems.deactivate($data.name)">
-                                    Deactivate
-                                </button>
-                                <!-- /ko -->
+                                <td class="vertical-middle"><img height="36" data-bind="attr: { src: `assets/images/oakitems/${OakItemType[$data.name]}.png` }"></td>
+                                <td class="vertical-middle text-left">
+                                    <div class="font-weight-bold" data-bind="text: $data.displayName"></div>
+                                    <div data-bind="text: $data.description"></div>
+                                </td>
+                                <td class="vertical-middle text-center text-nowrap">
+                                    <div style="line-height: 1.2rem;" data-bind="text: $data.formatBonus($data.level, true)"></div>
+                                    <div style="font-size: 0.6rem; line-height: 0.5rem;" data-bind="text: `Level ${$data.level}`"></div>
+                                </td>
+                                <td class="vertical-middle">
+                                    <!-- ko if: $data.isActive -->
+                                    <button type="button" class="btn btn-danger w-100" data-bind="click: () => App.game.oakItems.deactivate($data.name)">
+                                        Deactivate
+                                    </button>
+                                    <!-- /ko -->
 
-                                <!-- ko ifnot: $data.isActive -->
-                                <button type="button" class="btn btn-secondary w-100" data-bind="
+                                    <!-- ko ifnot: $data.isActive -->
+                                    <button type="button" class="btn btn-secondary w-100" data-bind="
                                     click: () => App.game.oakItems.activate($data.name),
                                     enable: App.game.oakItems.hasAvailableSlot()
                                 ">
-                                    Activate
-                                </button>
-                                <!-- /ko -->
-                            </td>
-                            <td class="vertical-middle p-0">
-                                <a class="btn btn-primary" href="#oakItemDetailModal" data-toggle="modal" data-bind="
+                                        Activate
+                                    </button>
+                                    <!-- /ko -->
+                                </td>
+                                <td class="vertical-middle p-0">
+                                    <a class="btn btn-primary" href="#oakItemDetailModal" data-toggle="modal" data-bind="
                                     click: () => {
                                         App.game.oakItems.selectedOakItem($data.name);
                                     }
                                 ">?</a>
-                            </td>
-                        </tr>
-                        <!-- /ko -->
+                                </td>
+                            </tr>
+                            <!-- /ko -->
 
-                        <!-- ko ifnot: $data.isUnlocked() -->
-                        <tr>
-                            <td class="vertical-middle"><img height="36" class="oak-item-locked" data-bind="attr: { src: `assets/images/oakitems/${OakItemType[$data.name]}.png` }"></td>
-                            <td class="vertical-middle text-left">
-                                <code>Locked</code><br/>
-                                <code class="small" data-bind="text: $data.requirement.hint()"></code>
-                            </td>
-                            <td class="vertical-middle text-left"></td>
-                            <td class="vertical-middle text-left"></td>
-                            <td class="vertical-middle text-left"></td>
-                        </tr>
-                        <!-- /ko -->
-                        <!-- /ko -->
-                        </tbody>
-                    </table>
+                            <!-- ko ifnot: $data.isUnlocked() -->
+                            <tr>
+                                <td class="vertical-middle"><img height="36" class="oak-item-locked" data-bind="attr: { src: `assets/images/oakitems/${OakItemType[$data.name]}.png` }"></td>
+                                <td class="vertical-middle text-left">
+                                    <code>Locked</code><br/>
+                                    <code class="small" data-bind="text: $data.requirement.hint()"></code>
+                                </td>
+                                <td class="vertical-middle text-left"></td>
+                                <td class="vertical-middle text-left"></td>
+                                <td class="vertical-middle text-left"></td>
+                            </tr>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div id="oakItemLoadouts" class="tab-pane fade">
