@@ -21,20 +21,10 @@ export default class OakItems implements Feature {
     defaults: Record<string, any>;
 
     public selectedOakItem: KnockoutObservable<number> = ko.observable(-1);
-    public maxLevelOakItems: PureComputed<number> = ko.pureComputed(() => this.itemList.filter(value => value.isMaxLevel()).length);
+    public maxLevelOakItems: PureComputed<OakItem[]>;
+
 
     constructor(unlockRequirements: Requirement[], private multiplier: Multiplier) {
-        this.itemList = [];
-        this.unlockRequirements = unlockRequirements;
-    }
-
-    // eslint-disable-next-line class-methods-use-this
-    canAccess(): boolean {
-        return true;
-        // return App.game.party.caughtPokemon.length >= 20;
-    }
-
-    initialize() {
         this.itemList = [
             new OakItem({
                 name: OakItemType.Magic_Ball,
@@ -181,7 +171,17 @@ export default class OakItems implements Feature {
                 bonusFormat: bonus => `+${bonus.toLocaleString('en-US', { style: 'percent' })}`,
             }),
         ];
+        this.maxLevelOakItems = ko.pureComputed(() => this.itemList.filter(value => value.isMaxLevel()));
+        this.unlockRequirements = unlockRequirements;
+    }
 
+    // eslint-disable-next-line class-methods-use-this
+    canAccess(): boolean {
+        return true;
+        // return App.game.party.caughtPokemon.length >= 20;
+    }
+
+    initialize() {
         this.addMultiplier('clickAttack', OakItemType.Rocky_Helmet);
         this.addMultiplier('exp', OakItemType.Exp_Share);
         this.addMultiplier('money', OakItemType.Amulet_Coin);
