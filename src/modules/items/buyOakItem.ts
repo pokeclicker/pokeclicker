@@ -1,6 +1,6 @@
 import { Currency } from '../GameConstants';
 import Item from './Item';
-import {ItemNameType} from './ItemNameType';
+import { ItemNameType } from './ItemNameType';
 
 export default class BuyOakItem extends Item {
     constructor(name: ItemNameType, basePrice: number, currency: Currency = Currency.questPoint) {

@@ -2,7 +2,6 @@
 import BerryType from '../enums/BerryType';
 import KeyItemType from '../enums/KeyItemType';
 import MulchType from '../enums/MulchType';
-import OakItemType from '../enums/OakItemType';
 import BattleItem from './BattleItem';
 import BerryItem from './BerryItem';
 import BuyKeyItem from './buyKeyItem';
@@ -26,7 +25,7 @@ import {
     Region,
     VitaminType,
 } from '../GameConstants';
-import {MulchShovelItem, ShovelItem} from './ShovelItem';
+import { MulchShovelItem, ShovelItem } from './ShovelItem';
 import PokeBlock from './PokeBlock';
 import MegaStoneItem from './MegaStoneItem';
 import Vitamin from './Vitamin';
@@ -41,7 +40,7 @@ import QuestItem from './QuestItem';
 import ChristmasPresent from './ChristmasPresent';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
-import {pokemonMap} from '../pokemons/PokemonList';
+import { pokemonMap } from '../pokemons/PokemonList';
 import AttackGainConsumable from './AttackGainConsumable';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};

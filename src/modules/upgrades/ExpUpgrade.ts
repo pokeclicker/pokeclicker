@@ -1,7 +1,7 @@
 import {
     Observable as KnockoutObservable, PureComputed,
 } from 'knockout';
-import Upgrade, {UpgradeProperties} from './Upgrade';
+import Upgrade, { UpgradeProperties } from './Upgrade';
 
 export type ExpUpgradeProperties = UpgradeProperties & {
     experienceList: number[];

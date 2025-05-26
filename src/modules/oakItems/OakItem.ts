@@ -2,7 +2,7 @@ import {
     Observable as KnockoutObservable, PureComputed,
 } from 'knockout';
 import GameHelper from '../GameHelper';
-import ExpUpgrade, {ExpUpgradeProperties} from '../upgrades/ExpUpgrade';
+import ExpUpgrade, { ExpUpgradeProperties } from '../upgrades/ExpUpgrade';
 import Requirement from '../requirements/Requirement';
 
 type OakItemProperties = ExpUpgradeProperties & {
