@@ -10,12 +10,14 @@ type OakItemProperties = ExpUpgradeProperties & {
 
     allowInactiveExperienceGain?: boolean;
     unlockRequirement?: Requirement;
+    overrideHint?: string;
 };
 
 export default class OakItem extends ExpUpgrade {
     private readonly _inactiveBonus: number;
     private readonly _allowInactiveExperienceGain: boolean = false;
     private readonly _unlockRequirement: Requirement;
+    private readonly _overrideHint: string | null;
 
     private _isActive: KnockoutObservable<boolean> = ko.observable(false);
     public isUnlocked: PureComputed<boolean> = ko.pureComputed(() => this._unlockRequirement?.isCompleted() ?? true);
@@ -25,6 +27,7 @@ export default class OakItem extends ExpUpgrade {
         this._inactiveBonus = properties.inactiveBonus;
         this._allowInactiveExperienceGain = properties.allowInactiveExperienceGain;
         this._unlockRequirement = properties.unlockRequirement;
+        this._overrideHint = properties.overrideHint ?? null;
     }
 
     use(experience: number = 1, scale = 1) {
@@ -50,6 +53,10 @@ export default class OakItem extends ExpUpgrade {
 
     get requirement(): Requirement | null {
         return this._unlockRequirement;
+    }
+
+    get hint(): string {
+        return this._overrideHint ?? this._unlockRequirement?.hint() ?? '';
     }
 
     get isActive(): boolean {
