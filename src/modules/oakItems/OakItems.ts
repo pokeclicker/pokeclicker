@@ -88,7 +88,7 @@ export default class OakItems implements Feature {
             new OakItem({
                 name: OakItemType.Shiny_Charm,
                 displayName: 'Shiny Charm',
-                description: 'Increases the odds of encountering Shiny Pokémon',
+                description: 'Increases your odds of finding Shiny Pokemon, from all sources',
                 maxLevel: 5,
                 unlockRequirement: new CaughtPokemonRequirement(70),
                 experienceList: [0, 5, 10, 20, 35, 65],
