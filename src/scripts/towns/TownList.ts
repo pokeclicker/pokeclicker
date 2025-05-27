@@ -493,7 +493,7 @@ const CinnabarIslandResearcher = new NPC('Researcher', [
 const KantoFossilNpc = new NPC('Underground Expert', [
     'That Explorer Kit is a must-have for any Fossil Fanatic! Why, it\'s how I found my very first Old Amber.',
     'Hrm, yes! I see that gleam in your eye! It may look expensive now, but the treasures you\'ll find in the Underground are priceless! And what\'s more- with each new region you travel to, the more adept you will become at identifying new curios!',
-    'Speaking of, our very own Kanto is home to three: the Helix Fossil, Dome Fossil, and Old Amber! You can revive them via that Hatchery of yours!',
+    'Speaking of, our very own Kanto is home to three: the Helix Fossil, Dome Fossil, and Old Amber! You can revive them into living Pokémon using techniques developed by the Devon Corporation and a research laboratory on Cinnabar Island! There are also other scientists around the Pokémon world who can revive Fossils using these techniques.',
 ], {image: 'assets/images/npcs/Ruin Maniac gen3.png'});
 
 const OneIslandCelio1 = new NPC ('Celio', [
@@ -1026,7 +1026,7 @@ TownList['Cinnabar Island'] = new Town(
     'Cinnabar Island',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [CinnabarIslandShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cinnabar Island']), new GenericTraderShop('Palaeontologist', 'Palaeontologist'), new MoveToDungeon(dungeonList['Pokémon Mansion'])],
+    [CinnabarIslandShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cinnabar Island']), new GenericTraderShop('Palaeontologist', 'Palaeontologist'), new GenericTraderShop('FossilCinnabarLab', 'Cinnabar Lab'), new MoveToDungeon(dungeonList['Pokémon Mansion'])],
     {
         requirements: [new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.kanto, 20),
@@ -3285,7 +3285,7 @@ TownList['Rustboro City'] = new Town(
     'Rustboro City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [RustboroCityShop, TemporaryBattleList['Mr. Stone']],
+    [RustboroCityShop, new GenericTraderShop('FossilDevonCorporation', 'Devon Corporation'), TemporaryBattleList['Mr. Stone']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Petalburg Woods'))],
     }
@@ -4530,7 +4530,7 @@ TownList['Oreburgh City'] = new Town(
     'Oreburgh City',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [OreburghCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Oreburgh City'])],
+    [OreburghCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Oreburgh City']), new GenericTraderShop('FossilOreburghMiningMuseum', 'Oreburgh Mining Museum')],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Oreburgh Gate'))],
         npcs: [OreburghConstructionWorker, HappinyWitness7],
@@ -5538,7 +5538,7 @@ TownList['Nacrene City'] = new Town(
     'Nacrene City',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [NacreneCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Nacrene City'])],
+    [NacreneCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Nacrene City']), new GenericTraderShop('FossilNacreneMuseum', 'Nacrene Museum')],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinwheel Forest'))],
         npcs: [VitaminRefundCode, UnovaFossilNpc],
@@ -6522,7 +6522,7 @@ TownList['Ambrette Town'] = new Town(
     'Ambrette Town',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [AmbretteTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Ambrette Town'])],
+    [AmbretteTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Ambrette Town']), new GenericTraderShop('FossilAmbretteFossilLab', 'Ambrette Fossil Lab')],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 8)],
         npcs: [KalosFossilNpc1, KalosFossilNpc3, Calem2],
@@ -9227,7 +9227,7 @@ TownList['Stow-on-Side'] = new Town(
     'Stow-on-Side',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.NorthGalar,
-    [TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side']), new ShardTraderShop(GameConstants.ShardTraderLocations['Route 6'], 'Fossil Master', true, 'Fossils')],
+    [TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side']), new GenericTraderShop('FossilMasterGalarRoute6', 'Cara Liss')],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
         npcs: [AncientMural1, AncientMural2, StowonSideSonia, Archaeologist],

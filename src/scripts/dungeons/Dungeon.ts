@@ -7846,7 +7846,7 @@ dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
             new CustomRequirement(
                 ko.pureComputed(() => darkraiDungeonMoonReq.isCompleted()),
                 true,
-                'Darkrai roams Sinnoh around New Moon, and live on the island during other moon phases.'),
+                'Darkrai roams Sinnoh around New Moon, and lives on the island during other moon phases.'),
         ])}),
     ],
     96500, 230);
@@ -9803,7 +9803,7 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
             {loot: 'Douse_Drive', ignoreDebuff: true},
             {loot: 'Shock_Drive', ignoreDebuff: true},
         ],
-        mythic: [{loot: 'Great_Twisted_Spoon', ignoreDebuff : true, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 14), new ItemOwnedRequirement('Great_Twisted_Spoon', 1, GameConstants.AchievementOption.less)])}],
+        mythic: [{loot: 'Great_Twisted_Spoon', ignoreDebuff : true, requirement: new QuestLineStepCompletedRequirement('An Unrivaled Power', 14)}],
     },
     5403000,
     [
