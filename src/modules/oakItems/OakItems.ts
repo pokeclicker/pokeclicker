@@ -28,7 +28,7 @@ export default class OakItems implements Feature {
             new OakItem({
                 name: OakItemType.Magic_Ball,
                 displayName: 'Magic Ball',
-                description: 'Gives a bonus to your catchrate',
+                description: 'Boosts your chance to successfully catch Pokémon',
                 maxLevel: 5,
                 unlockRequirement: new CaughtPokemonRequirement(20),
                 experienceList: [0, 250, 500, 1250, 2500, 5000],
@@ -40,7 +40,7 @@ export default class OakItems implements Feature {
             new OakItem({
                 name: OakItemType.Amulet_Coin,
                 displayName: 'Amulet Coin',
-                description: 'Gain more Pokédollars from battling',
+                description: 'Increases the amount of Pokédollars earned from battles',
                 maxLevel: 5,
                 unlockRequirement: new CaughtPokemonRequirement(30),
                 experienceList: [0, 500, 1000, 2500, 5000, 10000],
@@ -52,7 +52,7 @@ export default class OakItems implements Feature {
             new OakItem({
                 name: OakItemType.Rocky_Helmet,
                 displayName: 'Rocky Helmet',
-                description: 'Clicks do more damage',
+                description: 'Increases the damage dealt by your clicks',
                 maxLevel: 5,
                 unlockRequirement: new CaughtPokemonRequirement(40),
                 experienceList: [0, 500, 1000, 2500, 5000, 10000],
@@ -64,7 +64,7 @@ export default class OakItems implements Feature {
             new OakItem({
                 name: OakItemType.Exp_Share,
                 displayName: 'EXP Share',
-                description: 'Gain more exp from battling',
+                description: 'Grants more experience from every battle',
                 maxLevel: 5,
                 unlockRequirement: new CaughtPokemonRequirement(50),
                 experienceList: [0, 500, 1000, 2500, 5000, 10000],
@@ -76,7 +76,7 @@ export default class OakItems implements Feature {
             new OakItem({
                 name: OakItemType.Sprayduck,
                 displayName: 'Sprayduck',
-                description: 'Makes your berries grow faster',
+                description: 'Speeds up berry growth',
                 maxLevel: 5,
                 unlockRequirement: new CaughtPokemonRequirement(60),
                 experienceList: [0, 500, 1000, 2500, 5000, 10000],
@@ -88,7 +88,7 @@ export default class OakItems implements Feature {
             new OakItem({
                 name: OakItemType.Shiny_Charm,
                 displayName: 'Shiny Charm',
-                description: 'Encounter shinies more often',
+                description: 'Increases the odds of encountering Shiny Pokémon',
                 maxLevel: 5,
                 unlockRequirement: new CaughtPokemonRequirement(70),
                 experienceList: [0, 5, 10, 20, 35, 65],
@@ -100,7 +100,7 @@ export default class OakItems implements Feature {
             new OakItem({
                 name: OakItemType.Magma_Stone,
                 displayName: 'Magma Stone',
-                description: 'Hatch eggs faster',
+                description: 'Helps Pokémon Eggs hatch more quickly',
                 maxLevel: 5,
                 unlockRequirement: new CaughtPokemonRequirement(80),
                 experienceList: [0, 50, 100, 250, 500, 1000],
@@ -112,7 +112,7 @@ export default class OakItems implements Feature {
             new OakItem({
                 name: OakItemType.Cell_Battery,
                 displayName: 'Cell Battery',
-                description: 'Unlock higher discharge tiers',
+                description: 'Unlocks higher discharge tiers for more powerful effects',
                 maxLevel: 5,
                 unlockRequirement: new CaughtPokemonRequirement(90),
                 experienceList: [0, 5, 10, 25, 50, 100],
@@ -124,7 +124,7 @@ export default class OakItems implements Feature {
             new OakItem({
                 name: OakItemType.Squirtbottle,
                 displayName: 'Squirtbottle',
-                description: 'Increases the chance of berry mutations',
+                description: 'Increases the chance for berries to mutate',
                 maxLevel: 5,
                 unlockRequirement: new ItemOwnedRequirement('Squirtbottle', 1, AchievementOption.equal),
                 overrideHint: 'Purchase from the Berry Master in Goldenrod City, Johto',
@@ -137,7 +137,7 @@ export default class OakItems implements Feature {
             new OakItem({
                 name: OakItemType.Sprinklotad,
                 displayName: 'Sprinklotad',
-                description: 'Increases the duration of Mulch',
+                description: 'Extends the effect duration of Mulch',
                 maxLevel: 5,
                 unlockRequirement: new ItemOwnedRequirement('Sprinklotad', 1, AchievementOption.equal),
                 overrideHint: 'Purchase from the Berry Master in Mauville City, Hoenn',
@@ -150,7 +150,7 @@ export default class OakItems implements Feature {
             new OakItem({
                 name: OakItemType.Explosive_Charge,
                 displayName: 'Explosive Charge',
-                description: 'Increases the number of tiles the Bomb tool can target',
+                description: 'Expands the reach of the Bomb tool, allowing it to hit more tiles at once',
                 maxLevel: 5,
                 unlockRequirement: new ItemOwnedRequirement('Explosive_Charge', 1, AchievementOption.equal),
                 overrideHint: 'Purchase from the shop on Cinnabar Island, Kanto',
@@ -163,7 +163,7 @@ export default class OakItems implements Feature {
             new OakItem({
                 name: OakItemType.Treasure_Scanner,
                 displayName: 'Treasure Scanner',
-                description: 'Chance to multiply mining rewards',
+                description: 'Grants a chance to multiply the rewards found while mining',
                 maxLevel: 5,
                 unlockRequirement: new ItemOwnedRequirement('Treasure_Scanner', 1, AchievementOption.equal),
                 overrideHint: 'Purchase from the shop on Cinnabar Island, Kanto',
@@ -171,7 +171,7 @@ export default class OakItems implements Feature {
                 bonusList: [0.04, 0.08, 0.12, 0.16, 0.20, 0.24],
                 inactiveBonus: 1,
                 upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
-                bonusFormat: bonus => `+${bonus.toLocaleString('en-US', { style: 'percent' })}`,
+                bonusFormat: bonus => `${bonus.toLocaleString('en-US', { style: 'percent' })}`,
             }),
         ];
         this.maxLevelOakItems = ko.pureComputed(() => this.itemList.filter(value => value.isMaxLevel()));

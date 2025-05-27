@@ -72,7 +72,7 @@
                                 <td class="vertical-middle"><img height="36" data-bind="attr: { src: `assets/images/oakitems/${OakItemType[$data.name]}.png` }"></td>
                                 <td class="vertical-middle text-left">
                                     <div class="font-weight-bold" data-bind="text: $data.displayName"></div>
-                                    <div data-bind="text: $data.description"></div>
+                                    <div class="small font-italic" data-bind="text: $data.description"></div>
                                 </td>
                                 <td class="vertical-middle text-center text-nowrap">
                                     <div style="line-height: 1.2rem;" data-bind="text: $data.formatBonus($data.level, true)"></div>
@@ -201,7 +201,7 @@
                 </div>
                 <!-- /ko -->
 
-                <h5 class="font-weight-bold mb-2" data-bind="text: $data.description"></h5>
+                <h6 class="font-weight-bold font-italic mb-3" data-bind="text: $data.description"></h6>
 
                 <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
                     <thead>
