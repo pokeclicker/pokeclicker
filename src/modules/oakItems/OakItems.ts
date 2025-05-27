@@ -76,7 +76,7 @@ export default class OakItems implements Feature {
             new OakItem({
                 name: OakItemType.Sprayduck,
                 displayName: 'Sprayduck',
-                description: 'Speeds up berry growth',
+                description: 'Speeds up berry growth and withering',
                 maxLevel: 5,
                 unlockRequirement: new CaughtPokemonRequirement(60),
                 experienceList: [0, 500, 1000, 2500, 5000, 10000],
@@ -88,7 +88,7 @@ export default class OakItems implements Feature {
             new OakItem({
                 name: OakItemType.Shiny_Charm,
                 displayName: 'Shiny Charm',
-                description: 'Increases your odds of finding Shiny Pokemon, from all sources',
+                description: 'Increases your odds of finding Shiny Pokémon, from all sources',
                 maxLevel: 5,
                 unlockRequirement: new CaughtPokemonRequirement(70),
                 experienceList: [0, 5, 10, 20, 35, 65],
