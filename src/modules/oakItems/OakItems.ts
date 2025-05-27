@@ -47,7 +47,7 @@ export default class OakItems implements Feature {
                 bonusList: [1.25, 1.30, 1.35, 1.40, 1.45, 1.50],
                 inactiveBonus: 1,
                 upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
-                bonusFormat: bonus => `×${bonus.toLocaleString('en-US')}`,
+                bonusFormat: bonus => `×${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
             }),
             new OakItem({
                 name: OakItemType.Rocky_Helmet,
@@ -59,7 +59,7 @@ export default class OakItems implements Feature {
                 bonusList: [1.25, 1.30, 1.35, 1.40, 1.45, 1.50],
                 inactiveBonus: 1,
                 upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
-                bonusFormat: bonus => `×${bonus.toLocaleString('en-US')}`,
+                bonusFormat: bonus => `×${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
             }),
             new OakItem({
                 name: OakItemType.Exp_Share,
@@ -71,7 +71,7 @@ export default class OakItems implements Feature {
                 bonusList: [1.15, 1.18, 1.21, 1.24, 1.27, 1.30],
                 inactiveBonus: 1,
                 upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
-                bonusFormat: bonus => `×${bonus.toLocaleString('en-US')}`,
+                bonusFormat: bonus => `×${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
             }),
             new OakItem({
                 name: OakItemType.Sprayduck,
@@ -83,7 +83,7 @@ export default class OakItems implements Feature {
                 bonusList: [1.25, 1.30, 1.35, 1.40, 1.45, 1.50],
                 inactiveBonus: 1,
                 upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
-                bonusFormat: bonus => `×${bonus.toLocaleString('en-US')}`,
+                bonusFormat: bonus => `×${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
             }),
             new OakItem({
                 name: OakItemType.Shiny_Charm,
@@ -95,7 +95,7 @@ export default class OakItems implements Feature {
                 bonusList: [1.50, 1.60, 1.70, 1.80, 1.90, 2.00],
                 inactiveBonus: 1,
                 upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
-                bonusFormat: bonus => `×${bonus.toLocaleString('en-US')}`,
+                bonusFormat: bonus => `×${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
             }),
             new OakItem({
                 name: OakItemType.Magma_Stone,
@@ -107,7 +107,7 @@ export default class OakItems implements Feature {
                 bonusList: [1.50, 1.60, 1.70, 1.80, 1.90, 2.00],
                 inactiveBonus: 1,
                 upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
-                bonusFormat: bonus => `×${bonus.toLocaleString('en-US')}`,
+                bonusFormat: bonus => `×${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
             }),
             new OakItem({
                 name: OakItemType.Cell_Battery,
@@ -132,7 +132,7 @@ export default class OakItems implements Feature {
                 bonusList: [1.25, 1.50, 1.75, 2.00, 2.25, 2.50],
                 inactiveBonus: 1,
                 upgradeCostList: AmountFactory.createArray([0, 2000, 5000, 10000, 20000, 50000], Currency.farmPoint),
-                bonusFormat: bonus => `×${bonus.toLocaleString('en-US')}`,
+                bonusFormat: bonus => `×${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
             }),
             new OakItem({
                 name: OakItemType.Sprinklotad,
@@ -145,7 +145,7 @@ export default class OakItems implements Feature {
                 bonusList: [1.25, 1.40, 1.55, 1.70, 1.85, 2.00],
                 inactiveBonus: 1,
                 upgradeCostList: AmountFactory.createArray([0, 2000, 5000, 10000, 20000, 50000], Currency.farmPoint),
-                bonusFormat: bonus => `×${bonus.toLocaleString('en-US')}`,
+                bonusFormat: bonus => `×${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
             }),
             new OakItem({
                 name: OakItemType.Explosive_Charge,
