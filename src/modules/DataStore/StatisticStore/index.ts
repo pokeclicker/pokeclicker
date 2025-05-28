@@ -1,5 +1,4 @@
 import type { Observable as KnockoutObservable } from 'knockout';
-import { ContestResults, ContestStyle } from '../../GameConstants';
 import '../../koExtenders';
 import type { PokemonList } from '../../pokemons/PokemonList';
 import { Saveable } from '../common/Saveable';
@@ -127,9 +126,6 @@ export default class Statistics implements Saveable {
     gymsDefeated: Array<KnockoutObservable<number>>;
     dungeonsCleared: Array<KnockoutObservable<number>>;
     temporaryBattleDefeated: Array<KnockoutObservable<number>>;
-    // Contests
-    contestResults: Record<ContestResults, KnockoutObservable<number>>;
-    contestStyleMaster: Record<ContestStyle, KnockoutObservable<number>>;
     // DungeonGuides
     dungeonGuideAttempts: Array<KnockoutObservable<number>>;
     dungeonGuideClears: Array<KnockoutObservable<number>>;
@@ -146,28 +142,8 @@ export default class Statistics implements Saveable {
     shinyPokemonDefeated: PokemonStats;
     shinyPokemonEncountered: PokemonStats;
     shinyPokemonHatched: PokemonStats;
-    malePokemonCaptured: PokemonStats;
-    malePokemonDefeated: PokemonStats;
-    malePokemonEncountered: PokemonStats;
-    malePokemonHatched: PokemonStats;
-    femalePokemonCaptured: PokemonStats;
-    femalePokemonDefeated: PokemonStats;
-    femalePokemonEncountered: PokemonStats;
-    femalePokemonHatched: PokemonStats;
-    shinyMalePokemonCaptured: PokemonStats;
-    shinyFemalePokemonCaptured: PokemonStats;
-    shinyMalePokemonDefeated: PokemonStats;
-    shinyFemalePokemonDefeated: PokemonStats;
-    shinyMalePokemonEncountered: PokemonStats;
-    shinyFemalePokemonEncountered: PokemonStats;
-    shinyMalePokemonHatched: PokemonStats;
-    shinyFemalePokemonHatched: PokemonStats;
     shadowPokemonCaptured: PokemonStats;
     shadowPokemonDefeated: PokemonStats;
-    shadowMalePokemonCaptured: PokemonStats;
-    shadowFemalePokemonCaptured: PokemonStats;
-    shadowMalePokemonDefeated: PokemonStats;
-    shadowFemalePokemonDefeated: PokemonStats;
     npcTalkedTo: Record<string, KnockoutObservable<number>>;
     undergroundHelperRewardRetention: Record<string, KnockoutObservable<number>>;
     undergroundBatteryDischarges: Record<string, KnockoutObservable<number>>;
@@ -262,8 +238,6 @@ export default class Statistics implements Saveable {
         'berriesObtained',
         'mulchesUsed',
         'temporaryBattleDefeated',
-        'contestResults',
-        'contestStyleMaster',
         'dungeonGuideAttempts',
         'dungeonGuideClears',
     ];
@@ -278,28 +252,8 @@ export default class Statistics implements Saveable {
         'shinyPokemonDefeated',
         'shinyPokemonEncountered',
         'shinyPokemonHatched',
-        'malePokemonCaptured',
-        'malePokemonDefeated',
-        'malePokemonEncountered',
-        'malePokemonHatched',
-        'femalePokemonCaptured',
-        'femalePokemonDefeated',
-        'femalePokemonEncountered',
-        'femalePokemonHatched',
-        'shinyMalePokemonCaptured',
-        'shinyFemalePokemonCaptured',
-        'shinyMalePokemonDefeated',
-        'shinyFemalePokemonDefeated',
-        'shinyMalePokemonEncountered',
-        'shinyFemalePokemonEncountered',
-        'shinyMalePokemonHatched',
-        'shinyFemalePokemonHatched',
         'shadowPokemonCaptured',
         'shadowPokemonDefeated',
-        'shadowMalePokemonCaptured',
-        'shadowFemalePokemonCaptured',
-        'shadowMalePokemonDefeated',
-        'shadowFemalePokemonDefeated',
         'npcTalkedTo',
         'undergroundToolsUsed',
         'undergroundHelperRewardRetention',
