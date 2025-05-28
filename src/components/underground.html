@@ -1182,7 +1182,7 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-6 col-12">
+                            <div class="col-12">
                                 <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
                                     <thead>
                                     <tr class="bg-secondary">
@@ -1198,24 +1198,6 @@
                                         <td class="text-left">Mined</td>
                                         <td class="text-left tight"><code data-bind="text: App.game.statistics.undergroundSpecificItemsFound[UndergroundTrading.selectedTradeFromItem.id]().toLocaleString('en-US')"></code></td>
                                     </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="col-lg-6 col-12">
-                                <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
-                                    <thead>
-                                    <tr class="bg-secondary">
-                                        <th colspan="2">Expert retained</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <!-- ko foreach: App.game.underground.helpers.available() -->
-                                    <tr>
-                                        <td class="text-left" data-bind="text: $data.name"></td>
-                                        <td class="text-left tight"><code data-bind="text: App.game.statistics.undergroundHelperRewardRetention[`${$data.id}-${UndergroundTrading.selectedTradeFromItem.id}`]().toLocaleString('en-US')"></code></td>
-                                    </tr>
-                                    <!-- /ko -->
                                     </tbody>
                                 </table>
                             </div>

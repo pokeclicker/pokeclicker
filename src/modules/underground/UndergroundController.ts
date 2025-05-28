@@ -251,8 +251,7 @@ export class UndergroundController {
             if (helper) {
                 if (Rand.chance(helper.rewardRetention)) {
                     // Helper keeps the reward
-                    GameHelper.incrementObservable(App.game.statistics.undergroundHelperRewardRetention[`${helper.id}-${item.id}`], amount);
-                    UndergroundController.notifyHelperItemRetention(item, amount, helper);
+                    helper.retainItem(item, amount);
                 } else {
                     UndergroundController.gainMineItem(item.id, amount);
                 }

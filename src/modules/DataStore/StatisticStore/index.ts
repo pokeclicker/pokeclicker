@@ -145,7 +145,6 @@ export default class Statistics implements Saveable {
     shadowPokemonCaptured: PokemonStats;
     shadowPokemonDefeated: PokemonStats;
     npcTalkedTo: Record<string, KnockoutObservable<number>>;
-    undergroundHelperRewardRetention: Record<string, KnockoutObservable<number>>;
     undergroundBatteryDischarges: Record<string, KnockoutObservable<number>>;
     undergroundSpecificItemsFound: Record<string, KnockoutObservable<number>>;
     undergroundSpecificLayersMined: Record<string, KnockoutObservable<number>>;
@@ -256,7 +255,6 @@ export default class Statistics implements Saveable {
         'shadowPokemonDefeated',
         'npcTalkedTo',
         'undergroundToolsUsed',
-        'undergroundHelperRewardRetention',
         'undergroundBatteryDischarges',
         'undergroundSpecificItemsFound',
         'undergroundSpecificLayersMined',

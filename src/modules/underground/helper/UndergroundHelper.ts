@@ -24,6 +24,7 @@ import UndergroundToolType from '../tools/UndergroundToolType';
 import { UndergroundController } from '../UndergroundController';
 import Rand from '../../utilities/Rand';
 import UndergroundTool from '../tools/UndergroundTool';
+import UndergroundItem from '../UndergroundItem';
 
 type UndergroundHelperParams = {
     id: string,
@@ -59,6 +60,10 @@ export class UndergroundHelper {
 
     private _allowedEnergyRestores: ObservableArray<EnergyRestoreSize> = ko.observableArray([]);
     public selectedEnergyRestore: PureComputed<EnergyRestoreSize | -1> = ko.pureComputed(() => this._allowedEnergyRestores().find(potion => player.itemList[EnergyRestoreSize[potion]]() > 0) ?? -1);
+
+    private _trackedStolenItems: Record<600, Observable<number>> = {
+        600: ko.observable(0),
+    };
 
     constructor(options: UndergroundHelperParams) {
         const {
@@ -198,8 +203,14 @@ export class UndergroundHelper {
         GameHelper.incrementObservable(this._experience, experience);
     }
 
+    public retainItem(item: UndergroundItem, amount: number) {
+        UndergroundController.notifyHelperItemRetention(item, amount, this);
+
+        GameHelper.incrementObservable(this._trackedStolenItems[item.id]);
+    }
+
     public hasStolenItem(stolenItemID: number): boolean {
-        return false && App.game.statistics.undergroundHelperRewardRetention[`${this.id}-${stolenItemID}`]() > 0;
+        return this._trackedStolenItems[stolenItemID]?.() > 0;
     }
 
     get id(): string {
@@ -278,6 +289,7 @@ export class UndergroundHelper {
             timeSinceWork: this._timeSinceWork(),
             allowedEnergyRestores: this._allowedEnergyRestores(),
             shouldDiscoverFavorite: this._shouldDiscoverFavorite(),
+            retainedItems: ko.toJS(this._trackedStolenItems),
         };
     }
 
@@ -287,6 +299,9 @@ export class UndergroundHelper {
         this._timeSinceWork(json?.timeSinceWork || 0);
         this._allowedEnergyRestores(json?.allowedEnergyRestores ?? []);
         this._shouldDiscoverFavorite(json?.shouldDiscoverFavorite ?? false);
+        Object.keys(this._trackedStolenItems).forEach(value => {
+            this._trackedStolenItems[value](json?.retainedItems[value] ?? 0);
+        });
     }
 
     public static convertLevelToExperience(level: number): number {
