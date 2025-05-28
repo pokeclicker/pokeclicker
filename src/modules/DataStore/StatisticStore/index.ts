@@ -142,28 +142,8 @@ export default class Statistics implements Saveable {
     shinyPokemonDefeated: PokemonStats;
     shinyPokemonEncountered: PokemonStats;
     shinyPokemonHatched: PokemonStats;
-    malePokemonCaptured: PokemonStats;
-    malePokemonDefeated: PokemonStats;
-    malePokemonEncountered: PokemonStats;
-    malePokemonHatched: PokemonStats;
-    femalePokemonCaptured: PokemonStats;
-    femalePokemonDefeated: PokemonStats;
-    femalePokemonEncountered: PokemonStats;
-    femalePokemonHatched: PokemonStats;
-    shinyMalePokemonCaptured: PokemonStats;
-    shinyFemalePokemonCaptured: PokemonStats;
-    shinyMalePokemonDefeated: PokemonStats;
-    shinyFemalePokemonDefeated: PokemonStats;
-    shinyMalePokemonEncountered: PokemonStats;
-    shinyFemalePokemonEncountered: PokemonStats;
-    shinyMalePokemonHatched: PokemonStats;
-    shinyFemalePokemonHatched: PokemonStats;
     shadowPokemonCaptured: PokemonStats;
     shadowPokemonDefeated: PokemonStats;
-    shadowMalePokemonCaptured: PokemonStats;
-    shadowFemalePokemonCaptured: PokemonStats;
-    shadowMalePokemonDefeated: PokemonStats;
-    shadowFemalePokemonDefeated: PokemonStats;
     npcTalkedTo: Record<string, KnockoutObservable<number>>;
 
     observables = [
@@ -268,28 +248,8 @@ export default class Statistics implements Saveable {
         'shinyPokemonDefeated',
         'shinyPokemonEncountered',
         'shinyPokemonHatched',
-        'malePokemonCaptured',
-        'malePokemonDefeated',
-        'malePokemonEncountered',
-        'malePokemonHatched',
-        'femalePokemonCaptured',
-        'femalePokemonDefeated',
-        'femalePokemonEncountered',
-        'femalePokemonHatched',
-        'shinyMalePokemonCaptured',
-        'shinyFemalePokemonCaptured',
-        'shinyMalePokemonDefeated',
-        'shinyFemalePokemonDefeated',
-        'shinyMalePokemonEncountered',
-        'shinyFemalePokemonEncountered',
-        'shinyMalePokemonHatched',
-        'shinyFemalePokemonHatched',
         'shadowPokemonCaptured',
         'shadowPokemonDefeated',
-        'shadowMalePokemonCaptured',
-        'shadowFemalePokemonCaptured',
-        'shadowMalePokemonDefeated',
-        'shadowFemalePokemonDefeated',
         'npcTalkedTo',
         'undergroundToolsUsed',
     ];
