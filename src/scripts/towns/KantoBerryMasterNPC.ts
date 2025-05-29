@@ -16,7 +16,7 @@ class KantoBerryMasterNPC extends NPC {
         }
 
         // After the farm is unlocked
-        return `<p>${KantoBerryMasterNPC.generateMessage(new Date())}</p>`;
+        return `<p>${KantoBerryMasterNPC.generateMessage(GameHelper.today())}</p>`;
     }
 
     public static generateMessage(date: Date): string {
@@ -36,7 +36,13 @@ class KantoBerryMasterNPC extends NPC {
         mutationToShow.hintSeen = true;
 
         if (mutationToShow instanceof EnigmaMutation) {
-            mutationToShow.hintsSeen[mutationToShow.hintIndex](true);
+            if (mutationToShow.hintIndex === null) {
+                if (mutationToShow.hintsSeen.filter(s => s()).length === mutationToShow.hintsSeen.length) {
+                    return mutationToShow.hint;
+                }
+                mutationToShow.generateIndex();
+                mutationToShow.hintsSeen[mutationToShow.hintIndex](true);
+            }
             return mutationToShow.partialHint;
         }
 

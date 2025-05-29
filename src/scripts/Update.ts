@@ -2894,6 +2894,9 @@ class Update implements Saveable {
             // Remove unused pokemon egg item
             delete playerData._itemList.Pokemon_egg;
 
+            // Update Enigma hint data
+            saveData.farming.mutations[63] = {seen: saveData.farming.mutations[63]};
+
         },
     };
 
