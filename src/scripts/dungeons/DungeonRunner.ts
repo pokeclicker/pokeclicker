@@ -389,8 +389,8 @@ class DungeonRunner {
         return config[index]?.flash;
     }
 
-    public static isDungeonDebuffed(dungeon) {
-        return (dungeon.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(dungeon.name)) < player.highestRegion() - 2;
+    public static isDungeonDebuffed(dungeon: Dungeon) {
+        return dungeon.difficulty < player.highestRegion() - 2;
     }
 }
 
