@@ -72,7 +72,7 @@ class Player implements TmpPlayerType {
                 if (i != GameConstants.Region.kanto) { // Kanto has it's own starter code
                     if (this.region != i) {
                         this.region = i;
-                        this.subregion = 0;
+                        this._subregion(0);
                         this.route = undefined;
                         this._townName = GameConstants.StartingTowns[i];
                         this.town = TownList[this._townName];
@@ -219,6 +219,11 @@ class Player implements TmpPlayerType {
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
         App.game.party.gainPokemonById(GameConstants.RegionalStarters[this.region][index], shiny);
         this.regionStarters[this.region](index);
+    }
+
+    public hasBeatenChampOfRegion(region: GameConstants.Region = this.highestRegion()) {
+        const champion = GameConstants.RegionGyms[region].find(gym => GymList[gym]?.flags.champion);
+        return champion === undefined ? false : App.game.badgeCase.hasBadge(GymList[champion].badgeReward);
     }
 
     public toJSON() {
