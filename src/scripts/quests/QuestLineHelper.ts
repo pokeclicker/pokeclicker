@@ -1006,7 +1006,23 @@ class QuestLineHelper {
         const fightFolly = new DefeatTemporaryBattleQuest('Folly', 'Fight Folly the Shady Guy in Phenac City');
         orreColosseumQuestLine.addQuest(fightFolly);
 
-        const checkSack = new TalkToNPCQuest(Sack, 'Check what is in the mysterious sack.'); // Step 3
+        const talkToSackReward = () => {
+            $('#npc-modal').one('hidden.bs.modal', () => {
+                Information.show({
+                    steps: [
+                        {
+                            element: document.getElementById('pokeballSelector'),
+                            intro: 'You can now start catching Shadow Pokémon!<br/><br/>A "New Shadow" filter has been added to your list, be sure to select a Poké Ball and move it to the desired position!',
+                        },
+                    ],
+                    highlightClass: 'bg-secondary',
+                    overlayOpacity: 1,
+                    positionPrecedence: ['right', 'bottom'],
+                });
+            });
+        };
+
+        const checkSack = new TalkToNPCQuest(Sack, 'Check what is in the mysterious sack.').withCustomReward(talkToSackReward); // Step 3
         orreColosseumQuestLine.addQuest(checkSack);
 
         const defeatShadowsPhenac = new CustomQuest(10, 0, 'Defeat 10 trainers who are using Shadow Pokémon in Phenac City.', () => App.game.statistics.totalShadowPokemonDefeated());
