@@ -64,8 +64,10 @@ class DungeonGuide {
                 const uncompleteRatio = DungeonGuides.clears() / DungeonGuides.totalClears;
                 const refunds = this.calcCost(DungeonGuides.totalClears, DungeonRunner.dungeon.tokenCost, DungeonRunner.dungeon.difficulty, true);
                 // Only refund for the cancelled attempts
-                refunds.forEach(a => a.amount = Math.round(uncompleteRatio * a.amount));
-                refunds.forEach(a => App.game.wallet.addAmount(a, true));
+                refunds.forEach((a) => {
+                    a.amount = Math.round(uncompleteRatio * a.amount);
+                    App.game.wallet.addAmount(a, true);
+                });
                 this.fire();
             }
         } else {
