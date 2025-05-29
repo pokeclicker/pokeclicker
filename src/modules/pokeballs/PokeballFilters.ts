@@ -20,6 +20,7 @@ export default class PokeballFilters implements Feature {
         { name: 'New', options: { caught: false }, ball: Pokeball.Pokeball },
         { name: 'Caught Shiny', options: { shiny: true, caughtShiny: true }, ball: Pokeball.Pokeball },
         { name: 'Contagious', options: { pokerus: Pokerus.Contagious } },
+        { name: 'New Shadow', options: { shadow: true, caughtShadow: false } },
         { name: 'Caught', options: { caught: true } },
     ];
 
