@@ -36,16 +36,8 @@ class KantoBerryMasterNPC extends NPC {
         mutationToShow.hintSeen = true;
 
         if (mutationToShow instanceof EnigmaMutation) {
-            if (mutationToShow.hintIndex === null) {
-                if (mutationToShow.hintsSeen.filter(s => s()).length === mutationToShow.hintsSeen.length) {
-                    return mutationToShow.hint;
-                }
-                mutationToShow.generateIndex();
-                mutationToShow.hintsSeen[mutationToShow.hintIndex](true);
-            }
             return mutationToShow.partialHint;
         }
-
         return mutationToShow.hint;
     }
 

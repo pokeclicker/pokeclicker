@@ -73,7 +73,7 @@ class EnigmaMutation extends GrowMutation {
      * Handles getting the hint for this mutation for the Kanto Berry Master
      */
     generateIndex(): void {
-        if (this.hintIndex) {
+        if (this.lastIndex()) {
             return;
         }
         this.lastIndex(Rand.fromArray([...new Array(this.hintsSeen.length)].map((_, i) => i).filter(i => !this.hintsSeen[i]())));
@@ -84,12 +84,14 @@ class EnigmaMutation extends GrowMutation {
     }
 
     get partialHint(): string {
-        const idx = this.hintIndex;
-        return `There's a mysterious berry that requires ${this.getHint(idx)}.`;
-    }
-
-    get hintIndex() {
-        return this.lastIndex();
+        if (this.lastIndex() === null) {
+            if (this.hintsSeen.every(s => s())) {
+                return this.hint;
+            }
+            this.generateIndex();
+            this.hintsSeen[this.lastIndex()](true);
+        }
+        return `There's a mysterious berry that requires ${this.getHint(this.lastIndex())}.`;
     }
 
     private getHint(idx: number) {
@@ -136,7 +138,7 @@ class EnigmaMutation extends GrowMutation {
     }
 
     toJSON(): any {
-        return {seen: this.hintsSeen.map(h => h()), last: this.hintIndex};
+        return {seen: this.hintsSeen.map(h => h()), last: this.lastIndex()};
     }
 
     fromJSON(hints: any): void {
