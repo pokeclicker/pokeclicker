@@ -285,17 +285,6 @@ class PartyController {
         });
     }
 
-    private static pokemonsWithHeldItemSortedList = [];
-    static getPokemonsWithHeldItemSortedList = ko.pureComputed(() => {
-        // If the held item modal is open, we should sort it.
-        if (DisplayObservables.modalState.heldItemModal === 'show') {
-            PartyController.pokemonsWithHeldItemSortedList = App.game.party.caughtPokemon.filter(p => p.heldItem());
-            return PartyController.pokemonsWithHeldItemSortedList.sort(PartyController.compareBy(Settings.getSetting('heldItemSort').observableValue(), Settings.getSetting('heldItemSortDirection').observableValue()));
-        }
-        return PartyController.pokemonsWithHeldItemSortedList;
-    }).extend({ rateLimit: 500 });
-
-
     public static calculateRegionalMultiplier(pokemon: PartyPokemon, region: number): number {
         if (region > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== region) {
             return App.game.party.getRegionAttackMultiplier();
