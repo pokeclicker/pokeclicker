@@ -100,7 +100,6 @@ export type TmpDreamOrbControllerType = any;
 export type TmpPurifyChamberType = any;
 export type TmpWeatherAppType = any;
 export type TmpZMovesType = any;
-export type TmpPokemonContestType = any;
 export type TmpHeldItemType = any;
 
 export type TmpGameType = {
@@ -138,7 +137,6 @@ export type TmpGameType = {
     purifyChamber: TmpPurifyChamberType;
     weatherApp: TmpWeatherAppType;
     zMoves: TmpZMovesType;
-    pokemonContest: TmpPokemonContestType;
 
     // functions
     load: () => void;
@@ -349,6 +347,7 @@ export type TmpPartyType = {
 export type TmpPartyControllerType = {
     getCaughtStatusByName: (name: PokemonNameType) => CaughtStatus;
     getPokerusStatusByName: (name: PokemonNameType) => GameConstants.Pokerus;
+    getEvsByName: (name: PokemonNameType) => number;
 };
 
 export type TmpBagHandlerType = {
