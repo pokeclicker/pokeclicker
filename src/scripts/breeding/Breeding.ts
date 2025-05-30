@@ -141,6 +141,7 @@ class Breeding implements Feature {
         this.queueSlots(json.queueSlots ?? this.defaults.queueSlots);
         this._queueList(json.queueList ? json.queueList : this.defaults.queueList);
         this.hatcheryHelpers.fromJSON(json.hatcheryHelpers || []);
+        this.moveEggs();
     }
 
 
