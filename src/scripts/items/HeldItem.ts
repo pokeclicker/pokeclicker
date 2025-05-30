@@ -193,6 +193,8 @@ ItemList.Douse_Drive = new PokemonRestrictedAttackBonusHeldItem('Douse_Drive', 1
     (pokemon) => pokemon.id == 649 || pokemon.id == 649.03 || pokemon.id == 649.05 || pokemon.id == 649.08);
 ItemList.Shock_Drive = new PokemonRestrictedAttackBonusHeldItem('Shock_Drive', 10000, GameConstants.Currency.money, undefined, 'Shock Drive', 1.5, GameConstants.Region.unova, 'Genesect',
     (pokemon) => pokemon.id == 649 || pokemon.id == 649.04 || pokemon.id == 649.05 || pokemon.id == 649.09);
+ItemList.Great_Twisted_Spoon = new PokemonRestrictedAttackBonusHeldItem('Great_Twisted_Spoon', 10000, GameConstants.Currency.money, undefined, 'Great Twisted Spoon', 1.5, GameConstants.Region.kalos, 'Mewtwo',
+    (pokemon) => Math.floor(pokemon.id) == 150);
 ItemList.Leek = new PokemonRestrictedAttackBonusHeldItem('Leek', 10000, GameConstants.Currency.money, undefined, 'Leek', 1.3, GameConstants.Region.galar, 'Farfetch\'d or Sirfetch\'d',
     (pokemon) => Math.floor(pokemon.id) == 83 || Math.floor(pokemon.id) == 865);
 ItemList.Rusted_Sword = new PokemonRestrictedAttackBonusHeldItem('Rusted_Sword', 10000, GameConstants.Currency.money, undefined, 'Rusted Sword', 1.5, GameConstants.Region.galar, 'Zacian',

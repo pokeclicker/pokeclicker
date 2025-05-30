@@ -347,6 +347,7 @@ export type TmpPartyType = {
 export type TmpPartyControllerType = {
     getCaughtStatusByName: (name: PokemonNameType) => CaughtStatus;
     getPokerusStatusByName: (name: PokemonNameType) => GameConstants.Pokerus;
+    getEvsByName: (name: PokemonNameType) => number;
 };
 
 export type TmpBagHandlerType = {
