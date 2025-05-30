@@ -14,9 +14,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body p-0 pb-1 bg-danger" data-bind="visible: $data <= 0">
-        <h4>You are not meant to own this Pokémon</h4>
-        <h4>If you got it by accident, this is a bug you should report</h4>
+      <div class="modal-body bg-danger" data-bind="visible: $data <= 0">
+        <h4>This Pokémon should not be obtainable.</h4>
+        <h4>If you obtained it by accident, please report it as a bug.</h4>
       </div>
       <div class="modal-body p-0 pb-1" data-bind="visible: $data > 0">
         <div class="row m-0 mt-1">
