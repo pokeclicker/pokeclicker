@@ -2896,6 +2896,26 @@ class Update implements Saveable {
             // Remove unused pokemon egg item
             delete playerData._itemList.Pokemon_egg;
 
+            // Add the new default shadow filter to save files that haven't reached the requirements yet
+            const shadowsInTheDesert = saveData.quests.questLines.find((q) => q.name == 'Shadows in the Desert');
+            if (!shadowsInTheDesert || (shadowsInTheDesert.state !== 2 && shadowsInTheDesert.quest < 4)) {
+                const filter = { name: 'New Shadow', options: { shadow: true, caughtShadow: false } };
+                const inverted = settingsData['catchFilters.invertPriorityOrder'] ?? false;
+                if (inverted) { // added to beginning
+                    saveData.pokeballFilters?.list?.splice(0, 0, filter);
+                } else { // added to end
+                    saveData.pokeballFilters?.list?.push(filter);
+                }
+            }
+
+            // Refund any vitamins on MissingNo. as it now gets removed on update.
+            // Will also no longer be able to give it vitamins so this is a one time thing
+            const vitaminsUsed = saveData.party.caughtPokemon.find(p => p.id === 0)?.[2];
+            if (vitaminsUsed) {
+                playerData._itemList.Protein = (playerData._itemList.Protein ?? 0) + (vitaminsUsed[0] ?? 0);
+                playerData._itemList.Calcium = (playerData._itemList.Calcium ?? 0) + (vitaminsUsed[1] ?? 0);
+                playerData._itemList.Carbos = (playerData._itemList.Carbos ?? 0) + (vitaminsUsed[2] ?? 0);
+            }
         },
     };
 
@@ -3079,6 +3099,9 @@ class Update implements Saveable {
                     throw e;
                 }
             }, { playerData, saveData, settingsData });
+
+        // Remove MissingNo.
+        this.removeMissingNo(updateResult.saveData);
 
         try {
             this.automaticallyDownloadBackup(backupButton, settingsData);
@@ -3354,6 +3377,22 @@ class Update implements Saveable {
             saveData.party.caughtPokemon.push({ id: pokemonId });
             saveData.statistics.pokemonCaptured[pokemonId] = saveData.statistics.pokemonCaptured[pokemonId] + 1 || 1;
         }
+    }
+
+    removeMissingNo(saveData) {
+        const idx = saveData.party.caughtPokemon.findIndex(p => p.id === 0);
+        if (idx === -1) {
+            return;
+        }
+
+        // remove from party
+        saveData.party.caughtPokemon.splice(idx, 1);
+
+        // remove from breeding queue
+        saveData.breeding.queueList = saveData.breeding.queueList.filter(p => p !== 0);
+
+        // remove from egg slot
+        saveData.breeding.eggList = saveData.breeding.eggList.map(e => e.pokemon === 0 && e.type !== -1 ? null : e);
     }
 
     getPlayerData() {
