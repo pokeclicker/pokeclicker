@@ -165,6 +165,9 @@ class PartyController {
 
     static getVitaminFilteredList(): Array<PartyPokemon> {
         return App.game.party.caughtPokemon.filter((pokemon) => {
+            if (pokemon.id <= 0) {
+                return false;
+            }
             if (!(Settings.getSetting('vitaminSearchFilter') as SearchSetting).regex().test(pokemon.displayName)) {
                 return false;
             }
@@ -200,6 +203,9 @@ class PartyController {
 
     static getHeldItemFilteredList(): Array<PartyPokemon> {
         return App.game.party.caughtPokemon.filter((pokemon) => {
+            if (pokemon.id <= 0) {
+                return false;
+            }
             if (!HeldItem.heldItemSelected()?.canUse(pokemon)) {
                 return false;
             }
