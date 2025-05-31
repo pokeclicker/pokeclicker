@@ -387,6 +387,7 @@ class GameController {
                         $achievementsModal.modal('toggle');
                         return e.preventDefault();
                     }
+                    break;
                 case Settings.getSetting('hotkey.oakItems').value:
                     // Open oak items
                     if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
