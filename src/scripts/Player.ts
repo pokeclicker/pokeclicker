@@ -27,6 +27,7 @@ class Player implements TmpPlayerType {
     public regionStarters: Array<KnockoutObservable<GameConstants.Starter>>;
     public subregionObject: KnockoutObservable<SubRegion>;
     public trainerId: string;
+    private createdTime: number;
 
     constructor(savedPlayer?) {
         const saved: boolean = (savedPlayer != null);
@@ -102,6 +103,7 @@ class Player implements TmpPlayerType {
         this._origins = [...new Set((savedPlayer._origins || [])).add(window.location?.origin)];
 
         this.trainerId = savedPlayer.trainerId || Rand.intBetween(0, 999999).toString().padStart(6, '0');
+        this.createdTime = savedPlayer.createdTime ?? Math.floor(Date.now() / 1000);
     }
 
     private _itemList: { [name: string]: KnockoutObservable<number> };
