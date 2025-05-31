@@ -27,7 +27,7 @@ class Player implements TmpPlayerType {
     public regionStarters: Array<KnockoutObservable<GameConstants.Starter>>;
     public subregionObject: KnockoutObservable<SubRegion>;
     public trainerId: string;
-    private createdTime: number;
+    private _createdTime: number;
 
     constructor(savedPlayer?) {
         const saved: boolean = (savedPlayer != null);
@@ -103,7 +103,7 @@ class Player implements TmpPlayerType {
         this._origins = [...new Set((savedPlayer._origins || [])).add(window.location?.origin)];
 
         this.trainerId = savedPlayer.trainerId || Rand.intBetween(0, 999999).toString().padStart(6, '0');
-        this.createdTime = savedPlayer.createdTime ?? Math.floor(Date.now() / 1000);
+        this._createdTime = savedPlayer._createdTime ?? Math.floor(Date.now() / 1000);
     }
 
     private _itemList: { [name: string]: KnockoutObservable<number> };
@@ -244,6 +244,7 @@ class Player implements TmpPlayerType {
             'highestSubRegion',
             'regionStarters',
             'trainerId',
+            '_createdTime',
         ];
         const plainJS = ko.toJS(this);
         Object.entries(plainJS._itemMultipliers).forEach(([key, value]) => {

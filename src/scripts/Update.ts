@@ -2918,7 +2918,7 @@ class Update implements Saveable {
             }
 
             // Set file creation time to zero for existing files
-            playerData.createdTime = 0;
+            playerData._createdTime = 0;
         },
     };
 
