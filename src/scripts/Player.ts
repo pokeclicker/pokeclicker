@@ -103,7 +103,7 @@ class Player implements TmpPlayerType {
         this._origins = [...new Set((savedPlayer._origins || [])).add(window.location?.origin)];
 
         this.trainerId = savedPlayer.trainerId || Rand.intBetween(0, 999999).toString().padStart(6, '0');
-        this._createdTime = savedPlayer._createdTime ?? Math.floor(Date.now() / 1000);
+        this._createdTime = savedPlayer._createdTime ?? Date.now();
     }
 
     private _itemList: { [name: string]: KnockoutObservable<number> };
@@ -226,6 +226,10 @@ class Player implements TmpPlayerType {
     public hasBeatenChampOfRegion(region: GameConstants.Region = this.highestRegion()) {
         const champion = GameConstants.RegionGyms[region].find(gym => GymList[gym]?.flags.champion);
         return champion === undefined ? false : App.game.badgeCase.hasBadge(GymList[champion].badgeReward);
+    }
+
+    get createdTime(): number {
+        return this._createdTime;
     }
 
     public toJSON() {
