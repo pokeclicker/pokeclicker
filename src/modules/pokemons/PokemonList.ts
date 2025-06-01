@@ -14697,6 +14697,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 40,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Snover },
         'gender': {
             'visualDifference': true,
         },
@@ -14717,10 +14718,10 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 40,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Snover },
         'gender': {
             'femaleRatio': 0,
         },
-        'heldItem': { type: ItemType.berry, id: BerryType.Snover },
     },
     {
         'id': 460,

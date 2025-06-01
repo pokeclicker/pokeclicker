@@ -3,6 +3,7 @@ interface MutationOptions {
     hint?: string,
     unlockReq?: () => boolean,
     showHint?: boolean,
+    chanceModifier?: (chance: number) => number
 }
 
 abstract class Mutation {
@@ -16,6 +17,7 @@ abstract class Mutation {
     _hint?: string;
     showHint: boolean;
     _unlockReq?: (() => boolean);
+    _chanceModifier?: (chance: number) => number
 
     _hintSeen: KnockoutObservable<boolean>;
 
@@ -25,6 +27,7 @@ abstract class Mutation {
         this._hint = options?.hint;
         this._unlockReq = options?.unlockReq;
         this.showHint = options?.showHint ?? true;
+        this._chanceModifier = options?.chanceModifier ?? ((chance: number) => chance);
 
         this._hintSeen = ko.observable(false);
     }
@@ -53,7 +56,7 @@ abstract class Mutation {
      * Determines whether the player can even cause this mutation
      */
     get unlocked(): boolean {
-        if (!this._unlockReq) {
+        if (!this._unlockReq || App.game.farming.unlockedBerries[this.mutatedBerry]()) {
             return true;
         }
         return this._unlockReq();
@@ -77,7 +80,7 @@ abstract class Mutation {
      * @param idx The plot index
      */
     mutationChance(idx: number): number {
-        return this._mutationChance;
+        return this._chanceModifier?.(this._mutationChance) ?? this._mutationChance;
     }
 
     /**

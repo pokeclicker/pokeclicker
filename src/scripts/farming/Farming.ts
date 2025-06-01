@@ -1549,13 +1549,22 @@ class Farming implements Feature {
             hint: 'I\'ve heard that growing a Passho Berry alone will cause it to change!',
         }));
         // Chople
-        this.mutations.push(new OakMutation(.0001, BerryType.Chople, BerryType.Spelon, OakItemType.Magma_Stone));
+        this.mutations.push(new EvolveNearBerryStrictMutation(.0001, BerryType.Chople, BerryType.Spelon, {[BerryType.Spelon]: 3}, PlotStage.Taller, {
+            hint: 'I\'ve heard that growing a Spelon Berry near exactly three of its kind will cause it to change, especially when in contact with Magma Stone!',
+            chanceModifier: (chance: number) => chance * (App.game.oakItems.isActive(OakItemType.Magma_Stone) ? 2 : 1),
+        }));
         // Kebia
-        this.mutations.push(new OakMutation(.0001, BerryType.Kebia, BerryType.Pamtre, OakItemType.Rocky_Helmet));
+        this.mutations.push(new EvolveNearBerryStrictMutation(.0001, BerryType.Kebia, BerryType.Pamtre, {[BerryType.Pamtre]: 3}, PlotStage.Taller, {
+            hint: 'I\'ve heard that growing a Pamtre Berry near exactly three of its kind will cause it to change, especially when in contact with Rocky Helmet!',
+            chanceModifier: (chance: number) => chance * (App.game.oakItems.isActive(OakItemType.Rocky_Helmet) ? 2 : 1),
+        }));
         // Kebia Parasite
         this.mutations.push(new ParasiteMutation(.0004, BerryType.Kebia));
         // Shuca
-        this.mutations.push(new OakMutation(.0001, BerryType.Shuca, BerryType.Watmel, OakItemType.Sprinklotad));
+        this.mutations.push(new EvolveNearBerryStrictMutation(.0001, BerryType.Shuca, BerryType.Watmel, {[BerryType.Watmel]: 3}, PlotStage.Taller, {
+            hint: 'I\'ve heard that growing a Watmel Berry near exactly three of its kind will cause it to change, especially when in contact with Sprinklotad!',
+            chanceModifier: (chance: number) => chance * (App.game.oakItems.isActive(OakItemType.Sprinklotad) ? 2 : 1),
+        }));
         // Coba
         this.mutations.push(new GrowNearFlavorMutation(.0001, BerryType.Coba,
             [[0, 0], [10, 15], [0, 0], [15, 20], [0, 0]], {
@@ -1580,7 +1589,10 @@ class Farming implements Feature {
             hint: 'I\'ve heard that a special Berry can appear after being surrounded by Rindo Berries!',
         }));
         // Charti
-        this.mutations.push(new OakMutation(.0001, BerryType.Charti, BerryType.Cornn, OakItemType.Cell_Battery));
+        this.mutations.push(new EvolveNearBerryStrictMutation(.0001, BerryType.Charti, BerryType.Cornn, {[BerryType.Cornn]: 3}, PlotStage.Taller, {
+            hint: 'I\'ve heard that growing a Cornn Berry near exactly three of its kind will cause it to change, especially when in contact with Cell Battery!',
+            chanceModifier: (chance: number) => chance * (App.game.oakItems.isActive(OakItemType.Cell_Battery) ? 2 : 1),
+        }));
         // Kasib
         // No mutation, will check withers
         // Haban
@@ -1665,25 +1677,45 @@ class Farming implements Feature {
 
         // Liechi
         this.mutations.push(new FieldMutation(.00001, BerryType.Liechi, [{ berry: BerryType.Passho, amountRequired: 23 }], {
-            unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Kyogre').id]() > 0,
+            chanceModifier: (chance: number) => chance * (App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Kyogre').id]() > 0 ? 2 : 1),
+            hint: 'Legends tell of a mysterious Berry that only appears in a field of Passho Berries and that the power of Kyogre helps reveal.',
+            unlockReq: function(): boolean {
+                return App.game.quests.getQuestLine('Land vs. Water').state() == QuestLineState.ended;
+            },
         }));
         // Ganlon
         this.mutations.push(new FieldMutation(.00001, BerryType.Ganlon, [{ berry: BerryType.Shuca, amountRequired: 23 }], {
-            unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Groudon').id]() > 0,
+            chanceModifier: (chance: number) => chance * (App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Groudon').id]() > 0 ? 2 : 1),
+            hint: 'Legends tell of a mysterious Berry that only appears in a field of Shuca Berries and that the power of Groudon helps reveal.',
+            unlockReq: function(): boolean {
+                return App.game.quests.getQuestLine('Land vs. Water').state() == QuestLineState.ended;
+            },
         }));
         // Salac
         this.mutations.push(new FieldMutation(.00001, BerryType.Salac, [{ berry: BerryType.Coba, amountRequired: 23 }], {
-            unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Rayquaza').id]() > 0,
+            chanceModifier: (chance: number) => chance * (App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Rayquaza').id]() > 0 ? 2 : 1),
+            hint: 'Legends tell of a mysterious Berry that only appears in a field of Coba Berries and that the power of Rayquaza helps reveal.',
+            unlockReq: function(): boolean {
+                return App.game.quests.getQuestLine('Land vs. Water').state() == QuestLineState.ended;
+            },
         }));
         // Petaya
         this.mutations.push(new PetayaMutation(.00001));
         // Apicot
         this.mutations.push(new FieldMutation(.00001, BerryType.Apicot, [{ berry: BerryType.Chilan, amountRequired: 23 }], {
-            unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Palkia').id]() > 0,
+            chanceModifier: (chance: number) => chance * (App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Palkia').id]() > 0 ? 2 : 1),
+            hint: 'Legends tell of a mysterious Berry that only appears in a field of Chilan Berries and that the power of Palkia helps reveal.',
+            unlockReq: function(): boolean {
+                return App.game.quests.getQuestLine('A New World').state() == QuestLineState.ended;
+            },
         }));
         // Lansat
         this.mutations.push(new FieldMutation(.00001, BerryType.Lansat, [{ berry: BerryType.Roseli, amountRequired: 23 }], {
-            unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Dialga').id]() > 0,
+            chanceModifier: (chance: number) => chance * (App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Dialga').id]() > 0 ? 2 : 1),
+            hint: 'Legends tell of a mysterious Berry that only appears in a field of Roseli Berries and that the power of Dialga helps reveal.',
+            unlockReq: function(): boolean {
+                return App.game.quests.getQuestLine('A New World').state() == QuestLineState.ended;
+            },
         }));
 
         // Starf

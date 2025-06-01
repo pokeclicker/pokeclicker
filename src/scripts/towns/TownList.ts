@@ -1522,10 +1522,6 @@ const JohtoBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
     ItemList.Mulch_Shovel,
     ItemList.Squirtbottle,
     ItemList.FarmHandBailey,
-    ItemList.ChopleBerry,
-    ItemList.KebiaBerry,
-    ItemList.ShucaBerry,
-    ItemList.ChartiBerry,
 ], 'Johto Berry Master');
 
 //Johto Contest Shop
