@@ -68,7 +68,7 @@ const importHTML = (componentsUrl) => {
         return data.replace(fileReg, (match, componentName) => {
             const matchPath = path.join(curDirectory, componentName);
             const importPathsNew = [...importPaths, matchPath];
-            console.log(match + ' --> ' + matchPath);
+            console.log(`${match} --> ${matchPath}`);
             if (importPaths.includes(matchPath)) {
                 throw new Error(`Recursive HTML importer encountered an import loop:\n${importPathsNew.join(' --> ')}`);
             }
@@ -76,7 +76,7 @@ const importHTML = (componentsUrl) => {
                 const importContents = fs.readFileSync(matchPath, {
                     encoding: 'utf8',
                 });
-                return `<!-- imported from ${matchPath} -->\n` + recursiveImport(importContents, importPathsNew);
+                return `<!-- imported from ${matchPath} -->\n${recursiveImport(importContents, importPathsNew)}`;
             } catch (e) {
                 if (e.code === 'ENOENT') {
                     throw new Error(`HTML importer can't find imported file ${matchPath}`);
@@ -84,7 +84,7 @@ const importHTML = (componentsUrl) => {
                     throw e;
                 }
             }
-        });        
+        });
     };
 
     return new Transform({
@@ -96,7 +96,7 @@ const importHTML = (componentsUrl) => {
             }
 
             if (file.isStream()) {
-                return cb(new Error(`Our HTML importer doesn't support streams`));
+                return cb(new Error('Our HTML importer doesn\'t support streams'));
             }
 
             let data = file.contents.toString();
@@ -108,7 +108,7 @@ const importHTML = (componentsUrl) => {
             cb(null, file);
         },
     });
-}
+};
 /* end adapted */
 
 /**
@@ -214,7 +214,7 @@ gulp.task('scripts', () => {
     const osPathModulePrefix = convertPathToOS('../src/declarations');
 
     // Declarations for modules globally available as module namespaces (the JS kind) need to be wrapped in namespaces (the TS kind)
-    const globalModules = ['GameConstants.d.ts', `pokemons/PokemonHelper.d.ts`].map(p => convertPathToOS(p));
+    const globalModules = ['GameConstants.d.ts', 'pokemons/PokemonHelper.d.ts'].map(p => convertPathToOS(p));
     const globalModulesFilter = filter((vinylPath) => globalModules.some(modPath => vinylPath.relative.includes(modPath)), {restore: true});
 
     const generateDeclarations = base
