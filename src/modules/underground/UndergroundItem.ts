@@ -30,7 +30,7 @@ export default class UndergroundItem {
     }
 
     public isSellable(): boolean {
-        return [UndergroundItemValueType.Fossil, UndergroundItemValueType.Diamond, UndergroundItemValueType.Gem].includes(this.valueType);
+        return [UndergroundItemValueType.Diamond, UndergroundItemValueType.Gem].includes(this.valueType);
     }
 
     public hasSellValue(): boolean {

@@ -8,7 +8,6 @@
 ///<reference path="../../declarations/requirements/ObtainedPokemonRequirement.d.ts"/>
 ///<reference path="../../declarations/utilities/SeededDateRand.d.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>
-///<reference path="../gym/GymPokemon.ts"/>
 
 interface EnemyOptions {
     weight?: number,
@@ -111,7 +110,7 @@ class Dungeon {
         public tokenCost: number,
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
         public rewardFunction = () => {},
-        public optionalParameters: optionalDungeonParameters = {}
+        private optionalParameters: optionalDungeonParameters = {}
     ) {
         // Keep a list of mimics to use with getCaughtMimics()
         Object.entries(this.lootTable).forEach(([_, itemList]) => {
@@ -480,6 +479,10 @@ class Dungeon {
         });
 
         return encounterInfo;
+    }
+
+    get difficulty(): GameConstants.Region {
+        return this.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(this.name);
     }
 
     public isThereQuestAtLocation = ko.pureComputed(() => {
@@ -1897,6 +1900,7 @@ dungeonList['Altering Cave'] = new Dungeon('Altering Cave',
 
 // All Unown except "EFHP"
 const TanobyUnownList = 'ABCDGIJKLMNOQRSTUVWXYZ!?'.split('');
+const UnownHint = 'Unown appear at random everyday one at a time. An additional Unown will spawn after 100 and 250 clears of the ruins.';
 
 dungeonList['Tanoby Ruins'] = new Dungeon('Tanoby Ruins',
     [
@@ -1928,14 +1932,17 @@ dungeonList['Tanoby Ruins'] = new Dungeon('Tanoby Ruins',
     },
     720600,
     [
-        ...TanobyUnownList.map((char, index) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
-            hide: true,
-            requirement: new OneFromManyRequirement([
+        ...TanobyUnownList.map((char, index) => {
+            const req = new OneFromManyRequirement([
                 new SeededDateSelectNRequirement(index, TanobyUnownList.length, 1),
                 new MultiRequirement([new SeededDateSelectNRequirement(index, TanobyUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Tanoby Ruins'))]),
                 new MultiRequirement([new SeededDateSelectNRequirement(index, TanobyUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Tanoby Ruins'))]),
-            ]),
-        })),
+            ]);
+            return new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
+                hide: true,
+                requirement: new CustomRequirement(ko.pureComputed(() => req.isCompleted()), true, UnownHint),
+            });
+        }),
     ],
     43000, 39,
     () => {},
@@ -2090,14 +2097,17 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     },
     60600,
     [
-        ...AlphUnownList.map((char, index) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 280000, 14, {
-            hide: true,
-            requirement: new OneFromManyRequirement([
+        ...AlphUnownList.map((char, index) => {
+            const req = new OneFromManyRequirement([
                 new SeededDateSelectNRequirement(index, AlphUnownList.length, 1),
                 new MultiRequirement([new SeededDateSelectNRequirement(index, AlphUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Ruins of Alph'))]),
                 new MultiRequirement([new SeededDateSelectNRequirement(index, AlphUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Ruins of Alph'))]),
-            ]),
-        })),
+            ]);
+            return new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 280000, 14, {
+                hide: true,
+                requirement: new CustomRequirement(ko.pureComputed(() => req.isCompleted()), true, UnownHint),
+            });
+        }),
         new DungeonBossPokemon('Togepi (Flowering Crown)', 2700000, 23, {
             requirement: new MultiRequirement([
                 new PokemonDefeatedSelectNRequirement('Togepi (Flowering Crown)', 0, 6, 1),
@@ -3038,6 +3048,7 @@ dungeonList['Rusturf Tunnel'] = new Dungeon('Rusturf Tunnel',
             {loot: 'Revive'},
             {loot: 'Star Piece'},
             {loot: 'Hard Stone'},
+            {loot: 'Aggronite', ignoreDebuff : true, requirement: new MaxRegionRequirement(GameConstants.Region.kalos)},
         ],
         mythic: [{loot: 'Heart Scale'}],
     },
@@ -7076,14 +7087,17 @@ dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
     },
     960000,
     [
-        ...SolaceonUnownList.map((char, index) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
-            hide: true,
-            requirement: new OneFromManyRequirement([
+        ...SolaceonUnownList.map((char, index) => {
+            const req = new OneFromManyRequirement([
                 new SeededDateSelectNRequirement(index, SolaceonUnownList.length, 1),
                 new MultiRequirement([new SeededDateSelectNRequirement(index, SolaceonUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Solaceon Ruins'))]),
                 new MultiRequirement([new SeededDateSelectNRequirement(index, SolaceonUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Solaceon Ruins'))]),
-            ]),
-        })),
+            ]);
+            return new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
+                hide: true,
+                requirement: new CustomRequirement(ko.pureComputed(() => req.isCompleted()), true, UnownHint),
+            });
+        }),
     ],
     62500, 209);
 
@@ -7782,6 +7796,9 @@ dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
     ],
     106500, 230);
 
+const cresseliaDungeonMoonReq = new MoonCyclePhaseRequirement([MoonCyclePhase.NewMoon, MoonCyclePhase.WaxingCrescent, MoonCyclePhase.WaningCrescent]);
+const darkraiDungeonMoonReq = new MoonCyclePhaseRequirement([MoonCyclePhase.FullMoon, MoonCyclePhase.WaxingGibbous, MoonCyclePhase.WaningGibbous, MoonCyclePhase.FirstQuarter, MoonCyclePhase.ThirdQuarter]);
+
 dungeonList['Fullmoon Island'] = new Dungeon('Fullmoon Island',
     ['Illumise', 'Minun', 'Hypno', 'Luvdisc'],
     {
@@ -7799,7 +7816,14 @@ dungeonList['Fullmoon Island'] = new Dungeon('Fullmoon Island',
     [
         new DungeonBossPokemon('Lunatone', 11000000, 100),
         new DungeonBossPokemon('Clefable', 11000000, 100),
-        new DungeonBossPokemon('Cresselia', 11000000, 100, {requirement: new MoonCyclePhaseRequirement([MoonCyclePhase.NewMoon, MoonCyclePhase.WaxingCrescent, MoonCyclePhase.WaningCrescent])}),
+        new DungeonBossPokemon('Cresselia', 11000000, 100, {requirement: new MultiRequirement([
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Fullmoon Island')),
+            new CustomRequirement(
+                ko.pureComputed(() => cresseliaDungeonMoonReq.isCompleted()),
+                true,
+                'Cresselia lives on the island around New Moon, and roams Sinnoh during other moon phases.'
+            ),
+        ])}),
     ],
     96500, 230);
 
@@ -7821,7 +7845,13 @@ dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
     [
         new DungeonBossPokemon('Lunatone', 9900000, 100),
         new DungeonBossPokemon('Absol', 9900000, 100),
-        new DungeonBossPokemon('Darkrai', 11000000, 100, {requirement: new MoonCyclePhaseRequirement([MoonCyclePhase.FullMoon, MoonCyclePhase.WaxingGibbous, MoonCyclePhase.WaningGibbous, MoonCyclePhase.FirstQuarter, MoonCyclePhase.ThirdQuarter])}),
+        new DungeonBossPokemon('Darkrai', 11000000, 100, {requirement: new MultiRequirement([
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Newmoon Island')),
+            new CustomRequirement(
+                ko.pureComputed(() => darkraiDungeonMoonReq.isCompleted()),
+                true,
+                'Darkrai roams Sinnoh around New Moon, and lives on the island during other moon phases.'),
+        ])}),
     ],
     96500, 230);
 
@@ -7847,7 +7877,7 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
         new DungeonBossPokemon('Parasect', 9900000, 50),
         new DungeonBossPokemon('Breloom', 9900000, 50),
         new DungeonBossPokemon('Shaymin (Land)', 11000000, 50),
-        new DungeonBossPokemon('Shaymin (Sky)', 11000000, 50, {hide: true, requirement: new ObtainedPokemonRequirement('Shaymin (Land)')}),
+        new DungeonBossPokemon('Shaymin (Sky)', 11000000, 50, {hide: true, requirement: new ObtainedPokemonRequirement('Shaymin (Sky)')}),
         new DungeonBossPokemon('Bulbasaur (Rose)', 16000000, 100, {
             hide: true,
             requirement: new MultiRequirement([
@@ -9777,7 +9807,7 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
             {loot: 'Douse_Drive', ignoreDebuff: true},
             {loot: 'Shock_Drive', ignoreDebuff: true},
         ],
-        mythic: [{loot: 'Great_Twisted_Spoon', ignoreDebuff : true, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 14), new ItemOwnedRequirement('Great_Twisted_Spoon', 1, GameConstants.AchievementOption.less)])}],
+        mythic: [{loot: 'Great_Twisted_Spoon', ignoreDebuff : true, requirement: new QuestLineStepCompletedRequirement('An Unrivaled Power', 14)}],
     },
     5403000,
     [
@@ -12788,6 +12818,7 @@ dungeonList['Brawlers\' Cave'] = new Dungeon('Brawlers\' Cave',
 
 dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     [
+        {pokemon: 'Kubfu', options: { weight: 1 }},
         new DungeonTrainer('Master Dojo',
             [new GymPokemon('Zorua', 28886112, 65)],
             { weight: 1 }, 'Student'),
@@ -12815,21 +12846,19 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     },
     28886112,
     [
+        new DungeonBossPokemon('Urshifu (Single Strike)', 160924440, 60, {
+            requirement: new MultiRequirement([
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
+                new ObtainedPokemonRequirement('Urshifu (Single Strike)'),
+            ])}),
         new DungeonTrainer('Dojo Master',
             [new GymPokemon('Kubfu', 144430560, 70)], { weight: 1 }, 'Mustard'),
     ],
-    2000000, 40,
-    () => {
-        App.game.party.gainPokemonByName('Urshifu (Single Strike)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-        Notifier.notify({
-            message: 'Kubfu evolved into Urshifu (Single Strike)!',
-            type: NotificationConstants.NotificationOption.success,
-            timeout: 3e4,
-        });
-    });
+    2000000, 40);
 
 dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
     [
+        {pokemon: 'Kubfu', options: { weight: 1 }},
         new DungeonTrainer('Master Dojo',
             [new GymPokemon('Psyduck', 28886112, 65)],
             { weight: 1 }, 'Student'),
@@ -12857,18 +12886,15 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
     },
     28886112,
     [
+        new DungeonBossPokemon('Urshifu (Rapid Strike)', 160924440, 60, {
+            requirement: new MultiRequirement([
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Waters')),
+                new ObtainedPokemonRequirement('Urshifu (Rapid Strike)'),
+            ])}),
         new DungeonTrainer('Dojo Master',
             [new GymPokemon('Kubfu', 144430560, 70)], { weight: 1 }, 'Mustard'),
     ],
-    2000000, 36,
-    () => {
-        App.game.party.gainPokemonByName('Urshifu (Rapid Strike)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-        Notifier.notify({
-            message: 'Kubfu evolved into Urshifu (Rapid Strike)!',
-            type: NotificationConstants.NotificationOption.success,
-            timeout: 3e4,
-        });
-    });
+    2000000, 36);
 
 //Crown Tundra
 dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
@@ -13330,14 +13356,17 @@ dungeonList['Ancient Solaceon Ruins'] = new Dungeon('Ancient Solaceon Ruins',
     },
     960000,
     [
-        ...AncientSolaceonUnownList.map((char, index) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
-            hide: true,
-            requirement: new OneFromManyRequirement([
+        ...AncientSolaceonUnownList.map((char, index) => {
+            const req = new OneFromManyRequirement([
                 new SeededDateSelectNRequirement(index, AncientSolaceonUnownList.length, 1),
                 new MultiRequirement([new SeededDateSelectNRequirement(index, AncientSolaceonUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Ancient Solaceon Ruins'))]),
                 new MultiRequirement([new SeededDateSelectNRequirement(index, AncientSolaceonUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Ancient Solaceon Ruins'))]),
-            ]),
-        })),
+            ]);
+            return new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
+                hide: true,
+                requirement: new CustomRequirement(ko.pureComputed(() => req.isCompleted()), true, UnownHint),
+            });
+        }),
     ],
     96500, 13);
 
