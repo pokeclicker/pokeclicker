@@ -66,7 +66,7 @@ class Discord implements Saveable {
     }
 
     calcCode(code) {
-        const discordID = +App.game.discord.ID() || false;
+        const discordID = +this.ID() || false;
         if (!discordID) {
             return;
         }
@@ -101,13 +101,16 @@ class Discord implements Saveable {
 
     enterCode(enteredCode: string): boolean {
         // Discord integration disabled
-        if (!this.enabled) {
+        // Unless dev, so we can enter codes anyway
+        console.log('Processing');
+        if (!this.enabled && !GameHelper.isDevelopmentBuild()) {
             Notifier.notify({
                 message: 'Discord integration not enabled',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;
         }
+        console.log('blabla');
         // User not logged in to Discord
         if (!this.ID()) {
             Notifier.notify({
