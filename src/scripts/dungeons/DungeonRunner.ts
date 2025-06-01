@@ -20,32 +20,37 @@ class DungeonRunner {
     public static continuousInteractionInput = false;
 
     public static initializeDungeon(dungeon: Dungeon) {
-        if (!dungeon.isUnlocked()) {
-            if (dungeon.name === 'Viridian Forest') {
-                Notifier.notify({
-                    message: 'You need the Dungeon Ticket to access dungeons.\n<i>Check out the shop at Viridian City.</i>',
-                    type: NotificationConstants.NotificationOption.danger,
-                });
-                return false;
+        if (!DungeonRunner.canStartDungeon(dungeon)) {
+            let message;
+            let notifType;
+            if (!dungeon.isUnlocked()) {
+                if (dungeon.name === 'Viridian Forest') {
+                    message = 'You need the Dungeon Ticket to access dungeons.\n<i>Check out the shop at Viridian City.</i>';
+                    notifType = NotificationConstants.NotificationOption.danger;
+                } else {
+                    message = `You don't have access to this dungeon yet.\n<i>${dungeon.getRequirementHints()}</i>`;
+                    notifType = NotificationConstants.NotificationOption.warning;
+                }
+            } else if (!dungeon.hasUnlockedBoss()) {
+                message = 'You can\'t access this dungeon right now because all of its bosses are locked.';
+                notifType = NotificationConstants.NotificationOption.warning;
+            } else if (!DungeonGuides.hired() && !DungeonRunner.hasEnoughTokens(dungeon)) {
+                message = 'You don\'t have enough Dungeon Tokens.';
+                notifType = NotificationConstants.NotificationOption.danger;
             } else {
-                Notifier.notify({
-                    message: `You don't have access to this dungeon yet.\n<i>${dungeon.getRequirementHints()}</i>`,
-                    type: NotificationConstants.NotificationOption.warning,
-                });
-                return false;
+                message = 'You can\'t enter this dungeon right now.';
+                notifType = NotificationConstants.NotificationOption.danger;
             }
+            Notifier.notify({
+                message: message,
+                type: notifType,
+            });
+            return false;
         }
         DungeonRunner.dungeon = dungeon;
 
         // Only charge the player if they aren't using a dungeon guide as they are charged when they start the dungeon
         if (!DungeonGuides.hired()) {
-            if (!DungeonRunner.hasEnoughTokens()) {
-                Notifier.notify({
-                    message: 'You don\'t have enough Dungeon Tokens.',
-                    type: NotificationConstants.NotificationOption.danger,
-                });
-                return false;
-            }
             App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
         }
         // Reset any trainers/pokemon if there was one previously
@@ -57,13 +62,13 @@ class DungeonRunner {
 
         DungeonRunner.timeLeftPercentage(100);
         // Dungeon size increases with each region
-        let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + (dungeon.optionalParameters.dungeonRegionalDifficulty ?? player.region);
+        let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + (dungeon.difficulty);
         // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes
         dungeonSize -= Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toString().length - 1);
         const flash = DungeonRunner.getFlash(DungeonRunner.dungeon.name);
         const generateChestLoot = () => {
             const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeon.name)]();
-            const debuffed = (dungeon.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(dungeon.name)) < player.highestRegion() - 2;
+            const debuffed = DungeonRunner.isDungeonDebuffed(dungeon);
             // Ignores debuff on first attempt to get loot that ignores debuff.
             let tier = dungeon.getRandomLootTier(clears);
             let loot = dungeon.getRandomLoot(tier);
@@ -169,13 +174,15 @@ class DungeonRunner {
             mythic: 0,
         }[tier];
 
+        // Decreasing chance for rarer items (41.7% → 8.3%), ×150% with Dowsing Machine on
+        let moreItemsChance = 0.5 / (4 / (tierWeight + 1)) / 1.5;
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Dowsing_machine)()) {
-            // Decreasing chance for rarer items (62.5% → 12.5%)
-            const magnetChance = 0.5 / (4 / (tierWeight + 1));
-            if (Rand.chance(magnetChance)) {
-                // Gain more items in higher regions
-                amount += Math.max(1, Math.round(Math.max(tierWeight, 2) / 8 * (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 1)));
-            }
+            moreItemsChance *= 1.5;
+        }
+        if (Rand.chance(moreItemsChance)) {
+            // Gain more items in higher regions
+            const region = DungeonRunner.dungeon.difficulty;
+            amount *= 1 + Math.max(1, Math.round(Math.max(tierWeight, 2) / 8 * (region + 1)));
         }
 
         DungeonRunner.gainLoot(loot.loot, amount, tierWeight);
@@ -254,6 +261,12 @@ class DungeonRunner {
             return;
         }
 
+        if (!DungeonRunner.dungeon.hasUnlockedBoss()) {
+            // Prevent the player from being unable to finish the dungeon if somehow all the bosses became locked after entering
+            DungeonRunner.dungeonWon();
+            return;
+        }
+
         DungeonRunner.fightingBoss(true);
         DungeonBattle.generateNewBoss();
     }
@@ -268,6 +281,15 @@ class DungeonRunner {
         DungeonRunner.timeLeft(DungeonRunner.timeLeft() + GameConstants.DUNGEON_LADDER_BONUS);
         if (!DungeonGuides.hired()) {
             DungeonRunner.map.playerMoved(false);
+        }
+    }
+
+    public static returnToTown() {
+        MapHelper.moveToTown(DungeonRunner.dungeon.name);
+        if (App.game.gameState !== GameConstants.GameState.town) {
+            // MoveToTown failed and the player is stuck in the dungeon
+            const dest = GameConstants.StartingTowns[player.region];
+            MapHelper.moveToTown(dest);
         }
     }
 
@@ -286,8 +308,7 @@ class DungeonRunner {
             DungeonRunner.dungeonFinished(true);
             DungeonRunner.fighting(false);
             DungeonRunner.fightingBoss(false);
-            App.game.gameState = GameConstants.GameState.town;
-            DungeonGuides.clears(0);
+            DungeonRunner.returnToTown();
             DungeonGuides.endDungeon();
         }
     }
@@ -297,7 +318,7 @@ class DungeonRunner {
             DungeonRunner.dungeonFinished(true);
             DungeonRunner.fighting(false);
             DungeonRunner.fightingBoss(false);
-            App.game.gameState = GameConstants.GameState.town;
+            DungeonRunner.returnToTown();
             Notifier.notify({
                 message: 'You could not complete the dungeon in time.',
                 type: NotificationConstants.NotificationOption.danger,
@@ -316,7 +337,7 @@ class DungeonRunner {
                 GameHelper.incrementObservable(App.game.statistics.dungeonGuideClears[DungeonGuides.hired().index]);
             }
             GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]);
-            MapHelper.moveToTown(DungeonRunner.dungeon.name);
+            DungeonRunner.returnToTown();
             Notifier.notify({
                 message: 'You have successfully completed the dungeon.',
                 type: NotificationConstants.NotificationOption.success,
@@ -342,8 +363,12 @@ class DungeonRunner {
         });
     }
 
-    public static hasEnoughTokens() {
-        return App.game.wallet.hasAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
+    public static canStartDungeon(dungeon: Dungeon = DungeonRunner.dungeon) {
+        return (DungeonGuides.hired() || DungeonRunner.hasEnoughTokens(dungeon)) && dungeon.isUnlocked() && dungeon.hasUnlockedBoss();
+    }
+
+    public static hasEnoughTokens(dungeon: Dungeon = DungeonRunner.dungeon) {
+        return App.game.wallet.hasAmount(new Amount(dungeon.tokenCost, GameConstants.Currency.dungeonToken));
     }
 
     public static dungeonLevel(): number {
@@ -362,6 +387,10 @@ class DungeonRunner {
         // findIndex, so we can get next tier when light ball is implemented
         const index = config.findIndex((tier) => tier.clearsNeeded <= clears);
         return config[index]?.flash;
+    }
+
+    public static isDungeonDebuffed(dungeon: Dungeon) {
+        return dungeon.difficulty < player.highestRegion() - 2;
     }
 }
 
