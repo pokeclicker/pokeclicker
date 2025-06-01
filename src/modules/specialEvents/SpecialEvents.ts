@@ -22,11 +22,11 @@ export default class SpecialEvents implements Feature {
         endTime: Date,
         endFunction: EventCallback,
         hideFromEventCalendar = false,
-        cssClass?: string,
+        eventBattleBackground?: string,
     ) {
         // Check if the event exist before adding it again
         if (!this.events.find(event => event.title == title)) {
-            this.events.push(new SpecialEvent(title, description, startTime, startFunction, endTime, endFunction, hideFromEventCalendar, cssClass));
+            this.events.push(new SpecialEvent(title, description, startTime, startFunction, endTime, endFunction, hideFromEventCalendar, eventBattleBackground));
         }
     }
 

@@ -438,8 +438,10 @@ img {
   }
 
   &.christmas {
-    background-image: url("../assets/images/battleBackground/snow.png");
-    background-position: bottom;
+    &.default, &.forest {
+      background-image: url("../assets/images/battleBackground/snow.png");
+      background-position: bottom;
+    }
 
     &.cave {
       background-image: url("../assets/images/battleBackground/ice.png");

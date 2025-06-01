@@ -24,7 +24,7 @@ export default class SpecialEvent {
     hideFromEventCalendar: boolean;
     eventCalendarTimeLeft: KnockoutObservable<number>;
     isActive: KnockoutObservable<boolean>;
-    cssClass: string;
+    eventBattleBackground: string;
 
     // TODO: only notify once initially until event about to start/end
     notified: SpecialEventNotifiedStatus;
@@ -37,7 +37,7 @@ export default class SpecialEvent {
         endTime: Date,
         endFunction: EventCallback,
         hideFromEventCalendar: boolean,
-        cssClass?: string,
+        eventBattleBackground?: string,
     ) {
         this.title = title;
         this.description = description;
@@ -50,7 +50,7 @@ export default class SpecialEvent {
         this.eventCalendarTimeLeft = ko.observable(0);
         this.eventCalendarTimeLeft.equalityComparer = () => false; // Forcefully update timeLeft
         this.isActive = ko.pureComputed<boolean>(() => this.status() == SpecialEventStatus.started || this.eventCalendarTimeLeft() > 0);
-        this.cssClass = cssClass;
+        this.eventBattleBackground = eventBattleBackground;
     }
 
     initialize(): void {
@@ -189,9 +189,6 @@ export default class SpecialEvent {
         this.notify('on now!', Math.min(1 * HOUR, timeTillEventEnd), NotificationConstants.NotificationOption.success);
 
         this.startFunction();
-        if (this.cssClass) {
-            document.getElementById('battleViewContainer').classList.add(this.cssClass);
-        }
         // Start checking when the event should be ending
         this.checkEnd();
     }
@@ -228,9 +225,6 @@ export default class SpecialEvent {
     end() {
         // Update event status
         this.notify('just ended!', 1 * HOUR, NotificationConstants.NotificationOption.danger);
-        if (this.cssClass) {
-            document.getElementById('battleViewContainer').classList.remove(this.cssClass);
-        }
         this.endFunction();
         this.status(SpecialEventStatus.none);
         this.updateDate();
