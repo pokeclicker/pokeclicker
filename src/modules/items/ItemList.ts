@@ -187,7 +187,6 @@ ItemList.Grass_egg = new EggItem(EggItemType.Grass_egg, 1000, undefined, 'Grass 
 ItemList.Fighting_egg = new EggItem(EggItemType.Fighting_egg, 1000, undefined, 'Fighting Egg');
 ItemList.Electric_egg = new EggItem(EggItemType.Electric_egg, 1000, undefined, 'Electric Egg');
 ItemList.Dragon_egg = new EggItem(EggItemType.Dragon_egg, 1000, undefined, 'Dragon Egg');
-ItemList.Pokemon_egg = new EggItem(EggItemType.Pokemon_egg, 1000, undefined, 'Pokémon Egg');
 ItemList.Mystery_egg = new EggItem(EggItemType.Mystery_egg, 700, undefined, 'Mystery Egg');
 
 // Quest Items
@@ -221,7 +220,6 @@ ItemList.Push_Forretress_Magikarp_Jump = new QuestItem('Push_Forretress_Magikarp
 ItemList.Push_Golem_Magikarp_Jump = new QuestItem('Push_Golem_Magikarp_Jump', 'Push Golem', 'One of the pushing Pokémons Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
 ItemList.Push_Steelix_Magikarp_Jump = new QuestItem('Push_Steelix_Magikarp_Jump', 'Push Steelix', 'One of the pushing Pokémons Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
 ItemList.Prison_Bottle = new QuestItem('Prison_Bottle', 'Prison Bottle', 'A magical bottle used to bind Hoopa', 'Clash of Ages');
-ItemList.Great_Twisted_Spoon = new QuestItem('Great_Twisted_Spoon', 'Great Twisted Spoon', 'A larger version of the Twisted Spoon made specifically for Mewtwo', 'An Unrivaled Power');
 ItemList.Island_Challenge_Amulet = new QuestItem('Island_Challenge_Amulet', 'Island Challenge Amulet', 'A symbol that denotes your pilgramige on the Island Challenge of Alola. Stronger Trials await you with this in your bag!', 'Island Challenge');
 ItemList.Fighting_Memory_Silvally = new QuestItem('Fighting_Memory_Silvally', 'Fighting Memory', 'One of Silvally\'s memories, obtained from Kahuna Hala in Iki Town', 'Typing some Memories');
 ItemList.Rock_Memory_Silvally = new QuestItem('Rock_Memory_Silvally', 'Rock Memory', 'One of Silvally\'s memories, obtained from Kahuna Olivia in Konikoni City', 'Typing some Memories');
@@ -502,3 +500,26 @@ ItemList['Pikachu (Libre)'] = new PokemonItem('Pikachu (Libre)', 1000, Currency.
 // Event
 ItemList['Elf Munchlax'] = new PokemonItem('Elf Munchlax', 3108, Currency.questPoint, undefined, undefined,
     { visible: new MultiRequirement([new SpecialEventRequirement('Merry Christmas!'), new ObtainedPokemonRequirement('Santa Snorlax')]) });
+// Fossils
+ItemList.Omanyte = new PokemonItem('Omanyte');
+ItemList.Omastar = new PokemonItem('Omastar');
+ItemList.Kabuto = new PokemonItem('Kabuto');
+ItemList.Kabutops = new PokemonItem('Kabutops');
+ItemList.Aerodactyl = new PokemonItem('Aerodactyl');
+ItemList.Lileep = new PokemonItem('Lileep');
+ItemList.Cradily = new PokemonItem('Cradily');
+ItemList.Anorith = new PokemonItem('Anorith');
+ItemList.Armaldo = new PokemonItem('Armaldo');
+ItemList.Cranidos = new PokemonItem('Cranidos');
+ItemList.Rampardos = new PokemonItem('Rampardos');
+ItemList.Shieldon = new PokemonItem('Shieldon');
+ItemList.Bastiodon = new PokemonItem('Bastiodon');
+ItemList.Tirtouga = new PokemonItem('Tirtouga');
+ItemList.Carracosta = new PokemonItem('Carracosta');
+ItemList.Archen = new PokemonItem('Archen');
+ItemList.Archeops = new PokemonItem('Archeops');
+ItemList.Tyrunt = new PokemonItem('Tyrunt');
+ItemList.Tyrantrum = new PokemonItem('Tyrantrum');
+ItemList.Amaura = new PokemonItem('Amaura');
+ItemList.Aurorus = new PokemonItem('Aurorus');
+

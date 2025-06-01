@@ -165,6 +165,9 @@ class PartyController {
 
     static getVitaminFilteredList(): Array<PartyPokemon> {
         return App.game.party.caughtPokemon.filter((pokemon) => {
+            if (pokemon.id <= 0) {
+                return false;
+            }
             if (!(Settings.getSetting('vitaminSearchFilter') as SearchSetting).regex().test(pokemon.displayName)) {
                 return false;
             }
@@ -200,6 +203,9 @@ class PartyController {
 
     static getHeldItemFilteredList(): Array<PartyPokemon> {
         return App.game.party.caughtPokemon.filter((pokemon) => {
+            if (pokemon.id <= 0) {
+                return false;
+            }
             if (!HeldItem.heldItemSelected()?.canUse(pokemon)) {
                 return false;
             }
@@ -252,6 +258,9 @@ class PartyController {
 
     static getConsumableFilteredList(): Array<PartyPokemon> {
         return App.game.party.caughtPokemon.filter((pokemon) => {
+            if (pokemon.id <= 0) {
+                return false;
+            }
             const consumable = ItemList[ConsumableController.currentlySelectedName()] as Consumable;
             if (!consumable.canUse(pokemon)) {
                 return false;
@@ -275,17 +284,6 @@ class PartyController {
             return true;
         });
     }
-
-    private static pokemonsWithHeldItemSortedList = [];
-    static getPokemonsWithHeldItemSortedList = ko.pureComputed(() => {
-        // If the held item modal is open, we should sort it.
-        if (DisplayObservables.modalState.heldItemModal === 'show') {
-            PartyController.pokemonsWithHeldItemSortedList = App.game.party.caughtPokemon.filter(p => p.heldItem());
-            return PartyController.pokemonsWithHeldItemSortedList.sort(PartyController.compareBy(Settings.getSetting('heldItemSort').observableValue(), Settings.getSetting('heldItemSortDirection').observableValue()));
-        }
-        return PartyController.pokemonsWithHeldItemSortedList;
-    }).extend({ rateLimit: 500 });
-
 
     public static calculateRegionalMultiplier(pokemon: PartyPokemon, region: number): number {
         if (region > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== region) {
