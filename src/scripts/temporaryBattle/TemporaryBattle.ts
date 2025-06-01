@@ -1,5 +1,3 @@
-/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
-
 type TemporaryBattleOptionalArgument = {
     rewardFunction?: () => void,
     firstTimeRewardFunction?: () => void,
@@ -33,13 +31,15 @@ class TemporaryBattle extends TownContent implements TmpTemporaryBattleType {
         TemporaryBattleRunner.startBattle(this);
     }
     public areaStatus() {
+        const states = [];
         if (!this.isUnlocked()) {
-            return areaStatus.locked;
-        } else if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.name)]() == 0 && this.isVisible()) {
-            return areaStatus.incomplete;
-        } else {
-            return areaStatus.completed;
+            states.push(areaStatus.locked);
         }
+        if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.name)]() == 0 && this.isVisible()) {
+            states.push(areaStatus.incomplete);
+        }
+        states.push(areaStatus.completed);
+        return states;
     }
     public getDisplayName() {
         return this.optionalArgs.displayName ?? this.name.replace(/( route)? \d+$/, '');

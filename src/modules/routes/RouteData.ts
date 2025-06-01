@@ -27,6 +27,7 @@ import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
 import StatisticRequirement from '../requirements/StatisticRequirement';
 import PokemonLevelRequirement from '../requirements/PokemonLevelRequirement';
 import { getPokemonByName } from '../pokemons/PokemonHelper';
+import CustomRequirement from '../requirements/CustomRequirement';
 
 /*
 KANTO
@@ -280,6 +281,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 19', Region.kanto, 19,
     new RoutePokemon({
         water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
+        special: [new SpecialRoutePokemon(['Surfing Pikachu'], new ObtainedPokemonRequirement('Surfing Pikachu'))],
     }),
     [new GymBadgeRequirement(BadgeEnums.Soul)],
     undefined,
@@ -645,22 +647,23 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.johto, 40)],
 ));
+const cuteMeowthReq = new MultiRequirement([
+    new StatisticRequirement(['pokemonHatched', getPokemonByName('Phanpy').id], 1, 'Hatch Phanpy first.'),
+    new OneFromManyRequirement([
+        new PokemonLevelRequirement('Phanpy', 21, AchievementOption.less),
+        new MultiRequirement([
+            new PokemonLevelRequirement('Phanpy', 51, AchievementOption.less),
+            new ClearDungeonRequirement(250, getDungeonIndex('Team Rocket\'s Hideout')),
+        ]),
+    ]),
+]);
 Routes.add(new RegionRoute(
     'Johto Route 42', Region.johto, 42,
     new RoutePokemon({
         land: ['Spearow', 'Zubat', 'Mankey', 'Mareep', 'Flaaffy'],
         water: ['Goldeen', 'Seaking', 'Magikarp'],
         headbutt: ['Aipom', 'Heracross'],
-        special: [new SpecialRoutePokemon(['Meowth (Phanpy)'], new MultiRequirement([
-            new StatisticRequirement(['pokemonHatched', getPokemonByName('Phanpy').id], 1, 'Hatch Phanpy first.'),
-            new OneFromManyRequirement([
-                new PokemonLevelRequirement('Phanpy', 21, AchievementOption.less),
-                new MultiRequirement([
-                    new PokemonLevelRequirement('Phanpy', 51, AchievementOption.less),
-                    new ClearDungeonRequirement(250, getDungeonIndex('Team Rocket\'s Hideout')),
-                ]),
-            ]),
-        ]))],
+        special: [new SpecialRoutePokemon(['Meowth (Phanpy)'], new CustomRequirement(ko.pureComputed(() => cuteMeowthReq.isCompleted()), true, 'Have Phanpy newly hatched and at level below 21, or 51 if you cleared the Team Rocket\'s Hideout 250 times or more.'))],
     }),
     [
         new OneFromManyRequirement([
@@ -2188,7 +2191,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    33750,
+    47250,
 ));
 Routes.add(new RegionRoute(
     'Quick League Bridge', Region.alola, 32,
@@ -2199,7 +2202,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    67500,
+    94500,
 ));
 Routes.add(new RegionRoute(
     'Heavy League Bridge', Region.alola, 33,
@@ -2210,7 +2213,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    168750,
+    236250,
 ));
 Routes.add(new RegionRoute(
     'Great League Bridge', Region.alola, 34,
@@ -2221,7 +2224,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    270000,
+    378000,
 ));
 Routes.add(new RegionRoute(
     'Fast League Bridge', Region.alola, 35,
@@ -2232,7 +2235,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    506250,
+    708750,
 ));
 Routes.add(new RegionRoute(
     'Luxury League Bridge', Region.alola, 36,
@@ -2243,7 +2246,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    675000,
+    945000,
 ));
 Routes.add(new RegionRoute(
     'Heal League Bridge', Region.alola, 37,
@@ -2254,7 +2257,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    1012500,
+    1417500,
 ));
 Routes.add(new RegionRoute(
     'Ultra League Bridge', Region.alola, 38,
@@ -2265,7 +2268,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    1350000,
+    1890000,
 ));
 Routes.add(new RegionRoute(
     'Elite Four League Pier', Region.alola, 39,
@@ -2276,7 +2279,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    2025000,
+    2835000,
 ));
 Routes.add(new RegionRoute(
     'Master League Pier', Region.alola, 40,
@@ -2287,7 +2290,7 @@ Routes.add(new RegionRoute(
     undefined,
     AlolaSubRegions.MagikarpJump,
     true,
-    2700000,
+    3780000,
 ));
 
 /*
@@ -4244,29 +4247,30 @@ Routes.getRoutesByRegion(Region.hoenn).forEach(route => {
 });
 
 // Christmas Event
+const santaJynxReq = new OneFromManyRequirement([
+    new MultiRequirement([
+        new ItemOwnedRequirement('Christmas_present', 11, AchievementOption.less),
+        new TemporaryBattleRequirement('Santa Jynx 1'),
+        new SpecialEventRequirement('Merry Christmas!'),
+    ]),
+    new MultiRequirement([
+        new ItemOwnedRequirement('Christmas_present', 27, AchievementOption.less),
+        new TemporaryBattleRequirement('Santa Jynx 2'),
+        new SpecialEventRequirement('Merry Christmas!'),
+    ]),
+    new MultiRequirement([
+        new ItemOwnedRequirement('Christmas_present', 49, AchievementOption.less),
+        new TemporaryBattleRequirement('Santa Jynx 3'),
+        new SpecialEventRequirement('Merry Christmas!'),
+    ]),
+    new MultiRequirement([
+        new ItemOwnedRequirement('Christmas_present', 150, AchievementOption.less),
+        new TemporaryBattleRequirement('Santa Jynx 4'),
+        new SpecialEventRequirement('Merry Christmas!'),
+    ]),
+]);
 Routes.getRoutesByRegion(Region.kanto).forEach(route => {
     route.pokemon.special.push(
-        new SpecialRoutePokemon(['Santa Jynx'], new OneFromManyRequirement([
-            new MultiRequirement([
-                new ItemOwnedRequirement('Christmas_present', 11, AchievementOption.less),
-                new TemporaryBattleRequirement('Santa Jynx 1'),
-                new SpecialEventRequirement('Merry Christmas!'),
-            ]),
-            new MultiRequirement([
-                new ItemOwnedRequirement('Christmas_present', 27, AchievementOption.less),
-                new TemporaryBattleRequirement('Santa Jynx 2'),
-                new SpecialEventRequirement('Merry Christmas!'),
-            ]),
-            new MultiRequirement([
-                new ItemOwnedRequirement('Christmas_present', 49, AchievementOption.less),
-                new TemporaryBattleRequirement('Santa Jynx 3'),
-                new SpecialEventRequirement('Merry Christmas!'),
-            ]),
-            new MultiRequirement([
-                new ItemOwnedRequirement('Christmas_present', 150, AchievementOption.less),
-                new TemporaryBattleRequirement('Santa Jynx 4'),
-                new SpecialEventRequirement('Merry Christmas!'),
-            ]),
-        ])),
+        new SpecialRoutePokemon(['Santa Jynx'], new CustomRequirement(ko.pureComputed(() => santaJynxReq.isCompleted()), true, 'During Merry Christmas! event, Santa Jynx appears for the day once its band is defeated at Bill\'s House and until too many Christmas presents have been collected.')),
     );
 });

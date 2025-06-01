@@ -22,3 +22,22 @@
     top: 4px;
     left: 7px
 }
+
+.mapAreaStateWrapper td:first-of-type {
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+// Make filters below "completed" appear disabled
+tr.mapAreaStateWrapper[data-areastate="completed"] ~ tr td:first-of-type {
+    color: gray;
+    text-decoration: line-through;
+}
+
+.map-legend div.--completed ~ div.legend-item {
+    color: gray;
+    text-decoration: line-through;
+}

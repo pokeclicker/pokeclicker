@@ -81,6 +81,11 @@ class GameController {
         const $hatcheryModal = $('#breedingModal');
         $hatcheryModal.on('hide.bs.modal', _ => $hatcheryModal.data('disable-toggle', true));
         $hatcheryModal.on('hidden.bs.modal shown.bs.modal', _ => $hatcheryModal.data('disable-toggle', false));
+        // Achievements Tracker
+        const achievements = App.game.achievementTracker;
+        const $achievementsModal = $('#achievementsModal');
+        $achievementsModal.on('hide.bs.modal', _ => $achievementsModal.data('disable-toggle', true));
+        $achievementsModal.on('hidden.bs.modal shown.bs.modal', _ => $achievementsModal.data('disable-toggle', false));
         // Shop
         const $shopModal = $('#shopModal');
         $shopModal.on('hide.bs.modal', _ => $shopModal.data('disable-toggle', true));
@@ -375,6 +380,14 @@ class GameController {
                         return e.preventDefault();
                     }
                     break;
+                case Settings.getSetting('hotkey.achievementsTracker').value:
+                    // Open the achievmeents tracker
+                    if (achievements.canAccess() && !$achievementsModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        $achievementsModal.modal('toggle');
+                        return e.preventDefault();
+                    }
+                    break;
                 case Settings.getSetting('hotkey.oakItems').value:
                     // Open oak items
                     if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
@@ -424,6 +437,20 @@ class GameController {
                     if (quests.isDailyQuestsUnlocked() && !$questModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
                         $questModal.modal('toggle');
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.castformApp').value:
+                    if (WeatherApp.shortcutVisible()) {
+                        $('.modal').modal('hide');
+                        WeatherApp.openWeatherAppModal();
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.purifyChamber').value:
+                    if (PurifyChamber.shortcutVisible()) {
+                        $('.modal').modal('hide');
+                        PurifyChamber.openPurifyChamberModal();
                         return e.preventDefault();
                     }
                     break;
