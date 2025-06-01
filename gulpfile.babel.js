@@ -7,7 +7,6 @@ const cleanCSS = require('gulp-clean-css');
 const typescript = require('gulp-typescript');
 const browserSync = require('browser-sync');
 const less = require('gulp-less');
-const gulpImport = require('gulp-html-import');
 const ejs = require('gulp-ejs');
 const plumber = require('gulp-plumber');
 const replace = require('gulp-replace');
@@ -19,6 +18,7 @@ const webpack = require('webpack');
 const del = require('del');
 const fs = require('fs');
 const path = require('path');
+const { Transform } = require('node:stream');
 const version = process.env.npm_package_version || '0.0.0';
 
 const webpackConfig = require('./webpack.config');
@@ -57,6 +57,59 @@ const htmlImportIf = (html_str, is_true) => {
         return replace(replaceRegex, '');
     }
 };
+
+/* Adapted from https://github.com/jrainlau/gulp-html-import */
+const importHTML = (componentsUrl) => {
+    const fileReg = /(?<=^\s*)@import\s"([^"\n]*)"/gim;
+
+    const recursiveImport = (data, importPaths) => {
+        const curPath = importPaths.at(-1);
+        const curDirectory = curPath.startsWith(path.normalize(componentsUrl)) ? path.parse(curPath).dir : componentsUrl;
+        return data.replace(fileReg, (match, componentName) => {
+            const matchPath = path.join(curDirectory, componentName);
+            const importPathsNew = [...importPaths, matchPath];
+            console.log(`${match} --> ${matchPath}`);
+            if (importPaths.includes(matchPath)) {
+                throw new Error(`Recursive HTML importer encountered an import loop:\n${importPathsNew.join(' --> ')}`);
+            }
+            try {
+                const importContents = fs.readFileSync(matchPath, {
+                    encoding: 'utf8',
+                });
+                return `<!-- imported from ${matchPath} -->\n${recursiveImport(importContents, importPathsNew)}`;
+            } catch (e) {
+                if (e.code === 'ENOENT') {
+                    throw new Error(`HTML importer can't find imported file ${matchPath}`);
+                } else {
+                    throw e;
+                }
+            }
+        });
+    };
+
+    return new Transform({
+        objectMode: true,
+        highWaterMark: 16,
+        transform(file, enc, cb) {
+            if (file.isNull()) {
+                return cb(null, file);
+            }
+
+            if (file.isStream()) {
+                return cb(new Error('Our HTML importer doesn\'t support streams'));
+            }
+
+            let data = file.contents.toString();
+            let dataReplace = recursiveImport(data, [path.relative('./', file.path)]);
+
+            file.contents = Buffer.from(dataReplace);
+            file.extname = '.html';
+            console.log('Import finished.');
+            cb(null, file);
+        },
+    });
+};
+/* end adapted */
 
 /**
  * Push build to gh-pages
@@ -140,7 +193,7 @@ gulp.task('compile-html', (done) => {
 
     stream.pipe(plumber())
         .pipe(htmlImportIf('$DEV_BANNER', config.DEV_BANNER)) // If we want the development banner displayed
-        .pipe(gulpImport('./src/components/'))
+        .pipe(importHTML('./src/components/'))
         .pipe(replace('$VERSION', version))
         .pipe(replace('$DEVELOPMENT', !!config.DEVELOPMENT))
         .pipe(replace('$FEATURE_FLAGS', process.env.NODE_ENV === 'production' ? '{}' : JSON.stringify(config.FEATURE_FLAGS)))
@@ -161,7 +214,7 @@ gulp.task('scripts', () => {
     const osPathModulePrefix = convertPathToOS('../src/declarations');
 
     // Declarations for modules globally available as module namespaces (the JS kind) need to be wrapped in namespaces (the TS kind)
-    const globalModules = ['GameConstants.d.ts', `pokemons/PokemonHelper.d.ts`].map(p => convertPathToOS(p));
+    const globalModules = ['GameConstants.d.ts', 'pokemons/PokemonHelper.d.ts'].map(p => convertPathToOS(p));
     const globalModulesFilter = filter((vinylPath) => globalModules.some(modPath => vinylPath.relative.includes(modPath)), {restore: true});
 
     const generateDeclarations = base
