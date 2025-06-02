@@ -300,7 +300,7 @@ export class UndergroundHelper {
         this._allowedEnergyRestores(json?.allowedEnergyRestores ?? []);
         this._shouldDiscoverFavorite(json?.shouldDiscoverFavorite ?? false);
         Object.keys(this._trackedStolenItems).forEach(value => {
-            this._trackedStolenItems[value](json?.retainedItems[value] ?? 0);
+            this._trackedStolenItems[value](json?.retainedItems?.[value] ?? 0);
         });
     }
 
