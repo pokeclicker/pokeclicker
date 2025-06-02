@@ -1,22 +1,24 @@
 <div class="modal noselect fade" id="questDetailsModal" tabindex="-1" role="dialog" aria-labelledby="questDetailsModal">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-        <div class="modal-content" data-bind="with: App.game.statistics.selectedQuestName()" style="overflow: auto;">
+        <div class="modal-content detailQuestModal" data-bind="with: App.game.quests.selectedQuestName()">
             <div class="bg-primary p-2">
                 <h6 class="m-0 text-light font-weight-bold" data-bind="text: $data"></h6>
             </div>
             <table class="table table-striped table-bordered table-hover table-sm">
                 <tbody data-bind="foreach: App.game.quests.getQuestDetails($data) || []">
-                    <tr>
-                        <td>
-                            <knockout data-bind="text: taskDescription"></knockout>
+                    <tr data-bind="style: { backgroundColor: isCurrentTask && questStatut !== 0 ? 'orange' : 'transparent' }">
+                        <td class="taskIndexColumn">
+                            <span data-bind="text: taskIndex"></span>
                         </td>
-                        <td>
-                            <button class='btn btn-success btn-sm btn-block disabled-button' disabled
-                                data-bind='visible: $data.isCompleted && !$data.isCurrentTask'>Completed</button>
-                            <button class='btn btn-warning btn-sm btn-block disabled-button' disabled
-                                data-bind='visible: $data.isCurrentTask'>In Progress</button>
-                            <button class='btn btn-danger btn-sm btn-block disabled-button' disabled
-                                data-bind='visible: !$data.isCompleted && !$data.isCurrentTask'>Locked</button>
+                        <td class="taskDescriptionColumn">
+                            <span data-bind="text: taskDescription"></span>
+                        </td>
+                        <td class="taskStatutColumn">
+                            <span class="completedTask"
+                                  data-bind="visible: isCompleted && !isCurrentTask">Completed</span>
+                            <span data-bind="visible: isCurrentTask && questStatut !== 0">In Progress</span>
+                            <span class="lockedTask"
+                                  data-bind="visible: (!isCompleted && !isCurrentTask) || questStatut === 0">Locked</span>
                         </td>
                     </tr>
                 </tbody>
