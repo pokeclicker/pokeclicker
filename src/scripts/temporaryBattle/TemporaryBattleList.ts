@@ -3415,8 +3415,8 @@ TemporaryBattleList['Calem 5'] = new TemporaryBattle(
         imageName: 'Calem',
     }
 );
-TemporaryBattleList['Storyline AZ'] = new TemporaryBattle(
-    'Storyline AZ',
+TemporaryBattleList.AZ = new TemporaryBattle(
+    'AZ',
     [
         new GymPokemon('Torkoal', 153757520, 60),
         new GymPokemon('Golurk', 153757520, 60),
@@ -3428,23 +3428,6 @@ TemporaryBattleList['Storyline AZ'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer AZ',
         imageName: 'AZ',
-    }
-);
-TemporaryBattleList.AZ = new TemporaryBattle(
-    'AZ',
-    [
-        new GymPokemon('Torkoal', 161445396, 80),
-        new GymPokemon('Golurk', 161445396, 80),
-        new GymPokemon('Sigilyph', 161445396, 80),
-    ],
-    'Floette... It\'s been 3,000 years...',
-    [new QuestLineCompletedRequirement('A Beautiful World')],
-    undefined,
-    {
-        displayName: 'Pokémon Trainer AZ',
-        firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Floette (Eternal)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-        },
     }
 );
 TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
