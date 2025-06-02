@@ -3427,7 +3427,6 @@ TemporaryBattleList.AZ = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer AZ',
-        imageName: 'AZ',
     }
 );
 TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
