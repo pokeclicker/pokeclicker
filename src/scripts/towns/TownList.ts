@@ -9152,15 +9152,15 @@ const MagearnaMysteryGift = new GiftNPC('Mystery Gift', [
 ], () => {
     App.game.party.gainPokemonByName('Magearna (Original Color)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
 }, 'assets/images/pokemon/801.01.png', { saveKey: 'magearnamysterygift', requirement: new MultiRequirement([
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kanto),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.johto),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.hoenn),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.sinnoh),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.unova),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kalos),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.alola),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.galar),
-            ]), });
+    new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kanto),
+    new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.johto),
+    new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.hoenn),
+    new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.sinnoh),
+    new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.unova),
+    new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kalos),
+    new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.alola),
+    new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.galar),
+])});
 
 //Galar Towns
 TownList.Postwick = new Town(
