@@ -2,7 +2,7 @@
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 /// <reference path="../../declarations/breeding/EggType.d.ts" />
 
-type HatcheryQueueType = [EggType.Pokemon, number] | [EggType.EggItem, GameConstants.EggItemType];
+type HatcheryQueueEntry = [EggType.Pokemon, number] | [EggType.EggItem, GameConstants.EggItemType];
 
 class Breeding implements Feature {
     name = 'Breeding';
@@ -19,7 +19,7 @@ class Breeding implements Feature {
     private _eggList: Array<KnockoutObservable<Egg>>;
     private _eggSlots: KnockoutObservable<number>;
 
-    private _queueList: KnockoutObservableArray<HatcheryQueueType>;
+    private _queueList: KnockoutObservableArray<HatcheryQueueEntry>;
     public queueSlots: KnockoutObservable<number>;
 
     public readonly hatchList: Record<GameConstants.EggItemType, PokemonNameType[][]> = {
@@ -324,7 +324,7 @@ class Breeding implements Feature {
         return success;
     }
 
-    private addDataToQueue(queueData: HatcheryQueueType): boolean {
+    private addDataToQueue(queueData: HatcheryQueueEntry): boolean {
         const queueSize = this._queueList().length;
         if (queueSize < this.usableQueueSlots()) {
             this._queueList.push(queueData);
@@ -336,7 +336,7 @@ class Breeding implements Feature {
     public removeFromQueue(index: number): boolean {
         const queueSize = this._queueList().length;
         if (queueSize > index && index >= 0) {
-            const queueData: HatcheryQueueType = this._queueList.splice(index, 1)[0];
+            const queueData: HatcheryQueueEntry = this._queueList.splice(index, 1)[0];
             if (queueData[0] === EggType.Pokemon) {
                 App.game.party.getPokemon(queueData[1]).breeding = false;
                 return true;
@@ -500,7 +500,7 @@ class Breeding implements Feature {
         this._eggSlots(value);
     }
 
-    get queueList(): KnockoutObservable<Array<HatcheryQueueType>> {
+    get queueList(): KnockoutObservable<Array<HatcheryQueueEntry>> {
         return this._queueList;
     }
 

@@ -67,7 +67,7 @@ class BreedingController {
         return SeededRand.fromArray(EggSpots.spotTypes);
     }
 
-    public static getQueueImage([type, id]: HatcheryQueueType) {
+    public static getQueueImage([type, id]: HatcheryQueueEntry) {
         if (type == EggType.Pokemon) {
             return PokemonHelper.getImage(id);
         } else if (type == EggType.EggItem) {
