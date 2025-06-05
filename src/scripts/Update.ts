@@ -2916,6 +2916,9 @@ class Update implements Saveable {
                 playerData._itemList.Calcium = (playerData._itemList.Calcium ?? 0) + (vitaminsUsed[1] ?? 0);
                 playerData._itemList.Carbos = (playerData._itemList.Carbos ?? 0) + (vitaminsUsed[2] ?? 0);
             }
+
+            //Remove second AZ battle.
+            saveData.statistics.temporaryBattleDefeated.splice(202, 1);
         },
     };
 
