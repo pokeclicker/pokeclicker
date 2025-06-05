@@ -120,7 +120,7 @@ class Pokeballs implements Feature {
 
             new Pokeball(GameConstants.Pokeball.Moonball, (opts) => {
                 const moonCycleMod = MoonCycle.currentMoonCyclePhase();
-                const moonCycleBonus = (4 - Math.abs((moonCycleMod % 8) - 4)) * 5;
+                const moonCycleBonus = MoonCycle.catchChanceBonus(moonCycleMod);
 
                 if (GameConstants.MoonEvoPokemon.has(opts.pokemon)) {
                     return Math.min(20, moonCycleBonus + 10);

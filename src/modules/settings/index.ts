@@ -477,6 +477,7 @@ Settings.add(new BooleanSetting('sound.muted', 'Mute All Sounds', false));
 // Hotkeys
 Settings.add(new HotkeySetting('hotkey.farm', 'Farm', 'F'));
 Settings.add(new HotkeySetting('hotkey.hatchery', 'Hatchery', 'H'));
+Settings.add(new HotkeySetting('hotkey.achievementsTracker', 'Achievements', 'T'));
 Settings.add(new HotkeySetting('hotkey.oakItems', 'Oak Items', 'O'));
 Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'U'));
 Settings.add(new HotkeySetting('hotkey.shop', 'Poké Mart', 'E'));
