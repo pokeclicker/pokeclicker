@@ -320,8 +320,8 @@ const CeruleanKantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
     'Come back when you are ready to learn!',
 ]);
 const CeruleanFarmApprentice = new NPC('Farm Apprentice', [
-    'Buying all these water eggs with Quest Points sure is expensive....but one day when I was tending to my Passho Berries, a squirtle suddenly appeared!'
-    ,'Maybe I could save even MORE Quest Points on eggs if I keep mutating different berries.',
+    'One day I was tending to my Passho berries and a Squirtle suddenly appeared! If only I knew about this before spending all of my Quest Points on Water Eggs..',
+    'If I try mutating different berries maybe I can catch new Pokémon while saving my Quest Points!',
 ], {image: 'assets/images/npcs/Bug Catcher.png'});
 
 const CeruleanSuperNerd = new NPC('Super Nerd Jovan', [
