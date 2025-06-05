@@ -1536,6 +1536,7 @@ const JohtoBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
 const JohtoContestShop = new Shop([
     ItemList['Sudowoodo (Golden)'],
 ], 'Contest Shop');
+
 // Johto NPCs
 
 const CherrygroveMrPokemon = new NPC('Mr. Pokémon', [
@@ -10262,3 +10263,10 @@ TownList['Final Region Town'] = new Town(
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_PaldeaChampion)],
     }
 );
+
+const pickStarter = new PickStarterContent();
+GameConstants.StartingTowns.forEach((townName, region) => {
+    if (region > 0) { // Kanto is treater separately
+        TownList[townName].content.push(pickStarter);
+    }
+});
