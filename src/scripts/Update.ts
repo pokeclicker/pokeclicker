@@ -3000,7 +3000,10 @@ class Update implements Saveable {
         if (!settingsData?.disableAutoDownloadBackupSaveOnUpdate) {
             button.style.display = 'none';
             document.body.appendChild(button);
-            button.click();
+            // We don't want auto download on dev build
+            if (!GameHelper.isDevelopmentBuild()) {
+                button.click();
+            }
             document.body.removeChild(button);
         }
         button.style.display = '';
