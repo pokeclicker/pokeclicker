@@ -1082,14 +1082,6 @@ export enum StoneType {
     'Metal_alloy',
 }
 
-export enum FossilPieceType {
-    'None' = -1,
-    'Fossilized Bird',
-    'Fossilized Fish',
-    'Fossilized Drake',
-    'Fossilized Dino',
-}
-
 export enum BattleItemType {
     'xAttack' = 'xAttack',
     'xClick' = 'xClick',
@@ -1226,7 +1218,6 @@ export enum EggItemType {
     'Fighting_egg',
     'Electric_egg',
     'Dragon_egg',
-    'Pokemon_egg',
     'Mystery_egg',
 }
 
@@ -1307,35 +1298,6 @@ export const EnergyRestoreEffect = {
     SmallRestore: 0.1,
     MediumRestore: 0.2,
     LargeRestore: 0.5,
-};
-
-export const FossilToPokemon = {
-    'Helix Fossil': 'Omanyte',
-    'Dome Fossil': 'Kabuto',
-    'Old Amber': 'Aerodactyl',
-    'Root Fossil': 'Lileep',
-    'Claw Fossil': 'Anorith',
-    'Armor Fossil': 'Shieldon',
-    'Skull Fossil': 'Cranidos',
-    'Cover Fossil': 'Tirtouga',
-    'Plume Fossil': 'Archen',
-    'Jaw Fossil': 'Tyrunt',
-    'Sail Fossil': 'Amaura',
-};
-
-// Used for image name
-export const PokemonToFossil = {
-    Omanyte: 'Helix Fossil',
-    Kabuto: 'Dome Fossil',
-    Aerodactyl: 'Old Amber',
-    Lileep: 'Root Fossil',
-    Anorith: 'Claw Fossil',
-    Shieldon: 'Armor Fossil',
-    Cranidos: 'Skull Fossil',
-    Tirtouga: 'Cover Fossil',
-    Archen: 'Plume Fossil',
-    Tyrunt: 'Jaw Fossil',
-    Amaura: 'Sail Fossil',
 };
 
 // For random quest, name matches entry in gymList (created in Gym.ts)
@@ -2092,7 +2054,6 @@ export const TemporaryBattles = [
     'Merilyn',
     'Millis and Argus Steel',
     'Rampaging Yveltal',
-    'Storyline AZ',
     'AZ',
     'Ash Ketchum Kanto',
     'Ash Ketchum Johto',
@@ -2426,7 +2387,6 @@ export enum ShardTraderLocations {
     'Hulbury',
     'Motostoke',
     'Hammerlocke',
-    'Route 6',
     'Stow-on-Side',
     'Ballonlea',
     'Circhester',

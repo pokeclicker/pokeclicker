@@ -497,7 +497,7 @@ const CinnabarIslandResearcher = new NPC('Researcher', [
 const KantoFossilNpc = new NPC('Underground Expert', [
     'That Explorer Kit is a must-have for any Fossil Fanatic! Why, it\'s how I found my very first Old Amber.',
     'Hrm, yes! I see that gleam in your eye! It may look expensive now, but the treasures you\'ll find in the Underground are priceless! And what\'s more- with each new region you travel to, the more adept you will become at identifying new curios!',
-    'Speaking of, our very own Kanto is home to three: the Helix Fossil, Dome Fossil, and Old Amber! You can revive them via that Hatchery of yours!',
+    'Speaking of, our very own Kanto is home to three: the Helix Fossil, Dome Fossil, and Old Amber! You can revive them into living Pokémon using techniques developed by the Devon Corporation and a research laboratory on Cinnabar Island! There are also other scientists around the Pokémon world who can revive Fossils using these techniques.',
 ], {image: 'assets/images/npcs/Ruin Maniac gen3.png'});
 
 const OneIslandCelio1 = new NPC ('Celio', [
@@ -1030,7 +1030,7 @@ TownList['Cinnabar Island'] = new Town(
     'Cinnabar Island',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [CinnabarIslandShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cinnabar Island']), new GenericTraderShop('Palaeontologist', 'Palaeontologist'), new MoveToDungeon(dungeonList['Pokémon Mansion'])],
+    [CinnabarIslandShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cinnabar Island']), new GenericTraderShop('Palaeontologist', 'Palaeontologist'), new GenericTraderShop('FossilCinnabarLab', 'Cinnabar Lab'), new MoveToDungeon(dungeonList['Pokémon Mansion'])],
     {
         requirements: [new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.kanto, 20),
@@ -3289,7 +3289,7 @@ TownList['Rustboro City'] = new Town(
     'Rustboro City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [RustboroCityShop, TemporaryBattleList['Mr. Stone']],
+    [RustboroCityShop, new GenericTraderShop('FossilDevonCorporation', 'Devon Corporation'), TemporaryBattleList['Mr. Stone']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Petalburg Woods'))],
     }
@@ -4534,7 +4534,7 @@ TownList['Oreburgh City'] = new Town(
     'Oreburgh City',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [OreburghCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Oreburgh City'])],
+    [OreburghCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Oreburgh City']), new GenericTraderShop('FossilOreburghMiningMuseum', 'Oreburgh Mining Museum')],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Oreburgh Gate'))],
         npcs: [OreburghConstructionWorker, HappinyWitness7],
@@ -5542,7 +5542,7 @@ TownList['Nacrene City'] = new Town(
     'Nacrene City',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [NacreneCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Nacrene City'])],
+    [NacreneCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Nacrene City']), new GenericTraderShop('FossilNacreneMuseum', 'Nacrene Museum')],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinwheel Forest'))],
         npcs: [VitaminRefundCode, UnovaFossilNpc],
@@ -6284,6 +6284,14 @@ const TeamFlareBossLysandre1 = new NPC('Team Flare Boss Lysandre', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 31), new QuestLineStepCompletedRequirement('A Beautiful World', 33, GameConstants.AchievementOption.less)]),
 });
 
+const EternalFloetteGift = new GiftNPC('AZ', [
+    'Floette... It\'s been 3,000 years...',
+    'And with you... another of your kind?',
+    'Ah... it seems to be interested in you, $playername$. Would you like to take it with you?',
+], () => {
+    App.game.party.gainPokemonByName('Floette (Eternal)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
+}, 'assets/images/pokemon/670.05.png', { saveKey: 'eternalfloettegift', image: 'assets/images/npcs/AZ.png', requirement: new QuestLineCompletedRequirement('A Beautiful World') });
+
 const CouriwayOldGentlemanHarold = new NPC('Old Gentleman Harold', [
     'I love going on walks at <b>dusk</b>. It\'s my favourite part of the day, everything\'s so calm...',
     'Though lately, I\'ve been hearing roars near the waterfalls, but I\'m too scared to see for myself what kind of monster is making those sounds.',
@@ -6497,10 +6505,10 @@ TownList['Lumiose City'] = new Town(
     'Lumiose City',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [TemporaryBattleList['Sycamore 1'], DepartmentStoreShop, FriseurFurfrouShop, KalosStoneSalesman, TemporaryBattleList['Team Flare Lysandre 1'], TemporaryBattleList['Team Flare Xerosic'], TemporaryBattleList['Storyline AZ'], TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha'], TemporaryBattleList['Kalos Stone Salesman']],
+    [TemporaryBattleList['Sycamore 1'], DepartmentStoreShop, FriseurFurfrouShop, KalosStoneSalesman, TemporaryBattleList['Team Flare Lysandre 1'], TemporaryBattleList['Team Flare Xerosic'], TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha'], TemporaryBattleList['Kalos Stone Salesman']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
-        npcs: [ProfSycamore, LumioseDexio, LumioseEngineer, Lysandre1, Calem1, Lysandre3, Lysandre4, AZ1, BlueButton, RedButton, KalosStoneSalesman1, KalosStoneSalesman2],
+        npcs: [ProfSycamore, LumioseDexio, LumioseEngineer, Lysandre1, Calem1, Lysandre3, Lysandre4, AZ1, BlueButton, RedButton, EternalFloetteGift, KalosStoneSalesman1, KalosStoneSalesman2],
     }
 );
 TownList['Camphrier Town'] = new Town(
@@ -6526,7 +6534,7 @@ TownList['Ambrette Town'] = new Town(
     'Ambrette Town',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [AmbretteTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Ambrette Town'])],
+    [AmbretteTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Ambrette Town']), new GenericTraderShop('FossilAmbretteFossilLab', 'Ambrette Fossil Lab')],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 8)],
         npcs: [KalosFossilNpc1, KalosFossilNpc3, Calem2],
@@ -9143,13 +9151,20 @@ const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     //*TODO*: Change second line to this text when Paldea is available: 'Now be on your way, the illustrious Paldea region awaits over the horizons.',
     'assets/images/npcs/Professor Magnolia.png');
 
-const MagearnaMysteryGift = new NPC('Mystery Gift', [
+const MagearnaMysteryGift = new GiftNPC('Mystery Gift', [
     'You have received a Mystery Gift for completing the National Shiny Dex!',
-], {
-    image: 'assets/images/pokemon/801.01.png',
-    requirement: new MultiRequirement([new QuestLineStartedRequirement('A Mystery Gift'), new QuestLineCompletedRequirement('A Mystery Gift', GameConstants.AchievementOption.less)]),
-}
-);
+], () => {
+    App.game.party.gainPokemonByName('Magearna (Original Color)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
+}, 'assets/images/pokemon/801.01.png', { saveKey: 'magearnamysterygift', requirement: new MultiRequirement([
+    new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kanto),
+    new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.johto),
+    new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.hoenn),
+    new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.sinnoh),
+    new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.unova),
+    new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kalos),
+    new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.alola),
+    new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.galar),
+])});
 
 //Galar Towns
 TownList.Postwick = new Town(
@@ -9225,7 +9240,7 @@ TownList['Stow-on-Side'] = new Town(
     'Stow-on-Side',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.NorthGalar,
-    [TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side']), new ShardTraderShop(GameConstants.ShardTraderLocations['Route 6'], 'Fossil Master', true, 'Fossils')],
+    [TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side']), new GenericTraderShop('FossilMasterGalarRoute6', 'Cara Liss')],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
         npcs: [AncientMural1, AncientMural2, StowonSideSonia, Archaeologist],
