@@ -10266,7 +10266,7 @@ TownList['Final Region Town'] = new Town(
 
 const pickStarter = new PickStarterContent();
 GameConstants.StartingTowns.forEach((townName, region) => {
-    if (region > 0) { // Kanto is treater separately
+    if (region > 0) { // Kanto is treated separately
         TownList[townName].content.push(pickStarter);
     }
 });
