@@ -18,18 +18,22 @@ class BattleCafe extends TownContent {
     public areaStatus(): areaStatus[] {
         const status = super.areaStatus();
         const pokerusUnlocked = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked();
-        if (BattleCafeController.spinsLeft()) {
-            status.push(areaStatus.incomplete);
-        }
         const alcremieList = Object.values(BattleCafeController.evolutions).map(sweet => Object.values(sweet)).flat();
+        let incomplete = false;
         if (alcremieList.find(a => a.getCaughtStatus() == CaughtStatus.NotCaught)) {
             status.push(areaStatus.uncaughtPokemon);
+            incomplete = true;
         }
         if (alcremieList.find(a => a.getCaughtStatus() == CaughtStatus.Caught)) {
             status.push(areaStatus.uncaughtShinyPokemon);
+            incomplete = true;
         }
         if (pokerusUnlocked && alcremieList.find(a => a.getPokerusStatus() < GameConstants.Pokerus.Resistant)) {
             status.push(areaStatus.missingResistant);
+            incomplete = true;
+        }
+        if (incomplete && BattleCafeController.spinsLeft() > 0) {
+            status.push(areaStatus.incomplete);
         }
         return status;
     }
