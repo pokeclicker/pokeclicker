@@ -14,6 +14,25 @@ class BattleCafe extends TownContent {
     public text() {
         return 'Battle Café';
     }
+
+    public areaStatus(): areaStatus[] {
+        const status = super.areaStatus();
+        const pokerusUnlocked = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked();
+        if (BattleCafeController.spinsLeft()) {
+            status.push(areaStatus.incomplete);
+        }
+        const alcremieList = Object.values(BattleCafeController.evolutions).map(sweet => Object.values(sweet)).flat();
+        if (alcremieList.find(a => a.getCaughtStatus() == CaughtStatus.NotCaught)) {
+            status.push(areaStatus.uncaughtPokemon);
+        }
+        if (alcremieList.find(a => a.getCaughtStatus() == CaughtStatus.Caught)) {
+            status.push(areaStatus.uncaughtShinyPokemon);
+        }
+        if (pokerusUnlocked && alcremieList.find(a => a.getPokerusStatus() < GameConstants.Pokerus.Resistant)) {
+            status.push(areaStatus.missingResistant);
+        }
+        return status;
+    }
 }
 
 class BattleCafeSaveObject implements Saveable {
