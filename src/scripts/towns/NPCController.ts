@@ -7,7 +7,7 @@ class NPCController {
         npc.setTalkedTo();
         if (!this.modalState) {
             this.modalState = DisplayObservables.modalState['npc-modalObservable'].subscribe((value: BootstrapState) => {
-                if (value === 'hide') {
+                if (value === 'hidden') {
                     this.selectedNPC(null);
                 }
             });
