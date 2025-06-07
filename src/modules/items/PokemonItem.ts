@@ -88,6 +88,10 @@ export default class PokemonItem extends PokerusIndicatingItem {
         return evs >= 50 ? 'Already resistant!' : `EVs: ${evs.toLocaleString('en-US')} / 50`;
     }
 
+    showBagAmount() {
+        return false;
+    }
+
     get image() {
         const subDirectory = this.imageDirectory ? `${this.imageDirectory}/` : '';
         return `assets/images/items/${subDirectory}${this.name.replace(/[^\s\w.()-]/g, '')}.png`;
