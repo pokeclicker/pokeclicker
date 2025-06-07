@@ -491,6 +491,7 @@ TemporaryBattleList['Silver 4'] = new TemporaryBattle(
     {
         displayName: 'Rival Silver',
         imageName: 'Silver',
+        visibleRequirement: new QuestLineStepCompletedRequirement('Team Rocket Again', 1),
     }
 );
 TemporaryBattleList['Silver 5'] = new TemporaryBattle(
