@@ -48,4 +48,8 @@ export default class MoonCycle {
         [MoonCyclePhase.WaningCrescent]:
             new CurrentMoonPhase(MoonCyclePhase.WaningCrescent, '#3b365e', 'Waning Crescent Moon'),
     };
+
+    public static catchChanceBonus(phase: MoonCyclePhase): number {
+        return (4 - Math.abs((phase % 8) - 4)) * 5;
+    }
 }
