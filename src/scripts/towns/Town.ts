@@ -52,6 +52,9 @@ class Town implements TmpTownType {
         if (GameConstants.StartingTowns.includes(name)) {
             this.content.push(new NextRegionTownContent());
         }
+        if (region > GameConstants.Region.kanto && GameConstants.StartingTowns.includes(name)) {// Kanto is treated separately
+            this.content.push(new PickStarterContent());
+        }
         content.forEach((c) => {
             c.addParent(this);
         });

@@ -10263,10 +10263,3 @@ TownList['Final Region Town'] = new Town(
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_PaldeaChampion)],
     }
 );
-
-const pickStarter = new PickStarterContent();
-GameConstants.StartingTowns.forEach((townName, region) => {
-    if (region > 0) { // Kanto is treated separately
-        TownList[townName].content.push(pickStarter);
-    }
-});
