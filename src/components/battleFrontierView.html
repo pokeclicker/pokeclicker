@@ -45,9 +45,10 @@
                                 PokemonType.None,
                                 true,
                                 GameConstants.Region.none,
-                                false,
+                                true,
                                 false, 
                                 WeatherType.Clear,
+                                true,
                             ).toLocaleString('en-US'),
                             tooltip: {
                                 title: Battle.enemyPokemon()
@@ -56,9 +57,10 @@
                                         Battle.enemyPokemon().type2,
                                         true,
                                         GameConstants.Region.none,
-                                        false,
+                                        true,
                                         false, 
                                         WeatherType.Clear,
+                                        true,
                                     ).toLocaleString('en-US')} against ${pokemonMap[Battle.enemyPokemon().name].type.map(t => PokemonType[t]).join('&nbsp;/&nbsp;')}`
                                     : '',
                                 trigger: 'hover'}">

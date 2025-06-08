@@ -18,7 +18,7 @@ class BattleFrontierBattle extends Battle {
         if (!this.enemyPokemon()?.isAlive()) {
             return;
         }
-        this.enemyPokemon().damage(App.game.party.calculatePokemonAttack(this.enemyPokemon().type1, this.enemyPokemon().type2, true, GameConstants.Region.none, false, false, WeatherType.Clear));
+        this.enemyPokemon().damage(App.game.party.calculatePokemonAttack(this.enemyPokemon().type1, this.enemyPokemon().type2, true, GameConstants.Region.none, true, false, WeatherType.Clear, true));
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
         }
