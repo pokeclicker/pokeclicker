@@ -110,7 +110,7 @@ class Dungeon {
         public tokenCost: number,
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
         public rewardFunction = () => {},
-        public optionalParameters: optionalDungeonParameters = {}
+        private optionalParameters: optionalDungeonParameters = {}
     ) {
         // Keep a list of mimics to use with getCaughtMimics()
         Object.entries(this.lootTable).forEach(([_, itemList]) => {
@@ -479,6 +479,10 @@ class Dungeon {
         });
 
         return encounterInfo;
+    }
+
+    get difficulty(): GameConstants.Region {
+        return this.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(this.name);
     }
 
     public isThereQuestAtLocation = ko.pureComputed(() => {

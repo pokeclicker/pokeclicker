@@ -507,11 +507,13 @@ class Update implements Saveable {
 
             setTimeout(async () => {
                 // Check if player wants to activate the new challenge modes
-                if (await Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'Disable', cancel: 'Enable' })) {
-                    App.game.challenges.list.regionalAttackDebuff.disable();
+                const debuffChallengeState = Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added: Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'Disable', cancel: 'Enable' });
+                const pokedexChallengeState = Notifier.confirm({ title: 'Require Complete Pokédex (recommended)', message: 'New challenge mode added: Require Complete Pokédex.\n\nRequires a complete regional pokédex before moving on to the next region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'Disable' , cancel: 'Enable' });
+                if (await debuffChallengeState) {
+                    App.game.challenges.list.regionalAttackDebuff.disable(false);
                 }
-                if (await Notifier.confirm({ title: 'Require Complete Pokédex (recommended)', message: 'New challenge mode added Require Complete Pokédex.\n\nRequires a complete regional pokédex before moving on to the next region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'Disable' , cancel: 'Enable' })) {
-                    App.game.challenges.list.requireCompletePokedex.disable();
+                if (await pokedexChallengeState) {
+                    App.game.challenges.list.requireCompletePokedex.disable(false);
                 }
             }, GameConstants.SECOND);
         },
@@ -2894,6 +2896,29 @@ class Update implements Saveable {
             // Remove unused pokemon egg item
             delete playerData._itemList.Pokemon_egg;
 
+            // Add the new default shadow filter to save files that haven't reached the requirements yet
+            const shadowsInTheDesert = saveData.quests.questLines.find((q) => q.name == 'Shadows in the Desert');
+            if (!shadowsInTheDesert || (shadowsInTheDesert.state !== 2 && shadowsInTheDesert.quest < 4)) {
+                const filter = { name: 'New Shadow', options: { shadow: true, caughtShadow: false } };
+                const inverted = settingsData['catchFilters.invertPriorityOrder'] ?? false;
+                if (inverted) { // added to beginning
+                    saveData.pokeballFilters?.list?.splice(0, 0, filter);
+                } else { // added to end
+                    saveData.pokeballFilters?.list?.push(filter);
+                }
+            }
+
+            // Refund any vitamins on MissingNo. as it now gets removed on update.
+            // Will also no longer be able to give it vitamins so this is a one time thing
+            const vitaminsUsed = saveData.party.caughtPokemon.find(p => p.id === 0)?.[2];
+            if (vitaminsUsed) {
+                playerData._itemList.Protein = (playerData._itemList.Protein ?? 0) + (vitaminsUsed[0] ?? 0);
+                playerData._itemList.Calcium = (playerData._itemList.Calcium ?? 0) + (vitaminsUsed[1] ?? 0);
+                playerData._itemList.Carbos = (playerData._itemList.Carbos ?? 0) + (vitaminsUsed[2] ?? 0);
+            }
+
+            //Remove second AZ battle.
+            saveData.statistics.temporaryBattleDefeated.splice(202, 1);
         },
     };
 
@@ -2953,17 +2978,16 @@ class Update implements Saveable {
         const saveData = this.getSaveData();
         const settingsData = this.getSettingsData();
 
-        // Save the data by stringifying it, so that it isn't mutated during update
-        const backupSaveData = JSON.stringify({ player: playerData, save: saveData, settings: settingsData });
 
-        const button = document.createElement('a');
+        const data = { player: playerData, save: saveData, settings: settingsData };
+        // Save the data by stringifying it, so that it isn't mutated during update
+        const backupSaveData = JSON.stringify(data);
+
+        let button = null;
         try {
-            button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(SaveSelector.btoa(backupSaveData))}`;
+            button = SaveSelector.createDownloadElement(data, this.saveVersion, true);
             button.className = 'btn btn-block btn-warning';
             button.innerText = 'Click to Backup Save!';
-            const filename = settingsData.saveFilename || Settings.getSetting('saveFilename').defaultValue;
-            const datestr = GameConstants.formatDate(new Date());
-            button.setAttribute('download', GameHelper.saveFileName(filename, {'{date}' : datestr, '{version}' : this.saveVersion, '{name}' : saveData.profile.name}, true));
         } catch (e) {
             console.error('Failed to create backup button data:', e);
         }
@@ -2976,7 +3000,10 @@ class Update implements Saveable {
         if (!settingsData?.disableAutoDownloadBackupSaveOnUpdate) {
             button.style.display = 'none';
             document.body.appendChild(button);
-            button.click();
+            // We don't want auto download on dev build
+            if (!GameHelper.isDevelopmentBuild()) {
+                button.click();
+            }
             document.body.removeChild(button);
         }
         button.style.display = '';
@@ -3022,16 +3049,30 @@ class Update implements Saveable {
                     callback(updateData);
                     return updateData;
                 } catch (e) {
+                    console.error(`Caught error while applying update v${version}:\n`, e, { beforeUpdate, updateData });
+
                     try {
                         localStorage.backupSave = backupSaveData;
-                    } catch (e) {}
+                    } catch (e) {
+                        console.error('Caught error while backing up save file to localStorage:\n', e);
+                    }
+
+                    if (backupButton == null) {
+                        // Failed to get backup button, don't give them the option to reset their save
+                        Notifier.notify({
+                            title: `Failed to update to v${this.version}!`,
+                            message: 'Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a>.\n\nUnable to prepare backup save for download. Your save file is safe, but report this error as well.',
+                            type: NotificationConstants.NotificationOption.warning,
+                            timeout: GameConstants.DAY,
+                        });
+                        throw e;
+                    }
 
                     const resetButton = document.createElement('a');
                     resetButton.className = 'btn btn-block btn-danger';
                     resetButton.innerText = 'Reset your save - This is not reversible';
                     resetButton.id = 'failedUpdateResetButton';
 
-                    console.error(`Caught error while applying update v${version}`, e, { beforeUpdate, updateData });
                     Notifier.notify({
                         title: `Failed to update to v${this.version}!`,
                         message: `Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a> along with your save file.\n\n${backupButton.outerHTML}\n${resetButton.outerHTML}`,
@@ -3045,8 +3086,8 @@ class Update implements Saveable {
                             Notifier.confirm({
                                 title: 'Reset save',
                                 message: 'Are you sure you want to reset your save?\n\nThis cannot be undone, so please make sure you have a backup first!',
-                                type: NotificationConstants.NotificationOption.danger,
-                                confirm: 'reset',
+                                type: NotificationConstants.NotificationOption.warning,
+                                confirm: 'Reset',
                             }).then(confirmed => {
                                 if (confirmed) {
                                     // Force an autodownload of the backup when resetting the save
@@ -3065,6 +3106,9 @@ class Update implements Saveable {
                 }
             }, { playerData, saveData, settingsData });
 
+        // Remove MissingNo.
+        this.removeMissingNo(updateResult.saveData);
+
         try {
             this.automaticallyDownloadBackup(backupButton, settingsData);
             Notifier.notify({
@@ -3077,13 +3121,15 @@ class Update implements Saveable {
             console.error('Error trying to convert backup save', err);
             Notifier.notify({
                 title: `[v${this.version}] Game has been updated!`,
-                message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!\n\n<i>Failed to download old save, Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a>.</i>',
-                type: NotificationConstants.NotificationOption.primary,
+                message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!\n\n<i>Failed to download old save. Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a>.</i>',
+                type: NotificationConstants.NotificationOption.warning,
                 timeout: 6e4,
             });
             try {
                 localStorage.backupSave = backupSaveData;
-            } catch (e) {}
+            } catch (e) {
+                console.error('Caught error while backing up old save file to localStorage:\n', e);
+            }
             throw err;
         }
 
@@ -3337,6 +3383,22 @@ class Update implements Saveable {
             saveData.party.caughtPokemon.push({ id: pokemonId });
             saveData.statistics.pokemonCaptured[pokemonId] = saveData.statistics.pokemonCaptured[pokemonId] + 1 || 1;
         }
+    }
+
+    removeMissingNo(saveData) {
+        const idx = saveData.party.caughtPokemon.findIndex(p => p.id === 0);
+        if (idx === -1) {
+            return;
+        }
+
+        // remove from party
+        saveData.party.caughtPokemon.splice(idx, 1);
+
+        // remove from breeding queue
+        saveData.breeding.queueList = saveData.breeding.queueList.filter(p => p !== 0);
+
+        // remove from egg slot
+        saveData.breeding.eggList = saveData.breeding.eggList.map(e => e.pokemon === 0 && e.type !== -1 ? null : e);
     }
 
     getPlayerData() {
