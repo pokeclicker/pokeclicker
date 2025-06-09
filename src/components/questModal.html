@@ -94,8 +94,8 @@
                                     </tr>
                                 </thead>
                                 <tbody data-bind="foreach: $data.active">
-                                    <tr class="clickable">
-                                        <td data-toggle="modal" href="#questDetailsModal" data-bind="click: () => { App.game.quests.selectedQuestName($data.name) }">
+                                    <tr>
+                                        <td class="clickable" data-toggle="modal" href="#questDetailsModal" data-bind="click: () => { App.game.quests.selectedQuestName($data.name) }">
                                             <knockout class="font-weight-bold d-block" data-bind="text: $data.name"></knockout>
                                             <knockout class="small" data-bind="text: $data.description"></knockout>
                                         </td>

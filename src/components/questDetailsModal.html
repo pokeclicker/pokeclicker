@@ -1,28 +1,33 @@
-<div class="modal noselect fade" id="questDetailsModal" tabindex="-1" role="dialog" aria-labelledby="questDetailsModal">
+<div class="modal noselect fade" id="questDetailsModal" tabindex="-1" role="dialog" aria-labelledby="questDetailsModalLabel">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-        <div class="modal-content detailQuestModal" data-bind="with: App.game.quests.selectedQuestName()">
-            <div class="bg-primary p-2">
-                <h6 class="m-0 text-light font-weight-bold" data-bind="text: $data"></h6>
+        <div class="modal-content">
+            <div class="modal-header align-items-center">
+                <h4 class="m-0" data-bind="text: App.game.quests.selectedQuestName()"></h4>
             </div>
-            <table class="table table-striped table-bordered table-hover table-sm">
-                <tbody data-bind="foreach: App.game.quests.getQuestDetails($data) || []">
-                    <tr data-bind="style: { backgroundColor: isCurrentTask && questStatut !== 0 ? 'orange' : 'transparent' }">
-                        <td class="taskIndexColumn">
-                            <span data-bind="text: taskIndex"></span>
+            <div class="modal-body p-0 p-md-2 p-lg-3">
+                <table class="table table-striped table-bordered table-hover table-sm m-0">
+                    <tbody data-bind="with: App.game.quests.getQuestLine(App.game.quests.selectedQuestName())">
+                    <!-- ko foreach: $data.quests() -->
+                    <tr data-bind="css: { 'bg-info': ($parent.state() === QuestLineState.started || $parent.state() === QuestLineState.suspended) && $index() === $parent.curQuest() }">
+                        <td class="vertical-middle"><div class="px-2" data-bind="text: $index() + 1"></div></td>
+                        <td class="vertical-middle text-left">
+                            <div class="px-2" data-bind="text: ($index() <= $parent.curQuest() || $parent.state() === QuestLineState.ended) && $parent.state() !== QuestLineState.inactive ? $data.description : '???'"></div>
                         </td>
-                        <td class="taskDescriptionColumn">
-                            <span data-bind="text: taskDescription"></span>
-                        </td>
-                        <td class="taskStatutColumn">
-                            <span class="completedTask"
-                                  data-bind="visible: isCompleted && !isCurrentTask">Completed</span>
-                            <span data-bind="visible: isCurrentTask && questStatut !== 0">In Progress</span>
-                            <span class="lockedTask"
-                                  data-bind="visible: (!isCompleted && !isCurrentTask) || questStatut === 0">Locked</span>
+                        <td class="vertical-middle">
+                            <div class="px-2 text-nowrap">
+                                <span class="text-success" data-bind="if: $parent.state() === QuestLineState.ended || $index() < $parent.curQuest()">Completed</span>
+                                <span class="text-danger" data-bind="if: $parent.state() === QuestLineState.inactive">Locked</span>
+                                <span data-bind="if: $parent.state() === QuestLineState.started && $index() === $parent.curQuest()">In progress</span>
+                                <span class="text-danger" data-bind="if: $parent.state() === QuestLineState.started && $index() > $parent.curQuest()">Locked</span>
+                                <span data-bind="if: $parent.state() === QuestLineState.suspended && $index() === $parent.curQuest()">Paused</span>
+                                <span class="text-danger" data-bind="if: $parent.state() === QuestLineState.suspended && $index() > $parent.curQuest()">Locked</span>
+                            </div>
                         </td>
                     </tr>
-                </tbody>
-            </table>
+                    <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>

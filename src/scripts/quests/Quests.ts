@@ -201,40 +201,6 @@ class Quests implements Saveable {
         }
     }
 
-    public getQuestDetails(questName: QuestLineNameType) {
-        type DetailsQuest = {
-            taskIndex: number;
-            taskDescription: string;
-            isCompleted: boolean;
-            isCurrentTask: boolean;
-            questStatut: number;
-        };
-
-        const quest = this.getQuestLine(questName);
-
-        if (!quest) {
-            return;
-        }
-
-        const tasks = quest.quests();
-        const returnObject = tasks.map(task => {
-            const detailsQuest: DetailsQuest = {
-                taskIndex: task.index,
-                taskDescription:
-                    (task.index - 1 <= quest.curQuest() || quest.state() === QuestLineState.ended) && quest.state() !== 0
-                        ? task.description
-                        : '???',
-                isCompleted: task.index - 1 < quest.curQuest() || quest.state() === QuestLineState.ended,
-                isCurrentTask: task.index - 1 === quest.curQuest() && quest.state() !== QuestLineState.ended,
-                questStatut: quest.state(),
-            };
-
-            return detailsQuest;
-        });
-
-        return returnObject;
-    }
-
     public resetRefreshes() {
         this.refreshes(0);
     }
