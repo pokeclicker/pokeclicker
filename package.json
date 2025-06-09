@@ -66,7 +66,6 @@
     "gulp-ejs": "^5.1.0",
     "gulp-file-include": "^2.2.2",
     "gulp-filter": "^6.0.0",
-    "gulp-html-import": "^0.0.2",
     "gulp-less": "^5.0.0",
     "gulp-plumber": "^1.2.1",
     "gulp-rename": "^2.0.0",
@@ -76,7 +75,6 @@
     "gulp-stream-to-promise": "^0.1.0",
     "gulp-strip-debug": "^3.0.0",
     "gulp-typescript": "^5.0.1",
-    "gulp-util": "^3.0.7",
     "husky": "^4.3.8",
     "jsdom": "^25.0.0",
     "npm-run-all2": "^6.2.0",
@@ -102,5 +100,8 @@
     "knockout": "^3.5.1",
     "popper.js": "^1.16.0",
     "sortablejs": "^1.10.2"
+  },
+  "overrides": {
+    "clean-css": ">=5.3.1"
   }
 }
