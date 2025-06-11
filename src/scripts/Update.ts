@@ -2908,6 +2908,9 @@ class Update implements Saveable {
                 }
             }
 
+            // Update Enigma hint data
+            saveData.farming.mutations[63] = {seen: saveData.farming.mutations[63], last: null};
+
             // Refund any vitamins on MissingNo. as it now gets removed on update.
             // Will also no longer be able to give it vitamins so this is a one time thing
             const vitaminsUsed = saveData.party.caughtPokemon.find(p => p.id === 0)?.[2];

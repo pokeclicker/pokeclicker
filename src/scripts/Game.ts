@@ -472,6 +472,7 @@ class Game implements TmpGameType {
                 }
 
                 GameHelper.updateDay();
+                (App.game.farming.mutations.find(m => m instanceof EnigmaMutation) as EnigmaMutation).resetIndex();
 
                 SeededDateRand.seedWithDate(now);
                 // Give the player a free quest refresh

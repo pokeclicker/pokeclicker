@@ -67,6 +67,15 @@ class BreedingController {
         return SeededRand.fromArray(EggSpots.spotTypes);
     }
 
+    public static getQueueImage([type, id]: HatcheryQueueEntry) {
+        if (type == EggType.Pokemon) {
+            return PokemonHelper.getImage(id);
+        } else if (type == EggType.EggItem) {
+            return `assets/images/breeding/${GameConstants.EggItemType[id]}.png`;
+        }
+        return '';
+    }
+
     public static getEggPokemonName(egg: Egg): string | null {
         return egg.type === EggType.Pokemon ? egg.partyPokemon()?.name : null;
     }
