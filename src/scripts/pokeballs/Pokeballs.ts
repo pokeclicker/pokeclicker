@@ -262,8 +262,4 @@ class Pokeballs implements Feature {
             'pokeballs': this.pokeballs.map(p => p.quantity()),
         };
     }
-
-    update(delta: number): void {
-        // This method intentionally left blank
-    }
 }

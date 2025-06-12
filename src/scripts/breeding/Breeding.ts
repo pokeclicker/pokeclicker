@@ -114,9 +114,6 @@ class Breeding implements Feature {
         BreedingController.initialize();
     }
 
-    update(delta: number): void {
-    }
-
     canAccess(): boolean {
         return App.game.keyItems.hasKeyItem(KeyItemType.Mystery_egg);
     }

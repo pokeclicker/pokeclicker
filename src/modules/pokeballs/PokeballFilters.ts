@@ -90,8 +90,6 @@ export default class PokeballFilters implements Feature {
 
     canAccess() { return true; }
 
-    update() {}
-
     getFilterByName(name: string) {
         return this.list().find((filter) => filter.name === name);
     }

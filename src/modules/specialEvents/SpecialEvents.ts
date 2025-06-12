@@ -44,9 +44,6 @@ export default class SpecialEvents implements Feature {
         return true;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    update(delta: number): void {}  // This method intentionally left blank
-
     getEvent(eventName: SpecialEventTitleType) {
         return this.events.find((e) => e.title == eventName);
     }
