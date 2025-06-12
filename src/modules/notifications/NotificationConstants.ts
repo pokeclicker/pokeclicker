@@ -48,7 +48,6 @@ const NotificationConstants = {
             quest_completed: new NotificationSetting('notification.quest_completed', 'Quest completed', true),
             event_start_end: new NotificationSetting('notification.event_start_end', 'Event start/end information', true),
             gym_won: new NotificationSetting('notification.gym_won', 'Gym leader defeated', true),
-            offline_earnings: new NotificationSetting('notification.offline_earnings', 'Offline earnings', true),
             achievement_complete: new NotificationSetting('notification.achievement_complete', 'Achievement complete', true, true),
             new_catch: new NotificationSetting('notification.new_catch', 'New Pokémon/shiny captured', true, true),
             battle_frontier: new NotificationSetting('notification.battle_frontier', 'Battle Frontier', true, true),

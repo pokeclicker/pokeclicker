@@ -154,9 +154,7 @@ class Game implements TmpGameType {
         WeatherApp.initialize();
         DamageCalculator.initialize();
 
-        if (Settings.getSetting('disableOfflineProgress').value === false) {
-            this.computeOfflineEarnings();
-        }
+        this.computeOfflineEarnings();
         this.checkAndFix();
 
         if (Settings.getSetting('disableAutoSave').value === true) {
@@ -174,44 +172,34 @@ class Game implements TmpGameType {
 
     computeOfflineEarnings() {
         const now = Date.now();
-        const timeDiffInSeconds = Math.floor((now - player._lastSeen) / 1000);
+        const lastSeen = player._lastSeen;
+        const timeDiffInSeconds = Math.floor((now - lastSeen) / 1000);
         if (timeDiffInSeconds > 1) {
             // Only allow up to 24 hours worth of bonuses
             const timeDiffOverride = Math.min(86400, timeDiffInSeconds);
-            let region: GameConstants.Region = player.region;
-            let route: number = player.route || GameConstants.StartingRoutes[region];
-            if (!MapHelper.validRoute(route, region)) {
-                route = 1;
-                region = GameConstants.Region.kanto;
-            }
-            const availablePokemonMap = RouteHelper.getAvailablePokemonList(route, region).map(name => pokemonMap[name]);
-            const maxHealth: number = PokemonFactory.routeHealth(route, region);
-            let hitsToKill = 0;
-            for (const pokemon of availablePokemonMap) {
-                const type1: PokemonType = pokemon.type[0];
-                const type2: PokemonType = pokemon.type.length > 1 ? pokemon.type[1] : PokemonType.None;
-                const attackAgainstPokemon = App.game.party.calculatePokemonAttack(type1, type2);
-                const currentHitsToKill: number = Math.ceil(maxHealth / attackAgainstPokemon);
-                hitsToKill += currentHitsToKill;
-            }
-            hitsToKill = Math.ceil(hitsToKill / availablePokemonMap.length);
-            const numberOfPokemonDefeated = Math.floor(timeDiffOverride / hitsToKill);
-            if (numberOfPokemonDefeated === 0) {
-                return;
-            }
-            const routeMoney: number = PokemonFactory.routeMoney(player.route, player.region, false);
-            const baseMoneyToEarn = numberOfPokemonDefeated * routeMoney;
-            const moneyToEarn = Math.floor(baseMoneyToEarn * 0.5);//Debuff for offline money
-            App.game.wallet.gainMoney(moneyToEarn, true);
+            const divider = App.game.statistics.secondsPlayed() / timeDiffOverride * 2;
+            const moneyToEarn = Math.floor((App.game.statistics.totalMoney() - App.game.statistics.totalOfflineMoney()) / divider);
+            const dungeonTokensToEarn = Math.floor((App.game.statistics.totalDungeonTokens() - App.game.statistics.totalOfflineDungeonTokens()) / divider);
+            const getOfflineEarnings = () => {
+                App.game.wallet.gainMoney(moneyToEarn, true);
+                App.game.wallet.gainDungeonTokens(dungeonTokensToEarn, true);
+                // This avoids exponential growth through repeated offline times
+                GameHelper.incrementObservable(App.game.statistics.totalOfflineMoney, moneyToEarn);
+                GameHelper.incrementObservable(App.game.statistics.totalOfflineDungeonTokens, dungeonTokensToEarn);
+            };
+            const img = '<img src="./assets/images/currency/money.svg" height="24px"/>';
+            const earningText = `<li>${img} ${moneyToEarn.toLocaleString('en-US')}</li><li>${img.replace('money', 'dungeonToken')} ${dungeonTokensToEarn.toLocaleString('en-US')}</li>`;
+            const button = '<button class="mt-3 btn btn-block btn-success" data-dismiss="toast" id="OfflineProgressButton">Collect rewards</button>';
+            const message = `Your Pokémon kept battling and earned you:<br/><ul class="mb-0">${earningText}</ul>${button}`;
 
             Notifier.notify({
                 type: NotificationConstants.NotificationOption.info,
-                title: 'Offline Bonus',
-                message: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
-                strippedMessage: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: ${moneyToEarn.toLocaleString('en-US')} Pokédollars`,
-                timeout: 2 * GameConstants.MINUTE,
-                setting: NotificationConstants.NotificationSetting.General.offline_earnings,
+                title: 'Offline Progress',
+                message,
+                strippedMessage: `Earned: ${moneyToEarn.toLocaleString('en-US')} Pokédollars and ${dungeonTokensToEarn.toLocaleString('en-US')} Dungeon Tokens`,
+                timeout: GameConstants.HOUR,
             });
+            setTimeout(() => $('#OfflineProgressButton').on('click', () => getOfflineEarnings()), 0);
 
             // Dream orbs
             if ((new DreamOrbTownContent()).isUnlocked()) {
@@ -230,7 +218,6 @@ class Game implements TmpGameType {
                         title: 'Dream Orbs',
                         message: `Gained ${orbsEarned} Dream Orbs while offline:<br /><ul class="mb-0">${messageAppend}</ul>`,
                         timeout: 2 * GameConstants.MINUTE,
-                        setting: NotificationConstants.NotificationSetting.General.offline_earnings,
                     });
                 }
             }
