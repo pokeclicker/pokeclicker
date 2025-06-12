@@ -180,7 +180,13 @@ class Game implements TmpGameType {
             const divider = App.game.statistics.secondsPlayed() / timeDiffOverride * 2;
             const moneyToEarn = Math.floor((App.game.statistics.totalMoney() - App.game.statistics.totalOfflineMoney()) / divider);
             const dungeonTokensToEarn = Math.floor((App.game.statistics.totalDungeonTokens() - App.game.statistics.totalOfflineDungeonTokens()) / divider);
+            let alreadyCollected = false;
             const getOfflineEarnings = () => {
+                console.log('LOLLOL');
+                if (alreadyCollected) {// Prevents duplicates
+                    return;
+                }
+                alreadyCollected = true;
                 App.game.wallet.gainMoney(moneyToEarn, true);
                 App.game.wallet.gainDungeonTokens(dungeonTokensToEarn, true);
                 // This avoids exponential growth through repeated offline times
@@ -189,7 +195,7 @@ class Game implements TmpGameType {
             };
             const img = '<img src="./assets/images/currency/money.svg" height="24px"/>';
             const earningText = `<li>${img} ${moneyToEarn.toLocaleString('en-US')}</li><li>${img.replace('money', 'dungeonToken')} ${dungeonTokensToEarn.toLocaleString('en-US')}</li>`;
-            const button = '<button class="mt-3 btn btn-block btn-success" data-dismiss="toast" id="OfflineProgressButton">Collect rewards</button>';
+            const button = '<button class="mt-2 btn btn-block btn-success" data-dismiss="toast" id="OfflineProgressButton">Collect Rewards</button>';
             const message = `Your Pokémon kept battling and earned you:<br/><ul class="mb-0">${earningText}</ul>${button}`;
 
             Notifier.notify({
