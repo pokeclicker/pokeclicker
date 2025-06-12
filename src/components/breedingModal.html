@@ -18,8 +18,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <button type="button" class="btn btn-warning hatchery-warnings" style="pointer-events: none;" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
                                 You don't have any free egg slots.
                             </button>
-                            <button type="button" class="btn btn-danger hatchery-warnings" style="pointer-events: none;" data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots()">
-                                Your breeding queue is full or disabled.
+                            <button type="button" class="btn btn-danger hatchery-warnings" style="pointer-events: none;" data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots(), text: `Your breeding queue is ${Settings.getSetting('breedingQueueSizeSetting').observableValue() == 0 ? 'disabled' : 'full' }.`,">
                             </button>
                         </div>
                         <div class="float-right d-lg-block d-none">
@@ -427,13 +426,13 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </div>
                             </div>
 
-                            <div class="egg-display" data-bind="foreach: Object.keys(App.game.breeding.hatchList).map(egg => GameConstants.EggItemType[egg])">
+                            <div class="egg-display" data-bind="foreach: GameHelper.enumStrings(GameConstants.EggItemType)">
                                 <div>
-                                    <div class="card clickable" data-bind="click: () => { BreedingController.selectedEgg(EggType[$data.split('_')[0]]); },
-                                        css: { 'border-danger': BreedingController.selectedEgg() === EggType[$data.split('_')[0]] }">
+                                    <div class="card clickable" data-bind="click: () => { BreedingController.selectedEggItem(GameConstants.EggItemType[$data]); },
+                                        css: { 'border-danger': BreedingController.selectedEggItem() === GameConstants.EggItemType[$data] }">
                                         <div class="card-body rounded text-center p-0 eggSlotModal">
                                             <div class="d-flex flex-column align-items-center">
-                                                <div class="text-top" data-bind="text: GameConstants.camelCaseToString(GameConstants.humanifyString($data))">egg</div>
+                                                <div class="text-top" data-bind="text: ItemList[$data].displayName">egg</div>
                                                 <div style="position: absolute; right: 2px; top: -3px;"
                                                     data-bind="template: { name: 'caughtStatusTemplate', data: { status: ItemList[$data].getCaughtStatus() }, if: (ItemList[$data] instanceof CaughtIndicatingItem) }"></div>
                                                 <img src="" width="64px" data-bind="attr:{ src: `assets/images/breeding/${$data}.png` }">
@@ -444,13 +443,13 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <div style="margin: 1px 1px 0">
                                         <button type="button" class="btn btn-sm btn-block btn-primary" style="padding: .1rem 0;" data-bind="
                                             click: () => { ItemList[$data].use(); App.game.breeding.checkCloseModal(); },
-                                            enable: player.itemList[$data]() > 0 && App.game.breeding.hasFreeEggSlot()">Hatch</button>
+                                            enable: player.itemList[$data]() > 0 && (App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot())">Hatch</button>
                                     </div>
                                 </div>
                             </div>
-                            <!-- ko with: App.game.breeding.hatchList[BreedingController.selectedEgg()], as: 'hatchList' -->
+                            <!-- ko with: App.game.breeding.hatchList[BreedingController.selectedEggItem()], as: 'hatchList' -->
                             <hr class="my-2 bg-secondary" />
-                            <p class="small mb-2" data-bind="visible: BreedingController.selectedEgg() === EggType.Mystery">Mystery Eggs can hatch Pokémon from their own exclusive pool and all other typed egg pools. The exclusive Pokémon are listed below.</p>
+                            <p class="small mb-2" data-bind="visible: BreedingController.selectedEggItem() === GameConstants.EggItemType.Mystery_egg">Mystery Eggs can hatch Pokémon from both their own exclusive pool and all other typed egg pools. The exclusive Pokémon are listed below.</p>
                             <div class="row">
                                 <!-- ko foreach: {
                                     data: GameHelper.enumNumbers(GameConstants.Region).filter(r => r >= GameConstants.Region.kanto && r <= Math.min(player.highestRegion(), GameConstants.MAX_AVAILABLE_REGION)).reverse(),
@@ -484,7 +483,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                             <knockout data-bind="text: partyPokemon ? PokemonHelper.displayName($data) : '???'"></knockout>
                                                             <sup data-bind="visible: partyPokemon?.shiny ?? false">✨</sup>
                                                         </td>
-                                                        <td class="tight align-middle" data-bind="text: BreedingController.calcEggOdds(BreedingController.selectedEgg(), $data).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })"></td>
+                                                        <td class="tight align-middle" data-bind="text: BreedingController.calcEggOdds(BreedingController.selectedEggItem(), $data).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })"></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -721,7 +720,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     <button type="button" class="btn btn-danger hatchery-warnings"
                         data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots(),
                         tooltip: {
-                            title: 'Your breeding queue is full or disabled.',
+                            title: `Your breeding queue is ${Settings.getSetting('breedingQueueSizeSetting').observableValue() == 0 ? 'disabled' : 'full' }.`,
                             trigger: 'hover',
                             placement: 'top',
                             boundary: 'window'

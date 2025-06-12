@@ -168,10 +168,15 @@
                                                 trigger: 'hover'
                                             }"
                                             onchange="(() => {
-                                                const val = Number.isNaN(parseInt(this.value)) ? -1 : +this.value;
-                                                this.value = val < -1 ? -1 : Math.min(val, App.game.breeding.queueSlots());
-                                            })(), Settings.setSettingByName(this.name, +this.value)
-                                        ">
+                                                let val = Number.parseInt(this.value);
+                                                if (Number.isNaN(val)) {
+                                                    val = -1;
+                                                } else {
+                                                    val = Math.min(Math.max(val, -1), App.game.breeding.queueSlots());
+                                                }
+                                                this.value = val;
+                                                Settings.setSettingByName(this.name, val);
+                                            })()">
                                     </td>
                                 </tr>
                             </tbody>
@@ -217,6 +222,7 @@
                             <tbody>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.farm')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.hatchery')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.achievementsTracker')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.shop')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.oakItems')}"></tr>
@@ -244,6 +250,7 @@
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.hammer')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.bomb')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.survey')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.discharge')}"></tr>
                             </tbody>
                             <thead>
                                 <tr><th colspan="2">Oak Items</th></tr>

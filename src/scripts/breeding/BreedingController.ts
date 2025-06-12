@@ -6,7 +6,7 @@
 /// <reference path="../party/PartyController.ts" />
 
 class BreedingController {
-    public static selectedEgg: KnockoutObservable<EggType> = ko.observable(undefined);
+    public static selectedEggItem: KnockoutObservable<GameConstants.EggItemType> = ko.observable(undefined);
 
     public static initialize() {
         // Track view settings for hatchery list rerendering
@@ -42,15 +42,6 @@ class BreedingController {
         }
     }
 
-    public static getEggImage(egg: Egg): string {
-        let eggType = EggType[egg.type].toLowerCase();
-        if (eggType == 'pokemon') {
-            const dataPokemon: DataPokemon = PokemonHelper.getPokemonById(egg.pokemon);
-            eggType = String(PokemonType[dataPokemon.type1]).toLowerCase();
-        }
-        return `assets/images/breeding/${eggType}.png`;
-    }
-
     public static getEggCssClass(egg: Egg): string {
         const animationType = Settings.getSetting('eggAnimation').observableValue();
         if (animationType === 'none') {
@@ -75,6 +66,15 @@ class BreedingController {
         SeededRand.seed(seed);
         SeededRand.seed(SeededRand.intBetween(0, 1000));
         return SeededRand.fromArray(EggSpots.spotTypes);
+    }
+
+    public static getQueueImage([type, id]: HatcheryQueueEntry) {
+        if (type == EggType.Pokemon) {
+            return PokemonHelper.getImage(id);
+        } else if (type == EggType.EggItem) {
+            return `assets/images/breeding/${GameConstants.EggItemType[id]}.png`;
+        }
+        return '';
     }
 
     public static getEggPokemonName(egg: Egg): string | null {
@@ -152,15 +152,15 @@ class BreedingController {
         return 1.0;
     }
 
-    public static calcEggOdds(eggType: EggType, pokemon: PokemonNameType): number {
-        const hatchList = App.game.breeding.hatchList[eggType];
+    public static calcEggOdds(eggItem: GameConstants.EggItemType, pokemon: PokemonNameType): number {
+        const hatchList = App.game.breeding.hatchList[eggItem];
         const region = hatchList.findIndex(r => r.includes(pokemon));
 
         if (region === -1) {
             return 0;
         }
 
-        const regionPoolCount = eggType === EggType.Mystery
+        const regionPoolCount = eggItem === GameConstants.EggItemType.Mystery_egg
             ? Object.values(App.game.breeding.hatchList).reduce((total, eggTypePool) => total += eggTypePool[region].length, 0)
             : hatchList[region].length;
 

@@ -449,6 +449,9 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     });
 
     public matchesHatcheryFilters = ko.pureComputed(() => {
+        if (this.id <= 0) {
+            return false;
+        }
         // Check if search matches englishName or displayName
         const nameFilterSetting = Settings.getSetting('breedingNameFilter') as SearchSetting;
         if (nameFilterSetting.observableValue() != '') {

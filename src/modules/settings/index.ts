@@ -10,6 +10,9 @@ import DynamicBackground from '../background/DynamicBackground';
 import { SortOptionConfigs, SortOptions } from './SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from '../achievements/AchievementSortOptions';
 import {
+    SortOptionConfigs as UndergroundTreasureDisplaySortOptionConfigs,
+    SortOptions as UndergroundTreasureDisplaySortOptions } from '../underground/UndergroundTreasuresSortOptions';
+import {
     Region,
     MAX_AVAILABLE_REGION,
     AchievementType,
@@ -148,6 +151,27 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
     ],
     'cm'));
 Settings.add(new BooleanSetting('autoRestartUndergroundMine', 'Auto restart selected mine', false));
+const undergroundTreasureDisplaySortSettings = Object.keys(UndergroundTreasureDisplaySortOptionConfigs)
+    .map((option) => new SettingOption<number>(UndergroundTreasureDisplaySortOptionConfigs[option].text, parseInt(option, 10)));
+
+Settings.add(new Setting<number>('undergroundTreasureDisplaySorting', 'Sorting', undergroundTreasureDisplaySortSettings, UndergroundTreasureDisplaySortOptions.default));
+Settings.add(new BooleanSetting('undergroundTreasureDisplaySortingDirection', 'reverse', false));
+Settings.add(new Setting<string>('undergroundTreasureDisplayGrouping', 'Grouping',
+    [
+        new SettingOption('None', 'none'),
+        new SettingOption('Type', 'type'),
+        new SettingOption('Can be sold', 'sellable'),
+        new SettingOption('Region', 'region'),
+    ],
+    'type'));
+Settings.add(new BooleanSetting('undergroundTreasureDisplayShowLocked', 'Show locked items', false));
+Settings.add(new Setting<string>('undergroundTreasureViewMode', 'Underground Treasure View Mode',
+    [
+        new SettingOption('List', 'list-view'),
+        new SettingOption('Grid', 'grid-view'),
+    ],
+    'list-view'));
+
 Settings.add(new BooleanSetting('showUndergroundModule', 'Show Underground module on main screen', true));
 Settings.add(new BooleanSetting('enableUndergroundModuleMineControls', 'Enable Underground module mine controls', true));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
@@ -453,6 +477,7 @@ Settings.add(new BooleanSetting('sound.muted', 'Mute All Sounds', false));
 // Hotkeys
 Settings.add(new HotkeySetting('hotkey.farm', 'Farm', 'F'));
 Settings.add(new HotkeySetting('hotkey.hatchery', 'Hatchery', 'H'));
+Settings.add(new HotkeySetting('hotkey.achievementsTracker', 'Achievements', 'T'));
 Settings.add(new HotkeySetting('hotkey.oakItems', 'Oak Items', 'O'));
 Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'U'));
 Settings.add(new HotkeySetting('hotkey.shop', 'Poké Mart', 'E'));
@@ -468,6 +493,7 @@ Settings.add(new HotkeySetting('hotkey.underground.hammer', 'Switch to Hammer', 
 Settings.add(new HotkeySetting('hotkey.underground.chisel', 'Switch to Chisel', 'C'));
 Settings.add(new HotkeySetting('hotkey.underground.bomb', 'Switch to Bomb', 'B'));
 Settings.add(new HotkeySetting('hotkey.underground.survey', 'Switch to Survey', 'S'));
+Settings.add(new HotkeySetting('hotkey.underground.discharge', 'Discharge', 'D'));
 
 Settings.add(new HotkeySetting('hotkey.dungeon.up', 'Move Up', 'W', { prefix: '↑ or ' }));
 Settings.add(new HotkeySetting('hotkey.dungeon.left', 'Move Left', 'A', { prefix: '← or ' }));

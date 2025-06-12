@@ -1082,14 +1082,6 @@ export enum StoneType {
     'Metal_alloy',
 }
 
-export enum FossilPieceType {
-    'None' = -1,
-    'Fossilized Bird',
-    'Fossilized Fish',
-    'Fossilized Drake',
-    'Fossilized Dino',
-}
-
 export enum BattleItemType {
     'xAttack' = 'xAttack',
     'xClick' = 'xClick',
@@ -1226,7 +1218,6 @@ export enum EggItemType {
     'Fighting_egg',
     'Electric_egg',
     'Dragon_egg',
-    'Pokemon_egg',
     'Mystery_egg',
 }
 
@@ -1277,7 +1268,6 @@ export const MAX_HIRES = 1;
 export const REWARD_RETENTION_BASE = 0.6;
 export const REWARD_RETENTION_DECREASE_PER_LEVEL = 0.01;
 export const REWARD_RETENTION_MINIMUM = 0.1;
-export const HELPER_AUTO_SELL_LEVEL_REQUIREMENT = 20;
 
 export const SMART_TOOL_CHANCE_BASE = 0.5;
 export const SMART_TOOL_CHANCE_INCREASE_PER_LEVEL = 0.025;
@@ -2063,7 +2053,6 @@ export const TemporaryBattles = [
     'Merilyn',
     'Millis and Argus Steel',
     'Rampaging Yveltal',
-    'Storyline AZ',
     'AZ',
     'Ash Ketchum Kanto',
     'Ash Ketchum Johto',
