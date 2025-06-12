@@ -26,6 +26,20 @@
                     onchange="Settings.setSettingByName('partySortDirection', this.checked)"
                 />
             </div>
+            <div class="input-group-append bg-primary text-light">
+                <label 
+                    class="clickable m-0 px-2"
+                    style="cursor: pointer; display: flex; align-items: center;"
+                    data-bind="
+                        tooltip: { 
+                            title: PokemonListFilterController.tooltipText,
+                            trigger: 'hover',
+                            placement: 'top'
+                        }"
+                    onclick="PokemonListFilterController.openModal()">
+                    <img src="assets/images/fa-filter.svg" style="height: 1em; width: auto; filter: brightness(0) invert(1);">
+                </label>
+            </div>
         </div>
     </div>
 </script>
@@ -53,7 +67,7 @@
                         </tr>
                     </thead>
 
-                    <tbody data-bind="let: { lazyPokemonList: lazyLoad('lazyPokemonList', $element, PartyController.getSortedList, { pageSize: 20, reset: () => (DisplayObservables.collapseState.pokemonListBody === 'hidden'), pause: () => DisplayObservables.collapseState.pokemonListBody !== 'show' }) }">
+                    <tbody data-bind="let: { lazyPokemonList: lazyLoad('lazyPokemonList', $element, PartyController.getPokemonListSortedFilteredList, { pageSize: 20, reset: () => (DisplayObservables.collapseState.pokemonListBody === 'hidden'), pause: () => DisplayObservables.collapseState.pokemonListBody !== 'show' }) }">
                     <!-- ko if: DisplayObservables.collapseState.pokemonListBody !== 'hidden' -->
                         <!-- ko foreach: lazyPokemonList, childrenComplete: () => { lazyLoadCallback('lazyPokemonList'); } -->
                         <tr data-toggle="modal" href="#pokemonStatisticsModal" data-bind="hidden: $data.breeding, click: () => { App.game.statistics.selectedPokemonID($data.id) }">

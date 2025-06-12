@@ -1,0 +1,186 @@
+<div class="modal fade" id="pokemonListFilterModal" tabindex="-1" role="dialog" aria-labelledby="pokemonListFilterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Pokémon List Filters</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="form-row text-left">
+                        <!-- Name/ID Search -->
+                        <div class="form-group col-lg-12 col-12">
+                            <label for="pokemon-list-filter-nameID">Name or ID</label>
+                            <input id="pokemon-list-filter-nameID" autocomplete="off" class="form-control" placeholder="Search here"
+                                data-bind="value: Settings.getSetting('pokemonListNameFilter').observableValue, valueUpdate: 'input'" />
+                        </div>
+
+                        <!-- Type Filters -->
+                        <div class="form-group col-lg-6 col-6">
+                            <label>Type 1</label>
+                            <select class="custom-select"
+                                    data-bind="options: Settings.getSetting('pokemonListType1Filter').options,
+                                            optionsValue: 'value',
+                                            optionsText: 'text',
+                                            value: Settings.getSetting('pokemonListType1Filter').observableValue">
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-6 col-6">
+                            <label>Type 2</label>
+                            <select class="custom-select"
+                                    data-bind="options: Settings.getSetting('pokemonListType2Filter').options,
+                                            optionsValue: 'value',
+                                            optionsText: 'text',
+                                            value: Settings.getSetting('pokemonListType2Filter').observableValue">
+                            </select>
+                        </div>
+
+                        <!-- Region Filter -->
+                        <div class="form-group col-lg-6 col-6">
+                            <label>Region(s)</label>
+                            <div class="dropdown show">
+                                <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
+                                    data-bind="text: PokemonListFilterController.getRegionFilterString()">
+                                    Regions
+                                </button>
+                                <div class="border-secondary dropdown-menu col-12">
+                                    <div class="dropdown-item" data-bind="click: function() { Settings.getSetting('pokemonListRegionFilter').set((2 << player.highestRegion()) - 1) }">
+                                        All
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <!-- ko foreach : GameHelper.enumNumbers(GameConstants.Region).filter((r) => (r <= player.highestRegion() && r > GameConstants.Region.none)) -->
+                                    <div class="dropdown-item" data-bind="class: Settings.getSetting('pokemonListRegionFilter').observableValue() & (1 << $data) ? 'bg-success' : '',
+                                        text: GameConstants.camelCaseToString(GameConstants.Region[$data]),
+                                        click: function(){ Settings.getSetting('pokemonListRegionFilter').set(1 << $data) },
+                                        attr: { 'oncontextmenu' : `Settings.setSettingByName('pokemonListRegionFilter', Settings.getSetting('pokemonListRegionFilter').value ^ (1 << ${$data})); return false;` }">
+                                    </div>
+                                    <!-- /ko-->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Category Filter -->
+                        <div class="form-group col-lg-6 col-6">
+                            <label>Category</label>
+                            <div class="dropdown show">
+                                <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    data-bind="text: Settings.getSetting('pokemonListCategoryFilter').observableValue() == -1 ? 'All'
+                                        : Settings.getSetting('pokemonListCategoryFilter').observableValue() == -2 ? 'Categorized'
+                                        : PokemonCategories.categories().find(c => c.id == Settings.getSetting('pokemonListCategoryFilter').observableValue()).name()">
+                                    Categories
+                                </button>
+                                <div class="border-secondary dropdown-menu col-12 category-dropdown">
+                                    <div class="dropdown-item dropdown-text" data-bind="click: function() { Settings.getSetting('pokemonListCategoryFilter').set(-1) }">
+                                        All
+                                    </div>
+                                    <div class="dropdown-item dropdown-text" data-bind="click : function(){ Settings.getSetting('pokemonListCategoryFilter').set(-2) }">
+                                        Categorized
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <!-- ko foreach : PokemonCategories.categories -->
+                                    <div class="dropdown-item" data-bind="text : $data.name(), style: { background: $data.color(), color: GameHelper.isColorLight($data.color()) ? 'black' : 'white' },
+                                        click : function() { Settings.getSetting('pokemonListCategoryFilter').set($data.id) }">
+                                    </div>
+                                    <!-- /ko-->
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
+                                        <i>Edit categories</i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Shiny Filter -->
+                        <div class="form-group col-lg-6 col-6">
+                            <label>Shiny Status</label>
+                            <select class="custom-select"
+                                data-bind="options: Settings.getSetting('pokemonListShinyFilter').options,
+                                    optionsValue: 'value',
+                                    optionsText: 'text',
+                                    value: Settings.getSetting('pokemonListShinyFilter').observableValue">
+                            </select>
+                        </div>
+
+                        <!-- Pokerus Filter -->
+                        <div class="form-group col-lg-6 col-6">
+                            <label>Pokérus Status</label>
+                            <select class="custom-select"
+                                data-bind="options: Settings.getSetting('pokemonListPokerusFilter').options,
+                                    optionsValue: 'value',
+                                    optionsText: 'text',
+                                    value: Settings.getSetting('pokemonListPokerusFilter').observableValue">
+                            </select>
+                        </div>
+
+                        <!-- Shadow Status Filter -->
+                        <!-- ko if: Settings.getSetting('pokemonListShadowFilter').isUnlocked() -->
+                        <div class="form-group col-lg-6 col-6">
+                            <label>Shadow Status</label>
+                            <select class="custom-select"
+                                data-bind="options: Settings.getSetting('pokemonListShadowFilter').options,
+                                    optionsValue: 'value',
+                                    optionsText: 'text',
+                                    value: Settings.getSetting('pokemonListShadowFilter').observableValue">
+                            </select>
+                        </div>
+                        <!-- /ko -->
+
+                        <!-- Held Item Filter -->
+                        <div class="form-group col-lg-12 col-12">
+                            <label>Only with Held Item</label>
+                            <label class="form-check-label toggler-wrapper style-1 float-right">
+                                <input class="form-check-input" type="checkbox"
+                                    data-bind="checked: Settings.getSetting('pokemonListHeldItemFilter').observableValue">
+                                <div class="toggler-slider">
+                                    <div class="toggler-knob"></div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Level Filter -->
+                        <div class="form-group col-lg-6 col-6">
+                            <label>Min Level</label>
+                            <input type="number" class="form-control" min="0" max="100"
+                                data-bind="value: Settings.getSetting('pokemonListLevelFilter').observableValue" />
+                        </div>
+
+                        <!-- Attack Filter -->
+                        <div class="form-group col-lg-6 col-6">
+                            <label>Min Attack</label>
+                            <input type="number" class="form-control" min="0"
+                                data-bind="value: Settings.getSetting('pokemonListAttackFilter').observableValue" />
+                        </div>
+
+                        <div class="col-12">
+                            <hr style="border-color:grey;">
+                        </div>
+
+                        <!-- Preview Section -->
+                        <div class="col-12">
+                            <h6>Preview (showing <span data-bind="text: Math.min(PokemonListFilterController.getFilteredCount(), PokemonListFilterController.PREVIEW_LIMIT)"></span> of <span data-bind="text: PokemonListFilterController.getFilteredCount()"></span> filtered Pokémon)</h6>
+                            <div style="max-height: 300px; overflow-y: auto; border: 1px solid #dee2e6; border-radius: .25rem; padding: 0.5rem;">
+                                <ul class="row justify-content-center p-0 m-0" style="list-style: none;">
+                                    <!-- ko foreach: PokemonListFilterController.getPreviewList -->
+                                    <li class="col-6 col-sm-4 col-md-3 col-lg-2 pokedexEntry" 
+                                        data-bind="style: { background: PokedexHelper.getBackgroundColors($data.name) }">
+                                        <div data-bind="visible: $data.shiny" style="position: absolute; right: 2px; bottom: 35px; text-shadow: 1px 1px 0 black, -1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black;">✨</div>
+                                        <img class="pokedex-pokemon-sprite" 
+                                            data-bind="attr: { src: PokemonHelper.getImage($data.id, $data.shiny && !Settings.getSetting('partyHideShinySprites').value, $data.gender) }">
+                                        <span class="pokedex-bottom-text text-truncate px-1" data-bind="text: $data.displayName">name</span>
+                                    </li>
+                                    <!-- /ko -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-bind="click: PokemonListFilterController.resetFilters">Reset Filters</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Apply</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -360,6 +360,57 @@ Settings.add(new Setting<string>('breedingUniqueTransformationFilter', 'Unique T
     'all', new MaxRegionRequirement(Region.kalos), false));
 Settings.add(new BooleanSetting('breedingHideAltFilter', 'Hide alternate forms', false));
 
+// Pokemon List Filters
+export const pokemonListFilterSettingKeys = ['pokemonListNameFilter', 'pokemonListIDFilter', 'pokemonListRegionFilter', 'pokemonListType1Filter', 'pokemonListType2Filter',
+    'pokemonListShinyFilter', 'pokemonListPokerusFilter', 'pokemonListCategoryFilter', 'pokemonListHeldItemFilter', 'pokemonListShadowFilter', 'pokemonListLevelFilter', 'pokemonListAttackFilter'];
+
+Settings.add(new SearchSetting('pokemonListNameFilter', 'Search', '', undefined, false));
+Settings.add(new Setting<number>('pokemonListIDFilter', 'Search ID', [], -1, undefined, false));
+Settings.add(new Setting<number>('pokemonListRegionFilter', 'Region(s)', [], (2 << MAX_AVAILABLE_REGION) - 1, undefined, false));
+Settings.add(new Setting<PokemonType | null>('pokemonListType1Filter', 'Type 1',
+    [
+        new SettingOption('All', null),
+        ...Settings.enumToNumberSettingOptionArray(PokemonType).filter((opt) => opt.text !== 'None'),
+        new SettingOption('None', PokemonType.None),
+    ],
+    null, undefined, false));
+Settings.add(new Setting<PokemonType | null>('pokemonListType2Filter', 'Type 2',
+    [
+        new SettingOption('All', null),
+        ...Settings.enumToNumberSettingOptionArray(PokemonType).filter((opt) => opt.text !== 'None'),
+        new SettingOption('None', PokemonType.None),
+    ],
+    null, undefined, false));
+Settings.add(new Setting<number>('pokemonListShinyFilter', 'Shiny Status',
+    [
+        new SettingOption('All', -1),
+        new SettingOption('Not Shiny', 0),
+        new SettingOption('Shiny', 1),
+    ],
+    -1, undefined, false));
+Settings.add(new Setting<number>('pokemonListPokerusFilter', 'Pokérus Status',
+    [
+        new SettingOption('All', -1),
+        ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
+    ],
+    -1, undefined, false));
+Settings.add(new Setting<number>('pokemonListCategoryFilter', 'Category', () => [
+    new SettingOption('All', -1),
+    new SettingOption('Categorized', -2),
+    ...PokemonCategories.categories().map(c => new SettingOption(`Category ${c.id}`, c.id)),
+], -1, undefined, false));
+Settings.add(new BooleanSetting('pokemonListHeldItemFilter', 'Only with Held Item', false, undefined, false));
+Settings.add(new Setting<number>('pokemonListShadowFilter', 'Shadow Status',
+    [
+        new SettingOption('All', -1),
+        new SettingOption('Not Shadow', ShadowStatus.None),
+        new SettingOption('Shadow', ShadowStatus.Shadow),
+        new SettingOption('Purified', ShadowStatus.Purified),
+    ],
+    -1, new QuestLineStartedRequirement('Shadows in the Desert'), false));
+Settings.add(new Setting<number>('pokemonListLevelFilter', 'Min Level', [], 0, undefined, false));
+Settings.add(new Setting<number>('pokemonListAttackFilter', 'Min Attack', [], 0, undefined, false));
+
 // Hatchery display settings
 Settings.add(new Setting<string>('breedingDisplayTextSetting', 'Display Value',
     [
