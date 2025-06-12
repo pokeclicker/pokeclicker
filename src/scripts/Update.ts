@@ -2922,6 +2922,14 @@ class Update implements Saveable {
 
             //Remove second AZ battle.
             saveData.statistics.temporaryBattleDefeated.splice(202, 1);
+
+            // Replace the UG discord rich presence strings
+            if (settingsData['discord-rp.line-1']) {
+                settingsData['discord-rp.line-1'] = settingsData['discord-rp.line-1'].replace(/{underground_deal_trades}/g, '{underground_trades}');
+            }
+            if (settingsData['discord-rp.line-2']) {
+                settingsData['discord-rp.line-2'] = settingsData['discord-rp.line-2'].replace(/{underground_deal_trades}/g, '{underground_trades}');
+            }
         },
     };
 
