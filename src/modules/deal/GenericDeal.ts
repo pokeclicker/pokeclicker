@@ -245,6 +245,10 @@ export default class GenericDeal {
                 costs: [ { type: DealCostOrProfitType.Item, item: ItemList.Palaeontologist_token, amount: 1 } ],
                 profits: [ { type: DealCostOrProfitType.Item, item: ItemList['Pikachu (Palaeontologist)'], amount: 1, hidePlayerInventory: true } ],
             }),
+            new GenericDeal({
+                costs: [ { type: DealCostOrProfitType.Item, item: ItemList.Palaeontologist_token, amount: 1 } ],
+                profits: [ { type: DealCostOrProfitType.Amount, currency: new Amount(750, Currency.diamond), amount: 1 } ],
+            }),
         ]);
 
         GenericDeal.list.EverstoneDealer = ko.observableArray([
