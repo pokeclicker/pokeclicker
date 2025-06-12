@@ -312,7 +312,7 @@ class QuestLineHelper {
                 timeout: GameConstants.MINUTE,
             });
         };
-        const mineLayers = new MineLayersQuest(5, 0).withDescription('Mine 5 layers in the Underground.').withCustomReward(oldAmberReward);
+        const mineLayers = new MineLayersQuest(5, 0).withDescription('Collect all buried treasure 5 times in the Underground mines.').withCustomReward(oldAmberReward);
         undergroundQuestLine.addQuest(mineLayers);
 
         App.game.quests.questLines().push(undergroundQuestLine);
@@ -1006,7 +1006,23 @@ class QuestLineHelper {
         const fightFolly = new DefeatTemporaryBattleQuest('Folly', 'Fight Folly the Shady Guy in Phenac City');
         orreColosseumQuestLine.addQuest(fightFolly);
 
-        const checkSack = new TalkToNPCQuest(Sack, 'Check what is in the mysterious sack.'); // Step 3
+        const talkToSackReward = () => {
+            $('#npc-modal').one('hidden.bs.modal', () => {
+                Information.show({
+                    steps: [
+                        {
+                            element: document.getElementById('pokeballSelector'),
+                            intro: 'You can now start catching Shadow Pokémon!<br/><br/>A "New Shadow" filter has been added to your list, be sure to select a Poké Ball and move it to the desired position!',
+                        },
+                    ],
+                    highlightClass: 'bg-secondary',
+                    overlayOpacity: 1,
+                    positionPrecedence: ['right', 'bottom'],
+                });
+            });
+        };
+
+        const checkSack = new TalkToNPCQuest(Sack, 'Check what is in the mysterious sack.').withCustomReward(talkToSackReward); // Step 3
         orreColosseumQuestLine.addQuest(checkSack);
 
         const defeatShadowsPhenac = new CustomQuest(10, 0, 'Defeat 10 trainers who are using Shadow Pokémon in Phenac City.', () => App.game.statistics.totalShadowPokemonDefeated());
@@ -1885,7 +1901,7 @@ class QuestLineHelper {
         flareKalosQuestLine.addQuest(clearKalosLeague);
 
         // Battle AZ and finish the quest
-        const battleAZ1 = new DefeatTemporaryBattleQuest('Storyline AZ', 'What an amazing trainer! You became Kalos Champion! There is a parade in your honor in Lumiose City. But wait, AZ is there asking you for a battle. Show him what being a Pokémon Trainer is like!').withCustomReward(this.itemReward('Key_stone', 1));
+        const battleAZ1 = new DefeatTemporaryBattleQuest('AZ', 'What an amazing trainer! You became Kalos Champion! There is a parade in your honor in Lumiose City. But wait, AZ is there asking you for a battle. Show him what being a Pokémon Trainer is like!').withCustomReward(this.itemReward('Key_stone', 1));
         flareKalosQuestLine.addQuest(battleAZ1);
 
         App.game.quests.questLines().push(flareKalosQuestLine);
@@ -4051,33 +4067,6 @@ class QuestLineHelper {
         App.game.quests.questLines().push(gigantamaxQuestLine);
     }
 
-    public static createOriginalColorMagearnaQuestLine() {
-        const magearnaQuestLine = new QuestLine('A Mystery Gift', 'You have received a Mystery Gift.',
-            new MultiRequirement([
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kanto),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.johto),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.hoenn),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.sinnoh),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.unova),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kalos),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.alola),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.galar),
-            ]), GameConstants.BulletinBoards.Galar);
-
-        const mysteryGift = new TalkToNPCQuest(MagearnaMysteryGift, 'Go home and open your Mystery Gift').withCustomReward(() => {
-            App.game.party.gainPokemonByName('Magearna (Original Color)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-            Notifier.notify({
-                title: magearnaQuestLine.name,
-                message: 'You obtained Magearna (Original Color)!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        });
-        magearnaQuestLine.addQuest(mysteryGift);
-
-        App.game.quests.questLines().push(magearnaQuestLine);
-    }
-
     /* Hisui QuestLines */
 
     public static createHisuiForcesQuestLine() {
@@ -4270,7 +4259,6 @@ class QuestLineHelper {
         this.createDynaTreeBirdsQuestLine();
         this.createAncientGolemsQuestLine();
         this.createGigantamaxQuestLine();
-        this.createOriginalColorMagearnaQuestLine();
         this.createHisuiForcesQuestLine();
         this.createHisuiArceusQuestLine();
         this.createPaldeaLegendsQuestLine();

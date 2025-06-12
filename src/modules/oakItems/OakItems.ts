@@ -112,14 +112,14 @@ export default class OakItems implements Feature {
             new OakItem({
                 name: OakItemType.Cell_Battery,
                 displayName: 'Cell Battery',
-                description: 'Unlocks higher discharge tiers for more powerful effects',
+                description: 'Reduce the charges needed to discharge',
                 maxLevel: 5,
                 unlockRequirement: new CaughtPokemonRequirement(90),
-                experienceList: [0, 5, 10, 25, 50, 100],
-                bonusList: [0, 1, 2, 3, 4, 5],
+                experienceList: [0, 5, 10, 30, 60, 150],
+                bonusList: [-5, -10, -15, -20, -25, -30],
                 inactiveBonus: 0,
                 upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
-                bonusFormat: bonus => `Tier ${bonus.toLocaleString('en-US')}`,
+                bonusFormat: bonus => `${bonus.toLocaleString('en-US')} Charges`,
             }),
             new OakItem({
                 name: OakItemType.Squirtbottle,

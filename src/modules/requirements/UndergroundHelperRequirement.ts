@@ -12,6 +12,6 @@ export default class UndergroundHelperRequirement extends AchievementRequirement
     }
 
     public hint(): string {
-        return `${this.requiredValue} Underground Helpers with at least level ${this.levelRequired}`;
+        return `${this.requiredValue} Underground Experts with at least level ${this.levelRequired}`;
     }
 }

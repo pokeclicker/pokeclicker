@@ -81,6 +81,11 @@ class GameController {
         const $hatcheryModal = $('#breedingModal');
         $hatcheryModal.on('hide.bs.modal', _ => $hatcheryModal.data('disable-toggle', true));
         $hatcheryModal.on('hidden.bs.modal shown.bs.modal', _ => $hatcheryModal.data('disable-toggle', false));
+        // Achievements Tracker
+        const achievements = App.game.achievementTracker;
+        const $achievementsModal = $('#achievementsModal');
+        $achievementsModal.on('hide.bs.modal', _ => $achievementsModal.data('disable-toggle', true));
+        $achievementsModal.on('hidden.bs.modal shown.bs.modal', _ => $achievementsModal.data('disable-toggle', false));
         // Shop
         const $shopModal = $('#shopModal');
         $shopModal.on('hide.bs.modal', _ => $shopModal.data('disable-toggle', true));
@@ -192,6 +197,9 @@ class GameController {
                         return e.preventDefault();
                     case Settings.getSetting('hotkey.underground.survey').value:
                         App.game.underground.tools.selectedToolType = UndergroundToolType.Survey;
+                        return e.preventDefault();
+                    case Settings.getSetting('hotkey.underground.discharge').value:
+                        App.game.underground.battery.discharge();
                         return e.preventDefault();
                 }
             }
@@ -372,6 +380,14 @@ class GameController {
                     if (hatchery.canAccess() && !$hatcheryModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
                         $hatcheryModal.modal('toggle');
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.achievementsTracker').value:
+                    // Open the achievmeents tracker
+                    if (achievements.canAccess() && !$achievementsModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        $achievementsModal.modal('toggle');
                         return e.preventDefault();
                     }
                     break;
