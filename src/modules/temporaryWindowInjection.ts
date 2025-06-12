@@ -80,7 +80,6 @@ import ExpUpgrade from './upgrades/ExpUpgrade';
 import OakItemType from './enums/OakItemType';
 import OakItem from './oakItems/OakItem';
 import OakItems from './oakItems/OakItems';
-import BoughtOakItem from './oakItems/BoughtOakItem';
 import OakItemController from './oakItems/OakItemController';
 import OakItemLoadout from './oakItems/OakItemLoadout';
 import OakItemLoadouts from './oakItems/OakItemLoadouts';
@@ -307,7 +306,6 @@ Object.assign(<any>window, {
     OakItemType,
     OakItem,
     OakItems,
-    BoughtOakItem,
     OakItemController,
     OakItemLoadout,
     OakItemLoadouts,

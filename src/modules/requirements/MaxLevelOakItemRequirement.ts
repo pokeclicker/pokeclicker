@@ -7,7 +7,7 @@ export default class MaxLevelOakItemRequirement extends AchievementRequirement {
     }
 
     public getProgress() {
-        return Math.min(App.game.oakItems.maxLevelOakItems(), this.requiredValue);
+        return Math.min(App.game.oakItems.maxLevelOakItems().length, this.requiredValue);
     }
 
     public hint(): string {

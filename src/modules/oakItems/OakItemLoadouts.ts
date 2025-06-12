@@ -1,5 +1,4 @@
-import type {
-    Observable as KnockoutObservable,
+import {
     Computed as KnockoutComputed,
 } from 'knockout';
 import '../koExtenders';
@@ -8,53 +7,50 @@ import OakItemType from '../enums/OakItemType';
 import OakItemLoadout from './OakItemLoadout';
 
 export default class OakItemLoadouts implements Saveable {
-    private static MAX_SLOTS = 5;
+    public static MAX_SLOTS = 5;
 
     saveKey = 'oakItemLoadouts';
 
     defaults = {};
-
     loadouts: Array<OakItemLoadout> = Array(OakItemLoadouts.MAX_SLOTS).fill(0).map((_, i) => new OakItemLoadout(`Loadout ${i + 1}`));
-    selectedLoadout: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
 
-    activateLoadout(index: number) {
+    public activateLoadout(index: number) {
         if (App.game.challenges.list.disableOakItems.active()) {
+            return;
+        }
+
+        const loadout = this.loadouts[index]?.loadout;
+
+        if (!loadout) {
             return;
         }
 
         App.game.oakItems.deactivateAll();
-        this.loadouts[index].loadout().forEach((item: OakItemType) => {
-            App.game.oakItems.activate(item);
-        });
+        loadout().forEach(oakItemType => App.game.oakItems.activate(oakItemType));
     }
 
-    toggleItem(item: OakItemType) {
-        if (App.game.challenges.list.disableOakItems.active()) {
-            return;
-        }
+    public isLoadoutActive(index: number): KnockoutComputed<boolean> {
+        return ko.pureComputed(() => this.loadouts[index]?.loadout().every(oakItemType => App.game.oakItems.itemList[oakItemType].isActive) &&
+            this.loadouts[index]?.loadout().length === App.game.oakItems.activeCount());
+    }
 
-        const { loadout } = this.loadouts[this.selectedLoadout()];
-        if (loadout().includes(item)) {
-            const index = loadout().indexOf(item);
-            if (index !== -1) {
-                loadout.splice(index, 1);
-            }
-        } else if (loadout().length < App.game.oakItems.maxActiveCount() && App.game.oakItems.isUnlocked(item)) {
-            loadout.push(item);
+    public toggleOakItemInLoadout(loadoutIndex: number, oakItemType: OakItemType) {
+        const loadout = this.loadouts[loadoutIndex]?.loadout;
+        if (loadout().includes(oakItemType)) {
+            loadout.remove(oakItemType);
+        } else if (loadout().length < App.game.oakItems.maxActiveCount() && App.game.oakItems.isUnlocked(oakItemType)) {
+            loadout.push(oakItemType);
+            loadout.sort((a, b) => a - b);
         }
     }
 
-    hasItem(item: OakItemType): KnockoutComputed<boolean> {
-        return ko.pureComputed(() => this.loadouts[this.selectedLoadout()].loadout().includes(item));
-    }
-
-    getSelectedLoadout(): OakItemLoadout {
-        return this.loadouts[this.selectedLoadout()];
+    public loadoutHasOakItem(loadoutIndex: number, oakItemType: OakItemType): KnockoutComputed<boolean> {
+        return ko.pureComputed(() => this.loadouts[loadoutIndex]?.loadout().includes(oakItemType));
     }
 
     fromJSON(json: Array<{ name: string, loadout: Array<number> }>) {
         json?.forEach((loadout, index) => {
-            this.loadouts[index] = new OakItemLoadout(loadout.name, loadout.loadout);
+            this.loadouts[index] = new OakItemLoadout(loadout.name, loadout.loadout.sort((a, b) => a - b));
         });
     }
 

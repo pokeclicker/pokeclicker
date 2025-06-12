@@ -1,71 +1,194 @@
-import { Observable as KnockoutObservable } from 'knockout';
+import { PureComputed } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
 import OakItemType from '../enums/OakItemType';
-import { Currency } from '../GameConstants';
+import { AchievementOption, Currency } from '../GameConstants';
 import GameHelper from '../GameHelper';
 import Multiplier, { GetMultiplierFunction } from '../multiplier/Multiplier';
 import MultiplierType from '../multiplier/MultiplierType';
 import AmountFactory from '../wallet/AmountFactory';
-import BoughtOakItem from './BoughtOakItem';
 import OakItem from './OakItem';
+import CaughtPokemonRequirement from '../requirements/CaughtPokemonRequirement';
+import ItemOwnedRequirement from '../requirements/ItemOwnedRequirement';
+import Requirement from '../requirements/Requirement';
 
 export default class OakItems implements Feature {
     name = 'Oak Items';
     saveKey = 'oakItems';
 
     itemList: OakItem[];
-    unlockRequirements: number[];
+    unlockRequirements: Requirement[];
 
     defaults: Record<string, any>;
 
-    maxLevelOakItems: KnockoutObservable<number>;
+    public selectedOakItem: KnockoutObservable<number> = ko.observable(-1);
+    public maxLevelOakItems: PureComputed<OakItem[]>;
 
-    constructor(unlockRequirements: number[], private multiplier: Multiplier) {
-        this.itemList = [];
+    constructor(unlockRequirements: Requirement[], private multiplier: Multiplier) {
+        this.itemList = [
+            new OakItem({
+                name: OakItemType.Magic_Ball,
+                displayName: 'Magic Ball',
+                description: 'Boosts your chance to successfully catch Pokémon',
+                maxLevel: 5,
+                unlockRequirement: new CaughtPokemonRequirement(20),
+                experienceList: [0, 250, 500, 1250, 2500, 5000],
+                bonusList: [0.05, 0.06, 0.07, 0.08, 0.09, 0.10],
+                inactiveBonus: 0,
+                upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
+                bonusFormat: bonus => `+${bonus.toLocaleString('en-US', { style: 'percent' })}`,
+            }),
+            new OakItem({
+                name: OakItemType.Amulet_Coin,
+                displayName: 'Amulet Coin',
+                description: 'Increases the amount of Pokédollars earned from battles',
+                maxLevel: 5,
+                unlockRequirement: new CaughtPokemonRequirement(30),
+                experienceList: [0, 500, 1000, 2500, 5000, 10000],
+                bonusList: [1.25, 1.30, 1.35, 1.40, 1.45, 1.50],
+                inactiveBonus: 1,
+                upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
+                bonusFormat: bonus => `×${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
+            }),
+            new OakItem({
+                name: OakItemType.Rocky_Helmet,
+                displayName: 'Rocky Helmet',
+                description: 'Increases the damage dealt by your clicks',
+                maxLevel: 5,
+                unlockRequirement: new CaughtPokemonRequirement(40),
+                experienceList: [0, 500, 1000, 2500, 5000, 10000],
+                bonusList: [1.25, 1.30, 1.35, 1.40, 1.45, 1.50],
+                inactiveBonus: 1,
+                upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
+                bonusFormat: bonus => `×${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
+            }),
+            new OakItem({
+                name: OakItemType.Exp_Share,
+                displayName: 'EXP Share',
+                description: 'Grants more experience from every battle',
+                maxLevel: 5,
+                unlockRequirement: new CaughtPokemonRequirement(50),
+                experienceList: [0, 500, 1000, 2500, 5000, 10000],
+                bonusList: [1.15, 1.18, 1.21, 1.24, 1.27, 1.30],
+                inactiveBonus: 1,
+                upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
+                bonusFormat: bonus => `×${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
+            }),
+            new OakItem({
+                name: OakItemType.Sprayduck,
+                displayName: 'Sprayduck',
+                description: 'Speeds up berry growth and withering',
+                maxLevel: 5,
+                unlockRequirement: new CaughtPokemonRequirement(60),
+                experienceList: [0, 500, 1000, 2500, 5000, 10000],
+                bonusList: [1.25, 1.30, 1.35, 1.40, 1.45, 1.50],
+                inactiveBonus: 1,
+                upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
+                bonusFormat: bonus => `×${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
+            }),
+            new OakItem({
+                name: OakItemType.Shiny_Charm,
+                displayName: 'Shiny Charm',
+                description: 'Increases your odds of finding Shiny Pokémon, from all sources',
+                maxLevel: 5,
+                unlockRequirement: new CaughtPokemonRequirement(70),
+                experienceList: [0, 5, 10, 20, 35, 65],
+                bonusList: [1.50, 1.60, 1.70, 1.80, 1.90, 2.00],
+                inactiveBonus: 1,
+                upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
+                bonusFormat: bonus => `×${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
+            }),
+            new OakItem({
+                name: OakItemType.Magma_Stone,
+                displayName: 'Magma Stone',
+                description: 'Helps Pokémon Eggs hatch more quickly',
+                maxLevel: 5,
+                unlockRequirement: new CaughtPokemonRequirement(80),
+                experienceList: [0, 50, 100, 250, 500, 1000],
+                bonusList: [1.50, 1.60, 1.70, 1.80, 1.90, 2.00],
+                inactiveBonus: 1,
+                upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
+                bonusFormat: bonus => `×${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
+            }),
+            new OakItem({
+                name: OakItemType.Cell_Battery,
+                displayName: 'Cell Battery',
+                description: 'Reduce the charges needed to discharge',
+                maxLevel: 5,
+                unlockRequirement: new CaughtPokemonRequirement(90),
+                experienceList: [0, 5, 10, 30, 60, 150],
+                bonusList: [-5, -10, -15, -20, -25, -30],
+                inactiveBonus: 0,
+                upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
+                bonusFormat: bonus => `${bonus.toLocaleString('en-US')} Charges`,
+            }),
+            new OakItem({
+                name: OakItemType.Squirtbottle,
+                displayName: 'Squirtbottle',
+                description: 'Increases the chance for berries to mutate',
+                maxLevel: 5,
+                unlockRequirement: new ItemOwnedRequirement('Squirtbottle', 1, AchievementOption.equal),
+                overrideHint: 'Purchase from the Berry Master in Goldenrod City, Johto',
+                experienceList: [0, 50, 100, 250, 500, 1000],
+                bonusList: [1.25, 1.50, 1.75, 2.00, 2.25, 2.50],
+                inactiveBonus: 1,
+                upgradeCostList: AmountFactory.createArray([0, 2000, 5000, 10000, 20000, 50000], Currency.farmPoint),
+                bonusFormat: bonus => `×${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
+            }),
+            new OakItem({
+                name: OakItemType.Sprinklotad,
+                displayName: 'Sprinklotad',
+                description: 'Extends the effect duration of Mulch',
+                maxLevel: 5,
+                unlockRequirement: new ItemOwnedRequirement('Sprinklotad', 1, AchievementOption.equal),
+                overrideHint: 'Purchase from the Berry Master in Mauville City, Hoenn',
+                experienceList: [0, 500, 1000, 2500, 5000, 10000],
+                bonusList: [1.25, 1.40, 1.55, 1.70, 1.85, 2.00],
+                inactiveBonus: 1,
+                upgradeCostList: AmountFactory.createArray([0, 2000, 5000, 10000, 20000, 50000], Currency.farmPoint),
+                bonusFormat: bonus => `×${bonus.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
+            }),
+            new OakItem({
+                name: OakItemType.Explosive_Charge,
+                displayName: 'Explosive Charge',
+                description: 'Expands the reach of the Bomb tool, allowing it to hit more tiles at once',
+                maxLevel: 5,
+                unlockRequirement: new ItemOwnedRequirement('Explosive_Charge', 1, AchievementOption.equal),
+                overrideHint: 'Purchase from the shop on Cinnabar Island, Kanto',
+                experienceList: [0, 10, 20, 50, 100, 200],
+                bonusList: [1, 2, 3, 6, 8, 10],
+                inactiveBonus: 0,
+                upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
+                bonusFormat: bonus => `+${bonus.toLocaleString('en-US')} tiles`,
+            }),
+            new OakItem({
+                name: OakItemType.Treasure_Scanner,
+                displayName: 'Treasure Scanner',
+                description: 'Grants a chance to multiply the rewards found while mining',
+                maxLevel: 5,
+                unlockRequirement: new ItemOwnedRequirement('Treasure_Scanner', 1, AchievementOption.equal),
+                overrideHint: 'Purchase from the shop on Cinnabar Island, Kanto',
+                experienceList: [0, 20, 40, 100, 200, 400],
+                bonusList: [0.04, 0.08, 0.12, 0.16, 0.20, 0.24],
+                inactiveBonus: 1,
+                upgradeCostList: AmountFactory.createArray([0, 50000, 100000, 250000, 500000, 1000000], Currency.money),
+                bonusFormat: bonus => `${bonus.toLocaleString('en-US', { style: 'percent' })}`,
+            }),
+        ];
+        this.maxLevelOakItems = ko.pureComputed(() => this.itemList.filter(value => value.isMaxLevel()));
         this.unlockRequirements = unlockRequirements;
-        this.maxLevelOakItems = ko.observable(0);
     }
 
     // eslint-disable-next-line class-methods-use-this
     canAccess(): boolean {
-        return App.game.party.caughtPokemon.length >= 20;
+        return this.unlockRequirements.some(value => value.isCompleted());
     }
 
     initialize() {
-        this.itemList = [
-            new OakItem(OakItemType.Magic_Ball, 'Magic Ball', 'Gives a bonus to your catchrate',
-                true, [5, 6, 7, 8, 9, 10], 0, 20, 2, undefined, undefined, undefined, '%'),
-            new OakItem(OakItemType.Amulet_Coin, 'Amulet Coin', 'Gain more Pokédollars from battling',
-                true, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 30, 1),
-            new OakItem(OakItemType.Rocky_Helmet, 'Rocky Helmet', 'Clicks do more damage',
-                true, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 40, 3),
-            new OakItem(OakItemType.Exp_Share, 'EXP Share', 'Gain more exp from battling',
-                true, [1.15, 1.18, 1.21, 1.24, 1.27, 1.30], 1, 50, 1),
-            new OakItem(OakItemType.Sprayduck, 'Sprayduck', 'Makes your berries grow faster',
-                false, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 60, 1),
-            new OakItem(OakItemType.Shiny_Charm, 'Shiny Charm', 'Encounter shinies more often',
-                true, [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, 70, 150),
-            new OakItem(OakItemType.Magma_Stone, 'Magma Stone', 'Hatch eggs faster',
-                false, [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, 80, 10),
-            new OakItem(OakItemType.Cell_Battery, 'Cell Battery', 'Reduce the charges needed to discharge',
-                false, [-5, -10, -15, -20, -25, -30], 0, 90, 1, [5, 10, 30, 60, 150], undefined, undefined, ' Charges'),
-            new BoughtOakItem(OakItemType.Squirtbottle, 'Squirtbottle', 'Increases the chance of berry mutations', 'Johto Berry Master',
-                true, [1.25, 1.5, 1.75, 2, 2.25, 2.5], 1, 10, undefined, undefined, AmountFactory.createArray([2000, 5000, 10000, 20000, 50000], Currency.farmPoint)),
-            new BoughtOakItem(OakItemType.Sprinklotad, 'Sprinklotad', 'Increases the duration of Mulch', 'Hoenn Berry Master',
-                true, [1.25, 1.40, 1.55, 1.70, 1.85, 2.00], 1, 1, undefined, undefined, AmountFactory.createArray([2000, 5000, 10000, 20000, 50000], Currency.farmPoint)),
-            new BoughtOakItem(OakItemType.Explosive_Charge, 'Explosive Charge', 'Increases the number of tiles the Bomb tool can target', 'Cinnabar Island Shop',
-                true, [1, 2, 3, 6, 8, 10], 1, 50, undefined, undefined, AmountFactory.createArray([50000, 100000, 400000, 1000000, 2000000], Currency.money), ''),
-            new BoughtOakItem(OakItemType.Treasure_Scanner, 'Treasure Scanner', 'Chance to multiply mining rewards', 'Cinnabar Island Shop',
-                true, [4, 8, 12, 16, 20, 24], 1, 25, undefined, undefined, AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], Currency.money), '%'),
-        ];
-
         this.addMultiplier('clickAttack', OakItemType.Rocky_Helmet);
         this.addMultiplier('exp', OakItemType.Exp_Share);
         this.addMultiplier('money', OakItemType.Amulet_Coin);
         this.addMultiplier('shiny', OakItemType.Shiny_Charm);
         this.addMultiplier('eggStep', OakItemType.Magma_Stone);
-
-        this.itemList.forEach((i) => i.levelKO.subscribe(() => this.maxLevelOakItems(this.itemList.filter((i2) => i2.isMaxLevel()).length)));
     }
 
     calculateBonus(item: OakItemType, useItem = false): number {
@@ -97,12 +220,7 @@ export default class OakItems implements Feature {
     }
 
     maxActiveCount() {
-        for (let i = 0; i < this.unlockRequirements.length; i += 1) {
-            if (App.game.party.caughtPokemon.length < this.unlockRequirements[i]) {
-                return i;
-            }
-        }
-        return this.unlockRequirements.length;
+        return this.unlockRequirements.filter(value => value.isCompleted()).length;
     }
 
     activeCount() {
@@ -130,8 +248,6 @@ export default class OakItems implements Feature {
                 this.itemList[OakItemType[oakItem]].fromJSON(json[oakItem]);
             }
         });
-
-        this.maxLevelOakItems(this.itemList.filter((i) => i.isMaxLevel()).length);
     }
 
     toJSON(): Record<string, any> {

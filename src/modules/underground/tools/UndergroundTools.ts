@@ -63,7 +63,7 @@ export default class UndergroundTools {
                 action: () => {
                     const coordinatesActuallyMined: Array<Coordinate> = [];
                     const baseBombTiles: number = 10;
-                    const extraBombTiles: number = App.game.oakItems.isActive(OakItemType.Explosive_Charge) ? App.game.oakItems.calculateBonus(OakItemType.Explosive_Charge) : 0;
+                    const extraBombTiles: number = App.game.oakItems.calculateBonus(OakItemType.Explosive_Charge);
 
                     for (let i = 0; i < baseBombTiles + extraBombTiles; i++) {
                         const randomCoordinate = App.game.underground.mine.getRandomCoordinate();
