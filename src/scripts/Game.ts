@@ -172,8 +172,7 @@ class Game implements TmpGameType {
 
     computeOfflineEarnings() {
         const now = Date.now();
-        const lastSeen = player._lastSeen;
-        const timeDiffInSeconds = Math.floor((now - lastSeen) / 1000);
+        const timeDiffInSeconds = Math.floor((now - player._lastSeen) / 1000);
         if (timeDiffInSeconds > 1) {
             // Only allow up to 24 hours worth of bonuses
             const timeDiffOverride = Math.min(86400, timeDiffInSeconds);
@@ -182,7 +181,6 @@ class Game implements TmpGameType {
             const dungeonTokensToEarn = Math.floor((App.game.statistics.totalDungeonTokens() - App.game.statistics.totalOfflineDungeonTokens()) / divider);
             let alreadyCollected = false;
             const getOfflineEarnings = () => {
-                console.log('LOLLOL');
                 if (alreadyCollected) {// Prevents duplicates
                     return;
                 }
