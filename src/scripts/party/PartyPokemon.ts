@@ -550,6 +550,145 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         return true;
     });
 
+    public matchesFilters(context: 'hatchery' | 'pokemonList'): boolean {
+        const prefix = context === 'hatchery' ? 'breeding' : 'pokemonList';
+
+        if (this.id <= 0) {
+            return false;
+        }
+
+        // Check if search matches englishName or displayName
+        const nameFilterSetting = Settings.getSetting(`${prefix}NameFilter`) as SearchSetting;
+        if (nameFilterSetting.observableValue() != '') {
+            const nameFilter = nameFilterSetting.regex();
+            const displayName = PokemonHelper.displayName(this.name)();
+            const partyName = this.displayName;
+            if (!nameFilter.test(displayName) && !nameFilter.test(this.name) && !(partyName != undefined && nameFilter.test(partyName))) {
+                return false;
+            }
+        }
+
+        // Check if search matches species number
+        const idFilter = Settings.getSetting(`${prefix}IDFilter`).observableValue();
+        if (idFilter > -1 && idFilter != Math.floor(this.id)) {
+            return false;
+        }
+
+        // Check based on categories
+        const categoryFilter = Settings.getSetting(`${prefix}CategoryFilter`).observableValue();
+        // Categorized only
+        if (categoryFilter == -2 && this.isUncategorized()) {
+            return false;
+        }
+        // Selected category
+        if (categoryFilter >= 0 && !this.category.includes(categoryFilter)) {
+            return false;
+        }
+
+        // Check based on shiny status
+        const shinyFilter = Settings.getSetting(`${prefix}ShinyFilter`).observableValue();
+        if (shinyFilter >= 0 && +this.shiny !== shinyFilter) {
+            return false;
+        }
+
+        // Check based on native region
+        const unlockedRegionsMask = (2 << player.highestRegion()) - 1;
+        const regionFilterMask = Settings.getSetting(`${prefix}RegionFilter`).observableValue() & unlockedRegionsMask;
+        if (regionFilterMask !== unlockedRegionsMask) {
+            const nativeRegion = PokemonHelper.calcNativeRegion(this.name);
+            // With the region filter active, regionless pokemon should be shown only if no regions are selected
+            const nativeRegionInFilter = nativeRegion !== GameConstants.Region.none ?
+                (1 << nativeRegion) & regionFilterMask :
+                regionFilterMask === 0;
+            if (!nativeRegionInFilter) {
+                return false;
+            }
+        }
+
+        // Check based on Pokerus status
+        const pokerusFilter = Settings.getSetting(`${prefix}PokerusFilter`).observableValue();
+        if (pokerusFilter > -1 && this.pokerus !== pokerusFilter) {
+            return false;
+        }
+
+        // Check if either of the types match
+        const type1: (PokemonType | null) = Settings.getSetting(`${prefix}Type1Filter`).observableValue();
+        const type2: (PokemonType | null) = Settings.getSetting(`${prefix}Type2Filter`).observableValue();
+        if (type1 !== null || type2 !== null) {
+            const { type: types } = pokemonMap[this.name];
+            if ([type1, type2].includes(PokemonType.None)) {
+                const type = (type1 == PokemonType.None) ? type2 : type1;
+                if (!BreedingController.isPureType(this, type)) {
+                    return false;
+                }
+            } else if ((type1 !== null && !types.includes(type1)) || (type2 !== null && !types.includes(type2))) {
+                return false;
+            }
+        }
+
+        // Hatchery-specific filters
+        if (context === 'hatchery') {
+            const uniqueTransformationFilter = Settings.getSetting('breedingUniqueTransformationFilter').observableValue();
+            const pokemon = PokemonHelper.getPokemonById(this.id);
+            // Only Base Pokémon with Mega available
+            if (uniqueTransformationFilter == 'mega-available' && !PokemonHelper.hasMegaEvolution(pokemon.name)) {
+                return false;
+            }
+            // Only Base Pokémon without Mega Evolution
+            if (uniqueTransformationFilter == 'mega-unobtained' && !PokemonHelper.hasUncaughtMegaEvolution(pokemon.name)) {
+                return false;
+            }
+            // Only Mega Pokémon
+            if (uniqueTransformationFilter == 'mega-evolution' && !PokemonHelper.isMegaEvolution(pokemon.name)) {
+                return false;
+            }
+
+            // Check to exclude alternate forms
+            const hideAltFilter = Settings.getSetting('breedingHideAltFilter').observableValue();
+            if (hideAltFilter && !Number.isInteger(pokemon.id)) {
+                // Don't exclude alt forms native to a different region, as they're considered a main form for that region's progression
+                const nativeRegion = PokemonHelper.calcNativeRegion(this.name);
+                const hasBaseFormInSameRegion = pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion);
+                if (hasBaseFormInSameRegion) {
+                    return false;
+                }
+            }
+        }
+
+        // Pokemon List-specific filters
+        if (context === 'pokemonList') {
+            // Check held item filter
+            const heldItemFilter = Settings.getSetting('pokemonListHeldItemFilter').observableValue();
+            if (heldItemFilter && !this.heldItem()) {
+                return false;
+            }
+
+            // Check shadow status filter
+            const shadowFilter = Settings.getSetting('pokemonListShadowFilter').observableValue();
+            if (shadowFilter > -1 && this.shadow !== shadowFilter) {
+                return false;
+            }
+
+            // Check level filter
+            const levelFilter = Settings.getSetting('pokemonListLevelFilter').observableValue();
+            if (levelFilter > 0 && this.level < levelFilter) {
+                return false;
+            }
+
+            // Check attack filter
+            const attackFilter = Settings.getSetting('pokemonListAttackFilter').observableValue();
+            if (attackFilter > 0 && this.attack < attackFilter) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public matchesPokemonListFilters(): boolean {
+        return this.matchesFilters('pokemonList');
+    }
+
     public giveHeldItem = (heldItem: HeldItem): void => {
         if (!this.heldItem() || heldItem.name != this.heldItem().name) {
             if (heldItem && !heldItem.canUse(this)) {
