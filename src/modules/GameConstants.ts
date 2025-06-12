@@ -542,7 +542,7 @@ export function pluralizeString(str: string, amt: number): string {
     switch (true) {
         case /s$/.test(str):
             return str;
-        case /y$/.test(str):
+        case /[^aeiou]y$/.test(str):
             return str.replace(/y$/, 'ies');
         case /ch$/.test(str):
             return `${str}es`;
