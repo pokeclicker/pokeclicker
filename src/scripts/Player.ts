@@ -123,6 +123,11 @@ class Player implements TmpPlayerType {
     }
 
     set region(value: GameConstants.Region) {
+        if (value < 0) {
+            value = 0;
+        } else if (value > GameConstants.MAX_AVAILABLE_REGION) {
+            value = GameConstants.MAX_AVAILABLE_REGION;
+        }
         this._region(value);
     }
 
@@ -131,26 +136,16 @@ class Player implements TmpPlayerType {
     }
 
     set subregion(value: number) {
+        const maxUnlockedSubregion = Math.max(...SubRegions.getUnlockedSubRegions(this.region).map(sr => sr.id));
         if (value < 0) {
-            value = Math.max(...SubRegions.getSubRegions(this.region).filter(sr => sr.unlocked()).map(sr => sr.id));
-        }
-        if (value > Math.max(...SubRegions.getSubRegions(this.region).filter(sr => sr.unlocked()).map(sr => sr.id))) {
             value = 0;
+        } else if (value > maxUnlockedSubregion) {
+            value = maxUnlockedSubregion;
         }
-        const changedSubregions = value !== this.subregion;
 
         this._subregion(value);
         if (value > this.highestSubRegion()) {
             this.highestSubRegion(value);
-        }
-
-        if (changedSubregions) {
-            const subregion = SubRegions.getSubRegionById(this.region, value);
-            if (subregion.startRoute && subregion.startRoute !== this.route) {
-                MapHelper.moveToRoute(subregion.startRoute, this.region);
-            } else if (subregion.startTown && subregion.startTown !== this.town.name) {
-                MapHelper.moveToTown(subregion.startTown);
-            }
         }
     }
 
