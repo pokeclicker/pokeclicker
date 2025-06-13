@@ -54,7 +54,14 @@ class RouteHelper {
         }
         const currentEVs = this.getEvs(possiblePokemon);
         return `EVs until all Pokémon are resistant in this dungeon: ${currentEVs}&nbsp;/&nbsp;${50 * possiblePokemon.length}.`;
+    }
 
+    public static evoLinePokerusEVs(possiblePokemon: PokemonNameType[]): string {
+        if (this.minPokerus(possiblePokemon) == GameConstants.Pokerus.Resistant) {
+            return 'All caught Pokémon in this list are resistant!';
+        }
+        const currentEVs = this.getEvs(possiblePokemon);
+        return `EVs until all caught Pokémon in this list are resistant: ${currentEVs}&nbsp;/&nbsp;${50 * possiblePokemon.length}.`;
     }
 
     private static getEvs(possiblePokemon: PokemonNameType[]): number {
@@ -96,7 +103,7 @@ class RouteHelper {
     }
 
     public static minPokerus(possiblePokemon: PokemonNameType[]): number {
-        let pokerus = 3;
+        let pokerus = GameConstants.Pokerus.Resistant;
         for (let i = 0; i < possiblePokemon.length; i++) {
             const pokerusStatus = App.game.party.getPokemonByName(possiblePokemon[i])?.pokerus;
             pokerus = Math.min(pokerus, pokerusStatus);
