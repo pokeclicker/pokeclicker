@@ -173,7 +173,7 @@ class Game implements TmpGameType {
     computeOfflineEarnings() {
         const now = Date.now();
         const timeDiffInSeconds = Math.floor((now - player._lastSeen) / 1000);
-        if (timeDiffInSeconds > 1) {
+        if (timeDiffInSeconds > 1 && App.game.statistics.totalDungeonTokens()) {
             // Only allow up to 24 hours worth of bonuses
             const timeDiffOverride = Math.min(86400, timeDiffInSeconds);
             const divider = App.game.statistics.secondsPlayed() / timeDiffOverride * 2;
