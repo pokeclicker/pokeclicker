@@ -13,7 +13,7 @@ export default class Weather {
     public static currentWeather: Computed<WeatherType> = ko.pureComputed(() => {
         const weather = Weather.regionalWeather[player.region]();
 
-        // TODO: HLXII - Add weather overrides
+        // TODO: Add weather overrides
 
         return weather;
     });

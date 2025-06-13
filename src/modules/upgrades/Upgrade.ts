@@ -60,6 +60,10 @@ export default class Upgrade implements Saveable {
     }
 
     buy() {
+        if (this.isMaxLevel()) {
+            return;
+        }
+
         if (this.canBuy()) {
             App.game.wallet.loseAmount(this.calculateCost());
             this.levelUp();

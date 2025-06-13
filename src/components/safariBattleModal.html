@@ -45,13 +45,13 @@
                 <div class="message" data-bind='html: SafariBattle.text'></div>
                 <div class="row" style="width: 100%;">
                     <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.throwBall()" data-bind="disable: SafariBattle.busy()">
-                        <span class="position-absolute small" style="left: 5px;" data-bind="text: `[${Settings.getSetting('hotkey.safari.ball').value}]`"></span>
+                        <span class="position-absolute small" style="left: 5px;" data-bind="text: `[${Settings.getSetting('hotkey.safari.ball').observableValue()}]`"></span>
                         <knockout data-bind="text: `Ball (${Safari.balls()})`">Ball (30)</knockout>
                     </button>
                     <div class="btn-group btn-block col-6 m-0 dropup" style="padding:0px;">
                         <button type="button" class='btn btn-primary btn-block' onclick="this.blur();"
                             data-bind='{ click: function(){SafariBattle.throwBait();}, disable: SafariBattle.selectedBait().amount() <= 0 || SafariBattle.busy() }'>
-                            <span class="position-absolute small" style="left: 5px;" data-bind="text: `[${Settings.getSetting('hotkey.safari.bait').value}]`"></span>
+                            <span class="position-absolute small" style="left: 5px;" data-bind="text: `[${Settings.getSetting('hotkey.safari.bait').observableValue()}]`"></span>
                             <div style="display:inline"><img width=16px data-bind="attr: { src: SafariBattle.selectedBait().image }"></div>
                             <span data-bind="text: SafariBattle.selectedBait().btnName">Bait (∞)</span>
                         </button>
@@ -62,11 +62,11 @@
                         </div>
                     </div>
                     <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.throwRock()" data-bind="disable: SafariBattle.busy()">
-                        <span class="position-absolute small" style="left: 5px;" data-bind="text: `[${Settings.getSetting('hotkey.safari.rock').value}]`"></span>
+                        <span class="position-absolute small" style="left: 5px;" data-bind="text: `[${Settings.getSetting('hotkey.safari.rock').observableValue()}]`"></span>
                         Rock (∞)
                     </button>
                     <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.run()" data-bind="disable: SafariBattle.busy()">
-                        <span class="position-absolute small" style="left: 5px;" data-bind="text: `[${Settings.getSetting('hotkey.safari.run').value}]`"></span>
+                        <span class="position-absolute small" style="left: 5px;" data-bind="text: `[${Settings.getSetting('hotkey.safari.run').observableValue()}]`"></span>
                         Run
                     </button>
                 </div>

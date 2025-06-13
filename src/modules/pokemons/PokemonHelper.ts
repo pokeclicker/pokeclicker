@@ -16,12 +16,12 @@ import MegaEvolveRequirement from '../requirements/MegaEvolveRequirement';
 import type MegaStoneItem from '../items/MegaStoneItem';
 import { ItemList } from '../items/ItemList';
 import Settings from '../settings/Settings';
-import type { EvoData } from './evolutions/Base';
 
-// TODO remove when PokemonLocations is ported to modules
-declare class PokemonLocations {
-    public static getPokemonPrevolution(pokemonName: PokemonNameType, maxRegion?: Region): Array<EvoData>;
+// TODO remove when Dungeon is ported to modules
+declare class Dungeon {
+    public allShadowPokemon(): Array<PokemonNameType>;
 }
+declare const dungeonList: { [dungeonName: string]: Dungeon };
 
 // eslint-disable-next-line import/prefer-default-export
 export function calcNativeRegion(pokemonName: PokemonNameType) {
@@ -93,7 +93,7 @@ export function getImage(pokemonId: number, shiny: boolean = undefined, gender: 
         }
         if (shadow === undefined) {
             showShadow = partyPokemon.shadow === ShadowStatus.Shadow
-                || (partyPokemon.shadow === ShadowStatus.Purified && partyPokemon.showShadowImage);
+                || (partyPokemon.shadow === ShadowStatus.Purified && (partyPokemon.showShadowImage || Settings.getSetting('partyShowPurifiedShadowSprites').observableValue()));
         }
     }
     if (showShiny) {
@@ -161,6 +161,10 @@ export function isGigantamaxForm(pokemonName: PokemonNameType): boolean {
     return pokemonName.startsWith('Gigantamax') || pokemonName.startsWith('Eternamax');
 }
 
+export const getAllShadowPokemon = ko.pureComputed((): Set<PokemonNameType> => {
+    return new Set(Object.values(dungeonList).flatMap(d => d.allShadowPokemon()));
+});
+
 // To have encounter/caught/defeat/hatch statistics in a single place
 export function incrementPokemonStatistics(pokemonId: number, statistic: PokemonStatisticsType, shiny: boolean, gender: BattlePokemonGender, shadow: ShadowStatus) {
     const pokemonStatistics = {
@@ -168,33 +172,12 @@ export function incrementPokemonStatistics(pokemonId: number, statistic: Pokemon
         Defeated: App.game.statistics.pokemonDefeated[pokemonId],
         Encountered: App.game.statistics.pokemonEncountered[pokemonId],
         Hatched: App.game.statistics.pokemonHatched[pokemonId],
-        MaleCaptured: App.game.statistics.malePokemonCaptured[pokemonId],
-        MaleDefeated: App.game.statistics.malePokemonDefeated[pokemonId],
-        MaleEncountered: App.game.statistics.malePokemonEncountered[pokemonId],
-        MaleHatched: App.game.statistics.malePokemonHatched[pokemonId],
-        FemaleCaptured: App.game.statistics.femalePokemonCaptured[pokemonId],
-        FemaleDefeated: App.game.statistics.femalePokemonDefeated[pokemonId],
-        FemaleEncountered: App.game.statistics.femalePokemonEncountered[pokemonId],
-        FemaleHatched: App.game.statistics.femalePokemonHatched[pokemonId],
         ShinyCaptured: App.game.statistics.shinyPokemonCaptured[pokemonId],
         ShinyDefeated: App.game.statistics.shinyPokemonDefeated[pokemonId],
         ShinyEncountered: App.game.statistics.shinyPokemonEncountered[pokemonId],
         ShinyHatched: App.game.statistics.shinyPokemonHatched[pokemonId],
-        ShinyMaleCaptured: App.game.statistics.shinyMalePokemonCaptured[pokemonId],
-        ShinyMaleDefeated: App.game.statistics.shinyMalePokemonDefeated[pokemonId],
-        ShinyMaleEncountered: App.game.statistics.shinyMalePokemonEncountered[pokemonId],
-        ShinyMaleHatched: App.game.statistics.shinyMalePokemonHatched[pokemonId],
-        ShinyFemaleCaptured: App.game.statistics.shinyFemalePokemonCaptured[pokemonId],
-        ShinyFemaleDefeated: App.game.statistics.shinyFemalePokemonDefeated[pokemonId],
-        ShinyFemaleEncountered: App.game.statistics.shinyFemalePokemonEncountered[pokemonId],
-        ShinyFemaleHatched: App.game.statistics.shinyFemalePokemonHatched[pokemonId],
         ShadowCaptured: App.game.statistics.shadowPokemonCaptured[pokemonId],
         ShadowDefeated: App.game.statistics.shadowPokemonDefeated[pokemonId],
-        ShadowMaleCaptured: App.game.statistics.shadowMalePokemonCaptured[pokemonId],
-        ShadowMaleDefeated: App.game.statistics.shadowMalePokemonDefeated[pokemonId],
-        ShadowFemaleCaptured: App.game.statistics.shadowFemalePokemonCaptured[pokemonId],
-        ShadowFemaleDefeated: App.game.statistics.shadowFemalePokemonDefeated[pokemonId],
-
     };
     const totalStatistics = {
         Captured: App.game.statistics.totalPokemonCaptured,
@@ -249,29 +232,17 @@ export function incrementPokemonStatistics(pokemonId: number, statistic: Pokemon
     }
     GameHelper.incrementObservable(pokemonStatistics[statistic]);
     GameHelper.incrementObservable(totalStatistics[statistic]);
-    // Gender
-    if (gender !== BattlePokemonGender.NoGender) {
-        GameHelper.incrementObservable(pokemonStatistics[genderString + statistic]);
-    }
     GameHelper.incrementObservable(totalStatistics[genderString + statistic]);
     if (shiny) {
         const shinyString = 'Shiny';
         GameHelper.incrementObservable(pokemonStatistics[shinyString + statistic]);
         GameHelper.incrementObservable(totalStatistics[shinyString + statistic]);
-        // Gender
-        if (gender !== BattlePokemonGender.NoGender) {
-            GameHelper.incrementObservable(pokemonStatistics[shinyString + genderString + statistic]);
-        }
         GameHelper.incrementObservable(totalStatistics[shinyString + genderString + statistic]);
     }
     if (shadow === ShadowStatus.Shadow) {
         const shadowString = 'Shadow';
         GameHelper.incrementObservable(pokemonStatistics[shadowString + statistic]);
         GameHelper.incrementObservable(totalStatistics[shadowString + statistic]);
-        // Gender
-        if (gender !== BattlePokemonGender.NoGender) {
-            GameHelper.incrementObservable(pokemonStatistics[shadowString + genderString + statistic]);
-        }
         GameHelper.incrementObservable(totalStatistics[shadowString + genderString + statistic]);
     }
 }

@@ -1,5 +1,5 @@
 import {
-    AchievementOption, Region, RegionalStarters, Starter,
+    AchievementOption, camelCaseToString, Region, RegionalStarters, Starter,
 } from '../GameConstants';
 import { pokemonList } from '../pokemons/PokemonList';
 import Requirement from './Requirement';
@@ -16,6 +16,6 @@ export default class StarterRequirement extends Requirement {
 
     public hint(): string {
         const starter = pokemonList.find((p) => p.id === RegionalStarters[this.region][this.starter]).name;
-        return `Requires ${starter} to be chosen as your ${Region[this.region]} starter Pokémon`;
+        return `Requires ${starter} to be chosen as your ${camelCaseToString(Region[this.region])} starter Pokémon.`;
     }
 }

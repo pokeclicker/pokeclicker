@@ -25,8 +25,8 @@ class DungeonMap {
         this.currentTile().hasPlayer = true;
         this.flash?.apply(this.board(), this.playerPosition());
 
-        this.totalFights = ko.observable(this.board().flat().flat().filter((t) => t.type() == GameConstants.DungeonTile.enemy).length);
-        this.totalChests = ko.observable(this.board().flat().flat().filter((t) => t.type() == GameConstants.DungeonTile.chest).length);
+        this.totalFights = ko.observable(this.board().flat().flat().filter((t) => t.type() == GameConstants.DungeonTileType.enemy).length);
+        this.totalChests = ko.observable(this.board().flat().flat().filter((t) => t.type() == GameConstants.DungeonTileType.chest).length);
     }
 
     public moveToCoordinates(x: number, y: number, floor = undefined) {
@@ -60,7 +60,7 @@ class DungeonMap {
             this.currentTile().hasPlayer = true;
             this.currentTile().isVisible = true;
             this.currentTile().isVisited = true;
-            if (this.currentTile().type() == GameConstants.DungeonTile.enemy) {
+            if (this.currentTile().type() == GameConstants.DungeonTileType.enemy) {
                 DungeonBattle.generateNewEnemy();
             }
             return true;
@@ -71,7 +71,7 @@ class DungeonMap {
     public showChestTiles(): void {
         for (let i = 0; i < this.board()[this.playerPosition().floor].length; i++) {
             for (let j = 0; j < this.board()[this.playerPosition().floor][i].length; j++) {
-                if (this.board()[this.playerPosition().floor][i][j].type() == GameConstants.DungeonTile.chest) {
+                if (this.board()[this.playerPosition().floor][i][j].type() == GameConstants.DungeonTileType.chest) {
                     this.board()[this.playerPosition().floor][i][j].isVisible = true;
                 }
             }
@@ -90,14 +90,44 @@ class DungeonMap {
         return this.board()[this.playerPosition().floor][this.playerPosition().y][this.playerPosition().x];
     }
 
-    public nearbyTiles(point: Point): DungeonTile[] {
-        const tiles = [];
+    public nearbyTiles(point: Point, avoidTiles: GameConstants.DungeonTileType[] = []): DungeonTile[] {
+        const tiles: DungeonTile[] = [];
         tiles.push(this.board()[point.floor][point.y - 1]?.[point.x]);
         tiles.push(this.board()[point.floor][point.y + 1]?.[point.x]);
         tiles.push(this.board()[point.floor][point.y]?.[point.x - 1]);
         tiles.push(this.board()[point.floor][point.y]?.[point.x + 1]);
-        return tiles.filter(t => t);
+        return tiles.filter(t => t && !avoidTiles.includes(t.type()));
     }
+
+    public findShortestPath(start: Point, goal: Point, avoidTiles: GameConstants.DungeonTileType[] = []) {
+        const pathing = [start];
+        const fromPos = {};
+        fromPos[`${start.x},${start.y}`] = null;
+        while (pathing.length > 0) {
+            const current = pathing.shift();
+            if (current.x === goal.x && current.y === goal.y) {
+                break;
+            }
+
+            const neighbors = this.nearbyTiles(current, avoidTiles);
+            const randNeighbors = Rand.shuffleArray(neighbors);
+            randNeighbors.forEach(neighbor => {
+                if (!fromPos[`${neighbor.position.x},${neighbor.position.y}`]) {
+                    pathing.push(neighbor.position);
+                    fromPos[`${neighbor.position.x},${neighbor.position.y}`] = current;
+                }
+            });
+        }
+
+        let current = goal;
+        const path = [];
+        while (current != undefined && (current.x !== start.x || current.y !== start.y)) {
+            path.unshift(current);
+            current = fromPos[`${current.x},${current.y}`];
+        }
+        return path;
+    }
+
 
     public hasAccessToTile(point: Point): boolean {
         // If player fighting/catching they cannot move right now
@@ -127,30 +157,30 @@ class DungeonMap {
 
             // Boss or ladder
             if (index == this.floorSizes.length - 1) {
-                mapList.push(new DungeonTile(GameConstants.DungeonTile.boss, null));
+                mapList.push(new DungeonTile(GameConstants.DungeonTileType.boss, null));
             } else {
-                mapList.push(new DungeonTile(GameConstants.DungeonTile.ladder, null));
+                mapList.push(new DungeonTile(GameConstants.DungeonTileType.ladder, null));
             }
 
             // Chests (leave 1 space for enemy and 1 space for entrance)
             for (let i = 0; i < size && mapList.length < size * size - 2; i++) {
-                mapList.push(new DungeonTile(GameConstants.DungeonTile.chest, this.generateChestLoot()));
+                mapList.push(new DungeonTile(GameConstants.DungeonTileType.chest, this.generateChestLoot()));
             }
 
             // Enemy Pokemon (leave 1 space for entrance)
             for (let i = 0; i < size * 2 + 3 && mapList.length < size * size - 1; i++) {
-                mapList.push(new DungeonTile(GameConstants.DungeonTile.enemy, null));
+                mapList.push(new DungeonTile(GameConstants.DungeonTileType.enemy, null));
             }
 
             // Fill with empty tiles (leave 1 space for entrance)
             for (let i: number = mapList.length; i < size * size - 1; i++) {
-                mapList.push(new DungeonTile(GameConstants.DungeonTile.empty, null));
+                mapList.push(new DungeonTile(GameConstants.DungeonTileType.empty, null));
             }
 
             // Shuffle the tiles randomly
             this.shuffle(mapList);
             // Then place the entrance tile
-            const entranceTile = new DungeonTile(GameConstants.DungeonTile.entrance, null);
+            const entranceTile = new DungeonTile(GameConstants.DungeonTileType.entrance, null);
             entranceTile.isVisible = true;
             entranceTile.isVisited = true;
             mapList.splice(mapList.length + 1 - Math.ceil(size / 2), 0, entranceTile);
@@ -162,7 +192,15 @@ class DungeonMap {
             }
             map.push(floor);
         });
-        return map;
+        // Map positions to each tile
+        return map.map((floor, floorIndex) => {
+            return floor.map((row, rowIndex) => {
+                return row.map((tile, tileIndex) => {
+                    tile.position = new Point(tileIndex, rowIndex, floorIndex);
+                    return tile;
+                });
+            });
+        });
     }
 
     /**

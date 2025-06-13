@@ -101,7 +101,6 @@ enum BadgeEnums {
     'Elite_Drasna',
     'Elite_KalosChampion',
     // Alola
-    // TODO: these are unordered and some may be missing
     'Melemele_Stamp',
     'Akala_Stamp',
     'Ula_Ula_Stamp',

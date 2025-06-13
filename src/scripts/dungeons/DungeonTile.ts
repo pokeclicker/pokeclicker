@@ -1,13 +1,14 @@
 type ChestMetaData = NonNullable<{loot: Loot, tier: LootTier}>
 
-class DungeonTile<T extends GameConstants.DungeonTile = GameConstants.DungeonTile> {
+class DungeonTile {
     _isVisible: boolean;
     _isVisited: boolean;
     _hasPlayer: boolean;
-    type: KnockoutObservable<GameConstants.DungeonTile>;
+    type: KnockoutObservable<GameConstants.DungeonTileType>;
     cssClass: KnockoutObservable<string>;
+    position: Point;
 
-    constructor(type: T, public metadata: T extends GameConstants.DungeonTile.chest ? ChestMetaData : unknown) {
+    constructor(type: GameConstants.DungeonTileType, public metadata: ChestMetaData | null = null) {
         this._isVisible = false;
         this._isVisited = false;
         this._hasPlayer = false;
@@ -59,9 +60,9 @@ class DungeonTile<T extends GameConstants.DungeonTile = GameConstants.DungeonTil
             css.push('tile-visited');
         }
         // Add the tile type class
-        css.push(`tile-${GameConstants.DungeonTile[this.type()]}`);
+        css.push(`tile-${GameConstants.DungeonTileType[this.type()]}`);
 
-        if (this.type() === GameConstants.DungeonTile.chest) {
+        if (this.type() === GameConstants.DungeonTileType.chest) {
             css.push(`tile-chest-${(this.metadata as ChestMetaData).tier}`);
         }
 

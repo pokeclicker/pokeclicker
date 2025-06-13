@@ -6,6 +6,7 @@ class BattleFrontierRunner {
     static stage: KnockoutObservable<number> = ko.observable(1); // Start at stage 1
     public static checkpoint: KnockoutObservable<number> = ko.observable(1); // Start at stage 1
     public static highest: KnockoutObservable<number> = ko.observable(1);
+    public static battleBackground: KnockoutObservable<GameConstants.BattleBackground> = ko.observable('Default');
 
     public static counter = 0;
 
@@ -36,6 +37,10 @@ class BattleFrontierRunner {
             }
         }
 
+        if (!useCheckpoint) {
+            BattleFrontierRunner.battleBackground('Default');
+        }
+
         this.started(true);
         this.stage(useCheckpoint ? this.checkpoint() : 1);
         this.highest(App.game.statistics.battleFrontierHighestStageCompleted());
@@ -60,6 +65,12 @@ class BattleFrontierRunner {
         BattleFrontierRunner.timeLeftPercentage(100);
 
         this.checkpoint(this.stage());
+
+        if (this.stage() % 25 == 0) {
+            const currentBackground = BattleFrontierRunner.battleBackground();
+            const backgrounds = Object.keys(GameConstants.BattleBackgrounds).filter((key) => key !== currentBackground);
+            BattleFrontierRunner.battleBackground(Rand.fromArray(backgrounds) as GameConstants.BattleBackground);
+        }
     }
 
     public static end() {

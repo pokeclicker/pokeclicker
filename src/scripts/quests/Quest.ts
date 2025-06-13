@@ -32,6 +32,7 @@ abstract class Quest {
     customReward?: () => void;
     optionalArgs?: QuestOptionalArgument;
     initialValue?: number;
+    parentQuestLine?: QuestLine;
 
     constructor(amount: number, pointsReward: number) {
         this.amount = isNaN(amount) ? 0 : amount;

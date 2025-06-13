@@ -80,4 +80,8 @@ class ShopHandler {
     }
 
     //#endregion
+
+    public static shortcutVisible: KnockoutComputed<boolean> = ko.pureComputed(() => {
+        return App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Lance')]() > 0;
+    });
 }

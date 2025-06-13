@@ -1,6 +1,6 @@
 <div class="modal noselect fade" id="pokemonStatisticsModal" tabindex="-1" role="dialog" aria-labelledby="pokemonStatisticsModal">
   <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal modal-sm" role="document">
-    <div class="modal-content" data-bind="with: App.game.statistics.selectedPokemonID()">
+    <div class="modal-content" data-bind="using: App.game.statistics.selectedPokemonID()">
       <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
         <h5 class="modal-title text-muted"
           data-bind="text: `#${pokemonMap[$data].id <= 0 ? '???' : Math.floor(pokemonMap[$data].id).toString().padStart(3,0)}&nbsp;&nbsp;`">
@@ -14,7 +14,11 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body p-0 pb-1">
+      <div class="modal-body bg-danger" data-bind="visible: $data <= 0">
+        <h4>This Pokémon should not be obtainable.</h4>
+        <h4>If you obtained it by accident, please report it as a bug.</h4>
+      </div>
+      <div class="modal-body p-0 pb-1" data-bind="visible: $data > 0">
         <div class="row m-0 mt-1">
           <div class="col">
             <img data-bind="attr:{ src: PokemonHelper.getImage(pokemonMap[$data].id) }" src=""/>
@@ -37,16 +41,12 @@
                 <tr>
                   <td class="text-left">Type</td>
                   <td class="text-left tight">
-                    <span class="badge text-light px-1" data-bind="visible: pokemonMap[$data].type[0] >= 0,
-                                style: { 'background-color': TypeColor[pokemonMap[$data].type[0]] }">
-                      <small><strong
-                          data-bind="text: PokemonType[pokemonMap[$data].type[0]].toUpperCase()"></strong></small>
-                    </span>
-                    <span class="badge text-light px-1" data-bind="if: pokemonMap[$data].type[1] >= 0,
-                                style: { 'background-color': TypeColor[pokemonMap[$data].type[1]] }">
-                      <small><strong
-                          data-bind="text: PokemonType[pokemonMap[$data].type[1]].toUpperCase()"></strong></small>
-                    </span>
+                      <span class="badge text-light text-uppercase px-1" style="line-height: normal; text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black;" data-bind="visible: pokemonMap[$data].type[0] >= 0, style: { 'background-color': GameConstants.TypeColor[pokemonMap[$data].type[0]] }">
+                          <small><strong data-bind="text: PokemonType[pokemonMap[$data].type[0]]"></strong></small>
+                      </span>
+                      <span class="badge text-light text-uppercase px-1" style="line-height: normal; text-shadow: 0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black;" data-bind="visible: pokemonMap[$data].type[1] >= 0, style: { 'background-color': GameConstants.TypeColor[pokemonMap[$data].type[1]] }">
+                          <small><strong data-bind="text: PokemonType[pokemonMap[$data].type[1]]"></strong></small>
+                      </span>
                   </td>
                 </tr>
                 <tr>
@@ -100,15 +100,27 @@
                 <tr>
                   <td class="text-left">Breeding Efficiency</td>
                   <td class="text-left tight"><code
-                      data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue(App.game.party.getPokemon(pokemonMap[$data].id)).toLocaleString('en-US', { maximumSignificantDigits: 2 })"></code>
+                      data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue(App.game.party.getPokemon(pokemonMap[$data].id)).toLocaleString('en-US', { maximumFractionDigits: 3 })"></code>
                   </td>
                 </tr>
                 <!-- /ko -->
                 <!-- ko if: BagHandler.displayName(pokemonMap[$data].heldItem) -->
                 <tr>
-                  <td class="text-left align-middle">Rare Hold Item</td>
-                  <td class="text-left tight text-wrap"><code
-                      data-bind="text: BagHandler.displayName(pokemonMap[$data].heldItem)"></code></td>
+                  <td class="text-left align-middle" data-bind="tooltip: {
+                    title: 'Item this Pokémon has a chance to drop upon being defeated.',
+                    placement: 'bottom',
+                    trigger: 'hover'
+                  }">Rare Hold Item</td>
+                  <td class="text-left tight text-wrap">
+                    <code data-bind="text: BagHandler.displayName(pokemonMap[$data].heldItem)"></code>
+                    <!-- ko ifnot: pokemonMap[$data].heldItem.requirement?.isCompleted() ?? true -->
+                    <span class="small" data-bind="tooltip: {
+                        title: pokemonMap[$data].heldItem.requirement.hint(),
+                        placement: 'bottom',
+                        trigger: 'hover'
+                    }">🔒</span>
+                    <!-- /ko -->
+                  </td>
                 </tr>
                 <!-- /ko -->
                 <tr>
@@ -178,7 +190,12 @@
                     <label class="form-check-label toggler-wrapper style-1 float-left">
                       <input class="form-check-input" type="checkbox" id="" value="false"
                         data-bind="checked: App.game.party.getPokemon($data).showShadowImage">
-                      <div class="toggler-slider">
+                      <div class="toggler-slider" data-bind="tooltip: {
+                        html: true,
+                        title: Settings.getSetting('partyShowPurifiedShadowSprites').observableValue() ?
+                            `<strong><u>${Settings.getSetting('partyShowPurifiedShadowSprites').displayName}</u></strong> is currently overriding this setting.` : '',
+                        trigger: 'hover',
+                      }">
                         <div class="toggler-knob"></div>
                       </div>
                     </label>
@@ -200,136 +217,49 @@
                 <tr>
                   <td class="text-left align-middle">Encountered</td>
                   <td class="text-left align-middle tight position-relative">
-                    <code
-                      data-bind="text: App.game.statistics.pokemonEncountered[$data]().toLocaleString('en-US')">-</code>
-                    <!-- Gender Statistics -->
-                    <!-- ko if: pokemonMap[$data].gender.type == GameConstants.Genders.MaleFemale && pokemonMap[$data].gender.femaleRatio != 0 && pokemonMap[$data].gender.femaleRatio != 1 -->
-                    <knockout data-bind="template: {
-                                  name: 'pokemonGenderStatisticTemplate',
-                                  data: {
-                                      'maleStat': App.game.statistics.malePokemonEncountered[$data](),
-                                      'femaleStat': App.game.statistics.femalePokemonEncountered[$data](),
-                                  }
-                              }">Pokémon gender statistic</knockout>
-                    <!-- /ko -->
+                    <code data-bind="text: App.game.statistics.pokemonEncountered[$data]().toLocaleString('en-US')">-</code>
                   </td>
                 </tr>
                 <tr>
                   <td class="text-left align-middle">Defeated</td>
                   <td class="text-left align-middle tight position-relative">
-                    <code
-                      data-bind="text: App.game.statistics.pokemonDefeated[$data]().toLocaleString('en-US')">-</code>
-                    <!-- Gender Statistics -->
-                    <!-- ko if: pokemonMap[$data].gender.type == GameConstants.Genders.MaleFemale && pokemonMap[$data].gender.femaleRatio != 0 && pokemonMap[$data].gender.femaleRatio != 1 -->
-                    <knockout data-bind="template: {
-                                  name: 'pokemonGenderStatisticTemplate',
-                                  data: {
-                                      'maleStat': App.game.statistics.malePokemonDefeated[$data](),
-                                      'femaleStat': App.game.statistics.femalePokemonDefeated[$data](),
-                                  }
-                              }">Pokémon gender statistic</knockout>
-                    <!-- /ko -->
+                    <code data-bind="text: App.game.statistics.pokemonDefeated[$data]().toLocaleString('en-US')">-</code>
                   </td>
                 </tr>
                 <tr>
                   <td class="text-left align-middle">Captured</td>
                   <td class="text-left align-middle tight position-relative">
-                    <code
-                      data-bind="text: App.game.statistics.pokemonCaptured[$data]().toLocaleString('en-US')">-</code>
-                    <!-- Gender Statistics -->
-                    <!-- ko if: pokemonMap[$data].gender.type == GameConstants.Genders.MaleFemale && pokemonMap[$data].gender.femaleRatio != 0 && pokemonMap[$data].gender.femaleRatio != 1 -->
-                    <knockout data-bind="template: {
-                                  name: 'pokemonGenderStatisticTemplate',
-                                  data: {
-                                      'maleStat': App.game.statistics.malePokemonCaptured[$data](),
-                                      'femaleStat': App.game.statistics.femalePokemonCaptured[$data](),
-                                  }
-                              }">Pokémon gender statistic</knockout>
-                    <!-- /ko -->
+                    <code data-bind="text: App.game.statistics.pokemonCaptured[$data]().toLocaleString('en-US')">-</code>
                   </td>
                 </tr>
                 <tr>
                   <td class="text-left align-middle">Hatched</td>
                   <td class="text-left align-middle tight position-relative">
                     <code data-bind="text: App.game.statistics.pokemonHatched[$data]().toLocaleString('en-US')">-</code>
-                    <!-- Gender Statistics -->
-                    <!-- ko if: pokemonMap[$data].gender.type == GameConstants.Genders.MaleFemale && pokemonMap[$data].gender.femaleRatio != 0 && pokemonMap[$data].gender.femaleRatio != 1 -->
-                    <knockout data-bind="template: {
-                                  name: 'pokemonGenderStatisticTemplate',
-                                  data: {
-                                      'maleStat': App.game.statistics.malePokemonHatched[$data](),
-                                      'femaleStat': App.game.statistics.femalePokemonHatched[$data](),
-                                  }
-                              }">Pokémon gender statistic</knockout>
-                    <!-- /ko -->
                   </td>
                 </tr>
                 <tr>
                   <td class="text-left align-middle">Shinies Encountered</td>
                   <td class="text-left align-middle tight position-relative">
-                    <code
-                      data-bind="text: App.game.statistics.shinyPokemonEncountered[$data]().toLocaleString('en-US')">-</code>
-                    <!-- Gender Statistics -->
-                    <!-- ko if: pokemonMap[$data].gender.type == GameConstants.Genders.MaleFemale && pokemonMap[$data].gender.femaleRatio != 0 && pokemonMap[$data].gender.femaleRatio != 1 -->
-                    <knockout data-bind="template: {
-                                  name: 'pokemonGenderStatisticTemplate',
-                                  data: {
-                                      'maleStat': App.game.statistics.shinyMalePokemonEncountered[$data](),
-                                      'femaleStat': App.game.statistics.shinyFemalePokemonEncountered[$data](),
-                                  }
-                              }">Pokémon gender statistic</knockout>
-                    <!-- /ko -->
+                    <code data-bind="text: App.game.statistics.shinyPokemonEncountered[$data]().toLocaleString('en-US')">-</code>
                   </td>
                 </tr>
                 <tr>
                   <td class="text-left align-middle">Shinies Defeated</td>
                   <td class="text-left align-middle tight position-relative">
-                    <code
-                      data-bind="text: App.game.statistics.shinyPokemonDefeated[$data]().toLocaleString('en-US')">-</code>
-                    <!-- Gender Statistics -->
-                    <!-- ko if: pokemonMap[$data].gender.type == GameConstants.Genders.MaleFemale && pokemonMap[$data].gender.femaleRatio != 0 && pokemonMap[$data].gender.femaleRatio != 1 -->
-                    <knockout data-bind="template: {
-                                  name: 'pokemonGenderStatisticTemplate',
-                                  data: {
-                                      'maleStat': App.game.statistics.shinyMalePokemonDefeated[$data](),
-                                      'femaleStat': App.game.statistics.shinyFemalePokemonDefeated[$data](),
-                                  }
-                              }">Pokémon gender statistic</knockout>
-                    <!-- /ko -->
+                    <code data-bind="text: App.game.statistics.shinyPokemonDefeated[$data]().toLocaleString('en-US')">-</code>
                   </td>
                 </tr>
                 <tr>
                   <td class="text-left align-middle">Shinies Captured</td>
                   <td class="text-left align-middle tight position-relative">
-                    <code
-                      data-bind="text: App.game.statistics.shinyPokemonCaptured[$data]().toLocaleString('en-US')">-</code>
-                    <!-- Gender Statistics -->
-                    <!-- ko if: pokemonMap[$data].gender.type == GameConstants.Genders.MaleFemale && pokemonMap[$data].gender.femaleRatio != 0 && pokemonMap[$data].gender.femaleRatio != 1 -->
-                    <knockout data-bind="template: {
-                                  name: 'pokemonGenderStatisticTemplate',
-                                  data: {
-                                      'maleStat': App.game.statistics.shinyMalePokemonCaptured[$data](),
-                                      'femaleStat': App.game.statistics.shinyFemalePokemonCaptured[$data](),
-                                  }
-                              }">Pokémon gender statistic</knockout>
-                    <!-- /ko -->
+                    <code data-bind="text: App.game.statistics.shinyPokemonCaptured[$data]().toLocaleString('en-US')">-</code>
                   </td>
                 </tr>
                 <tr>
                   <td class="text-left align-middle">Shinies Hatched</td>
                   <td class="text-left align-middle tight position-relative">
-                    <code
-                      data-bind="text: App.game.statistics.shinyPokemonHatched[$data]().toLocaleString('en-US')">-</code>
-                    <!-- Gender Statistics -->
-                    <!-- ko if: pokemonMap[$data].gender.type == GameConstants.Genders.MaleFemale && pokemonMap[$data].gender.femaleRatio != 0 && pokemonMap[$data].gender.femaleRatio != 1 -->
-                    <knockout data-bind="template: {
-                                  name: 'pokemonGenderStatisticTemplate',
-                                  data: {
-                                      'maleStat': App.game.statistics.shinyMalePokemonHatched[$data](),
-                                      'femaleStat': App.game.statistics.shinyFemalePokemonHatched[$data](),
-                                  }
-                              }">Pokémon gender statistic</knockout>
-                    <!-- /ko -->
+                    <code data-bind="text: App.game.statistics.shinyPokemonHatched[$data]().toLocaleString('en-US')">-</code>
                   </td>
                 </tr>
               </tbody>

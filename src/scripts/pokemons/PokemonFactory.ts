@@ -1,6 +1,4 @@
 ///<reference path="../../declarations/globals.d.ts"/>
-///<reference path="PokemonHelper.ts"/>
-///<reference path="BattlePokemon.ts"/>
 
 class PokemonFactory {
 
@@ -36,16 +34,16 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const level: number = this.routeLevel(route, region);
-        const heldItem: BagItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROUTE_HELD_ITEM_MODIFIER);
         const money: number = this.routeMoney(route,region);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        const heldItem: BagItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROUTE_HELD_ITEM_MODIFIER, shiny);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const encounterType = roaming ? EncounterType.roamer : EncounterType.route;
 
         if (shiny) {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
-                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender),
+                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender, GameConstants.ShadowStatus.None),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
@@ -54,7 +52,7 @@ class PokemonFactory {
         if (roaming) {
             Notifier.notify({
                 message: `You encountered a roaming ${name}!`,
-                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender),
+                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender, GameConstants.ShadowStatus.None),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.roaming,
                 setting: NotificationConstants.NotificationSetting.General.encountered_roaming,
@@ -67,7 +65,7 @@ class PokemonFactory {
                         : createLogContent.roamerShiny
                     : createLogContent.roamer
                 )({
-                    location: Routes.getRoute(player.region, player.route()).routeName,
+                    location: Routes.getRoute(player.region, player.route).routeName,
                     pokemon: name,
                 })
             );
@@ -152,13 +150,13 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const money = 0;
-        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_HELD_ITEM_MODIFIER);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
+        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_HELD_ITEM_MODIFIER, shiny);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         if (shiny) {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
-                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender),
+                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender, GameConstants.ShadowStatus.None),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
@@ -170,12 +168,12 @@ class PokemonFactory {
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, gender, GameConstants.ShadowStatus.None, et, heldItem, ep);
     }
 
-    public static generateDungeonTrainerPokemon(pokemon: GymPokemon, chestsOpened: number, baseHealth: number, level: number, isBoss: boolean): BattlePokemon {
+    public static generateDungeonTrainerPokemon(pokemon: GymPokemon, chestsOpened: number, baseHealth: number, level: number, isBoss: boolean, trainerPokemon = 1): BattlePokemon {
         const name = pokemon.name;
         const basePokemon = PokemonHelper.getPokemonByName(name);
-        const maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)));
+        const maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)) / (isBoss ? 1 : trainerPokemon ** 0.75));
         const exp: number = basePokemon.exp;
-        const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
+        const shiny: boolean = pokemon.shiny ? pokemon.shiny : this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         // Reward 2% or 5% (boss) of dungeon DT cost when the trainer mons are defeated
         const money = 0;
@@ -193,13 +191,13 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const money = 0;
-        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_BOSS_HELD_ITEM_MODIFIER);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
+        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_BOSS_HELD_ITEM_MODIFIER, shiny);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         if (shiny) {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
-                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender),
+                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender, GameConstants.ShadowStatus.None),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
@@ -236,10 +234,10 @@ class PokemonFactory {
     private static roamingEncounter(routeNum: number, region: GameConstants.Region, subRegion: SubRegion): boolean {
         // Map to the route numbers
         const route = Routes.getRoute(region, routeNum);
-        const routes = Routes.getRoutesByRegion(region).map(r => MapHelper.normalizeRoute(r.number, region));
+        const routes = Routes.getRoutesByRegion(region).filter(r => RoamingPokemonList.findGroup(region, r.subRegion || 0) == RoamingPokemonList.findGroup(region, subRegion.id));
 
         // Check if the dice rolls in their favor
-        const encounter = PokemonFactory.roamingChance(Math.max(...routes), Math.min(...routes), route, region, subRegion);
+        const encounter = PokemonFactory.roamingChance(route, routes, region, subRegion);
         if (!encounter) {
             return false;
         }
@@ -254,12 +252,13 @@ class PokemonFactory {
         return true;
     }
 
-    private static roamingChance(maxRoute: number, minRoute: number, curRoute: RegionRoute, region: GameConstants.Region, subRegion: SubRegion, max = GameConstants.ROAMING_MAX_CHANCE, min = GameConstants.ROAMING_MIN_CHANCE, skipBonus = false) {
+    private static roamingChance(curRoute: RegionRoute, allRoutes: RegionRoute[], region: GameConstants.Region, subRegion: SubRegion, max = GameConstants.ROAMING_MAX_CHANCE, min = GameConstants.ROAMING_MIN_CHANCE, skipBonus = false) {
         const bonus = skipBonus ? 1 : App.game.multiplier.getBonus('roaming');
-        const routeNum = MapHelper.normalizeRoute(curRoute?.number, region);
+        const maxRoute = allRoutes.length - 1;
+        const routeInd = allRoutes.indexOf(curRoute);
         // Check if we should have increased chances on this route (3 x rate)
         const increasedChance = RoamingPokemonList.getIncreasedChanceRouteBySubRegionGroup(player.region, RoamingPokemonList.findGroup(region, subRegion.id))()?.number == curRoute?.number;
-        const roamingChance = (max + ( (min - max) * (maxRoute - routeNum) / (maxRoute - minRoute))) / ((increasedChance ? 3 : 1) * bonus);
+        const roamingChance = (max + ((min - max) * (maxRoute - routeInd) / (maxRoute))) / ((increasedChance ? GameConstants.ROAMING_INCREASED_CHANCE : 1) * bonus);
         return Rand.chance(roamingChance);
     }
 
@@ -269,9 +268,17 @@ class PokemonFactory {
         return GameConstants.clipNumber(catchRateRaw, 0, 100);
     }
 
-    private static generateHeldItem(item: BagItem, modifier: number): BagItem | null {
+    private static generateHeldItem(item: BagItem, modifier: number, shiny: boolean): BagItem | null {
         if (!item || !BagHandler.displayName(item)) {
             return null;
+        }
+
+        if (!(item.requirement?.isCompleted() ?? true)) {
+            return null;
+        }
+
+        if (shiny) {
+            return item;
         }
 
         let chance = GameConstants.HELD_ITEM_CHANCE;
@@ -297,6 +304,9 @@ class PokemonFactory {
             case 'Pure_light':
                 chance = GameConstants.LIGHT_ITEM_CHANCE;
                 break;
+            case 'Crystallized_shadow':
+                chance = GameConstants.SHADOW_ITEM_CHANCE;
+                break;
             case 'Rusted_Sword':
             case 'Rusted_Shield':
                 chance = GameConstants.RUST_ITEM_CHANCE;
@@ -305,11 +315,15 @@ class PokemonFactory {
             case 'White_mane_hair':
                 chance = GameConstants.MANE_ITEM_CHANCE;
                 break;
+            case 'Magikarp_Biscuit':
+                chance = GameConstants.HELD_MAGIKARP_BISCUIT;
+                break;
             case 'Rare_Candy':
                 chance = GameConstants.HELD_CANDY_ITEM_CHANCE;
                 break;
             case 'Christmas_present':
                 chance = GameConstants.CHRISTMAS_ITEM_CHANCE;
+                break;
         }
 
         chance /= modifier;

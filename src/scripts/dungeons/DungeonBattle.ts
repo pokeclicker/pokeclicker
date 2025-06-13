@@ -1,5 +1,4 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
-/// <reference path="../Battle.ts" />
 
 class DungeonBattle extends Battle {
 
@@ -48,14 +47,14 @@ class DungeonBattle extends Battle {
         player.lowerItemMultipliers(MultiplierDecreaser.Battle);
 
         // Clearing Dungeon tile
-        DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
+        DungeonRunner.map.currentTile().type(GameConstants.DungeonTileType.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
 
         // Attempting to catch Pokemon
         const isShiny: boolean = enemyPokemon.shiny;
         const isShadow: boolean = enemyPokemon.shadow == GameConstants.ShadowStatus.Shadow;
         const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny, isShadow, enemyPokemon.encounterType);
-        const route = player.town()?.dungeon?.difficultyRoute || 1;
+        const route = player.town?.dungeon?.difficultyRoute || 1;
         const region = player.region;
         if (pokeBall !== GameConstants.Pokeball.None) {
             this.prepareCatch(enemyPokemon, pokeBall);
@@ -89,7 +88,7 @@ class DungeonBattle extends Battle {
             const isShiny: boolean = enemyPokemon.shiny;
             const isShadow: boolean = enemyPokemon.shadow == GameConstants.ShadowStatus.Shadow;
             const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny, isShadow, enemyPokemon.encounterType);
-            const route = player.town()?.dungeon?.difficultyRoute || 1;
+            const route = player.town?.dungeon?.difficultyRoute || 1;
             const region = player.region;
             if (pokeBall !== GameConstants.Pokeball.None) {
                 this.prepareCatch(enemyPokemon, pokeBall);
@@ -135,7 +134,7 @@ class DungeonBattle extends Battle {
             this.trainerPokemonIndex(0);
 
             // Clearing Dungeon tile
-            DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
+            DungeonRunner.map.currentTile().type(GameConstants.DungeonTileType.empty);
             DungeonRunner.map.currentTile().calculateCssClass();
 
             // Update boss
@@ -168,11 +167,11 @@ class DungeonBattle extends Battle {
                     LogBookTypes.SHINY,
                     App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id, true)
                         ? createLogContent.encounterShinyDupe({
-                            location: player.town().dungeon.name,
+                            location: player.town.dungeon.name,
                             pokemon: this.enemyPokemon().name,
                         })
                         : createLogContent.encounterShiny({
-                            location: player.town().dungeon.name,
+                            location: player.town.dungeon.name,
                             pokemon: this.enemyPokemon().name,
                         })
                 );
@@ -180,7 +179,7 @@ class DungeonBattle extends Battle {
                 App.game.logbook.newLog(
                     LogBookTypes.NEW,
                     createLogContent.encounterWild({
-                        location: player.town().dungeon.name,
+                        location: player.town.dungeon.name,
                         pokemon: this.enemyPokemon().name,
                     })
                 );
@@ -210,11 +209,11 @@ class DungeonBattle extends Battle {
                 LogBookTypes.SHINY,
                 App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id, true)
                     ? createLogContent.encounterShinyDupe({
-                        location: player.town().dungeon.name,
+                        location: player.town.dungeon.name,
                         pokemon: this.enemyPokemon().name,
                     })
                     : createLogContent.encounterShiny({
-                        location: player.town().dungeon.name,
+                        location: player.town.dungeon.name,
                         pokemon: this.enemyPokemon().name,
                     })
             );
@@ -222,7 +221,7 @@ class DungeonBattle extends Battle {
             App.game.logbook.newLog(
                 LogBookTypes.NEW,
                 createLogContent.encounterWild({
-                    location: player.town().dungeon.name,
+                    location: player.town.dungeon.name,
                     pokemon: this.enemyPokemon().name,
                 })
             );
@@ -239,7 +238,7 @@ class DungeonBattle extends Battle {
         const pokemon = this.trainer().getTeam()[this.trainerPokemonIndex()];
         const baseHealth = DungeonRunner.fightingBoss() ? pokemon.maxHealth : DungeonRunner.dungeon.baseHealth;
         const level = DungeonRunner.fightingBoss() ? pokemon.level : DungeonRunner.dungeonLevel();
-        const enemyPokemon = PokemonFactory.generateDungeonTrainerPokemon(pokemon, DungeonRunner.chestsOpened(), baseHealth, level, DungeonRunner.fightingBoss());
+        const enemyPokemon = PokemonFactory.generateDungeonTrainerPokemon(pokemon, DungeonRunner.chestsOpened(), baseHealth, level, DungeonRunner.fightingBoss(), this.trainer().getTeam().length);
 
         this.enemyPokemon(enemyPokemon);
     }
@@ -261,11 +260,11 @@ class DungeonBattle extends Battle {
                     LogBookTypes.SHINY,
                     App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id, true)
                         ? createLogContent.encounterShinyDupe({
-                            location: player.town().dungeon.name,
+                            location: player.town.dungeon.name,
                             pokemon: this.enemyPokemon().name,
                         })
                         : createLogContent.encounterShiny({
-                            location: player.town().dungeon.name,
+                            location: player.town.dungeon.name,
                             pokemon: this.enemyPokemon().name,
                         })
                 );
@@ -273,7 +272,7 @@ class DungeonBattle extends Battle {
                 App.game.logbook.newLog(
                     LogBookTypes.NEW,
                     createLogContent.encounterWild({
-                        location: player.town().dungeon.name,
+                        location: player.town.dungeon.name,
                         pokemon: this.enemyPokemon().name,
                     })
                 );

@@ -3,7 +3,7 @@
 ko.options.deferUpdates = true;
 
 /**
- * TODO(@Isha) refactor this to no longer be global but App properties.
+ * TODO refactor this to no longer be global but App properties.
  * Will be done after the major player refactor.
  */
 let player;
@@ -13,8 +13,7 @@ let player;
  */
 document.addEventListener('DOMContentLoaded', () => {
     try {
-        const settings = localStorage.getItem('settings');
-        Settings.fromJSON(JSON.parse(settings));
+        Settings.loadDefault();
         document.body.className = `no-select ${Settings.getSetting('theme').observableValue()} ${Settings.getSetting('backgroundImage').observableValue()}`;
         (document.getElementById('theme-link') as HTMLLinkElement).href = `https://bootswatch.com/4/${Settings.getSetting('theme').observableValue()}/bootstrap.min.css`;
 

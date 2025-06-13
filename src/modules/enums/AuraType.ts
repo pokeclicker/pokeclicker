@@ -10,7 +10,6 @@ enum AuraType {
     Boost,
     Roaming,
     Ev,
-    Repel,
     Decay,
     Xp,
 }

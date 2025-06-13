@@ -9,7 +9,7 @@ import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
 
 export default class GemDeals {
-    public static list: Record<GemShops, KnockoutObservableArray<GemDeal>> = {
+    public static list: Partial<Record<GemShops, KnockoutObservableArray<GemDeal>>> = {
         ...GemDealList, // static deals
     };
 

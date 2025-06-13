@@ -1,6 +1,6 @@
 ///<reference path="../../declarations/globals.d.ts"/>
 
-declare const modalUtils: { observableState: typeof observableState };
+declare const DisplayObservables: { modalState: typeof modalState };
 
 class PartyController {
 
@@ -154,9 +154,9 @@ class PartyController {
     }).extend({ rateLimit: 500 });
 
     private static vitaminSortedList = [];
-    static getvitaminSortedList = ko.pureComputed(() => {
+    static getVitaminSortedList = ko.pureComputed(() => {
         // If the vitamin modal is open, we should sort it.
-        if (modalUtils.observableState.pokemonVitaminModal === 'show' || modalUtils.observableState.pokemonVitaminExpandedModal === 'show') {
+        if (DisplayObservables.modalState.pokemonVitaminExpandedModal === 'show') {
             PartyController.vitaminSortedList = PartyController.getVitaminFilteredList();
             return PartyController.vitaminSortedList.sort(PartyController.compareBy(Settings.getSetting('vitaminSort').observableValue(), Settings.getSetting('vitaminSortDirection').observableValue()));
         }
@@ -164,8 +164,11 @@ class PartyController {
     }).extend({ rateLimit: 100 });
 
     static getVitaminFilteredList(): Array<PartyPokemon> {
-        return [...App.game.party.caughtPokemon].filter((pokemon) => {
-            if (!new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(pokemon.displayName)) {
+        return App.game.party.caughtPokemon.filter((pokemon) => {
+            if (pokemon.id <= 0) {
+                return false;
+            }
+            if (!(Settings.getSetting('vitaminSearchFilter') as SearchSetting).regex().test(pokemon.displayName)) {
                 return false;
             }
             if (Settings.getSetting('vitaminRegionFilter').observableValue() > -2) {
@@ -191,7 +194,7 @@ class PartyController {
     private static heldItemSortedList = [];
     static getHeldItemSortedList = ko.pureComputed(() => {
         // If the held item modal is open, we should sort it.
-        if (modalUtils.observableState.heldItemModal === 'show') {
+        if (DisplayObservables.modalState.heldItemModal === 'show') {
             PartyController.heldItemSortedList = PartyController.getHeldItemFilteredList();
             return PartyController.heldItemSortedList.sort(PartyController.compareBy(Settings.getSetting('heldItemSort').observableValue(), Settings.getSetting('heldItemSortDirection').observableValue()));
         }
@@ -199,26 +202,43 @@ class PartyController {
     }).extend({ rateLimit: 100 });
 
     static getHeldItemFilteredList(): Array<PartyPokemon> {
-        return [...App.game.party.caughtPokemon].filter((pokemon) => {
+        return App.game.party.caughtPokemon.filter((pokemon) => {
+            if (pokemon.id <= 0) {
+                return false;
+            }
             if (!HeldItem.heldItemSelected()?.canUse(pokemon)) {
                 return false;
             }
-            if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(pokemon.displayName)) {
+
+            const testString = Settings.getSetting('heldItemDropdownPokemonOrItem').observableValue() === 'pokemon'
+                ? pokemon.displayName : pokemon.heldItem()?.displayName;
+            if (!(Settings.getSetting('heldItemSearchFilter') as SearchSetting).regex().test(testString)) {
                 return false;
             }
+
             if (Settings.getSetting('heldItemRegionFilter').observableValue() > -2) {
                 if (PokemonHelper.calcNativeRegion(pokemon.name) !== Settings.getSetting('heldItemRegionFilter').observableValue()) {
                     return false;
                 }
             }
-            const type = Settings.getSetting('heldItemTypeFilter').observableValue();
-            if (type > -2 && !pokemonMap[pokemon.name].type.includes(type)) {
-                return false;
+            const type1 = Settings.getSetting('heldItemTypeFilter').observableValue();
+            const type2 = Settings.getSetting('heldItemType2Filter').observableValue();
+            if (type1 !== -2 || type2 !== -2) {
+                const { type: types } = pokemonMap[pokemon.name];
+                if ([type1, type2].includes(PokemonType.None)) {
+                    const type = (type1 == PokemonType.None) ? type2 : type1;
+                    if (!BreedingController.isPureType(pokemon, type === -2 ? null : type)) {
+                        return false;
+                    }
+                } else if ((type1 !== -2 && !types.includes(type1)) || (type2 !== -2 && !types.includes(type2))) {
+                    return false;
+                }
             }
+
             if (Settings.getSetting('heldItemHideHoldingPokemon').observableValue() && pokemon.heldItem()) {
                 return false;
             }
-            if (Settings.getSetting('heldItemShowHoldingThisItem').observableValue() && pokemon.heldItem() !== HeldItem.heldItemSelected()) {
+            if (Settings.getSetting('heldItemHideHoldingThisItem').observableValue() && pokemon.heldItem() === HeldItem.heldItemSelected()) {
                 return false;
             }
 
@@ -229,7 +249,7 @@ class PartyController {
     private static consumableSortedList = [];
     static getConsumableSortedList = ko.pureComputed(() => {
         // If the consumable modal is open, we should sort it.
-        if (modalUtils.observableState.consumableModal === 'show') {
+        if (DisplayObservables.modalState.consumableModal === 'show') {
             PartyController.consumableSortedList = PartyController.getConsumableFilteredList();
             return PartyController.consumableSortedList.sort(PartyController.compareBy(Settings.getSetting('consumableSort').observableValue(), Settings.getSetting('consumableSortDirection').observableValue()));
         }
@@ -237,8 +257,15 @@ class PartyController {
     }).extend({ rateLimit: 100 });
 
     static getConsumableFilteredList(): Array<PartyPokemon> {
-        return [...App.game.party.caughtPokemon].filter((pokemon) => {
-            if (!new RegExp(Settings.getSetting('consumableSearchFilter').observableValue() , 'i').test(pokemon.displayName)) {
+        return App.game.party.caughtPokemon.filter((pokemon) => {
+            if (pokemon.id <= 0) {
+                return false;
+            }
+            const consumable = ItemList[ConsumableController.currentlySelectedName()] as Consumable;
+            if (!consumable.canUse(pokemon)) {
+                return false;
+            }
+            if (!(Settings.getSetting('consumableSearchFilter') as SearchSetting).regex().test(pokemon.displayName)) {
                 return false;
             }
             if (Settings.getSetting('consumableRegionFilter').observableValue() > -2) {
@@ -258,17 +285,6 @@ class PartyController {
         });
     }
 
-    private static pokemonsWithHeldItemSortedList = [];
-    static getPokemonsWithHeldItemSortedList = ko.pureComputed(() => {
-        // If the held item modal is open, we should sort it.
-        if (modalUtils.observableState.heldItemModal === 'show') {
-            PartyController.pokemonsWithHeldItemSortedList = [...App.game.party.caughtPokemon.filter(p => p.heldItem())];
-            return PartyController.pokemonsWithHeldItemSortedList.sort(PartyController.compareBy(Settings.getSetting('heldItemSort').observableValue(), Settings.getSetting('heldItemSortDirection').observableValue()));
-        }
-        return PartyController.pokemonsWithHeldItemSortedList;
-    }).extend({ rateLimit: 500 });
-
-
     public static calculateRegionalMultiplier(pokemon: PartyPokemon, region: number): number {
         if (region > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== region) {
             return App.game.party.getRegionAttackMultiplier();
@@ -279,6 +295,10 @@ class PartyController {
     public static moveCategoryPokemon(fromCategory: number, toCategory: number) {
         // Category should exist
         if (!PokemonCategories.categories().some((c) => c.id === toCategory)) {
+            return;
+        }
+
+        if (fromCategory === toCategory) {
             return;
         }
 

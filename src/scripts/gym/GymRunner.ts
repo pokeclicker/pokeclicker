@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/enums/Badges.d.ts" />
 
@@ -112,10 +113,15 @@ class GymRunner {
 
             // Auto restart gym battle
             if (GymRunner.autoRestart()) {
-                const cost = (GymRunner.gymObservable().moneyReward || 10) * 2;
+                const clears = App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym.town)]();
+                const cost = clears >= 100 ? 0 : (GymRunner.gymObservable().moneyReward || 10) * 2;
                 const amt = new Amount(cost, GameConstants.Currency.money);
+                const reward = GymRunner.gymObservable().autoRestartReward();
                 // If the player can afford it, restart the gym
-                if (App.game.wallet.loseAmount(amt)) {
+                if (cost === 0 || App.game.wallet.loseAmount(amt)) {
+                    if (reward > 0) {
+                        App.game.wallet.gainMoney(reward);
+                    }
                     GymRunner.startGym(GymRunner.gymObservable(), GymRunner.autoRestart(), false);
                     return;
                 }
@@ -137,6 +143,11 @@ class GymRunner {
         return gym.optionalArgs.environment;
     }
 
+    public static getBattleBackgroundImage() {
+        const gym = GymRunner.gymObservable();
+        return gym.optionalArgs.battleBackground;
+    }
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -149,3 +160,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+GymRunner satisfies TmpGymRunnerType;

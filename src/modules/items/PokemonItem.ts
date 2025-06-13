@@ -1,8 +1,8 @@
-import CaughtIndicatingItem from './CaughtIndicatingItem';
+import PokerusIndicatingItem from './PokerusIndicatingItem';
 import { PokemonNameType } from  '../pokemons/PokemonNameType';
 import CaughtStatus from '../enums/CaughtStatus';
 import { Computed as KnockoutComputed } from 'knockout';
-import { Currency, SHINY_CHANCE_SHOP, SHOPMON_EP_YIELD, ShadowStatus, PokemonStatisticsType, Pokerus, BattlePokemonGender } from '../GameConstants';
+import { Currency, SHINY_CHANCE_SHOP, SHOPMON_EP_YIELD, ShadowStatus, PokemonStatisticsType, Pokerus } from '../GameConstants';
 import { ShopOptions } from './types';
 import * as PokemonHelper from '../pokemons/PokemonHelper';
 import GameHelper from '../GameHelper';
@@ -11,29 +11,19 @@ import Notifier from '../notifications/Notifier';
 import { createLogContent } from '../logbook/helpers';
 import { LogBookTypes } from '../logbook/LogBookTypes';
 
-// TODO remove this when PokemonFactory is moved to modules
-declare class PokemonFactory {
-    static generateShiny(chance: number, skipBonus?: boolean): boolean;
-    static generateGenderById(id: number): BattlePokemonGender;
-}
-// TODO remove this when PartyController is moved to modules
-declare class PartyController {
-    static getCaughtStatusByName: (name: PokemonNameType) => CaughtStatus;
-    static getPokerusStatusByName: (name: PokemonNameType) => Pokerus;
-}
-
-export default class PokemonItem extends CaughtIndicatingItem {
+export default class PokemonItem extends PokerusIndicatingItem {
     type: PokemonNameType;
     private _translatedOrDisplayName: KnockoutComputed<string>;
 
     constructor(
         pokemon: PokemonNameType,
-        basePrice: number,
+        basePrice: number = undefined,
         currency: Currency = Currency.questPoint,
         public ignoreEV = false,
         displayName: string = undefined,
         options?: ShopOptions,
-        name: string = pokemon) {
+        name: string = pokemon,
+    ) {
         super(name, basePrice, currency, options, undefined, `Add ${pokemon} to your party.`, 'pokemonItem');
         this.type = pokemon;
         this._translatedOrDisplayName = ko.pureComputed(() => displayName ?? PokemonHelper.displayName(pokemon)());
@@ -54,8 +44,8 @@ export default class PokemonItem extends CaughtIndicatingItem {
             // Statistics
             if (i < amt - 1) { // -1 because gainPokemonById will add 1 to statistics
                 const gender = PokemonFactory.generateGenderById(pokemonID);
-                const shadow = ShadowStatus.None;
-                PokemonHelper.incrementPokemonStatistics(pokemonID, PokemonStatisticsType.Captured, shinyBool, gender, shadow);
+                const shinyStatistic = shinyBool && numShiny > 1;
+                PokemonHelper.incrementPokemonStatistics(pokemonID, PokemonStatisticsType.Captured, shinyStatistic, gender, ShadowStatus.None);
             }
         }
 
@@ -63,7 +53,7 @@ export default class PokemonItem extends CaughtIndicatingItem {
             const newCatch = !(shiny && App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true));
             Notifier.notify({
                 message: `${(shiny) ? `✨ You obtained a shiny ${pokemonName}! ✨` : `You obtained ${GameHelper.anOrA(pokemonName)} ${pokemonName}!`}`,
-                pokemonImage: PokemonHelper.getImage(pokemonID, shiny),
+                pokemonImage: PokemonHelper.getImage(pokemonID, shiny, undefined, ShadowStatus.None),
                 type: (shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success),
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: (newCatch ? NotificationConstants.NotificationSound.General.new_catch : null),
@@ -91,6 +81,15 @@ export default class PokemonItem extends CaughtIndicatingItem {
 
     getPokerusStatus(): Pokerus {
         return PartyController.getPokerusStatusByName(this.type);
+    }
+
+    getPokerusProgress(): string {
+        const evs = PartyController.getEvsByName(this.type);
+        return evs >= 50 ? 'Already resistant!' : `EVs: ${evs.toLocaleString('en-US')} / 50`;
+    }
+
+    showBagAmount() {
+        return false;
     }
 
     get image() {

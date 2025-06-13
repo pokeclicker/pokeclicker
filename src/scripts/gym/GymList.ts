@@ -156,7 +156,7 @@ GymList['Elite Lorelei'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Earth)],
     undefined,
     undefined,
-    { environment: 'Ice' }
+    { battleBackground: 'Ice' }
 );
 GymList['Elite Bruno'] = new Gym(
     'Bruno',
@@ -174,7 +174,7 @@ GymList['Elite Bruno'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Lorelei)],
     undefined,
     undefined,
-    { environment: 'Cave' }
+    { battleBackground: 'Cave' }
 );
 GymList['Elite Agatha'] = new Gym(
     'Agatha',
@@ -192,7 +192,7 @@ GymList['Elite Agatha'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Bruno)],
     undefined,
     undefined,
-    { environment: 'Graveyard' }
+    { battleBackground: 'Graveyard' }
 );
 GymList['Elite Lance'] = new Gym(
     'Lance',
@@ -210,7 +210,7 @@ GymList['Elite Lance'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Agatha)],
     undefined,
     undefined,
-    { environment: 'GemCave' }
+    { battleBackground: 'GemCave' }
 );
 // Kanto Champion
 GymList['Champion Blue'] = new Gym(
@@ -239,7 +239,7 @@ GymList['Champion Blue'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Lance)],
     () => {},
     { champion: true },
-    { environment: 'GemCave' }
+    { battleBackground: 'GemCave' }
 );
 
 //Johto Gyms
@@ -251,7 +251,7 @@ GymList['Violet City'] = new Gym(
         new GymPokemon('Pidgeotto', 112000, 9),
     ],
     BadgeEnums.Zephyr,
-    250,
+    500,
     '...Darn! My Dad\'s cherished bird Pokémon... All right. Take this. It\'s the official Pokémon League Zephyr Badge.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Sprout Tower'))]
 );
@@ -264,7 +264,7 @@ GymList['Azalea Town'] = new Gym(
         new GymPokemon('Scyther', 119000, 16),
     ],
     BadgeEnums.Hive,
-    500,
+    1000,
     'Whoa, amazing! You\'re an expert on Pokémon! My research isn\'t complete yet. Ok, you win. Take this Badge.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Slowpoke Well'))]
 );
@@ -276,7 +276,7 @@ GymList['Goldenrod City'] = new Gym(
         new GymPokemon('Miltank', 170000, 20),
     ],
     BadgeEnums.Plain,
-    1000,
+    1500,
     '...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here\'s the Plain Badge.',
     [new RouteKillRequirement(10, GameConstants.Region.johto, 34)]
 );
@@ -290,7 +290,7 @@ GymList['Ecruteak City'] = new Gym(
         new GymPokemon('Haunter', 130000, 23),
     ],
     BadgeEnums.Fog,
-    1500,
+    2500,
     'I\'m not good enough yet... All right. This Badge is yours.',
     [new GymBadgeRequirement(BadgeEnums.Plain)],
     () => {
@@ -306,7 +306,7 @@ GymList['Cianwood City'] = new Gym(
         new GymPokemon('Poliwrath', 183000, 30),
     ],
     BadgeEnums.Storm,
-    2500,
+    3500,
     'Wha? Huh? I lost? How about that! You\'re worthy of the Storm Badge!',
     [new QuestLineStepCompletedRequirement('The Sick Ampharos', 2)]
 );
@@ -319,7 +319,7 @@ GymList['Olivine City'] = new Gym(
         new GymPokemon('Steelix', 182000, 35),
     ],
     BadgeEnums.Mineral,
-    3500,
+    4000,
     '...You are a better trainer than me, in both skill and kindness. In accordance with League rules, I confer upon you this Badge.',
     [new QuestLineCompletedRequirement('The Sick Ampharos')]
 );
@@ -332,7 +332,7 @@ GymList['Mahogany Town'] = new Gym(
         new GymPokemon('Piloswine', 196000, 31),
     ],
     BadgeEnums.Glacier,
-    4000,
+    5000,
     'Ah, I am impressed by your prowess. With your strong will, I know you will overcome all life\'s obstacles. You are worthy of this Badge!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Rocket\'s Hideout'))]
 );
@@ -346,7 +346,7 @@ GymList['Blackthorn City'] = new Gym(
         new GymPokemon('Kingdra', 220000, 40),
     ],
     BadgeEnums.Rising,
-    5000,
+    7500,
     'Here, this is the Rising Badge... Hurry up! Take it!',
     [new GymBadgeRequirement(BadgeEnums.Glacier)]
 );
@@ -363,7 +363,7 @@ GymList['Elite Will'] = new Gym(
         new GymPokemon('Xatu', 260250, 42),
     ],
     BadgeEnums.Elite_Will,
-    7500,
+    10000,
     'Even though I was defeated, I won\'t change my course. I will continue battling until I stand above all Trainers! Now move on and experience the true ferocity of the Elite Four.',
     [new TemporaryBattleRequirement('Silver 5')]
 );
@@ -378,7 +378,7 @@ GymList['Elite Koga'] = new Gym(
         new GymPokemon('Crobat', 260250, 44),
     ],
     BadgeEnums.Elite_Koga,
-    7500,
+    10000,
     'I subjected you to everything I could muster. But my efforts failed. I must hone my skills. Go on to the next room, and put your abilities to the test!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Will)],
     undefined, undefined, { displayName: 'Elite Koga' }
@@ -394,7 +394,7 @@ GymList['Elite Bruno2'] = new Gym(
         new GymPokemon('Machamp', 260250, 46),
     ],
     BadgeEnums.Elite_Bruno2,
-    7500,
+    10000,
     'Having lost, I have no right to say anything… Go face your next challenge!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Koga)],
     undefined, undefined, { displayName: 'Elite Bruno' }
@@ -410,7 +410,7 @@ GymList['Elite Karen'] = new Gym(
         new GymPokemon('Houndoom', 266000, 47),
     ],
     BadgeEnums.Elite_Karen,
-    7500,
+    10000,
     'Strong Pokémon. Weak Pokémon. That is only the selfish perception of people. Truly skilled Trainers should try to win with the Pokémon they love best. I like your style. You understand what\'s important. Go on — — the Champion is waiting.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Bruno2)]
 );
@@ -427,7 +427,7 @@ GymList['Champion Lance'] = new Gym(
         new GymPokemon('Dragonite', 270000, 50),
     ],
     BadgeEnums.Elite_JohtoChampion,
-    7500,
+    13000,
     '…It\'s over. But it\'s an odd feeling. I\'m not angry that I lost. In fact, I feel happy. Happy that I witnessed the rise of a great new Champion!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Karen)],
     () => {},
@@ -609,7 +609,7 @@ GymList['Elite Drake'] = new Gym(
     [
         new GymPokemon('Shelgon', 1064000, 52),
         new GymPokemon('Altaria', 1072000, 54),
-        new GymPokemon('Flygon', 1076000, 53),
+        new GymPokemon('Kingdra', 1076000, 53),
         new GymPokemon('Flygon', 1076000, 53),
         new GymPokemon('Salamence', 1157000, 55),
     ],
@@ -648,7 +648,7 @@ GymList['Mikan Island'] = new Gym(
         new GymPokemon('Blastoise', 2307500, 24),
     ],
     BadgeEnums['Coral-Eye'],
-    740,
+    10000,
     'I can see why you made it so far in the Indigo League, and I bet you\'ll do pretty well in the Orange League.\n' +
     'This is the Coral-Eye Badge of the Mikan Gym, to prove that you won your match!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tanoby Ruins'))]
@@ -664,7 +664,7 @@ GymList['Navel Island'] = new Gym(
         new GymPokemon('Electrode', 923000, 24),
     ],
     BadgeEnums.Sea_Ruby,
-    740,
+    10000,
     'You and the others were great.\nNow I\'d like to give you and your fellow challengers something you really deserve. The Sea Ruby badge. It\'s yours.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lost Cave'))]
 );
@@ -677,7 +677,7 @@ GymList['Trovita Island'] = new Gym(
         new GymPokemon('Starmie', 1538333, 24),
     ],
     BadgeEnums.Spike_Shell,
-    740,
+    10000,
     'Nice job, guys. Here are your Spike Shell badges, guys.',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 41)]
 );
@@ -689,7 +689,7 @@ GymList['Kumquat Island'] = new Gym(
         new GymPokemon('Marowak', 2307500, 24),
     ],
     BadgeEnums.Jade_Star,
-    740, //TODO
+    10000,
     'You did a fine job.\nAnd now, as Kumquat Island gym leader, and a member of the Orange Crew, I happily present this token of your victory.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Icefall Cave'))]
 );
@@ -707,7 +707,7 @@ GymList['Supreme Gym Leader Drake'] = new Gym(
         new GymPokemon('Dragonite', 1124400, 37),
     ],
     BadgeEnums.Elite_OrangeChampion,
-    4800,
+    12000,
     'You really deserve that trophy. You\'re a great Pokémon trainer.',
     [
         new GymBadgeRequirement(BadgeEnums['Coral-Eye']),
@@ -729,7 +729,7 @@ GymList['Cipher Admin Ein'] = new Gym (
         new GymPokemon('Manectric', 12099520, 50),
     ],
     BadgeEnums.Elite_F_Disk,
-    10000,
+    12000,
     'Urrrgh… What unbelievable power…',
     [new QuestLineCompletedRequirement('Shadows in the Desert')],
     undefined, undefined, { displayName: 'Challenge Ein' }
@@ -745,7 +745,7 @@ GymList['Cipher Admin Miror B.'] = new Gym (
         new GymPokemon('Armaldo', 11599520, 43),
     ],
     BadgeEnums.Elite_L_Disk,
-    10000,
+    12000,
     'I\'m an awesome dancer… But I can\'t win in battles!',
     [new QuestLineCompletedRequirement('Shadows in the Desert')],
     undefined, undefined, { displayName: 'Challenge Miror B.' }
@@ -761,7 +761,7 @@ GymList['Cipher Admin Dakim'] = new Gym (
         new GymPokemon('Houndoom', 11999520, 47),
     ],
     BadgeEnums.Elite_R_Disk,
-    10000,
+    12000,
     'This can\'t be! The mighty Dakim loses again?',
     [new QuestLineCompletedRequirement('Shadows in the Desert')],
     undefined, undefined, { displayName: 'Challenge Dakim' }
@@ -777,7 +777,7 @@ GymList['Cipher Admin Venus'] = new Gym (
         new GymPokemon('Milotic', 12299520, 48),
     ],
     BadgeEnums.Elite_U_Disk,
-    10000,
+    12000,
     'I shall forget that I ever battled with you. Yes, that\'s what I\'ll do. Ohohohoh!',
     [new QuestLineCompletedRequirement('Shadows in the Desert')],
     undefined, undefined, { displayName: 'Challenge Venus' }
@@ -794,7 +794,7 @@ GymList['Cipher Admin Lovrina'] = new Gym ( //Kalos E4 difficulty, plus 10% per 
         new GymPokemon('Meganium', 30994948, 100),
     ],
     BadgeEnums.Elite_ColosseumLovrina,
-    100000,
+    65000,
     'I was so impressed by your toughness! Because you are so tough, I\'ll let you be the first member in my fan club! Doesn\'t that so make your day?',
     [new QuestLineCompletedRequirement('Gale of Darkness')],
     undefined, undefined, { displayName: 'Challenge Lovrina' }
@@ -1061,14 +1061,13 @@ GymList['Champion Cynthia'] = new Gym(
 );
 
 //Unova Gyms
-//TODO: Balancing of gym Pokemon HP & rewards.
 GymList['Aspertia City'] = new Gym(
     'Cheren',
     'Aspertia City',
     [
-        new GymPokemon('Patrat', 3458300, 58),
-        new GymPokemon('Pidove', 3462000, 58),
-        new GymPokemon('Lillipup', 3464000, 58),
+        new GymPokemon('Patrat', 3458300, 12),
+        new GymPokemon('Pidove', 3462000, 12),
+        new GymPokemon('Lillipup', 3464000, 14),
     ],
     BadgeEnums.Basic,
     500,
@@ -1079,9 +1078,9 @@ GymList['Virbank City'] = new Gym(
     'Roxie',
     'Virbank City',
     [
-        new GymPokemon('Koffing', 3658300, 58),
-        new GymPokemon('Grimer', 3662000, 58),
-        new GymPokemon('Whirlipede', 3664000, 58),
+        new GymPokemon('Koffing', 3658300, 17),
+        new GymPokemon('Grimer', 3662000, 17),
+        new GymPokemon('Whirlipede', 3664000, 19),
     ],
     BadgeEnums.Toxic,
     800,
@@ -1095,10 +1094,10 @@ GymList['Castelia City'] = new Gym(
     'Burgh',
     'Castelia City',
     [
-        new GymPokemon('Dwebble', 3858300, 58),
-        new GymPokemon('Shelmet', 3862000, 58),
-        new GymPokemon('Karrablast', 3964000, 58),
-        new GymPokemon('Leavanny', 4064000, 58),
+        new GymPokemon('Dwebble', 3858300, 24),
+        new GymPokemon('Shelmet', 3862000, 24),
+        new GymPokemon('Karrablast', 3964000, 24),
+        new GymPokemon('Leavanny', 4064000, 26),
     ],
     BadgeEnums.Insect,
     1500,
@@ -1109,10 +1108,10 @@ GymList['Nimbasa City'] = new Gym(
     'Elesa',
     'Nimbasa City',
     [
-        new GymPokemon('Emolga', 4258300, 58),
-        new GymPokemon('Flaaffy', 4262000, 58),
-        new GymPokemon('Joltik', 4464000, 58),
-        new GymPokemon('Zebstrika', 4464000, 58),
+        new GymPokemon('Emolga', 4258300, 30),
+        new GymPokemon('Flaaffy', 4262000, 30),
+        new GymPokemon('Joltik', 4464000, 30),
+        new GymPokemon('Zebstrika', 4464000, 32),
     ],
     BadgeEnums.Bolt,
     2600,
@@ -1123,10 +1122,10 @@ GymList['Driftveil City'] = new Gym(
     'Clay',
     'Driftveil City',
     [
-        new GymPokemon('Krokorok', 4658300, 58),
-        new GymPokemon('Sandslash', 4662000, 58),
-        new GymPokemon('Onix', 4864000, 58),
-        new GymPokemon('Excadrill', 5064000, 58),
+        new GymPokemon('Krokorok', 4658300, 34),
+        new GymPokemon('Sandslash', 4662000, 34),
+        new GymPokemon('Onix', 4864000, 34),
+        new GymPokemon('Excadrill', 5064000, 36),
     ],
     BadgeEnums.Quake,
     4800,
@@ -1137,10 +1136,10 @@ GymList['Mistralton City'] = new Gym(
     'Skyla',
     'Mistralton City',
     [
-        new GymPokemon('Swoobat', 5458300, 58),
-        new GymPokemon('Skarmory', 6062000, 58),
-        new GymPokemon('Sigilyph', 5664000, 58),
-        new GymPokemon('Swanna', 5864000, 58),
+        new GymPokemon('Swoobat', 5458300, 40),
+        new GymPokemon('Skarmory', 6062000, 40),
+        new GymPokemon('Sigilyph', 5664000, 40),
+        new GymPokemon('Swanna', 5864000, 42),
     ],
     BadgeEnums.Jet,
     7600,
@@ -1151,10 +1150,10 @@ GymList['Opelucid City'] = new Gym(
     'Drayden',
     'Opelucid City',
     [
-        new GymPokemon('Druddigon', 6558300, 58),
-        new GymPokemon('Flygon', 6662000, 58),
-        new GymPokemon('Altaria', 6464000, 58),
-        new GymPokemon('Haxorus', 6964000, 58),
+        new GymPokemon('Druddigon', 6558300, 50),
+        new GymPokemon('Flygon', 6662000, 50),
+        new GymPokemon('Altaria', 6464000, 50),
+        new GymPokemon('Haxorus', 6964000, 52),
     ],
     BadgeEnums.Legend,
     14000,
@@ -1165,10 +1164,10 @@ GymList['Humilau City'] = new Gym(
     'Marlon',
     'Humilau City',
     [
-        new GymPokemon('Wailord', 7458300, 58),
-        new GymPokemon('Mantine', 7262000, 58),
-        new GymPokemon('Carracosta', 7064000, 58),
-        new GymPokemon('Jellicent', 7464000, 58),
+        new GymPokemon('Wailord', 7458300, 53),
+        new GymPokemon('Mantine', 7262000, 53),
+        new GymPokemon('Carracosta', 7064000, 53),
+        new GymPokemon('Jellicent', 7464000, 55),
     ],
     BadgeEnums.Wave,
     27000,
@@ -1177,7 +1176,6 @@ GymList['Humilau City'] = new Gym(
 );
 
 //Unova Elite 4
-//TODO: Balancing of elite Pokemon HP & rewards.
 GymList['Elite Shauntal'] = new Gym(
     'Shauntal',
     'Elite Shauntal',
@@ -1265,7 +1263,6 @@ GymList['Champion Iris'] = new Gym(
 );
 
 //Kalos Gyms
-//TODO: Balancing of gym Pokemon HP & rewards.
 GymList['Santalune City'] = new Gym(
     'Viola',
     'Santalune City',
@@ -1369,7 +1366,6 @@ GymList['Snowbelle City'] = new Gym(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Village'))]
 );
 //Kalos Elite 4
-//TODO: Balancing of elite Pokemon HP & rewards.
 GymList['Elite Malva'] = new Gym(
     'Malva',
     'Elite Malva',
@@ -1453,7 +1449,6 @@ GymList['Champion Diantha'] = new Gym(
 );
 
 //Alola Gyms
-//TODO: Balancing of gym Pokemon HP & rewards.
 GymList['Iki Town'] = new Gym(
     'Hala',
     'Iki Town',
@@ -1463,80 +1458,75 @@ GymList['Iki Town'] = new Gym(
         new GymPokemon('Crabrawler', 63069612, 16),
     ],
     BadgeEnums.Melemele_Stamp,
-    128000,
-    'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too! Accept this Z-Crystal! It allows Trainers to share their power with their partner Pokémon!',
-    [new TemporaryBattleRequirement('Hau 3')],
-    () => {
-        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Fighting], 1);
-    },
-    undefined, { displayName: 'Hala\'s Grand Trial' }
+    16000,
+    'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too! Accept this Z-Crystal! It allows Trainers to share their power with their partner Pokémon!</br><img width="100" src="assets/images/items/zCrystal/Fightinium Z.svg"/></br>With this victory... you have cleared all of the trials of Melemele Island, the first of Alola\'s islands! The Melemele stamp is proof of your accomplishments.',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to Paradise, Cousin!', 10), new TemporaryBattleRequirement('Hau 3')])],
+    undefined, undefined, { displayName: 'Hala\'s Grand Trial' }
 );
 GymList['Konikoni City'] = new Gym(
     'Olivia',
     'Konikoni City',
     [
-        new GymPokemon('Anorith', 66147743, 27),
-        new GymPokemon('Lileep', 66147743, 27),
-        new GymPokemon('Lycanroc (Midnight)', 67478674, 28),
+        new GymPokemon('Anorith', 81530244, 27),
+        new GymPokemon('Lileep', 81530244, 27),
+        new GymPokemon('Lycanroc (Midnight)', 83170680, 28),
     ],
     BadgeEnums.Akala_Stamp,
-    128000,
-    'How lovely. Diamonds only sparkle after coal is pushed to its absolute limit. Here. The Rock-type Z-Crystal... The Rockium Z is all yours!',
-    [new TemporaryBattleRequirement('Plumeria 1')],
-    () => {
-        App.game.quests.getQuestLine('Eater of Light').beginQuest(0, undefined, true);
-        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Rock], 1);
-    },
-    undefined, { displayName: 'Olivia\'s Grand Trial' }
+    30000,
+    'How lovely. Diamonds only sparkle after coal is pushed to its absolute limit. Here. The Rock-type Z-Crystal... The Rockium Z is all yours!</br><img width="100" src="assets/images/items/zCrystal/Rockium Z.svg"/></br>I think your journey will hold many surprises. And I hope it holds many joys.',
+    [new QuestLineStepCompletedRequirement('Symbiotic Relations', 8)],
+    undefined, undefined, { displayName: 'Olivia\'s Grand Trial' }
 );
 GymList['Malie City'] = new Gym(
     'Nanu',
     'Malie City',
     [
-        new GymPokemon('Sableye', 70650480, 43),
-        new GymPokemon('Krokorok', 70650480, 43),
-        new GymPokemon('Alolan Persian', 71735104, 44),
+        new GymPokemon('Sableye', 101710296, 43),
+        new GymPokemon('Krokorok', 101710296, 43),
+        new GymPokemon('Alolan Persian', 103271750, 44),
     ],
     BadgeEnums.Ula_Ula_Stamp,
-    128000,
-    'Hmph... heh. Let me fix your team up for you. Here. This is yours.',
+    52000,
+    'Hmph... heh. Let me fix your team up for you. Here. This is yours.</br><img width="100" src="assets/images/items/zCrystal/Darkinium Z.svg"/></br>There. Congratulations or whatever. You\'ve officially finished your Ula\'ula trials. You\'ve got somewhere else to be, don\'t you? Try not to destroy the whole place.',
     [new TemporaryBattleRequirement('Gladion 2')],
-    () => {
-        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Dark], 1);
-    }, undefined, { displayName: 'Nanu\'s Grand Trial' }
+    undefined, undefined, { displayName: 'Nanu\'s Grand Trial' }
 );
 GymList['Exeggutor Island'] = new Gym(
     'Hapu',
     'Exeggutor Island',
     [
-        new GymPokemon('Golurk', 76658268, 53),
-        new GymPokemon('Gastrodon (East)', 76658268, 53),
-        new GymPokemon('Flygon', 76658268, 53),
-        new GymPokemon('Mudsdale', 77747374, 54),
+        new GymPokemon('Alolan Dugtrio', 85759429, 47, new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
+        new GymPokemon('Gastrodon (East)', 85759429, 47, new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
+        new GymPokemon('Flygon', 85759429, 47, new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
+        new GymPokemon('Mudsdale', 86977838, 48, new QuestLineStepCompletedRequirement('Emissary of Light', 4, GameConstants.AchievementOption.less)),
+        new GymPokemon('Golurk', 91233435, 53, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
+        new GymPokemon('Gastrodon (East)', 91233435, 53, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
+        new GymPokemon('Flygon', 91233435, 53, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
+        new GymPokemon('Mudsdale', 92529615, 54, new QuestLineStepCompletedRequirement('Emissary of Light', 4)),
     ],
     BadgeEnums.Poni_Stamp,
-    128000,
-    'You have succeeded in your final grand trial! That was enjoyable. Looks like I cannot beat you even when I am not holding back... Take your Ground-type Z-Crystal then... This Groundium Z is yours!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))],
-    () => {
-        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Ground], 1);
-    }, undefined, { displayName: 'Hapu\'s Grand Trial' }
+    64000,
+    'You have succeeded in your final grand trial! That was enjoyable. Looks like I cannot beat you even when I am not holding back... Take your Ground-type Z-Crystal then... This Groundium Z is yours!</br><img width="100" src="assets/images/items/zCrystal/Groundium Z.svg"/></br>Then go on with you two! Head straight through here and find the altar!',
+    [new QuestLineCompletedRequirement('Emissary of Light')],
+    undefined, undefined, { displayName: 'Hapu\'s Grand Trial' }
 );
 
 //Alola Elite 4
-//TODO: Balancing of elite Pokemon HP & rewards.
+// modified from base HP, keep them roughly the same difficulty
+// regular mons base HP: 91879987
+// ace pokemon base HP: 92856372
 GymList['Elite Molayne'] = new Gym(
     'Molayne',
     'Elite Molayne',
     [
-        new GymPokemon('Klefki', 85547357, 56),
-        new GymPokemon('Bisharp', 85547357, 56),
-        new GymPokemon('Magnezone', 85547357, 56),
-        new GymPokemon('Metagross', 85547357, 56),
-        new GymPokemon('Alolan Dugtrio', 86456446, 57),
+        new GymPokemon('Klefki', 78883047, 56),
+        new GymPokemon('Bisharp', 84369882, 56),
+        new GymPokemon('Magnezone', 82982134, 56),
+        new GymPokemon('Metagross', 84733765, 56),
+        new GymPokemon('Alolan Dugtrio', 95774052, 57),
     ],
     BadgeEnums.Elite_Molayne,
-    64000,
+    100000,
     'That Kukui... He certainly found an interesting Trainer for me to face!',
     [new GymBadgeRequirement(BadgeEnums.Poni_Stamp)]
 );
@@ -1544,14 +1534,14 @@ GymList['Elite Olivia'] = new Gym(
     'Olivia',
     'Elite Olivia',
     [
-        new GymPokemon('Armaldo', 85547357, 56),
-        new GymPokemon('Cradily', 85547357, 56),
-        new GymPokemon('Gigalith', 85547357, 56),
-        new GymPokemon('Probopass', 85547357, 56),
-        new GymPokemon('Lycanroc (Midnight)', 86456446, 57),
+        new GymPokemon('Armaldo', 81025320, 56),
+        new GymPokemon('Cradily', 74381821, 56),
+        new GymPokemon('Gigalith', 140708180, 56),
+        new GymPokemon('Probopass', 85174188, 56),
+        new GymPokemon('Lycanroc (Midnight)', 150439372, 57),
     ],
     BadgeEnums.Elite_Olivia,
-    64000,
+    100000,
     'I don\'t see the same look in your eyes that I saw when we first met on Akala Island. Have you had some experiences that you\'ll carry with you in your heart forever? Well, it\'s time for you to move on.',
     [new GymBadgeRequirement(BadgeEnums.Poni_Stamp)]
 );
@@ -1559,14 +1549,14 @@ GymList['Elite Acerola'] = new Gym(
     'Acerola',
     'Elite Acerola',
     [
-        new GymPokemon('Banette', 85547357, 56),
-        new GymPokemon('Drifblim', 85547357, 56),
-        new GymPokemon('Dhelmise', 85547357, 56),
-        new GymPokemon('Froslass', 85547357, 56),
-        new GymPokemon('Palossand', 86456446, 57),
+        new GymPokemon('Banette', 94589428, 56),
+        new GymPokemon('Drifblim', 87179189, 56),
+        new GymPokemon('Dhelmise', 91179189, 56),
+        new GymPokemon('Froslass', 91691988, 56),
+        new GymPokemon('Palossand', 103277813, 57),
     ],
     BadgeEnums.Elite_Acerola,
-    64000,
+    100000,
     'I\'m...I\'m speechless! You\'ve done me in!',
     [new GymBadgeRequirement(BadgeEnums.Poni_Stamp)]
 );
@@ -1574,20 +1564,19 @@ GymList['Elite Kahili'] = new Gym(
     'Kahili',
     'Elite Kahili',
     [
-        new GymPokemon('Braviary', 85547357, 56),
-        new GymPokemon('Hawlucha', 85547357, 56),
-        new GymPokemon('Oricorio (Baile)', 85547357, 56),
-        new GymPokemon('Mandibuzz', 85547357, 56),
-        new GymPokemon('Toucannon', 86456446, 57),
+        new GymPokemon('Braviary', 86420587, 56),
+        new GymPokemon('Hawlucha', 109446185, 56),
+        new GymPokemon('Oricorio (Baile)', 103127826, 56),
+        new GymPokemon('Mandibuzz', 89123587, 56),
+        new GymPokemon('Toucannon', 91392090, 57),
     ],
     BadgeEnums.Elite_Kahili,
-    64000,
+    100000,
     'It\'s frustrating to me as a member of the Elite Four, but it seems your strength is the real deal.',
     [new GymBadgeRequirement(BadgeEnums.Poni_Stamp)]
 );
 
 // Alola Champion
-// TODO: Balancing - Set HP
 GymList['Champion Hau'] = new Gym(
     'Hau',
     'Champion Hau',
@@ -1604,7 +1593,7 @@ GymList['Champion Hau'] = new Gym(
         new GymPokemon('Incineroar', 96725389, 60, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
     BadgeEnums.Champion_Stamp,
-    100000,
+    150000,
     'We\'re gonna keep moving forward, by staying at full power all the time!',
     [
         new GymBadgeRequirement(BadgeEnums.Elite_Molayne),
@@ -1620,12 +1609,19 @@ GymList['Champion Hau'] = new Gym(
 GymList['Friend League'] = new Gym(
     'Karson', // red cap
     'Friend League',
-    [new GymPokemon('Magikarp', 337500, 20)],
+    [new GymPokemon('Magikarp', 472500, 20)],
     BadgeEnums.Friend_League,
     10000,
     'Your Karp is really Magic!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 31)],
-    undefined,
+    () => {
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
+    },
     undefined,
     { imageName: 'Jump Champ Red' }
 );
@@ -1633,21 +1629,18 @@ GymList['Friend League'] = new Gym(
 GymList['Quick League'] = new Gym(
     'Koichiro', // blue cap
     'Quick League',
-    [new GymPokemon('Magikarp Skelly', 675000, 20)],
+    [new GymPokemon('Magikarp Skelly', 945000, 20)],
     BadgeEnums.Quick_League,
     10500,
     'Looks like I flailed...',
     [new TemporaryBattleRequirement('Magikarp Jump Koylee')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Skelly')) {
-            Notifier.notify({
-                message: 'You were awarded a Magikarp Skelly!',
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-            });
-            App.game.party.gainPokemonByName('Magikarp Skelly', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
-        }
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
     },
     undefined,
     { imageName: 'Jump Champ Blue' }
@@ -1656,21 +1649,18 @@ GymList['Quick League'] = new Gym(
 GymList['Heavy League'] = new Gym(
     'Kareign', // green cap
     'Heavy League',
-    [new GymPokemon('Magikarp Orange Two-Tone', 1687500, 20)],
+    [new GymPokemon('Magikarp Orange Two-Tone', 2362500, 20)],
     BadgeEnums.Heavy_League,
     11000,
     'Karpe Diem',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Orange Two-Tone')) {
-            Notifier.notify({
-                message: 'You were awarded a Magikarp Orange Two-Tone!',
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-            });
-            App.game.party.gainPokemonByName('Magikarp Orange Two-Tone', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
-        }
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
     },
     undefined,
     {
@@ -1682,12 +1672,19 @@ GymList['Heavy League'] = new Gym(
 GymList['Great League'] = new Gym(
     'Karbuck', // blue cap
     'Great League',
-    [new GymPokemon('Magikarp', 2700000, 20)],
+    [new GymPokemon('Magikarp', 3780000, 20)],
     BadgeEnums.Great_League,
     11500,
     'Guess ya got me. Hook, line and sinker!',
     [new TemporaryBattleRequirement('Magikarp Jump Karpress')],
-    undefined,
+    () => {
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
+    },
     undefined,
     { imageName: 'Jump Champ Blue' }
 );
@@ -1695,21 +1692,18 @@ GymList['Great League'] = new Gym(
 GymList['Fast League'] = new Gym(
     'Kareign 2', // green cap
     'Fast League',
-    [new GymPokemon('Magikarp Pink Dapples', 5062500, 20)],
+    [new GymPokemon('Magikarp Pink Dapples', 7087500, 20)],
     BadgeEnums.Fast_League,
     12000,
     'This life is not for me... I will become a Karpenter now...',
     [new TemporaryBattleRequirement('Magikarp Jump Karson')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Pink Dapples')) {
-            Notifier.notify({
-                message: 'You were awarded a Magikarp Pink Dapples!',
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-            });
-            App.game.party.gainPokemonByName('Magikarp Pink Dapples', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
-        }
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
     },
     undefined,
     {
@@ -1721,21 +1715,18 @@ GymList['Fast League'] = new Gym(
 GymList['Luxury League'] = new Gym(
     'Jump Champ', // red cap
     'Luxury League',
-    [new GymPokemon('Magikarp Pink Orca', 6750000, 20)],
+    [new GymPokemon('Magikarp Pink Orca', 9450000, 20)],
     BadgeEnums.Luxury_League,
     12500,
     'Just wait \'til my Magikarp evolves and you will all see how great I am! <i>Cries</i>',
     [new TemporaryBattleRequirement('Magikarp Jump Karbuck')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Pink Orca')) {
-            Notifier.notify({
-                message: 'You were awarded a Magikarp Pink Orca!',
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-            });
-            App.game.party.gainPokemonByName('Magikarp Pink Orca', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
-        }
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
     },
     undefined,
     {
@@ -1747,21 +1738,18 @@ GymList['Luxury League'] = new Gym(
 GymList['Heal League'] = new Gym(
     'Karami', // blue cap
     'Heal League',
-    [new GymPokemon('Magikarp Purple Bubbles', 10125000, 20)],
+    [new GymPokemon('Magikarp Purple Bubbles', 14175000, 20)],
     BadgeEnums.Heal_League,
     12500,
     'I\'m getting more old than my rod...',
     [new TemporaryBattleRequirement('Magikarp Jump Karpella 2')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Purple Bubbles')) {
-            Notifier.notify({
-                message: 'You were awarded a Magikarp Purple Bubbles!',
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-            });
-            App.game.party.gainPokemonByName('Magikarp Purple Bubbles', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
-        }
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
     },
     undefined,
     { imageName: 'Jump Champ Blue' }
@@ -1770,21 +1758,18 @@ GymList['Heal League'] = new Gym(
 GymList['Ultra League'] = new Gym(
     'Jump Champ 2', // red cap
     'Ultra League',
-    [new GymPokemon('Magikarp Brown Tiger', 13500000, 20)],
+    [new GymPokemon('Magikarp Brown Tiger', 18900000, 20)],
     BadgeEnums.Ultra_League,
     12500,
     'I knew I smelled something fishy...',
     [new TemporaryBattleRequirement('Magikarp Jump Koylee 2')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Brown Tiger')) {
-            Notifier.notify({
-                message: 'You were awarded a Magikarp Brown Tiger!',
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-            });
-            App.game.party.gainPokemonByName('Magikarp Brown Tiger', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
-        }
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
     },
     undefined,
     {
@@ -1796,21 +1781,18 @@ GymList['Ultra League'] = new Gym(
 GymList['E4 League'] = new Gym(
     'Jump Champ 3', // red cap
     'E4 League',
-    [new GymPokemon('Magikarp Orange Forehead', 20250000, 20)],
+    [new GymPokemon('Magikarp Orange Forehead', 28350000, 20)],
     BadgeEnums.E4_League,
     12500,
     'That jump really splashed!',
     [new TemporaryBattleRequirement('Magikarp Jump Karpella 3')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Orange Forehead')) {
-            Notifier.notify({
-                message: 'You were awarded a Magikarp Orange Forehead!',
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-            });
-            App.game.party.gainPokemonByName('Magikarp Orange Forehead', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
-        }
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
     },
     undefined,
     {
@@ -1822,11 +1804,19 @@ GymList['E4 League'] = new Gym(
 GymList['Master League'] = new Gym(
     'Magikarp',
     'Master League',
-    [new GymPokemon('Magikarp', 27000000, 20)],
+    [new GymPokemon('Magikarp', 37800000, 20)],
     BadgeEnums.Master_League,
     13000,
     'Mayor Karp will be proud of you!',
-    [new TemporaryBattleRequirement('Magikarp Jump Tykarp 2')]
+    [new TemporaryBattleRequirement('Magikarp Jump Tykarp 2')],
+    () => {
+        Notifier.notify({
+            message: 'You were awarded a Magikarp Biscuit!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Magikarp_Biscuit.image,
+        });
+        player.gainItem('Magikarp_Biscuit', 1);
+    }
 );
 
 //Galar Leaders
@@ -2428,7 +2418,8 @@ GymList['Champion Nemona'] = new Gym(
     BadgeEnums.Elite_Nemona,
     250000,
     '',
-    [new GymBadgeRequirement(BadgeEnums.Elite_PaldeaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_PaldeaChampion)],
+    undefined, undefined, { hideUntilUnlocked: true }
 );
 GymList['Segin Squad\'s Base'] = new Gym(
     'Giacomo',
@@ -2523,7 +2514,7 @@ GymList['Director Clavell'] = new Gym(
     250000,
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
-    undefined, undefined, { displayName: 'Director Clavell' }
+    undefined, undefined, { displayName: 'Director Clavell', hideUntilUnlocked: true }
 );
 GymList['Penny of Team Star'] = new Gym(
     'Penny',
@@ -2540,7 +2531,7 @@ GymList['Penny of Team Star'] = new Gym(
     250000,
     '',
     [new GymBadgeRequirement(BadgeEnums.Elite_Clavell)],
-    undefined, undefined, { displayName: 'Penny of Team Star' }
+    undefined, undefined, { displayName: 'Penny of Team Star', hideUntilUnlocked: true }
 );
 GymList['Stony Cliff Titan'] = new Gym(
     'Stony Cliff Titan',
@@ -2611,7 +2602,7 @@ GymList['Pokémon Trainer Arven'] = new Gym(
     250000,
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
-    undefined, undefined, { displayName: 'Arven' }
+    undefined, undefined, { displayName: 'Arven', hideUntilUnlocked: true }
 );
 GymList['AI Sada'] = new Gym(
     'AI Sada',

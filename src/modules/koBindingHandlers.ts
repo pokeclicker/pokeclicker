@@ -156,11 +156,14 @@ const resizableHandler = {
 const tooltipHandler = {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-        const local = ko.utils.unwrapObservable(valueAccessor()),
-            options = {};
+        const local = ko.utils.unwrapObservable(valueAccessor());
+        const options = {} as any;
 
         ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
         ko.utils.extend(options, local);
+
+        // TODO Bootstrap 5: Use customClass rather than rewriting the template
+        options.template = `<div class="tooltip ${options.class ?? ''}" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>`;
 
         $(element).tooltip(options);
 

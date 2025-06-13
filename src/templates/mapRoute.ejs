@@ -37,7 +37,8 @@ Parameters:
 <% if (locals.rotate) { %>
     transform="rotate(90 ,<%= locals.x * 16 %>, <%= locals.y * 16 %>)"
 <% } %>
-    data-bind="click:function(){ MapHelper.moveToRoute(<%= locals.route %>, <%= locals.region %>); } ">
+    data-bind="click:function(){ MapHelper.moveToRoute(<%= locals.route %>, <%= locals.region %>); },
+        event: { mouseenter: () => GameController.showMapTooltip(Routes.getName(<%= locals.route %>, <%= locals.region %>)), mouseleave: GameController.hideMapTooltip }">
     <rect data-route='<%= locals.route %>'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(<%= locals.route %>, <%= locals.region %>) }"
         height="<%= locals.height * 16 %>"

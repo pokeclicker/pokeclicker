@@ -17,7 +17,7 @@ export default class TextMerger {
         mergeSubstrings.forEach((s) => {
             const key = s.substring(1, s.length - 1).toLocaleLowerCase();
             if (this.mergeValues[key]()) {
-                textResult = text.replace(s, this.escapeHtml(this.mergeValues[key]()));
+                textResult = textResult.replace(s, this.escapeHtml(this.mergeValues[key]()));
             }
         });
 
