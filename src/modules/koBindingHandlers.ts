@@ -1,6 +1,5 @@
 /// <reference path="./koBindingHandlers.d.ts" />
 
-import areaStatus from './enums/AreaStatus'
 import Sortable from 'sortablejs';
 import Settings from './settings/Settings';
 
@@ -145,7 +144,6 @@ const sortableHandler = {
     update: function (element, valueAccessor) {
         // When knockout makes changes to the UI, check that it still matches the internal order
         // This may not be necessary with the improved handling in onEnd() above, but better safe than sorry 
-        const value = valueAccessor();
         const sortInstance = sortableControllers.get(element);
         const internalOrder = valueAccessor().foreach().map(x => String(sortInstance.options.getId(x)));
         const visibleOrder = sortInstance.toArray();
