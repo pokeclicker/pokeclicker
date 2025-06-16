@@ -116,10 +116,7 @@ class PokedexHelper {
 
             const nameFilterSetting = Settings.getSetting('pokedexNameFilter') as SearchSetting;
             if (nameFilterSetting.observableValue() != '') {
-                const nameFilter = nameFilterSetting.regex();
-                const displayName = PokemonHelper.displayName(pokemon.name)();
-                const partyName = App.game.party.getPokemonByName(pokemon.name)?.displayName;
-                if (!nameFilter.test(displayName) && !nameFilter.test(pokemon.name) && !(partyName != undefined && nameFilter.test(partyName))) {
+                if (!PokemonHelper.matchPokemonByNames(nameFilterSetting.regex(), pokemon.name)) {
                     return false;
                 }
             }
