@@ -3,6 +3,10 @@ import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import { UndergroundController } from './UndergroundController';
+import GameHelper from '../GameHelper';
+import Notifier from '../notifications/Notifier';
+import NotificationOption from '../notifications/NotificationOption';
+import { SECOND } from '../GameConstants';
 
 export const TRADE_DOWN_AMOUNT = 3;
 
@@ -11,6 +15,8 @@ export class UndergroundTrading {
     private static _selectedTradeToItem: Observable<UndergroundItem | null> = ko.observable(null);
     private static _tradeAmount: Observable<number> = ko.observable(1).extend({ numeric: 0 });
     private static _sellAmount: Observable<number> = ko.observable(1).extend({ numeric: 0 });
+
+    public static quickSellEnabled: Observable<boolean> = ko.observable(false);
 
     private static  _computedAvailableItemsToTradeList: PureComputed<UndergroundItem[]> = ko.pureComputed<UndergroundItem[]>(() => {
         return UndergroundItems.getUnlockedItems().filter(item => ![UndergroundItemValueType.Diamond, UndergroundItemValueType.MegaStone].includes(item.valueType));
@@ -54,6 +60,15 @@ export class UndergroundTrading {
 
         player.loseItem(this.selectedTradeFromItem.itemName, tradeFromAmount);
         player.gainItem(this.selectedTradeToItem.itemName, tradeToAmount);
+
+        GameHelper.incrementObservable(App.game.statistics.undergroundTrades, tradeToAmount);
+
+        Notifier.notify({
+            title: 'Underground',
+            message: `<b><img src="${this.selectedTradeFromItem.image}" height="24px" class="pixelated"/> → <img src="${this.selectedTradeToItem.image}" height="24px" class="pixelated"/> Trade confirmed!</b><br/>${tradeFromAmount.toLocaleString('en-US')}× ${this.selectedTradeFromItem.displayName} → ${tradeToAmount.toLocaleString('en-US')}× ${this.selectedTradeToItem.displayName}.`,
+            type: NotificationOption.success,
+            timeout: 10 * SECOND,
+        });
 
         return true;
     }
@@ -118,5 +133,16 @@ export class UndergroundTrading {
 
     public static sell() {
         UndergroundController.sellMineItem(this.selectedTradeFromItem, this.sellAmount);
+        Notifier.notify({
+            title: 'Underground',
+            message: `<b><img src="${this.selectedTradeFromItem.image}" height="24px" class="pixelated"/> Sale Confirmed!</b><br/>${this.sellAmount.toLocaleString('en-US')}× ${this.selectedTradeFromItem.displayName} has been boxed up for sale. Good choice, Trainer!`,
+            type: NotificationOption.success,
+            timeout: 10 * SECOND,
+        });
+    }
+
+    public static quickSell(item: UndergroundItem) {
+        if (!item.hasSellValue()) return;
+        UndergroundController.sellMineItem(item, player.itemList[item.itemName]());
     }
 }

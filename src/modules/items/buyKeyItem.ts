@@ -31,4 +31,8 @@ export default class BuyKeyItem extends Item {
     get image(): string {
         return `assets/images/keyitems/${this.name}.png`;
     }
+
+    get description() {
+        return App.game.keyItems.itemList[this.item].description;
+    }
 }
