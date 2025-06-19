@@ -5,6 +5,8 @@
 ///<reference path="ProfNPC.ts"/>
 ///<reference path="RoamerNPC.ts"/>
 ///<reference path="GiftNPC.ts"/>
+///<reference path="PokemonGiftNPC.ts"/>
+///<reference path="AssistantNPC.ts"/>
 ///<reference path="TownContent.ts"/>
 
 type TownOptionalArgument = {

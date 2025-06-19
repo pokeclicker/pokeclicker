@@ -250,6 +250,14 @@ class MapHelper {
                 }
             });
         });
+        town.npcs?.filter(npc => npc instanceof PokemonGiftNPC && npc.isVisible()).forEach((npc: PokemonGiftNPC) => {
+            if (!App.game.party.alreadyCaughtPokemonByName(npc.giftPokemon)) {
+                states.add(areaStatus.uncaughtPokemon);
+            }
+            if (!App.game.party.alreadyCaughtPokemonByName(npc.giftPokemon, true)) {
+                states.add(areaStatus.uncaughtShinyPokemon);
+            }
+        });
 
         if (states.has(areaStatus.uncaughtShinyPokemon) && states.has(areaStatus.missingAchievement)) {
             states.add(areaStatus.uncaughtShinyPokemonAndMissingAchievement);
