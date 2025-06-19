@@ -2930,6 +2930,9 @@ class Update implements Saveable {
             if (settingsData['discord-rp.line-2']) {
                 settingsData['discord-rp.line-2'] = settingsData['discord-rp.line-2'].replace(/{underground_deal_trades}/g, '{underground_trades}');
             }
+
+            // Set file creation time to zero for existing files
+            playerData._createdTime = 0;
         },
     };
 
