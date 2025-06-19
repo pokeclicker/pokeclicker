@@ -2908,6 +2908,9 @@ class Update implements Saveable {
                 }
             }
 
+            // Update Enigma hint data
+            saveData.farming.mutations[63] = {seen: saveData.farming.mutations[63], last: null};
+
             // Refund any vitamins on MissingNo. as it now gets removed on update.
             // Will also no longer be able to give it vitamins so this is a one time thing
             const vitaminsUsed = saveData.party.caughtPokemon.find(p => p.id === 0)?.[2];
@@ -2915,6 +2918,17 @@ class Update implements Saveable {
                 playerData._itemList.Protein = (playerData._itemList.Protein ?? 0) + (vitaminsUsed[0] ?? 0);
                 playerData._itemList.Calcium = (playerData._itemList.Calcium ?? 0) + (vitaminsUsed[1] ?? 0);
                 playerData._itemList.Carbos = (playerData._itemList.Carbos ?? 0) + (vitaminsUsed[2] ?? 0);
+            }
+
+            //Remove second AZ battle.
+            saveData.statistics.temporaryBattleDefeated.splice(202, 1);
+
+            // Replace the UG discord rich presence strings
+            if (settingsData['discord-rp.line-1']) {
+                settingsData['discord-rp.line-1'] = settingsData['discord-rp.line-1'].replace(/{underground_deal_trades}/g, '{underground_trades}');
+            }
+            if (settingsData['discord-rp.line-2']) {
+                settingsData['discord-rp.line-2'] = settingsData['discord-rp.line-2'].replace(/{underground_deal_trades}/g, '{underground_trades}');
             }
 
             // Set file creation time to zero for existing files
@@ -3000,7 +3014,10 @@ class Update implements Saveable {
         if (!settingsData?.disableAutoDownloadBackupSaveOnUpdate) {
             button.style.display = 'none';
             document.body.appendChild(button);
-            button.click();
+            // We don't want auto download on dev build
+            if (!GameHelper.isDevelopmentBuild()) {
+                button.click();
+            }
             document.body.removeChild(button);
         }
         button.style.display = '';

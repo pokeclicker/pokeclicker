@@ -1,0 +1,34 @@
+<div class="modal fade noselect" id="moonPhaseModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Moon Phases</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="small">Moon Phases rotate daily and influence the catch rate of Moon Balls. Additionally, some Pokémon move around according to the current phase.</p>
+                <table class="table table-bordered mb-0">
+                    <thead>
+                        <tr>
+                            <th class="align-middle text-left" colspan="2">Phase</th>
+                            <th class="align-middle">Moon Ball Bonus</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: Object.values(MoonCycle.currentMoonPhases)">
+                        <tr>
+                            <td class="align-middle text-center tight p-2" data-bind="style: { 'background-color': $data.color }">
+                                <img src="" width="30px" data-bind="attr: { src: `assets/images/moonCycle/${MoonCyclePhase[$data.phase]}.png` }">
+                            </td>
+                            <td class="align-middle text-left" data-bind="text: $data.description,
+                                css: { 'bg-primary text-light': $data.phase === MoonCycle.currentMoonCyclePhase() }"></td>
+                            <td class="align-middle" data-bind="text: `+${MoonCycle.catchChanceBonus($data.phase)}%`,
+                                css: { 'bg-primary text-light': $data.phase === MoonCycle.currentMoonCyclePhase() }"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

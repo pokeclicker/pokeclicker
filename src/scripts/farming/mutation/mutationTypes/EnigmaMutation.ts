@@ -6,6 +6,7 @@
 class EnigmaMutation extends GrowMutation {
 
     hintsSeen: KnockoutObservable<boolean>[];
+    private lastIndex: KnockoutObservable<number>;
 
     constructor(mutationChance: number) {
         super(mutationChance, BerryType.Enigma, {
@@ -15,6 +16,7 @@ class EnigmaMutation extends GrowMutation {
         });
 
         this.hintsSeen = Array<boolean>(4).fill(false).map(val => ko.observable(val));
+        this.lastIndex = ko.observable(null);
     }
 
     /**
@@ -67,17 +69,29 @@ class EnigmaMutation extends GrowMutation {
         return [...new Array(4)].map((_) => SeededRand.fromArray(berryTypes));
     }
 
-    get hintIndex(): number {
-        SeededRand.seedWithDate(new Date());
-        return SeededRand.floor(4);
-    }
-
     /**
      * Handles getting the hint for this mutation for the Kanto Berry Master
      */
+    generateIndex(): void {
+        if (this.lastIndex()) {
+            return;
+        }
+        this.lastIndex(Rand.fromArray([...new Array(this.hintsSeen.length)].map((_, i) => i).filter(i => !this.hintsSeen[i]())));
+    }
+
+    resetIndex(): void {
+        this.lastIndex(null);
+    }
+
     get partialHint(): string {
-        const idx = this.hintIndex;
-        return `There's a mysterious berry that requires ${this.getHint(idx)}.`;
+        if (this.lastIndex() === null) {
+            if (this.hintsSeen.every(s => s())) {
+                return this.hint;
+            }
+            this.generateIndex();
+            this.hintsSeen[this.lastIndex()](true);
+        }
+        return `There's a mysterious berry that requires ${this.getHint(this.lastIndex())}.`;
     }
 
     private getHint(idx: number) {
@@ -123,20 +137,23 @@ class EnigmaMutation extends GrowMutation {
         return tempHint;
     }
 
-    toJSON(): boolean[] {
-        return this.hintsSeen.map(h => h());
+    toJSON(): any {
+        return {seen: this.hintsSeen.map(h => h()), last: this.lastIndex()};
     }
 
-    fromJSON(hintsSeen: boolean[]): void {
-        if (!hintsSeen || typeof hintsSeen !== 'object') {
-            return;
+    fromJSON(hints: any): void {
+        const hintsSeen = hints.seen;
+        if (Array.isArray(hintsSeen)) {
+            hintsSeen.forEach((value: boolean, index: number) => {
+                if (value) {
+                    this.hintSeen = true;
+                }
+                this.hintsSeen[index](value);
+            });
         }
-        (hintsSeen as boolean[]).forEach((value: boolean, index: number) => {
-            if (value) {
-                this.hintSeen = true;
-            }
-            this.hintsSeen[index](value);
-        });
+        if (hints.last !== null) {
+            this.lastIndex(hints.last);
+        }
     }
 
 }
