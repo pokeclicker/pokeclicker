@@ -79,6 +79,16 @@
                                 <tr data-bind="visible: Object.values(App.game.challenges.list).filter(c => c.active()).length > 0, template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideChallengeRelatedModules')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showGymGoAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showMuteButton')}"></tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-primary" data-bind="click: () => {
+                                            Settings.list.filter(s => s.name.startsWith('moduleHeight.')).forEach((setting) => {
+                                                const resizeId = setting.name.split('.')[1];
+                                                document.querySelector(`[data-resize-id='${resizeId}']`).style.height = `${setting.defaultValue}px`;
+                                            })
+                                        }">Reset Resizable Modules</button>
+                                    </td>
+                                </tr>
                             </tbody>
                             <thead>
                                 <tr><th colspan="2">Map Colors</th></tr>
@@ -102,14 +112,17 @@
                                 <tr>
                                     <td colspan="2">
                                         <button type="button" class="btn btn-primary" data-bind="click: () => {
-                                            Settings.list.filter(s => s.name.startsWith('moduleHeight.')).forEach((setting) => {
-                                                const resizeId = setting.name.split('.')[1];
-                                                document.querySelector(`[data-resize-id='${resizeId}']`).style.height = `${setting.defaultValue}px`;
-                                            })
-                                        }">Reset Resizable Modules</button>
+                                            const mapAreaStateOrder = Settings.getSetting('mapAreaStateOrder');
+                                            mapAreaStateOrder.set(mapAreaStateOrder.defaultValue);
+                                        }">Reset Order</button>
+                                        <button type="button" class="btn btn-primary" data-bind="click: () => {
+                                            Settings.getSetting('mapAreaStateOrder').value.map(status => 
+                                                Settings.getSetting(`--${areaStatus[status]}`)
+                                            ).forEach(setting => setting.set(setting.defaultValue));
+                                        }">Reset Colors</button>
                                     </td>
                                 </tr>
-                            </thead>
+                            </tbody>
                         </table>
                     </div>
 
