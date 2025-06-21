@@ -85,7 +85,7 @@ const playerSpriteMoveHandler = {
 const sortableControllers = new WeakMap();
 const sortableHandler = {
     init: function (element, valueAccessor, allBindings, viewModel) {
-        const value = valueAccessor();
+        const bindingParameters = valueAccessor();
 
         // Create Sortable instance
         const options = {
@@ -99,14 +99,14 @@ const sortableHandler = {
             getId: (x) => x,
 
             // override with options passed through knockout binding
-            ...(value.options ?? {}),
+            ...(bindingParameters.options ?? {}),
 
             // handle updating underlying knockout array when moving items
             onEnd: (evt, originalEvt) => {
                 // If an onEnd function was supplied, call that first
-                value.options?.onEnd?.(evt, originalEvt);
+                bindingParameters.options?.onEnd?.(evt, originalEvt);
 
-                const list = [...value.foreach()]; // shallow copy of the observable array
+                const list = [...bindingParameters.foreach()]; // shallow copy of the observable array
                 const sortableList = sortableControllers.get(element).toArray();
 
                 // Find the current indices of each element in the UI and sort the underlying array to match
@@ -116,15 +116,20 @@ const sortableHandler = {
                 list.sort((a, b) => newIndices.get(a)  - newIndices.get(b));
 
                 // Update the observable array's order
-                value.foreach(list);
+                bindingParameters.foreach(list);
             },
+        };
+        // Prevent reordering fixed elements
+        if (options.filter) {
+            options.preventOnFilter = false;
+            options.onMove = (evt, originalEvt) => !evt.related.matches(options.filter);
         };
         sortableControllers.set(element, Sortable.create(element, options));
 
         // Apply the sortable binding
         ko.applyBindingsToNode(element, {
             template: {
-                foreach: value.foreach,
+                foreach: bindingParameters.foreach,
                 afterRender(nodes, el) {
                     nodes.forEach((n) => {
                         if (n instanceof Element) {
@@ -142,8 +147,9 @@ const sortableHandler = {
         return { controlsDescendantBindings: true };
     },
     update: function (element, valueAccessor) {
-        // When knockout makes changes to the UI, check that it still matches the internal order
-        // This may not be necessary with the improved handling in onEnd() above, but better safe than sorry 
+        // When the observable array changes, keep the UI order synced
+        // It should always match for changes via the user dragging elements
+        // but this lets us safely change the order via code
         const sortInstance = sortableControllers.get(element);
         const internalOrder = valueAccessor().foreach().map(x => String(sortInstance.options.getId(x)));
         const visibleOrder = sortInstance.toArray();
