@@ -20,11 +20,11 @@
                     </thead>
                     <tbody data-bind="sortable: {
                         foreach: PokemonCategories.categories,
+                        getDataId: (cat) => cat.id,
                         options: {
                             group: 'pokemonCategories',
                             draggable: '.category-row',
                             handle: '.category-drag-handle',
-                            getId: (cat) => cat.id,
                         }}">
                         <tr class="category-row">
                             <!-- ko if: $data.id != 0 -->

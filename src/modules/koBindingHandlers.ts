@@ -79,13 +79,14 @@ const playerSpriteMoveHandler = {
  * 
  * Syntax: sortable: { foreach: <observable array>, options: { ... } }
  *  - foreach: the observable array used for the foreach binding
+ *  - dataToId: optional function that maps array elements to unique (when converted to strings) IDs 
  *  - options: optional object for Sortablejs options
- *    - getId: optional function that maps array elements to unique (when converted to strings) IDs 
  */
 const sortableControllers = new WeakMap();
 const sortableHandler = {
     init: function (element, valueAccessor, allBindings, viewModel) {
         const bindingParameters = valueAccessor();
+        const getDataId = bindingParameters.getDataId ? (data) => String(bindingParameters.getDataId(data)) : (data) => String(data);
 
         // Create Sortable instance
         const options = {
@@ -96,10 +97,12 @@ const sortableHandler = {
             delayOnTouchOnly: true,
             touchStartThreshold: 20,
             dataIdAttr: 'data-sortable-id',
-            getId: (x) => x,
-
+            
             // override with options passed through knockout binding
             ...(bindingParameters.options ?? {}),
+
+            // not used by Sortable, but putting it in the instance anyway for ease of access
+            getDataId,
 
             // handle updating underlying knockout array when moving items
             onEnd: (evt, originalEvt) => {
@@ -112,14 +115,14 @@ const sortableHandler = {
                 // Find the current indices of each element in the UI and sort the underlying array to match
                 // This avoids potential desync issues
                 const newIndices = new Map();
-                list.forEach(val => newIndices.set(val, sortableList.indexOf(String(options.getId(val)))));
+                list.forEach(val => newIndices.set(val, sortableList.indexOf(options.getDataId(val))));
                 list.sort((a, b) => newIndices.get(a)  - newIndices.get(b));
 
                 // Update the observable array's order
                 bindingParameters.foreach(list);
             },
         };
-        // Prevent reordering fixed elements
+        // If some elements aren't draggable, prevent dragging other elements onto them
         if (options.filter) {
             options.preventOnFilter = false;
             options.onMove = (evt, originalEvt) => !evt.related.matches(options.filter);
@@ -133,13 +136,13 @@ const sortableHandler = {
                 afterRender(nodes, el) {
                     nodes.forEach((n) => {
                         if (n instanceof Element) {
-                            n.setAttribute(options.dataIdAttr, options.getId(el));
+                            n.setAttribute(options.dataIdAttr, options.getDataId(el));
                         }
                     });
                 },
                 beforeRemove(node: HTMLElement, idx, el) {
                     // Sortable may have cloned the node, so we need to get the real one
-                    const found = element.querySelector(`[${options.dataIdAttr}="${options.getId(el)}"]`);
+                    const found = element.querySelector(`[${options.dataIdAttr}="${options.getDataId(el)}"]`);
                     (found ?? node)?.remove();
                 },
             },
@@ -151,7 +154,7 @@ const sortableHandler = {
         // It should always match for changes via the user dragging elements
         // but this lets us safely change the order via code
         const sortInstance = sortableControllers.get(element);
-        const internalOrder = valueAccessor().foreach().map(x => String(sortInstance.options.getId(x)));
+        const internalOrder = valueAccessor().foreach().map(x => sortInstance.options.getDataId(x));
         const visibleOrder = sortInstance.toArray();
         if (internalOrder.some((x, i) => x !== visibleOrder[i])) {
             // Out of sync, reorder the UI to match the internal model
