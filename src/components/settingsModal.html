@@ -99,12 +99,23 @@
                                 options: {
                                     group: 'mapAreaStateOrder',
                                     draggable: '.mapAreaStateWrapper',
-                                    handle: '.mapAreaStateWrapper td:first-of-type',
+                                    handle: '.SortableColorChoiceSetting-handle',
                                     dataIdAttr: 'data-key',
-                                }
+                                    filter: '.sortable-fixed-position',
+                                },
                             }">
-                            <!-- ko with: Settings.getSetting(`--${areaStatus[$data]}`), as: 'setting' -->
-                                <tr class="mapAreaStateWrapper" data-bind="visible: setting.isUnlocked(), attr: { 'data-areastate': areaStatus[$parent] }, template: { name: 'ColorChoiceSettingTemplate', data: setting}"></tr>
+                            <!-- ko let: {
+                                    setting: Settings.getSetting(`--${areaStatus[$data]}`),
+                                    isFixed: [areaStatus.locked, areaStatus.incomplete, areaStatus.questAtLocation].includes($data),
+                                } -->
+                                <tr class="mapAreaStateWrapper" data-bind="visible: setting.isUnlocked(),
+                                    class: isFixed ? 'sortable-fixed-position' : '',
+                                    attr: { 'data-areastate': areaStatus[$data] },
+                                    template: {
+                                        name: 'SortableColorChoiceSettingTemplate',
+                                        data: { setting, isFixed },
+                                    }">
+                                </tr>
                             <!-- /ko -->
                             </tbody>
                             <tbody>
@@ -588,6 +599,22 @@
         trigger: 'hover',
     }">
         <label style="width:100%; min-height: 36px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: $data.observableValue"/></label>
+    </td>
+</script>
+
+<script type="text/html" id="SortableColorChoiceSettingTemplate">
+    <td class="p-0" style="display:flex;">
+        <div style="width:2.5em;" data-bind="if: !$data.isFixed">
+            <div class="p-2 SortableColorChoiceSetting-handle">⠿</div>
+        </div>
+        <div class="p-2" style="flex:1;" data-bind="text: `${$data.setting.displayName}:`">setting name</div>
+    </td>
+    <td class="p-0" data-bind="style: { background: $data.setting.observableValue },
+    tooltip: {
+        title: 'Set to white for transparent',
+        trigger: 'hover',
+    }">
+        <label style="width:100%; min-height: 36px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: $data.setting.observableValue"/></label>
     </td>
 </script>
 

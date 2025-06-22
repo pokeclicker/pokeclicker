@@ -125,8 +125,8 @@ const sortableHandler = {
         // If some elements aren't draggable, prevent dragging other elements onto them
         if (options.filter) {
             options.preventOnFilter = false;
-            options.onMove = (evt, originalEvt) => !evt.related.matches(options.filter);
-        };
+            options.onMove = (evt) => !evt.related.matches(options.filter);
+        }
         sortableControllers.set(element, Sortable.create(element, options));
 
         // Apply the sortable binding
