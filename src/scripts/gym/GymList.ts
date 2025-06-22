@@ -91,7 +91,6 @@ GymList['Fuchsia City'] = new Gym(
         ]),
     ],
     () => {
-        App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);
         App.game.quests.getQuestLine('Mining Expedition').beginQuest(0, undefined, true);
     }
 );
@@ -132,7 +131,6 @@ GymList['Viridian City'] = new Gym(
         new QuestLineCompletedRequirement('Bill\'s Errand'),
     ],
     () => {
-        App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
         App.game.quests.getQuestLine('Persons of Interest').beginQuest(0, undefined, true);
     },
     undefined,

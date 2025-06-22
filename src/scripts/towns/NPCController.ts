@@ -3,7 +3,7 @@ class NPCController {
     private static modalState: any;
     public static openDialog(npc: NPC) {
         this.selectedNPC(npc);
-        $('#npc-modal').modal();
+        $('#npcModal').modal();
         npc.setTalkedTo();
         if (!this.modalState) {
             this.modalState = DisplayObservables.modalState['npc-modalObservable'].subscribe((value: BootstrapState) => {

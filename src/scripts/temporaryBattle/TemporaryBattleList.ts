@@ -3901,7 +3901,7 @@ TemporaryBattleList['Hau 2'] = new TemporaryBattle(
         imageName: 'Rival Hau',
         /* Uncomment once Z-Moves are ready
         firstTimeRewardFunction: () => {
-            App.game.keyItems.gainKeyItem(KeyItemType['Z-Power_Ring'], true);
+            App.game.keyItems.gainKeyItem(KeyItemType['Z-Power_Ring']);
         },*/
     }
 );

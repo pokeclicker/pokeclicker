@@ -54,4 +54,11 @@ export default class GameLoadState {
             });
         }
     }
+
+    /**
+     * Shorthand version of onLoadState() to check if the game is fully loaded
+     */
+    static onRunning(callback: () => void) {
+        GameLoadState.onLoadState(LoadingStates.running, callback);
+    }
 }
