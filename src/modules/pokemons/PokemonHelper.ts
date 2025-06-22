@@ -128,10 +128,9 @@ export function displayName(englishName: string): Computed<string> {
     return App.translation.get(englishName, 'pokemon');
 }
 
-export function matchPokemonByNames(pattern: RegExp | string, pokemonName: PokemonNameType, pokemon?: TmpPartyPokemonType) {
-    const searchPattern = pattern instanceof RegExp ? pattern : GameHelper.safelyBuildRegex(pattern);
+export function matchPokemonByNames(pattern: RegExp, pokemonName: PokemonNameType, pokemon?: TmpPartyPokemonType) {
     const partyName = (pokemon || App.game.party.getPokemonByName(pokemonName))?.displayName;
-    return searchPattern.test(displayName(pokemonName)()) || searchPattern.test(pokemonName) || (partyName && searchPattern.test(partyName));
+    return pattern.test(displayName(pokemonName)()) || pattern.test(pokemonName) || (partyName && pattern.test(partyName));
 }
 
 export function hasMegaEvolution(pokemonName: PokemonNameType): boolean {
