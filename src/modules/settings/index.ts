@@ -503,7 +503,7 @@ Settings.add(new Setting('discord-rp.large-image', 'Discord main image',
         new SettingOption('None', ''),
         new SettingOption('PokéClicker Logo', 'pokeclickerlogo'),
         new SettingOption('Current Area Environment', 'current-environment'),
-        ...Object.entries(BattleBackgroundImage).map(([name, code]) => new SettingOption(`${name} Environment`, `background-${code}`)),
+        ...Object.entries(BattleBackgroundImage).map(([name, code]) => new SettingOption(`${name} Environment`, code ? `background-${code}` : 'default')),
     ],
     'pokeclickerlogo'));
 Settings.add(new Setting('discord-rp.small-image', 'Discord small image',
