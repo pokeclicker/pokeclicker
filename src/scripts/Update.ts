@@ -2938,7 +2938,8 @@ class Update implements Saveable {
             const categoryNoneIndex = saveData.categories.categories.findIndex(c => c.id === 0);
             if (categoryNoneIndex > 0) {
                 const cats = saveData.categories.categories;
-                saveData.categories.categories = [cats[categoryNoneIndex], ...cats.toSpliced(categoryNoneIndex, 1)];
+                const noneCategory = cats.splice(categoryNoneIndex, 1)[0];
+                saveData.categories.categories = [noneCategory, ...cats];
             }
         },
     };
