@@ -2933,6 +2933,14 @@ class Update implements Saveable {
 
             // Set file creation time to zero for existing files
             playerData._createdTime = 0;
+
+            // None now locked as the first category
+            const categoryNoneIndex = saveData.categories.categories.findIndex(c => c.id === 0);
+            if (categoryNoneIndex > 0) {
+                const cats = saveData.categories.categories;
+                const noneCategory = cats.splice(categoryNoneIndex, 1)[0];
+                saveData.categories.categories = [noneCategory, ...cats];
+            }
         },
     };
 
