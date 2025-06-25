@@ -17,6 +17,9 @@ class BattleCafe extends TownContent {
 
     public areaStatus(): areaStatus[] {
         const status = super.areaStatus();
+        if (status.includes(areaStatus.locked)) {
+            return [areaStatus.locked];
+        }
         const pokerusUnlocked = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked();
         const alcremieList = Object.values(BattleCafeController.evolutions).flatMap(sweet => Object.values(sweet));
         let incomplete = false;

@@ -18,6 +18,9 @@ class BerryMasterShop extends Shop {
 
     public areaStatus() {
         const itemStatusArray = super.areaStatus();
+        if (itemStatusArray.includes(areaStatus.locked)) {
+            return [areaStatus.locked];
+        }
 
         const berryListIndex = GameConstants.BerryTraderLocations[this.parent.name];
         if (berryListIndex > -1) {
