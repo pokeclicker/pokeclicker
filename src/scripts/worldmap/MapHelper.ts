@@ -167,9 +167,6 @@ class MapHelper {
         if (!RouteHelper.routeCompleted(route, region, false)) {
             states.add(areaStatus.uncaughtPokemon);
         }
-        if (!RouteHelper.routeCompleted(route, region, true) && !RouteHelper.isAchievementsComplete(route, region)) {
-            states.add(areaStatus.uncaughtShinyPokemonAndMissingAchievement);
-        }
         if (!RouteHelper.routeCompleted(route, region, true)) {
             states.add(areaStatus.uncaughtShinyPokemon);
         }
@@ -211,7 +208,7 @@ class MapHelper {
         const states = new Set([areaStatus.completed]);
         // Check if this location is locked
         if (!MapHelper.accessToTown(townName)) {
-            states.add(areaStatus.locked);
+            return areaStatus[areaStatus.locked];
         }
         // Is this location a dungeon
         if (dungeonList[townName] && dungeonList[townName].isUnlocked()) {
@@ -243,17 +240,13 @@ class MapHelper {
         }
         const town = TownList[townName];
         town.content.forEach(c => {
-            c.areaStatus().forEach(s => {
-            // If the town itself is not locked, it should never show locked
-                if (s != areaStatus.locked) {
+            const s = c.areaStatus();
+            if (!s.includes(areaStatus.locked)) {
+                s.forEach(s => {
                     states.add(s);
-                }
-            });
+                });
+            }
         });
-
-        if (states.has(areaStatus.uncaughtShinyPokemon) && states.has(areaStatus.missingAchievement)) {
-            states.add(areaStatus.uncaughtShinyPokemonAndMissingAchievement);
-        }
         const statusPriority = Settings.getSetting('mapAreaStateOrder').observableValue();
         const importantState = statusPriority.find(state => states.has(state));
         return areaStatus[importantState];
