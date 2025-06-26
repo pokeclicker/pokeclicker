@@ -2941,6 +2941,16 @@ class Update implements Saveable {
                 const noneCategory = cats.splice(categoryNoneIndex, 1)[0];
                 saveData.categories.categories = [noneCategory, ...cats];
             }
+
+            // Mark new Pokemon Gifts as claimed if they are already owned
+            const ownsFloetteEternal = saveData.party.caughtPokemon.find((p: PartyPokemon) => p.id === 670.05);
+            if (ownsFloetteEternal) {
+                saveData.statistics.npcTalkedTo[GameHelper.hash('eternalfloettegift')] = 1;
+            }
+            const ownsMagearnaOriginal = saveData.party.caughtPokemon.find((p: PartyPokemon) => p.id === 801.01);
+            if (ownsMagearnaOriginal) {
+                saveData.statistics.npcTalkedTo[GameHelper.hash('magearnamysterygift')] = 1;
+            }
         },
     };
 
