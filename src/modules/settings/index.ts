@@ -24,6 +24,7 @@ import {
     getDungeonIndex,
     Pokerus,
     ShadowStatus,
+    BattleBackgroundImage,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 import Language, { LanguageNames } from '../translation/Language';
@@ -527,17 +528,7 @@ Settings.add(new Setting('discord-rp.large-image', 'Discord main image',
         new SettingOption('None', ''),
         new SettingOption('PokéClicker Logo', 'pokeclickerlogo'),
         new SettingOption('Current Area Environment', 'current-environment'),
-        new SettingOption('Cave Environment', 'background-cave'),
-        new SettingOption('Cave Gem Environment', 'background-cave-gem'),
-        new SettingOption('Fire Environment', 'background-fire'),
-        new SettingOption('Forest Environment', 'background-forest'),
-        new SettingOption('Grass Environment', 'background-grass'),
-        new SettingOption('Desert Environment', 'background-desert'),
-        new SettingOption('Graveyard Environment', 'background-graveyard'),
-        new SettingOption('Ice Environment', 'background-ice'),
-        new SettingOption('Mansion Environment', 'background-mansion'),
-        new SettingOption('Power Plant Environment', 'background-power-plant'),
-        new SettingOption('Water Environment', 'background-water'),
+        ...Object.entries(BattleBackgroundImage).map(([name, code]) => new SettingOption(`${name} Environment`, code ? `background-${code}` : 'grass')),
     ],
     'pokeclickerlogo'));
 Settings.add(new Setting('discord-rp.small-image', 'Discord small image',
