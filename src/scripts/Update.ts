@@ -3418,19 +3418,17 @@ class Update implements Saveable {
     }
 
     removeMissingNo(saveData) {
-        const idx = saveData.party.caughtPokemon.findIndex(p => p.id === 0);
-        if (idx === -1) {
-            return;
+        // remove from party
+        let idx;
+        while ((idx = saveData.party.caughtPokemon.findIndex(p => p.id === 0)) !== -1) {
+            saveData.party.caughtPokemon.splice(idx, 1);
         }
 
-        // remove from party
-        saveData.party.caughtPokemon.splice(idx, 1);
-
         // remove from breeding queue
-        saveData.breeding.queueList = saveData.breeding.queueList.filter(p => p !== 0);
+        saveData.breeding.queueList = saveData.breeding.queueList.filter(p => Array.isArray(p) || pokemonMap[p].id !== 0);
 
         // remove from egg slot
-        saveData.breeding.eggList = saveData.breeding.eggList.map(e => e.pokemon === 0 && e.type !== -1 ? null : e);
+        saveData.breeding.eggList = saveData.breeding.eggList.map(e => pokemonMap[e.pokemon].id === 0 && e.type !== -1 ? null : e);
     }
 
     getPlayerData() {
