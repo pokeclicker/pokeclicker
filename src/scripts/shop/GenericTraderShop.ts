@@ -17,6 +17,9 @@ class GenericTraderShop extends Shop {
 
     public areaStatus() {
         const itemStatusArray = super.areaStatus();
+        if (itemStatusArray.includes(areaStatus.locked)) {
+            return [areaStatus.locked];
+        }
         const deals = GenericDeal.getDeals(this.traderID)?.();
 
         if ((deals?.length || 0) > 0) {
