@@ -17,6 +17,9 @@ class GemMasterShop extends Shop {
 
     public areaStatus() {
         const itemStatusArray = super.areaStatus();
+        if (itemStatusArray.includes(areaStatus.locked)) {
+            return [areaStatus.locked];
+        }
 
         const deals = GemDeals.getDeals(this.shop);
         if (deals) {
