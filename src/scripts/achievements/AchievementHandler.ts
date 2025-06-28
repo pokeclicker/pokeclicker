@@ -7,7 +7,7 @@ class AchievementHandler {
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     public static achievementListFiltered: KnockoutObservableArray<Achievement> = ko.observableArray([]);
     public static numberOfTabs: KnockoutObservable<number> = ko.observable(0);
-    public static _cachedAchievementBonus: KnockoutObservable<number> = ko.observable(0);
+    public static _cachedAchievementBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 4 });
 
     public static setNavigateIndex(index: number): void {
         if (index < 0 || index >= AchievementHandler.numberOfTabs()) {
