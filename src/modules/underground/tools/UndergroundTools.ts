@@ -57,7 +57,7 @@ export default class UndergroundTools {
             new UndergroundTool({
                 id: UndergroundToolType.Bomb,
                 displayName: 'Bomb',
-                description: 'Mines a maximum of 2 layers on each of 10 random tiles (including fully mined tiles). The number of tiles increases when equipped with the Explosive Charge Oak Item. Items cannot be mined with the Bomb tool and will instead be destroyed. You will not receive XP for these items.',
+                description: 'Mines a maximum of 2 layers on each of 10 random tiles (including fully mined tiles). The number of tiles increases when equipped with the Explosive Charge Oak Item. Items mined with the Bomb tool will have a high chance of getting destroyed in the process. You will not receive XP for destroyed items.',
                 durabilityPerUse: 0.18,
                 itemDestroyChance: 0.875,
                 action: () => {
