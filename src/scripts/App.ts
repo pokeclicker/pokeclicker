@@ -18,8 +18,6 @@ class App {
         }
 
         Preload.load(App.debug).then(() => {
-            ko.options.deferUpdates = true;
-
             console.log(`[${GameConstants.formatDate(new Date())}] %cLoading Game Data..`, 'color:#8e44ad;font-weight:900;');
 
             App.game = new Game();
