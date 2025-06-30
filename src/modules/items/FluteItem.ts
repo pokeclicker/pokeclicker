@@ -37,7 +37,7 @@ export default class FluteItem extends Item {
     }
 
     public getMultiplier() {
-        return (this.multiplyBy - 1) * (AchievementHandler.achievementBonus() + 1) + 1;
+        return Number(((this.multiplyBy - 1) * (AchievementHandler.achievementBonus() + 1) + 1).toFixed(4));
     }
 
     isSoldOut(): boolean {

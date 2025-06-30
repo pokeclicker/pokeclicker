@@ -103,14 +103,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Achievement Bonus</td>
-                                    <td class="text-center">
-                                        <code data-bind="text: AchievementHandler.achievementBonus()"></code>
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td colspan="2" class="text-center">
-                                        <code data-bind="html: `(1 + ${$data.caughtPokemon} + ${$data.shinyPokemon} + ${$data.resistantPokemon} + ${$data.purifiedPokemon})<sup>1.4</sup> * (1 + ${AchievementHandler.achievementBonus()})`"></code>
+                                        <code data-bind="html: `(1 + ${$data.caughtPokemon} + ${$data.shinyPokemon} + ${$data.resistantPokemon} + ${$data.purifiedPokemon})<sup>1.4</sup>`"></code>
                                     </td>
                                 </tr>
                                 <tr>
@@ -124,6 +118,12 @@
                         <h5>Modifiers</h5>
                         <table class="table table-bordered table-sm mb-0">
                             <tbody>
+                                <tr>
+                                    <td>Achievement Bonus</td>
+                                    <td class="text-center">
+                                        <code data-bind="text: `×(1 + ${AchievementHandler.achievementBonus()})`"></code>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td class="w-50">xClick</td>
                                     <td class="text-center w-50">
@@ -144,7 +144,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="text-center">
-                                        <code data-bind="text: `${$data.baseClickAttack} * ${$data.xClickModifier} * ${$data.rockyHelmetModifier} * ${$data.blackFluteModifier}`"></code>
+                                        <code data-bind="text: `${$data.baseClickAttack} * (1 + ${AchievementHandler.achievementBonus()}) * ${$data.xClickModifier} * ${$data.rockyHelmetModifier} * ${$data.blackFluteModifier}`"></code>
                                     </td>
                                 </tr>
                                 <tr>
