@@ -160,11 +160,11 @@
                                         click: () => { App.game.underground.battery.discharge() }
                                     ">
                                         <div class="card-body bg-secondary rounded border border-secondary text-center p-1">
-                                            <div class="underground-tool__background-gradient conic" data-bind="style: { '--gradient-percentage': (App.game.underground.battery.charges / App.game.underground.battery.maxCharges).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }">
+                                            <div class="underground-tool__background-gradient conic" data-bind="style: { '--gradient-percentage': Math.min(App.game.underground.battery.charges / App.game.underground.battery.maxCharges, 1).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }">
                                                 <div class="bg-secondary p-1 p-xl-2">
                                                     <img alt="" width="27px" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItemType[OakItemType.Cell_Battery] + '.png'}">
                                                     <div class="small font-weight-bold">
-                                                        <knockout data-bind="text: App.game.underground.battery.charges, css: { 'text-warning': App.game.underground.battery.charges < App.game.underground.battery.maxCharges }"></knockout> / <knockout data-bind="text: App.game.underground.battery.maxCharges"></knockout>
+                                                        <knockout data-bind="text: Math.min(App.game.underground.battery.charges, App.game.underground.battery.maxCharges), css: { 'text-warning': App.game.underground.battery.charges < App.game.underground.battery.maxCharges }"></knockout> / <knockout data-bind="text: App.game.underground.battery.maxCharges"></knockout>
                                                     </div>
                                                 </div>
                                             </div>
