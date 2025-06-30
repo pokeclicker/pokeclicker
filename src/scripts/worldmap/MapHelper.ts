@@ -247,6 +247,10 @@ class MapHelper {
                 });
             }
         });
+        town.npcs?.filter(npc => npc instanceof PokemonGiftNPC && npc.isVisible()).forEach((npc: PokemonGiftNPC) => {
+            npc.areaStatus().forEach(s => states.add(s));
+        });
+
         const statusPriority = Settings.getSetting('mapAreaStateOrder').observableValue();
         const importantState = statusPriority.find(state => states.has(state));
         return areaStatus[importantState];
