@@ -468,12 +468,10 @@ const SaffronBreeder = new NPC('Breeder', [
     requirement: new GymBadgeRequirement(BadgeEnums.Earth),
 });
 
-const LaprasGift = new GiftNPC('Silph Co. Employee', [
+const LaprasGift = new PokemonGiftNPC('Silph Co. Employee', [
     'Oh! Hi! You\'re not a member of Team Rocket! You came to save us? Why thank you!',
     'I want you to have this Pokémon for saving us.',
-], () => {
-    App.game.party.gainPokemonByName('Lapras', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-}, 'assets/images/pokemon/131.png', { saveKey: 'laprasgift', image: 'assets/images/npcs/Office Worker (male).png', requirement: new MultiRequirement([new TemporaryBattleRequirement('Blue 5'), new ObtainedPokemonRequirement('Lapras', true)]) });
+], 'Lapras', 'assets/images/pokemon/131.png', { saveKey: 'laprasgift', image: 'assets/images/npcs/Office Worker (male).png', requirement: new MultiRequirement([new TemporaryBattleRequirement('Blue 5'), new ObtainedPokemonRequirement('Lapras', true)]) });
 
 const FuchsiaKantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
     'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
@@ -6285,13 +6283,11 @@ const TeamFlareBossLysandre1 = new NPC('Team Flare Boss Lysandre', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 31), new QuestLineStepCompletedRequirement('A Beautiful World', 33, GameConstants.AchievementOption.less)]),
 });
 
-const EternalFloetteGift = new GiftNPC('AZ', [
+const EternalFloetteGift = new PokemonGiftNPC('AZ', [
     'Floette... It\'s been 3,000 years...',
     'And with you... another of your kind?',
     'Ah... it seems to be interested in you, $playername$. Would you like to take it with you?',
-], () => {
-    App.game.party.gainPokemonByName('Floette (Eternal)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-}, 'assets/images/pokemon/670.05.png', { saveKey: 'eternalfloettegift', image: 'assets/images/npcs/AZ.png', requirement: new QuestLineCompletedRequirement('A Beautiful World') });
+], 'Floette (Eternal)', 'assets/images/pokemon/670.05.png', { saveKey: 'eternalfloettegift', image: 'assets/images/npcs/AZ.png', requirement: new QuestLineCompletedRequirement('A Beautiful World') });
 
 const CouriwayOldGentlemanHarold = new NPC('Old Gentleman Harold', [
     'I love going on walks at <b>dusk</b>. It\'s my favourite part of the day, everything\'s so calm...',
@@ -6320,11 +6316,9 @@ const Spelunker = new NPC('Spelunker', [
     'That would be big news, sure to be reported on local bulletin boards!',
 ]);
 
-const ExamineAegislash = new GiftNPC('Millis and Argus Steels\' Aeglislash', [
+const ExamineAegislash = new PokemonGiftNPC('Millis and Argus Steels\' Aeglislash', [
     '<i>Aegislash wants to join you on your adventure.</i>',
-], () => {
-    App.game.party.gainPokemonByName('Aegislash (Blade)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-}, 'assets/images/pokemon/681.01.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Aegislash (Blade)', true)]) });
+], 'Aegislash (Blade)', 'assets/images/pokemon/681.01.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Aegislash (Blade)', true)]) });
 
 const ThanksDiancie = new NPC('Princess Diancie', [
     'Thank you for your help saving the Diamond Domain. I will be waiting for you in Reflection Cave.',
@@ -8646,11 +8640,9 @@ const EnergyPlantRose = new NPC('Chairman Rose', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 15), new QuestLineStepCompletedRequirement('The Darkest Day', 17, GameConstants.AchievementOption.less)]),
 });
 
-const EternatusCatch = new GiftNPC('Catch Eternatus', [
+const EternatusCatch = new PokemonGiftNPC('Catch Eternatus', [
     'You caught Eternatus!',
-], () => {
-    App.game.party.gainPokemonByName('Eternatus', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-}, 'assets/images/pokemon/890.png', { saveKey: 'eternatuscatch', requirement: new MultiRequirement([new TemporaryBattleRequirement('The Darkest Day'), new ObtainedPokemonRequirement('Eternatus', true)]) });
+], 'Eternatus', 'assets/images/pokemon/890.png', { saveKey: 'eternatuscatch', requirement: new MultiRequirement([new TemporaryBattleRequirement('The Darkest Day'), new ObtainedPokemonRequirement('Eternatus', true)]) });
 
 const Leon = new NPC('Leon', [
     'My matches are always sold out, but this... I\'ve never seen a crowd this wild!',
@@ -9152,11 +9144,9 @@ const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     //*TODO*: Change second line to this text when Paldea is available: 'Now be on your way, the illustrious Paldea region awaits over the horizons.',
     'assets/images/npcs/Professor Magnolia.png');
 
-const MagearnaMysteryGift = new GiftNPC('Mystery Gift', [
+const MagearnaMysteryGift = new PokemonGiftNPC('Mystery Gift', [
     'You have received a Mystery Gift for completing the National Shiny Dex!',
-], () => {
-    App.game.party.gainPokemonByName('Magearna (Original Color)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-}, 'assets/images/pokemon/801.01.png', { saveKey: 'magearnamysterygift', requirement: new MultiRequirement([
+], 'Magearna (Original Color)', 'assets/images/pokemon/801.01.png', { saveKey: 'magearnamysterygift', requirement: new MultiRequirement([
     new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kanto),
     new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.johto),
     new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.hoenn),

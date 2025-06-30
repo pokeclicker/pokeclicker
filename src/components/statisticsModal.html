@@ -26,6 +26,10 @@
                             </thead>
                             <tbody>
                             <tr>
+                                <td class="text-left">Start Date/Time</td>
+                                <td class="text-left tight text-muted" data-bind="text: player.createdTime ? new Date(player.createdTime).toLocaleString() : 'N/A'"></td>
+                            </tr>
+                            <tr>
                                 <td class="text-left">Time Played</td>
                                 <td class="text-left tight text-muted" data-bind="html: GameConstants.formatSecondsToTime(App.game.statistics['secondsPlayed']())">-</td>
                             </tr>

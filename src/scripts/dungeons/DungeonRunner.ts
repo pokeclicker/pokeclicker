@@ -142,7 +142,7 @@ class DungeonRunner {
     public static handleInteraction(source: GameConstants.DungeonInteractionSource = GameConstants.DungeonInteractionSource.Click) {
         if (DungeonRunner.fighting() && !DungeonBattle.catching() && source === GameConstants.DungeonInteractionSource.Click) {
             DungeonBattle.clickAttack();
-        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.entrance && source !== GameConstants.DungeonInteractionSource.HeldKeybind && !DungeonGuides.hired()) {
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.entrance && (source === GameConstants.DungeonInteractionSource.Click || source === GameConstants.DungeonInteractionSource.Keybind) && !DungeonGuides.hired()) {
             DungeonRunner.dungeonLeave();
         } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.chest) {
             DungeonRunner.openChest();

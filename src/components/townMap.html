@@ -86,8 +86,8 @@
                 @import "regionMaps/KalosSVG.html"
                 @import "regionMaps/AlolaSVG.html"
                 @import "regionMaps/GalarSVG.html"
-                @import "regionMaps/HisuiSVG.html"
-                @import "regionMaps/PaldeaSVG.html"
+                @importif $DEVELOPMENT "regionMaps/HisuiSVG.html"
+                @importif $DEVELOPMENT "regionMaps/PaldeaSVG.html"
 
                 <g id="playerSprite">
                     <!-- This group is cleared actively via koExtenders.ts added to fix #3358 -->
