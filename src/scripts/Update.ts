@@ -3428,7 +3428,7 @@ class Update implements Saveable {
         saveData.breeding.queueList = saveData.breeding.queueList.filter(p => Array.isArray(p) || pokemonMap[p].id !== 0);
 
         // remove from egg slot
-        saveData.breeding.eggList = saveData.breeding.eggList.map(e => pokemonMap[e.pokemon].id === 0 && e.type !== -1 ? null : e);
+        saveData.breeding.eggList = saveData.breeding.eggList.map(e => e === null || (pokemonMap[e.pokemon].id === 0 && e.type !== -1) ? null : e);
     }
 
     getPlayerData() {
