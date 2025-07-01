@@ -66,8 +66,10 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         <div class="form-row text-left">
                                             <div class="form-group col-lg-12 col-12">
                                                 <label for="breeding-filter-nameID">Name or ID</label>
-                                                <input id="breeding-filter-nameID" autocomplete="off" class="form-control" placeholder="Search here"
-                                                    oninput="BreedingController.formatSearch(this.value)" data-bind="value: BreedingController.getSearchString()" />
+                                                <input id="breeding-filter-nameID" autocomplete="off" class="form-control"
+                                                    oninput="BreedingController.formatSearch(this.value)"
+                                                    data-bind="value: BreedingController.getSearchString(),
+                                                        attr: { placeholder: `${PokemonHelper.displayName('Bulbasaur')()} or 1` }"/>
                                             </div>
 
                                             <div class="form-group col-lg-6 col-6">
