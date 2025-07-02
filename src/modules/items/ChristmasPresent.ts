@@ -3,12 +3,12 @@ import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
 import Rand from '../utilities/Rand';
 import Amount from '../wallet/Amount';
-import Item from './Item';
+import EventCollectibleItem from './EventCollectibleItem';
 
-export default class ChristmasPresent extends Item {
+export default class ChristmasPresent extends EventCollectibleItem {
 
     constructor(public size: number = 1) {
-        super('Christmas_present', undefined, undefined, undefined, 'Christmas Present');
+        super('Christmas_present', 'Christmas Present', 'A lovely Christmas present you opened.', 'Merry Christmas!');
     }
 
     public gain() {
@@ -30,9 +30,5 @@ export default class ChristmasPresent extends Item {
             image: this.image,
             setting: NotificationConstants.NotificationSetting.Items.dropped_item,
         });
-    }
-
-    get description(): string {
-        return 'A lovely Christmas Present.';
     }
 }
