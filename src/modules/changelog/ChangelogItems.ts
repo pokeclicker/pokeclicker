@@ -11,7 +11,7 @@ import ChangelogUpdate from './ChangelogUpdate';
 const ChangelogItems = [
     // note that month is 0 indexed
     // v0.10.24
-    new ChangelogUpdate('v0.10.24', new Date(2025, 6, 1)),
+    new ChangelogUpdate('v0.10.24', new Date(2025, 6, 4)),
     new Changelog(changelogType.NEW, 'New Achievements'),
     new Changelog(changelogType.NEW, 'New Held Items'),
     new Changelog(changelogType.NEW, 'Map Colors can now be reordered in the Display settings'),
@@ -31,7 +31,6 @@ const ChangelogItems = [
     new Changelog(changelogType.NEW, 'Click Attack breakdown added to Statistics menu'),
     new Changelog(changelogType.CHANGE, 'Sprinklotad Oak Item changed to boost mulch duration. Its level progress has also been reset.'),
     new Changelog(changelogType.CHANGE, 'Underground Bomb tool has a high chance to destroy items when fully uncovering them, including bombs used by Experts'),
-    new Changelog(changelogType.CHANGE, 'Underground Survey tool prioritizes unseen treasure and the indicator will be removed after collecting the item'),
     new Changelog(changelogType.CHANGE, 'Battery Discharge (Underground) can now be used without equipping the Cell Battery Oak Item'),
     new Changelog(changelogType.CHANGE, 'Cell Battery Oak Item now reduces the charges required to discharge'),
     new Changelog(changelogType.CHANGE, 'Palaeontologist Token can now be traded for Diamonds'),
@@ -53,7 +52,6 @@ const ChangelogItems = [
     new Changelog(changelogType.CHANGE, 'Magikarp Jump subregion no longer affected by the regional debuff'),
     new Changelog(changelogType.CHANGE, 'Currency display module will now dynamically show additional currencies as they are unlocked or earned'),
     new Changelog(changelogType.CHANGE, 'Manaphy and Phione now have unique egg patterns'),
-    new Changelog(changelogType.CHANGE, 'Reduced save file size'),
     new Changelog(changelogType.CHANGE, 'Adjustments to where some Pokémon can be obtained'),
     new Changelog(changelogType.CHANGE, 'Adjustments to the types of some Pokémon'),
     new Changelog(changelogType.CHANGE, 'MissingNo. is now removed on update to better serve its purpose as a failsafe and bug indicator'),
