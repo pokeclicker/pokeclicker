@@ -2305,7 +2305,7 @@ const BattleFrontierShop = new Shop([
     ItemList.FarmHandJamie,
     ItemList.HatcheryHelperNoel,
     ItemList.Muscle_Band,
-    ItemList.Power_Herb
+    ItemList.Power_Herb,
 ]);
 const OutskirtStandShop = new Shop([
     ItemList.Pokeball,

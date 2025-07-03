@@ -7870,8 +7870,8 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
         epic: [
             {loot: 'Meadow Plate'},
             {loot: 'Sky Plate'},
-            {loot: 'Power_Herb'},
         ],
+        legendary: [{loot: 'Power_Herb'}],
     },
     2603000,
     [
