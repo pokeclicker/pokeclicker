@@ -46,7 +46,6 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyLostAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayReduced')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayExtended')}"></tr>
                             </tbody>
                             <thead>
                                 <tr><th colspan="2">Hatchery</th></tr>
@@ -80,25 +79,6 @@
                                 <tr data-bind="visible: Object.values(App.game.challenges.list).filter(c => c.active()).length > 0, template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideChallengeRelatedModules')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showGymGoAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showMuteButton')}"></tr>
-                            </tbody>
-                            <thead>
-                                <tr><th colspan="2">Map Colors</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--locked')}"></tr>
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--incomplete')}"></tr>
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--questAtLocation')}"></tr>
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtPokemon')}"></tr>
-                                <!-- ko if: Settings.getSetting('--uncaughtShadowPokemon').isUnlocked() -->
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShadowPokemon')}"></tr>
-                                <!-- /ko -->
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShinyPokemonAndMissingAchievement')}"></tr>
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShinyPokemon')}"></tr>
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--missingAchievement')}"></tr>
-                                <!-- ko if: Settings.getSetting('--missingResistant').isUnlocked() -->
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--missingResistant')}"></tr>
-                                <!-- /ko -->
-                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--completed')}"></tr>
                                 <tr>
                                     <td colspan="2">
                                         <button type="button" class="btn btn-primary" data-bind="click: () => {
@@ -109,7 +89,50 @@
                                         }">Reset Resizable Modules</button>
                                     </td>
                                 </tr>
+                            </tbody>
+                            <thead>
+                                <tr><th colspan="2">Map Colors</th></tr>
                             </thead>
+                            <tbody
+                            data-bind="sortable: {
+                                foreach: Settings.getSetting('mapAreaStateOrder').observableValue,
+                                options: {
+                                    group: 'mapAreaStateOrder',
+                                    draggable: '.mapAreaStateWrapper',
+                                    handle: '.SortableColorChoiceSetting-handle',
+                                    dataIdAttr: 'data-key',
+                                    filter: '.sortable-fixed-position',
+                                },
+                            }">
+                            <!-- ko let: {
+                                    setting: Settings.getSetting(`--${areaStatus[$data]}`),
+                                    isFixed: [areaStatus.locked, areaStatus.incomplete, areaStatus.questAtLocation].includes($data),
+                                } -->
+                                <tr class="mapAreaStateWrapper" data-bind="visible: setting.isUnlocked(),
+                                    class: isFixed ? 'sortable-fixed-position' : '',
+                                    attr: { 'data-areastate': areaStatus[$data] },
+                                    template: {
+                                        name: 'SortableColorChoiceSettingTemplate',
+                                        data: { setting, isFixed },
+                                    }">
+                                </tr>
+                            <!-- /ko -->
+                            </tbody>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-primary" data-bind="click: () => {
+                                            const mapAreaStateOrder = Settings.getSetting('mapAreaStateOrder');
+                                            mapAreaStateOrder.set(mapAreaStateOrder.defaultValue);
+                                        }">Reset Order</button>
+                                        <button type="button" class="btn btn-primary" data-bind="click: () => {
+                                            Settings.getSetting('mapAreaStateOrder').value.map(status => 
+                                                Settings.getSetting(`--${areaStatus[status]}`)
+                                            ).forEach(setting => setting.set(setting.defaultValue));
+                                        }">Reset Colors</button>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
 
@@ -168,10 +191,15 @@
                                                 trigger: 'hover'
                                             }"
                                             onchange="(() => {
-                                                const val = Number.isNaN(parseInt(this.value)) ? -1 : +this.value;
-                                                this.value = val < -1 ? -1 : Math.min(val, App.game.breeding.queueSlots());
-                                            })(), Settings.setSettingByName(this.name, +this.value)
-                                        ">
+                                                let val = Number.parseInt(this.value);
+                                                if (Number.isNaN(val)) {
+                                                    val = -1;
+                                                } else {
+                                                    val = Math.min(Math.max(val, -1), App.game.breeding.queueSlots());
+                                                }
+                                                this.value = val;
+                                                Settings.setSettingByName(this.name, val);
+                                            })()">
                                     </td>
                                 </tr>
                             </tbody>
@@ -217,11 +245,18 @@
                             <tbody>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.farm')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.hatchery')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.achievementsTracker')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.shop')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.oakItems')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.pokeballSelection')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dailyQuests')}"></tr>
+                                <!-- ko if: Settings.getSetting('hotkey.castformApp').isUnlocked() -->
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.castformApp')}"></tr>
+                                <!-- /ko -->
+                                <!-- ko if: Settings.getSetting('hotkey.purifyChamber').isUnlocked() -->
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.purifyChamber')}"></tr>
+                                <!-- /ko -->
                             </tbody>
                             <thead>
                                 <tr><th colspan="2">Farm</th></tr>
@@ -238,6 +273,7 @@
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.hammer')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.bomb')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.survey')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.discharge')}"></tr>
                             </tbody>
                             <thead>
                                 <tr><th colspan="2">Oak Items</th></tr>
@@ -563,6 +599,22 @@
         trigger: 'hover',
     }">
         <label style="width:100%; min-height: 36px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: $data.observableValue"/></label>
+    </td>
+</script>
+
+<script type="text/html" id="SortableColorChoiceSettingTemplate">
+    <td class="p-0" style="display:flex;">
+        <div style="width:2.5em;" data-bind="if: !$data.isFixed">
+            <div class="p-2 SortableColorChoiceSetting-handle">⠿</div>
+        </div>
+        <div class="p-2" style="flex:1;" data-bind="text: `${$data.setting.displayName}:`">setting name</div>
+    </td>
+    <td class="p-0" data-bind="style: { background: $data.setting.observableValue },
+    tooltip: {
+        title: 'Set to white for transparent',
+        trigger: 'hover',
+    }">
+        <label style="width:100%; min-height: 36px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: $data.setting.observableValue"/></label>
     </td>
 </script>
 

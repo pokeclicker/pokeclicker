@@ -1,16 +1,27 @@
-/// <reference path="../declarations/TemporaryScriptTypes.d.ts" />
-///<reference path="pokemons/PokemonFactory.ts"/>
-/// <reference path="../declarations/GameHelper.d.ts" />
+import * as GameConstants from '../GameConstants';
+import GameHelper from '../GameHelper';
+import * as PokemonHelper from '../pokemons/PokemonHelper';
+import { pokemonMap } from '../pokemons/PokemonList';
+import PokemonType from '../enums/PokemonType';
+import { createLogContent } from '../logbook/helpers';
+import { LogBookTypes } from '../logbook/LogBookTypes';
+import { MultiplierDecreaser } from '../items/types';
+import Routes from '../routes/Routes';
+import OakItemType from '../enums/OakItemType';
+import Rand from '../utilities/Rand';
+import Amount from '../wallet/Amount';
+import type BattlePokemon from './BattlePokemon';
+import type { Observable as KnockoutObservable, PureComputed } from 'knockout';
 
 /**
  * Handles all logic related to battling
  */
-class Battle {
-    static enemyPokemon: KnockoutObservable<BattlePokemon> = ko.observable(null);
+export default class Battle {
+    static enemyPokemon: KnockoutObservable<BattlePokemon | null> = ko.observable(null);
 
     static counter = 0;
     static catching: KnockoutObservable<boolean> = ko.observable(false);
-    static catchRateActual: KnockoutObservable<number> = ko.observable(null);
+    static catchRateActual: KnockoutObservable<number | null> = ko.observable(0);
     static pokeball: KnockoutObservable<GameConstants.Pokeball> = ko.observable(GameConstants.Pokeball.Pokeball);
     static lastPokemonAttack = Date.now();
     static lastClickAttack = Date.now();
@@ -88,7 +99,7 @@ class Battle {
                         this.generateNewEnemy();
                     }
                 },
-                App.game.pokeballs.calculateCatchTime(pokeBall)
+                App.game.pokeballs.calculateCatchTime(pokeBall),
             )
             ;
 
@@ -120,7 +131,7 @@ class Battle {
                     : createLogContent.encounterShiny({
                         location: Routes.getRoute(player.region, player.route).routeName,
                         pokemon: enemyPokemon.name,
-                    })
+                    }),
             );
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id) && enemyPokemon.health()) {
             App.game.logbook.newLog(
@@ -128,7 +139,7 @@ class Battle {
                 createLogContent.encounterWild({
                     location: Routes.getRoute(player.region, player.route).routeName,
                     pokemon: enemyPokemon.name,
-                })
+                }),
             );
         }
     }
@@ -159,12 +170,12 @@ class Battle {
                 LogBookTypes.ESCAPED,
                 App.game.party.alreadyCaughtPokemon(enemyPokemon.id, true)
                     ? createLogContent.escapedShinyDupe({ pokemon: enemyPokemon.name })
-                    : createLogContent.escapedShiny({ pokemon: enemyPokemon.name })
+                    : createLogContent.escapedShiny({ pokemon: enemyPokemon.name }),
             );
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id)) { // Failed to catch, Uncaught
             App.game.logbook.newLog(
                 LogBookTypes.ESCAPED,
-                createLogContent.escapedWild({ pokemon: enemyPokemon.name})
+                createLogContent.escapedWild({ pokemon: enemyPokemon.name }),
             );
         }
         this.catching(false);
@@ -180,7 +191,7 @@ class Battle {
         partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, enemyPokemon.shiny, enemyPokemon.shadow, enemyPokemon.ep * epBonus);
     }
 
-    public static gainTokens(route: number, region: GameConstants.Region, pokeball = this.pokeball()) {
+    public static gainTokens(route: number, region: GameConstants.Region, pokeball = this.pokeball()): Amount {
         let currencyKinds = [GameConstants.Currency.dungeonToken];
         if (pokeball === GameConstants.Pokeball.Luxuryball) {
             //currencyKinds = [
@@ -204,7 +215,7 @@ class Battle {
         const currencyUnits = PokemonFactory.routeDungeonTokens(route, region)
                                 / GameConstants.LuxuryBallCurrencyRate[GameConstants.Currency.dungeonToken];
         const chosenCurrency = currencyKinds[Math.floor(Math.random() * currencyKinds.length)];
-        App.game.wallet.addAmount(new Amount(Math.ceil(currencyUnits * GameConstants.LuxuryBallCurrencyRate[chosenCurrency]), chosenCurrency), false);
+        return App.game.wallet.addAmount(new Amount(Math.ceil(currencyUnits * GameConstants.LuxuryBallCurrencyRate[chosenCurrency]), chosenCurrency), false);
     }
 
     static gainItem() {
@@ -215,15 +226,14 @@ class Battle {
         }
     }
 
-    public static pokemonAttackTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
+    // eslint-disable-next-line @typescript-eslint/member-ordering
+    public static pokemonAttackTooltip: PureComputed<string> = ko.pureComputed(() => {
         if (Battle.enemyPokemon()) {
             const pokemonAttack = App.game.party.calculatePokemonAttack(Battle.enemyPokemon().type1, Battle.enemyPokemon().type2);
             return `${pokemonAttack.toLocaleString('en-US')} against ${pokemonMap[Battle.enemyPokemon().name].type.map(t => PokemonType[t]).join('&nbsp;/&nbsp;')}`;
         } else {
             return '';
         }
-    }).extend({rateLimit: 1000});
+    }).extend({ rateLimit: 1000 });
 
 }
-
-Battle satisfies TmpBattleType;

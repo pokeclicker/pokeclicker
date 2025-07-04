@@ -14,4 +14,7 @@ export default class PokeballItem extends Item {
         App.game.pokeballs.gainPokeballs(this.type, amt);
     }
 
+    getBagAmount() {
+        return App.game.pokeballs.getBallQuantity(this.type);
+    }
 }

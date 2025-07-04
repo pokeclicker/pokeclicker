@@ -26,6 +26,7 @@ export const MIN_LOAD_TIME = 0.5 * SECOND;
 export const MAX_LOAD_TIME = 20 * SECOND;
 export const MUTATION_TICK = 1 * SECOND;
 export const WANDER_TICK = 1.5 * SECOND;
+export const MULCH_OAK_ITEM_TICK = 1 * MINUTE;
 export const TEMP_BATTLE_TIME = 60 * SECOND;
 export const TEMP_BATTLE_TICK = 0.1 * SECOND;
 export const SPECIAL_EVENT_TICK = 1 * SECOND;
@@ -541,7 +542,7 @@ export function pluralizeString(str: string, amt: number): string {
     switch (true) {
         case /s$/.test(str):
             return str;
-        case /y$/.test(str):
+        case /[^aeiou]y$/.test(str):
             return str.replace(/y$/, 'ies');
         case /ch$/.test(str):
             return `${str}es`;
@@ -1081,14 +1082,6 @@ export enum StoneType {
     'Metal_alloy',
 }
 
-export enum FossilPieceType {
-    'None' = -1,
-    'Fossilized Bird',
-    'Fossilized Fish',
-    'Fossilized Drake',
-    'Fossilized Dino',
-}
-
 export enum BattleItemType {
     'xAttack' = 'xAttack',
     'xClick' = 'xClick',
@@ -1225,7 +1218,6 @@ export enum EggItemType {
     'Fighting_egg',
     'Electric_egg',
     'Dragon_egg',
-    'Pokemon_egg',
     'Mystery_egg',
 }
 
@@ -1276,7 +1268,6 @@ export const MAX_HIRES = 1;
 export const REWARD_RETENTION_BASE = 0.6;
 export const REWARD_RETENTION_DECREASE_PER_LEVEL = 0.01;
 export const REWARD_RETENTION_MINIMUM = 0.1;
-export const HELPER_AUTO_SELL_LEVEL_REQUIREMENT = 20;
 
 export const SMART_TOOL_CHANCE_BASE = 0.5;
 export const SMART_TOOL_CHANCE_INCREASE_PER_LEVEL = 0.025;
@@ -1306,35 +1297,6 @@ export const EnergyRestoreEffect = {
     SmallRestore: 0.1,
     MediumRestore: 0.2,
     LargeRestore: 0.5,
-};
-
-export const FossilToPokemon = {
-    'Helix Fossil': 'Omanyte',
-    'Dome Fossil': 'Kabuto',
-    'Old Amber': 'Aerodactyl',
-    'Root Fossil': 'Lileep',
-    'Claw Fossil': 'Anorith',
-    'Armor Fossil': 'Shieldon',
-    'Skull Fossil': 'Cranidos',
-    'Cover Fossil': 'Tirtouga',
-    'Plume Fossil': 'Archen',
-    'Jaw Fossil': 'Tyrunt',
-    'Sail Fossil': 'Amaura',
-};
-
-// Used for image name
-export const PokemonToFossil = {
-    Omanyte: 'Helix Fossil',
-    Kabuto: 'Dome Fossil',
-    Aerodactyl: 'Old Amber',
-    Lileep: 'Root Fossil',
-    Anorith: 'Claw Fossil',
-    Shieldon: 'Armor Fossil',
-    Cranidos: 'Skull Fossil',
-    Tirtouga: 'Cover Fossil',
-    Archen: 'Plume Fossil',
-    Tyrunt: 'Jaw Fossil',
-    Amaura: 'Sail Fossil',
 };
 
 // For random quest, name matches entry in gymList (created in Gym.ts)
@@ -2091,7 +2053,6 @@ export const TemporaryBattles = [
     'Merilyn',
     'Millis and Argus Steel',
     'Rampaging Yveltal',
-    'Storyline AZ',
     'AZ',
     'Ash Ketchum Kanto',
     'Ash Ketchum Johto',
@@ -2425,7 +2386,6 @@ export enum ShardTraderLocations {
     'Hulbury',
     'Motostoke',
     'Hammerlocke',
-    'Route 6',
     'Stow-on-Side',
     'Ballonlea',
     'Circhester',
@@ -2516,6 +2476,7 @@ export enum ExtraAchievementCategories {
     sevii,
     orre,
     magikarpJump,
+    secret, // secret should be last
 }
 export const DayCycleStartHours: Record<DayCyclePart, number> = {
     [DayCyclePart.Dawn]: 5,
@@ -2636,6 +2597,7 @@ export enum DungeonInteractionSource {
     Click,
     Keybind,
     HeldKeybind,
+    DungeonGuide,
 }
 
 export const ModalCollapseList = [
@@ -2652,6 +2614,8 @@ export const ModalCollapseList = [
     'currencyBody',
     'undergroundCard',
     'undergroundDailyTradesCard',
+    'undergroundDisplayHelpers',
+    'undergroundDisplayBattery',
     'plotListCard',
     'zCrystalItemContainerBody',
 ];
@@ -2690,18 +2654,3 @@ export const ZMOVE_ACTIVE_MULTIPLIER = 1.5;
 export const ZMOVE_COUNTERACTIVE_MULTIPLIER = 0.75;
 export const ZMOVE_ACTIVE_TIME = 1 * MINUTE;
 export const ZMOVE_COUNTERACTIVE_TIME = 4 * MINUTE;
-
-export enum ContestResults {
-    Normal,
-    Super,
-    Hyper,
-    Master,
-}
-
-export enum ContestStyle {
-    Cool,
-    Beautiful,
-    Cute,
-    Clever,
-    Tough,
-}

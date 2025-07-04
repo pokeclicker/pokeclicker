@@ -16,7 +16,10 @@ class GemMasterShop extends Shop {
     }
 
     public areaStatus() {
-        const itemStatusArray = [super.areaStatus()];
+        const itemStatusArray = super.areaStatus();
+        if (itemStatusArray.includes(areaStatus.locked)) {
+            return [areaStatus.locked];
+        }
 
         const deals = GemDeals.getDeals(this.shop);
         if (deals) {
@@ -34,6 +37,6 @@ class GemMasterShop extends Shop {
                 itemStatusArray.push(areaStatus.missingResistant);
             }
         }
-        return Math.min(...itemStatusArray);
+        return itemStatusArray;
     }
 }

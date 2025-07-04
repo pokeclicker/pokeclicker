@@ -48,14 +48,25 @@ class Discord implements Saveable {
         location.href = `$DISCORD_LOGIN_PROXY?action=login&redirect_uri=${encodeURIComponent(location.origin + location.pathname)}`;
     }
 
-    logout(): void {
+    async logout(shouldConfirm = false): Promise<void> {
+        if (shouldConfirm) {
+            if (!await Notifier.confirm({
+                title: 'Unlink Discord?',
+                message: 'Are you sure?',
+                type: NotificationConstants.NotificationOption.warning,
+                confirm: 'Continue',
+            })) {
+                return;
+            }
+        }
+
         this.ID(this.defaults.id);
         // Save now
         Save.store(player);
     }
 
     calcCode(code) {
-        const discordID = +App.game.discord.ID() || false;
+        const discordID = +this.ID() || false;
         if (!discordID) {
             return;
         }
@@ -90,7 +101,8 @@ class Discord implements Saveable {
 
     enterCode(enteredCode: string): boolean {
         // Discord integration disabled
-        if (!this.enabled) {
+        // Unless dev, so we can enter codes anyway
+        if (!this.enabled && !GameHelper.isDevelopmentBuild()) {
             Notifier.notify({
                 message: 'Discord integration not enabled',
                 type: NotificationConstants.NotificationOption.danger,

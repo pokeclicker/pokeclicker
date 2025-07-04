@@ -10,6 +10,9 @@ import DynamicBackground from '../background/DynamicBackground';
 import { SortOptionConfigs, SortOptions } from './SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from '../achievements/AchievementSortOptions';
 import {
+    SortOptionConfigs as UndergroundTreasureDisplaySortOptionConfigs,
+    SortOptions as UndergroundTreasureDisplaySortOptions } from '../underground/UndergroundTreasuresSortOptions';
+import {
     Region,
     MAX_AVAILABLE_REGION,
     AchievementType,
@@ -20,6 +23,7 @@ import {
     ModalCollapseList,
     getDungeonIndex,
     Pokerus,
+    ShadowStatus,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 import Language, { LanguageNames } from '../translation/Language';
@@ -30,6 +34,9 @@ import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequire
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import PokemonCategories from '../party/Category';
+import ShadowPokemonRequirement from '../requirements/ShadowPokemonRequirement';
+import OrderSetting from './OrderSetting';
+import areaStatus from '../enums/AreaStatus';
 
 export default Settings;
 
@@ -144,10 +151,30 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
     ],
     'cm'));
 Settings.add(new BooleanSetting('autoRestartUndergroundMine', 'Auto restart selected mine', false));
+const undergroundTreasureDisplaySortSettings = Object.keys(UndergroundTreasureDisplaySortOptionConfigs)
+    .map((option) => new SettingOption<number>(UndergroundTreasureDisplaySortOptionConfigs[option].text, parseInt(option, 10)));
+
+Settings.add(new Setting<number>('undergroundTreasureDisplaySorting', 'Sorting', undergroundTreasureDisplaySortSettings, UndergroundTreasureDisplaySortOptions.default));
+Settings.add(new BooleanSetting('undergroundTreasureDisplaySortingDirection', 'reverse', false));
+Settings.add(new Setting<string>('undergroundTreasureDisplayGrouping', 'Grouping',
+    [
+        new SettingOption('None', 'none'),
+        new SettingOption('Type', 'type'),
+        new SettingOption('Can be sold', 'sellable'),
+        new SettingOption('Region', 'region'),
+    ],
+    'type'));
+Settings.add(new BooleanSetting('undergroundTreasureDisplayShowLocked', 'Show locked items', false));
+Settings.add(new Setting<string>('undergroundTreasureViewMode', 'Underground Treasure View Mode',
+    [
+        new SettingOption('List', 'list-view'),
+        new SettingOption('Grid', 'grid-view'),
+    ],
+    'list-view'));
+
 Settings.add(new BooleanSetting('showUndergroundModule', 'Show Underground module on main screen', true));
 Settings.add(new BooleanSetting('enableUndergroundModuleMineControls', 'Enable Underground module mine controls', true));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
-Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points, Battle Points, and Contest Tokens on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
 Settings.add(new BooleanSetting('confirmBeformeMulchingAllPlots', 'Confirm before mulching all plots', false));
 Settings.add(new BooleanSetting('breedingQueueClearConfirmation', 'Confirm before clearing the hatchery queue', true));
@@ -172,7 +199,8 @@ Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement',
 Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokémon', [], '#ffee00'));
 Settings.add(new CssVariableSetting('missingAchievement', 'Missing Achievement', [], '#57e3ff'));
 Settings.add(new CssVariableSetting('missingResistant', 'Missing Resistant', [], '#ab1707', new ClearDungeonRequirement(1, getDungeonIndex('Distortion World'))));
-Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#ffffff'));
+Settings.add(new CssVariableSetting('completed', 'None of the Above', [], '#ffffff'));
+Settings.add(new OrderSetting('mapAreaStateOrder', 'Map Area State Order', GameHelper.enumNumbers(areaStatus)));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
@@ -270,7 +298,16 @@ Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false, undef
 Settings.add(new Setting<string>('heldItemDropdownPokemonOrItem', 'Pokémon or Item', [new SettingOption('Pokémon', 'pokemon'), new SettingOption('Item', 'item')], 'pokemon', undefined, false));
 Settings.add(new SearchSetting('heldItemSearchFilter', 'Search', '', undefined, false));
 Settings.add(new Setting<number>('heldItemRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptionsNoneLast], -2, undefined, false));
-Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2, undefined, false));
+Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [
+    new SettingOption('All', -2),
+    ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
+    new SettingOption('None', PokemonType.None),
+], -2, undefined, false));
+Settings.add(new Setting<number>('heldItemType2Filter', 'Type 2', [
+    new SettingOption('All', -2),
+    ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
+    new SettingOption('None', PokemonType.None),
+], -2, undefined, false));
 Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false, undefined, false));
 Settings.add(new BooleanSetting('heldItemHideHoldingThisItem', 'Hide Pokémon holding this item', false, undefined, false));
 
@@ -440,11 +477,14 @@ Settings.add(new BooleanSetting('sound.muted', 'Mute All Sounds', false));
 // Hotkeys
 Settings.add(new HotkeySetting('hotkey.farm', 'Farm', 'F'));
 Settings.add(new HotkeySetting('hotkey.hatchery', 'Hatchery', 'H'));
+Settings.add(new HotkeySetting('hotkey.achievementsTracker', 'Achievements', 'T'));
 Settings.add(new HotkeySetting('hotkey.oakItems', 'Oak Items', 'O'));
 Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'U'));
 Settings.add(new HotkeySetting('hotkey.shop', 'Poké Mart', 'E'));
 Settings.add(new HotkeySetting('hotkey.dailyQuests', 'Daily Quests', 'Q'));
 Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Poké Ball Selection', 'P', { suffix: ' + Number' }));
+Settings.add(new HotkeySetting('hotkey.castformApp', 'Castform App', 'C', {}, new ClearDungeonRequirement(250, getDungeonIndex('Weather Institute'))));
+Settings.add(new HotkeySetting('hotkey.purifyChamber', 'Purify Chamber', 'K', {}, new ShadowPokemonRequirement(1, ShadowStatus.Purified)));
 
 Settings.add(new HotkeySetting('hotkey.farm.toggleShovel', 'Toggle Shovel', 'S'));
 Settings.add(new HotkeySetting('hotkey.farm.togglePlotSafeLock', 'Toggle Plot Lock', 'L', { suffix: ' or Shift + Click' }));
@@ -453,6 +493,7 @@ Settings.add(new HotkeySetting('hotkey.underground.hammer', 'Switch to Hammer', 
 Settings.add(new HotkeySetting('hotkey.underground.chisel', 'Switch to Chisel', 'C'));
 Settings.add(new HotkeySetting('hotkey.underground.bomb', 'Switch to Bomb', 'B'));
 Settings.add(new HotkeySetting('hotkey.underground.survey', 'Switch to Survey', 'S'));
+Settings.add(new HotkeySetting('hotkey.underground.discharge', 'Discharge', 'D'));
 
 Settings.add(new HotkeySetting('hotkey.dungeon.up', 'Move Up', 'W', { prefix: '↑ or ' }));
 Settings.add(new HotkeySetting('hotkey.dungeon.left', 'Move Left', 'A', { prefix: '← or ' }));

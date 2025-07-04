@@ -1,5 +1,4 @@
 /// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
-///<reference path="GymPokemon.ts"/>
 ///<reference path="../pokemons/PokemonFactory.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
 ///<reference path="../../declarations/enums/Badges.d.ts"/>
@@ -57,17 +56,21 @@ class Gym extends TownContent implements TmpGymType {
         champion: false,
     };
 
-    public areaStatus(): areaStatus {
+    public areaStatus(): areaStatus[] {
+        const states = [];
         if (!this.isUnlocked()) {
-            return areaStatus.locked;
-        } else if (!App.game.badgeCase.hasBadge(this.badgeReward)) {
-            return areaStatus.incomplete;
-        } else if (this.isThereQuestAtLocation()) {
-            return areaStatus.questAtLocation;
-        } else if (!this.isAchievementsComplete()) {
-            return areaStatus.missingAchievement;
+            return [areaStatus.locked];
         }
-        return areaStatus.completed;
+        if (!App.game.badgeCase.hasBadge(this.badgeReward)) {
+            states.push(areaStatus.incomplete);
+        }
+        if (this.isThereQuestAtLocation()) {
+            states.push(areaStatus.questAtLocation);
+        }
+        if (!this.isAchievementsComplete()) {
+            states.push(areaStatus.missingAchievement);
+        }
+        return states;
     }
 
     public clears() {

@@ -14,31 +14,23 @@ export default class Achievement {
     public getProgressText: KnockoutComputed<string> = ko.pureComputed(() => `${this.getProgress().toLocaleString('en-US')} / ${this.property.requiredValue.toLocaleString('en-US')}`);
     public bonus = 0;
     public unlocked : KnockoutObservable<boolean> = ko.observable(false);
+    protected notificationTitle: string = 'Achievement';
+    protected notificationTimeout: number = 1e4;
 
     constructor(
         public name: string,
-        public description: string,
+        protected _description: string,
         public property: AchievementRequirement,
         public bonusWeight: number,
         public category: AchievementCategory,
         public achievableFunction: () => boolean | null = null,
+        public persist: boolean = false,
     ) {}
 
     public check(): boolean {
         if (this.isCompleted() && !this.unlocked()) {
-            Notifier.notify({
-                title: `[Achievement] ${this.name}`,
-                message: this.description,
-                type: NotificationConstants.NotificationOption.warning,
-                timeout: 1e4,
-                sound: NotificationConstants.NotificationSound.General.achievement,
-                setting: NotificationConstants.NotificationSetting.General.achievement_complete,
-            });
-            App.game.logbook.newLog(
-                LogBookTypes.ACHIEVE,
-                createLogContent.earnedAchievement({ name: this.name }),
-            );
             this.unlocked(true);
+            this.notifyUnlocked();
             if (this === App.game.achievementTracker.trackedAchievement()) {
                 App.game.achievementTracker.nextAchievement();
             }
@@ -47,6 +39,21 @@ export default class Achievement {
             return true;
         }
         return false;
+    }
+
+    public notifyUnlocked() {
+        Notifier.notify({
+            title: `[${this.notificationTitle}] ${this.name}`,
+            message: this.description,
+            type: NotificationConstants.NotificationOption.warning,
+            timeout: this.notificationTimeout,
+            sound: NotificationConstants.NotificationSound.General.achievement,
+            setting: NotificationConstants.NotificationSetting.General.achievement_complete,
+        });
+        App.game.logbook.newLog(
+            LogBookTypes.ACHIEVE,
+            createLogContent.earnedAchievement({ name: this.name }),
+        );
     }
 
     public getProgress() {
@@ -66,5 +73,13 @@ export default class Achievement {
             return this.achievableFunction();
         }
         return true;
+    }
+
+    get description(): string {
+        return this._description;
+    }
+
+    get displayName(): string {
+        return this.name;
     }
 }

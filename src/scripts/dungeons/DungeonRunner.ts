@@ -62,7 +62,7 @@ class DungeonRunner {
 
         DungeonRunner.timeLeftPercentage(100);
         // Dungeon size increases with each region
-        let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + (dungeon.optionalParameters.dungeonRegionalDifficulty ?? player.region);
+        let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + (dungeon.difficulty);
         // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes
         dungeonSize -= Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toString().length - 1);
         const flash = DungeonRunner.getFlash(DungeonRunner.dungeon.name);
@@ -142,7 +142,7 @@ class DungeonRunner {
     public static handleInteraction(source: GameConstants.DungeonInteractionSource = GameConstants.DungeonInteractionSource.Click) {
         if (DungeonRunner.fighting() && !DungeonBattle.catching() && source === GameConstants.DungeonInteractionSource.Click) {
             DungeonBattle.clickAttack();
-        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.entrance && source !== GameConstants.DungeonInteractionSource.HeldKeybind && !DungeonGuides.hired()) {
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.entrance && (source === GameConstants.DungeonInteractionSource.Click || source === GameConstants.DungeonInteractionSource.Keybind) && !DungeonGuides.hired()) {
             DungeonRunner.dungeonLeave();
         } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.chest) {
             DungeonRunner.openChest();
@@ -174,16 +174,22 @@ class DungeonRunner {
             mythic: 0,
         }[tier];
 
+        // Decreasing chance for rarer items (41.7% → 8.3%), ×150% with Dowsing Machine on
+        let moreItemsChance = 0.5 / (4 / (tierWeight + 1)) / 1.5;
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Dowsing_machine)()) {
-            // Decreasing chance for rarer items (62.5% → 12.5%)
-            const magnetChance = 0.5 / (4 / (tierWeight + 1));
-            if (Rand.chance(magnetChance)) {
-                // Gain more items in higher regions
-                amount += Math.max(1, Math.round(Math.max(tierWeight, 2) / 8 * (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 1)));
-            }
+            moreItemsChance *= 1.5;
+        }
+        if (Rand.chance(moreItemsChance)) {
+            // Gain more items in higher regions
+            const region = DungeonRunner.dungeon.difficulty;
+            amount *= 1 + Math.max(1, Math.round(Math.max(tierWeight, 2) / 8 * (region + 1)));
         }
 
         DungeonRunner.gainLoot(loot.loot, amount, tierWeight);
+
+        if (tier === 'mythic' && !loot.ignoreDebuff && DungeonRunner.isDungeonDebuffed(DungeonRunner.dungeon)) {
+            AchievementHandler.unlockAchievement('Lucky Loot');
+        }
 
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTileType.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
@@ -282,6 +288,15 @@ class DungeonRunner {
         }
     }
 
+    public static returnToTown() {
+        MapHelper.moveToTown(DungeonRunner.dungeon.name);
+        if (App.game.gameState !== GameConstants.GameState.town) {
+            // MoveToTown failed and the player is stuck in the dungeon
+            const dest = GameConstants.StartingTowns[player.region];
+            MapHelper.moveToTown(dest);
+        }
+    }
+
     public static async dungeonLeave(shouldConfirm = Settings.getSetting('confirmLeaveDungeon').observableValue()): Promise<void> {
         if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTileType.entrance || DungeonRunner.dungeonFinished() || !DungeonRunner.map.playerMoved()) {
             return;
@@ -297,8 +312,7 @@ class DungeonRunner {
             DungeonRunner.dungeonFinished(true);
             DungeonRunner.fighting(false);
             DungeonRunner.fightingBoss(false);
-            App.game.gameState = GameConstants.GameState.town;
-            DungeonGuides.clears(0);
+            DungeonRunner.returnToTown();
             DungeonGuides.endDungeon();
         }
     }
@@ -308,7 +322,7 @@ class DungeonRunner {
             DungeonRunner.dungeonFinished(true);
             DungeonRunner.fighting(false);
             DungeonRunner.fightingBoss(false);
-            App.game.gameState = GameConstants.GameState.town;
+            DungeonRunner.returnToTown();
             Notifier.notify({
                 message: 'You could not complete the dungeon in time.',
                 type: NotificationConstants.NotificationOption.danger,
@@ -327,7 +341,7 @@ class DungeonRunner {
                 GameHelper.incrementObservable(App.game.statistics.dungeonGuideClears[DungeonGuides.hired().index]);
             }
             GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]);
-            MapHelper.moveToTown(DungeonRunner.dungeon.name);
+            DungeonRunner.returnToTown();
             Notifier.notify({
                 message: 'You have successfully completed the dungeon.',
                 type: NotificationConstants.NotificationOption.success,
@@ -379,8 +393,8 @@ class DungeonRunner {
         return config[index]?.flash;
     }
 
-    public static isDungeonDebuffed(dungeon) {
-        return (dungeon.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(dungeon.name)) < player.highestRegion() - 2;
+    public static isDungeonDebuffed(dungeon: Dungeon) {
+        return dungeon.difficulty < player.highestRegion() - 2;
     }
 }
 

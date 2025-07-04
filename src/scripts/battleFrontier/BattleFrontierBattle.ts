@@ -1,6 +1,3 @@
-/// <reference path="../../declarations/GameHelper.d.ts" />
-/// <reference path="../Battle.ts" />
-
 class BattleFrontierBattle extends Battle {
     static alternateAttack = false;
     static pokemonIndex: KnockoutObservable<number> = ko.observable(0);
@@ -69,6 +66,10 @@ class BattleFrontierBattle extends Battle {
         // Give 1 extra gem per pokemon defeated after every 80 stages
         const gems = Math.ceil(BattleFrontierRunner.stage() / 80);
         const gender = PokemonFactory.generateGender(enemy.gender.femaleRatio, enemy.gender.type);
+
+        if (shiny) {
+            GameHelper.incrementObservable(App.game.statistics.totalShinyTrainerPokemonSeen);
+        }
 
         const enemyPokemon = new BattlePokemon(enemy.name, enemy.id, enemy.type[0], enemy.type[1], health, level, 0, enemy.exp, new Amount(money, GameConstants.Currency.money), shiny, gems, gender, GameConstants.ShadowStatus.None, EncounterType.trainer);
         this.enemyPokemon(enemyPokemon);

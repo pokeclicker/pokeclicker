@@ -27,6 +27,7 @@ class Player implements TmpPlayerType {
     public regionStarters: Array<KnockoutObservable<GameConstants.Starter>>;
     public subregionObject: KnockoutObservable<SubRegion>;
     public trainerId: string;
+    private _createdTime: number;
 
     constructor(savedPlayer?) {
         const saved: boolean = (savedPlayer != null);
@@ -63,25 +64,7 @@ class Player implements TmpPlayerType {
 
         this.regionStarters = new Array<KnockoutObservable<number>>();
         for (let i = 0; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
-            if (savedPlayer.regionStarters && savedPlayer.regionStarters[i] != undefined) {
-                this.regionStarters.push(ko.observable(savedPlayer.regionStarters[i]));
-            } else if (i < (savedPlayer.highestRegion ?? 0)) {
-                this.regionStarters.push(ko.observable(GameConstants.Starter.Grass));
-            } else if (i == (savedPlayer.highestRegion ?? 0)) {
-                this.regionStarters.push(ko.observable(GameConstants.Starter.None));
-                if (i != GameConstants.Region.kanto) { // Kanto has it's own starter code
-                    if (this.region != i) {
-                        this.region = i;
-                        this.subregion = 0;
-                        this.route = undefined;
-                        this._townName = GameConstants.StartingTowns[i];
-                        this.town = TownList[this._townName];
-                    }
-                    $('#pickStarterModal').modal('show');
-                }
-            } else {
-                this.regionStarters.push(ko.observable(GameConstants.Starter.None));
-            }
+            this.regionStarters.push(ko.observable(savedPlayer.regionStarters?.[i] ?? GameConstants.Starter.None));
         }
 
         this._itemList = Save.initializeItemlist();
@@ -102,6 +85,7 @@ class Player implements TmpPlayerType {
         this._origins = [...new Set((savedPlayer._origins || [])).add(window.location?.origin)];
 
         this.trainerId = savedPlayer.trainerId || Rand.intBetween(0, 999999).toString().padStart(6, '0');
+        this._createdTime = savedPlayer._createdTime ?? Date.now();
     }
 
     private _itemList: { [name: string]: KnockoutObservable<number> };
@@ -221,6 +205,15 @@ class Player implements TmpPlayerType {
         this.regionStarters[this.region](index);
     }
 
+    public hasBeatenChampOfRegion(region: GameConstants.Region = this.highestRegion()) {
+        const champion = GameConstants.RegionGyms[region].find(gym => GymList[gym]?.flags.champion);
+        return champion === undefined ? false : App.game.badgeCase.hasBadge(GymList[champion].badgeReward);
+    }
+
+    get createdTime(): number {
+        return this._createdTime;
+    }
+
     public toJSON() {
         const keep = [
             '_route',
@@ -237,6 +230,7 @@ class Player implements TmpPlayerType {
             'highestSubRegion',
             'regionStarters',
             'trainerId',
+            '_createdTime',
         ];
         const plainJS = ko.toJS(this);
         Object.entries(plainJS._itemMultipliers).forEach(([key, value]) => {

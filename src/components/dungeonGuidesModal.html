@@ -7,55 +7,94 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body text-left p-2">
+            <div class="modal-body text-left p-0">
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a class="nav-link active" href="#dungeonGuidesModalHireTab" data-toggle="tab">Hire</a></li>
                     <li class="nav-item"><a class="nav-link" href="#dungeonGuidesModalHelpTab" data-toggle="tab">Help</a></li>
                 </ul>
-                <div class="tab-content">
+                <div class="tab-content p-0">
                     <!-- Hiring Tab -->
                     <div id="dungeonGuidesModalHireTab" class="tab-pane fade active show">
                         <!-- ko if: player.town instanceof DungeonTown -->
-                        <div class="row m-0 justify-content-center d-flex" data-bind="foreach: DungeonGuides.available()" style="max-width: 100%;">
-                            <div class="card text-left col-md-4 col-sm-6 col-xs-12 p-0 align-items-stretch">
-                                <h5 class="card-header">
-                                    <knockout data-bind="text: $data.name">Name</knockout>
-                                    <img class="float-right pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                        <div class="row m-0 justify-content-center d-flex p-1" data-bind="foreach: DungeonGuides.available()" style="max-width: 100%;">
+                            <div class="card text-left col-lg-6 col-md-12 p-1 border-0 align-items-stretch">
+                                <h5 class="card-header d-flex align-items-center py-2">
+                                    <knockout class="flex-grow-1" data-bind="text: $data.name">Name</knockout>
+                                    <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
                                 </h5>
-                                <div class="card-body p-0 text-center">
-                                    <div class="card h-100">
-                                        <div class="card-header p-1">
-                                            Description
-                                        </div>
-                                        <div class="card-body p-1 flex-grow-0" data-bind="html: $data.description">
-                                            Description
-                                        </div>
-                                        <div class="card-header p-1">
-                                            Cost / Run
-                                        </div>
-                                        <div class="card-body p-1 flex-grow-1" data-bind="foreach: $data.calcCost(1, player.town.dungeon.tokenCost, player.region)">
-                                            <knockout class="w-100" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}">cost</knockout><br/>
-                                        </div>
-                                        <div class="card-header p-1">
-                                            Movement Speed
-                                        </div>
-                                        <div class="card-body p-1 flex-grow-0" data-bind="text: `${($data.interval / 1000).toLocaleString('en-US')} seconds`">
-                                            Speed
-                                        </div>
-                                        <div class="card-header p-1">
-                                            Statistics
-                                        </div>
-                                        <div class="card-body p-1 flex-grow-0">
-                                            <knockout data-bind="text: `Total Attempts: ${App.game.statistics.dungeonGuideAttempts[$data.index]().toLocaleString()}`">Attempts</knockout><br/>
-                                            <knockout data-bind="text: `Total Clears: ${App.game.statistics.dungeonGuideClears[$data.index]().toLocaleString()}`">Clears</knockout>
-                                        </div>
-                                    </div>
+                                <div class="card-body p-0 text-center small">
+                                    <table class="table table-bordered table-sm h-100 mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2" class="align-middle h-100" data-bind="html: $data.description">Description</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="w-50 table-secondary" style="height: 1px;">Movement Speed</td>
+                                                <td class="table-secondary">Cost / Run</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="align-middle" data-bind="text: `${($data.interval / 1000).toLocaleString('en-US')} seconds`"></td>
+                                                <td rowspan="3" class="align-middle" data-bind="foreach: $data.calcCost(1, player.town.dungeon.tokenCost, player.region)">
+                                                    <knockout class="w-100 currency-template" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}">cost</knockout><br/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="table-secondary" style="height: 1px;">Statistics</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="align-middle">
+                                                    <knockout data-bind="text: `Total Attempts: ${App.game.statistics.dungeonGuideAttempts[$data.index]().toLocaleString()}`">Attempts</knockout><br/>
+                                                    <knockout data-bind="text: `Total Clears: ${App.game.statistics.dungeonGuideClears[$data.index]().toLocaleString()}`">Clears</knockout>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="card-footer">
-                                    <butto class="btn btn-block btn-primary" href="#dungeonGuidesSubModal" data-toggle="modal" data-bind="click: () => DungeonGuides.selected($data.index)">Hire!</butto>
+                                <div class="card-footer p-2">
+                                    <butto class="btn btn-block btn-sm btn-primary" href="#dungeonGuidesSubModal" data-toggle="modal" data-bind="click: () => DungeonGuides.selected($data.index)">Hire!</butto>
                                 </div>
                             </div>
                         </div>
+                        <!-- ko if: DungeonGuides.list.some(g => !g.isUnlocked()) -->
+                        <div class="px-2 mt-1 mb-2">
+                            <button class="btn btn-secondary btn-block" data-toggle="collapse" href="#lockedDungeonGuides">Show/Hide Locked Dungeon Guides</button>
+                        </div>
+                        <div class="collapse" id="lockedDungeonGuides">
+                            <div class="row m-0 justify-content-center d-flex px-1" data-bind="foreach: DungeonGuides.list.filter(g => !g.isUnlocked())" style="max-width: 100%;">
+                                <div class="card text-left col-lg-6 col-md-12 p-1 border-0 align-items-stretch">
+                                    <h5 class="card-header d-flex align-items-center py-2">
+                                        <knockout class="flex-grow-1" data-bind="text: $data.name">Name</knockout>
+                                        <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                                    </h5>
+                                    <div class="card-body p-0 text-center small">
+                                        <table class="table table-bordered table-sm h-100 mb-0">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2" class="align-middle h-100" data-bind="html: $data.description">Description</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="w-50 table-secondary" style="height: 1px;">Movement Speed</td>
+                                                    <td class="table-secondary">Currencies</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle" data-bind="text: `${($data.interval / 1000).toLocaleString('en-US')} seconds`"></td>
+                                                    <td class="align-middle" data-bind="foreach: $data.calcCost(1, player.town.dungeon.tokenCost, player.region)">
+                                                        <img width="24" src="" data-bind="attr: { src: `assets/images/currency/${GameConstants.Currency[$data.currency]}.svg` }"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="table-secondary" style="height: 1px;">Unlock Requirement</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="align-middle" data-bind="text: $data.unlockRequirement?.hint()"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
                         <!-- /ko -->
                     </div>
 
@@ -83,31 +122,39 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body text-left p-2">
+            <div class="modal-body text-left p-0">
                 <!-- ko if: player.town instanceof DungeonTown -->
-                <table class="table table-striped table-hover m-0 text-center">
+                <table class="table m-0 text-center">
                     <tbody>
                         <tr>
-                            <td>Dungeon Attempts</td>
+                            <td class="table-secondary border-top-0 p-2">Dungeon Attempts</td>
                         </tr>
                         <tr>
-                            <td class="p-0">
+                            <td class="p-2">
                                 <input type="number" class="form-control" min="1" step="1" data-bind="value: DungeonGuides.clears"/>
                             </td>
                         </tr>
                         <tr>
-                            <td>Guide Cost</td>
+                            <td class="table-secondary p-2">Guide Cost</td>
                         </tr>
                         <tr>
-                            <td data-bind="foreach: DungeonGuides.calcCost()">
+                            <td class="p-2" data-bind="foreach: DungeonGuides.calcCost()">
                                 <knockout data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></knockout><br/>
                             </td>
                         </tr>
                         <tr>
-                            <td>Dungeon Cost</td>
+                            <td class="table-secondary p-2">Dungeon Entry Cost</td>
                         </tr>
-                        <tr data-bind="with: DungeonGuides.calcDungeonCost()">
+                        <tr class="p-2" data-bind="with: DungeonGuides.calcDungeonCost()">
                             <td data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></td>
+                        </tr>
+                        <tr>
+                            <td class="table-secondary p-2">Total Cost</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2" data-bind="foreach: DungeonGuides.calcCost(true)">
+                                <knockout data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></knockout><br/>
+                            </td>
                         </tr>
                         <tr class="bg-danger">
                             <td>ALL CHARGES NON REFUNDABLE</td>

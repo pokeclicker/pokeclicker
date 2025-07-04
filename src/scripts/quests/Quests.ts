@@ -28,13 +28,13 @@ class Quests implements Saveable {
 
     // Get current quests by status
     public completedQuests: KnockoutComputed<Array<Quest>> = ko.pureComputed(() => {
-        return this.questList().filter(quest => quest.isCompleted());
+        return this.sortedQuestList().filter(quest => quest.claimed());
     });
     public currentQuests: KnockoutComputed<Array<Quest>> = ko.pureComputed(() => {
         return this.questList().filter(quest => quest.inProgress());
     });
     public incompleteQuests: KnockoutComputed<Array<Quest>> =  ko.pureComputed(() => {
-        return this.questList().filter(quest => !quest.isCompleted());
+        return this.questList().filter(quest => !quest.claimed());
     });
     public sortedQuestList: KnockoutComputed<Array<Quest>> = ko.pureComputed(() => {
         const list = [...this.questList()];
@@ -118,11 +118,13 @@ class Quests implements Saveable {
             }
             // Once the player completes every available quest, refresh the list for free
             if (this.allQuestClaimed()) {
+                const bonus = this.calcListBonus();
+                App.game.wallet.gainQuestPoints(bonus);
                 this.refreshQuests(true);
                 // Give player a free refresh
                 this.freeRefresh(true);
                 Notifier.notify({
-                    message: '<i>All quests completed. Your quest list has been refreshed.</i>',
+                    message: `All quests completed. Your quest list has been refreshed and you gained an extra <img src="./assets/images/currency/questPoint.svg" height="24px"/> ${bonus.toLocaleString('en-US')}.`,
                     type: NotificationConstants.NotificationOption.info,
                     timeout: 1e4,
                     setting: NotificationConstants.NotificationSetting.General.quest_completed,
@@ -135,6 +137,16 @@ class Quests implements Saveable {
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
+    }
+
+    public calcListBonus(): number {
+        const level = this.level();
+        const part = this.calcListBonusPercent(level);
+        return Math.round(this.questList().reduce((acc, q) => acc + q.pointsReward, 0) * part);
+    }
+
+    public calcListBonusPercent(level: number): number {
+        return Math.max(0.1, Math.min(5000 + level * 100, (2 * level) ** 2 + 100) / 10000);
     }
 
     public addXP(amount: number) {
@@ -191,6 +203,11 @@ class Quests implements Saveable {
 
             this.freeRefresh(false);
             GameHelper.incrementObservable(this.refreshes);
+
+            if (this.completedQuests().length === 0) {
+                AchievementHandler.unlockAchievement('Picky Quester');
+            }
+
             this.generateQuestList();
         } else {
             Notifier.notify({
@@ -208,14 +225,18 @@ class Quests implements Saveable {
         return App.game.wallet.hasAmount(this.getRefreshCost());
     }
 
+    public isRefreshFree(): boolean {
+        return this.freeRefresh() || this.getRefreshCost().amount == 0;
+    }
+
     /**
      * Formula for the Money cost for refreshing quests
-     * @returns 0 when all quests are complete, ~1 million when none are
+     * @returns 0 when all but 1 quests are complete, ~1 million when none are
      */
     public getRefreshCost(): Amount {
         // If we have a free refersh, just assume all the quest are completed
-        const notComplete = this.freeRefresh() ? 0 : this.incompleteQuests().length;
-        const cost = Math.floor((250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1)) / 1000) * 1000;
+        const notComplete = this.freeRefresh() ? 0 : this.incompleteQuests().length - 1;
+        const cost = Math.floor((250000 / Math.log(9) * Math.log(Math.pow(notComplete, 4) + 1)) / 1000) * 1000;
         return new Amount(Math.max(0, Math.min(1e6, cost)), GameConstants.Currency.money);
     }
 
@@ -237,7 +258,7 @@ class Quests implements Saveable {
      * Determines if all quests have been completed and claimed.
      */
     public allQuestClaimed() {
-        return !this.incompleteQuests().length && !this.currentQuests().length;
+        return !this.incompleteQuests().length;
     }
 
     /**

@@ -6,54 +6,79 @@
                 <h4 data-bind='text: ShopHandler.shopObservable?.().name'></h4>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
             </div>
-            <div>
-                <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#genericTraderTrade">Trades</a></li>
-                </ul>
-            </div>
             <div class="modal-body tab-content">
-                <div id="genericTraderTrade" class="tab-pane fade in active show" style="min-height: 250px;">
-                    <div style="display: grid; column-gap: 0.5rem; grid-template-columns: auto auto 1fr auto auto auto 1fr auto;">
-                        <div class="font-weight-bold" style="grid-column: 1 / 3">Cost</div>
-                        <div class="font-weight-bold">Inventory</div>
-                        <div class="font-weight-bold"></div>
-                        <div class="font-weight-bold" style="grid-column: 5 / 7">Profit</div>
-                        <div class="font-weight-bold">Inventory</div>
-                        <div class="font-weight-bold"></div>
-
-                        <!-- ko foreach: { data: GenericDeal.getDeals(ShopHandler.shopObservable().traderID), as: 'deal' } -->
-                        <div class="align-items-center mt-1" style="display: grid; grid-column: 1 / 9; grid-template-columns: subgrid" data-bind="let: { tradeAmount: ko.observable(1) }">
-                            <div class="align-items-center" style="display: grid; grid-column: 1 / 4; grid-template-columns: subgrid">
-                                <!-- ko foreach: deal.costs -->
-                                <!-- ko template: { name: 'traderCostProfitItemTemplate', data: { model: $data, tradeAmount: tradeAmount(), type: 'cost' } } -->
-                                <!-- /ko -->
-                                <!-- /ko -->
-                            </div>
-                            <div class="mx-4">→</div>
-                            <div class="align-items-center" style="display: grid; grid-column: 5 / 8; grid-template-columns: subgrid">
-                                <!-- ko foreach: deal.profits -->
-                                <!-- ko template: { name: 'traderCostProfitItemTemplate', data: { model: $data, tradeAmount: tradeAmount(), type: 'profit' } } -->
-                                <!-- /ko -->
-                                <!-- /ko -->
-                            </div>
-                            <div>
-                                <div class="btn-group btn-block">
-                                    <button class='btn btn-success btn-block' data-bind='click: function(){GenericDeal.use(ShopHandler.shopObservable()?.traderID, $index(), tradeAmount())}, attr: { disabled: tradeAmount() > GenericDeal.maxTrades(deal) || !GenericDeal.canUse(ShopHandler.shopObservable()?.traderID, $index()) }'>
-                                        <knockout data-bind="text: !GenericDeal.anySoldOut(deal) ? 'Trade' : 'Sold out'"></knockout>
-                                    </button>
-                                    <button type="button" data-bind="visible: GenericDeal.maxTrades(deal) > 1, text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    </button>
-                                    <div class="dropdown-menu" data-bind="foreach: [1, 10, 100]">
-                                        <button class="dropdown-item" type="button" data-bind="visible: GenericDeal.maxTrades(deal) > 1, click: function(){tradeAmount($data)}, text: $data"></button>
+                <div id="genericTraderTrade" class="tab-pane fade in active show">
+                    <div class="table-responsive" style="min-height: 250px; text-wrap: nowrap">
+                        <table class="table table-striped table-hover table-sm m-0 table-generic-trader" data-bind="
+                            css: {
+                                'hide-all-cost-inventory': !GenericDeal.getDeals(ShopHandler.shopObservable().traderID)?.().filter(deal => deal.isVisible()).some(deal => deal.costs.some(profit => !profit.hidePlayerInventory)),
+                                'hide-all-profit-inventory': !GenericDeal.getDeals(ShopHandler.shopObservable().traderID)?.().filter(deal => deal.isVisible()).some(deal => deal.profits.some(profit => !profit.hidePlayerInventory))
+                            }
+                        ">
+                            <thead>
+                            <tr>
+                                <th>Cost</th>
+                                <th class="cost-inventory">Inventory</th>
+                                <th></th>
+                                <th>Profit</th>
+                                <th class="profit-inventory">Inventory</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody data-bind="foreach: { data: GenericDeal.getDeals(ShopHandler.shopObservable().traderID)?.().filter(deal => deal.isVisible()), as: 'deal' }">
+                            <tr data-bind="let: { tradeAmount: ko.observable(1) }">
+                                <td class="align-middle text-center cost-section">
+                                    <div class="d-flex flex-column pr-2" data-bind="foreach: deal.costs">
+                                        <div class="d-flex align-items-center" style="height: 24px; gap: 8px;" data-bind="template: { name: 'traderCostProfitItemTemplate', data: { model: $data, tradeAmount: tradeAmount() } }"></div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style="grid-column: 1 / 9;">
-                            <hr class="my-2">
-                        </div>
-                        <!-- /ko -->
+                                </td>
+                                <td class="align-middle text-center cost-inventory">
+                                    <div class="d-flex flex-column px-2" data-bind="foreach: deal.costs">
+                                        <div class="text-center" style="height: 24px;" data-bind="text: $data.hidePlayerInventory ? '' : GenericDeal.inventoryAmount($data).toLocaleString('en-US')"></div>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="px-2">→</div>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="d-flex flex-column px-2" data-bind="foreach: deal.profits">
+                                        <div class="d-flex align-items-center" style="height: 24px; gap: 8px;" data-bind="template: { name: 'traderCostProfitItemTemplate', data: { model: $data, tradeAmount: tradeAmount() } }"></div>
+                                    </div>
+                                </td>
+                                <td class="align-middle profit-inventory">
+                                    <div class="d-flex flex-column px-2" data-bind="foreach: deal.profits">
+                                        <div class="text-center" style="height: 24px;" data-bind="text: $data.hidePlayerInventory ? '' : GenericDeal.inventoryAmount($data).toLocaleString('en-US')"></div>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <!-- ko if: GenericDeal.isLocked(ShopHandler.shopObservable()?.traderID, $index()) -->
+                                    <img width="24px" class="lock ml-2" src="assets/images/breeding/lock.svg" data-bind="
+                                        tooltip: {
+                                            title: deal.requirement?.hint() || '',
+                                            placement: 'bottom',
+                                            trigger: 'hover'
+                                        }
+                                    " />
+                                    <!-- /ko -->
+                                    <!-- ko ifnot: GenericDeal.isLocked(ShopHandler.shopObservable()?.traderID, $index()) -->
+                                    <div class="btn-group btn-block pl-2">
+                                        <button class='btn btn-success btn-block' data-bind='click: function(){GenericDeal.use(ShopHandler.shopObservable()?.traderID, $index(), tradeAmount())}, attr: { disabled: tradeAmount() > GenericDeal.maxTrades(deal) || !GenericDeal.canUse(ShopHandler.shopObservable()?.traderID, $index()) }'>
+                                            <knockout data-bind="text: !GenericDeal.anySoldOut(deal) ? (deal.tradeButtonOverride ?? 'Trade') : 'Sold out'"></knockout>
+                                        </button>
+                                        <!-- ko if: GenericDeal.maxTrades(deal) > 1 || tradeAmount() > 1 -->
+                                        <button type="button" data-bind="text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        </button>
+                                        <!-- Until we can fix the PokemonItem gain() function, this should be limited to 1000 -->
+                                        <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000]">
+                                            <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data"></button>
+                                        </div>
+                                        <!-- /ko -->
+                                    </div>
+                                    <!-- /ko -->
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -67,31 +92,26 @@
 <script type="text/html" id="traderCostProfitItemTemplate">
     <!-- ko if: model.type === 'Gem' -->
     <div><img height="24px" data-bind="attr: {src: Gems.image(model.gemType) }"/></div>
-    <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${PokemonType[model.gemType]}`, css: { 'text-danger': type === 'cost' && tradeAmount * model.amount > App.game.gems.gemWallet[model.gemType]() }"></div>
-    <div class="text-center" data-bind="text: model.hidePlayerInventory ? '' : App.game.gems.gemWallet[model.gemType]().toLocaleString('en-US')"></div>
+    <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${PokemonType[model.gemType]}`, css: { 'not-enough': tradeAmount * model.amount > App.game.gems.gemWallet[model.gemType]() }"></div>
     <!-- /ko -->
 
     <!-- ko if: model.type === 'Shard' -->
     <div><img height="24px" data-bind="attr: {src: model.shardItem.image }"/></div>
-    <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${model.shardItem.displayName}`, css: { 'text-danger': type === 'cost' && tradeAmount * model.amount > player.itemList[model.shardItem.name]() }"></div>
-    <div class="text-center" data-bind="text: model.hidePlayerInventory ? '' : player.itemList[model.shardItem.name]().toLocaleString('en-US')"></div>
+    <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${model.shardItem.displayName}`, css: { 'not-enough': tradeAmount * model.amount > player.itemList[model.shardItem.name]() }"></div>
     <!-- /ko -->
 
     <!-- ko if: model.type === 'Berry' -->
     <div><img height="24px" data-bind="attr: {src: FarmController.getBerryImage(model.berryType) }, css: {'berryLocked': !App.game.farming.unlockedBerries[model.berryType]() }"/></div>
-    <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${App.game.farming.unlockedBerries[model.berryType]() ? BerryType[model.berryType] : '???'}`, css: { 'text-danger': type === 'cost' && tradeAmount * model.amount > App.game.farming.berryList[model.berryType]() }"></div>
-    <div class="text-center" data-bind="text: model.hidePlayerInventory ? '' : App.game.farming.berryList[model.berryType]().toLocaleString('en-US')"></div>
+    <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${App.game.farming.unlockedBerries[model.berryType]() ? BerryType[model.berryType] : '???'}`, css: { 'not-enough': tradeAmount * model.amount > App.game.farming.berryList[model.berryType]() }"></div>
     <!-- /ko -->
 
     <!-- ko if: model.type === 'Item' -->
     <div><img height="24px" data-bind="attr: {src: model.item.image }"/></div>
-    <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${model.item.displayName}`, css: { 'text-danger': type === 'cost' && tradeAmount * model.amount > player.itemList[model.item.name]() }"></div>
-    <div class="text-center" data-bind="text: model.hidePlayerInventory ? '' : player.itemList[model.item.name]().toLocaleString('en-US')"></div>
+    <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${model.item.displayName}`, css: { 'not-enough': tradeAmount * model.amount > player.itemList[model.item.name]() }"></div>
     <!-- /ko -->
 
     <!-- ko if: model.type === 'Amount' -->
     <div><img height="24px" data-bind="attr: {src: `assets/images/currency/${GameConstants.Currency[model.currency.currency]}.svg` }"/></div>
-    <div class="text-left" data-bind="text: `${(tradeAmount * model.currency.amount * model.amount).toLocaleString('en-US')} × ${GameConstants.camelCaseToString(GameConstants.Currency[model.currency.currency])}`, css: { 'text-danger': type === 'cost' && tradeAmount * model.currency.amount * model.amount > App.game.wallet.currencies[model.currency.currency]() }"></div>
-    <div class="text-center" data-bind="text: model.hidePlayerInventory ? '' : App.game.wallet.currencies[model.currency.currency]().toLocaleString('en-US')"></div>
+    <div class="text-left" data-bind="text: `${(tradeAmount * model.currency.amount * model.amount).toLocaleString('en-US')} × ${GameConstants.camelCaseToString(GameConstants.Currency[model.currency.currency])}`, css: { 'not-enough': tradeAmount * model.currency.amount * model.amount > App.game.wallet.currencies[model.currency.currency]() }"></div>
     <!-- /ko -->
 </script>

@@ -213,14 +213,14 @@ class PokemonLocations {
             return cache[maxRegion][pokemonName];
         }
         const cacheLine = this.initRegionalCacheLine(cache, maxRegion, Array<string>);
-        Object.entries(App.game.breeding.hatchList).forEach(([eggType, eggArr]) => {
+        Object.entries(App.game.breeding.hatchList).forEach(([eggItemType, eggArr]) => {
             eggArr.forEach((pokemonArr, region) => {
                 // If we only want to check up to a maximum region
                 if (maxRegion != GameConstants.Region.none && region > maxRegion)  {
                     return false;
                 }
                 pokemonArr.forEach(name => {
-                    cacheLine[name].push(EggType[eggType]);
+                    cacheLine[name].push(GameConstants.EggItemType[eggItemType]);
                 });
             });
         });
@@ -289,18 +289,6 @@ class PokemonLocations {
                 return false;
             }
             cacheLine[baby].push(parent);
-        });
-        return cacheLine[pokemonName];
-    }
-
-    public static getPokemonFossils(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
-        const cache = this.getRegionalCache<string[]>(this.getPokemonFossils.name);
-        if (cache[maxRegion]) {
-            return cache[maxRegion][pokemonName];
-        }
-        const cacheLine = this.initRegionalCacheLine(cache, maxRegion, Array<string>);
-        Object.entries(GameConstants.FossilToPokemon).forEach(([fossil, pokemon]) => {
-            cacheLine[pokemon].push(fossil);
         });
         return cacheLine[pokemonName];
     }
@@ -549,15 +537,13 @@ class PokemonLocations {
                 return false;
             }
 
-            const npcs = town.npcs?.filter(n => n instanceof GiftNPC);
+            const npcs = town.npcs?.filter(n => n instanceof PokemonGiftNPC);
             npcs?.forEach(npc => {
-                const rewardFunction = (npc as GiftNPC).giftFunction?.toString();
-                this.getPokemonRewards(rewardFunction).forEach(pokemon => {
-                    cacheLine[pokemon].push({
-                        town: townName,
-                        npc: npc.name,
-                        requirements: npc.options?.requirement,
-                    });
+                const pokemon = (npc as PokemonGiftNPC).giftPokemon;
+                cacheLine[pokemon].push({
+                    town: townName,
+                    npc: npc.name,
+                    requirements: npc.options?.requirement,
                 });
             });
         });
@@ -688,11 +674,6 @@ class PokemonLocations {
         const parents = PokemonLocations.getPokemonParents(pokemonName, maxRegion);
         if (parents.length) {
             encounterTypes[PokemonLocationType.Baby] = parents;
-        }
-        // Fossil
-        const fossils = PokemonLocations.getPokemonFossils(pokemonName);
-        if (fossils.length) {
-            encounterTypes[PokemonLocationType.Fossil] = fossils;
         }
         // Safari
         const safariChance = PokemonLocations.getPokemonSafariChance(pokemonName);

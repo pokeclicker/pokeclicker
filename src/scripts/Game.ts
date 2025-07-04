@@ -46,7 +46,6 @@ class Game implements TmpGameType {
     public purifyChamber: PurifyChamber;
     public weatherApp: WeatherApp;
     public zMoves: ZMoves;
-    public pokemonContest: PokemonContest;
 
     constructor() {
         // Needs to be loaded first so save data can be updated (specifically "player" data)
@@ -86,7 +85,6 @@ class Game implements TmpGameType {
         this.purifyChamber = new PurifyChamber();
         this.weatherApp = new WeatherApp();
         this.zMoves = new ZMoves();
-        this.pokemonContest = new PokemonContest();
 
         this._gameState = ko.observable(GameConstants.GameState.loading);
     }
@@ -154,7 +152,6 @@ class Game implements TmpGameType {
         SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
         WeatherApp.initialize();
-        PokemonContestController.generateDailyContest(now);
         DamageCalculator.initialize();
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
@@ -475,6 +472,7 @@ class Game implements TmpGameType {
                 }
 
                 GameHelper.updateDay();
+                (App.game.farming.mutations.find(m => m instanceof EnigmaMutation) as EnigmaMutation).resetIndex();
 
                 SeededDateRand.seedWithDate(now);
                 // Give the player a free quest refresh

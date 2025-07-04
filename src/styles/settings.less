@@ -22,3 +22,24 @@
     top: 4px;
     left: 7px
 }
+
+.mapAreaStateWrapper .SortableColorChoiceSetting-handle {
+    width: 100%;
+    border: 1px solid rgba(200, 200, 200, 30%);
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+// Make filters below "completed" appear disabled
+tr.mapAreaStateWrapper[data-areastate="completed"] ~ tr td:first-of-type > div:not(:first-of-type) {
+    color: gray;
+    text-decoration: line-through;
+}
+
+.map-legend div.--completed ~ div.legend-item {
+    color: gray;
+    text-decoration: line-through;
+}

@@ -82,34 +82,30 @@ class QuestLineHelper {
                     exitOnEsc: false,
                     showButtons: false,
                 });
-                const caughtSelector: HTMLElement = document.querySelector('tr[data-name="Caught"] img.pokeball-small.clickable.pokeball-selected');
-                caughtSelector.addEventListener('click', () => {
-                    Information.hide();
-                    $('#pokeballSelectorModal').one('shown.bs.modal', null, () => {
-                        // Need to set a timeout, otherwise it messes up the modal layout
-                        setTimeout(() => {
-                            Information.show({
-                                steps: [
-                                    {
-                                        element: document.querySelector('#pokeballSelectorModal .modal-body'),
-                                        intro: 'Select the <img title="Poké Ball" src="assets/images/pokeball/Pokeball.svg" height="25px"> Poké Ball to use this type of ball to capture already caught Pokémon, which will give you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens when captured.',
-                                    },
-                                ],
-                                // Needed for IntroJs on modals
-                                overlayOpacity: 0,
-                            });
-                        }, 100);
 
-                        // Hide the IntroJS overlay once the user selects the Pokeball
-                        const selectPokeball = document.querySelectorAll('#pokeballSelectorModal .clickable')[1];
-                        selectPokeball.addEventListener('click', () => {
-                            Information.hide();
-                        }, {
-                            once: true,
+                $('#pokeballSelectorModal').one('show.bs.modal', () => {
+                    Information.hide();
+                });
+
+                $('#pokeballSelectorModal').one('shown.bs.modal', () => {
+                    // Need to set a timeout, otherwise it messes up the modal layout
+                    setTimeout(() => {
+                        Information.show({
+                            steps: [
+                                {
+                                    element: document.querySelector('#pokeballSelectorModal .modal-body'),
+                                    intro: 'Select the <img title="Poké Ball" src="assets/images/pokeball/Pokeball.svg" height="25px"> Poké Ball to use this type of ball to capture already caught Pokémon, which will give you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens when captured.',
+                                },
+                            ],
+                            // Needed for IntroJs on modals
+                            overlayOpacity: 0,
                         });
+                    }, 100);
+
+                    // Hide the IntroJS overlay once the user selects the Pokeball
+                    $('#pokeballSelectorModal .clickable').one('click', () => {
+                        Information.hide();
                     });
-                }, {
-                    once: true,
                 });
             });
         };
@@ -311,12 +307,12 @@ class QuestLineHelper {
             ItemList.Old_amber.gain(1);
             Notifier.notify({
                 title: undergroundQuestLine.name,
-                message: 'You have gained an Old Amber fossil!\n<i>You can breed this in the hatchery.</i>',
+                message: 'You have gained an Old Amber!\n<i>Have a look around Cinnabar island to revive this fossil.</i>',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: GameConstants.MINUTE,
             });
         };
-        const mineLayers = new MineLayersQuest(5, 0).withDescription('Mine 5 layers in the Underground.').withCustomReward(oldAmberReward);
+        const mineLayers = new MineLayersQuest(5, 0).withDescription('Collect all buried treasure 5 times in the Underground mines.').withCustomReward(oldAmberReward);
         undergroundQuestLine.addQuest(mineLayers);
 
         App.game.quests.questLines().push(undergroundQuestLine);
@@ -1010,7 +1006,23 @@ class QuestLineHelper {
         const fightFolly = new DefeatTemporaryBattleQuest('Folly', 'Fight Folly the Shady Guy in Phenac City');
         orreColosseumQuestLine.addQuest(fightFolly);
 
-        const checkSack = new TalkToNPCQuest(Sack, 'Check what is in the mysterious sack.'); // Step 3
+        const talkToSackReward = () => {
+            $('#npc-modal').one('hidden.bs.modal', () => {
+                Information.show({
+                    steps: [
+                        {
+                            element: document.getElementById('pokeballSelector'),
+                            intro: 'You can now start catching Shadow Pokémon!<br/><br/>A "New Shadow" filter has been added to your list, be sure to select a Poké Ball and move it to the desired position!',
+                        },
+                    ],
+                    highlightClass: 'bg-secondary',
+                    overlayOpacity: 1,
+                    positionPrecedence: ['right', 'bottom'],
+                });
+            });
+        };
+
+        const checkSack = new TalkToNPCQuest(Sack, 'Check what is in the mysterious sack.').withCustomReward(talkToSackReward); // Step 3
         orreColosseumQuestLine.addQuest(checkSack);
 
         const defeatShadowsPhenac = new CustomQuest(10, 0, 'Defeat 10 trainers who are using Shadow Pokémon in Phenac City.', () => App.game.statistics.totalShadowPokemonDefeated());
@@ -1889,7 +1901,7 @@ class QuestLineHelper {
         flareKalosQuestLine.addQuest(clearKalosLeague);
 
         // Battle AZ and finish the quest
-        const battleAZ1 = new DefeatTemporaryBattleQuest('Storyline AZ', 'What an amazing trainer! You became Kalos Champion! There is a parade in your honor in Lumiose City. But wait, AZ is there asking you for a battle. Show him what being a Pokémon Trainer is like!').withCustomReward(this.itemReward('Key_stone', 1));
+        const battleAZ1 = new DefeatTemporaryBattleQuest('AZ', 'What an amazing trainer! You became Kalos Champion! There is a parade in your honor in Lumiose City. But wait, AZ is there asking you for a battle. Show him what being a Pokémon Trainer is like!').withCustomReward(this.itemReward('Key_stone', 1));
         flareKalosQuestLine.addQuest(battleAZ1);
 
         App.game.quests.questLines().push(flareKalosQuestLine);
@@ -3734,13 +3746,13 @@ class QuestLineHelper {
         const talktoMustard9 = new TalkToNPCQuest(Mustard9, 'Talk to Mustard at the Master Dojo.');
         dojoArmorQuestLine.addQuest(talktoMustard9);
 
-        const clearTowerofDarkness = new DefeatDungeonQuest(1, 0, 'Tower of Darkness').withDescription('Defeat Tower of Darkness.');
-        const clearTowerofWaters = new DefeatDungeonQuest(1, 0, 'Tower of Waters').withDescription('Defeat Tower of Waters');
+        const catchUrshifuSingleStrike = new CaptureSpecificPokemonQuest('Urshifu (Single Strike)');
+        const catchUrshifuRapidStrike = new CaptureSpecificPokemonQuest('Urshifu (Rapid Strike)');
         dojoArmorQuestLine.addQuest(new MultipleQuestsQuest(
             [
-                clearTowerofDarkness,
-                clearTowerofWaters,
-            ], 'Complete Kubfu\'s training in the Tower of Darkness and the Tower of Waters so it can evolve!'));
+                catchUrshifuSingleStrike,
+                catchUrshifuRapidStrike,
+            ], 'Level up Kubfu in both of the Towers of Two Fists to obtain Urshifu!'));
 
         const talktoMustard10 = new TalkToNPCQuest(Mustard10, 'Talk to Mustard at one of the Towers of Two Fists.');
         dojoArmorQuestLine.addQuest(talktoMustard10);
@@ -4055,33 +4067,6 @@ class QuestLineHelper {
         App.game.quests.questLines().push(gigantamaxQuestLine);
     }
 
-    public static createOriginalColorMagearnaQuestLine() {
-        const magearnaQuestLine = new QuestLine('A Mystery Gift', 'You have received a Mystery Gift.',
-            new MultiRequirement([
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kanto),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.johto),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.hoenn),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.sinnoh),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.unova),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kalos),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.alola),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.galar),
-            ]), GameConstants.BulletinBoards.Galar);
-
-        const mysteryGift = new TalkToNPCQuest(MagearnaMysteryGift, 'Go home and open your Mystery Gift').withCustomReward(() => {
-            App.game.party.gainPokemonByName('Magearna (Original Color)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-            Notifier.notify({
-                title: magearnaQuestLine.name,
-                message: 'You obtained Magearna (Original Color)!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        });
-        magearnaQuestLine.addQuest(mysteryGift);
-
-        App.game.quests.questLines().push(magearnaQuestLine);
-    }
-
     /* Hisui QuestLines */
 
     public static createHisuiForcesQuestLine() {
@@ -4274,7 +4259,6 @@ class QuestLineHelper {
         this.createDynaTreeBirdsQuestLine();
         this.createAncientGolemsQuestLine();
         this.createGigantamaxQuestLine();
-        this.createOriginalColorMagearnaQuestLine();
         this.createHisuiForcesQuestLine();
         this.createHisuiArceusQuestLine();
         this.createPaldeaLegendsQuestLine();

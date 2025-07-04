@@ -7,10 +7,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <!-- ko if: DisplayObservables.modalState.statisticsModal === 'show' -->
             <div class="modal-body p-0">
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a class="nav-link active" href="#statisticsModalStatsPane" data-toggle="tab">Stats</a></li>
                     <li class="nav-item"><a class="nav-link" href="#statisticsModalMultipliersPane" data-toggle="tab">Multipliers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#statisticsModalClickAttackPane" data-toggle="tab">Click Attack</a></li>
                 </ul>
                 <div class="tab-content">
                     <!-- Stats Pane -->
@@ -23,6 +25,10 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <tr>
+                                <td class="text-left">Start Date/Time</td>
+                                <td class="text-left tight text-muted" data-bind="text: player.createdTime ? new Date(player.createdTime).toLocaleString() : 'N/A'"></td>
+                            </tr>
                             <tr>
                                 <td class="text-left">Time Played</td>
                                 <td class="text-left tight text-muted" data-bind="html: GameConstants.formatSecondsToTime(App.game.statistics['secondsPlayed']())">-</td>
@@ -66,8 +72,93 @@
                             <!-- /ko -->
                         </table>
                     </div>
+
+                    <!-- Click Attack Pane -->
+                    <div class="tab-pane text-left p-3" id="statisticsModalClickAttackPane" data-bind="with: App.game.party.clickAttackBreakdown">
+                        <h5>Base Click Attack</h5>
+                        <table class="table table-bordered table-sm">
+                            <tbody>
+                                <tr>
+                                    <td class="w-50">Unique Pokémon</td>
+                                    <td class="text-center w-50">
+                                        <code data-bind="text: $data.caughtPokemon.toLocaleString('en-US')"></code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Shiny Pokémon</td>
+                                    <td class="text-center">
+                                        <code data-bind="text: $data.shinyPokemon.toLocaleString('en-US')"></code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Resistant Pokémon</td>
+                                    <td class="text-center">
+                                        <code data-bind="text: $data.resistantPokemon.toLocaleString('en-US')"></code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Purified Pokémon</td>
+                                    <td class="text-center">
+                                        <code data-bind="text: $data.purifiedPokemon.toLocaleString('en-US')"></code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-center">
+                                        <code data-bind="html: `(1 + ${$data.caughtPokemon} + ${$data.shinyPokemon} + ${$data.resistantPokemon} + ${$data.purifiedPokemon})<sup>1.4</sup>`"></code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">=</td>
+                                    <td class="text-center">
+                                        <span data-bind="text: $data.baseClickAttack.toLocaleString('en-US')"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h5>Modifiers</h5>
+                        <table class="table table-bordered table-sm mb-0">
+                            <tbody>
+                                <tr>
+                                    <td>Achievement Bonus</td>
+                                    <td class="text-center">
+                                        <code data-bind="text: `×(1 + ${AchievementHandler.achievementBonus()})`"></code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="w-50">xClick</td>
+                                    <td class="text-center w-50">
+                                        <code data-bind="text: `×${$data.xClickModifier}`"></code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Rocky Helmet</td>
+                                    <td class="text-center">
+                                        <code data-bind="text: `×${$data.rockyHelmetModifier}`"></code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Black Flute</td>
+                                    <td class="text-center">
+                                        <code data-bind="text: `×${$data.blackFluteModifier}`"></code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-center">
+                                        <code data-bind="text: `${$data.baseClickAttack} * (1 + ${AchievementHandler.achievementBonus()}) * ${$data.xClickModifier} * ${$data.rockyHelmetModifier} * ${$data.blackFluteModifier}`"></code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">=</td>
+                                    <td class="text-center">
+                                        <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+            <!-- /ko -->
         </div>
     </div>
 </div>

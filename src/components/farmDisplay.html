@@ -129,7 +129,7 @@
         </div>
       </div>
       <!-- /ko -->
-      
+
       <div class="row py-1" data-bind="foreach: App.game.farming.plotList">
         <!-- ko if: $index() % GameConstants.FARM_PLOT_WIDTH == 0 -->
         <div class="w-100"></div>
@@ -173,11 +173,14 @@
                     <!-- ko if: $data.isSafeLocked -->
                     <img class ="plotSafeLockIcon" src= "assets/images/farm/plotSafeLock.svg" >
                     <!-- /ko -->
+                    <span class="position-absolute border border-2 border-dark rounded-circle bg-success"
+                        style="bottom: 3px; left: 3px; padding: 0.25rem; pointer-events: none;"
+                        data-bind="visible: App.game.farming.possiblePlotMutations()[$index()].length > 0"></span>
                 </div>
             </div>
         </div>
     </div>
-    
+
     </div>
     <div class="card-footer p-0">
       <button type="button" class="btn float-left"

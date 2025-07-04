@@ -41,17 +41,15 @@
                     placement: 'bottom',
                     class: 'no-click',
                 }">
-                <!-- ko if: $data.type == EggType.Fossil -->
-                <img class="egg" data-bind="attr: {src: BreedingController.getEggImage($data)}, class: BreedingController.getEggCssClass($data)"/>
+                <div data-bind="template: { name: 'eggSVGTemplate', data: $data}, class: BreedingController.getEggCssClass($data)">
+                </div>
+
+                <!-- ko if: $data.type == EggType.Pokemon -->
+                <div data-bind="if: $data.partyPokemon()?.pokerus > GameConstants.Pokerus.Uninfected" style="position: absolute;right: 2px;top: -3px;">
+                    <img width="40px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[$data.partyPokemon()?.pokerus]}.png`}"/>
+                </div>
                 <!-- /ko -->
-                <!-- ko ifnot: $data.type == EggType.Fossil -->
-                <div data-bind="template: { name: 'eggSVGTemplate', data: $data}, class: BreedingController.getEggCssClass($data)"></div>
-                    <!-- ko if: $data.type == EggType.Pokemon -->
-                    <div data-bind="if: $data.partyPokemon()?.pokerus > GameConstants.Pokerus.Uninfected" style="position: absolute;right: 2px;top: -3px;">
-                        <img width="40px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[$data.partyPokemon()?.pokerus]}.png`}"/>
-                    </div>
-                    <!-- /ko -->
-                <!-- /ko -->
+
                 <div class="progress" data-bind='visible: progress() < 100'>
                     <div class="progress-bar bg-success" role="progressbar"
                          data-bind="attr:{ style: 'width:' + $data.progress() + '%' }"
@@ -79,7 +77,7 @@
     <!-- ko if: App.game.breeding.queueList().length -->
     <div id="hatcheryQueue" class="card-footer p-1" data-bind="foreach: App.game.breeding.queueList()">
       <div class="queuePokemon clickable bg-primary" data-bind="click: function(){ App.game.breeding.removeFromQueue($index()) }">
-        <img src="" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data].id) }">
+        <img src="" data-bind="attr: { src: BreedingController.getQueueImage($data) }">
       </div>
     </div>
     <div id="hatcheryQueueInfo" class="card-footer p-0 small">
