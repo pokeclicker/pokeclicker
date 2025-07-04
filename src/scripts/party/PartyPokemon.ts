@@ -113,6 +113,11 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this.defaultFemaleSprite = ko.observable(false);
         this.hideShinyImage = ko.observable(false);
         this._nickname = ko.observable();
+        this._nickname.subscribe((value) => {
+            if (value === this._translatedName()) {
+                AchievementHandler.unlockAchievement('A cat named Cat');
+            }
+        });
         this._displayName = ko.pureComputed(() => this._nickname() ? this._nickname() : this._translatedName());
         this._shadow = ko.observable(shadow);
         this._showShadowImage = ko.observable(false);

@@ -268,6 +268,10 @@ export class UndergroundController {
             if (App.game.underground.mine.attemptCompleteLayer()) {
                 UndergroundController.notifyMineCompleted(helper);
 
+                if (App.game.underground.mine.grid.every((tile) => tile.layerDepth === 0)) {
+                    GameHelper.incrementObservable(App.game.statistics.undergroundLayersFullyMined);
+                }
+
                 if (helper) {
                     UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER, true);
 

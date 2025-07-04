@@ -45,6 +45,8 @@ export default class FluteEffectRunner {
         return tooltip.join('<br>');
     });
 
+    public static fluteActiveTime = Object.fromEntries(Object.keys(FluteItemType).map(flute => [flute, ko.observable(0)]));
+
     public static initialize(multiplier: Multiplier) {
         FluteEffectRunner.numActiveFlutes(0);
         GameHelper.enumStrings(FluteItemType).forEach((itemName: FluteItemType) => {
@@ -79,6 +81,8 @@ export default class FluteEffectRunner {
                         LogBookTypes.OTHER,
                         createLogContent.fluteRanOutOfGems({ flute: humanifyString(itemName) }),
                     );
+                } else {
+                    GameHelper.incrementObservable(FluteEffectRunner.fluteActiveTime[itemName]);
                 }
             }
         });
@@ -134,6 +138,7 @@ export default class FluteEffectRunner {
         this.updateFormattedTimeLeft(itemName);
         player.gainItem(itemName, 1);
         this.updateActiveGemTypes();
+        FluteEffectRunner.fluteActiveTime[itemName](0);
     }
 
     public static fluteFormattedTime(itemName: FluteItemType): number {

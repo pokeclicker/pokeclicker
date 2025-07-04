@@ -2298,7 +2298,8 @@ class Farming implements Feature {
 
         const farmPoints = Math.floor(berry.farmValue / (4 + berry.growthTime[PlotStage.Bloom] / 1800));
         const shinyModifier = wanderer.shiny ? GameConstants.WANDER_SHINY_FP_MODIFIER : 1;
-        App.game.wallet.gainFarmPoints(farmPoints * shinyModifier);
+        const amount = App.game.wallet.gainFarmPoints(farmPoints * shinyModifier);
+        GameHelper.incrementObservable(App.game.statistics.farmWandererFarmPointsObtained, amount.amount);
 
         const pokeball = App.game.pokeballs.calculatePokeballToUse(pokemonData.id, wanderer.shiny, false, EncounterType.wanderer);
         if (pokeball !== GameConstants.Pokeball.None) {
@@ -2334,7 +2335,8 @@ class Farming implements Feature {
 
             // DT
             const fakedRoute = FarmController.wandererToRoute(wanderer.name);
-            Battle.gainTokens(fakedRoute.number, fakedRoute.region, wanderer.pokeball());
+            const amount = Battle.gainTokens(fakedRoute.number, fakedRoute.region, wanderer.pokeball());
+            GameHelper.incrementObservable(App.game.statistics.farmWandererDungeonTokensObtained, amount.amount);
 
             // Check for Starf berry generation
             if (wanderer.shiny) {

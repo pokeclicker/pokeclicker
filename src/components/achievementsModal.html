@@ -113,18 +113,17 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
     </div>
 
     <script type="text/html" id="achievementListTemplate">
-        <tr
-            class="achievement-row"
-            data-bind="css: { 'table-success': isCompleted() , 'table-danger': !isCompleted() }, click: () => {App.game.achievementTracker.trackAchievement($data); $('#achievementsModal').modal('hide');}">
-            <td style="text-align:left;vertical-align:middle;"><b><span data-bind="text: name">Name</span></b><br>
+        <tr class="achievement-row"
+            data-bind="css: { 'table-success': isCompleted() , 'table-danger': !isCompleted() },
+                click: () => {App.game.achievementTracker.trackAchievement($data); $('#achievementsModal').modal('hide');}">
+            <td style="text-align:left;vertical-align:middle;">
+                <b><span data-bind="text: displayName">Name</span></b><br>
                 <small><span data-bind="text: description">Description</span></small>
             </td>
-
             <td style="vertical-align:middle;"><span data-bind="text: getProgress().toLocaleString('en-US')">1</span>/<span
                     data-bind="text: property.requiredValue.toLocaleString('en-US')">2</span>
             </td>
             <td style="vertical-align:middle;"><span data-bind="text: getProgressPercentage()"></span>%</td>
-
             <td style="vertical-align:middle;">+<span data-bind="text: getBonus()"></span>%</td>
         </tr>
     </script>

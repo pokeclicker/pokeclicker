@@ -1,3 +1,4 @@
+import { PureComputed } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
 import SpecialEvent, { EventCallback } from './SpecialEvent';
 import type { SpecialEventTitleType } from './SpecialEventTitleType';
@@ -9,9 +10,14 @@ export default class SpecialEvents implements Feature {
     public counter = 0;
 
     public events: SpecialEvent[] = [];
+    public activeEventCount: PureComputed<number>;
 
     constructor() {
         this.addEvents();
+
+        this.activeEventCount = ko.pureComputed(() => {
+            return this.events.filter((event) => event.isActive()).length;
+        });
     }
 
     public newEvent(title: SpecialEventTitleType, description: string, startTime: Date, startFunction: EventCallback, endTime: Date, endFunction: EventCallback, hideFromEventCalendar = false) {

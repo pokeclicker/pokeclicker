@@ -302,6 +302,7 @@ export type TmpPartyPokemonType = {
     addCategory(id: number): void;
     removeCategory(id: number): void;
     resetCategory(): void;
+    calculateEVAttackBonus(): number;
 };
 
 export type TmpPartyType = {

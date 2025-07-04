@@ -187,6 +187,10 @@ class DungeonRunner {
 
         DungeonRunner.gainLoot(loot.loot, amount, tierWeight);
 
+        if (tier === 'mythic' && !loot.ignoreDebuff && DungeonRunner.isDungeonDebuffed(DungeonRunner.dungeon)) {
+            AchievementHandler.unlockAchievement('Lucky Loot');
+        }
+
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTileType.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
         if (DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor] == Math.floor(DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor] / 3)) {

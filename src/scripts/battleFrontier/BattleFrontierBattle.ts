@@ -67,6 +67,10 @@ class BattleFrontierBattle extends Battle {
         const gems = Math.ceil(BattleFrontierRunner.stage() / 80);
         const gender = PokemonFactory.generateGender(enemy.gender.femaleRatio, enemy.gender.type);
 
+        if (shiny) {
+            GameHelper.incrementObservable(App.game.statistics.totalShinyTrainerPokemonSeen);
+        }
+
         const enemyPokemon = new BattlePokemon(enemy.name, enemy.id, enemy.type[0], enemy.type[1], health, level, 0, enemy.exp, new Amount(money, GameConstants.Currency.money), shiny, gems, gender, GameConstants.ShadowStatus.None, EncounterType.trainer);
         this.enemyPokemon(enemyPokemon);
     }
