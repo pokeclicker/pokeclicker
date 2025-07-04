@@ -36,6 +36,8 @@ export default class Statistics implements Saveable {
     totalFarmPoints: KnockoutObservable<number>;
     totalBattlePoints: KnockoutObservable<number>;
     totalContestTokens: KnockoutObservable<number>;
+    totalOfflineMoney: KnockoutObservable<number>;
+    totalOfflineDungeonTokens: KnockoutObservable<number>;
     // Pokemon
     totalPokemonCaptured: KnockoutObservable<number>;
     totalPokemonDefeated: KnockoutObservable<number>;
@@ -168,6 +170,8 @@ export default class Statistics implements Saveable {
         'totalFarmPoints',
         'totalBattlePoints',
         'totalContestTokens',
+        'totalOfflineMoney',
+        'totalOfflineDungeonTokens',
         'totalPokemonCaptured',
         'totalPokemonDefeated',
         'totalPokemonEncountered',

@@ -205,7 +205,6 @@ Settings.add(new OrderSetting('mapAreaStateOrder', 'Map Area State Order', GameH
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
 Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web workers for game ticks (more consistent game speed)', true));
-Settings.add(new BooleanSetting('disableOfflineProgress', 'Disable offline progress', false));
 Settings.add(new Setting<string>('saveReminder', 'Save reminder interval (in game time)',
     [
         new SettingOption('Never', '0'),
