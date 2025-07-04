@@ -203,6 +203,11 @@ class Quests implements Saveable {
 
             this.freeRefresh(false);
             GameHelper.incrementObservable(this.refreshes);
+
+            if (this.completedQuests().length === 0) {
+                AchievementHandler.unlockAchievement('Picky Quester');
+            }
+
             this.generateQuestList();
         } else {
             Notifier.notify({

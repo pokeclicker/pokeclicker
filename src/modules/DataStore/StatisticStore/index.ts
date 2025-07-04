@@ -81,9 +81,12 @@ export default class Statistics implements Saveable {
     totalShadowFemalePokemonDefeated: KnockoutObservable<number>;
     totalShadowGenderlessPokemonCaptured: KnockoutObservable<number>;
     totalShadowGenderlessPokemonDefeated: KnockoutObservable<number>;
+
+    totalShinyTrainerPokemonSeen: KnockoutObservable<number>;
     // Underground
     undergroundItemsFound: KnockoutObservable<number>;
     undergroundLayersMined: KnockoutObservable<number>;
+    undergroundLayersFullyMined: KnockoutObservable<number>;
     undergroundTrades: KnockoutObservable<number>;
     undergroundToolsUsed: Record<string, KnockoutObservable<number>>;
     // Farm
@@ -95,6 +98,8 @@ export default class Statistics implements Saveable {
     totalMulchesUsed: KnockoutObservable<number>;
     totalShovelsUsed: KnockoutObservable<number>;
     berryDailyDealTrades: KnockoutObservable<number>;
+    farmWandererFarmPointsObtained: KnockoutObservable<number>;
+    farmWandererDungeonTokensObtained: KnockoutObservable<number>;
     // Battle Frontier
     battleFrontierTotalStagesCompleted: KnockoutObservable<number>;
     battleFrontierHighestStageCompleted: KnockoutObservable<number>;
@@ -203,8 +208,10 @@ export default class Statistics implements Saveable {
         'totalShadowFemalePokemonDefeated',
         'totalShadowGenderlessPokemonCaptured',
         'totalShadowGenderlessPokemonDefeated',
+        'totalShinyTrainerPokemonSeen',
         'undergroundItemsFound',
         'undergroundLayersMined',
+        'undergroundLayersFullyMined',
         'undergroundTrades',
         'totalManualHarvests',
         'totalBerriesHarvested',
@@ -214,6 +221,8 @@ export default class Statistics implements Saveable {
         'totalMulchesUsed',
         'totalShovelsUsed',
         'berryDailyDealTrades',
+        'farmWandererFarmPointsObtained',
+        'farmWandererDungeonTokensObtained',
         'battleFrontierTotalStagesCompleted',
         'battleFrontierHighestStageCompleted',
         'safariTimesEntered',

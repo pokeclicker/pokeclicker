@@ -144,6 +144,16 @@ import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersM
 import UndergroundHelperRequirement from './requirements/UndergroundHelperRequirement';
 import UndergroundLevelRequirement from './requirements/UndergroundLevelRequirement';
 import UndergroundUseToolRequirement from './requirements/UndergroundUseToolRequirement';
+import UndergroundLayersFullyMinedRequirement from './requirements/UndergroundLayersFullyMinedRequirement';
+import CaptureSpecificPokemonRequirement from './requirements/CaptureSpecificPokemonRequirement';
+import ClearAnyDungeonRequirement from './requirements/ClearAnyDungeonRequirement';
+import EVBonusRequirement from './requirements/EVBonusRequirement';
+import TimePlayedRequirement from './requirements/TimePlayedRequirement';
+import TotalSpecialEventsActiveRequirement from './requirements/TotalSpecialEventsActiveRequirement';
+import PokeballFilterCountRequirement from './requirements/PokeballFilterCountRequirement';
+import DefeatedPokemonTypeRequirement from './requirements/DefeatedPokemonTypeRequirement';
+import AllFlutesTimeActiveRequirement from './requirements/AllFlutesTimeActiveRequirement';
+import DummyRequirement from './requirements/DummyRequirement';
 import WeatherRequirement from './requirements/WeatherRequirement';
 import MegaEvolveRequirement from './requirements/MegaEvolveRequirement';
 import PokemonAttackRequirement from './requirements/PokemonAttackRequirement';
@@ -152,6 +162,7 @@ import KeyItemController from './keyItems/KeyItemController';
 import KeyItem from './keyItems/KeyItem';
 import KeyItems from './keyItems/KeyItems';
 import Achievement from './achievements/Achievement';
+import SecretAchievement from './achievements/SecretAchievement';
 import Gems from './gems/Gems';
 import GemDeals from './gems/GemDeals';
 import FluteEffectRunner from './gems/FluteEffectRunner';
@@ -372,6 +383,16 @@ Object.assign(<any>window, {
     UndergroundHelperRequirement,
     UndergroundLevelRequirement,
     UndergroundUseToolRequirement,
+    UndergroundLayersFullyMinedRequirement,
+    CaptureSpecificPokemonRequirement,
+    ClearAnyDungeonRequirement,
+    EVBonusRequirement,
+    TimePlayedRequirement,
+    TotalSpecialEventsActiveRequirement,
+    PokeballFilterCountRequirement,
+    DefeatedPokemonTypeRequirement,
+    AllFlutesTimeActiveRequirement,
+    DummyRequirement,
     WeatherRequirement,
     MegaEvolveRequirement,
     PokemonAttackRequirement,
@@ -381,6 +402,7 @@ Object.assign(<any>window, {
     KeyItem,
     KeyItems,
     Achievement,
+    SecretAchievement,
     Gems,
     GemDeals,
     FluteEffectRunner,

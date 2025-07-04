@@ -191,7 +191,7 @@ export default class Battle {
         partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, enemyPokemon.shiny, enemyPokemon.shadow, enemyPokemon.ep * epBonus);
     }
 
-    public static gainTokens(route: number, region: GameConstants.Region, pokeball = this.pokeball()) {
+    public static gainTokens(route: number, region: GameConstants.Region, pokeball = this.pokeball()): Amount {
         let currencyKinds = [GameConstants.Currency.dungeonToken];
         if (pokeball === GameConstants.Pokeball.Luxuryball) {
             //currencyKinds = [
@@ -215,7 +215,7 @@ export default class Battle {
         const currencyUnits = PokemonFactory.routeDungeonTokens(route, region)
                                 / GameConstants.LuxuryBallCurrencyRate[GameConstants.Currency.dungeonToken];
         const chosenCurrency = currencyKinds[Math.floor(Math.random() * currencyKinds.length)];
-        App.game.wallet.addAmount(new Amount(Math.ceil(currencyUnits * GameConstants.LuxuryBallCurrencyRate[chosenCurrency]), chosenCurrency), false);
+        return App.game.wallet.addAmount(new Amount(Math.ceil(currencyUnits * GameConstants.LuxuryBallCurrencyRate[chosenCurrency]), chosenCurrency), false);
     }
 
     static gainItem() {
