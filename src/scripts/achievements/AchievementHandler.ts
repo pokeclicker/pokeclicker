@@ -682,8 +682,8 @@ class AchievementHandler {
 
         AchievementHandler.addSecretAchievement(
             'Smell Ya Later!',
-            'Defeat Champion Blue 1,000,000 times.',
-            new ClearGymRequirement(1e6, GameConstants.getGymIndex('Champion Blue')),
+            'Defeat Champion Blue 100,000 times.',
+            new ClearGymRequirement(1e5, GameConstants.getGymIndex('Champion Blue')),
             'Blue is my favorite color'
         );
 
