@@ -2,7 +2,7 @@ class PokemonGiftNPC extends GiftNPC {
     constructor(
         public name: string,
         public dialog: string[],
-        private giftPokemon: PokemonNameType,
+        public giftPokemon: PokemonNameType,
         public giftImage?: string,
         options: NPCOptionalArgument = {}
     ) {
