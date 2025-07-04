@@ -822,18 +822,28 @@ class AchievementHandler {
             'One column to rule them all',
             'Have all movable UI modules in one column.',
             new CustomRequirement(ko.pureComputed((): boolean => {
-                const settings = [
-                    'modules.left-column', 'modules.left-column-2', 'modules.middle-top-sort-column',
-                    'modules.middle-bottom-sort-column', 'modules.right-column', 'modules.right-column-2',
-                ];
+                const columns: Array<Array<string>> = [['modules.middle-top-sort-column', 'modules.middle-bottom-sort-column']];
+                if (Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5') {
+                    columns.push(
+                        ['modules.left-column'],
+                        ['modules.left-column-2'],
+                        ['modules.right-column'],
+                        ['modules.right-column-2']
+                    );
+                } else {
+                    columns.push(
+                        ['modules.left-column', 'modules.left-column-2'],
+                        ['modules.right-column', 'modules.right-column-2']
+                    );
+                }
 
-                const usedColumns = settings.filter((setting) => {
-                    const modules: string[] = Settings.getSetting(setting)?.observableValue()?.split('|').filter((module: string) => module?.trim());
+                const usedColumns = columns.filter((settings) => {
+                    const modules = settings.flatMap((setting) => Settings.getSetting(setting)?.observableValue()?.split('|').filter((module: string) => module?.trim()));
                     if (!modules?.length) {
                         return false;
                     }
 
-                    return modules.filter((module) => $(`#${module}`).is(':visible')).length > 0;
+                    return modules.filter((module) => document.getElementById(module) && $(`#${module}`).is(':visible')).length > 0;
                 });
 
                 return usedColumns.length === 1;
