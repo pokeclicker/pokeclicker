@@ -30,8 +30,8 @@ class UsePokeballQuest extends Quest implements QuestInterface {
         return super.randomizeReward(reward);
     }
 
-    get description(): string {
-        return this.customDescription ?? `Use ${this.amount.toLocaleString('en-US')} ${ItemList[GameConstants.Pokeball[this.pokeball]].displayName}s.`;
+    get defaultDescription(): string {
+        return `Use ${this.amount.toLocaleString('en-US')} ${ItemList[GameConstants.Pokeball[this.pokeball]].displayName}s.`;
     }
 
     toJSON() {

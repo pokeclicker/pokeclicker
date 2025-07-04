@@ -213,9 +213,6 @@ export default class GameHelper {
         let hash = 0;
         let i = 0;
         let chr = 0;
-        if (text.length === 0) {
-            return hash;
-        }
 
         for (i = 0; i < text.length; i++) {
             chr = text.charCodeAt(i);
@@ -225,6 +222,14 @@ export default class GameHelper {
             hash |= 0; // Convert to 32bit integer
         }
         return hash;
+    }
+
+    /**
+     *  Same algorithm as GameHelper.hash() but only produces positive numbers
+     *  This makes hash collisions twice as likely, but avoids unwanted '-' when output is used as a string.
+     */
+    public static translationHash(text: string): number {
+        return Math.abs(GameHelper.hash(text));
     }
 
     public static isColorLight(color: string): boolean {

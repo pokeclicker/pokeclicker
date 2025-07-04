@@ -22,10 +22,7 @@ class MineItemsQuest extends Quest implements QuestInterface {
         return super.randomizeReward(reward);
     }
 
-    get description(): string {
-        if (this.customDescription) {
-            return this.customDescription;
-        }
+    get defaultDescription(): string {
         const suffix = this.amount > 1 ? 's' : '';
         return `Collect ${this.amount.toLocaleString('en-US')} item${suffix} from the Underground mines.`;
     }

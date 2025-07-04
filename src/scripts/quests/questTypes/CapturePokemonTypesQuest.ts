@@ -41,8 +41,8 @@ class CapturePokemonTypesQuest extends Quest implements QuestInterface {
         return super.randomizeReward(reward);
     }
 
-    get description(): string {
-        return this.customDescription ?? `Capture or hatch ${this.amount.toLocaleString('en-US')} ${PokemonType[this.type]}-type Pokémon.`;
+    get defaultDescription(): string {
+        return `Capture or hatch ${this.amount.toLocaleString('en-US')} ${PokemonType[this.type]}-type Pokémon.`;
     }
 
     toJSON() {

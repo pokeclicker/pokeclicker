@@ -53,10 +53,10 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         return super.randomizeReward(reward);
     }
 
-    get description(): string {
+    get defaultDescription(): string {
         const { subRegion } = TownList[this.dungeon];
         const subRegionName = SubRegions.getSubRegionById(this.region, subRegion).name;
-        return this.customDescription ?? `Defeat the ${this.dungeon} dungeon in ${subRegionName} ${this.amount.toLocaleString('en-US')} times.`;
+        return `Defeat the ${this.dungeon} dungeon in ${subRegionName} ${this.amount.toLocaleString('en-US')} times.`;
     }
 
     toJSON() {
