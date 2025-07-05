@@ -74,7 +74,8 @@ class AchievementHandler {
             a.achievable() &&
             (this.filter.status() == -2 || a.unlocked() === !!this.filter.status()) &&
             (this.filter.type()   == -2 || a.property.achievementType === this.filter.type()) &&
-            (this.filter.category() == 'all' || a.category.name === this.filter.category())
+            (this.filter.category() == 'all' || a.category.name === this.filter.category()) &&
+            (a.category.name != 'secret' || this.filter.category() == 'secret')
         )));
         this.calculateNumberOfTabs();
         if (!retainPage) {
@@ -682,8 +683,8 @@ class AchievementHandler {
 
         AchievementHandler.addSecretAchievement(
             'Smell Ya Later!',
-            'Defeat Champion Blue 1,000,000 times.',
-            new ClearGymRequirement(1e6, GameConstants.getGymIndex('Champion Blue')),
+            'Defeat Champion Blue 123,456 times.',
+            new ClearGymRequirement(123456, GameConstants.getGymIndex('Champion Blue')),
             'Blue is my favorite color'
         );
 
@@ -822,18 +823,28 @@ class AchievementHandler {
             'One column to rule them all',
             'Have all movable UI modules in one column.',
             new CustomRequirement(ko.pureComputed((): boolean => {
-                const settings = [
-                    'modules.left-column', 'modules.left-column-2', 'modules.middle-top-sort-column',
-                    'modules.middle-bottom-sort-column', 'modules.right-column', 'modules.right-column-2',
-                ];
+                const columns: Array<Array<string>> = [['modules.middle-top-sort-column', 'modules.middle-bottom-sort-column']];
+                if (Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5') {
+                    columns.push(
+                        ['modules.left-column'],
+                        ['modules.left-column-2'],
+                        ['modules.right-column'],
+                        ['modules.right-column-2']
+                    );
+                } else {
+                    columns.push(
+                        ['modules.left-column', 'modules.left-column-2'],
+                        ['modules.right-column', 'modules.right-column-2']
+                    );
+                }
 
-                const usedColumns = settings.filter((setting) => {
-                    const modules: string[] = Settings.getSetting(setting)?.observableValue()?.split('|').filter((module: string) => module?.trim());
+                const usedColumns = columns.filter((settings) => {
+                    const modules = settings.flatMap((setting) => Settings.getSetting(setting)?.observableValue()?.split('|').filter((module: string) => module?.trim()));
                     if (!modules?.length) {
                         return false;
                     }
 
-                    return modules.filter((module) => $(`#${module}`).is(':visible')).length > 0;
+                    return modules.filter((module) => document.getElementById(module) && $(`#${module}`).is(':visible')).length > 0;
                 });
 
                 return usedColumns.length === 1;
