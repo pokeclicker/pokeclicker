@@ -44,13 +44,16 @@ const numericExtender = (target: MaybeWritable, precision: number) => {
             }
 
             // Round to the specified precision
-            if (precision > 0) {
+            if (precision == 0) {
+                valueToWrite = Math.round(newValue);
+            } else if (precision > 0) {
                 // Round the decimal component separately for greater precision and to avoid potential MAX_SAFE_INT issues
                 const roundingMultiplier = 10 ** precision;
                 const integerComponent = Math.trunc(newValue);
                 const fractionComponent = newValue - integerComponent;
                 valueToWrite = Math.round(fractionComponent * roundingMultiplier) / roundingMultiplier + integerComponent;
-            } else if (precision < 0) {
+            } else {
+                // precision < 0
                 const roundingDivisor = 10 ** -precision;
                 const roundedValue = Math.round(newValue / roundingDivisor) * roundingDivisor;
                 if (roundedValue > Number.MAX_SAFE_INTEGER) {
