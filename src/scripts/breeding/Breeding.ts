@@ -262,6 +262,11 @@ class Breeding implements Feature {
     }
 
     public addPokemonToHatchery(pokemon: PartyPokemon): boolean {
+        if (pokemon.breeding) {
+            // Prevent putting multiple copies of a pokemon in the hatchery
+            console.error(`Tried to add ${pokemon.name} to the hatchery while already being bred!`);
+            return false;
+        }
         // If they have a free eggslot, add the pokemon to the egg now
         if (this.hasFreeEggSlot()) {
             return this.gainPokemonEgg(pokemon);
