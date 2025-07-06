@@ -232,8 +232,8 @@ ItemList.Twisted_Spoon = new TypeRestrictedAttackBonusHeldItem('Twisted_Spoon', 
 ItemList.Agile_Scroll = new HybridAttackBonusHeldItem('Agile_Scroll', 10000, GameConstants.Currency.money, undefined, 'Agile Scroll', 0.5, 2.0, GameConstants.Region.hisui);
 ItemList.Strong_Scroll = new HybridAttackBonusHeldItem('Strong_Scroll', 10000, GameConstants.Currency.money, undefined, 'Strong Scroll', 2.0, 0.5, GameConstants.Region.hisui);
 
-ItemList.Power_Herb = new AttackBonusHeldItem('Power_Herb', undefined, GameConstants.Currency.money, undefined, 'Power Herb', 1.5, GameConstants.Region.alola, undefined, (pokemon) => true,
-    () => App.game.gameState == GameConstants.GameState.dungeon && DungeonRunner.fightingBoss(), ' against Dungeon Bosses');
+ItemList.Power_Herb = new AttackBonusHeldItem('Power_Herb', 2500, GameConstants.Currency.battlePoint, undefined, 'Power Herb', 1.4, GameConstants.Region.hoenn, undefined, (pokemon) => true,
+    () => App.game.gameState == GameConstants.GameState.battleFrontier && BattleFrontierRunner.started(), ' in the Battle Frontier');
 
 ItemList.Macho_Brace = new EVsGainedBonusHeldItem('Macho_Brace', 1500, GameConstants.Currency.questPoint, undefined, 'Macho Brace', 1.5, GameConstants.Region.sinnoh);
 ItemList.Power_Bracer = new EVsGainedBonusHeldItem('Power_Bracer', 2000, GameConstants.Currency.questPoint, undefined, 'Power Bracer', 2, GameConstants.Region.alola);

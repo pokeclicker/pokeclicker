@@ -7871,6 +7871,7 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
             {loot: 'Meadow Plate'},
             {loot: 'Sky Plate'},
         ],
+        legendary: [{loot: 'Power_Herb'}],
     },
     2603000,
     [
@@ -9862,6 +9863,7 @@ dungeonList['Santalune Forest'] = new Dungeon('Santalune Forest',
         epic: [
             {loot: 'Insect Plate'},
             {loot: 'Fist Plate'},
+            {loot: 'Power_Herb'},
         ],
         legendary: [
             {loot: 'SmallRestore'},
