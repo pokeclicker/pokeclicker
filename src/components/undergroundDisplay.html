@@ -23,60 +23,49 @@
                 <!-- /ko -->
 
                 <!-- ko ifnot: App.game.underground.mine && App.game.underground.mine.timeUntilDiscovery > 0 -->
-                <div class="small" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsFound > 0 && App.game.underground.mine?.itemsFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsFound === App.game.underground.mine?.itemsBuried }">Found • <knockout data-bind="text: App.game.underground.mine?.itemsFound"></knockout></div>
+                <div class="small" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsFound > 0 && App.game.underground.mine?.itemsFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsFound === App.game.underground.mine?.itemsBuried }">Collected • <knockout data-bind="text: App.game.underground.mine?.itemsFound"></knockout></div>
                 <div class="small" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsPartiallyFound > 0 && App.game.underground.mine?.itemsPartiallyFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsPartiallyFound === App.game.underground.mine?.itemsBuried }">Seen • <knockout data-bind="text: App.game.underground.mine?.itemsPartiallyFound"></knockout></div>
                 <div class="small">Buried • <knockout data-bind="text: App.game.underground.mine?.itemsBuried"></knockout></div>
                 <!-- /ko -->
             </div>
         </div>
 
-        <div class="container">
-            <div class="row d-flex justify-content-center flex-wrap" style="gap: 2px;">
-                <!-- ko foreach: [UndergroundToolType.Chisel, UndergroundToolType.Hammer, UndergroundToolType.Bomb, UndergroundToolType.Survey] -->
-                <!-- ko let: { tool: App.game.underground.tools.getTool($data) } -->
-                <div class="tool-ui" style="flex: 1; min-width: 50px;" data-bind="class: `${UndergroundToolType[$data]}-tool-ui`">
-                    <div class="p-0 mb-1 d-flex justify-content-center" data-bind="css: { 'clickable': [UndergroundToolType.Bomb, UndergroundToolType.Survey].includes($data) && Settings.getSetting('enableUndergroundModuleMineControls').observableValue() }, click: () => {
-                        if ([UndergroundToolType.Bomb, UndergroundToolType.Survey].includes($data) && Settings.getSetting('enableUndergroundModuleMineControls').observableValue()) {
-                            App.game.underground.tools.useTool($data, 0, 0);
-                        }
-                    }">
-                        <div style="position: relative; width: 100%; max-width: 50px; aspect-ratio: 1; padding: 2px; border-radius: 10px;" data-bind="style: { background: `conic-gradient(var(--tool-color) ${tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}, transparent 0)`, opacity: tool.durability < tool.durabilityPerUse ? 0.3 : 1 }">
-                            <div class="d-flex flex-column align-items-center justify-content-center bg-secondary" style="width: 100%; height: 100%; border-radius: 8px;">
-                                <div style="display: flex; align-items: center; justify-content: center;">
-                                    <img style="width: 20px; height: 20px; object-fit: contain;" alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[tool.id]}.png` }, style: {  }">
-                                </div>
-                                <div class="small"><knockout data-bind="text: tool.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
+        <div class="underground-all-tools-container mini">
+            <!-- ko foreach: App.game.underground.tools.tools -->
+            <div class="underground-tool-container underground-tool-color" data-bind="
+                class: `underground-tool-color__${UndergroundToolType[$data.id].toLowerCase()}`,
+                css: { 'clickable': [UndergroundToolType.Bomb, UndergroundToolType.Survey].includes($data.id) && $data.canUseTool() && Settings.getSetting('enableUndergroundModuleMineControls').observableValue() },
+                click: () => {
+                    if ([UndergroundToolType.Bomb, UndergroundToolType.Survey].includes($data.id) && $data.canUseTool() && Settings.getSetting('enableUndergroundModuleMineControls').observableValue()) {
+                        App.game.underground.tools.useTool($data.id, 0, 0);
+                    }
+                }
+            ">
+                <div class="card-body text-center p-0">
+                    <div class="underground-tool__background-gradient" data-bind="css: { 'conic': $data.durabilityPerUse > 0, 'infinite': $data.durabilityPerUse === 0 }, style: { '--gradient-percentage': $data.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }">
+                        <div class="bg-secondary">
+                            <img alt="" data-bind="attr: { src: `assets/images/underground/${UndergroundToolType[$data.id]}.png` }">
+                            <div class="small" data-bind="css: { 'text-warning': $data.durability < $data.durabilityPerUse }">
+                                <knockout data-bind="text: $data.durability.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })"></knockout>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ko if: tool.restoreRate > 0 -->
-                    <div class="progress" style='height: 5px; min-height: 5px;'>
-                        <div class="progress-bar" role="progressbar" style="background: var(--tool-color)"
-                             data-bind="style: { 'width': (tool.restoreRateCounter / tool.restoreRate).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
-                             aria-valuemin="0" aria-valuemax="100">
-                        </div>
-                    </div>
-                    <div class="small"><knockout data-bind="text: (tool.restoreRateCounter / tool.restoreRate).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></knockout></div>
-                    <!-- /ko -->
-                    <!-- ko ifnot: tool.restoreRate > 0 -->
-                    <div class="progress" style='height: 5px; min-height: 5px;'>
-                        <div class="progress-bar progress-bar-animated" role="progressbar" style="background: linear-gradient(45deg,var(--tool-color) 25%,transparent 25%,transparent 50%,var(--tool-color) 50%,var(--tool-color) 75%,transparent 75%,transparent); background-size: 0.5rem 0.5rem;"
-                             data-bind="style: { 'width': '100%' }"
-                             aria-valuemin="0" aria-valuemax="100">
-                        </div>
-                    </div>
-                    <div class="small">∞</div>
-                    <!-- /ko -->
+                    <div class="small" data-bind="
+                        text: $data.durabilityPerUse === 0 ? '∞' : `${Math.floor($data.durability / $data.durabilityPerUse)}`,
+                        css: {
+                            'text-success': $data.durabilityPerUse === 0 || (1 - $data.durability) <= 1 % $data.durabilityPerUse,
+                            'text-warning': Math.floor($data.durability / $data.durabilityPerUse) === 0
+                        }
+                    "></div>
                 </div>
-                <!-- /ko -->
-                <!-- /ko -->
             </div>
+            <!-- /ko -->
         </div>
     </div>
 
     <div class="card-header position-relative p-0" data-toggle="collapse" href="#undergroundDisplayHelpers">
-        <span>Helper</span>
+        <span>Expert</span>
         <!-- ko if: App.game.underground.helpers.hired().length > 0 -->
         <button class="btn btn-sm btn-danger" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="App.game.underground.helpers.hired().forEach(helper => helper.fire())">
             Fire
@@ -89,11 +78,30 @@
             <!-- ko foreach: App.game.underground.helpers.hired() -->
             <div class="row">
                 <div class="col p-2">
-                    <div data-bind="text: $data.name"></div>
-                    <!-- ko ifnot: $data.selectedEnergyRestore < 0 -->
-                    <div data-bind="text: `${GameConstants.camelCaseToString(GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore])} (${player.itemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore]]().toLocaleString('en-US')})`"></div>
+                    <div class="d-flex flex-wrap align-items-center justify-content-center">
+                        <div class="d-flex justify-content-center">
+                            <div class="d-flex align-items-center justify-content-center position-relative">
+                                <!-- ko foreach: $data.images -->
+                                <img class="pixelated" data-bind="attr: { src: $data }" src="" alt="">
+                                <!-- /ko -->
+                                <!-- ko if: $data.hasStolenItem(600) -->
+                                <img class="pixelated position-absolute" src="assets/images/pokemon/25.23.png" alt="" style="width: 24px; right: -16px; bottom: -10px;">
+                                <!-- /ko -->
+                            </div>
+                        </div>
+
+                        <div class="mx-2">
+                            <div style="line-height: 1.2rem;" data-bind="text: $data.name"></div>
+                            <div style="font-size: 0.6rem; line-height: 0.5rem;" data-bind="text: `Level ${$data.level}`"></div>
+                        </div>
+                    </div>
+
+                    <!-- ko ifnot: $data.selectedEnergyRestore() < 0 -->
+                    <img class="pixelated" data-bind="attr: { src: ItemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore()]].image }" src="" alt="" style="height: 26px;">
+                    <span data-bind="text: `× ${player.itemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore()]]().toLocaleString('en-US')}`"></span>
                     <!-- /ko -->
-                    <div class="progress" style='height: 5px'>
+
+                    <div class="progress mt-2" style='height: 5px'>
                         <div class="progress-bar bg-info" role="progressbar"
                              data-bind="attr:{ style: 'width:' + ($data.timeSinceWork / $data.workCycleTime).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
                              aria-valuemin="0" aria-valuemax="100">
@@ -104,32 +112,37 @@
             </div>
             <!-- /ko -->
             <!-- ko ifnot: App.game.underground.helpers.hired().length > 0 -->
-            <div class="">No helpers hired. You're on your own!</div>
+            <div class="">No experts hired. You're on your own!</div>
             <!-- /ko -->
         </div>
     </div>
 
-    <!-- ko ifnot: App.game.challenges.list.disableOakItems.active() -->
-    <!-- ko if: App.game.oakItems.isActive(OakItemType.Cell_Battery) -->
     <div class="card-header position-relative p-0" data-toggle="collapse" href="#undergroundDisplayBattery">
         <span>Battery</span>
     </div>
 
-    <div id="undergroundDisplayBattery" class="table-responsive show">
-        <div class="container">
-            <div class="row">
-                <div class="col p-2">
-                    <div class="progress" style='height: 15px; min-height: 15px;'>
-                        <div class="progress-bar" role="progressbar"
-                             data-bind="style: { 'width': (App.game.underground.battery.charges / App.game.underground.battery.maxCharges).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }"
-                             aria-valuemin="0" aria-valuemax="100">
-                            <span data-bind="text: `${App.game.underground.battery.charges} / ${App.game.underground.battery.maxCharges}`"></span>
+    <div id="undergroundDisplayBattery" class="table-responsive p-1 show">
+        <div class="underground-all-tools-container mini">
+            <div class="underground-tool-container underground-tool-color underground-tool-color__discharge" data-bind="
+                css: { 'clickable': App.game.underground.battery.canDischarge() && Settings.getSetting('enableUndergroundModuleMineControls').observableValue() },
+                click: () => {
+                    if (App.game.underground.battery.canDischarge() && Settings.getSetting('enableUndergroundModuleMineControls').observableValue()) {
+                        App.game.underground.battery.discharge();
+                    }
+                }
+            ">
+                <div class="card-body text-center p-0">
+                    <div class="underground-tool__background-gradient conic" data-bind="style: { '--gradient-percentage': Math.min(App.game.underground.battery.charges / App.game.underground.battery.maxCharges, 1).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }">
+                        <div class="bg-secondary">
+                            <img alt="" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItemType[OakItemType.Cell_Battery] + '.png'}" style="width: 42px; height: 42px;">
                         </div>
+                    </div>
+
+                    <div class="small">
+                        <knockout data-bind="text: Math.min(App.game.underground.battery.charges, App.game.underground.battery.maxCharges), css: { 'text-warning': App.game.underground.battery.charges < App.game.underground.battery.maxCharges }"></knockout> / <knockout data-bind="text: App.game.underground.battery.maxCharges"></knockout>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /ko -->
-    <!-- /ko -->
 </div>

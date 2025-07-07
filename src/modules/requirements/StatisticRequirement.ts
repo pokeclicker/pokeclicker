@@ -1,6 +1,6 @@
 import { Observable } from 'knockout';
 import { AchievementOption } from '../GameConstants';
-import Requirement from './Requirement';
+import AchievementRequirement from './AchievementRequirement';
 
 // Requires a later version of TypeScript
 // Method to handle retrieving statistics with better type safety.
@@ -30,7 +30,7 @@ Nested statistics:
 new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gengar').id], 666) // encounter 666 Gengar
 */
 
-export default class StatisticRequirement extends Requirement {
+export default class StatisticRequirement extends AchievementRequirement {
     private focus: Observable<number>;
 
     constructor(

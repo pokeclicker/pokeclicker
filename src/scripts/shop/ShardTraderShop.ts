@@ -17,6 +17,9 @@ class ShardTraderShop extends Shop {
 
     public areaStatus() {
         const itemStatusArray = super.areaStatus();
+        if (itemStatusArray.includes(areaStatus.locked)) {
+            return [areaStatus.locked];
+        }
 
         const deals = ShardDeal.getDeals(this.location)?.();
         if (deals) {

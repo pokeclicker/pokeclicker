@@ -12,7 +12,6 @@ import { UndergroundController } from './UndergroundController';
 import OakItemType from '../enums/OakItemType';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
-import OakItemLevelRequirement from '../requirements/OakItemLevelRequirement';
 import Requirement from '../requirements/Requirement';
 import MultiRequirement from '../requirements/MultiRequirement';
 import { batteryPatternEruption } from './battery/eruption';
@@ -29,6 +28,7 @@ import { batteryPatternExplosion } from './battery/explosion';
 import { batteryPatternFleurCannon } from './battery/fleurCannon';
 import { batteryPatternHyperBeam } from './battery/hyperBeam';
 import PokeballRequirement from '../requirements/PokeballRequirement';
+import UndergroundLevelRequirement from '../requirements/UndergroundLevelRequirement';
 
 export type Pattern = Array<Array<{ coordinate: Coordinate, depth: number }>>;
 
@@ -52,7 +52,7 @@ export class UndergroundBatteryPattern {
         this._pattern = pattern;
         this._tilesCleared = pattern.flatMap(frame => frame?.map(value => value.depth) || 0).reduce((prev, cur) => prev + cur, 0);
 
-        this._requirement = new MultiRequirement([new OakItemLevelRequirement(OakItemType.Cell_Battery, tier), ...(requirement ? [requirement] : [])]);
+        this._requirement = new MultiRequirement([...(requirement ? [requirement] : [])]);
     }
 
     get hint(): string {
@@ -89,6 +89,12 @@ export class UndergroundBattery {
     private _activeDischargePattern: UndergroundBatteryPattern | null = null;
     private _activeDischargeFrame: number = 0;
 
+    public canDischarge: PureComputed<boolean> = ko.pureComputed(() =>
+        this.charges >= this.maxCharges &&
+        App.game.underground.mine.timeUntilDiscovery <= 0 &&
+        !App.game.underground.mine.completed &&
+        UndergroundBattery._patterns.length !== 0);
+
     public static addPattern(pattern: UndergroundBatteryPattern) {
         this._patterns.push(pattern);
     }
@@ -98,21 +104,13 @@ export class UndergroundBattery {
     }
 
     public update(delta: number) {
-        if (!App.game.oakItems.isActive(OakItemType.Cell_Battery)) {
-            return;
-        }
-
         if (this._batteryCooldown() > 0) {
             GameHelper.incrementObservable(this._batteryCooldown, -delta);
         }
     }
 
     public charge() {
-        if (!App.game.oakItems.isActive(OakItemType.Cell_Battery)) {
-            return;
-        }
-
-        if (this._charges() >= UNDERGROUND_BATTERY_MAX_CHARGES) {
+        if (this._charges() >= this.maxCharges) {
             return;
         }
 
@@ -123,21 +121,13 @@ export class UndergroundBattery {
         GameHelper.incrementObservable(this._charges, 1);
         this._batteryCooldown(UNDERGROUND_BATTERY_COOLDOWN_SECONDS);
 
-        if (this._charges() >= UNDERGROUND_BATTERY_MAX_CHARGES) {
+        if (this._charges() >= this.maxCharges) {
             UndergroundController.notifyBatteryFull();
         }
     }
 
     public discharge() {
-        if (!App.game.oakItems.isActive(OakItemType.Cell_Battery)) {
-            return;
-        }
-
-        if (this._charges() < UNDERGROUND_BATTERY_MAX_CHARGES) {
-            return;
-        }
-
-        if (UndergroundBattery._patterns.length === 0) {
+        if (!this.canDischarge()) {
             return;
         }
 
@@ -148,6 +138,7 @@ export class UndergroundBattery {
         this._activeDischargeFrame = 0;
         this._charges(0);
 
+        GameHelper.incrementObservable(App.game.statistics.undergroundBatteryDischarges[randomPattern.id]);
         App.game.oakItems.use(OakItemType.Cell_Battery);
         Notifier.notify({
             title: 'Cell Battery Discharge',
@@ -163,8 +154,7 @@ export class UndergroundBattery {
         while (
             this._activeDischargePattern &&
             this._activeDischargeFrame < this._activeDischargePattern.pattern.length &&
-            App.game.underground.mine.timeUntilDiscovery <= 0 &&
-            !App.game.underground.mine.completed
+            this.canDischarge
         ) {
             const patternFrame = this._activeDischargePattern.pattern[this._activeDischargeFrame];
 
@@ -177,7 +167,7 @@ export class UndergroundBattery {
                     }
                 });
 
-                UndergroundController.handleCoordinatesMined(Array.from(tilesMined));
+                UndergroundController.handleCoordinatesMined(Array.from(tilesMined), null);
             }
 
             ++this._activeDischargeFrame;
@@ -194,7 +184,8 @@ export class UndergroundBattery {
     }
 
     get maxCharges() {
-        return UNDERGROUND_BATTERY_MAX_CHARGES;
+        // Additive as the bonus is a negative number
+        return UNDERGROUND_BATTERY_MAX_CHARGES + App.game.oakItems.calculateBonus(OakItemType.Cell_Battery);
     }
 
     get patterns() {
@@ -222,15 +213,15 @@ export class UndergroundBattery {
 }
 
 UndergroundBattery.addPattern(new UndergroundBatteryPattern('Eruption', 0, batteryPatternEruption));
-UndergroundBattery.addPattern(new UndergroundBatteryPattern('Hydro Cannon', 1, batteryPatternHydroCannon));
-UndergroundBattery.addPattern(new UndergroundBatteryPattern('Dragon Breath', 2, batteryPatternDragonBreath));
-UndergroundBattery.addPattern(new UndergroundBatteryPattern('Leaf Tornado', 2, batteryPatternLeafTornado));
-UndergroundBattery.addPattern(new UndergroundBatteryPattern('Overdrive', 2, batteryPatternOverdrive));
-UndergroundBattery.addPattern(new UndergroundBatteryPattern('10,000,000 Volt Thunderbolt', 3, batteryPatternTenMillionVoltThunderbolt));
-UndergroundBattery.addPattern(new UndergroundBatteryPattern('Draco Meteor', 3, batteryPatternDracoMeteor));
-UndergroundBattery.addPattern(new UndergroundBatteryPattern('Heart Stamp', 3, batteryPatternHeartStamp));
-UndergroundBattery.addPattern(new UndergroundBatteryPattern('Pokéball', 4, batteryPatternPokeball, new PokeballRequirement(46100, Pokeball.Pokeball)));
-UndergroundBattery.addPattern(new UndergroundBatteryPattern('Surf', 4, batteryPatternSurf));
-UndergroundBattery.addPattern(new UndergroundBatteryPattern('Explosion', 5, batteryPatternExplosion));
-UndergroundBattery.addPattern(new UndergroundBatteryPattern('Fleur Cannon', 5, batteryPatternFleurCannon));
-UndergroundBattery.addPattern(new UndergroundBatteryPattern('Hyper Beam', 5, batteryPatternHyperBeam));
+UndergroundBattery.addPattern(new UndergroundBatteryPattern('Hydro Cannon', 1, batteryPatternHydroCannon, new UndergroundLevelRequirement(5)));
+UndergroundBattery.addPattern(new UndergroundBatteryPattern('Dragon Breath', 2, batteryPatternDragonBreath, new UndergroundLevelRequirement(10)));
+UndergroundBattery.addPattern(new UndergroundBatteryPattern('Leaf Tornado', 2, batteryPatternLeafTornado, new UndergroundLevelRequirement(10)));
+UndergroundBattery.addPattern(new UndergroundBatteryPattern('Overdrive', 2, batteryPatternOverdrive, new UndergroundLevelRequirement(10)));
+UndergroundBattery.addPattern(new UndergroundBatteryPattern('10,000,000 Volt Thunderbolt', 3, batteryPatternTenMillionVoltThunderbolt, new UndergroundLevelRequirement(15)));
+UndergroundBattery.addPattern(new UndergroundBatteryPattern('Draco Meteor', 3, batteryPatternDracoMeteor, new UndergroundLevelRequirement(15)));
+UndergroundBattery.addPattern(new UndergroundBatteryPattern('Heart Stamp', 3, batteryPatternHeartStamp, new UndergroundLevelRequirement(15)));
+UndergroundBattery.addPattern(new UndergroundBatteryPattern('Pokéball', 4, batteryPatternPokeball, new MultiRequirement([new UndergroundLevelRequirement(20), new PokeballRequirement(46100, Pokeball.Pokeball)])));
+UndergroundBattery.addPattern(new UndergroundBatteryPattern('Surf', 4, batteryPatternSurf, new UndergroundLevelRequirement(20)));
+UndergroundBattery.addPattern(new UndergroundBatteryPattern('Explosion', 5, batteryPatternExplosion, new UndergroundLevelRequirement(30)));
+UndergroundBattery.addPattern(new UndergroundBatteryPattern('Fleur Cannon', 5, batteryPatternFleurCannon, new UndergroundLevelRequirement(30)));
+UndergroundBattery.addPattern(new UndergroundBatteryPattern('Hyper Beam', 5, batteryPatternHyperBeam, new UndergroundLevelRequirement(30)));

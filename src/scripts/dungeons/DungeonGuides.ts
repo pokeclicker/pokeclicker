@@ -37,7 +37,7 @@ class DungeonGuide {
                     case GameConstants.DungeonTileType.chest:
                     case GameConstants.DungeonTileType.boss:
                     case GameConstants.DungeonTileType.ladder:
-                        DungeonRunner.handleInteraction();
+                        DungeonRunner.handleInteraction(GameConstants.DungeonInteractionSource.DungeonGuide);
                         break;
                 }
             } catch (e) {

@@ -59,7 +59,7 @@ class Gym extends TownContent implements TmpGymType {
     public areaStatus(): areaStatus[] {
         const states = [];
         if (!this.isUnlocked()) {
-            states.push(areaStatus.locked);
+            return [areaStatus.locked];
         }
         if (!App.game.badgeCase.hasBadge(this.badgeReward)) {
             states.push(areaStatus.incomplete);

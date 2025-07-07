@@ -2,6 +2,7 @@
 /// <reference path="../../declarations/breeding/EggType.d.ts" />
 /// <reference path="../../declarations/utilities/DisplayObservables.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/koExtenders.d.ts" />
 /// <reference path="../party/PartyController.ts" />
 
 class BreedingController {
