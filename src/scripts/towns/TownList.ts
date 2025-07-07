@@ -5326,6 +5326,15 @@ const AncientBugHunter2 = new NPC('Ancient Bug Hunter', [
     image: 'assets/images/npcs/Super Nerd.png',
     requirement: new QuestLineCompletedRequirement('The Legend Awakened'),
 });
+
+const AncientBugHunter3 = new NPC('Ancient Bug Hunter', [
+    'Trainers report on sightings of various Genesect holding the same Drives as the Genesect they own.',
+    'It seems like this Dungeon\'s Genesect is choosing it\'s Drive based on the Moon Cycle!',
+    'While the high-speed form races to different Dungeons all across Unova.',
+], {
+    image: 'assets/images/npcs/Super Nerd.png',
+    requirement: new QuestLineCompletedRequirement('The Legend Awakened'),
+});
 //Unova Towns
 TownList['Aspertia City'] = new Town(
     'Aspertia City',
@@ -5819,7 +5828,7 @@ TownList['P2 Laboratory'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.unova, 17)],
     [],
     {
-        npcs: [P2LaboratoryColress, InvestigateP2],
+        npcs: [P2LaboratoryColress, InvestigateP2, AncientBugHunter3],
     }
 );
 
