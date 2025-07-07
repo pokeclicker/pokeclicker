@@ -9955,8 +9955,40 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
                 new GymPokemon('Beheeyem', 10000000, 72),
                 new GymPokemon('Magnezone', 10000000, 72),
                 new GymPokemon('Klinklang', 11000000, 74),
-            ], { weight: 1 }, 'Colress', '(colress)'),
-        new DungeonBossPokemon('Genesect', 62000000, 100, {requirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 7)}),
+            ], { hide: true, weight: 1, requirement: new QuestLineCompletedRequirement('The Legend Awakened', GameConstants.AchievementOption.less)}, 'Colress', '(colress)'),
+        new DungeonBossPokemon('Genesect', 62000000, 100, { requirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 7) }),
+        new DungeonBossPokemon('Genesect (Burn)', 62000000, 100, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Genesect (Burn)'),
+                new MoonCyclePhaseRequirement([MoonCyclePhase.NewMoon, MoonCyclePhase.FullMoon]),
+            ]),
+        }),
+        new DungeonBossPokemon('Genesect (Chill)', 62000000, 100,
+            {
+                hide: true,
+                requirement: new MultiRequirement([
+                    new ObtainedPokemonRequirement('Genesect (Chill)'),
+                    new MoonCyclePhaseRequirement([MoonCyclePhase.FirstQuarter, MoonCyclePhase.ThirdQuarter]),
+                ]),
+            }),
+        new DungeonBossPokemon('Genesect (Douse)', 62000000, 100,
+            {
+                hide: true,
+                requirement: new MultiRequirement([
+                    new ObtainedPokemonRequirement('Genesect (Douse)'),
+                    new MoonCyclePhaseRequirement([MoonCyclePhase.WaxingCrescent, MoonCyclePhase.WaningGibbous]),
+                ]),
+            }),
+        new DungeonBossPokemon('Genesect (Shock)', 62000000, 100,
+            {
+                hide: true,
+                requirement: new MultiRequirement([
+                    new ObtainedPokemonRequirement('Genesect (Shock)'),
+                    new MoonCyclePhaseRequirement([MoonCyclePhase.WaxingGibbous, MoonCyclePhase.WaningCrescent]),
+                ]),
+            }),
+
     ],
     396500, 18);
 
