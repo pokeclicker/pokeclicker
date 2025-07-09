@@ -39,6 +39,25 @@
                                 <td class="text-left tight text-muted" data-bind="text: App.game.statistics[$data]().toLocaleString('en-US')">-</td>
                             </tr>
                             <!-- /ko -->
+                            <!-- ko foreach: App.game.statistics.genderStatisticGroups -->
+                            <tr>
+                                <td class="text-left" data-bind="text: GameConstants.camelCaseToString($data[0])">-</td>
+                                <td class="text-left tight text-muted"
+                                    data-bind="tooltip: {
+                                        title: `Male: ${App.game.statistics[$data[1]]().toLocaleString('en-US')}
+                                            <br/>
+                                            Female: ${App.game.statistics[$data[2]]().toLocaleString('en-US')}
+                                            <br/>
+                                            Genderless: ${App.game.statistics[$data[3]]().toLocaleString('en-US')}`,
+                                        html: true,
+                                        trigger: 'hover',
+                                        placement: 'top',
+                                        boundary: 'window'
+                                    },
+                                    text: App.game.statistics[$data[0]]().toLocaleString('en-US')">
+                                </td>
+                            </tr>
+                            <!-- /ko -->
                             </tbody>
                         </table>
                     </div>

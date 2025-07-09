@@ -9144,9 +9144,7 @@ const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     //*TODO*: Change second line to this text when Paldea is available: 'Now be on your way, the illustrious Paldea region awaits over the horizons.',
     'assets/images/npcs/Professor Magnolia.png');
 
-const MagearnaMysteryGift = new PokemonGiftNPC('Mystery Gift', [
-    'You have received a Mystery Gift for completing the National Shiny Dex!',
-], 'Magearna (Original Color)', 'assets/images/pokemon/801.01.png', { saveKey: 'magearnamysterygift', requirement: new MultiRequirement([
+const magearnaGiftReq = new MultiRequirement([
     new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kanto),
     new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.johto),
     new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.hoenn),
@@ -9155,7 +9153,11 @@ const MagearnaMysteryGift = new PokemonGiftNPC('Mystery Gift', [
     new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kalos),
     new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.alola),
     new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.galar),
-])});
+]);
+const MagearnaMysteryGift = new PokemonGiftNPC('Mystery Gift', [
+    'You have received a Mystery Gift for completing the National Shiny Dex!',
+], 'Magearna (Original Color)', 'assets/images/pokemon/801.01.png',
+{ saveKey: 'magearnamysterygift', requirement: new CustomRequirement(ko.pureComputed(() => +magearnaGiftReq.isCompleted()), 1, 'Complete all regional Shiny Master achievements from Kanto through Galar.')});
 
 //Galar Towns
 TownList.Postwick = new Town(

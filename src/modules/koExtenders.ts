@@ -44,18 +44,22 @@ const numericExtender = (target: MaybeWritable, precision: number) => {
             }
 
             // Round to the specified precision
-            if (precision > 0) {
-                // Round the decimal component separately for greater precision and to avoid potential MAX_SAFE_INT issues
+            if (precision == 0) {
+                valueToWrite = Math.round(valueToWrite);
+            } else if (precision > 0) {
                 const roundingMultiplier = 10 ** precision;
-                const integerComponent = Math.trunc(newValue);
-                const fractionComponent = newValue - integerComponent;
-                valueToWrite = Math.round(fractionComponent * roundingMultiplier) / roundingMultiplier + integerComponent;
-            } else if (precision < 0) {
+                // If the multiplier would take valueToWrite near or outside the safe integer range,
+                // store the overflow separately while doing the calculations
+                let overflow = Math.abs(valueToWrite) - Number.MAX_SAFE_INTEGER / (roundingMultiplier * 16);
+                overflow = overflow > 0 ? Math.sign(valueToWrite) * Math.trunc(overflow) : 0;
+                valueToWrite = Math.round((valueToWrite - overflow) * roundingMultiplier) / roundingMultiplier + overflow;
+            } else {
+                // precision < 0
                 const roundingDivisor = 10 ** -precision;
-                const roundedValue = Math.round(newValue / roundingDivisor) * roundingDivisor;
+                const roundedValue = Math.round(valueToWrite / roundingDivisor) * roundingDivisor;
                 if (roundedValue > Number.MAX_SAFE_INTEGER) {
                     // If rounding to this precision would round up to above MAX_SAFE_INTEGER, round down instead
-                    valueToWrite = Math.floor(newValue / roundingDivisor) * roundingDivisor;
+                    valueToWrite = Math.floor(valueToWrite / roundingDivisor) * roundingDivisor;
                 } else {
                     valueToWrite = roundedValue;
                 }
