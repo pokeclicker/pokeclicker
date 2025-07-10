@@ -3270,7 +3270,7 @@ const destinyScientistBF = new NPC('Professor Lund', [
 const destinyDeoxysReunion = new PokemonGiftNPC('Green and Purple Gem Deoxys', [
     '<i>The Deoxys sync their lights, they seem to be happy to have found each other. </i>',
     '<i>Right as you wanted to leave them alone the Deoxys with the green gem send a light towards your way. It wants to thank you for your help.</i>',
-], 'Deoxys (Green)', 'assets/images/pokemon/386.04.png', { image: 'assets/images/npcs/other/Deoxys reunion.png', requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Destiny Deoxys', 8), , new ObtainedPokemonRequirement('Deoxys (Green)', true)])});
+], 'Deoxys (Green)', 'assets/images/pokemon/386.04.png', { image: 'assets/images/npcs/other/Deoxys reunion.png', requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Destiny Deoxys', 8), new ObtainedPokemonRequirement('Deoxys (Green)', true)])});
 
 
 // For Leafeon and Glaceon. Show up in Hoenn too
