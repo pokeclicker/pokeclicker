@@ -90,6 +90,14 @@ class GameController {
         const $shopModal = $('#shopModal');
         $shopModal.on('hide.bs.modal', _ => $shopModal.data('disable-toggle', true));
         $shopModal.on('hidden.bs.modal shown.bs.modal', _ => $shopModal.data('disable-toggle', false));
+        // Castform App (Weather)
+        const $weatherModal = $('#weatherAppModal');
+        $weatherModal.on('hide.bs.modal', _ => $weatherModal.data('disable-toggle', true));
+        $weatherModal.on('hidden.bs.modal shown.bs.modal', _ => $weatherModal.data('disable-toggle', false));
+        // Purify Chamber
+        const $purifyChamberModal = $('#purifyChamberModal');
+        $purifyChamberModal.on('hide.bs.modal', _ => $purifyChamberModal.data('disable-toggle', true));
+        $purifyChamberModal.on('hidden.bs.modal shown.bs.modal', _ => $purifyChamberModal.data('disable-toggle', false));
         // Ship
         const $shipModal = $('#ShipModal');
         // Modal Collapse
@@ -444,14 +452,14 @@ class GameController {
                     }
                     break;
                 case Settings.getSetting('hotkey.castformApp').value:
-                    if (WeatherApp.shortcutVisible()) {
+                    if (WeatherApp.shortcutVisible() && !$weatherModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
                         WeatherApp.openWeatherAppModal();
                         return e.preventDefault();
                     }
                     break;
                 case Settings.getSetting('hotkey.purifyChamber').value:
-                    if (PurifyChamber.shortcutVisible()) {
+                    if (PurifyChamber.shortcutVisible() && !$purifyChamberModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
                         PurifyChamber.openPurifyChamberModal();
                         return e.preventDefault();

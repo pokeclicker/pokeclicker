@@ -1,7 +1,7 @@
-import Requirement from './Requirement';
 import * as GameConstants from '../GameConstants';
+import AchievementRequirement from './AchievementRequirement';
 
-export default class TemporaryBattleRequirement extends Requirement {
+export default class TemporaryBattleRequirement extends AchievementRequirement {
     constructor(public battleName: string, defeatsRequired = 1, option = GameConstants.AchievementOption.more) {
         super(defeatsRequired, option);
     }

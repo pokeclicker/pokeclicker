@@ -2476,6 +2476,7 @@ export enum ExtraAchievementCategories {
     sevii,
     orre,
     magikarpJump,
+    secret, // secret should be last
 }
 export const DayCycleStartHours: Record<DayCyclePart, number> = {
     [DayCyclePart.Dawn]: 5,
@@ -2596,6 +2597,7 @@ export enum DungeonInteractionSource {
     Click,
     Keybind,
     HeldKeybind,
+    DungeonGuide,
 }
 
 export const ModalCollapseList = [
@@ -2612,6 +2614,8 @@ export const ModalCollapseList = [
     'currencyBody',
     'undergroundCard',
     'undergroundDailyTradesCard',
+    'undergroundDisplayHelpers',
+    'undergroundDisplayBattery',
     'plotListCard',
     'zCrystalItemContainerBody',
 ];

@@ -132,14 +132,14 @@
                 }
             ">
                 <div class="card-body text-center p-0">
-                    <div class="underground-tool__background-gradient conic" data-bind="style: { '--gradient-percentage': (App.game.underground.battery.charges / App.game.underground.battery.maxCharges).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }">
+                    <div class="underground-tool__background-gradient conic" data-bind="style: { '--gradient-percentage': Math.min(App.game.underground.battery.charges / App.game.underground.battery.maxCharges, 1).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }">
                         <div class="bg-secondary">
                             <img alt="" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItemType[OakItemType.Cell_Battery] + '.png'}" style="width: 42px; height: 42px;">
                         </div>
                     </div>
 
                     <div class="small">
-                        <knockout data-bind="text: App.game.underground.battery.charges, css: { 'text-warning': App.game.underground.battery.charges < App.game.underground.battery.maxCharges }"></knockout> / <knockout data-bind="text: App.game.underground.battery.maxCharges"></knockout>
+                        <knockout data-bind="text: Math.min(App.game.underground.battery.charges, App.game.underground.battery.maxCharges), css: { 'text-warning': App.game.underground.battery.charges < App.game.underground.battery.maxCharges }"></knockout> / <knockout data-bind="text: App.game.underground.battery.maxCharges"></knockout>
                     </div>
                 </div>
             </div>

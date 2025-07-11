@@ -140,6 +140,9 @@ class PokemonFactory {
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const shadow = pokemon.shadow;
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
+        if (shiny && !pokemon.shiny) {
+            GameHelper.incrementObservable(App.game.statistics.totalShinyTrainerPokemonSeen);
+        }
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer);
     }
 
@@ -180,6 +183,9 @@ class PokemonFactory {
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const shadow = pokemon.shadow;
         const ep = GameConstants.BASE_EP_YIELD * (isBoss ? GameConstants.DUNGEON_BOSS_EP_MODIFIER : GameConstants.DUNGEON_EP_MODIFIER);
+        if (shiny && !pokemon.shiny) {
+            GameHelper.incrementObservable(App.game.statistics.totalShinyTrainerPokemonSeen);
+        }
         return new BattlePokemon(name, basePokemon.id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, gender, shadow, EncounterType.trainer, undefined, ep);
     }
 
@@ -221,6 +227,9 @@ class PokemonFactory {
         const shiny = pokemon.shiny ? pokemon.shiny : this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const shadow = pokemon.shadow;
+        if (shiny && !pokemon.shiny && battle.optionalArgs.isTrainerBattle) {
+            GameHelper.incrementObservable(App.game.statistics.totalShinyTrainerPokemonSeen);
+        }
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, encounterType);
     }
 

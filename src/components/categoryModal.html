@@ -20,14 +20,17 @@
                     </thead>
                     <tbody data-bind="sortable: {
                         foreach: PokemonCategories.categories,
+                        getDataId: (cat) => cat.id,
                         options: {
                             group: 'pokemonCategories',
                             draggable: '.category-row',
                             handle: '.category-drag-handle',
-                            getId: (cat) => cat.id,
+                            filter: '.sortable-fixed-position'
                         }}">
-                        <tr class="category-row">
-                            <td class="category-drag-handle align-middle text-center px-2" style="cursor: grab;">⠿</td>
+                        <tr class="category-row" data-bind="class: $data.id == 0 ? 'sortable-fixed-position' : 0">
+                            <td class="px-2" data-bind="if: $data.id != 0">
+                                <div class="category-drag-handle align-middle text-center">⠿</div>
+                            </td>
                             <td class="p-0" data-bind="style: { background: $data.color }">
                                 <label style="width:100%; min-height: 28px; padding:0px; margin: 0px;">
                                     <input style="opacity: 0;" type="color" data-bind="value: $data.color" />
