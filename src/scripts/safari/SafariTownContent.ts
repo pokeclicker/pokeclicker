@@ -19,6 +19,6 @@ class SafariTownContent extends TownContent {
         const pokemonStatusArray = [areaStatus.completed];
         const pokerusUnlocked = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked();
         const safariEncounters = SafariPokemonList.list[player.region]().filter(p => p.isAvailable()).map(p => p.name) as PokemonNameType[];
-        return MapHelper.getPokemonAreaStatus(safariEncounters, pokerusUnlocked);
+        return [areaStatus.completed, ...MapHelper.getPokemonAreaStatus(safariEncounters, pokerusUnlocked)];
     }
 }
