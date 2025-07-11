@@ -17,7 +17,10 @@ class BerryMasterShop extends Shop {
     public amountInput = () => $('#berryMasterModal').find('input[name="amountOfItems"]');
 
     public areaStatus() {
-        const itemStatusArray = [super.areaStatus()];
+        const itemStatusArray = super.areaStatus();
+        if (itemStatusArray.includes(areaStatus.locked)) {
+            return [areaStatus.locked];
+        }
 
         const berryListIndex = GameConstants.BerryTraderLocations[this.parent.name];
         if (berryListIndex > -1) {
@@ -36,7 +39,7 @@ class BerryMasterShop extends Shop {
                 itemStatusArray.push(areaStatus.missingResistant);
             }
         }
-        return Math.min(...itemStatusArray);
+        return itemStatusArray;
     }
 
 }

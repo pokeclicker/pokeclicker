@@ -67,7 +67,7 @@
                                         Claim
                                     </button>
                                     <span data-bind='visible: $data.inProgress() && !$data.isCompleted(), text: Math.floor(progress()*100) + "%"'></span>
-                                    <button class='btn btn-success btn-sm btn-block' disabled data-bind='visible: $data.claimed()'>Completed</button>
+                                    <button class='btn btn-secondary btn-sm btn-block' disabled data-bind='visible: $data.claimed()'>Completed</button>
                                 </td>
                             </tr>
                             </tbody>
@@ -157,24 +157,30 @@
                 </div>
             </div>
 
-            <div class="modal-footer">
-                <div id='refreshQuests'>
-                    <!-- ko if: App.game.quests.freeRefresh() -->
-                    <button class="btn btn-primary" onclick="App.game.quests.refreshQuests(false, true)">Free Refresh</button>
-                    <!-- /ko -->
-                    <!-- ko if: !App.game.quests.freeRefresh() -->
-                    <button class="btn btn-primary" onclick="App.game.quests.refreshQuests(false, true)"
-                        data-bind="enable: App.game.quests.canAffordRefresh(),
-                            tooltip: {
-                                title: App.game.quests.freeRefresh() ? '' : `Daily free refresh in: ${GameHelper.formattedLetterTimeUntilTomorrow()}`,
-                                trigger: 'hover', placement:'top'
-                            }">
-                        <span data-bind="template: { name: 'amountTemplate', data: App.game.quests.getRefreshCost() }"></span> - Refresh
-                    </button>
-                    <!-- /ko -->
-
+            <div class="modal-footer justify-content-start flex-nowrap">
+                <div id="refreshQuests">
+                    <div class="d-flex flex-wrap align-items-center" style="gap: 8px;">
+                        <!-- ko if: App.game.quests.isRefreshFree() -->
+                        <button class="btn btn-primary" onclick="App.game.quests.refreshQuests(true, true)">Free Refresh</button>
+                        <!-- /ko -->
+                        <!-- ko if: !App.game.quests.isRefreshFree() -->
+                        <button class="btn btn-primary" onclick="App.game.quests.refreshQuests(false, true)"
+                            data-bind="enable: App.game.quests.canAffordRefresh(),
+                                tooltip: {
+                                    title: App.game.quests.freeRefresh() ? '' : `Daily free refresh in: ${GameHelper.formattedLetterTimeUntilTomorrow()}`,
+                                    trigger: 'hover', placement:'top'
+                                }">
+                            <span data-bind="template: { name: 'amountTemplate', data: App.game.quests.getRefreshCost() }"></span> - Refresh
+                        </button>
+                        <!-- /ko -->
+                        <span>
+                            Or complete all quests for a bonus<knockout data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.quests.calcListBonus(), 'currency': GameConstants.Currency.questPoint}}"></knockout>
+                        </span>
+                    </div>
                 </div>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <div class="flex-grow-1 text-right">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>

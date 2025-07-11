@@ -15,8 +15,11 @@ class GenericTraderShop extends Shop {
         $('#genericTraderModal').modal('show');
     }
 
-    public areaStatus(): number {
-        const itemStatusArray = [super.areaStatus()];
+    public areaStatus() {
+        const itemStatusArray = super.areaStatus();
+        if (itemStatusArray.includes(areaStatus.locked)) {
+            return [areaStatus.locked];
+        }
         const deals = GenericDeal.getDeals(this.traderID)?.();
 
         if ((deals?.length || 0) > 0) {
@@ -43,7 +46,7 @@ class GenericTraderShop extends Shop {
             }
         }
 
-        return Math.min(...itemStatusArray);
+        return itemStatusArray;
     }
 
     public isVisible(): boolean {

@@ -1,4 +1,4 @@
-class EvolutionStone extends CaughtIndicatingItem {
+class EvolutionStone extends PokerusIndicatingItem {
 
     type: GameConstants.StoneType;
     public unlockedRegion: GameConstants.Region;

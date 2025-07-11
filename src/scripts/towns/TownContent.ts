@@ -10,8 +10,8 @@ abstract class TownContent {
         this.parent = parent;
     }
 
-    public areaStatus() : areaStatus {
-        return this.isUnlocked() ? areaStatus.completed : areaStatus.locked;
+    public areaStatus() : areaStatus[] {
+        return [this.isUnlocked() ? areaStatus.completed : areaStatus.locked];
     }
 
     public isUnlocked(): boolean {
@@ -125,8 +125,8 @@ class MoveToDungeon extends TownContent {
     public isUnlocked(): boolean {
         return TownList[this.dungeon.name].isUnlocked();
     }
-    public areaStatus(): areaStatus {
-        return areaStatus[MapHelper.calculateTownCssClass(this.dungeon.name)];
+    public areaStatus(): areaStatus[] {
+        return [areaStatus[MapHelper.calculateTownCssClass(this.dungeon.name)]];
     }
     public clears() {
         if (!QuestLineHelper.isQuestLineCompleted('Tutorial Quests')) {
@@ -157,11 +157,11 @@ class MoveToTown extends TownContent {
         return TownList[this.townName].isUnlocked();
     }
 
-    public areaStatus(): areaStatus {
+    public areaStatus(): areaStatus[] {
         if (this.includeAreaStatus) {
-            return areaStatus[MapHelper.calculateTownCssClass(this.townName)];
+            return [areaStatus[MapHelper.calculateTownCssClass(this.townName)]];
         } else {
-            return areaStatus.completed;
+            return [areaStatus.completed];
         }
     }
 }
@@ -204,5 +204,27 @@ class WeatherAppTownContent extends TownContent {
 
     public text() {
         return 'Open the Castform App';
+    }
+}
+
+class PickStarterContent extends TownContent {
+    public cssClass() {
+        return 'btn btn-warning';
+    }
+
+    public isVisible(): boolean {
+        return player.regionStarters[player.region]() == GameConstants.Starter.None;
+    }
+
+    public onclick() {
+        $('#pickStarterModal').modal('show');
+    }
+
+    public areaStatus(): areaStatus[] {
+        return [this.isVisible() ? areaStatus.uncaughtPokemon : areaStatus.completed];
+    }
+
+    public text() {
+        return 'Pick your Starter';
     }
 }

@@ -28,20 +28,25 @@ class Shop extends TownContent {
     }
 
     public areaStatus() {
-        const itemStatusArray = [super.areaStatus()];
+        const itemStatusArray = super.areaStatus();
+        if (itemStatusArray.includes(areaStatus.locked)) {
+            return [areaStatus.locked];
+        }
         const pokerusUnlocked = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked();
         this.items.forEach(i => {
             if (i instanceof PokemonItem) {
                 if (i.getCaughtStatus() == CaughtStatus.NotCaught) {
                     itemStatusArray.push(areaStatus.uncaughtPokemon);
-                } else if (i.getCaughtStatus() == CaughtStatus.Caught) {
+                }
+                if (i.getCaughtStatus() == CaughtStatus.Caught) {
                     itemStatusArray.push(areaStatus.uncaughtShinyPokemon);
-                } else if (pokerusUnlocked && i.getPokerusStatus() < GameConstants.Pokerus.Resistant) {
+                }
+                if (pokerusUnlocked && i.getPokerusStatus() < GameConstants.Pokerus.Resistant) {
                     itemStatusArray.push(areaStatus.missingResistant);
                 }
             }
         });
-        return Math.min(...itemStatusArray);
+        return itemStatusArray;
     }
 
     get displayName() {

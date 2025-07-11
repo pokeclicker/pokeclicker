@@ -9,49 +9,33 @@
                 </button>
             </div>
 
-            <div class="modal-body p-0">
-                <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a class="nav-link active" href="#saveTab" data-toggle="tab">Save</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#saveConvert" data-toggle="tab">Convert Original Save</a></li>
-                </ul>
-                <div class="tab-content p-3">
-                    <div id="saveTab" class="tab-pane fade in active show">
-                        <div>
-                            <form class="form-inline input-group">
-                                <input class="outline-dark form-control" placeholder="Enter code..." id="redeemable-code-input" type="text" />
-                                <div class="input-group-append">
-                                    <button class="btn btn-info" name="name" value="value" type="submit" onclick="RedeemableCodeController.enterCode(); return false;">Claim!</button>
-                                </div>
-                            </form>
-                            <hr>
-                            <!-- ko if: App.game.discord.enabled -->
-                            <button class="btn btn-primary btn-block" onClick="App.game.discord.login()" data-bind="visible: !App.game.discord.ID()">Link Discord</button>
-                            <button class="btn btn-warning btn-block" onClick="App.game.discord.logout()" data-bind="visible: App.game.discord.ID()">Unlink Discord</button>
-                            <i class="text-warning"><strong>Note:</strong> This is <strong>not</strong> used for cloud saves;<br/>it just allows you to enter codes received from the Discord bot.</i>
-                            <hr>
-                            <!-- /ko -->
-
-                            <button class="btn btn-primary btn-block" onClick="Save.download()">Download Save</button>
-                            <i>If this does not work, you can copy the contents of the save and paste it into a '.txt' file</i>
-                            <button class="btn btn-primary btn-block" onclick="Save.copySaveToClipboard()">Copy to Clipboard</button>
-                            <hr>
-
-                            <input type="file" id="import-save" accept=".txt" style="display:none;"
-                                    onchange=Save.loadFromFile(this.files[0])>
-                            <label for="import-save" class="btn btn-primary btn-block">Import Save</label>
-                            <hr>
-                            <h5 class="text-danger">You will not be able to recover your savefile!</h5>
-                            <button class="btn btn-danger btn-block" onClick="Save.delete()">DELETE SAVE</button>
+            <div class="modal-body">
+                <div id="saveTab">
+                    <form class="form-inline input-group">
+                        <input class="outline-dark form-control" placeholder="Enter code..." id="redeemable-code-input" type="text" />
+                        <div class="input-group-append">
+                            <button class="btn btn-info" name="name" value="value" type="submit" onclick="RedeemableCodeController.enterCode(); return false;">Claim!</button>
                         </div>
-                    </div>
+                    </form>
+                    <hr>
+                    <!-- ko if: App.game.discord.enabled -->
+                    <button class="btn btn-primary btn-block" onClick="App.game.discord.login()" data-bind="visible: !App.game.discord.ID()">Link Discord</button>
+                    <button class="btn btn-warning btn-block" onClick="App.game.discord.logout(true)" data-bind="visible: App.game.discord.ID()">Unlink Discord</button>
+                    <i class="text-warning"><strong>Note:</strong> This is <strong>not</strong> used for cloud saves;<br/>it just allows you to enter codes received from the Discord bot.</i>
+                    <hr>
+                    <!-- /ko -->
 
-                    <div id="saveConvert" class="tab-pane fade">
-                        <p>You can paste your old PokéClicker save file here, to keep shinies:</p>
-                        <textarea id="convertTextArea" class="saveTextArea"></textarea>
-                        <button class="btn btn-success btn-block" onclick="Save.convert()">
-                            Convert
-                        </button>
-                    </div>
+                    <button class="btn btn-primary btn-block" onClick="Save.download()">Download Save</button>
+                    <i>If this does not work, you can copy the contents of the save and paste it into a '.txt' file</i>
+                    <button class="btn btn-primary btn-block" onclick="Save.copySaveToClipboard()">Copy to Clipboard</button>
+                    <hr>
+
+                    <input type="file" id="import-save" accept=".txt" style="display:none;"
+                            onchange=Save.loadFromFile(this.files[0])>
+                    <label for="import-save" class="btn btn-primary btn-block">Import Save</label>
+                    <hr>
+                    <h5 class="text-danger">You will not be able to recover your savefile!</h5>
+                    <button class="btn btn-danger btn-block" onClick="Save.delete()">DELETE SAVE</button>
                 </div>
             </div>
 

@@ -77,7 +77,7 @@
                css: { active: ShopHandler.selected() == $index() },
                attr: { disabled: !$data.isAvailable() || $data.isSoldOut() },
                tooltip: {
-                  title: $data.description ? `<u>${$data.displayName}:</u><br/>${$data.description}` : '',
+                  title: $data.shopTooltip,
                   trigger: 'hover',
                   placement:'bottom',
                   boundary: 'viewport',

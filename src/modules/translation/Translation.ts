@@ -8,6 +8,7 @@ import type Setting from '../settings/Setting';
 import memoize from '../utilities/memoize';
 import Language from './Language';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
+import Notifier from '../notifications/Notifier';
 
 export type TranslationVar = string | number | PokemonNameType;
 export type TranslationVars = Record<string, TranslationVar>;
@@ -43,6 +44,15 @@ export default class Translate {
     constructor(languageSetting: Setting<Language>) {
         this.languageUpdated = ko.observable(0);
 
+        let translationsUrlOverride = new URLSearchParams(window.location.search).get('translations');
+        if (translationsUrlOverride?.startsWith('github:')) {
+            translationsUrlOverride = `https://raw.githubusercontent.com/${translationsUrlOverride.split(':')[1]}`;
+        }
+
+        if (translationsUrlOverride != null) {
+            Notifier.notify({ message: `Using ${translationsUrlOverride} for translations`, timeout: 5000 });
+        }
+
         i18next
             .use(Backend)
             .use(LanguageDetector)
@@ -54,7 +64,7 @@ export default class Translate {
                     // Two backend sources - tries the TRANSLATION_URL first, falls back to copy taken at build time
                     backends: [HttpBackend, HttpBackend],
                     backendOptions: [
-                        { loadPath: '$TRANSLATIONS_URL/locales/{{lng}}/{{ns}}.json' },
+                        { loadPath: `${translationsUrlOverride ?? '$TRANSLATIONS_URL'}/locales/{{lng}}/{{ns}}.json` },
                         { loadPath: './locales/{{lng}}/{{ns}}.json' },
                     ],
                 },

@@ -8,7 +8,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         <ul class="nav nav-tabs nav-fill w-100">
                             <li class="nav-item"><a class="nav-link active" href="#breeding-pokemon" data-toggle="tab" onclick="$('#breeding-fireall').show()">Pokémon</a></li>
                             <li class="nav-item"><a class="nav-link" href="#breeding-eggs" data-toggle="tab" onclick="$('#breeding-fireall').show()">Eggs</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#breeding-fossils" data-toggle="tab" onclick="$('#breeding-fireall').show()">Fossils</a></li>
                             <li class="nav-item" data-bind="visible: App.game.breeding.hatcheryHelpers.isUnlocked()" onclick="$('#breeding-fireall').show()"><a class="nav-link" href="#breeding-helpers" data-toggle="tab">Helpers</a></li>
                             <li class="nav-item"><a class="nav-link" href="#breeding-help" data-toggle="tab" onclick="$('#breeding-fireall').show()">Help</a></li>
                             <li class="d-lg-block d-none"><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
@@ -19,8 +18,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <button type="button" class="btn btn-warning hatchery-warnings" style="pointer-events: none;" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
                                 You don't have any free egg slots.
                             </button>
-                            <button type="button" class="btn btn-danger hatchery-warnings" style="pointer-events: none;" data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots()">
-                                Your breeding queue is full or disabled.
+                            <button type="button" class="btn btn-danger hatchery-warnings" style="pointer-events: none;" data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots(), text: `Your breeding queue is ${Settings.getSetting('breedingQueueSizeSetting').observableValue() == 0 ? 'disabled' : 'full' }.`,">
                             </button>
                         </div>
                         <div class="float-right d-lg-block d-none">
@@ -48,7 +46,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 </div>
             </div>
             <div class="modal-body p-0">
-                <div class="tab-content p-3 h-100">
+                <div class="tab-content p-2 h-100">
                     <!-- ko let: { categoryModeEnabled: PokemonCategories.categoryAssignEnabled, categoryModeSelected: PokemonCategories.categoryAssignSelected } -->
                     <div class="tab-pane fade in active show" id="breeding-pokemon">
                         <div class="row">
@@ -415,50 +413,96 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 
                     <div class="tab-pane fade" id="breeding-eggs">
                         <div class="scrolling-div-breeding-list">
-                            <button type="button" class="btn btn-warning hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: !Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player.itemList[x]()).length">
-                                You don't have any eggs to breed.
-                            </button>
-                            <!-- ko if: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player.itemList[x]()).length -->
-                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player.itemList[x]())">
-                                <li class="eggSlotModal col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
-                                    <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.camelCaseToString(GameConstants.humanifyString($data))">egg</span>
-                                    <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data}.png` }">
-                                    <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + player.itemList[$data]().toLocaleString('en-US')">amount</span>
-                                    <a class="overlay" href="#breed" data-bind="click: function() { ItemList[$data].use(); App.game.breeding.checkCloseModal(); }"></a>
-                                    <knockout style="position: absolute; right: 2px; top: -14px;"
-                                        data-bind="template: { name: 'caughtStatusTemplate', data: { status: ItemList[$data].getCaughtStatus() }, if: (ItemList[$data] instanceof CaughtIndicatingItem) }"/>
-                                </li>
-                            </ul>
-                            <!-- /ko -->
-                        </div>
-                    </div>
+                            <div class="card mb-1">
+                                <div class="card-header small py-2" data-toggle="collapse" data-target="#collapseOne">
+                                    Egg Information & Hatching Odds
+                                </div>
+                                <div id="collapseOne" class="collapse">
+                                    <div class="card-body p-2 small">
+                                        <p>Pokémon Eggs can be purchased or traded for in shops throughout each region and can be hatched to obtain exclusive Pokémon. Click on an egg below to view its hatching pool.</p>
+                                        <p>Hatching a Pokémon you've already caught will give it a small attack boost.</p>
+                                        <p class="mb-0">Eggs have a 50% chance to hatch a Pokémon from your highest region, with the odds continuing to be halved for each prior region. Kanto and Johto pools will always have equal odds.<br/><br/>For example: in Sinnoh, there is a 50% chance to obtain Pokémon from the Sinnoh egg pool, a 25% chance to obtain Pokémon from the Hoenn egg pool, and a 12.5% chance to obtain Pokémon from both the Kanto and Johto egg pools.</p>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="tab-pane fade" id="breeding-fossils">
-                        <div class="scrolling-div-breeding-list">
-                            <button type="button" class="btn btn-warning hatchery-warnings w-100" style="pointer-events: none;" data-bind="visible: !UndergroundItems.list.filter(it => it.valueType === UndergroundItemValueType.Fossil && player.itemList[it.itemName]() > 0).length">
-                                You don't have any fossils to breed.
-                            </button>
-                            <!-- ko if: UndergroundItems.list.filter(it => it.valueType === UndergroundItemValueType.Fossil && player.itemList[it.itemName]() > 0).length -->
-                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: UndergroundItems.list.filter(it => it.valueType === UndergroundItemValueType.Fossil && player.itemList[it.itemName]() > 0)">
-                                <li class="eggSlotModal col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
-                                    <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data.name)">fossil</span>
-                                    <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }">
-                                    <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + player.itemList[$data.itemName]().toLocaleString('en-US')">amount</span>
-                                    <a class="overlay" href="#breed" data-bind="click: function() { UndergroundController.sellMineItem($data); App.game.breeding.checkCloseModal(); }"></a>
-                                    <knockout style="position: absolute; right: 2px; top: -14px;"
-                                        data-bind="template: { name: 'caughtStatusTemplate', data: { status: PartyController.getCaughtStatusByName(GameConstants.FossilToPokemon[$data.name]) } }"/>
-                                </li>
-                            </ul>
+                            <div class="egg-display" data-bind="foreach: GameHelper.enumStrings(GameConstants.EggItemType)">
+                                <div>
+                                    <div class="card clickable" data-bind="click: () => { BreedingController.selectedEggItem(GameConstants.EggItemType[$data]); },
+                                        css: { 'border-danger': BreedingController.selectedEggItem() === GameConstants.EggItemType[$data] }">
+                                        <div class="card-body rounded text-center p-0 eggSlotModal">
+                                            <div class="d-flex flex-column align-items-center">
+                                                <div class="text-top" data-bind="text: ItemList[$data].displayName">egg</div>
+                                                <div style="position: absolute; right: 2px; top: -3px;"
+                                                    data-bind="template: { name: 'caughtStatusTemplate', data: { status: ItemList[$data].getCaughtStatus() }, if: (ItemList[$data] instanceof CaughtIndicatingItem) }"></div>
+                                                <img src="" width="64px" data-bind="attr:{ src: `assets/images/breeding/${$data}.png` }">
+                                                <div class="text-bottom" data-bind="text: 'Amount: ' + player.itemList[$data]().toLocaleString('en-US')">amount</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="margin: 1px 1px 0">
+                                        <button type="button" class="btn btn-sm btn-block btn-primary" style="padding: .1rem 0;" data-bind="
+                                            click: () => { ItemList[$data].use(); App.game.breeding.checkCloseModal(); },
+                                            enable: player.itemList[$data]() > 0 && (App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot())">Hatch</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ko with: App.game.breeding.hatchList[BreedingController.selectedEggItem()], as: 'hatchList' -->
+                            <hr class="my-2 bg-secondary" />
+                            <p class="small mb-2" data-bind="visible: BreedingController.selectedEggItem() === GameConstants.EggItemType.Mystery_egg">Mystery Eggs can hatch Pokémon from both their own exclusive pool and all other typed egg pools. The exclusive Pokémon are listed below.</p>
+                            <div class="row">
+                                <!-- ko foreach: {
+                                    data: GameHelper.enumNumbers(GameConstants.Region).filter(r => r >= GameConstants.Region.kanto && r <= Math.min(player.highestRegion(), GameConstants.MAX_AVAILABLE_REGION)).reverse(),
+                                    as: 'region'
+                                } -->
+                                <div class="col-12 col-sm-6 col-md-4 mb-2" data-bind="visible: hatchList[region].length > 0">
+                                    <div class="card h-100 border-0">
+                                        <div class="card-header bg-primary text-white py-2" data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[region])"></div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-bordered mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="align-middle">Pattern</th>
+                                                        <th class="text-left align-middle">Pokémon</th>
+                                                        <th class="align-middle">Odds</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody data-bind="foreach: hatchList[$data]">
+                                                    <tr data-bind="let: { dataPokemon: PokemonHelper.getPokemonByName($data), partyPokemon: App.game.party.getPokemonByName($data) }">
+                                                        <td class="tight align-middle px-2 py-1" data-bind="let: { egg: {
+                                                            pokemon: $data,
+                                                            pokemonType1: dataPokemon.type1,
+                                                            pokemonType2: dataPokemon.type2 === PokemonType.None ? dataPokemon.type1 : dataPokemon.type2,
+                                                            progress: () => 0
+                                                        }}">
+                                                            <div class="d-flex align-items-center text-center" style="width: 70px;">
+                                                                <div data-bind="template: { name: 'eggSVGTemplate', data: egg }"></div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="align-middle text-left">
+                                                            <knockout data-bind="text: partyPokemon ? PokemonHelper.displayName($data) : '???'"></knockout>
+                                                            <sup data-bind="visible: partyPokemon?.shiny ?? false">✨</sup>
+                                                        </td>
+                                                        <td class="tight align-middle" data-bind="text: BreedingController.calcEggOdds(BreedingController.selectedEggItem(), $data).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /ko -->
+                            </div>
                             <!-- /ko -->
                         </div>
                     </div>
 
                     <div class="tab-pane fade" id="breeding-helpers">
+                        <!-- ko if: HatcheryHelpers.list.some(f => f.isUnlocked()) -->
                         <div class="row m-0 justify-content-center" data-bind="foreach: App.game.breeding.hatcheryHelpers.available()" style="max-width: 100%;">
-                            <div class="card text-left col-md-3 col-sm-6 col-xs-12 p-0">
-                                <h5 class="card-header">
-                                    <knockout data-bind="text: $data.name">Name</knockout>
-                                    <img class="float-right pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                            <div class="card text-left col-lg-3 col-md-6 col-xs-12 border-0 p-1">
+                                <h5 class="card-header d-flex align-items-center py-2">
+                                    <knockout class="flex-grow-1" data-bind="text: $data.name">Name</knockout>
+                                    <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
                                 </h5>
                                 <div class="card-body p-0">
                                     <table class="table table-striped table-hover table-bordered table-sm m-0" style="overflow: visible;">
@@ -582,6 +626,50 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </div>
                             </div>
                         </div>
+                        <!-- /ko -->
+                        <!-- ko if: HatcheryHelpers.list.some(f => !f.isUnlocked()) -->
+                        <div class="mt-1 px-1">
+                            <button class="btn btn-secondary btn-block" data-toggle="collapse" href="#lockedHatcheryHelpers">Show/Hide Locked Hatchery Helpers</button>
+                        </div>
+                        <div class="collapse mt-1" id="lockedHatcheryHelpers">
+                            <div class="row m-0 justify-content-center" data-bind="foreach: HatcheryHelpers.list.filter(f => !f.isUnlocked())" style="max-width: 100%;">
+                                <div class="card text-left col-lg-3 col-md-6 col-xs-12 border-0 p-1">
+                                    <h5 class="card-header d-flex align-items-center py-2">
+                                        <knockout class="flex-grow-1" data-bind="text: $data.name">Name</knockout>
+                                        <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
+                                    </h5>
+                                    <div class="card-body p-0">
+                                        <table class="table table-bordered table-sm m-0 h-100" style="overflow: visible;">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left align-middle">Cost / Hatch:</td>
+                                                    <td class="text-right" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.cost.amount, 'currency': $data.cost.currency, 'reducedThreshold': 1e10}}"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Step Efficiency:</td>
+                                                    <td class="text-right">
+                                                        <knockout data-bind="text: `${$data.stepEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left text-nowrap">Attack Efficiency:</td>
+                                                    <td class="text-right">
+                                                        <knockout data-bind="text: `${$data.attackEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text-center table-secondary">Unlock Requirement</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="text-center p-2 h-100 align-middle" data-bind="text: $data.unlockRequirement.hint()"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
                     </div>
 
 
@@ -632,7 +720,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     <button type="button" class="btn btn-danger hatchery-warnings"
                         data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots(),
                         tooltip: {
-                            title: 'Your breeding queue is full or disabled.',
+                            title: `Your breeding queue is ${Settings.getSetting('breedingQueueSizeSetting').observableValue() == 0 ? 'disabled' : 'full' }.`,
                             trigger: 'hover',
                             placement: 'top',
                             boundary: 'window'
