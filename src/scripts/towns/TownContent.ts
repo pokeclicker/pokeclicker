@@ -221,7 +221,7 @@ class PickStarterContent extends TownContent {
     }
 
     public areaStatus(): areaStatus[] {
-        return [this.isVisible() ? areaStatus.uncaughtPokemon : areaStatus.completed];
+        return [this.isVisible() ? areaStatus.incomplete : areaStatus.completed];
     }
 
     public text() {
