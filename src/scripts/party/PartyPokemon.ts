@@ -342,10 +342,11 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     }
 
     public setVitaminAmount(vitamin: GameConstants.VitaminType, amount: number) {
-        if (this.breeding || isNaN(amount) || amount < 0) {
+        if (this.breeding || isNaN(amount)) {
             return;
         }
 
+        amount = Math.max(0, amount);
         const diff = Math.floor(amount) - this.vitaminsUsed[vitamin]();
         if (diff === 0) {
             return;

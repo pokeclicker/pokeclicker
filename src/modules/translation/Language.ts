@@ -11,6 +11,7 @@ enum Language {
     'zh-Hant' = 'zh-Hant',
     'ru' = 'ru',
     'tr' = 'tr',
+    'nl' = 'nl',
 }
 
 export const LanguageNames: Record<Language, string> = {
@@ -25,6 +26,7 @@ export const LanguageNames: Record<Language, string> = {
     'zh-Hant': '繁體中文',
     'ru': 'Русский',
     'tr': 'Türkçe',
+    'nl': 'Nederlands',
 };
 
 export default Language;
