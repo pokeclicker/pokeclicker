@@ -42,6 +42,7 @@ export type PokemonNameType
     | 'Charizard (Clone)'
     | 'Squirtle'
     | 'Squirtle (Clone)'
+    | 'Squad Leader Squirtle'
     | 'Wartortle'
     | 'Wartortle (Clone)'
     | 'Blastoise'
