@@ -1453,7 +1453,7 @@ class QuestLineHelper {
 
     // Destiny Deoxys Quest
     public static createDestinyDeoxysQuestLine() {
-        const destinyDeoxysQuest = new QuestLine('Destiny Deoxys', '', new QuestLineCompletedRequirement('Hollow Truth and Ideals'), GameConstants.BulletinBoards.Unova);
+        const destinyDeoxysQuest = new QuestLine('Destiny Deoxys', 'Discover the mystery of the crashed meteor.', new QuestLineCompletedRequirement('Hollow Truth and Ideals'), GameConstants.BulletinBoards.Unova);
 
         const clearGiantChasm = new DefeatDungeonQuest(5, 0, 'Giant Chasm').withDescription('There seems to be a big fuzz about new foundings in the Giant Chasm. Try finding it.');
         destinyDeoxysQuest.addQuest(clearGiantChasm);

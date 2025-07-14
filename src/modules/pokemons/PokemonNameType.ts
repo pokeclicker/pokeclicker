@@ -675,7 +675,7 @@ export type PokemonNameType
     | 'Deoxys (Attack)'
     | 'Deoxys (Defense)'
     | 'Deoxys (Speed)'
-    | 'Deoxys (Green)'
+    | 'Deoxys (Green Core)'
     | 'Deoxys (Clone)'
     | 'Turtwig'
     | 'Grotle'

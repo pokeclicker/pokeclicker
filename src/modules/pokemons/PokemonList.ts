@@ -12944,7 +12944,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 386.04,
-        'name': 'Deoxys (Green)',
+        'name': 'Deoxys (Green Core)',
         'type': [PokemonType.Psychic],
         'eggCycles': 120,
         'levelType': LevelType.slow,
