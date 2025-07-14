@@ -13420,6 +13420,141 @@ dungeonList['Max Lair'] = new Dungeon('Max Lair',
     ],
     2500000, 46);
 
+//Lental Dungeons
+
+dungeonList['Florio Island Illumina Spot'] = new Dungeon('Florio Island Illumina Spot',
+    ['Eevee', 'Sylveon', 'Comfey', 'Combee', 'Hoothoot', 'Pikachu', 'Emolga'],
+    {
+        common: [
+            {loot: 'Cheri'},
+            {loot: 'Chesto'},
+            {loot: 'Pecha'},
+            {loot: 'Rawst'},
+            {loot: 'Aspear'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Lime Shard'},
+        ],
+        epic: [{loot: 'Meadow Plate'}],
+        legendary: [{loot: 'Shaymin (Land)'}],
+        // mythic: [{loot: 'Illumina Orb'}],
+    },
+    100,
+    [new DungeonBossPokemon('Illumina Meganium', 100, 40)],
+    100, 56,
+    undefined,
+    {
+        requirement: new TemporaryBattleRequirement('Florio Island Illumina Pokémon 3'),
+    });
+dungeonList['Belusylva Island Illumina Spot'] = new Dungeon('Belusylva Island Illumina Spot',
+    ['Magikarp', 'Lotad', 'Bulbasaur', 'Ninetales', 'Serperior', 'Trevenant', 'Espeon', 'Kecleon'],
+    {
+        common: [
+            {loot: 'Leppa'},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
+            {loot: 'Persim'},
+            {loot: 'Razz'},
+        ],
+        rare: [
+            {loot: 'White Shard'},
+            {loot: 'Pink Shard'},
+        ],
+        epic: [{loot: 'Splash Plate'}],
+        // legendary: [],
+        // mythic: [{loot: 'Illumina Orb'}],
+    },
+    100,
+    [new DungeonBossPokemon('Illumina Milotic', 100, 40)],
+    100, 58,
+    undefined,
+    {
+        requirement: new TemporaryBattleRequirement('Belusylva Island Illumina Pokémon 3'),
+    });
+dungeonList['Maricopia Islands Illumina Spot'] = new Dungeon('Maricopia Islands Illumina Spot',
+    ['Wailmer', 'Finneon', 'Luvdisc', 'Wailord'],
+    {
+        common: [{loot: 'Wishiwashi (Solo)'}],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Cyan Shard'},
+        ],
+        epic: [{loot: 'Splash Plate'}],
+        // legendary: [],
+        // mythic: [{loot: 'Illumina Orb'}],
+    },
+    100,
+    [new DungeonBossPokemon('Illumina Wishiwashi', 100, 40)],
+    100, 60,
+    undefined,
+    {
+        requirement: new TemporaryBattleRequirement('Maricopia Islands Illumina Pokémon 3'),
+    });
+dungeonList['Voluca Island Illumina Spot'] = new Dungeon('Voluca Island Illumina Spot',
+    ['Monferno', 'Talonflame', 'Archeops'],
+    {
+        common: [{loot: 'Cheri'}], // TODO
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Crimson Shard'},
+        ],
+        epic: [
+            {loot: 'Insect Plate'},
+            {loot: 'Flame Plate'},
+        ],
+        // legendary: [],
+        // mythic: [{loot: 'Illumina Orb'}],
+    },
+    100,
+    [new DungeonBossPokemon('Illumina Volcarona', 100, 40)],
+    100, 62,
+    undefined,
+    {
+        requirement: new TemporaryBattleRequirement('Voluca Island Illumina Pokémon 3'),
+    });
+dungeonList['Durice Island Illumina Spot'] = new Dungeon('Durice Island Illumina Spot',
+    ['Noibat', 'Carbink', 'Sableye', 'Joltik', 'Crobat'],
+    {
+        common: [{loot: 'Cheri'}], // TODO
+        rare: [
+            {loot: 'Grey Shard'},
+            {loot: 'Brown Shard'},
+        ],
+        epic: [
+            {loot: 'Iron Plate'},
+            {loot: 'Stone Plate'},
+        ],
+        // legendary: [],
+        // mythic: [{loot: 'Illumina Orb'}],
+    },
+    100,
+    [new DungeonBossPokemon('Illumina Steelix', 100, 40)],
+    100, 64,
+    undefined,
+    {
+        requirement: new TemporaryBattleRequirement('Durice Island Illumina Pokémon 3'),
+    });
+dungeonList['Aurus Island Illumina Spot'] = new Dungeon('Aurus Island Illumina Spot',
+    ['Sigilyph', 'Woobat', 'Eldegoss', 'Chandelure', 'Houndoom', 'Absol', 'Noivern', 'Natu', 'Golurk'],
+    {
+        common: [{loot: 'Cheri'}], // TODO
+        rare: [
+            {loot: 'Rose Shard'},
+            {loot: 'Black Shard'},
+        ],
+        epic: [{loot: 'Pixie Plate'}],
+        // legendary: [],
+        // mythic: [{loot: 'Illumina Orb'}],
+    },
+    100,
+    [new DungeonBossPokemon('Illumina Xerneas', 100, 40)],
+    100, 65,
+    undefined,
+    {
+        requirement: new TemporaryBattleRequirement('Aurus Island Illumina Pokémon 3'),
+    });
+
 //Hisui Dungeons
 
 dungeonList['Floaro Gardens'] = new Dungeon('Floaro Gardens',

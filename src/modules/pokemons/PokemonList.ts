@@ -4148,7 +4148,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 77,
         'eggCycles': 25,
-        'evolutions': [StoneEvolution('Onix', 'Steelix', StoneType.Metal_coat)],
+        'evolutions': [
+            StoneEvolution('Onix', 'Steelix', StoneType.Metal_coat),
+            DummyEvolution('Onix', 'Illumina Steelix'),
+        ],
         'base': {
             'hitpoints': 35,
             'attack': 45,
@@ -6818,7 +6821,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Bayleef', 'Meganium', 32)],
+        'evolutions': [
+            LevelEvolution('Bayleef', 'Meganium', 32),
+            DummyEvolution('Bayleef', 'Illumina Meganium'),
+        ],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -6850,6 +6856,26 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
             'visualDifference': true,
+        },
+    },
+    {
+        'id': 154.01,
+        'name': 'Illumina Meganium',
+        'catchRate': 45,
+        'type': [PokemonType.Grass],
+        'levelType': LevelType.mediumslow,
+        'exp': 236,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 80,
+            'attack': 82,
+            'specialAttack': 83,
+            'defense': 100,
+            'specialDefense': 100,
+            'speed': 80,
+        },
+        'gender': {
+            'femaleRatio': 0,
         },
     },
     {
@@ -8667,6 +8693,26 @@ export const pokemonList = createPokemonArray(
         },
         'gender': {
             'visualDifference': true,
+        },
+    },
+    {
+        'id': 208.03,
+        'name': 'Illumina Steelix',
+        'catchRate': 25,
+        'type': [PokemonType.Steel, PokemonType.Ground],
+        'levelType': LevelType.mediumfast,
+        'exp': 179,
+        'eggCycles': 25,
+        'base': {
+            'hitpoints': 75,
+            'attack': 85,
+            'specialAttack': 55,
+            'defense': 200,
+            'specialDefense': 65,
+            'speed': 30,
+        },
+        'gender': {
+            'femaleRatio': 0,
         },
     },
     {
@@ -11893,7 +11939,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.erratic,
         'exp': 40,
         'catchRate': 255,
-        'evolutions': [StoneEvolution('Feebas', 'Milotic', StoneType.Prism_scale)],
+        'evolutions': [
+            StoneEvolution('Feebas', 'Milotic', StoneType.Prism_scale),
+            DummyEvolution('Feebas', 'Illumina Milotic'),
+        ],
         'base': {
             'hitpoints': 20,
             'attack': 15,
@@ -11921,6 +11970,26 @@ export const pokemonList = createPokemonArray(
         },
         'gender': {
             'visualDifference': true,
+        },
+    },
+    {
+        'id': 350.01,
+        'name': 'Illumina Milotic',
+        'type': [PokemonType.Water],
+        'eggCycles': 20,
+        'levelType': LevelType.erratic,
+        'exp': 189,
+        'catchRate': 60,
+        'base': {
+            'hitpoints': 95,
+            'attack': 60,
+            'specialAttack': 100,
+            'defense': 79,
+            'specialDefense': 125,
+            'speed': 81,
+        },
+        'gender': {
+            'femaleRatio': 1,
         },
     },
     {
@@ -19074,7 +19143,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 72,
         'catchRate': 45,
-        'evolutions': [LevelEvolution('Larvesta', 'Volcarona', 59)],
+        'evolutions': [
+            LevelEvolution('Larvesta', 'Volcarona', 59),
+            DummyEvolution('Larvesta', 'Illumina Volcarona'),
+        ],
         'baby': true,
         'base': {
             'hitpoints': 55,
@@ -19088,6 +19160,23 @@ export const pokemonList = createPokemonArray(
     {
         'id': 637,
         'name': 'Volcarona',
+        'type': [PokemonType.Bug, PokemonType.Fire],
+        'eggCycles': 40,
+        'levelType': LevelType.slow,
+        'exp': 248,
+        'catchRate': 15,
+        'base': {
+            'hitpoints': 85,
+            'attack': 60,
+            'specialAttack': 135,
+            'defense': 65,
+            'specialDefense': 105,
+            'speed': 100,
+        },
+    },
+    {
+        'id': 637.01,
+        'name': 'Illumina Volcarona',
         'type': [PokemonType.Bug, PokemonType.Fire],
         'eggCycles': 40,
         'levelType': LevelType.slow,
@@ -21951,6 +22040,26 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 716.02,
+        'name': 'Illumina Xerneas',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 306,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 126,
+            'attack': 131,
+            'specialAttack': 131,
+            'defense': 95,
+            'specialDefense': 98,
+            'speed': 99,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
         'id': 717,
         'name': 'Yveltal',
         'type': [PokemonType.Dark, PokemonType.Flying],
@@ -22728,7 +22837,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 61,
         'catchRate': 60,
-        'evolutions': [LevelEvolution('Wishiwashi (Solo)', 'Wishiwashi (School)', 20)],
+        'evolutions': [
+            LevelEvolution('Wishiwashi (Solo)', 'Wishiwashi (School)', 20),
+            DummyEvolution('Wishiwashi (Solo)', 'Illumina Wishiwashi'),
+        ],
         'base': {
             'hitpoints': 45,
             'attack': 20,
@@ -22768,6 +22880,23 @@ export const pokemonList = createPokemonArray(
             'attack': 140,
             'specialAttack': 140,
             'defense': 140,
+            'specialDefense': 135,
+            'speed': 30,
+        },
+    },
+    {
+        'id': 746.03,
+        'name': 'Illumina Wishiwashi',
+        'type': [PokemonType.Water],
+        'eggCycles': 15,
+        'levelType': LevelType.fast,
+        'exp': 61,
+        'catchRate': 60,
+        'base': {
+            'hitpoints': 45,
+            'attack': 140,
+            'specialAttack': 140,
+            'defense': 130,
             'specialDefense': 135,
             'speed': 30,
         },

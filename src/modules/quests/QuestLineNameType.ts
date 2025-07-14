@@ -74,4 +74,5 @@ export type QuestLineNameType
     | 'How blu mouse?'
     | 'Dr. Splash\'s Research Project'
     | 'Let\'s Go, Meltan!'
-    | 'Defeat Rainbow Rocket';
+    | 'Defeat Rainbow Rocket'
+    | 'New Pokémon Snap';

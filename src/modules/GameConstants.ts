@@ -106,6 +106,7 @@ export enum GalarSubRegions {
     NorthGalar,
     IsleofArmor,
     CrownTundra,
+    Lental,
 }
 
 export enum HisuiSubRegions {
@@ -827,7 +828,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
         [Region.kalos]: new Set([8, 23, 'Couriway Town', 'Sea Spirit\'s Den']),
         [Region.alola]: new Set([15, 19, 20, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 'Hoppy Town', 'Friend League', 'Quick League', 'Heavy League', 'Great League', 'Fast League', 'Luxury League', 'Heal League', 'Ultra League', 'Elite Four League', 'Master League', 'Magikarp\'s Eye', 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
-        [Region.galar]: new Set(['Hulbury', 'Roaring-Sea Caves', 5, 6, 8, 9, 16, 21, 27, 29, 36, 37, 41, 42, 43, 44, 51, 53]),
+        [Region.galar]: new Set(['Hulbury', 'Roaring-Sea Caves', 'Maricopia Islands Illumina Spot', 5, 6, 8, 9, 16, 21, 27, 29, 36, 37, 41, 42, 43, 44, 51, 53, 59, 60, 68, 69]),
         [Region.hisui]: new Set([]),
     },
 
@@ -840,7 +841,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kalos]: new Set(['Connecting Cave', 'Glittering Cave', 'Reflection Cave', 'Sea Spirit\'s Den', 'Frost Cavern', 'Terminus Cave', 'Victory Road Kalos']),
         [Region.alola]: new Set(['Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon', 'Mount Lanakila', 'Resolution Cave']),
         [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2', 'Courageous Cavern', 'Brawlers\' Cave', 'Warm-Up Tunnel', 'Roaring-Sea Caves', 'Rock Peak Ruins', 'Iron Ruins', 'Iceberg Ruins', 'Split-Decision Ruins', 'Lakeside Cave', 'Tunnel to the Top', 'Max Lair']),
-        [Region.hisui]: new Set(['Oreburrow Tunnel', 'Ancient Solaceon Ruins', 'Seaside Hollow', 'Turnback Cave', 'Ancient Wayward Cave', 'Ancient Quarry', 'Primeval Grotto', 'Ice Column Chamber', 'Icepeak Cavern', 'Ancient Snowpoint Temple']),
+        [Region.hisui]: new Set(['Oreburrow Tunnel', 'Ancient Solaceon Ruins', 'Seaside Hollow', 'Turnback Cave', 'Ancient Wayward Cave', 'Ancient Quarry', 'Primeval Grotto', 'Ice Column Chamber', 'Icepeak Cavern', 'Ancient Snowpoint Temple', 'Voluca Island Illumina Spot', 'Durice Island Illumina Spot', 'Aurus Island Illumina Spot']),
     },
 
     // Hisui Areas
@@ -882,7 +883,7 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
         [Region.kalos]: new Set([8, 23, 'Couriway Town', 'Sea Spirit\'s Den']),
         [Region.alola]: new Set([15, 19, 20, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 'Hoppy Town', 'Hoppy Town Fishing Pond', 'Friend League', 'Quick League', 'Heavy League', 'Great League', 'Fast League', 'Luxury League', 'Heal League', 'Ultra League', 'Elite Four League', 'Master League', 'Magikarp\'s Eye', 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
-        [Region.galar]: new Set(['Hulbury', 'Roaring-Sea Caves', 5, 6, 8, 9, 16, 21, 27, 29, 36, 37, 41, 42, 43, 44, 51, 53]),
+        [Region.galar]: new Set(['Hulbury', 'Roaring-Sea Caves', 'Maricopia Islands Illumina Spot', 5, 6, 8, 9, 16, 21, 27, 29, 36, 37, 41, 42, 43, 44, 51, 53, 59, 60, 69]),
     },
 
     Ice: {
@@ -893,7 +894,7 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
         [Region.unova]: new Set(['Giant Chasm', 'Team Plasma Assault']),
         [Region.kalos]: new Set([17, 'Dendemille Town', 'Snowbelle City', 'Frost Cavern']),
         [Region.alola]: new Set(['Mount Lanakila']),
-        [Region.galar]: new Set(['Circhester', 'Iceberg Ruins', 'Crown Shrine', 'Freezington', 26, 28, 31, 32, 46, 47, 54, 55]),
+        [Region.galar]: new Set(['Circhester', 'Iceberg Ruins', 'Crown Shrine', 'Freezington', 26, 28, 31, 32, 46, 47, 54, 55, 63]),
     },
 
     Fire: {
@@ -904,7 +905,7 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
         [Region.unova]: new Set([]),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(['Wela Volcano Park']),
-        [Region.galar]: new Set(['Motostoke']),
+        [Region.galar]: new Set(['Motostoke', 'Voluca Island Illumina Spot', 62]),
     },
 
     Forest: {
@@ -915,7 +916,7 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
         [Region.unova]: new Set([6, 'Floccesy Town', 'Lostlorn Forest', 'Pinwheel Forest', 'Pledge Grove']),
         [Region.kalos]: new Set([1, 14, 20, 'Coumarine City', 'Laverre City', 'Santalune Forest', 'Pokémon Village']),
         [Region.alola]: new Set([27, 'Melemele Woods', 'Lush Jungle', 'Malie Garden', 'Ula\'ula Meadow', 'Poni Meadow']),
-        [Region.galar]: new Set(['Slumbering Weald', 'Slumbering Weald Shrine', 'Glimwood Tangle', 'Ballonlea', 'Dyna Tree Hill', 2, 12, 13, 35]),
+        [Region.galar]: new Set(['Slumbering Weald', 'Slumbering Weald Shrine', 'Glimwood Tangle', 'Ballonlea', 'Dyna Tree Hill', 'Florio Island Illumina Spot', 'Belusylva Island Illumina Spot', 2, 12, 13, 35, 56, 57, 58, 66, 67, 68]),
     },
 
     Cave: {
@@ -926,7 +927,7 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
         [Region.unova]: new Set(['Relic Castle', 'Relic Passage', 'Seaside Cave', 'Victory Road Unova', 'Twist Mountain']),
         [Region.kalos]: new Set([9, 'Connecting Cave', 'Kiloude City', 'Terminus Cave', 'Victory Road Kalos']),
         [Region.alola]: new Set([12, 22, 29, 'Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon']),
-        [Region.galar]: new Set(['Warm-Up Tunnel', 'Courageous Cavern', 'Brawlers\' Cave', 'Rock Peak Ruins', 'Split-Decision Ruins', 'Lakeside Cave', 'Tunnel to the Top', 18]),
+        [Region.galar]: new Set(['Warm-Up Tunnel', 'Courageous Cavern', 'Brawlers\' Cave', 'Rock Peak Ruins', 'Split-Decision Ruins', 'Lakeside Cave', 'Tunnel to the Top', 'Aurus Island Illumina Spot', 18, 65]),
     },
 
     GemCave: {
@@ -937,7 +938,7 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
         [Region.unova]: new Set(['Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
         [Region.kalos]: new Set(['Glittering Cave', 'Reflection Cave']),
         [Region.alola]: new Set(['Altar of the Sunne and Moone', 'Resolution Cave']),
-        [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2', 'Iron Ruins']),
+        [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2', 'Iron Ruins', 'Durice Island Illumina Spot', 64]),
     },
 
     Desert: {
@@ -948,7 +949,7 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
         [Region.unova]: new Set([4, 25, 'Lentimas Town', 'Reversal Mountain']),
         [Region.kalos]: new Set([13]),
         [Region.alola]: new Set([23]),
-        [Region.galar]: new Set([23, 25, 39, 'Stow-on-Side', 'Dusty Bowl']),
+        [Region.galar]: new Set([23, 25, 39, 61, 70, 'Stow-on-Side', 'Dusty Bowl']),
     },
 
     PowerPlant: {
@@ -1751,10 +1752,16 @@ export const GalarDungeons = [
     'Tunnel to the Top',
     'Crown Shrine',
     'Max Lair', // 189
+    'Florio Island Illumina Spot',
+    'Belusylva Island Illumina Spot',
+    'Maricopia Islands Illumina Spot',
+    'Voluca Island Illumina Spot',
+    'Durice Island Illumina Spot',
+    'Aurus Island Illumina Spot', // 195
 ];
 
 export const HisuiDungeons = [
-    'Floaro Gardens', // 190
+    'Floaro Gardens', // 190 -> 196
     'Oreburrow Tunnel',
     'Heartwood',
     'Ancient Solaceon Ruins',
@@ -1776,18 +1783,18 @@ export const HisuiDungeons = [
     'Ancient Lake Valor',
     'Ancient Lake Acuity',
     'Temple of Sinnoh',
-    'Turnback Cave', // 212
+    'Turnback Cave', // 212 -> 218
 ];
 
 export const PaldeaDungeons = [
-    'Inlet Grotto', // 213
+    'Inlet Grotto', // 213 -> 219
     'Glaseado Mountain',
     'Grasswither Shrine',
     'Icerend Shrine',
     'Groundblight Shrine',
     'Firescourge Shrine',
     'Area Zero',
-    'Area Zero Depths', // 220
+    'Area Zero Depths', // 220 -> 226
 ];
 
 export const RegionDungeons = [
@@ -2254,6 +2261,24 @@ export const TemporaryBattles = [
     'Kyurem 2',
     'Kyurem 3',
     'Twerps',
+    'Florio Island Illumina Pokémon 1',
+    'Florio Island Illumina Pokémon 2',
+    'Florio Island Illumina Pokémon 3',
+    'Belusylva Island Illumina Pokémon 1',
+    'Belusylva Island Illumina Pokémon 2',
+    'Belusylva Island Illumina Pokémon 3',
+    'Maricopia Islands Illumina Pokémon 1',
+    'Maricopia Islands Illumina Pokémon 2',
+    'Maricopia Islands Illumina Pokémon 3',
+    'Voluca Island Illumina Pokémon 1',
+    'Voluca Island Illumina Pokémon 2',
+    'Voluca Island Illumina Pokémon 3',
+    'Durice Island Illumina Pokémon 1',
+    'Durice Island Illumina Pokémon 2',
+    'Durice Island Illumina Pokémon 3',
+    'Aurus Island Illumina Pokémon 1',
+    'Aurus Island Illumina Pokémon 2',
+    'Aurus Island Illumina Pokémon 3',
     'Volo 1',
     'Akari 1',
     'Warden Mai',

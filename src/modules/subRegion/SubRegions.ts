@@ -77,6 +77,7 @@ SubRegions.addSubRegion(Region.galar, new SubRegion('South Galar', GalarSubRegio
 SubRegions.addSubRegion(Region.galar, new SubRegion('North Galar', GalarSubRegions.NorthGalar, new LazyRequirementWrapper(() => new RouteKillRequirement(10, GameConstants.Region.galar, 22)), 'Hammerlocke'));
 SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', GalarSubRegions.IsleofArmor, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Armor Station'));
 SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', GalarSubRegions.CrownTundra, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Crown Tundra Station'));
+SubRegions.addSubRegion(Region.galar, new SubRegion('Lental', GalarSubRegions.Lental, new QuestLineStartedRequirement('New Pokémon Snap'), 'Professor Mirror\'s Research Lab'));
 
 SubRegions.addSubRegion(Region.hisui, new SubRegion('Hisui', HisuiSubRegions.Hisui, undefined, 'Prelude Beach'));
 

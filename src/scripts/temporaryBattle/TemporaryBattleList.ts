@@ -6579,6 +6579,214 @@ TemporaryBattleList['Eternamax Eternatus'] = new TemporaryBattle(
         imageName: '../pokemon/890.01',
     }
 );
+TemporaryBattleList['Florio Island Illumina Pokémon 1'] = new TemporaryBattle(
+    'Florio Island Illumina Pokémon 1',
+    [new GymPokemon('Illumina Meganium', 100, 40)],
+    '<b><i>You followed the Meganium around Florio Island.</i></b>',
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 1)],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Florio Island Illumina Pokémon 2'] = new TemporaryBattle(
+    'Florio Island Illumina Pokémon 2',
+    [new GymPokemon('Illumina Meganium', 100, 40)],
+    '<b><i>You continued to follow the Meganium around Florio Island.</i></b>',
+    [new TemporaryBattleRequirement('Florio Island Illumina Pokémon 1')],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Florio Island Illumina Pokémon 3'] = new TemporaryBattle(
+    'Florio Island Illumina Pokémon 3',
+    [new GymPokemon('Illumina Meganium', 100, 40)],
+    '<b><i>The Meganium fled from you. You should be able to find it again in the same area.</i></b>',
+    [new TemporaryBattleRequirement('Florio Island Illumina Pokémon 2')],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Belusylva Island Illumina Pokémon 1'] = new TemporaryBattle(
+    'Belusylva Island Illumina Pokémon 1',
+    [new GymPokemon('Illumina Milotic', 100, 40)],
+    '<b><i>You followed the Milotic around Belusylva Island.</i></b>',
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 5)],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Belusylva Island Illumina Pokémon 2'] = new TemporaryBattle(
+    'Belusylva Island Illumina Pokémon 2',
+    [new GymPokemon('Illumina Milotic', 100, 40)],
+    '<b><i>You continued to follow the Milotic around Belusylva Island.</i></b>',
+    [new TemporaryBattleRequirement('Belusylva Island Illumina Pokémon 1')],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Belusylva Island Illumina Pokémon 3'] = new TemporaryBattle(
+    'Belusylva Island Illumina Pokémon 3',
+    [new GymPokemon('Illumina Milotic', 100, 40)],
+    '<b><i>The Milotic fled from you. You should be able to find it again in the same area.</i></b>',
+    [new TemporaryBattleRequirement('Belusylva Island Illumina Pokémon 2')],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Maricopia Islands Illumina Pokémon 1'] = new TemporaryBattle(
+    'Maricopia Islands Illumina Pokémon 1',
+    [new GymPokemon('Wishiwashi (Solo)', 100, 40)],
+    '<b><i>You followed the Wishiwashi around Maricopia Islands.</i></b>',
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 9)],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Maricopia Islands Illumina Pokémon 2'] = new TemporaryBattle(
+    'Maricopia Islands Illumina Pokémon 2',
+    [
+        new GymPokemon('Wishiwashi (Solo)', 100, 40),
+        new GymPokemon('Wishiwashi (Solo)', 100, 40),
+        new GymPokemon('Wishiwashi (Solo)', 100, 40),
+        new GymPokemon('Wishiwashi (Solo)', 100, 40),
+        new GymPokemon('Wishiwashi (Solo)', 100, 40),
+        new GymPokemon('Wishiwashi (Solo)', 100, 40),
+    ],
+    '<b><i>You continued to follow the Wishiwashi around Maricopia Islands. They begin to group together.</i></b>',
+    [new TemporaryBattleRequirement('Maricopia Islands Illumina Pokémon 1')],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Maricopia Islands Illumina Pokémon 3'] = new TemporaryBattle(
+    'Maricopia Islands Illumina Pokémon 3',
+    [new GymPokemon('Illumina Wishiwashi', 100, 40)],
+    '<b><i>The Wishiwashi fled from you. You should be able to find it again in the same area.</i></b>',
+    [new TemporaryBattleRequirement('Maricopia Islands Illumina Pokémon 2')],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Voluca Island Illumina Pokémon 1'] = new TemporaryBattle(
+    'Voluca Island Illumina Pokémon 1',
+    [new GymPokemon('Illumina Volcarona', 100, 40)],
+    '<b><i>You followed the Volcarona around Voluca Island. But it seems to have escaped. </i></b>',
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 13)],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Voluca Island Illumina Pokémon 2'] = new TemporaryBattle(
+    'Voluca Island Illumina Pokémon 2',
+    [new GymPokemon('Illumina Volcarona', 100, 40)],
+    '<b><i>You found the Volcarona and continued to follow it around Voluca Island.</i></b>',
+    [new TemporaryBattleRequirement('Voluca Island Illumina Pokémon 1')],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Voluca Island Illumina Pokémon 3'] = new TemporaryBattle(
+    'Voluca Island Illumina Pokémon 3',
+    [
+        new GymPokemon('Illumina Volcarona', 100, 40),
+        new GymPokemon('Illumina Volcarona', 100, 40),
+    ],
+    '<b><i>The Volcarona fled from you. You should be able to find it again in the same area.</i></b>',
+    [new TemporaryBattleRequirement('Voluca Island Illumina Pokémon 2')],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Durice Island Illumina Pokémon 1'] = new TemporaryBattle(
+    'Durice Island Illumina Pokémon 1',
+    [new GymPokemon('Illumina Steelix', 100, 40)],
+    '<b><i>You followed the Steelix around Durice Island.</i></b>',
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 17)],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Durice Island Illumina Pokémon 2'] = new TemporaryBattle(
+    'Durice Island Illumina Pokémon 2',
+    [new GymPokemon('Illumina Steelix', 100, 40)],
+    '<b><i>You continued to follow the Steelix around Durice Island.</i></b>',
+    [new TemporaryBattleRequirement('Durice Island Illumina Pokémon 1')],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Durice Island Illumina Pokémon 3'] = new TemporaryBattle(
+    'Durice Island Illumina Pokémon 3',
+    [new GymPokemon('Illumina Steelix', 100, 40)],
+    '<b><i>The Steelix fled from you. You should be able to find it again in the same area.</i></b>',
+    [new TemporaryBattleRequirement('Durice Island Illumina Pokémon 2')],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Aurus Island Illumina Pokémon 1'] = new TemporaryBattle(
+    'Aurus Island Illumina Pokémon 1',
+    [new GymPokemon('Illumina Xerneas', 100, 40)],
+    '<b><i>You followed the Xerneas around Aurus Island.</i></b>',
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 20)],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Aurus Island Illumina Pokémon 2'] = new TemporaryBattle(
+    'Aurus Island Illumina Pokémon 2',
+    [new GymPokemon('Illumina Xerneas', 100, 40)],
+    '<b><i>You continued to follow the Xerneas around Aurus Island.</i></b>',
+    [new TemporaryBattleRequirement('Aurus Island Illumina Pokémon 1')],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Aurus Island Illumina Pokémon 3'] = new TemporaryBattle(
+    'Aurus Island Illumina Pokémon 3',
+    [new GymPokemon('Illumina Xerneas', 100, 40)],
+    '<b><i>The Xermeas fled from you. You should be able to find it again in the same area.</i></b>',
+    [new TemporaryBattleRequirement('Aurus Island Illumina Pokémon 2')],
+    undefined,
+    {
+        returnTown: 'Professor Mirror\'s Research Lab',
+        hideTrainer: true,
+    }
+);
 
 
 // Hisui Temporary Battles

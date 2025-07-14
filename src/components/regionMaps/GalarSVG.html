@@ -3471,4 +3471,385 @@
             })
         %>
     </g>
+    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Lental').id">
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/galar-lental.png?v=$VERSION',
+            href:'assets/images/galar-lental.png?v=$VERSION'
+        }"></image>
+
+        <!-- ------ -->
+        <!-- ROUTES -->
+        <!-- ------ -->
+
+        <!--Nature Park-->
+        <%- include('templates/mapRoute',
+            { route: 56, region: 7
+            , width: 5, height: 5
+            , x: 0, y: 0, name: "NP"
+            })
+        %>
+
+        <!--Founja Jungle-->
+        <%- include('templates/mapRoute',
+            { route: 57, region: 7
+            , width: 5, height: 5
+            , x: 5, y: 0, name: "FJ"
+            })
+        %>
+
+        <!--Elsewhere Forest-->
+        <%- include('templates/mapRoute',
+            { route: 58, region: 7
+            , width: 5, height: 5
+            , x: 10, y: 0, name: "EF"
+            })
+        %>
+
+        <!--Blushing Beach-->
+        <%- include('templates/mapRoute',
+            { route: 59, region: 7
+            , width: 5, height: 5
+            , x: 15, y: 0, name: "BB"
+            })
+        %>
+
+        <!--Lental Seafloor-->
+        <%- include('templates/mapRoute',
+            { route: 60, region: 7
+            , width: 5, height: 5
+            , x: 20, y: 0, name: "LS"
+            })
+        %>
+
+        <!--Sweltering Sands-->
+        <%- include('templates/mapRoute',
+            { route: 61, region: 7
+            , width: 5, height: 5
+            , x: 25, y: 0, name: "SS"
+            })
+        %>
+
+        <!--Fireflow Volcano-->
+        <%- include('templates/mapRoute',
+            { route: 62, region: 7
+            , width: 5, height: 5
+            , x: 30, y: 0, name: "FV"
+            })
+        %>
+
+        <!--Shiver Snowfields-->
+        <%- include('templates/mapRoute',
+            { route: 63, region: 7
+            , width: 5, height: 5
+            , x: 35, y: 0, name: "SS"
+            })
+        %>
+
+        <!--Outaway Cave-->
+        <%- include('templates/mapRoute',
+            { route: 64, region: 7
+            , width: 5, height: 5
+            , x: 40, y: 0, name: "OC"
+            })
+        %>
+
+        <!--Ruins of Remembrance-->
+        <%- include('templates/mapRoute',
+            { route: 65, region: 7
+            , width: 5, height: 5
+            , x: 45, y: 0, name: "RoR"
+            })
+        %>
+
+        <!--Research Camp-->
+        <%- include('templates/mapRoute',
+            { route: 66, region: 7
+            , width: 5, height: 5
+            , x: 50, y: 0, name: "RC"
+            })
+        %>
+
+        <!--Side Path-->
+        <%- include('templates/mapRoute',
+            { route: 67, region: 7
+            , width: 5, height: 5
+            , x: 55, y: 0, name: "SP"
+            })
+        %>
+
+        <!--Mightywide River-->
+        <%- include('templates/mapRoute',
+            { route: 68, region: 7
+            , width: 5, height: 5
+            , x: 60, y: 0, name: "MR"
+            })
+        %>
+
+        <!--Maricopia Reef-->
+        <%- include('templates/mapRoute',
+            { route: 69, region: 7
+            , width: 5, height: 5
+            , x: 65, y: 0, name: "MR"
+            })
+        %>
+
+        <!--Barren Badlands-->
+        <%- include('templates/mapRoute',
+            { route: 70, region: 7
+            , width: 5, height: 5
+            , x: 70, y: 0, name: "BB"
+            })
+        %>
+
+        <!-- ----- -->
+        <!-- TOWNS -->
+        <!-- ----- -->
+
+        <!--Professor Mirror's Research Lab-->
+        <%- include('templates/mapTown',
+            { name: "Professor Mirror's Research Lab"
+            , x: 50, y: 50
+            , width: 10, height: 10
+            })
+        %>
+
+        <!-- -------- -->
+        <!-- DUNGEONS -->
+        <!-- -------- -->
+
+        <!--Florio Island Illumina Spot-->
+        <%- include('templates/mapDungeon',
+            { name: "Florio Island Illumina Spot"
+            , x: 0, y: 20
+            , width: 10, height: 10
+            })
+        %>
+
+        <!--Belusylva Island Illumina Spot-->
+        <%- include('templates/mapDungeon',
+            { name: "Belusylva Island Illumina Spot"
+            , x: 15, y: 20
+            , width: 10, height: 10
+            })
+        %>
+
+        <!--Maricopia Islands Illumina Spot-->
+        <%- include('templates/mapDungeon',
+            { name: "Maricopia Islands Illumina Spot"
+            , x: 30, y: 20
+            , width: 10, height: 10
+            })
+        %>
+
+        <!--Voluca Island Illumina Spot-->
+        <%- include('templates/mapDungeon',
+            { name: "Voluca Island Illumina Spot"
+            , x: 45, y: 20
+            , width: 10, height: 10
+            })
+        %>
+
+        <!--Durice Island Illumina Spot-->
+        <%- include('templates/mapDungeon',
+            { name: "Durice Island Illumina Spot"
+            , x: 60, y: 20
+            , width: 10, height: 10
+            })
+        %>
+
+        <!--Aurus Island Illumina Spot-->
+        <%- include('templates/mapDungeon',
+            { name: "Aurus Island Illumina Spot"
+            , x: 75, y: 20
+            , width: 10, height: 10
+            })
+        %>
+
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+        <%- include('templates/mapPOI',
+            { name: "Dock"
+            , x: 26, y: 15
+            , width: 3, height: 2
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Crown Tundra Station') }"
+            })
+        %>
+
+        <%- include('templates/mapPOI',
+            { name: "S. S. Anne"
+            , x: 21, y: 12
+            , width: 8, height: 3
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Crown Tundra Station') }"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Florio Island Illumina Pokémon 1"
+            , x: 41, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Florio Island Illumina Pokémon 1'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Florio Island Illumina Pokémon 1'] && TemporaryBattleList['Florio Island Illumina Pokémon 1'].isVisible()"
+            , image: "assets/images/map/Illumina Meganium.png"
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Florio Island Illumina Pokémon 2"
+            , x: 36, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Florio Island Illumina Pokémon 2'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Florio Island Illumina Pokémon 2'] && TemporaryBattleList['Florio Island Illumina Pokémon 2'].isVisible()"
+            , image: "assets/images/map/Illumina Meganium.png"
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Florio Island Illumina Pokémon 3"
+            , x: 31, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Florio Island Illumina Pokémon 3'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Florio Island Illumina Pokémon 3'] && TemporaryBattleList['Florio Island Illumina Pokémon 3'].isVisible()"
+            , image: "assets/images/map/Illumina Meganium.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Belusylva Island Illumina Pokémon 1"
+            , x: 41, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Belusylva Island Illumina Pokémon 1'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Belusylva Island Illumina Pokémon 1'] && TemporaryBattleList['Belusylva Island Illumina Pokémon 1'].isVisible()"
+            , image: "assets/images/map/Illumina Milotic.png"
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Belusylva Island Illumina Pokémon 2"
+            , x: 36, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Belusylva Island Illumina Pokémon 2'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Belusylva Island Illumina Pokémon 2'] && TemporaryBattleList['Belusylva Island Illumina Pokémon 2'].isVisible()"
+            , image: "assets/images/map/Illumina Milotic.png"
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Belusylva Island Illumina Pokémon 3"
+            , x: 31, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Belusylva Island Illumina Pokémon 3'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Belusylva Island Illumina Pokémon 3'] && TemporaryBattleList['Belusylva Island Illumina Pokémon 3'].isVisible()"
+            , image: "assets/images/map/Illumina Milotic.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Maricopia Islands Illumina Pokémon 1"
+            , x: 41, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Maricopia Islands Illumina Pokémon 1'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Maricopia Islands Illumina Pokémon 1'] && TemporaryBattleList['Maricopia Islands Illumina Pokémon 1'].isVisible()"
+            , image: "assets/images/map/Illumina Wishiwashi.png"
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Maricopia Islands Illumina Pokémon 2"
+            , x: 36, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Maricopia Islands Illumina Pokémon 2'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Maricopia Islands Illumina Pokémon 2'] && TemporaryBattleList['Maricopia Islands Illumina Pokémon 2'].isVisible()"
+            , image: "assets/images/map/Illumina Wishiwashi.png"
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Maricopia Islands Illumina Pokémon 3"
+            , x: 31, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Maricopia Islands Illumina Pokémon 3'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Maricopia Islands Illumina Pokémon 3'] && TemporaryBattleList['Maricopia Islands Illumina Pokémon 3'].isVisible()"
+            , image: "assets/images/map/Illumina Wishiwashi.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Voluca Island Illumina Pokémon 1"
+            , x: 41, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Voluca Island Illumina Pokémon 1'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Voluca Island Illumina Pokémon 1'] && TemporaryBattleList['Voluca Island Illumina Pokémon 1'].isVisible()"
+            , image: "assets/images/map/Illumina Volcarona.png"
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Voluca Island Illumina Pokémon 2"
+            , x: 36, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Voluca Island Illumina Pokémon 2'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Voluca Island Illumina Pokémon 2'] && TemporaryBattleList['Voluca Island Illumina Pokémon 2'].isVisible()"
+            , image: "assets/images/map/Illumina Volcarona.png"
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Voluca Island Illumina Pokémon 3"
+            , x: 31, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Voluca Island Illumina Pokémon 3'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Voluca Island Illumina Pokémon 3'] && TemporaryBattleList['Voluca Island Illumina Pokémon 3'].isVisible()"
+            , image: "assets/images/map/Illumina Volcarona.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Durice Island Illumina Pokémon 1"
+            , x: 41, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Durice Island Illumina Pokémon 1'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Durice Island Illumina Pokémon 1'] && TemporaryBattleList['Durice Island Illumina Pokémon 1'].isVisible()"
+            , image: "assets/images/map/Illumina Steelix.png"
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Durice Island Illumina Pokémon 2"
+            , x: 36, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Durice Island Illumina Pokémon 2'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Durice Island Illumina Pokémon 2'] && TemporaryBattleList['Durice Island Illumina Pokémon 2'].isVisible()"
+            , image: "assets/images/map/Illumina Steelix.png"
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Durice Island Illumina Pokémon 3"
+            , x: 31, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Durice Island Illumina Pokémon 3'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Durice Island Illumina Pokémon 3'] && TemporaryBattleList['Durice Island Illumina Pokémon 3'].isVisible()"
+            , image: "assets/images/map/Illumina Steelix.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Aurus Island Illumina Pokémon 1"
+            , x: 41, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Aurus Island Illumina Pokémon 1'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Aurus Island Illumina Pokémon 1'] && TemporaryBattleList['Aurus Island Illumina Pokémon 1'].isVisible()"
+            , image: "assets/images/map/Illumina Xerneas.png"
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Aurus Island Illumina Pokémon 2"
+            , x: 36, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Aurus Island Illumina Pokémon 2'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Aurus Island Illumina Pokémon 2'] && TemporaryBattleList['Aurus Island Illumina Pokémon 2'].isVisible()"
+            , image: "assets/images/map/Illumina Xerneas.png"
+            })
+        %>
+        <%- include('templates/mapOverlay',
+            { name: "Aurus Island Illumina Pokémon 3"
+            , x: 31, y: 28
+            , width: 6, height: 5
+            , databind: "click: () => TemporaryBattleList['Aurus Island Illumina Pokémon 3'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Aurus Island Illumina Pokémon 3'] && TemporaryBattleList['Aurus Island Illumina Pokémon 3'].isVisible()"
+            , image: "assets/images/map/Illumina Xerneas.png"
+            })
+        %>
+    </g>
 </g>

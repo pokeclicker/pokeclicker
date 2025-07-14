@@ -13,9 +13,11 @@ import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepComp
 import RouteKillRequirement from '../requirements/RouteKillRequirement';
 import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
 import WeatherRequirement from '../requirements/WeatherRequirement';
+import DayCyclePartRequirement from '../requirements/DayCyclePartRequirement';
 import DayOfWeekRequirement from '../requirements/DayOfWeekRequirement';
 import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 import WeatherType from '../weather/WeatherType';
+import DayCyclePart from '../dayCycle/DayCyclePart';
 import RegionRoute from './RegionRoute';
 import RoutePokemon from './RoutePokemon';
 import Routes from './Routes';
@@ -3095,7 +3097,7 @@ Routes.add(new RegionRoute(
         special:
       [
           new SpecialRoutePokemon(['Comfey'], new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Chansey'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm])),          
+          new SpecialRoutePokemon(['Chansey'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Kingler'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Harsh_Sunlight])),
           new SpecialRoutePokemon(['Starmie'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Harsh_Sunlight, WeatherType.Fog])),
           new SpecialRoutePokemon(['Toxapex'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Fog])),
@@ -3157,7 +3159,7 @@ Routes.add(new RegionRoute(
         water: ['Magikarp', 'Goldeen', 'Arrokuda', 'Corphish'],
         special:
       [
-          new SpecialRoutePokemon(['Chansey'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm])),          
+          new SpecialRoutePokemon(['Chansey'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Amoonguss'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Harsh_Sunlight])),
           new SpecialRoutePokemon(['Cramorant'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Harsh_Sunlight, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Windy, WeatherType.Sandstorm, WeatherType.Fog])),
           new SpecialRoutePokemon(['Tangrowth'], new WeatherRequirement([WeatherType.Clear, WeatherType.Harsh_Sunlight])),
@@ -3263,7 +3265,7 @@ Routes.add(new RegionRoute(
         water: ['Magikarp', 'Carvanha', 'Sharpedo', 'Corphish', 'Arrokuda', 'Staryu'],
         special:
       [
-          new SpecialRoutePokemon(['Stoutland'], new WeatherRequirement([WeatherType.Clear])),       
+          new SpecialRoutePokemon(['Stoutland'], new WeatherRequirement([WeatherType.Clear])),
           new SpecialRoutePokemon(['Kangaskhan'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast])),
           new SpecialRoutePokemon(['Chansey'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Kingler'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm])),
@@ -3275,7 +3277,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Drapion'], new WeatherRequirement([WeatherType.Overcast, WeatherType.Harsh_Sunlight])),
           new SpecialRoutePokemon(['Pelipper', 'Shelmet', 'Cramorant (Gulping)'], new WeatherRequirement([WeatherType.Rain])),
           new SpecialRoutePokemon(['Shinx', 'Scrafty', 'Toxicroak'], new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])),
-          new SpecialRoutePokemon(['Luxray', 'Luxio', 'Magneton', 'Accelgor', 'Cramorant (Gorging)'], new WeatherRequirement([WeatherType.Thunderstorm])),          
+          new SpecialRoutePokemon(['Luxray', 'Luxio', 'Magneton', 'Accelgor', 'Cramorant (Gorging)'], new WeatherRequirement([WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Fletchinder', 'Fomantis', 'Lilligant', 'Talonflame'], new WeatherRequirement([WeatherType.Harsh_Sunlight])),
           new SpecialRoutePokemon(['Silicobra', 'Scizor', 'Crustle', 'Skarmory', 'Escavalier', 'Jangmo-o'], new WeatherRequirement([WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Blissey', 'Wigglytuff', 'Comfey', 'Drifblim', 'Azumarill', 'Gardevoir'], new WeatherRequirement([WeatherType.Fog])),
@@ -3321,7 +3323,7 @@ Routes.add(new RegionRoute(
         special:
       [
           new SpecialRoutePokemon(['Lycanroc (Midday)', 'Mienshao'], new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Chansey'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm])),          
+          new SpecialRoutePokemon(['Chansey'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Bisharp', 'Braviary', 'Lycanroc (Midnight)', 'Mandibuzz', 'Pawniard'], new WeatherRequirement([WeatherType.Overcast])),
           new SpecialRoutePokemon(['Jangmo-o'], new WeatherRequirement([WeatherType.Overcast, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm, WeatherType.Fog])),
           new SpecialRoutePokemon(['Scrafty', 'Shinx', 'Toxicroak'], new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])),
@@ -3349,9 +3351,9 @@ Routes.add(new RegionRoute(
       [
           new SpecialRoutePokemon(['Rotom (Mow)'], new WeatherRequirement([WeatherType.Clear])),
           new SpecialRoutePokemon(['Exeggutor'], new WeatherRequirement([WeatherType.Clear, WeatherType.Harsh_Sunlight])),
-          new SpecialRoutePokemon(['Chansey'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm])),          
+          new SpecialRoutePokemon(['Chansey'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Rotom (Fan)', 'Tentacruel'], new WeatherRequirement([WeatherType.Overcast])),
-          new SpecialRoutePokemon(['Jellicent'], new WeatherRequirement([WeatherType.Overcast, WeatherType.Fog])),          
+          new SpecialRoutePokemon(['Jellicent'], new WeatherRequirement([WeatherType.Overcast, WeatherType.Fog])),
           new SpecialRoutePokemon(['Rotom (Frost)'], new WeatherRequirement([WeatherType.Rain])),
           new SpecialRoutePokemon(['Pelipper'], new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Rotom (Wash)', 'Chinchou', 'Lanturn'], new WeatherRequirement([WeatherType.Thunderstorm])),
@@ -3404,10 +3406,10 @@ Routes.add(new RegionRoute(
       [
           new SpecialRoutePokemon(['Chansey'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Exeggutor'], new WeatherRequirement([WeatherType.Clear, WeatherType.Rain, WeatherType.Harsh_Sunlight])),
-          new SpecialRoutePokemon(['Mantyke'], new WeatherRequirement([WeatherType.Clear, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Sandstorm])), 
-          new SpecialRoutePokemon(['Zoroark', 'Tentacruel'], new WeatherRequirement([WeatherType.Overcast])), 
-          new SpecialRoutePokemon(['Pelipper'], new WeatherRequirement([WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm])),    
-          new SpecialRoutePokemon(['Jellicent'], new WeatherRequirement([WeatherType.Overcast, WeatherType.Fog])),    
+          new SpecialRoutePokemon(['Mantyke'], new WeatherRequirement([WeatherType.Clear, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Sandstorm])),
+          new SpecialRoutePokemon(['Zoroark', 'Tentacruel'], new WeatherRequirement([WeatherType.Overcast])),
+          new SpecialRoutePokemon(['Pelipper'], new WeatherRequirement([WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm])),
+          new SpecialRoutePokemon(['Jellicent'], new WeatherRequirement([WeatherType.Overcast, WeatherType.Fog])),
           new SpecialRoutePokemon(['Magnezone', 'Chinchou', 'Lanturn'], new WeatherRequirement([WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Volcarona', 'Fletchinder'], new WeatherRequirement([WeatherType.Harsh_Sunlight])),
           new SpecialRoutePokemon(['Alakazam', 'Blissey', 'Comfey', 'Drifloon'], new WeatherRequirement([WeatherType.Fog])),
@@ -3430,7 +3432,7 @@ Routes.add(new RegionRoute(
         special:
       [
           new SpecialRoutePokemon(['Mantyke'], new WeatherRequirement([WeatherType.Clear, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Sandstorm])),
-          new SpecialRoutePokemon(['Seadra'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm, WeatherType.Fog])),          
+          new SpecialRoutePokemon(['Seadra'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm, WeatherType.Fog])),
           new SpecialRoutePokemon(['Tentacruel'], new WeatherRequirement([WeatherType.Overcast])),
           new SpecialRoutePokemon(['Jellicent'], new WeatherRequirement([WeatherType.Overcast, WeatherType.Fog])),
           new SpecialRoutePokemon(['Pelipper'], new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])),
@@ -3479,9 +3481,9 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Audino', 'Mime Jr.'],
         special:
-      [          
+      [
           new SpecialRoutePokemon(['Mamoswine'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm])),
-          new SpecialRoutePokemon(['Jynx'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm, WeatherType.Fog])),        
+          new SpecialRoutePokemon(['Jynx'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm, WeatherType.Fog])),
           new SpecialRoutePokemon(['Piloswine', 'Smoochum', 'Snom', 'Swinub'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Fog])),
           new SpecialRoutePokemon(['Dubwool', 'Wooloo', 'Snorlax'], new WeatherRequirement([WeatherType.Clear, WeatherType.Harsh_Sunlight])),
           new SpecialRoutePokemon(['Sneasel', 'Phantump'], new WeatherRequirement([WeatherType.Overcast])),
@@ -3515,7 +3517,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Swablu', 'Weavile'], new WeatherRequirement([WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Cryogonal'], new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Vanillish', 'Vanillite'], new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard])),
-          new SpecialRoutePokemon(['Vanilluxe'], new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Sandstorm])),         
+          new SpecialRoutePokemon(['Vanilluxe'], new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Absol'], new WeatherRequirement([WeatherType.Blizzard])),
           new SpecialRoutePokemon(['Eevee'], new WeatherRequirement([WeatherType.Blizzard, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Magmar', 'Magby'], new WeatherRequirement([WeatherType.Harsh_Sunlight])),
@@ -3536,7 +3538,7 @@ Routes.add(new RegionRoute(
         special:
       [
           new SpecialRoutePokemon(['Gurdurr', 'Eevee', 'Conkeldurr', 'Leafeon'], new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Feebas', 'Nidoran(F)', 'Shelmet'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Fog])),     
+          new SpecialRoutePokemon(['Feebas', 'Nidoran(F)', 'Shelmet'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Fog])),
           new SpecialRoutePokemon(['Nidoking'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Sandstorm, WeatherType.Fog])),
           new SpecialRoutePokemon(['Nidoqueen'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm, WeatherType.Fog])),
           new SpecialRoutePokemon(['Dubwool', 'Wooloo'], new WeatherRequirement([WeatherType.Clear, WeatherType.Harsh_Sunlight])),
@@ -3569,7 +3571,7 @@ Routes.add(new RegionRoute(
       [
           new SpecialRoutePokemon(['Audino', 'Karrablast', 'Nidoran(M)', 'Nidoran(F)', 'Sinistea'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Fog])),
           new SpecialRoutePokemon(['Dragapult'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Harsh_Sunlight])),
-          new SpecialRoutePokemon(['Polteageist'], new WeatherRequirement([WeatherType.Clear, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm, WeatherType.Fog])),          
+          new SpecialRoutePokemon(['Polteageist'], new WeatherRequirement([WeatherType.Clear, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Blizzard, WeatherType.Harsh_Sunlight, WeatherType.Sandstorm, WeatherType.Fog])),
           new SpecialRoutePokemon(['Phantump', 'Trevenant'], new WeatherRequirement([WeatherType.Overcast])),
           new SpecialRoutePokemon(['Lampent'], new WeatherRequirement([WeatherType.Overcast, WeatherType.Fog])),
           new SpecialRoutePokemon(['Dewpider', 'Araquanid'], new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])),
@@ -3743,6 +3745,253 @@ Routes.add(new RegionRoute(
     [new ClearDungeonRequirement(1, getDungeonIndex('Tunnel to the Top'))],
     undefined,
     GalarSubRegions.CrownTundra,
+));
+
+// Lental
+/*
+ * Introduces Day/Night Route Encounters
+ * To simulate Research Level:
+ *  1000 Route Defeats is Research Level 2
+ *  5000 Route Defeats is Research Level 3
+ */
+Routes.add(new RegionRoute(
+    'Nature Park', Region.galar, 56,
+    new RoutePokemon({
+        special:
+      [
+          new SpecialRoutePokemon(['Dodrio', 'Bouffalant', 'Pichu', 'Emolga', 'Bidoof', 'Wurmple', 'Taillow', 'Swanna', 'Magikarp', 'Florges (Red)', 'Florges (Yellow)', 'Florges (Orange)', 'Florges (Blue)', 'Florges (White)', 'Comfey', 'Hoothoot'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+          new SpecialRoutePokemon(['Grookey'], new MultiRequirement([new ObtainedPokemonRequirement('Grookey'), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Ducklett', 'Tangrowth'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 56), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Pidgeot', 'Heracross'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 56), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Scorbunny'], new MultiRequirement([new ObtainedPokemonRequirement('Scorbunny'), new RouteKillRequirement(5000, Region.galar, 56), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Shroomish', 'Sylveon', 'Snorlax'], new MultiRequirement([new RouteKillRequirement(10, Region.galar, 0), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])), // available after 'Side Path' during the day
+
+          new SpecialRoutePokemon(['Bidoof', 'Dodrio', 'Bouffalant', 'Tangrowth', 'Caterpie', 'Murkrow', 'Combee', 'Ducklett', 'Swanna', 'Torterra', 'Pidgeot', 'Hoothoot', 'Pinsir', 'Magikarp'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+          new SpecialRoutePokemon(['Grookey'], new MultiRequirement([new ObtainedPokemonRequirement('Grookey'), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
+          new SpecialRoutePokemon(['Scorbunny'], new MultiRequirement([new ObtainedPokemonRequirement('Scorbunny'), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
+          new SpecialRoutePokemon(['Sylveon', 'Vespiquen', 'Heracross'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 56), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
+          new SpecialRoutePokemon(['Foongus', 'Pikachu', 'Eevee'], new MultiRequirement([new RouteKillRequirement(10, Region.galar, 0), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])), // available after 'Side Path' during the night
+      ],
+    }),
+    [new MultiRequirement([new QuestLineStartedRequirement('New Pokémon Snap'), new QuestLineStepCompletedRequirement('New Pokémon Snap', 0)])],
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Founja Jungle', Region.galar, 57,
+    new RoutePokemon({
+        special:
+      [
+          new SpecialRoutePokemon(['Bounsweet', 'Aipom', 'Pikipek', 'Beautifly', 'Wooper', 'Quagsire', 'Yanmega', 'Arbok', 'Liepard', 'Magikarp', 'Slaking', 'Metapod'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+          new SpecialRoutePokemon(['Toucannon'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 57), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Venusaur', 'Leafeon'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 57), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Sobble'], new MultiRequirement([new ObtainedPokemonRequirement('Sobble'), new RouteKillRequirement(5000, Region.galar, 56), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+
+          new SpecialRoutePokemon(['Yanmega', 'Liepard', 'Bounsweet', 'Morelull', 'Ariados', 'Magikarp', 'Quagsire', 'Pikipek', 'Toucannon', 'Wooper'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+          new SpecialRoutePokemon(['Leafeon', 'Swampert', 'Slaking', 'Metapod', 'Arbok'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 57), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
+          new SpecialRoutePokemon(['Ledian'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 57), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
+      ],
+    }),
+    [new MultiRequirement([new QuestLineStartedRequirement('New Pokémon Snap'), new QuestLineStepCompletedRequirement('New Pokémon Snap', 3)])],
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Elsewhere Forest', Region.galar, 58,
+    new RoutePokemon({
+        land: ['Shiftry', 'Trevenant', 'Lotad', 'Kecleon', 'Deerling (Spring)', 'Deerling (Summer)', 'Sawsbuck (Spring)', 'Sawsbuck (Summer)', 'Bewear', 'Unfezant', 'Pancham', 'Drampa', 'Bulbasaur', 'Espurr', 'Applin', 'Magikarp'],
+        special:
+      [
+          new SpecialRoutePokemon(['Deerling (Autumn)', 'Sawsbuck (Autumn)', 'Serperior'], new RouteKillRequirement(1000, Region.galar, 58)),
+          new SpecialRoutePokemon(['Deerling (Winter)', 'Sawsbuck (Winter)', 'Espeon', 'Gardevoir', 'Ninetales'], new RouteKillRequirement(5000, Region.galar, 58)),
+      ],
+    }),
+    [new MultiRequirement([new QuestLineStartedRequirement('New Pokémon Snap'), new QuestLineStepCompletedRequirement('New Pokémon Snap', 4)])],
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Blushing Beach', Region.galar, 59,
+    new RoutePokemon({
+        special:
+      [
+          new SpecialRoutePokemon(['Crabrawler', 'Exeggutor', 'Wingull', 'Bellossom', 'Pikachu', 'Octillery', 'Finneon', 'Pyukumuku', 'Machamp', 'Stunfisk'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+          new SpecialRoutePokemon(['Corsola', 'Alolan Raichu', 'Lapras', 'Squirtle'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 59), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Blastoise'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 59), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+
+          new SpecialRoutePokemon(['Exeggutor', 'Zangoose', 'Drifblim', 'Seviper', 'Inkay', 'Pyukumuku', 'Magikarp', 'Octillery', 'Clamperl', 'Corsola', 'Sandygast', 'Alolan Raichu', 'Finneon', 'Wingull', 'Crabrawler'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+          new SpecialRoutePokemon(['Mareanie', 'Primarina', 'Bellossom', 'Pikachu'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 59), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
+      ],
+    }),
+    [new MultiRequirement([new QuestLineStartedRequirement('New Pokémon Snap'), new QuestLineStepCompletedRequirement('New Pokémon Snap', 7)])],
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Lental Seafloor', Region.galar, 60,
+    new RoutePokemon({
+        land: ['Magikarp', 'Finneon', 'Luvdisc', 'Corsola', 'Lumineon', 'Octillery', 'Wailmer', 'Sharpedo', 'Qwilfish', 'Tentacruel', 'Mantine'],
+        special:
+      [
+          new SpecialRoutePokemon(['Pelipper', 'Cradily', 'Pyukumuku', 'Clawitzer', 'Chinchou', 'Frillish', 'Lanturn', 'Clamperl', 'Golisopod'], new RouteKillRequirement(1000, Region.galar, 60)),
+          new SpecialRoutePokemon(['Alomomola', 'Inkay', 'Starmie', 'Wailord', 'Squirtle', 'Lapras'], new RouteKillRequirement(5000, Region.galar, 60)),
+      ],
+    }),
+    [new MultiRequirement([new QuestLineStartedRequirement('New Pokémon Snap'), new QuestLineStepCompletedRequirement('New Pokémon Snap', 8)])],
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Sweltering Sands', Region.galar, 61,
+    new RoutePokemon({
+        special:
+      [
+          new SpecialRoutePokemon(['Skorupi', 'Cacnea', 'Heliolisk', 'Minior (Meteor)', 'Mandibuzz', 'Pinsir', 'Lycanroc (Midday)', 'Hippowdon', 'Torchic', 'Trapinch'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+          new SpecialRoutePokemon(['Flygon', 'Onix', 'Tyranitar', 'Silicobra', 'Magikarp'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 61), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Scorbunny'], new MultiRequirement([new ObtainedPokemonRequirement('Scorbunny'), new RouteKillRequirement(1000, Region.galar, 61), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+
+          new SpecialRoutePokemon(['Skorupi', 'Trapinch', 'Sandshrew', 'Kangaskhan', 'Lycanroc (Midnight)', 'Magikarp', 'Hippowdon', 'Cacnea', 'Minior (Meteor)', 'Minior (Red Core)', 'Minior (Blue Core)', 'Minior (Green Core)', 'Minior (Orange Core)', 'Minior (Indigo Core)', 'Minior (Violet Core)', 'Minior (Yellow Core)', 'Mandibuzz', 'Onix'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+          new SpecialRoutePokemon(['Silicobra', 'Tyranitar', 'Flygon'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 61), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
+      ],
+    }),
+    [new MultiRequirement([new QuestLineStartedRequirement('New Pokémon Snap'), new QuestLineStepCompletedRequirement('New Pokémon Snap', 11)])],
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Fireflow Volcano', Region.galar, 62,
+    new RoutePokemon({
+        land: ['Altaria', 'Luxray', 'Archeops', 'Graveler', 'Aerodactyl', 'Slugma', 'Tyrantrum', 'Monferno', 'Charmander'],
+        special:
+      [
+          new SpecialRoutePokemon(['Shinx', 'Talonflame', 'Typhlosion', 'Torkoal', 'Charizard'], new RouteKillRequirement(1000, Region.galar, 62)),
+          new SpecialRoutePokemon(['Flareon'], new RouteKillRequirement(5000, Region.galar, 62)),
+      ],
+    }),
+    [new MultiRequirement([new QuestLineStartedRequirement('New Pokémon Snap'), new QuestLineStepCompletedRequirement('New Pokémon Snap', 12)])],
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Shiver Snowfields', Region.galar, 63,
+    new RoutePokemon({
+        special:
+      [
+          new SpecialRoutePokemon(['Furret', 'Swinub', 'Beartic', 'Cubchoo', 'Magikarp', 'Mamoswine', 'Skarmory', 'Snorunt', 'Snom', 'Frosmoth', 'Glalie', 'Spheal', 'Piplup'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+          new SpecialRoutePokemon(['Froslass', 'Alolan Sandslash', 'Alolan Vulpix', 'Weavile', 'Abomasnow', 'Crabominable'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 63), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Mightyena', 'Glaceon', 'Vanilluxe', 'Dewgong', 'Avalugg'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 63), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+
+          new SpecialRoutePokemon(['Mightyena', 'Piplup', 'Mamoswine', 'Snorunt', 'Braviary', 'Furret', 'Alolan Sandslash', 'Delibird', 'Abomasnow', 'Vanilluxe', 'Jynx', 'Alolan Vulpix', 'Spheal', 'Swinub', 'Frosmoth'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+          new SpecialRoutePokemon(['Crabominable', 'Weavile', 'Snom', 'Froslass', 'Aurorus', 'Avalugg', 'Dewgong', 'Cubchoo', 'Beartic', 'Magikarp', 'Glaceon'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 63), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
+      ],
+    }),
+    [new MultiRequirement([new QuestLineStartedRequirement('New Pokémon Snap'), new QuestLineStepCompletedRequirement('New Pokémon Snap', 14)])],
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Outaway Cave', Region.galar, 64,
+    new RoutePokemon({
+        land: ['Crobat', 'Carbink', 'Joltik', 'Braviary', 'Rampardos', 'Glalie', 'Magikarp', 'Croagunk', 'Sableye', 'Gengar', 'Geodude', 'Noibat', 'Beartic'],
+        special:
+      [
+          new SpecialRoutePokemon(['Drifloon', 'Mawile', 'Clefairy', 'Jolteon'], new RouteKillRequirement(1000, Region.galar, 64)),
+          new SpecialRoutePokemon(['Pumpkaboo (Average)', 'Pumpkaboo (Large)', 'Pumpkaboo (Small)', 'Pumpkaboo (Super Size)', 'Hydreigon', 'Goodra'], new RouteKillRequirement(5000, Region.galar, 64)),
+      ],
+    }),
+    [new MultiRequirement([new QuestLineStartedRequirement('New Pokémon Snap'), new QuestLineStepCompletedRequirement('New Pokémon Snap', 15)])],
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Ruins of Remembrance', Region.galar, 65,
+    new RoutePokemon({
+        land: ['Houndoom', 'Eldegoss', 'Natu', 'Beheeyem', 'Salandit', 'Noivern', 'Sigilyph', 'Golurk', 'Woobat', 'Magikarp'],
+        special:
+      [
+          new SpecialRoutePokemon(['Chandelure', 'Absol'], new RouteKillRequirement(1000, Region.galar, 65)),
+          new SpecialRoutePokemon(['Umbreon'], new RouteKillRequirement(5000, Region.galar, 65)),
+      ],
+    }),
+    [new MultiRequirement([new QuestLineStartedRequirement('New Pokémon Snap'), new QuestLineStepCompletedRequirement('New Pokémon Snap', 18)])],
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Research Camp', Region.galar, 66,
+    new RoutePokemon({
+        land: ['Stoutland', 'Meowth', 'Starly', 'Cutiefly', 'Bunnelby', 'Sudowoodo', 'Eevee', 'Trubbish', 'Pikachu', 'Audino', 'Rattata', 'Dedenne'],
+    }),
+    [new QuestLineCompletedRequirement('New Pokémon Snap')],
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Side Path', Region.galar, 67,
+    new RoutePokemon({
+        special:
+      [
+          new SpecialRoutePokemon(['Wurmple', 'Pichu', 'Dodrio', 'Comfey', 'Shroomish', 'Bidoof', 'Pidgeot', 'Taillow', 'Emolga', 'Torterra', 'Sylveon', 'Snorlax'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+          new SpecialRoutePokemon(['Scorbunny'], new MultiRequirement([new ObtainedPokemonRequirement('Scorbunny'), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+
+          new SpecialRoutePokemon(['Caterpie', 'Combee', 'Vespiquen', 'Foongus', 'Pichu', 'Snorlax', 'Torterra', 'Pidgeot', 'Hoothoot', 'Murkrow', 'Pinsir', 'Tangrowth', 'Ducklett', 'Magikarp', 'Pikachu', 'Eevee'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+          new SpecialRoutePokemon(['Scorbunny'], new MultiRequirement([new ObtainedPokemonRequirement('Scorbunny'), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
+      ],
+    }),
+    [new RouteKillRequirement(100, Region.galar, 66)],
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Mightywide River', Region.galar, 68,
+    new RoutePokemon({
+        special:
+      [
+          new SpecialRoutePokemon(['Magikarp', 'Beautifly', 'Aipom', 'Tropius', 'Psyduck', 'Toucannon', 'Feraligatr', 'Swampert', 'Metapod'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+          new SpecialRoutePokemon(['Grookey'], new MultiRequirement([new ObtainedPokemonRequirement('Grookey'), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Sobble'], new MultiRequirement([new ObtainedPokemonRequirement('Sobble'), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Arbok', 'Wooper', 'Quagsire', 'Gyarados'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 68), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Ursaring', 'Venusaur', 'Drilbur', 'Cleffa'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 68), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+
+          new SpecialRoutePokemon(['Morelull', 'Tropius', 'Psyduck', 'Beautifly', 'Ariados', 'Wooper', 'Quagsire', 'Swampert', 'Feraligatr', 'Toucannon', 'Ledian', 'Aipom'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+          new SpecialRoutePokemon(['Ursaring', 'Drilbur', 'Magikarp', 'Cleffa', 'Gyarados'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 68), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
+      ],
+    }),
+    [new RouteKillRequirement(100, Region.galar, 66)],
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Maricopia Reef', Region.galar, 69,
+    new RoutePokemon({
+        special:
+      [
+          new SpecialRoutePokemon(['Finneon', 'Sharpedo', 'Wingull', 'Pelipper', 'Magikarp', 'Machamp', 'Mareanie', 'Corsola', 'Mantine', 'Wailord', 'Pyukumuku'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+          new SpecialRoutePokemon(['Pikachu', 'Squirtle'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 69), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Lapras', 'Wailmer'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 69), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+
+          new SpecialRoutePokemon(['Inkay', 'Wailord', 'Squirtle', 'Alolan Raichu', 'Wingull', 'Mareanie', 'Drifblim', 'Mantine', 'Primarina', 'Lapras', 'Clamperl', 'Vaporeon', 'Blastoise'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+      ],
+    }),
+    [new RouteKillRequirement(100, Region.galar, 66)],
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Barren Badlands', Region.galar, 70,
+    new RoutePokemon({
+        special:
+      [
+          new SpecialRoutePokemon(['Tepig', 'Diglett', 'Mandibuzz', 'Hippowdon', 'Minior (Meteor)', 'Silicobra', 'Swalot', 'Koffing', 'Shinx', 'Torchic', 'Lycanroc (Midnight)', 'Onix', 'Crustle'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+          new SpecialRoutePokemon(['Rockruff', 'Kangaskhan', 'Scolipede', 'Salazzle'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 70), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+
+          new SpecialRoutePokemon(['Rockruff', 'Torchic', 'Shinx', 'Tepig', 'Crustle', 'Mandibuzz', 'Diglett', 'Lycanroc (Midday)', 'Swalot', 'Scolipede', 'Kangaskhan', 'Tyranitar'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+          new SpecialRoutePokemon(['Magikarp', 'Gliscor', 'Sandshrew', 'Minior (Meteor)'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 70), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
+      ],
+    }),
+    [new RouteKillRequirement(100, Region.galar, 66)],
+    undefined,
+    GalarSubRegions.Lental,
 ));
 
 /*
