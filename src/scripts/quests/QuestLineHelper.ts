@@ -1338,7 +1338,7 @@ class QuestLineHelper {
         const clearVirbankGrunt = new DefeatTemporaryBattleQuest('Team Plasma Grunt 1', 'A Team Plasma Grunt in Virbank City would like to steal your Pokémon. Defeat the grunt.');
         plasmaUnovaQuestLine.addQuest(clearVirbankGrunt);
 
-        const clearCastliaSewers = new DefeatDungeonQuest(10, 0, 'Castelia Sewers').withDescription('Some Team Plasma Grunts were seen entering the Castelia Sewers. Clear Castelia Sewers.');
+        const clearCastliaSewers = new DefeatDungeonQuest(1, 0, 'Castelia Sewers').withDescription('Some Team Plasma Grunts were seen entering the Castelia Sewers. Clear Castelia Sewers.');
         plasmaUnovaQuestLine.addQuest(clearCastliaSewers);
 
         const talktoPlasmaGrunt1 = new TalkToNPCQuest(PlasmaGrunt1, 'Investigate the Perfectly Ordinary Frigate.');
