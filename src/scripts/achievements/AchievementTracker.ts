@@ -31,7 +31,11 @@ class AchievementTracker implements Feature {
         let max = Infinity;
         // Grabs the next tier achievement with the same custom signature.
         AchievementHandler.achievementList.forEach((current) => {
-            if (`${tracked.property}` === `${current.property}` && tracked.property.requiredValue < current.property.requiredValue && current.property.requiredValue < max) {
+            if (`${tracked.property}` === `${current.property}`
+                && tracked.property.requiredValue < current.property.requiredValue
+                && current.property.requiredValue < max
+                && !(current instanceof SecretAchievement)
+            ) {
                 next = current;
                 max = current.property.requiredValue;
             }

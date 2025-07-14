@@ -2134,8 +2134,8 @@ TemporaryBattleList['Ghetsis 2'] = new TemporaryBattle(
 TemporaryBattleList['Destiny Deoxys Rayquaza'] = new TemporaryBattle(
     'Destiny Deoxys Rayquaza',
     [
-        new GymPokemon('Deoxys', 47_276_622, 70),
-        new GymPokemon('Rayquaza', 57_782_538, 70),
+        new GymPokemon('Deoxys', 47276622, 70),
+        new GymPokemon('Rayquaza', 57782538, 70),
     ],
     '<i>Rayquaza and Deoxys fled seperate ways.</i>',
     [new QuestLineStepCompletedRequirement('Destiny Deoxys', 1)],
@@ -2149,12 +2149,12 @@ TemporaryBattleList['Destiny Deoxys Rayquaza'] = new TemporaryBattle(
 TemporaryBattleList['Destiny Deoxys Army'] = new TemporaryBattle(
     'Destiny Deoxys Army',
     [
-        new GymPokemon('Deoxys (Clone)', 11_766_624, 70),
-        new GymPokemon('Deoxys (Clone)', 11_766_624, 70),
-        new GymPokemon('Deoxys (Clone)', 11_766_624, 70),
-        new GymPokemon('Deoxys (Clone)', 11_766_624, 70),
-        new GymPokemon('Deoxys (Clone)', 11_766_624, 70),
-        new GymPokemon('Deoxys', 58_833_120, 70),
+        new GymPokemon('Deoxys (Clone)', 11766624, 70),
+        new GymPokemon('Deoxys (Clone)', 11766624, 70),
+        new GymPokemon('Deoxys (Clone)', 11766624, 70),
+        new GymPokemon('Deoxys (Clone)', 11766624, 70),
+        new GymPokemon('Deoxys (Clone)', 11766624, 70),
+        new GymPokemon('Deoxys', 58833120, 70),
     ],
     '<i>The Deoxys are scattering.</i>',
     [new QuestLineStepCompletedRequirement('Destiny Deoxys', 4)],
@@ -2167,7 +2167,7 @@ TemporaryBattleList['Destiny Deoxys Army'] = new TemporaryBattle(
 );
 TemporaryBattleList['Destiny Rayquaza'] = new TemporaryBattle(
     'Destiny Rayquaza',
-    [new GymPokemon('Rayquaza', 127_079_520, 70)],
+    [new GymPokemon('Rayquaza', 127079520, 70)],
     '<i>Rayquaza calmed down.</i>',
     [new QuestLineStepCompletedRequirement('Destiny Deoxys', 7)],
     undefined,
