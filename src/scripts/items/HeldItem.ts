@@ -257,6 +257,5 @@ ItemList.Everstone = new HeldItem('Everstone', 10000, GameConstants.Currency.mon
 // Override Black Glasses' canUse function to factor in Squirtle evolution.
 const glassesRestrict = (ItemList.Black_Glasses as AttackBonusHeldItem).canUse;
 (ItemList.Black_Glasses as AttackBonusHeldItem).canUse = (pokemon: PartyPokemon): boolean => {
-    const dataPokemon = PokemonHelper.getPokemonById(pokemon.id);
     return pokemon.name != 'Squad Leader Squirtle' ? pokemon.name == 'Squirtle' || glassesRestrict(pokemon) : false;
 };
