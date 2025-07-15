@@ -3239,6 +3239,40 @@ const OrreColosseumSpectator = new NPC('Colosseum Spectator', [
     'Only the toughest trainers in Orre are allowed to fight here! I\'m just watching until I get stronger.']
 );
 
+// Destiny Deoxys Quest NPCs
+
+const destinyGem = new NPC('Green Pulsing Gemstone', [
+    '<i>Deep inside the Giant Chasm you find a Gemstone. It\'s moving, almost as if it was alive...</i>',
+    '<i>As you decide to pick up the stone you hear a roar, followed by an explosion in the distance.</i>',
+], { image: 'assets/images/npcs/other/Green Gemstone.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Destiny Deoxys', 0), new QuestLineStepCompletedRequirement('Destiny Deoxys', 2, GameConstants.AchievementOption.less)]),
+});
+
+const destinyScientistChasm = new NPC('Professor Lund', [
+    'Hey, good job on chasing away those Pokémon. My name is Professor Lund and I\'m leading the science team in this area.',
+    'You must know a meteorite has landed in this area... What are you saying? You already found it?!',
+    'It\'s truly spectacular... We\'re going to move the gemstone to our laboratory in Hoenn. If you like you can come with us, our lab is near the Battle Frontier. While we analyze the Gemstone you can use the local facilities.',
+], {
+    image: 'assets/images/npcs/Scientist (male).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Destiny Deoxys', 2), new QuestLineStepCompletedRequirement('Destiny Deoxys', 4, GameConstants.AchievementOption.less)]),
+});
+
+const destinyScientistBF = new NPC('Professor Lund', [
+    'You have certainly noticed but one of the Pokémon you\'ve fought at the Giant Chasm is invading this town.',
+    'The charts on the gemstone analysis were off the charts while you were fighting. We are this close to solving the mystery.',
+    '<i>A shockwave is overcoming the building. You hear an explosion and the lights in the lab go out.</i>',
+    'That Pokémon must have destroyed the generator... quick grab everything you can find and help us repair it.',
+], {
+    image: 'assets/images/npcs/Scientist (male).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Destiny Deoxys', 5), new QuestLineStepCompletedRequirement('Destiny Deoxys', 7, GameConstants.AchievementOption.less)]),
+});
+
+const destinyDeoxysReunion = new PokemonGiftNPC('Green and Purple Gem Deoxys', [
+    '<i>The Deoxys sync their lights, they seem to be happy to have found each other. </i>',
+    '<i>Right as you wanted to leave them alone the Deoxys with the green gem send a light towards your way. It wants to thank you for your help.</i>',
+], 'Deoxys (Green Core)', 'assets/images/pokemon/386.04.png', { image: 'assets/images/npcs/other/Deoxys reunion.png', requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Destiny Deoxys', 8), new ObtainedPokemonRequirement('Deoxys (Green Core)', true)])});
+
+
 // For Leafeon and Glaceon. Show up in Hoenn too
 const MossRock = new NPC('Moss Rock', [
     'The rock is covered in moss. It feels pleasantly cool.',
@@ -3468,10 +3502,10 @@ TownList['Battle Frontier'] = new Town(
     'Battle Frontier',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [BattleFrontierShop, new BattleFrontierTownContent()],
+    [BattleFrontierShop, new BattleFrontierTownContent(), TemporaryBattleList['Destiny Deoxys Rayquaza'], TemporaryBattleList['Destiny Deoxys Army'], TemporaryBattleList['Destiny Rayquaza'], new GemMasterShop(GameConstants.GemShops.hoennBattleFrontierDeoxysDeal, 'Deoxys Replica', [new QuestLineCompletedRequirement('Destiny Deoxys')], true)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
-        npcs: [CoolTrainerDillan],
+        npcs: [CoolTrainerDillan, destinyScientistBF, destinyDeoxysReunion],
     }
 );
 TownList['Pokémon League Hoenn'] = new Town(
@@ -5735,9 +5769,9 @@ TownList['Giant Chasm'] = new DungeonTown(
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate')),
         new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15),
     ],
-    [TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2'], TemporaryBattleList['Kyurem 2'], TemporaryBattleList['Kyurem 3']],
+    [TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2'], TemporaryBattleList['Kyurem 2'], TemporaryBattleList['Kyurem 3'], TemporaryBattleList['Destiny Deoxys Rayquaza']],
     {
-        npcs: [Cobalion6, Cobalion7, Terrakion2, Virizion3],
+        npcs: [Cobalion6, Cobalion7, Terrakion2, Virizion3, destinyGem, destinyScientistChasm],
     }
 );
 TownList['Cave of Being'] = new DungeonTown(

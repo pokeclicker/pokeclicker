@@ -1451,6 +1451,48 @@ class QuestLineHelper {
         App.game.quests.questLines().push(plasmaUnovaQuestLine);
     }
 
+    // Destiny Deoxys Quest
+    public static createDestinyDeoxysQuestLine() {
+        const destinyDeoxysQuest = new QuestLine('Destiny Deoxys', 'Discover the mystery of the crashed meteor.', new QuestLineCompletedRequirement('Hollow Truth and Ideals'), GameConstants.BulletinBoards.Unova);
+
+        const clearGiantChasm = new DefeatDungeonQuest(5, 0, 'Giant Chasm').withDescription('There seems to be a big fuzz about new foundings in the Giant Chasm. Try finding it.');
+        destinyDeoxysQuest.addQuest(clearGiantChasm);
+
+        const talkToGreenGem = new TalkToNPCQuest(destinyGem, 'You found a Green Pulsing Gemstone. Take a closer look.');
+        destinyDeoxysQuest.addQuest(talkToGreenGem);
+
+        const rayquazaDeoxysBattle = new DefeatTemporaryBattleQuest('Destiny Deoxys Rayquaza', 'Rayquaza and Deoxys are rampaging in the area. Try to calm them down.');
+        destinyDeoxysQuest.addQuest(rayquazaDeoxysBattle);
+
+        const talkToScientistChasm = new TalkToNPCQuest(destinyScientistChasm, 'Now that the situation has calmed down talk to the local scientists about the Green Gemstone.');
+        destinyDeoxysQuest.addQuest(talkToScientistChasm);
+
+        const clearBattleFrontier = new ClearBattleFrontierQuest(386, 0).withDescription('Check out the Battle Frontier while the scientist analyzes the gemstone.');
+        destinyDeoxysQuest.addQuest(clearBattleFrontier);
+
+        const defeatDeoxysClones = new DefeatTemporaryBattleQuest('Destiny Deoxys Army', 'While you were in the Battle Frontier an army of Deoxys attacked. Fight your way out!');
+        destinyDeoxysQuest.addQuest(defeatDeoxysClones);
+
+        const talkToScientistBF = new TalkToNPCQuest(destinyScientistBF, 'The scientist you met at Giant Chasm is looking for you at the Battle Frontier.');
+        destinyDeoxysQuest.addQuest(talkToScientistBF);
+
+        const gainElectricGems = new GainGemsQuest(15000, 0, PokemonType.Electric);
+        const gainSteelGems = new GainGemsQuest(5000, 0, PokemonType.Steel);
+        destinyDeoxysQuest.addQuest(new MultipleQuestsQuest([
+            gainElectricGems,
+            gainSteelGems,
+        ], 'The generator isn\t working. Look around for scraps to repair it.'));
+
+
+        const rayquazaBFBattle = new DefeatTemporaryBattleQuest('Destiny Rayquaza', 'Rayquaza attacks again. Calm it down for the last time.');
+        destinyDeoxysQuest.addQuest(rayquazaBFBattle);
+
+        const talkToDeoxys = new TalkToNPCQuest(destinyDeoxysReunion, 'Rayquaza realized that the Deoxys are no threat. Reunite the Purple and Green Gemed Deoxys.');
+        destinyDeoxysQuest.addQuest(talkToDeoxys);
+
+        App.game.quests.questLines().push(destinyDeoxysQuest);
+    }
+
     // Swords of Justice quest
     public static createSwordsQuestLine() {
         const swordsofJusticeQuest = new QuestLine('Swords of Justice', 'The Swords of Justice sense something bad is about to happen, will you be able to help them out?', new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion), GameConstants.BulletinBoards.Unova);
@@ -4312,6 +4354,7 @@ class QuestLineHelper {
         this.createManaphyQuestLine();
         this.createGiratinaQuestLine();
         this.createPlasmaUnovaQuestLine();
+        this.createDestinyDeoxysQuestLine();
         this.createSwordsQuestLine();
         this.createGenesectQuestLine();
         this.createOrreXDQuestLine();
