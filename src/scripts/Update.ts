@@ -2908,6 +2908,9 @@ class Update implements Saveable {
                 }
             }
 
+            // Update Enigma hint data
+            saveData.farming.mutations[63] = {seen: saveData.farming.mutations[63], last: null};
+
             // Refund any vitamins on MissingNo. as it now gets removed on update.
             // Will also no longer be able to give it vitamins so this is a one time thing
             const vitaminsUsed = saveData.party.caughtPokemon.find(p => p.id === 0)?.[2];
@@ -2915,6 +2918,39 @@ class Update implements Saveable {
                 playerData._itemList.Protein = (playerData._itemList.Protein ?? 0) + (vitaminsUsed[0] ?? 0);
                 playerData._itemList.Calcium = (playerData._itemList.Calcium ?? 0) + (vitaminsUsed[1] ?? 0);
                 playerData._itemList.Carbos = (playerData._itemList.Carbos ?? 0) + (vitaminsUsed[2] ?? 0);
+            }
+
+            //Remove second AZ battle.
+            saveData.statistics.temporaryBattleDefeated.splice(202, 1);
+
+            // Replace the UG discord rich presence strings
+            if (settingsData['discord-rp.line-1']) {
+                settingsData['discord-rp.line-1'] = settingsData['discord-rp.line-1'].replace(/{underground_deal_trades}/g, '{underground_trades}');
+            }
+            if (settingsData['discord-rp.line-2']) {
+                settingsData['discord-rp.line-2'] = settingsData['discord-rp.line-2'].replace(/{underground_deal_trades}/g, '{underground_trades}');
+            }
+
+            // Set file creation time to zero for existing files
+            playerData._createdTime = 0;
+
+            // None now locked as the first category
+            const categoryNoneIndex = saveData.categories.categories.findIndex(c => c.id === 0);
+            if (categoryNoneIndex > 0) {
+                const cats = saveData.categories.categories;
+                const noneCategory = cats.splice(categoryNoneIndex, 1)[0];
+                saveData.categories.categories = [noneCategory, ...cats];
+            }
+
+            // Mark new Pokemon Gifts as claimed if they are already owned
+            saveData.statistics.npcTalkedTo = saveData.statistics.npcTalkedTo || {};
+            const ownsFloetteEternal = saveData.party.caughtPokemon.find((p: PartyPokemon) => p.id === 670.05);
+            if (ownsFloetteEternal) {
+                saveData.statistics.npcTalkedTo[GameHelper.hash('eternalfloettegift')] = 1;
+            }
+            const ownsMagearnaOriginal = saveData.party.caughtPokemon.find((p: PartyPokemon) => p.id === 801.01);
+            if (ownsMagearnaOriginal) {
+                saveData.statistics.npcTalkedTo[GameHelper.hash('magearnamysterygift')] = 1;
             }
         },
     };
@@ -2997,7 +3033,10 @@ class Update implements Saveable {
         if (!settingsData?.disableAutoDownloadBackupSaveOnUpdate) {
             button.style.display = 'none';
             document.body.appendChild(button);
-            button.click();
+            // We don't want auto download on dev build
+            if (!GameHelper.isDevelopmentBuild()) {
+                button.click();
+            }
             document.body.removeChild(button);
         }
         button.style.display = '';
@@ -3380,19 +3419,17 @@ class Update implements Saveable {
     }
 
     removeMissingNo(saveData) {
-        const idx = saveData.party.caughtPokemon.findIndex(p => p.id === 0);
-        if (idx === -1) {
-            return;
+        // remove from party
+        let idx;
+        while ((idx = saveData.party.caughtPokemon.findIndex(p => p.id === 0)) !== -1) {
+            saveData.party.caughtPokemon.splice(idx, 1);
         }
 
-        // remove from party
-        saveData.party.caughtPokemon.splice(idx, 1);
-
         // remove from breeding queue
-        saveData.breeding.queueList = saveData.breeding.queueList.filter(p => p !== 0);
+        saveData.breeding.queueList = saveData.breeding.queueList.filter(p => Array.isArray(p) || pokemonMap[p].id !== 0);
 
         // remove from egg slot
-        saveData.breeding.eggList = saveData.breeding.eggList.map(e => e.pokemon === 0 && e.type !== -1 ? null : e);
+        saveData.breeding.eggList = saveData.breeding.eggList.map(e => e === null || (pokemonMap[e.pokemon].id === 0 && e.type !== -1) ? null : e);
     }
 
     getPlayerData() {

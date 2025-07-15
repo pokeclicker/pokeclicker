@@ -206,3 +206,25 @@ class WeatherAppTownContent extends TownContent {
         return 'Open the Castform App';
     }
 }
+
+class PickStarterContent extends TownContent {
+    public cssClass() {
+        return 'btn btn-warning';
+    }
+
+    public isVisible(): boolean {
+        return player.regionStarters[player.region]() == GameConstants.Starter.None;
+    }
+
+    public onclick() {
+        $('#pickStarterModal').modal('show');
+    }
+
+    public areaStatus(): areaStatus[] {
+        return [this.isVisible() ? areaStatus.uncaughtPokemon : areaStatus.completed];
+    }
+
+    public text() {
+        return 'Pick your Starter';
+    }
+}

@@ -31,15 +31,13 @@ class TemporaryBattle extends TownContent implements TmpTemporaryBattleType {
         TemporaryBattleRunner.startBattle(this);
     }
     public areaStatus() {
-        const states = [];
         if (!this.isUnlocked()) {
-            states.push(areaStatus.locked);
+            return [areaStatus.locked];
         }
         if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.name)]() == 0 && this.isVisible()) {
-            states.push(areaStatus.incomplete);
+            return [areaStatus.incomplete];
         }
-        states.push(areaStatus.completed);
-        return states;
+        return [areaStatus.completed];
     }
     public getDisplayName() {
         return this.optionalArgs.displayName ?? this.name.replace(/( route)? \d+$/, '');

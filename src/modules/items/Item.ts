@@ -189,6 +189,14 @@ export default class Item {
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.saveName]));
     }
 
+    showBagAmount() {
+        return this.maxAmount > 1;
+    }
+
+    getBagAmount() {
+        return player.amountOfItem(this.name);
+    }
+
     // eslint-disable-next-line class-methods-use-this
     init() {
         // Override in specific item class for any item specific initialization needed
@@ -205,5 +213,20 @@ export default class Item {
     get image() {
         const subDirectory = this.imageDirectory ? `${this.imageDirectory}/` : '';
         return `assets/images/items/${subDirectory}${this.name}.png`;
+    }
+
+    get shopTooltip() {
+        if (!this.description && !this.showBagAmount()) {
+            return '';
+        }
+
+        let tooltip = `<u>${this.displayName}:</u>`;
+        if (this.description) {
+            tooltip += `<br/>${this.description}`;
+        }
+        if (this.showBagAmount()) {
+            tooltip += `<br/><br/>In Bag: ${this.getBagAmount().toLocaleString('en-US')}`;
+        }
+        return tooltip;
     }
 }

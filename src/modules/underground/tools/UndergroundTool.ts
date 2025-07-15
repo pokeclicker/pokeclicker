@@ -1,25 +1,34 @@
-import GameHelper from '../../GameHelper';
 import UndergroundToolType from './UndergroundToolType';
 import { Coordinate } from '../mine/Mine';
 import Notifier from '../../notifications/Notifier';
 import NotificationConstants from '../../notifications/NotificationConstants';
 import { Observable, PureComputed } from 'knockout';
+import { UNDERGROUND_MAX_CLICKS_PER_SECOND } from '../UndergroundController';
+
+type UndergroundToolProperties = {
+    id: UndergroundToolType;
+    displayName: string;
+    description: string;
+
+    durabilityPerUse: number;
+    itemDestroyChance?: number;
+
+    customRestoreRateFn?: (tool: UndergroundTool, level: number) => number;
+    action: (x: number, y: number) => { coordinatesMined: Array<Coordinate>, success: boolean };
+};
 
 export default class UndergroundTool {
-    private _durability: Observable<number> = ko.observable(1).extend({ numeric: 2 });
-    private _restoreRateCounter: Observable<number> = ko.observable(0);
+    private _toolProperties: UndergroundToolProperties;
+
+    private _durability: Observable<number> = ko.observable(1).extend({ numeric: 5 });
 
     public canUseTool: PureComputed<boolean> = ko.pureComputed(() => this.durability >= this.durabilityPerUse);
+    public restoreRatePerSecond: PureComputed<number> = ko.pureComputed(() => this.calculateDurabilityRestoreRatePerSecond(App.game.underground.undergroundLevel));
 
-    constructor(
-        public id: UndergroundToolType,
-        public displayName: string,
-        public restoreRateInSeconds: number,
-        public restoreRateReductionPerLevel: number,
-        public durabilityRestoreRate: number,
-        public durabilityPerUse: number,
-        public action: (x: number, y: number) => { coordinatesMined: Array<Coordinate>, success: boolean },
-    ) {
+    private maxDurabilityPerSecond: PureComputed<number> = ko.pureComputed(() => this._toolProperties.durabilityPerUse * UNDERGROUND_MAX_CLICKS_PER_SECOND);
+
+    constructor(toolProperties: UndergroundToolProperties) {
+        this._toolProperties = toolProperties;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -30,19 +39,14 @@ export default class UndergroundTool {
     private handleDurabilityTick(deltaTime: number) {
         if (this.durability >= 1) return;
 
-        if (this.restoreRate <= 0) {
-            this._durability(Math.max(this.durability, 1));
+        const restorePercentage: number = this.restoreRatePerSecond() * deltaTime;
+
+        if (restorePercentage >= 1) {
+            this._durability(1);
             return;
         }
 
-        GameHelper.incrementObservable(this._restoreRateCounter, deltaTime);
-
-        if (this.restoreRateCounter < this.restoreRate) {
-            return;
-        }
-
-        this._durability(Math.min(this.durability + this.durabilityRestoreRate, 1));
-        this._restoreRateCounter(this.restoreRateCounter % this.restoreRate);
+        this._durability(Math.min(this.durability + restorePercentage, 1));
 
         if (this.durability === 1) {
             Notifier.notify({
@@ -57,33 +61,58 @@ export default class UndergroundTool {
     }
 
     public reduceDurabilityByUse() {
-        if (this.restoreRate <= 0)
-            return;
+        this._durability(this._durability() - this.durabilityPerUse);
+    }
 
-        GameHelper.incrementObservable(this._durability, -this.durabilityPerUse);
+    get id(): UndergroundToolType {
+        return this._toolProperties.id;
+    }
+
+    get displayName(): string {
+        return this._toolProperties.displayName;
+    }
+
+    get description(): string {
+        return this._toolProperties.description;
+    }
+
+    get durabilityPerUse(): number {
+        return this.restoreRatePerSecond() >= this.maxDurabilityPerSecond() ? 0 : this._toolProperties.durabilityPerUse;
     }
 
     get durability(): number {
         return this._durability();
     }
 
-    get restoreRate(): number {
-        return Math.max(this.restoreRateInSeconds - this.restoreRateReductionPerLevel * App.game.underground.undergroundLevel, 0);
+    get itemDestroyChance(): number {
+        return this._toolProperties.itemDestroyChance ?? 0;
     }
 
-    get restoreRateCounter(): number {
-        return this._restoreRateCounter();
+    get action() {
+        return this._toolProperties.action;
     }
 
     public fromJSON(save) {
         this._durability(save?.durability ?? 1);
-        this._restoreRateCounter(save?.restoreRateCounter || 0);
     }
 
     public toJSON() {
         return {
             durability: this._durability(),
-            restoreRateCounter: this._restoreRateCounter(),
         };
+    }
+
+    public calculateDurabilityRestoreRatePerSecond(level: number = 0): number {
+        if (this._toolProperties.customRestoreRateFn) {
+            return this._toolProperties.customRestoreRateFn(this, level);
+        }
+
+        const [minimumLevel, maximumLevel] = [0, 20];
+        const deltaLevel: number = maximumLevel - minimumLevel;
+
+        const baseRatePerSecond = 0.001;
+        const finalRatePerSecond = 0.18;
+
+        return (2 ** (Math.max(level - minimumLevel, 0) / deltaLevel) ** 10 - 1) * (finalRatePerSecond - baseRatePerSecond) + baseRatePerSecond;
     }
 }
