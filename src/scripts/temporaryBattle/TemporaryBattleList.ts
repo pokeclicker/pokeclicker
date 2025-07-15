@@ -6662,7 +6662,7 @@ TemporaryBattleList['Belusylva Island Illumina Pokémon 1'] = new TemporaryBattl
     'Belusylva Island Illumina Pokémon 1',
     [new GymPokemon('Illumina Milotic', 100, 40)],
     '<b><i>You followed the Milotic around Belusylva Island.</i></b>',
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 5)],
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 4)],
     undefined,
     {
         returnTown: 'Professor Mirror\'s Research Lab',
@@ -6695,7 +6695,7 @@ TemporaryBattleList['Maricopia Islands Illumina Pokémon 1'] = new TemporaryBatt
     'Maricopia Islands Illumina Pokémon 1',
     [new GymPokemon('Wishiwashi (Solo)', 100, 40)],
     '<b><i>You followed the Wishiwashi around Maricopia Islands.</i></b>',
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 9)],
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 7)],
     undefined,
     {
         returnTown: 'Professor Mirror\'s Research Lab',
@@ -6735,7 +6735,7 @@ TemporaryBattleList['Voluca Island Illumina Pokémon 1'] = new TemporaryBattle(
     'Voluca Island Illumina Pokémon 1',
     [new GymPokemon('Illumina Volcarona', 100, 40)],
     '<b><i>You followed the Volcarona around Voluca Island. But it seems to have escaped. </i></b>',
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 13)],
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 10)],
     undefined,
     {
         returnTown: 'Professor Mirror\'s Research Lab',
@@ -6771,7 +6771,7 @@ TemporaryBattleList['Durice Island Illumina Pokémon 1'] = new TemporaryBattle(
     'Durice Island Illumina Pokémon 1',
     [new GymPokemon('Illumina Steelix', 100, 40)],
     '<b><i>You followed the Steelix around Durice Island.</i></b>',
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 17)],
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 13)],
     undefined,
     {
         returnTown: 'Professor Mirror\'s Research Lab',
@@ -6804,7 +6804,7 @@ TemporaryBattleList['Aurus Island Illumina Pokémon 1'] = new TemporaryBattle(
     'Aurus Island Illumina Pokémon 1',
     [new GymPokemon('Illumina Xerneas', 100, 40)],
     '<b><i>You followed the Xerneas around Aurus Island.</i></b>',
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 20)],
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 16)],
     undefined,
     {
         returnTown: 'Professor Mirror\'s Research Lab',

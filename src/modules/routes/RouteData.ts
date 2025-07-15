@@ -3764,16 +3764,16 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Ducklett', 'Tangrowth'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 56), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
           new SpecialRoutePokemon(['Pidgeot', 'Heracross'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 56), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
           new SpecialRoutePokemon(['Scorbunny'], new MultiRequirement([new ObtainedPokemonRequirement('Scorbunny'), new RouteKillRequirement(5000, Region.galar, 56), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
-          new SpecialRoutePokemon(['Shroomish', 'Sylveon', 'Snorlax'], new MultiRequirement([new RouteKillRequirement(10, Region.galar, 67), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])), // available after 'Side Path' during the day
+          new SpecialRoutePokemon(['Shroomish', 'Sylveon', 'Snorlax'], new MultiRequirement([new RouteKillRequirement(100, Region.galar, 60), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])), // available after 'Side Path' during the day
 
           new SpecialRoutePokemon(['Bidoof', 'Dodrio', 'Bouffalant', 'Tangrowth', 'Caterpie', 'Murkrow', 'Combee', 'Ducklett', 'Swanna', 'Torterra', 'Pidgeot', 'Hoothoot', 'Pinsir', 'Magikarp'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
           new SpecialRoutePokemon(['Grookey'], new MultiRequirement([new ObtainedPokemonRequirement('Grookey'), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
           new SpecialRoutePokemon(['Scorbunny'], new MultiRequirement([new ObtainedPokemonRequirement('Scorbunny'), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
           new SpecialRoutePokemon(['Sylveon', 'Vespiquen', 'Heracross'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 56), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
-          new SpecialRoutePokemon(['Foongus', 'Pikachu', 'Eevee'], new MultiRequirement([new RouteKillRequirement(10, Region.galar, 67), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])), // available after 'Side Path' during the night
+          new SpecialRoutePokemon(['Foongus', 'Pikachu', 'Eevee'], new MultiRequirement([new RouteKillRequirement(100, Region.galar, 60), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])), // available after 'Side Path' during the night
       ],
     }),
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 0)],
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 0)], // talk to Mirror
     undefined,
     GalarSubRegions.Lental,
 ));
@@ -3785,149 +3785,53 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Bounsweet', 'Aipom', 'Pikipek', 'Beautifly', 'Wooper', 'Quagsire', 'Yanmega', 'Arbok', 'Liepard', 'Magikarp', 'Slaking', 'Metapod'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
           new SpecialRoutePokemon(['Toucannon'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 57), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
           new SpecialRoutePokemon(['Venusaur', 'Leafeon'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 57), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
-          new SpecialRoutePokemon(['Sobble'], new MultiRequirement([new ObtainedPokemonRequirement('Sobble'), new RouteKillRequirement(5000, Region.galar, 56), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Sobble'], new MultiRequirement([new ObtainedPokemonRequirement('Sobble'), new RouteKillRequirement(5000, Region.galar, 57), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
 
           new SpecialRoutePokemon(['Yanmega', 'Liepard', 'Bounsweet', 'Morelull', 'Ariados', 'Magikarp', 'Quagsire', 'Pikipek', 'Toucannon', 'Wooper'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
           new SpecialRoutePokemon(['Leafeon', 'Swampert', 'Slaking', 'Metapod', 'Arbok'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 57), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
           new SpecialRoutePokemon(['Ledian'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 57), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
       ],
     }),
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 3)],
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 3)], // beat Florio Island Illumina Pokemon and talk to mirror
     undefined,
     GalarSubRegions.Lental,
 ));
 Routes.add(new RegionRoute(
-    'Elsewhere Forest', Region.galar, 58,
-    new RoutePokemon({
-        land: ['Shiftry', 'Trevenant', 'Lotad', 'Kecleon', 'Deerling (Spring)', 'Deerling (Summer)', 'Sawsbuck (Spring)', 'Sawsbuck (Summer)', 'Bewear', 'Unfezant', 'Pancham', 'Drampa', 'Bulbasaur', 'Espurr', 'Applin', 'Magikarp'],
-        special:
-      [
-          new SpecialRoutePokemon(['Deerling (Autumn)', 'Sawsbuck (Autumn)', 'Serperior'], new RouteKillRequirement(1000, Region.galar, 58)),
-          new SpecialRoutePokemon(['Deerling (Winter)', 'Sawsbuck (Winter)', 'Espeon', 'Gardevoir', 'Ninetales'], new RouteKillRequirement(5000, Region.galar, 58)),
-      ],
-    }),
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 4)],
-    undefined,
-    GalarSubRegions.Lental,
-));
-Routes.add(new RegionRoute(
-    'Blushing Beach', Region.galar, 59,
+    'Blushing Beach', Region.galar, 58,
     new RoutePokemon({
         special:
       [
           new SpecialRoutePokemon(['Crabrawler', 'Exeggutor', 'Wingull', 'Bellossom', 'Pikachu', 'Octillery', 'Finneon', 'Pyukumuku', 'Machamp', 'Stunfisk'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
-          new SpecialRoutePokemon(['Corsola', 'Alolan Raichu', 'Lapras', 'Squirtle'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 59), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
-          new SpecialRoutePokemon(['Blastoise'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 59), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Corsola', 'Alolan Raichu', 'Lapras', 'Squirtle'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 58), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Blastoise'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 58), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
 
           new SpecialRoutePokemon(['Exeggutor', 'Zangoose', 'Drifblim', 'Seviper', 'Inkay', 'Pyukumuku', 'Magikarp', 'Octillery', 'Clamperl', 'Corsola', 'Sandygast', 'Alolan Raichu', 'Finneon', 'Wingull', 'Crabrawler'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
-          new SpecialRoutePokemon(['Mareanie', 'Primarina', 'Bellossom', 'Pikachu'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 59), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
+          new SpecialRoutePokemon(['Mareanie', 'Primarina', 'Bellossom', 'Pikachu'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 58), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
       ],
     }),
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 7)],
+    [new RouteKillRequirement(1000, Region.galar, 57)], // Founja Jungle Research Level 2
     undefined,
     GalarSubRegions.Lental,
 ));
 Routes.add(new RegionRoute(
-    'Lental Seafloor', Region.galar, 60,
-    new RoutePokemon({
-        land: ['Magikarp', 'Finneon', 'Luvdisc', 'Corsola', 'Lumineon', 'Octillery', 'Wailmer', 'Sharpedo', 'Qwilfish', 'Tentacruel', 'Mantine'],
-        special:
-      [
-          new SpecialRoutePokemon(['Pelipper', 'Cradily', 'Pyukumuku', 'Clawitzer', 'Chinchou', 'Frillish', 'Lanturn', 'Clamperl', 'Golisopod'], new RouteKillRequirement(1000, Region.galar, 60)),
-          new SpecialRoutePokemon(['Alomomola', 'Inkay', 'Starmie', 'Wailord', 'Squirtle', 'Lapras'], new RouteKillRequirement(5000, Region.galar, 60)),
-      ],
-    }),
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 8)],
-    undefined,
-    GalarSubRegions.Lental,
-));
-Routes.add(new RegionRoute(
-    'Sweltering Sands', Region.galar, 61,
+    'Sweltering Sands', Region.galar, 59,
     new RoutePokemon({
         special:
       [
           new SpecialRoutePokemon(['Skorupi', 'Cacnea', 'Heliolisk', 'Minior (Meteor)', 'Mandibuzz', 'Pinsir', 'Lycanroc (Midday)', 'Hippowdon', 'Torchic', 'Trapinch'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
-          new SpecialRoutePokemon(['Flygon', 'Onix', 'Tyranitar', 'Silicobra', 'Magikarp'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 61), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
-          new SpecialRoutePokemon(['Scorbunny'], new MultiRequirement([new ObtainedPokemonRequirement('Scorbunny'), new RouteKillRequirement(1000, Region.galar, 61), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Flygon', 'Onix', 'Tyranitar', 'Silicobra', 'Magikarp'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 59), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Scorbunny'], new MultiRequirement([new ObtainedPokemonRequirement('Scorbunny'), new RouteKillRequirement(1000, Region.galar, 59), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
 
           new SpecialRoutePokemon(['Skorupi', 'Trapinch', 'Sandshrew', 'Kangaskhan', 'Lycanroc (Midnight)', 'Magikarp', 'Hippowdon', 'Cacnea', 'Minior (Meteor)', 'Minior (Red Core)', 'Minior (Blue Core)', 'Minior (Green Core)', 'Minior (Orange Core)', 'Minior (Indigo Core)', 'Minior (Violet Core)', 'Minior (Yellow Core)', 'Mandibuzz', 'Onix'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
-          new SpecialRoutePokemon(['Silicobra', 'Tyranitar', 'Flygon'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 61), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
+          new SpecialRoutePokemon(['Silicobra', 'Tyranitar', 'Flygon'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 59), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
       ],
     }),
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 11)],
+    [new RouteKillRequirement(1000, Region.galar, 57)], // Founja Jungle Research Level 2
     undefined,
     GalarSubRegions.Lental,
 ));
 Routes.add(new RegionRoute(
-    'Fireflow Volcano', Region.galar, 62,
-    new RoutePokemon({
-        land: ['Altaria', 'Luxray', 'Archeops', 'Graveler', 'Aerodactyl', 'Slugma', 'Tyrantrum', 'Monferno', 'Charmander'],
-        special:
-      [
-          new SpecialRoutePokemon(['Shinx', 'Talonflame', 'Typhlosion', 'Torkoal', 'Charizard'], new RouteKillRequirement(1000, Region.galar, 62)),
-          new SpecialRoutePokemon(['Flareon'], new RouteKillRequirement(5000, Region.galar, 62)),
-      ],
-    }),
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 12)],
-    undefined,
-    GalarSubRegions.Lental,
-));
-Routes.add(new RegionRoute(
-    'Shiver Snowfields', Region.galar, 63,
-    new RoutePokemon({
-        special:
-      [
-          new SpecialRoutePokemon(['Furret', 'Swinub', 'Beartic', 'Cubchoo', 'Magikarp', 'Mamoswine', 'Skarmory', 'Snorunt', 'Snom', 'Frosmoth', 'Glalie', 'Spheal', 'Piplup'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
-          new SpecialRoutePokemon(['Froslass', 'Alolan Sandslash', 'Alolan Vulpix', 'Weavile', 'Abomasnow', 'Crabominable'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 63), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
-          new SpecialRoutePokemon(['Mightyena', 'Glaceon', 'Vanilluxe', 'Dewgong', 'Avalugg'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 63), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
-
-          new SpecialRoutePokemon(['Mightyena', 'Piplup', 'Mamoswine', 'Snorunt', 'Braviary', 'Furret', 'Alolan Sandslash', 'Delibird', 'Abomasnow', 'Vanilluxe', 'Jynx', 'Alolan Vulpix', 'Spheal', 'Swinub', 'Frosmoth'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
-          new SpecialRoutePokemon(['Crabominable', 'Weavile', 'Snom', 'Froslass', 'Aurorus', 'Avalugg', 'Dewgong', 'Cubchoo', 'Beartic', 'Magikarp', 'Glaceon'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 63), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
-      ],
-    }),
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 15)],
-    undefined,
-    GalarSubRegions.Lental,
-));
-Routes.add(new RegionRoute(
-    'Outaway Cave', Region.galar, 64,
-    new RoutePokemon({
-        land: ['Crobat', 'Carbink', 'Joltik', 'Braviary', 'Rampardos', 'Glalie', 'Magikarp', 'Croagunk', 'Sableye', 'Gengar', 'Geodude', 'Noibat', 'Beartic'],
-        special:
-      [
-          new SpecialRoutePokemon(['Drifloon', 'Mawile', 'Clefairy', 'Jolteon'], new RouteKillRequirement(1000, Region.galar, 64)),
-          new SpecialRoutePokemon(['Pumpkaboo (Average)', 'Pumpkaboo (Large)', 'Pumpkaboo (Small)', 'Pumpkaboo (Super Size)', 'Hydreigon', 'Goodra'], new RouteKillRequirement(5000, Region.galar, 64)),
-      ],
-    }),
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 16)],
-    undefined,
-    GalarSubRegions.Lental,
-));
-Routes.add(new RegionRoute(
-    'Ruins of Remembrance', Region.galar, 65,
-    new RoutePokemon({
-        land: ['Houndoom', 'Eldegoss', 'Natu', 'Beheeyem', 'Salandit', 'Noivern', 'Sigilyph', 'Golurk', 'Woobat', 'Magikarp'],
-        special:
-      [
-          new SpecialRoutePokemon(['Chandelure', 'Absol'], new RouteKillRequirement(1000, Region.galar, 65)),
-          new SpecialRoutePokemon(['Umbreon'], new RouteKillRequirement(5000, Region.galar, 65)),
-      ],
-    }),
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 19)],
-    undefined,
-    GalarSubRegions.Lental,
-));
-Routes.add(new RegionRoute(
-    'Research Camp', Region.galar, 66,
-    new RoutePokemon({
-        land: ['Stoutland', 'Meowth', 'Starly', 'Cutiefly', 'Bunnelby', 'Sudowoodo', 'Eevee', 'Trubbish', 'Pikachu', 'Audino', 'Rattata', 'Dedenne'],
-    }),
-    [new QuestLineCompletedRequirement('New Pokémon Snap')],
-    undefined,
-    GalarSubRegions.Lental,
-));
-Routes.add(new RegionRoute(
-    'Side Path', Region.galar, 67,
+    'Side Path', Region.galar, 60,
     new RoutePokemon({
         special:
       [
@@ -3938,42 +3842,138 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Scorbunny'], new MultiRequirement([new ObtainedPokemonRequirement('Scorbunny'), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
       ],
     }),
-    [new QuestLineCompletedRequirement('New Pokémon Snap')],
+    [new RouteKillRequirement(100, Region.galar, 58), new RouteKillRequirement(100, Region.galar, 59)], // Blushing Beach and Sweltering Sands explored
     undefined,
     GalarSubRegions.Lental,
 ));
 Routes.add(new RegionRoute(
-    'Mightywide River', Region.galar, 68,
+    'Fireflow Volcano', Region.galar, 61,
+    new RoutePokemon({
+        land: ['Altaria', 'Luxray', 'Archeops', 'Graveler', 'Aerodactyl', 'Slugma', 'Tyrantrum', 'Monferno', 'Charmander'],
+        special:
+      [
+          new SpecialRoutePokemon(['Shinx', 'Talonflame', 'Typhlosion', 'Torkoal', 'Charizard'], new RouteKillRequirement(1000, Region.galar, 61)),
+          new SpecialRoutePokemon(['Flareon'], new RouteKillRequirement(5000, Region.galar, 61)),
+      ],
+    }),
+    [new RouteKillRequirement(1000, Region.galar, 59)], // Sweltering Sands Research Level 2
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Elsewhere Forest', Region.galar, 62,
+    new RoutePokemon({
+        land: ['Shiftry', 'Trevenant', 'Lotad', 'Kecleon', 'Deerling (Spring)', 'Deerling (Summer)', 'Sawsbuck (Spring)', 'Sawsbuck (Summer)', 'Bewear', 'Unfezant', 'Pancham', 'Drampa', 'Bulbasaur', 'Espurr', 'Applin', 'Magikarp'],
+        special:
+      [
+          new SpecialRoutePokemon(['Deerling (Autumn)', 'Sawsbuck (Autumn)', 'Serperior'], new RouteKillRequirement(1000, Region.galar, 62)),
+          new SpecialRoutePokemon(['Deerling (Winter)', 'Sawsbuck (Winter)', 'Espeon', 'Gardevoir', 'Ninetales'], new RouteKillRequirement(5000, Region.galar, 62)),
+      ],
+    }),
+    [new RouteKillRequirement(1000, Region.galar, 61)], // Fireflow Volcano Research Level 2
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Maricopia Reef', Region.galar, 63,
+    new RoutePokemon({
+        special:
+      [
+          new SpecialRoutePokemon(['Finneon', 'Sharpedo', 'Wingull', 'Pelipper', 'Magikarp', 'Machamp', 'Mareanie', 'Corsola', 'Mantine', 'Wailord', 'Pyukumuku'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+          new SpecialRoutePokemon(['Pikachu', 'Squirtle'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 63), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Lapras', 'Wailmer'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 63), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+
+          new SpecialRoutePokemon(['Inkay', 'Wailord', 'Squirtle', 'Alolan Raichu', 'Wingull', 'Mareanie', 'Drifblim', 'Mantine', 'Primarina', 'Lapras', 'Clamperl', 'Vaporeon', 'Blastoise'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+      ],
+    }),
+    [new RouteKillRequirement(1000, Region.galar, 58)], // Blushing Beach Research Level 2
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Lental Seafloor', Region.galar, 64,
+    new RoutePokemon({
+        land: ['Magikarp', 'Finneon', 'Luvdisc', 'Corsola', 'Lumineon', 'Octillery', 'Wailmer', 'Sharpedo', 'Qwilfish', 'Tentacruel', 'Mantine'],
+        special:
+      [
+          new SpecialRoutePokemon(['Pelipper', 'Cradily', 'Pyukumuku', 'Clawitzer', 'Chinchou', 'Frillish', 'Lanturn', 'Clamperl', 'Golisopod'], new RouteKillRequirement(1000, Region.galar, 64)),
+          new SpecialRoutePokemon(['Alomomola', 'Inkay', 'Starmie', 'Wailord', 'Squirtle', 'Lapras'], new RouteKillRequirement(5000, Region.galar, 64)),
+      ],
+    }),
+    [new RouteKillRequirement(1000, Region.galar, 63)], // Maricopia Reef Research Level 2
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Research Camp', Region.galar, 65,
+    new RoutePokemon({
+        land: ['Stoutland', 'Meowth', 'Starly', 'Cutiefly', 'Bunnelby', 'Sudowoodo', 'Eevee', 'Trubbish', 'Pikachu', 'Audino', 'Rattata', 'Dedenne'],
+    }),
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 9)], // 3 Illumina Pokemon encountered
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Shiver Snowfields', Region.galar, 66,
+    new RoutePokemon({
+        special:
+      [
+          new SpecialRoutePokemon(['Furret', 'Swinub', 'Beartic', 'Cubchoo', 'Magikarp', 'Mamoswine', 'Skarmory', 'Snorunt', 'Snom', 'Frosmoth', 'Glalie', 'Spheal', 'Piplup'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+          new SpecialRoutePokemon(['Froslass', 'Alolan Sandslash', 'Alolan Vulpix', 'Weavile', 'Abomasnow', 'Crabominable'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 66), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Mightyena', 'Glaceon', 'Vanilluxe', 'Dewgong', 'Avalugg'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 66), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+
+          new SpecialRoutePokemon(['Mightyena', 'Piplup', 'Mamoswine', 'Snorunt', 'Braviary', 'Furret', 'Alolan Sandslash', 'Delibird', 'Abomasnow', 'Vanilluxe', 'Jynx', 'Alolan Vulpix', 'Spheal', 'Swinub', 'Frosmoth'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+          new SpecialRoutePokemon(['Crabominable', 'Weavile', 'Snom', 'Froslass', 'Aurorus', 'Avalugg', 'Dewgong', 'Cubchoo', 'Beartic', 'Magikarp', 'Glaceon'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 66), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
+      ],
+    }),
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 12)], // 4 Illumina Pokemon encountered
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Outaway Cave', Region.galar, 67,
+    new RoutePokemon({
+        land: ['Crobat', 'Carbink', 'Joltik', 'Braviary', 'Rampardos', 'Glalie', 'Magikarp', 'Croagunk', 'Sableye', 'Gengar', 'Geodude', 'Noibat', 'Beartic'],
+        special:
+      [
+          new SpecialRoutePokemon(['Drifloon', 'Mawile', 'Clefairy', 'Jolteon'], new RouteKillRequirement(1000, Region.galar, 67)),
+          new SpecialRoutePokemon(['Pumpkaboo (Average)', 'Pumpkaboo (Large)', 'Pumpkaboo (Small)', 'Pumpkaboo (Super Size)', 'Hydreigon', 'Goodra'], new RouteKillRequirement(5000, Region.galar, 67)),
+      ],
+    }),
+    [new RouteKillRequirement(1000, Region.galar, 66)], // Shiver Snowfields Research Level 2
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Ruins of Remembrance', Region.galar, 68,
+    new RoutePokemon({
+        land: ['Houndoom', 'Eldegoss', 'Natu', 'Beheeyem', 'Salandit', 'Noivern', 'Sigilyph', 'Golurk', 'Woobat', 'Magikarp'],
+        special:
+      [
+          new SpecialRoutePokemon(['Chandelure', 'Absol'], new RouteKillRequirement(1000, Region.galar, 67)),
+          new SpecialRoutePokemon(['Umbreon'], new RouteKillRequirement(5000, Region.galar, 67)),
+      ],
+    }),
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 15)], // 5 Illumina Pokemon
+    undefined,
+    GalarSubRegions.Lental,
+));
+Routes.add(new RegionRoute(
+    'Mightywide River', Region.galar, 69,
     new RoutePokemon({
         special:
       [
           new SpecialRoutePokemon(['Magikarp', 'Beautifly', 'Aipom', 'Tropius', 'Psyduck', 'Toucannon', 'Feraligatr', 'Swampert', 'Metapod'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
           new SpecialRoutePokemon(['Grookey'], new MultiRequirement([new ObtainedPokemonRequirement('Grookey'), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
           new SpecialRoutePokemon(['Sobble'], new MultiRequirement([new ObtainedPokemonRequirement('Sobble'), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
-          new SpecialRoutePokemon(['Arbok', 'Wooper', 'Quagsire', 'Gyarados'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 68), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
-          new SpecialRoutePokemon(['Ursaring', 'Venusaur', 'Drilbur', 'Cleffa'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 68), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Arbok', 'Wooper', 'Quagsire', 'Gyarados'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 69), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Ursaring', 'Venusaur', 'Drilbur', 'Cleffa'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 69), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
 
           new SpecialRoutePokemon(['Morelull', 'Tropius', 'Psyduck', 'Beautifly', 'Ariados', 'Wooper', 'Quagsire', 'Swampert', 'Feraligatr', 'Toucannon', 'Ledian', 'Aipom'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
-          new SpecialRoutePokemon(['Ursaring', 'Drilbur', 'Magikarp', 'Cleffa', 'Gyarados'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 68), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
+          new SpecialRoutePokemon(['Ursaring', 'Drilbur', 'Magikarp', 'Cleffa', 'Gyarados'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 69), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
       ],
     }),
-    [new QuestLineCompletedRequirement('New Pokémon Snap')],
-    undefined,
-    GalarSubRegions.Lental,
-));
-Routes.add(new RegionRoute(
-    'Maricopia Reef', Region.galar, 69,
-    new RoutePokemon({
-        special:
-      [
-          new SpecialRoutePokemon(['Finneon', 'Sharpedo', 'Wingull', 'Pelipper', 'Magikarp', 'Machamp', 'Mareanie', 'Corsola', 'Mantine', 'Wailord', 'Pyukumuku'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
-          new SpecialRoutePokemon(['Pikachu', 'Squirtle'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 69), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
-          new SpecialRoutePokemon(['Lapras', 'Wailmer'], new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 69), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
-
-          new SpecialRoutePokemon(['Inkay', 'Wailord', 'Squirtle', 'Alolan Raichu', 'Wingull', 'Mareanie', 'Drifblim', 'Mantine', 'Primarina', 'Lapras', 'Clamperl', 'Vaporeon', 'Blastoise'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
-      ],
-    }),
-    [new QuestLineCompletedRequirement('New Pokémon Snap')],
+    [new QuestLineCompletedRequirement('New Pokémon Snap')], // Post-game DLC
     undefined,
     GalarSubRegions.Lental,
 ));
@@ -3989,7 +3989,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Magikarp', 'Gliscor', 'Sandshrew', 'Minior (Meteor)'], new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 70), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
       ],
     }),
-    [new QuestLineCompletedRequirement('New Pokémon Snap')],
+    [new QuestLineCompletedRequirement('New Pokémon Snap')], // Post-game DLC
     undefined,
     GalarSubRegions.Lental,
 ));

@@ -9205,7 +9205,7 @@ const MagearnaMysteryGift = new PokemonGiftNPC('Mystery Gift', [
 // Lental NPCs
 const LentalRoamerNPC = new RoamerNPC('Rita', [
     'There seems to be a lot of activity at {ROUTE_NAME}. If you\'ve explored the Lental Region enough, I\'m sure some rare Pokémon will come out to greet you!',
-], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.Lental));
+], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.Lental), 'assets/images/npcs/Rita.png');
 const SnapMirror1 = new NPC ('Prof. Mirror', [
     'Welcome to the Lental Region! I\'m Professor Mirror and this is my assistant, Rita.',
     'We are researching the Illumina phenomenon.',
@@ -9217,10 +9217,10 @@ const SnapMirror1 = new NPC ('Prof. Mirror', [
 const SnapMirror2 = new NPC ('Prof. Mirror', [
     'Wow! You saw a Meganium undergoing the Illumina Phenomenon! It\'s quite a beautiful experience, isn\'t it?',
     'I\'ve detected high energy readings on Belusylva Island. It must be another Illumina Pokémon!',
-    'You should head there next.',
+    'You should head there next, but try to explore some of the other islands as well.',
 ], {
     image: 'assets/images/npcs/Professor Mirror.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('New Pokémon Snap', 2), new QuestLineStepCompletedRequirement('New Pokémon Snap', 6, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('New Pokémon Snap', 2), new QuestLineStepCompletedRequirement('New Pokémon Snap', 5, GameConstants.AchievementOption.less)]),
 });
 const SnapMirror3 = new NPC ('Prof. Mirror', [
     'Wow! You saw a Milotic undergoing the Illumina Phenomenon! It\'s quite a beautiful experience, isn\'t it?',
@@ -9228,7 +9228,7 @@ const SnapMirror3 = new NPC ('Prof. Mirror', [
     'You should head there next.',
 ], {
     image: 'assets/images/npcs/Professor Mirror.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('New Pokémon Snap', 6), new QuestLineStepCompletedRequirement('New Pokémon Snap', 10, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('New Pokémon Snap', 5), new QuestLineStepCompletedRequirement('New Pokémon Snap', 8, GameConstants.AchievementOption.less)]),
 });
 const SnapMirror4 = new NPC ('Prof. Mirror', [
     'Wow! You saw a Wishiwashi undergoing the Illumina Phenomenon! It\'s quite a beautiful experience, isn\'t it?',
@@ -9236,7 +9236,7 @@ const SnapMirror4 = new NPC ('Prof. Mirror', [
     'You should head there next.',
 ], {
     image: 'assets/images/npcs/Professor Mirror.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('New Pokémon Snap', 10), new QuestLineStepCompletedRequirement('New Pokémon Snap', 14, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('New Pokémon Snap', 8), new QuestLineStepCompletedRequirement('New Pokémon Snap', 11, GameConstants.AchievementOption.less)]),
 });
 const SnapMirror5 = new NPC ('Prof. Mirror', [
     'Wow! You saw a pair of Volcarona undergoing the Illumina Phenomenon! It\'s quite a beautiful experience, isn\'t it?',
@@ -9244,7 +9244,7 @@ const SnapMirror5 = new NPC ('Prof. Mirror', [
     'You should head there next.',
 ], {
     image: 'assets/images/npcs/Professor Mirror.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('New Pokémon Snap', 14), new QuestLineStepCompletedRequirement('New Pokémon Snap', 18, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('New Pokémon Snap', 11), new QuestLineStepCompletedRequirement('New Pokémon Snap', 14, GameConstants.AchievementOption.less)]),
 });
 const SnapMirror6 = new NPC ('Prof. Mirror', [
     'Wow! You saw a Steelix undergoing the Illumina Phenomenon! It\'s quite a beautiful experience, isn\'t it?',
@@ -9252,7 +9252,7 @@ const SnapMirror6 = new NPC ('Prof. Mirror', [
     'You should head there next.',
 ], {
     image: 'assets/images/npcs/Professor Mirror.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('New Pokémon Snap', 18), new QuestLineStepCompletedRequirement('New Pokémon Snap', 21, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('New Pokémon Snap', 14), new QuestLineStepCompletedRequirement('New Pokémon Snap', 17, GameConstants.AchievementOption.less)]),
 });
 const SnapMirror7 = new NPC ('Prof. Mirror', [
     'Wow! You saw a Xerneas undergoing the Illumina Phenomenon! It\'s quite a beautiful experience, isn\'t it?',
@@ -9260,15 +9260,22 @@ const SnapMirror7 = new NPC ('Prof. Mirror', [
     'I am going to continue to research this phenomenon in order to discover the effects it may have on other Pokémon!',
 ], {
     image: 'assets/images/npcs/Professor Mirror.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('New Pokémon Snap', 21), new QuestLineCompletedRequirement('New Pokémon Snap', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('New Pokémon Snap', 17), new QuestLineCompletedRequirement('New Pokémon Snap', GameConstants.AchievementOption.less)]),
 });
 const SnapMirror8 = new NPC ('Prof. Mirror', [
-    'I am going to continue to research the Illumina Phenomenon here in the Lental Region.',
-    'Feel free to explore any of the islands here in the Lental Region.',
+    'I am going to continue to research the Illumina Phenomenon in the Lental Region. Feel free to explore any of the islands here.',
     'Some of the Pokémon in this region will only appear at night or during the day.',
     'I\'ve also found that if you explore an area enough, more Pokémon will appear.',
 ], {
     image: 'assets/images/npcs/Professor Mirror.png',
+    requirement: new QuestLineCompletedRequirement('New Pokémon Snap'),
+});
+const ToddSnap = new NPC ('Todd Snap', [
+    'Have you found any Fluffruit yet?',
+    'Throwing one at a Pokémon will bother it.',
+    'The Pokémon may look different, but it\'s still the same Pokémon.',
+], {
+    image: 'assets/images/npcs/Todd Snap.png',
     requirement: new QuestLineCompletedRequirement('New Pokémon Snap'),
 });
 
@@ -9473,7 +9480,7 @@ TownList['Professor Mirror\'s Research Lab'] = new Town(
     [new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
-        npcs: [SnapMirror1, SnapMirror2, SnapMirror3, SnapMirror4, SnapMirror5, SnapMirror6, SnapMirror7, SnapMirror8, LentalRoamerNPC],
+        npcs: [SnapMirror1, SnapMirror2, SnapMirror3, SnapMirror4, SnapMirror5, SnapMirror6, SnapMirror7, SnapMirror8, LentalRoamerNPC, ToddSnap],
     }
 );
 
@@ -9668,43 +9675,37 @@ TownList['Florio Island Illumina Spot'] = new DungeonTown(
     'Florio Island Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 2)],
-    []
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 3)]
 );
 TownList['Belusylva Island Illumina Spot'] = new DungeonTown(
     'Belusylva Island Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 6)],
-    []
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 6)]
 );
 TownList['Maricopia Islands Illumina Spot'] = new DungeonTown(
     'Maricopia Islands Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 10)],
-    []
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 9)]
 );
 TownList['Voluca Island Illumina Spot'] = new DungeonTown(
     'Voluca Island Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 14)],
-    []
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 12)]
 );
 TownList['Durice Island Illumina Spot'] = new DungeonTown(
     'Durice Island Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 18)],
-    []
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 15)]
 );
 TownList['Aurus Island Illumina Spot'] = new DungeonTown(
     'Aurus Island Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 21)],
-    []
+    [new QuestLineCompletedRequirement('New Pokémon Snap')]
 );
 
 //Hisui shops

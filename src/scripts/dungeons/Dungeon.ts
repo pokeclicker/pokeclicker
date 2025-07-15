@@ -13427,18 +13427,21 @@ dungeonList['Florio Island Illumina Spot'] = new Dungeon('Florio Island Illumina
     ['Eevee', 'Sylveon', 'Comfey', 'Combee', 'Hoothoot', 'Pikachu', 'Emolga'],
     {
         common: [
-            {loot: 'Cheri'},
-            {loot: 'Chesto'},
             {loot: 'Pecha'},
-            {loot: 'Rawst'},
-            {loot: 'Aspear'},
+            {loot: 'Leppa'},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
+            {loot: 'Persim'},
         ],
         rare: [
             {loot: 'Green Shard'},
             {loot: 'Lime Shard'},
         ],
         epic: [{loot: 'Meadow Plate'}],
-        legendary: [{loot: 'Shaymin (Land)'}],
+        legendary: [
+            {loot: 'Fluffruit'},
+            {loot: 'Shaymin (Land)', requirement: new ObtainedPokemonRequirement('Shaymin (Land)')},
+        ],
         mythic: [{loot: 'Illumina_Orb'}],
     },
     100,
@@ -13452,10 +13455,10 @@ dungeonList['Belusylva Island Illumina Spot'] = new Dungeon('Belusylva Island Il
     ['Magikarp', 'Lotad', 'Bulbasaur', 'Ninetales', 'Serperior', 'Trevenant', 'Espeon', 'Kecleon'],
     {
         common: [
-            {loot: 'Leppa'},
-            {loot: 'Oran'},
-            {loot: 'Sitrus'},
-            {loot: 'Persim'},
+            {loot: 'Cheri'},
+            {loot: 'Chesto'},
+            {loot: 'Rawst'},
+            {loot: 'Aspear'},
             {loot: 'Razz'},
         ],
         rare: [
@@ -13463,7 +13466,7 @@ dungeonList['Belusylva Island Illumina Spot'] = new Dungeon('Belusylva Island Il
             {loot: 'Pink Shard'},
         ],
         epic: [{loot: 'Splash Plate'}],
-        // legendary: [],
+        legendary: [{loot: 'Fluffruit'}],
         mythic: [{loot: 'Illumina_Orb'}],
     },
     100,
@@ -13476,13 +13479,17 @@ dungeonList['Belusylva Island Illumina Spot'] = new Dungeon('Belusylva Island Il
 dungeonList['Maricopia Islands Illumina Spot'] = new Dungeon('Maricopia Islands Illumina Spot',
     ['Wailmer', 'Finneon', 'Luvdisc', 'Wailord'],
     {
-        common: [{loot: 'Wishiwashi (Solo)'}],
+        common: [
+            {loot: 'Wishiwashi (Solo)', weight: 5},
+            {loot: 'Luvdisc', weight: 1},
+            {loot: 'Finneon', weight: 1},
+        ],
         rare: [
             {loot: 'Blue Shard'},
             {loot: 'Cyan Shard'},
         ],
         epic: [{loot: 'Splash Plate'}],
-        // legendary: [],
+        legendary: [{loot: 'Fluffruit'}],
         mythic: [{loot: 'Illumina_Orb'}],
     },
     100,
@@ -13495,7 +13502,11 @@ dungeonList['Maricopia Islands Illumina Spot'] = new Dungeon('Maricopia Islands 
 dungeonList['Voluca Island Illumina Spot'] = new Dungeon('Voluca Island Illumina Spot',
     ['Monferno', 'Talonflame', 'Archeops'],
     {
-        common: [{loot: 'Cheri'}], // TODO
+        common: [
+            {loot: 'Bluk'},
+            {loot: 'Nanab'},
+            {loot: 'Wepear'},
+        ],
         rare: [
             {loot: 'Red Shard'},
             {loot: 'Crimson Shard'},
@@ -13504,7 +13515,7 @@ dungeonList['Voluca Island Illumina Spot'] = new Dungeon('Voluca Island Illumina
             {loot: 'Insect Plate'},
             {loot: 'Flame Plate'},
         ],
-        // legendary: [],
+        legendary: [{loot: 'Fluffruit'}],
         mythic: [{loot: 'Illumina_Orb'}],
     },
     100,
@@ -13517,7 +13528,11 @@ dungeonList['Voluca Island Illumina Spot'] = new Dungeon('Voluca Island Illumina
 dungeonList['Durice Island Illumina Spot'] = new Dungeon('Durice Island Illumina Spot',
     ['Noibat', 'Carbink', 'Sableye', 'Joltik', 'Crobat'],
     {
-        common: [{loot: 'Cheri'}], // TODO
+        common: [
+            {loot: 'Pinap'},
+            {loot: 'Figy'},
+            {loot: 'Wiki'},
+        ],
         rare: [
             {loot: 'Grey Shard'},
             {loot: 'Brown Shard'},
@@ -13526,7 +13541,7 @@ dungeonList['Durice Island Illumina Spot'] = new Dungeon('Durice Island Illumina
             {loot: 'Iron Plate'},
             {loot: 'Stone Plate'},
         ],
-        // legendary: [],
+        legendary: [{loot: 'Fluffruit'}],
         mythic: [{loot: 'Illumina_Orb'}],
     },
     100,
@@ -13539,13 +13554,17 @@ dungeonList['Durice Island Illumina Spot'] = new Dungeon('Durice Island Illumina
 dungeonList['Aurus Island Illumina Spot'] = new Dungeon('Aurus Island Illumina Spot',
     ['Sigilyph', 'Woobat', 'Eldegoss', 'Chandelure', 'Houndoom', 'Absol', 'Noivern', 'Natu', 'Golurk'],
     {
-        common: [{loot: 'Cheri'}], // TODO
+        common: [
+            {loot: 'Mago'},
+            {loot: 'Aguav'},
+            {loot: 'Iapapa'},
+        ],
         rare: [
             {loot: 'Rose Shard'},
             {loot: 'Black Shard'},
         ],
         epic: [{loot: 'Pixie Plate'}],
-        // legendary: [],
+        legendary: [{loot: 'Fluffruit'}],
         mythic: [{loot: 'Illumina_Orb'}],
     },
     100,

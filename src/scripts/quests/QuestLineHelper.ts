@@ -4122,70 +4122,58 @@ class QuestLineHelper {
         const snapFlorioIllumina = new DefeatTemporaryBattleQuest('Florio Island Illumina Pokémon 3', 'Follow the Florio Island Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapFlorioIllumina);
 
-        const talktoSnapMirror2 = new TalkToNPCQuest(SnapMirror2, 'Speak to Professor Mirror about the Illumina Pokémon.');
-        newPokemonSnapQuestLine.addQuest(talktoSnapMirror2);
+        const talktoSnapMirror2 = new TalkToNPCQuest(SnapMirror2, 'Speak to Professor Mirror about the Illumina Meganium.');
+        newPokemonSnapQuestLine.addQuest(talktoSnapMirror2); // 3
 
         /* Belusylva Island */
-        const snapFounjaJungle = new DefeatPokemonsQuest(100, 0, 57, GameConstants.Region.galar).withDescription('Explore Belusylva Island\'s Founja Jungle.');
-        newPokemonSnapQuestLine.addQuest(snapFounjaJungle);
-
-        const snapElsewhereForest = new DefeatPokemonsQuest(100, 0, 58, GameConstants.Region.galar).withDescription('Explore Belusylva Island\'s Elsewhere Forest.');
+        const snapElsewhereForest = new DefeatPokemonsQuest(100, 0, 62, GameConstants.Region.galar).withDescription('Explore Belusylva Island\'s Elsewhere Forest.');
         newPokemonSnapQuestLine.addQuest(snapElsewhereForest);
 
         const snapBelusylvaIllumina = new DefeatTemporaryBattleQuest('Belusylva Island Illumina Pokémon 3', 'Defeat the Belusylva Island Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapBelusylvaIllumina);
 
-        const talktoSnapMirror3 = new TalkToNPCQuest(SnapMirror3, 'Speak to Professor Mirror about the Illumina Pokémon.');
-        newPokemonSnapQuestLine.addQuest(talktoSnapMirror3);
+        const talktoSnapMirror3 = new TalkToNPCQuest(SnapMirror3, 'Speak to Professor Mirror about the Illumina Milotic.');
+        newPokemonSnapQuestLine.addQuest(talktoSnapMirror3); // 6
 
         /* Maricopia Islands */
-        const snapBlushingBeach = new DefeatPokemonsQuest(100, 0, 59, GameConstants.Region.galar).withDescription('Explore Maricopia Islands\' Blushing Beach.');
-        newPokemonSnapQuestLine.addQuest(snapBlushingBeach);
-
-        const snapLentalSeafloor = new DefeatPokemonsQuest(100, 0, 60, GameConstants.Region.galar).withDescription('Explore Maricopia Islands\' Lental Seafloor.');
+        const snapLentalSeafloor = new DefeatPokemonsQuest(5000, 0, 64, GameConstants.Region.galar).withDescription('Explore Maricopia Islands\' Lental Seafloor.');
         newPokemonSnapQuestLine.addQuest(snapLentalSeafloor);
 
         const snapMaricopiaIllumina = new DefeatTemporaryBattleQuest('Maricopia Islands Illumina Pokémon 3', 'Defeat the Maricopia Islands Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapMaricopiaIllumina);
 
-        const talktoSnapMirror4 = new TalkToNPCQuest(SnapMirror4, 'Speak to Professor Mirror about the Illumina Pokémon.');
-        newPokemonSnapQuestLine.addQuest(talktoSnapMirror4);
+        const talktoSnapMirror4 = new TalkToNPCQuest(SnapMirror4, 'Speak to Professor Mirror about the Illumina Wishiwashi.');
+        newPokemonSnapQuestLine.addQuest(talktoSnapMirror4); // 9
 
         /* Voluca Island */
-        const snapSwelteringSands = new DefeatPokemonsQuest(100, 0, 61, GameConstants.Region.galar).withDescription('Explore Voluca Island\'s Sweltering Sands.');
-        newPokemonSnapQuestLine.addQuest(snapSwelteringSands);
-
-        const snapFireflowVolcano = new DefeatPokemonsQuest(100, 0, 62, GameConstants.Region.galar).withDescription('Explore Voluca Island\'s Fireflow Volcano.');
+        const snapFireflowVolcano = new DefeatPokemonsQuest(1000, 0, 61, GameConstants.Region.galar).withDescription('Explore Voluca Island\'s Fireflow Volcano.');
         newPokemonSnapQuestLine.addQuest(snapFireflowVolcano);
 
         const snapVolucaIllumina = new DefeatTemporaryBattleQuest('Voluca Island Illumina Pokémon 3', 'Defeat the Voluca Island Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapVolucaIllumina);
 
-        const talktoSnapMirror5 = new TalkToNPCQuest(SnapMirror5, 'Speak to Professor Mirror about the Illumina Pokémon.');
-        newPokemonSnapQuestLine.addQuest(talktoSnapMirror5);
+        const talktoSnapMirror5 = new TalkToNPCQuest(SnapMirror5, 'Speak to Professor Mirror about the Illumina Volcarona.');
+        newPokemonSnapQuestLine.addQuest(talktoSnapMirror5); // 12
 
         /* Durice Island */
-        const snapShiverSnowfields = new DefeatPokemonsQuest(100, 0, 63, GameConstants.Region.galar).withDescription('Explore Durice Island\'s Shiver Snowfields.');
-        newPokemonSnapQuestLine.addQuest(snapShiverSnowfields);
-
-        const snapOutawayCave = new DefeatPokemonsQuest(100, 0, 64, GameConstants.Region.galar).withDescription('Explore Durice Island\'s Outaway Cave.');
+        const snapOutawayCave = new DefeatPokemonsQuest(1000, 0, 67, GameConstants.Region.galar).withDescription('Explore Durice Island\'s Outaway Cave.');
         newPokemonSnapQuestLine.addQuest(snapOutawayCave);
 
         const snapDuriceIllumina = new DefeatTemporaryBattleQuest('Durice Island Illumina Pokémon 3', 'Defeat the Durice Island Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapDuriceIllumina);
 
-        const talktoSnapMirror6 = new TalkToNPCQuest(SnapMirror6, 'Speak to Professor Mirror about the Illumina Pokémon.');
-        newPokemonSnapQuestLine.addQuest(talktoSnapMirror6);
+        const talktoSnapMirror6 = new TalkToNPCQuest(SnapMirror6, 'Speak to Professor Mirror about the Illumina Steelix.');
+        newPokemonSnapQuestLine.addQuest(talktoSnapMirror6); // 15
 
         /* Aurus Island */
-        const snapRuinsOfRemembrance = new DefeatPokemonsQuest(100, 0, 65, GameConstants.Region.galar).withDescription('Explore Aurus Island\'s Ruins of Remembrance.');
+        const snapRuinsOfRemembrance = new DefeatPokemonsQuest(1000, 0, 68, GameConstants.Region.galar).withDescription('Explore Aurus Island\'s Ruins of Remembrance.');
         newPokemonSnapQuestLine.addQuest(snapRuinsOfRemembrance);
 
         const snapAurusIllumina = new DefeatTemporaryBattleQuest('Aurus Island Illumina Pokémon 3', 'Defeat the Aurus Island Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapAurusIllumina);
 
-        const talktoSnapMirror7 = new TalkToNPCQuest(SnapMirror7, 'Speak to Professor Mirror about the Illumina Pokémon.');
-        newPokemonSnapQuestLine.addQuest(talktoSnapMirror7);
+        const talktoSnapMirror7 = new TalkToNPCQuest(SnapMirror7, 'Speak to Professor Mirror about the Illumina Xerneas.');
+        newPokemonSnapQuestLine.addQuest(talktoSnapMirror7); //18
 
         App.game.quests.questLines().push(newPokemonSnapQuestLine);
     }
