@@ -6634,6 +6634,7 @@ TemporaryBattleList['Florio Island Illumina Pokémon 1'] = new TemporaryBattle(
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/154.01',
     }
 );
 TemporaryBattleList['Florio Island Illumina Pokémon 2'] = new TemporaryBattle(
@@ -6645,6 +6646,7 @@ TemporaryBattleList['Florio Island Illumina Pokémon 2'] = new TemporaryBattle(
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/154.01',
     }
 );
 TemporaryBattleList['Florio Island Illumina Pokémon 3'] = new TemporaryBattle(
@@ -6656,6 +6658,7 @@ TemporaryBattleList['Florio Island Illumina Pokémon 3'] = new TemporaryBattle(
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/154.01',
     }
 );
 TemporaryBattleList['Belusylva Island Illumina Pokémon 1'] = new TemporaryBattle(
@@ -6667,6 +6670,7 @@ TemporaryBattleList['Belusylva Island Illumina Pokémon 1'] = new TemporaryBattl
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/350.01',
     }
 );
 TemporaryBattleList['Belusylva Island Illumina Pokémon 2'] = new TemporaryBattle(
@@ -6678,6 +6682,7 @@ TemporaryBattleList['Belusylva Island Illumina Pokémon 2'] = new TemporaryBattl
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/350.01',
     }
 );
 TemporaryBattleList['Belusylva Island Illumina Pokémon 3'] = new TemporaryBattle(
@@ -6689,6 +6694,7 @@ TemporaryBattleList['Belusylva Island Illumina Pokémon 3'] = new TemporaryBattl
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/350.01',
     }
 );
 TemporaryBattleList['Maricopia Islands Illumina Pokémon 1'] = new TemporaryBattle(
@@ -6700,6 +6706,7 @@ TemporaryBattleList['Maricopia Islands Illumina Pokémon 1'] = new TemporaryBatt
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/746.03',
     }
 );
 TemporaryBattleList['Maricopia Islands Illumina Pokémon 2'] = new TemporaryBattle(
@@ -6718,6 +6725,7 @@ TemporaryBattleList['Maricopia Islands Illumina Pokémon 2'] = new TemporaryBatt
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/746.03',
     }
 );
 TemporaryBattleList['Maricopia Islands Illumina Pokémon 3'] = new TemporaryBattle(
@@ -6729,6 +6737,7 @@ TemporaryBattleList['Maricopia Islands Illumina Pokémon 3'] = new TemporaryBatt
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/746.03',
     }
 );
 TemporaryBattleList['Voluca Island Illumina Pokémon 1'] = new TemporaryBattle(
@@ -6740,6 +6749,7 @@ TemporaryBattleList['Voluca Island Illumina Pokémon 1'] = new TemporaryBattle(
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/637.01',
     }
 );
 TemporaryBattleList['Voluca Island Illumina Pokémon 2'] = new TemporaryBattle(
@@ -6751,6 +6761,7 @@ TemporaryBattleList['Voluca Island Illumina Pokémon 2'] = new TemporaryBattle(
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/637.01',
     }
 );
 TemporaryBattleList['Voluca Island Illumina Pokémon 3'] = new TemporaryBattle(
@@ -6765,6 +6776,7 @@ TemporaryBattleList['Voluca Island Illumina Pokémon 3'] = new TemporaryBattle(
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/637.01',
     }
 );
 TemporaryBattleList['Durice Island Illumina Pokémon 1'] = new TemporaryBattle(
@@ -6776,6 +6788,7 @@ TemporaryBattleList['Durice Island Illumina Pokémon 1'] = new TemporaryBattle(
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/208.03',
     }
 );
 TemporaryBattleList['Durice Island Illumina Pokémon 2'] = new TemporaryBattle(
@@ -6787,6 +6800,7 @@ TemporaryBattleList['Durice Island Illumina Pokémon 2'] = new TemporaryBattle(
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/208.03',
     }
 );
 TemporaryBattleList['Durice Island Illumina Pokémon 3'] = new TemporaryBattle(
@@ -6798,6 +6812,7 @@ TemporaryBattleList['Durice Island Illumina Pokémon 3'] = new TemporaryBattle(
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/208.03',
     }
 );
 TemporaryBattleList['Aurus Island Illumina Pokémon 1'] = new TemporaryBattle(
@@ -6809,6 +6824,7 @@ TemporaryBattleList['Aurus Island Illumina Pokémon 1'] = new TemporaryBattle(
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/716.02',
     }
 );
 TemporaryBattleList['Aurus Island Illumina Pokémon 2'] = new TemporaryBattle(
@@ -6820,6 +6836,7 @@ TemporaryBattleList['Aurus Island Illumina Pokémon 2'] = new TemporaryBattle(
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/716.02',
     }
 );
 TemporaryBattleList['Aurus Island Illumina Pokémon 3'] = new TemporaryBattle(
@@ -6831,6 +6848,7 @@ TemporaryBattleList['Aurus Island Illumina Pokémon 3'] = new TemporaryBattle(
     {
         returnTown: 'Professor Mirror\'s Research Lab',
         hideTrainer: true,
+        imageName: '../pokemon/716.02',
     }
 );
 
