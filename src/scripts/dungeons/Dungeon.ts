@@ -13438,14 +13438,14 @@ dungeonList['Florio Island Illumina Spot'] = new Dungeon('Florio Island Illumina
         ],
         epic: [{loot: 'Meadow Plate'}],
         legendary: [{loot: 'Shaymin (Land)'}],
-        // mythic: [{loot: 'Illumina Orb'}],
+        mythic: [{loot: 'Illumina_Orb'}],
     },
     100,
     [new DungeonBossPokemon('Illumina Meganium', 100, 40)],
     100, 56,
     undefined,
     {
-        requirement: new TemporaryBattleRequirement('Florio Island Illumina Pokémon 3'),
+        requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 2),
     });
 dungeonList['Belusylva Island Illumina Spot'] = new Dungeon('Belusylva Island Illumina Spot',
     ['Magikarp', 'Lotad', 'Bulbasaur', 'Ninetales', 'Serperior', 'Trevenant', 'Espeon', 'Kecleon'],
@@ -13463,14 +13463,14 @@ dungeonList['Belusylva Island Illumina Spot'] = new Dungeon('Belusylva Island Il
         ],
         epic: [{loot: 'Splash Plate'}],
         // legendary: [],
-        // mythic: [{loot: 'Illumina Orb'}],
+        mythic: [{loot: 'Illumina_Orb'}],
     },
     100,
     [new DungeonBossPokemon('Illumina Milotic', 100, 40)],
     100, 58,
     undefined,
     {
-        requirement: new TemporaryBattleRequirement('Belusylva Island Illumina Pokémon 3'),
+        requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 6),
     });
 dungeonList['Maricopia Islands Illumina Spot'] = new Dungeon('Maricopia Islands Illumina Spot',
     ['Wailmer', 'Finneon', 'Luvdisc', 'Wailord'],
@@ -13482,14 +13482,14 @@ dungeonList['Maricopia Islands Illumina Spot'] = new Dungeon('Maricopia Islands 
         ],
         epic: [{loot: 'Splash Plate'}],
         // legendary: [],
-        // mythic: [{loot: 'Illumina Orb'}],
+        mythic: [{loot: 'Illumina_Orb'}],
     },
     100,
     [new DungeonBossPokemon('Illumina Wishiwashi', 100, 40)],
     100, 60,
     undefined,
     {
-        requirement: new TemporaryBattleRequirement('Maricopia Islands Illumina Pokémon 3'),
+        requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 10),
     });
 dungeonList['Voluca Island Illumina Spot'] = new Dungeon('Voluca Island Illumina Spot',
     ['Monferno', 'Talonflame', 'Archeops'],
@@ -13504,14 +13504,14 @@ dungeonList['Voluca Island Illumina Spot'] = new Dungeon('Voluca Island Illumina
             {loot: 'Flame Plate'},
         ],
         // legendary: [],
-        // mythic: [{loot: 'Illumina Orb'}],
+        mythic: [{loot: 'Illumina_Orb'}],
     },
     100,
     [new DungeonBossPokemon('Illumina Volcarona', 100, 40)],
     100, 62,
     undefined,
     {
-        requirement: new TemporaryBattleRequirement('Voluca Island Illumina Pokémon 3'),
+        requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 14),
     });
 dungeonList['Durice Island Illumina Spot'] = new Dungeon('Durice Island Illumina Spot',
     ['Noibat', 'Carbink', 'Sableye', 'Joltik', 'Crobat'],
@@ -13526,14 +13526,14 @@ dungeonList['Durice Island Illumina Spot'] = new Dungeon('Durice Island Illumina
             {loot: 'Stone Plate'},
         ],
         // legendary: [],
-        // mythic: [{loot: 'Illumina Orb'}],
+        mythic: [{loot: 'Illumina_Orb'}],
     },
     100,
     [new DungeonBossPokemon('Illumina Steelix', 100, 40)],
     100, 64,
     undefined,
     {
-        requirement: new TemporaryBattleRequirement('Durice Island Illumina Pokémon 3'),
+        requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 18),
     });
 dungeonList['Aurus Island Illumina Spot'] = new Dungeon('Aurus Island Illumina Spot',
     ['Sigilyph', 'Woobat', 'Eldegoss', 'Chandelure', 'Houndoom', 'Absol', 'Noivern', 'Natu', 'Golurk'],
@@ -13545,14 +13545,14 @@ dungeonList['Aurus Island Illumina Spot'] = new Dungeon('Aurus Island Illumina S
         ],
         epic: [{loot: 'Pixie Plate'}],
         // legendary: [],
-        // mythic: [{loot: 'Illumina Orb'}],
+        mythic: [{loot: 'Illumina_Orb'}],
     },
     100,
     [new DungeonBossPokemon('Illumina Xerneas', 100, 40)],
     100, 65,
     undefined,
     {
-        requirement: new TemporaryBattleRequirement('Aurus Island Illumina Pokémon 3'),
+        requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 21),
     });
 
 //Hisui Dungeons

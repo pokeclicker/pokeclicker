@@ -9169,6 +9169,9 @@ const MagearnaMysteryGift = new PokemonGiftNPC('Mystery Gift', [
 { saveKey: 'magearnamysterygift', requirement: new CustomRequirement(ko.pureComputed(() => +magearnaGiftReq.isCompleted()), 1, 'Complete all regional Shiny Master achievements from Kanto through Galar.')});
 
 // Lental NPCs
+const LentalRoamerNPC = new RoamerNPC('Rita', [
+    'There seems to be a lot of activity at {ROUTE_NAME}. If you\'ve explored the Lental Region enough, I\'m sure some rare Pokémon will come out to greet you!',
+], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.Lental));
 const SnapMirror1 = new NPC ('Prof. Mirror', [
     'Welcome to the Lental Region! I\'m Professor Mirror and this is my assistant, Rita.',
     'We are researching the Illumina phenomenon.',
@@ -9436,7 +9439,7 @@ TownList['Professor Mirror\'s Research Lab'] = new Town(
     [new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
-        npcs: [SnapMirror1, SnapMirror2, SnapMirror3, SnapMirror4, SnapMirror5, SnapMirror6, SnapMirror7, SnapMirror8],
+        npcs: [SnapMirror1, SnapMirror2, SnapMirror3, SnapMirror4, SnapMirror5, SnapMirror6, SnapMirror7, SnapMirror8, LentalRoamerNPC],
     }
 );
 
@@ -9631,43 +9634,43 @@ TownList['Florio Island Illumina Spot'] = new DungeonTown(
     'Florio Island Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new TemporaryBattleRequirement('Florio Island Illumina Pokémon 3')],
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 2)],
     []
 );
 TownList['Belusylva Island Illumina Spot'] = new DungeonTown(
     'Belusylva Island Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new MultiRequirement([new QuestLineStartedRequirement('New Pokémon Snap'), new QuestLineStepCompletedRequirement('New Pokémon Snap', 5)])],
-    [TemporaryBattleList['Belusylva Island Illumina Pokémon']]
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 6)],
+    []
 );
 TownList['Maricopia Islands Illumina Spot'] = new DungeonTown(
     'Maricopia Islands Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new MultiRequirement([new QuestLineStartedRequirement('New Pokémon Snap'), new QuestLineStepCompletedRequirement('New Pokémon Snap', 9)])],
-    [TemporaryBattleList['Maricopia Islands Illumina Pokémon']]
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 10)],
+    []
 );
 TownList['Voluca Island Illumina Spot'] = new DungeonTown(
     'Voluca Island Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new MultiRequirement([new QuestLineStartedRequirement('New Pokémon Snap'), new QuestLineStepCompletedRequirement('New Pokémon Snap', 13)])],
-    [TemporaryBattleList['Voluca Island Illumina Pokémon']]
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 14)],
+    []
 );
 TownList['Durice Island Illumina Spot'] = new DungeonTown(
     'Durice Island Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new MultiRequirement([new QuestLineStartedRequirement('New Pokémon Snap'), new QuestLineStepCompletedRequirement('New Pokémon Snap', 17)])],
-    [TemporaryBattleList['Durice Island Illumina Pokémon']]
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 18)],
+    []
 );
 TownList['Aurus Island Illumina Spot'] = new DungeonTown(
     'Aurus Island Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new MultiRequirement([new QuestLineStartedRequirement('New Pokémon Snap'), new QuestLineStepCompletedRequirement('New Pokémon Snap', 20)])],
-    [TemporaryBattleList['Aurus Island Illumina Pokémon']]
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 21)],
+    []
 );
 
 //Hisui shops

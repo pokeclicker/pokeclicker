@@ -446,6 +446,7 @@ export type ItemNameType
     | 'Leek'
     | 'Rusted_Sword'
     | 'Rusted_Shield'
+    | 'Illumina_Orb'
     | 'Wellspring_Mask'
     | 'Hearthflame_Mask'
     | 'Cornerstone_Mask'

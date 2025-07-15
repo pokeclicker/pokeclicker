@@ -10,11 +10,13 @@ export default class RoamingPokemon {
     constructor(
         public pokemonName: PokemonNameType,
         public unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement,
+        public specifyRoutes: number[] = [], // Specify the route numbers of the subregion the roaming Pokémon should appear on, [] means any route in the subregion
     ) {
         this.pokemon = pokemonMap[pokemonName];
     }
 
-    public isRoaming() {
-        return this.unlockRequirement ? this.unlockRequirement.isCompleted() : true;
+    public isRoaming(route: number) {
+        const onRoute = !this.specifyRoutes.length || this.specifyRoutes.includes(route);
+        return onRoute && (this.unlockRequirement ? this.unlockRequirement.isCompleted() : true);
     }
 }

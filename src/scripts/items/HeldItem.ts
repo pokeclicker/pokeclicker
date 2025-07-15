@@ -201,6 +201,8 @@ ItemList.Rusted_Sword = new PokemonRestrictedAttackBonusHeldItem('Rusted_Sword',
     (pokemon) => Math.floor(pokemon.id) == 888);
 ItemList.Rusted_Shield = new PokemonRestrictedAttackBonusHeldItem('Rusted_Shield', 10000, GameConstants.Currency.money, undefined, 'Rusted Shield', 1.5, GameConstants.Region.galar, 'Zamazenta',
     (pokemon) => Math.floor(pokemon.id) == 889);
+ItemList.Illumina_Orb = new PokemonRestrictedAttackBonusHeldItem('Illumina_Orb', 10000, GameConstants.Currency.money, undefined, 'Illumina Orb', 1.3, GameConstants.Region.galar, 'the holding Illumina Pokémon',
+    (pokemon) => pokemon.id == 154.01 || pokemon.id == 208.03 || pokemon.id == 350.01 || pokemon.id == 637.01 || pokemon.id == 716.02 || pokemon.id == 746.03);
 ItemList.Wellspring_Mask = new PokemonRestrictedAttackBonusHeldItem('Wellspring_Mask', 10000, GameConstants.Currency.money, undefined, 'Wellspring Mask', 1.5, GameConstants.Region.paldea, 'Ogerpon',
     (pokemon) => pokemon.id == 1017 || pokemon.id == 1017.01 || pokemon.id == 1017.04 || pokemon.id == 1017.05);
 ItemList.Hearthflame_Mask = new PokemonRestrictedAttackBonusHeldItem('Hearthflame_Mask', 10000, GameConstants.Currency.money, undefined, 'Hearthflame Mask', 1.5, GameConstants.Region.paldea, 'Ogerpon',

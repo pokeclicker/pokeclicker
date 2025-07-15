@@ -22,6 +22,9 @@ import RoamingGroup from './RoamingGroup';
 import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
 import MoonCyclePhaseRequirement from '../requirements/MoonCyclePhaseRequirement';
 import MoonCyclePhase from '../moonCycle/MoonCyclePhase';
+import RouteKillRequirement from '../requirements/RouteKillRequirement';
+import DayCyclePartRequirement from '../requirements/DayCyclePartRequirement';
+import DayCyclePart from '../dayCycle/DayCyclePart';
 
 export default class RoamingPokemonList {
     public static roamerGroups: RoamingGroup[][] = [
@@ -62,9 +65,9 @@ export default class RoamingPokemonList {
         }
     }
 
-    public static getSubRegionalGroupRoamers(region: Region, subRegionGroup: number): Array<RoamingPokemon> {
+    public static getSubRegionalGroupRoamers(region: Region, subRegionGroup: number, route: number): Array<RoamingPokemon> {
         return RoamingPokemonList.list[region] && RoamingPokemonList.list[region][subRegionGroup]
-            ? RoamingPokemonList.list[region][subRegionGroup].filter((p) => p.isRoaming())
+            ? RoamingPokemonList.list[region][subRegionGroup].filter((p) => p.isRoaming(route))
             : [];
     }
 
@@ -154,7 +157,20 @@ RoamingPokemonList.add(Region.galar, 3, new RoamingPokemon('Glastrier', new Ques
 RoamingPokemonList.add(Region.galar, 3, new RoamingPokemon('Galarian Articuno', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 5)));
 
 // Galar - Lental
-
+// Could use OneFromManyRequirement some, but this helps emphasize they have standalone requirements for day/night
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Shaymin (Land)', new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 56), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])]), [56]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Shaymin (Land)', new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 56), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [56]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Mew', new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 57), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])]), [57]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Mew', new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 57), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [57]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Celebi', new RouteKillRequirement(1000, Region.galar, 58), [58]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Lugia', new RouteKillRequirement(5000, Region.galar, 60), [60]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Ho-Oh', new MultiRequirement([new QuestLineCompletedRequirement('New Pokémon Snap'), new RouteKillRequirement(1000, Region.galar, 62)]), [62]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Suicune', new MultiRequirement([new QuestLineCompletedRequirement('New Pokémon Snap'), new RouteKillRequirement(1000, Region.galar, 63), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [63]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Diancie', new RouteKillRequirement(5000, Region.galar, 64), [64]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Jirachi', new MultiRequirement([new QuestLineCompletedRequirement('New Pokémon Snap'), new RouteKillRequirement(1000, Region.galar, 65)]), [65]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Manaphy', new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 69), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [69]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Zeraora', new MultiRequirement([new RouteKillRequirement(5000, Region.galar, 70), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])]), [70]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Zeraora', new MultiRequirement([new RouteKillRequirement(1000, Region.galar, 70), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [70]));
 
 // Hisui
 RoamingPokemonList.add(Region.hisui, 0, new RoamingPokemon('Tornadus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1)));
@@ -173,6 +189,47 @@ RoamingPokemonList.add(Region.galar, 2, new RoamingPokemon('Vivillon (Fancy)', n
 RoamingPokemonList.add(Region.galar, 3, new RoamingPokemon('Vivillon (Fancy)', new SpecialEventRequirement('Lunar New Year')));
 RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Vivillon (Meadow)', new SpecialEventRequirement('Lunar New Year')));
 RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Vivillon (Meadow)', new SpecialEventRequirement('Lunar New Year')));
+// Lunar New Year Vivillon for New Pokémon Snap
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Meadow)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])]), [56]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Garden)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(5000, Region.galar, 56), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])]), [56]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Meadow)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])]), [67]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Garden)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])]), [67]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Garden)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [67]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Fancy)', new SpecialEventRequirement('Lunar New Year'), [66]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Poké Ball)', new SpecialEventRequirement('Lunar New Year'), [66]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Marine)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])]), [59]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Marine)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [59]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Ocean)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [69]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Monsoon)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(1000, Region.galar, 57), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])]), [57]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Jungle)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(5000, Region.galar, 57), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])]), [57]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Jungle)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(1000, Region.galar, 57), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [57]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (River)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(1000, Region.galar, 57), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [57]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Modern)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(5000, Region.galar, 58)]), [58]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Elegant)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(5000, Region.galar, 58)]), [58]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Jungle)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])]), [68]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (River)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(1000, Region.galar, 68), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])]), [68]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Jungle)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [68]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (River)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [68]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Monsoon)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [68]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Sandstorm)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])]), [61]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Sun)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(1000, Region.galar, 61), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [61]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Savanna)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(1000, Region.galar, 61), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [61]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (High Plains)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(5000, Region.galar, 62)]), [62]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Savanna)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [70]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Sun)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [70]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Sandstorm)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [70]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Ocean)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(1000, Region.galar, 70), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [70]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Modern)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(1000, Region.galar, 70), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [70]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Tundra)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(1000, Region.galar, 70), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [70]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Marine)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(1000, Region.galar, 70), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [70]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Jungle)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(1000, Region.galar, 70), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [70]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Polar)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(1000, Region.galar, 70), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [70]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Tundra)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(1000, Region.galar, 63), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])]), [63]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Polar)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(5000, Region.galar, 63), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])]), [63]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Icy Snow)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(1000, Region.galar, 63), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [63]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Jungle)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(1000, Region.galar, 64)]), [64]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Archipelago)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(5000, Region.galar, 64)]), [64]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Vivillon (Continental)', new MultiRequirement([new SpecialEventRequirement('Lunar New Year'), new RouteKillRequirement(5000, Region.galar, 65)]), [65]));
 // Hoopa Day (Apr 1 - Apr 2)
 // Easter (Apr 8 - Apr 29)
 // Golden Week (Apr 29 - May 6)
