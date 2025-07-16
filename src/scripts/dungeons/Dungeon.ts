@@ -13446,11 +13446,8 @@ dungeonList['Florio Island Illumina Spot'] = new Dungeon('Florio Island Illumina
     },
     100,
     [new DungeonBossPokemon('Illumina Meganium', 100, 40)],
-    100, 56,
-    undefined,
-    {
-        requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 2),
-    });
+    100, 56
+);
 dungeonList['Belusylva Island Illumina Spot'] = new Dungeon('Belusylva Island Illumina Spot',
     ['Magikarp', 'Lotad', 'Bulbasaur', 'Ninetales', 'Serperior', 'Trevenant', 'Espeon', 'Kecleon'],
     {
@@ -13471,11 +13468,8 @@ dungeonList['Belusylva Island Illumina Spot'] = new Dungeon('Belusylva Island Il
     },
     100,
     [new DungeonBossPokemon('Illumina Milotic', 100, 40)],
-    100, 58,
-    undefined,
-    {
-        requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 6),
-    });
+    100, 58
+);
 dungeonList['Maricopia Islands Illumina Spot'] = new Dungeon('Maricopia Islands Illumina Spot',
     ['Wailmer', 'Finneon', 'Luvdisc', 'Wailord'],
     {
@@ -13494,11 +13488,8 @@ dungeonList['Maricopia Islands Illumina Spot'] = new Dungeon('Maricopia Islands 
     },
     100,
     [new DungeonBossPokemon('Illumina Wishiwashi', 100, 40)],
-    100, 60,
-    undefined,
-    {
-        requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 10),
-    });
+    100, 60
+);
 dungeonList['Voluca Island Illumina Spot'] = new Dungeon('Voluca Island Illumina Spot',
     ['Monferno', 'Talonflame', 'Archeops'],
     {
@@ -13520,11 +13511,8 @@ dungeonList['Voluca Island Illumina Spot'] = new Dungeon('Voluca Island Illumina
     },
     100,
     [new DungeonBossPokemon('Illumina Volcarona', 100, 40)],
-    100, 62,
-    undefined,
-    {
-        requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 14),
-    });
+    100, 62
+);
 dungeonList['Durice Island Illumina Spot'] = new Dungeon('Durice Island Illumina Spot',
     ['Noibat', 'Carbink', 'Sableye', 'Joltik', 'Crobat'],
     {
@@ -13546,11 +13534,8 @@ dungeonList['Durice Island Illumina Spot'] = new Dungeon('Durice Island Illumina
     },
     100,
     [new DungeonBossPokemon('Illumina Steelix', 100, 40)],
-    100, 64,
-    undefined,
-    {
-        requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 18),
-    });
+    100, 64
+);
 dungeonList['Aurus Island Illumina Spot'] = new Dungeon('Aurus Island Illumina Spot',
     ['Sigilyph', 'Woobat', 'Eldegoss', 'Chandelure', 'Houndoom', 'Absol', 'Noivern', 'Natu', 'Golurk'],
     {
@@ -13569,11 +13554,8 @@ dungeonList['Aurus Island Illumina Spot'] = new Dungeon('Aurus Island Illumina S
     },
     100,
     [new DungeonBossPokemon('Illumina Xerneas', 100, 40)],
-    100, 65,
-    undefined,
-    {
-        requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 21),
-    });
+    100, 65
+);
 
 //Hisui Dungeons
 

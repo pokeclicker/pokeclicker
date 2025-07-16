@@ -6632,7 +6632,7 @@ TemporaryBattleList['Florio Island Illumina Pokémon 1'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('New Pokémon Snap', 1)],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/154.01',
     }
@@ -6644,7 +6644,7 @@ TemporaryBattleList['Florio Island Illumina Pokémon 2'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Florio Island Illumina Pokémon 1')],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/154.01',
     }
@@ -6656,7 +6656,7 @@ TemporaryBattleList['Florio Island Illumina Pokémon 3'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Florio Island Illumina Pokémon 2')],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/154.01',
     }
@@ -6668,7 +6668,7 @@ TemporaryBattleList['Belusylva Island Illumina Pokémon 1'] = new TemporaryBattl
     [new QuestLineStepCompletedRequirement('New Pokémon Snap', 4)],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/350.01',
     }
@@ -6680,7 +6680,7 @@ TemporaryBattleList['Belusylva Island Illumina Pokémon 2'] = new TemporaryBattl
     [new TemporaryBattleRequirement('Belusylva Island Illumina Pokémon 1')],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/350.01',
     }
@@ -6692,7 +6692,7 @@ TemporaryBattleList['Belusylva Island Illumina Pokémon 3'] = new TemporaryBattl
     [new TemporaryBattleRequirement('Belusylva Island Illumina Pokémon 2')],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/350.01',
     }
@@ -6704,7 +6704,7 @@ TemporaryBattleList['Maricopia Islands Illumina Pokémon 1'] = new TemporaryBatt
     [new QuestLineStepCompletedRequirement('New Pokémon Snap', 7)],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/746.03',
     }
@@ -6723,7 +6723,7 @@ TemporaryBattleList['Maricopia Islands Illumina Pokémon 2'] = new TemporaryBatt
     [new TemporaryBattleRequirement('Maricopia Islands Illumina Pokémon 1')],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/746.03',
     }
@@ -6735,7 +6735,7 @@ TemporaryBattleList['Maricopia Islands Illumina Pokémon 3'] = new TemporaryBatt
     [new TemporaryBattleRequirement('Maricopia Islands Illumina Pokémon 2')],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/746.03',
     }
@@ -6747,7 +6747,7 @@ TemporaryBattleList['Voluca Island Illumina Pokémon 1'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('New Pokémon Snap', 10)],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/637.01',
     }
@@ -6759,7 +6759,7 @@ TemporaryBattleList['Voluca Island Illumina Pokémon 2'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Voluca Island Illumina Pokémon 1')],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/637.01',
     }
@@ -6774,7 +6774,7 @@ TemporaryBattleList['Voluca Island Illumina Pokémon 3'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Voluca Island Illumina Pokémon 2')],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/637.01',
     }
@@ -6786,7 +6786,7 @@ TemporaryBattleList['Durice Island Illumina Pokémon 1'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('New Pokémon Snap', 13)],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/208.03',
     }
@@ -6798,7 +6798,7 @@ TemporaryBattleList['Durice Island Illumina Pokémon 2'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Durice Island Illumina Pokémon 1')],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/208.03',
     }
@@ -6810,7 +6810,7 @@ TemporaryBattleList['Durice Island Illumina Pokémon 3'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Durice Island Illumina Pokémon 2')],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/208.03',
     }
@@ -6822,7 +6822,7 @@ TemporaryBattleList['Aurus Island Illumina Pokémon 1'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('New Pokémon Snap', 16)],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/716.02',
     }
@@ -6834,7 +6834,7 @@ TemporaryBattleList['Aurus Island Illumina Pokémon 2'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Aurus Island Illumina Pokémon 1')],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/716.02',
     }
@@ -6846,7 +6846,7 @@ TemporaryBattleList['Aurus Island Illumina Pokémon 3'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Aurus Island Illumina Pokémon 2')],
     undefined,
     {
-        returnTown: 'Professor Mirror\'s Research Lab',
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
         imageName: '../pokemon/716.02',
     }

@@ -9275,7 +9275,7 @@ const ToddSnap = new NPC ('Todd Snap', [
     'Throwing one at a Pokémon will bother it.',
     'The Pokémon may look different, but it\'s still the same Pokémon.',
 ], {
-    image: 'assets/images/npcs/Todd Snap.png',
+    image: 'assets/images/npcs/Todd Snap (New).png',
     requirement: new QuestLineCompletedRequirement('New Pokémon Snap'),
 });
 
@@ -9473,8 +9473,8 @@ TownList.Freezington = new Town(
 );
 
 //Lental Town
-TownList['Professor Mirror\'s Research Lab'] = new Town(
-    'Professor Mirror\'s Research Lab',
+TownList['Laboratory of Ecology and Natural Sciences'] = new Town(
+    'Laboratory of Ecology and Natural Sciences',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
     [new DockTownContent()],

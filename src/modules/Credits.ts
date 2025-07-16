@@ -857,6 +857,12 @@ export const SpriteCredits: Credit[] = [
             'Turo',
             'Tyme',
             'Worker (female)',
+            'Professor Mirror',
+            'Rita',
+            'Todd Snap (64 and New)',
+            'Phil',
+            'Captain Vince',
+            'Snap Protagonist (male and female)',
         ],
         // Notes: Permission given on image page if credited.
     },
