@@ -165,7 +165,7 @@ class MapHelper {
         if (RouteHelper.isThereQuestAtLocation(route, region)) {
             states.add(areaStatus.questAtLocation);
         }
-        MapHelper.getPokemonAreaStatus(possiblePokemon, Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked()).forEach(s => states.add(s));
+        MapHelper.getPokemonAreaStatus(possiblePokemon).forEach(s => states.add(s));
         if (!RouteHelper.isAchievementsComplete(route, region)) {
             states.add(areaStatus.missingAchievement);
         }
@@ -214,7 +214,7 @@ class MapHelper {
             if (dungeonList[townName].isThereQuestAtLocation()) {
                 states.add(areaStatus.questAtLocation);
             }
-            MapHelper.getPokemonAreaStatus(possiblePokemon, Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked())
+            MapHelper.getPokemonAreaStatus(possiblePokemon)
                 .forEach(s => states.add(s));
             if (shadowPokemon.some(p => App.game.party.alreadyCaughtPokemonByName(p) && App.game.party.getPokemonByName(p).shadow == GameConstants.ShadowStatus.None)) {
                 states.add(areaStatus.uncaughtShadowPokemon);
@@ -368,8 +368,9 @@ class MapHelper {
 
     }
 
-    public static getPokemonAreaStatus(pokemon: PokemonNameType[], pokerusUnlocked: boolean): areaStatus[] {
+    public static getPokemonAreaStatus(pokemon: PokemonNameType[]): areaStatus[] {
         const statuses = [];
+        const pokerusUnlocked = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked();
         let uncaught = false, uncaughtShiny = false, missingResistant = false;
         pokemon.forEach(p => {
             const partyPokemon = App.game.party.getPokemonByName(p);

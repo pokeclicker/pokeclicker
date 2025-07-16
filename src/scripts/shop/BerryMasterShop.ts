@@ -26,7 +26,7 @@ class BerryMasterShop extends Shop {
         if (berryListIndex > -1) {
             const berryDeals = BerryDeal.list[berryListIndex]();
             const berryTraderPokemon = berryDeals.filter(d => d.item.itemType instanceof PokemonItem).map(d => d.item.itemType.type) as PokemonNameType[];
-            const statuses = MapHelper.getPokemonAreaStatus(berryTraderPokemon, Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked());
+            const statuses = MapHelper.getPokemonAreaStatus(berryTraderPokemon);
             itemStatusArray.push(...statuses);
         }
         return [...new Set(itemStatusArray)];

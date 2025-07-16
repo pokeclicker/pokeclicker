@@ -32,7 +32,7 @@ class GenericTraderShop extends Shop {
                     return false;
                 })
                 .map(profit => (profit as unknown as ItemDealProfit).item.type) as PokemonNameType[];
-            const statuses = MapHelper.getPokemonAreaStatus(pokemonDeals, Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked());
+            const statuses = MapHelper.getPokemonAreaStatus(pokemonDeals);
             itemStatusArray.push(...statuses);
         }
 

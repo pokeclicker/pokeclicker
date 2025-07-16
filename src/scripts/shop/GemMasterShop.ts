@@ -24,7 +24,7 @@ class GemMasterShop extends Shop {
         const deals = GemDeals.getDeals(this.shop);
         if (deals) {
             const pokemonDeals = deals.filter(d => d.item.itemType instanceof PokemonItem && d.isVisible()).map(d => d.item.itemType.type) as PokemonNameType[];
-            const statuses = MapHelper.getPokemonAreaStatus(pokemonDeals, Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked());
+            const statuses = MapHelper.getPokemonAreaStatus(pokemonDeals);
             itemStatusArray.push(...statuses);
         }
         return [...new Set(itemStatusArray)];

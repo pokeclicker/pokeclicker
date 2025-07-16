@@ -24,7 +24,7 @@ class ShardTraderShop extends Shop {
         const deals = ShardDeal.getDeals(this.location)?.();
         if (deals) {
             const pokemonDeals = deals.filter(d => d.item.itemType instanceof PokemonItem && d.item.itemType.isVisible()).map(d => d.item.itemType.type) as PokemonNameType[];
-            const statuses = MapHelper.getPokemonAreaStatus(pokemonDeals, Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked());
+            const statuses = MapHelper.getPokemonAreaStatus(pokemonDeals);
             itemStatusArray.push(...statuses);
         }
         return [...new Set(itemStatusArray)];
