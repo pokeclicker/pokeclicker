@@ -9270,14 +9270,14 @@ const SnapMirror8 = new NPC ('Prof. Mirror', [
     image: 'assets/images/npcs/Professor Mirror.png',
     requirement: new QuestLineCompletedRequirement('New Pokémon Snap'),
 });
-const ToddSnap = new NPC ('Todd Snap', [
-    'Have you found any Fluffruit yet?',
-    'Throwing one at a Pokémon will bother it.',
-    'The Pokémon may look different, but it\'s still the same Pokémon.',
-], {
-    image: 'assets/images/npcs/Todd Snap (New).png',
-    requirement: new QuestLineCompletedRequirement('New Pokémon Snap'),
-});
+// const ToddSnap = new NPC ('Todd Snap', [
+//     'Have you found any Fluffruit yet?',
+//     'Throwing one at or near a Pokémon may cause it to act in unique ways.',
+//     'The Pokémon may look different, but it\'s still the same Pokémon.',
+// ], {
+//     image: 'assets/images/npcs/Todd Snap (New).png',
+//     requirement: new QuestLineCompletedRequirement('New Pokémon Snap'),
+// });
 
 //Galar Towns
 TownList.Postwick = new Town(
@@ -9480,7 +9480,7 @@ TownList['Laboratory of Ecology and Natural Sciences'] = new Town(
     [new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
-        npcs: [SnapMirror1, SnapMirror2, SnapMirror3, SnapMirror4, SnapMirror5, SnapMirror6, SnapMirror7, SnapMirror8, LentalRoamerNPC, ToddSnap],
+        npcs: [SnapMirror1, SnapMirror2, SnapMirror3, SnapMirror4, SnapMirror5, SnapMirror6, SnapMirror7, SnapMirror8, LentalRoamerNPC, /* ToddSnap */ ],
     }
 );
 

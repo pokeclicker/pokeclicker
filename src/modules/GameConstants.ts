@@ -2504,6 +2504,7 @@ export enum ExtraAchievementCategories {
     sevii,
     orre,
     magikarpJump,
+    lental,
     secret, // secret should be last
 }
 export const DayCycleStartHours: Record<DayCyclePart, number> = {
@@ -2557,6 +2558,11 @@ export enum ShadowStatus {
     Shadow,
     Purified,
 }
+
+// export enum FluffruitStatus {
+//     Normal,
+//     Fluffed,
+// }
 
 export enum MegaStoneType {
     Abomasite,
