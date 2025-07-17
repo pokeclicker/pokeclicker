@@ -1884,7 +1884,7 @@ class Farming implements Feature {
                 // Only notify for one wanderer, randomly picked, shiny priorized; there will rarely be more than one
                 const shinyList = wanderList.filter(w => w.shiny);
                 const displayWanderer = shinyList.length ? Rand.fromArray(shinyList) : Rand.fromArray(wanderList);
-                message = `A wild ${displayWanderer.name} has wandered onto the farm!`;
+                message = `A wild ${(displayWanderer.shiny ? 'shiny ' : '')}${displayWanderer.name} has wandered onto the farm!`;
                 image = PokemonHelper.getImage(PokemonHelper.getPokemonByName(displayWanderer.name).id, displayWanderer.shiny, undefined, GameConstants.ShadowStatus.None);
                 type = displayWanderer.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
                 sound = displayWanderer.shiny ? NotificationConstants.NotificationSound.General.shiny_long : NotificationConstants.NotificationSound.Farming.wandering_pokemon;
@@ -2298,7 +2298,8 @@ class Farming implements Feature {
 
         const farmPoints = Math.floor(berry.farmValue / (4 + berry.growthTime[PlotStage.Bloom] / 1800));
         const shinyModifier = wanderer.shiny ? GameConstants.WANDER_SHINY_FP_MODIFIER : 1;
-        App.game.wallet.gainFarmPoints(farmPoints * shinyModifier);
+        const amount = App.game.wallet.gainFarmPoints(farmPoints * shinyModifier);
+        GameHelper.incrementObservable(App.game.statistics.farmWandererFarmPointsObtained, amount.amount);
 
         const pokeball = App.game.pokeballs.calculatePokeballToUse(pokemonData.id, wanderer.shiny, false, EncounterType.wanderer);
         if (pokeball !== GameConstants.Pokeball.None) {
@@ -2334,7 +2335,8 @@ class Farming implements Feature {
 
             // DT
             const fakedRoute = FarmController.wandererToRoute(wanderer.name);
-            Battle.gainTokens(fakedRoute.number, fakedRoute.region, wanderer.pokeball());
+            const amount = Battle.gainTokens(fakedRoute.number, fakedRoute.region, wanderer.pokeball());
+            GameHelper.incrementObservable(App.game.statistics.farmWandererDungeonTokensObtained, amount.amount);
 
             // Check for Starf berry generation
             if (wanderer.shiny) {

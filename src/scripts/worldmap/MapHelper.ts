@@ -154,6 +154,7 @@ class MapHelper {
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
         const states = new Set([areaStatus.completed]);
+        const possiblePokemon = RouteHelper.getAvailablePokemonList(route, region);
 
         if (!MapHelper.accessToRoute(route, region)) {
             states.add(areaStatus.locked);
@@ -164,20 +165,9 @@ class MapHelper {
         if (RouteHelper.isThereQuestAtLocation(route, region)) {
             states.add(areaStatus.questAtLocation);
         }
-        if (!RouteHelper.routeCompleted(route, region, false)) {
-            states.add(areaStatus.uncaughtPokemon);
-        }
-        if (!RouteHelper.routeCompleted(route, region, true) && !RouteHelper.isAchievementsComplete(route, region)) {
-            states.add(areaStatus.uncaughtShinyPokemonAndMissingAchievement);
-        }
-        if (!RouteHelper.routeCompleted(route, region, true)) {
-            states.add(areaStatus.uncaughtShinyPokemon);
-        }
+        MapHelper.getPokemonAreaStatus(possiblePokemon).forEach(s => states.add(s));
         if (!RouteHelper.isAchievementsComplete(route, region)) {
             states.add(areaStatus.missingAchievement);
-        }
-        if (Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(route, region, true)) < GameConstants.Pokerus.Resistant) {
-            states.add(areaStatus.missingResistant);
         }
 
         const statusPriority = Settings.getSetting('mapAreaStateOrder').observableValue();
@@ -211,12 +201,12 @@ class MapHelper {
         const states = new Set([areaStatus.completed]);
         // Check if this location is locked
         if (!MapHelper.accessToTown(townName)) {
-            states.add(areaStatus.locked);
+            return areaStatus[areaStatus.locked];
         }
         // Is this location a dungeon
         if (dungeonList[townName] && dungeonList[townName].isUnlocked()) {
-            const possiblePokemon = dungeonList[townName].allAvailablePokemon();
             const shadowPokemon = dungeonList[townName].allAvailableShadowPokemon();
+            const possiblePokemon = [...dungeonList[townName].allAvailablePokemon(), ...shadowPokemon];
 
             if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(townName)]()) {
                 states.add(areaStatus.incomplete);
@@ -224,36 +214,28 @@ class MapHelper {
             if (dungeonList[townName].isThereQuestAtLocation()) {
                 states.add(areaStatus.questAtLocation);
             }
-            if (!RouteHelper.listCompleted(possiblePokemon, false)) {
-                states.add(areaStatus.uncaughtPokemon);
-            }
-            if (Settings.getSetting(`--${areaStatus[areaStatus.uncaughtShadowPokemon]}`).isUnlocked()
-                && shadowPokemon.some(pokemon => App.game.party.getPokemonByName(pokemon)?.shadow < GameConstants.ShadowStatus.Shadow)) {
+            MapHelper.getPokemonAreaStatus(possiblePokemon)
+                .forEach(s => states.add(s));
+            if (shadowPokemon.some(p => App.game.party.alreadyCaughtPokemonByName(p) && App.game.party.getPokemonByName(p).shadow == GameConstants.ShadowStatus.None)) {
                 states.add(areaStatus.uncaughtShadowPokemon);
-            }
-            if (!RouteHelper.listCompleted(possiblePokemon, true)) {
-                states.add(areaStatus.uncaughtShinyPokemon);
             }
             if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
                 states.add(areaStatus.missingAchievement);
             }
-            if (Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(possiblePokemon) < GameConstants.Pokerus.Resistant) {
-                states.add(areaStatus.missingResistant);
-            }
         }
         const town = TownList[townName];
         town.content.forEach(c => {
-            c.areaStatus().forEach(s => {
-            // If the town itself is not locked, it should never show locked
-                if (s != areaStatus.locked) {
+            const s = c.areaStatus();
+            if (!s.includes(areaStatus.locked)) {
+                s.forEach(s => {
                     states.add(s);
-                }
-            });
+                });
+            }
+        });
+        town.npcs?.filter(npc => npc instanceof PokemonGiftNPC && npc.isVisible()).forEach((npc: PokemonGiftNPC) => {
+            npc.areaStatus().forEach(s => states.add(s));
         });
 
-        if (states.has(areaStatus.uncaughtShinyPokemon) && states.has(areaStatus.missingAchievement)) {
-            states.add(areaStatus.uncaughtShinyPokemonAndMissingAchievement);
-        }
         const statusPriority = Settings.getSetting('mapAreaStateOrder').observableValue();
         const importantState = statusPriority.find(state => states.has(state));
         return areaStatus[importantState];
@@ -384,6 +366,35 @@ class MapHelper {
             );
         }
 
+    }
+
+    public static getPokemonAreaStatus(pokemon: PokemonNameType[]): areaStatus[] {
+        const statuses = [];
+        const pokerusUnlocked = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked();
+        let uncaught = false, uncaughtShiny = false, missingResistant = false;
+        pokemon.forEach(p => {
+            const partyPokemon = App.game.party.getPokemonByName(p);
+            if (!partyPokemon) {
+                uncaught = true;
+                return; // Don't show shiny and resistant for uncaught Pokémon
+            }
+            if (!partyPokemon.shiny) {
+                uncaughtShiny = true;
+            }
+            if (pokerusUnlocked && partyPokemon.pokerus < GameConstants.Pokerus.Resistant) {
+                missingResistant = true;
+            }
+        });
+        if (uncaught) {
+            statuses.push(areaStatus.uncaughtPokemon);
+        }
+        if (uncaughtShiny) {
+            statuses.push(areaStatus.uncaughtShinyPokemon);
+        }
+        if (missingResistant) {
+            statuses.push(areaStatus.missingResistant);
+        }
+        return statuses;
     }
 
 }

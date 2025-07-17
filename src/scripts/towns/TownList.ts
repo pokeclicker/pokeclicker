@@ -468,12 +468,10 @@ const SaffronBreeder = new NPC('Breeder', [
     requirement: new GymBadgeRequirement(BadgeEnums.Earth),
 });
 
-const LaprasGift = new GiftNPC('Silph Co. Employee', [
+const LaprasGift = new PokemonGiftNPC('Silph Co. Employee', [
     'Oh! Hi! You\'re not a member of Team Rocket! You came to save us? Why thank you!',
     'I want you to have this Pokémon for saving us.',
-], () => {
-    App.game.party.gainPokemonByName('Lapras', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-}, 'assets/images/pokemon/131.png', { saveKey: 'laprasgift', image: 'assets/images/npcs/Office Worker (male).png', requirement: new MultiRequirement([new TemporaryBattleRequirement('Blue 5'), new ObtainedPokemonRequirement('Lapras', true)]) });
+], 'Lapras', 'assets/images/pokemon/131.png', { saveKey: 'laprasgift', image: 'assets/images/npcs/Office Worker (male).png', requirement: new MultiRequirement([new TemporaryBattleRequirement('Blue 5'), new ObtainedPokemonRequirement('Lapras', true)]) });
 
 const FuchsiaKantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
     'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
@@ -3241,6 +3239,40 @@ const OrreColosseumSpectator = new NPC('Colosseum Spectator', [
     'Only the toughest trainers in Orre are allowed to fight here! I\'m just watching until I get stronger.']
 );
 
+// Destiny Deoxys Quest NPCs
+
+const destinyGem = new NPC('Green Pulsing Gemstone', [
+    '<i>Deep inside the Giant Chasm you find a Gemstone. It\'s moving, almost as if it was alive...</i>',
+    '<i>As you decide to pick up the stone you hear a roar, followed by an explosion in the distance.</i>',
+], { image: 'assets/images/npcs/other/Green Gemstone.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Destiny Deoxys', 0), new QuestLineStepCompletedRequirement('Destiny Deoxys', 2, GameConstants.AchievementOption.less)]),
+});
+
+const destinyScientistChasm = new NPC('Professor Lund', [
+    'Hey, good job on chasing away those Pokémon. My name is Professor Lund and I\'m leading the science team in this area.',
+    'You must know a meteorite has landed in this area... What are you saying? You already found it?!',
+    'It\'s truly spectacular... We\'re going to move the gemstone to our laboratory in Hoenn. If you like you can come with us, our lab is near the Battle Frontier. While we analyze the Gemstone you can use the local facilities.',
+], {
+    image: 'assets/images/npcs/Scientist (male).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Destiny Deoxys', 2), new QuestLineStepCompletedRequirement('Destiny Deoxys', 4, GameConstants.AchievementOption.less)]),
+});
+
+const destinyScientistBF = new NPC('Professor Lund', [
+    'You have certainly noticed but one of the Pokémon you\'ve fought at the Giant Chasm is invading this town.',
+    'The charts on the gemstone analysis were off the charts while you were fighting. We are this close to solving the mystery.',
+    '<i>A shockwave is overcoming the building. You hear an explosion and the lights in the lab go out.</i>',
+    'That Pokémon must have destroyed the generator... quick grab everything you can find and help us repair it.',
+], {
+    image: 'assets/images/npcs/Scientist (male).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Destiny Deoxys', 5), new QuestLineStepCompletedRequirement('Destiny Deoxys', 7, GameConstants.AchievementOption.less)]),
+});
+
+const destinyDeoxysReunion = new PokemonGiftNPC('Green and Purple Gem Deoxys', [
+    '<i>The Deoxys sync their lights, they seem to be happy to have found each other. </i>',
+    '<i>Right as you wanted to leave them alone the Deoxys with the green gem send a light towards your way. It wants to thank you for your help.</i>',
+], 'Deoxys (Green Core)', 'assets/images/pokemon/386.04.png', { image: 'assets/images/npcs/other/Deoxys reunion.png', requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Destiny Deoxys', 8), new ObtainedPokemonRequirement('Deoxys (Green Core)', true)])});
+
+
 // For Leafeon and Glaceon. Show up in Hoenn too
 const MossRock = new NPC('Moss Rock', [
     'The rock is covered in moss. It feels pleasantly cool.',
@@ -3470,10 +3502,10 @@ TownList['Battle Frontier'] = new Town(
     'Battle Frontier',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [BattleFrontierShop, new BattleFrontierTownContent()],
+    [BattleFrontierShop, new BattleFrontierTownContent(), TemporaryBattleList['Destiny Deoxys Rayquaza'], TemporaryBattleList['Destiny Deoxys Army'], TemporaryBattleList['Destiny Rayquaza'], new GemMasterShop(GameConstants.GemShops.hoennBattleFrontierDeoxysDeal, 'Deoxys Replica', [new QuestLineCompletedRequirement('Destiny Deoxys')], true)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
-        npcs: [CoolTrainerDillan],
+        npcs: [CoolTrainerDillan, destinyScientistBF, destinyDeoxysReunion],
     }
 );
 TownList['Pokémon League Hoenn'] = new Town(
@@ -5328,6 +5360,15 @@ const AncientBugHunter2 = new NPC('Ancient Bug Hunter', [
     image: 'assets/images/npcs/Super Nerd.png',
     requirement: new QuestLineCompletedRequirement('The Legend Awakened'),
 });
+
+const AncientBugHunter3 = new NPC('Ancient Bug Hunter', [
+    'Trainers report on sightings of various Genesect holding the same Drives as the Genesect they own.',
+    'It seems like this Dungeon\'s Genesect is choosing it\'s Drive based on the Moon Cycle!',
+    'While the high-speed form races to different Dungeons all across Unova.',
+], {
+    image: 'assets/images/npcs/Super Nerd.png',
+    requirement: new QuestLineCompletedRequirement('The Legend Awakened'),
+});
 //Unova Towns
 TownList['Aspertia City'] = new Town(
     'Aspertia City',
@@ -5728,9 +5769,9 @@ TownList['Giant Chasm'] = new DungeonTown(
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate')),
         new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15),
     ],
-    [TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2'], TemporaryBattleList['Kyurem 2'], TemporaryBattleList['Kyurem 3']],
+    [TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2'], TemporaryBattleList['Kyurem 2'], TemporaryBattleList['Kyurem 3'], TemporaryBattleList['Destiny Deoxys Rayquaza']],
     {
-        npcs: [Cobalion6, Cobalion7, Terrakion2, Virizion3],
+        npcs: [Cobalion6, Cobalion7, Terrakion2, Virizion3, destinyGem, destinyScientistChasm],
     }
 );
 TownList['Cave of Being'] = new DungeonTown(
@@ -5821,7 +5862,7 @@ TownList['P2 Laboratory'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.unova, 17)],
     [],
     {
-        npcs: [P2LaboratoryColress, InvestigateP2],
+        npcs: [P2LaboratoryColress, InvestigateP2, AncientBugHunter3],
     }
 );
 
@@ -6285,13 +6326,11 @@ const TeamFlareBossLysandre1 = new NPC('Team Flare Boss Lysandre', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 31), new QuestLineStepCompletedRequirement('A Beautiful World', 33, GameConstants.AchievementOption.less)]),
 });
 
-const EternalFloetteGift = new GiftNPC('AZ', [
+const EternalFloetteGift = new PokemonGiftNPC('AZ', [
     'Floette... It\'s been 3,000 years...',
     'And with you... another of your kind?',
     'Ah... it seems to be interested in you, $playername$. Would you like to take it with you?',
-], () => {
-    App.game.party.gainPokemonByName('Floette (Eternal)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-}, 'assets/images/pokemon/670.05.png', { saveKey: 'eternalfloettegift', image: 'assets/images/npcs/AZ.png', requirement: new QuestLineCompletedRequirement('A Beautiful World') });
+], 'Floette (Eternal)', 'assets/images/pokemon/670.05.png', { saveKey: 'eternalfloettegift', image: 'assets/images/npcs/AZ.png', requirement: new QuestLineCompletedRequirement('A Beautiful World') });
 
 const CouriwayOldGentlemanHarold = new NPC('Old Gentleman Harold', [
     'I love going on walks at <b>dusk</b>. It\'s my favourite part of the day, everything\'s so calm...',
@@ -6320,11 +6359,9 @@ const Spelunker = new NPC('Spelunker', [
     'That would be big news, sure to be reported on local bulletin boards!',
 ]);
 
-const ExamineAegislash = new GiftNPC('Millis and Argus Steels\' Aeglislash', [
+const ExamineAegislash = new PokemonGiftNPC('Millis and Argus Steels\' Aeglislash', [
     '<i>Aegislash wants to join you on your adventure.</i>',
-], () => {
-    App.game.party.gainPokemonByName('Aegislash (Blade)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-}, 'assets/images/pokemon/681.01.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Aegislash (Blade)', true)]) });
+], 'Aegislash (Blade)', 'assets/images/pokemon/681.01.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Aegislash (Blade)', true)]) });
 
 const ThanksDiancie = new NPC('Princess Diancie', [
     'Thank you for your help saving the Diamond Domain. I will be waiting for you in Reflection Cave.',
@@ -8646,11 +8683,9 @@ const EnergyPlantRose = new NPC('Chairman Rose', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 15), new QuestLineStepCompletedRequirement('The Darkest Day', 17, GameConstants.AchievementOption.less)]),
 });
 
-const EternatusCatch = new GiftNPC('Catch Eternatus', [
+const EternatusCatch = new PokemonGiftNPC('Catch Eternatus', [
     'You caught Eternatus!',
-], () => {
-    App.game.party.gainPokemonByName('Eternatus', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-}, 'assets/images/pokemon/890.png', { saveKey: 'eternatuscatch', requirement: new MultiRequirement([new TemporaryBattleRequirement('The Darkest Day'), new ObtainedPokemonRequirement('Eternatus', true)]) });
+], 'Eternatus', 'assets/images/pokemon/890.png', { saveKey: 'eternatuscatch', requirement: new MultiRequirement([new TemporaryBattleRequirement('The Darkest Day'), new ObtainedPokemonRequirement('Eternatus', true)]) });
 
 const Leon = new NPC('Leon', [
     'My matches are always sold out, but this... I\'ve never seen a crowd this wild!',
@@ -9152,11 +9187,7 @@ const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     //*TODO*: Change second line to this text when Paldea is available: 'Now be on your way, the illustrious Paldea region awaits over the horizons.',
     'assets/images/npcs/Professor Magnolia.png');
 
-const MagearnaMysteryGift = new GiftNPC('Mystery Gift', [
-    'You have received a Mystery Gift for completing the National Shiny Dex!',
-], () => {
-    App.game.party.gainPokemonByName('Magearna (Original Color)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-}, 'assets/images/pokemon/801.01.png', { saveKey: 'magearnamysterygift', requirement: new MultiRequirement([
+const magearnaGiftReq = new MultiRequirement([
     new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kanto),
     new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.johto),
     new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.hoenn),
@@ -9165,7 +9196,11 @@ const MagearnaMysteryGift = new GiftNPC('Mystery Gift', [
     new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kalos),
     new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.alola),
     new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.galar),
-])});
+]);
+const MagearnaMysteryGift = new PokemonGiftNPC('Mystery Gift', [
+    'You have received a Mystery Gift for completing the National Shiny Dex!',
+], 'Magearna (Original Color)', 'assets/images/pokemon/801.01.png',
+{ saveKey: 'magearnamysterygift', requirement: new CustomRequirement(ko.pureComputed(() => +magearnaGiftReq.isCompleted()), 1, 'Complete all regional Shiny Master achievements from Kanto through Galar.')});
 
 //Galar Towns
 TownList.Postwick = new Town(

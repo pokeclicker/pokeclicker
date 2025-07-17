@@ -2254,6 +2254,9 @@ export const TemporaryBattles = [
     'Kyurem 2',
     'Kyurem 3',
     'Twerps',
+    'Destiny Deoxys Rayquaza',
+    'Destiny Deoxys Army',
+    'Destiny Rayquaza',
     'Volo 1',
     'Akari 1',
     'Warden Mai',
@@ -2476,6 +2479,7 @@ export enum ExtraAchievementCategories {
     sevii,
     orre,
     magikarpJump,
+    secret, // secret should be last
 }
 export const DayCycleStartHours: Record<DayCyclePart, number> = {
     [DayCyclePart.Dawn]: 5,
@@ -2586,6 +2590,7 @@ export enum GemShops {
     HoennFluteMaster,
     HoennStoneSalesman,
     UnovaFluteMaster,
+    hoennBattleFrontierDeoxysDeal,
     FurfrouGemTrader,
     KalosStoneSalesman,
     SilvallyTrader,
@@ -2596,6 +2601,7 @@ export enum DungeonInteractionSource {
     Click,
     Keybind,
     HeldKeybind,
+    DungeonGuide,
 }
 
 export const ModalCollapseList = [
@@ -2612,6 +2618,8 @@ export const ModalCollapseList = [
     'currencyBody',
     'undergroundCard',
     'undergroundDailyTradesCard',
+    'undergroundDisplayHelpers',
+    'undergroundDisplayBattery',
     'plotListCard',
     'zCrystalItemContainerBody',
 ];

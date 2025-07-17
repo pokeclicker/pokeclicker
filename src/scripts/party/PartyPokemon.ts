@@ -113,6 +113,11 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this.defaultFemaleSprite = ko.observable(false);
         this.hideShinyImage = ko.observable(false);
         this._nickname = ko.observable();
+        this._nickname.subscribe((value) => {
+            if (value === this._translatedName()) {
+                AchievementHandler.unlockAchievement('A cat named Cat');
+            }
+        });
         this._displayName = ko.pureComputed(() => this._nickname() ? this._nickname() : this._translatedName());
         this._shadow = ko.observable(shadow);
         this._showShadowImage = ko.observable(false);
@@ -337,10 +342,11 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     }
 
     public setVitaminAmount(vitamin: GameConstants.VitaminType, amount: number) {
-        if (this.breeding || isNaN(amount) || amount < 0) {
+        if (this.breeding || isNaN(amount)) {
             return;
         }
 
+        amount = Math.max(0, amount);
         const diff = Math.floor(amount) - this.vitaminsUsed[vitamin]();
         if (diff === 0) {
             return;
