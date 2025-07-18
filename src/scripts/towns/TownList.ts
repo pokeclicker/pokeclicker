@@ -9203,7 +9203,7 @@ const MagearnaMysteryGift = new PokemonGiftNPC('Mystery Gift', [
 { saveKey: 'magearnamysterygift', requirement: new CustomRequirement(ko.pureComputed(() => +magearnaGiftReq.isCompleted()), 1, 'Complete all regional Shiny Master achievements from Kanto through Galar.')});
 
 // Lental NPCs
-const LentalRoamerNPC = new RoamerNPC('Rita', [
+const RitaLentalRoamerNPC = new RoamerNPC('Rita', [
     'There seems to be a lot of activity at {ROUTE_NAME}. If you\'ve explored the Lental Region enough, I\'m sure some rare Pokémon will come out to greet you!',
 ], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.Lental), 'assets/images/npcs/Rita.png');
 const SnapMirror1 = new NPC ('Prof. Mirror', [
@@ -9262,7 +9262,7 @@ const SnapMirror7 = new NPC ('Prof. Mirror', [
     image: 'assets/images/npcs/Professor Mirror.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('New Pokémon Snap', 17), new QuestLineCompletedRequirement('New Pokémon Snap', GameConstants.AchievementOption.less)]),
 });
-const SnapMirror8 = new NPC ('Prof. Mirror', [
+const SnapMirrorResearchLevel = new NPC ('Prof. Mirror', [
     'I am going to continue to research the Illumina Phenomenon in the Lental Region. Feel free to explore any of the islands here.',
     'Some of the Pokémon in this region will only appear at night or during the day.',
     'I\'ve also found that if you explore an area enough, more Pokémon will appear.',
@@ -9270,14 +9270,93 @@ const SnapMirror8 = new NPC ('Prof. Mirror', [
     image: 'assets/images/npcs/Professor Mirror.png',
     requirement: new QuestLineCompletedRequirement('New Pokémon Snap'),
 });
-// const ToddSnap = new NPC ('Todd Snap', [
-//     'Have you found any Fluffruit yet?',
-//     'Throwing one at or near a Pokémon may cause it to act in unique ways.',
-//     'The Pokémon may look different, but it\'s still the same Pokémon.',
-// ], {
-//     image: 'assets/images/npcs/Todd Snap (New).png',
-//     requirement: new QuestLineCompletedRequirement('New Pokémon Snap'),
-// });
+const ToddSnap1 = new NPC ('Todd Snap', [
+    'Professor Mirror told me all about you!',
+    'A long time ago, I helped Professor Oak explore Pokémon Island. Now I want you to do the same!',
+    'I saw 3 great birds hatch from their eggs.',
+    'I saw a Jigglypuff that would sing while others danced to its music.',
+    'At the end of my journey, I even saw the mythical Pokémon Mew!',
+    'But there was one Pokémon that always seemed to elude me.',
+    'I didn\'t get a single picture of it, it was camouflaged into the environment!',
+    'You should start by exploring the shore of Pokémon Island to find it.',
+], {
+    image: 'assets/images/npcs/Todd Snap (New).png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Pokémon Snap 64'), new QuestLineStepCompletedRequirement('Pokémon Snap 64', 2, GameConstants.AchievementOption.less)]),
+});
+const ToddSnap2 = new NPC ('Todd Snap', [
+    'You only found a rock that was shaped like a Kingler on the beach? Make sure you\'re careful not to disturb real Pokémon too.',
+    'There is a Tunnel into the island, maybe that\'s where I saw it.',
+    'You should also check the beach again, just in case it went there after you.',
+], {
+    image: 'assets/images/npcs/Todd Snap (New).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Pokémon Snap 64', 2), new QuestLineStepCompletedRequirement('Pokémon Snap 64', 5, GameConstants.AchievementOption.less)]),
+});
+const ToddSnap3 = new NPC ('Todd Snap', [
+    'Some Kakuna attacked you while you were examining a shadow? At least they weren\'t Beedrill yet!',
+    'Maybe it was on the Volcano. Be careful near the magma though!',
+    'And don\'t forget to check back at the places you already were.',
+], {
+    image: 'assets/images/npcs/Todd Snap (New).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Pokémon Snap 64', 5), new QuestLineStepCompletedRequirement('Pokémon Snap 64', 8, GameConstants.AchievementOption.less)]),
+});
+const ToddSnap4 = new NPC ('Todd Snap', [ // Add some comments about not examining every suspicious thing that might be dangerous
+    'You are pretty lucky that the poison gas wasn\'t hiding any Pokémon, the wild Pokémon would have attacked you again! You should be more careful.',
+    'Actually, I think I remember seeing it on the edge of the River. I bet it was there!',
+    'I could be remembering wrong though, so look back at the Tunnel and Volcano as well.',
+], {
+    image: 'assets/images/npcs/Todd Snap (New).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Pokémon Snap 64', 8), new QuestLineStepCompletedRequirement('Pokémon Snap 64', 11, GameConstants.AchievementOption.less)]),
+});
+const ToddSnap5 = new NPC ('Todd Snap', [
+    'It really wasn\'t by the River? You\'ll have to check again later.',
+    'It definitely could be hiding in the Cave right now though.',
+], {
+    image: 'assets/images/npcs/Todd Snap (New).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Pokémon Snap 64', 11), new QuestLineStepCompletedRequirement('Pokémon Snap 64', 14, GameConstants.AchievementOption.less)]),
+});
+const ToddSnap6 = new NPC ('Todd Snap', [
+    'There are a lot of Zubat in the Cave, I\'m not surprised you disturbed them.',
+    'There is only one more place left to check. It\'s got to be in the valley!',
+    'Make sure you check along the water too.',
+    'If it\'s not there, look back at all the places you\'ve been.',
+], {
+    image: 'assets/images/npcs/Todd Snap (New).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Pokémon Snap 64', 14), new QuestLineStepCompletedRequirement('Pokémon Snap 64', 17, GameConstants.AchievementOption.less)]),
+});
+const ToddSnap7 = new NPC ('Todd Snap', [
+    'You thought the mountain was a Dugtrio?! It does look like one, but it\'s much to big!',
+    'You still haven\'t been able to find it?',
+    'I am confident that I saw it near the River, make sure you check it again! And be more thorough!',
+], {
+    image: 'assets/images/npcs/Todd Snap (New).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Pokémon Snap 64', 17), new QuestLineStepCompletedRequirement('Pokémon Snap 64', 20, GameConstants.AchievementOption.less)]),
+});
+const ToddSnap8 = new NPC ('Todd Snap', [
+    'It was a Porygon all along?! I can\'t believe it blended in with the environment that well.',
+    'It looks like it would stand out on any surface!',
+    'Although, maybe I can just see clearer than I could back then.',
+], {
+    image: 'assets/images/npcs/Todd Snap (New).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Pokémon Snap 64', 20), new QuestLineCompletedRequirement('Pokémon Snap 64', GameConstants.AchievementOption.less)]),
+});
+const ToddSnapFluffruit = new NPC ('Todd Snap', [
+    'Have you found any Fluffruit yet?',
+    'Having a Pokémon hold one will cause it to like you more.',
+    'This will increase the likelihood that another of the same species will join you when you try to catch it!',
+], {
+    image: 'assets/images/npcs/Todd Snap (New).png',
+    requirement: new QuestLineCompletedRequirement('Pokémon Snap 64'),
+});
+const ToddSnap64 = new NPC ('Todd Snap\'s Journal', [
+    '<b><i>There is a picture of Todd Snap when he was younger marking a page in his journal.</i></b>',
+    '<i>Pokémon Island is a place with many rare Pokémon!</i>',
+    '<i>3 elemental birds will sometimes roam part of the island, but you have to hatch them from their eggs first!</i>',
+    '<i>After I explored the whole island, the mythical Pokémon Mew would float right up next to me. And then disappear for a long time!</i>',
+    '<i>Once I had visited the Cave enough times, some Jigglypuff would sing and dance while I was around. Their music always makes me tired though.</i>',
+], {
+    image: 'assets/images/npcs/Todd Snap (64).png',
+    requirement: new QuestLineCompletedRequirement('New Pokémon Snap'),
+});
 
 //Galar Towns
 TownList.Postwick = new Town(
@@ -9472,7 +9551,7 @@ TownList.Freezington = new Town(
     }
 );
 
-//Lental Town
+// Lental Towns
 TownList['Laboratory of Ecology and Natural Sciences'] = new Town(
     'Laboratory of Ecology and Natural Sciences',
     GameConstants.Region.galar,
@@ -9480,10 +9559,63 @@ TownList['Laboratory of Ecology and Natural Sciences'] = new Town(
     [new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
-        npcs: [SnapMirror1, SnapMirror2, SnapMirror3, SnapMirror4, SnapMirror5, SnapMirror6, SnapMirror7, SnapMirror8, LentalRoamerNPC, /* ToddSnap */ ],
+        npcs: [SnapMirror1, SnapMirror2, SnapMirror3, SnapMirror4, SnapMirror5, SnapMirror6, SnapMirror7, SnapMirrorResearchLevel, RitaLentalRoamerNPC, ToddSnap1, ToddSnap2, ToddSnap3, ToddSnap4, ToddSnap5, ToddSnap6, ToddSnap7, ToddSnap8, ToddSnapFluffruit, ToddSnap64],
     }
 );
-
+TownList['Florio Island'] = new Town(
+    'Florio Island',
+    GameConstants.Region.galar,
+    GameConstants.GalarSubRegions.Lental,
+    [GymList['Florio Island Illumina Meganium'], new MoveToDungeon(dungeonList['Florio Island Illumina Spot'])],
+    {
+        requirements: [new TemporaryBattleRequirement('Florio Island Illumina Pokémon 2')],
+    }
+);
+TownList['Belusylva Island'] = new Town(
+    'Belusylva Island',
+    GameConstants.Region.galar,
+    GameConstants.GalarSubRegions.Lental,
+    [GymList['Belusylva Island Illumina Milotic'], new MoveToDungeon(dungeonList['Belusylva Island Illumina Spot'])],
+    {
+        requirements: [new TemporaryBattleRequirement('Belusylva Island Illumina Pokémon 2')],
+    }
+);
+TownList['Maricopia Islands'] = new Town(
+    'Maricopia Islands',
+    GameConstants.Region.galar,
+    GameConstants.GalarSubRegions.Lental,
+    [GymList['Maricopia Islands Illumina Wishiwashi'], new MoveToDungeon(dungeonList['Maricopia Islands Illumina Spot'])],
+    {
+        requirements: [new TemporaryBattleRequirement('Maricopia Islands Illumina Pokémon 2')],
+    }
+);
+TownList['Voluca Island'] = new Town(
+    'Voluca Island',
+    GameConstants.Region.galar,
+    GameConstants.GalarSubRegions.Lental,
+    [GymList['Voluca Island Illumina Volcarona'], new MoveToDungeon(dungeonList['Voluca Island Illumina Spot'])],
+    {
+        requirements: [new TemporaryBattleRequirement('Voluca Island Illumina Pokémon 2')],
+    }
+);
+TownList['Durice Island'] = new Town(
+    'Durice Island',
+    GameConstants.Region.galar,
+    GameConstants.GalarSubRegions.Lental,
+    [GymList['Durice Island Illumina Steelix'], new MoveToDungeon(dungeonList['Durice Island Illumina Spot'])],
+    {
+        requirements: [new TemporaryBattleRequirement('Durice Island Illumina Pokémon 2')],
+    }
+);
+TownList['Aurus Island'] = new Town(
+    'Aurus Island',
+    GameConstants.Region.galar,
+    GameConstants.GalarSubRegions.Lental,
+    [GymList['Aurus Island Illumina Xerneas'], new MoveToDungeon(dungeonList['Aurus Island Illumina Spot'])],
+    {
+        requirements: [new TemporaryBattleRequirement('Aurus Island Illumina Pokémon 2')],
+    }
+);
 
 //Galar Dungeons
 TownList['Slumbering Weald Shrine'] = new DungeonTown(
@@ -9675,37 +9807,37 @@ TownList['Florio Island Illumina Spot'] = new DungeonTown(
     'Florio Island Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 3)]
+    [new GymBadgeRequirement(BadgeEnums.Florio_Crystabloom)]
 );
 TownList['Belusylva Island Illumina Spot'] = new DungeonTown(
     'Belusylva Island Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 6)]
+    [new GymBadgeRequirement(BadgeEnums.Belusylva_Crystabloom)]
 );
 TownList['Maricopia Islands Illumina Spot'] = new DungeonTown(
     'Maricopia Islands Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 9)]
+    [new GymBadgeRequirement(BadgeEnums.Maricopia_Crystabloom)]
 );
 TownList['Voluca Island Illumina Spot'] = new DungeonTown(
     'Voluca Island Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 12)]
+    [new GymBadgeRequirement(BadgeEnums.Voluca_Crystabloom)]
 );
 TownList['Durice Island Illumina Spot'] = new DungeonTown(
     'Durice Island Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 15)]
+    [new GymBadgeRequirement(BadgeEnums.Durice_Crystabloom)]
 );
 TownList['Aurus Island Illumina Spot'] = new DungeonTown(
     'Aurus Island Illumina Spot',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.Lental,
-    [new QuestLineCompletedRequirement('New Pokémon Snap')]
+    [new GymBadgeRequirement(BadgeEnums.Aurus_Crystabloom)]
 );
 
 //Hisui shops

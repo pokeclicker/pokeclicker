@@ -4116,66 +4116,160 @@ class QuestLineHelper {
         const talktoSnapMirror1 = new TalkToNPCQuest(SnapMirror1, 'Speak to Professor Mirror in his lab.');
         newPokemonSnapQuestLine.addQuest(talktoSnapMirror1);
 
-        const snapFlorioIsland = new DefeatPokemonsQuest(100, 0, 56, GameConstants.Region.galar).withDescription('Explore Florio Island\'s Nature Park.');
+        const snapFlorioIsland = new DefeatPokemonsQuest(GameConstants.ResearchLevel[1], 0, 56, GameConstants.Region.galar).withDescription('Explore Florio Island\'s Nature Park.');
         newPokemonSnapQuestLine.addQuest(snapFlorioIsland);
 
-        const snapFlorioIllumina = new DefeatTemporaryBattleQuest('Florio Island Illumina Pokémon 3', 'Follow the Florio Island Illumina Pokémon.');
+        const snapFlorioIllumina = new DefeatGymQuest(1, 0, 'Florio Island Illumina Meganium').withDescription('Follow the Florio Island Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapFlorioIllumina);
 
         const talktoSnapMirror2 = new TalkToNPCQuest(SnapMirror2, 'Speak to Professor Mirror about the Illumina Meganium.');
         newPokemonSnapQuestLine.addQuest(talktoSnapMirror2); // 3
 
         /* Belusylva Island */
-        const snapBelusylvaIsland = new DefeatPokemonsQuest(100, 0, 62, GameConstants.Region.galar).withDescription('Explore Belusylva Island\'s Elsewhere Forest.');
+        const snapBelusylvaIsland = new DefeatPokemonsQuest(GameConstants.ResearchLevel[1], 0, 62, GameConstants.Region.galar).withDescription('Explore Belusylva Island\'s Elsewhere Forest.');
         newPokemonSnapQuestLine.addQuest(snapBelusylvaIsland);
 
-        const snapBelusylvaIllumina = new DefeatTemporaryBattleQuest('Belusylva Island Illumina Pokémon 3', 'Defeat the Belusylva Island Illumina Pokémon.');
+        const snapBelusylvaIllumina = new DefeatGymQuest(1, 0, 'Belusylva Island Illumina Milotic').withDescription('Follow the Belusylva Island Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapBelusylvaIllumina);
 
         const talktoSnapMirror3 = new TalkToNPCQuest(SnapMirror3, 'Speak to Professor Mirror about the Illumina Milotic.');
         newPokemonSnapQuestLine.addQuest(talktoSnapMirror3); // 6
 
         /* Maricopia Islands */
-        const snapMaricopiaIslands = new DefeatPokemonsQuest(5000, 0, 64, GameConstants.Region.galar).withDescription('Explore Maricopia Islands\' Lental Seafloor.');
+        const snapMaricopiaIslands = new DefeatPokemonsQuest(GameConstants.ResearchLevel[3], 0, 64, GameConstants.Region.galar).withDescription('Explore Maricopia Islands\' Lental Seafloor.');
         newPokemonSnapQuestLine.addQuest(snapMaricopiaIslands);
 
-        const snapMaricopiaIllumina = new DefeatTemporaryBattleQuest('Maricopia Islands Illumina Pokémon 3', 'Defeat the Maricopia Islands Illumina Pokémon.');
+        const snapMaricopiaIllumina = new DefeatGymQuest(1, 0, 'Maricopia Islands Illumina Wishiwashi').withDescription('Follow the Maricopia Islands Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapMaricopiaIllumina);
 
         const talktoSnapMirror4 = new TalkToNPCQuest(SnapMirror4, 'Speak to Professor Mirror about the Illumina Wishiwashi.');
         newPokemonSnapQuestLine.addQuest(talktoSnapMirror4); // 9
 
         /* Voluca Island */
-        const snapVolucaIsland = new DefeatPokemonsQuest(1000, 0, 61, GameConstants.Region.galar).withDescription('Explore Voluca Island\'s Fireflow Volcano.');
+        const snapVolucaIsland = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 61, GameConstants.Region.galar).withDescription('Explore Voluca Island\'s Fireflow Volcano.');
         newPokemonSnapQuestLine.addQuest(snapVolucaIsland);
 
-        const snapVolucaIllumina = new DefeatTemporaryBattleQuest('Voluca Island Illumina Pokémon 3', 'Defeat the Voluca Island Illumina Pokémon.');
+        const snapVolucaIllumina = new DefeatGymQuest(1, 0, 'Voluca Island Illumina Volcarona').withDescription('Follow the Voluca Island Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapVolucaIllumina);
 
         const talktoSnapMirror5 = new TalkToNPCQuest(SnapMirror5, 'Speak to Professor Mirror about the Illumina Volcarona.');
         newPokemonSnapQuestLine.addQuest(talktoSnapMirror5); // 12
 
         /* Durice Island */
-        const snapDuriceIsland = new DefeatPokemonsQuest(1000, 0, 67, GameConstants.Region.galar).withDescription('Explore Durice Island\'s Outaway Cave.');
+        const snapDuriceIsland = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 67, GameConstants.Region.galar).withDescription('Explore Durice Island\'s Outaway Cave.');
         newPokemonSnapQuestLine.addQuest(snapDuriceIsland);
 
-        const snapDuriceIllumina = new DefeatTemporaryBattleQuest('Durice Island Illumina Pokémon 3', 'Defeat the Durice Island Illumina Pokémon.');
+        const snapDuriceIllumina = new DefeatGymQuest(1, 0, 'Durice Island Illumina Steelix').withDescription('Follow the Durice Island Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapDuriceIllumina);
 
         const talktoSnapMirror6 = new TalkToNPCQuest(SnapMirror6, 'Speak to Professor Mirror about the Illumina Steelix.');
         newPokemonSnapQuestLine.addQuest(talktoSnapMirror6); // 15
 
         /* Aurus Island */
-        const snapAurusIsland = new DefeatPokemonsQuest(1000, 0, 68, GameConstants.Region.galar).withDescription('Explore Aurus Island\'s Ruins of Remembrance.');
+        const snapAurusIsland = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 68, GameConstants.Region.galar).withDescription('Explore Aurus Island\'s Ruins of Remembrance.');
         newPokemonSnapQuestLine.addQuest(snapAurusIsland);
 
-        const snapAurusIllumina = new DefeatTemporaryBattleQuest('Aurus Island Illumina Pokémon 3', 'Defeat the Aurus Island Illumina Pokémon.');
+        const snapAurusIllumina = new DefeatGymQuest(1, 0, 'Aurus Island Illumina Xerneas').withDescription('Follow the Aurus Island Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapAurusIllumina);
 
         const talktoSnapMirror7 = new TalkToNPCQuest(SnapMirror7, 'Speak to Professor Mirror about the Illumina Xerneas.');
         newPokemonSnapQuestLine.addQuest(talktoSnapMirror7); //18
 
         App.game.quests.questLines().push(newPokemonSnapQuestLine);
+    }
+
+    public static createPokemonSnap64QuestLine() {
+        const PokemonSnap64QuestLine = new QuestLine('Pokémon Snap 64', 'Todd would like your help locating rare Pokémon on Pokémon Island.', new QuestLineCompletedRequirement('New Pokémon Snap'), GameConstants.BulletinBoards.Galar);
+
+        const talktoToddSnap1 = new TalkToNPCQuest(ToddSnap1, 'Speak to Todd Snap about the Pokémon he wants to see.');
+        PokemonSnap64QuestLine.addQuest(talktoToddSnap1);
+
+        const snapBeach = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 71, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Beach to find the hidden Pokémon.');
+        PokemonSnap64QuestLine.addQuest(snapBeach);
+
+        const snapKingler = new DefeatTemporaryBattleQuest('Kingler?', 'Defeat the suspicious looking Kingler on Pokémon Island\'s Beach');
+        PokemonSnap64QuestLine.addQuest(snapKingler);
+
+        const talktoToddSnap2 = new TalkToNPCQuest(ToddSnap2, 'Speak to Todd about what you saw.');
+        PokemonSnap64QuestLine.addQuest(talktoToddSnap2); // 3
+
+        const snapTunnel = new MultipleQuestsQuest(
+            [
+                new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 72, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Tunnel to find the hidden Pokémon.'),
+                new DefeatPokemonsQuest(GameConstants.ResearchLevel[1], 0, 71, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Beach (again) to find the hidden Pokémon.'),
+            ], 'Explore Pokémon Island\'s Tunnel... and reexplore the Beach.');
+        PokemonSnap64QuestLine.addQuest(snapTunnel);
+
+        const snapPinsir = new DefeatTemporaryBattleQuest('Pinsir?', 'Defeat the suspicious looking Pinsir in Pokémon Island\'s Tunnel');
+        PokemonSnap64QuestLine.addQuest(snapPinsir);
+
+        const talktoToddSnap3 = new TalkToNPCQuest(ToddSnap3, 'Speak to Todd about what you saw.');
+        PokemonSnap64QuestLine.addQuest(talktoToddSnap3); // 6
+
+        const snapVolcano = new MultipleQuestsQuest(
+            [
+                new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 73, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Volcano to find the hidden Pokémon.'),
+                new DefeatPokemonsQuest(GameConstants.ResearchLevel[1], 0, 72, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Tunnel (again) to find the hidden Pokémon.'),
+                new DefeatPokemonsQuest(GameConstants.ResearchLevel[1], 0, 71, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Beach (again) to find the hidden Pokémon.'),
+            ], 'Explore Pokémon Island\'s Volcano... and reexplore the other areas.');
+        PokemonSnap64QuestLine.addQuest(snapVolcano);
+
+        const snapKoffing = new DefeatTemporaryBattleQuest('Koffing?', 'Defeat the suspicious looking Koffing at Pokémon Island\'s Volcano');
+        PokemonSnap64QuestLine.addQuest(snapKoffing);
+
+        const talktoToddSnap4 = new TalkToNPCQuest(ToddSnap4, 'Speak to Todd about what you saw.');
+        PokemonSnap64QuestLine.addQuest(talktoToddSnap4); // 9
+
+        const snapRiver = new MultipleQuestsQuest(
+            [
+                new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 74, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s River to find the hidden Pokémon.'),
+                new DefeatPokemonsQuest(GameConstants.ResearchLevel[1], 0, 73, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Volcano (again) to find the hidden Pokémon.'),
+                new DefeatPokemonsQuest(GameConstants.ResearchLevel[1], 0, 72, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Tunnel (again) to find the hidden Pokémon.'),
+            ], 'Explore Pokémon Island\'s River... and reexplore the other areas... again.');
+        PokemonSnap64QuestLine.addQuest(snapRiver);
+
+        const snapCubone = new DefeatTemporaryBattleQuest('Cubone?', 'Defeat the suspicious looking Cubone alongside Pokémon Island\'s River');
+        PokemonSnap64QuestLine.addQuest(snapCubone);
+
+        const talktoToddSnap5 = new TalkToNPCQuest(ToddSnap5, 'Speak to Todd about what you saw.');
+        PokemonSnap64QuestLine.addQuest(talktoToddSnap5); // 12
+
+        const snapCave = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 75, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Cave... and and only the Cave.');
+        PokemonSnap64QuestLine.addQuest(snapCave);
+
+        const snapMewtwo = new DefeatTemporaryBattleQuest('Mewtwo?', 'Defeat the suspicious looking Mewtwo in Pokémon Island\'s Cave');
+        PokemonSnap64QuestLine.addQuest(snapMewtwo);
+
+        const talktoToddSnap6 = new TalkToNPCQuest(ToddSnap6, 'Speak to Todd about what you saw.');
+        PokemonSnap64QuestLine.addQuest(talktoToddSnap6); // 15
+
+        const snapValley = new MultipleQuestsQuest(
+            [
+                new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 76, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Valley to find the hidden Pokémon.'),
+                new DefeatPokemonsQuest(GameConstants.ResearchLevel[1], 0, 75, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Cave (again) to find the hidden Pokémon.'),
+                new DefeatPokemonsQuest(GameConstants.ResearchLevel[1], 0, 74, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s River (again) to find the hidden Pokémon.'),
+                new DefeatPokemonsQuest(GameConstants.ResearchLevel[1], 0, 73, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Volcano (again) to find the hidden Pokémon.'),
+                new DefeatPokemonsQuest(GameConstants.ResearchLevel[1], 0, 72, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Tunnel (again) to find the hidden Pokémon.'),
+                new DefeatPokemonsQuest(GameConstants.ResearchLevel[1], 0, 71, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Beach (again) to find the hidden Pokémon.'),
+            ], 'This is the last time, right?');
+        PokemonSnap64QuestLine.addQuest(snapValley);
+
+        const snapDugtrio = new DefeatTemporaryBattleQuest('Dugtrio?', 'Defeat the suspicious looking Dugtrio on Pokémon Island\'s Beach');
+        PokemonSnap64QuestLine.addQuest(snapDugtrio);
+
+        const talktoToddSnap7 = new TalkToNPCQuest(ToddSnap7, 'Speak to Todd about what you saw.');
+        PokemonSnap64QuestLine.addQuest(talktoToddSnap7); // 18
+
+        const snapRiverAgain = new DefeatPokemonsQuest(GameConstants.ResearchLevel[3], 0, 74, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s River. You\'ll definitely find the camouflaged Pokémon this time.');
+        PokemonSnap64QuestLine.addQuest(snapRiverAgain);
+
+        const snapPorygon = new DefeatTemporaryBattleQuest('Camouflaged Pokémon', 'Defeat the Camouflaged Pokémon on the bank of Pokémon Island\'s River');
+        PokemonSnap64QuestLine.addQuest(snapPorygon);
+
+        const talktoToddSnap8 = new TalkToNPCQuest(ToddSnap8, 'Speak to Todd about the Porygon you found!');
+        PokemonSnap64QuestLine.addQuest(talktoToddSnap8); // 21
+
+        App.game.quests.questLines().push(PokemonSnap64QuestLine);
     }
 
     /* Hisui QuestLines */
@@ -4383,5 +4477,6 @@ class QuestLineHelper {
         this.createMeltanQuestLine();
         this.createRainbowRocketQuestLine();
         this.createNewPokemonSnapQuestLine();
+        this.createPokemonSnap64QuestLine();
     }
 }

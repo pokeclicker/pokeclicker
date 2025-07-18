@@ -504,8 +504,6 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Go, Go, Mega Force!', 'Obtain 25 Mega Stones.', new TotalMegaStoneObtainedRequirement(25), 7, GameConstants.Region.kalos);
         AchievementHandler.addAchievement('Y\'all got any more of them Mega Stones?', `Obtain all ${totalMegaStones} Mega Stones.`, new TotalMegaStoneObtainedRequirement(totalMegaStones), 10, GameConstants.Region.kalos);
 
-        // AchievementHandler.addAchievement('Fluffruit', 'Use a Fluffruit on a Pokémon', new ReactingPokemonRequirement(1), 1, GameConstants.ExtraAchievementCategories.lental);
-
         /*
          * REGIONAL
          */
@@ -646,6 +644,18 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Twenty Thousands Karps Under the Seas', 'Catch all unique Shiny Magikarp forms.', new CaughtUniquePokemonByFilterRequirement(karpDexFilter, 'Catch all unique Shiny Magikarp forms.', karpAmount, true), 1.5, GameConstants.ExtraAchievementCategories.magikarpJump);
 
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 2], GameConstants.ExtraAchievementCategories.orre, 'Orre');
+
+        addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 3], GameConstants.ExtraAchievementCategories.lental, 'Lental');
+        const illuminaDexFilter = (p: PartyPokemon) => p.name.startsWith('Illumina ');
+        const illuminaAmount = pokemonList.reduce((count, p) => count + +(p.name.startsWith('Illumina ')), 0); // I doubt more will be added in the future, but just in case
+        AchievementHandler.addAchievement('They Glow Now?!', 'Catch all unique Illumina Pokémon.', new CaughtUniquePokemonByFilterRequirement(illuminaDexFilter, 'Catch all unique Illumina Pokémon.', illuminaAmount), 1, GameConstants.ExtraAchievementCategories.lental);
+        AchievementHandler.addAchievement('Radiant Radiance', 'Catch all unique Shiny Illumina Pokémon.', new CaughtUniquePokemonByFilterRequirement(illuminaDexFilter, 'Catch all unique Shiny Illumina Pokémon.', illuminaAmount, true), 1.5, GameConstants.ExtraAchievementCategories.lental);
+        // AchievementHandler.addAchievement('Put all your eggs in one basket', 'Have the 4 roamers native to Pokémon Island roaming.', new MultiRequirement([
+        //         new StatisticRequirement(['pokemonHatched', 144], 1000), // Articuno
+        //         new StatisticRequirement(['pokemonHatched', 145], 1000), // Zapdos
+        //         new StatisticRequirement(['pokemonHatched', 146], 1000), // Moltres
+        //         new QuestLineCompletedRequirement('Pokémon Snap 64'), // Mew
+        //     ]), 0.5, GameConstants.ExtraAchievementCategories.lental); // not sure if this is even a good achievement, but I can't think of many for Snap
 
         // Secret achievements
         AchievementHandler.addSecretAchievement(

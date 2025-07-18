@@ -6625,6 +6625,7 @@ TemporaryBattleList['Eternamax Eternatus'] = new TemporaryBattle(
         imageName: '../pokemon/890.01',
     }
 );
+// Lental Temporary Battles
 TemporaryBattleList['Florio Island Illumina Pokémon 1'] = new TemporaryBattle(
     'Florio Island Illumina Pokémon 1',
     [new GymPokemon('Illumina Meganium', 100, 40)],
@@ -6642,18 +6643,6 @@ TemporaryBattleList['Florio Island Illumina Pokémon 2'] = new TemporaryBattle(
     [new GymPokemon('Illumina Meganium', 100, 40)],
     '<b><i>You continued to follow the Meganium around Florio Island.</i></b>',
     [new TemporaryBattleRequirement('Florio Island Illumina Pokémon 1')],
-    undefined,
-    {
-        returnTown: 'Laboratory of Ecology and Natural Sciences',
-        hideTrainer: true,
-        imageName: '../pokemon/154.01',
-    }
-);
-TemporaryBattleList['Florio Island Illumina Pokémon 3'] = new TemporaryBattle(
-    'Florio Island Illumina Pokémon 3',
-    [new GymPokemon('Illumina Meganium', 100, 40)],
-    '<b><i>The Meganium fled from you. You should be able to find it again in the same area.</i></b>',
-    [new TemporaryBattleRequirement('Florio Island Illumina Pokémon 2')],
     undefined,
     {
         returnTown: 'Laboratory of Ecology and Natural Sciences',
@@ -6685,18 +6674,6 @@ TemporaryBattleList['Belusylva Island Illumina Pokémon 2'] = new TemporaryBattl
         imageName: '../pokemon/350.01',
     }
 );
-TemporaryBattleList['Belusylva Island Illumina Pokémon 3'] = new TemporaryBattle(
-    'Belusylva Island Illumina Pokémon 3',
-    [new GymPokemon('Illumina Milotic', 100, 40)],
-    '<b><i>The Milotic fled from you. You should be able to find it again in the same area.</i></b>',
-    [new TemporaryBattleRequirement('Belusylva Island Illumina Pokémon 2')],
-    undefined,
-    {
-        returnTown: 'Laboratory of Ecology and Natural Sciences',
-        hideTrainer: true,
-        imageName: '../pokemon/350.01',
-    }
-);
 TemporaryBattleList['Maricopia Islands Illumina Pokémon 1'] = new TemporaryBattle(
     'Maricopia Islands Illumina Pokémon 1',
     [new GymPokemon('Wishiwashi (Solo)', 100, 40)],
@@ -6706,7 +6683,7 @@ TemporaryBattleList['Maricopia Islands Illumina Pokémon 1'] = new TemporaryBatt
     {
         returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
-        imageName: '../pokemon/746.03',
+        imageName: '../pokemon/746',
     }
 );
 TemporaryBattleList['Maricopia Islands Illumina Pokémon 2'] = new TemporaryBattle(
@@ -6725,19 +6702,7 @@ TemporaryBattleList['Maricopia Islands Illumina Pokémon 2'] = new TemporaryBatt
     {
         returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
-        imageName: '../pokemon/746.03',
-    }
-);
-TemporaryBattleList['Maricopia Islands Illumina Pokémon 3'] = new TemporaryBattle(
-    'Maricopia Islands Illumina Pokémon 3',
-    [new GymPokemon('Illumina Wishiwashi', 100, 40)],
-    '<b><i>The Wishiwashi fled from you. You should be able to find it again in the same area.</i></b>',
-    [new TemporaryBattleRequirement('Maricopia Islands Illumina Pokémon 2')],
-    undefined,
-    {
-        returnTown: 'Laboratory of Ecology and Natural Sciences',
-        hideTrainer: true,
-        imageName: '../pokemon/746.03',
+        imageName: '../pokemon/746',
     }
 );
 TemporaryBattleList['Voluca Island Illumina Pokémon 1'] = new TemporaryBattle(
@@ -6757,21 +6722,6 @@ TemporaryBattleList['Voluca Island Illumina Pokémon 2'] = new TemporaryBattle(
     [new GymPokemon('Illumina Volcarona', 100, 40)],
     '<b><i>You found the Volcarona and continued to follow it around Voluca Island.</i></b>',
     [new TemporaryBattleRequirement('Voluca Island Illumina Pokémon 1')],
-    undefined,
-    {
-        returnTown: 'Laboratory of Ecology and Natural Sciences',
-        hideTrainer: true,
-        imageName: '../pokemon/637.01',
-    }
-);
-TemporaryBattleList['Voluca Island Illumina Pokémon 3'] = new TemporaryBattle(
-    'Voluca Island Illumina Pokémon 3',
-    [
-        new GymPokemon('Illumina Volcarona', 100, 40),
-        new GymPokemon('Illumina Volcarona', 100, 40),
-    ],
-    '<b><i>The Volcarona fled from you. You should be able to find it again in the same area.</i></b>',
-    [new TemporaryBattleRequirement('Voluca Island Illumina Pokémon 2')],
     undefined,
     {
         returnTown: 'Laboratory of Ecology and Natural Sciences',
@@ -6803,18 +6753,6 @@ TemporaryBattleList['Durice Island Illumina Pokémon 2'] = new TemporaryBattle(
         imageName: '../pokemon/208.03',
     }
 );
-TemporaryBattleList['Durice Island Illumina Pokémon 3'] = new TemporaryBattle(
-    'Durice Island Illumina Pokémon 3',
-    [new GymPokemon('Illumina Steelix', 100, 40)],
-    '<b><i>The Steelix fled from you. You should be able to find it again in the same area.</i></b>',
-    [new TemporaryBattleRequirement('Durice Island Illumina Pokémon 2')],
-    undefined,
-    {
-        returnTown: 'Laboratory of Ecology and Natural Sciences',
-        hideTrainer: true,
-        imageName: '../pokemon/208.03',
-    }
-);
 TemporaryBattleList['Aurus Island Illumina Pokémon 1'] = new TemporaryBattle(
     'Aurus Island Illumina Pokémon 1',
     [new GymPokemon('Illumina Xerneas', 100, 40)],
@@ -6839,16 +6777,101 @@ TemporaryBattleList['Aurus Island Illumina Pokémon 2'] = new TemporaryBattle(
         imageName: '../pokemon/716.02',
     }
 );
-TemporaryBattleList['Aurus Island Illumina Pokémon 3'] = new TemporaryBattle(
-    'Aurus Island Illumina Pokémon 3',
-    [new GymPokemon('Illumina Xerneas', 100, 40)],
-    '<b><i>The Xermeas fled from you. You should be able to find it again in the same area.</i></b>',
-    [new TemporaryBattleRequirement('Aurus Island Illumina Pokémon 2')],
+// Pokémon Island Temporary Battles
+TemporaryBattleList['Kingler?'] = new TemporaryBattle(
+    'Kingler?',
+    [new GymPokemon('Kingler', 100, 40)],
+    '<b><i>It turned out to just be a rock that looked like a Kingler.</i></b>',
+    [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 1)],
     undefined,
     {
         returnTown: 'Laboratory of Ecology and Natural Sciences',
         hideTrainer: true,
-        imageName: '../pokemon/716.02',
+        imageName: '../pokemon/99',
+    }
+);
+TemporaryBattleList['Pinsir?'] = new TemporaryBattle(
+    'Pinsir?',
+    [
+        new GymPokemon('Pinsir', 100, 40),
+        new GymPokemon('Kakuna', 100, 40),
+        new GymPokemon('Kakuna', 100, 40),
+    ],
+    '<b><i>You disturbed a few Kakuna, but it turned out to just be the shadow of a few objects that looks like a Pinsir.</i></b>',
+    [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 4)],
+    undefined,
+    {
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
+        hideTrainer: true,
+        imageName: '../pokemon/127',
+    }
+);
+TemporaryBattleList['Koffing?'] = new TemporaryBattle(
+    'Koffing?',
+    [new GymPokemon('Koffing', 100, 40)],
+    '<b><i>It turned out to just be a gas cloud that looks like a Koffing.</i></b>',
+    [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 7)],
+    undefined,
+    {
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
+        hideTrainer: true,
+        imageName: '../pokemon/109',
+    }
+);
+TemporaryBattleList['Cubone?'] = new TemporaryBattle(
+    'Cubone?',
+    [new GymPokemon('Cubone', 100, 40)],
+    '<b><i>It turned out to just be a tree that grew into the shape of a Cubone.</i></b>',
+    [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 10)],
+    undefined,
+    {
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
+        hideTrainer: true,
+        imageName: '../pokemon/104',
+    }
+);
+TemporaryBattleList['Mewtwo?'] = new TemporaryBattle(
+    'Mewtwo?',
+    [
+        new GymPokemon('Mewtwo', 100, 40),
+        new GymPokemon('Zubat', 100, 40),
+        new GymPokemon('Zubat', 100, 40),
+        new GymPokemon('Zubat', 100, 40),
+    ],
+    '<b><i>It turned out to just be a group of crystals that form a Mewtwo, and you surprised a colony of Zubat!</i></b>',
+    [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 13)],
+    undefined,
+    {
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
+        hideTrainer: true,
+        imageName: '../pokemon/151',
+    }
+);
+TemporaryBattleList['Dugtrio?'] = new TemporaryBattle(
+    'Dugtrio?',
+    [new GymPokemon('Dugtrio', 100, 40)],
+    '<b><i>It turned out to just be a the face of a mountain that looks like a Dugtrio.</i></b>',
+    [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 16)],
+    undefined,
+    {
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
+        hideTrainer: true,
+        imageName: '../pokemon/51',
+    }
+);
+TemporaryBattleList['Camouflaged Pokémon'] = new TemporaryBattle(
+    'Camouflaged Pokémon',
+    [
+        new GymPokemon('Porygon (Camo)', 100, 40, undefined, false),
+        new GymPokemon('Porygon (Camo)', 100, 40, undefined, true),
+    ],
+    '<b><i>It was a pair of camouflaged Pokémon! This must be what Todd was looking for.</i></b>',
+    [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 19)],
+    undefined,
+    {
+        returnTown: 'Laboratory of Ecology and Natural Sciences',
+        hideTrainer: true,
+        imageName: '../pokemon/137.01',
     }
 );
 

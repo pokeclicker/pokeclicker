@@ -39,6 +39,10 @@ class HeldItem extends Item {
                 title: 'EXP Gain',
                 items: sortedHeldItems.filter(i => i instanceof ExpGainedBonusHeldItem),
             },
+            catchRate: {
+                title: 'Catch Rate',
+                items: sortedHeldItems.filter(i => i instanceof CatchRateBonusHeldItem),
+            },
             other: {
                 title: 'Other',
                 items: sortedHeldItems.filter(i => i.constructor.name === 'AttackBonusHeldItem' || i.constructor.name === 'HeldItem'),
@@ -157,6 +161,21 @@ class ExpGainedBonusHeldItem extends HeldItem {
     }
 }
 
+class CatchRateBonusHeldItem extends HeldItem {
+    constructor(
+        name: string,
+        basePrice: number,
+        currency: GameConstants.Currency,
+        shopOptions: ShopOptions,
+        displayName: string,
+        public gainedBonus: number,
+        regionUnlocked: GameConstants.Region,
+        pokemonDescription = 'the holding Pokémon species',
+        canUse = (pokemon: PartyPokemon) => true) {
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that increases catch rate for ${pokemonDescription} by ${(gainedBonus).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })}.`, regionUnlocked, canUse);
+    }
+}
+
 ItemList.Wonder_Chest = new ExpGainedBonusHeldItem('Wonder_Chest', 10000, GameConstants.Currency.money, undefined, 'Wonder Chest', 1.25, GameConstants.Region.johto);
 ItemList.Miracle_Chest = new ExpGainedBonusHeldItem('Miracle_Chest', 30000, GameConstants.Currency.money, { visible: new MaxRegionRequirement(GameConstants.Region.sinnoh) }, 'Miracle Chest', 1.5, GameConstants.Region.sinnoh);
 ItemList.Joy_Scent = new ExpGainedBonusHeldItem('Joy_Scent', 10000, GameConstants.Currency.money, undefined, 'Joy Scent', 1.75, GameConstants.Region.hoenn, ' the holding Shadow Pokémon',
@@ -239,6 +258,9 @@ ItemList.Power_Herb = new AttackBonusHeldItem('Power_Herb', undefined, GameConst
 
 ItemList.Macho_Brace = new EVsGainedBonusHeldItem('Macho_Brace', 1500, GameConstants.Currency.questPoint, undefined, 'Macho Brace', 1.5, GameConstants.Region.sinnoh);
 ItemList.Power_Bracer = new EVsGainedBonusHeldItem('Power_Bracer', 2000, GameConstants.Currency.questPoint, undefined, 'Power Bracer', 2, GameConstants.Region.alola);
+
+ItemList.Fluffruit = new CatchRateBonusHeldItem('Fluffruit', 10000, GameConstants.Currency.money, undefined, 'Fluffruit', 10, GameConstants.Region.galar);
+// ItemList.Fluffruit = new HeldItem('Fluffruit', 10000, GameConstants.Currency.money, undefined, 'Fluffruit', 'Raises the catch rate of the species of the holder by 10% (additive).', GameConstants.Region.galar, (pokemon) => true);
 
 ItemList.Everstone = new HeldItem('Everstone', 10000, GameConstants.Currency.money, undefined, 'Everstone', 'Stops the holder from evolving due to level or a stone being used. Also prevents new baby Pokémon from hatching.', GameConstants.Region.kanto,
     (pokemon) => {

@@ -1504,6 +1504,15 @@ export const MagikarpJumpGyms = [
     'Master League',
 ];
 
+export const LentalGyms = [
+    'Florio Island Illumina Meganium',
+    'Belusylva Island Illumina Milotic',
+    'Maricopia Islands Illumina Wishiwashi',
+    'Voluca Island Illumina Volcarona',
+    'Durice Island Illumina Steelix',
+    'Aurus Island Illumina Xerneas',
+];
+
 export const RegionGyms = [
     KantoGyms,
     JohtoGyms,
@@ -1519,6 +1528,7 @@ export const RegionGyms = [
     OrangeGyms,
     MagikarpJumpGyms,
     OrreGyms,
+    LentalGyms,
 ];
 
 export function getGymIndex(gym: string): number {
@@ -2266,22 +2276,23 @@ export const TemporaryBattles = [
     'Destiny Rayquaza',
     'Florio Island Illumina Pokémon 1',
     'Florio Island Illumina Pokémon 2',
-    'Florio Island Illumina Pokémon 3',
     'Belusylva Island Illumina Pokémon 1',
     'Belusylva Island Illumina Pokémon 2',
-    'Belusylva Island Illumina Pokémon 3',
     'Maricopia Islands Illumina Pokémon 1',
     'Maricopia Islands Illumina Pokémon 2',
-    'Maricopia Islands Illumina Pokémon 3',
     'Voluca Island Illumina Pokémon 1',
     'Voluca Island Illumina Pokémon 2',
-    'Voluca Island Illumina Pokémon 3',
     'Durice Island Illumina Pokémon 1',
     'Durice Island Illumina Pokémon 2',
-    'Durice Island Illumina Pokémon 3',
     'Aurus Island Illumina Pokémon 1',
     'Aurus Island Illumina Pokémon 2',
-    'Aurus Island Illumina Pokémon 3',
+    'Kingler?',
+    'Pinsir?',
+    'Koffing?',
+    'Cubone?',
+    'Mewtwo?',
+    'Dugtrio?',
+    'Camouflaged Pokémon',
     'Volo 1',
     'Akari 1',
     'Warden Mai',
@@ -2525,6 +2536,15 @@ export const MoonCycleValues: Record<MoonCyclePhase, number> = {
     [MoonCyclePhase.WaningCrescent]: 7,
 };
 
+// Research Level - used for route encounters in Lental
+export const ResearchLevel = [ // actual values haven't been determined yet, low values are used to make it easier to get through the quest
+    0, // Unexplored
+    10, // Research Level 1
+    20, // Research Level 2
+    30, // Research Level 3
+    40, // Research Level MAX
+];
+
 export const MoonEvoPokemon = new Set<PokemonNameType>([
     'Nidoran(F)', // 29
     'Nidorina', // 30
@@ -2558,11 +2578,6 @@ export enum ShadowStatus {
     Shadow,
     Purified,
 }
-
-// export enum FluffruitStatus {
-//     Normal,
-//     Fluffed,
-// }
 
 export enum MegaStoneType {
     Abomasite,

@@ -337,6 +337,7 @@ export type TmpPartyType = {
     ) => number;
     getRegionAttackMultiplier: (highestRegion?: GameConstants.Region) => number
     calculateEffortPoints: (pokemon: TmpPartyPokemonType, shiny: boolean, shadow: GameConstants.ShadowStatus, number: number, ignore?: boolean) => number;
+    calculateCatchRateBonus: (pokemon: TmpPartyPokemonType) => number;
     getPokemon: (id: number) => TmpPartyPokemonType | undefined;
     getPokemonByName: (name: PokemonNameType) => TmpPartyPokemonType | undefined;
     partyPokemonActiveInSubRegion: (region: GameConstants.Region, subregion: GameConstants.SubRegions) => Array<TmpPartyPokemonType>;

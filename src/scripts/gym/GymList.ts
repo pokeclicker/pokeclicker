@@ -2141,6 +2141,83 @@ GymList['Elite Trainer Peony'] = new Gym(
     { imageName: 'Peony Elite' }
 );
 
+// Lental Gyms
+GymList['Florio Island Illumina Meganium'] = new Gym(
+    'Illumina Meganium',
+    'Florio Island Illumina Meganium',
+    [new GymPokemon('Illumina Meganium', 305387462, 74)],
+    BadgeEnums.Florio_Crystabloom,
+    250000,
+    '<b><i>The Meganium fled from you. You should be able to find it again in the same area.</i></b>',
+    [new TemporaryBattleRequirement('Florio Island Illumina Pokémon 2')],
+    undefined,
+    undefined,
+    { imageName: 'specialNPCs/Transparent' }
+);
+GymList['Belusylva Island Illumina Milotic'] = new Gym(
+    'Illumina Milotic',
+    'Belusylva Island Illumina Milotic',
+    [new GymPokemon('Illumina Milotic', 305387462, 74)],
+    BadgeEnums.Belusylva_Crystabloom,
+    250000,
+    '<b><i>The Milotic fled from you. You should be able to find it again in the same area.</i></b>',
+    [new TemporaryBattleRequirement('Belusylva Island Illumina Pokémon 2')],
+    undefined,
+    undefined,
+    { imageName: 'specialNPCs/Transparent' }
+);
+GymList['Maricopia Islands Illumina Wishiwashi'] = new Gym(
+    'Illumina Wishiwashi',
+    'Maricopia Islands Illumina Wishiwashi',
+    [new GymPokemon('Illumina Wishiwashi', 305387462, 74)],
+    BadgeEnums.Maricopia_Crystabloom,
+    250000,
+    '<b><i>The Wishiwashi fled from you. You should be able to find it again in the same area.</i></b>',
+    [new TemporaryBattleRequirement('Maricopia Islands Illumina Pokémon 2')],
+    undefined,
+    undefined,
+    { imageName: 'specialNPCs/Transparent' }
+);
+GymList['Voluca Island Illumina Volcarona'] = new Gym(
+    'Illumina Volcarona',
+    'Voluca Island Illumina Volcarona',
+    [
+        new GymPokemon('Illumina Volcarona', 305387462, 74),
+        new GymPokemon('Illumina Volcarona', 305387462, 74),
+    ],
+    BadgeEnums.Voluca_Crystabloom,
+    250000,
+    '<b><i>The Volcarona fled from you. You should be able to find it again in the same area.</i></b>',
+    [new TemporaryBattleRequirement('Voluca Island Illumina Pokémon 2')],
+    undefined,
+    undefined,
+    { imageName: 'specialNPCs/Transparent' }
+);
+GymList['Durice Island Illumina Steelix'] = new Gym(
+    'Illumina Steelix',
+    'Durice Island Illumina Steelix',
+    [new GymPokemon('Illumina Steelix', 305387462, 74)],
+    BadgeEnums.Durice_Crystabloom,
+    250000,
+    '<b><i>The Steelix fled from you. You should be able to find it again in the same area.</i></b>',
+    [new TemporaryBattleRequirement('Durice Island Illumina Pokémon 2')],
+    undefined,
+    undefined,
+    { imageName: 'specialNPCs/Transparent' }
+);
+GymList['Aurus Island Illumina Xerneas'] = new Gym(
+    'Illumina Xerneas',
+    'Aurus Island Illumina Xerneas',
+    [new GymPokemon('Illumina Xerneas', 305387462, 74)],
+    BadgeEnums.Aurus_Crystabloom,
+    250000,
+    '<b><i>The Xerneas fled from you. You should be able to find it again in the same area.</i></b>',
+    [new TemporaryBattleRequirement('Aurus Island Illumina Pokémon 2')],
+    undefined,
+    undefined,
+    { imageName: 'specialNPCs/Transparent' }
+);
+
 // Hisui Gyms
 
 GymList['Grandtree Arena'] = new Gym(
