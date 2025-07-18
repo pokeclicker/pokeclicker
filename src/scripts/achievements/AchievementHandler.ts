@@ -648,7 +648,7 @@ class AchievementHandler {
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 3], GameConstants.ExtraAchievementCategories.lental, 'Lental');
         const illuminaDexFilter = (p: PartyPokemon) => p.name.startsWith('Illumina ');
         const illuminaAmount = pokemonList.reduce((count, p) => count + +(p.name.startsWith('Illumina ')), 0); // I doubt more will be added in the future, but just in case
-        AchievementHandler.addAchievement('They Glow Now?!', 'Catch all unique Illumina Pokémon.', new CaughtUniquePokemonByFilterRequirement(illuminaDexFilter, 'Catch all unique Illumina Pokémon.', illuminaAmount), 1, GameConstants.ExtraAchievementCategories.lental);
+        AchievementHandler.addAchievement('They Glow Now? They Glow Now!', 'Catch all unique Illumina Pokémon.', new CaughtUniquePokemonByFilterRequirement(illuminaDexFilter, 'Catch all unique Illumina Pokémon.', illuminaAmount), 1, GameConstants.ExtraAchievementCategories.lental);
         AchievementHandler.addAchievement('Radiant Radiance', 'Catch all unique Shiny Illumina Pokémon.', new CaughtUniquePokemonByFilterRequirement(illuminaDexFilter, 'Catch all unique Shiny Illumina Pokémon.', illuminaAmount, true), 1.5, GameConstants.ExtraAchievementCategories.lental);
         // AchievementHandler.addAchievement('Put all your eggs in one basket', 'Have the 4 roamers native to Pokémon Island roaming.', new MultiRequirement([
         //         new StatisticRequirement(['pokemonHatched', 144], 1000), // Articuno

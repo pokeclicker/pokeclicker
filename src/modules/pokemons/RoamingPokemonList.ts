@@ -173,9 +173,9 @@ RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Jirachi', new MultiR
 RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Zeraora', new MultiRequirement([new ObtainedPokemonRequirement('Zeraora'), new RouteKillRequirement(ResearchLevel[3], Region.galar, 70), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])]), [70]));
 RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Zeraora', new MultiRequirement([new ObtainedPokemonRequirement('Zeraora'), new RouteKillRequirement(ResearchLevel[2], Region.galar, 70), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])]), [70]));
 // Pokémon Island
-RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Zapdos', new StatisticRequirement(['pokemonHatched', 145], 100), [72]));
-RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Moltres', new StatisticRequirement(['pokemonHatched', 146], 10), [73]));
-RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Articuno', new StatisticRequirement(['pokemonHatched', 144], 10), [75]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Zapdos', new StatisticRequirement(['pokemonHatched', 145], 1000), [72]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Moltres', new StatisticRequirement(['pokemonHatched', 146], 1000), [73]));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Articuno', new StatisticRequirement(['pokemonHatched', 144], 1000), [75]));
 RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Mew', new QuestLineCompletedRequirement('Pokémon Snap 64'), [71, 72, 73, 74, 75, 76]));
 
 // Hisui

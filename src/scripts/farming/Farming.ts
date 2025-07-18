@@ -2316,12 +2316,11 @@ class Farming implements Feature {
 
     public attemptCatchWanderer(plot: Plot) {
         const wanderer = plot.wanderer;
-        const partyPokemon = App.game.party.getPokemonByName(wanderer.name);
         const catchChance = GameConstants.clipNumber(
             wanderer.catchRate
                 + App.game.pokeballs.getCatchBonus(wanderer.pokeball(), { pokemon: wanderer.name, encounterType: EncounterType.wanderer })
                 + App.game.oakItems.calculateBonus(OakItemType.Magic_Ball)
-                + App.game.party.calculateCatchRateBonus(partyPokemon)
+                + App.game.party.calculateCatchRateBonus(App.game.party.getPokemonByName(wanderer.name))
                 + (plot.mulch === MulchType.Gooey_Mulch ? GameConstants.GOOEY_MULCH_CATCH_BONUS : 0),
             0, 100);
         if (Rand.chance(catchChance / 100)) { // Successfully caught
@@ -2329,6 +2328,7 @@ class Farming implements Feature {
             App.game.party.gainPokemonByName(wanderer.name, wanderer.shiny);
 
             // EV
+            const partyPokemon = App.game.party.getPokemonByName(wanderer.name);
             const wandererEPGain = App.game.pokeballs.getEPBonus(wanderer.pokeball())
                 * GameConstants.BASE_EP_YIELD
                 * (Berry.isBaseWanderer(wanderer.name) ? GameConstants.BASE_WANDERER_EP_MODIFIER : GameConstants.WANDERER_EP_MODIFIER);

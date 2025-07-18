@@ -9355,7 +9355,7 @@ const ToddSnap64 = new NPC ('Todd Snap\'s Journal', [
     '<i>Once I had visited the Cave enough times, some Jigglypuff would sing and dance while I was around. Their music always makes me tired though.</i>',
 ], {
     image: 'assets/images/npcs/Todd Snap (64).png',
-    requirement: new QuestLineCompletedRequirement('New Pokémon Snap'),
+    requirement: new QuestLineStartedRequirement('Pokémon Snap 64'),
 });
 
 //Galar Towns
