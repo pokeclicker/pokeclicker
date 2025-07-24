@@ -60,7 +60,7 @@ export default class TranslationHelper {
         return exportTree;
     }
 
-    public static exportQuestlineTranslationDefaults(): string {
+    public static exportQuestlineTranslationDefaults(): void {
         // Make sure all questline translatable text has been loaded by App.translation
         App.game.quests.questLines().forEach(ql => {
             ql.displayName; // eslint-disable-line @typescript-eslint/no-unused-expressions
@@ -76,15 +76,20 @@ export default class TranslationHelper {
         const defaultsTree = TranslationHelper.exportCachedTranslationDefaults('questlines', replaceNames);
         const questlineOrder = App.game.quests.questLines().map(ql => ql.name);
         const questlineNames = new Set(questlineOrder);
-        // Use a list of all keys as the sort order for stringify to keep the questlines in game order
+        // Use a sorted list of all keys as the sort order for stringify
         // Unfortunately JSON does not have a non-awkward-workaround solution to this
         const allKeys: Set<string> = new Set();
         JSON.stringify(defaultsTree, (key, value) => (allKeys.add(key), value));
         const keyOrder = Array.from(allKeys).sort((a, b) => {
             if (questlineNames.has(a) && questlineNames.has(b)) {
+                // sort questline names to match game order
                 return questlineOrder.indexOf(a) - questlineOrder.indexOf(b);
             } else if ((a.startsWith('displayName') && b.startsWith('description')) || (b.startsWith('displayName') && a.startsWith('description'))) {
+                // sort displayName before description
                 return a > b ? -1 : 1;
+            } else if (a.startsWith('step ') && b.startsWith('step ')) {
+                // sort steps in numeric order
+                return Number(a.match(/step (\d+)/)[0]) - Number(b.match(/step (\d+)/)[0]);
             }
             return a < b ? -1 : 1;
         });
