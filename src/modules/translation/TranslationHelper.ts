@@ -1,4 +1,5 @@
 import { pokemonList } from '../pokemons/PokemonList';
+import * as DownloadUtil from '../utilities/DownloadUtil';
 
 export default class TranslationHelper {
     /**
@@ -87,6 +88,7 @@ export default class TranslationHelper {
             }
             return a < b ? -1 : 1;
         });
-        return JSON.stringify(defaultsTree, keyOrder, 2);
+        const outputFile = JSON.stringify(defaultsTree, keyOrder, 2);
+        DownloadUtil.downloadTextFile(outputFile, 'questlines.json');
     }
 }
