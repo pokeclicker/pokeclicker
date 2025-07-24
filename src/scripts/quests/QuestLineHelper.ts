@@ -3359,7 +3359,7 @@ class QuestLineHelper {
 
     // Available upon clearing the Great League
     public static createDrSplashQuestLine() {
-        const drSplashQuestLine = new QuestLine('Dr. Splash\'s Research Project', 'Help Dr. Splash unlock the full potential of your Magikarps.', new GymBadgeRequirement(BadgeEnums.Great_League), GameConstants.BulletinBoards.Hoppy);
+        const drSplashQuestLine = new QuestLine('Dr. Splash\'s Research Project', 'Help Dr. Splash unlock the full potential of your Magikarp.', new GymBadgeRequirement(BadgeEnums.Great_League), GameConstants.BulletinBoards.Hoppy);
 
         const talkToDrSplash1 = new TalkToNPCQuest(DrSplash1, 'Talk to Dr. Splash in Hoppy Town.');
         drSplashQuestLine.addQuest(talkToDrSplash1);
