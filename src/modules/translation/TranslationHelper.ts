@@ -69,9 +69,9 @@ export default class TranslationHelper {
         });
         // get default text, replacing pokemon names with their translation keys
         // reversed to catch more-specific alt forms before the base name
-        // regex matches escaped pokemon name, not adjacent to a word character (i.e. )
-        const pokemonNames = pokemonList.map(p => RegExp(String.raw`(?<![\w[])(${p.name.replace(/([()-.?])/g, '\\$1')})(?![\w\]])`, 'g')).reverse();
-        const replaceNames = (text) => pokemonNames.reduce((t, regex) => t.replace(regex, '[[$1]]'), text);
+        // regex matches escaped pokemon name, if not adjacent to a word character (i.e. mid-string) and not already part of a translation key
+        const pokemonNames = pokemonList.map(p => RegExp(String.raw`(?<!\w|\[\[pokemon::)(${p.name.replace(/([()-.?])/g, '\\$1')})(?!\w|]])`, 'g')).reverse();
+        const replaceNames = (text) => pokemonNames.reduce((t, regex) => t.replace(regex, '[[pokemon::$1]]'), text);
 
         const defaultsTree = TranslationHelper.exportCachedTranslationDefaults('questlines', replaceNames);
         const questlineOrder = App.game.quests.questLines().map(ql => ql.name);

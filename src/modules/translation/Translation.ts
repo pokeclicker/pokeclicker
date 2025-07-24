@@ -66,6 +66,7 @@ export default class Translate {
             .init({
                 debug: GameHelper.isDevelopmentBuild(),
                 ns: namespaces,
+                fallbackNS: 'pokemon',
                 fallbackLng: 'en',
                 backend: {
                     // Two backend sources - tries the TRANSLATION_URL first, falls back to copy taken at build time
@@ -81,6 +82,7 @@ export default class Translate {
                     nestingSuffix: ']]',
                     escapeValue: false,
                 },
+                nsSeparator: '::',
             });
 
         i18next.on('initialized', () => {
