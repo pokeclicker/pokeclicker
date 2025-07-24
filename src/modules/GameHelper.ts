@@ -225,11 +225,11 @@ export default class GameHelper {
     }
 
     /**
-     *  Same algorithm as GameHelper.hash() but only produces positive numbers
+     *  Same algorithm as GameHelper.hash() but only produces positive numbers and pads to a constant number of chars
      *  This makes hash collisions twice as likely, but avoids unwanted '-' when output is used as a string.
      */
-    public static translationHash(text: string): number {
-        return Math.abs(GameHelper.hash(text));
+    public static nonnegativeHashString(text: string): string {
+        return `${Math.abs(GameHelper.hash(text))}`.padStart(10, '0');
     }
 
     public static isColorLight(color: string): boolean {

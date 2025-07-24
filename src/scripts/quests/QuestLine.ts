@@ -20,7 +20,7 @@ class QuestLine {
         private disablePausing = false // applies to bulletin board quests only
     ) {
         this.name = name;
-        this.description = description;
+        this._description = description;
         this.quests = ko.observableArray();
         this.totalQuests = 0;
         this.curQuest = ko.pureComputed(() => {
@@ -146,25 +146,21 @@ class QuestLine {
 
     get displayName(): string {
         if (!this.cachedTranslatedName) {
-            this.cachedTranslatedName = App.translation.get(
-                `${this.name}.displayName.${GameHelper.translationHash(this.name)}`,
+            this.cachedTranslatedName = App.translation.getHashed(
+                `${this.name}.displayName`,
                 'questlines',
-                { defaultValue: this.name }
+                this.name
             );
         }
         return this.cachedTranslatedName();
     }
 
-    set description(description: string) {
-        this._description = description;
-    }
-
     get description(): string {
         if (!this.cachedTranslatedDescription) {
-            this.cachedTranslatedDescription = App.translation.get(
-                `${this.name}.description.${GameHelper.translationHash(this._description)}`,
+            this.cachedTranslatedDescription = App.translation.getHashed(
+                `${this.name}.description`,
                 'questlines',
-                { defaultValue: this._description }
+                this._description
             );
         }
         return this.cachedTranslatedDescription();

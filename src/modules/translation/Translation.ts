@@ -25,6 +25,10 @@ const getTranslatedMemoResolver = (
     return `${namespace}:${key}`;
 };
 export default class Translate {
+    private languageUpdated: Observable<number>;
+    // For easy exporting of translation keys/values from dev builds
+    public cachedTranslationDefaults?: Record<string, TranslationVars>; // { namespace: { key: defaultValue }}
+
     get = memoize((
         key: string,
         namespace: string,
@@ -39,9 +43,8 @@ export default class Translate {
         });
     }), getTranslatedMemoResolver);
 
-    private languageUpdated: Observable<number>;
-
     constructor(languageSetting: Setting<Language>) {
+        const namespaces = ['pokemon', 'logbook', 'settings', 'questlines'];
         this.languageUpdated = ko.observable(0);
 
         let translationsUrlOverride = new URLSearchParams(window.location.search).get('translations');
@@ -53,12 +56,16 @@ export default class Translate {
             Notifier.notify({ message: `Using ${translationsUrlOverride} for translations`, timeout: 5000 });
         }
 
+        if (GameHelper.isDevelopmentBuild()) {
+            this.cachedTranslationDefaults = Object.fromEntries(namespaces.map(ns => [ns, {}]));
+        }
+
         i18next
             .use(Backend)
             .use(LanguageDetector)
             .init({
                 debug: GameHelper.isDevelopmentBuild(),
-                ns: ['pokemon', 'logbook', 'settings'],
+                ns: namespaces,
                 fallbackLng: 'en',
                 backend: {
                     // Two backend sources - tries the TRANSLATION_URL first, falls back to copy taken at build time
@@ -93,5 +100,32 @@ export default class Translate {
                 GameHelper.incrementObservable(this.languageUpdated);
             });
         });
+    }
+
+    public translationHashKey(key: string, defaultValue: string) {
+        return `${key}.${GameHelper.nonnegativeHashString(defaultValue)}`;
+    }
+
+    /**
+     * Combines the translation key with a hash of the default text, making the key change whenever the default text does.
+     * This invalidates outdated translations instead of risking the translations becoming inaccurate. 
+     */
+    public getHashed(key: string, namespace: string, defaultValue: string, otherOptions?: TOptions) {
+        if (!defaultValue?.length) {
+            throw new Error(`Failed to create hashed translation key for '${namespace}.${key}' as the default translation was missing or blank`);
+        }
+        const hashedKey = this.translationHashKey(key, defaultValue);
+        if (this.cachedTranslationDefaults) {
+            this.cacheDefaultValue(hashedKey, namespace, defaultValue);
+        }
+        return this.get(hashedKey, namespace, { ...(otherOptions ?? {}), defaultValue });
+    }
+
+    private cacheDefaultValue(key: string, namespace: string, defaultValue: string) {
+        let cached = this.cachedTranslationDefaults[namespace][key];
+        if (cached && cached != defaultValue) {
+            throw new Error(`Translation cache encountered conflicting default values for key '${namespace}.${key}':\n"${cached}"\n"${defaultValue}"`);
+        }
+        this.cachedTranslationDefaults[namespace][key] = defaultValue;
     }
 }

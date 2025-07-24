@@ -56,11 +56,11 @@ abstract class Quest {
             return description;
         }
         if (!this.cachedTranslatedDescription) {
-            this.cachedTranslatedDescription = App.translation.get(
-                // Keys are formatted like "Example Quest.step 1.123456789"
-                `${this.parentQuestLine.name}.step ${this.parentQuestLine.quests().findIndex(q => q === this) + 1}.${GameHelper.translationHash(description)}`,
+            this.cachedTranslatedDescription = App.translation.getHashed(
+                // Pre-hash keys are formatted like "Example Quest.step 1"
+                `${this.parentQuestLine.name}.step ${this.parentQuestLine.quests().indexOf(this) + 1}`,
                 'questlines',
-                { defaultValue: description }
+                description
             );
         }
         return this.cachedTranslatedDescription();
