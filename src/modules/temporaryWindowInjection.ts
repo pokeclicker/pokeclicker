@@ -231,6 +231,7 @@ import GameLoadState from './utilities/GameLoadState';
 import GenericDeal, { DealCostOrProfitType } from './deal/GenericDeal';
 import areaStatus from './enums/AreaStatus';
 import TranslationHelper from './translation/TranslationHelper';
+import * as DownloadUtil from './utilities/DownloadUtil';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -477,4 +478,5 @@ Object.assign(<any>window, {
     GameLoadState,
     areaStatus,
     TranslationHelper,
+    DownloadUtil,
 });
