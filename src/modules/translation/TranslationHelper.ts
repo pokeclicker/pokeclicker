@@ -1,3 +1,4 @@
+import type { TranslationNamespace } from './Translation';
 import { pokemonList } from '../pokemons/PokemonList';
 import * as DownloadUtil from '../utilities/DownloadUtil';
 import GameHelper from '../GameHelper';
@@ -7,7 +8,7 @@ export default class TranslationHelper {
      * Converts translation key/defaults to a tree as in the actual translation files.
      * @param replaceFunction - function to modify the default translation text, i.e. for replacing text with translation keys
      */
-    private static exportCachedTranslationDefaults(namespace: string, replaceFunction?: (string) => string) {
+    private static exportCachedTranslationDefaults(namespace: TranslationNamespace, replaceFunction?: (string) => string) {
         if (!GameHelper.isDevelopmentBuild()) {
             throw new Error(`The translation cache is only available by default in development builds. To cache translatable text in this game version, add "?translationCache=true" to the end of the URL and reload the game.`);
         }

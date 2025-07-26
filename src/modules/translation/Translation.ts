@@ -10,6 +10,7 @@ import Language from './Language';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
 import Notifier from '../notifications/Notifier';
 
+export type TranslationNamespace = 'pokemon' | 'logbook' | 'settings' | 'questlines';
 export type TranslationVar = string | number | PokemonNameType;
 export type TranslationVars = Record<string, TranslationVar>;
 
@@ -44,7 +45,7 @@ export default class Translate {
     }), getTranslatedMemoResolver);
 
     constructor(languageSetting: Setting<Language>) {
-        const namespaces = ['pokemon', 'logbook', 'settings', 'questlines'];
+        const namespaces: TranslationNamespace[] = ['pokemon', 'logbook', 'settings', 'questlines'];
         this.languageUpdated = ko.observable(0);
 
         let translationsUrlOverride = new URLSearchParams(window.location.search).get('translations');
