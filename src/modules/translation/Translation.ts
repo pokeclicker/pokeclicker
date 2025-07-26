@@ -60,7 +60,7 @@ export default class Translate {
         const cacheUrlOverride = new URLSearchParams(window.location.search).get('translationCache');
         if (cacheUrlOverride != null ? cacheUrlOverride.toLowerCase() == 'true' : GameHelper.isDevelopmentBuild()) {
             this.cachedTranslationDefaults = {};
-            namespaces.forEach(ns => this.cachedTranslationDefaults[ns] = {});
+            namespaces.forEach(ns => { this.cachedTranslationDefaults[ns] = {}; });
         }
 
         i18next

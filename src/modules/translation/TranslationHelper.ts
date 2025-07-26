@@ -10,7 +10,7 @@ export default class TranslationHelper {
      */
     private static exportCachedTranslationDefaults(namespace: TranslationNamespace, replaceFunction?: (string) => string) {
         if (!GameHelper.isDevelopmentBuild()) {
-            throw new Error(`The translation cache is only available by default in development builds. To cache translatable text in this game version, add "?translationCache=true" to the end of the URL and reload the game.`);
+            throw new Error('The translation cache is only available by default in development builds. To cache translatable text in this game version, add "?translationCache=true" to the end of the URL and reload the game.');
         }
         if (!App.game) {
             throw new Error('Translations may not be properly cached before the game is running.');
