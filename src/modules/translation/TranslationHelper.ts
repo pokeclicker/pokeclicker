@@ -1,5 +1,6 @@
 import { pokemonList } from '../pokemons/PokemonList';
 import * as DownloadUtil from '../utilities/DownloadUtil';
+import GameHelper from '../GameHelper';
 
 export default class TranslationHelper {
     /**
@@ -7,14 +8,14 @@ export default class TranslationHelper {
      * @param replaceFunction - function to modify the default translation text, i.e. for replacing text with translation keys
      */
     private static exportCachedTranslationDefaults(namespace: string, replaceFunction?: (string) => string) {
-        if (!App.translation.cachedTranslationDefaults) {
-            throw new Error('Hashed translations are only cached in development builds of the game.');
+        if (!GameHelper.isDevelopmentBuild()) {
+            throw new Error(`The translation cache is only available by default in development builds. To cache translatable text in this game version, add "?translationCache=true" to the end of the URL and reload the game.`);
         }
         if (!App.game) {
-            throw new Error('Hashed translations may not be fully cached before the game is running.');
+            throw new Error('Translations may not be properly cached before the game is running.');
         }
-        if (!App.translation.cachedTranslationDefaults[namespace]) {
-            throw new Error(`Could not find translation namespace '${namespace}'`);
+        if (!App.translation.cachedTranslationDefaults?.[namespace]) {
+            throw new Error(`Could not find cache for translation namespace '${namespace}'`);
         }
 
         const exportTree = Object.create(null);
@@ -32,9 +33,10 @@ export default class TranslationHelper {
             // add to tree, creating new child objects if not yet present
             subkeys.forEach((subkey, i) => {
                 if (i == subkeys.length - 1) {
-                    //
+                    // last key, add value as leaf
                     current[subkey] = defval;
                 } else {
+                    // traverse to next child branch
                     if (!current[subkey]) {
                         current[subkey] = {};
                     }
@@ -46,15 +48,18 @@ export default class TranslationHelper {
         // condense tree by combining subkeys with single children
         const queue = [exportTree];
         const findWithSoloChild = (node) => Object.keys(node).find(k => typeof node[k] == 'object' && Object.keys(node[k]).length == 1);
+        // breadth-first search, though depth-first would have identical output
         while (queue.length) {
-            const node = queue.pop();
+            const node = queue.shift();
             let soloChild;
+            // find keys that lead to nodes with a single non-string child
             while (soloChild = findWithSoloChild(node)) {
                 // merge key with its single child key
                 const childKey = Object.keys(node[soloChild])[0];
                 node[`${soloChild}.${childKey}`] = node[soloChild][childKey];
                 delete node[soloChild];
             }
+            // after merging keys, enqueue all child objects
             queue.push(...Object.keys(node).filter(k => typeof node[k] == 'object').map(k => node[k]));
         }
         return exportTree;
