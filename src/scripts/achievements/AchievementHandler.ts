@@ -823,28 +823,27 @@ class AchievementHandler {
             'One column to rule them all',
             'Have all movable UI modules in one column.',
             new CustomRequirement(ko.pureComputed((): boolean => {
-                const columns: Array<Array<string>> = [['modules.middle-top-sort-column', 'modules.middle-bottom-sort-column']];
+                const columnGroups: Array<Array<string>> = [['middle-top-sort-column', 'middle-bottom-sort-column']];
                 if (Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5') {
-                    columns.push(
-                        ['modules.left-column'],
-                        ['modules.left-column-2'],
-                        ['modules.right-column'],
-                        ['modules.right-column-2']
+                    columnGroups.push(
+                        ['left-column'],
+                        ['left-column-2'],
+                        ['right-column'],
+                        ['right-column-2']
                     );
                 } else {
-                    columns.push(
-                        ['modules.left-column', 'modules.left-column-2'],
-                        ['modules.right-column', 'modules.right-column-2']
+                    columnGroups.push(
+                        ['left-column', 'left-column-2'],
+                        ['right-column', 'right-column-2']
                     );
                 }
 
-                const usedColumns = columns.filter((settings) => {
-                    const modules = settings.flatMap((setting) => Settings.getSetting(setting)?.observableValue()?.split('|').filter((module: string) => module?.trim()));
-                    if (!modules?.length) {
-                        return false;
-                    }
+                // Setting value is unreliable on new saves but we still need them as dependencies
+                columnGroups.flat().forEach((column) => Settings.getSetting(`modules.${column}`).observableValue());
 
-                    return modules.filter((module) => document.getElementById(module) && $(`#${module}`).is(':visible')).length > 0;
+                const usedColumns = columnGroups.filter((columns) => {
+                    const modules = columns.flatMap((column) => [...Array.from(document.querySelectorAll(`#${column} > .sortable`))]);
+                    return modules.some((module) => $(module).is(':visible'));
                 });
 
                 return usedColumns.length === 1;

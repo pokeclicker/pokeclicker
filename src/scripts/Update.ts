@@ -2943,6 +2943,7 @@ class Update implements Saveable {
             }
 
             // Mark new Pokemon Gifts as claimed if they are already owned
+            saveData.statistics.npcTalkedTo = saveData.statistics.npcTalkedTo || {};
             const ownsFloetteEternal = saveData.party.caughtPokemon.find((p: PartyPokemon) => p.id === 670.05);
             if (ownsFloetteEternal) {
                 saveData.statistics.npcTalkedTo[GameHelper.hash('eternalfloettegift')] = 1;

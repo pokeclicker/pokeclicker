@@ -16,6 +16,7 @@ import MegaEvolveRequirement from '../requirements/MegaEvolveRequirement';
 import type MegaStoneItem from '../items/MegaStoneItem';
 import { ItemList } from '../items/ItemList';
 import Settings from '../settings/Settings';
+import type { TmpPartyPokemonType } from '../TemporaryScriptTypes';
 
 // TODO remove when Dungeon is ported to modules
 declare class Dungeon {
@@ -129,6 +130,11 @@ export function displayName(englishName: string): string {
 
 export function displayNameObservable(englishName: string): PureComputed<string> {
     return App.translation.get(englishName, 'pokemon');
+}
+
+export function matchPokemonByNames(pattern: RegExp, pokemonName: PokemonNameType, pokemon?: TmpPartyPokemonType) {
+    const partyName = (pokemon || App.game.party.getPokemonByName(pokemonName))?.displayName;
+    return pattern.test(displayName(pokemonName)) || pattern.test(pokemonName) || (partyName && pattern.test(partyName));
 }
 
 export function hasMegaEvolution(pokemonName: PokemonNameType): boolean {
