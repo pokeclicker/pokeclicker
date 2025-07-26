@@ -56,8 +56,10 @@ export default class Translate {
             Notifier.notify({ message: `Using ${translationsUrlOverride} for translations`, timeout: 5000 });
         }
 
-        if (GameHelper.isDevelopmentBuild()) {
-            this.cachedTranslationDefaults = Object.fromEntries(namespaces.map(ns => [ns, {}]));
+        const cacheUrlOverride = new URLSearchParams(window.location.search).get('translationCache');
+        if (cacheUrlOverride != null ? cacheUrlOverride.toLowerCase() == 'true' : GameHelper.isDevelopmentBuild()) {
+            this.cachedTranslationDefaults = {};
+            namespaces.forEach(ns => this.cachedTranslationDefaults[ns] = {});
         }
 
         i18next
