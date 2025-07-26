@@ -10,6 +10,20 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.25
+    new ChangelogUpdate('v0.10.25', new Date(2025, 6, 31)),
+    new Changelog(changelogType.NEW, 'New Pokémon'),
+    new Changelog(changelogType.NEW, 'New Quest Line - Destiny Deoxys - available at Unova bulletin board after completing Hollow Truth and Ideals'),
+    new Changelog(changelogType.CHANGE, 'Removed <i>Incomplete Area</i> status from Battle Café'),
+    new Changelog(changelogType.CHANGE, 'Secret achievements are now only shown when the <i>Secret</i> category is selected'),
+    new Changelog(changelogType.CHANGE, 'Adjusted requirement for <i>Blue is my favorite color</i> secret achievement'),
+    new Changelog(changelogType.CHANGE, 'Pokémon search fields now support searching by nickname, current language name, and English name'),
+    new Changelog(changelogType.CHANGE, 'Reduced clear requirement for Castelia Sewers (10 → 1) in Hollow Truth and Ideals quest line'),
+    new Changelog(changelogType.CHANGE, 'Adjustments to where some Pokémon can be obtained'),
+    new Changelog(changelogType.FIXED, 'Fixed bug that allowed duplicate Pokémon to be added to the hatchery queue'),
+    new Changelog(changelogType.FIXED, 'Fixed ability to sell/trade fractional items'),
+    new Changelog(changelogType.FIXED, 'Fixed issues with several secret achievements'),
+
     // v0.10.24
     new ChangelogUpdate('v0.10.24', new Date(2025, 6, 4)),
     new Changelog(changelogType.NEW, 'New Achievements'),
