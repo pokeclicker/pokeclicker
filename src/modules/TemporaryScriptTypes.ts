@@ -92,6 +92,7 @@ export type TmpGemsType = any;
 export type TmpFarmingType = any;
 export type TmpRedeemableCodesType = any;
 export type TmpQuestsType = any;
+export type TmpQuestType = any;
 export type TmpDiscordType = any;
 export type TmpAchievementTrackerType = any;
 export type TmpBattleFrontierType = any;

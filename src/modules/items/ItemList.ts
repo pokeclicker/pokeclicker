@@ -370,6 +370,7 @@ ItemList['Pikachu (Palaeontologist)'] = new PokemonItem('Pikachu (Palaeontologis
 // Hoenn
 ItemList['Probably Chimecho']  = new PokemonItem('Hoppip (Chimecho)', 35800, Currency.diamond, false, 'Probably Chimecho');
 ItemList.Beldum               = new PokemonItem('Beldum', 22500);
+ItemList['Deoxys (Clone)'] = new PokemonItem('Deoxys (Clone)', 100);
 // Sinnoh
 ItemList['Grotle (Acorn)']  = new PokemonItem('Grotle (Acorn)');
 ItemList.Combee               = new PokemonItem('Combee', 6750);
