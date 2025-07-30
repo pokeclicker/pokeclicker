@@ -116,12 +116,12 @@ class TypeRestrictedExceptionAttackBonusHeldItem extends TypeRestrictedAttackBon
         type: PokemonType,
         regionUnlocked: GameConstants.Region,
         exceptions: Partial<Record<PokemonNameType, boolean>>) {
-            super(name, basePrice, currency, shopOptions, displayName, _attackBonus, type, regionUnlocked);
-            const _canUse = this.canUse;
-            this.canUse = (pokemon: PartyPokemon) => {
-                return exceptions[pokemon.name] ?? _canUse(pokemon);
-            }
-        }
+        super(name, basePrice, currency, shopOptions, displayName, _attackBonus, type, regionUnlocked);
+        const canUse = this.canUse;
+        this.canUse = (pokemon: PartyPokemon) => {
+            return exceptions[pokemon.name] ?? canUse(pokemon);
+        };
+    }
 }
 
 class HybridAttackBonusHeldItem extends AttackBonusHeldItem {
