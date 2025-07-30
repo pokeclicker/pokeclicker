@@ -608,7 +608,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             LevelEvolution('Squirtle', 'Wartortle', 16),
-            HeldItemLevelEvolution('Black_Glasses', 'Squirtle', 'Squad Leader Squirtle', 25, true),
+            HeldItemLevelEvolution('Black_Glasses', 'Squirtle', 'Squad Leader Squirtle', 10, true),
         ],
         'base': {
             'hitpoints': 44,
