@@ -461,10 +461,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         // Check if search matches englishName or displayName
         const nameFilterSetting = Settings.getSetting('breedingNameFilter') as SearchSetting;
         if (nameFilterSetting.observableValue() != '') {
-            const nameFilter = nameFilterSetting.regex();
-            const displayName = PokemonHelper.displayName(this.name)();
-            const partyName = this.displayName;
-            if (!nameFilter.test(displayName) && !nameFilter.test(this.name) && !(partyName != undefined && nameFilter.test(partyName))) {
+            if (!PokemonHelper.matchPokemonByNames(nameFilterSetting.regex(), this.name, this)) {
                 return false;
             }
         }
