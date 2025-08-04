@@ -75,12 +75,10 @@ class Farming implements Feature {
             const plotMutations = [...Array(GameConstants.FARM_PLOT_WIDTH * GameConstants.FARM_PLOT_HEIGHT)].map(() => []);
             App.game.farming.mutations.forEach((mutation) => {
                 const isUnlocked = App.game.farming.unlockedBerries[mutation.mutatedBerry]();
-                if (!isUnlocked && !mutation.hintSeen) {
-                    return;
-                }
                 mutation.getMutationPlots().forEach((plot) => {
                     if (mutation.getTotalMutationChance(plot) > 0) {
-                        plotMutations[plot].push(isUnlocked ? BerryType[mutation.mutatedBerry] : '???');
+                        const berry = isUnlocked || mutation.hintSeen ? BerryType[mutation.mutatedBerry] : '???';
+                        plotMutations[plot].push(berry);
                     }
                 });
             });
