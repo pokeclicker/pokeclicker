@@ -1455,10 +1455,10 @@ class QuestLineHelper {
     public static createDestinyDeoxysQuestLine() {
         const destinyDeoxysQuest = new QuestLine('Destiny Deoxys', 'Discover the mystery of the crashed meteor.', new QuestLineCompletedRequirement('Hollow Truth and Ideals'), GameConstants.BulletinBoards.Unova);
 
-        const clearGiantChasm = new DefeatDungeonQuest(5, 0, 'Giant Chasm').withDescription('There seems to be a big fuzz about new foundings in the Giant Chasm. Try finding it.');
+        const clearGiantChasm = new DefeatDungeonQuest(5, 0, 'Giant Chasm').withDescription('There seems to be a big fuss about a new discovery in the Giant Chasm. Try finding it.');
         destinyDeoxysQuest.addQuest(clearGiantChasm);
 
-        const talkToGreenGem = new TalkToNPCQuest(destinyGem, 'You found a Green Pulsing Gemstone. Take a closer look.');
+        const talkToGreenGem = new TalkToNPCQuest(destinyGem, 'You found a pulsating Green Gemstone. Take a closer look.');
         destinyDeoxysQuest.addQuest(talkToGreenGem);
 
         const rayquazaDeoxysBattle = new DefeatTemporaryBattleQuest('Destiny Deoxys Rayquaza', 'Rayquaza and Deoxys are rampaging in the area. Try to calm them down.');
@@ -1481,13 +1481,13 @@ class QuestLineHelper {
         destinyDeoxysQuest.addQuest(new MultipleQuestsQuest([
             gainElectricGems,
             gainSteelGems,
-        ], 'The generator isn\t working. Look around for scraps to repair it.'));
+        ], 'The generator isn\'t working. Look around for scraps to repair it.'));
 
 
         const rayquazaBFBattle = new DefeatTemporaryBattleQuest('Destiny Rayquaza', 'Rayquaza attacks again. Calm it down for the last time.');
         destinyDeoxysQuest.addQuest(rayquazaBFBattle);
 
-        const talkToDeoxys = new TalkToNPCQuest(destinyDeoxysReunion, 'Rayquaza realized that the Deoxys are no threat. Reunite the Purple and Green Gemed Deoxys.');
+        const talkToDeoxys = new TalkToNPCQuest(destinyDeoxysReunion, 'Rayquaza realized that the Deoxys are no threat. Reunite the Purple and Green Gemmed Deoxys.');
         destinyDeoxysQuest.addQuest(talkToDeoxys);
 
         App.game.quests.questLines().push(destinyDeoxysQuest);
@@ -3401,7 +3401,7 @@ class QuestLineHelper {
 
     // Available upon clearing the Great League
     public static createDrSplashQuestLine() {
-        const drSplashQuestLine = new QuestLine('Dr. Splash\'s Research Project', 'Help Dr. Splash unlock the full potential of your Magikarps.', new GymBadgeRequirement(BadgeEnums.Great_League), GameConstants.BulletinBoards.Hoppy);
+        const drSplashQuestLine = new QuestLine('Dr. Splash\'s Research Project', 'Help Dr. Splash unlock the full potential of your Magikarp.', new GymBadgeRequirement(BadgeEnums.Great_League), GameConstants.BulletinBoards.Hoppy);
 
         const talkToDrSplash1 = new TalkToNPCQuest(DrSplash1, 'Talk to Dr. Splash in Hoppy Town.');
         drSplashQuestLine.addQuest(talkToDrSplash1);
@@ -4313,5 +4313,10 @@ class QuestLineHelper {
         this.createDrSplashQuestLine();
         this.createMeltanQuestLine();
         this.createRainbowRocketQuestLine();
+        // Enforce unique questline names
+        const numQuestLines = App.game.quests.questLines().length;
+        if (numQuestLines != [...new Set(App.game.quests.questLines().map(ql => ql.name))].length) {
+            throw new Error('QuestLineHelper: Duplicate QuestLine names detected');
+        }
     }
 }

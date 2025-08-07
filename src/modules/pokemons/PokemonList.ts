@@ -606,7 +606,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Squirtle', 'Wartortle', 16)],
+        'evolutions': [
+            LevelEvolution('Squirtle', 'Wartortle', 16),
+            HeldItemLevelEvolution('Black_Glasses', 'Squirtle', 'Squad Leader Squirtle', 10, true),
+        ],
         'base': {
             'hitpoints': 44,
             'attack': 48,
@@ -638,6 +641,26 @@ export const pokemonList = createPokemonArray(
         },
         'gender': {
             'femaleRatio': 0.125,
+        },
+    },
+    {
+        'id': 7.02,
+        'name': 'Squad Leader Squirtle',
+        'catchRate': 45,
+        'type': [PokemonType.Water, PokemonType.Dark],
+        'levelType': LevelType.mediumslow,
+        'exp': 63,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 44,
+            'attack': 48,
+            'specialAttack': 50,
+            'defense': 65,
+            'specialDefense': 64,
+            'speed': 43,
+        },
+        'gender': {
+            'femaleRatio': 0,
         },
     },
     {

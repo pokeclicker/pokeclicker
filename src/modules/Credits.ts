@@ -28,6 +28,14 @@ export const SpriteCredits: Credit[] = [
         // Notes: Akuma-Tsubasa is the creator, LightningKillua15 is the owner allowing use if the creator is credited.
     },
     {
+        name: 'Alooshii',
+        link: 'https://discordapp.com/users/518667199716524035/',
+        resources: [
+            'Squad Leader Squirtle',
+        ],
+        // Notes: Made in the context of PokéClicker
+    },
+    {
         name: 'Anarlaurendil',
         link: 'https://www.deviantart.com/anarlaurendil',
         image: 'https://a.deviantart.net/avatars-big/a/n/anarlaurendil.png',
