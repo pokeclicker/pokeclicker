@@ -4252,26 +4252,25 @@ const santaJynxReq = new OneFromManyRequirement([
     new MultiRequirement([
         new ItemOwnedRequirement('Christmas_present', 11, AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 1'),
-        new SpecialEventRequirement('Merry Christmas!'),
     ]),
     new MultiRequirement([
         new ItemOwnedRequirement('Christmas_present', 27, AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 2'),
-        new SpecialEventRequirement('Merry Christmas!'),
     ]),
     new MultiRequirement([
         new ItemOwnedRequirement('Christmas_present', 49, AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 3'),
-        new SpecialEventRequirement('Merry Christmas!'),
     ]),
     new MultiRequirement([
         new ItemOwnedRequirement('Christmas_present', 150, AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 4'),
-        new SpecialEventRequirement('Merry Christmas!'),
     ]),
 ]);
 Routes.getRoutesByRegion(Region.kanto).forEach(route => {
     route.pokemon.special.push(
-        new SpecialRoutePokemon(['Santa Jynx'], new CustomRequirement(ko.pureComputed(() => santaJynxReq.isCompleted()), true, 'During Merry Christmas! event, Santa Jynx appears for the day once its band is defeated at Bill\'s House and until too many Christmas presents have been collected.')),
-    );
+        new SpecialRoutePokemon(['Santa Jynx'], new MultiRequirement([
+            new SpecialEventRequirement('Merry Christmas!'),
+            new CustomRequirement(ko.pureComputed(() => santaJynxReq.isCompleted()), true, 'Santa Jynx appears for a day after its band is defeated at Bill\'s House and until too many Christmas presents have been collected.'),
+        ]),
+        ));
 });
