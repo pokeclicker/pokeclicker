@@ -170,7 +170,7 @@ class FarmHand {
             this.workTicks(0);
             if (this.hired()) {
                 this.work();
-            } else {
+            } else if (this.energy() < this.maxEnergy) {
                 this.addEnergy();
             }
 
