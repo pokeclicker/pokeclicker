@@ -157,6 +157,10 @@ class FarmHand {
     }
 
     tick(): void {
+
+        if (!this.hired() && this.energy() >= this.maxEnergy) {
+            return;
+        }
         // Charge player when cost tick reached
         GameHelper.incrementObservable(this.costTicks, GameConstants.TICK_TIME);
         if (this.costTicks() % this.costTick < GameConstants.TICK_TIME && this.hired()) {
