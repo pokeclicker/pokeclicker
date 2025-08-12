@@ -167,7 +167,7 @@ class FarmHand {
         // Work/Restore energy when work ticks reached
         GameHelper.incrementObservable(this.workTicks, GameConstants.TICK_TIME);
         if (this.workTicks() % this.workTick < GameConstants.TICK_TIME) {
-            this.workTicks(0);            
+            this.workTicks(0);
             if (this.hired()) {
                 this.work();
             } else {
