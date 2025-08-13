@@ -105,6 +105,25 @@ class TypeRestrictedAttackBonusHeldItem extends AttackBonusHeldItem {
     }
 }
 
+class TypeRestrictedExceptionAttackBonusHeldItem extends TypeRestrictedAttackBonusHeldItem {
+    constructor(
+        name: string,
+        basePrice: number,
+        currency: GameConstants.Currency,
+        shopOptions : ShopOptions,
+        displayName: string,
+        _attackBonus: number,
+        type: PokemonType,
+        regionUnlocked: GameConstants.Region,
+        exceptions: Partial<Record<PokemonNameType, boolean>>) {
+        super(name, basePrice, currency, shopOptions, displayName, _attackBonus, type, regionUnlocked);
+        const canUse = this.canUse;
+        this.canUse = (pokemon: PartyPokemon) => {
+            return exceptions[pokemon.name] ?? canUse(pokemon);
+        };
+    }
+}
+
 class HybridAttackBonusHeldItem extends AttackBonusHeldItem {
     constructor(
         name: string,
@@ -212,7 +231,8 @@ ItemList.Booster_Energy = new PokemonRestrictedAttackBonusHeldItem('Booster_Ener
 
 // Type specific items
 ItemList.Black_Belt = new TypeRestrictedAttackBonusHeldItem('Black_Belt', 10000, GameConstants.Currency.money, undefined, 'Black Belt', 1.2, PokemonType.Fighting, GameConstants.Region.johto);
-ItemList.Black_Glasses = new TypeRestrictedAttackBonusHeldItem('Black_Glasses', 10000, GameConstants.Currency.money, undefined, 'Black Glasses', 1.2, PokemonType.Dark, GameConstants.Region.johto);
+// Exceptions as Squirtle level evolves into Squad Leader Squirtle if it wears Black Glasses
+ItemList.Black_Glasses = new TypeRestrictedExceptionAttackBonusHeldItem('Black_Glasses', 10000, GameConstants.Currency.money, undefined, 'Black Glasses', 1.2, PokemonType.Dark, GameConstants.Region.johto, { Squirtle: true, 'Squad Leader Squirtle': false });
 ItemList.Charcoal = new TypeRestrictedAttackBonusHeldItem('Charcoal', 10000, GameConstants.Currency.money, undefined, 'Charcoal', 1.2, PokemonType.Fire, GameConstants.Region.johto);
 ItemList.Dragon_Fang = new TypeRestrictedAttackBonusHeldItem('Dragon_Fang', 10000, GameConstants.Currency.money, undefined, 'Dragon Fang', 1.2, PokemonType.Dragon, GameConstants.Region.johto);
 ItemList.Magnet = new TypeRestrictedAttackBonusHeldItem('Magnet', 10000, GameConstants.Currency.money, undefined, 'Magnet', 1.2, PokemonType.Electric, GameConstants.Region.johto);
@@ -229,6 +249,7 @@ ItemList.Silver_Powder = new TypeRestrictedAttackBonusHeldItem('Silver_Powder', 
 ItemList.Soft_Sand = new TypeRestrictedAttackBonusHeldItem('Soft_Sand', 10000, GameConstants.Currency.money, undefined, 'Soft Sand', 1.2, PokemonType.Ground, GameConstants.Region.johto);
 ItemList.Spell_Tag = new TypeRestrictedAttackBonusHeldItem('Spell_Tag', 10000, GameConstants.Currency.money, undefined, 'Spell Tag', 1.2, PokemonType.Ghost, GameConstants.Region.johto);
 ItemList.Twisted_Spoon = new TypeRestrictedAttackBonusHeldItem('Twisted_Spoon', 10000, GameConstants.Currency.money, undefined, 'Twisted Spoon', 1.2, PokemonType.Psychic, GameConstants.Region.johto);
+
 ItemList.Agile_Scroll = new HybridAttackBonusHeldItem('Agile_Scroll', 10000, GameConstants.Currency.money, undefined, 'Agile Scroll', 0.5, 2.0, GameConstants.Region.hisui);
 ItemList.Strong_Scroll = new HybridAttackBonusHeldItem('Strong_Scroll', 10000, GameConstants.Currency.money, undefined, 'Strong Scroll', 2.0, 0.5, GameConstants.Region.hisui);
 
@@ -251,4 +272,5 @@ ItemList.Everstone = new HeldItem('Everstone', 10000, GameConstants.Currency.mon
         // babies
         const baby = pokemonBabyPrevolutionMap[pokemon.name];
         return baby !== undefined && pokemon.name != baby;
-    });
+    }
+);
