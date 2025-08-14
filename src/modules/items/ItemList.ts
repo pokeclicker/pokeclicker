@@ -268,6 +268,7 @@ ItemList.Magikarp_Biscuit = new AttackGainConsumable(ConsumableType.Magikarp_Bis
 
 // Miscellaneous
 ItemList.Christmas_present = new ChristmasPresent();
+ItemList.Rattatite = new Item('Rattatite', undefined, undefined, undefined, undefined, 'That\'s how Joey got his Rattata into the top percentage.'); // Actually counts how many times Joey is defeated
 
 // Underground Items
 // Sellable (Diamonds)
