@@ -85,7 +85,7 @@ class Gym extends TownContent implements TmpGymType {
         public moneyReward: number,
         public defeatMessage: string,
         requirements: Requirement[] = [],
-        public rewardFunction = () => {},
+        public clearRewards: GymClearReward[] = [],
         {
             quest = true,
             achievement = true,
@@ -130,13 +130,11 @@ class Gym extends TownContent implements TmpGymType {
         return 'Brock';
     }
 
-    public firstWinReward() {
+    public gainBadge() {
         // Give the player this gyms badge
         App.game.badgeCase.gainBadge(this.badgeReward);
         // Show the badge modal
         $('#receiveBadgeModal').modal('show');
-        // Run the first time reward function
-        this.rewardFunction();
     }
 
     public autoRestartReward(): number {
@@ -150,6 +148,15 @@ class Gym extends TownContent implements TmpGymType {
 
     public getPokemonList() {
         return this.pokemons.filter((p) => p.requirements.every((r => r.isCompleted())));
+    }
+
+    public checkClearRewards() {
+        const clears = this.clears();
+        this.clearRewards.forEach((reward) => {
+            if (reward.isRewardClear(clears)) {
+                reward.rewardFunction(this);
+            }
+        });
     }
 
     get imageName() {
