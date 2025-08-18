@@ -90,6 +90,7 @@ class SafariPokemon implements PokemonInterface {
         if (this.eatingBait === BaitType.Razz) {
             escapeF /= 1.5 + this.levelModifier;
         }
+        escapeF /= 10;
 
         return escapeF;
     }

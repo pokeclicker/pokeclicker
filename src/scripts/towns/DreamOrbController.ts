@@ -80,7 +80,8 @@ class DreamOrbController implements Saveable {
             });
             return;
         }
-        const amountToOpen = Math.min(this.amountSelected(), selectedOrb.amount());
+        //const amountToOpen = Math.min(this.amountSelected(), selectedOrb.amount());
+        const amountToOpen = Math.min(this.amountSelected(), this.amountSelected());
         this.opening(true);
         this.item(undefined);
         Notifier.notify({

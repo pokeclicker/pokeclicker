@@ -1934,9 +1934,9 @@ dungeonList['Tanoby Ruins'] = new Dungeon('Tanoby Ruins',
     [
         ...TanobyUnownList.map((char, index) => {
             const req = new OneFromManyRequirement([
-                new SeededDateSelectNRequirement(index, TanobyUnownList.length, 1),
-                new MultiRequirement([new SeededDateSelectNRequirement(index, TanobyUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Tanoby Ruins'))]),
-                new MultiRequirement([new SeededDateSelectNRequirement(index, TanobyUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Tanoby Ruins'))]),
+                new SeededDateSelectNRequirement(index, TanobyUnownList.length, 26),
+                //new MultiRequirement([new SeededDateSelectNRequirement(index, TanobyUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Tanoby Ruins'))]),
+                //new MultiRequirement([new SeededDateSelectNRequirement(index, TanobyUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Tanoby Ruins'))]),
             ]);
             return new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
                 hide: true,
@@ -2099,9 +2099,9 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     [
         ...AlphUnownList.map((char, index) => {
             const req = new OneFromManyRequirement([
-                new SeededDateSelectNRequirement(index, AlphUnownList.length, 1),
-                new MultiRequirement([new SeededDateSelectNRequirement(index, AlphUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Ruins of Alph'))]),
-                new MultiRequirement([new SeededDateSelectNRequirement(index, AlphUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Ruins of Alph'))]),
+                new SeededDateSelectNRequirement(index, AlphUnownList.length, 28),
+                //new MultiRequirement([new SeededDateSelectNRequirement(index, AlphUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Ruins of Alph'))]),
+                //new MultiRequirement([new SeededDateSelectNRequirement(index, AlphUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Ruins of Alph'))]),
             ]);
             return new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 280000, 14, {
                 hide: true,

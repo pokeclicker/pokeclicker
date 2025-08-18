@@ -103,11 +103,11 @@ export const dayCyclePartRestrict = <T extends EvoFn>(evo: T) => (
 
 export const dayRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
-) => dayCyclePartRestrict(evo)([DayCyclePart.Day, DayCyclePart.Dusk], ...rest);
+) => dayCyclePartRestrict(evo)([DayCyclePart.Day, DayCyclePart.Dusk, DayCyclePart.Night, DayCyclePart.Dawn], ...rest);
 
 export const nightRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
-) => dayCyclePartRestrict(evo)([DayCyclePart.Night, DayCyclePart.Dawn], ...rest);
+) => dayCyclePartRestrict(evo)([DayCyclePart.Day, DayCyclePart.Dusk, DayCyclePart.Night, DayCyclePart.Dawn], ...rest);
 
 export const moonCyclePhaseRestrict = <T extends EvoFn>(evo: T) => (
     moonCyclePhases: MoonCyclePhase[],

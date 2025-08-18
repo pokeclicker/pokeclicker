@@ -116,8 +116,8 @@ RoamingPokemonList.add(Region.hoenn, 1, new RoamingPokemon('Bonsly', new QuestLi
 // Sinnoh
 RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Manaphy', new QuestLineCompletedRequirement('Recover the Precious Egg!')));
 RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Mesprit', new ClearDungeonRequirement(1, getDungeonIndex('Distortion World'))));
-RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Cresselia', new MultiRequirement([new ClearDungeonRequirement(1, getDungeonIndex('Fullmoon Island')), new MoonCyclePhaseRequirement([MoonCyclePhase.FullMoon, MoonCyclePhase.WaxingGibbous, MoonCyclePhase.WaningGibbous, MoonCyclePhase.FirstQuarter, MoonCyclePhase.ThirdQuarter])])));
-RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Darkrai', new MultiRequirement([new ClearDungeonRequirement(1, getDungeonIndex('Newmoon Island')), new MoonCyclePhaseRequirement([MoonCyclePhase.NewMoon, MoonCyclePhase.WaxingCrescent, MoonCyclePhase.WaningCrescent])])));
+RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Cresselia', new ClearDungeonRequirement(1, getDungeonIndex('Fullmoon Island'))));
+RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Darkrai', new ClearDungeonRequirement(1, getDungeonIndex('Newmoon Island'))));
 
 // Unova
 RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Tornadus', new GymBadgeRequirement(BadgeEnums.Legend)));

@@ -404,3 +404,5 @@ FarmHands.add(new FarmHand('Kerry', 50, 16, FarmHandSpeeds.AboveAverage, 8, 8, n
 FarmHands.add(new FarmHand('Riley', 70, 25, FarmHandSpeeds.Fast, 8, 10, new UniqueItemOwnedRequirement('FarmHandRiley', 'purchase', 'Purchased in the Sinnoh region.')));
 FarmHands.add(new FarmHand('Jamie', 65, 5, FarmHandSpeeds.Faster, 9, 10, new UniqueItemOwnedRequirement('FarmHandJamie', 'purchase', 'Purchased in the Hoenn region.')));
 FarmHands.add(new FarmHand('Jessie', 100, 50, FarmHandSpeeds.Fastest, 10, 12, new BerriesUnlockedRequirement(56)));
+// Custom skom farmhand
+FarmHands.add(new FarmHand('SKOM', 100, 50, FarmHandSpeeds.Fastest, 1, 1, new BerriesUnlockedRequirement(56)));
