@@ -59,10 +59,6 @@ class SafariPokemon implements PokemonInterface {
         }
     }
 
-    public static calcPokemonWeight(pokemon): number {
-        return pokemon.weight * (App.game.party.alreadyCaughtPokemonByName(pokemon.name) ? 1 : 2);
-    }
-
     public get catchFactor(): number {
         const oakBonus = App.game.oakItems.calculateBonus(OakItemType.Magic_Ball);
         let catchF = this.baseCatchFactor + oakBonus + (this.levelModifier * 10);

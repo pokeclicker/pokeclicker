@@ -305,13 +305,19 @@ class PokemonLocations {
                 return;
             }
             const zoneList = SafariPokemonList.list[region]();
-            const safariWeight = zoneList.reduce((sum, p) => sum += p.weight, 0);
+            const safariWeights = Object.fromEntries(GameHelper.enumNumbers(SafariEnvironments).map(k => [k, 0]));
             zoneList.forEach(safariPokemon => {
-                cacheLine[safariPokemon.name][+region] = cacheLine[safariPokemon.name][+region] || {};
-                cacheLine[safariPokemon.name][+region][0] = +((SafariPokemon.calcPokemonWeight(safariPokemon) / safariWeight) * 100).toFixed(2);
+                safariPokemon.environments.forEach(env => safariWeights[env] += safariPokemon.weight);
+            });
+            zoneList.forEach(safariPokemon => {
+                cacheLine[safariPokemon.name][+region] = cacheLine[safariPokemon.name][+region] || { chances: {} };
+                safariPokemon.environments.forEach(env => cacheLine[safariPokemon.name][+region].chances[env] = +(safariPokemon.weight / safariWeights[env] * 100).toFixed(2));
+                if (safariPokemon.requirement) {
+                    cacheLine[safariPokemon.name][+region].requirement = safariPokemon.requirement;
+                }
             });
         });
-        return cacheLine[pokemonName] as Record<GameConstants.Region, Record<number, number>>;
+        return cacheLine[pokemonName] as Record<GameConstants.Region, {requirement?: Requirement, chances: Record<GameConstants.Region, number>}>;
     }
 
     public static getPokemonPrevolution(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<EvoData> {
