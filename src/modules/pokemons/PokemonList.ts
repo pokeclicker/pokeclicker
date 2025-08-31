@@ -6464,6 +6464,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 110,
             'speed': 30,
         },
+        'heldItem': { type: ItemType.item, id: 'Leftovers' },
         'gender': {
             'femaleRatio': 0.125,
         },
@@ -14459,6 +14460,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 85,
             'speed': 5,
         },
+        'heldItem': { type: ItemType.item, id: 'Leftovers' },
         'gender': {
             'femaleRatio': 0.125,
         },
