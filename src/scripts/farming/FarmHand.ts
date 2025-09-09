@@ -225,7 +225,7 @@ class FarmHand {
                             berry = App.game.farming.plotList[emptyPlotIndex].lastPlanted;
                             break;
                         case FarmHandBerryTypes.Random: // Plant a random berry
-                            berry = Rand.fromArray(App.game.farming.farmHands.availableBerries().filter(b => b >= 0));
+                            berry = Rand.fromArray(App.game.farming.farmHands.availableBerries().filter(b => (b as number) >= 0));
                             break;
                         default:
                             berry = this.focus();
