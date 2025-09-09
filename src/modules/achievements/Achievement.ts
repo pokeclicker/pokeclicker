@@ -15,7 +15,7 @@ export default class Achievement {
         // roundingMode isn't understood by our typescript version
         // @ts-ignore
         const progress = this.getProgress().toLocaleString('en-US', { roundingMode: 'trunc' });
-        return `${progress} / ${this.property.requiredValue.toLocaleString('en-US')}`
+        return `${progress} / ${this.property.requiredValue.toLocaleString('en-US')}`;
     });
     public bonus = 0;
     public unlocked : KnockoutObservable<boolean> = ko.observable(false);
