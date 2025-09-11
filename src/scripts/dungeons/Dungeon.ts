@@ -306,6 +306,22 @@ class Dungeon {
         return updatedChances;
     }
 
+    public getLootChance(loot: Loot, tier: LootTier): number {
+        const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]();
+        const debuffed = DungeonRunner.isDungeonDebuffed(this);
+
+        const tierWeights = (loot.ignoreDebuff ? this.getLootTierWeights(clears, false) : this.getLootTierWeights(clears, debuffed));
+        const weightSum = Object.keys(tierWeights)
+            .filter(tier => this.lootTable[tier].some((item: Loot) => item.requirement?.isCompleted() ?? true))
+            .map(tier => tierWeights[tier])
+            .reduce((acc, weight) => acc + weight, 0);
+
+        const tierLoot = this.lootTable[tier].filter((item) => item.requirement?.isCompleted() ?? true);
+        const tierWeightSum = tierLoot.reduce((acc, item) => acc + (item.weight ?? 1), 0);
+        const lootWeight = loot.weight ?? 1;
+        return lootWeight / tierWeightSum * tierWeights[tier] / weightSum;
+    }
+
     /**
      * Retrieves the weights for all the possible enemies
      */
