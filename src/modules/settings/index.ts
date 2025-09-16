@@ -310,6 +310,8 @@ Settings.add(new Setting<number>('heldItemType2Filter', 'Type 2', [
 ], -2, undefined, false));
 Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false, undefined, false));
 Settings.add(new BooleanSetting('heldItemHideHoldingThisItem', 'Hide Pokémon holding this item', false, undefined, false));
+Settings.add(new BooleanSetting('heldItemHideHoldingSameOrBetter', 'Hide Pokémon holding equivalent or better item', false, undefined, false));
+Settings.add(new BooleanSetting('heldItemOnlyShowWorse', 'Only show Pokémon holding inferior item', false, undefined, false));
 
 // Hatchery Filters
 export const breedingFilterSettingKeys = ['breedingNameFilter', 'breedingIDFilter', 'breedingRegionFilter', 'breedingType1Filter', 'breedingType2Filter',
