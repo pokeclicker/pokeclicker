@@ -234,7 +234,7 @@ class PokemonFactory {
     private static roamingEncounter(routeNum: number, region: GameConstants.Region): boolean {
         // Map to the route numbers
         const route = Routes.getRoute(region, routeNum);
-        
+
         // Check if the dice rolls in their favor
         const encounter = PokemonFactory.roamingChance(route);
         if (!encounter) {
