@@ -117,6 +117,23 @@ export default class Gems implements Feature {
         return this.gemUpgrades[typeNum * Gems.nEffects + effectNum]();
     }
 
+    public getGemCaseClass(
+        typeNum: PokemonType,
+        effectNum: TypeEffectiveness,
+    ): string {
+        if (!this.isValidUpgrade(typeNum, effectNum)) return 'bg-success';
+        if (this.hasMaxUpgrade(typeNum, effectNum)) return 'bg-success';
+        return 'bg-warning';
+    }
+
+    public getGetCaseAnimation(
+        typeNum: PokemonType,
+        effectNum: TypeEffectiveness,
+    ): string {
+        if (this.isValidUpgrade(typeNum, effectNum) && this.canBuyGemUpgrade(typeNum, effectNum)) return 'flash linear 4s infinite';
+        return 'none';
+    }
+
     initialize() {}
 
     canAccess(): boolean {
