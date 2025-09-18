@@ -292,9 +292,7 @@ class PokedexHelper {
             } else if (option == SortOptions.timesHatched) {
                 aValue = App.game.statistics.pokemonHatched[a.id]() || 0;
                 bValue = App.game.statistics.pokemonHatched[b.id]() || 0;
-            }
-            //all other sort options: sort only party pokemon, sort party pokemon ahead of uncaught pokemon regardless of sort direction
-            else if (aParty && bParty) { 
+            } else if (aParty && bParty) { //all other sort options: sort only party pokemon, sort party pokemon ahead of uncaught pokemon regardless of sort direction
                 aValue = config.getValue(aParty);
                 bValue = config.getValue(bParty);
             } else if (!aParty && bParty) {
