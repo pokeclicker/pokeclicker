@@ -379,6 +379,14 @@ Settings.add(new Setting<Region>('breedingRegionalAttackDebuffSetting', 'Regiona
     regionOptionsNoneFirst,
     Region.none, undefined, false));
 
+// Pokedex Sorting
+const pokedexSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+)).filter((opt) => ![SortOptions.level, SortOptions.attack].includes(opt.value));
+
+Settings.add(new Setting<number>('pokedexSort', 'Sort', pokedexSortSettings, SortOptions.id));
+Settings.add(new BooleanSetting('pokedexSortDirection', 'reverse', false));
+
 // Pokedex Filters
 export const pokedexFilterSettingKeys = ['pokedexNameFilter', 'pokedexIDFilter', 'pokedexRegionFilter', 'pokedexType1Filter', 'pokedexType2Filter', 'pokedexCaughtFilter',
     'pokedexPokerusFilter', 'pokedexCategoryFilter', 'pokedexUniqueTransformationFilter', 'pokedexHeldItemFilter', 'pokedexHideAltFilter'];
