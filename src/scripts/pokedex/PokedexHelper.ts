@@ -270,7 +270,7 @@ class PokedexHelper {
 
 
     /* Sorts Pokedex data using base pokemon data and party pokemon data. 
-        Uncaught pokemon can be sorted by id, name, and base attack; in all other cases, sort by id, prioritized after party pokemon */
+        Uncaught pokemon can be sorted by id, name, times hatched, base attack; in all other cases, sort by id, prioritized after party pokemon */
     public static compareBy(option: SortOptions, direction: boolean) {
         return (a, b) => {
             const aParty = App.game.party.getPokemon(a.id);
@@ -280,7 +280,7 @@ class PokedexHelper {
             let res, dir = direction ? -1 : 1;
             let aValue, bValue;
 
-            //ID, name, attack sort: sort all pokemon
+            //ID, name, base attack, times hatched sort: sort all pokemon
             if(option == SortOptions.id) {
                 aValue = aParty ? config.getValue(aParty) : a.id;
                 bValue = bParty ? config.getValue(bParty) : b.id;
@@ -292,6 +292,10 @@ class PokedexHelper {
             else if (option == SortOptions.baseAttack) {
                 aValue = aParty ? config.getValue(aParty) : a.attack;
                 bValue = bParty ? config.getValue(bParty) : b.attack;
+            }
+            else if (option == SortOptions.timesHatched) {
+                aValue = App.game.statistics.pokemonHatched[a.id]() || 0;
+                bValue = App.game.statistics.pokemonHatched[b.id]() || 0;
             }
             //all other sort options: sort only party pokemon, sort party pokemon ahead of uncaught pokemon regardless of sort direction
             else if (aParty && bParty) { 
