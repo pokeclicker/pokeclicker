@@ -5372,8 +5372,8 @@ const AncientBugHunter2 = new NPC('Ancient Bug Hunter', [
 
 const AncientBugHunter3 = new NPC('Ancient Bug Hunter', [
     'Trainers report on sightings of various Genesect holding the same Drives as the Genesect they own.',
-    'It seems like this Dungeon\'s Genesect is choosing it\'s Drive based on the Moon Cycle!',
-    'While the high-speed form races to different Dungeons all across Unova.',
+    'It seems like this Dungeon\'s Genesect is choosing its Drive based on the Moon Cycle!',
+    'Meanwhile the high-speed form races to different Dungeons all across Unova.',
 ], {
     image: 'assets/images/npcs/Super Nerd.png',
     requirement: new QuestLineCompletedRequirement('The Legend Awakened'),
