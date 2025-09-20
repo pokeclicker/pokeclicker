@@ -393,9 +393,30 @@ export default class GenericDeal {
                 costs: [
                     { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_bird, amount: 1 },
                     { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_drake, amount: 1 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(25000, Currency.questPoint), amount: 1 },
                 ],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dracozolt, amount: 1, hidePlayerInventory: true }],
                 tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Dracozolt', true),
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_bird, amount: 1 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_drake, amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dracozolt, amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Dracozolt'),
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_bird, amount: 1 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_dino, amount: 1 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(25000, Currency.questPoint), amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Arctozolt, amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Arctozolt', true),
             }),
             new GenericDeal({
                 costs: [
@@ -404,6 +425,17 @@ export default class GenericDeal {
                 ],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Arctozolt, amount: 1, hidePlayerInventory: true }],
                 tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Arctozolt'),
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_fish, amount: 1 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_drake, amount: 1 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(25000, Currency.questPoint), amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dracovish, amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Dracovish', true),
             }),
             new GenericDeal({
                 costs: [
@@ -412,6 +444,17 @@ export default class GenericDeal {
                 ],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dracovish, amount: 1, hidePlayerInventory: true }],
                 tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Dracovish'),
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_fish, amount: 1 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.Fossilized_dino, amount: 1 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(25000, Currency.questPoint), amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Arctovish, amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Arctovish', true),
             }),
             new GenericDeal({
                 costs: [
@@ -420,6 +463,7 @@ export default class GenericDeal {
                 ],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Arctovish, amount: 1, hidePlayerInventory: true }],
                 tradeButtonOverride: 'Revive',
+                tradeRequirement: new ObtainedPokemonRequirement('Arctovish'),
             }),
         ]);
     }
