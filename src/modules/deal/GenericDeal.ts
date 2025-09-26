@@ -7,6 +7,7 @@ import GameHelper from '../GameHelper';
 import { Currency } from '../GameConstants';
 import Requirement from '../requirements/Requirement';
 import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
+import type { ObservableArray } from 'knockout';
 
 export type GenericTraderShopIdentifier =
     'Palaeontologist' |
@@ -103,7 +104,7 @@ export default class GenericDeal {
         return this._tradeButtonOverride;
     }
 
-    public static list: Partial<Record<GenericTraderShopIdentifier, KnockoutObservableArray<GenericDeal>>> = {};
+    public static list: Partial<Record<GenericTraderShopIdentifier, ObservableArray<GenericDeal>>> = {};
 
     constructor(params: GenericDealParams) {
         const {

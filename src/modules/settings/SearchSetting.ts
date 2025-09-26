@@ -1,9 +1,10 @@
 import GameHelper from '../GameHelper';
 import Requirement from '../requirements/Requirement';
 import Setting from './Setting';
+import type { PureComputed } from 'knockout';
 
 export default class SearchSetting extends Setting<string> {
-    public readonly regex: ko.PureComputed<RegExp>;
+    public readonly regex: PureComputed<RegExp>;
 
     constructor(
         name: string,

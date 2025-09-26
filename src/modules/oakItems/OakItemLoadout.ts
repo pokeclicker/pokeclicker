@@ -1,6 +1,8 @@
+import type { Observable, ObservableArray } from 'knockout';
+
 export default class OakItemLoadout {
-    public name: ko.Observable<string>;
-    public loadout: ko.ObservableArray<number>;
+    public name: Observable<string>;
+    public loadout: ObservableArray<number>;
 
     constructor(name: string, loadout: Array<number> = []) {
         this.name = ko.observable(name);

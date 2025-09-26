@@ -3,20 +3,20 @@
     "types": [
       "vitest/globals",
       "jquery",
-      "knockout",
       "bootstrap",
     ],
-    "lib": ["dom", "es2019"],
+    "lib": ["dom", "es2023"],
     "skipLibCheck": true,
     "sourceMap": true,
-    "module": "es6",
-    "target": "es6",
+    "module": "es2020",
+    "target": "es2020",
     "jsx": "react",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "declarationDir": "../declarations",
-    "moduleResolution": "node"
+    "moduleResolution": "bundler",
+    "allowUmdGlobalAccess": true
   },
   "compileOnSave": false
 }

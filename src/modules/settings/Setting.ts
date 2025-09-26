@@ -30,7 +30,7 @@ export default class Setting<T> {
         // Redirects writes to the observable to this.set()
         this.observableValue = ko.pureComputed({
             read: this._observable,
-            write: (value) => {
+            write: (value: T) => {
                 this.set(value);
             },
             owner: this,

@@ -17,7 +17,7 @@ type MaybeWritable = Observable | Computed;
 // Only numeric values allowed - usage: ko.observable(0).extend({ numeric: 0 });
 // Rounds to <precision> decimal places, can be negative
 const numericExtender = (target: MaybeWritable, precision: number) => {
-    if (!ko.isWritableObservable(target)) {
+    if (!ko.isWriteableObservable(target)) {
         throw new Error('Cannot apply \'numeric\' extender to a non-writable observable!');
     }
     if (!Number.isInteger(precision)) {
@@ -90,7 +90,7 @@ const numericExtender = (target: MaybeWritable, precision: number) => {
 };
 
 const booleanExtender = (target: MaybeWritable) => {
-    if (!ko.isWritableObservable(target)) {
+    if (!ko.isWriteableObservable(target)) {
         throw new Error('Cannot apply \'boolean\' extender to a non-writable observable!');
     }
     // create a writable computed observable to intercept writes to our observable

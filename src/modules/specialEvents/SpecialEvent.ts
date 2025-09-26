@@ -4,6 +4,7 @@ import NotificationConstants from '../notifications/NotificationConstants';
 import { DAY, HOUR, formatTimeShortWords, formatTime, Currency, SPECIAL_EVENT_TICK, SECOND } from '../GameConstants';
 import NotificationOption from '../notifications/NotificationOption';
 import { SpecialEventTitleType } from './SpecialEventTitleType';
+import type { Observable, PureComputed } from 'knockout';
 
 export type EventCallback = () => void;
 
@@ -16,14 +17,14 @@ export enum SpecialEventStatus {
 export default class SpecialEvent {
     title: SpecialEventTitleType;
     description: string;
-    status: KnockoutObservable<SpecialEventStatus>;
+    status: Observable<SpecialEventStatus>;
     startTime: Date;
     startFunction: EventCallback;
     endTime: Date;
     endFunction: EventCallback;
     hideFromEventCalendar: boolean;
-    eventCalendarTimeLeft: KnockoutObservable<number>;
-    isActive: KnockoutObservable<boolean>;
+    eventCalendarTimeLeft: Observable<number>;
+    isActive: PureComputed<boolean>;
 
     // TODO: only notify once initially until event about to start/end
     notified: SpecialEventNotifiedStatus;
