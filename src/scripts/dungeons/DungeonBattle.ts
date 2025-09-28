@@ -35,7 +35,6 @@ class DungeonBattle extends Battle {
         if (DungeonRunner.fightingLootEnemy) {
             DungeonRunner.fightingLootEnemy = false;
         } else if (!DungeonRunner.fightingBoss()) {
-            ++DungeonRunner.encountersWon;
             ++DungeonRunner.encountersWonThisFloor;
             DungeonRunner.updateEncounterInfo();
         }
@@ -128,7 +127,6 @@ class DungeonBattle extends Battle {
             }
 
             DungeonRunner.fighting(false);
-            ++DungeonRunner.encountersWon;
             ++DungeonRunner.encountersWonThisFloor;
             DungeonRunner.updateEncounterInfo();
             if (DungeonRunner.fightingBoss()) {

@@ -12,7 +12,6 @@ class DungeonRunner {
     public static currentTileType;
     public static chestsOpened: number;
     public static chestsOpenedThisFloor: number;
-    public static encountersWon: number;
     public static encountersWonThisFloor: number;
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
     public static defeatedBoss: KnockoutObservable<string> = ko.observable(null);
@@ -87,7 +86,6 @@ class DungeonRunner {
 
         DungeonRunner.chestsOpened = 0;
         DungeonRunner.chestsOpenedThisFloor = 0;
-        DungeonRunner.encountersWon = 0;
         DungeonRunner.encountersWonThisFloor = 0;
         DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;
@@ -311,17 +309,13 @@ class DungeonRunner {
     public static updateChestInfo() {
         let t = `${DungeonRunner.chestsOpenedThisFloor}/${DungeonRunner.map.chestsPerLevel[DungeonRunner.map.playerPosition().floor]}`;
         if (DungeonRunner.map.floorSizes.length > 1) {
-            t += ` (${DungeonRunner.chestsOpened}/${DungeonRunner.map.totalChests})`;
+            t += ` Total: ${DungeonRunner.chestsOpened}`;
         }
         DungeonRunner.chestInfo(t);
     }
 
     public static updateEncounterInfo() {
-        let t = `${DungeonRunner.encountersWonThisFloor}/${DungeonRunner.map.fightsPerLevel[DungeonRunner.map.playerPosition().floor]}`;
-        if (DungeonRunner.map.floorSizes.length > 1) {
-            t += ` (${DungeonRunner.encountersWon}/${DungeonRunner.map.totalFights})`;
-        }
-        DungeonRunner.encounterInfo(t);
+        DungeonRunner.encounterInfo(`${DungeonRunner.encountersWonThisFloor}/${DungeonRunner.map.fightsPerLevel[DungeonRunner.map.playerPosition().floor]}`);
     }
 
     public static async dungeonLeave(shouldConfirm = Settings.getSetting('confirmLeaveDungeon').observableValue()): Promise<void> {
