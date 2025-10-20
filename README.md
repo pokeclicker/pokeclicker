@@ -4,6 +4,20 @@
 [![Discord](https://img.shields.io/discord/450412847017754644?color=7289DA&label=Discord&logo=discord)](https://discord.gg/a6DFe4p)
 
 # PokéClicker
+
+---------------------------------
+MADDIE WAS HERE >:3 >:3 >:3
+---------------------------------
+
+
+
+
+
+
+
+
+
+
 A game about catching Pokémon, defeating gym leaders, and watching numbers get bigger.
 
 You can try out the current state at https://www.pokeclicker.com/
