@@ -19,7 +19,7 @@ export default class QuestLineStartedRequirement extends Requirement {
     }
 
     public getProgress(): number {
-        return +(this.quest.state() !== QuestLineState.inactive);
+        return +(this.quest.state() !== QuestLineState.inactive && this.quest.state() !== QuestLineState.suspended);
     }
 
     public hint(): string {
