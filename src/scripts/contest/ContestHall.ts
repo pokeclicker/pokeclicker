@@ -32,7 +32,7 @@ class ContestHall extends TownContent {
         App.game.gameState = GameConstants.GameState.town;
     }
     public areaStatus(): areaStatus {
-        if (this.rank.every(r => this.type.every(t => App.game.statistics.contestRoundsWon[r][t]()))) {
+        if (this.rank.every(r => this.type.every(t => App.game.statistics.contestHighestRound[r][t]()))) {
             return areaStatus.completed;
         } else {
             return areaStatus.incomplete;
