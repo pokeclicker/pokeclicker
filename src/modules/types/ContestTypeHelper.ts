@@ -1,5 +1,6 @@
 import ContestType from '../enums/ContestType';
 import { TypeEffectivenessValue } from '../GameConstants';
+import GameHelper from '../GameHelper';
 
 export default class ContestTypeHelper {
     public static contestTypeMatrix: Array<Array<number>> = (() => {
@@ -29,6 +30,10 @@ export default class ContestTypeHelper {
         // return nothing if undefined
         if (!attackingTypes.length || !defendingTypes.length) {
             return 0;
+        }
+        // return error message if a wrong number or undefined slips in
+        if (attackingTypes.some(att => !GameHelper.enumNumbers(ContestType).includes(att) || defendingTypes.some(def => !GameHelper.enumNumbers(ContestType).includes(def)))) {
+            throw new Error('Invalid value being passed through contest type matrix');
         }
         // Find the effectiveness against each defending ContestType
         const defenseEffectiveness = defendingTypes.map(d => {
