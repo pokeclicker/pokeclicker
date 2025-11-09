@@ -290,6 +290,7 @@ class PartyController {
                     return false;
                 }
             }
+            // filter by type
             const type = Settings.getSetting('pokeblockTypeFilter').observableValue();
             if (type > -1 && !pokemonMap[pokemon.name].contestTypes.includes(type)) {
                 return false;
