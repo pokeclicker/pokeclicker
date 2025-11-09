@@ -74,7 +74,7 @@ class BattlePokemon implements EnemyPokemonInterface {
      * @param rally
      */
     public rally(rally: number): void {
-        this.support(Math.min(this.support() + rally, this.maxHealth()));
+        this.support(Math.max(0, Math.min(this.support() + rally, this.maxHealth())));
         this.supportPercentage(Math.floor(this.support() / this.maxHealth() * 100));
     }
 
