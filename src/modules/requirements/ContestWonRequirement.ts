@@ -18,10 +18,10 @@ export default class ContestWonRequirement extends AchievementRequirement {
 
     public getProgress() {
         if (this.type != undefined) {
-            return Math.min(App.game.statistics.contestRoundsWon[this.rank][this.type](), this.requiredValue);
+            return Math.min(App.game.statistics.contestHighestRound[this.rank][this.type](), this.requiredValue);
         } else {
-            const ct = GameHelper.enumNumbers(ContestType).find(t => App.game.statistics.contestRoundsWon[this.rank][t]() >= this.requiredValue);
-            return Math.min(App.game.statistics.contestRoundsWon[this.rank][ct](), this.requiredValue);
+            const ct = GameHelper.enumNumbers(ContestType).find(t => App.game.statistics.contestHighestRound[this.rank][t]() >= this.requiredValue);
+            return Math.min(App.game.statistics.contestHighestRound[this.rank][ct](), this.requiredValue);
         }
     }
 
