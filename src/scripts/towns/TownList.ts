@@ -2351,30 +2351,30 @@ const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
 
 //Hoenn Contest Shop
 const HoennContestShop = new Shop([
-    // ItemList['Tangela (Pom-pom)'],
-    // ItemList['Goldeen (Diva)'],
-    // ItemList['Weepinbell (Fancy)'],
-    // ItemList['Onix (Rocker)'],
-    // ItemList['Dugtrio (Punk)'],
-    // ItemList['Gengar (Punk)'],
-    ItemList.Pokeblock_case, // only for dev
-    ItemList.PokeBlock_Red,
-    ItemList.PokeBlock_Blue,
-    ItemList.PokeBlock_Pink,
-    ItemList.PokeBlock_Green,
-    ItemList.PokeBlock_Yellow,
-    ItemList.PokeBlock_White,
-    ItemList.PokeBlock_Gold,
-    ItemList.PokeBlock_Cool,
-    ItemList.PokeBlock_Beautiful,
-    ItemList.PokeBlock_Cute,
-    ItemList.PokeBlock_Smart,
-    ItemList.PokeBlock_Tough,
-    ItemList.PokeBlock_Balanced,
-    // new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
-    // new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
-    // new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
-    // new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
+    ItemList['Tangela (Pom-pom)'],
+    ItemList['Goldeen (Diva)'],
+    ItemList['Weepinbell (Fancy)'],
+    ItemList['Onix (Rocker)'],
+    ItemList['Dugtrio (Punk)'],
+    ItemList['Gengar (Punk)'],
+    // ItemList.Pokeblock_case, // only for dev
+    // ItemList.PokeBlock_Red,
+    // ItemList.PokeBlock_Blue,
+    // ItemList.PokeBlock_Pink,
+    // ItemList.PokeBlock_Green,
+    // ItemList.PokeBlock_Yellow,
+    // ItemList.PokeBlock_White,
+    // ItemList.PokeBlock_Gold,
+    // ItemList.PokeBlock_Cool,
+    // ItemList.PokeBlock_Beautiful,
+    // ItemList.PokeBlock_Cute,
+    // ItemList.PokeBlock_Smart,
+    // ItemList.PokeBlock_Tough,
+    // ItemList.PokeBlock_Balanced,
+    new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
 ], 'Contest Shop', [PokemonContestController.requirements]);
 
 //Hoenn Flute Master
@@ -4136,8 +4136,7 @@ const SecretBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
     ItemList.Mulch_Shovel,
 ], 'Secret Berry Shop');
 
-// TODO: add to Hearthome when done
-const SuperContests = new ContestHall([ContestRank['Super Normal'], ContestRank['Super Great'], ContestRank['Super Ultra'], ContestRank['Super Master']], undefined, undefined, 'Sinnoh Contests');
+const SuperContests = new ContestHall([ContestRank['Super Normal'], ContestRank['Super Great'], ContestRank['Super Ultra'], ContestRank['Super Master'], ContestRank.Practice], undefined, undefined, 'Sinnoh Contests');
 const BrilliantShiningContestHall = new ContestHall([ContestRank['Brilliant Shining']], [ContestType.Balanced]);
 
 //Sinnoh NPCs
@@ -4576,7 +4575,7 @@ TownList['Hearthome City'] = new Town(
     'Hearthome City',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [HearthomeCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hearthome City']), SinnohBerryMaster],
+    [SuperContests, HearthomeCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hearthome City']), SinnohBerryMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 208)],
         npcs: [HearthomeContestFan, LucyStevens1, HappinyWitness6],
