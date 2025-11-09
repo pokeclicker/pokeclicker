@@ -63,7 +63,7 @@ class ContestBattleDance {
 
         dancers.forEach(p => {
             // Use crotchet as move value
-            ContestBattle.moveAppeal()[ContestBattle.pokemons().indexOf(p)].push(ContestBattle.crotchetValue());
+            ContestBattle.moveArray()[ContestBattle.pokemons().indexOf(p)].push(ContestBattle.crotchetValue());
 
             // Gather dance hearts
             p.danceHearts(p.danceHearts() + 2 * ContestTypeHelper.getAppealModifier([ContestBattle.crotchetValue()], [ContestRunner.type()]));

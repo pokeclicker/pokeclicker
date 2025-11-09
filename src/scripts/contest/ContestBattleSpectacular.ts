@@ -64,7 +64,7 @@ class ContestBattleSpectacular {
             talentMoves.forEach(m => m.pp(0));
             // Apply only chosen moves to array
             const newMoves = talentMoves.flatMap(t => t.moveType);
-            ContestBattle.moveAppeal.splice(ContestBattle.selectedEnemy(), 1, newMoves);
+            ContestBattle.moveArray.splice(ContestBattle.selectedEnemy(), 1, newMoves);
             return;
         }
 
@@ -121,7 +121,7 @@ class ContestBattleSpectacular {
         }
 
         // save move type before defeating pokemon
-        const spectacularMove = ContestBattle.moveAppeal()[ContestBattle.selectedEnemy()][0] ?? ContestBattleSpectacular.activeSpectacularType();
+        const spectacularMove = ContestBattle.moveArray()[ContestBattle.selectedEnemy()][0] ?? ContestBattleSpectacular.activeSpectacularType();
 
         // the usual
         ContestBattle.defeatContestPokemon();
@@ -137,7 +137,7 @@ class ContestBattleSpectacular {
     }
 
     public static addFrenzyTime() {
-        const multiplier = ContestScore.calculateMoveScore(ContestBattle.moveAppeal()[ContestBattle.selectedEnemy()], ContestBattleSpectacular.activeSpectacularType(), 0);
+        const multiplier = ContestScore.calculateMoveScore(ContestBattle.moveArray()[ContestBattle.selectedEnemy()], ContestBattleSpectacular.activeSpectacularType(), 0);
         const time = Math.min(10 * GameConstants.SECOND, ContestRunner.frenzyTime() + multiplier * GameConstants.SECOND);
         ContestRunner.frenzyTime(time);
     }
