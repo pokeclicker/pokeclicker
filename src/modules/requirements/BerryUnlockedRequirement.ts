@@ -3,15 +3,15 @@ import * as GameConstants from '../GameConstants';
 import AchievementRequirement from './AchievementRequirement';
 
 export default class BerryUnlockedRequirement extends AchievementRequirement {
-    constructor(berry: BerryType, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(berry, option);
+    constructor(public berry: BerryType, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+        super(1, option);
     }
 
     public getProgress() {
-        return Number(App.game.farming.unlockedBerries[this.requiredValue]());
+        return Number(App.game.farming.unlockedBerries[this.berry]());
     }
 
     public hint(): string {
-        return `The ${BerryType[this.requiredValue]} Berry needs to be unlocked.`;
+        return `The ${BerryType[this.berry]} Berry needs to be unlocked.`;
     }
 }
