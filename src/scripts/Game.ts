@@ -452,9 +452,7 @@ class Game implements TmpGameType {
             }
             case GameConstants.GameState.contest: {
                 ContestBattle.counter += GameConstants.TICK_TIME;
-                if (ContestBattle.counter >= GameConstants.BATTLE_TICK) {
-                    ContestBattle.tick();
-                }
+                ContestBattle.tick();
                 ContestRunner.tick();
                 break;
             }
