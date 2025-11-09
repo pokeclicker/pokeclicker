@@ -225,18 +225,29 @@ class PokemonFactory {
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, encounterType);
     }
 
-    public static generateContestTrainerPokemon(trainer: ContestTrainer, pokemonIndex: number): ContestBattlePokemon {
-        const pokemon = trainer.getTeam()[pokemonIndex] as ContestPokemon;
+    public static generateContestTrainerPokemon(trainer: ContestTrainer, partyIndex: number): ContestBattlePokemon {
+        const pokemon = trainer.getTeam()[partyIndex] as ContestPokemon;
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
         const nickname = pokemon.nickname;
         const contestTypes = pokemon.contestTypes ?? basePokemon.contestTypes;
         const gender = pokemon.gender ?? this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
-        const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        const exp: number = basePokemon.exp;
+        let dance = basePokemon.id.toString().split('').filter(n => !isNaN(Number(n))).map(v => Number(v) % 4);
+        if (dance.length < 2) {
+            dance.unshift(0, 0);
+        }
+        if (dance.length < 3) {
+            dance.unshift(0);
+        }
+        if (dance.length > 5) {
+            dance = dance.slice(dance.length - 5);
+        }
+        const moves = pokemon.moves ?? Rand.shuffleArray(contestTypes.concat(contestTypes).concat(contestTypes).concat(contestTypes)).slice(0,4);
+        const shiny = pokemon.shiny ?? false;
+        const exp: number = pokemon.level; // standardize exp gain by rank
         const catchRate = 0;
-        const money = 0;
+        const money = pokemon.money ?? new Amount(1, GameConstants.Currency.contestToken);
         const shadow = GameConstants.ShadowStatus.None;
-        return new ContestBattlePokemon(contestTypes, nickname, pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer);
+        return new ContestBattlePokemon(contestTypes, nickname, dance, moves, pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, money, shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer);
     }
 
     private static generateRoamingEncounter(region: GameConstants.Region, subRegion: SubRegion): PokemonNameType {
