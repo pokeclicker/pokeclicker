@@ -17,6 +17,7 @@ import PokemonType from './enums/PokemonType';
 import CaughtStatus from './enums/CaughtStatus';
 import ContestType from './enums/ContestType';
 import ContestRank from './enums/ContestRank';
+import ContestOpponentStatus from './enums/ContestOpponentStatus';
 import EvolutionType from './enums/EvolutionType';
 import FarmNotificationType from './enums/FarmNotificationType';
 import FlavorType from './enums/FlavorType';
@@ -25,6 +26,7 @@ import KeyItemType from './enums/KeyItemType';
 import MulchType from './enums/MulchType';
 import PlotStage from './enums/PlotStage';
 import QuestLineState from './quests/QuestLineState';
+import RibbonEnums from './enums/Ribbons';
 import WeatherForecastStatus from './enums/WeatherForecastStatus';
 import SafariEnvironments from './enums/SafariEnvironments';
 import FarmingTool from './enums/FarmingTool';
@@ -107,13 +109,16 @@ import CustomRequirement from './requirements/CustomRequirement';
 import DefeatedRequirement from './requirements/DefeatedRequirement';
 import DevelopmentRequirement from './requirements/DevelopmentRequirement';
 import DiamondRequirement from './requirements/DiamondRequirement';
+import Direction from './enums/Direction';
 import FarmHandRequirement from './requirements/FarmHandRequirement';
 import FarmPlotsUnlockedRequirement from './requirements/FarmPlotsUnlockedRequirement';
 import FarmPointsRequirement from './requirements/FarmPointsRequirement';
 import GymBadgeRequirement from './requirements/GymBadgeRequirement';
 import HatchRequirement from './requirements/HatchRequirement';
 import HatcheryHelperRequirement from './requirements/HatcheryHelperRequirement';
+import InContestRankRequirement from './requirements/InContestRankRequirement';
 import InContestRequirement from './requirements/InContestRequirement';
+import InContestTypeRequirement from './requirements/InContestTypeRequirement';
 import InRegionRequirement from './requirements/InRegionRequirement';
 import MoneyRequirement from './requirements/MoneyRequirement';
 import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
@@ -241,6 +246,7 @@ Object.assign(<any>window, {
     EvolutionType,
     ContestType,
     ContestRank,
+    ContestOpponentStatus,
     FarmNotificationType,
     FlavorType,
     ItemType,
@@ -248,6 +254,7 @@ Object.assign(<any>window, {
     MulchType,
     PlotStage,
     QuestLineState,
+    RibbonEnums,
     WeatherForecastStatus,
     SafariEnvironments,
     FarmingTool,
@@ -337,6 +344,7 @@ Object.assign(<any>window, {
     DefeatedRequirement,
     DevelopmentRequirement,
     DiamondRequirement,
+    Direction,
     FarmHandRequirement,
     FarmPlotsUnlockedRequirement,
     FarmPointsRequirement,
@@ -344,7 +352,9 @@ Object.assign(<any>window, {
     HatchRequirement,
     HatcheryHelperRequirement,
     InRegionRequirement,
+    InContestRankRequirement,
     InContestRequirement,
+    InContestTypeRequirement,
     MoneyRequirement,
     MaxLevelOakItemRequirement,
     MaxRegionRequirement,
