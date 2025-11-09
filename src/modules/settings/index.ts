@@ -487,6 +487,8 @@ Settings.add(new HotkeySetting('hotkey.safari.bait', 'Throw Bait', 'B'));
 Settings.add(new HotkeySetting('hotkey.safari.rock', 'Throw Rock', 'R'));
 Settings.add(new HotkeySetting('hotkey.safari.run', 'Run', 'F'));
 
+Settings.add(new HotkeySetting('hotkey.contest.action', 'Clap', 'Space'));
+
 // Discord
 Settings.add(new BooleanSetting('discord-rp.enabled', 'Discord RP enabled', true));
 Settings.add(new Setting('discord-rp.line-1', 'Discord line 1 text', [], 'Shinies: {caught_shiny}/{caught} {sparkle}'));
