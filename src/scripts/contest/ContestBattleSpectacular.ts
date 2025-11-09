@@ -68,18 +68,14 @@ class ContestBattleSpectacular {
             return;
         }
 
-        // Use move
-        moves[direction].pp(0);
+        // Add move to move array
+        ContestBattle.useContestMove(direction);
 
         // Penlaty
         if (moves.every(m => m.pp() <= 0)) {
             // Apply jammed status now, to make it easier to overwrite a few lines down
             ContestBattle.pokemons()[ContestBattle.selectedEnemy()].status(ContestOpponentStatus.Jammed);
         }
-
-        // Add to move array
-        const newMoves = ContestBattle.moveAppeal()[ContestBattle.selectedEnemy()].concat(move.moveType);
-        ContestBattle.moveAppeal.splice(ContestBattle.selectedEnemy(), 1, newMoves);
 
         // Define effectiveness
         const matchup = ContestBattleSpectacular.activeSpectacularType() === ContestType.Balanced ? 1 : ContestTypeHelper.getAppealModifier([move.moveType], [ContestBattleSpectacular.activeSpectacularType()]);
