@@ -26,7 +26,6 @@ import KeyItemType from './enums/KeyItemType';
 import MulchType from './enums/MulchType';
 import PlotStage from './enums/PlotStage';
 import QuestLineState from './quests/QuestLineState';
-import RibbonEnums from './enums/Ribbons';
 import WeatherForecastStatus from './enums/WeatherForecastStatus';
 import SafariEnvironments from './enums/SafariEnvironments';
 import FarmingTool from './enums/FarmingTool';
@@ -254,7 +253,6 @@ Object.assign(<any>window, {
     MulchType,
     PlotStage,
     QuestLineState,
-    RibbonEnums,
     WeatherForecastStatus,
     SafariEnvironments,
     FarmingTool,
