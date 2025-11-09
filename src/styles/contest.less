@@ -7,6 +7,14 @@
   "Smart" #7fd244,
   "Tough" #f2c43d;
 
+@progressBarColors:
+  "Cool" #D42C04,
+  "Beautiful" #1E93C0,
+  "Cute" #D2458D,
+  "Smart" #15A13F,
+  "Tough" #CCA100,
+  "Balanced" #C08EEA;
+
 .contestButton3 {
   width: 16%;
   min-width: 80px;
@@ -38,8 +46,8 @@
 
 .contestpoints {
   bottom: 10px;
-  width: 70%;
-  left: 15%;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .enemy-contest {
@@ -59,8 +67,27 @@
   }
 }
 
+.contest-inactive {
+  filter: brightness(0.5);
+}
+
+.contestSpotlight {
+  position: absolute;
+  top: 17%;
+
+  @media (max-width: 768px) {
+    margin-top: 20px;
+  }
+}
+
 .contestTrainerLine { // fix for mobile somehow
   justify-content: center;
+}
+
+.spectacle {
+  .enemy {
+    background: radial-gradient(rgba(0,0,0,0), #eee 5%, rgba(0,0,0,0) 75%);
+  }
 }
 
 // Mobile screen specific stylings
@@ -78,6 +105,17 @@
     @color: extract(@value, 2);
     &[contest-type='@{type}'] .ribbon-color {
       fill: @color;
+    }
+  }
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors */
+.progress {
+  .for(@progressBarColors); .-each(@value) {
+    @type: extract(@value, 1);
+    @color: extract(@value, 2);
+    &[contest-type='@{type}'] .progress-bar {
+      background-color: @color;
     }
   }
 }
