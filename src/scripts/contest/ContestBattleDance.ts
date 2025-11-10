@@ -2,6 +2,7 @@
 ///<reference path="../contest/ContestBattlePokemon.ts"/>
 ///<reference path="../contest/ContestRunner.ts"/>
 ///<reference path="../contest/ContestHelper.ts"/>
+///<reference path="../contest/ContestBattleDancePose.ts"/>
 ///<reference path="../../declarations/enums/ContestOpponentStatus.d.ts"/>
 
 class ContestBattleDance {
@@ -34,7 +35,11 @@ class ContestBattleDance {
     // Spacebar
     public static judgeBeat() {
         if (ContestBattle.frenzyMode()) {
-            ContestBattle.pokemons()[ContestBattle.selectedEnemy()].rally(5);
+            ContestBattle.rallyPokemon(ContestBattle.selectedEnemy());
+            // Default to random pose
+            if (isNaN(ContestBattle.finishingPose()[ContestBattle.selectedEnemy()])) {
+                ContestBattle.finishingPose.splice(ContestBattle.selectedEnemy(), 1, Rand.fromArray(GameHelper.enumNumbers(Direction)));
+            }
             // Apply Dancing status to show dance hearts
             ContestBattle.pokemons()[ContestBattle.selectedEnemy()].status(ContestOpponentStatus.Dancing);
             ContestBattle.defeatContestPokemon();
@@ -80,9 +85,7 @@ class ContestBattleDance {
                 }
             }
 
-            if (p.isRallied()) {
-                ContestBattle.defeatContestPokemon(ContestBattle.pokemons().indexOf(p), false);
-            }
+            ContestBattle.defeatContestPokemon(ContestBattle.pokemons().indexOf(p), false);
         });
 
         if (ContestBattle.pokemons().every(p => !p.dance().length)) {
@@ -94,6 +97,8 @@ class ContestBattleDance {
 
     public static frenzyDance(direction: number) {
         ContestBattle.useContestMove(direction);
+
+        ContestBattle.finishingPose.splice(ContestBattle.selectedEnemy(), 1, direction);
 
         // Give or take dance hearts
         const move = ContestBattle.pokemons()[ContestBattle.selectedEnemy()].usableMoves[direction];
@@ -112,9 +117,12 @@ class ContestBattleDance {
         return;
     }
 
-    public static danceHeartBonus() {
+    public static danceHeartScoreBonus() {
         let sum = 0;
         ContestBattle.pokemons().forEach(p => sum += p.danceHearts());
+
+        sum *= (10 + ContestBattleDancePose.poseBonus(ContestRunner.type())) / 10;
+
         return sum;
     }
 
@@ -143,21 +151,16 @@ class ContestBattleDance {
     }
 
     public static getDancingCss(pokemon: ContestBattlePokemon) {
+        if (ContestBattle.frenzyMode()) {
+            return `walk${Direction[ContestBattle.finishingPose()[ContestBattle.pokemons().indexOf(pokemon)] ?? Direction.Down]}`;
+        }
+
         if (pokemon.status() != ContestOpponentStatus.Waiting || !ContestBattle.getSpotlightStatus(ContestBattle.pokemons().indexOf(pokemon))) {
             return 'walkDown';
         }
+
         if (pokemon.dance().length) {
-            switch (pokemon.dance()[0] as Direction) {
-                case Direction.Left:
-                    return 'walkLeft';
-                case Direction.Up:
-                    return 'walkUp';
-                case Direction.Right:
-                    return 'walkRight';
-                case Direction.Down:
-                default:
-                    return 'walkDown';
-            }
+            return `walk${Direction[pokemon.dance()[0]]}`;
         }
     }
 }
