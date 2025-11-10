@@ -30,15 +30,10 @@ class ContestBattleDefault {
         const pk = ContestBattle.pokemons()[ContestBattle.selectedEnemy()];
         const visual = Math.max(...pk.contestTypes.map(ct => ContestTypeHelper.contestTypeMatrix[ct][ContestRunner.type()] * 2));
         if (ContestBattle.beat() + visual >= 2) {
-            pk.rally(pk.maxHealth());
-            pk.status(ContestOpponentStatus.Appealed);
+            ContestBattle.rallyPokemon(ContestBattle.selectedEnemy());
         } else {
             ContestScore.breakChain();
             pk.status(ContestOpponentStatus.Jammed);
-            ContestBattle.moveToNextTrainer();    
-            ContestBattle.beat(0);
-            ContestBattle.counter = 0;
-            return;
         }
 
         // Defeat pokemon
