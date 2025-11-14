@@ -8,6 +8,7 @@ enum MultiplierType {
     eggStep,
     roaming,
     ev,
+    batteryCharge,
 }
 
 export default MultiplierType;
