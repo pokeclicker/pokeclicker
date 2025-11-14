@@ -118,7 +118,7 @@ export class UndergroundBattery {
             return;
         }
 
-        GameHelper.incrementObservable(this._charges, 1 * App.game.multiplier.getBonus('batteryCharge'));
+        GameHelper.incrementObservable(this._charges, 1 * App.game.multiplier.getBonus('undergroundCharge'));
         this._batteryCooldown(UNDERGROUND_BATTERY_COOLDOWN_SECONDS);
 
         if (this._charges() >= this.maxCharges) {

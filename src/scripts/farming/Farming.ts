@@ -62,7 +62,7 @@ class Farming implements Feature {
         this.multiplier.addBonus('roaming', () => this.externalAuras[AuraType.Roaming](), multiplierSource);
         this.multiplier.addBonus('ev', () => this.externalAuras[AuraType.Ev](), multiplierSource);
         this.multiplier.addBonus('exp', () => this.externalAuras[AuraType.Xp](), multiplierSource);
-        this.multiplier.addBonus('batteryCharge', () => this.externalAuras[AuraType.Charge](), multiplierSource);
+        this.multiplier.addBonus('undergroundCharge', () => this.externalAuras[AuraType.Charge](), multiplierSource);
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
             for (let i = GameHelper.enumLength(BerryType) - 2; i >= 0; i--) {

@@ -64,7 +64,7 @@ export default class OakItems implements Feature {
         this.addMultiplier('money', OakItemType.Amulet_Coin);
         this.addMultiplier('shiny', OakItemType.Shiny_Charm);
         this.addMultiplier('eggStep', OakItemType.Magma_Stone);
-        this.addMultiplier('batteryCharge', OakItemType.Cell_Battery);
+        this.addMultiplier('undergroundCharge', OakItemType.Cell_Battery);
 
         this.itemList.forEach((i) => i.levelKO.subscribe(() => this.maxLevelOakItems(this.itemList.filter((i2) => i2.isMaxLevel()).length)));
     }
