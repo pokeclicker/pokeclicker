@@ -1679,6 +1679,7 @@ export const UnovaDungeons = [
 
 export const KalosDungeons = [
     'Santalune Forest', // 125
+    'Parfum Palace Garden',
     'Connecting Cave',
     'Glittering Cave',
     'Reflection Cave',
