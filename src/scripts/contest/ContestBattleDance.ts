@@ -2,7 +2,7 @@
 ///<reference path="../contest/ContestBattlePokemon.ts"/>
 ///<reference path="../contest/ContestRunner.ts"/>
 ///<reference path="../contest/ContestHelper.ts"/>
-///<reference path="../contest/ContestBattleDancePose.ts"/>
+///<reference path="../contest/ContestBattleDanceCombos.ts"/>
 ///<reference path="../../declarations/enums/ContestOpponentStatus.d.ts"/>
 
 class ContestBattleDance {
