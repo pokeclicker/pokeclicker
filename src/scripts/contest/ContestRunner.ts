@@ -1,32 +1,23 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/notifications/Notifier.d.ts" />
+/// <reference path="../../declarations/notifications/NotificationConstants.d.ts" />
 
 class ContestRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.CONTEST_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
-    public static timeBonus: KnockoutObservable<number> = ko.observable(1);
 
     public static maxAudienceAppeal: KnockoutObservable<number> = ko.observable(1);
     public static audienceAppeal: KnockoutObservable<number> = ko.observable(0);
 
-    // Hoenn contests
-    public static crowdHype: KnockoutObservableArray<ContestType> = ko.observableArray();
+    public static crowdHype: KnockoutObservable<number> = ko.observable(0);
     public static jamTime: KnockoutObservable<number> = ko.observable(0);
-
-    public static clickPokeblocks: KnockoutObservable<number> = ko.observable(0);
+    public static frenzyTime: KnockoutObservable<number> = ko.observable(0);
+    public static encoreRound: KnockoutObservable<number> = ko.observable(0);
 
     public static running: KnockoutObservable<boolean> = ko.observable(false);
 
-    public static rank: KnockoutObservable<ContestRank> = ko.observable();
-    public static type: KnockoutObservable<ContestType> = ko.observable();
-    public static trainers: KnockoutObservableArray<ContestTrainer> = ko.observableArray();
-
-    public static encoreStatus: KnockoutObservable<boolean> = ko.observable(false);
-    public static encoreRounds: KnockoutObservable<number> = ko.observable(0);
-    public static finaleStatus: KnockoutObservable<boolean> = ko.observable(false);
-
-    // Rewards
-    public static berryRewards: KnockoutObservableArray<{ berry: BerryType, amount: number }> = ko.observableArray();
-    public static itemRewards: KnockoutObservableArray<{ item: ItemNameType, amount: number }> = ko.observableArray();
+    public static rank: KnockoutObservable<number> = ko.observable(0);
+    public static type: KnockoutObservable<number> = ko.observable(0);
 
     // Updated via ContestHall.ts
     public static contestTypeObservable: KnockoutObservableArray<ContestType> = ko.observableArray();
@@ -36,15 +27,7 @@ class ContestRunner {
         rank: ContestRank,
         type: ContestType
     ) {
-        if (!ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()])) {
-            Notifier.notify({
-                title: 'Pokémon Contest',
-                message: 'Your Pokémon don\'t have any Appeal for this Contest! Use Pokéblocks to boost their Appeal.',
-                type: NotificationConstants.NotificationOption.danger,
-                timeout: 5000,
-            });
-            return;
-        }
+        // Check if unlocked
         if (!ContestHelper.contestIsUnlocked(rank, type)) {
             Notifier.notify({
                 title: 'Pokémon Contest',
@@ -53,201 +36,171 @@ class ContestRunner {
             });
             return;
         }
-        ContestRunner.running(false);
-        DungeonRunner.timeBonus(FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
-        ContestRunner.timeLeft(GameConstants.CONTEST_TIME * ContestRunner.timeBonus());
-        ContestRunner.timeLeftPercentage(100);
 
+        // Set up for new contest
+        ContestRunner.running(false);
         ContestRunner.rank(rank);
         ContestRunner.type(type);
+        ContestBattle.danceMode(ContestHelper.isDanceHall(ContestRunner.rank()));
+        ContestRunner.timeLeft(GameConstants.CONTEST_TIME * ContestHelper.contestRankTimer(ContestRunner.rank()));
+        ContestRunner.timeLeftPercentage(100);
+        ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()]); // todo: increase number when pokeblocks are in
 
-        ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * ContestRunner.rank() * ContestRunner.rank());
-        ContestRunner.audienceAppeal(0);
+        // Ready up the rhythm gimmicks
+        ContestBattle.selectedEnemy(0);
+        ContestBattle.counter = 0;
+        ContestBattle.beat(0);
+        ContestBattle.crotchetValue(ContestRunner.type());
+        ContestBattleSpectacular.activeSpectacularType(ContestRunner.type());
 
-        ContestRunner.crowdHype.removeAll();
-        ContestRunner.jamTime(0);
+        // Give fresh reward log
+        ContestBattle.tokenReward(0);
+        ContestBattle.itemRewardLog().forEach(i => i.amount(0));
+        ContestBattle.berryRewardLog().forEach(b => b.amount(0));
 
-        ContestRunner.encoreStatus(false);
-        ContestRunner.encoreRounds(0);
-        ContestRunner.finaleStatus(false);
-
-        ContestRunner.itemRewards.removeAll();
-        ContestRunner.berryRewards.removeAll();
-
-        ContestRunner.trainers(Rand.shuffleArray(ContestOpponents[ContestRunner.rank()]));
-        ContestBattle.trainerStreak(0);
-        ContestBattle.generateTrainers();
+        // Begin contest
+        ContestBattle.generateNewEnemy();
         App.game.gameState = GameConstants.GameState.contest;
-        ContestRunner.useClickPokeblocks();
         ContestRunner.running(true);
+    }
+
+    public static endContest() {
+        ContestRunner.running(false);
+
+        ContestRunner.updateScore();
+
+        // Reset score
+        ContestScore.totalScore(0);
+        ContestScore.activeChain(1);
+
+        // Reset stuff that would interfere with manually test-starting the contest
+        ContestBattle.prepareNextTrainerBatch(false);
+        ContestBattle.frenzyMode(false);
+        ContestRunner.audienceAppeal(0);
+        ContestRunner.crowdHype(0);
+        ContestRunner.jamTime(0);
+        ContestRunner.frenzyTime(0);
+        ContestRunner.encoreRound(0);
+        
+        // Empty arrays
+        ContestBattle.trainers.removeAll();
+        ContestBattle.pokemons.removeAll();
+        ContestBattle.trainersPartyIndex.removeAll();
+        ContestBattle.moveArray.removeAll();
+        ContestBattle.finishingPose.removeAll();
+    }
+
+    public static resetContest() {
+        ContestRunner.endContest();
+        ContestRunner.startContest(ContestRunner.rank(), ContestRunner.type());
     }
 
     public static tick() {
         if (!ContestRunner.running()) {
             return;
         }
-        // activate encore if doing well enough
-        if (ContestRunner.timeLeft() >= 3 * GameConstants.SECOND && ContestRunner.isRallied() && ContestRunner.encoreStatus() != true && ContestRunner.finaleStatus() != true) {
-            if (ContestRunner.encoreRounds() < ContestRunner.rank() || ContestRank.Spectacular <= ContestRunner.rank()) {
-                Notifier.notify({
-                    title: 'Pokémon Contest',
-                    message: 'The crowd is cheering! Bonus round incoming!',
-                    type: NotificationConstants.NotificationOption.success,
-                    // TODO: setting: contest notifications
-                });
-                ContestRunner.encoreStatus(true);
-            } else {
-                Notifier.notify({
-                    title: 'Pokémon Contest',
-                    message: 'What a grand finale! Auto-restart incoming!',
-                    type: NotificationConstants.NotificationOption.success,
-                    // TODO: setting: contest notifications
-                });
-                ContestRunner.finaleStatus(true);
-            }
-        }
+        // Assess completion
         if (ContestRunner.timeLeft() < 0) {
             ContestRunner.isRallied() ? ContestRunner.contestWon() : ContestRunner.contestLost();
         }
-        ContestRunner.timeLeft(ContestRunner.timeLeft() - GameConstants.CONTEST_TICK);
-        ContestRunner.timeLeftPercentage(Math.floor(ContestRunner.timeLeft() / (GameConstants.CONTEST_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
-
-        ContestRunner.jamTime(Math.max(ContestRunner.jamTime() - GameConstants.CONTEST_TICK, 0));
-
-        const currentFluteBonus = FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute);
-        if (currentFluteBonus != ContestRunner.timeBonus()) {
-            if (currentFluteBonus > ContestRunner.timeBonus()) {
-                if (ContestRunner.timeBonus() === 1) {
-                    ContestRunner.timeBonus(currentFluteBonus);
-                    ContestRunner.timeLeft(ContestRunner.timeLeft() * ContestRunner.timeBonus());
-                } else {
-                    ContestRunner.timeLeft(ContestRunner.timeLeft() / ContestRunner.timeBonus());
-                    ContestRunner.timeBonus(currentFluteBonus);
-                    ContestRunner.timeLeft(ContestRunner.timeLeft() * ContestRunner.timeBonus());
-                }
-            } else {
-                ContestRunner.timeLeft(ContestRunner.timeLeft() / ContestRunner.timeBonus());
-                ContestRunner.timeBonus(currentFluteBonus);
-            }
+        // Transition from Frenzy
+        if (ContestBattle.frenzyMode() && ContestRunner.frenzyTime() <= 0) {
+            ContestBattle.frenzyMode(false);
+            ContestRunner.crowdHype(0);
+            ContestBattle.prepareNextTrainerBatch(true);
         }
+
+        // Timers
+            // Regular timer, only count down if no frenzy
+        ContestRunner.timeLeft(ContestRunner.timeLeft() - (!ContestBattle.frenzyMode() ? GameConstants.CONTEST_TICK : 0));
+            // Percentage for html
+        ContestRunner.timeLeftPercentage(Math.floor(!ContestBattle.frenzyMode() ?
+            ContestRunner.timeLeft() / (GameConstants.CONTEST_TIME * ContestHelper.contestRankTimer(ContestRunner.rank())) * 100 :
+            ContestRunner.frenzyTime() / GameConstants.CONTEST_TIME * 100
+        ));
+            // Always reduce gimmick timers
+        ContestRunner.jamTime(Math.max(ContestRunner.jamTime() - GameConstants.CONTEST_TICK, 0));
+        ContestRunner.frenzyTime(Math.max(ContestRunner.frenzyTime() - GameConstants.CONTEST_TICK, 0));
     }
 
+    // Completion
     public static isRallied(): boolean {
         return ContestRunner.audienceAppeal() >= ContestRunner.maxAudienceAppeal();
     }
 
     /**
      * Gain audience points
-     * @param rally
+     * @param rally - by how much to increase the audience bar
      */
     public static rally(rally: number): void {
-        ContestRunner.audienceAppeal(Math.min(ContestRunner.audienceAppeal() + rally, ContestRunner.maxAudienceAppeal()));
+        ContestRunner.audienceAppeal(Math.min(ContestRunner.audienceAppeal() + Math.round(rally), ContestRunner.maxAudienceAppeal()));
     }
 
     public static getTrainerList() {
-        return ContestRunner.trainers().filter(trainer => {
+        return ContestTrainerList.ContestOpponents[ContestRunner.rank()].concat(ContestTrainerList.SpecialEventContestOpponents).filter(trainer => {
             return (trainer.options?.requirement) ? trainer.options.requirement.isCompleted() : true;
         });
     }
 
     public static contestTokenReward() {
-        const trainerBonus = ContestBattle.trainerStreak();
-        const rankBonus = ContestRunner.rank();
-        return Math.floor(5 + Math.max(1, trainerBonus * rankBonus));
+        let multiplier = 100;
+        multiplier += ContestBattle.contestClearedMultiplier();
+        multiplier /= 100;
+        return Math.floor(ContestRunner.rank() + ContestRunner.rank() * Math.round(ContestScore.totalScore() * multiplier / 100));
+    }
+
+    public static updateScore() {
+        if (ContestRunner.rank() != ContestRank.Practice) {
+            App.game.statistics.contestHighestScore[ContestRunner.rank()][ContestRunner.type()](Math.max(App.game.statistics.contestHighestScore[ContestRunner.rank()][ContestRunner.type()](), ContestScore.totalScore()));
+        } else {
+            App.game.statistics.contestHighestScore[ContestRunner.rank()][ContestRunner.type()](ContestScore.totalScore());
+        }
     }
 
     public static contestLost() {
         if (ContestRunner.running()) {
-            ContestRunner.running(false);
-            if (ContestRunner.encoreRounds() != 0) {
-                // Award some tokens
-                App.game.wallet.gainContestTokens(Math.floor(ContestRunner.contestTokenReward() / 3));
-                Notifier.notify({
-                    title: 'Pokémon Contest',
-                    message: `Good job! You got a bonus of <img src="./assets/images/currency/contestToken.svg" height="16px"/> ${Math.floor(ContestRunner.contestTokenReward() / 3)} Contest Tokens!`,
-                    type: NotificationConstants.NotificationOption.success,
-                    // TODO: setting: contest notifications
-                });
-            } else {
-                Notifier.notify({
-                    title: 'Pokémon Contest',
-                    message: 'You did not have enough appeal to win the crowd over.',
-                    type: NotificationConstants.NotificationOption.danger,
-                });
-            }
-            // always end the contest if lost
-            ContestBattle.endContest();
+            Notifier.notify({
+                title: 'Pokémon Contest',
+                message: 'You did not accrue enough appeal to win the crowd over.',
+                type: NotificationConstants.NotificationOption.danger,
+                // TODO: setting to turn off contest notifications
+            });
+            ContestRunner.endContest();
         }
     }
 
     public static contestWon() {
         if (ContestRunner.running()) {
-            // Award tokens after each round
-            App.game.wallet.gainContestTokens(ContestRunner.contestTokenReward());
-            Notifier.notify({
-                title: 'Pokémon Contest',
-                message: `${ContestHelper.encoreWord[Math.min(ContestRunner.encoreRounds(), ContestRunner.rank())]} You won <img src="./assets/images/currency/contestToken.svg" height="16px"/> ${ContestRunner.contestTokenReward()} Contest Tokens!`,
-                type: NotificationConstants.NotificationOption.success,
-                // TODO: setting: contest notifications
-            });
-
-            // give rewards to player at end of round
-            if (ContestRunner.berryRewards().length) {
-                ContestRunner.berryRewards().forEach(br => {
-                    App.game.farming.gainBerry(br.berry, br.amount, false);
-                    Notifier.notify({
-                        title: 'Pokémon Contest',
-                        message: `${br.amount} ${BerryType[br.berry]} Berry rewarded.`,
-                        type: NotificationConstants.NotificationOption.success,
-                    });
+            if (ContestRunner.rank() > ContestRank.Practice) {
+                // Award tokens after each round
+                ContestBattle.addContestTokenReward(ContestRunner.contestTokenReward());
+                Notifier.notify({
+                    title: 'Pokémon Contest',
+                    message: `Congratulations! You won <img src="./assets/images/currency/contestToken.svg" height="16px"/> ${ContestRunner.contestTokenReward()} Contest Tokens!`,
+                    type: NotificationConstants.NotificationOption.success,
+                    // TODO: setting to turn off contest notifications
                 });
-                ContestRunner.berryRewards.removeAll();
+
+                // First time completion - end here and don't proceed to encore bonus rounds
+                if (App.game.statistics.contestHighestRound[this.rank()][this.type()]() == 0) {
+                    $('#contestWonModal').modal('show');
+                    ContestRunner.endContest();
+                    GameHelper.incrementObservable(App.game.statistics.contestHighestRound[ContestRunner.rank()][ContestRunner.type()]);
+                    return;
+                }
+
+                // Update statistics
+                App.game.statistics.contestHighestRound[ContestRunner.rank()][ContestRunner.type()](Math.max(App.game.statistics.contestHighestRound[ContestRunner.rank()][ContestRunner.type()](), ContestRunner.encoreRound() + 1));
+                ContestRunner.updateScore();
             }
 
-            if (ContestRunner.itemRewards().length) {
-                ContestRunner.itemRewards().forEach(ir => {
-                    player.gainItem(ir.item, ir.amount);
-                    Notifier.notify({
-                        title: 'Pokémon Contest',
-                        message: `${ir.amount} ${ItemList[ir.item].displayName} rewarded.`,
-                        type: NotificationConstants.NotificationOption.success,
-                    });
-                });
-                ContestRunner.itemRewards.removeAll();
-            }
-
-            if (App.game.statistics.contestRoundsWon[this.rank()][this.type()]() == 0) {
-                $('#contestWonModal').modal('show');
-            }
-
-            GameHelper.incrementObservable(App.game.statistics.contestRoundsWon[ContestRunner.rank()][ContestRunner.type()]);
-            App.game.statistics.contestRoundHighest[ContestRunner.rank()][ContestRunner.type()](Math.max(App.game.statistics.contestRoundHighest[ContestRunner.rank()][ContestRunner.type()](), ContestRunner.encoreRounds() + 1));
-
-            if (ContestRunner.encoreStatus()) {
-                // increase encore round
-                ContestRunner.encoreRounds(ContestRunner.encoreRounds() + 1);
-                // reset audience, time, and encore status
-                ContestRunner.audienceAppeal(0);
-                ContestRunner.timeLeft(GameConstants.CONTEST_TIME * ContestRunner.timeBonus());
-                ContestRunner.encoreStatus(false);
-                // increase audience bar (needs updated encore round from above)
-                ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * ContestRunner.rank() * ContestRunner.rank() * (ContestRunner.encoreRounds() + 1));
-            } else if (ContestRunner.finaleStatus()) {
-                // if max encore rounds, auto restart contest
-                ContestRunner.startContest(ContestRunner.rank(), ContestRunner.type());
-            } else {
-                // if neither, end the contest
-                ContestRunner.running(false);
-                ContestBattle.endContest();
-            }
-
-            // TODO: reward ribbons to party pokemon based on rank, type, and how high their appeal is
+            // Reset time and appeal
+            ContestRunner.audienceAppeal(0);
+            ContestRunner.timeLeft(GameConstants.CONTEST_TIME * ContestHelper.contestRankTimer(ContestRunner.rank()));
+            // Increase encore round
+            ContestRunner.encoreRound(ContestRunner.encoreRound() + 1);
+            ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * ContestRunner.encoreRound());
         }
-    }
-
-    public static useClickPokeblocks() {
-        ContestRunner.clickPokeblocks(Math.min(ContestRunner.clickPokeblocks(), player.itemList.PokeBlock_Gold()));
-        ContestRunner.clickPokeblocks() > 0 ? GameHelper.incrementObservable(player.itemList.PokeBlock_Gold, -ContestRunner.clickPokeblocks()) : '';
     }
 
     // Computables
@@ -256,18 +209,11 @@ class ContestRunner {
     })
 
     public static audienceStatus: KnockoutComputed<string> = ko.pureComputed(() => {
-        if (ContestRunner.jamTime() > 1) {
-            return `<i>Jammed! (${Math.ceil(ContestRunner.jamTime() / 1000)}s)</i>`;
-        }
-        if (!ContestRunner.encoreStatus() && !ContestRunner.finaleStatus()) {
-            return `${`${ContestRunner.audienceAppeal().toLocaleString('en-US')} / ${ContestRunner.maxAudienceAppeal().toLocaleString('en-US')}`}`;
-        } else {
-            return ContestRunner.encoreStatus() ? '<i>Encore!</i>' : '<i>Grand Finale!</i>';
-        }
+        return `${`${ContestRunner.audienceAppeal().toLocaleString('en-US')} / ${ContestRunner.maxAudienceAppeal().toLocaleString('en-US')}`}`;
     })
 
     public static timeLeftSeconds = ko.pureComputed(() => {
-        return (Math.ceil(ContestRunner.timeLeft() / 100) / 10).toFixed(1);
+        return (Math.ceil((!ContestBattle.frenzyMode() ? ContestRunner.timeLeft() : ContestRunner.frenzyTime()) / 100) / 10).toFixed(1);
     })
 }
 
