@@ -2,11 +2,20 @@
 /// <reference path="../contest/ContestPokemon.ts"/>
 /// <reference path="../../declarations/enums/ContestRank.d.ts"/>
 /// <reference path="../../declarations/enums/BerryType.d.ts"/>
+/// <reference path="../../declarations/requirements/QuestLineCompletedRequirement.d.ts"/>
+/// <reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
+/// <reference path="../../declarations/requirements/StarterRequirement.d.ts"/>
+/// <reference path="../../declarations/requirements/SpecialEventRequirement.d.ts"/>
+/// <reference path="../../declarations/requirements/BerryUnlockedRequirement.d.ts"/>
+/// <reference path="../../declarations/requirements/WeatherRequirement.d.ts"/>
+/// <reference path="../../declarations/requirements/ClearGymRequirement.d.ts"/>
+/// <reference path="../../declarations/requirements/InRegionRequirement.d.ts"/>
+/// <reference path="../../declarations/requirements/CustomRequirement.d.ts"/>
 
 interface ContestTrainerOptions {
     requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
-    berryReward?: {berry: BerryType, amount: number, requirement?: MultiRequirement | OneFromManyRequirement | Requirement}[],
-    itemReward?: {item: ItemNameType, amount: number, requirement?: MultiRequirement | OneFromManyRequirement | Requirement}[],
+    rankedBerryReward?: {rank: ContestRank, amount: number},
+    itemReward?: contestItemReward[],
 }
 
 class ContestTrainer extends Trainer {
@@ -15,546 +24,729 @@ class ContestTrainer extends Trainer {
         trainerClass: string,
         team: ContestPokemon[],
         subTrainerClass?: string,
-        public options?: ContestTrainerOptions) {
+        public options?: ContestTrainerOptions,
+    ) {
         super(trainerClass, team, name, subTrainerClass);
     }
-
 }
 
-const ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
-    [ContestRank.Practice]: [
-        new ContestTrainer('Gage', 'Ace Trainer', [new ContestPokemon('Pikachu', 'Chuchu', 10, 1, undefined, undefined, GameConstants.BattlePokemonGender.Male)], '(male)'),
-        new ContestTrainer('Raven', 'Aroma Lady', [new ContestPokemon('Hoothoot', 'Tootie', 10, 1)]),
-        new ContestTrainer('Marquis', 'School Kid', [new ContestPokemon('Geodude', 'Iggy', 10, 1)], '(male)'),
-        new ContestTrainer('Jocelyn', 'Madame', [new ContestPokemon('Machop', 'Punchy', 20, 1)]),
-        new ContestTrainer('Carson', 'Psychic', [new ContestPokemon('Psyduck', 'Quackers', 10, 1)], '(male)'),
-        new ContestTrainer('Jade', 'Beauty', [new ContestPokemon('Cherubi', 'Juicy', 10, 1)]),
-        new ContestTrainer('Zane', 'Pokémon Breeder', [new ContestPokemon('Barboach', 'Stubby', 20, 1)], '(male)'),
-        new ContestTrainer('Kiara', 'Lass', [new ContestPokemon('Mime Jr.', 'Kiddo', 20, 1)]),
-        new ContestTrainer('Allan', 'Camper', [new ContestPokemon('Bidoof', 'Smiley', 10, 1, undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
-        new ContestTrainer('Evelyn', 'Lass', [new ContestPokemon('Glameow', 'Fluffy', 10, 1)]),
-        new ContestTrainer('Celeste', 'Ace Trainer', [new ContestPokemon('Starly', 'Chirpy', 10, 1, undefined, undefined, GameConstants.BattlePokemonGender.Female)], '(female)'),
-        new ContestTrainer('Jakob', 'Rancher', [new ContestPokemon('Shellos (West)', 'Zoomer', 10, 1)]),
-    ],
-    [ContestRank.Normal]: [
-        new ContestTrainer('Agatha', 'Aroma Lady', [new ContestPokemon('Bulbasaur', 'Bulby', 80, 10)]),
-        new ContestTrainer('Alec', 'Camper', [new ContestPokemon('Slakoth', 'Slokth', 130, 10)]),
-        new ContestTrainer('Beau', 'Hex Maniac', [new ContestPokemon('Butterfree', 'Futterbe', 80, 10, undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
-        new ContestTrainer('Caitlin', 'Tuber', [new ContestPokemon('Poliwag', 'Wagil', 100, 10)], '(female)'),
-        new ContestTrainer('Cale', 'Ruin Maniac', [new ContestPokemon('Diglett', 'Digle', 100, 10)]),
-        new ContestTrainer('Chance', 'Rich Boy', [
-            new ContestPokemon('Electrike', 'Rikelec', 100, 10, undefined, new GymBadgeRequirement(BadgeEnums.Dynamo, GameConstants.AchievementOption.less)),
-            new ContestPokemon('Manectric', 'Rikelec', 100, 10, undefined, new GymBadgeRequirement(BadgeEnums.Dynamo)),
-        ]),
-        new ContestTrainer('Colby', 'Ninja Boy', [new ContestPokemon('Totodile', 'Totdil', 120, 10)]),
-        new ContestTrainer('Edith', 'Parasol Lady', [
-            new ContestPokemon('Zigzagoon', 'Zigoon', 40, 10),
-            new ContestPokemon('Illumise', 'Musille', 40, 10),
-        ]),
-        new ContestTrainer('Evan', 'Bug Catcher', [new ContestPokemon('Dustox', 'Duster', 50, 10, undefined, undefined, GameConstants.BattlePokemonGender.Male)], 'gen4'),
-        new ContestTrainer('Grant', 'Youngster', [new ContestPokemon('Shroomish', 'Smish', 30, 10)]),
-        new ContestTrainer('Jimmy', 'Preschooler', [new ContestPokemon('Poochyena', 'Poochy', 60, 10)], '(male)'),
-        new ContestTrainer('Kay', 'Cooltrainer', [new ContestPokemon('Pidgeotto', 'Pideot', 80, 10)], '(female)'),
-        new ContestTrainer('Kelsey', 'Picnicker', [new ContestPokemon('Seedot', 'Dots', 80, 10)]),
-        new ContestTrainer('Kylie', 'Beauty', [new ContestPokemon('Ledyba', 'Baledy', 100, 10, undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
-        new ContestTrainer('Liam', 'Bird Keeper', [new ContestPokemon('Delibird', 'Birdly', 140, 10)], 'gen3'),
-        new ContestTrainer('Madison', 'Pokéfan', [new ContestPokemon('Taillow', 'Tatay', 40, 10)], 'gen4 (female)'),
-        new ContestTrainer('Mariah', 'School Kid', [new ContestPokemon('Aron', 'Ronar', 110, 10)], '(female)'),
-        new ContestTrainer('Melanie', 'Twin', [new ContestPokemon('Gulpin', 'Gulin', 40, 10, undefined, undefined, GameConstants.BattlePokemonGender.Male)], 'left frlg'),
-        new ContestTrainer('Milo', 'PokéManiac', [new ContestPokemon('Larvitar', 'Tarvitar', 50, 10)]),
-        new ContestTrainer('Morris', 'School Kid', [new ContestPokemon('Makuhita', 'Mahita', 100, 10)], '(male)'),
-        new ContestTrainer('Paige', 'Young Couple', [
-            new ContestPokemon('Wingull', 'Gulwee', 60, 10),
-            new ContestPokemon('Spheal', 'Sleal', 60, 10),
-        ], '(female)'),
-        new ContestTrainer('Raymond', 'Black Belt', [new ContestPokemon('Nincada', 'Ninda', 60, 10)]),
-        new ContestTrainer('Russell', 'Cooltrainer', [
-            new ContestPokemon('Zubat', 'Zutzu', 70, 10, undefined, undefined, GameConstants.BattlePokemonGender.Male),
-            new ContestPokemon('Crobat', 'Batro', 70, 10),
-        ], '(male)'),
-        new ContestTrainer('Sydney', 'Lass', [new ContestPokemon('Whismur', 'Whiris', 80, 10)]),
-        new ContestTrainer('Red', 'Juggler', [new ContestPokemon('Red Spearow', 'Sparrow', 100, 10)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}),
-        new ContestTrainer('Dice', 'Painter', [new ContestPokemon('Bulbasaur (Rose)', 'Nice', 100, 10)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}),
-        new ContestTrainer('Ultima', 'Ruin Maniac', [new ContestPokemon('Pikachu', 'Pikablu', 100000000, 10)], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}),
-    ],
-    [ContestRank.Super]: [
-        new ContestTrainer('Aliyah', 'Nurse', [new ContestPokemon('Blissey', 'Bliss', 80, 20)]),
-        new ContestTrainer('Ariana', 'Reporter', [new ContestPokemon('Kecleon', 'Kecon', 80, 20)]),
-        new ContestTrainer('Ashton', 'Cooltrainer', [new ContestPokemon('Goldeen', 'Golden', 80, 20, undefined, undefined, GameConstants.BattlePokemonGender.Male)], '(male)'),
-        new ContestTrainer('Audrey', 'Lass', [new ContestPokemon('Swablu', 'Swaby', 40, 20)]),
-        new ContestTrainer('Avery', 'School Kid', [
-            new ContestPokemon('Linoone', 'Noone', 50, 20),
-            new ContestPokemon('Spoink', 'Poinker', 50, 20),
-        ], '(male)'),
-        new ContestTrainer('Bobby', 'Triathlete', [
-            new ContestPokemon('Doduo', 'Duodo', 110, 20, undefined, new GymBadgeRequirement(BadgeEnums.Balance, GameConstants.AchievementOption.less), GameConstants.BattlePokemonGender.Female),
-            new ContestPokemon('Dodrio', 'Duodo', 110, 20, undefined, new GymBadgeRequirement(BadgeEnums.Balance), GameConstants.BattlePokemonGender.Female),
-        ], 'gen3 (maleswimming)'),
-        new ContestTrainer('Cassidy', 'Pokéfan', [
-            new ContestPokemon('Sandshrew', 'Shrand', 110, 20, undefined, new GymBadgeRequirement(BadgeEnums.Balance, GameConstants.AchievementOption.less)),
-            new ContestPokemon('Sandslash', 'Shrand', 110, 20, undefined, new GymBadgeRequirement(BadgeEnums.Balance)),
-        ], 'gen4 (female)'),
-        new ContestTrainer('Claire', 'Picnicker', [new ContestPokemon('Trapinch', 'Pinchin', 40, 20)]),
-        new ContestTrainer('Devin', 'Gentleman', [new ContestPokemon('Snubbull', 'Snubbins', 20, 20)]),
-        new ContestTrainer('Diego', 'Veteran', [new ContestPokemon('Hitmonchan', 'Hitemon', 60, 20)], '(male)'),
-        new ContestTrainer('Jada', 'Lady', [new ContestPokemon('Seel', 'Seeley', 40, 20)]),
-        new ContestTrainer('Karina', 'Pokemon Ranger', [new ContestPokemon('Roselia', 'Relia', 30, 20, undefined, undefined, GameConstants.BattlePokemonGender.Male)], '(female)'),
-        new ContestTrainer('Katrina', 'Parasol Lady', [new ContestPokemon('Lotad', 'Tado', 40, 20)]),
-        new ContestTrainer('Luke', 'Collector', [new ContestPokemon('Slowbro', 'Browlo', 30, 20)]),
-        new ContestTrainer('Miles', 'Pokémon Ranger', [new ContestPokemon('Spinda', 'Spinin', 20, 20)], '(male)'),
-        new ContestTrainer('Morgan', 'Black Belt', [new ContestPokemon('Baltoy', 'Toybal', 60, 20)]),
-        new ContestTrainer('Natalia', 'Pokéfan', [new ContestPokemon('Elekid', 'Kidlek', 40, 20)], '(female)'),
-        new ContestTrainer('Raul', 'Bird Keeper', [new ContestPokemon('Farfetch\'d', 'Fetchin', 20, 20)]),
-        new ContestTrainer('Sandra', 'Twin', [new ContestPokemon('Barboach', 'Boboach', 60, 20)], 'right frlg'),
-        new ContestTrainer('Summer', 'Office Worker', [
-            new ContestPokemon('Medicham', 'Chamcham', 50, 20, undefined, undefined, GameConstants.BattlePokemonGender.Female),
-            new ContestPokemon('Numel', 'Lenum', 50, 20, undefined, undefined, GameConstants.BattlePokemonGender.Female),
-        ], '(female)'),
-        new ContestTrainer('Tylor', 'Hex Maniac', [new ContestPokemon('Misdreavus', 'Dreavis', 30, 20)]),
-        new ContestTrainer('Willie', 'Ninja Boy', [new ContestPokemon('Cacnea', 'Nacac', 50, 20)]),
-        new ContestTrainer('Zeek', 'Psychic', [new ContestPokemon('Drowzee', 'Drowzin', 110, 20)], '(male)'),
-        new ContestTrainer('Red', 'Juggler', [new ContestPokemon('Red Spearow', 'Sparrow', 100, 20)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}),
-        new ContestTrainer('Dice', 'Painter', [new ContestPokemon('Bulbasaur (Rose)', 'Nice', 100, 20)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}),
-        new ContestTrainer('Ultima', 'Ruin Maniac', [new ContestPokemon('Pikachu', 'Pikablu', 100000000, 20)], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}),
-    ],
-    [ContestRank.Hyper]: [
-        new ContestTrainer('Alisha', 'Young Couple', [new ContestPokemon('Beautifly', 'Tifly', 60, 30, undefined, undefined, GameConstants.BattlePokemonGender.Female)], '(female)'),
-        new ContestTrainer('Bryce', 'Bug Catcher', [new ContestPokemon('Pineco', 'Pinoc', 80, 30)]),
-        new ContestTrainer('Claudia', 'Picnicker', [
-            new ContestPokemon('Nuzleaf', 'Nuzle', 60, 30, undefined, undefined, GameConstants.BattlePokemonGender.Male),
-            new ContestPokemon('Shiftry', 'Shifty', 60, 30, undefined, undefined, GameConstants.BattlePokemonGender.Male),
-        ]),
-        new ContestTrainer('Coltin', 'Pokémon Breeder', [new ContestPokemon('Cubone', 'Cubin', 50, 30)], '(male)'),
-        new ContestTrainer('Corbin', 'Collector', [
-            new ContestPokemon('Pelipper', 'Pelipe', 80, 30),
-            new ContestPokemon('Absol', 'Abso', 80, 30),
-        ], 'gen3'),
-        new ContestTrainer('Darryl', 'Cooltrainer', [new ContestPokemon('Seviper', 'Vipes', 60, 30)], '(male)'),
-        new ContestTrainer('Devon', 'Pokéfan', [new ContestPokemon('Miltank', 'Milkan', 90, 30)], '(male)'),
-        new ContestTrainer('Elias', 'Ninja Boy', [new ContestPokemon('Ninjask', 'Ninas', 100, 30)]),
-        new ContestTrainer('Ellie', 'Veteran', [new ContestPokemon('Hitmonlee', 'Hitmon', 70, 30)], '(female)'),
-        new ContestTrainer('Emilio', 'School Kid', [
-            new ContestPokemon('Machop', 'Chopam', 20, 30),
-            new ContestPokemon('Machoke', 'Chokem', 50, 30),
-        ], '(male)'),
-        new ContestTrainer('Felicia', 'Lass', [
-            new ContestPokemon('Castform', 'Caster', 130, 30, undefined, new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Sandstorm, WeatherType.Windy])),
-            new ContestPokemon('Castform (Sunny)', 'Caster', 130, 30, undefined, new WeatherRequirement([WeatherType.Harsh_Sunlight])),
-            new ContestPokemon('Castform (Rainy)', 'Caster', 130, 30, undefined, new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])),
-            new ContestPokemon('Castform (Snowy)', 'Caster', 130, 30, undefined, new WeatherRequirement([WeatherType.Hail, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Fog])),
-        ]),
-        new ContestTrainer('Francis', 'Black Belt', [new ContestPokemon('Mightyena', 'Yena', 60, 30)]),
-        new ContestTrainer('Gracie', 'Pokemon Ranger', [new ContestPokemon('Exeggutor', 'Eggsor', 70, 30)], '(female)'),
-        new ContestTrainer('Jade', 'Pokéfan', [new ContestPokemon('Swellow', 'Welow', 60, 30)], '(female)'),
-        new ContestTrainer('Jamie', 'Cooltrainer', [new ContestPokemon('Dunsparce', 'Diltot', 70, 30)], '(female)'),
-        new ContestTrainer('Jorge', 'Gentleman', [new ContestPokemon('Houndoom', 'Doomond', 90, 30, undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
-        new ContestTrainer('Karla', 'Tuber', [new ContestPokemon('Lombre', 'Lombe', 90, 30)], '(female)'),
-        new ContestTrainer('Kiara', 'School Kid', [new ContestPokemon('Kangaskhan', 'Khankan', 100, 30)], '(female)'),
-        new ContestTrainer('Lacey', 'Psychic', [new ContestPokemon('Lunatone', 'Lunone', 40, 30)], '(female)'),
-        new ContestTrainer('Marcus', 'Sailor', [new ContestPokemon('Squirtle', 'Surtle', 60, 30)]),
-        new ContestTrainer('Noel', 'Youngster', [new ContestPokemon('Magikarp', 'Karpag', 120, 30, undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
-        new ContestTrainer('Ronnie', 'Hiker', [new ContestPokemon('Lairon', 'Lairn', 70, 30)]),
-        new ContestTrainer('Saul', 'Camper', [new ContestPokemon('Seaking', 'Kingsea', 100, 30, undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
-        new ContestTrainer('Selena', 'Madame', [new ContestPokemon('Wailmer', 'Merail', 90, 30)]),
-        new ContestTrainer('Red', 'Juggler', [new ContestPokemon('Red Spearow', 'Sparrow', 120, 30)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}),
-        new ContestTrainer('Dice', 'Painter', [new ContestPokemon('Bulbasaur (Rose)', 'Nice', 120, 30)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}),
-        new ContestTrainer('Ultima', 'Ruin Maniac', [new ContestPokemon('Pikachu', 'Pikablu', 100000000, 30)], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}),
-    ],
-    [ContestRank.Master]: [
-        new ContestTrainer('Aubrey', 'Young Couple', [
-            new ContestPokemon('Vileplume', 'Plumile', 80, 40, undefined, undefined, GameConstants.BattlePokemonGender.Male),
-            new ContestPokemon('Bellossom', 'Blossom', 80, 40),
-        ], '(female)'),
-        new ContestTrainer('Camile', 'Hex Maniac', [new ContestPokemon('Gengar', 'Garen', 80, 40)]),
-        new ContestTrainer('Camille', 'Psychic', [
-            new ContestPokemon('Natu', 'Utan', 60, 40, undefined, new GymBadgeRequirement(BadgeEnums.Mind, GameConstants.AchievementOption.less)),
-            new ContestPokemon('Xatu', 'Utan', 60, 40, undefined, new GymBadgeRequirement(BadgeEnums.Mind), GameConstants.BattlePokemonGender.Female),
-        ], '(female)'),
-        new ContestTrainer('Clara', 'Pokémon Breeder', [new ContestPokemon('Togepi', 'Gepito', 40, 40)], '(female)'),
-        new ContestTrainer('Deon', 'School Kid', [new ContestPokemon('Sharpedo', 'Pedos', 30, 40)], '(male)'),
-        new ContestTrainer('Frankie', 'Youngster', [new ContestPokemon('Pichu', 'Chupy', 70, 40)]),
-        new ContestTrainer('Heath', 'Cooltrainer', [new ContestPokemon('Heracross', 'Heross', 70, 40, undefined, undefined, GameConstants.BattlePokemonGender.Male)], '(male)'),
-        new ContestTrainer('Helen', 'Battle Girl', [new ContestPokemon('Wobbuffet', 'Wobet', 140, 40, undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
-        new ContestTrainer('Jakob', 'Psychic', [new ContestPokemon('Espeon', 'Speon', 70, 40)], '(male)'),
-        new ContestTrainer('Janelle', 'Lady', [new ContestPokemon('Luvdisc', 'Luvis', 50, 40)]),
-        new ContestTrainer('Justina', 'Picnicker', [new ContestPokemon('Gyarados', 'Rados', 90, 40, undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
-        new ContestTrainer('Kailey', 'Twin', [new ContestPokemon('Meowth', 'Meowy', 70, 40)], 'left frlg'),
-        new ContestTrainer('Keaton', 'Preschooler', [new ContestPokemon('Slaking', 'Sling', 60, 40)], '(male)'),
-        new ContestTrainer('Lamar', 'Rich Boy', [new ContestPokemon('Kirlia', 'Lirki', 60, 40)]),
-        new ContestTrainer('Lane', 'Black Belt', [new ContestPokemon('Ursaring', 'Ursing', 80, 40, undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
-        new ContestTrainer('Martin', 'Scientist', [new ContestPokemon('Porygon', 'Gonpor', 100, 40)], '(male)'),
-        new ContestTrainer('Mayra', 'Pokéfan', [new ContestPokemon('Altaria', 'Taria', 50, 40)], 'gen4 (female)'),
-        new ContestTrainer('Nigel', 'Camper', [
-            new ContestPokemon('Sableye', 'Eyesab', 100, 40),
-            new ContestPokemon('Duskull', 'Kullusk', 100, 40),
-        ]),
-        new ContestTrainer('Perla', 'Beauty', [new ContestPokemon('Jynx', 'Nyx', 40, 40)]),
-        new ContestTrainer('Ralph', 'Old Man', [new ContestPokemon('Loudred', 'Louderd', 70, 40)]),
-        new ContestTrainer('Rosa', 'Idol', [
-            new ContestPokemon('Skitty', 'Sitty', 100, 40),
-            new ContestPokemon('Delcatty', 'Catted', 100, 40),
-        ]),
-        new ContestTrainer('Sasha', 'Twin', [new ContestPokemon('Electrode', 'Rodlect', 80, 40)], 'right frlg'),
-        new ContestTrainer('Sergio', 'Dragon Tamer', [new ContestPokemon('Dragonite', 'Drite', 60, 40)]),
-        new ContestTrainer('Trey', 'Sailor', [new ContestPokemon('Slowking', 'Slowgo', 60, 40)]),
-        new ContestTrainer('Red', 'Juggler', [new ContestPokemon('Red Spearow', 'Sparrow', 120, 40)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}),
-        new ContestTrainer('Dice', 'Painter', [new ContestPokemon('Bulbasaur (Rose)', 'Nice', 120, 40)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}),
-        new ContestTrainer('Ultima', 'Ruin Maniac', [new ContestPokemon('Pikachu', 'Pikablu', 100000000, 40)], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day')}),
-    ],
-    // Sinnoh Super Contests - try to include the default types when possible as to not confuse players
-    [ContestRank['Super Normal']]: [
-        new ContestTrainer('Luis', 'Camper', [new ContestPokemon('Pikachu', 'Sparky', 20, 50, [ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Male)]),
-        new ContestTrainer('Lacey', 'Lass', [new ContestPokemon('Barboach', 'Whiskers', 20, 50, [ContestType.Cute])]),
-        new ContestTrainer('Connor', 'Ninja Boy', [new ContestPokemon('Starly', 'Flappy', 10, 50, [ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Male)]),
-        new ContestTrainer('Dakota', 'School Kid', [new ContestPokemon('Bidoof', 'Dots', 20, 50, [ContestType.Cool], undefined, GameConstants.BattlePokemonGender.Female)], '(female)'),
-        new ContestTrainer('Gabriel', 'Artist', [new ContestPokemon('Glameow', 'Precious', 30, 50, [ContestType.Beautiful])]),
-        new ContestTrainer('Tiffany', 'Parasol Lady', [new ContestPokemon('Shinx', 'Flick', 20, 50, [ContestType.Cool], undefined, GameConstants.BattlePokemonGender.Male)]),
-        new ContestTrainer('Westley', 'School Kid', [new ContestPokemon('Psyduck', 'Dizzy', 20, 50, [ContestType.Beautiful])], '(male)'),
-        new ContestTrainer('Anna', 'Picnicker', [new ContestPokemon('Bonsly', 'Sprout', 10, 50, [ContestType.Tough])]),
-        new ContestTrainer('Corey', 'School Kid', [new ContestPokemon('Hoothoot', 'Hootie', 20, 50, [ContestType.Smart])], '(male)'),
-        new ContestTrainer('Sara', 'Beauty', [new ContestPokemon('Zubat', 'Batty', 10, 50, [ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Female)]),
-        new ContestTrainer('Ian', 'Fisherman', [new ContestPokemon('Shellos (West)', 'Wiggy', 20, 50, [ContestType.Smart])]),
-        new ContestTrainer('Heather', 'Lass', [new ContestPokemon('Cherubi', 'Pit', 20, 50, [ContestType.Beautiful])]),
-        new ContestTrainer('Marcus', 'Psychic', [new ContestPokemon('Mime Jr.', 'Merry', 20, 50, [ContestType.Smart])], '(male)'),
-        new ContestTrainer('Erin', 'Aroma Lady', [new ContestPokemon('Buizel', 'Weasy', 20, 50, [ContestType.Beautiful])]),
-        new ContestTrainer('Shane', 'Scientist', [new ContestPokemon('Bronzor', 'Wheelie', 10, 50, [ContestType.Tough])], '(male)'),
-        new ContestTrainer('Marissa', 'Battle Girl', [new ContestPokemon('Machop', 'Choppy', 40, 50, [ContestType.Cool])]),
-        new ContestTrainer('Victor', 'Hiker', [new ContestPokemon('Geodude', 'Rocky', 10, 50, [ContestType.Tough])]),
-        new ContestTrainer('Brooke', 'School Kid', [new ContestPokemon('Goldeen', 'Goldy', 40, 50, [ContestType.Cool], undefined, GameConstants.BattlePokemonGender.Female)], '(female)'),
-        new ContestTrainer('Tanner', 'Collector', [new ContestPokemon('Clefairy', 'Buffy', 10, 50, [ContestType.Smart])]),
-        new ContestTrainer('Renee', 'Lady', [new ContestPokemon('Pachirisu', 'Bucky', 10, 50, [ContestType.Tough], undefined, GameConstants.BattlePokemonGender.Female)]),
-    ],
-    [ContestRank['Super Great']]: [
-        new ContestTrainer('Isaac', 'Pokémon Breeder', [new ContestPokemon('Pikachu', 'Chewy', 30, 60, [ContestType.Cool, ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Male)], '(male)'),
-        new ContestTrainer('Alexus', 'Bird Keeper', [new ContestPokemon('Hoothoot', 'Hoots', 50, 60, [ContestType.Smart, ContestType.Tough])]),
-        new ContestTrainer('Jorge', 'Pokéfan', [new ContestPokemon('Geodude', 'Pebbles', 10, 60, [ContestType.Cool, ContestType.Tough])], '(male)'),
-        new ContestTrainer('Cora', 'Cowgirl', [new ContestPokemon('Ponyta', 'Blaze', 40, 60, [ContestType.Cute])]),
-        new ContestTrainer('Chase', 'Psychic', [new ContestPokemon('Meditite', 'Ohm', 50, 60, [ContestType.Cool, ContestType.Smart], undefined, GameConstants.BattlePokemonGender.Male)], '(male)'),
-        new ContestTrainer('Katie', 'Lass', [new ContestPokemon('Psyduck', 'Slappy', 30, 60, [ContestType.Cool, ContestType.Beautiful])]),
-        new ContestTrainer('Dominic', 'Fisherman', [new ContestPokemon('Barboach', 'Beardy', 60, 60, [ContestType.Beautiful, ContestType.Cute])]),
-        new ContestTrainer('Sierra', 'Parasol Lady', [new ContestPokemon('Bidoof', 'Gnawby', 30, 60, [ContestType.Cool, ContestType.Tough], undefined, GameConstants.BattlePokemonGender.Male)]),
-        new ContestTrainer('Keith', 'Guitarist', [new ContestPokemon('Pachirisu', 'Stripe', 20, 60, [ContestType.Cute, ContestType.Tough], undefined, GameConstants.BattlePokemonGender.Female)]),
-        new ContestTrainer('Julia', 'Cowgirl', [new ContestPokemon('Shellos (West)', 'Sluggo', 30, 60, [ContestType.Cute, ContestType.Smart])]),
-        new ContestTrainer('Brendan', 'Sailor', [new ContestPokemon('Goldeen', 'Auric', 30, 60, [ContestType.Cool, ContestType.Beautiful], undefined, GameConstants.BattlePokemonGender.Male)]),
-        new ContestTrainer('Amy', 'Aroma Lady', [new ContestPokemon('Stunky', 'Stinky', 30, 60, [ContestType.Cool])]),
-        new ContestTrainer('Chad', 'Ruin Maniac', [new ContestPokemon('Bronzor', 'Saucy', 10, 60, [ContestType.Smart, ContestType.Tough])]),
-        new ContestTrainer('Caitlin', 'Picnicker', [new ContestPokemon('Mime Jr.', 'Mimi', 70, 60, [ContestType.Beautiful, ContestType.Smart])]),
-        new ContestTrainer('Martin', 'Camper', [new ContestPokemon('Cherubi', 'Cheri', 20, 60, [ContestType.Beautiful, ContestType.Tough])]),
-        new ContestTrainer('Kathryn', 'Battle Girl', [new ContestPokemon('Onix', 'Flex', 40, 60, [ContestType.Tough])]),
-        new ContestTrainer('Randal', 'Ninja Boy', [new ContestPokemon('Misdreavus', 'Missy', 60, 60, [ContestType.Smart])]),
-        new ContestTrainer('Sidney', 'Bird Keeper', [new ContestPokemon('Starly', 'Happy', 50, 60, [ContestType.Cute, ContestType.Smart], undefined, GameConstants.BattlePokemonGender.Female)]),
-        new ContestTrainer('Xavier', 'Artist', [new ContestPokemon('Chingling', 'Chimer', 50, 60, [ContestType.Beautiful])]),
-        new ContestTrainer('Monica', 'Lady', [new ContestPokemon('Glameow', 'Glimmer', 60, 60, [ContestType.Beautiful, ContestType.Cute])]),
-    ],
-    [ContestRank['Super Ultra']]: [
-        new ContestTrainer('Frank', 'Ace Trainer', [new ContestPokemon('Pikachu', 'Piki', 100, 70, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Male)], '(male)'),
-        new ContestTrainer('Leah', 'Aroma Lady', [new ContestPokemon('Clefairy', 'Blingy', 70, 70, [ContestType.Cute, ContestType.Smart])]),
-        new ContestTrainer('Julian', 'Jogger', [new ContestPokemon('Machop', 'Kata', 60, 70, [ContestType.Cool, ContestType.Tough])]),
-        new ContestTrainer('Bianca', 'Cowgirl', [new ContestPokemon('Ponyta', 'Flash', 80, 70, [ContestType.Cute, ContestType.Tough])]),
-        new ContestTrainer('Mario', 'Ninja Boy', [new ContestPokemon('Gastly', 'Spooky', 50, 70, [ContestType.Beautiful])]),
-        new ContestTrainer('Lara', 'Madame', [new ContestPokemon('Onix', 'Gem', 70, 70, [ContestType.Beautiful, ContestType.Tough])]),
-        new ContestTrainer('Alan', 'Rancher', [new ContestPokemon('Hoothoot', 'Brainy', 80, 70, [ContestType.Cool, ContestType.Smart, ContestType.Tough])]),
-        new ContestTrainer('Bria', 'Ace Trainer', [new ContestPokemon('Murkrow', 'Ebony', 40, 70, [ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Female)], '(female)'),
-        new ContestTrainer('Collin', 'Ace Trainer', [new ContestPokemon('Misdreavus', 'Malice', 130, 70, [ContestType.Beautiful, ContestType.Cute, ContestType.Smart])], '(male)'),
-        new ContestTrainer('Alexis', 'Psychic', [new ContestPokemon('Meditite', 'Ponder', 120, 70, [ContestType.Cool, ContestType.Smart], undefined, GameConstants.BattlePokemonGender.Female)], '(female)'),
-        new ContestTrainer('Andre', 'Camper', [new ContestPokemon('Budew', 'Buddy', 70, 70, [ContestType.Beautiful, ContestType.Smart])]),
-        new ContestTrainer('Bridget', 'Beauty', [new ContestPokemon('Chatot', 'Tweety', 100, 70, [ContestType.Cool, ContestType.Beautiful, ContestType.Tough])]),
-        new ContestTrainer('Damien', 'Artist', [new ContestPokemon('Chingling', 'Jangle', 80, 70, [ContestType.Cool, ContestType.Beautiful])]),
-        new ContestTrainer('Kara', 'Battle Girl', [new ContestPokemon('Bronzor', 'Bronzy', 120, 70, [ContestType.Cute, ContestType.Smart, ContestType.Tough])]),
-        new ContestTrainer('Angus', 'Sailor', [new ContestPokemon('Bonsly', 'Chokkan', 60, 70, [ContestType.Smart, ContestType.Tough])]),
-        new ContestTrainer('Kiana', 'Ace Trainer', [new ContestPokemon('Zubat', 'Midnight', 90, 70, [ContestType.Beautiful, ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Male)], '(female)'),
-        new ContestTrainer('Jonesy', 'Collector', [new ContestPokemon('Pichu', 'Sweetie', 80, 70, [ContestType.Cool])]),
-        new ContestTrainer('Hayley', 'Cowgirl', [new ContestPokemon('Buneary', 'Floppy', 140, 70, [ContestType.Tough])]),
-        new ContestTrainer('Alfredo', 'Ace Trainer', [new ContestPokemon('Stunky', 'Honey', 100, 70, [ContestType.Cool, ContestType.Cute])], '(male)'),
-        new ContestTrainer('Bailey', 'Picnicker', [new ContestPokemon('Happiny', 'Baby', 80, 70, [ContestType.Smart])]),
-    ],
-    [ContestRank['Super Master']]: [
-        new ContestTrainer('Josiah', 'Ace Trainer', [new ContestPokemon('Pikachu', 'Ziggy', 40, 80, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Tough], undefined, GameConstants.BattlePokemonGender.Male)], '(male)'),
-        new ContestTrainer('Carly', 'Aroma Lady', [new ContestPokemon('Clefairy', 'Bumbles', 120, 80, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart])]),
-        new ContestTrainer('Bryant', 'Ace Trainer', [new ContestPokemon('Machop', 'Chopper', 110, 80, [ContestType.Cool, ContestType.Cute, ContestType.Tough])], '(male)'),
-        new ContestTrainer('Nancy', 'Beauty', [new ContestPokemon('Gastly', 'Boo', 120, 80, [ContestType.Cool, ContestType.Beautiful, ContestType.Smart])]),
-        new ContestTrainer('Zackery', 'Artist', [new ContestPokemon('Turtwig', 'Speedy', 100, 80, [ContestType.Beautiful, ContestType.Tough])]),
-        new ContestTrainer('Tanya', 'Pokéfan', [new ContestPokemon('Chimchar', 'Chimpy', 100, 80, [ContestType.Cute, ContestType.Tough])], '(female)'),
-        new ContestTrainer('Elias', 'Ace Trainer', [new ContestPokemon('Piplup', 'Penny', 140, 80, [ContestType.Cool, ContestType.Cute])], '(male)'),
-        new ContestTrainer('Marisa', 'Aroma Lady', [new ContestPokemon('Shieldon', 'Rampy', 100, 80, [ContestType.Cool, ContestType.Smart])]),
-        new ContestTrainer('Kelvin', 'Sailor', [new ContestPokemon('Buizel', 'Zippy', 140, 80, [ContestType.Beautiful, ContestType.Smart])]),
-        new ContestTrainer('Chloe', 'Lady', [new ContestPokemon('Chatot', 'Bebop', 90, 80, [ContestType.Cool, ContestType.Beautiful, ContestType.Smart, ContestType.Tough])]),
-        new ContestTrainer('Rodney', 'Collector', [new ContestPokemon('Bonsly', 'Twigs', 80, 80, [ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough])]),
-        new ContestTrainer('Hailey', 'Parasol Lady', [new ContestPokemon('Mime Jr.', 'Moppet', 90, 80, [ContestType.Beautiful, ContestType.Smart, ContestType.Tough])]),
-        new ContestTrainer('Kaleb', 'Pokéfan', [new ContestPokemon('Hoothoot', 'Strix', 40, 80, [ContestType.Cool, ContestType.Cute, ContestType.Smart, ContestType.Tough])], '(male)'),
-        new ContestTrainer('Ashlyn', 'Ace Trainer', [new ContestPokemon('Murkrow', 'Murky', 90, 80, [ContestType.Beautiful, ContestType.Cute, ContestType.Tough], undefined, GameConstants.BattlePokemonGender.Female)], '(female)'),
-        new ContestTrainer('Alberto', 'Artist', [new ContestPokemon('Meditite', 'Noodle', 140, 80, [ContestType.Cool, ContestType.Cute, ContestType.Smart], undefined, GameConstants.BattlePokemonGender.Male)]),
-        new ContestTrainer('', 'Fantina', [new ContestPokemon('Drifblim', 'Loony', 230, 80, [ContestType.Cute])]),
-        new ContestTrainer('Kristin', 'Reporter', [new ContestPokemon('Magneton', 'Jolt', 80, 80, [ContestType.Beautiful])]),
-        new ContestTrainer('Johanna', 'Contest Champion', [new ContestPokemon('Kangaskhan', 'Jumpy', 180, 80, [ContestType.Cool])], '(Johanna)'),
-        new ContestTrainer('Casey', 'Nurse', [new ContestPokemon('Chansey', 'Pinky', 90, 80, [ContestType.Smart])]),
-        new ContestTrainer('', 'Jasmine', [new ContestPokemon('Steelix', 'Rusty', 210, 80, [ContestType.Tough], undefined, GameConstants.BattlePokemonGender.Male)]),
-    ],
-    [ContestRank.Spectacular]: [
-        /**
-        * Normal Spectacular Trainers
-        * Gen 1 berries
-        */
-        new ContestTrainer('Micah', 'Youngster', [new ContestPokemon('Poochyena', 'Poochin', 24, 90, [ContestType.Cool, ContestType.Tough])], undefined,
-            {berryReward: [{berry: BerryType.Cheri, amount: 5}]}
-        ),
-        new ContestTrainer('Shannon', 'Lady', [new ContestPokemon('Zigzagoon', 'Gonzer', 10, 90, [ContestType.Cute])], undefined,
-            {berryReward: [{berry: BerryType.Pecha, amount: 5}]}
-        ),
-        new ContestTrainer('Mateo', 'Bug Catcher', [new ContestPokemon('Dustox', 'Nox', 12, 90, [ContestType.Beautiful], undefined, GameConstants.BattlePokemonGender.Male)], undefined,
-            {berryReward: [{berry: BerryType.Chesto, amount: 5}]}
-        ),
-        new ContestTrainer('Jordyn', 'School Kid', [new ContestPokemon('Seedot', 'Seedottie', 22, 90, [ContestType.Smart, ContestType.Tough])], '(female)',
-            {berryReward: [{berry: BerryType.Aspear, amount: 5}]}
-        ),
-        new ContestTrainer('Gianna', 'Lass', [new ContestPokemon('Taillow', 'Tailster', 20, 90, [ContestType.Cool])], undefined,
-            {berryReward: [{berry: BerryType.Cheri, amount: 5}]}
-        ),
-        new ContestTrainer('Declan', 'Ninja Boy', [new ContestPokemon('Nincada', 'Ninny', 17, 90, [ContestType.Smart])], undefined,
-            {berryReward: [{berry: BerryType.Rawst, amount: 5}]}
-        ),
-        new ContestTrainer('Carlton', 'School Kid', [new ContestPokemon('Shroomish', 'Shrewmish', 20, 90, [ContestType.Smart])], '(male)',
-            {berryReward: [{berry: BerryType.Rawst, amount: 5}]}
-        ),
-        new ContestTrainer('Adeine', 'Tuber', [new ContestPokemon('Wingull', 'Win', 31, 90, [ContestType.Beautiful, ContestType.Cute])], '(female)',
-            {berryReward: [{berry: BerryType.Chesto, amount: 5}]}
-        ),
-        new ContestTrainer('Asher', 'Pokéfan', [new ContestPokemon('Slakoth', 'Visikoth', 42, 90, [ContestType.Beautiful, ContestType.Cute, ContestType.Tough])], '(male)',
-            {berryReward: [{berry: BerryType.Sitrus, amount: 5}]}
-        ),
-        new ContestTrainer('Lauren', 'Pokéfan', [new ContestPokemon('Whismur', 'Whizz', 28, 90, [ContestType.Cute, ContestType.Smart])], '(female)',
-            {berryReward: [{berry: BerryType.Aspear, amount: 5}]}
-        ),
-        new ContestTrainer('Jeremiah', 'Black Belt', [new ContestPokemon('Makuhita', 'Makuwaku', 32, 90, [ContestType.Cool, ContestType.Tough])], undefined,
-            {berryReward: [{berry: BerryType.Leppa, amount: 5}]}
-        ),
-        new ContestTrainer('Molly', 'Picnicker', [new ContestPokemon('Aron', 'Ronnie', 34, 90, [ContestType.Cool, ContestType.Tough])], undefined,
-            {berryReward: [{berry: BerryType.Persim, amount: 5}]}
-        ),
-        new ContestTrainer('Martinus', 'Camper', [new ContestPokemon('Zubat', 'Zoonby', 22, 90, [ContestType.Beautiful, ContestType.Smart], undefined, GameConstants.BattlePokemonGender.Male)], undefined,
-            {berryReward: [{berry: BerryType.Oran, amount: 5}]}
-        ),
-        new ContestTrainer('Liliana', 'Aroma Lady', [new ContestPokemon('Gulpin', 'Guligan', 22, 90, [ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
-            {berryReward: [{berry: BerryType.Pecha, amount: 5}]}
-        ),
-        new ContestTrainer('Camden', 'Guitarist', [new ContestPokemon('Electrike', 'Bolt', 44, 90, [ContestType.Cool, ContestType.Beautiful])], undefined,
-            {berryReward: [{berry: BerryType.Lum, amount: 1}]}
-        ),
-        /**
-        * Super Spectacular Trainers
-        * Gen 2 berries
-        */
-        new ContestTrainer('Keira', 'Aroma Lady', [new ContestPokemon('Roselia', 'Rosalie', 76, 90, [ContestType.Beautiful, ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
-            {berryReward: [{berry: BerryType.Bluk, amount: 4, requirement: new BerryUnlockedRequirement(BerryType.Bluk)}]}
-        ),
-        new ContestTrainer('Bentley', 'Bird Keeper', [new ContestPokemon('Doduo', 'Dodon\'t', 76, 90, [ContestType.Cool, ContestType.Tough], undefined, GameConstants.BattlePokemonGender.Male)], undefined,
-            {berryReward: [{berry: BerryType.Pinap, amount: 4, requirement: new BerryUnlockedRequirement(BerryType.Pinap)}]}
-        ),
-        new ContestTrainer('Plum', 'Lass', [new ContestPokemon('Trapinch', 'Tracy', 43, 90, [ContestType.Tough])], undefined,
-            {berryReward: [{berry: BerryType.Iapapa, amount: 4, requirement: new BerryUnlockedRequirement(BerryType.Iapapa)}]}
-        ),
-        new ContestTrainer('Zacahry', 'Pokémon Breeder', [new ContestPokemon('Cacnea', 'Succulus', 42, 90, [ContestType.Smart])], '(male)',
-            {berryReward: [{berry: BerryType.Aguav, amount: 4, requirement: new BerryUnlockedRequirement(BerryType.Aguav)}]}
-        ),
-        new ContestTrainer('Alyssa', 'Picnicker', [new ContestPokemon('Sandshrew', 'Sandyclaws', 50, 90, [ContestType.Cool])], undefined,
-            {berryReward: [{berry: BerryType.Figy, amount: 4, requirement: new BerryUnlockedRequirement(BerryType.Figy)}]}
-        ),
-        new ContestTrainer('Brody', 'Ruin Maniac', [new ContestPokemon('Baltoy', 'Baltop', 60, 90, [ContestType.Smart])], undefined,
-            {berryReward: [{berry: BerryType.Wepear, amount: 4, requirement: new BerryUnlockedRequirement(BerryType.Wepear)}]}
-        ),
-        new ContestTrainer('Mila', 'Parasol Lady', [new ContestPokemon('Numel', 'Mel', 60, 90, [ContestType.Beautiful], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
-            {berryReward: [{berry: BerryType.Wiki, amount: 4, requirement: new BerryUnlockedRequirement(BerryType.Wiki)}]}
-        ),
-        new ContestTrainer('Rohan', 'Camper', [new ContestPokemon('Spinda', 'Spinmaster', 83, 90, [ContestType.Cute, ContestType.Smart])], undefined,
-            {berryReward: [{berry: BerryType.Nanab, amount: 4, requirement: new BerryUnlockedRequirement(BerryType.Nanab)}]}
-        ),
-        new ContestTrainer('Alaina', 'Lady', [new ContestPokemon('Swablu', 'Swellbell', 81, 80, [ContestType.Beautiful, ContestType.Smart])], undefined,
-            {berryReward: [{berry: BerryType.Razz, amount: 4, requirement: new BerryUnlockedRequirement(BerryType.Razz)}]}
-        ),
-        new ContestTrainer('Levi', 'Triathlete', [new ContestPokemon('Linoone', 'Noone', 88, 90, [ContestType.Cool, ContestType.Tough])], '(maleswimming)',
-            {berryReward: [{berry: BerryType.Razz, amount: 4, requirement: new BerryUnlockedRequirement(BerryType.Razz)}]}
-        ),
-        new ContestTrainer('Gabriella', 'Ace Trainer', [new ContestPokemon('Kecleon', 'Leon', 94, 90, [ContestType.Cool, ContestType.Tough])], '(female)',
-            {berryReward: [{berry: BerryType.Pinap, amount: 4, requirement: new BerryUnlockedRequirement(BerryType.Pinap)}]}
-        ),
-        new ContestTrainer('Dominic', 'School Kid', [new ContestPokemon('Corphish', 'Snip', 67, 90, [ContestType.Tough])], '(male)',
-            {berryReward: [{berry: BerryType.Wepear, amount: 4, requirement: new BerryUnlockedRequirement(BerryType.Wepear)}]}
-        ),
-        new ContestTrainer('Kaitlyn', 'Pokémon Breeder', [new ContestPokemon('Barboach', 'Barbra', 85, 90, [ContestType.Beautiful, ContestType.Cute])], '(female)',
-            {berryReward: [{berry: BerryType.Nanab, amount: 4, requirement: new BerryUnlockedRequirement(BerryType.Nanab)}]}
-        ),
-        new ContestTrainer('Tyler', 'Psychic', [new ContestPokemon('Spoink', 'Spearl', 82, 90, [ContestType.Beautiful, ContestType.Cute])], '(male)',
-            {berryReward: [{berry: BerryType.Bluk, amount: 4, requirement: new BerryUnlockedRequirement(BerryType.Bluk)}]}
-        ),
-        new ContestTrainer('Adalyn', 'Pokémon Ranger', [new ContestPokemon('Lotad', 'Tad', 56, 90, [ContestType.Smart])], '(female)',
-            {berryReward: [{berry: BerryType.Mago, amount: 4, requirement: new BerryUnlockedRequirement(BerryType.Mago)}]}
-        ),
-        /**
-        * Hyper Spectacular Trainers
-        * Gen 3 berries
-        */
-        new ContestTrainer('Landon', 'Pokémaniac', [new ContestPokemon('Lairon', 'Wonwon', 205, 90, [ContestType.Smart, ContestType.Tough])], undefined,
-            {berryReward: [{berry: BerryType.Durin, amount: 3, requirement: new BerryUnlockedRequirement(BerryType.Durin)}]}
-        ),
-        new ContestTrainer('Mckenzie', 'Pokémon Ranger', [new ContestPokemon('Nuzleaf', 'Nuzlad', 235, 90, [ContestType.Cool, ContestType.Beautiful], undefined, GameConstants.BattlePokemonGender.Female)], '(female)',
-            {berryReward: [{berry: BerryType.Spelon, amount: 3, requirement: new BerryUnlockedRequirement(BerryType.Spelon)}]}
-        ),
-        new ContestTrainer('Nelson', 'Ninja Boy', [new ContestPokemon('Ninjask', 'Ninjackie', 78, 90, [ContestType.Tough])], undefined,
-            {berryReward: [{berry: BerryType.Grepa, amount: 3, requirement: new BerryUnlockedRequirement(BerryType.Grepa)}]}
-        ),
-        new ContestTrainer('Riley', 'Lady', [new ContestPokemon('Swellow', 'Wollew', 74, 90, [ContestType.Cool])], undefined,
-            {berryReward: [{berry: BerryType.Pomeg, amount: 3, requirement: new BerryUnlockedRequirement(BerryType.Pomeg)}]}
-        ),
-        new ContestTrainer('Nathan', 'Gentleman', [new ContestPokemon('Mightyena', 'Mighty', 84, 90, [ContestType.Smart])], undefined,
-            {berryReward: [{berry: BerryType.Hondew, amount: 3, requirement: new BerryUnlockedRequirement(BerryType.Hondew)}]}
-        ),
-        new ContestTrainer('Twyla', 'Beauty', [new ContestPokemon('Beautifly', 'Papi', 128, 90, [ContestType.Beautiful], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
-            {berryReward: [{berry: BerryType.Kelpsy, amount: 3, requirement: new BerryUnlockedRequirement(BerryType.Kelpsy)}]}
-        ),
-        new ContestTrainer('Gavin', 'Fisherman', [new ContestPokemon('Seaking', 'The King', 190, 90, [ContestType.Cool, ContestType.Beautiful], undefined, GameConstants.BattlePokemonGender.Male)], undefined,
-            {berryReward: [{berry: BerryType.Cornn, amount: 3, requirement: new BerryUnlockedRequirement(BerryType.Cornn)}]}
-        ),
-        new ContestTrainer('Lily', 'Parasol Lady', [new ContestPokemon('Camerupt', 'Camelot', 230, 90, [ContestType.Beautiful, ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
-            {berryReward: [{berry: BerryType.Pamtre, amount: 3, requirement: new BerryUnlockedRequirement(BerryType.Pamtre)}]}
-        ),
-        new ContestTrainer('Primo', 'Hiker', [new ContestPokemon('Machop', 'Chopchop', 170, 90, [ContestType.Cool, ContestType.Tough])], undefined,
-            {berryReward: [{berry: BerryType.Nomel, amount: 3, requirement: new BerryUnlockedRequirement(BerryType.Nomel)}]}
-        ),
-        new ContestTrainer('Alejandra', 'Pokémon Breeder', [new ContestPokemon('Lombre', 'Nombre', 200, 90, [ContestType.Cute, ContestType.Smart])], '(female)',
-            {berryReward: [{berry: BerryType.Watmel, amount: 3, requirement: new BerryUnlockedRequirement(BerryType.Watmel)}]}
-        ),
-        new ContestTrainer('Yoshinari', 'Collector', [new ContestPokemon('Seviper', 'Crawly', 213, 90, [ContestType.Smart, ContestType.Tough])], undefined,
-            {berryReward: [{berry: BerryType.Belue, amount: 3, requirement: new BerryUnlockedRequirement(BerryType.Belue)}]}
-        ),
-        new ContestTrainer('Lacy', 'Tuber', [new ContestPokemon('Wailmer', 'Bobble', 84, 90, [ContestType.Cute])], '(female)',
-            {berryReward: [{berry: BerryType.Qualot, amount: 3, requirement: new BerryUnlockedRequirement(BerryType.Qualot)}]}
-        ),
-        new ContestTrainer('Owen', 'Swimmer', [new ContestPokemon('Magikarp', 'Magi', 270, 90, [ContestType.Cute, ContestType.Tough], undefined, GameConstants.BattlePokemonGender.Male)], '(male)',
-            {berryReward: [{berry: BerryType.Magost, amount: 3, requirement: new BerryUnlockedRequirement(BerryType.Magost)}]}
-        ),
-        new ContestTrainer('Addison', 'Hex Maniac', [new ContestPokemon('Lunatone', 'Moony', 128, 90, [ContestType.Smart])], undefined,
-            {berryReward: [{berry: BerryType.Rabuta, amount: 3, requirement: new BerryUnlockedRequirement(BerryType.Rabuta)}]}
-        ),
-        new ContestTrainer('Jayce', 'Sailor', [new ContestPokemon('Pelipper', 'Piper', 104, 90, [ContestType.Cool])], undefined,
-            {berryReward: [{berry: BerryType.Tamato, amount: 3, requirement: new BerryUnlockedRequirement(BerryType.Tamato)}]}
-        ),
-        /**
-        * Master Spectacular Trainers
-        * Gen 4 berries
-        */
-        new ContestTrainer('Yoko', 'Delinquent', [new ContestPokemon('Gyarados', 'Gyalaxy', 382, 90, [ContestType.Cool, ContestType.Tough, ContestType.Balanced], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
-            {berryReward: [{berry: BerryType.Colbur, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Colbur)}]}
-        ),
-        new ContestTrainer('Jeff', 'Guitarist', [new ContestPokemon('Loudred', 'Louduff', 174, 90, [ContestType.Cool, ContestType.Balanced])], undefined,
-            {berryReward: [
-                {berry: BerryType.Wacan, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Wacan)},
-                {berry: BerryType.Charti, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Charti)},
-            ]}
-        ),
-        new ContestTrainer('Elsie', 'Pokéfan', [new ContestPokemon('Delcatty', 'Mione', 166, 90, [ContestType.Cute, ContestType.Balanced])], '(female)',
-            {berryReward: [{berry: BerryType.Shuca, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Shuca)}]}
-        ),
-        new ContestTrainer('Jaylon', 'Expert', [new ContestPokemon('Slaking', 'Slacker', 403, 90, [ContestType.Cool, ContestType.Tough, ContestType.Balanced])], undefined,
-            {berryReward: [{berry: BerryType.Haban, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Haban)}]}
-        ),
-        new ContestTrainer('Layla', 'Free Diver', [new ContestPokemon('Gorebyss', 'Gorflir', 194, 90, [ContestType.Beautiful, ContestType.Balanced])], undefined,
-            {berryReward: [
-                {berry: BerryType.Coba, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Coba)},
-                {berry: BerryType.Yache, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Yache)},
-            ]}
-        ),
-        new ContestTrainer('Ruslan', 'Psychic', [new ContestPokemon('Kirlia', 'Lia', 186, 90, [ContestType.Smart, ContestType.Balanced])], '(male)',
-            {berryReward: [{berry: BerryType.Payapa, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Payapa)}]}
-        ),
-        new ContestTrainer('Lilias', 'Aroma Lady', [new ContestPokemon('Vileplume', 'Plumette', 170, 90, [ContestType.Beautiful, ContestType.Balanced], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
-            {berryReward: [
-                {berry: BerryType.Rindo, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Rindo)},
-                {berry: BerryType.Kebia, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Kebia)},
-            ]}
-        ),
-        new ContestTrainer('Aiden', 'Street Thug', [new ContestPokemon('Dusclops', 'Topclops', 289, 90, [ContestType.Smart, ContestType.Tough, ContestType.Balanced])], undefined,
-            {berryReward: [{berry: BerryType.Kasib, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Kasib)}]}
-        ),
-        new ContestTrainer('Madelyn', 'Beauty', [new ContestPokemon('Illumise', 'Princess', 346, 90, [ContestType.Cute, ContestType.Smart, ContestType.Balanced])], undefined,
-            {berryReward: [{berry: BerryType.Tanga, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Tanga)}]}
-        ),
-        new ContestTrainer('Elijah', 'Sailor', [new ContestPokemon('Sharpedo', 'Shargob', 380, 90, [ContestType.Smart, ContestType.Tough, ContestType.Balanced])], undefined,
-            {berryReward: [{berry: BerryType.Babiri, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Babiri)}]}
-        ),
-        new ContestTrainer('Hailey', 'Swimmer', [new ContestPokemon('Luvdisc', 'Lovelynn', 384, 90, [ContestType.Cute, ContestType.Smart, ContestType.Balanced])], '(female)',
-            {berryReward: [{berry: BerryType.Passho, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Passho)}]}
-        ),
-        new ContestTrainer('Clayton', 'Black Belt', [new ContestPokemon('Heracross', 'Heracles', 274, 90, [ContestType.Cool, ContestType.Tough, ContestType.Balanced], undefined, GameConstants.BattlePokemonGender.Male)], undefined,
-            {berryReward: [{berry: BerryType.Chople, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Chople)}]}
-        ),
-        new ContestTrainer('Audrey', 'Lass', [new ContestPokemon('Electrode', 'Trode', 358, 90, [ContestType.Cool, ContestType.Beautiful, ContestType.Balanced])], undefined,
-            {berryReward: [{berry: BerryType.Chilan, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Chilan)}]}
-        ),
-        new ContestTrainer('Evan', 'Pokéfan', [new ContestPokemon('Pichu', 'Pinchurlink', 208, 90, [ContestType.Cute, ContestType.Balanced])], '(male)',
-            {berryReward: [{berry: BerryType.Occa, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Occa)}]}
-        ),
-        new ContestTrainer('Julia', 'Fairy Tale Girl', [new ContestPokemon('Wobbuffet', 'Elizabeth', 256, 90, [ContestType.Beautiful, ContestType.Balanced], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
-            {berryReward: [{berry: BerryType.Roseli, amount: 2, requirement: new BerryUnlockedRequirement(BerryType.Roseli)}]}
-        ),
-        // Special Spectacular
-        // Chaz
-        new ContestTrainer('Chaz', 'Rich Boy', [new ContestPokemon('Machoke', 'Macherie', 355, 90, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Balanced])], undefined,
+class ContestTrainerList {
+    public static ContestOpponents: Record<ContestRank, ContestTrainer[]> = {
+        [ContestRank.Practice]: [
+            new ContestTrainer('Gage', 'Dragon Tamer', [new ContestPokemon('Pikachu', 'Chuchu', 1, 1, undefined, undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
+            new ContestTrainer('Raven', 'Aroma Lady', [new ContestPokemon('Hoothoot', 'Tootie', 1, 1)]),
+            new ContestTrainer('Marquis', 'School Kid', [new ContestPokemon('Geodude', 'Iggy', 1, 1)], '(male)'),
+            new ContestTrainer('Jocelyn', 'Madame', [new ContestPokemon('Machop', 'Punchy', 2, 1)]),
+            new ContestTrainer('Carson', 'Psychic', [new ContestPokemon('Psyduck', 'Quackers', 1, 1)], '(male)'),
+            new ContestTrainer('Jade', 'Beauty', [new ContestPokemon('Cherubi', 'Juicy', 1, 1)]),
+            new ContestTrainer('Zane', 'Pokémon Breeder', [new ContestPokemon('Barboach', 'Stubby', 2, 1)], '(male)'),
+            new ContestTrainer('Kiara', 'Lass', [new ContestPokemon('Mime Jr.', 'Kiddo', 2, 1)]),
+            new ContestTrainer('Allan', 'Camper', [new ContestPokemon('Bidoof', 'Smiley', 1, 1, undefined, undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
+            new ContestTrainer('Evelyn', 'Lady', [new ContestPokemon('Glameow', 'Fluffy', 1, 1)], '(gen4)'),
+            new ContestTrainer('Celeste', 'Bird Keeper', [new ContestPokemon('Starly', 'Chirpy', 1, 1, undefined, undefined, undefined, GameConstants.BattlePokemonGender.Female)], '(female)'),
+            new ContestTrainer('Jakob', 'Rancher', [new ContestPokemon('Shellos (West)', 'Zoomer', 1, 1)]),
+        ],
+        // Hoenn Contests
+        [ContestRank.Normal]: [
+            new ContestTrainer('Agatha', 'Aroma Lady', [new ContestPokemon('Bulbasaur', 'Bulby', 1, 10, [ContestType.Cute, ContestType.Smart], [ContestType.Cute, ContestType.Smart, ContestType.Tough, ContestType.Cute])]),
+            new ContestTrainer('Alec', 'Camper', [new ContestPokemon('Slakoth', 'Slokth', 1, 10, [ContestType.Beautiful, ContestType.Cute, ContestType.Tough], [ContestType.Tough, ContestType.Tough, ContestType.Cute, ContestType.Cute])]),
+            new ContestTrainer('Beau', 'Hex Maniac', [new ContestPokemon('Butterfree', 'Futterbe', 1, 10, [ContestType.Beautiful, ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Beautiful, ContestType.Beautiful], undefined, GameConstants.BattlePokemonGender.Male)]),
+            new ContestTrainer('Caitlin', 'Tuber', [new ContestPokemon('Poliwag', 'Wagil', 1, 10, [ContestType.Beautiful, ContestType.Tough], [ContestType.Beautiful, ContestType.Tough, ContestType.Tough, ContestType.Beautiful])], '(female)'),
+            new ContestTrainer('Cale', 'Ruin Maniac', [new ContestPokemon('Diglett', 'Digle', 1, 10, [ContestType.Smart, ContestType.Tough], [ContestType.Smart, ContestType.Tough, ContestType.Tough, ContestType.Tough])]),
+            new ContestTrainer('Chance', 'Rich Boy', [
+                new ContestPokemon('Electrike', 'Rikelec', 1, 10, [ContestType.Beautiful], [ContestType.Cool, ContestType.Cool, ContestType.Cool, ContestType.Cool], new GymBadgeRequirement(BadgeEnums.Dynamo, GameConstants.AchievementOption.less)),
+                new ContestPokemon('Manectric', 'Rikelec', 1, 10, [ContestType.Cool, ContestType.Beautiful], [ContestType.Cool, ContestType.Cool, ContestType.Cool, ContestType.Cool], new GymBadgeRequirement(BadgeEnums.Dynamo)),
+            ]),
+            new ContestTrainer('Colby', 'Ninja Boy', [new ContestPokemon('Totodile', 'Totdil', 1, 10, [ContestType.Cool, ContestType.Beautiful], [ContestType.Cool, ContestType.Smart, ContestType.Beautiful, ContestType.Beautiful])]),
+            new ContestTrainer('Edith', 'Parasol Lady', [
+                new ContestPokemon('Zigzagoon', 'Zigoon', 1, 10, [ContestType.Cute], [ContestType.Cute, ContestType.Cute, ContestType.Tough, ContestType.Cute]),
+                new ContestPokemon('Illumise', 'Musille', 1, 10, [ContestType.Beautiful, ContestType.Cute], [ContestType.Cute, ContestType.Cute, ContestType.Tough, ContestType.Cute]),
+            ]),
+            new ContestTrainer('Evan', 'Bug Catcher', [new ContestPokemon('Dustox', 'Duster', 1, 10, [ContestType.Beautiful], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Beautiful, ContestType.Smart], undefined, GameConstants.BattlePokemonGender.Male)], 'gen4'),
+            new ContestTrainer('Grant', 'Youngster', [new ContestPokemon('Shroomish', 'Smish', 1, 10, [ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Smart, ContestType.Cute])]),
+            new ContestTrainer('Jimmy', 'Preschooler', [new ContestPokemon('Poochyena', 'Poochy', 1, 10, [ContestType.Cool, ContestType.Tough], [ContestType.Cool, ContestType.Tough, ContestType.Tough, ContestType.Cool])], '(male)'),
+            new ContestTrainer('Kay', 'Cooltrainer', [new ContestPokemon('Pidgeotto', 'Pideot', 1, 10, [ContestType.Cool, ContestType.Beautiful], [ContestType.Smart, ContestType.Cool, ContestType.Cool, ContestType.Beautiful])], '(female)'),
+            new ContestTrainer('Kelsey', 'Picnicker', [new ContestPokemon('Seedot', 'Dots', 1, 10, [ContestType.Smart, ContestType.Tough], [ContestType.Tough, ContestType.Smart, ContestType.Cool, ContestType.Beautiful])]),
+            new ContestTrainer('Kylie', 'Beauty', [new ContestPokemon('Ledyba', 'Baledy', 1, 10, [ContestType.Cool, ContestType.Cute], [ContestType.Cute, ContestType.Cool, ContestType.Cool, ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Male)]),
+            new ContestTrainer('Liam', 'Bird Keeper', [new ContestPokemon('Delibird', 'Birdly', 1, 10, [ContestType.Cute, ContestType.Smart, ContestType.Tough], [ContestType.Cute, ContestType.Cute, ContestType.Tough, ContestType.Cute])], 'gen3'),
+            new ContestTrainer('Madison', 'Pokéfan', [new ContestPokemon('Taillow', 'Tatay', 1, 10, [ContestType.Cool], [ContestType.Cool, ContestType.Cool, ContestType.Cool, ContestType.Cute])], 'gen4 (female)'),
+            new ContestTrainer('Mariah', 'School Kid', [new ContestPokemon('Aron', 'Ronar', 1, 10, [ContestType.Cool, ContestType.Tough], [ContestType.Cool, ContestType.Tough, ContestType.Tough, ContestType.Tough])], '(female)'),
+            new ContestTrainer('Melanie', 'Twin', [new ContestPokemon('Gulpin', 'Gulin', 1, 10, [ContestType.Cute], [ContestType.Tough, ContestType.Cute, ContestType.Smart, ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Male)], 'left frlg'),
+            new ContestTrainer('Milo', 'PokéManiac', [new ContestPokemon('Larvitar', 'Tarvitar', 1, 10, [ContestType.Tough], [ContestType.Tough, ContestType.Tough, ContestType.Tough, ContestType.Smart])]),
+            new ContestTrainer('Morris', 'School Kid', [new ContestPokemon('Makuhita', 'Mahita', 1, 10, [ContestType.Cool, ContestType.Tough], [ContestType.Tough, ContestType.Cool, ContestType.Tough, ContestType.Cool])], '(male)'),
+            new ContestTrainer('Paige', 'Young Couple', [
+                new ContestPokemon('Wingull', 'Gulwee', 1, 10, [ContestType.Cute], [ContestType.Beautiful, ContestType.Cute, ContestType.Cute, ContestType.Smart]),
+                new ContestPokemon('Spheal', 'Sleal', 1, 10, [ContestType.Beautiful], [ContestType.Beautiful, ContestType.Cute, ContestType.Cute, ContestType.Smart]),
+            ], '(female)'),
+            new ContestTrainer('Raymond', 'Black Belt', [new ContestPokemon('Nincada', 'Ninda', 1, 10, [ContestType.Smart], [ContestType.Smart, ContestType.Cool, ContestType.Tough, ContestType.Smart])]),
+            new ContestTrainer('Russell', 'Cooltrainer', [
+                new ContestPokemon('Zubat', 'Zutzu', 1, 10, [ContestType.Cute, ContestType.Smart], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Smart, ContestType.Smart], undefined, GameConstants.BattlePokemonGender.Male),
+                new ContestPokemon('Crobat', 'Batro', 1, 10, [ContestType.Beautiful, ContestType.Cute], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Smart, ContestType.Smart]),
+            ], '(male)'),
+            new ContestTrainer('Sydney', 'Lass', [new ContestPokemon('Whismur', 'Whiris', 1, 10, [ContestType.Cool, ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Cute, ContestType.Cool])]),
+        ],
+        [ContestRank.Super]: [
+            new ContestTrainer('Aliyah', 'Nurse', [new ContestPokemon('Blissey', 'Bliss', 1, 20, [ContestType.Beautiful, ContestType.Cute, ContestType.Tough], [ContestType.Cute, ContestType.Beautiful, ContestType.Tough, ContestType.Tough])]),
+            new ContestTrainer('Ariana', 'Reporter', [new ContestPokemon('Kecleon', 'Kecon', 1, 20, [ContestType.Smart, ContestType.Tough], [ContestType.Tough, ContestType.Smart, ContestType.Tough, ContestType.Tough])]),
+            new ContestTrainer('Ashton', 'Cooltrainer', [new ContestPokemon('Goldeen', 'Golden', 1, 20, [ContestType.Cool, ContestType.Beautiful], [ContestType.Cool, ContestType.Cool, ContestType.Cool, ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Male)], '(male)'),
+            new ContestTrainer('Audrey', 'Lass', [new ContestPokemon('Swablu', 'Swaby', 1, 20, [ContestType.Beautiful, ContestType.Smart], [ContestType.Smart, ContestType.Beautiful, ContestType.Beautiful, ContestType.Beautiful])]),
+            new ContestTrainer('Avery', 'School Kid', [
+                new ContestPokemon('Linoone', 'Noone', 1, 20, [ContestType.Beautiful, ContestType.Cute], [ContestType.Cute, ContestType.Cute, ContestType.Cute, ContestType.Cute]),
+                new ContestPokemon('Spoink', 'Poinker', 1, 20, [ContestType.Cute, ContestType.Smart], [ContestType.Cute, ContestType.Smart, ContestType.Cute, ContestType.Cute]),
+            ], '(male)'),
+            new ContestTrainer('Bobby', 'Triathlete', [
+                new ContestPokemon('Doduo', 'Duodo', 1, 20, [ContestType.Cool, ContestType.Cute], [ContestType.Cool, ContestType.Cool, ContestType.Cute, ContestType.Cute], new GymBadgeRequirement(BadgeEnums.Balance, GameConstants.AchievementOption.less), GameConstants.BattlePokemonGender.Female),
+                new ContestPokemon('Dodrio', 'Duodo', 1, 20, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough], [ContestType.Cool, ContestType.Cool, ContestType.Cute, ContestType.Cute], new GymBadgeRequirement(BadgeEnums.Balance), GameConstants.BattlePokemonGender.Female),
+            ], 'gen3 (maleswimming)'),
+            new ContestTrainer('Carson', 'Youngster', [new ContestPokemon('Skarmory', 'Corpy', 1, 20, [ContestType.Cool, ContestType.Beautiful, ContestType.Tough], [ContestType.Cool, ContestType.Cool, ContestType.Cool, ContestType.Cool])]),
+            new ContestTrainer('Cassidy', 'Pokéfan', [
+                new ContestPokemon('Sandshrew', 'Shrand', 1, 20, [ContestType.Cool], [ContestType.Cool, ContestType.Cute, ContestType.Cool, ContestType.Tough], new GymBadgeRequirement(BadgeEnums.Balance, GameConstants.AchievementOption.less)),
+                new ContestPokemon('Sandslash', 'Shrand', 1, 20, [ContestType.Cool, ContestType.Tough], [ContestType.Cool, ContestType.Cute, ContestType.Cool, ContestType.Tough], new GymBadgeRequirement(BadgeEnums.Balance)),
+            ], 'gen4 (female)'),
+            new ContestTrainer('Claire', 'Picnicker', [new ContestPokemon('Trapinch', 'Pinchin', 1, 20, [ContestType.Cute, ContestType.Smart, ContestType.Tough], [ContestType.Tough, ContestType.Cute, ContestType.Smart, ContestType.Smart])]),
+            new ContestTrainer('Devin', 'Gentleman', [new ContestPokemon('Snubbull', 'Snubbins', 1, 20, [ContestType.Cute, ContestType.Tough], [ContestType.Tough, ContestType.Smart, ContestType.Cute, ContestType.Tough])]),
+            new ContestTrainer('Diego', 'Veteran', [new ContestPokemon('Hitmonchan', 'Hitemon', 1, 20, [ContestType.Cool, ContestType.Tough], [ContestType.Cool, ContestType.Cool, ContestType.Tough, ContestType.Tough])], '(male)'),
+            new ContestTrainer('Jada', 'Lady', [new ContestPokemon('Seel', 'Seeley', 1, 20, [ContestType.Beautiful, ContestType.Cute], [ContestType.Cute, ContestType.Beautiful, ContestType.Beautiful, ContestType.Cute])]),
+            new ContestTrainer('Karina', 'Pokemon Ranger', [new ContestPokemon('Roselia', 'Relia', 1, 20, [ContestType.Beautiful, ContestType.Smart], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Smart, ContestType.Smart], undefined, GameConstants.BattlePokemonGender.Male)], '(female)'),
+            new ContestTrainer('Katrina', 'Parasol Lady', [new ContestPokemon('Lotad', 'Tado', 1, 20, [ContestType.Beautiful, ContestType.Cute, ContestType.Smart], [ContestType.Smart, ContestType.Cute, ContestType.Tough, ContestType.Beautiful])]),
+            new ContestTrainer('Luke', 'Collector', [new ContestPokemon('Slowbro', 'Browlo', 1, 20, [ContestType.Cute, ContestType.Smart], [ContestType.Cute, ContestType.Smart, ContestType.Cute, ContestType.Smart])]),
+            new ContestTrainer('Miles', 'Pokémon Ranger', [new ContestPokemon('Spinda', 'Spinin', 1, 20, [ContestType.Cute, ContestType.Smart], [ContestType.Cute, ContestType.Smart, ContestType.Smart, ContestType.Cute])], '(male)'),
+            new ContestTrainer('Morgan', 'Black Belt', [new ContestPokemon('Baltoy', 'Toybal', 1, 20, [ContestType.Beautiful, ContestType.Smart], [ContestType.Beautiful, ContestType.Smart, ContestType.Beautiful, ContestType.Smart])]),
+            new ContestTrainer('Natalia', 'Pokéfan', [new ContestPokemon('Elekid', 'Kidlek', 1, 20, [ContestType.Cool, ContestType.Cute], [ContestType.Cool, ContestType.Cool, ContestType.Smart, ContestType.Cute])], '(female)'),
+            new ContestTrainer('Raul', 'Bird Keeper', [new ContestPokemon('Farfetch\'d', 'Fetchin', 1, 20, [ContestType.Cool, ContestType.Cute], [ContestType.Cute, ContestType.Cool, ContestType.Smart, ContestType.Cute])]),
+            new ContestTrainer('Sandra', 'Twin', [new ContestPokemon('Barboach', 'Boboach', 1, 20, [ContestType.Cute, ContestType.Smart, ContestType.Tough], [ContestType.Cute, ContestType.Cute, ContestType.Tough, ContestType.Smart])], 'right frlg'),
+            new ContestTrainer('Summer', 'Office Worker', [
+                new ContestPokemon('Medicham', 'Chamcham', 1, 20, [ContestType.Cool, ContestType.Tough], [ContestType.Cool, ContestType.Cool, ContestType.Beautiful, ContestType.Beautiful], undefined, GameConstants.BattlePokemonGender.Female),
+                new ContestPokemon('Numel', 'Lenum', 1, 20, [ContestType.Cool, ContestType.Beautiful], [ContestType.Tough, ContestType.Tough, ContestType.Beautiful, ContestType.Beautiful], undefined, GameConstants.BattlePokemonGender.Female),
+            ], '(female)'),
+            new ContestTrainer('Tylor', 'Hex Maniac', [new ContestPokemon('Misdreavus', 'Dreavis', 1, 20, [ContestType.Beautiful, ContestType.Smart], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Smart, ContestType.Smart])]),
+            new ContestTrainer('Willie', 'Ninja Boy', [new ContestPokemon('Cacnea', 'Nacac', 1, 20, [ContestType.Cool, ContestType.Smart], [ContestType.Smart, ContestType.Cool, ContestType.Smart, ContestType.Cute])]),
+            new ContestTrainer('Zeek', 'Psychic', [new ContestPokemon('Drowzee', 'Drowzin', 1, 20, [ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough], [ContestType.Smart, ContestType.Smart, ContestType.Smart, ContestType.Cute])], '(male)'),
+        ],
+        [ContestRank.Hyper]: [
+            new ContestTrainer('Alisha', 'Young Couple', [new ContestPokemon('Beautifly', 'Tifly', 1, 30, [ContestType.Beautiful, ContestType.Smart], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Smart, ContestType.Smart], undefined, GameConstants.BattlePokemonGender.Female)], '(female)'),
+            new ContestTrainer('Bryce', 'Bug Catcher', [new ContestPokemon('Pineco', 'Pinoc', 1, 30, [ContestType.Beautiful, ContestType.Smart], [ContestType.Beautiful, ContestType.Smart, ContestType.Beautiful, ContestType.Smart])]),
+            new ContestTrainer('Claudia', 'Picnicker', [
+                new ContestPokemon('Nuzleaf', 'Nuzle', 1, 30, [ContestType.Cool], [ContestType.Beautiful, ContestType.Cool, ContestType.Beautiful, ContestType.Cool], undefined, GameConstants.BattlePokemonGender.Male),
+                new ContestPokemon('Shiftry', 'Shifty', 1, 30, [ContestType.Beautiful], [ContestType.Beautiful, ContestType.Cool, ContestType.Beautiful, ContestType.Cool], undefined, GameConstants.BattlePokemonGender.Male),
+            ]),
+            new ContestTrainer('Coltin', 'Pokémon Breeder', [new ContestPokemon('Cubone', 'Cubin', 1, 30, [ContestType.Cute, ContestType.Tough], [ContestType.Tough, ContestType.Tough, ContestType.Tough, ContestType.Cute])], '(male)'),
+            new ContestTrainer('Corbin', 'Collector', [
+                new ContestPokemon('Pelipper', 'Pelipe', 1, 30, [ContestType.Beautiful], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Cool, ContestType.Cool]),
+                new ContestPokemon('Absol', 'Abso', 1, 30, [ContestType.Cool], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Cool, ContestType.Cool]),
+            ], 'gen3'),
+            new ContestTrainer('Darryl', 'Cooltrainer', [new ContestPokemon('Seviper', 'Vipes', 1, 30, [ContestType.Cool, ContestType.Smart], [ContestType.Smart, ContestType.Tough, ContestType.Tough, ContestType.Smart])], '(male)'),
+            new ContestTrainer('Devon', 'Pokéfan', [new ContestPokemon('Miltank', 'Milkan', 1, 30, [ContestType.Beautiful, ContestType.Cute], [ContestType.Cute, ContestType.Beautiful, ContestType.Cute, ContestType.Beautiful])], '(male)'),
+            new ContestTrainer('Elias', 'Ninja Boy', [new ContestPokemon('Ninjask', 'Ninas', 1, 30, [ContestType.Cute, ContestType.Smart, ContestType.Tough], [ContestType.Smart, ContestType.Tough, ContestType.Cute, ContestType.Cute])]),
+            new ContestTrainer('Ellie', 'Veteran', [new ContestPokemon('Hitmonlee', 'Hitmon', 1, 30, [ContestType.Cool, ContestType.Tough], [ContestType.Cool, ContestType.Tough, ContestType.Cool, ContestType.Cool])], '(female)'),
+            new ContestTrainer('Emilio', 'School Kid', [
+                new ContestPokemon('Machop', 'Chopam', 1, 30, [ContestType.Tough], [ContestType.Tough, ContestType.Cool, ContestType.Tough, ContestType.Tough]),
+                new ContestPokemon('Machoke', 'Chokem', 1, 30, [ContestType.Cool], [ContestType.Tough, ContestType.Cool, ContestType.Tough, ContestType.Tough]),
+            ], '(male)'),
+            new ContestTrainer('Felicia', 'Lass', [
+                new ContestPokemon('Camerupt', 'Erupam', 1, 30, [ContestType.Cool, ContestType.Beautiful], [ContestType.Tough, ContestType.Tough, ContestType.Beautiful, ContestType.Cool]),
+                new ContestPokemon('Castform', 'Caster', 1, 30, [ContestType.Cute, ContestType.Smart, ContestType.Tough], [ContestType.Beautiful, ContestType.Smart, ContestType.Tough, ContestType.Cute], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Sandstorm, WeatherType.Windy])),
+                new ContestPokemon('Castform (Sunny)', 'Caster', 1, 30, [ContestType.Cute], [ContestType.Beautiful, ContestType.Smart, ContestType.Tough, ContestType.Cute], new WeatherRequirement([WeatherType.Harsh_Sunlight])),
+                new ContestPokemon('Castform (Rainy)', 'Caster', 1, 30, [ContestType.Smart], [ContestType.Beautiful, ContestType.Smart, ContestType.Tough, ContestType.Cute], new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])),
+                new ContestPokemon('Castform (Snowy)', 'Caster', 1, 30, [ContestType.Tough], [ContestType.Beautiful, ContestType.Smart, ContestType.Tough, ContestType.Cute], new WeatherRequirement([WeatherType.Hail, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Fog])),
+            ]),
+            new ContestTrainer('Francis', 'Black Belt', [new ContestPokemon('Mightyena', 'Yena', 1, 30, [ContestType.Cool, ContestType.Smart], [ContestType.Smart, ContestType.Tough, ContestType.Smart, ContestType.Tough])]),
+            new ContestTrainer('Gracie', 'Pokemon Ranger', [new ContestPokemon('Exeggutor', 'Eggsor', 1, 30, [ContestType.Smart, ContestType.Tough], [ContestType.Tough, ContestType.Smart, ContestType.Tough, ContestType.Smart])], '(female)'),
+            new ContestTrainer('Jade', 'Pokéfan', [new ContestPokemon('Swellow', 'Welow', 1, 30, [ContestType.Cool, ContestType.Beautiful], [ContestType.Cool, ContestType.Cool, ContestType.Cool, ContestType.Smart])], '(female)'),
+            new ContestTrainer('Jamie', 'Cooltrainer', [new ContestPokemon('Dunsparce', 'Diltot', 1, 30, [ContestType.Cute, ContestType.Tough], [ContestType.Tough, ContestType.Cute, ContestType.Cute, ContestType.Smart])], '(female)'),
+            new ContestTrainer('Jorge', 'Gentleman', [new ContestPokemon('Houndoom', 'Doomond', 1, 30, [ContestType.Cool, ContestType.Beautiful], [ContestType.Cool, ContestType.Beautiful, ContestType.Smart, ContestType.Beautiful], undefined, GameConstants.BattlePokemonGender.Male)]),
+            new ContestTrainer('Karla', 'Tuber', [new ContestPokemon('Lombre', 'Lombe', 1, 30, [ContestType.Beautiful, ContestType.Cute, ContestType.Smart], [ContestType.Cute, ContestType.Beautiful, ContestType.Cute, ContestType.Cute])], '(female)'),
+            new ContestTrainer('Kiara', 'School Kid', [new ContestPokemon('Kangaskhan', 'Khankan', 1, 30, [ContestType.Cool, ContestType.Cute], [ContestType.Tough, ContestType.Cool, ContestType.Tough, ContestType.Cute])], '(female)'),
+            new ContestTrainer('Lacey', 'Psychic', [new ContestPokemon('Lunatone', 'Lunone', 1, 30, [ContestType.Beautiful, ContestType.Smart], [ContestType.Beautiful, ContestType.Smart, ContestType.Smart, ContestType.Smart])], '(female)'),
+            new ContestTrainer('Marcus', 'Sailor', [new ContestPokemon('Squirtle', 'Surtle', 1, 30, [ContestType.Cute, ContestType.Tough], [ContestType.Cute, ContestType.Cute, ContestType.Tough, ContestType.Cute])]),
+            new ContestTrainer('Noel', 'Youngster', [new ContestPokemon('Magikarp', 'Karpag', 1, 30, [ContestType.Cute, ContestType.Tough], [ContestType.Tough, ContestType.Cute, ContestType.Cute, ContestType.Tough], undefined, GameConstants.BattlePokemonGender.Male)]),
+            new ContestTrainer('Ronnie', 'Hiker', [new ContestPokemon('Lairon', 'Lairn', 1, 30, [ContestType.Smart, ContestType.Tough], [ContestType.Smart, ContestType.Cool, ContestType.Tough, ContestType.Tough])]),
+            new ContestTrainer('Saul', 'Camper', [new ContestPokemon('Seaking', 'Kingsea', 1, 30, [ContestType.Cool, ContestType.Cute, ContestType.Smart, ContestType.Tough], [ContestType.Cute, ContestType.Smart, ContestType.Cool, ContestType.Cool], undefined, GameConstants.BattlePokemonGender.Male)]),
+            new ContestTrainer('Selena', 'Madame', [new ContestPokemon('Wailmer', 'Merail', 1, 30, [ContestType.Beautiful, ContestType.Cute], [ContestType.Beautiful, ContestType.Cute, ContestType.Beautiful, ContestType.Cute])]),
+        ],
+        [ContestRank.Master]: [
+            new ContestTrainer('Aubrey', 'Young Couple', [
+                new ContestPokemon('Vileplume', 'Plumile', 1, 40, [ContestType.Beautiful, ContestType.Cute], [ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Beautiful], undefined, GameConstants.BattlePokemonGender.Male),
+                new ContestPokemon('Bellossom', 'Blossom', 1, 40, [ContestType.Cute, ContestType.Smart], [ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Beautiful]),
+            ], '(female)'),
+            new ContestTrainer('Camile', 'Hex Maniac', [new ContestPokemon('Gengar', 'Garen', 1, 40, [ContestType.Cool, ContestType.Tough], [ContestType.Smart, ContestType.Smart, ContestType.Tough, ContestType.Tough])]),
+            new ContestTrainer('Camille', 'Psychic', [
+                new ContestPokemon('Natu', 'Utan', 1, 40, [ContestType.Cute, ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Smart, ContestType.Smart], new GymBadgeRequirement(BadgeEnums.Mind, GameConstants.AchievementOption.less)),
+                new ContestPokemon('Xatu', 'Utan', 1, 40, [ContestType.Beautiful, ContestType.Cute, ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Smart, ContestType.Smart], new GymBadgeRequirement(BadgeEnums.Mind), GameConstants.BattlePokemonGender.Female),
+            ], '(female)'),
+            new ContestTrainer('Clara', 'Pokémon Breeder', [new ContestPokemon('Togepi', 'Gepito', 1, 40, [ContestType.Cute], [ContestType.Cute, ContestType.Cute, ContestType.Cute, ContestType.Cute])], '(female)'),
+            new ContestTrainer('Deon', 'School Kid', [new ContestPokemon('Sharpedo', 'Pedos', 1, 40, [ContestType.Cool, ContestType.Cute, ContestType.Tough], [ContestType.Cool, ContestType.Cute, ContestType.Smart, ContestType.Tough])], '(male)'),
+            new ContestTrainer('Frankie', 'Youngster', [new ContestPokemon('Pichu', 'Chupy', 1, 40, [ContestType.Beautiful, ContestType.Cute, ContestType.Smart], [ContestType.Cute, ContestType.Cute, ContestType.Cute, ContestType.Cute])]),
+            new ContestTrainer('Heath', 'Cooltrainer', [new ContestPokemon('Heracross', 'Heross', 1, 40, [ContestType.Cool, ContestType.Tough], [ContestType.Tough, ContestType.Tough, ContestType.Cool, ContestType.Smart], undefined, GameConstants.BattlePokemonGender.Male)], '(male)'),
+            new ContestTrainer('Helen', 'Battle Girl', [new ContestPokemon('Wobbuffet', 'Wobet', 1, 40, [ContestType.Cool, ContestType.Beautiful, ContestType.Smart, ContestType.Tough], [ContestType.Tough, ContestType.Beautiful, ContestType.Beautiful, ContestType.Smart], undefined, GameConstants.BattlePokemonGender.Male)]),
+            new ContestTrainer('Jakob', 'Psychic', [new ContestPokemon('Espeon', 'Speon', 1, 40, [ContestType.Cool, ContestType.Beautiful], [ContestType.Cool, ContestType.Cool, ContestType.Beautiful, ContestType.Cute])], '(male)'),
+            new ContestTrainer('Janelle', 'Lady', [new ContestPokemon('Luvdisc', 'Luvis', 1, 40, [ContestType.Cute, ContestType.Tough], [ContestType.Cute, ContestType.Cute, ContestType.Tough, ContestType.Cute])]),
+            new ContestTrainer('Justina', 'Picnicker', [new ContestPokemon('Gyarados', 'Rados', 1, 40, [ContestType.Cool, ContestType.Beautiful, ContestType.Tough], [ContestType.Cool, ContestType.Beautiful, ContestType.Tough, ContestType.Tough], undefined, GameConstants.BattlePokemonGender.Male)]),
+            new ContestTrainer('Kailey', 'Twin', [new ContestPokemon('Meowth', 'Meowy', 1, 40, [ContestType.Cute, ContestType.Smart], [ContestType.Cute, ContestType.Smart, ContestType.Smart, ContestType.Tough])], 'left frlg'),
+            new ContestTrainer('Keaton', 'Preschooler', [new ContestPokemon('Slaking', 'Sling', 1, 40, [ContestType.Cute, ContestType.Smart, ContestType.Tough], [ContestType.Cute, ContestType.Tough, ContestType.Cute, ContestType.Cute])], '(male)'),
+            new ContestTrainer('Lamar', 'Rich Boy', [new ContestPokemon('Kirlia', 'Lirki', 1, 40, [ContestType.Cool, ContestType.Smart], [ContestType.Cool, ContestType.Smart, ContestType.Smart, ContestType.Cute])]),
+            new ContestTrainer('Lane', 'Black Belt', [new ContestPokemon('Ursaring', 'Ursing', 1, 40, [ContestType.Cool, ContestType.Tough], [ContestType.Tough, ContestType.Cool, ContestType.Smart, ContestType.Cool], undefined, GameConstants.BattlePokemonGender.Male)]),
+            new ContestTrainer('Martin', 'Scientist', [new ContestPokemon('Porygon', 'Gonpor', 1, 40, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Cute, ContestType.Smart])], '(male)'),
+            new ContestTrainer('Mayra', 'Pokéfan', [new ContestPokemon('Altaria', 'Taria', 1, 40, [ContestType.Cool, ContestType.Beautiful], [ContestType.Cool, ContestType.Cool, ContestType.Beautiful, ContestType.Beautiful])], 'gen4 (female)'),
+            new ContestTrainer('Nigel', 'Camper', [
+                new ContestPokemon('Sableye', 'Eyesab', 1, 40, [ContestType.Cool, ContestType.Tough], [ContestType.Beautiful, ContestType.Smart, ContestType.Smart, ContestType.Smart]),
+                new ContestPokemon('Duskull', 'Kullusk', 1, 40, [ContestType.Smart, ContestType.Tough], [ContestType.Smart, ContestType.Smart, ContestType.Smart, ContestType.Smart]),
+            ]),
+            new ContestTrainer('Perla', 'Beauty', [new ContestPokemon('Jynx', 'Nyx', 1, 40, [ContestType.Beautiful, ContestType.Smart], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Beautiful, ContestType.Smart])]),
+            new ContestTrainer('Ralph', 'Old Man', [new ContestPokemon('Loudred', 'Louderd', 1, 40, [ContestType.Cool, ContestType.Tough], [ContestType.Cool, ContestType.Tough, ContestType.Cool, ContestType.Cool])]),
+            new ContestTrainer('Rosa', 'Idol', [
+                new ContestPokemon('Skitty', 'Sitty', 1, 40, [ContestType.Beautiful, ContestType.Cute], [ContestType.Cute, ContestType.Cute, ContestType.Smart, ContestType.Cute]),
+                new ContestPokemon('Delcatty', 'Catted', 1, 40, [ContestType.Beautiful, ContestType.Smart], [ContestType.Cute, ContestType.Cute, ContestType.Smart, ContestType.Cute]),
+            ]),
+            new ContestTrainer('Sasha', 'Twin', [new ContestPokemon('Electrode', 'Rodlect', 1, 40, [ContestType.Cool, ContestType.Beautiful], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Cool, ContestType.Beautiful])], 'right frlg'),
+            new ContestTrainer('Sergio', 'Dragon Tamer', [new ContestPokemon('Dragonite', 'Drite', 1, 40, [ContestType.Cool, ContestType.Tough], [ContestType.Cool, ContestType.Tough, ContestType.Cool, ContestType.Tough])]),
+            new ContestTrainer('Trey', 'Sailor', [new ContestPokemon('Slowking', 'Slowgo', 1, 40, [ContestType.Cute, ContestType.Tough], [ContestType.Cute, ContestType.Tough, ContestType.Cute, ContestType.Tough])]),
+        ],
+        // Sinnoh Super Contests
+        [ContestRank['Super Normal']]: [
+            new ContestTrainer('Luis', 'Camper', [new ContestPokemon('Pikachu', 'Sparky', 1, 50, [ContestType.Cute], undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
+            new ContestTrainer('Lacey', 'Lass', [new ContestPokemon('Barboach', 'Whiskers', 1, 50, [ContestType.Cute])]),
+            new ContestTrainer('Connor', 'Ninja Boy', [new ContestPokemon('Starly', 'Flappy', 1, 50, [ContestType.Cute], undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
+            new ContestTrainer('Dakota', 'School Kid', [new ContestPokemon('Bidoof', 'Dots', 1, 50, [ContestType.Cool], undefined, undefined, GameConstants.BattlePokemonGender.Female)], '(female)'),
+            new ContestTrainer('Gabriel', 'Artist', [new ContestPokemon('Glameow', 'Precious', 1, 50, [ContestType.Beautiful])]),
+            new ContestTrainer('Tiffany', 'Parasol Lady', [new ContestPokemon('Shinx', 'Flick', 1, 50, [ContestType.Cool], undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
+            new ContestTrainer('Westley', 'School Kid', [new ContestPokemon('Psyduck', 'Dizzy', 1, 50, [ContestType.Beautiful])], '(male)'),
+            new ContestTrainer('Anna', 'Picnicker', [new ContestPokemon('Bonsly', 'Sprout', 1, 50, [ContestType.Tough])]),
+            new ContestTrainer('Corey', 'School Kid', [new ContestPokemon('Hoothoot', 'Hootie', 1, 50, [ContestType.Smart])], '(male)'),
+            new ContestTrainer('Sara', 'Beauty', [new ContestPokemon('Zubat', 'Batty', 1, 50, [ContestType.Cute], undefined, undefined, GameConstants.BattlePokemonGender.Female)]),
+            new ContestTrainer('Ian', 'Fisherman', [new ContestPokemon('Shellos (West)', 'Wiggy', 1, 50, [ContestType.Smart])]),
+            new ContestTrainer('Heather', 'Lass', [new ContestPokemon('Cherubi', 'Pit', 1, 50, [ContestType.Beautiful])]),
+            new ContestTrainer('Marcus', 'Psychic', [new ContestPokemon('Mime Jr.', 'Merry', 1, 50, [ContestType.Smart])], '(male)'),
+            new ContestTrainer('Erin', 'Aroma Lady', [new ContestPokemon('Buizel', 'Weasy', 1, 50, [ContestType.Beautiful])]),
+            new ContestTrainer('Shane', 'Scientist', [new ContestPokemon('Bronzor', 'Wheelie', 1, 50, [ContestType.Tough])], '(male)'),
+            new ContestTrainer('Marissa', 'Battle Girl', [new ContestPokemon('Machop', 'Choppy', 1, 50, [ContestType.Cool])]),
+            new ContestTrainer('Victor', 'Hiker', [new ContestPokemon('Geodude', 'Rocky', 1, 50, [ContestType.Tough])]),
+            new ContestTrainer('Brooke', 'School Kid', [new ContestPokemon('Goldeen', 'Goldy', 1, 50, [ContestType.Cool], undefined, undefined, GameConstants.BattlePokemonGender.Female)], '(female)'),
+            new ContestTrainer('Tanner', 'Collector', [new ContestPokemon('Clefairy', 'Buffy', 1, 50, [ContestType.Smart])]),
+            new ContestTrainer('Renee', 'Lady', [new ContestPokemon('Pachirisu', 'Bucky', 1, 50, [ContestType.Tough], undefined, undefined, GameConstants.BattlePokemonGender.Female)], '(gen4)'),
+        ],
+        [ContestRank['Super Great']]: [
+            new ContestTrainer('Isaac', 'Pokémon Breeder', [new ContestPokemon('Pikachu', 'Chewy', 1, 60, [ContestType.Cool, ContestType.Cute], undefined, undefined, GameConstants.BattlePokemonGender.Male)], '(male)'),
+            new ContestTrainer('Alexus', 'Bird Keeper', [new ContestPokemon('Hoothoot', 'Hoots', 1, 60, [ContestType.Smart, ContestType.Tough])], '(female)'),
+            new ContestTrainer('Jorge', 'Pokéfan', [new ContestPokemon('Geodude', 'Pebbles', 1, 60, [ContestType.Cool, ContestType.Tough])], '(male)'),
+            new ContestTrainer('Cora', 'Cowgirl', [new ContestPokemon('Ponyta', 'Blaze', 1, 60, [ContestType.Cute])]),
+            new ContestTrainer('Chase', 'Psychic', [new ContestPokemon('Meditite', 'Ohm', 1, 60, [ContestType.Cool, ContestType.Smart], undefined, undefined, GameConstants.BattlePokemonGender.Male)], '(male)'),
+            new ContestTrainer('Katie', 'Lass', [new ContestPokemon('Psyduck', 'Slappy', 1, 60, [ContestType.Cool, ContestType.Beautiful])]),
+            new ContestTrainer('Dominic', 'Fisherman', [new ContestPokemon('Barboach', 'Beardy', 1, 60, [ContestType.Beautiful, ContestType.Cute])]),
+            new ContestTrainer('Sierra', 'Parasol Lady', [new ContestPokemon('Bidoof', 'Gnawby', 1, 60, [ContestType.Cool, ContestType.Tough], undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
+            new ContestTrainer('Keith', 'Guitarist', [new ContestPokemon('Pachirisu', 'Stripe', 1, 60, [ContestType.Cute, ContestType.Tough], undefined, undefined, GameConstants.BattlePokemonGender.Female)], '(male)'),
+            new ContestTrainer('Julia', 'Cowgirl', [new ContestPokemon('Shellos (West)', 'Sluggo', 1, 60, [ContestType.Cute, ContestType.Smart])]),
+            new ContestTrainer('Brendan', 'Sailor', [new ContestPokemon('Goldeen', 'Auric', 1, 60, [ContestType.Cool, ContestType.Beautiful], undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
+            new ContestTrainer('Amy', 'Aroma Lady', [new ContestPokemon('Stunky', 'Stinky', 1, 60, [ContestType.Cool])]),
+            new ContestTrainer('Chad', 'Ruin Maniac', [new ContestPokemon('Bronzor', 'Saucy', 1, 60, [ContestType.Smart, ContestType.Tough])]),
+            new ContestTrainer('Caitlin', 'Picnicker', [new ContestPokemon('Mime Jr.', 'Mimi', 1, 60, [ContestType.Beautiful, ContestType.Smart])]),
+            new ContestTrainer('Martin', 'Camper', [new ContestPokemon('Cherubi', 'Cheri', 1, 60, [ContestType.Beautiful, ContestType.Tough])]),
+            new ContestTrainer('Kathryn', 'Battle Girl', [new ContestPokemon('Onix', 'Flex', 1, 60, [ContestType.Tough])]),
+            new ContestTrainer('Randal', 'Ninja Boy', [new ContestPokemon('Misdreavus', 'Missy', 1, 60, [ContestType.Smart])]),
+            new ContestTrainer('Sidney', 'Bird Keeper', [new ContestPokemon('Starly', 'Happy', 1, 60, [ContestType.Cute, ContestType.Smart], undefined, undefined, GameConstants.BattlePokemonGender.Female)], '(female)'),
+            new ContestTrainer('Xavier', 'Artist', [new ContestPokemon('Chingling', 'Chimer', 1, 60, [ContestType.Beautiful])]),
+            new ContestTrainer('Monica', 'Lady', [new ContestPokemon('Glameow', 'Glimmer', 1, 60, [ContestType.Beautiful, ContestType.Cute])], '(gen4)'),
+        ],
+        [ContestRank['Super Ultra']]: [
+            new ContestTrainer('Frank', 'Ace Trainer', [new ContestPokemon('Pikachu', 'Piki', 1, 70, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute], undefined, undefined, GameConstants.BattlePokemonGender.Male)], '(male)'),
+            new ContestTrainer('Leah', 'Aroma Lady', [new ContestPokemon('Clefairy', 'Blingy', 1, 70, [ContestType.Cute, ContestType.Smart])]),
+            new ContestTrainer('Julian', 'Jogger', [new ContestPokemon('Machop', 'Kata', 1, 70, [ContestType.Cool, ContestType.Tough])]),
+            new ContestTrainer('Bianca', 'Cowgirl', [new ContestPokemon('Ponyta', 'Flash', 1, 70, [ContestType.Cute, ContestType.Tough])]),
+            new ContestTrainer('Mario', 'Ninja Boy', [new ContestPokemon('Gastly', 'Spooky', 1, 70, [ContestType.Beautiful])]),
+            new ContestTrainer('Lara', 'Madame', [new ContestPokemon('Onix', 'Gem', 1, 70, [ContestType.Beautiful, ContestType.Tough])]),
+            new ContestTrainer('Alan', 'Rancher', [new ContestPokemon('Hoothoot', 'Brainy', 1, 70, [ContestType.Cool, ContestType.Smart, ContestType.Tough])]),
+            new ContestTrainer('Bria', 'Bird Keeper', [new ContestPokemon('Murkrow', 'Ebony', 1, 70, [ContestType.Cute], undefined, undefined, GameConstants.BattlePokemonGender.Female)], '(female)'),
+            new ContestTrainer('Collin', 'Ace Trainer', [new ContestPokemon('Misdreavus', 'Malice', 1, 70, [ContestType.Beautiful, ContestType.Cute, ContestType.Smart])], '(male)'),
+            new ContestTrainer('Alexis', 'Psychic', [new ContestPokemon('Meditite', 'Ponder', 1, 70, [ContestType.Cool, ContestType.Smart], undefined, undefined, GameConstants.BattlePokemonGender.Female)], '(female)'),
+            new ContestTrainer('Andre', 'Camper', [new ContestPokemon('Budew', 'Buddy', 1, 70, [ContestType.Beautiful, ContestType.Smart])]),
+            new ContestTrainer('Bridget', 'Beauty', [new ContestPokemon('Chatot', 'Tweety', 1, 70, [ContestType.Cool, ContestType.Beautiful, ContestType.Tough])]),
+            new ContestTrainer('Damien', 'Artist', [new ContestPokemon('Chingling', 'Jangle', 1, 70, [ContestType.Cool, ContestType.Beautiful])]),
+            new ContestTrainer('Kara', 'Battle Girl', [new ContestPokemon('Bronzor', 'Bronzy', 1, 70, [ContestType.Cute, ContestType.Smart, ContestType.Tough])]),
+            new ContestTrainer('Angus', 'Sailor', [new ContestPokemon('Bonsly', 'Chokkan', 1, 70, [ContestType.Smart, ContestType.Tough])]),
+            new ContestTrainer('Kiana', 'Bird Keeper', [new ContestPokemon('Zubat', 'Midnight', 1, 70, [ContestType.Beautiful, ContestType.Cute], undefined, undefined, GameConstants.BattlePokemonGender.Male)], '(female)'),
+            new ContestTrainer('Jonesy', 'Collector', [new ContestPokemon('Pichu', 'Sweetie', 1, 70, [ContestType.Cool])]),
+            new ContestTrainer('Hayley', 'Cowgirl', [new ContestPokemon('Buneary', 'Floppy', 1, 70, [ContestType.Tough])]),
+            new ContestTrainer('Alfredo', 'Ace Trainer', [new ContestPokemon('Stunky', 'Honey', 1, 70, [ContestType.Cool, ContestType.Cute])], '(male)'),
+            new ContestTrainer('Bailey', 'Picnicker', [new ContestPokemon('Happiny', 'Baby', 1, 70, [ContestType.Smart])]),
+        ],
+        [ContestRank['Super Master']]: [
+            new ContestTrainer('Josiah', 'Ace Trainer', [new ContestPokemon('Pikachu', 'Ziggy', 1, 80, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Tough], undefined, undefined, GameConstants.BattlePokemonGender.Male)], '(male snow)'),
+            new ContestTrainer('Carly', 'Pokémon Breeder', [new ContestPokemon('Clefairy', 'Bumbles', 1, 80, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart])], '(female)'),
+            new ContestTrainer('Bryant', 'Ace Trainer', [new ContestPokemon('Machop', 'Chopper', 1, 80, [ContestType.Cool, ContestType.Cute, ContestType.Tough])], '(male)'),
+            new ContestTrainer('Nancy', 'Beauty', [new ContestPokemon('Gastly', 'Boo', 1, 80, [ContestType.Cool, ContestType.Beautiful, ContestType.Smart])]),
+            new ContestTrainer('Zackery', 'Artist', [new ContestPokemon('Turtwig', 'Speedy', 1, 80, [ContestType.Beautiful, ContestType.Tough])]),
+            new ContestTrainer('Tanya', 'Pokéfan', [new ContestPokemon('Chimchar', 'Chimpy', 1, 80, [ContestType.Cute, ContestType.Tough])], '(female)'),
+            new ContestTrainer('Elias', 'Pokemon Ranger', [new ContestPokemon('Piplup', 'Penny', 1, 80, [ContestType.Cool, ContestType.Cute])], '(male)'),
+            new ContestTrainer('Marisa', 'Aroma Lady', [new ContestPokemon('Shieldon', 'Rampy', 1, 80, [ContestType.Cool, ContestType.Smart])]),
+            new ContestTrainer('Kelvin', 'Sailor', [new ContestPokemon('Buizel', 'Zippy', 1, 80, [ContestType.Beautiful, ContestType.Smart])]),
+            new ContestTrainer('Chloe', 'Lady', [new ContestPokemon('Chatot', 'Bebop', 1, 80, [ContestType.Cool, ContestType.Beautiful, ContestType.Smart, ContestType.Tough])], '(gen4)'),
+            new ContestTrainer('Rodney', 'Collector', [new ContestPokemon('Bonsly', 'Twigs', 1, 80, [ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough])]),
+            new ContestTrainer('Hailey', 'Parasol Lady', [new ContestPokemon('Mime Jr.', 'Moppet', 1, 80, [ContestType.Beautiful, ContestType.Smart, ContestType.Tough])]),
+            new ContestTrainer('Kaleb', 'Pokéfan', [new ContestPokemon('Hoothoot', 'Strix', 1, 80, [ContestType.Cool, ContestType.Cute, ContestType.Smart, ContestType.Tough])], '(male)'),
+            new ContestTrainer('Ashlyn', 'Bird Keeper', [new ContestPokemon('Murkrow', 'Murky', 1, 80, [ContestType.Beautiful, ContestType.Cute, ContestType.Tough], undefined, undefined, GameConstants.BattlePokemonGender.Female)], '(female)'),
+            new ContestTrainer('Alberto', 'Artist', [new ContestPokemon('Meditite', 'Noodle', 1, 80, [ContestType.Cool, ContestType.Cute, ContestType.Smart], undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
+            new ContestTrainer('', 'Fantina', [new ContestPokemon('Drifblim', 'Loony', 1, 80, [ContestType.Cute])]),
+            new ContestTrainer('Johanna', 'Contest Champion', [new ContestPokemon('Kangaskhan', 'Jumpy', 1, 80, [ContestType.Cool])], '(Johanna)'),
+            new ContestTrainer('Kristin', 'Reporter', [new ContestPokemon('Magneton', 'Jolt', 1, 80, [ContestType.Beautiful])]),
+            new ContestTrainer('Casey', 'Nurse', [new ContestPokemon('Chansey', 'Pinky', 1, 80, [ContestType.Smart])]),
+            new ContestTrainer('', 'Jasmine', [new ContestPokemon('Steelix', 'Rusty', 1, 80, [ContestType.Tough], undefined, undefined, GameConstants.BattlePokemonGender.Male)]),
+        ],
+        [ContestRank.Spectacular]: [
+            /**
+            * Normal Spectacular Trainers
+            * Gen 1 berries
+            */
+            new ContestTrainer('Micah', 'Youngster', [new ContestPokemon('Poochyena', 'Poochin', 5, 90, [ContestType.Cool, ContestType.Tough], [ContestType.Tough, ContestType.Tough, ContestType.Tough, ContestType.Cool])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Normal, amount: 2}}
+            ),
+            new ContestTrainer('Shannon', 'Lady', [new ContestPokemon('Zigzagoon', 'Gonzer', 5, 90, [ContestType.Cute], [ContestType.Cute, ContestType.Cute, ContestType.Cool, ContestType.Smart])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Normal, amount: 2}}
+            ),
+            new ContestTrainer('Mateo', 'Bug Catcher', [new ContestPokemon('Dustox', 'Nox', 5, 90, [ContestType.Beautiful], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Cute, ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Male)], undefined,
+                {rankedBerryReward: {rank: ContestRank.Normal, amount: 2}}
+            ),
+            new ContestTrainer('Jordyn', 'School Kid', [new ContestPokemon('Seedot', 'Seedottie', 5, 90, [ContestType.Smart, ContestType.Tough], [ContestType.Tough, ContestType.Tough, ContestType.Smart, ContestType.Smart])], '(female)',
+                {rankedBerryReward: {rank: ContestRank.Normal, amount: 2}}
+            ),
+            new ContestTrainer('Gianna', 'Lass', [new ContestPokemon('Taillow', 'Tailster', 5, 90, [ContestType.Cool], [ContestType.Cool, ContestType.Cool, ContestType.Cool, ContestType.Beautiful])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Normal, amount: 2}}
+            ),
+            new ContestTrainer('Declan', 'Ninja Boy', [new ContestPokemon('Nincada', 'Ninny', 5, 90, [ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Tough, ContestType.Cute])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Normal, amount: 2}}
+            ),
+            new ContestTrainer('Carlton', 'School Kid', [new ContestPokemon('Shroomish', 'Shrewmish', 5, 90, [ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Smart, ContestType.Tough])], '(male)',
+                {rankedBerryReward: {rank: ContestRank.Normal, amount: 2}}
+            ),
+            new ContestTrainer('Adeine', 'Tuber', [new ContestPokemon('Wingull', 'Win', 5, 90, [ContestType.Beautiful, ContestType.Cute], [ContestType.Cute, ContestType.Cute, ContestType.Beautiful, ContestType.Beautiful])], '(female)',
+                {rankedBerryReward: {rank: ContestRank.Normal, amount: 2}}
+            ),
+            new ContestTrainer('Asher', 'Pokéfan', [new ContestPokemon('Slakoth', 'Visikoth', 5, 90, [ContestType.Beautiful, ContestType.Cute, ContestType.Tough], [ContestType.Tough, ContestType.Tough, ContestType.Cute, ContestType.Cute])], '(male)',
+                {rankedBerryReward: {rank: ContestRank.Normal, amount: 2}}
+            ),
+            new ContestTrainer('Lauren', 'Pokéfan', [new ContestPokemon('Whismur', 'Whizz', 5, 90, [ContestType.Cute, ContestType.Smart], [ContestType.Cute, ContestType.Cute, ContestType.Cute, ContestType.Smart])], '(female)',
+                {rankedBerryReward: {rank: ContestRank.Normal, amount: 2}}
+            ),
+            new ContestTrainer('Jeremiah', 'Black Belt', [new ContestPokemon('Makuhita', 'Makuwaku', 5, 90, [ContestType.Cool, ContestType.Tough], [ContestType.Tough, ContestType.Tough, ContestType.Cool, ContestType.Cool])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Normal, amount: 2}}
+            ),
+            new ContestTrainer('Molly', 'Picnicker', [new ContestPokemon('Aron', 'Ronnie', 5, 90, [ContestType.Cool, ContestType.Tough], [ContestType.Cool, ContestType.Tough, ContestType.Tough, ContestType.Tough])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Normal, amount: 2}}
+            ),
+            new ContestTrainer('Martinus', 'Camper', [new ContestPokemon('Zubat', 'Zoonby', 5, 90, [ContestType.Beautiful, ContestType.Smart], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Smart, ContestType.Smart], undefined, GameConstants.BattlePokemonGender.Male)], undefined,
+                {rankedBerryReward: {rank: ContestRank.Normal, amount: 2}}
+            ),
+            new ContestTrainer('Liliana', 'Aroma Lady', [new ContestPokemon('Gulpin', 'Guligan', 5, 90, [ContestType.Cute], [ContestType.Smart, ContestType.Smart, ContestType.Cute, ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
+                {rankedBerryReward: {rank: ContestRank.Normal, amount: 2}}
+            ),
+            new ContestTrainer('Camden', 'Guitarist', [new ContestPokemon('Electrike', 'Bolt', 5, 90, [ContestType.Cool, ContestType.Beautiful], [ContestType.Cool, ContestType.Cool, ContestType.Tough, ContestType.Beautiful])], '(oras)',
+                {rankedBerryReward: {rank: ContestRank.Normal, amount: 2}}
+            ),
+            /**
+            * Super Spectacular Trainers
+            * Gen 2 berries
+            */
+            new ContestTrainer('Keira', 'Aroma Lady', [new ContestPokemon('Roselia', 'Rosalie', 5, 90, [ContestType.Beautiful, ContestType.Cute], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Cute, ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
+                {rankedBerryReward: {rank: ContestRank.Super, amount: 4}}
+            ),
+            new ContestTrainer('Bentley', 'Bird Keeper', [new ContestPokemon('Doduo', 'Dodon\'t', 5, 90, [ContestType.Cool, ContestType.Tough], [ContestType.Cool, ContestType.Cool, ContestType.Tough, ContestType.Tough], undefined, GameConstants.BattlePokemonGender.Male)], undefined,
+                {rankedBerryReward: {rank: ContestRank.Super, amount: 4}}
+            ),
+            new ContestTrainer('Plum', 'Lass', [new ContestPokemon('Trapinch', 'Tracy', 5, 90, [ContestType.Tough], [ContestType.Tough, ContestType.Tough, ContestType.Tough, ContestType.Smart])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Super, amount: 4}}
+            ),
+            new ContestTrainer('Zacahry', 'Pokémon Breeder', [new ContestPokemon('Cacnea', 'Succulus', 5, 90, [ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Smart, ContestType.Cute])], '(male)',
+                {rankedBerryReward: {rank: ContestRank.Super, amount: 4}}
+            ),
+            new ContestTrainer('Alyssa', 'Picnicker', [new ContestPokemon('Sandshrew', 'Sandyclaws', 5, 90, [ContestType.Cool], [ContestType.Cool, ContestType.Cool, ContestType.Tough, ContestType.Tough])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Super, amount: 4}}
+            ),
+            new ContestTrainer('Brody', 'Ruin Maniac', [new ContestPokemon('Baltoy', 'Baltop', 5, 90, [ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Cute, ContestType.Tough])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Super, amount: 4}}
+            ),
+            new ContestTrainer('Mila', 'Parasol Lady', [new ContestPokemon('Numel', 'Mel', 5, 90, [ContestType.Beautiful], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Cute, ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
+                {rankedBerryReward: {rank: ContestRank.Super, amount: 4}}
+            ),
+            new ContestTrainer('Rohan', 'Camper', [new ContestPokemon('Spinda', 'Spinmaster', 5, 90, [ContestType.Cute, ContestType.Smart], [ContestType.Cute, ContestType.Cute, ContestType.Smart, ContestType.Smart])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Super, amount: 4}}
+            ),
+            new ContestTrainer('Alaina', 'Lady', [new ContestPokemon('Swablu', 'Swellbell', 5, 80, [ContestType.Beautiful, ContestType.Smart], [ContestType.Cute, ContestType.Cute, ContestType.Beautiful, ContestType.Beautiful])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Super, amount: 4}}
+            ),
+            new ContestTrainer('Levi', 'Triathlete', [new ContestPokemon('Linoone', 'Noone', 5, 90, [ContestType.Cool, ContestType.Tough], [ContestType.Cool, ContestType.Beautiful, ContestType.Tough, ContestType.Tough])], 'gen3 (maleswimming)',
+                {rankedBerryReward: {rank: ContestRank.Super, amount: 4}}
+            ),
+            new ContestTrainer('Gabriella', 'Ace Trainer', [new ContestPokemon('Kecleon', 'Leon', 5, 90, [ContestType.Cool, ContestType.Tough], [ContestType.Cool, ContestType.Cool, ContestType.Tough, ContestType.Tough])], '(female)',
+                {rankedBerryReward: {rank: ContestRank.Super, amount: 4}}
+            ),
+            new ContestTrainer('Dominic', 'School Kid', [new ContestPokemon('Corphish', 'Snip', 5, 90, [ContestType.Tough], [ContestType.Cool, ContestType.Tough, ContestType.Smart, ContestType.Cool])], '(male)',
+                {rankedBerryReward: {rank: ContestRank.Super, amount: 4}}
+            ),
+            new ContestTrainer('Kaitlyn', 'Pokémon Breeder', [new ContestPokemon('Barboach', 'Barbra', 5, 90, [ContestType.Beautiful, ContestType.Cute], [ContestType.Cute, ContestType.Cute, ContestType.Beautiful, ContestType.Beautiful])], '(female)',
+                {rankedBerryReward: {rank: ContestRank.Super, amount: 4}}
+            ),
+            new ContestTrainer('Tyler', 'Psychic', [new ContestPokemon('Spoink', 'Spearl', 5, 90, [ContestType.Beautiful, ContestType.Cute], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Cute, ContestType.Cute])], '(male)',
+                {rankedBerryReward: {rank: ContestRank.Super, amount: 4}}
+            ),
+            new ContestTrainer('Adalyn', 'Pokémon Ranger', [new ContestPokemon('Lotad', 'Tad', 5, 90, [ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Cute, ContestType.Cute])], '(female)',
+                {rankedBerryReward: {rank: ContestRank.Super, amount: 4}}
+            ),
+            /**
+            * Hyper Spectacular Trainers
+            * Gen 3 berries
+            */
+            new ContestTrainer('Landon', 'Pokémaniac', [new ContestPokemon('Lairon', 'Wonwon', 5, 90, [ContestType.Smart, ContestType.Tough], [ContestType.Smart, ContestType.Smart, ContestType.Tough, ContestType.Tough])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Hyper, amount: 6}}
+            ),
+            new ContestTrainer('Mckenzie', 'Pokémon Ranger', [new ContestPokemon('Nuzleaf', 'Nuzlad', 5, 90, [ContestType.Cool, ContestType.Beautiful], [ContestType.Cool, ContestType.Cool, ContestType.Beautiful, ContestType.Beautiful], undefined, GameConstants.BattlePokemonGender.Female)], '(female)',
+                {rankedBerryReward: {rank: ContestRank.Hyper, amount: 6}}
+            ),
+            new ContestTrainer('Nelson', 'Ninja Boy', [new ContestPokemon('Ninjask', 'Ninjackie', 5, 90, [ContestType.Tough], [ContestType.Tough, ContestType.Tough, ContestType.Cool, ContestType.Cool])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Hyper, amount: 6}}
+            ),
+            new ContestTrainer('Riley', 'Lady', [new ContestPokemon('Swellow', 'Wollew', 5, 90, [ContestType.Cool], [ContestType.Cool, ContestType.Cool, ContestType.Cool, ContestType.Cool])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Hyper, amount: 6}}
+            ),
+            new ContestTrainer('Nathan', 'Gentleman', [new ContestPokemon('Mightyena', 'Mighty', 5, 90, [ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Smart, ContestType.Tough])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Hyper, amount: 6}}
+            ),
+            new ContestTrainer('Twyla', 'Beauty', [new ContestPokemon('Beautifly', 'Papi', 5, 90, [ContestType.Beautiful], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Cute, ContestType.Cool], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
+                {rankedBerryReward: {rank: ContestRank.Hyper, amount: 6}}
+            ),
+            new ContestTrainer('Gavin', 'Fisherman', [new ContestPokemon('Seaking', 'The King', 5, 90, [ContestType.Cool, ContestType.Beautiful], [ContestType.Beautiful, ContestType.Tough, ContestType.Cool, ContestType.Cool], undefined, GameConstants.BattlePokemonGender.Male)], undefined,
+                {rankedBerryReward: {rank: ContestRank.Hyper, amount: 6}}
+            ),
+            new ContestTrainer('Lily', 'Parasol Lady', [new ContestPokemon('Camerupt', 'Camelot', 5, 90, [ContestType.Beautiful, ContestType.Cute], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Cute, ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
+                {rankedBerryReward: {rank: ContestRank.Hyper, amount: 6}}
+            ),
+            new ContestTrainer('Primo', 'Hiker', [new ContestPokemon('Machop', 'Chopchop', 5, 90, [ContestType.Cool, ContestType.Tough], [ContestType.Cool, ContestType.Cool, ContestType.Tough, ContestType.Tough])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Hyper, amount: 6}}
+            ),
+            new ContestTrainer('Alejandra', 'Pokémon Breeder', [new ContestPokemon('Lombre', 'Nombre', 5, 90, [ContestType.Cute, ContestType.Smart], [ContestType.Cute, ContestType.Cute, ContestType.Smart, ContestType.Smart])], '(female)',
+                {rankedBerryReward: {rank: ContestRank.Hyper, amount: 6}}
+            ),
+            new ContestTrainer('Yoshinari', 'Collector', [new ContestPokemon('Seviper', 'Crawly', 5, 90, [ContestType.Smart, ContestType.Tough], [ContestType.Beautiful, ContestType.Smart, ContestType.Tough, ContestType.Tough])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Hyper, amount: 6}}
+            ),
+            new ContestTrainer('Lacy', 'Tuber', [new ContestPokemon('Wailmer', 'Bobble', 5, 90, [ContestType.Cute], [ContestType.Cute, ContestType.Cute, ContestType.Cute, ContestType.Beautiful])], '(female)',
+                {rankedBerryReward: {rank: ContestRank.Hyper, amount: 6}}
+            ),
+            new ContestTrainer('Owen', 'Swimmer', [new ContestPokemon('Magikarp', 'Magi', 5, 90, [ContestType.Cute, ContestType.Tough], [ContestType.Cute, ContestType.Cute, ContestType.Tough, ContestType.Cute], undefined, GameConstants.BattlePokemonGender.Male)], '(male)',
+                {rankedBerryReward: {rank: ContestRank.Hyper, amount: 6}}
+            ),
+            new ContestTrainer('Addison', 'Hex Maniac', [new ContestPokemon('Lunatone', 'Moony', 5, 90, [ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Smart, ContestType.Tough])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Hyper, amount: 6}}
+            ),
+            new ContestTrainer('Jayce', 'Sailor', [new ContestPokemon('Pelipper', 'Piper', 5, 90, [ContestType.Cool], [ContestType.Cool, ContestType.Tough, ContestType.Tough, ContestType.Tough])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Hyper, amount: 6}}
+            ),
+            /**
+            * Master Spectacular Trainers
+            * Gen 4 berries
+            */
+            new ContestTrainer('Yoko', 'Delinquent', [new ContestPokemon('Gyarados', 'Gyalaxy', 5, 90, [ContestType.Cool, ContestType.Tough], [ContestType.Cool, ContestType.Cool, ContestType.Tough, ContestType.Tough], undefined, GameConstants.BattlePokemonGender.Female)], '(female)',
+                {rankedBerryReward: {rank: ContestRank.Master, amount: 8}}
+            ),
+            new ContestTrainer('Jeff', 'Guitarist', [new ContestPokemon('Loudred', 'Louduff', 5, 90, [ContestType.Cool], [ContestType.Cool, ContestType.Cool, ContestType.Cool, ContestType.Beautiful])], '(oras)',
+                {rankedBerryReward: {rank: ContestRank.Master, amount: 8}}
+            ),
+            new ContestTrainer('Elsie', 'Pokéfan', [new ContestPokemon('Delcatty', 'Mione', 5, 90, [ContestType.Cute], [ContestType.Cute, ContestType.Cute, ContestType.Cute, ContestType.Beautiful])], '(female)',
+                {rankedBerryReward: {rank: ContestRank.Master, amount: 8}}
+            ),
+            new ContestTrainer('Jaylon', 'Expert', [new ContestPokemon('Slaking', 'Slacker', 5, 90, [ContestType.Cool, ContestType.Tough], [ContestType.Cool, ContestType.Cute, ContestType.Tough, ContestType.Tough])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Master, amount: 8}}
+            ),
+            new ContestTrainer('Layla', 'Free Diver', [new ContestPokemon('Gorebyss', 'Gorflir', 5, 90, [ContestType.Beautiful], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Beautiful, ContestType.Cool])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Master, amount: 8}}
+            ),
+            new ContestTrainer('Ruslan', 'Psychic', [new ContestPokemon('Kirlia', 'Lia', 5, 90, [ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Smart, ContestType.Smart])], '(male)',
+                {rankedBerryReward: {rank: ContestRank.Master, amount: 8}}
+            ),
+            new ContestTrainer('Lilias', 'Aroma Lady', [new ContestPokemon('Vileplume', 'Plumette', 5, 90, [ContestType.Beautiful], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Beautiful, ContestType.Cool], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
+                {rankedBerryReward: {rank: ContestRank.Master, amount: 8}}
+            ),
+            new ContestTrainer('Aiden', 'Street Thug', [new ContestPokemon('Dusclops', 'Topclops', 5, 90, [ContestType.Smart, ContestType.Tough], [ContestType.Smart, ContestType.Smart, ContestType.Tough, ContestType.Tough])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Master, amount: 8}}
+            ),
+            new ContestTrainer('Madelyn', 'Beauty', [new ContestPokemon('Illumise', 'Princess', 5, 90, [ContestType.Cute, ContestType.Smart], [ContestType.Cute, ContestType.Cute, ContestType.Smart, ContestType.Smart])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Master, amount: 8}}
+            ),
+            new ContestTrainer('Elijah', 'Sailor', [new ContestPokemon('Sharpedo', 'Shargob', 5, 90, [ContestType.Smart, ContestType.Tough], [ContestType.Smart, ContestType.Smart, ContestType.Tough, ContestType.Tough])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Master, amount: 8}}
+            ),
+            new ContestTrainer('Hailey', 'Swimmer', [new ContestPokemon('Luvdisc', 'Lovelynn', 5, 90, [ContestType.Cute, ContestType.Smart], [ContestType.Cute, ContestType.Cute, ContestType.Smart, ContestType.Cute])], '(female)',
+                {rankedBerryReward: {rank: ContestRank.Master, amount: 8}}
+            ),
+            new ContestTrainer('Clayton', 'Black Belt', [new ContestPokemon('Heracross', 'Heracles', 5, 90, [ContestType.Cool, ContestType.Tough], [ContestType.Cool, ContestType.Cool, ContestType.Tough, ContestType.Tough], undefined, GameConstants.BattlePokemonGender.Male)], undefined,
+                {rankedBerryReward: {rank: ContestRank.Master, amount: 8}}
+            ),
+            new ContestTrainer('Audrey', 'Lass', [new ContestPokemon('Electrode', 'Trode', 5, 90, [ContestType.Cool, ContestType.Beautiful], [ContestType.Cool, ContestType.Cool, ContestType.Beautiful, ContestType.Beautiful])], undefined,
+                {rankedBerryReward: {rank: ContestRank.Master, amount: 8}}
+            ),
+            new ContestTrainer('Evan', 'Pokéfan', [new ContestPokemon('Pichu', 'Pinchurlink', 5, 90, [ContestType.Cute], [ContestType.Cute, ContestType.Cute, ContestType.Cute, ContestType.Cute])], '(male)',
+                {rankedBerryReward: {rank: ContestRank.Master, amount: 8}}
+            ),
+            new ContestTrainer('Julia', 'Fairy Tale Girl', [new ContestPokemon('Wobbuffet', 'Elizabeth', 5, 90, [ContestType.Beautiful], [ContestType.Tough, ContestType.Beautiful, ContestType.Beautiful, ContestType.Smart], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
+                {rankedBerryReward: {rank: ContestRank.Master, amount: 8}}
+            ),
+            // Special Spectacular
+            // Cosplay Pikachu Breeder
+            new ContestTrainer('', 'Pokemon Breeder', [
+                new ContestPokemon('Pikachu (Rock Star)', 'Cosplay Pikachu', 5, 90, [ContestType.Cool], [ContestType.Cool, ContestType.Cool, ContestType.Cool, ContestType.Cool], new InContestTypeRequirement(ContestType.Cool)),
+                new ContestPokemon('Pikachu (Belle)', 'Cosplay Pikachu', 5, 90, [ContestType.Beautiful], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Beautiful, ContestType.Beautiful], new InContestTypeRequirement(ContestType.Beautiful)),
+                new ContestPokemon('Pikachu (Pop Star)', 'Cosplay Pikachu', 5, 90, [ContestType.Cute], [ContestType.Cute, ContestType.Cute, ContestType.Cute, ContestType.Cute], new InContestTypeRequirement(ContestType.Cute)),
+                new ContestPokemon('Pikachu (Ph. D.)', 'Cosplay Pikachu', 5, 90, [ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Smart, ContestType.Smart], new InContestTypeRequirement(ContestType.Smart)),
+                new ContestPokemon('Pikachu (Libre)', 'Cosplay Pikachu', 5, 90, [ContestType.Tough], [ContestType.Tough, ContestType.Tough, ContestType.Tough, ContestType.Tough], new InContestTypeRequirement(ContestType.Tough)),
+                // todo: add regular Cosplay Pikachu
+                new ContestPokemon('Pikachu', 'Cosplay Pikachu', 5, 90, [ContestType.Balanced], [ContestType.Balanced, ContestType.Balanced, ContestType.Balanced, ContestType.Balanced], new InContestTypeRequirement(ContestType.Balanced), GameConstants.BattlePokemonGender.Female),
+            ], '(female gen3)', {
+                rankedBerryReward: {rank: ContestRank.Spectacular, amount: 2},
+                // todo: reward cosplaychu tokens for each type
+                itemReward: [],
+            }),
+            // Chaz
+            new ContestTrainer('Chaz', 'Rich Boy', [new ContestPokemon('Machoke', 'Macherie', 5, 90, [ContestType.Balanced], [ContestType.Cute, ContestType.Cool, ContestType.Beautiful, ContestType.Smart])], '(oras)',
+                {
+                    requirement: new OneFromManyRequirement([
+                        new ContestWonRequirement(1, ContestRank.Spectacular, ContestType.Cool),
+                        new ContestWonRequirement(1, ContestRank.Spectacular, ContestType.Beautiful),
+                        new ContestWonRequirement(1, ContestRank.Spectacular, ContestType.Cute),
+                        new ContestWonRequirement(1, ContestRank.Spectacular, ContestType.Smart),
+                        new ContestWonRequirement(1, ContestRank.Spectacular, ContestType.Tough),
+                    ]),
+                    rankedBerryReward: {rank: ContestRank['Brilliant Shining'], amount: 3},
+                    itemReward: [{item: 'Rare_Candy', amount: ko.observable(5), chance: 10}],
+                }),
+            // Wallace
+            new ContestTrainer('', 'Wallace', [new ContestPokemon('Milotic', 'Milotic', 5, 90, [ContestType.Beautiful, ContestType.Balanced], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Beautiful, ContestType.Beautiful], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
+                {
+                    requirement: new ClearGymRequirement(1000, GameConstants.getGymIndex('Champion Wallace')),
+                    rankedBerryReward: {rank: ContestRank.Spectacular, amount: 4},
+                    itemReward: [{item: 'Rare_Candy', amount: ko.observable(5), chance: 5, requirement: new InContestTypeRequirement(ContestType.Balanced)}],
+                }),
+            // Lisia
+            new ContestTrainer('', 'Lisia', [
+                new ContestPokemon('Altaria', 'Ali', 5, 90, [ContestType.Cool], [ContestType.Beautiful, ContestType.Cool, ContestType.Cool, ContestType.Cool], new InContestTypeRequirement(ContestType.Cool)),
+                new ContestPokemon('Altaria', 'Ali', 5, 90, [ContestType.Beautiful], [ContestType.Cool, ContestType.Beautiful, ContestType.Beautiful, ContestType.Beautiful], new InContestTypeRequirement(ContestType.Beautiful)),
+                new ContestPokemon('Altaria', 'Ali', 5, 90, [ContestType.Cute], [ContestType.Cute, ContestType.Beautiful, ContestType.Cute, ContestType.Cute], new InContestTypeRequirement(ContestType.Cute)),
+                new ContestPokemon('Altaria', 'Ali', 5, 90, [ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Cute, ContestType.Smart], new InContestTypeRequirement(ContestType.Smart)),
+                new ContestPokemon('Altaria', 'Ali', 5, 90, [ContestType.Tough], [ContestType.Tough, ContestType.Tough, ContestType.Tough, ContestType.Smart], new InContestTypeRequirement(ContestType.Tough)),
+                new ContestPokemon('Mega Altaria', 'Ali', 5, 90, [ContestType.Cool], [ContestType.Cool, ContestType.Cool, ContestType.Cool, ContestType.Cool], new InContestTypeRequirement(ContestType.Cool, false)),
+                new ContestPokemon('Mega Altaria', 'Ali', 5, 90, [ContestType.Beautiful], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Beautiful, ContestType.Beautiful], new InContestTypeRequirement(ContestType.Beautiful, false)),
+                new ContestPokemon('Mega Altaria', 'Ali', 5, 90, [ContestType.Cute], [ContestType.Cute, ContestType.Cute, ContestType.Cute, ContestType.Cute], new InContestTypeRequirement(ContestType.Cute, false)),
+                new ContestPokemon('Mega Altaria', 'Ali', 5, 90, [ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Smart, ContestType.Smart], new InContestTypeRequirement(ContestType.Smart, false)),
+                new ContestPokemon('Mega Altaria', 'Ali', 5, 90, [ContestType.Tough], [ContestType.Tough, ContestType.Tough, ContestType.Tough, ContestType.Tough], new InContestTypeRequirement(ContestType.Tough, false)),
+                new ContestPokemon('Mega Altaria', 'Ali', 5, 100, [ContestType.Balanced], [ContestType.Balanced, ContestType.Balanced, ContestType.Balanced, ContestType.Balanced], new InContestTypeRequirement(ContestType.Balanced)),
+            ], undefined,
             {
-                requirement: new MultiRequirement([
+                requirement: new OneFromManyRequirement([
                     new ContestWonRequirement(1, ContestRank.Spectacular, ContestType.Cool),
                     new ContestWonRequirement(1, ContestRank.Spectacular, ContestType.Beautiful),
                     new ContestWonRequirement(1, ContestRank.Spectacular, ContestType.Cute),
                     new ContestWonRequirement(1, ContestRank.Spectacular, ContestType.Smart),
                     new ContestWonRequirement(1, ContestRank.Spectacular, ContestType.Tough),
                 ]),
-                berryReward: [
-                    {berry: BerryType.Enigma, amount: 1, requirement: new MultiRequirement([new InContestRequirement(ContestType.Cool), new BerryUnlockedRequirement(BerryType.Enigma)])},
-                    {berry: BerryType.Micle, amount: 1, requirement: new MultiRequirement([new InContestRequirement(ContestType.Beautiful), new BerryUnlockedRequirement(BerryType.Micle)])},
-                    {berry: BerryType.Custap, amount: 1, requirement: new MultiRequirement([new InContestRequirement(ContestType.Cute), new BerryUnlockedRequirement(BerryType.Custap)])},
-                    {berry: BerryType.Jaboca, amount: 1, requirement: new MultiRequirement([new InContestRequirement(ContestType.Smart), new BerryUnlockedRequirement(BerryType.Jaboca)])},
-                    {berry: BerryType.Rowap, amount: 1, requirement: new MultiRequirement([new InContestRequirement(ContestType.Tough), new BerryUnlockedRequirement(BerryType.Rowap)])},
-                    {berry: BerryType.Kee, amount: 1, requirement: new MultiRequirement([new InContestRequirement(ContestType.Balanced), new BerryUnlockedRequirement(BerryType.Kee)])},
-                    {berry: BerryType.Maranga, amount: 1, requirement: new MultiRequirement([new InContestRequirement(ContestType.Balanced), new BerryUnlockedRequirement(BerryType.Maranga)])},
-                ],
-            }),
-        // Wallace
-        new ContestTrainer('', 'Wallace', [new ContestPokemon('Milotic', 'Milotic', 320, 90, [ContestType.Beautiful, ContestType.Balanced], undefined, GameConstants.BattlePokemonGender.Female)], undefined,
-            {
-                requirement: new ClearGymRequirement(1, GameConstants.getGymIndex('Champion Wallace')), // after testing: requirement: new ClearGymRequirement(1000, GameConstants.getGymIndex('Champion Wallace')),
-                itemReward: [{item: 'Rare_Candy', amount: 1}],
-            }),
-        // Lisia
-        new ContestTrainer('', 'Lisia', [new ContestPokemon('Mega Altaria', 'Ali', 400, 90, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough, ContestType.Balanced])], undefined,
-            {
-                requirement: new ContestWonRequirement(1, ContestRank.Spectacular), // after testing: requirement: new ContestWonRequirement(100, ContestRank.Spectacular),
+                rankedBerryReward: {rank: ContestRank['Brilliant Shining'], amount: 1},
                 itemReward: [
+                    {item: 'PokeBlock_Red', amount: ko.observable(10), chance: 2, requirement: new InContestTypeRequirement(ContestType.Cool)},
+                    {item: 'PokeBlock_Blue', amount: ko.observable(10), chance: 2, requirement: new InContestTypeRequirement(ContestType.Beautiful)},
+                    {item: 'PokeBlock_Pink', amount: ko.observable(10), chance: 2, requirement: new InContestTypeRequirement(ContestType.Cute)},
+                    {item: 'PokeBlock_Green', amount: ko.observable(10), chance: 2, requirement: new InContestTypeRequirement(ContestType.Smart)},
+                    {item: 'PokeBlock_Yellow', amount: ko.observable(10), chance: 2, requirement: new InContestTypeRequirement(ContestType.Tough)},
+                    {item: 'PokeBlock_Cool', amount: ko.observable(5), chance: 10, requirement: new InContestTypeRequirement(ContestType.Cool, false)},
+                    {item: 'PokeBlock_Beautiful', amount: ko.observable(5), chance: 10, requirement: new InContestTypeRequirement(ContestType.Beautiful, false)},
+                    {item: 'PokeBlock_Cute', amount: ko.observable(5), chance: 10, requirement: new InContestTypeRequirement(ContestType.Cute, false)},
+                    {item: 'PokeBlock_Smart', amount: ko.observable(5), chance: 10, requirement: new InContestTypeRequirement(ContestType.Smart, false)},
+                    {item: 'PokeBlock_Tough', amount: ko.observable(5), chance: 10, requirement: new InContestTypeRequirement(ContestType.Tough, false)},
+                    {item: 'PokeBlock_White', amount: ko.observable(10), chance: 2, requirement: new InContestTypeRequirement(ContestType.Balanced)},
+                    {item: 'PokeBlock_Balanced', amount: ko.observable(5), chance: 10, requirement: new InContestTypeRequirement(ContestType.Balanced)},
                     {
                         item: 'Altarianite',
-                        amount: 1,
-                        requirement: new MultiRequirement([
-                            new MaxRegionRequirement(GameConstants.Region.kalos),
-                            new CustomRequirement(ko.pureComputed(() => player.hasMegaStone(GameConstants.MegaStoneType.Altarianite)), false, 'Player must not have Altarianite.'),
-                        ]),
+                        amount: ko.observable(1),
+                        amountLimit: 1,
+                        requirement: new InContestTypeRequirement(ContestType.Balanced),
                     },
-                    {item: 'PokeBlock_Cool', amount: 1, requirement: new InContestRequirement(ContestType.Cool)},
-                    {item: 'PokeBlock_Beautiful', amount: 1, requirement: new InContestRequirement(ContestType.Beautiful)},
-                    {item: 'PokeBlock_Cute', amount: 1, requirement: new InContestRequirement(ContestType.Cute)},
-                    {item: 'PokeBlock_Smart', amount: 1, requirement: new InContestRequirement(ContestType.Smart)},
-                    {item: 'PokeBlock_Tough', amount: 1, requirement: new InContestRequirement(ContestType.Tough)},
-                    {item: 'PokeBlock_Balanced', amount: 1, requirement: new InContestRequirement(ContestType.Balanced)},
                 ],
             }),
-        // Event
-        new ContestTrainer('Red', 'Juggler', [new ContestPokemon('Red Spearow', 'Sparrow', 300, 40)], undefined, {requirement: new SpecialEventRequirement('Flying Pikachu')}),
-        new ContestTrainer('Dice', 'Painter', [new ContestPokemon('Bulbasaur (Rose)', 'Nice', 300, 40)], undefined, {requirement: new SpecialEventRequirement('Golden Week')}),
-        new ContestTrainer('Ultima', 'Ruin Maniac', [new ContestPokemon('Pikachu', 'Pikablu', 100000000, 40)], 'gen3', {requirement: new SpecialEventRequirement('Hoopa Day'), itemReward: [{item: 'Power_Herb', amount: 50}]}),
-        new ContestTrainer('', 'Lisia', [new ContestPokemon('Galarian Rapidash', 'Dashie', 400, 90, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough, ContestType.Balanced], undefined, undefined, true)], '(lunar new year)',
-            {requirement: new SpecialEventRequirement('Lunar New Year')}),
-    ],
-    [ContestRank['Brilliant Shining']]: [
-        new ContestTrainer('Luis', 'Camper', [new ContestPokemon('Pikachu', 'Sparky', 180, 100)]),
-        new ContestTrainer('', 'Fantina', [new ContestPokemon('Drifblim', 'Loony', 970, 100)]),
-        new ContestTrainer('Johanna', 'Contest Champion', [new ContestPokemon('Kangaskhan', 'Jumpy', 780, 100)], '(Johanna)'),
-        new ContestTrainer('', 'Jasmine', [new ContestPokemon('Steelix', 'Rusty', 970, 100)]),
-    ],
-};
+        ],
+        // In progress. Different pokemon were given so dance moves aren't the same anymore
+        [ContestRank['Brilliant Shining']]: [
+            // Normal
+            new ContestTrainer('Luis', 'Camper', [new ContestPokemon('Pikachu (Sinnoh Cap)', 'Sparky', 20, 50, [ContestType.Cool, ContestType.Tough])]),
+            new ContestTrainer('Lacey', 'Lass', [new ContestPokemon('Whiscash', 'Whiskers', 20, 50, [ContestType.Cute, ContestType.Smart])]),
+            new ContestTrainer('Connor', 'Ninja Boy', [new ContestPokemon('Staravia', 'Flappy', 10, 50, [ContestType.Cool])]),
+            new ContestTrainer('Dakota', 'School Kid', [new ContestPokemon('Bidoof', 'Dots', 20, 50, [ContestType.Beautiful, ContestType.Tough])], '(female)'),
+            new ContestTrainer('Gabriel', 'Artist', [new ContestPokemon('Glameow', 'Precious', 30, 50, [ContestType.Cute, ContestType.Smart, ContestType.Tough])]),
+            new ContestTrainer('Tiffany', 'Parasol Lady', [new ContestPokemon('Luxray', 'Flick', 20, 50, [ContestType.Cool, ContestType.Smart])]),
+            new ContestTrainer('Westley', 'School Kid', [new ContestPokemon('Psyduck', 'Dizzy', 20, 50, [ContestType.Beautiful, ContestType.Smart])], '(male)'),
+            new ContestTrainer('Anna', 'Picnicker', [new ContestPokemon('Sudowoodo', 'Sprout', 10, 50, [ContestType.Tough])]),
+            new ContestTrainer('Corey', 'School Kid', [new ContestPokemon('Hoothoot', 'Hootie', 20, 50, [ContestType.Cute, ContestType.Smart])], '(male)'),
+            new ContestTrainer('Sara', 'Beauty', [new ContestPokemon('Zubat', 'Batty', 10, 50, [ContestType.Cool])]),
+            new ContestTrainer('Ian', 'Fisherman', [new ContestPokemon('Gastrodon (West)', 'Wiggy', 20, 50, [ContestType.Cute, ContestType.Smart])]),
+            new ContestTrainer('Heather', 'Lass', [new ContestPokemon('Cherubi', 'Pit', 20, 50, [ContestType.Cool, ContestType.Beautiful])]),
+            new ContestTrainer('Marcus', 'Psychic', [new ContestPokemon('Galarian Mr. Mime', 'Merry', 20, 50, [ContestType.Smart, ContestType.Tough])], '(male)'),
+            new ContestTrainer('Erin', 'Aroma Lady', [new ContestPokemon('Buizel', 'Weasy', 20, 50, [ContestType.Beautiful, ContestType.Cute])]),
+            new ContestTrainer('Shane', 'Scientist', [new ContestPokemon('Bronzor', 'Wheelie', 10, 50, [ContestType.Beautiful])], '(male)'),
+            new ContestTrainer('Marissa', 'Battle Girl', [new ContestPokemon('Machop', 'Choppy', 40, 50, [ContestType.Cool, ContestType.Tough])]),
+            new ContestTrainer('Victor', 'Hiker', [new ContestPokemon('Geodude', 'Rocky', 10, 50, [ContestType.Tough])]),
+            new ContestTrainer('Brooke', 'School Kid', [new ContestPokemon('Goldeen', 'Goldy', 40, 50, [ContestType.Beautiful, ContestType.Cute])], '(female)'),
+            new ContestTrainer('Tanner', 'Collector', [new ContestPokemon('Clefairy', 'Buffy', 10, 50, [ContestType.Tough])]),
+            new ContestTrainer('Renee', 'Lady', [new ContestPokemon('Pachirisu', 'Bucky', 10, 50, [ContestType.Cool])], '(gen4)'),
+            // Great
+            new ContestTrainer('Isaac', 'Pokémon Breeder', [new ContestPokemon('Pikachu', 'Chewy', 30, 60, [ContestType.Cool, ContestType.Smart, ContestType.Tough])], '(male)'),
+            new ContestTrainer('Alexus', 'Bird Keeper', [new ContestPokemon('Hoothoot', 'Hoots', 50, 60, [ContestType.Cool, ContestType.Beautiful])]),
+            new ContestTrainer('Jorge', 'Pokéfan', [new ContestPokemon('Geodude', 'Pebbles', 10, 60, [ContestType.Tough])], '(male)'),
+            new ContestTrainer('Cora', 'Cowgirl', [new ContestPokemon('Galarian Ponyta', 'Blaze', 40, 60, [ContestType.Beautiful, ContestType.Cute])]),
+            new ContestTrainer('Chase', 'Psychic', [new ContestPokemon('Meditite', 'Ohm', 50, 60, [ContestType.Smart, ContestType.Tough])], '(male)'),
+            new ContestTrainer('Katie', 'Lass', [new ContestPokemon('Golduck', 'Slappy', 30, 60, [ContestType.Beautiful, ContestType.Smart])]),
+            new ContestTrainer('Dominic', 'Fisherman', [new ContestPokemon('Barboach', 'Beardy', 60, 60, [ContestType.Cute, ContestType.Smart, ContestType.Tough])]),
+            new ContestTrainer('Sierra', 'Parasol Lady', [new ContestPokemon('Bibarel', 'Gnawby', 30, 60, [ContestType.Cool, ContestType.Cute])]),
+            new ContestTrainer('Keith', 'Guitarist', [new ContestPokemon('Pachirisu', 'Stripe', 20, 60, [ContestType.Cool])], '(male)'),
+            new ContestTrainer('Julia', 'Cowgirl', [new ContestPokemon('Gastrodon (East)', 'Sluggo', 30, 60, [ContestType.Beautiful, ContestType.Cute, ContestType.Smart])]),
+            new ContestTrainer('Brendan', 'Sailor', [new ContestPokemon('Seaking', 'Auric', 30, 60, [ContestType.Beautiful])]),
+            new ContestTrainer('Amy', 'Aroma Lady', [new ContestPokemon('Stunky', 'Stinky', 30, 60, [ContestType.Cool, ContestType.Beautiful])]),
+            new ContestTrainer('Chad', 'Ruin Maniac', [new ContestPokemon('Bronzong', 'Saucy', 10, 60, [ContestType.Smart])]),
+            new ContestTrainer('Caitlin', 'Picnicker', [new ContestPokemon('Mr. Mime', 'Mimi', 70, 60, [ContestType.Cute, ContestType.Smart, ContestType.Tough])]),
+            new ContestTrainer('Martin', 'Camper', [new ContestPokemon('Cherrim (Overcast)', 'Cheri', 20, 60, [ContestType.Cool, ContestType.Beautiful])]),
+            new ContestTrainer('Kathryn', 'Battle Girl', [new ContestPokemon('Steelix', 'Flex', 40, 60, [ContestType.Cool, ContestType.Tough])]),
+            new ContestTrainer('Randal', 'Ninja Boy', [new ContestPokemon('Misdreavus', 'Missy', 60, 60, [ContestType.Beautiful, ContestType.Cute, ContestType.Smart])]),
+            new ContestTrainer('Sidney', 'Bird Keeper', [new ContestPokemon('Staraptor', 'Happy', 50, 60, [ContestType.Cool, ContestType.Tough])]),
+            new ContestTrainer('Xavier', 'Artist', [new ContestPokemon('Chingling', 'Chimer', 50, 60, [ContestType.Cute, ContestType.Smart])]),
+            new ContestTrainer('Monica', 'Lady', [new ContestPokemon('Purugly', 'Glimmer', 60, 60, [ContestType.Smart, ContestType.Tough])], '(gen4)'),
+            // Ultra
+            new ContestTrainer('Frank', 'Ace Trainer', [new ContestPokemon('Raichu', 'Piki', 100, 70, [ContestType.Cool, ContestType.Smart, ContestType.Tough])], '(male)'),
+            new ContestTrainer('Leah', 'Aroma Lady', [new ContestPokemon('Cleffa', 'Blingy', 70, 70, [ContestType.Beautiful, ContestType.Cute])]),
+            new ContestTrainer('Julian', 'Jogger', [new ContestPokemon('Machoke', 'Kata', 60, 70, [ContestType.Cool, ContestType.Tough])]),
+            new ContestTrainer('Bianca', 'Cowgirl', [new ContestPokemon('Rapidash', 'Flash', 80, 70, [ContestType.Cool, ContestType.Beautiful])]),
+            new ContestTrainer('Mario', 'Ninja Boy', [new ContestPokemon('Gastly', 'Spooky', 50, 70, [ContestType.Smart])]),
+            new ContestTrainer('Lara', 'Madame', [new ContestPokemon('Crystal Onix', 'Gem', 70, 70, [ContestType.Cool, ContestType.Tough])]),
+            new ContestTrainer('Alan', 'Rancher', [new ContestPokemon('Hoothoot', 'Brainy', 80, 70, [ContestType.Cute, ContestType.Smart])]),
+            new ContestTrainer('Bria', 'Ace Trainer', [new ContestPokemon('Murkrow', 'Ebony', 40, 70, [ContestType.Beautiful])], '(female)'),
+            new ContestTrainer('Collin', 'Ace Trainer', [new ContestPokemon('Mismagius', 'Malice', 130, 70, [ContestType.Cool, ContestType.Smart, ContestType.Tough])], '(male)'),
+            new ContestTrainer('Alexis', 'Psychic', [new ContestPokemon('Meditite', 'Ponder', 120, 70, [ContestType.Cool, ContestType.Beautiful, ContestType.Tough])], '(female)'),
+            new ContestTrainer('Andre', 'Camper', [new ContestPokemon('Budew', 'Buddy', 70, 70, [ContestType.Beautiful, ContestType.Cute])]),
+            new ContestTrainer('Bridget', 'Beauty', [new ContestPokemon('Chatot', 'Tweety', 100, 70, [ContestType.Beautiful, ContestType.Cute, ContestType.Smart])]),
+            new ContestTrainer('Damien', 'Artist', [new ContestPokemon('Chimecho', 'Jangle', 80, 70, [ContestType.Cute, ContestType.Smart])]),
+            new ContestTrainer('Kara', 'Battle Girl', [new ContestPokemon('Bronzor', 'Bronzy', 120, 70, [ContestType.Cool, ContestType.Beautiful, ContestType.Smart, ContestType.Tough])]),
+            new ContestTrainer('Angus', 'Sailor', [new ContestPokemon('Bonsly', 'Chokkan', 60, 70, [ContestType.Cute, ContestType.Tough])]),
+            new ContestTrainer('Kiana', 'Ace Trainer', [new ContestPokemon('Golbat', 'Midnight', 90, 70, [ContestType.Beautiful, ContestType.Smart])], '(female)'),
+            new ContestTrainer('Jonesy', 'Collector', [new ContestPokemon('Pichu', 'Sweetie', 80, 70, [ContestType.Cool, ContestType.Cute])]),
+            new ContestTrainer('Hayley', 'Cowgirl', [new ContestPokemon('Buneary', 'Floppy', 140, 70, [ContestType.Cute, ContestType.Smart, ContestType.Tough])]),
+            new ContestTrainer('Alfredo', 'Ace Trainer', [new ContestPokemon('Stunky', 'Honey', 100, 70, [ContestType.Cool, ContestType.Tough])], '(male)'),
+            new ContestTrainer('Bailey', 'Picnicker', [new ContestPokemon('Happiny', 'Baby', 80, 70, [ContestType.Cute, ContestType.Tough])]),
+            // Master
+            new ContestTrainer('Josiah', 'Ace Trainer', [new ContestPokemon('Alolan Raichu', 'Ziggy', 40, 80, [ContestType.Beautiful])], '(male)'),
+            new ContestTrainer('Carly', 'Aroma Lady', [new ContestPokemon('Clefable', 'Bumbles', 120, 80, [ContestType.Cool, ContestType.Beautiful, ContestType.Smart])]),
+            new ContestTrainer('Bryant', 'Ace Trainer', [new ContestPokemon('Machamp', 'Chopper', 110, 80, [ContestType.Smart, ContestType.Tough])], '(male)'),
+            new ContestTrainer('Nancy', 'Beauty', [new ContestPokemon('Gengar', 'Boo', 120, 80, [ContestType.Cool, ContestType.Smart, ContestType.Tough])]),
+            new ContestTrainer('Zackery', 'Artist', [new ContestPokemon('Torterra', 'Speedy', 100, 80, [ContestType.Smart, ContestType.Tough])]),
+            new ContestTrainer('Tanya', 'Pokéfan', [new ContestPokemon('Infernape', 'Chimpy', 100, 80, [ContestType.Cool, ContestType.Beautiful])], '(female)'),
+            new ContestTrainer('Elias', 'Ace Trainer', [new ContestPokemon('Empoleon', 'Penny', 140, 80, [ContestType.Cool, ContestType.Cute, ContestType.Tough])], '(male)'),
+            new ContestTrainer('Marisa', 'Aroma Lady', [new ContestPokemon('Shieldon', 'Rampy', 100, 80, [ContestType.Cute, ContestType.Smart])]),
+            new ContestTrainer('Kelvin', 'Sailor', [new ContestPokemon('Floatzel', 'Zippy', 140, 80, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute])]),
+            new ContestTrainer('Chloe', 'Lady', [new ContestPokemon('Chatot', 'Bebop', 90, 80, [ContestType.Beautiful, ContestType.Cute])], '(gen4)'),
+            new ContestTrainer('Rodney', 'Collector', [new ContestPokemon('Sudowoodo (Golden)', 'Twigs', 80, 80, [ContestType.Cute, ContestType.Tough])]), // Bronzley?
+            new ContestTrainer('Hailey', 'Parasol Lady', [new ContestPokemon('Mr. Rime', 'Moppet', 90, 80, [ContestType.Cute, ContestType.Smart])]),
+            new ContestTrainer('Kaleb', 'Pokéfan', [new ContestPokemon('Noctowl', 'Strix', 40, 80, [ContestType.Cool])], '(male)'),
+            new ContestTrainer('Ashlyn', 'Ace Trainer', [new ContestPokemon('Honchkrow', 'Murky', 90, 80, [ContestType.Cool, ContestType.Beautiful])], '(female)'),
+            new ContestTrainer('Alberto', 'Artist', [new ContestPokemon('Mega Medicham', 'Noodle', 140, 80, [ContestType.Cool, ContestType.Beautiful, ContestType.Tough])]),
+            new ContestTrainer('', 'Fantina', [new ContestPokemon('Drifblim', 'Loony', 230, 80, [ContestType.Cool, ContestType.Beautiful, ContestType.Smart, ContestType.Tough])]),
+            new ContestTrainer('Johanna', 'Contest Champion', [new ContestPokemon('Mega Kangaskhan', 'Jumpy', 180, 80, [ContestType.Cool, ContestType.Cute, ContestType.Tough])], '(Johanna)'),
+            new ContestTrainer('Kristin', 'Reporter', [new ContestPokemon('Magnezone', 'Jolt', 80, 80, [ContestType.Beautiful, ContestType.Smart])]),
+            new ContestTrainer('Casey', 'Nurse', [new ContestPokemon('Blissey', 'Pinky', 90, 80, [ContestType.Cute, ContestType.Tough])]),
+            new ContestTrainer('', 'Jasmine', [new ContestPokemon('Mega Steelix', 'Rusty', 210, 80, [ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough])]),
+        ],
+    };
+
+    public static SpecialEventContestOpponents: ContestTrainer[] = [
+        // Lunar New Year
+        new ContestTrainer('', 'Lisia', [
+            new ContestPokemon('Galarian Rapidash', 'Dashie', 400, 90, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough], [ContestType.Balanced, ContestType.Balanced, ContestType.Balanced, ContestType.Balanced], undefined, undefined, true),
+        ], '(Lunar New Year)',
+            {
+                requirement: new MultiRequirement([
+                    new SpecialEventRequirement('Lunar New Year'),
+                    new InContestRankRequirement(ContestRank.Spectacular, GameConstants.AchievementOption.equal),
+                    new MaxRegionRequirement(GameConstants.Region.galar),
+                ])
+            }),
+        new ContestTrainer('', 'Dawn', [new ContestPokemon('Oricorio (Sensu)', 'Oricorio', 1, 10)], '(Lunar New Year)',
+            {
+                requirement: new MultiRequirement([
+                    new SpecialEventRequirement('Lunar New Year'),
+                    new InRegionRequirement([GameConstants.Region.sinnoh]),
+                    new MaxRegionRequirement(GameConstants.Region.alola),
+                ])
+            }),
+        new ContestTrainer('', 'Wallace', [new ContestPokemon('Blacephalon', 'Blacephalon', 1, 10)], '(Lunar New Year)',
+            {
+                requirement: new MultiRequirement([
+                    new SpecialEventRequirement('Lunar New Year'),
+                    new InContestRankRequirement(ContestRank.Spectacular, GameConstants.AchievementOption.equal),
+                    new MaxRegionRequirement(GameConstants.Region.alola),
+                ])
+            }),
+        // Hoopa Day
+        new ContestTrainer('', 'Contest Judge', [
+            new ContestPokemon('Pikachu', 'Pikablu', 1, 10, undefined, undefined, new QuestLineCompletedRequirement('How blu mouse?', GameConstants.AchievementOption.less), GameConstants.BattlePokemonGender.Male),
+            new ContestPokemon('Marill', 'Pikablu', 1, 10, undefined, undefined, new QuestLineCompletedRequirement('How blu mouse?')),
+            ], undefined,
+            { requirement: new SpecialEventRequirement('Hoopa Day') }),
+        // Easter
+        new ContestTrainer('', 'Contest Judge', [new ContestPokemon('Torchic (Egg)', 'Torchic', 1, 10)], undefined,
+            { requirement: new SpecialEventRequirement('Easter') }),
+        new ContestTrainer('', 'May', [
+            new ContestPokemon('Lopunny', 'Lopunny', 1, 10),
+            new ContestPokemon('Mega Lopunny', 'Lopunny', 1, 10),
+        ], '(Easter)',
+            {
+                requirement: new MultiRequirement([
+                    new SpecialEventRequirement('Easter'),
+                    new InContestRankRequirement(ContestRank.Spectacular, GameConstants.AchievementOption.equal),
+                ])
+            }),
+        // Golden Week
+        new ContestTrainer('', 'Contest Judge', [new ContestPokemon('Bulbasaur (Rose)', 'Bulbasaur', 1, 10)], undefined,
+            { requirement: new SpecialEventRequirement('Golden Week') }),
+        // Mewtwo strikes back
+        new ContestTrainer('', 'Armored Mewtwo', [
+            new ContestPokemon('Bulbasaur (Clone)', 'Bulbasaur', 1, 10, undefined, undefined, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+            new ContestPokemon('Charmander (Clone)', 'Charmander', 1, 10, undefined, undefined, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+            new ContestPokemon('Squirtle (Clone)', 'Squirtle', 1, 10, undefined, undefined, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        ], undefined,
+            { requirement: new SpecialEventRequirement('Mewtwo strikes back!') }),
+        // Flying Pikachu
+        new ContestTrainer('', 'Contest Judge', [new ContestPokemon('Flying Pikachu', 'Pikachu', 1, 10)], undefined,
+            { requirement: new SpecialEventRequirement('Flying Pikachu') }),
+        // Halloween
+        new ContestTrainer('', 'Contest Judge', [new ContestPokemon('Spooky Bulbasaur', 'Bulbasaur', 1, 10)], undefined,
+            { requirement: new SpecialEventRequirement('Halloween!') }),
+        // Let's Go
+        new ContestTrainer('', 'Contest Judge', [
+            new ContestPokemon('Let\'s Go Pikachu', 'Eevee', 1, 10),
+            new ContestPokemon('Let\'s Go Eevee', 'Pikachu', 1, 10),
+        ], undefined,
+            { requirement: new SpecialEventRequirement('Let\'s GO!') }),
+        // Christmas
+        new ContestTrainer('', 'Jasmine', [
+            new ContestPokemon('Ampharos', 'Ampharos', 1, 10),
+            new ContestPokemon('Mega Ampharos', 'Ampharos', 1, 10, undefined, undefined, new MaxRegionRequirement(GameConstants.Region.kalos)),
+        ], '(Merry Christmas!)',
+            {
+                requirement: new MultiRequirement([
+                    new SpecialEventRequirement('Merry Christmas!'),
+                    new InContestRankRequirement(ContestRank['Super Master']),
+                ])
+            }),
+        new ContestTrainer('', 'Santa Snorlax', [
+            new ContestPokemon('Reindeer Stantler', 'Reindeer', 1, 10),
+        ], undefined,
+            { requirement: new SpecialEventRequirement('Merry Christmas!') }),
+        new ContestTrainer('', 'Contest Judge', [new ContestPokemon('Elf Munchlax', 'Hermey', 1, 10)], undefined,
+            {
+                requirement: new MultiRequirement([
+                    new SpecialEventRequirement('Merry Christmas!'),
+                    new InContestRankRequirement(ContestRank.Master),
+                ])
+            }),
+    ];
+}
