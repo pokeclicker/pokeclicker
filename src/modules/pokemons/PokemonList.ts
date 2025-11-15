@@ -6529,6 +6529,26 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 143.04,
+        'name': 'Mosslax',
+        'catchRate': 25,
+        'type': [PokemonType.Normal, PokemonType.Grass],
+        'levelType': LevelType.slow,
+        'exp': 189,
+        'eggCycles': 40,
+        'base': {
+            'hitpoints': 160,
+            'attack': 110,
+            'specialAttack': 65,
+            'defense': 65,
+            'specialDefense': 110,
+            'speed': 30,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+    },
+    {
         'id': 144,
         'name': 'Articuno',
         'catchRate': 3,
@@ -14449,6 +14469,8 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             StoneEvolution('Munchlax', 'Snorlax', StoneType.Soothe_bell),
             DummyEvolution('Munchlax', 'Gigantamax Snorlax'),
+            EnvironmentRestrictedLevelEvolution('MossRock', 'Munchlax', 'Mosslax', 20),
+            RegionStoneEvolution(galarOnly, 'Munchlax', 'Mosslax', StoneType.Leaf_stone),
         ],
         'baby': true,
         'base': {
