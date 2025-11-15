@@ -2959,6 +2959,9 @@ class Update implements Saveable {
             if (saveData.badgeCase[17]) {
                 Update.startQuestLine(saveData, 'Team Rocket Again');
             }
+            
+            // Add Parfum Palace Garden dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 126);
         },
     };
 
