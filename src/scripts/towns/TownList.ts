@@ -6572,7 +6572,7 @@ TownList['Parfum Palace'] = new Town(
     'Parfum Palace',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new ShardTraderShop(GameConstants.ShardTraderLocations['Parfum Palace'], 'Furfrou Shard Trader', true), FurfrouGemTrader],
+    [new ShardTraderShop(GameConstants.ShardTraderLocations['Parfum Palace'], 'Furfrou Shard Trader', true), FurfrouGemTrader, new MoveToDungeon(dungeonList['Parfum Palace Garden'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 6)],
     }
@@ -6728,6 +6728,25 @@ TownList['Santalune Forest'] = new DungeonTown(
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 2)]
+);
+TownList['Parfum Palace Garden'] = new DungeonTown(
+    'Parfum Palace Garden',
+    GameConstants.Region.kalos,
+    GameConstants.KalosSubRegions.Kalos,
+    [new MultiRequirement([
+        new RouteKillRequirement(10, GameConstants.Region.kalos, 6),
+        new OneFromManyRequirement([
+            new ObtainedPokemonRequirement('Furfrou (Heart)'),
+            new ObtainedPokemonRequirement('Furfrou (Star)',),
+            new ObtainedPokemonRequirement('Furfrou (Diamond)'),
+            new ObtainedPokemonRequirement('Furfrou (Debutante)'),
+            new ObtainedPokemonRequirement('Furfrou (Matron)'),
+            new ObtainedPokemonRequirement('Furfrou (Dandy)'),
+            new ObtainedPokemonRequirement('Furfrou (La Reine)'),
+            new ObtainedPokemonRequirement('Furfrou (Kabuki)'),
+            new ObtainedPokemonRequirement('Furfrou (Pharaoh)'),
+        ]),
+    ])]
 );
 TownList['Connecting Cave'] = new DungeonTown(
     'Connecting Cave',

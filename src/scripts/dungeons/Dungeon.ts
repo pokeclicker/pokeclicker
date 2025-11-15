@@ -10048,6 +10048,41 @@ dungeonList['Santalune Forest'] = new Dungeon('Santalune Forest',
     400000, 2
 );
 
+dungeonList['Parfum Palace Garden'] = new Dungeon('Parfum Palace Garden',
+    ['Furfrou'],
+    {
+        common: [
+            {loot: 'Pokeball', weight: 2},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Blue Shard'},
+        ],
+        epic: [
+            {loot: 'Repeatball'},
+            {loot: 'Blank Plate'},
+        ],
+        legendary: [
+            {loot: 'Rare Bone'},
+            {loot: 'Silk_Scarf'},
+        ],
+    },
+    6153195,
+    [
+        new DungeonBossPokemon('Furfrou (Heart)', 55803095, 15, { requirement : new ObtainedPokemonRequirement('Furfrou (Heart)', true)}),
+        new DungeonBossPokemon('Furfrou (Star)', 55803095, 15 { requirement : new ObtainedPokemonRequirement('Furfrou (Star)', true)}),
+        new DungeonBossPokemon('Furfrou (Diamond)', 55803095, 15 { requirement : new ObtainedPokemonRequirement('Furfrou (Diamond)', true)}),
+        new DungeonBossPokemon('Furfrou (Debutante)', 55803095, 15 { requirement : new ObtainedPokemonRequirement('Furfrou (Debutante)', true)}),
+        new DungeonBossPokemon('Furfrou (Matron)', 55803095, 15 { requirement : new ObtainedPokemonRequirement('Furfrou (Matron)', true)}),
+        new DungeonBossPokemon('Furfrou (Dandy)', 55803095, 15 { requirement : new ObtainedPokemonRequirement('Furfrou (Dandy)', true)}),
+        new DungeonBossPokemon('Furfrou (La Reine)', 55803095, 15 { requirement : new ObtainedPokemonRequirement('Furfrou (La Reine)', true)}),
+        new DungeonBossPokemon('Furfrou (Kabuki)', 55803095, 15 { requirement : new ObtainedPokemonRequirement('Furfrou (Kabuki)', true)}),
+        new DungeonBossPokemon('Furfrou (Pharaoh)', 55803095, 15 { requirement : new ObtainedPokemonRequirement('Furfrou (Pharaoh)', true)}),
+    ],
+    437500, 6
+);
+
 dungeonList['Connecting Cave'] = new Dungeon('Connecting Cave',
     [
         {pokemon: 'Zubat', options: { weight: 1.33 }},
