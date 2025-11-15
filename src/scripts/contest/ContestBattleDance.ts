@@ -121,7 +121,7 @@ class ContestBattleDance {
         let sum = 0;
         ContestBattle.pokemons().forEach(p => sum += p.danceHearts());
 
-        sum *= (10 + ContestBattleDancePose.poseBonus(ContestRunner.type(), ContestBattle.finishingPose())) / 10;
+        sum *= (10 + ContestBattleDanceCombos.poseBonus(ContestRunner.type(), ContestBattle.finishingPose())) / 10;
 
         return sum;
     }
