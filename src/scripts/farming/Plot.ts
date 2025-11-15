@@ -75,7 +75,7 @@ class Plot implements Saveable {
 
                 const boost = this.auraBoost();
                 const value = this.berryData.aura.getAuraValue(this.stage());
-                return value > 1 || this.berry === BerryType.Micle ? value * boost : value / boost;
+                return value > 1 ? value * boost : value / boost;
             }).extend({ rateLimit: 50 }),
         };
 
