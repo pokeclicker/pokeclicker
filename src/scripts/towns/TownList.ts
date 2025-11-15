@@ -6737,7 +6737,7 @@ TownList['Parfum Palace Garden'] = new DungeonTown(
         new RouteKillRequirement(10, GameConstants.Region.kalos, 6),
         new OneFromManyRequirement([
             new ObtainedPokemonRequirement('Furfrou (Heart)'),
-            new ObtainedPokemonRequirement('Furfrou (Star)',),
+            new ObtainedPokemonRequirement('Furfrou (Star)'),
             new ObtainedPokemonRequirement('Furfrou (Diamond)'),
             new ObtainedPokemonRequirement('Furfrou (Debutante)'),
             new ObtainedPokemonRequirement('Furfrou (Matron)'),
