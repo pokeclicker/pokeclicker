@@ -659,13 +659,13 @@ class ContestTrainerList {
     public static SpecialEventContestOpponents: ContestTrainer[] = [
         // Lunar New Year
         new ContestTrainer('', 'Lisia', [new ContestPokemon('Galarian Rapidash', 'Dashie', 400, 90, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough], [ContestType.Balanced, ContestType.Balanced, ContestType.Balanced, ContestType.Balanced], undefined, undefined, true)], '(Lunar New Year)',
-        {
-            requirement: new MultiRequirement([
-                new SpecialEventRequirement('Lunar New Year'),
-                new InContestRankRequirement(ContestRank.Spectacular, GameConstants.AchievementOption.equal),
-                new MaxRegionRequirement(GameConstants.Region.galar),
-            ])
-        }),
+            {
+                requirement: new MultiRequirement([
+                    new SpecialEventRequirement('Lunar New Year'),
+                    new InContestRankRequirement(ContestRank.Spectacular, GameConstants.AchievementOption.equal),
+                    new MaxRegionRequirement(GameConstants.Region.galar),
+                ]),
+            }),
         new ContestTrainer('', 'Dawn', [new ContestPokemon('Oricorio (Sensu)', 'Oricorio', 1, 10)], '(Lunar New Year)',
             {
                 requirement: new MultiRequirement([

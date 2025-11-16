@@ -343,11 +343,12 @@ class ContestHelper {
     }
 
     // HTML
-        // Contest modal
+    // Contest modal
     public static getActiveContestColors(type: ContestType, typeArray: ContestType[]) {
-    if (typeArray.includes(type)) {
-        return GameConstants.ContestColor[type];
-    }}
+        if (typeArray.includes(type)) {
+            return GameConstants.ContestColor[type];
+        }
+    }
 
     public static contestButtonTooltip(rank: ContestRank, type: ContestType): string {
         let tooltipString = '';
@@ -359,17 +360,18 @@ class ContestHelper {
         return tooltipString;
     }
 
-        // Ribbons
+    // Ribbons
     public static getRibbonImage(rank: ContestRank, type: ContestType) {
-    if (rank > ContestRank.Practice) {
-        const RibbonRank = ContestRank[rank];
-        const RibbonType = ContestType[type];
-        return RibbonType === 'Balanced' ?
-            `<image href="assets/images/ribbons/${RibbonRank} Star Ribbon.svg">` :
-            `<image href="assets/images/ribbons/${RibbonRank} Rank Ribbon.svg"></image> ${ContestRibbonSVGs.getContestRibbon[rank]}`;
-    } else {
-        return '<image href="assets/images/ribbons/Super Normal Rank Ribbon.svg">';
-    }}
+        if (rank > ContestRank.Practice) {
+            const RibbonRank = ContestRank[rank];
+            const RibbonType = ContestType[type];
+            return RibbonType === 'Balanced' ?
+                `<image href="assets/images/ribbons/${RibbonRank} Star Ribbon.svg">` :
+                `<image href="assets/images/ribbons/${RibbonRank} Rank Ribbon.svg"></image> ${ContestRibbonSVGs.getContestRibbon[rank]}`;
+        } else {
+            return '<image href="assets/images/ribbons/Super Normal Rank Ribbon.svg">';
+        }
+    }
 
     public static getAvailableRibbons() {
         const ranksWithRibbons = GameHelper.enumNumbers(ContestRank).filter(rank => rank > ContestRank.Practice);
@@ -385,19 +387,19 @@ class ContestHelper {
         return ribbonRecord;
     }
 
-        // Text
+    // Text
     public static congratulatoryWord: Record<ContestRank, string> = {
-    [ContestRank.Practice]: 'practical',
-    [ContestRank.Normal]: 'neat',
-    [ContestRank.Super]: 'superb',
-    [ContestRank.Hyper]: 'hyper-tastic',
-    [ContestRank.Master]: 'immaculate',
-    [ContestRank['Super Normal']]: 'nice and formal',
-    [ContestRank['Super Great']]: 'top-rate',
-    [ContestRank['Super Ultra']]: 'ultra stellar',
-    [ContestRank['Super Master']]: 'super masterful',
-    [ContestRank.Spectacular]: 'inspirationally illustrious',
-    [ContestRank['Brilliant Shining']]: 'career-defining',
+        [ContestRank.Practice]: 'practical',
+        [ContestRank.Normal]: 'neat',
+        [ContestRank.Super]: 'superb',
+        [ContestRank.Hyper]: 'hyper-tastic',
+        [ContestRank.Master]: 'immaculate',
+        [ContestRank['Super Normal']]: 'nice and formal',
+        [ContestRank['Super Great']]: 'top-rate',
+        [ContestRank['Super Ultra']]: 'ultra stellar',
+        [ContestRank['Super Master']]: 'super masterful',
+        [ContestRank.Spectacular]: 'inspirationally illustrious',
+        [ContestRank['Brilliant Shining']]: 'career-defining',
     };
 
     public static getRibbonImageDescription(rank: ContestRank, type: ContestType, badgeCase = true) {
