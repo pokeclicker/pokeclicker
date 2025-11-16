@@ -2655,6 +2655,7 @@ export enum GemShops {
     HoennFluteMaster,
     HoennStoneSalesman,
     UnovaFluteMaster,
+    hoennBattleFrontierDeoxysDeal,
     FurfrouGemTrader,
     KalosStoneSalesman,
     SilvallyTrader,
