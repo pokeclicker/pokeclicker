@@ -1,273 +1,548 @@
 ///<reference path="../Battle.ts"/>
+///<reference path="../contest/ContestBattlePokemon.ts"/>
+///<reference path="../contest/ContestBattleDance.ts"/>
+///<reference path="../contest/ContestTrainer.ts"/>
+///<reference path="../contest/ContestRunner.ts"/>
+///<reference path="../contest/ContestHelper.ts"/>
+///<reference path="../contest/ContestBattleSpectacular.ts"/>
+///<reference path="../App.ts"/>
+///<reference path="../../declarations/enums/ContestOpponentStatus.d.ts"/>
+///<reference path="../../declarations/items/ItemList.d.ts"/>
+///<reference path="../../declarations/pokemons/PokemonHelper.d.ts"/>
+///<reference path="../../declarations/utilities/Rand.d.ts"/>
+
 class ContestBattle extends Battle {
+    // Mechanics
+        // Used to generate enemies
     static trainers: KnockoutObservableArray<ContestTrainer> = ko.observableArray(null);
     static pokemons: KnockoutObservableArray<ContestBattlePokemon> = ko.observableArray(null);
-    static pokemonIndexArray: Array<KnockoutObservable<number>> = new Array(1).fill(ko.observable(null));
-    static enemyIndexes: KnockoutObservableArray<number> = ko.observableArray(null);
+    static trainersPartyIndex: KnockoutObservableArray<number> = ko.observableArray(null);
+        // Rerolls trainer batch
+    static prepareNextTrainerBatch: KnockoutObservable<boolean> = ko.observable(false);
+    static lastTrainerRoll = Date.now();
+    // Moves used
+    static moveArray: KnockoutObservableArray<ContestType[]> = ko.observableArray(null);
+    // Which opponent you have access to, usually overlaps with Spotlight status
+    static selectedEnemy: KnockoutObservable<number> = ko.observable(0);
 
-    static trainerStreak: KnockoutObservable<number> = ko.observable(0);
+    // Modes
+    static danceMode: KnockoutObservable<boolean> = ko.observable(false);
+    static frenzyMode: KnockoutObservable<boolean> = ko.observable(false);
 
-    static selectedEnemy: KnockoutObservable<number> = ko.observable(-1);
+    // Gimmicks
+        // Hoenn
+    static beat: KnockoutObservable<number> = ko.observable(0);
+    static totalJamTime: KnockoutObservable<number> = ko.observable(GameConstants.SECOND);
+        // Sinnoh
+    static crotchetValue: KnockoutObservable<number> = ko.observable(0);
+    static finishingPose: KnockoutObservableArray<number> = ko.observableArray(null);
+        // Help tab
+    static infoBeat: KnockoutObservable<number> = ko.observable(0);
+    static infoCrotchetValue: KnockoutObservable<number> = ko.observable(0);
+        // Testing
+    public static testAppeal: KnockoutObservable<number> = ko.observable(10);
 
-    public static trainerInfo(index: number) {
-        if (index >= 0) {
-            return `${ContestBattle.trainers()[index].name.replace(/\d/g,'')}\'s ${ContestBattle.pokemons()[index].nickname}`;
-        } else {
-            return 'Active Click Type';
+    // Rewards
+    public static tokenReward: KnockoutObservable<number> = ko.observable(0);
+    public static berryRewardLog: KnockoutObservableArray<contestBerryReward> = ko.observableArray(
+        // Map them by number so we can display them already sorted
+        GameHelper.enumNumbers(BerryType).map((b) => Object({ berry: b, amount: ko.observable(0) }) as contestBerryReward)
+    );
+    public static itemRewardLog: KnockoutObservableArray<contestItemReward> = ko.observableArray(null);
+
+    public static tick() {
+        // Info tab has separate beat cycle
+        if (GameHelper.counter % 500 === 0) {
+            if (ContestBattle.infoBeat() >= 2) {
+                ContestBattle.infoBeat(0);
+                const typeValues = [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough];
+                ContestBattle.infoCrotchetValue(typeValues[(ContestBattle.infoCrotchetValue() + 1) % 5]);
+            } else {
+                ContestBattle.infoBeat(ContestBattle.infoBeat() + 1);
+            }
         }
+
+        if (ContestBattle.prepareNextTrainerBatch()) {
+            // Give some time to process results
+            const now = Date.now();
+            if (now - 500 >= ContestBattle.lastTrainerRoll) {
+                // Assess batch completion
+                ContestBattle.exciteCrowd();
+                // New batch
+                ContestBattle.generateNewEnemy();
+                ContestBattle.prepareNextTrainerBatch(false);
+                ContestBattle.selectedEnemy(0);
+            }
+            // Keep counter and gimmick ticks from progressing during delay
+            ContestBattle.counter = 0;
+            return;
+        }
+
+        // Gimmicks
+        switch (ContestRunner.rank()) {
+            case ContestRank.Normal:
+            case ContestRank.Super:
+            case ContestRank.Hyper:
+            case ContestRank.Master:
+                return ContestBattleDefault.tick();
+            case ContestRank.Practice:
+            case ContestRank['Super Normal']:
+            case ContestRank['Super Great']:
+            case ContestRank['Super Ultra']:
+            case ContestRank['Super Master']:
+                return ContestBattleDance.tick();
+            case ContestRank.Spectacular:
+                return ContestBattleSpectacular.tick();
+            case ContestRank['Brilliant Shining']: // not coded yet
+            default:
+                return;
+        }
+    }
+
+    public static pokemonAppeal() {
+        if (!ContestRunner.running()) {
+            throw new Error('ContestRunner must be running');
+        }
+
+        // increase the audience bar
+        let multiplier = 100;
+        // chains are mainly used for score, so their boost to appeal is adjusted to not inflate it
+        multiplier += Math.max(0, ContestScore.activeChain() * 10 - 10);
+        // frenzy bonus
+        if (ContestBattle.frenzyMode()) {
+            multiplier += ContestBattle.contestClearedMultiplier();
+        }
+        // Jam penalty
+        if (ContestRunner.jamTime() > 0) {
+            multiplier /= 2;
+        }
+        // convert to single digit
+        multiplier /= 100;
+
+        // (commented out for testing) const rallyAppeal = ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]) * multiplier;
+        ContestRunner.rally(ContestBattle.testAppeal() * multiplier);
+    }
+
+    /**
+     * Generates new set of Contest Opponents
+     */
+    public static generateNewEnemy() {
+        // Determine opponents on field
+        const opponentAmount = !ContestHelper.isDanceHall(ContestRunner.rank()) ? Math.min(ContestRunner.rank(), 5) : Math.max(4, ContestRunner.rank() - 5);
+        // Shuffle trainers
+        const opponents = Rand.shuffleArray(ContestRunner.getTrainerList().filter(t => !ContestBattle.trainers().some(tr => tr === t)));
+        // Create observable arrays
+        // Because some trainers have multiple mons, we track trainers in their own array, so we can refer to it for their next pokemon
+        ContestBattle.trainers(new Array(opponentAmount).fill(null).map((_,i) => opponents[i] as ContestTrainer));
+        ContestBattle.trainersPartyIndex(new Array(opponentAmount).fill(0));
+        ContestBattle.moveArray(new Array(opponentAmount).fill([]));
+        ContestBattle.finishingPose(new Array(opponentAmount).fill(undefined));
+        // Use trainer array to generate Contest Pokemon, aka - send out their first pokemon!
+        ContestBattle.pokemons(new Array(opponentAmount).fill(null).map((_,i) => PokemonFactory.generateContestTrainerPokemon(ContestBattle.trainers()[i], 0)));
+    }
+
+    /**
+     * Brings out opponent's next pokemon, gives rewards if whole party defeated
+     * @param index - index of pokemon to be defeated, defaults to `ContestBattle.selectedEnemy()` if empty
+     * @param moveToNextTrainer - boolean for moving to next trainer on stage
+     */
+    public static defeatContestPokemon(index?: number, moveToNextTrainer = true) {
+        const opponentIndex = index ?? ContestBattle.selectedEnemy();
+        const opponent = ContestBattle.pokemons()[opponentIndex];
+
+        if (ContestBattle.pokemons()[opponentIndex].isRallied()) {
+            // Assess bonus before appeal is added
+            if (ContestRunner.isRallied()) {
+                ContestBattle.addContestTokenReward(ContestBattle.pokemons()[opponentIndex].reward.amount);
+            }
+
+            ContestBattle.pokemonAppeal();
+
+            // Eggs and stuff
+            PokemonHelper.incrementPokemonStatistics(opponent.id, GameConstants.PokemonStatisticsType.Defeated, opponent.shiny, opponent.gender, opponent.shadow);
+            App.game.party.gainExp(ContestRunner.rank(), ContestScore.activeChain(), ContestBattle.frenzyMode());
+            App.game.breeding.progressEggsBattle(Battle.route, player.region);
+            player.lowerItemMultipliers(MultiplierDecreaser.Battle);
+
+            // Score
+            ContestScore.increaseChain(Math.min(10, ContestRunner.rank() || 5 + 1));
+            ContestScore.increaseScore(ContestScore.calculateMoveScore(ContestBattle.moveArray()[opponentIndex], ContestRunner.type()));
+
+            // Check if more mons in trainer party
+            if (ContestBattle.trainersPartyIndex()[opponentIndex] + 1 < ContestBattle.trainers()[opponentIndex].getTeam().length) {
+                ContestBattle.trainersPartyIndex()[opponentIndex] = ContestBattle.trainersPartyIndex()[opponentIndex] + 1;
+                ContestBattle.pokemons.splice(opponentIndex, 1, PokemonFactory.generateContestTrainerPokemon(ContestBattle.trainers()[opponentIndex], ContestBattle.trainersPartyIndex()[opponentIndex]));
+                return;
+            }
+
+            // Apply spectacular (trainer) rewards
+            if (opponent.status() === ContestOpponentStatus.Spectacle) {
+                ContestBattleSpectacular.spectacularReward();
+            }
+
+            // Frenzy rewards
+            if (ContestBattle.frenzyMode()) {
+                // score bonus
+                ContestScore.increaseScore((ContestRunner.rank() / 10) * ContestScore.calculateMoveScore(ContestBattle.moveArray()[opponentIndex], ContestRunner.type()));
+                // dancing gives more tokens but no berries, to make ranks more distinct
+                if (!ContestBattle.danceMode()) {
+                    ContestBattle.addContestBerryReward(ContestRunner.rank(), ContestBattle.getBerryMultiplier());
+                } else {
+                    const tokRew = Math.round(opponent.reward.amount * (10 + opponent.danceHearts()) / 10);
+                    if (opponent.danceHearts() > 0) {
+                        ContestBattle.addContestTokenReward(tokRew);
+                    }
+                }
+                ContestHelper.itemRewards().forEach(i => ContestBattle.addContestItemReward(i));
+            }
+        }
+
+        // move to next trainer
+        if (moveToNextTrainer) {
+            ContestBattle.moveToNextTrainer();
+        }
+    }
+
+    public static rallyPokemon(index: number) {
+        ContestBattle.pokemons()[index].rally(ContestBattle.pokemons()[ContestBattle.selectedEnemy()].maxHealth());
+        ContestBattle.pokemons()[index].status(ContestOpponentStatus.Appealed);
+        return;
+    }
+
+    public static moveToNextTrainer() {
+        if (!ContestRunner.running()) {
+            return;
+        }
+
+        if (ContestBattle.pokemons().every(p => p.status() != ContestOpponentStatus.Waiting)) {
+            return ContestBattle.resetTrainers();
+        }
+
+        let opponentIndex = ContestBattle.selectedEnemy();
+        if (opponentIndex + 1 < ContestBattle.pokemons().length) {
+            opponentIndex = opponentIndex + 1;
+        } else {
+            opponentIndex = 0;
+        }
+
+        return ContestBattle.selectedEnemy(opponentIndex);
+    }
+
+    public static resetTrainers() {
+        const now = Date.now();
+        ContestBattle.lastTrainerRoll = now;
+        ContestBattle.prepareNextTrainerBatch(true);
+        ContestBattle.counter = 0;
+    }
+
+    public static exciteCrowd() {
+        if (ContestRunner.jamTime() > 0) {
+            return;
+        }
+
+        // Failure
+        if (ContestBattle.pokemons().some(p => p.status() === ContestOpponentStatus.Jammed)) {
+            if (this.danceMode()) {
+                ContestScore.breakChain();
+                ContestRunner.crowdHype(Math.max(0, ContestRunner.crowdHype() - 1));
+            } else {
+                ContestBattle.totalJamTime(ContestRunner.rank() * GameConstants.SECOND);
+                ContestRunner.jamTime(ContestRunner.rank() * GameConstants.SECOND);
+            }
+            return;
+        }
+
+        // Success
+        ContestRunner.crowdHype(Math.min(ContestRunner.crowdHype() + 1, 5));
+        if (ContestBattle.danceMode()) {
+            ContestScore.increaseScore(ContestBattleDance.danceHeartScoreBonus());
+        }
+        if (ContestRunner.crowdHype() >= 5) {
+            if (!ContestBattle.frenzyMode()) {
+                ContestRunner.frenzyTime(10 * GameConstants.SECOND);
+                // Reset spectacular type upon frenzy activation
+                ContestBattleSpectacular.activeSpectacularType(ContestRunner.type());
+            }
+            ContestBattle.frenzyMode(true);
+        }
+        return;
+    }
+
+    // Keyboard controls
+    // Spacebar
+    public static contestAction() {
+        if (!ContestRunner.running() || ContestBattle.prepareNextTrainerBatch()) {
+            return;
+        }
+        switch (ContestRunner.rank()) {
+            case ContestRank.Normal:
+            case ContestRank.Super:
+            case ContestRank.Hyper:
+            case ContestRank.Master:
+                ContestBattleDefault.judgeBeat();
+                break;
+            case ContestRank.Practice:
+            case ContestRank['Super Normal']:
+            case ContestRank['Super Great']:
+            case ContestRank['Super Ultra']:
+            case ContestRank['Super Master']:
+                ContestBattleDance.judgeBeat();
+                break;
+            case (ContestRank.Spectacular):
+                ContestBattleSpectacular.contestAction();
+                break;
+            default:
+                break;
+        }
+    }
+    // Directional keys
+    public static contestMove(direction: number) {
+        if (!ContestRunner.running() || ContestBattle.prepareNextTrainerBatch() || !ContestBattle.pokemons()[ContestBattle.selectedEnemy()].usableMoves[direction].pp()) {
+            return;
+        }
+        switch (ContestRunner.rank()) {
+            case (ContestRank.Normal):
+            case (ContestRank.Super):
+            case (ContestRank.Hyper):
+            case (ContestRank.Master):
+                if (ContestBattle.frenzyMode()) {
+                    return ContestBattle.useContestMove(direction);
+                }
+                return;
+            case ContestRank.Practice:
+            case ContestRank['Super Normal']:
+            case ContestRank['Super Great']:
+            case ContestRank['Super Ultra']:
+            case ContestRank['Super Master']:
+                ContestBattleDance.dance(direction);
+                break;
+            case (ContestRank.Spectacular):
+                return ContestBattleSpectacular.useContestMove(direction);
+            case ContestRank['Brilliant Shining']: // not coded yet
+            default:
+                break;
+        }
+    }
+
+    // Multipliers
+    public static contestClearedMultiplier() {
+        let contestsCleared = 0;
+        GameHelper.enumNumbers(ContestRank).forEach(r =>
+            GameHelper.enumNumbers(ContestType).forEach(ct =>
+                contestsCleared += (Math.min(1, App.game.statistics.contestHighestRound[r][ct]() ?? 0) * (ct != ContestType.Balanced ? 1 : 2.5))
+            )
+        );
+        return Math.floor(contestsCleared);
+    }
+
+    public static getBerryMultiplier(): number {
+        // check if any move pool has a good matchup against the running contest type
+        let sum = 0;
+        ContestBattle.moveArray().forEach(ct => {
+            sum += ContestTypeHelper.getAppealModifier(ct, [ContestRunner.type()]);
+        })
+        // consolidate all attacks
+        let multiplier = 1;
+        ContestBattle.moveArray().flatMap(ct => ct).forEach(moveType => {
+            const matchup = ContestTypeHelper.getAppealModifier([moveType], [ContestRunner.type()]);
+            multiplier += matchup ? matchup : -1;
+            }
+        )
+        return sum * Math.max(multiplier, 1);
+    }
+
+    /**
+     * Adds the selected move to the moveArray array
+     * @param direction - one of four pokemons moves
+     * @returns 
+     */
+    public static useContestMove(direction: number) {
+        const move = ContestBattle.pokemons()[ContestBattle.selectedEnemy()].usableMoves[direction];
+        move.pp(0);
+        const newMoves = ContestBattle.moveArray()[ContestBattle.selectedEnemy()].concat(move.moveType);
+        ContestBattle.moveArray.splice(ContestBattle.selectedEnemy(), 1, newMoves);
+        return;
+    }
+
+    // Rewards and Reward Log
+    // Tokens
+    public static addContestTokenReward(amount: number) {
+        // gain tokens
+        App.game.wallet.gainContestTokens(amount);
+        // log token gain
+        GameHelper.incrementObservable(ContestBattle.tokenReward, amount);
+    }
+
+    // Berries
+    public static addContestBerryReward(rank: ContestRank, multiplier: number, trainerReward = false) {
+        if (!multiplier) {
+            return;
+        }
+        const b = ContestHelper.getContestBerryReward(rank ?? ContestRunner.rank(), trainerReward);
+        const amount = Math.ceil(b.amount() * multiplier);
+        // give the berry
+        App.game.farming.gainBerry(b.berry, amount, false);
+        Notifier.notify({
+            title: 'Pokémon Contest',
+            message: `The audience threw you ${amount} ${BerryType[b.berry]} ${amount > 1 ? 'Berries' : 'Berry'}!`,
+            image: FarmController.getBerryImage(b.berry),
+            type: NotificationConstants.NotificationOption.success,
+        });
+        // log the berry
+        ContestBattle.berryRewardLog()[b.berry].amount(ContestBattle.berryRewardLog()[b.berry].amount() + amount);
+    }
+
+    // Items
+    public static addContestItemReward(item: contestItemReward, trainerItem?: boolean) {
+        // check for availability
+        const reqComplete = item.requirement?.isCompleted() ?? true;
+        const chanceLuck = Rand.chance(item.chance ?? 1);
+        if (!chanceLuck || !reqComplete) {
+            return;
+        }
+        // check for item limit
+        let gain = item.amount();
+        if (item.amountLimit) {
+            if (player.itemList[item.item]() >= item.amountLimit) {
+                return;
+            }
+            gain = Math.min(item.amountLimit, item.amount());
+        }
+        // give the item
+        player.gainItem(item.item, gain);
+        Notifier.notify({
+            title: 'Pokémon Contest',
+            message: trainerItem ? `${ContestBattle.trainers()[ContestBattle.selectedEnemy()].name} & ${ContestBattle.pokemons()[ContestBattle.selectedEnemy()].nickname} tossed you a favor!` : 'The audience threw you a reward!',
+            image: ItemList[item.item].image,
+            type: NotificationConstants.NotificationOption.success,
+        });
+        // log the item
+        const oldAmount = ContestBattle.itemRewardLog().find(i => i.item === item.item)?.amount() ?? 0;
+        const newAmount = oldAmount + gain;
+        ContestBattle.itemRewardLog(ContestBattle.itemRewardLog().filter(i => i.item != item.item).concat({item: item.item, amount: ko.observable(newAmount)}).sort((a,b) => b.amount() - a.amount()));
+    }
+
+    // HTML display
+    // Appeal hearts
+    public static maxAppealComputable: KnockoutComputed<string> = ko.pureComputed(() => {
+        const appealLeft = '🤍';
+        const appeal = ContestHelper.getContestEmoji(ContestRunner.type());
+        if (!ContestRunner.jamTime()) {
+            const hypePoints = Math.min(5, ContestRunner.crowdHype());
+            return appeal.repeat(hypePoints).concat(appealLeft.repeat(5 - hypePoints));
+        }
+
+        // Jamming is specific to Hoenn contests and prevents riling up the crowd for its duration, so we turn the emojis into a timer
+        const jam = '🖤';
+        const jamTickInterval = ContestBattle.totalJamTime() / 5;
+        return jam.repeat(Math.ceil(ContestRunner.jamTime() / jamTickInterval)).concat(Math.ceil(ContestRunner.jamTime() / jamTickInterval) === 5 ? '' : '🩶').concat(appealLeft.repeat(Math.max(4 - Math.ceil(ContestRunner.jamTime() / jamTickInterval), 0)));
+    })
+
+    // Highlight selected/affected Pokemon
+    public static getSpotlightStatus(index: number): boolean {
+        if (ContestBattle.prepareNextTrainerBatch()) {
+            return false;
+        }
+        if (ContestBattle.danceMode()) {
+            return ContestBattle.pokemons()[index].contestTypes.includes(ContestBattle.crotchetValue()) || ContestBattle.frenzyMode();
+        }
+        if (ContestRunner.rank() === ContestRank.Spectacular && !ContestBattle.frenzyMode()) {
+            return Boolean(ContestBattleSpectacular.moveRange(ContestBattle.selectedEnemy())[ContestBattleSpectacular.spotlightFormation()][index]);
+        }
+        return index === ContestBattle.selectedEnemy();
+    }
+
+    public static getSpotlightGrayscaleStatus(index: number): boolean {
+        if (ContestRunner.rank() === ContestRank.Spectacular) {
+            return ContestBattle.selectedEnemy() != index;
+        }
+        if (ContestBattle.danceMode() && ContestBattle.frenzyMode()) {
+            return index != ContestBattle.selectedEnemy();
+        }
+        return false;
+    }
+
+    public static contestHealth(pokemon: ContestBattlePokemon) {
+        const oppStatus = pokemon.status();
+        if (oppStatus === ContestOpponentStatus.Appealed){
+            return ('💖').repeat(5);
+        }
+        switch (ContestRunner.rank()) {
+            case ContestRank.Normal:
+            case ContestRank.Super:
+            case ContestRank.Hyper:
+            case ContestRank.Master:
+                return ContestBattleDefault.contestHealth(pokemon);
+            case ContestRank.Practice:
+            case ContestRank['Super Normal']:
+            case ContestRank['Super Great']:
+            case ContestRank['Super Ultra']:
+            case ContestRank['Super Master']:
+                return ContestBattleDance.contestHealth(pokemon);
+            case ContestRank.Spectacular:
+                return ContestBattleSpectacular.contestHealth(pokemon);
+            case ContestRank['Brilliant Shining']: // not coded yet
+            default:
+                return new Array(5).fill('🤍').join('');
+        }
+    }
+
+    public static healthDisplayBeat(grade: number, emojiSucceed: string, emojiFail: string, emojiNeutral: string, beat = ContestBattle.beat()) {
+        const hearts = new Array(beat * 2 + 1).fill(grade >= 2 ? emojiSucceed : emojiFail);
+        const hpBar = new Array(2).fill(emojiNeutral).splice(0, 2 - Math.max(0, beat));
+        return hpBar.concat(hearts).concat(hpBar).join('');
+    }
+
+    // Table HTML
+    public static trainerInfo(index: number) {
+        let action = '';
+        switch (ContestRunner.rank()) {
+            case ContestRank.Normal:
+            case ContestRank.Super:
+            case ContestRank.Hyper:
+            case ContestRank.Master:
+                action = ContestBattle.frenzyMode() ? 'Moves' : 'Appeal';
+                break;
+            case ContestRank.Spectacular:
+                action = ContestBattle.frenzyMode() ? 'Spectacular Talent' : 'Moves'
+                break;
+            case ContestRank.Practice:
+            case ContestRank['Super Normal']:
+            case ContestRank['Super Great']:
+            case ContestRank['Super Ultra']:
+            case ContestRank['Super Master']:
+                if (ContestBattle.frenzyMode()) {
+                    action = 'Moves';
+                    break;
+                }
+                return 'Dance Beat';
+            case ContestRank['Brilliant Shining']: // not coded yet
+                break;
+        }
+        return `${ContestBattle.trainers()[index].name.replace(/\d/g,'')}\'s ${ContestBattle.pokemons()[index].nickname}\'s ${action}`;
     }
 
     public static enemyTypes(index: number) {
-        if (index >= 0) {
-            return ContestBattle.pokemons()[index].contestTypes;
-        } else {
-            return [ContestRunner.type()];
+        return ContestBattle.danceMode() ? [ContestBattle.crotchetValue()] : ContestBattle.pokemons()[index].contestTypes;
+    }
+
+    public static contestViewGimmickBar(rank: ContestRank): string {
+        if (ContestBattle.frenzyMode() || rank === ContestRank.Spectacular) {
+            return 'contestMovesTemplate';
         }
+        return 'contestBeatTemplate';
     }
 
-    public static pokemonAttack() {
-        if (ContestRunner.running()) {
-            const now = Date.now();
-            if (ContestBattle.lastPokemonAttack > now - 900) {
-                return;
-            }
-            ContestBattle.lastPokemonAttack = now;
-
-            // auto damage enemy if disableClick challenge
-            if (App.game.challenges.list.disableClickAttack.active()) {
-                ContestBattle.pokemons().forEach(p => p.damage(ContestHelper.calculateClickAppeal([ContestRunner.type()], p.contestTypes)));
-            }
-
-            // increase the audience bar
-            if (ContestRunner.jamTime() <= 0) {
-                ContestRunner.rally(ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]));
-            }
-
-            if (ContestBattle.pokemons().some(p => !p?.isAlive())) {
-                ContestBattle.pokemons().filter(p => !p?.isAlive()).forEach(() => ContestBattle.defeatPokemon());
-            }
-        }
+    public static getBattleViewTitle() {
+    const heart = ContestHelper.getContestEmoji(ContestRunner.type());
+    let emoji = '🤍';
+    if (ContestRunner.contestRankObservable().filter(rank => rank > ContestRank.Practice).every(rank => {
+        ContestRunner.contestTypeObservable().every(
+            type => new ContestWonRequirement(1, rank, type).isCompleted()
+        )}
+    )) {
+        emoji = '💖';
     }
-
-    /**
-     * Award the player with exp, and go to the next pokemon
-     */
-    public static defeatPokemon() {
-        const enemyIndex = ContestBattle.pokemons().findIndex(p => !p?.isAlive());
-
-        ContestBattle.exciteCrowd(enemyIndex);
-
-        ContestBattle.pokemons()[enemyIndex].defeat(true);
-        ContestBattle.pokemonIndexArray[enemyIndex](ContestBattle.pokemonIndexArray[enemyIndex]() + 1);
-
-        if (ContestBattle.pokemonIndexArray[enemyIndex]() + 1 >= ContestBattle.trainers()[enemyIndex].getTeam().length) {
-            // increase trainer streak
-            ContestBattle.trainerStreak(ContestBattle.trainerStreak() + 1);
-            App.game.statistics.contestTrainerStreak[ContestRunner.rank()][ContestRunner.type()](Math.max(App.game.statistics.contestTrainerStreak[ContestRunner.rank()][ContestRunner.type()](), ContestBattle.trainerStreak()));
-            // increase statistic
-            GameHelper.incrementObservable(App.game.statistics.contestTrainersDefeated[ContestRunner.rank()][ContestRunner.type()]);
-            // give reward
-            ContestBattle.addContestReward(enemyIndex);
-        }
-
-        // Make contest "route" regionless
-        App.game.breeding.progressEggsBattle(ContestRunner.rank() * 3 + 1, GameConstants.Region.none);
-
-        ContestBattle.generateNewEnemy();
-
-        player.lowerItemMultipliers(MultiplierDecreaser.Battle); //todo: ContestBattle
-    }
-
-    public static generateTrainers() {
-        // max and default of 4
-        const opponentAmount = ContestRunner.rank() != ContestRank.Practice ? Math.min(ContestRunner.rank(), 4) : 4;
-        const opponents = Rand.shuffleArray(ContestRunner.getTrainerList());
-        ContestBattle.enemyIndexes(new Array((opponentAmount)).fill(null).map((_,i) => i));
-        ContestBattle.trainers(new Array(opponentAmount).fill(null).map((_,i) => opponents[i]));
-        ContestBattle.pokemonIndexArray = new Array(opponentAmount).fill(ko.observable(0));
-        ContestBattle.pokemons(new Array(opponentAmount).fill(null));
-        ContestBattle.pokemons().forEach(() => ContestBattle.generateNewEnemy());
-    }
-
-    /**
-     * Reset the counter.
-     */
-    public static generateNewEnemy() {
-        // Do NOT reset ContestBattle.counter, because click attacking is separate from idle damage
-
-        // trainer, enemy, and pokemon indexes are in the same position
-        const enemyIndex = ContestBattle.pokemons().findIndex(p => p === null || !p?.isAlive());
-
-        // Check if all of the trainer's party has been used
-        if (ContestBattle.pokemonIndexArray[enemyIndex]() + 1 >= ContestBattle.trainers()[enemyIndex].getTeam().length) {
-
-            // Reset pokemon index for next trainer
-            ContestBattle.pokemonIndexArray[enemyIndex](0);
-
-            // Select new trainer and pokemon
-            const newTrainer = Rand.fromArray(ContestRunner.getTrainerList().filter(t => !ContestBattle.trainers().some(tr => tr === t)));
-            ContestBattle.trainers()[enemyIndex] = newTrainer;
-            ContestBattle.trainers.notifySubscribers();
-            ContestBattle.pokemons()[enemyIndex] = PokemonFactory.generateContestTrainerPokemon(newTrainer, 0);
-            ContestBattle.pokemons.notifySubscribers();
-
-        } else {
-            // Move to next pokemon
-            ContestBattle.pokemons()[enemyIndex] = PokemonFactory.generateContestTrainerPokemon(ContestBattle.trainers()[enemyIndex], ContestBattle.pokemonIndexArray[enemyIndex]());
-            ContestBattle.pokemons.notifySubscribers();
-        }
-
-        // increase the opposing pokemon's hp slightly with each trainer defeated
-        const multiplier = Math.max(ContestRunner.rank(), 1) + ContestRunner.encoreRounds();
-        ContestBattle.pokemons()[enemyIndex].health(ContestBattle.pokemons()[enemyIndex].health() * multiplier);
-        ContestBattle.pokemons()[enemyIndex].maxHealth(ContestBattle.pokemons()[enemyIndex].maxHealth() * multiplier);
-    }
-
-    public static endContest() {
-        ContestBattle.trainers([]);
-        ContestBattle.pokemons([]);
-        ContestBattle.pokemonIndexArray = [];
-        ContestBattle.enemyIndexes([]);
-        ContestRunner.itemRewards.removeAll();
-        ContestRunner.berryRewards.removeAll();
-    }
-
-    public static clickAppeal(index: number) {
-        if (ContestRunner.running()) {
-            // click attacks disabled
-            if (App.game.challenges.list.disableClickAttack.active()) {
-                return;
-            }
-            // (Comments copied from clickAttack)
-            // TODO: figure out a better way of handling this
-            // Limit click attack speed, Only allow 1 attack per 50ms (20 per second)
-            const now = Date.now();
-            if (this.lastClickAttack > now - 50) {
-                return;
-            }
-            this.lastClickAttack = now;
-            if (!this.pokemons()[index]?.isAlive()) {
-                return;
-            }
-            this.pokemons()[index].damage(ContestHelper.calculateClickAppeal([ContestRunner.type()], ContestBattle.pokemons()[index].contestTypes));
-            if (!this.pokemons()[index].isAlive()) {
-                this.defeatPokemon();
-            }
-        }
-    }
-
-    public static maxAppeal() {
-        if (ContestRunner.crowdHype().length >= 5) {
-            // Make const for crowdHype so it doesn't change in Spectacular Rank
-            const hypeFocus = [...new Set(ContestRunner.crowdHype().filter(ct => ct === ContestRunner.type()))].length;
-
-            ContestBattle.pokemons().forEach(p => {
-                // damage opponent
-                p.damage(10 * ContestHelper.calculateClickAppeal([ContestRunner.type()], p.contestTypes));
-
-                // equation for adding audience appeal
-                const multiplier = p.contestTypes.includes(ContestRunner.type()) ? 2 : 1;
-                const baseAudienceAppeal = ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * Math.pow(ContestRunner.rank(), 2);
-                const baseOpponentHealth = p.maxHealth() / (Math.max(ContestRunner.rank(), 1) + ContestRunner.encoreRounds());
-                const HPBonus = baseOpponentHealth * ContestRunner.rank() * 10 * multiplier / (baseAudienceAppeal);
-                const percentBonus = 15 / 100;
-                const baseBonus = Math.floor((((((percentBonus * baseAudienceAppeal) / 80) / (Math.pow(ContestRunner.rank(), 2) * ContestBattle.enemyIndexes().length)) / (80 * ContestRunner.rank())) + HPBonus) * baseAudienceAppeal);
-
-                // Rally and Jam when defeated or, in Spectacular, every time used
-                if (!p?.isAlive() || ContestRunner.rank() === ContestRank.Spectacular) {
-                    ContestRunner.rally(Math.round(baseBonus / hypeFocus));
-                    ContestBattle.contestJam(p);
-                }
-                // Defeat
-                if (!p?.isAlive()) {
-                    ContestBattle.defeatPokemon();
-                }
-            });
-
-            // then empty the click appeal bar
-            ContestRunner.crowdHype.removeAll();
-        }
-    }
-
-    public static exciteCrowd(p: any) {
-        if (ContestRunner.jamTime() <= 0) {
-            if (ContestRunner.rank() < ContestRank.Spectacular && ContestBattle.pokemons()[p].contestTypes.includes(ContestRunner.type())) {
-                // limit to 5, add contest's type
-                const run = ContestRunner.crowdHype().concat(ContestRunner.type()).reverse().slice(0, 5).reverse();
-                ContestRunner.crowdHype(run);
-            }
-            if (ContestRunner.rank() >= ContestRank.Spectacular) {
-                // limit to 5, add opponent's types, keep contest's type
-                const type = ContestRunner.crowdHype().concat(ContestBattle.pokemons()[p].contestTypes).filter(ct => ct === ContestRunner.type());
-                const run = ContestRunner.crowdHype().concat(ContestBattle.pokemons()[p].contestTypes).filter(ct => ct != ContestRunner.type()).reverse().slice(0, 5 - type.length).reverse();
-                ContestRunner.crowdHype(type.concat(run).slice(0, 5));
-            }
-        }
-    }
-
-    public static contestJam(p: any) {
-        const type = ContestRunner.rank() < ContestRank.Spectacular ? [ContestRunner.type()] : ContestRunner.crowdHype();
-        const jams = p?.contestTypes.filter(ct => ContestTypeHelper.getAppealModifier(type, [ct]) === 0).length;
-        ContestRunner.jamTime(ContestRunner.jamTime() + jams * 1000);
-    }
-
-    // Computables for contestView
-    public static trainerBonusComputable: KnockoutComputed<string> = ko.pureComputed(() => {
-        return `Trainer Streak: ${ContestBattle.trainerStreak()}`;
-    });
-
-    public static encoreBonusComputable: KnockoutComputed<string> = ko.pureComputed(() => {
-        // remember to check ContestRank.Practice for this
-        return ContestRunner.rank() < ContestRank.Spectacular ? `Bonus Round: ${ContestRunner.encoreRounds()}/${ContestRunner.rank()}` : `Round: ${ContestRunner.encoreRounds()}`;
-    });
-
-    public static maxAppealComputable: KnockoutComputed<string> = ko.pureComputed(() => {
-        const appealLeft = '🤍';
-        const jam = '🖤';
-
-        const appeal: string[] = [];
-        ContestRunner.crowdHype().forEach(ct => {
-            switch (ct) {
-                case ct = ContestType.Cool:
-                    appeal.push('🧡');
-                    break;
-                case ct = ContestType.Beautiful:
-                    appeal.push('💙');
-                    break;
-                case ct = ContestType.Cute:
-                    appeal.push('🩷');
-                    break;
-                case ct = ContestType.Smart:
-                    appeal.push('💚');
-                    break;
-                case ct = ContestType.Tough:
-                    appeal.push('💛');
-                    break;
-                case ct = ContestType.Balanced:
-                    appeal.push('💜');
-                    break;
-            }
-        });
-
-        if (!ContestRunner.jamTime()) {
-            return appeal.join('').concat(appealLeft.repeat(5 - appeal.length));
-        } else {
-            return jam.repeat(Math.min(Math.ceil(ContestRunner.jamTime() / 1000), 5)).concat(appealLeft.repeat(5 - Math.min(Math.ceil(ContestRunner.jamTime() / 1000), 5)));
-        }
-    })
-
-    public static addContestReward(enemyIndex: number) {
-        ContestBattle.trainers()[enemyIndex].options?.berryReward?.filter(br => !br.requirement || br.requirement?.isCompleted()).forEach(br => {
-            const amountWon = ContestRunner.berryRewards().find(b => b.berry === br.berry)?.amount ?? 0;
-            ContestRunner.berryRewards(ContestRunner.berryRewards().filter(b => b.berry != br.berry).concat({berry: br.berry, amount: br.amount + amountWon}));
-        });
-        ContestBattle.trainers()[enemyIndex].options?.itemReward?.filter(ir => !ir.requirement || ir.requirement?.isCompleted()).forEach(ir => {
-            let amountWon = ContestRunner.itemRewards().find(i => i.item === ir.item)?.amount ?? 0;
-            // limit to one mega stone in case of Lisia being defeated twice in one round
-            if (ir.item === 'Altarianite') {
-                amountWon = 0;
-            }
-            ContestRunner.itemRewards(ContestRunner.itemRewards().filter(i => i.item != ir.item).concat({item: ir.item, amount: ir.amount + amountWon}));
-        });
+        return !ContestRunner.running() ? `${emoji}Contest Hall${emoji}` : `${heart}${ContestRank[ContestRunner.rank()]} Rank ${ContestType[ContestRunner.type()]}${heart}`;
     }
 }
