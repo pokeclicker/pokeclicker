@@ -134,19 +134,24 @@ ItemList.PokeBlock_Mild      = new PokeBlock(PokeBlockColor.Mild, 1, undefined, 
     (pokemon) =>  pokemon.contestSheen() < 100, 'A Mild Poffin that boosts the Appeal and Sheen of any Pokémon by a steady amount.', 'Mild Poffin', 10);
 
 ItemList.PokeBlock_Purple    = new PokeBlock(PokeBlockColor.Purple, 1, undefined, [ContestType.Cool, ContestType.Beautiful],
-    (pokemon) => (pokemon.contestExp >= 350 && ![ContestType.Cool, ContestType.Beautiful].every(ct => pokemon.currentContestTypes.includes(ct)) && [ContestType.Cool, ContestType.Beautiful].some(ct => pokemon.currentContestTypes.includes(ct))),
+    (pokemon) => (pokemon.contestExp >= 350 &&
+    ![ContestType.Cool, ContestType.Beautiful].every(ct => pokemon.currentContestTypes.includes(ct)) && [ContestType.Cool, ContestType.Beautiful].some(ct => pokemon.currentContestTypes.includes(ct))),
     'A Spicy-Dry Pokéblock that uses 350 Sheen points to change a Pokémon\'s Contest Type from Cool to Beautiful or vice versa.');
 ItemList.PokeBlock_Indigo    = new PokeBlock(PokeBlockColor.Indigo, 1, undefined, [ContestType.Beautiful, ContestType.Cute],
-    (pokemon) => (pokemon.contestExp >= 350 && ![ContestType.Beautiful, ContestType.Cute].every(ct => pokemon.currentContestTypes.includes(ct)) && [ContestType.Beautiful, ContestType.Cute].some(ct => pokemon.currentContestTypes.includes(ct))),
+    (pokemon) => (pokemon.contestExp >= 350 &&
+    ![ContestType.Beautiful, ContestType.Cute].every(ct => pokemon.currentContestTypes.includes(ct)) && [ContestType.Beautiful, ContestType.Cute].some(ct => pokemon.currentContestTypes.includes(ct))),
     'A Dry-Sweet Pokéblock that uses 350 Sheen points to change a Pokémon\'s Contest Type from Beautiful to Cute or vice versa.');
 ItemList.PokeBlock_Brown     = new PokeBlock(PokeBlockColor.Brown, 1, undefined, [ContestType.Cute, ContestType.Smart],
-    (pokemon) => (pokemon.contestExp >= 350 && ![ContestType.Cute, ContestType.Smart].every(ct => pokemon.currentContestTypes.includes(ct)) && [ContestType.Cute, ContestType.Smart].some(ct => pokemon.currentContestTypes.includes(ct))),
+    (pokemon) => (pokemon.contestExp >= 350 &&
+    ![ContestType.Cute, ContestType.Smart].every(ct => pokemon.currentContestTypes.includes(ct)) && [ContestType.Cute, ContestType.Smart].some(ct => pokemon.currentContestTypes.includes(ct))),
     'A Sweet-Bitter Pokéblock that uses 350 Sheen apoints to change a Pokémon\'s Contest Type from Cute to Smart or vice versa.');
 ItemList.PokeBlock_Olive     = new PokeBlock(PokeBlockColor.Olive, 1, undefined, [ContestType.Smart, ContestType.Tough],
-    (pokemon) => (pokemon.contestExp >= 350 && ![ContestType.Smart, ContestType.Tough].every(ct => pokemon.currentContestTypes.includes(ct)) && [ContestType.Smart, ContestType.Tough].some(ct => pokemon.currentContestTypes.includes(ct))),
+    (pokemon) => (pokemon.contestExp >= 350 &&
+    ![ContestType.Smart, ContestType.Tough].every(ct => pokemon.currentContestTypes.includes(ct)) && [ContestType.Smart, ContestType.Tough].some(ct => pokemon.currentContestTypes.includes(ct))),
     'A Bitter-Sour Pokéblock that uses 350 Sheen points to change a Pokémon\'s Contest Type from Smart to Tough or vice versa.');
 ItemList.PokeBlock_Orange    = new PokeBlock(PokeBlockColor.Orange, 1, undefined, [ContestType.Cool, ContestType.Tough],
-    (pokemon) => (pokemon.contestExp >= 350 && ![ContestType.Cool, ContestType.Tough].every(ct => pokemon.currentContestTypes.includes(ct)) && [ContestType.Cool, ContestType.Tough].some(ct => pokemon.currentContestTypes.includes(ct))),
+    (pokemon) => (pokemon.contestExp >= 350 &&
+    ![ContestType.Cool, ContestType.Tough].every(ct => pokemon.currentContestTypes.includes(ct)) && [ContestType.Cool, ContestType.Tough].some(ct => pokemon.currentContestTypes.includes(ct))),
     'A Sour-Spicy Pokéblock that uses 350 Sheen points to change a Pokémon\'s Contest Type from Tough to Cool or vice versa.');
 ItemList.PokeBlock_Rainbow   = new PokeBlock(PokeBlockColor.Rainbow, 1, undefined, undefined,
     (pokemon) => pokemon.contestSheen() >= 100, 'A Flavorful Pokéblock that converts Sheen into a tiny bit of Appeal.');

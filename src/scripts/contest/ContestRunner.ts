@@ -82,7 +82,7 @@ class ContestRunner {
         ContestRunner.running(false);
 
         ContestRunner.updateScore();
-        
+
         // Empty arrays
         ContestBattle.trainers.removeAll();
         ContestBattle.pokemons.removeAll();
@@ -112,14 +112,14 @@ class ContestRunner {
         }
 
         // Timers
-            // Regular timer, only count down if no frenzy
+        // Regular timer, only count down if no frenzy
         ContestRunner.timeLeft(ContestRunner.timeLeft() - (!ContestBattle.frenzyMode() ? GameConstants.CONTEST_TICK : 0));
-            // Percentage for html
+        // Percentage for html
         ContestRunner.timeLeftPercentage(Math.floor(!ContestBattle.frenzyMode() ?
             ContestRunner.timeLeft() / (GameConstants.CONTEST_TIME * ContestHelper.contestRankTimer(ContestRunner.rank())) * 100 :
             ContestRunner.frenzyTime() / GameConstants.CONTEST_TIME * 100
         ));
-            // Always reduce gimmick timers
+        // Always reduce gimmick timers
         ContestRunner.jamTime(Math.max(ContestRunner.jamTime() - GameConstants.CONTEST_TICK, 0));
         ContestRunner.frenzyTime(Math.max(ContestRunner.frenzyTime() - GameConstants.CONTEST_TICK, 0));
     }

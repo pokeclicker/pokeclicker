@@ -32,8 +32,7 @@ class ContestScore {
         contestTypes.forEach(moveType => {
             const matchup = contestRunnerType === ContestType.Balanced ? 0.5 : ContestTypeHelper.getAppealModifier([moveType], [contestRunnerType]);
             sum += matchup;
-            }
-        )
+        });
         return Math.max(sum, baseNumber);
     }
 }

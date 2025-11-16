@@ -32,7 +32,7 @@ class ContestBattleSpectacular {
             ContestBattleSpectacular.judgeBeat();
             return;
         }
-    
+
         const pk = ContestBattle.pokemons()[ContestBattle.selectedEnemy()];
         pk.rally(1);
 
@@ -95,7 +95,7 @@ class ContestBattleSpectacular {
                 // Apply status after defeat, reverts back from Spectacle status too
                 p.status(ContestOpponentStatus.Appealed);
             }
-        })
+        });
 
         // Spectacular Balanced gimmick, type relay
         if (ContestRunner.type() === ContestType.Balanced) {

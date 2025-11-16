@@ -39,7 +39,7 @@ interface contestMove {
 
 class ContestHelper {
     // Pokemon
-        // Audience appeal
+    // Audience appeal
     public static calculatePokemonContestAppeal(conRank: ContestRank, conType: ContestType, types: ContestType[], pokemons?: PartyPokemon[], includeBreeding = false): number {
         let appeal = 0;
         const pks = pokemons ? pokemons : ContestHelper.getPartyPokemonByContestTypeRank(conType, conRank);
@@ -65,7 +65,7 @@ class ContestHelper {
         return appeal / 10;
     }
 
-        // Contest eligibility
+    // Contest eligibility
     public static getPartyPokemonByMaxSheen(): PartyPokemon[] {
         return App.game.party.caughtPokemon.filter((p) => {
             return p.contestSheen() >= 100;
@@ -130,7 +130,7 @@ class ContestHelper {
             case ContestRank.Normal:
                 return 1;
             case ContestRank.Super:
-                return 1.2
+                return 1.2;
             case ContestRank.Hyper:
                 return 1.5;
             case ContestRank.Master:
@@ -275,9 +275,7 @@ class ContestHelper {
             { berry: BerryType.Durin, amount: ko.observable(1), weight: 0.7, requirement: new MultiRequirement([new InContestTypeRequirement(ContestType.Smart), new BerryUnlockedRequirement(BerryType.Durin)]) },
             { berry: BerryType.Belue, amount: ko.observable(1), weight: 0.7, requirement: new MultiRequirement([new InContestTypeRequirement(ContestType.Tough), new BerryUnlockedRequirement(BerryType.Belue)]) },
         ],
-        [ContestRank.Spectacular] : [
-            ...GameHelper.enumNumbers(BerryType).filter(b => Number(b) >= BerryType.Occa && Number(b) <= BerryType.Roseli).map((b) => Object({ berry: b, amount: ko.observable(1), weight: 0.2, requirement: new BerryUnlockedRequirement(b) }) as contestBerryReward),
-        ],
+        [ContestRank.Spectacular] : [...GameHelper.enumNumbers(BerryType).filter(b => Number(b) >= BerryType.Occa && Number(b) <= BerryType.Roseli).map((b) => Object({ berry: b, amount: ko.observable(1), weight: 0.2, requirement: new BerryUnlockedRequirement(b) }) as contestBerryReward)],
         [ContestRank['Brilliant Shining']]: [
             { berry: BerryType.Enigma, amount: ko.observable(1), weight: 0.1, requirement: new MultiRequirement([new InContestTypeRequirement(ContestType.Cool), new BerryUnlockedRequirement(BerryType.Enigma)]) },
             { berry: BerryType.Micle, amount: ko.observable(1), weight: 0.1, requirement: new MultiRequirement([new InContestTypeRequirement(ContestType.Beautiful), new BerryUnlockedRequirement(BerryType.Micle)]) },
@@ -347,10 +345,9 @@ class ContestHelper {
     // HTML
         // Contest modal
     public static getActiveContestColors(type: ContestType, typeArray: ContestType[]) {
-        if (typeArray.includes(type)) {
-            return GameConstants.ContestColor[type];
-        }
-    }
+    if (typeArray.includes(type)) {
+        return GameConstants.ContestColor[type];
+    }}
 
     public static contestButtonTooltip(rank: ContestRank, type: ContestType): string {
         let tooltipString = '';
@@ -364,16 +361,15 @@ class ContestHelper {
 
         // Ribbons
     public static getRibbonImage(rank: ContestRank, type: ContestType) {
-        if (rank > ContestRank.Practice) {
-            const RibbonRank = ContestRank[rank];
-            const RibbonType = ContestType[type];
-            return RibbonType === 'Balanced' ?
-                `<image href="assets/images/ribbons/${RibbonRank} Star Ribbon.svg">` :
-                `<image href="assets/images/ribbons/${RibbonRank} Rank Ribbon.svg"></image> ${ContestRibbonSVGs.getContestRibbon[rank]}`;
-        } else {
-            return '<image href="assets/images/ribbons/Super Normal Rank Ribbon.svg">';
-        }
-    }
+    if (rank > ContestRank.Practice) {
+        const RibbonRank = ContestRank[rank];
+        const RibbonType = ContestType[type];
+        return RibbonType === 'Balanced' ?
+            `<image href="assets/images/ribbons/${RibbonRank} Star Ribbon.svg">` :
+            `<image href="assets/images/ribbons/${RibbonRank} Rank Ribbon.svg"></image> ${ContestRibbonSVGs.getContestRibbon[rank]}`;
+    } else {
+        return '<image href="assets/images/ribbons/Super Normal Rank Ribbon.svg">';
+    }}
 
     public static getAvailableRibbons() {
         const ranksWithRibbons = GameHelper.enumNumbers(ContestRank).filter(rank => rank > ContestRank.Practice);
@@ -391,17 +387,17 @@ class ContestHelper {
 
         // Text
     public static congratulatoryWord: Record<ContestRank, string> = {
-        [ContestRank.Practice]: 'practical',
-        [ContestRank.Normal]: 'neat',
-        [ContestRank.Super]: 'superb',
-        [ContestRank.Hyper]: 'hyper-tastic',
-        [ContestRank.Master]: 'immaculate',
-        [ContestRank['Super Normal']]: 'nice and formal',
-        [ContestRank['Super Great']]: 'top-rate',
-        [ContestRank['Super Ultra']]: 'ultra stellar',
-        [ContestRank['Super Master']]: 'super masterful',
-        [ContestRank.Spectacular]: 'inspirationally illustrious',
-        [ContestRank['Brilliant Shining']]: 'career-defining',
+    [ContestRank.Practice]: 'practical',
+    [ContestRank.Normal]: 'neat',
+    [ContestRank.Super]: 'superb',
+    [ContestRank.Hyper]: 'hyper-tastic',
+    [ContestRank.Master]: 'immaculate',
+    [ContestRank['Super Normal']]: 'nice and formal',
+    [ContestRank['Super Great']]: 'top-rate',
+    [ContestRank['Super Ultra']]: 'ultra stellar',
+    [ContestRank['Super Master']]: 'super masterful',
+    [ContestRank.Spectacular]: 'inspirationally illustrious',
+    [ContestRank['Brilliant Shining']]: 'career-defining',
     };
 
     public static getRibbonImageDescription(rank: ContestRank, type: ContestType, badgeCase = true) {

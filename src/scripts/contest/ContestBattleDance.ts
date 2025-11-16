@@ -126,7 +126,7 @@ class ContestBattleDance {
     }
 
     public static contestHealth(pokemon: ContestBattlePokemon) {
-        const dancing: string[] = new Array();
+        const dancing: string[] = [];
         pokemon.dance().forEach(d => dancing.push(ContestHelper.getArrowEmoji(d)));
 
         const oppStatus = pokemon.status();

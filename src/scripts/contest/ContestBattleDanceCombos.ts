@@ -33,17 +33,16 @@ class ContestBattleDanceCombos {
      * Cool poses - posing along the same plane
      */
     public static coolPoseBonus(arr: number[]) {
-        let map = new Map();
-            GameHelper.enumNumbers(Direction).forEach((n) => {
+        const map = new Map();
+        GameHelper.enumNumbers(Direction).forEach((n) => {
             map.set(n, 0);
         });
 
-        arr.forEach((n)=>{
-        map.set(n, map.get(n) + 1);
+        arr.forEach((n) => {
+            map.set(n, map.get(n) + 1);
         });
 
         return Math.max(map.get(Direction.Up) + map.get(Direction.Down), map.get(Direction.Left) + map.get(Direction.Right));
-    
     }
 
     /**
@@ -82,14 +81,14 @@ class ContestBattleDanceCombos {
         }
 
         // Pair calculation
-        let map = new Map();
-            GameHelper.enumNumbers(Direction).forEach((n) => {
+        const map = new Map();
+        GameHelper.enumNumbers(Direction).forEach((n) => {
             map.set(n, 0);
         });
 
         if (linkedPairExists) {
-            arr.forEach((n)=>{
-            map.set(n, map.get(n) + 1);
+            arr.forEach((n) => {
+                map.set(n, map.get(n) + 1);
             });
         }
 
@@ -98,7 +97,7 @@ class ContestBattleDanceCombos {
 
         // Group pairs from entire stage
         const pairValue = Math.max(Math.min(map.get(Direction.Up), map.get(Direction.Down)), Math.min(map.get(Direction.Left), map.get(Direction.Right))) * 2 + oddPairsHandicap;
-    
+
         return pairValue;
     }
 
@@ -235,7 +234,7 @@ class ContestBattleDanceCombos {
             bonus += danceBonuses[i] * Math.floor(typeArray[i]);
         }
         return bonus;
-    };
+    }
 
     // Live combo bonus
     public static moveBonus(type: ContestType, moveDirections: number[]) {

@@ -23,7 +23,7 @@ class ContestTrainer extends Trainer {
         trainerClass: string,
         team: ContestPokemon[],
         subTrainerClass?: string,
-        public options?: ContestTrainerOptions,
+        public options?: ContestTrainerOptions
     ) {
         super(trainerClass, team, name, subTrainerClass);
     }
@@ -658,23 +658,21 @@ class ContestTrainerList {
 
     public static SpecialEventContestOpponents: ContestTrainer[] = [
         // Lunar New Year
-        new ContestTrainer('', 'Lisia', [
-            new ContestPokemon('Galarian Rapidash', 'Dashie', 400, 90, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough], [ContestType.Balanced, ContestType.Balanced, ContestType.Balanced, ContestType.Balanced], undefined, undefined, true),
-        ], '(Lunar New Year)',
-            {
-                requirement: new MultiRequirement([
-                    new SpecialEventRequirement('Lunar New Year'),
-                    new InContestRankRequirement(ContestRank.Spectacular, GameConstants.AchievementOption.equal),
-                    new MaxRegionRequirement(GameConstants.Region.galar),
-                ])
-            }),
+        new ContestTrainer('', 'Lisia', [new ContestPokemon('Galarian Rapidash', 'Dashie', 400, 90, [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough], [ContestType.Balanced, ContestType.Balanced, ContestType.Balanced, ContestType.Balanced], undefined, undefined, true)], '(Lunar New Year)',
+        {
+            requirement: new MultiRequirement([
+                new SpecialEventRequirement('Lunar New Year'),
+                new InContestRankRequirement(ContestRank.Spectacular, GameConstants.AchievementOption.equal),
+                new MaxRegionRequirement(GameConstants.Region.galar),
+            ])
+        }),
         new ContestTrainer('', 'Dawn', [new ContestPokemon('Oricorio (Sensu)', 'Oricorio', 1, 10)], '(Lunar New Year)',
             {
                 requirement: new MultiRequirement([
                     new SpecialEventRequirement('Lunar New Year'),
                     new InRegionRequirement([GameConstants.Region.sinnoh]),
                     new MaxRegionRequirement(GameConstants.Region.alola),
-                ])
+                ]),
             }),
         new ContestTrainer('', 'Wallace', [new ContestPokemon('Blacephalon', 'Blacephalon', 1, 10)], '(Lunar New Year)',
             {
@@ -682,14 +680,14 @@ class ContestTrainerList {
                     new SpecialEventRequirement('Lunar New Year'),
                     new InContestRankRequirement(ContestRank.Spectacular, GameConstants.AchievementOption.equal),
                     new MaxRegionRequirement(GameConstants.Region.alola),
-                ])
+                ]),
             }),
         // Hoopa Day
         new ContestTrainer('', 'Contest Judge', [
             new ContestPokemon('Pikachu', 'Pikablu', 1, 10, undefined, undefined, new QuestLineCompletedRequirement('How blu mouse?', GameConstants.AchievementOption.less), GameConstants.BattlePokemonGender.Male),
             new ContestPokemon('Marill', 'Pikablu', 1, 10, undefined, undefined, new QuestLineCompletedRequirement('How blu mouse?')),
-            ], undefined,
-            { requirement: new SpecialEventRequirement('Hoopa Day') }),
+        ], undefined,
+        { requirement: new SpecialEventRequirement('Hoopa Day') }),
         // Easter
         new ContestTrainer('', 'Contest Judge', [new ContestPokemon('Torchic (Egg)', 'Torchic', 1, 10)], undefined,
             { requirement: new SpecialEventRequirement('Easter') }),
@@ -697,12 +695,12 @@ class ContestTrainerList {
             new ContestPokemon('Lopunny', 'Lopunny', 1, 10),
             new ContestPokemon('Mega Lopunny', 'Lopunny', 1, 10),
         ], '(Easter)',
-            {
-                requirement: new MultiRequirement([
-                    new SpecialEventRequirement('Easter'),
-                    new InContestRankRequirement(ContestRank.Spectacular, GameConstants.AchievementOption.equal),
-                ])
-            }),
+        {
+            requirement: new MultiRequirement([
+                new SpecialEventRequirement('Easter'),
+                new InContestRankRequirement(ContestRank.Spectacular, GameConstants.AchievementOption.equal),
+            ]),
+        }),
         // Golden Week
         new ContestTrainer('', 'Contest Judge', [new ContestPokemon('Bulbasaur (Rose)', 'Bulbasaur', 1, 10)], undefined,
             { requirement: new SpecialEventRequirement('Golden Week') }),
@@ -712,7 +710,7 @@ class ContestTrainerList {
             new ContestPokemon('Charmander (Clone)', 'Charmander', 1, 10, undefined, undefined, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
             new ContestPokemon('Squirtle (Clone)', 'Squirtle', 1, 10, undefined, undefined, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
         ], undefined,
-            { requirement: new SpecialEventRequirement('Mewtwo strikes back!') }),
+        { requirement: new SpecialEventRequirement('Mewtwo strikes back!') }),
         // Flying Pikachu
         new ContestTrainer('', 'Contest Judge', [new ContestPokemon('Flying Pikachu', 'Pikachu', 1, 10)], undefined,
             { requirement: new SpecialEventRequirement('Flying Pikachu') }),
@@ -724,28 +722,25 @@ class ContestTrainerList {
             new ContestPokemon('Let\'s Go Pikachu', 'Eevee', 1, 10),
             new ContestPokemon('Let\'s Go Eevee', 'Pikachu', 1, 10),
         ], undefined,
-            { requirement: new SpecialEventRequirement('Let\'s GO!') }),
+        { requirement: new SpecialEventRequirement('Let\'s GO!') }),
         // Christmas
         new ContestTrainer('', 'Jasmine', [
             new ContestPokemon('Ampharos', 'Ampharos', 1, 10),
             new ContestPokemon('Mega Ampharos', 'Ampharos', 1, 10, undefined, undefined, new MaxRegionRequirement(GameConstants.Region.kalos)),
         ], '(Merry Christmas!)',
-            {
-                requirement: new MultiRequirement([
-                    new SpecialEventRequirement('Merry Christmas!'),
-                    new InContestRankRequirement(ContestRank['Super Master']),
-                ])
-            }),
-        new ContestTrainer('', 'Santa Snorlax', [
-            new ContestPokemon('Reindeer Stantler', 'Reindeer', 1, 10),
-        ], undefined,
-            { requirement: new SpecialEventRequirement('Merry Christmas!') }),
+        {
+            requirement: new MultiRequirement([
+                new SpecialEventRequirement('Merry Christmas!'),
+                new InContestRankRequirement(ContestRank['Super Master']),
+            ]),
+        }),
+        new ContestTrainer('', 'Santa Snorlax', [new ContestPokemon('Reindeer Stantler', 'Reindeer', 1, 10)], undefined, { requirement: new SpecialEventRequirement('Merry Christmas!') }),
         new ContestTrainer('', 'Contest Judge', [new ContestPokemon('Elf Munchlax', 'Hermey', 1, 10)], undefined,
             {
                 requirement: new MultiRequirement([
                     new SpecialEventRequirement('Merry Christmas!'),
                     new InContestRankRequirement(ContestRank.Master),
-                ])
+                ]),
             }),
     ];
 }

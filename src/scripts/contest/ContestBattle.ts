@@ -12,11 +12,11 @@
 
 class ContestBattle extends Battle {
     // Mechanics
-        // Used to generate enemies
+    // Used to generate enemies
     static trainers: KnockoutObservableArray<ContestTrainer> = ko.observableArray(null);
     static pokemons: KnockoutObservableArray<ContestBattlePokemon> = ko.observableArray(null);
     static trainersPartyIndex: KnockoutObservableArray<number> = ko.observableArray(null);
-        // Rerolls trainer batch
+    // Rerolls trainer batch
     static prepareNextTrainerBatch: KnockoutObservable<boolean> = ko.observable(false);
     static lastTrainerRoll = Date.now();
     // Moves used
@@ -29,16 +29,16 @@ class ContestBattle extends Battle {
     static frenzyMode: KnockoutObservable<boolean> = ko.observable(false);
 
     // Gimmicks
-        // Hoenn
+    // Hoenn
     static beat: KnockoutObservable<number> = ko.observable(0);
     static totalJamTime: KnockoutObservable<number> = ko.observable(GameConstants.SECOND);
-        // Sinnoh
+    // Sinnoh
     static crotchetValue: KnockoutObservable<number> = ko.observable(0);
     static finishingPose: KnockoutObservableArray<number> = ko.observableArray(null);
-        // Help tab
+    // Help tab
     static infoBeat: KnockoutObservable<number> = ko.observable(0);
     static infoCrotchetValue: KnockoutObservable<number> = ko.observable(0);
-        // Testing
+    // Testing
     public static testAppeal: KnockoutObservable<number> = ko.observable(10);
 
     // Rewards
@@ -339,21 +339,19 @@ class ContestBattle extends Battle {
         let sum = 0;
         ContestBattle.moveArray().forEach(ct => {
             sum += ContestTypeHelper.getAppealModifier(ct, [ContestRunner.type()]);
-        })
+        });
         // consolidate all attacks
         let multiplier = 1;
         ContestBattle.moveArray().flatMap(ct => ct).forEach(moveType => {
             const matchup = ContestTypeHelper.getAppealModifier([moveType], [ContestRunner.type()]);
             multiplier += matchup ? matchup : -1;
-            }
-        )
+        });
         return sum * Math.max(multiplier, 1);
     }
 
     /**
      * Adds the selected move to the moveArray array
      * @param direction - one of four pokemons moves
-     * @returns 
      */
     public static useContestMove(direction: number) {
         const move = ContestBattle.pokemons()[ContestBattle.selectedEnemy()].usableMoves[direction];
@@ -463,7 +461,7 @@ class ContestBattle extends Battle {
 
     public static contestHealth(pokemon: ContestBattlePokemon) {
         const oppStatus = pokemon.status();
-        if (oppStatus === ContestOpponentStatus.Appealed){
+        if (oppStatus === ContestOpponentStatus.Appealed) {
             return ('💖').repeat(5);
         }
         switch (ContestRunner.rank()) {
@@ -503,7 +501,7 @@ class ContestBattle extends Battle {
                 action = ContestBattle.frenzyMode() ? 'Moves' : 'Appeal';
                 break;
             case ContestRank.Spectacular:
-                action = ContestBattle.frenzyMode() ? 'Spectacular Talent' : 'Moves'
+                action = ContestBattle.frenzyMode() ? 'Spectacular Talent' : 'Moves';
                 break;
             case ContestRank.Practice:
             case ContestRank['Super Normal']:
@@ -533,15 +531,15 @@ class ContestBattle extends Battle {
     }
 
     public static getBattleViewTitle() {
-    const heart = ContestHelper.getContestEmoji(ContestRunner.type());
-    let emoji = '🤍';
-    if (ContestRunner.contestRankObservable().filter(rank => rank > ContestRank.Practice).every(rank => {
-        ContestRunner.contestTypeObservable().every(
-            type => new ContestWonRequirement(1, rank, type).isCompleted()
-        )}
-    )) {
-        emoji = '💖';
-    }
+        const heart = ContestHelper.getContestEmoji(ContestRunner.type());
+        let emoji = '🤍';
+        if (ContestRunner.contestRankObservable().filter(rank => rank > ContestRank.Practice).every(rank => {
+            ContestRunner.contestTypeObservable().every(
+                type => new ContestWonRequirement(1, rank, type).isCompleted()
+            );
+        })) {
+            emoji = '💖';
+        }
         return !ContestRunner.running() ? `${emoji}Contest Hall${emoji}` : `${heart}${ContestRank[ContestRunner.rank()]} Rank ${ContestType[ContestRunner.type()]}${heart}`;
     }
 }
