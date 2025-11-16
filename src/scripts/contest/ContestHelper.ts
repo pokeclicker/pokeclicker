@@ -60,6 +60,8 @@ class ContestHelper {
             appeal = pAppeal * ContestTypeHelper.getAppealModifier(pType, types);
         }
 
+        appeal *= Math.max(1, pokemon.contestSheen() / 100);
+
         return appeal / 10;
     }
 
