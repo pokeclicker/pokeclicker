@@ -60,22 +60,51 @@ aria-labelledby="badgeCaseModalLabel">
         </div>
 
         <div id="ribbonCase" class="modal-body tab-pane fade">
-            <div data-bind="foreach: { data: GameHelper.enumNumbers(ContestRank).filter(r => r > ContestRank.Practice && ContestHelper.getContestHallRequirements(r).every(req => req.isCompleted())), as: 'rank'}">
+            <div data-bind="foreach: { data: GameHelper.enumNumbers(ContestRank).filter(r => r > ContestRank.Practice && r < ContestRank['Brilliant Shining'] && ContestHelper.getContestHallRequirements(r).every(req => req.isCompleted())), as: 'rank'}">
                 <h4 data-bind="text: `${ContestRank[rank]} Rank`"></h4>
-                <div class="row no-gutters justify-content-center"
-                    data-bind="foreach: ContestHelper.getAvailableRibbons()[ContestRank[rank]]">
-                    <div data-bind="css: {'col-2': $data < ContestType.Balanced, 'col-4': $data >= ContestType.Balanced}">
-                        <p class="m-0" style="font-weight: bolder;" data-bind="text: ContestHelper.getRibbonImageDescription(rank, $data)"></p>
-                        <svg class="ribbon" xmlns="http://www.w3.org/2000/svg" width="80px" viewBox="0 0 1280 1280" xmlns:v="https://vecta.io/nano"
-                            data-bind="
-                                css: {
-                                    'badge-not-acquired': App.game.statistics.contestHighestRound[rank][$data]() == 0,
-                                    'pokemon-not-seen': !ContestHelper.contestIsUnlocked(rank, $data),
-                                },
-                                attr: {'contest-type': ContestType[$data]},
-                                ">
-                            <g data-bind="html: ContestHelper.getRibbonImage(rank, $data)"></g>
-                        </svg>
+                <div class="row no-gutters justify-content-center">
+                    <div class="row w-100 justify-content-center">
+                        <!-- ko foreach: ContestHelper.getAvailableRibbons()[ContestRank[rank]].filter(r => r < ContestType.Balanced) -->
+                        <div class="col-2 p-0" style="align-content:center">
+                            <p class="m-0" data-bind="text: ContestHelper.getRibbonImageDescription(rank, $data)"></p>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <div class="row w-100 justify-content-center">
+                        <!-- ko foreach: ContestHelper.getAvailableRibbons()[ContestRank[rank]].filter(r => r < ContestType.Balanced) -->
+                        <div class="col-2 p-0" style="align-content:center">
+                            <svg class="ribbon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1280" xmlns:v="https://vecta.io/nano"
+                                data-bind="
+                                    style: {
+                                        width: rank < ContestRank.Spectacular ? '80px' : '',
+                                    },
+                                    css: {
+                                        'badge-not-acquired': App.game.statistics.contestHighestRound[rank][$data]() == 0,
+                                        'pokemon-not-seen': !ContestHelper.contestIsUnlocked(rank, $data),
+                                    },
+                                    attr: {'contest-type': ContestType[$data]},
+                                    ">
+                                <g data-bind="html: ContestHelper.getRibbonImage(rank, $data)"></g>
+                            </svg>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <div class="row w-100 justify-content-center">
+                        <!-- ko foreach: ContestHelper.getAvailableRibbons()[ContestRank[rank]].filter(r => r >= ContestType.Balanced) -->
+                        <div class="" style="align-content:center">
+                            <p class="m-0" data-bind="text: ContestHelper.getRibbonImageDescription(rank, $data)"></p>
+                            <svg class="ribbon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1280" xmlns:v="https://vecta.io/nano"
+                                data-bind="
+                                    css: {
+                                        'badge-not-acquired': App.game.statistics.contestHighestRound[rank][$data]() == 0,
+                                        'pokemon-not-seen': !ContestHelper.contestIsUnlocked(rank, $data),
+                                    },
+                                    attr: {'contest-type': ContestType[$data]},
+                                    ">
+                                <g data-bind="html: ContestHelper.getRibbonImage(rank, $data)"></g>
+                            </svg>
+                        </div>
+                        <!-- /ko -->
                     </div>
                 </div>
             </div>

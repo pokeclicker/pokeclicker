@@ -376,7 +376,7 @@ class ContestHelper {
     }
 
     public static getAvailableRibbons() {
-        const ranksWithRibbons = GameHelper.enumNumbers(ContestRank).filter(rank => rank > ContestRank.Practice && rank < ContestRank['Brilliant Shining']);
+        const ranksWithRibbons = GameHelper.enumNumbers(ContestRank).filter(rank => rank > ContestRank.Practice);
         const ribbonRecord = GameHelper.objectFromEnumStrings(ContestRank, () => [] as ContestType[]);
         ranksWithRibbons.forEach(r => {
             if (r <= ContestRank.Spectacular) {
