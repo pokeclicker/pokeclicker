@@ -4,22 +4,25 @@ import Item from './Item';
 
 export default class PokeBlock extends Item {
     type: PokeBlockColor;
-    contestType: ContestType;
+    contestType: ContestType[];
     _canUse: (pokemon: any) => boolean;
+    value: number;
 
     constructor(
         color: PokeBlockColor,
         basePrice: number,
         currency: Currency = Currency.money,
-        contestType?: ContestType,
+        contestType?: ContestType[],
         canUse?: (pokemon: any) => boolean,
         description: string = `A ${PokeBlockColor[color]} Pokéblock`,
         displayName: string = `${PokeBlockColor[color]} Pokéblock`,
+        value: number = 1,
     ) {
         super(`PokeBlock_${PokeBlockColor[color]}`, basePrice, currency, undefined, displayName, description, 'pokeblock');
         this.type = color;
         this.contestType = contestType;
         this._canUse = canUse;
+        this.value = value;
     }
 
     canUse(pokemon: { [key: string]: any }): boolean {
