@@ -81,6 +81,7 @@
                           <th class="text-left bg-dark align-middle">Pokémon</th>
                           <th class="text-left bg-dark align-middle">Contest Type</th>
                           <th class="text-left bg-dark align-middle">Appeal</th>
+                          <th class="text-left bg-dark align-middle">Sheen</th>
                       </tr>
                   </thead>
                   <tbody data-bind="foreach: lazyLoad('lazyPokeblockList', $element, PartyController.getPokeblockSortedList, { reset: () => (DisplayObservables.modalState.pokeblockModal === 'hidden') }), childrenComplete: () => { lazyLoadCallback('lazypokeblockList'); }">
@@ -94,6 +95,7 @@
                           </span>
                         </td>
                       <td class="text-center tight text-truncate" style="max-width: 20vw;" data-bind="text: $data.calculateContestAppeal(true).toLocaleString('en-US')">Appeal</td>
+                      <td class="text-center tight text-truncate" style="max-width: 20vw;" data-bind="text: $data.maxSheenTooltip">Sheen</td>
                     </tr>
                   </tbody>
                 </table>
