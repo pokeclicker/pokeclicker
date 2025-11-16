@@ -77,6 +77,7 @@ export default class KeyItems implements Feature {
                     ) || App.game.party.caughtPokemon[0];
                     patientZero.pokerus = Pokerus.Contagious;
                 }),
+            new KeyItem(KeyItemType.Heavy_tools, 'These mining tools should help to punch through the toughest rock.', undefined, undefined, undefined, 'Heavy Tools'),
             /*new KeyItem(KeyItemType['Z-Power_Ring'],
                 // Using a Z-Crystal boosts the power of all your Pokémon of a shared type for a short while, after which some time is needed to recharge.'
                 'A gift from Melemele\'s kahuna that enables the use of Z-Crystals. What they do is still under development.',

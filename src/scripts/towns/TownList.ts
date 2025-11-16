@@ -234,6 +234,17 @@ const PinkanBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
     ItemList.Gooey_Mulch,
 ], 'Officer Jenny\'s Pinkan Trade Shop', [new QuestLineCompletedRequirement('Team Rocket\'s Pinkan Theme Park')]);
 
+const SecretCaveShop = new Shop(
+    [
+        ItemList.Heavy_tools,
+    ],
+    'Here\'s what I need',
+    [
+        new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+    ],
+    true
+);
+
 // Kanto NPCs
 
 const PalletProfOak = new ProfNPC('Prof. Oak',
@@ -1149,7 +1160,7 @@ TownList['Secret Cave'] = new Town(
     'Secret Cave',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Sevii123,
-    [],
+    [SecretCaveShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
         npcs: [SecretCaveMiner1, SecretCaveMiner2, SecretCaveMiner3],
