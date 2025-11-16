@@ -1,4 +1,3 @@
-///<reference path="../Battle.ts"/>
 ///<reference path="../contest/ContestBattlePokemon.ts"/>
 ///<reference path="../contest/ContestBattleDance.ts"/>
 ///<reference path="../contest/ContestTrainer.ts"/>
