@@ -30,11 +30,11 @@ class ContestHall extends TownContent {
         // Put the user back in the town
         App.game.gameState = GameConstants.GameState.town;
     }
-    public areaStatus(): areaStatus {
-        if (this.rank.every(r => this.type.every(t => App.game.statistics.contestHighestRound[r][t]()))) {
-            return areaStatus.completed;
-        } else {
-            return areaStatus.incomplete;
+    public areaStatus(): areaStatus[] {
+        const states = [];
+        if (!this.rank.every(r => this.type.every(t => App.game.statistics.contestHighestRound[r][t]()))) {
+            states.push(areaStatus.incomplete);
         }
+        return states;
     }
 }
