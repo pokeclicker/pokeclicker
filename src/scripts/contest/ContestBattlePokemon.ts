@@ -1,6 +1,4 @@
-/// <reference path="../../declarations/GameHelper.d.ts" />
-
-export default class ContestBattlePokemon extends BattlePokemon {
+class ContestBattlePokemon extends BattlePokemon {
     status: KnockoutObservable<number>;
     dance: KnockoutObservableArray<number>;
     danceHearts: KnockoutObservable<number> = ko.observable(0);

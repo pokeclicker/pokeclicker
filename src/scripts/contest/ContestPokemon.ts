@@ -1,6 +1,4 @@
-///<reference path="../gym/GymPokemon.ts"/>
-
-export default class ContestPokemon extends GymPokemon {
+class ContestPokemon extends GymPokemon {
     nickname: string;
     contestTypes?: ContestType[];
     moves?: ContestType[];
