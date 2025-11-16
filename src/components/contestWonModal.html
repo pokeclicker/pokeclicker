@@ -17,6 +17,7 @@ aria-labelledby="contestWonModalLabel" aria-hidden="true">
                 ${ContestHelper.congratulatoryWord[ContestRunner.rank()]} ${ContestHelper.getRibbonImageDescription(ContestRunner.rank(), ContestRunner.type(), false)}!`"></p>
                 <p data-bind="text: `You can now compete in ${ContestRank[ContestRunner.rank()]} Rank ${ContestType[ContestRunner.type()]} Encore Rounds!`"></p>
                 <p data-bind="html: `<i>Your base frenzy Audience Appeal has increased by 1%!</i>`"</p>
+                <!-- <p data-bind="html: `<i>Your Pokémon's max Contest Sheen has increased to ${ContestHelper.maxSheen()}!</i>`"></p> -->
             </div>
             <!-- ko if: ContestRunner.rank() === ContestRank['Brilliant Shining'] -->
             <h3>Thank you for playing!</h3>

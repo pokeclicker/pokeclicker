@@ -47,6 +47,7 @@ class ContestRunner {
         ContestBattle.prepareNextTrainerBatch(false);
         ContestRunner.audienceAppeal(0);
         ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()]); // todo: increase number when pokeblocks are in
+        // ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * ContestRunner.rank() * ContestRunner.rank() * ContestHelper.contestRankTimer(ContestRunner.rank()));
 
         // Reset gameplay gimmicks
         ContestRunner.crowdHype(0);

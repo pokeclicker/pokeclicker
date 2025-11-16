@@ -347,6 +347,12 @@
                                 visible: new RouteKillRequirement(10, GameConstants.Region.hoenn, 121),
                                 text: new MaxRegionRequirement(GameConstants.Region.kalos).isCompleted() ? 'Hoenn Spectacular' : '???',
                             ">Hoenn Spectacular</a>
+                            <!-- <a data-toggle='tab' class='nav-link w-50' href="#ranks4"
+                            data-bind="
+                                css: { disabled: !ContestHelper.getContestHallRequirements(ContestRank['Brilliant Shining']).every(r => r.isCompleted()) },
+                                visible: new RouteKillRequirement(10, GameConstants.Region.sinnoh, 208),
+                                text: new MaxRegionRequirement(GameConstants.Region.galar).isCompleted() ? 'Sinnoh Brilliant Shining' : '???',
+                            ">Sinnoh Brilliant Shining</a> -->
                         </li>
                     </ul>
                 </div>
@@ -415,6 +421,7 @@
         <button class="btn btn-success" style="min-width: 30%;" onclick="ContestRunner.restartContest()" data-bind="visible: ContestRunner.running()">Restart Contest</button>
         <button class="btn btn-danger" style="min-width: 30%;" onclick="ContestHall.leave();" data-bind="visible: !ContestRunner.running()">Leave</button>
         <button class="btn btn-danger" style="min-width: 30%;" onclick="ContestRunner.endContest();" data-bind="visible: ContestRunner.running()">Stop Contest</button>
+        <!-- <button class="btn btn-warning" style="min-width: 30%;">Dressing Room</button> -->
     </div>
     
     <div class="mb-3">
