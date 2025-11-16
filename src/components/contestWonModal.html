@@ -13,8 +13,10 @@ aria-labelledby="contestWonModalLabel" aria-hidden="true">
                 </div>
             </div>
             <div class="modal-body">
-                <p data-bind="text: `Congratulations! You have been awarded a ${ContestRank[ContestRunner.rank()]} ${ContestRunner.type() != ContestType.Balanced ? ContestType[ContestRunner.type()] : 'Star'} Ribbon!`"></p>
-                <p><i>Your Click Appeal has increased by 1.</i></p>
+                <p data-bind="text: `Congratulations! You have been awarded ${GameHelper.anOrA(ContestHelper.congratulatoryWord(ContestRunner.rank()))}
+                ${ContestHelper.congratulatoryWord(ContestRunner.rank())} ${ContestHelper.getRibbonImageDescription(ContestRunner.rank(), ContestRunner.type(), false)}!`"></p>
+                <p data-bind="text: `You can now compete in ${ContestRank[ContestRunner.rank()]} Rank ${ContestType[ContestRunner.type()]} Encore Rounds!`"></p>
+                <p data-bind="html: `<i>Your base frenzy Audience Appeal has increased by 1%!</i>`"</p>
             </div>
             <div class="modal-footer" style="justify-content: center;">
                 <button type="button" class="btn btn-success" data-dismiss="modal">Accept</button>
