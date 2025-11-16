@@ -1145,16 +1145,6 @@ TownList['Client Island'] = new Town(
         npcs: [ClientSignpost, RedSpearow],
     }
 );
-TownList['Client Island'] = new Town(
-    'Client Island',
-    GameConstants.Region.kanto,
-    GameConstants.KantoSubRegions.Sevii123,
-    [ClientIslandShop],
-    {
-        requirements: [new ClientRequirement(), new GymBadgeRequirement(BadgeEnums.Volcano)],
-        npcs: [ClientSignpost, RedSpearow],
-    }
-);
 TownList['Secret Cave'] = new Town(
     'Secret Cave',
     GameConstants.Region.kanto,
