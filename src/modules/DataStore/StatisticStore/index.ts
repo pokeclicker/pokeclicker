@@ -132,12 +132,12 @@ export default class Statistics implements Saveable {
     gymsDefeated: Array<KnockoutObservable<number>>;
     dungeonsCleared: Array<KnockoutObservable<number>>;
     temporaryBattleDefeated: Array<KnockoutObservable<number>>;
-    // Contests
-    contestHighestRound: Record<string, Record<string, KnockoutObservable<number>>>;
-    contestHighestScore: Record<string, Record<string, KnockoutObservable<number>>>;
     // DungeonGuides
     dungeonGuideAttempts: Array<KnockoutObservable<number>>;
     dungeonGuideClears: Array<KnockoutObservable<number>>;
+    // Contests
+    contestHighestRound: Record<string, Record<string, KnockoutObservable<number>>>;
+    contestHighestScore: Record<string, Record<string, KnockoutObservable<number>>>;
 
     /*
      * objectObservables

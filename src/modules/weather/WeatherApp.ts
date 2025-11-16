@@ -6,16 +6,22 @@ import GameHelper from '../GameHelper';
 import { Region, getDungeonIndex } from '../GameConstants';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
+import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 
 export default class WeatherApp {
     saveKey = 'weatherapp';
     defaults: Record<string, any>;
-    
+
     public static fullForecast: ObservableArray<RegionalForecast> = ko.observableArray([]);
     public static selectedRegion: Observable<Region> = ko.observable(Region.hoenn);
     public static dateList: ObservableArray<Date> = ko.observableArray([]);
 
     public static defaultDateRange: number = 7;
+
+    public static shortcutRequirement = new ClearDungeonRequirement(250, getDungeonIndex('Weather Institute'));
+    public static shortcutVisible = ko.pureComputed((): boolean => {
+        return WeatherApp.shortcutRequirement.isCompleted();
+    });
 
     /**
      * Generates the forecasts for all regions
@@ -28,9 +34,9 @@ export default class WeatherApp {
 
     /**
      * Generates the forecast for a single region
-     * @param region 
-     * @param dateRange 
-     * @param date 
+     * @param region
+     * @param dateRange
+     * @param date
      */
     public static generateRegionalForecast(region: Region, dateRange: number = WeatherApp.defaultDateRange, date: Date = new Date()) {
         const weatherForecastList = [];
@@ -52,8 +58,8 @@ export default class WeatherApp {
 
     /**
      * Generate the date list for the table
-     * @param dateRange 
-     * @param date 
+     * @param dateRange
+     * @param date
      */
     public static generateDateList(dateRange: number = WeatherApp.defaultDateRange, date: Date = new Date()) {
         WeatherApp.dateList([]);
@@ -82,7 +88,7 @@ export default class WeatherApp {
 
     /**
      * Adds the regional forecast to the forecast list
-     * @param regionalForecast 
+     * @param regionalForecast
      */
     public static addRegionalForecast(regionalForecast: RegionalForecast) {
         let exist = false;

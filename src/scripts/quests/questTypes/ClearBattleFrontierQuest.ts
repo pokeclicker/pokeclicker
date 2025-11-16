@@ -22,7 +22,7 @@ class ClearBattleFrontierQuest extends Quest implements QuestInterface {
         return super.randomizeReward(reward);
     }
 
-    get description(): string {
+    get defaultDescription(): string {
         const suffix = this.amount > 1 ? 's' : '';
         return `Clear ${this.amount.toLocaleString('en-US')} Stages in the Battle Frontier.`;
     }

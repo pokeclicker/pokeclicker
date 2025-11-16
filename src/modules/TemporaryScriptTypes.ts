@@ -29,13 +29,13 @@ import type { EvoData } from './pokemons/evolutions/Base';
 import type { PokemonNameType } from './pokemons/PokemonNameType';
 import type CaughtStatus from './enums/CaughtStatus';
 import type SpecialEvents from './specialEvents/SpecialEvents';
-import ContestRank from './enums/ContestRank';
-import ContestType from './enums/ContestType';
 import type PokemonType from './enums/PokemonType';
 import type WeatherType from './weather/WeatherType';
 import type { MultiplierDecreaser } from './items/types';
 import type BagItem from './interfaces/BagItem';
 import type BattlePokemon from './battles/BattlePokemon';
+import ContestRank from './enums/ContestRank';
+import ContestType from './enums/ContestType';
 
 /*
     These types are only temporary while we are converting things to modules. As things are converted,

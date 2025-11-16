@@ -226,11 +226,11 @@ class MapHelper {
         const town = TownList[townName];
         town.content.forEach(c => {
             const s = c.areaStatus();
-            // if (!s.includes(areaStatus.locked)) {
-            //     s.forEach(s => {
-            //         states.add(s);
-            //     });
-            // }
+            if (!s.includes(areaStatus.locked)) {
+                s.forEach(s => {
+                    states.add(s);
+                });
+            }
         });
         town.npcs?.filter(npc => npc instanceof PokemonGiftNPC && npc.isVisible()).forEach((npc: PokemonGiftNPC) => {
             npc.areaStatus().forEach(s => states.add(s));
