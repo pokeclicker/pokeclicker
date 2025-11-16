@@ -37,14 +37,27 @@ class ContestRunner {
             return;
         }
 
-        // Set up for new contest
+        // Set up for new contest, make sure these aren't carried over from pressing other start buttons mid-contest
         ContestRunner.running(false);
         ContestRunner.rank(rank);
         ContestRunner.type(type);
         ContestBattle.danceMode(ContestHelper.isDanceHall(ContestRunner.rank()));
         ContestRunner.timeLeft(GameConstants.CONTEST_TIME * ContestHelper.contestRankTimer(ContestRunner.rank()));
         ContestRunner.timeLeftPercentage(100);
+        ContestBattle.prepareNextTrainerBatch(false);
+        ContestRunner.audienceAppeal(0);
         ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()]); // todo: increase number when pokeblocks are in
+
+        // Reset gameplay gimmicks
+        ContestRunner.crowdHype(0);
+        ContestRunner.jamTime(0);
+        ContestRunner.frenzyTime(0);
+        ContestBattle.frenzyMode(false);
+        ContestRunner.encoreRound(0);
+
+        // Reset score
+        ContestScore.totalScore(0);
+        ContestScore.activeChain(1);
 
         // Ready up the rhythm gimmicks
         ContestBattle.selectedEnemy(0);
@@ -68,19 +81,6 @@ class ContestRunner {
         ContestRunner.running(false);
 
         ContestRunner.updateScore();
-
-        // Reset score
-        ContestScore.totalScore(0);
-        ContestScore.activeChain(1);
-
-        // Reset stuff that would interfere with manually test-starting the contest
-        ContestBattle.prepareNextTrainerBatch(false);
-        ContestBattle.frenzyMode(false);
-        ContestRunner.audienceAppeal(0);
-        ContestRunner.crowdHype(0);
-        ContestRunner.jamTime(0);
-        ContestRunner.frenzyTime(0);
-        ContestRunner.encoreRound(0);
         
         // Empty arrays
         ContestBattle.trainers.removeAll();
@@ -90,7 +90,7 @@ class ContestRunner {
         ContestBattle.finishingPose.removeAll();
     }
 
-    public static resetContest() {
+    public static restartContest() {
         ContestRunner.endContest();
         ContestRunner.startContest(ContestRunner.rank(), ContestRunner.type());
     }

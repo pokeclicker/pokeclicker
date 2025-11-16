@@ -491,11 +491,11 @@ class ContestTrainerList {
             // Special Spectacular
             // Cosplay Pikachu Breeder
             new ContestTrainer('', 'Pokemon Breeder', [
-                new ContestPokemon('Pikachu (Rock Star)', 'Cosplay Pikachu', 5, 90, [ContestType.Cool], [ContestType.Cool, ContestType.Cool, ContestType.Cool, ContestType.Cool], new InContestTypeRequirement(ContestType.Cool, true)),
-                new ContestPokemon('Pikachu (Belle)', 'Cosplay Pikachu', 5, 90, [ContestType.Beautiful], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Beautiful, ContestType.Beautiful], new InContestTypeRequirement(ContestType.Beautiful, true)),
-                new ContestPokemon('Pikachu (Pop Star)', 'Cosplay Pikachu', 5, 90, [ContestType.Cute], [ContestType.Cute, ContestType.Cute, ContestType.Cute, ContestType.Cute], new InContestTypeRequirement(ContestType.Cute, true)),
-                new ContestPokemon('Pikachu (Ph. D.)', 'Cosplay Pikachu', 5, 90, [ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Smart, ContestType.Smart], new InContestTypeRequirement(ContestType.Smart, true)),
-                new ContestPokemon('Pikachu (Libre)', 'Cosplay Pikachu', 5, 90, [ContestType.Tough], [ContestType.Tough, ContestType.Tough, ContestType.Tough, ContestType.Tough], new InContestTypeRequirement(ContestType.Tough, true)),
+                new ContestPokemon('Pikachu (Rock Star)', 'Cosplay Pikachu', 5, 90, [ContestType.Cool], [ContestType.Cool, ContestType.Cool, ContestType.Cool, ContestType.Cool], new InContestTypeRequirement(ContestType.Cool, false)),
+                new ContestPokemon('Pikachu (Belle)', 'Cosplay Pikachu', 5, 90, [ContestType.Beautiful], [ContestType.Beautiful, ContestType.Beautiful, ContestType.Beautiful, ContestType.Beautiful], new InContestTypeRequirement(ContestType.Beautiful, false)),
+                new ContestPokemon('Pikachu (Pop Star)', 'Cosplay Pikachu', 5, 90, [ContestType.Cute], [ContestType.Cute, ContestType.Cute, ContestType.Cute, ContestType.Cute], new InContestTypeRequirement(ContestType.Cute, false)),
+                new ContestPokemon('Pikachu (Ph. D.)', 'Cosplay Pikachu', 5, 90, [ContestType.Smart], [ContestType.Smart, ContestType.Smart, ContestType.Smart, ContestType.Smart], new InContestTypeRequirement(ContestType.Smart, false)),
+                new ContestPokemon('Pikachu (Libre)', 'Cosplay Pikachu', 5, 90, [ContestType.Tough], [ContestType.Tough, ContestType.Tough, ContestType.Tough, ContestType.Tough], new InContestTypeRequirement(ContestType.Tough, false)),
                 // todo: add regular Cosplay Pikachu
                 new ContestPokemon('Pikachu', 'Cosplay Pikachu', 5, 90, [ContestType.Balanced], [ContestType.Balanced, ContestType.Balanced, ContestType.Balanced, ContestType.Balanced], new InContestTypeRequirement(ContestType.Balanced), GameConstants.BattlePokemonGender.Female),
             ], '(female gen3)', {
