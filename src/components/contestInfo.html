@@ -412,7 +412,7 @@
 <script type="text/html" id="contestButtons">
     <div class="mb-3">
         <button class="btn btn-success" style="min-width: 30%;" onclick="ContestRunner.startContest(ContestRunner.rank(), ContestRunner.type())" data-bind="visible: !ContestRunner.running()">Start Contest</button>
-        <button class="btn btn-success" style="min-width: 30%;" onclick="ContestRunner.restartContest();" data-bind="visible: ContestRunner.running()">Restart Contest</button>
+        <button class="btn btn-success" style="min-width: 30%;" onclick="ContestRunner.restartContest()" data-bind="visible: ContestRunner.running()">Restart Contest</button>
         <button class="btn btn-danger" style="min-width: 30%;" onclick="ContestHall.leave();" data-bind="visible: !ContestRunner.running()">Leave</button>
         <button class="btn btn-danger" style="min-width: 30%;" onclick="ContestRunner.endContest();" data-bind="visible: ContestRunner.running()">Stop Contest</button>
     </div>
@@ -531,7 +531,7 @@
                 <td class="text-left" style="vertical-align: middle;">
                     <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center;">
                     <!-- ko foreach: trainer.getTeam() -->
-                        <img class="smallImage m-0" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data.name].id, $data.shiny ?? 0, undefined, 0) }, css: { 'pokemon-not-seen': trainer.options?.requirement && !trainer.options?.requirement?.isCompleted()}">
+                        <img class="smallImage m-0" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data.name].id, $data.shiny ?? 0, $data.gender, 0) }, css: { 'pokemon-not-seen': trainer.options?.requirement && !trainer.options?.requirement?.isCompleted()}">
                         <span class="align-middle" data-bind="text: $data.nickname"></span>
                         <!-- ko if: (trainer.getTeam().indexOf($data) + 1) % 2 === 0 -->
                         <br/>
