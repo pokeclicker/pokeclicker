@@ -1019,6 +1019,16 @@
             , isExtension: true
             })
         %>
+        <!--Secret Cave-->
+        <%- include('templates/mapOverlay',
+            { name: "Cave Entrance"
+            , x: 81, y: 46
+            , width: 1, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Secret Cave')}, attr:{ class: MapHelper.calculateTownCssClass('Secret Cave') }"
+            , visible:  "App.game.badgeCase.hasBadge(BadgeEnums.Elite_HoennChampion)"
+            , image: "assets/images/map/cave_entrance.png"
+            })
+        %>
 
         <!-- -------- -->
         <!-- DUNGEONS -->

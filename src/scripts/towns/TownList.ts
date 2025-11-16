@@ -895,6 +895,32 @@ const UnownFigure = new NPC('Unown Figure', [
     '3. <b>Limited Variety in the Region</b>: Not all versions of Unown are found here. Although 28 forms exist, some have only been encountered in other regions.',
 ], { image: 'assets/images/npcs/Scientist (male).png' });
 
+const SecretCaveMiner1 = new NPC('Secret Miner', [
+    'Hey. I see you there. I\'m digging here, can you leave me alone?',
+    'Alright, fine. Will you keep quiet about this if I share what I\'ll find? It\'s probably gonna take a while though. Come back when you\'re champion of at least four... no... five regions! That should give me enough time.',
+], {
+    requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion, GameConstants.AchievementOption.less),
+});
+
+const SecretCaveMiner2 = new NPC ('Secret Miner', [
+    'Are you the same snoop I spoke to before? I\'ll just assume you are. Hello again. Probably.',
+    'Wow. You actually did it? You became champion in five regions? Well, color me impressed. Well done.',
+    'So, remember when I said I would be done by the time you did that? Turns out this is taking a bit longer than I expected. Just... Six. Make it six. I\'ll for sure be done by then!',
+], {
+    requirement: new MultiRequirement([
+        new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
+        new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion, GameConstants.AchievementOption.less),
+    ]),
+});
+
+const SecretCaveMiner3 = new NPC('Secret Miner', [
+    'Champion of six regions now? You are that kid I was talking to before, right? I swear, I can\'t tell you young trainer apart these days. Apologies if this is the first time we\'re talking.',
+    'I really wanted to be done by now, but I\'ve hit a bit of a snag. You see, there is this thick layer of very strong rock back there. I need some heavy equipment to go through it.',
+    'Don\'t worry, I\'ll do the job myself once I have the tools. You won\'t even need to lift a finger, and it\'ll only take a second. You\'ll get your share of whatever I find back there. I\'m a bit short on funds though...',
+], {
+    requirement: new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+});
+
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
@@ -1117,6 +1143,26 @@ TownList['Client Island'] = new Town(
     {
         requirements: [new ClientRequirement(), new GymBadgeRequirement(BadgeEnums.Volcano)],
         npcs: [ClientSignpost, RedSpearow],
+    }
+);
+TownList['Client Island'] = new Town(
+    'Client Island',
+    GameConstants.Region.kanto,
+    GameConstants.KantoSubRegions.Sevii123,
+    [ClientIslandShop],
+    {
+        requirements: [new ClientRequirement(), new GymBadgeRequirement(BadgeEnums.Volcano)],
+        npcs: [ClientSignpost, RedSpearow],
+    }
+);
+TownList['Secret Cave'] = new Town(
+    'Secret Cave',
+    GameConstants.Region.kanto,
+    GameConstants.KantoSubRegions.Sevii123,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+        npcs: [SecretCaveMiner1, SecretCaveMiner2, SecretCaveMiner3],
     }
 );
 TownList['Four Island'] = new Town(
