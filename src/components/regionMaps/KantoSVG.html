@@ -1076,6 +1076,17 @@
             })
         %>
 
+        <!--Secret Field-->
+        <%- include('templates/mapOverlay',
+            { name: "Secret Field"
+            , x: 83, y: 47
+            , width: 2, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Secret Field')}, attr:{ class: MapHelper.calculateTownCssClass('Secret Field') }"
+            , visible:  "TownList['Secret Field'].isUnlocked()"
+            , image: "assets/images/map/transparent.png"
+            })
+        %>
+
         <!-- ------------------ -->
         <!-- PLACES OF INTEREST -->
         <!-- ------------------ -->

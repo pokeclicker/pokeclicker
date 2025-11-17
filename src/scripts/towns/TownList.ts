@@ -926,11 +926,17 @@ const SecretCaveMiner2 = new NPC ('Secret Miner', [
 
 const SecretCaveMiner3 = new NPC('Secret Miner', [
     'Champion of six regions now? You are that kid I was talking to before, right? I swear, I can\'t tell you young trainer apart these days. Apologies if this is the first time we\'re talking.',
-    'I really wanted to be done by now, but I\'ve hit a bit of a snag. You see, there is this thick layer of very strong rock back there. I need some heavy equipment to go through it.',
+    'I really wanted to be done by now, but I\'ve hit a bit of a snag. You see, there is this thick layer of very strong crystal back there. I need some heavy equipment to go through it.',
     'Don\'t worry, I\'ll do the job myself once I have the tools. You won\'t even need to lift a finger, and it\'ll only take a second. You\'ll get your share of whatever I find back there. I\'m a bit short on funds though...',
 ], {
     requirement: new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
 });
+
+const SecretCaveMiner4 = new NPC('Secret Miner', [
+    'What? This is it? I was expecting riches beyond my wildest dreams! Sorry, <i>our</i> wildest dreams!',
+    'There\'s just Dunsparce! Dunsparce, everywhere! What a waste of time! I have no use for this!',
+    'It\'s all yours I guess. This is your share. Everything. I don\'t want it. Have fun defeating them, or catching them, or whatever it is you want to do with them.',
+]);
 
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
@@ -1487,6 +1493,16 @@ TownList['Pinkan Mountain'] = new DungeonTown(
         new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion),
     ],
     []
+);
+TownList['Secret Field'] = new DungeonTown(
+    'Secret Field',
+    GameConstants.Region.kanto,
+    GameConstants.KantoSubRegions.Sevii123,
+    [new CustomRequirement(ko.pureComputed(() => +App.game.keyItems.hasKeyItem(KeyItemType.Heavy_tools)), 1, 'Obtain the Heavy Tools')],
+    undefined,
+    {
+        npcs: [SecretCaveMiner4],
+    }
 );
 
 //Johto Shops

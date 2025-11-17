@@ -1561,6 +1561,7 @@ export const KantoDungeons = [
     'Altering Cave',
     'Tanoby Ruins',
     'Pinkan Mountain', // 22
+    'Secret Field',
 ];
 
 export const JohtoDungeons = [

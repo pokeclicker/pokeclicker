@@ -1980,6 +1980,21 @@ dungeonList['Pinkan Mountain'] = new Dungeon('Pinkan Mountain',
     () => {},
     {dungeonRegionalDifficulty: GameConstants.Region.hoenn});
 
+dungeonList['Secret Field'] = new Dungeon('Secret Field',
+    ['Dunsparce'],
+    {
+        common: [{loot: 'Pokeball'}],
+        rare: [{loot: 'Greatball'}],
+        epic: [{loot: 'Ultraball'}],
+    },
+    10205169,
+    [
+        new DungeonBossPokemon('Dunsparce', 110000000, 40),
+    ],
+    754000, 42,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.kalos});
+
 // Johto Dungeons
 
 dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
