@@ -288,7 +288,7 @@ TemporaryBattleList['Dunsparce'] = new TemporaryBattle(
     'Dunsparce',
     [new GymPokemon('Dunsparce', 160000000, 50)],
     'Here is your reward for defeating the king of all Dunsparce. It\'s... nothing! For now...',
-    [new ClearDungeonRequirement(3, GameConstants.getDungeonIndex('Secret Field'))],
+    [new ClearDungeonRequirement(206, GameConstants.getDungeonIndex('Secret Field'))],
     undefined,
     {
         displayName: 'A Very Big Dunsparce',
