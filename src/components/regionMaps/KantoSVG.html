@@ -1027,6 +1027,7 @@
             , databind: "click:function(){MapHelper.moveToTown('Secret Cave')}, attr:{ class: MapHelper.calculateTownCssClass('Secret Cave') }"
             , visible:  "App.game.badgeCase.hasBadge(BadgeEnums.Elite_HoennChampion)"
             , image: "assets/images/map/cave_entrance.png"
+            , connectedToTown: "Secret Cave"
             })
         %>
 
@@ -1084,6 +1085,7 @@
             , databind: "click:function(){MapHelper.moveToTown('Secret Field')}, attr:{ class: MapHelper.calculateTownCssClass('Secret Field') }"
             , visible:  "TownList['Secret Field'].isUnlocked()"
             , image: "assets/images/map/transparent.png"
+            , connectedToTown: "Secret Field"
             })
         %>
 
@@ -1107,6 +1109,18 @@
            , width: 3, height: 8
            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('One Island') }"
           })
+        %>
+
+        <!--Dunsparce-->
+        <%- include('templates/mapOverlay',
+            { name: "A Very Big Dunsparce"
+            , x: 82, y: 45
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Dunsparce'].protectedOnclick(), attr: { class: TemporaryBattleList['Dunsparce'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Dunsparce'] && TemporaryBattleList['Dunsparce'].isVisible()"
+            , image: "assets/images/map/dunsparceoverworld.png"
+            , connectedToTown: "Secret Field"
+            })
         %>
     </g>
 

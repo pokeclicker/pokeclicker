@@ -284,6 +284,19 @@ TemporaryBattleList['Blue 6'] = new TemporaryBattle(
         imageName: 'Blue2',
     }
 );
+TemporaryBattleList['Dunsparce'] = new TemporaryBattle(
+    'Dunsparce',
+    [new GymPokemon('Dunsparce', 160000000, 50)],
+    'Here is your reward for defeating the king of all Dunsparce. It\'s... nothing! For now...',
+    [new ClearDungeonRequirement(3, GameConstants.getDungeonIndex('Secret Field'))],
+    undefined,
+    {
+        displayName: 'A Very Big Dunsparce',
+        returnTown: 'Secret Field',
+        imageName: '../pokemon/206',
+        hideTrainer: true,
+    }
+);
 // Kanto Christmas Temporary Battles, based on Blue 2
 TemporaryBattleList['Santa Jynx 1'] = new TemporaryBattle(
     'Santa Jynx 1',
