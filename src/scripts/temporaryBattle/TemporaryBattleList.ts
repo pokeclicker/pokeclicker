@@ -284,7 +284,7 @@ TemporaryBattleList['Blue 6'] = new TemporaryBattle(
         imageName: 'Blue2',
     }
 );
-TemporaryBattleList['Dunsparce'] = new TemporaryBattle(
+TemporaryBattleList.Dunsparce = new TemporaryBattle(
     'Dunsparce',
     [new GymPokemon('Dunsparce', 160000000, 50)],
     'Here is your reward for defeating the king of all Dunsparce. It\'s... nothing! For now...',
