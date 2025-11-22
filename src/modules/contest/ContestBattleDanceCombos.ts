@@ -1,8 +1,13 @@
+import ContestType from '../enums/ContestType';
+import Direction from '../enums/Direction';
+import GameHelper from '../GameHelper';
+import ContestTypeHelper from '../types/ContestTypeHelper';
+
 /**
  * Each typed dance has different judging preferences.
  * The idea is to follow contest type matchup compatibility, so there is some overlap with adjacent types but not opposing ones
  *
- * Cool - same plane
+ * Cool - same axis
  *
  * Beautiful - opposite pairs
  *
@@ -12,7 +17,7 @@
  *
  * Tough - within 90deg of each other
  */
-class ContestBattleDanceCombos {
+export default class ContestBattleDanceCombos {
     public static isDirectionalLink(moveOne: number, moveTwo: number) {
         return moveOne === moveTwo;
     }
@@ -30,7 +35,7 @@ class ContestBattleDanceCombos {
     }
 
     /**
-     * Cool poses - posing along the same plane
+     * Cool poses - posing along the same axis
      */
     public static coolPoseBonus(arr: number[]) {
         const map = new Map();
@@ -236,7 +241,7 @@ class ContestBattleDanceCombos {
         return bonus;
     }
 
-    // Live combo bonus
+    // Live combo bonus - to be used for Brilliant Shining rank
     public static moveBonus(type: ContestType, moveDirections: number[]) {
         const moveOne = moveDirections[0];
         const moveTwo = moveDirections[1];
