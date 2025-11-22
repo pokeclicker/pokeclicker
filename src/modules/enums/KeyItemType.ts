@@ -4,6 +4,7 @@ enum KeyItemType {
     'Pokeball_bag',
     'Town_map',
     'Dungeon_ticket',
+    'Super_rod',
     'Fishing_rod',
     'HM03_surf',
     'Holo_caster',

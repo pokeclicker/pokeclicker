@@ -154,9 +154,9 @@ class GymRunner {
 document.addEventListener('DOMContentLoaded', () => {
     $('#receiveBadgeModal').on('hidden.bs.modal', async () => {
         if (GymBattle.gym.badgeReward == BadgeEnums.Soul) {
-            const modal = KeyItemController.showGainModal(KeyItems.KeyItem.Safari_ticket);
+            const modal = KeyItemController.showGainModal(KeyItemType.Safari_ticket);
             await asyncEvent(modal, 'hidden.bs.modal');
-            KeyItemController.showGainModal(KeyItems.KeyItem.Kanto_HM03_surf);
+            KeyItemController.showGainModal(KeyItemType.HM03_surf);
         }
         if (GymBattle.gym.badgeReward == BadgeEnums.Earth) {
             KeyItemController.showGainModal(KeyItemType.Gem_case);

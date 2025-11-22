@@ -39,6 +39,7 @@ export default class KeyItems implements Feature {
                     });
                 }, 'Town Map'),
             new KeyItem(KeyItemType.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region and beyond.<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon.', undefined, undefined, undefined, 'Dungeon Ticket'),
+            new KeyItem(KeyItemType.Super_rod, 'The best fishing rod for catching wild water Pokémon.', undefined, undefined, undefined, 'Super Rod'),
             new LevelableKeyItem(KeyItemType.Fishing_rod, [
                 new KeyItemLevel('Allows you to encounter some common Pokémon that live in Kanto\'s water', () => App.game.statistics.routeKills[Region.kanto][6]() >= ROUTE_KILLS_NEEDED),
                 new KeyItemLevel('Allows you to encounter uncommon Pokémon that live in Kanto\'s water', () => MapHelper.accessToTown('Fuchsia City')),
@@ -47,7 +48,7 @@ export default class KeyItems implements Feature {
 
             new LevelableKeyItem(KeyItemType.HM03_surf, [
                 new KeyItemLevel('Can be used for crossing water in Kanto', undefined),
-             ], undefined, undefined, 'HM03 Surf'),
+            ], undefined, undefined, 'HM03 Surf'),
 
             new KeyItem(KeyItemType.Holo_caster, 'A device that allows users to see and track Achievements. Completing Achievements gives useful bonuses.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Victory Road')]() > 0, undefined, undefined, 'Holo Caster'),
