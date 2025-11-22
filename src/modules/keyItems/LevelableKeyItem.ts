@@ -12,7 +12,7 @@ export class KeyItemLevel {
     public parent: LevelableKeyItem;
     constructor(
         public description: string,
-        public unlockReq: () => boolean,
+        public unlockReq: () => boolean = () => true,
     ) {
         this.unlockReqComputed = ko.computed<boolean>(unlockReq);
     }
