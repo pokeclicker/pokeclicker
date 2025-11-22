@@ -240,10 +240,10 @@ class PokemonFactory {
         const contestTypes = pokemon.contestTypes ?? basePokemon.contestTypes;
         const gender = pokemon.gender ?? this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         let dance = basePokemon.id.toString().split('').filter(n => !isNaN(Number(n))).map(v => Number(v) % 4);
-        if (dance.length < 2) {
+        if (Math.floor(dance.length) < 2) {
             dance.unshift(0, 0);
         }
-        if (dance.length < 3) {
+        if (Math.floor(dance.length) < 3) {
             dance.unshift(0);
         }
         if (dance.length > 5) {
