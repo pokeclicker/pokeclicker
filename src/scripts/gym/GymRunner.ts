@@ -161,6 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (GymBattle.gym.badgeReward == BadgeEnums.Earth) {
             KeyItemController.showGainModal(KeyItemType.Gem_case);
         }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Fog) {
+            KeyItemController.showGainModal(KeyItemType.HM03_surf);
+        }
     });
 });
 

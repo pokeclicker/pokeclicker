@@ -44,12 +44,19 @@ export default class KeyItems implements Feature {
                 new KeyItemLevel('Allows you to encounter some common Pokémon that live in Kanto\'s water', () => App.game.statistics.routeKills[Region.kanto][6]() >= ROUTE_KILLS_NEEDED),
                 new KeyItemLevel('Allows you to encounter uncommon Pokémon that live in Kanto\'s water', () => MapHelper.accessToTown('Fuchsia City')),
                 new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s waters.', () => App.game.statistics.routeKills[Region.kanto][13]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s waters and common Pokémon that live in Johto\'s waters.', () => App.game.statistics.routeKills[Region.johto][32]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s waters and uncommon Pokémon that live in Johto\'s waters.', () => App.game.statistics.routeKills[Region.johto][39]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s and Johto\'s waters.', () => App.game.statistics.routeKills[Region.johto][28]() >= ROUTE_KILLS_NEEDED),
             ], undefined, undefined, 'Fishing Rod'),
 
             new LevelableKeyItem(KeyItemType.HM03_surf, [
                 new KeyItemLevel('Can be used for crossing water in Kanto', undefined),
+                new KeyItemLevel('Can be used for crossing water in Kanto and Johto', undefined),
             ], undefined, undefined, 'HM03 Surf'),
 
+            new KeyItem(KeyItemType.TM02_headbutt, 'Can be used to knock wild Pokémon from trees. Warning, may cause concussion.',
+                () => App.game.statistics.dungeonsCleared[getDungeonIndex('Ilex Forest')]() > 0,
+                undefined, undefined, 'TM02 Headbutt'),
             new KeyItem(KeyItemType.Holo_caster, 'A device that allows users to see and track Achievements. Completing Achievements gives useful bonuses.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Victory Road')]() > 0, undefined, undefined, 'Holo Caster'),
             new KeyItem(KeyItemType.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémon Attack. Some baby Pokémon can only be found through breeding, too!',

@@ -11,38 +11,58 @@ export default class RoutePokemon {
     public land: PokemonNameType[];
     public water: PokemonNameType[];
     public headbutt: PokemonNameType[];
-    public special: SpecialRoutePokemon[];
     public kantooldrod: PokemonNameType [];
     public kantogoodrod: PokemonNameType [];
     public kantosuperrod: PokemonNameType [];
     public kantosurf: PokemonNameType[];
+    public johtooldrod: PokemonNameType [];
+    public johtogoodrod: PokemonNameType [];
+    public johtosuperrod: PokemonNameType [];
+    public johtosurf: PokemonNameType[];
+    public johtoheadbutt: PokemonNameType[];
+    public special: SpecialRoutePokemon[];
 
     constructor({
         land = [],
         water = [],
         headbutt = [],
-        special = [],
         kantooldrod = [],
         kantogoodrod = [],
         kantosuperrod = [],
         kantosurf = [],
+        johtooldrod = [],
+        johtogoodrod = [],
+        johtosuperrod = [],
+        johtosurf = [],
+        johtoheadbutt = [],
+        special = [],
     }: {
         land?: PokemonNameType[],
         water?: PokemonNameType[],
         headbutt?: PokemonNameType[],
-        special?: SpecialRoutePokemon[],
         kantooldrod?: PokemonNameType[],
         kantogoodrod?: PokemonNameType[],
         kantosuperrod?: PokemonNameType[],
         kantosurf?: PokemonNameType[],
+        johtooldrod?: PokemonNameType[],
+        johtogoodrod?: PokemonNameType[],
+        johtosuperrod?: PokemonNameType[],
+        johtosurf?: PokemonNameType[],
+        johtoheadbutt?: PokemonNameType[],
+        special?: SpecialRoutePokemon[],
     }) {
         this.land = land;
         this.water = water;
         this.headbutt = headbutt;
-        this.special = special;
         this.kantooldrod = kantooldrod;
         this.kantogoodrod = kantogoodrod;
         this.kantosuperrod = kantosuperrod;
         this.kantosurf = kantosurf;
+        this.johtooldrod = johtooldrod;
+        this.johtogoodrod = johtogoodrod;
+        this.johtosuperrod = johtosuperrod;
+        this.johtosurf = johtosurf;
+        this.johtoheadbutt = johtoheadbutt;
+        this.special = special;
     }
 }

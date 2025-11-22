@@ -295,6 +295,7 @@ GymList['Ecruteak City'] = new Gym(
     'I\'m not good enough yet... All right. This Badge is yours.',
     [new GymBadgeRequirement(BadgeEnums.Plain)],
     () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
         App.game.quests.getQuestLine('Team Rocket Again').beginQuest(0, undefined, true);
         App.game.quests.getQuestLine('The Sick Ampharos').beginQuest(0, undefined, true);
     }
