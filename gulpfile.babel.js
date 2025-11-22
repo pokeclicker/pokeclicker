@@ -235,7 +235,7 @@ gulp.task('scripts', () => {
         // Remove default exports
         .pipe(replace(/(^|\n)export default \w+;/g, ''))
         // Replace imports with references
-        .pipe(replace(/(^|\n)import ([\w {},*]*? from )?'(.*)((.d)?.ts)?';/g, '$1/// <reference path="$3.d.ts"/>'))
+        .pipe(replace(/(^|\n)import ([\w {},*]*? from )?'(.*)((.d)?.ts)?';/g, '$1/// <reference path="$3.d.ts"/>\n'))
         // Convert exports to declarations so that ./src/scripts can use them
         .pipe(replace(/(^|\n)export (?!declare|type|[\w {},*]*? from)(default )?/g, '$1declare '))
         // Remove any remaining 'export'
