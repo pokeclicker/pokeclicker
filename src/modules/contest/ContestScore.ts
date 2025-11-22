@@ -1,10 +1,7 @@
-///<reference path="../contest/ContestBattlePokemon.ts"/>
-///<reference path="../contest/ContestBattleDance.ts"/>
-///<reference path="../contest/ContestTrainer.ts"/>
-///<reference path="../contest/ContestRunner.ts"/>
-///<reference path="../contest/ContestHelper.ts"/>
+import ContestType from '../enums/ContestType';
+import ContestTypeHelper from '../types/ContestTypeHelper';
 
-class ContestScore {
+export default class ContestScore {
     static totalScore: KnockoutObservable<number> = ko.observable(0);
     static activeChain: KnockoutObservable<number> = ko.observable(1);
 
