@@ -92,6 +92,7 @@ GymList['Fuchsia City'] = new Gym(
     ],
     () => {
         App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
         App.game.quests.getQuestLine('Mining Expedition').beginQuest(0, undefined, true);
     }
 );

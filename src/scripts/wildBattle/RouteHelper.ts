@@ -23,13 +23,33 @@ class RouteHelper {
         let pokemonList = possiblePokemons.land;
 
         // Water Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItemType.Super_rod) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItemType.Fishing_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.water);
         }
 
         // Headbutt Pokémon
         if (includeHeadbutt) {
             pokemonList = pokemonList.concat(possiblePokemons.headbutt);
+        }
+
+        // Kanto Old Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 0) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.kantooldrod);
+        }
+
+        // Kanto Good Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 1) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.kantogoodrod);
+        }
+
+        // Kanto Super Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 2) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.kantosuperrod);
+        }
+
+        // Kanto Surf Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.HM03_surf, 0) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.kantosurf);
         }
 
         // Special requirement Pokémon
