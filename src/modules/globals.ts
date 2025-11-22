@@ -18,5 +18,4 @@ declare global {
     const PartyController: TempTypes.TmpPartyControllerType;
     const TemporaryBattleList: TempTypes.TmpTemporaryBattleListType;
     const BagHandler: TempTypes.TmpBagHandlerType;
-    const ContestRunner: TempTypes.TmpContestRunnerType;
 }
