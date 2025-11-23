@@ -2111,7 +2111,7 @@ Routes.add(new RegionRoute(
     'Route 1 Hau\'oli Outskirts', Region.alola, 18,
     new RoutePokemon({
         land: ['Slowpoke', 'Wingull', 'Inkay'],
-        water: ['Tentacool', 'Mantyke', 'Finneon'],
+        alolasurf: ['Tentacool', 'Wingull', 'Finneon', 'Mantyke'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new TemporaryBattleRequirement('Hau 2')],
@@ -2147,10 +2147,11 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Melemele Sea', Region.alola, 19,
     new RoutePokemon({
-        water: ['Tentacool', 'Magikarp', 'Corsola', 'Remoraid', 'Wingull', 'Clamperl', 'Luvdisc', 'Mantyke', 'Finneon', 'Wishiwashi (Solo)'],
+        land: ['Tentacool', 'Wingull', 'Finneon', 'Mantyke'],
+        alolafishingrod: ['Magikarp', 'Gyarados', 'Corsola', 'Remoraid', 'Octillery', 'Clamperl', 'Huntail', 'Gorebyss', 'Luvdisc', 'Wishiwashi (Solo)', 'Mareanie'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
-    [new ClearDungeonRequirement(1, getDungeonIndex('Brooklet Hill'))],
+    [new RouteKillRequirement(10, Region.alola, 5)],
     5.1,
     AlolaSubRegions.MelemeleIsland,
 ));
@@ -2158,7 +2159,8 @@ Routes.add(new RegionRoute(
     'Kala\'e Bay', Region.alola, 20,
     new RoutePokemon({
         land: ['Alolan Rattata', 'Slowpoke', 'Wingull', 'Bagon', 'Shelgon', 'Yungoos'],
-        water: ['Tentacool', 'Shellder', 'Magikarp', 'Remoraid', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
+        alolafishingrod: ['Shellder', 'Magikarp', 'Gyarados', 'Wishiwashi (Solo)'],
+        alolasurf: ['Tentacool', 'Wingull', 'Finneon'],
         special: [
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Horsea'], new DayOfWeekRequirement(DayOfWeek.Wednesday)),
@@ -2167,7 +2169,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new ClearDungeonRequirement(1, getDungeonIndex('Seaward Cave')),
-        new ClearDungeonRequirement(1, getDungeonIndex('Brooklet Hill')),
+        new RouteKillRequirement(10, Region.alola, 5),
     ],
     5.2,
     AlolaSubRegions.MelemeleIsland,
@@ -2214,7 +2216,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 7', Region.alola, 7,
     new RoutePokemon({
-        water: ['Tentacool', 'Staryu', 'Magikarp', 'Wingull', 'Finneon', 'Wishiwashi (Solo)', 'Pyukumuku'],
+        land: ['Tentacool', 'Wingull', 'Finneon', 'Pyukumuku'],
+        alolafishingrod: ['Staryu', 'Starmie', 'Magikarp', 'Gyarados', 'Wishiwashi (Solo)'],
         special: [
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Spheal'], new DayOfWeekRequirement(DayOfWeek.Monday)),
@@ -2228,7 +2231,8 @@ Routes.add(new RegionRoute(
     'Alola Route 8', Region.alola, 8,
     new RoutePokemon({
         land: ['Alolan Rattata', 'Fletchling', 'Trumbeak', 'Yungoos', 'Stufful'],
-        water: ['Tentacool', 'Magikarp', 'Chinchou', 'Remoraid', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
+        alolafishingrod: ['Magikarp', 'Gyarados', 'Chinchou', 'Lanturn', 'Remoraid', 'Octillery', 'Wishiwashi (Solo)'],
+        alolasurf: ['Tentacool', 'Wingull', 'Finneon', 'Mantyke'],
         special:
         [
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
@@ -2244,7 +2248,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 9', Region.alola, 9,
     new RoutePokemon({
-        water: ['Magikarp', 'Corsola', 'Luvdisc', 'Wishiwashi (Solo)', 'Mareanie'],
+        land: ['Magikarp', 'Gyarados', 'Corsola', 'Luvdisc', 'Wishiwashi (Solo)', 'Mareanie'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Diglett\'s Tunnel'))],
@@ -2255,7 +2259,7 @@ Routes.add(new RegionRoute(
     'Akala Outskirts', Region.alola, 21,
     new RoutePokemon({
         land: ['Alolan Raticate', 'Natu', 'Wingull', 'Nosepass', 'Gumshoos', 'Stufful'],
-        water: ['Magikarp', 'Chinchou', 'Wishiwashi (Solo)'],
+        alolafishingrod: ['Magikarp', 'Gyarados', 'Chinchou', 'Lanturn', 'Wishiwashi (Solo)'],
         special: [
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Honedge'], new DayOfWeekRequirement(DayOfWeek.Wednesday)),
@@ -2325,7 +2329,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 13', Region.alola, 13,
     new RoutePokemon({
-        water: ['Magikarp', 'Wishiwashi (Solo)', 'Bruxish'],
+        land: ['Magikarp', 'Gyarados', 'Wishiwashi (Solo)', 'Bruxish'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new RouteKillRequirement(10, Region.alola, 12)],
@@ -2335,7 +2339,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 14', Region.alola, 14,
     new RoutePokemon({
-        water: ['Tentacruel', 'Magikarp', 'Pelipper', 'Finneon', 'Frillish', 'Wishiwashi (Solo)', 'Bruxish'],
+        land: ['Tentacruel', 'Pelipper', 'Finneon', 'Frillish'],
+        alolafishingrod: ['Magikarp', 'Gyarados', 'Wishiwashi (Solo)', 'Bruxish'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new RouteKillRequirement(10, Region.alola, 13)],
@@ -2359,7 +2364,8 @@ Routes.add(new RegionRoute(
     'Alola Route 15', Region.alola, 15,
     new RoutePokemon({
         land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Gumshoos', 'Sandygast'],
-        water: ['Tentacruel', 'Magikarp', 'Clamperl', 'Finneon', 'Wishiwashi (Solo)', 'Bruxish'],
+        alolafishingrod: ['Magikarp', 'Gyarados', 'Clamperl', 'Huntail', 'Gorebyss', 'Wishiwashi (Solo)', 'Bruxish'],
+        alolasurf: ['Tentacruel', 'Pelipper', 'Finneon', 'Lumineon'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
     [new RouteKillRequirement(10, Region.alola, 13)],
@@ -2421,7 +2427,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Poni Breaker Coast', Region.alola, 26,
     new RoutePokemon({
-        water: ['Tentacruel', 'Lapras', 'Magikarp', 'Pelipper', 'Carvanha', 'Wailmer', 'Relicanth', 'Gastrodon (East)', 'Lumineon'],
+        land: ['Tentacruel', 'Lapras', 'Pelipper', 'Gastrodon (East)', 'Lumineon'],
+        alolafishingrod: ['Magikarp', 'Gyarados', 'Carvanha', 'Sharpedo', 'Wailmer', 'Wailord', 'Relicanth'],
         special: [
             new SpecialRoutePokemon(['Wimpod'], new ObtainedPokemonRequirement('Wimpod')),
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
@@ -2474,7 +2481,7 @@ Routes.add(new RegionRoute(
     'Poni Gauntlet', Region.alola, 30,
     new RoutePokemon({
         land: ['Pelipper', 'Lickitung', 'Golduck', 'Granbull', 'Inkay', 'Bewear'],
-        water: ['Magikarp', 'Dratini', 'Dragonair', 'Barboach'],
+        alolafishingrod: ['Magikarp', 'Gyarados', 'Dratini', 'Dragonair', 'Dragonite', 'Barboach', 'Whiscash'],
         special: [
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Togekiss', 'Rotom'], new DayOfWeekRequirement(DayOfWeek.Tuesday)),
