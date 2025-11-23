@@ -23,7 +23,7 @@ class RouteHelper {
         let pokemonList = possiblePokemons.land;
 
         // Water Pokémon
-        if (App.game.keyItems.hasKeyItem(KeyItemType.Fishing_rod) || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem(KeyItemType.Super_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.water);
         }
 
@@ -50,6 +50,56 @@ class RouteHelper {
         // Kanto Surf Pokémon
         if (App.game.keyItems.hasKeyItemLevel(KeyItemType.HM03_surf, 0) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.kantosurf);
+        }
+
+        // Johto Old Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 3) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.johtooldrod);
+        }
+
+        // Johto Good Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 4) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.johtogoodrod);
+        }
+
+        // Johto Super Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 5) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.johtosuperrod);
+        }
+
+        // Johto Headbutt Pokémon
+        if (App.game.keyItems.hasKeyItem(KeyItemType.TM02_headbutt) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.johtoheadbutt);
+        }
+
+        // Johto Surf Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.HM03_surf, 1) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.johtosurf);
+        }
+
+        // Hoenn Old Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 6) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.hoennoldrod);
+        }
+
+        // Hoenn Good Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 7) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.hoenngoodrod);
+        }
+
+        // Hoenn Super Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 8) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.hoennsuperrod);
+        }
+
+        // Hoenn Surf Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.HM03_surf, 2) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.hoennsurf);
+        }
+
+        // Hoenn Dive Pokémon
+        if (App.game.keyItems.hasKeyItem(KeyItemType.HM08_dive) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.hoenndive);
         }
 
         // Special requirement Pokémon
@@ -99,8 +149,8 @@ class RouteHelper {
      * @returns {boolean} true if all Pokémon on this route are caught.
      */
 
-    public static routeCompleted(route: number, region: GameConstants.Region, includeShiny: boolean, includeHeadbutt = true): boolean {
-        return RouteHelper.listCompleted(RouteHelper.getAvailablePokemonList(route, region, includeHeadbutt), includeShiny);
+    public static routeCompleted(route: number, region: GameConstants.Region, includeShiny: boolean): boolean {
+        return RouteHelper.listCompleted(RouteHelper.getAvailablePokemonList(route, region), includeShiny);
     }
 
     public static listCompleted(possiblePokemon: PokemonNameType[], includeShiny: boolean) {

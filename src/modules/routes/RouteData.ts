@@ -869,7 +869,10 @@ Routes.add(new RegionRoute(
     'Hoenn Route 102', Region.hoenn, 102,
     new RoutePokemon({
         land: ['Surskit', 'Poochyena', 'Wurmple', 'Lotad', 'Zigzagoon', 'Ralts', 'Seedot'],
-        water: ['Marill', 'Goldeen', 'Magikarp', 'Corphish'],
+        hoennoldrod: ['Goldeen', 'Magikarp'],
+        hoenngoodrod: ['Goldeen', 'Magikarp', 'Corphish'],
+        hoennsuperrod: ['Corphish'],
+        hoennsurf: ['Goldeen', 'Marill', 'Surskit'],
     }),
     [new TemporaryBattleRequirement('May 1')],
 ));
@@ -877,7 +880,10 @@ Routes.add(new RegionRoute(
     'Hoenn Route 103', Region.hoenn, 103,
     new RoutePokemon({
         land: ['Poochyena', 'Wingull', 'Zigzagoon'],
-        water: ['Tentacool', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Sharpedo', 'Wailmer'],
+        hoennsurf: ['Tentacool', 'Wingull', 'Pelipper'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 101)],
     101.1,
@@ -886,14 +892,20 @@ Routes.add(new RegionRoute(
     'Hoenn Route 104', Region.hoenn, 104,
     new RoutePokemon({
         land: ['Poochyena', 'Wurmple', 'Marill', 'Taillow', 'Wingull'],
-        water: ['Pelipper', 'Magikarp'],
+        hoennoldrod: ['Magikarp'],
+        hoenngoodrod: ['Magikarp'],
+        hoennsuperrod: ['Magikarp'],
+        hoennsurf: ['Wingull', 'Pelipper'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 102)],
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 105', Region.hoenn, 105,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+        land: ['Tentacool', 'Wingull', 'Pelipper'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Wailmer'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Balance)],
     115.1,
@@ -901,7 +913,10 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Hoenn Route 106', Region.hoenn, 106,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+        land: ['Tentacool', 'Wingull', 'Pelipper'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Wailmer'],
     }),
     [
         new OneFromManyRequirement([
@@ -914,7 +929,10 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Hoenn Route 107', Region.hoenn, 107,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+        land: ['Tentacool', 'Wingull', 'Pelipper'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Wailmer'],
     }),
     [
         new OneFromManyRequirement([
@@ -927,7 +945,10 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Hoenn Route 108', Region.hoenn, 108,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+        land: ['Tentacool', 'Wingull', 'Pelipper'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Wailmer'],
     }),
     [
         new OneFromManyRequirement([
@@ -940,7 +961,10 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Hoenn Route 109', Region.hoenn, 109,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+        land: ['Tentacool', 'Wingull', 'Pelipper'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Wailmer'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Balance)],
     115.5,
@@ -949,7 +973,10 @@ Routes.add(new RegionRoute(
     'Hoenn Route 110', Region.hoenn, 110,
     new RoutePokemon({
         land: ['Poochyena', 'Gulpin', 'Minun', 'Oddish', 'Wingull', 'Plusle'],
-        water: ['Tentacool', 'Pelipper', 'Magikarp', 'Wailmer'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Wailmer'],
+        hoennsurf: ['Tentacool', 'Wingull', 'Pelipper'],
         special:
         [new SpecialRoutePokemon(['Electrike'], new ObtainedPokemonRequirement('Electrike'))],
     }),
@@ -959,7 +986,10 @@ Routes.add(new RegionRoute(
     'Hoenn Route 111', Region.hoenn, 111,
     new RoutePokemon({
         land: ['Sandshrew', 'Trapinch', 'Baltoy', 'Cacnea'],
-        water: ['Marill', 'Goldeen', 'Magikarp', 'Barboach'],
+        hoennoldrod: ['Goldeen', 'Magikarp'],
+        hoenngoodrod: ['Goldeen', 'Magikarp', 'Barboach'],
+        hoennsuperrod: ['Barboach'],
+        hoennsurf: ['Goldeen', 'Marill', 'Surskit'],
         headbutt: ['Geodude'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Dynamo)],
@@ -982,7 +1012,10 @@ Routes.add(new RegionRoute(
     'Hoenn Route 114', Region.hoenn, 114,
     new RoutePokemon({
         land: ['Zangoose', 'Surskit', 'Swablu', 'Lotad', 'Lombre', 'Seviper', 'Nuzleaf'],
-        water: ['Marill', 'Goldeen', 'Magikarp', 'Barboach'],
+        hoennoldrod: ['Goldeen', 'Magikarp'],
+        hoenngoodrod: ['Goldeen', 'Magikarp', 'Barboach'],
+        hoennsuperrod: ['Barboach'],
+        hoennsurf: ['Goldeen', 'Marill', 'Surskit'],
         headbutt: ['Geodude'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 113)],
@@ -991,7 +1024,10 @@ Routes.add(new RegionRoute(
     'Hoenn Route 115', Region.hoenn, 115,
     new RoutePokemon({
         land: ['Swablu', 'Taillow', 'Swellow', 'Jigglypuff', 'Wingull'],
-        water: ['Tentacool', 'Pelipper', 'Magikarp', 'Wailmer'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Wailmer'],
+        hoennsurf: ['Tentacool', 'Wingull', 'Pelipper'],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Meteor Falls'))],
 ));
@@ -1007,7 +1043,10 @@ Routes.add(new RegionRoute(
     'Hoenn Route 117', Region.hoenn, 117,
     new RoutePokemon({
         land: ['Surskit', 'Poochyena', 'Oddish', 'Marill', 'Illumise', 'Volbeat', 'Seedot'],
-        water: ['Goldeen', 'Magikarp', 'Corphish'],
+        hoennoldrod: ['Goldeen', 'Magikarp'],
+        hoenngoodrod: ['Goldeen', 'Magikarp', 'Corphish'],
+        hoennsuperrod: ['Corphish'],
+        hoennsurf: ['Goldeen', 'Marill', 'Surskit'],
         special:
         [new SpecialRoutePokemon(['Roselia'], new ObtainedPokemonRequirement('Roselia'))],
     }),
@@ -1018,7 +1057,10 @@ Routes.add(new RegionRoute(
     'Hoenn Route 118', Region.hoenn, 118,
     new RoutePokemon({
         land: ['Zigzagoon', 'Linoone', 'Wingull', 'Kecleon'],
-        water: ['Tentacool', 'Pelipper', 'Magikarp', 'Carvanha', 'Sharpedo'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Carvanha'],
+        hoennsuperrod: ['Carvanha', 'Sharpedo'],
+        hoennsurf: ['Tentacool', 'Wingull', 'Pelipper'],
         special:
         [
             new SpecialRoutePokemon(['Electrike'], new ObtainedPokemonRequirement('Electrike')),
@@ -1031,7 +1073,10 @@ Routes.add(new RegionRoute(
     'Hoenn Route 119', Region.hoenn, 119,
     new RoutePokemon({
         land: ['Zigzagoon', 'Linoone', 'Oddish', 'Tropius', 'Kecleon'],
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Carvanha'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Carvanha'],
+        hoennsuperrod: ['Carvanha'],
+        hoennsurf: ['Tentacool', 'Wingull', 'Pelipper'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 118)],
 ));
@@ -1039,7 +1084,10 @@ Routes.add(new RegionRoute(
     'Hoenn Route 120', Region.hoenn, 120,
     new RoutePokemon({
         land: ['Surskit', 'Poochyena', 'Mightyena', 'Oddish', 'Marill', 'Absol', 'Kecleon', 'Seedot'],
-        water: ['Goldeen', 'Magikarp', 'Barboach'],
+        hoennoldrod: ['Goldeen', 'Magikarp'],
+        hoenngoodrod: ['Goldeen', 'Magikarp', 'Barboach'],
+        hoennsuperrod: ['Barboach'],
+        hoennsurf: ['Goldeen', 'Marill', 'Surskit'],
     }),
     [
         new ClearDungeonRequirement(1, getDungeonIndex('Weather Institute')),
@@ -1050,14 +1098,20 @@ Routes.add(new RegionRoute(
     'Hoenn Route 121', Region.hoenn, 121,
     new RoutePokemon({
         land: ['Poochyena', 'Shuppet', 'Mightyena', 'Oddish', 'Gloom', 'Wingull', 'Kecleon'],
-        water: ['Tentacool', 'Pelipper', 'Magikarp', 'Wailmer'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Wailmer'],
+        hoennsurf: ['Tentacool', 'Wingull', 'Pelipper'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 120)],
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 122', Region.hoenn, 122,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+        land: ['Tentacool', 'Wingull', 'Pelipper'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Sharpedo', 'Wailmer'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 121)],
 ));
@@ -1065,35 +1119,52 @@ Routes.add(new RegionRoute(
     'Hoenn Route 123', Region.hoenn, 123,
     new RoutePokemon({
         land: ['Poochyena', 'Shuppet', 'Mightyena', 'Oddish', 'Gloom', 'Wingull', 'Kecleon'],
-        water: ['Tentacool', 'Pelipper', 'Magikarp', 'Wailmer'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Wailmer'],
+        hoennsurf: ['Tentacool', 'Wingull', 'Pelipper'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 122)],
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 124', Region.hoenn, 124,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Clamperl', 'Relicanth'],
+        land: ['Tentacool', 'Wingull', 'Pelipper'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Sharpedo', 'Wailmer'],
+        hoenndive: ['Chinchou', 'Clamperl', 'Relicanth'],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Aqua Hideout'))],
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 125', Region.hoenn, 125,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+        land: ['Tentacool', 'Wingull', 'Pelipper'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Sharpedo', 'Wailmer'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 124)],
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 126', Region.hoenn, 126,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Clamperl', 'Relicanth'],
+        land: ['Tentacool', 'Wingull', 'Pelipper'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Sharpedo', 'Wailmer'],
+        hoenndive: ['Chinchou', 'Clamperl', 'Relicanth'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 124)],
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 127', Region.hoenn, 127,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+        land: ['Tentacool', 'Wingull', 'Pelipper'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Sharpedo', 'Wailmer'],
     }),
     [
         new OneFromManyRequirement([
@@ -1105,14 +1176,20 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Hoenn Route 128', Region.hoenn, 128,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Luvdisc', 'Wailmer', 'Corsola'],
+        land: ['Tentacool', 'Wingull', 'Pelipper'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer', 'Luvdisc'],
+        hoennsuperrod: ['Corsola', 'Wailmer', 'Luvdisc'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 127)],
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 129', Region.hoenn, 129,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Wailord', 'Magikarp', 'Wailmer', 'Sharpedo'],
+        land: ['Tentacool', 'Wingull', 'Pelipper', 'Wailord'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Sharpedo', 'Wailmer'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 128)],
 ));
@@ -1120,35 +1197,50 @@ Routes.add(new RegionRoute(
     'Hoenn Route 130', Region.hoenn, 130,
     new RoutePokemon({
         land: ['Wynaut'],
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Sharpedo', 'Wailmer'],
+        hoennsurf: ['Tentacool', 'Wingull', 'Pelipper'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 129)],
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 131', Region.hoenn, 131,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+        land: ['Tentacool', 'Wingull', 'Pelipper'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Sharpedo', 'Wailmer'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 130)],
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 132', Region.hoenn, 132,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Horsea'],
+        land: ['Tentacool', 'Wingull', 'Pelipper'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Horsea', 'Sharpedo', 'Wailmer'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 131)],
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 133', Region.hoenn, 133,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Horsea'],
+        land: ['Tentacool', 'Wingull', 'Pelipper'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Horsea', 'Sharpedo', 'Wailmer'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 132)],
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 134', Region.hoenn, 134,
     new RoutePokemon({
-        water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Horsea'],
+        land: ['Tentacool', 'Wingull', 'Pelipper'],
+        hoennoldrod: ['Tentacool', 'Magikarp'],
+        hoenngoodrod: ['Tentacool', 'Magikarp', 'Wailmer'],
+        hoennsuperrod: ['Horsea', 'Sharpedo', 'Wailmer'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 133)],
 ));

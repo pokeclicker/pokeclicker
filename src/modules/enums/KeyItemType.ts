@@ -8,6 +8,7 @@ enum KeyItemType {
     'Fishing_rod',
     'HM03_surf',
     'TM02_headbutt',
+    'HM08_dive',
     'Holo_caster',
     'Mystery_egg',
     'Safari_ticket',

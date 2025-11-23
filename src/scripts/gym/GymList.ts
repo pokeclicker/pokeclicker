@@ -461,7 +461,10 @@ GymList['Dewford Town'] = new Gym(
     BadgeEnums.Knuckle,
     2000,
     'Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you\'ve got me. Take this Gym Badge!',
-    [new TemporaryBattleRequirement('May 2')]
+    [new TemporaryBattleRequirement('May 2')],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.Fishing_rod, true);
+    }
 );
 GymList['Mauville City'] = new Gym(
     'Wattson',
@@ -509,7 +512,10 @@ GymList['Petalburg City'] = new Gym(
     [
         new GymBadgeRequirement(BadgeEnums.Knuckle),
         new GymBadgeRequirement(BadgeEnums.Heat),
-    ]
+    ],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
+    }
 );
 GymList['Fortree City'] = new Gym(
     'Winona',
@@ -538,7 +544,10 @@ GymList['Mossdeep City'] = new Gym(
     BadgeEnums.Mind,
     8000,
     'What? Our combination... was shattered! It can\'t be helped. You\'ve won... So, in recognition, take this Gym Badge.',
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 125)]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 125)],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM08_dive, true);
+    }
 );
 GymList['Sootopolis City'] = new Gym(
     'Juan',
