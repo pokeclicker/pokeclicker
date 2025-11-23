@@ -71,7 +71,7 @@ export default class KeyItems implements Feature {
             new KeyItem(KeyItemType.TM02_headbutt, 'Can be used to knock wild Pokémon from trees. Warning, may cause concussion.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Ilex Forest')]() > 0,
                 undefined, undefined, 'TM02 Headbutt'),
-            new KeyItem(KeyItemType.Go_goggles, 'Can be used to access new parts of route 112 and encounter new Pokémon.', undefined, undefined, undefined, 'Go-Goggles'),
+            new KeyItem(KeyItemType.Go_goggles, 'Can be used to access new parts of route 111 and encounter new Pokémon.', undefined, undefined, undefined, 'Go-Goggles'),
             new KeyItem(KeyItemType.HM08_dive, 'Can be used to dive to the bottom of the ocean to find new kinds of Pokémon.', undefined, undefined, undefined, 'HM08 Dive'),
             new KeyItem(KeyItemType.Holo_caster, 'A device that allows users to see and track Achievements. Completing Achievements gives useful bonuses.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Victory Road')]() > 0, undefined, undefined, 'Holo Caster'),
