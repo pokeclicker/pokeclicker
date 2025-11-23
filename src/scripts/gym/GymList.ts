@@ -945,7 +945,10 @@ GymList['Pastoria City'] = new Gym(
     BadgeEnums.Fen,
     2500,
     'It seems the undertow pulled me under... But I had a great time battling with you! You\'ve earned this!',
-    [new TemporaryBattleRequirement('Barry 4')]
+    [new TemporaryBattleRequirement('Barry 4')],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
+    }
 );
 GymList['Canalave City'] = new Gym(
     'Byron',

@@ -173,6 +173,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (GymBattle.gym.badgeReward == BadgeEnums.Mind) {
             KeyItemController.showGainModal(KeyItemType.HM08_dive);
         }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Fen) {
+            KeyItemController.showGainModal(KeyItemType.HM03_surf);
+        }
     });
 });
 

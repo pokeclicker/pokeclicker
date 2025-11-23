@@ -50,12 +50,16 @@ export default class KeyItems implements Feature {
                 new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s and Johto\'s waters and common Pokémon that live in Hoenn\'s waters.', undefined),
                 new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s and Johto\'s waters and uncommon Pokémon that live in Hoenn\'s waters.', () => App.game.statistics.routeKills[Region.hoenn][118]() >= ROUTE_KILLS_NEEDED),
                 new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s and Hoenn\'s waters.', () => App.game.statistics.routeKills[Region.hoenn][125]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s and Hoenn\'s waters and common Pokémon that live in Sinnoh\'s waters.', () => App.game.statistics.routeKills[Region.sinnoh][202]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s and Hoenn\'s waters and uncommon Pokémon that live in Sinnoh\'s waters.', () => App.game.statistics.routeKills[Region.sinnoh][209]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s, Hoenn\'s and Sinnoh\'s waters.', () => App.game.statistics.routeKills[Region.sinnoh][225]() >= ROUTE_KILLS_NEEDED),
             ], undefined, undefined, 'Fishing Rod'),
 
             new LevelableKeyItem(KeyItemType.HM03_surf, [
                 new KeyItemLevel('Can be used for crossing water in Kanto', undefined),
                 new KeyItemLevel('Can be used for crossing water in Kanto and Johto', undefined),
                 new KeyItemLevel('Can be used for crossing water in Kanto, Johto and Hoenn', undefined),
+                new KeyItemLevel('Can be used for crossing water in Kanto, Johto, Hoenn and Sinnoh', undefined),
             ], undefined, undefined, 'HM03 Surf'),
 
             new KeyItem(KeyItemType.TM02_headbutt, 'Can be used to knock wild Pokémon from trees. Warning, may cause concussion.',

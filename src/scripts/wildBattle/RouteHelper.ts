@@ -102,6 +102,26 @@ class RouteHelper {
             pokemonList = pokemonList.concat(possiblePokemons.hoenndive);
         }
 
+        // Sinnoh Old Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 9) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.sinnoholdrod);
+        }
+
+        // Sinnoh Good Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 10) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.sinnohgoodrod);
+        }
+
+        // Sinnoh Super Rod Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.Fishing_rod, 11) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.sinnohsuperrod);
+        }
+
+        // Sinnoh Surf Pokémon
+        if (App.game.keyItems.hasKeyItemLevel(KeyItemType.HM03_surf, 3) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.sinnohsurf);
+        }
+
         // Special requirement Pokémon
         pokemonList = pokemonList.concat(...possiblePokemons.special.filter(p => p.isAvailable()).map(p => p.pokemon));
 
