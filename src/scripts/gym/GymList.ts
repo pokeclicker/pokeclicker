@@ -1315,7 +1315,10 @@ GymList['Shalour City'] = new Gym(
     BadgeEnums.Rumble,
     3800,
     'Oh! I have been defeated! Alack, alay! Lady Korrina gave a terrible display! This is it. I must give up my title and admit that your strength far exceeds-- Just teasing! But here\'s your Badge. Boy, you\'ll be rolling in \'em soon!',
-    [new TemporaryBattleRequirement('Calem 1')]
+    [new TemporaryBattleRequirement('Calem 1')],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
+    }
 );
 GymList['Coumarine City'] = new Gym(
     'Ramos',

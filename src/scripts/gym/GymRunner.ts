@@ -179,6 +179,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (GymBattle.gym.badgeReward == BadgeEnums.Quake) {
             KeyItemController.showGainModal(KeyItemType.HM03_surf);
         }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Rumble) {
+            KeyItemController.showGainModal(KeyItemType.HM03_surf);
+        }
     });
 });
 
