@@ -55,7 +55,7 @@ class Plot implements Saveable {
         this._isSafeLocked = ko.observable(false);
         this._berry = ko.observable(berry).extend({ numeric: 0 });
         this._lastPlanted = ko.observable(berry).extend({ numeric: 0 });
-        this._age = ko.observable(age);
+        this._age = ko.observable(age).extend({ numeric: 5 });
         this._mulch = ko.observable(mulch).extend({ numeric: 0 });
         this._mulchTimeLeft = ko.observable(mulchTimeLeft).extend({ numeric: 3 });
         this._wanderer = ko.observable(undefined);
@@ -194,7 +194,7 @@ class Plot implements Saveable {
             if (this.berry === BerryType.None) {
                 return PlotStage.Seed;
             }
-            return this.berryData.growthTime.findIndex(t => this.age <= t);
+            return this.berryData.growthTime.findIndex(t => this.age < t);
         });
 
         this.tooltip = ko.pureComputed(() => {
@@ -319,7 +319,7 @@ class Plot implements Saveable {
 
             // Checking for Petaya Berries
             if (App.game.farming.berryInFarm(BerryType.Petaya, PlotStage.Berry, true) && this.berry !== BerryType.Petaya) {
-                this.age = Math.min(this.age, this.berryData.growthTime[3] + 1);
+                this.age = Math.min(this.age, this.berryData.growthTime[3]);
             }
 
             const updatedStage = this.stageUpdated(oldAge, this.age);
@@ -333,12 +333,12 @@ class Plot implements Saveable {
                 change = true;
             }
 
-            if (!this._hasWarnedAboutToWither && this.age + 15 > this.berryData.growthTime[4]) {
+            if (!this._hasWarnedAboutToWither && this.age + 15 >= this.berryData.growthTime[4]) {
                 this.notifications.push(FarmNotificationType.AboutToWither);
                 this._hasWarnedAboutToWither = true;
             }
 
-            if (this.age > this.berryData.growthTime[4]) {
+            if (this.age >= this.berryData.growthTime[4]) {
                 this.die();
                 change = true;
             }
