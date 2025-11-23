@@ -1144,7 +1144,10 @@ GymList['Driftveil City'] = new Gym(
     BadgeEnums.Quake,
     4800,
     'Phew… You\'re really somethin\'! Li\'l whippersnapper Trainers who pack a real punch keep showin\' up one after another. Mrmph. Here! Take this!',
-    [new GymBadgeRequirement(BadgeEnums.Bolt)]
+    [new GymBadgeRequirement(BadgeEnums.Bolt)],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
+    }
 );
 GymList['Mistralton City'] = new Gym(
     'Skyla',
