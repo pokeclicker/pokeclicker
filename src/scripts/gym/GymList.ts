@@ -492,7 +492,10 @@ GymList['Lavaridge Town'] = new Gym(
     BadgeEnums.Heat,
     4000,
     'Oh... I guess I was trying too hard... I... I\'ve only recently become a Gym Leader. I tried too hard to be someone I\'m not. I have to do things my natural way. If I don\'t, my Pokémon will be confused. Thanks for teaching me that. For that, you deserve this.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Jagged Pass'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Jagged Pass'))],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.Go_goggles, true);
+    }
 );
 GymList['Petalburg City'] = new Gym(
     'Norman',

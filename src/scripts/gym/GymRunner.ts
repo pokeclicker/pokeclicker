@@ -164,6 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (GymBattle.gym.badgeReward == BadgeEnums.Fog) {
             KeyItemController.showGainModal(KeyItemType.HM03_surf);
         }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Heat) {
+            KeyItemController.showGainModal(KeyItemType.Go_goggles);
+        }
         if (GymBattle.gym.badgeReward == BadgeEnums.Balance) {
             KeyItemController.showGainModal(KeyItemType.HM03_surf);
         }
