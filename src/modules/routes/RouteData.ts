@@ -985,11 +985,11 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Hoenn Route 111', Region.hoenn, 111,
     new RoutePokemon({
-        land: ['Sandshrew', 'Trapinch', 'Baltoy', 'Cacnea'],
-        hoennoldrod: ['Goldeen', 'Magikarp'],
+        land: ['Goldeen', 'Magikarp'],
         hoenngoodrod: ['Goldeen', 'Magikarp', 'Barboach'],
         hoennsuperrod: ['Barboach'],
         hoennsurf: ['Goldeen', 'Marill', 'Surskit'],
+        hoenngogoggles: ['Sandshrew', 'Trapinch', 'Baltoy', 'Cacnea'],
         headbutt: ['Geodude'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Dynamo)],

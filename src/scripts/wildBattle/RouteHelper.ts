@@ -97,6 +97,11 @@ class RouteHelper {
             pokemonList = pokemonList.concat(possiblePokemons.hoennsurf);
         }
 
+        // Hoenn Go-Goggles Pokémon
+        if (App.game.keyItems.hasKeyItem(KeyItemType.Go_goggles) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.hoenngogoggles);
+        }
+
         // Hoenn Dive Pokémon
         if (App.game.keyItems.hasKeyItem(KeyItemType.HM08_dive) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.hoenndive);

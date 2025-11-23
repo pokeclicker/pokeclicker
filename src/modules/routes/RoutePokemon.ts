@@ -25,6 +25,7 @@ export default class RoutePokemon {
     public hoennsuperrod: PokemonNameType [];
     public hoennsurf: PokemonNameType[];
     public hoenndive: PokemonNameType[];
+    public hoenngogoggles: PokemonNameType[];
     public sinnoholdrod: PokemonNameType [];
     public sinnohgoodrod: PokemonNameType [];
     public sinnohsuperrod: PokemonNameType [];
@@ -55,6 +56,7 @@ export default class RoutePokemon {
         hoennsuperrod = [],
         hoennsurf = [],
         hoenndive = [],
+        hoenngogoggles = [],
         sinnoholdrod = [],
         sinnohgoodrod = [],
         sinnohsuperrod = [],
@@ -84,6 +86,7 @@ export default class RoutePokemon {
         hoennsuperrod?: PokemonNameType[],
         hoennsurf?: PokemonNameType[],
         hoenndive?: PokemonNameType[],
+        hoenngogoggles?: PokemonNameType[],
         sinnoholdrod?: PokemonNameType[],
         sinnohgoodrod?: PokemonNameType[],
         sinnohsuperrod?: PokemonNameType[],
@@ -113,6 +116,7 @@ export default class RoutePokemon {
         this.hoennsuperrod = hoennsuperrod;
         this.hoennsurf = hoennsurf;
         this.hoenndive = hoenndive;
+        this.hoenngogoggles = hoenngogoggles;
         this.sinnoholdrod = sinnoholdrod;
         this.sinnohgoodrod = sinnohgoodrod;
         this.sinnohsuperrod = sinnohsuperrod;

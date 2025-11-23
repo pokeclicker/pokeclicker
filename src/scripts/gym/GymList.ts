@@ -461,10 +461,7 @@ GymList['Dewford Town'] = new Gym(
     BadgeEnums.Knuckle,
     2000,
     'Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you\'ve got me. Take this Gym Badge!',
-    [new TemporaryBattleRequirement('May 2')],
-    () => {
-        App.game.keyItems.gainKeyItem(KeyItemType.Fishing_rod, true);
-    }
+    [new TemporaryBattleRequirement('May 2')]
 );
 GymList['Mauville City'] = new Gym(
     'Wattson',
