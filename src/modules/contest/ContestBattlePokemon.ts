@@ -1,8 +1,13 @@
-class ContestBattlePokemon extends BattlePokemon {
+import BattlePokemon from '../battles/BattlePokemon';
+import ContestOpponentStatus from '../enums/ContestOpponentStatus';
+import ContestType from '../enums/ContestType';
+import ContestMove from '../interfaces/ContestMove';
+
+export default class ContestBattlePokemon extends BattlePokemon {
     status: KnockoutObservable<number>;
     dance: KnockoutObservableArray<number>;
     danceHearts: KnockoutObservable<number> = ko.observable(0);
-    usableMoves: contestMove[];
+    usableMoves: ContestMove[];
 
     constructor(
         public contestTypes: ContestType[],
@@ -14,6 +19,6 @@ class ContestBattlePokemon extends BattlePokemon {
         super(...args);
         this.status = ko.observable(ContestOpponentStatus.Waiting);
         this.dance = ko.observableArray(dance);
-        this.usableMoves = moves.map(m => Object({ moveType: m, pp: ko.observable(1)}) as contestMove);
+        this.usableMoves = moves.map(m => Object({ moveType: m, pp: ko.observable(1) }) as ContestMove);
     }
 }
