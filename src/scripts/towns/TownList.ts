@@ -2399,6 +2399,7 @@ const HoennFluteMaster = new GemMasterShop(GameConstants.GemShops.HoennFluteMast
 const HoennStoneSalesman = new GemMasterShop(GameConstants.GemShops.HoennStoneSalesman, 'Stone Salesman', [new TemporaryBattleRequirement('Hoenn Stone Salesman')], true);
 
 const SpectacularContestHall = new ContestHall([ContestRank.Spectacular], [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough, ContestType.Balanced]);
+const SuperContests = new ContestHall([ContestRank['Super Normal'], ContestRank['Super Great'], ContestRank['Super Ultra'], ContestRank['Super Master'], ContestRank.Practice], undefined, undefined, 'Sinnoh Contests');
 
 //Hoenn NPCs
 
@@ -3469,7 +3470,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new ContestHall([ContestRank.Master]), SpectacularContestHall, DepartmentStoreShop, HoennContestShop],
+    [new ContestHall([ContestRank.Master]), SpectacularContestHall, SuperContests, DepartmentStoreShop, HoennContestShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }
@@ -4187,7 +4188,7 @@ const SecretBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
     ItemList.Mulch_Shovel,
 ], 'Secret Berry Shop');
 
-const SuperContests = new ContestHall([ContestRank['Super Normal'], ContestRank['Super Great'], ContestRank['Super Ultra'], ContestRank['Super Master'], ContestRank.Practice], undefined, undefined, 'Sinnoh Contests');
+// const SuperContests = new ContestHall([ContestRank['Super Normal'], ContestRank['Super Great'], ContestRank['Super Ultra'], ContestRank['Super Master'], ContestRank.Practice], undefined, undefined, 'Sinnoh Contests');
 const BrilliantShiningContestHall = new ContestHall([ContestRank['Brilliant Shining']], [ContestType.Balanced]);
 
 //Sinnoh NPCs
