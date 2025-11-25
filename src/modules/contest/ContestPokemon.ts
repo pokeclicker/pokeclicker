@@ -1,27 +1,30 @@
-class ContestPokemon extends GymPokemon {
+import ContestType from '../enums/ContestType';
+import { BattlePokemonGender } from '../GameConstants';
+import GymPokemon from '../gym/GymPokemon';
+import { PokemonNameType } from '../pokemons/PokemonNameType';
+import Requirement from '../requirements/Requirement';
+
+export default class ContestPokemon extends GymPokemon {
     nickname: string;
     contestTypes?: ContestType[];
     moves?: ContestType[];
-    gender?: GameConstants.BattlePokemonGender;
-    money?: Amount;
+    gender?: BattlePokemonGender;
 
     constructor(
         name: PokemonNameType,
         nickname: string,
         maxHealth = 5,
-        level = Math.max(ContestRunner.rank() * 10, 1),
+        level = 10, // calculated by rank but still needed for GymPokemon
         contestTypes?: ContestType[],
         moves?: ContestType[],
         requirements?: Requirement | Requirement[],
-        gender?: GameConstants.BattlePokemonGender, // only for visual differences, keeps the pokemon sprites consistent
+        gender?: BattlePokemonGender, // only for visual differences, keeps the pokemon sprites consistent
         shiny = false, // also keep sprites consistent
-        money = new Amount(Math.max(0, ContestRunner.rank() - 1) % 4 + 1 + Math.max(0,  ContestRunner.rank() - 8), GameConstants.Currency.contestToken)
     ) {
         super(name, maxHealth, level, requirements, shiny);
         this.nickname = nickname;
         this.contestTypes = contestTypes;
         this.moves = moves;
         this.gender = gender;
-        this.money = money;
     }
 }
