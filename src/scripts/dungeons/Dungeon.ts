@@ -1988,7 +1988,10 @@ dungeonList['Secret Field'] = new Dungeon('Secret Field',
         epic: [{loot: 'Ultraball'}],
     },
     10205169,
-    [new DungeonBossPokemon('Dunsparce', 110000000, 40)],
+    [
+        new DungeonBossPokemon('Dunsparce', 110000000, 40),
+        new DungeonBossPokemon('Dunsparsparce', 110000000, 40, {hide: true, requirement: new ObtainedPokemonRequirement('Dunsparsparce')}),
+    ],
     754000, 42,
     () => {},
     {dungeonRegionalDifficulty: GameConstants.Region.kalos});

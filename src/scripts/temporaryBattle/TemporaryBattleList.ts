@@ -292,6 +292,9 @@ TemporaryBattleList.Dunsparce = new TemporaryBattle(
     undefined,
     {
         displayName: 'A Very Big Dunsparce',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Dunsparsparce', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
+        },
         returnTown: 'Secret Field',
         imageName: '../pokemon/206',
         hideTrainer: true,
