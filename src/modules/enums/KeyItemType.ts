@@ -16,8 +16,8 @@ enum KeyItemType {
     'DNA_splicers',
     'Reins_of_unity',
     'Pokerus_virus',
-    'Z-Power_Ring',
     'Heavy_tools',
+    'Z-Power_Ring',
 }
 
 export default KeyItemType;
