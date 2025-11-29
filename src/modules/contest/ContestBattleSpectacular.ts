@@ -1,25 +1,26 @@
-///<reference path="../contest/ContestBattlePokemon.ts"/>
-///<reference path="../contest/ContestRunner.ts"/>
-///<reference path="../contest/ContestHelper.ts"/>
-///<reference path="../contest/ContestScore.ts"/>
-///<reference path="../contest/ContestBattleDefault.ts"/>
-///<reference path="../../declarations/enums/ContestOpponentStatus.d.ts"/>
+import ContestOpponentStatus from '../enums/ContestOpponentStatus';
+import ContestType from '../enums/ContestType';
+import { SECOND } from '../GameConstants';
+import ContestTypeHelper from '../types/ContestTypeHelper';
+import ContestBattle from './ContestBattle';
+import ContestBattleDefault from './ContestBattleDefault';
+import ContestBattlePokemon from './ContestBattlePokemon';
+import ContestHelper from './ContestHelper';
+import ContestRunner from './ContestRunner';
+import ContestScore from './ContestScore';
 
-class ContestBattleSpectacular {
-    static spotlightFormation: KnockoutObservable<number> = ko.observable(0);
-    static activeSpectacularType: KnockoutObservable<number> = ko.observable(0);
-
+export default class ContestBattleSpectacular {
     public static tick() {
-        if (ContestBattle.frenzyMode()) {
+        if (ContestRunner.frenzyMode()) {
             ContestBattleDefault.changeBeat();
             return;
         }
         // Cycle through affected pokemon
         if (ContestBattle.counter >= 600) {
-            if (ContestBattleSpectacular.spotlightFormation() + 1 < ContestBattleSpectacular.moveRange(ContestBattle.selectedEnemy()).length) {
-                ContestBattleSpectacular.spotlightFormation(ContestBattleSpectacular.spotlightFormation() + 1);
+            if (ContestBattle.spotlightFormation() + 1 < ContestBattleSpectacular.moveRange(ContestBattle.selectedEnemy()).length) {
+                ContestBattle.spotlightFormation(ContestBattle.spotlightFormation() + 1);
             } else {
-                ContestBattleSpectacular.spotlightFormation(0);
+                ContestBattle.spotlightFormation(0);
             }
             ContestBattle.counter = 0;
         }
@@ -28,7 +29,7 @@ class ContestBattleSpectacular {
     // Controls
     // Spacebar
     public static contestAction() {
-        if (ContestBattle.frenzyMode()) {
+        if (ContestRunner.frenzyMode()) {
             ContestBattleSpectacular.judgeBeat();
             return;
         }
@@ -56,7 +57,7 @@ class ContestBattleSpectacular {
         const moves = ContestBattle.pokemons()[ContestBattle.selectedEnemy()].usableMoves;
         const move = moves[direction];
 
-        if (ContestBattle.frenzyMode()) {
+        if (ContestRunner.frenzyMode()) {
             // Reset pp to make moves available if switching selection
             moves.forEach(m => m.pp(1));
             // Choose all moves of the selected move's type
@@ -78,7 +79,8 @@ class ContestBattleSpectacular {
         }
 
         // Define effectiveness
-        const matchup = ContestBattleSpectacular.activeSpectacularType() === ContestType.Balanced ? 1 : ContestTypeHelper.getAppealModifier([move.moveType], [ContestBattleSpectacular.activeSpectacularType()]);
+        const matchup = ContestBattle.activeSpectacularType() === ContestType.Balanced ? 1 :
+            ContestTypeHelper.getAppealModifier([move.moveType], [ContestBattle.activeSpectacularType()]);
         // Score
         ContestScore.increaseChain(Math.min(10, ContestRunner.rank() + 1), matchup * 2);
         ContestScore.increaseScore(ContestScore.calculateMoveScore([move.moveType], ContestRunner.type()));
@@ -99,7 +101,7 @@ class ContestBattleSpectacular {
 
         // Spectacular Balanced gimmick, type relay
         if (ContestRunner.type() === ContestType.Balanced) {
-            ContestBattleSpectacular.activeSpectacularType(move.moveType);
+            ContestBattle.activeSpectacularType(move.moveType);
         }
 
         // Safely move on to next trainer independent of Pokemon defeat
@@ -121,7 +123,7 @@ class ContestBattleSpectacular {
         }
 
         // save move type before defeating pokemon
-        const spectacularMove = ContestBattle.moveArray()[ContestBattle.selectedEnemy()][0] ?? ContestBattleSpectacular.activeSpectacularType();
+        const spectacularMove = ContestBattle.moveArray()[ContestBattle.selectedEnemy()][0] ?? ContestBattle.activeSpectacularType();
 
         // the usual
         ContestBattle.defeatContestPokemon();
@@ -130,15 +132,15 @@ class ContestBattleSpectacular {
 
         // apply type relay gimmick after frenzy time reward
         if (ContestRunner.type() === ContestType.Balanced) {
-            ContestBattleSpectacular.activeSpectacularType(spectacularMove);
+            ContestBattle.activeSpectacularType(spectacularMove);
         }
 
         return;
     }
 
     public static addFrenzyTime() {
-        const multiplier = ContestScore.calculateMoveScore(ContestBattle.moveArray()[ContestBattle.selectedEnemy()], ContestBattleSpectacular.activeSpectacularType(), 0);
-        const time = Math.min(10 * GameConstants.SECOND, ContestRunner.frenzyTime() + multiplier * GameConstants.SECOND);
+        const multiplier = ContestScore.calculateMoveScore(ContestBattle.moveArray()[ContestBattle.selectedEnemy()], ContestBattle.activeSpectacularType(), 0);
+        const time = Math.min(10 * SECOND, ContestRunner.frenzyTime() + multiplier * SECOND);
         ContestRunner.frenzyTime(time);
     }
 
@@ -152,7 +154,11 @@ class ContestBattleSpectacular {
         // Score bonus
         ContestScore.increaseScore(10);
         // Berry bonus
-        ContestBattle.addContestBerryReward(ContestBattle.trainers()[opponentIndex].options?.rankedBerryReward?.rank ?? ContestRunner.rank(), ContestBattle.trainers()[opponentIndex].options?.rankedBerryReward?.amount ?? 2, true);
+        ContestBattle.addContestBerryReward(
+            ContestBattle.trainers()[opponentIndex].options?.rankedBerryReward?.rank ?? ContestRunner.rank(),
+            ContestBattle.trainers()[opponentIndex].options?.rankedBerryReward?.amount ?? 2,
+            true,
+        );
     }
 
     public static moveRange(performerIndex: number): number[][] {
@@ -178,12 +184,15 @@ class ContestBattleSpectacular {
             return ('⭐').repeat(5);
         }
 
-        if (ContestBattle.frenzyMode()) {
+        if (ContestRunner.frenzyMode()) {
             if (ContestBattle.pokemons().indexOf(pokemon) != ContestBattle.selectedEnemy()) {
                 return new Array(5).fill('🔹').join('');
             }
-            const visual = ContestBattle.beat() + Math.max(...ContestBattle.pokemons()[ContestBattle.pokemons().indexOf(pokemon)].contestTypes.map(ct => ContestTypeHelper.contestTypeMatrix[ct][ContestBattleSpectacular.activeSpectacularType()] * 2));
-            return ContestBattle.healthDisplayBeat(visual, '⭐', ContestHelper.getContestEmoji(ContestBattleSpectacular.activeSpectacularType()), '🔹');
+            const visual = ContestBattle.beat() +
+                Math.max(...ContestBattle.pokemons()[ContestBattle.pokemons().indexOf(pokemon)].contestTypes.map(ct =>
+                    ContestTypeHelper.contestTypeMatrix[ct][ContestBattle.activeSpectacularType()] * 2,
+                ));
+            return ContestBattle.healthDisplayBeat(visual, '⭐', ContestHelper.getContestEmoji(ContestBattle.activeSpectacularType()), '🔹');
         }
 
         let heart = '🤍';
@@ -193,6 +202,6 @@ class ContestBattleSpectacular {
                 return (heart).repeat(5);
             }
         }
-        return new Array(ContestHelper.getContestEmoji(ContestBattleSpectacular.activeSpectacularType()).repeat(pokemon.support())).concat(heart.repeat(5 - pokemon.support())).join('');
+        return new Array(ContestHelper.getContestEmoji(ContestBattle.activeSpectacularType()).repeat(pokemon.support())).concat(heart.repeat(5 - pokemon.support())).join('');
     }
 }
