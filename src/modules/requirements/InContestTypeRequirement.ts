@@ -1,3 +1,4 @@
+import ContestRunner from '../contest/ContestRunner';
 import ContestType from '../enums/ContestType';
 import { AchievementOption } from '../GameConstants';
 import Requirement from './Requirement';

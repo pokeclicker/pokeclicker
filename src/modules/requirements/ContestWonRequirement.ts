@@ -8,8 +8,8 @@ export default class ContestWonRequirement extends AchievementRequirement {
     public rank: ContestRank;
     public type?: ContestType;
 
-    constructor(value: number, rank: ContestRank, type?: ContestType, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, option, GameConstants.AchievementType.None); // TODO?: Contest Achievements
+    constructor(value: number, rank: ContestRank, type?: ContestType) {
+        super(value, GameConstants.AchievementOption.more, GameConstants.AchievementType.None); // TODO?: Contest Achievements
         this.rank = rank;
         if (type != undefined) {
             this.type = type;
@@ -29,7 +29,7 @@ export default class ContestWonRequirement extends AchievementRequirement {
         if (this.requiredValue === 1) {
             return `Requires having won a ${ContestRank[this.rank]} ${ContestType[this.type] ?? 'Rank'} Contest.`;
         }
-        return `Requires winning a total of ${this.requiredValue} rounds in a ${ContestRank[this.rank]} ${ContestType[this.type] ?? 'Rank'} Contest.`;
+        return `Requires having reached ${this.requiredValue} or more consecutive encores in a ${ContestRank[this.rank]} ${ContestType[this.type] ?? 'Rank'} Contest.`;
     }
 
     public toString(): string {
