@@ -1,16 +1,27 @@
-///<reference path="../contest/ContestBattlePokemon.ts"/>
-///<reference path="../contest/ContestRunner.ts"/>
-///<reference path="../contest/ContestHelper.ts"/>
-///<reference path="../contest/ContestBattleDanceCombos.ts"/>
-///<reference path="../../declarations/enums/ContestOpponentStatus.d.ts"/>
+import ContestOpponentStatus from '../enums/ContestOpponentStatus';
+import ContestType from '../enums/ContestType';
+import Direction from '../enums/Direction';
+import GameHelper from '../GameHelper';
+import ContestTypeHelper from '../types/ContestTypeHelper';
+import Rand from '../utilities/Rand';
+import ContestBattle from './ContestBattle';
+import ContestBattleDanceCombos from './ContestBattleDanceCombos';
+import ContestBattlePokemon from './ContestBattlePokemon';
+import ContestHelper from './ContestHelper';
+import ContestRunner from './ContestRunner';
+import ContestScore from './ContestScore';
 
-class ContestBattleDance {
+export default class ContestBattleDance {
     public static tick() {
-        if (!ContestBattle.frenzyMode()) {
+        if (!ContestRunner.frenzyMode()) {
             if (ContestBattle.counter >= Math.max(1500 - 250 * ((ContestRunner.rank() - 1) % 4), 700)) {
-                ContestBattle.pokemons().filter(p => ContestBattle.getSpotlightStatus(ContestBattle.pokemons().indexOf(p))).forEach(p => {
+                ContestBattle.pokemons().filter(p => ContestBattle.getSpotlightStatus(ContestBattle.pokemons().indexOf(p))).forEach((p: ContestBattlePokemon) => {
                     if (p.status() === ContestOpponentStatus.Dancing) {
-                        p.danceHearts() >= 1 ? p.danceHearts(p.danceHearts() - 1) : p.status(ContestOpponentStatus.Jammed);
+                        if (p.danceHearts() >= 1) {
+                            p.danceHearts(p.danceHearts() - 1);
+                        } else {
+                            p.status(ContestOpponentStatus.Jammed);
+                        }
                     }
                     if (p.isRallied() && p.danceHearts() > 0) {
                         p.status(ContestOpponentStatus.Dancing);
@@ -33,7 +44,7 @@ class ContestBattleDance {
     // Controls
     // Spacebar
     public static judgeBeat() {
-        if (ContestBattle.frenzyMode()) {
+        if (ContestRunner.frenzyMode()) {
             ContestBattle.rallyPokemon(ContestBattle.selectedEnemy());
             // Default to random pose
             if (isNaN(ContestBattle.finishingPose()[ContestBattle.selectedEnemy()])) {
@@ -47,14 +58,14 @@ class ContestBattleDance {
 
         // Restore dance hearts for worn-out pokemon
         ContestBattle.pokemons().filter(p =>
-            !p.danceHearts() && p.status() === ContestOpponentStatus.Dancing && ContestBattle.getSpotlightStatus(ContestBattle.pokemons().indexOf(p))
+            !p.danceHearts() && p.status() === ContestOpponentStatus.Dancing && ContestBattle.getSpotlightStatus(ContestBattle.pokemons().indexOf(p)),
         ).forEach(p => p.danceHearts(1 + ContestTypeHelper.getAppealModifier([ContestBattle.crotchetValue()], [ContestRunner.type()]) * 2));
         return;
     }
 
     // Directional keys
     public static dance(direction: number) {
-        if (ContestBattle.frenzyMode()) {
+        if (ContestRunner.frenzyMode()) {
             ContestBattleDance.frenzyDance(direction);
             return;
         }
@@ -104,21 +115,21 @@ class ContestBattleDance {
         const matchup = ContestTypeHelper.getAppealModifier([move.moveType], [ContestRunner.type()]);
         const p = ContestBattle.pokemons()[ContestBattle.selectedEnemy()];
         if (matchup >= 1) {
-            ContestBattle.pokemons().filter(p => p.contestTypes.includes(move.moveType)).forEach(p => p.danceHearts(p.danceHearts() + 1));
+            ContestBattle.pokemons().filter(pk => pk.contestTypes.includes(move.moveType)).forEach(pk => pk.danceHearts(p.danceHearts() + 1));
         }
         if (matchup > 0) {
             p.danceHearts(p.danceHearts() + 1);
         }
         if (matchup <= 0) {
             p.danceHearts(p.danceHearts() - 1);
-            ContestBattle.pokemons().forEach(p => p.danceHearts(p.danceHearts() - 1));
+            ContestBattle.pokemons().forEach(pk => pk.danceHearts(p.danceHearts() - 1));
         }
         return;
     }
 
     public static danceHeartScoreBonus() {
         let sum = 0;
-        ContestBattle.pokemons().forEach(p => sum += p.danceHearts());
+        ContestBattle.pokemons().forEach(p => { sum += p.danceHearts(); });
 
         sum *= (10 + ContestBattleDanceCombos.poseBonus(ContestRunner.type(), ContestBattle.finishingPose())) / 10;
 
@@ -133,7 +144,7 @@ class ContestBattleDance {
         if (oppStatus === ContestOpponentStatus.Jammed) {
             return new Array(5).fill('🖤').join('');
         }
-        if (pokemon.dance().length && !ContestBattle.frenzyMode()) {
+        if (pokemon.dance().length && !ContestRunner.frenzyMode()) {
             return dancing.join('');
         }
 
@@ -150,7 +161,7 @@ class ContestBattleDance {
     }
 
     public static getDancingCss(pokemon: ContestBattlePokemon) {
-        if (ContestBattle.frenzyMode()) {
+        if (ContestRunner.frenzyMode()) {
             return `walk${Direction[ContestBattle.finishingPose()[ContestBattle.pokemons().indexOf(pokemon)] ?? Direction.Down]}`;
         }
 
