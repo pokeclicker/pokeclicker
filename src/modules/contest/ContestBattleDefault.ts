@@ -1,9 +1,12 @@
-///<reference path="../contest/ContestBattlePokemon.ts"/>
-///<reference path="../contest/ContestRunner.ts"/>
-///<reference path="../contest/ContestHelper.ts"/>
-///<reference path="../../declarations/enums/ContestOpponentStatus.d.ts"/>
+import ContestOpponentStatus from '../enums/ContestOpponentStatus';
+import ContestTypeHelper from '../types/ContestTypeHelper';
+import ContestBattle from './ContestBattle';
+import ContestBattlePokemon from './ContestBattlePokemon';
+import ContestHelper from './ContestHelper';
+import ContestRunner from './ContestRunner';
+import ContestScore from './ContestScore';
 
-class ContestBattleDefault {
+export default class ContestBattleDefault {
     public static tick() {
         return ContestBattleDefault.changeBeat();
     }
@@ -20,7 +23,7 @@ class ContestBattleDefault {
     }
 
     public static judgeBeat() {
-        if (ContestBattle.frenzyMode()) {
+        if (ContestRunner.frenzyMode()) {
             ContestBattle.rallyPokemon(ContestBattle.selectedEnemy());
             ContestBattle.defeatContestPokemon();
             return;
@@ -55,10 +58,11 @@ class ContestBattleDefault {
         if (ContestBattle.pokemons().indexOf(pokemon) != ContestBattle.selectedEnemy()) {
             return new Array(5).fill('🤍').join('');
         }
-        if (ContestBattle.frenzyMode()) {
+        if (ContestRunner.frenzyMode()) {
             return new Array(5).fill(ContestHelper.getContestEmoji(ContestRunner.type())).join('');
         }
-        const visual = ContestBattle.beat() + Math.max(...ContestBattle.pokemons()[ContestBattle.pokemons().indexOf(pokemon)].contestTypes.map(ct => ContestTypeHelper.contestTypeMatrix[ct][ContestRunner.type()] * 2));
+        const visual = ContestBattle.beat() +
+            Math.max(...ContestBattle.pokemons()[ContestBattle.pokemons().indexOf(pokemon)].contestTypes.map(ct => ContestTypeHelper.contestTypeMatrix[ct][ContestRunner.type()] * 2));
         return ContestBattle.healthDisplayBeat(visual, ContestHelper.getContestEmoji(ContestRunner.type()), '🖤', '🤍');
     }
 }
