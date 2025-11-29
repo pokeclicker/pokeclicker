@@ -1868,7 +1868,7 @@ export const TemporaryBattles = [
     'Ash Ketchum New Island',
     'Bill\'s Grandpa',
     'Blue 6',
-    'Dunsparce',
+    'Dunsparce 1',
     'Santa Jynx 1',
     'Santa Jynx 2',
     'Santa Jynx 3',

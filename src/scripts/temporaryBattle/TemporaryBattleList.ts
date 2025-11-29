@@ -284,10 +284,10 @@ TemporaryBattleList['Blue 6'] = new TemporaryBattle(
         imageName: 'Blue2',
     }
 );
-TemporaryBattleList.Dunsparce = new TemporaryBattle(
-    'Dunsparce',
+TemporaryBattleList['Dunsparce 1'] = new TemporaryBattle(
+    'Dunsparce 1',
     [new GymPokemon('Dunsparce', 160000000, 50)],
-    'Here is your reward for defeating the king of all Dunsparce. It\'s... nothing! For now...',
+    'You defeated the very big Dunsparce. It left a strange Dunsparce behind...',
     [new ClearDungeonRequirement(206, GameConstants.getDungeonIndex('Secret Field'))],
     undefined,
     {
