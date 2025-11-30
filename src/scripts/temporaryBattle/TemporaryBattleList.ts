@@ -295,7 +295,7 @@ TemporaryBattleList['Dunsparce 1'] = new TemporaryBattle(
         firstTimeRewardFunction: () => {
             App.game.party.gainPokemonByName('Dunsparsparce', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         },
-        returnTown: 'Secret Field',
+        returnTown: 'Secret Cave',
         imageName: '../pokemon/206',
         hideTrainer: true,
     }
