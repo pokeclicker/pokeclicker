@@ -1814,7 +1814,7 @@ const OlivineSSAquaCaptain = new NPC('S.S. Aqua Captain', [
 
 const MooMooFarmer = new NPC('Farmer', [
     'Welcome to Moomoo Farm! Home of the world\'s best Moomoo Milk!',
-    'Say, I\'ve heard of a milk based Pokémon in a far away region. I was told it has many forms. If you can show me all of it\'s forms, I\'ll sell you something nice.'
+    'Say, I\'ve heard of a milk based Pokémon in a far away region. I was told it has many forms. If you can show me all of it\'s forms, I\'ll sell you something nice.',
 ], { image: 'assets/images/npcs/Rancher.png' });
 
 const CianwoodPhotographyAide = new NPC('Photography Aide', [

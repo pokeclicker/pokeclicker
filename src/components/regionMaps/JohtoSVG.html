@@ -900,4 +900,17 @@
         , image: "assets/images/map/mewtwox.png"
         })
     %>
+
+    <!--Miltank 1-->
+    <%- include('templates/mapPOI',
+        { name: "Miltank"
+        , x: 10, y: 13
+        , width: 2, height: 2
+        , databind: `attr: { class: MapHelper.accessToRoute(39, GameConstants.Region.johto) ? 'unlockedRoute' : 'lockedRoute' },
+            click: () => {
+                Notifier.notify({message: 'Moo.'});
+            }`
+        , image: "assets/images/map/transparent.png"
+        })
+    %>
 </g>
