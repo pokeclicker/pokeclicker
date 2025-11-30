@@ -902,7 +902,7 @@
     %>
 
     <!--Miltank 1-->
-    <%- include('templates/mapPOI',
+    <%- include('templates/mapOverlay',
         { name: "Miltank"
         , x: 10, y: 13
         , width: 2, height: 2
@@ -910,6 +910,17 @@
             click: () => {
                 Notifier.notify({message: 'Moo.'});
             }`
+        , image: "assets/images/map/transparent.png"
+        })
+    %>
+
+    <!--Miltank 2-->
+    <%- include('templates/mapOverlay',
+        { name: "Miltank"
+        , x: 10, y: 13
+        , width: 2, height: 2
+        , databind: "click: () => TemporaryBattleList['Miltank 1'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Miltank 1'] && TemporaryBattleList['Miltank 1'].isVisible()"
         , image: "assets/images/map/transparent.png"
         })
     %>

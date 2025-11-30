@@ -2188,6 +2188,7 @@ export const TemporaryBattles = [
     'Shielbert 2',
     'Rampaging Zacian',
     'Rampaging Zamazenta',
+    'Miltank 1',
     'Klara 1',
     'Avery 1',
     'Mustard',

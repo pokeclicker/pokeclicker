@@ -2959,6 +2959,9 @@ class Update implements Saveable {
             if (saveData.badgeCase[17]) {
                 Update.startQuestLine(saveData, 'Team Rocket Again');
             }
+
+            //Add Miltank tembattle for one free MooMoo Milk
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 336);
         },
     };
 
