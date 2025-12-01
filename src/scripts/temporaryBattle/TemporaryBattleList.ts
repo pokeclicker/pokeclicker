@@ -5750,9 +5750,7 @@ TemporaryBattleList['Miltank 1'] = new TemporaryBattle(
     'Miltank 1',
     [new GymPokemon('Miltank', 2822390965, 60)],
     'Miltank had a great time battling you. It gave you a free sample! One free MooMoo Milk! How nice!',
-    [
-        new CaughtUniquePokemonByFilterRequirement((p: PartyPokemon) => p.name.startsWith('Alcremie'), 'All Alcremie variations must be owned', 63),
-    ],
+    [new CaughtUniquePokemonByFilterRequirement((p: PartyPokemon) => p.name.startsWith('Alcremie'), 'All Alcremie variations must be owned', 63)],
     undefined,
     {
         displayName: 'Miltank',
