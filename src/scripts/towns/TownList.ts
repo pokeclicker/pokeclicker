@@ -1544,7 +1544,7 @@ const MooMooFarmShop = new Shop(
     ],
     'Help them grow',
     [
-        new CaughtUniquePokemonByFilterRequirement((p: PartyPokemon) => p.name.startsWith('Alcremie'), 'All Alcremie variations must be owned', 63);
+        new CaughtUniquePokemonByFilterRequirement((p: PartyPokemon) => p.name.startsWith('Alcremie'), 'All Alcremie variations must be owned', 63),
     ],
     true
 );
