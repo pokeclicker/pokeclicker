@@ -217,7 +217,7 @@ ItemList.Great_Twisted_Spoon = new PokemonRestrictedAttackBonusHeldItem('Great_T
     (pokemon) => Math.floor(pokemon.id) == 150);
 ItemList.Leek = new PokemonRestrictedAttackBonusHeldItem('Leek', 10000, GameConstants.Currency.money, undefined, 'Leek', 1.3, GameConstants.Region.galar, 'Farfetch\'d or Sirfetch\'d',
     (pokemon) => Math.floor(pokemon.id) == 83 || Math.floor(pokemon.id) == 865);
-ItemList.MooMoo_Milk = new EVsGainedBonusHeldItem('MooMoo_Milk', 1000, GameConstants.Currency.battlePoint, undefined, 'MooMoo Milk', 4, GameConstants.Region.alola, (pokemon) => Math.floor(pokemon.id) == 868 || Math.floor(pokemon.id) == 869);
+ItemList.MooMoo_Milk = new EVsGainedBonusHeldItem('MooMoo_Milk', 1000, GameConstants.Currency.battlePoint, undefined, 'MooMoo Milk', 4, GameConstants.Region.galar, (pokemon) => Math.floor(pokemon.id) == 868 || Math.floor(pokemon.id) == 869);
 ItemList.Rusted_Sword = new PokemonRestrictedAttackBonusHeldItem('Rusted_Sword', 10000, GameConstants.Currency.money, undefined, 'Rusted Sword', 1.5, GameConstants.Region.galar, 'Zacian',
     (pokemon) => Math.floor(pokemon.id) == 888);
 ItemList.Rusted_Shield = new PokemonRestrictedAttackBonusHeldItem('Rusted_Shield', 10000, GameConstants.Currency.money, undefined, 'Rusted Shield', 1.5, GameConstants.Region.galar, 'Zamazenta',
