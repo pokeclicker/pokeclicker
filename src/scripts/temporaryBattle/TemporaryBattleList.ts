@@ -432,7 +432,7 @@ TemporaryBattleList['Silver 2'] = new TemporaryBattle(
         new GymPokemon('Bayleef', 237772, 18, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Water)),
     ],
     '...Humph! Useless Pokémon! Listen, you. You only won because my Pokémon were weak.',
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 33)],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Slowpoke Well'))],
     undefined,
     {
         displayName: 'Rival Silver',
