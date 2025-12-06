@@ -4,6 +4,7 @@ import ContestRank from '../../enums/ContestRank';
 
 const failedSetValue = () => 0;
 
+// This is all copied from getRouteKillsProxy. Notes have been modified for Ranks and Types
 // TODO: Determine what the return type is
 export default (): any => {
     // Filter the Rank enum to only the string values (names)
@@ -18,7 +19,7 @@ export default (): any => {
                     return rankStats[prop];
                 }
 
-                // Rounds Won are tracked by the Contest Type Enum number as the key,
+                // Contests Won are tracked by the Contest Type Enum number as the key,
                 // so only allow keys that can be numbers
                 if (Number.isNaN(Number(prop))) {
                     if (Number.isNaN(prop)) {
