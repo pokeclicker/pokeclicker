@@ -73,6 +73,7 @@ export default class ContestRunner {
         // Reset score
         ContestScore.totalScore(0);
         ContestScore.activeChain(1);
+        ContestScore.encoreBonus(10);
 
         // Ready up the rhythm gimmicks
         ContestBattle.selectedEnemy(0);
@@ -159,6 +160,7 @@ export default class ContestRunner {
         const encores = Math.ceil(Math.log10(Math.max(rallyAmount / ContestHelper.rankAppeal[ContestRunner.rank()], 1)) / Math.log10(1.5));
         // todo: use encores as multipliers (* 1.x) for final score
         ContestRunner.encoreRound(encores);
+        ContestScore.increaseEncoreBonus(encores);
 
         ContestRunner.audienceAppeal(rallyAmount);
     }

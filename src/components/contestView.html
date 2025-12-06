@@ -117,7 +117,7 @@
           </tr>
           <tr data-bind="template: { name: ContestBattle.contestViewGimmickBar(ContestRunner.rank()) }"></tr>
           <tr>
-            <td data-bind="text: `Encores: ×${ContestRunner.encoreRound().toLocaleString('en-US')}`">
+            <td data-bind="text: `Encore: ×${(ContestScore.encoreBonus() / 10).toLocaleString('en-US')}`">
               Encore Round
             </td>
             <td data-bind="text: `Chain: ×${ContestScore.activeChain().toLocaleString('en-US')}`">

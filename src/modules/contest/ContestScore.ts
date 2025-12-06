@@ -4,9 +4,10 @@ import ContestTypeHelper from '../types/ContestTypeHelper';
 export default class ContestScore {
     static totalScore: KnockoutObservable<number> = ko.observable(0);
     static activeChain: KnockoutObservable<number> = ko.observable(1);
+    static encoreBonus: KnockoutObservable<number> = ko.observable(10);
 
     public static increaseScore(score: number) {
-        const addedScore = Math.round(score * ContestScore.activeChain());
+        const addedScore = Math.round(score * ContestScore.activeChain() * (ContestScore.encoreBonus() / 10));
         ContestScore.totalScore(ContestScore.totalScore() + addedScore);
         return;
     }
@@ -22,6 +23,11 @@ export default class ContestScore {
     public static breakChain() {
         ContestScore.activeChain(1);
         return;
+    }
+
+    public static increaseEncoreBonus(bonus: number) {
+        ContestScore.encoreBonus(ContestScore.encoreBonus() + bonus);
+        return
     }
 
     public static calculateMoveScore(contestTypes: ContestType[], contestRunnerType: ContestType, baseNumber = 1) {
