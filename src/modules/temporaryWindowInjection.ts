@@ -34,6 +34,13 @@ import Battle from './battles/Battle';
 import BattlePokemon from './battles/BattlePokemon';
 import Trainer from './battles/Trainer';
 import GymPokemon from './gym/GymPokemon';
+import ContestBattle from './contest/ContestBattle';
+import ContestBattlePokemon from './contest/ContestBattlePokemon';
+import ContestHelper from './contest/ContestHelper';
+import ContestRunner from './contest/ContestRunner';
+import ContestRewards from './contest/ContestRewards';
+import ContestTrainerList from './contest/ContestTrainerList';
+import ContestScore from './contest/ContestScore';
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
@@ -120,7 +127,6 @@ import GymBadgeRequirement from './requirements/GymBadgeRequirement';
 import HatchRequirement from './requirements/HatchRequirement';
 import HatcheryHelperRequirement from './requirements/HatcheryHelperRequirement';
 import InContestRankRequirement from './requirements/InContestRankRequirement';
-import InContestRequirement from './requirements/InContestRequirement';
 import InContestTypeRequirement from './requirements/InContestTypeRequirement';
 import InRegionRequirement from './requirements/InRegionRequirement';
 import MoneyRequirement from './requirements/MoneyRequirement';
@@ -278,6 +284,13 @@ Object.assign(<any>window, {
     BattlePokemon,
     Trainer,
     GymPokemon,
+    ContestBattle,
+    ContestBattlePokemon,
+    ContestHelper,
+    ContestRunner,
+    ContestRewards,
+    ContestTrainerList,
+    ContestScore,
     BooleanSetting,
     RangeSetting,
     Setting,
@@ -373,7 +386,6 @@ Object.assign(<any>window, {
     HatcheryHelperRequirement,
     InRegionRequirement,
     InContestRankRequirement,
-    InContestRequirement,
     InContestTypeRequirement,
     MoneyRequirement,
     MaxLevelOakItemRequirement,
