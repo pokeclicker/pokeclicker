@@ -30,14 +30,6 @@ import ContestRewards from './ContestRewards';
 import ContestTrainerList from './ContestTrainerList';
 
 export default class ContestBattle extends Battle {
-    // more ideas: oak item metronome to increas chain. grip claw for blender
-    // bulbapedia contest merch plushies in contest shop
-    // ribbon tab on stats display, as tab
-    // display appeal tiers for pokemon statistics
-    // todo: scarves do idle damage/appeal
-    // todo: -1 sheen per tick or so, if the pokemon contribute appeal... also probably have rework pokeblocks a bit more
-    //      capped poffins will be opposite of pokeblocks: give sheen but no appeal. could add a sheen bonus?
-
     // Mechanics
     // Used to generate enemies
     static trainers: KnockoutObservableArray<ContestTrainer> = ko.observableArray(null);

@@ -14,10 +14,6 @@ import ContestScore from './ContestScore';
 import ContestBattle from './ContestBattle';
 
 export default class ContestRunner {
-    /**
-     * notes:
-     * timer should be standardized and made longer
-     */
     // Timers
     public static timeLeft: KnockoutObservable<number> = ko.observable(CONTEST_TIME);
     public static frenzyTime: KnockoutObservable<number> = ko.observable(0);
