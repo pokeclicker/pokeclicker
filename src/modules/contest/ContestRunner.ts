@@ -194,7 +194,10 @@ export default class ContestRunner {
                 });
 
                 // Compensate berries for dance halls
-                ContestBattle.addContestBerryReward(Math.max(0, ContestRunner.rank() - 1) % 4 + 1, Number(ContestRunner.danceMode()) * (11 - ContestRunner.rank()), ContestRunner.danceMode());
+                ContestBattle.addContestBerryReward(ContestRunner.rank() < ContestRank.Spectacular ? Math.max(0, ContestRunner.rank() - 1) % 4 + 1 : ContestRunner.rank(),
+                    Number(ContestRunner.danceMode()) * Math.min(ContestRunner.rank(), ContestRunner.encoreRound()),
+                    true,
+                );
 
                 // First time completion - end here and don't proceed to encore bonus rounds
                 if (App.game.statistics.contestHighestRound[this.rank()][this.type()]() == 0) {
