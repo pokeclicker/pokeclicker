@@ -22,6 +22,7 @@ class ContestHall extends TownContent {
         ContestRunner.contestTypeObservable(this.type);
         ContestRunner.rank(this.rank[0]);
         ContestRunner.type(this.type[0]);
+        ContestRunner.danceMode(ContestHelper.isDanceHall(this.rank[0]));
         App.game.gameState = GameConstants.GameState.contest;
     }
     public static leave(): void {
