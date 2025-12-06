@@ -9,6 +9,7 @@ export default class Challenges implements Saveable {
     list: Record<string, Challenge> = {
         regionalAttackDebuff: new Challenge('Regional Attack Debuff (recommended)', 'Lowers Pokémon attack based on native region and highest-reached region', true),
         requireCompletePokedex: new Challenge('Require Complete Pokédex (recommended)', 'Requires a complete regional Pokédex before moving on to the next region', true),
+        storyPokerus: new Challenge('Story Pokérus (recommended)', 'Pokérus is unlocked as you progress through the story', true),
         disableClickAttack: new Challenge('No Click Attack', 'Disables the ability to use Click Attacks'),
         disableBattleItems: new Challenge('No Battle Items', 'Disables the usage of Battle Items'),
         disableMasterballs: new Challenge('No Master Balls', 'Disables the usage of Master Balls'),
@@ -16,7 +17,7 @@ export default class Challenges implements Saveable {
         disableGems: new Challenge('No Gem Upgrades', 'Disables the usage of Gems to increase type effectiveness'),
         disableVitamins: new Challenge('No Vitamins', 'Disables the usage of Vitamins'),
         slowEVs: new Challenge('Slow EVs', 'Gain EVs 10x slower'),
-        realEvolutions: new Challenge('Real Evolution', 'Your Pokémon go away when they evolve'),
+        realEvolutions: new Challenge('Real Evolution', 'When a Pokémon evolves into a new form, the original form is lost. Attack bonus, shiny status, Pokérus & EVs, and other statistics are all transferred to the evolved form.'),
     };
 
     fromJSON(json): void {
