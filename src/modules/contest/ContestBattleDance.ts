@@ -58,8 +58,8 @@ export default class ContestBattleDance {
 
         // Restore dance hearts for worn-out pokemon
         ContestBattle.pokemons().filter(p =>
-            !p.danceHearts() && p.status() === ContestOpponentStatus.Dancing && ContestBattle.getSpotlightStatus(ContestBattle.pokemons().indexOf(p)),
-        ).forEach(p => p.danceHearts(1 + ContestTypeHelper.getAppealModifier([ContestBattle.crotchetValue()], [ContestRunner.type()]) * 2));
+            p.status() === ContestOpponentStatus.Dancing && ContestBattle.getSpotlightStatus(ContestBattle.pokemons().indexOf(p)),
+        ).forEach(p => p.danceHearts(Math.min(3, p.danceHearts() + 1 + ContestTypeHelper.getAppealModifier([ContestBattle.crotchetValue()], [ContestRunner.type()]) * 2)));
         return;
     }
 
