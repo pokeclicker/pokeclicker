@@ -210,9 +210,9 @@ export default class ContestBattle extends Battle {
                 // dancing gives more tokens but no berries, to make ranks more distinct
                 if (!ContestRunner.danceMode()) {
                     ContestBattle.addContestBerryReward(ContestRunner.rank(), ContestBattle.getBerryMultiplier());
-                } else {
-                    // const opponentTokens = new Amount(Math.max(0, ContestRunner.rank() - 1) % 4 + 1 + Math.max(0,  ContestRunner.rank() - 8), Currency.contestToken),
-                    const tokRew = Math.round(opponent.reward.amount * (10 + opponent.danceHearts()) / 10);
+                } else if (ContestRunner.rank() > ContestRank.Practice) {
+                    const tokenRank = Math.max(0, ContestRunner.rank() - 1) % 4 + 1 + Math.max(0,  ContestRunner.rank() - 8);
+                    const tokRew = Math.round(tokenRank * (10 + opponent.danceHearts()) / 10);
                     if (opponent.danceHearts() > 0) {
                         ContestBattle.addContestTokenReward(tokRew);
                     }
