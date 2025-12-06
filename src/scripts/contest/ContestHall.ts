@@ -1,5 +1,7 @@
 ///<reference path="../towns/TownContent.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
+///<reference path="../../declarations/contest/ContestHelper.d.ts"/>
+///<reference path="../../declarations/contest/ContestRunner.d.ts"/>
 
 class ContestHall extends TownContent {
     constructor(

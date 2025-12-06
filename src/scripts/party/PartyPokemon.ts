@@ -1,5 +1,5 @@
 /// <reference path="../../declarations/party/LevelType.d.ts" />
-/// <reference path="../contest/ContestHelper.ts" />
+/// <reference path="../../declarations/contest/ContestHelper.d.ts" />
 
 enum PartyPokemonSaveKeys {
     attackBonusPercent = 0,

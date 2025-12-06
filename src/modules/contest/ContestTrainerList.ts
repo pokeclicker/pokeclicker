@@ -740,6 +740,6 @@ export default class ContestTrainerList {
             new ContestPokemon('Pikachu', '', 1, 10, [ContestType.Beautiful, ContestType.Cute, ContestType.Smart]),
             new ContestPokemon('Pachirisu', '', 1, 10, [ContestType.Cool, ContestType.Cute, ContestType.Tough]),
             new ContestPokemon('Psyduck', '', 1, 10, [ContestType.Beautiful, ContestType.Smart, ContestType.Tough]),
-        ])
+        ]);
     }
 }

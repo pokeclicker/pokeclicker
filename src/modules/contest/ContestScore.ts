@@ -27,7 +27,7 @@ export default class ContestScore {
 
     public static increaseEncoreBonus(bonus: number) {
         ContestScore.encoreBonus(ContestScore.encoreBonus() + bonus);
-        return
+        return;
     }
 
     public static calculateMoveScore(contestTypes: ContestType[], contestRunnerType: ContestType, baseNumber = 1) {

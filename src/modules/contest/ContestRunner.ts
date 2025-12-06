@@ -215,16 +215,19 @@ export default class ContestRunner {
     // eslint-disable-next-line @typescript-eslint/member-ordering
     public static audienceAppealPercentage: PureComputed<number> = ko.pureComputed(() => {
         return Math.floor(ContestRunner.audienceAppeal() / ContestRunner.maxAudienceAppeal() * 100);
-    })
+    });
 
+    // eslint-disable-next-line @typescript-eslint/member-ordering
     public static audienceStatus: PureComputed<string> = ko.pureComputed(() => {
         return `${`${ContestRunner.audienceAppeal().toLocaleString('en-US')} / ${ContestRunner.maxAudienceAppeal().toLocaleString('en-US')}`}`;
-    })
+    });
 
+    // eslint-disable-next-line @typescript-eslint/member-ordering
     public static timeLeftSeconds: PureComputed<string> = ko.pureComputed(() => {
         return (Math.ceil((!ContestRunner.frenzyMode() ? ContestRunner.timeLeft() : ContestRunner.frenzyTime()) / 100) / 10).toFixed(1);
-    })
+    });
 
+    // eslint-disable-next-line @typescript-eslint/member-ordering
     public static crowdHypeComputable: PureComputed<string> = ko.pureComputed(() => {
         const appealLeft = '🤍';
         const appeal = ContestHelper.getContestEmoji(ContestRunner.type());

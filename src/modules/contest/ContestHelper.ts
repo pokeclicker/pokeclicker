@@ -170,7 +170,7 @@ export default class ContestHelper {
         return ContestHelper.getContestHallRequirements(rank, type).every(r => r.isCompleted());
     }
 
-    public static getContestHallRequirements(rank: ContestRank, type: ContestType): (Requirement | OneFromManyRequirement)[] {
+    public static getContestHallRequirements(rank: ContestRank, type?: ContestType): (Requirement | OneFromManyRequirement)[] {
         if (new DevelopmentRequirement().isCompleted()) {
             return [new DevelopmentRequirement()];
         }
@@ -256,7 +256,7 @@ export default class ContestHelper {
     public static contestButtonTooltip(rank: ContestRank, type: ContestType): string {
         let tooltipString = '';
         tooltipString += `${ContestRank[rank]} ${ContestType[type]}:`;
-        tooltipString += `<i>Tooltip info will be added later</i>`;
+        tooltipString += '<i>Tooltip info will be added later</i>';
         // tooltipString += `<div><strong>Audience Appeal: ${ContestHelper.calculatePokemonContestAppeal(rank, type, [type]).toLocaleString('en-US')}</strong></div>`;
         // if (rank == ContestRank.Spectacular) {
         //     tooltipString += '<div>Eligible Types:</div>';
