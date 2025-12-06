@@ -6,9 +6,9 @@
         <div class="progress-bar" role="progressbar" style="animation-direction: reverse;"
           data-bind="attr:{ style: 'width:' + ContestRunner.timeLeftPercentage() + '%' },
           css: {
-            'bg-danger': !ContestBattle.frenzyMode() && ContestRunner.timeLeftSeconds() < 3,
+            'bg-danger': !ContestRunner.frenzyMode() && ContestRunner.timeLeftSeconds() < 3,
             'bg-primary': ContestRunner.timeLeftSeconds() >= 10,
-            'progress-bar-striped progress-bar-animated bg-warning': ContestBattle.frenzyMode(),
+            'progress-bar-striped progress-bar-animated bg-warning': ContestRunner.frenzyMode(),
           }"
           aria-valuemin="0" aria-valuemax="100">
           <span data-bind="text: ContestRunner.timeLeftSeconds() + 's'" style="font-size: 12px;"></span>
@@ -18,12 +18,7 @@
         
     <div class="" data-bind="visible: !ContestRunner.running()">
       <div style="margin-top: 60px;">
-        <button class="btn w-25 btn-success" onclick="ContestRunner.startContest(ContestRunner.rank(), ContestRunner.type())">Start Contest</button>
-        <!-- <button class="btn w-25" onclick="ContestRunner.startContest(ContestRunner.rank(), ContestRunner.type())"
-        data-bind="css: {
-          'btn-success': ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]),
-          'btn-danger': !ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]),
-        }">Start Contest</button> -->
+        <button class="btn w-25 btn-success" onclick="ContestBattle.startContest(ContestRunner.rank(), ContestRunner.type())" data-bind="disabled: !ContestHelper.contestIsUnlocked(rank, type)">Start Contest</button>
       </div>
       <div class="">
           <div class="justify-content-center">
@@ -56,19 +51,19 @@
           <!-- <div class="mr-5" data-bind="visible: ContestBattle.getSpotlightStatus($index())">
             <img class="contestSpotlight" src="assets/images/contestSpotlight.png" data-bind="
               style: {
-                'opacity': !ContestBattle.danceMode() && ($index() != ContestBattle.selectedEnemy()) ? '70%' : '',
+                'opacity': !ContestRunner.danceMode() && ($index() != ContestBattle.selectedEnemy()) ? '70%' : '',
                 'filter': ContestBattle.getSpotlightGrayscaleStatus($index()) ? 'grayscale(1)' : '',
               }"/>
           </div> -->
 
-          <!-- ko if: !ContestBattle.danceMode() -->
+          <!-- ko if: !ContestRunner.danceMode() -->
             <knockout class="enemy-contest" data-bind="css: {
               'contest-inactive': !ContestBattle.getSpotlightStatus($index()) && !ContestBattle.prepareNextTrainerBatch(),
               'spectacle': ContestBattle.pokemons()[$index()].status() === ContestOpponentStatus.Spectacle,
             }, template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': ContestBattle.pokemons()[$index()] } }">Pokémon sprite</knockout>
           <!-- /ko -->
             
-            <!-- ko if: ContestBattle.danceMode() -->
+            <!-- ko if: ContestRunner.danceMode() -->
             <div class="pokemonSprite wandererSprite mx-2" style="position: relative; margin-top: 40px; top: 0; left: 0;"
               data-bind="css: {
                 'contest-inactive': !ContestBattle.getSpotlightStatus($index()) && !ContestBattle.prepareNextTrainerBatch(),
@@ -79,13 +74,13 @@
                 'animation': ContestBattle.getSpotlightStatus($index()) ? '' : 'none',
                 'animation-duration': ContestBattle.pokemons()[$index()].danceHearts() <= 0 && ContestBattle.pokemons()[$index()].isRallied() ? '1.2s' : '',
               },
-              class: ContestBattleDance.getDancingCss(ContestBattle.pokemons()[$index()])">
+              class: ContestBattle.getDancingCss(ContestBattle.pokemons()[$index()])">
             </div>
             <!-- /ko -->
 
             <div class="progress trainerhitpoints" data-bind="css: {
               'contest-inactive': !ContestBattle.getSpotlightStatus($index()) && !ContestBattle.prepareNextTrainerBatch(),
-              'contestpoints': !ContestBattle.danceMode(),
+              'contestpoints': !ContestRunner.danceMode(),
             }">
               <div class="progress-bar bg-danger" role="progressbar"
                       data-bind="attr:{ style: 'width:0%' }"
@@ -102,7 +97,7 @@
                   'width': ContestRunner.audienceAppealPercentage() + '%',
                   'animation-direction': 'reverse',
                 }, css: {
-                  'progress-bar-striped progress-bar-animated': ContestRunner.isRallied() || ContestBattle.frenzyMode() || ContestRunner.jamTime() > 0,
+                  'progress-bar-striped progress-bar-animated': ContestRunner.isRallied() || ContestRunner.frenzyMode() || ContestRunner.jamTime() > 0,
                   'bg-dark': ContestRunner.jamTime() > 0,
                 }, class: Settings.getSetting('theme').observableValue()"
                 aria-valuemin="0" aria-valuemax="100">
@@ -116,7 +111,7 @@
             <td colspan="2" rowspan="3" class="" width="25%">
               <button class="btn btn-block btn-secondary">
                 <span data-bind="text: 'Crowd Hype'"></span></br>
-                <span data-bind="text: ContestBattle.maxAppealComputable()"></span>
+                <span data-bind="text: ContestRunner.crowdHypeComputable()"></span>
               </button>
             </td>
           </tr>

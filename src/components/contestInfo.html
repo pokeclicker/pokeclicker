@@ -13,24 +13,34 @@
         </ul>
     </div>
 
-    <div id="contestHall" class="tab-pane fade in active show card-body text-center">
+    <div id="contestHall" class="tab-pane fade in active show modal-body text-center">
         <div data-bind="template: {name: 'contestButtons'}"></div>
         <div class="p-0 modal-body">
-            <div class="justify-content-center" data-bind="foreach: { data: ContestRunner.contestRankObservable(), as: 'rank' }">
-                <h4 class="card-header mb-1 p-1" data-toggle="collapse" data-bind="attr : {href : '#rankCard_' + $index()}, text: `${ContestRank[rank]} Rank`"></h4>
-                <div class="card-body mb-1 p-0 show row" style="justify-content: space-evenly;"  data-bind="attr : {id : 'rankCard_' + $index()}, foreach: { data: ContestRunner.contestTypeObservable(), as: 'type' }">
+            <div class="justify-content-center" data-bind="let: { rank: ContestRunner.rank() }">
+                <div class="card-header mb-1 p-1 row" data-bind="style: { 'justify-content': ContestRunner.contestRankObservable().length <= 1 ? 'center' : 'space-between' }">
+                    <a onclick="ContestRunner.rank(ContestHelper.cycleThroughRanks(ContestRunner.contestRankObservable(), ContestRunner.rank(), false))" class="close p-1" type="button" data-bind="
+                    visible: ContestRunner.contestRankObservable().length > 1,
+                    css: { disabled: ContestRunner.running() },
+                    attr: { 'aria-label': `Move to ${ContestRank[ContestHelper.cycleThroughRanks(ContestRunner.contestRankObservable(), ContestRunner.rank(), false)]} Rank`},
+                    style: { 'opacity': !ContestRunner.running() ? '' : '20%', 'align-content': 'center' },
+                    ">&lt;</a>
+                    <h4 class="m-0 p-1" data-bind="text: `${ContestRank[rank]} Rank`" style="align-content: center;"></h4>
+                    <a onclick="ContestRunner.rank(ContestHelper.cycleThroughRanks(ContestRunner.contestRankObservable(), ContestRunner.rank()))" class="close p-1" type="button" data-bind="
+                    visible: ContestRunner.contestRankObservable().length > 1,
+                    css: { disabled: ContestRunner.running() },
+                    attr: { 'aria-label': `Move to ${ContestRank[ContestHelper.cycleThroughRanks(ContestRunner.contestRankObservable(), ContestRunner.rank())]} Rank`},
+                    style: { 'opacity': !ContestRunner.running() ? '' : '20%', 'align-content': 'center' },
+                    ">&gt;</a>
+                </div>
+                <div class="card-body mb-1 p-0 show row" style="justify-content: space-evenly;"  data-bind="foreach: { data: ContestRunner.contestTypeObservable(), as: 'type' }">
                     <button class="d-flex flex-column align-items-center p-0 btn btn-secondary"
                         data-bind="click: () => {
-                           if (!ContestRunner.running()) {
+                            ContestRunner.endContest();
                             ContestRunner.rank(rank);
                             ContestRunner.type(type);
-                           } else {
-                            ContestRunner.startContest(rank, type);
-                           };
                         },
                         css: {
                             active: ContestRunner.type() == type && ContestRunner.rank() == rank,
-                            disabled: !ContestHelper.contestIsUnlocked(rank, type),
                             contestButton3: Settings.getSetting('gameDisplayStyle').observableValue() != 'fullWidth5',
                             contestButton5: Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
                         },
@@ -170,20 +180,20 @@
                     <td>Weight</td>
                     <td>Berry</td>
                 </tr>
-                <!-- ko foreach: Array.from(new Set([...Object.entries(ContestHelper.berryRewards).filter(r => r[0] <= ContestRank.Spectacular).flatMap(b=>b[1]).flatMap(b=>b.weight)].sort().reverse())) -->
+                <!-- ko foreach: Array.from(new Set([...Object.entries(ContestRewards.berryRewards).filter(r => r[0] <= ContestRank.Spectacular).flatMap(b=>b[1]).flatMap(b=>b.weight)].sort().reverse())) -->
                 <tr class="m-0">
                     <td data-bind="text: $data"></td>
-                    <td data-bind="foreach: Object.entries(ContestHelper.berryRewards).filter(r => r[0] <= ContestRank.Spectacular).flatMap(b=>b[1]).filter(b => b.weight === $data)">
+                    <td data-bind="foreach: Object.entries(ContestRewards.berryRewards).filter(r => r[0] <= ContestRank.Spectacular).flatMap(b=>b[1]).filter(b => b.weight === $data)">
                         <img style="max-width: 24px;" data-bind="attr: {src: FarmController.getBerryImage($data.berry)},
                         css: {'contest-inactive': ($data.requirement && !$data.requirement?.isCompleted())
-                        || Object.entries(ContestHelper.berryRewards).filter(b => b[0] > ContestRunner.rank()).flatMap(b => b[1]).includes($data)
+                        || Object.entries(ContestRewards.berryRewards).filter(b => b[0] > ContestRunner.rank()).flatMap(b => b[1]).includes($data)
                         || ContestHelper.isDanceHall(ContestRunner.rank())}">
                     </td>
                 </tr>
                 <!-- /ko -->
             </tbody>
         </table>
-        <!-- ko with: ContestHelper.itemRewards() -->
+        <!-- ko with: ContestRewards.itemRewards() -->
         <table class="table table-striped table-hover table-sm mb-1 p-0 show" style="justify-content: space-evenly;">
             <tbody>
                 <tr>
@@ -249,12 +259,10 @@
         <!-- /ko -->
         <div class="p-0 modal-body">
             <div class="justify-content-center" style="overflow-x:hidden; height:500px" data-bind="foreach: { data: ContestRunner.contestRankObservable(), as: 'rank' }">
-                <h4 class="card-header mb-1 p-1" data-bind="text: `${ContestRank[rank]} Rank Trainers`"></h4>
                 <div data-bind="template: {name: 'trainerInfoTable', data: ContestTrainerList.ContestOpponents[rank]}"></div>
             </div>
             <!-- ko if: ContestTrainerList.SpecialEventContestOpponents.some(trainer => trainer.options.requirement.isCompleted()) -->
-            <div class="justify-content-center">
-                <h4 class="card-header mb-1 p-1">Special Event Trainers</h4>
+            <div class="justify-content-center mt-2">
                 <div data-bind="template: {name: 'trainerInfoTable', data: ContestTrainerList.SpecialEventContestOpponents.filter(trainer => trainer.options.requirement.isCompleted())}"></div>
             </div>
             <!-- /ko -->
@@ -278,7 +286,7 @@
                 You earn extra tokens when you try to increase an already maxed out bar.
             </p>
 
-            <p>Encores: Once you have beaten a contest, you unlock the ability to perform encores. During an encore, you keep your points and chain, but each consecutive round increases the amount of appeal needed to max out the audience bar.</p>
+            <p>Encores: The audience will call for an encore when you max out the audience bar. Each consecutive encore increases the amount of appeal needed to max out the audience bar. Completed encores will multiply your final score.</p>
 
             <p>Health bars: The bars underneat the individual pokemon. They change to reflect their completion and status. Successfully performing an action makes the pokemon appeal to the audience (💖). If the action results in a failure, the pokemon is jammed (🖤). Click on the "Rank Gameplay" tab for further information.</p>
 
@@ -337,19 +345,19 @@
                             <a data-toggle='tab' class='nav-link active w-50' href="#ranks1">Hoenn Regular</a>
                             <a data-toggle='tab' class="nav-link w-50" href="#ranks2"
                             data-bind="
-                                css: { disabled: !ContestHelper.getContestHallRequirements(ContestRank['Super Normal']).every(r => r.isCompleted()) },
+                                css: { disabled: !ContestHelper.contestIsUnlocked(ContestRank['Super Normal']) },
                                 visible: new RouteKillRequirement(10, GameConstants.Region.sinnoh, 208),
                                 text: new MaxRegionRequirement(GameConstants.Region.sinnoh).isCompleted() ? 'Sinnoh Regular' : '???',
                             ">Sinnoh Regular</a>
                             <a data-toggle='tab' class='nav-link w-50' href="#ranks3"
                             data-bind="
-                                css: { disabled: !ContestHelper.getContestHallRequirements(ContestRank.Spectacular).every(r => r.isCompleted()) },
+                                css: { disabled: !ContestHelper.contestIsUnlocked(ContestRank.Spectacular) },
                                 visible: new RouteKillRequirement(10, GameConstants.Region.hoenn, 121),
                                 text: new MaxRegionRequirement(GameConstants.Region.kalos).isCompleted() ? 'Hoenn Spectacular' : '???',
                             ">Hoenn Spectacular</a>
                             <!-- <a data-toggle='tab' class='nav-link w-50' href="#ranks4"
                             data-bind="
-                                css: { disabled: !ContestHelper.getContestHallRequirements(ContestRank['Brilliant Shining']).every(r => r.isCompleted()) },
+                                css: { disabled: !ContestHelper.contestIsUnlocked(ContestRank['Brilliant Shining']) },
                                 visible: new RouteKillRequirement(10, GameConstants.Region.sinnoh, 208),
                                 text: new MaxRegionRequirement(GameConstants.Region.galar).isCompleted() ? 'Sinnoh Brilliant Shining' : '???',
                             ">Sinnoh Brilliant Shining</a> -->
@@ -417,7 +425,7 @@
 
 <script type="text/html" id="contestButtons">
     <div class="mb-3">
-        <button class="btn btn-success" style="min-width: 30%;" onclick="ContestRunner.startContest(ContestRunner.rank(), ContestRunner.type())" data-bind="visible: !ContestRunner.running()">Start Contest</button>
+        <button class="btn btn-success" style="min-width: 30%;" onclick="ContestRunner.startContest()" data-bind="visible: !ContestRunner.running()">Start Contest</button>
         <button class="btn btn-success" style="min-width: 30%;" onclick="ContestRunner.restartContest()" data-bind="visible: ContestRunner.running()">Restart Contest</button>
         <button class="btn btn-danger" style="min-width: 30%;" onclick="ContestHall.leave();" data-bind="visible: !ContestRunner.running()">Leave</button>
         <button class="btn btn-danger" style="min-width: 30%;" onclick="ContestRunner.endContest();" data-bind="visible: ContestRunner.running()">Stop Contest</button>
@@ -425,31 +433,27 @@
     </div>
     
     <div class="mb-3">
-        <button class="btn btn-primary m-0" onclick="ContestBattle.contestAction()">
+        <button class="btn btn-primary m-0" onclick="ContestBattle.contestAction()" data-bind="
+        css: { disabled: ContestBattle.disableCheerButton() },
+        ">
+            <span style="line-height: normal;">💖</span>
+            <br/>
             Cheer
             <knockout data-bind="text: `[${Settings.getSetting('hotkey.contest.action').observableValue()}]`,
             visible: Settings.getSetting('hotkey.contest.action').observableValue() != 'None'"></knockout>
         </button>
-        <button class="btn btn-primary m-0" onclick="ContestBattle.contestMove(Direction.Up)">
-            Move ↑
-            <knockout data-bind="text: `[${Settings.getSetting('hotkey.dungeon.up').observableValue()}]`,
-            visible: Settings.getSetting('hotkey.dungeon.up').observableValue() != 'None'"></knockout>
-        </button>
-        <button class="btn btn-primary m-0" onclick="ContestBattle.contestMove(Direction.Down)">
-            Move ↓
-            <knockout data-bind="text: `[${Settings.getSetting('hotkey.dungeon.down').observableValue()}]`,
-            visible: Settings.getSetting('hotkey.dungeon.down').observableValue() != 'None'"></knockout>
-        </button>
-        <button class="btn btn-primary m-0" onclick="ContestBattle.contestMove(Direction.Left)">
-            Move ←
-            <knockout data-bind="text: `[${Settings.getSetting('hotkey.dungeon.left').observableValue()}]`,
-            visible: Settings.getSetting('hotkey.dungeon.left').observableValue() != 'None'"></knockout>
-        </button>
-        <button class="btn btn-primary m-0" onclick="ContestBattle.contestMove(Direction.Right)">
-            Move →
-            <knockout data-bind="text: `[${Settings.getSetting('hotkey.dungeon.right').observableValue()}]`,
-            visible: Settings.getSetting('hotkey.dungeon.right').observableValue() != 'None'"></knockout>
-        </button>
+        <!-- ko foreach: GameHelper.enumNumbers(Direction) -->
+            <button class="btn btn-primary m-0"
+                data-bind="click: () => { ContestBattle.contestMove($data); },
+                css: { disabled: ContestBattle.disableDirectionalButtons($data) },
+                ">
+                <span style="line-height: normal;" data-bind="text: ContestHelper.getArrowEmoji($data)"></span>
+                <br/>
+                <span style="line-height: normal;" data-bind="text: Direction[$data]"></span>
+                <knockout data-bind="text: `[${Settings.getSetting(`hotkey.dungeon.${Direction[$data].toLocaleLowerCase()}`).observableValue()}]`,
+                visible: Settings.getSetting(`hotkey.dungeon.${Direction[$data].toLocaleLowerCase()}`).observableValue() != 'None'"></knockout>
+            </button>
+        <!-- /ko -->
     </div>
 
     <div class="modal-footer">
@@ -472,58 +476,39 @@
             </div>
         </div>
     </div>
-</script>
-
-<script type="text/html" id="contestTypeButtons">  
-    <div class="p-0 modal-body">
-        <div class="justify-content-center" data-bind="foreach: { data: ContestRunner.contestRankObservable(), as: 'rank' }">
-            <h4 class="card-header mb-1 p-1" data-toggle="collapse" data-bind="attr : {href : '#rankCard_' + $index()}, text: `${ContestRank[rank]} Rank`"></h4>
-            <div class="card-body mb-1 p-0 show row" style="justify-content: space-evenly;"  data-bind="attr : {id : 'rankCard_' + $index()}, foreach: { data: ContestRunner.contestTypeObservable(), as: 'type' }">
-                <button class="d-flex flex-column align-items-center p-0 btn btn-secondary"
-                    data-bind="click: () => {
-                        if (!ContestRunner.running()) {
-                        ContestRunner.rank(rank);
-                        ContestRunner.type(type);
-                        } else {
-                        ContestRunner.startContest(rank, type);
-                        };
-                    },
-                    css: {
-                        active: ContestRunner.type() == type && ContestRunner.rank() == rank,
-                        disabled: !ContestHelper.contestIsUnlocked(rank, type),
-                        contestButton3: Settings.getSetting('gameDisplayStyle').observableValue() != 'fullWidth5',
-                        contestButton5: Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5',
-                    },
+    <!-- <div class="modal-footer">
+        <div class="input-group m-0">
+            <div class="input-group-prepend">
+                <button class="btn btn-warning smallButton smallFont" data-bind="
                     tooltip: {
-                        html: true,
-                        title: ContestHelper.contestButtonTooltip(rank, type),
+                        title: 'Change how much audience appeal you deal per contest action',
                         trigger: 'hover focus',
-                    },
-                    attr:{'aria-label': `${ContestRank[rank]} Rank ${ContestType[type]} Contest. ${ContestHelper.contestButtonTooltip(rank, type)}.`}
-                    ">
-                    <p class="m-0" style="font-weight: bolder;" data-bind="text: `${ContestType[type]}`"></p>
-                    <svg class="ribbon" xmlns="http://www.w3.org/2000/svg" width="80px" viewBox="0 0 1280 1280" xmlns:v="https://vecta.io/nano"
-                        data-bind="
-                            attr: {'contest-type': ContestType[type]},
-                            css: { 'pokemon-not-seen': !App.game.statistics.contestHighestRound[rank][type]() },
-                            ">
-                        <g data-bind="html: ContestHelper.getRibbonImage(rank, type)"></g>
-                    </svg>
-                    <p class="mb-0" data-bind="html: 'Appeal' + '<br/>' + `${GameHelper.formatAmount(ContestHelper.calculatePokemonContestAppeal(rank, type, [type]))}`"></p>
+                    }">
+                    Test Appeal
                 </button>
             </div>
+            <input type="number" class="outline-dark form-control form-control-number"
+                value="0" min="0" required
+                data-bind="textInput: ContestBattle.testAppeal, attr: { max: player.itemList.PokeBlock_Gold(), disabled: ContestRunner.running() }"
+            title=""/>
+            <div class="d-md-flex input-group-append">
+                <button class="btn btn-warning smallButton smallFont" data-bind="text: `In Bag: ${player.itemList.PokeBlock_Gold().toLocaleString('en-US')}`"></button>
+            </div>
         </div>
-    </div>
+    </div> -->
 </script>
 
 <script type="text/html" id="trainerInfoTable">
     <table class="table table-striped table-hover table-sm mb-1 p-0 show" style="justify-content: space-evenly;"">
         <thead class="sticky-top bg-secondary">
             <tr>
-                <th colspan="2">Trainer</th>
-                <th>Pokémon</th>
-                <!-- ko if: $data.some(trainer => trainer.options?.rankedBerryReward) || $data.some(trainer => trainer.options?.itemReward) -->
-                <th colspan="2">Spectacle Favors</th>
+                <th colspan="100%" class="p-0"><h4 class="mt-1 p-0 mb-0" data-bind="text: `${ContestRank[$parent] != undefined ? `${ContestRank[$parent]} Rank` : 'Special Event'} Trainers`"></h4></th>
+            </tr>
+            <tr>
+                <th colspan="2" class="pt-0">Trainer</th>
+                <th class="pt-0">Pokémon</th>
+                <!-- ko if: ContestRunner.contestRankObservable().some(r => r >= ContestRank.Spectacular) -->
+                <th colspan="2" class="pt-0">Spectacle Favors</th>
                 <!-- /ko -->
             </tr>
         </thead>
@@ -546,16 +531,16 @@
                     <!-- /ko -->
                     </div>
                 </td>
-                <!-- ko if: trainer.options?.rankedBerryReward || trainer.options?.itemReward -->
+                <!-- ko if: ContestRunner.contestRankObservable().some(r => r >= ContestRank.Spectacular) -->
                 <td style="min-width: 150px; vertical-align: middle;">
                     <div data-bind="if: trainer.options?.rankedBerryReward">
-                        <!-- ko foreach: ContestHelper.berryRewards[trainer.options?.rankedBerryReward.rank] -->
+                        <!-- ko foreach: ContestRewards.berryRewards[trainer.options?.rankedBerryReward.rank] -->
                             <img style="max-width: 24px;" data-bind="attr: {src: FarmController.getBerryImage($data.berry)},
                             css: {
                                 'contest-inactive': $data.requirement && !$data.requirement?.isCompleted(),
                                 'pokemon-not-seen': trainer.options.requirement && !trainer.options.requirement?.isCompleted(),
                             }">
-                            <!-- ko if: (ContestHelper.berryRewards[trainer.options?.rankedBerryReward.rank].indexOf($data) + 1) % 5 === 0 -->
+                            <!-- ko if: (ContestRewards.berryRewards[trainer.options?.rankedBerryReward.rank].indexOf($data) + 1) % 5 === 0 -->
                             <br/>
                             <!-- /ko -->
                         <!-- /ko -->
@@ -600,48 +585,70 @@
     <p>Berries are rewarded during frenzy depending on the cumulative performance of all Pokemon on stage.</p>
 </script>
 <script type="text/html" id="rankInfoSinnoh">
-    <p>Use the directional keys to make the pokemon dance. If they are out of dance moves, they will dance automatically whenever highlighted.
-        Encourage danced-out Pokemon with the spacebar to refill their dance stamina to prevent them from being jammed. Performing a dance move or cheering tired pokemon increases their dance stamina.
-        Dance stamina gained depends on the matchup of the current beat and the contest type, giving +2, +1, or +0 💗s.
-        Help all the pokemon complete their dance before they become jammed to score Crowd Hype.</p>
-        <p>Pokemon of the same species have the same dance moves. The key to victory is knowing your opponent and paying attention to the beat.</p>
+    <p>
+        Use the directional keys to make the pokemon dance.
+        You can gather dance stamina (💗) depending on the matchup of the current beat and the participating contest's type, with possible values of +2, +1, or +0  when a successfu dance move is performed.
+        Complete all the Pokemons' dances to increase Crowd Hype.
+    </p>
+    <p class="mb-0">Pokemon of the same species have the same dance moves. The key to victory is knowing your opponent and paying attention to the beat.</p>
 
-    <div class="" style="display: flex; justify-content: center;">
-        <div class="pokemonSprite wandererSprite" style="position: relative;"
-            data-bind="style: { backgroundImage: 'url(\'assets/images/dynamic-background/pokemon/399.png\')'},
-            css: {'walkDown': ContestBattle.infoCrotchetValue() === 0 || ContestBattle.infoCrotchetValue() === 3}">
-            <p data-bind="text: `${'💗'.repeat(3 - (ContestBattle.infoCrotchetValue() > 0 ? 1 : 0)
-            - (ContestBattle.infoCrotchetValue() > 3 ? 1 : 0))}`"></p>
+    <!-- ko with: ContestTrainerList.InfoTabPokemon() -->
+    <div class="row" style="display: flex; justify-content: center;" data-bind="foreach: $data.getTeam()">
+        <!-- ko let: { dance: (pokemonMap[$data.name].id.toString().length < 3 ? '0' : '').concat(pokemonMap[$data.name].id.toString()).split('') } -->
+        <div>
+            <div class="pokemonSprite wandererSprite" style="position: inherit;"
+                data-bind="css: {
+                    'contest-inactive': !$data.contestTypes.includes(ContestBattle.infoCrotchetValue()),
+                },
+                style: {
+                'backgroundImage': `url(assets/images/dynamic-background/pokemon/${pokemonMap[$data.name].id}.png)`,
+                'animation': $data.contestTypes.includes(ContestBattle.infoCrotchetValue()) ? '' : 'none',
+                },
+                class: $data.contestTypes.includes(ContestBattle.infoCrotchetValue()) ? `walk${Direction[dance[$data.contestTypes.indexOf(ContestBattle.infoCrotchetValue())] % 4]}` : 'walkDown'">
+            </div>
+            <!-- ko with: dance.map(d => ContestHelper.getArrowEmoji(d % 4)).splice(Math.max(...GameHelper.enumNumbers(ContestType).map(ct => ct < ContestBattle.infoCrotchetValue() && $data.contestTypes.indexOf(ct) + 1)), 3) -->
+            <p data-bind="text: $data.length > 0 ? $data.join('') : '🤍'"></p>
+            <!-- /ko -->
         </div>
-        <div class="pokemonSprite wandererSprite" style="position: relative;"
-            data-bind="style: { backgroundImage: 'url(\'assets/images/dynamic-background/pokemon/25.png\')'},
-            css: {'walkLeft': ContestBattle.infoCrotchetValue() === 1,
-            'walkRight': ContestBattle.infoCrotchetValue() === 2,
-            'walkDown': ContestBattle.infoCrotchetValue() === 3 || ContestBattle.infoCrotchetValue() === 0 ,
-            }">
-            <p data-bind="text: `${ContestBattle.infoCrotchetValue() < 1 ? '⬇️⬅️➡️' :
-            ContestBattle.infoCrotchetValue() < 2 ? '⬅️➡️' :
-            ContestBattle.infoCrotchetValue() < 3 ? '➡️' : '💗'.repeat(3 - (ContestBattle.infoCrotchetValue() > 3 ? 1 : 0))}`"></p>
-        </div>
-        <div class="pokemonSprite wandererSprite" style="position: relative;"
-            data-bind="style: { backgroundImage: 'url(\'assets/images/dynamic-background/pokemon/417.png\')'},
-            css: {'walkDown': ContestBattle.infoCrotchetValue() === 1 || ContestBattle.infoCrotchetValue() === 2}">
-            <p data-bind="text: `${'💗'.repeat(3 - (ContestBattle.infoCrotchetValue() > 1 ? 1 : 0)
-                - (ContestBattle.infoCrotchetValue() > 2 ? 1 : 0))}`"></p>
-        </div>
-        <div class="pokemonSprite wandererSprite" style="position: relative;"
-            data-bind="style: { backgroundImage: 'url(\'assets/images/dynamic-background/pokemon/54.png\')','animation-duration': ContestBattle.infoCrotchetValue() === 3 ? '1.2s' : ''},
-            css: {'walkDown': ContestBattle.infoCrotchetValue() < 4}">
-            <p data-bind="text: `${ContestBattle.infoCrotchetValue() === 3 ? '🤍' : ContestBattle.infoCrotchetValue() > 2 ? '🖤' :'💗'.repeat(3 - (ContestBattle.infoCrotchetValue() > 0 ? 1 : 0)
-                - (ContestBattle.infoCrotchetValue() > 1 ? 1 : 0))}`"></p>
-        </div>
+        <!-- /ko -->
     </div>
-    <p>Dance halls don't reward berries, but an opponent's dance hearts will translate into a token bonus during a frenzy.</p>
-    <p>Also during frenzy, use moves to amass hearts and increase your score. Pokemon work together when under a spotlight and a move's matchup can increase or decrease the total, so be careful with which moves you select.
+    <div data-bind="foreach: GameHelper.enumNumbers(ContestType).filter(e => e != ContestType.Balanced)">
+        <span class="badge text-light px-1" data-bind="
+                    style: {
+                    'background-color': ContestHelper.getActiveContestColors($data, [ContestBattle.infoCrotchetValue()]) ?? 'rgba(0,0,0,.7)',
+                    }">
+        <small>
+            <strong data-bind="text: ContestType[$data].toUpperCase()" style="color: white;"></strong>
+        </small>
+        </span>
+    </div>
+    <!-- /ko -->
+    <div>
+        <p class="mt-2 mb-0">
+            When a Pokemon has finished its dance, it will start losing 💗 whenever highlighted.
+            Cheering can refresh up to 3 💗, depending on the beat's compatibility with the participating contest.
+        </p>
+        <p>
+            Keep track of low 💗 and use the Cheer button to refresh them when depleted to prevent them from being jammed.
+            If any given Pokemon is jammed during the session, Crowd Hype decreases by 1 at the end of the round.
+        </p>
+        <div class="pokemonSprite wandererSprite m-auto walkDown" style="
+            position: inherit;
+            animation-duration: 1.2s;
+            background-image: url('assets/images/dynamic-background/pokemon/25.png');
+            ">
+        </div>
+        <p data-bind="text: '🤍'.repeat([1, 2, 3, 2, 1][ContestBattle.infoCrotchetValue()] ?? 1)"></p>
+    </div>
+    <p>
+        During frenzy, use moves to amass hearts and increase your score. A move's matchup can increase or decrease another Pokemon's dance hearts too, so be careful with which moves you select.
         Using bad moves won't lower your score or chain, but will result in a lesser bonus, if at all.
+    </p>
+    <p>Dance halls don't reward berries, but extra dance hearts influence the token bonus during a frenzy.</p>
+    <p>
         The last move used by a pokemon will leave it in a finishing pose.
         Strike a group pose that impresses your audience for a small bonus when your hearts are tallied after all pokemon have performed.
-        Not performing will cause the pokemon to strike a random pose.
+        Not performing a move will cause the pokemon to strike a random pose.
     </p>
     <table class="table table-bordered table-striped" data-bind="with: GameHelper.enumNumbers(ContestType)">
         <thead>
@@ -686,9 +693,9 @@
 
     <div class="row" style="display:flex; justify-content:space-evenly">
         <!-- ko foreach: GameHelper.enumNumbers(ContestType).filter(type => type < 5) -->
-             <div data-bind="css: {'contest-inactive': Boolean(!ContestBattleSpectacular.moveRange(0)[ContestBattle.infoCrotchetValue()][$index()])}">
+             <div data-bind="css: {'contest-inactive': Boolean(!ContestBattle.infoMoveRange()[ContestBattle.infoFormation()][$index()])}">
                 <img data-bind="attr: {src: PokemonHelper.getImage(25, false)}">
-                <p data-bind="text: ('❤️').repeat(ContestBattleSpectacular.moveRange(0)[ContestBattle.infoCrotchetValue()][$index()]).concat(('🤍').repeat(5 - ContestBattleSpectacular.moveRange(0)[ContestBattle.infoCrotchetValue()][$index()]))"></p>
+                <p data-bind="text: ('❤️').repeat(ContestBattle.infoMoveRange()[ContestBattle.infoFormation()][$index()]).concat(('🤍').repeat(5 - ContestBattle.infoMoveRange()[ContestBattle.infoFormation()][$index()]))"></p>
             </div>
         <!-- /ko -->
     </div>
@@ -697,7 +704,7 @@
     <p>If the pokemon runs out of moves, it gets jammed. Jammed pokemon can still fill their hearts with the help of other pokemon.</p>
     <p>Spectacle status is denoted by ⭐. Trainers will give you favors if you help them dazzle the audience with a Spectacle. This status is more easily achieved during a frenzy, but can be activated during a normal round too.</p>
     <p>During frenzy, lock in a set of moves and perform them with the spacebar.
-        If timed for a Spectacle, the cumulative effectiveness of the pokemon's performance will extend the duration of the frenzy and if you're lucky, give you a reward.</p>
+        If timed for a Spectacle, the cumulative effectiveness of the pokemon's performance will extend the duration of the frenzy and if you're lucky, reward you with an item.</p>
 
     <div class="row">
         <!-- ko foreach: GameHelper.enumNumbers(ContestType).filter(type => type < 3) -->
