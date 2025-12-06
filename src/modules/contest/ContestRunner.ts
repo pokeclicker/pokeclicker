@@ -154,7 +154,7 @@ export default class ContestRunner {
         const rallyAmount = ContestRunner.audienceAppeal() + Math.round(rally);
 
         const encores = Math.ceil(Math.log10(Math.max(rallyAmount / ContestHelper.rankAppeal[ContestRunner.rank()], 1)) / Math.log10(1.5));
-        // todo: use encores as multipliers (* 1.x) for final score
+
         ContestRunner.encoreRound(encores);
         ContestScore.increaseEncoreBonus(encores);
 
@@ -192,6 +192,9 @@ export default class ContestRunner {
                     type: NotificationConstants.NotificationOption.success,
                     // TODO: setting to turn off contest notifications
                 });
+
+                // Compensate berries for dance halls
+                ContestBattle.addContestBerryReward(Math.max(0, ContestRunner.rank() - 1) % 4 + 1, Number(ContestRunner.danceMode()) * (11 - ContestRunner.rank()), ContestRunner.danceMode());
 
                 // First time completion - end here and don't proceed to encore bonus rounds
                 if (App.game.statistics.contestHighestRound[this.rank()][this.type()]() == 0) {

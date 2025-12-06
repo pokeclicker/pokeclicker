@@ -115,12 +115,12 @@ export default class ContestRewards {
         ],
     };
 
-    public static getContestBerryReward(rank: ContestRank, trainerReward = false): ContestBerryReward {
+    public static getContestBerryReward(rank: ContestRank, fromSpecifiedRank = false): ContestBerryReward {
         let rewards: ContestBerryReward[] = [];
         for (let i = ContestRank.Practice; i <= rank; i++) {
             rewards = rewards.concat(ContestRewards.berryRewards[i]?.filter(b => b.requirement?.isCompleted() ?? true) ?? { berry: BerryType.None, amount: ko.observable(0), weight: 0 });
         }
-        if (trainerReward) {
+        if (fromSpecifiedRank) {
             rewards = ContestRewards.berryRewards[rank]?.filter(b => b.requirement?.isCompleted() ?? true) ?? [{ berry: BerryType.None, amount: ko.observable(0), weight: 0 }];
         }
         return Rand.fromWeightedArray(rewards, rewards.map((br) => br.weight ?? 0.1));

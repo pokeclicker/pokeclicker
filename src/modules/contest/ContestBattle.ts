@@ -396,11 +396,11 @@ export default class ContestBattle extends Battle {
     }
 
     // Berries
-    public static addContestBerryReward(rank: ContestRank, multiplier: number, trainerReward = false) {
+    public static addContestBerryReward(rank: ContestRank, multiplier: number, fromSpecifiedRank = false) {
         if (!multiplier) {
             return;
         }
-        const b = ContestRewards.getContestBerryReward(rank ?? ContestRunner.rank(), trainerReward);
+        const b = ContestRewards.getContestBerryReward(rank ?? ContestRunner.rank(), fromSpecifiedRank);
         const amount = Math.ceil(b.amount() * multiplier);
         // give the berry
         App.game.farming.gainBerry(b.berry, amount, false);
