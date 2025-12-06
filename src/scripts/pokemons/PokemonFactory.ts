@@ -253,7 +253,7 @@ class PokemonFactory {
         const shiny = pokemon.shiny ?? false;
         const exp: number = pokemon.level; // standardize exp gain by rank
         const catchRate = 0;
-        const money = pokemon.money ?? new Amount(1, GameConstants.Currency.contestToken);
+        const money = new Amount(1, GameConstants.Currency.contestToken);
         const shadow = GameConstants.ShadowStatus.None;
         return new ContestBattlePokemon(contestTypes, nickname, dance, moves, pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, money, shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer);
     }
