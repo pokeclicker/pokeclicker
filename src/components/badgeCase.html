@@ -60,7 +60,7 @@ aria-labelledby="badgeCaseModalLabel">
         </div>
 
         <div id="ribbonCase" class="modal-body tab-pane fade">
-            <div data-bind="foreach: { data: GameHelper.enumNumbers(ContestRank).filter(r => r > ContestRank.Practice && r < ContestRank['Brilliant Shining'] && ContestHelper.getContestHallRequirements(r).every(req => req.isCompleted())), as: 'rank'}">
+            <div data-bind="foreach: { data: GameHelper.enumNumbers(ContestRank).filter(r => r > ContestRank.Practice && ContestHelper.getContestHallRequirements(r).every(req => req.isCompleted())), as: 'rank'}">
                 <h4 data-bind="text: `${ContestRank[rank]} Rank`"></h4>
                 <div class="row no-gutters justify-content-center">
                     <div class="row w-100 justify-content-center">
