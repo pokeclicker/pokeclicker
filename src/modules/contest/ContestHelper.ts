@@ -7,6 +7,7 @@ import { pokemonMap } from '../pokemons/PokemonList';
 import ContestWonRequirement from '../requirements/ContestWonRequirement';
 import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
+import NullRequirement from '../requirements/NullRequirement';
 import OneFromManyRequirement from '../requirements/OneFromManyRequirement';
 import Requirement from '../requirements/Requirement';
 import { TmpPartyPokemonType } from '../TemporaryScriptTypes';
@@ -164,9 +165,6 @@ export default class ContestHelper {
 
     // Requirements
     public static contestIsUnlocked(rank: ContestRank, type: ContestType) {
-        if (new DevelopmentRequirement().isCompleted()) {
-            return true;
-        }
         return ContestHelper.getContestHallRequirements(rank, type).every(r => r.isCompleted());
     }
 
@@ -188,7 +186,7 @@ export default class ContestHelper {
         }
         if (rank === ContestRank['Brilliant Shining']) {
             return [
-                new DevelopmentRequirement(),
+                new NullRequirement(),
                 new MaxRegionRequirement(Region.galar),
             ];
         }

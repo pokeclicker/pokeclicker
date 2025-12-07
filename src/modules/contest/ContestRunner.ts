@@ -69,7 +69,7 @@ export default class ContestRunner {
         // Reset score
         ContestScore.totalScore(0);
         ContestScore.activeChain(1);
-        ContestScore.encoreBonus(10);
+        ContestScore.encoreBonus(1);
 
         // Ready up the rhythm gimmicks
         ContestBattle.selectedEnemy(0);
@@ -148,7 +148,7 @@ export default class ContestRunner {
     public static rally(rally: number): void {
         // only expand audience bar after last rally has been calculated so players have time to process completion status
         if (ContestRunner.isRallied()) {
-            ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * Math.pow(1.5, ContestRunner.encoreRound()));
+            ContestRunner.maxAudienceAppeal(Math.round(ContestHelper.rankAppeal[ContestRunner.rank()] * Math.pow(1.5, ContestRunner.encoreRound())));
         }
 
         const rallyAmount = ContestRunner.audienceAppeal() + Math.round(rally);
@@ -156,7 +156,7 @@ export default class ContestRunner {
         const encores = Math.ceil(Math.log10(Math.max(rallyAmount / ContestHelper.rankAppeal[ContestRunner.rank()], 1)) / Math.log10(1.5));
 
         ContestRunner.encoreRound(encores);
-        ContestScore.increaseEncoreBonus(encores);
+        ContestScore.encoreBonus(1 + encores);
 
         ContestRunner.audienceAppeal(rallyAmount);
     }
@@ -202,8 +202,6 @@ export default class ContestRunner {
                 // First time completion - end here and don't proceed to encore bonus rounds
                 if (App.game.statistics.contestHighestRound[this.rank()][this.type()]() == 0) {
                     $('#contestWonModal').modal('show');
-                    GameHelper.incrementObservable(App.game.statistics.contestHighestRound[ContestRunner.rank()][ContestRunner.type()]);
-                    return;
                 }
 
                 // Update statistics

@@ -125,8 +125,8 @@ export default class ContestBattle extends Battle {
 
         // increase the audience bar
         let multiplier = 100;
-        // chains are mainly used for score, so their boost to appeal is adjusted to not inflate it
-        multiplier += Math.max(0, ContestScore.activeChain() * 10 - 10);
+        // Chain bonus
+        multiplier += ContestScore.activeChain();
         // frenzy bonus
         if (ContestRunner.frenzyMode()) {
             multiplier += ContestBattle.contestClearedMultiplier();
@@ -186,7 +186,6 @@ export default class ContestBattle extends Battle {
             player.lowerItemMultipliers(MultiplierDecreaser.Battle);
 
             // Score
-            ContestScore.increaseChain(Math.min(10, ContestRunner.rank() || 5 + 1));
             ContestScore.increaseScore(ContestScore.calculateMoveScore(ContestBattle.moveArray()[opponentIndex], ContestRunner.type()));
 
             // Check if more mons in trainer party
@@ -206,7 +205,7 @@ export default class ContestBattle extends Battle {
             // Frenzy rewards
             if (ContestRunner.frenzyMode()) {
                 // score bonus
-                ContestScore.increaseScore((ContestRunner.rank() / 10) * ContestScore.calculateMoveScore(ContestBattle.moveArray()[opponentIndex], ContestRunner.type()));
+                ContestScore.increaseScore(1.5 * ContestScore.calculateMoveScore(ContestBattle.moveArray()[opponentIndex], ContestRunner.type()));
                 // dancing gives more tokens but no berries, to make ranks more distinct
                 if (!ContestRunner.danceMode()) {
                     ContestBattle.addContestBerryReward(ContestRunner.rank(), ContestBattle.getBerryMultiplier());
@@ -216,6 +215,8 @@ export default class ContestBattle extends Battle {
                     if (opponent.danceHearts() > 0) {
                         ContestBattle.addContestTokenReward(tokRew);
                     }
+                } else if (opponentIndex >= ContestBattle.pokemons().length - 1) {
+                    ContestScore.increaseChain(ContestBattleDance.frenzyHeartsTotal());
                 }
                 ContestRewards.itemRewards().forEach(i => ContestBattle.addContestItemReward(i));
             }
@@ -267,7 +268,6 @@ export default class ContestBattle extends Battle {
         // Failure
         if (ContestBattle.pokemons().some(p => p.status() === ContestOpponentStatus.Jammed)) {
             if (ContestRunner.danceMode()) {
-                ContestScore.breakChain();
                 ContestRunner.crowdHype(Math.max(0, ContestRunner.crowdHype() - 1));
             } else {
                 ContestBattle.totalJamTime(ContestRunner.rank() * SECOND);
@@ -383,6 +383,14 @@ export default class ContestBattle extends Battle {
         move.pp(0);
         const newMoves = ContestBattle.moveArray()[ContestBattle.selectedEnemy()].concat(move.moveType);
         ContestBattle.moveArray.splice(ContestBattle.selectedEnemy(), 1, newMoves);
+
+        let matchup = ContestRunner.type() === ContestType.Balanced ? 1 : ContestTypeHelper.getAppealModifier([move.moveType], [ContestRunner.type()]);
+        // Dance hearts give points too, so limit Move additions
+        if (ContestRunner.danceMode()) {
+            matchup = Math.floor(matchup);
+        }
+        ContestScore.increaseChain(Math.ceil(matchup));
+
         return;
     }
 

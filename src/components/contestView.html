@@ -18,7 +18,7 @@
         
     <div class="" data-bind="visible: !ContestRunner.running()">
       <div style="margin-top: 60px;">
-        <button class="btn w-25 btn-success" onclick="ContestBattle.startContest(ContestRunner.rank(), ContestRunner.type())" data-bind="disabled: !ContestHelper.contestIsUnlocked(rank, type)">Start Contest</button>
+        <button class="btn w-25 btn-success" onclick="ContestRunner.startContest()" data-bind="disabled: !ContestHelper.contestIsUnlocked(rank, type)">Start Contest</button>
       </div>
       <div class="">
           <div class="justify-content-center">
@@ -97,7 +97,7 @@
                   'width': ContestRunner.audienceAppealPercentage() + '%',
                   'animation-direction': 'reverse',
                 }, css: {
-                  'progress-bar-striped progress-bar-animated': ContestRunner.isRallied() || ContestRunner.frenzyMode() || ContestRunner.jamTime() > 0,
+                  'progress-bar-striped progress-bar-animated': ContestRunner.frenzyMode() || ContestRunner.jamTime() > 0,
                   'bg-dark': ContestRunner.jamTime() > 0,
                 }, class: Settings.getSetting('theme').observableValue()"
                 aria-valuemin="0" aria-valuemax="100">
@@ -117,10 +117,10 @@
           </tr>
           <tr data-bind="template: { name: ContestBattle.contestViewGimmickBar(ContestRunner.rank()) }"></tr>
           <tr>
-            <td data-bind="text: `Encore: ×${(ContestScore.encoreBonus() / 10).toLocaleString('en-US')}`">
+            <td data-bind="text: `Encore: ×${ContestScore.encoreBonus().toLocaleString('en-US')}`">
               Encore Round
             </td>
-            <td data-bind="text: `Chain: ×${ContestScore.activeChain().toLocaleString('en-US')}`">
+            <td data-bind="text: `Chain: &plus;${ContestScore.activeChain().toLocaleString('en-US')}`">
               Combo Chain
             </td>
             <td colspan="2" data-bind="text: `Score: ${Math.round(ContestScore.totalScore()).toLocaleString('en-US')}`">

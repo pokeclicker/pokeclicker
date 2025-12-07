@@ -20,6 +20,9 @@ export default class ContestBattleDance {
                         if (p.danceHearts() >= 1) {
                             p.danceHearts(p.danceHearts() - 1);
                         } else {
+                            if (p.status() != ContestOpponentStatus.Jammed) {
+                                ContestScore.breakChain();
+                            }
                             p.status(ContestOpponentStatus.Jammed);
                         }
                     }
@@ -59,7 +62,13 @@ export default class ContestBattleDance {
         // Restore dance hearts for worn-out pokemon
         ContestBattle.pokemons().filter(p =>
             p.status() === ContestOpponentStatus.Dancing && ContestBattle.getSpotlightStatus(ContestBattle.pokemons().indexOf(p)),
-        ).forEach(p => p.danceHearts(Math.min(3, p.danceHearts() + 1 + ContestTypeHelper.getAppealModifier([ContestBattle.crotchetValue()], [ContestRunner.type()]) * 2)));
+        ).forEach(p => {
+            const matchup = 1 + ContestTypeHelper.getAppealModifier([ContestBattle.crotchetValue()], [ContestRunner.type()]) * 2;
+            if (p.danceHearts() <= 0) {
+                ContestScore.increaseChain(matchup);
+            }
+            p.danceHearts(Math.min(3, p.danceHearts() + matchup));
+        });
         return;
     }
 
@@ -95,6 +104,7 @@ export default class ContestBattleDance {
                 }
             }
 
+            ContestScore.increaseChain();
             ContestBattle.defeatContestPokemon(ContestBattle.pokemons().indexOf(p), false);
         });
 
@@ -127,12 +137,15 @@ export default class ContestBattleDance {
         return;
     }
 
-    public static danceHeartScoreBonus() {
+    public static frenzyHeartsTotal() {
         let sum = 0;
         ContestBattle.pokemons().forEach(p => { sum += p.danceHearts(); });
+        return sum;
+    }
 
+    public static danceHeartScoreBonus() {
+        let sum = ContestBattleDance.frenzyHeartsTotal();
         sum *= (10 + ContestBattleDanceCombos.poseBonus(ContestRunner.type(), ContestBattle.finishingPose())) / 10;
-
         return sum;
     }
 

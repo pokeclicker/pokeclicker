@@ -82,10 +82,12 @@ export default class ContestBattleSpectacular {
         const matchup = ContestBattle.activeSpectacularType() === ContestType.Balanced ? 1 :
             ContestTypeHelper.getAppealModifier([move.moveType], [ContestBattle.activeSpectacularType()]);
         // Score
-        ContestScore.increaseChain(Math.min(10, ContestRunner.rank() + 1), matchup * 2);
-        ContestScore.increaseScore(ContestScore.calculateMoveScore([move.moveType], ContestRunner.type()));
+        ContestScore.increaseChain(Math.floor(matchup)); // extra chain increase
+        if (matchup <= 0) {
+            ContestScore.breakChain();
+        }
         // Use move
-        ContestBattle.pokemons().filter(p => ContestBattle.getSpotlightStatus(ContestBattle.pokemons().indexOf(p))).forEach(p => {
+        ContestBattle.pokemons().filter(p => ContestBattle.getSpotlightStatus(ContestBattle.pokemons().indexOf(p)) && p.status() != ContestOpponentStatus.Appealed).forEach(p => {
             const supportAppeal = matchup > 0 ? matchup : -0.5;
             // don't lower support if rallied
             if (!p.isRallied()) {
@@ -114,6 +116,7 @@ export default class ContestBattleSpectacular {
     public static judgeBeat() {
         // default success
         ContestBattle.rallyPokemon(ContestBattle.selectedEnemy());
+        ContestScore.increaseChain();
 
         // bonus success
         const pk = ContestBattle.pokemons()[ContestBattle.selectedEnemy()];
@@ -123,7 +126,7 @@ export default class ContestBattleSpectacular {
         }
 
         // save move type before defeating pokemon
-        const spectacularMove = ContestBattle.moveArray()[ContestBattle.selectedEnemy()][0] ?? ContestBattle.activeSpectacularType();
+        const activeSpectacularMove = ContestBattle.moveArray()[ContestBattle.selectedEnemy()][0] ?? ContestBattle.activeSpectacularType();
 
         // the usual
         ContestBattle.defeatContestPokemon();
@@ -132,7 +135,7 @@ export default class ContestBattleSpectacular {
 
         // apply type relay gimmick after frenzy time reward
         if (ContestRunner.type() === ContestType.Balanced) {
-            ContestBattle.activeSpectacularType(spectacularMove);
+            ContestBattle.activeSpectacularType(activeSpectacularMove);
         }
 
         return;
@@ -152,7 +155,8 @@ export default class ContestBattleSpectacular {
         // Frenzy Time
         ContestBattleSpectacular.addFrenzyTime();
         // Score bonus
-        ContestScore.increaseScore(10);
+        const movesUsed = ContestBattle.moveArray()[ContestBattle.selectedEnemy()].filter(ct => ct === ContestBattle.activeSpectacularType());
+        ContestScore.increaseChain(Math.max(1, movesUsed.length));
         // Berry bonus
         ContestBattle.addContestBerryReward(
             ContestBattle.trainers()[opponentIndex].options?.rankedBerryReward?.rank ?? ContestRunner.rank(),

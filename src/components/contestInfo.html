@@ -150,7 +150,6 @@
 
         <h4>Available Rewards</h4>
         <p>Shaded berries and item rewards are locked. If berries do not become unshaded when selecting a different rank or type, you have to unlock them in the farm first</p>
-        <p style="font-weight: bold;">Note: Berries are not rewarded in dance halls</p>
 
         <div class="mb-3" data-bind="foreach: { data: ContestRunner.contestTypeObservable(), as: 'type' }">
             <button class="btn btn-info"
@@ -180,16 +179,17 @@
                     <td>Weight</td>
                     <td>Berry</td>
                 </tr>
-                <!-- ko foreach: Array.from(new Set([...Object.entries(ContestRewards.berryRewards).filter(r => r[0] <= ContestRank.Spectacular).flatMap(b=>b[1]).flatMap(b=>b.weight)].sort().reverse())) -->
+                <!-- ko let: { berryRank: ContestRunner.rank() < ContestRank.Spectacular ? Math.max(0, ContestRunner.rank() - 1) % 4 + 1 : ContestRunner.rank() } -->
+                <!-- ko foreach: Array.from(new Set([...Object.entries(ContestRewards.berryRewards).filter(r => r[0] <= berryRank).flatMap(b=>b[1]).flatMap(b=>b.weight)].sort().reverse())) -->
                 <tr class="m-0">
                     <td data-bind="text: $data"></td>
-                    <td data-bind="foreach: Object.entries(ContestRewards.berryRewards).filter(r => r[0] <= ContestRank.Spectacular).flatMap(b=>b[1]).filter(b => b.weight === $data)">
+                    <td data-bind="foreach: Object.entries(ContestRewards.berryRewards).filter(r => r[0] <= berryRank).flatMap(b=>b[1]).filter(b => b.weight === $data)">
                         <img style="max-width: 24px;" data-bind="attr: {src: FarmController.getBerryImage($data.berry)},
                         css: {'contest-inactive': ($data.requirement && !$data.requirement?.isCompleted())
-                        || Object.entries(ContestRewards.berryRewards).filter(b => b[0] > ContestRunner.rank()).flatMap(b => b[1]).includes($data)
-                        || ContestHelper.isDanceHall(ContestRunner.rank())}">
+                        || Object.entries(ContestRewards.berryRewards).filter(b => b[0] > berryRank).flatMap(b => b[1]).includes($data)}">
                     </td>
                 </tr>
+                <!-- /ko -->
                 <!-- /ko -->
             </tbody>
         </table>
@@ -286,7 +286,7 @@
                 You earn extra tokens when you try to increase an already maxed out bar.
             </p>
 
-            <p>Encores: The audience will call for an encore when you max out the audience bar. Each consecutive encore increases the amount of appeal needed to max out the audience bar. Completed encores will multiply your final score.</p>
+            <p>Encores: The audience will call for an encore when you max out the audience bar. Each consecutive encore increases the amount of appeal needed to max out the audience bar. Encores act as a multiplier for the points you score.</p>
 
             <p>Health bars: The bars underneat the individual pokemon. They change to reflect their completion and status. Successfully performing an action makes the pokemon appeal to the audience (💖). If the action results in a failure, the pokemon is jammed (🖤). Click on the "Rank Gameplay" tab for further information.</p>
 
@@ -296,7 +296,7 @@
             <p>Frenzy: Max the Crowd Hype to get the audience in a frenzy for extra points and rewards. Gameplay is slightly altered during a frenzy, and chains cannot be broken for its duration.
             Make use of the limited frenzy time to chain attacks for lots of points. During a frenzy, your audience appeal dealt will also be buffed based on how many contests you've won.</p>
 
-            <p>Chain: How well you perform. Successful actions increase the chain and multiply your score and dealt audience appeal. Higher ranks allow for larger chains.</p>
+            <p>Chain: Point bonus. Successful actions increase the chain, add to your score, and can give a small bonus dealt audience appeal. Chains are broken when a poor action is performed.</p>
 
             <p>Score: Your total points. These indicate how well you've done in a contest. The higher your score the more tokens you get upon completion.</p>
 
@@ -644,7 +644,7 @@
         During frenzy, use moves to amass hearts and increase your score. A move's matchup can increase or decrease another Pokemon's dance hearts too, so be careful with which moves you select.
         Using bad moves won't lower your score or chain, but will result in a lesser bonus, if at all.
     </p>
-    <p>Dance halls don't reward berries, but extra dance hearts influence the token bonus during a frenzy.</p>
+    <p>Dance halls reward limited amounts berries, but extra dance hearts influence the token bonus during a frenzy.</p>
     <p>
         The last move used by a pokemon will leave it in a finishing pose.
         Strike a group pose that impresses your audience for a small bonus when your hearts are tallied after all pokemon have performed.
@@ -694,7 +694,7 @@
     <div class="row" style="display:flex; justify-content:space-evenly">
         <!-- ko foreach: GameHelper.enumNumbers(ContestType).filter(type => type < 5) -->
              <div data-bind="css: {'contest-inactive': Boolean(!ContestBattle.infoMoveRange()[ContestBattle.infoFormation()][$index()])}">
-                <img data-bind="attr: {src: PokemonHelper.getImage(25, false)}">
+                <img data-bind="attr: {src: PokemonHelper.getImage(261 + $data * 10, false, undefined, 0)}">
                 <p data-bind="text: ('❤️').repeat(ContestBattle.infoMoveRange()[ContestBattle.infoFormation()][$index()]).concat(('🤍').repeat(5 - ContestBattle.infoMoveRange()[ContestBattle.infoFormation()][$index()]))"></p>
             </div>
         <!-- /ko -->

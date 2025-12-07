@@ -3,36 +3,31 @@ import ContestTypeHelper from '../types/ContestTypeHelper';
 
 export default class ContestScore {
     static totalScore: KnockoutObservable<number> = ko.observable(0);
-    static activeChain: KnockoutObservable<number> = ko.observable(1);
-    static encoreBonus: KnockoutObservable<number> = ko.observable(10);
+    static activeChain: KnockoutObservable<number> = ko.observable(0);
+    static encoreBonus: KnockoutObservable<number> = ko.observable(1);
 
     public static increaseScore(score: number) {
-        const addedScore = Math.round(score * ContestScore.activeChain() * (ContestScore.encoreBonus() / 10));
-        ContestScore.totalScore(ContestScore.totalScore() + addedScore);
+        const addedScore = Math.round((score + ContestScore.activeChain()) * ContestScore.encoreBonus());
+        ContestScore.totalScore(ContestScore.totalScore() + Math.max(0, addedScore));
         return;
     }
 
-    public static increaseChain(multiplierCap: number, amount = 1) {
-        const currentChain = Math.max(1, ContestScore.activeChain()) * 10;
-        const cap = multiplierCap * 10;
-        const newChain = Math.min(cap, currentChain + Math.round(amount));
-        ContestScore.activeChain(Math.max(1, newChain / 10));
+    public static increaseChain(amount = 1) {
+        const currentChain = Math.max(1, ContestScore.activeChain());
+        const newChain = currentChain + Math.round(Math.max(0, amount));
+        ContestScore.activeChain(newChain);
+        ContestScore.increaseScore(0);
         return;
     }
 
     public static breakChain() {
-        ContestScore.activeChain(1);
+        ContestScore.activeChain(0);
         return;
     }
 
-    public static increaseEncoreBonus(bonus: number) {
-        ContestScore.encoreBonus(ContestScore.encoreBonus() + bonus);
-        return;
-    }
-
-    public static calculateMoveScore(contestTypes: ContestType[], contestRunnerType: ContestType, baseNumber = 1) {
+    public static calculateMoveScore(movesUsed: ContestType[], contestRunnerType: ContestType, baseNumber = 1) {
         let sum = baseNumber;
-        contestTypes.forEach(moveType => {
+        movesUsed.forEach(moveType => {
             const matchup = contestRunnerType === ContestType.Balanced ? 0.5 : ContestTypeHelper.getAppealModifier([moveType], [contestRunnerType]);
             sum += matchup;
         });

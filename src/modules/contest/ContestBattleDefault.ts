@@ -25,6 +25,7 @@ export default class ContestBattleDefault {
     public static judgeBeat() {
         if (ContestRunner.frenzyMode()) {
             ContestBattle.rallyPokemon(ContestBattle.selectedEnemy());
+            ContestScore.increaseChain();
             ContestBattle.defeatContestPokemon();
             return;
         }
@@ -34,6 +35,7 @@ export default class ContestBattleDefault {
         const visual = Math.max(...pk.contestTypes.map(ct => ContestTypeHelper.contestTypeMatrix[ct][ContestRunner.type()] * 2));
         if (ContestBattle.beat() + visual >= 2) {
             ContestBattle.rallyPokemon(ContestBattle.selectedEnemy());
+            ContestScore.increaseChain();
         } else {
             ContestScore.breakChain();
             pk.status(ContestOpponentStatus.Jammed);
