@@ -6,7 +6,6 @@ import type {
 import ContestRank from '../enums/ContestRank';
 import ContestType from '../enums/ContestType';
 import { CONTEST_TICK, CONTEST_TIME, GameState } from '../GameConstants';
-import GameHelper from '../GameHelper';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
 import ContestHelper from './ContestHelper';
