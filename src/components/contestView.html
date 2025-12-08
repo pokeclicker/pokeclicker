@@ -57,7 +57,9 @@
           </div> -->
 
           <!-- ko if: !ContestRunner.danceMode() -->
-            <knockout class="enemy-contest" data-bind="css: {
+            <knockout class="enemy-contest" data-bind="style: {
+              'filter': ContestBattle.getSpotlightGrayscaleStatus($index()) && ContestBattle.getSpotlightStatus($index()) ? 'grayscale(0.8)' : '',
+            }, css: {
               'contest-inactive': !ContestBattle.getSpotlightStatus($index()) && !ContestBattle.prepareNextTrainerBatch(),
               'spectacle': ContestBattle.pokemons()[$index()].status() === ContestOpponentStatus.Spectacle,
             }, template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': ContestBattle.pokemons()[$index()] } }">Pokémon sprite</knockout>

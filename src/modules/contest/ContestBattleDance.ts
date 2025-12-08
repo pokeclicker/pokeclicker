@@ -14,7 +14,7 @@ import ContestScore from './ContestScore';
 export default class ContestBattleDance {
     public static tick() {
         if (!ContestRunner.frenzyMode()) {
-            if (ContestBattle.counter >= Math.max(1500 - 250 * ((ContestRunner.rank() - 1) % 4), 700)) {
+            if (ContestBattle.counter >= Math.max(1500 - 100 * ((ContestRunner.rank() - 1) % 4))) {
                 ContestBattle.pokemons().filter(p => ContestBattle.getSpotlightStatus(ContestBattle.pokemons().indexOf(p))).forEach((p: ContestBattlePokemon) => {
                     if (p.status() === ContestOpponentStatus.Dancing) {
                         if (p.danceHearts() >= 1) {
@@ -67,7 +67,7 @@ export default class ContestBattleDance {
             if (p.danceHearts() <= 0) {
                 ContestScore.increaseChain(matchup);
             }
-            p.danceHearts(Math.min(3, p.danceHearts() + matchup));
+            p.danceHearts(Math.max(p.danceHearts(), Math.min(3, p.danceHearts() + matchup)));
         });
         return;
     }

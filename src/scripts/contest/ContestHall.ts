@@ -2,6 +2,7 @@
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
 ///<reference path="../../declarations/contest/ContestHelper.d.ts"/>
 ///<reference path="../../declarations/contest/ContestRunner.d.ts"/>
+///<reference path="../../declarations/contest/ContestBattle.d.ts"/>
 
 class ContestHall extends TownContent {
     constructor(
@@ -25,6 +26,7 @@ class ContestHall extends TownContent {
         ContestRunner.rank(this.rank[0]);
         ContestRunner.type(this.type[0]);
         ContestRunner.danceMode(ContestHelper.isDanceHall(this.rank[0]));
+        ContestBattle.testTimer(10 * ContestHelper.contestRankTimer(ContestRunner.rank()));
         App.game.gameState = GameConstants.GameState.contest;
     }
     public static leave(): void {

@@ -119,10 +119,10 @@ export default class ContestHelper {
             case ContestRank['Super Great']:
             case ContestRank['Super Ultra']:
             case ContestRank['Super Master']:
-                return 5;
+                return 6;
             case ContestRank.Spectacular:
             case ContestRank['Brilliant Shining']:
-                return 6;
+                return 9;
         }
     }
 

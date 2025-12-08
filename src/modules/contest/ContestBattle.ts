@@ -59,6 +59,7 @@ export default class ContestBattle extends Battle {
     static infoFormation: KnockoutObservable<number> = ko.observable(0);
     // Testing
     public static testAppeal: KnockoutObservable<number> = ko.observable(10);
+    public static testTimer: KnockoutObservable<number> = ko.observable(10);
 
     // Rewards
     public static tokenReward: KnockoutObservable<number> = ko.observable(0);
@@ -385,10 +386,6 @@ export default class ContestBattle extends Battle {
         ContestBattle.moveArray.splice(ContestBattle.selectedEnemy(), 1, newMoves);
 
         let matchup = ContestRunner.type() === ContestType.Balanced ? 1 : ContestTypeHelper.getAppealModifier([move.moveType], [ContestRunner.type()]);
-        // Dance hearts give points too, so limit Move additions
-        if (ContestRunner.danceMode()) {
-            matchup = Math.floor(matchup);
-        }
         ContestScore.increaseChain(Math.ceil(matchup));
 
         return;

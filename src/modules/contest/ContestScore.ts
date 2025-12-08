@@ -13,7 +13,7 @@ export default class ContestScore {
     }
 
     public static increaseChain(amount = 1) {
-        const currentChain = Math.max(1, ContestScore.activeChain());
+        const currentChain = Math.max(0, ContestScore.activeChain());
         const newChain = currentChain + Math.round(Math.max(0, amount));
         ContestScore.activeChain(newChain);
         ContestScore.increaseScore(0);

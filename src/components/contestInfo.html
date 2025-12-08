@@ -456,6 +456,7 @@
         <!-- /ko -->
     </div>
 
+    <!-- ko if: new DevelopmentRequirement().isCompleted() -->
     <div class="modal-footer">
         <div class="input-group m-0">
             <div class="input-group-prepend">
@@ -475,27 +476,26 @@
                 <button class="btn btn-warning smallButton smallFont"></button>
             </div>
         </div>
-    </div>
-    <!-- <div class="modal-footer">
         <div class="input-group m-0">
             <div class="input-group-prepend">
                 <button class="btn btn-warning smallButton smallFont" data-bind="
                     tooltip: {
-                        title: 'Change how much audience appeal you deal per contest action',
+                        title: 'Change the duration of the contest timer',
                         trigger: 'hover focus',
                     }">
-                    Test Appeal
+                    Test Timer
                 </button>
             </div>
             <input type="number" class="outline-dark form-control form-control-number"
                 value="0" min="0" required
-                data-bind="textInput: ContestBattle.testAppeal, attr: { max: player.itemList.PokeBlock_Gold(), disabled: ContestRunner.running() }"
+                data-bind="textInput: ContestBattle.testTimer"
             title=""/>
             <div class="d-md-flex input-group-append">
-                <button class="btn btn-warning smallButton smallFont" data-bind="text: `In Bag: ${player.itemList.PokeBlock_Gold().toLocaleString('en-US')}`"></button>
+                <button class="btn btn-warning smallButton smallFont"></button>
             </div>
         </div>
-    </div> -->
+    </div>
+    <!-- /ko -->
 </script>
 
 <script type="text/html" id="trainerInfoTable">

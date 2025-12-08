@@ -5,7 +5,7 @@ import type {
 } from 'knockout';
 import ContestRank from '../enums/ContestRank';
 import ContestType from '../enums/ContestType';
-import { CONTEST_TICK, CONTEST_TIME, GameState } from '../GameConstants';
+import { CONTEST_TICK, CONTEST_TIME, GameState, SECOND } from '../GameConstants';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
 import ContestHelper from './ContestHelper';
@@ -52,7 +52,7 @@ export default class ContestRunner {
 
         ContestRunner.running(false);
         ContestRunner.danceMode(ContestHelper.isDanceHall(ContestRunner.rank()));
-        ContestRunner.timeLeft(CONTEST_TIME * ContestHelper.contestRankTimer(ContestRunner.rank()));
+        ContestRunner.timeLeft(ContestBattle.testTimer() * SECOND);
         ContestRunner.timeLeftPercentage(100);
         ContestRunner.audienceAppeal(0);
         ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()]); // todo: increase number when pokeblocks are in
@@ -194,7 +194,7 @@ export default class ContestRunner {
 
                 // Compensate berries for dance halls
                 ContestBattle.addContestBerryReward(ContestRunner.rank() < ContestRank.Spectacular ? Math.max(0, ContestRunner.rank() - 1) % 4 + 1 : ContestRunner.rank(),
-                    Number(ContestRunner.danceMode()) * Math.min(ContestRunner.rank(), ContestRunner.encoreRound()),
+                    Number(ContestRunner.danceMode()) * Math.min(ContestRunner.rank(), ContestRunner.encoreRound() || 1),
                     true,
                 );
 
