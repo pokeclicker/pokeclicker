@@ -4732,7 +4732,7 @@ TownList['Sunyshore City'] = new Town(
     [SunyshoreCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Sunyshore City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 222)],
-        npcs: [SunyshoreRibbonerJulia],
+        npcs: [SunyshoreRibbonerJulia, SunyshoreDoctor],
     }
 );
 TownList['Fight Area'] = new Town(
