@@ -128,8 +128,8 @@ export default class ContestRewards {
 
     public static itemRewards(): ContestItemReward[] {
         return [
-            { item: 'Heart_scale', amount: ko.observable(1), chance: 600, requirement: new InContestRankRequirement(ContestRank.Spectacular) },
-            { item: 'Star_piece', amount: ko.observable(1), chance: 600, requirement: new InContestRankRequirement(ContestRank.Spectacular) },
+            { item: 'Heart_scale', amount: ko.observable(1), chance: 100, requirement: new InContestRankRequirement(ContestRank.Spectacular) },
+            { item: 'Star_piece', amount: ko.observable(1), chance: 100, requirement: new InContestRankRequirement(ContestRank.Spectacular) },
         ];
     }
 }

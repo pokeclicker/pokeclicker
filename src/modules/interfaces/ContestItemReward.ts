@@ -9,4 +9,5 @@ export default interface ContestItemReward {
     amountLimit?: number,
     chance?: number,
     requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
+    displayRequirement?: MultiRequirement | OneFromManyRequirement | Requirement,
 }
