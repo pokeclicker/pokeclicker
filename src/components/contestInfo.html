@@ -193,7 +193,7 @@
                 <!-- /ko -->
             </tbody>
         </table>
-        <!-- ko with: ContestRewards.itemRewards().filter(i => i.displayRequirement.isCompleted() ?? i.requirement.isCompleted()) -->
+        <!-- ko with: ContestRewards.itemRewards().filter(i => i.displayRequirement?.isCompleted() ?? i.requirement?.isCompleted() ?? true) -->
         <!-- ko if: $data.length -->
         <table class="table table-striped table-hover table-sm mb-1 p-0 show" style="justify-content: space-evenly;">
             <tbody>
