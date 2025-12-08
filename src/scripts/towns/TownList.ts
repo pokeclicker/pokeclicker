@@ -974,7 +974,7 @@ TownList['Vermilion City'] = new Town(
     [VermilionCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Vermilion City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
-        npcs: [VermilionFanClubChairman, VermilionShardApprentice, VermilionEusine, SquirtleJenny],
+        npcs: [VermilionFanClubChairman, VermilionShardApprentice, SquirtleJenny, VermilionEusine],
     }
 );
 TownList['Lavender Town'] = new Town(
@@ -994,7 +994,7 @@ TownList['Celadon City'] = new Town(
     [CeladonDepartmentStoreShop, CeladonCityShop, new MoveToDungeon(dungeonList['Rocket Game Corner'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
-        npcs: [BigSpender, EggHuntErika, CandyMan],
+        npcs: [BigSpender, CandyMan, EggHuntErika],
     }
 );
 TownList['Saffron City'] = new Town(
