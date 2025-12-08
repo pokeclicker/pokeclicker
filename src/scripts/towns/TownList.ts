@@ -3527,7 +3527,7 @@ TownList['Pokémon League Hoenn'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.hoenn, 128),
             new TemporaryBattleRequirement('Wally 2'),
         ],
-        npcs: [TicketClaim, DeltaSteven2, DeltaSteven3],
+        npcs: [DeltaSteven2, DeltaSteven3, TicketClaim],
     }
 );
 TownList['Southern Island'] = new Town(
