@@ -172,6 +172,28 @@
                 ">
             </button>
         </div>
+        <div class="mb-3" data-bind="visible: ContestRunner.contestRankObservable().length > 1,
+            foreach: { data: ContestRunner.contestRankObservable().filter(r => r != ContestRank.Practice), as: 'rank' }">
+            <button class="btn btn-info"
+                data-bind="click: () => {
+                    if (!ContestRunner.running()) {
+                    ContestRunner.rank(rank);
+                    } else {
+                    Notifier.notify({
+                        title: 'Pokémon Contest',
+                        message: 'You can\'t change the contest rank while you are competing!',
+                        type: NotificationConstants.NotificationOption.warning,
+                    })
+                    };
+                },
+                text: ContestRank[rank],
+                css: {
+                    active: ContestRunner.rank() == rank,
+                },
+                attr:{'aria-label': `${ContestRank[rank]}`}
+                ">
+            </button>
+        </div>
 
         <table class="table table-striped table-hover table-sm mb-1 p-0 show" style="justify-content: space-evenly;">
             <tbody>
