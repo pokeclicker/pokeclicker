@@ -4105,8 +4105,8 @@ const CanalaveCityShop = new Shop ([
     ItemList.Metal_coat,
 ]);
 const PalParkShop = new Shop([
-    ItemList.Razor_claw,
-    ItemList.Razor_fang,
+    ItemList.Razor_Claw,
+    ItemList.Razor_Fang,
     ItemList.Combee,
     ItemList['Burmy (Plant)'],
     ItemList.Cherubi,
@@ -5000,8 +5000,8 @@ const DriftveilCityShop = new Shop([
     ItemList.Greatball,
     ItemList.Dowsing_machine,
     ItemList.Lucky_incense,
-    ItemList.Razor_claw,
-    ItemList.Razor_fang,
+    ItemList.Razor_Claw,
+    ItemList.Razor_Fang,
     ItemList.Zorua,
 ]);
 const MistraltonCityShop = new Shop([
@@ -5980,8 +5980,8 @@ const AnistarCityShop = new Shop([
     ItemList.Ultraball,
     ItemList.Moon_stone,
     ItemList.Sun_stone,
-    ItemList.Razor_claw,
-    ItemList.Razor_fang,
+    ItemList.Razor_Claw,
+    ItemList.Razor_Fang,
 ]);
 const CouriwayTownShop = new Shop([
     ItemList.Pokeball,
@@ -6904,8 +6904,8 @@ const TapuVillageShop = new Shop([
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.Lucky_egg,
-    ItemList.Razor_claw,
-    ItemList.Razor_fang,
+    ItemList.Razor_Claw,
+    ItemList.Razor_Fang,
     ItemList.Ice_stone,
 ]);
 const SeafolkVillageShop = new Shop([
@@ -8480,8 +8480,8 @@ const CirchesterShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
-    ItemList.Razor_claw,
-    ItemList.Razor_fang,
+    ItemList.Razor_Claw,
+    ItemList.Razor_Fang,
     ItemList.Protector,
     ItemList.Ice_stone,
 ]);

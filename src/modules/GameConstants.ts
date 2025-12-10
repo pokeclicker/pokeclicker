@@ -1047,8 +1047,6 @@ export enum StoneType {
     'Shiny_stone',
     'Dusk_stone',
     'Dawn_stone',
-    'Razor_claw',
-    'Razor_fang',
     'Electirizer',
     'Magmarizer',
     'Protector',

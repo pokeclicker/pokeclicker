@@ -190,6 +190,10 @@ ItemList.Light_Ball = new PokemonRestrictedAttackBonusHeldItem('Light_Ball', 100
     (pokemon) => Math.floor(pokemon.id) == 25);
 ItemList.Lucky_Punch = new PokemonRestrictedAttackBonusHeldItem('Lucky_Punch', 10000, GameConstants.Currency.money, undefined, 'Lucky Punch', 1.3, GameConstants.Region.sinnoh, 'Happiny, Chansey or Blissey',
     (pokemon) => Math.floor(pokemon.id) == 440 ||  Math.floor(pokemon.id) == 113 || Math.floor(pokemon.id) == 242);
+ItemList.Razor_Fang = new PokemonRestrictedAttackBonusHeldItem('Razor_Fang', 2500, GameConstants.Currency.questPoint, undefined, 'Razor Fang', 1.3, GameConstants.Region.sinnoh, 'Gligar or Gliscor',
+    (pokemon) => Math.floor(pokemon.id) == 207 ||  Math.floor(pokemon.id) == 472);
+ItemList.Razor_Claw = new PokemonRestrictedAttackBonusHeldItem('Razor_Claw', 2500, GameConstants.Currency.questPoint, undefined, 'Razor Claw', 1.3, GameConstants.Region.sinnoh, 'Sneasel, Weavile or Sneasler',
+    (pokemon) => Math.floor(pokemon.id) == 215 ||  Math.floor(pokemon.id) == 461 ||  Math.floor(pokemon.id) == 903);
 ItemList.Quick_Powder = new PokemonRestrictedAttackBonusHeldItem('Quick_Powder', 10000, GameConstants.Currency.money, undefined, 'Quick Powder', 1.3, GameConstants.Region.kalos, 'Ditto',
     (pokemon) => Math.floor(pokemon.id) == 132);
 ItemList.Thick_Club = new PokemonRestrictedAttackBonusHeldItem('Thick_Club', 10000, GameConstants.Currency.money, undefined, 'Thick Club', 1.3, GameConstants.Region.alola, 'Cubone or Marowak',
