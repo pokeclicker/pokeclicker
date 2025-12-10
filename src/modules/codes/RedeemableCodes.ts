@@ -248,7 +248,7 @@ export default class RedeemableCodes implements Saveable {
 
     enterCode(code: string): void {
         // If this is a Discord code, send it to the Discord class to check
-        if (App.game.discord.enabled && this.isDiscordCode(code)) {
+        if (this.isDiscordCode(code)) {
             App.game.discord.enterCode(code);
             return;
         }

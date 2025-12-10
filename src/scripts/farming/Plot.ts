@@ -127,7 +127,7 @@ class Plot implements Saveable {
             if (this.mulch === MulchType.None) {
                 return '';
             }
-            return GameConstants.formatTime(this.mulchTimeLeft);
+            return GameConstants.formatTime(this.mulchTimeLeft * App.game.farming.getMulchDurationMultiplier());
         });
 
         this.auraGrowth = ko.pureComputed(() => {
@@ -187,6 +187,8 @@ class Plot implements Saveable {
         this.isEmpty = ko.pureComputed(() => {
             return this.berry === BerryType.None;
         });
+
+        this.isMulched = ko.pureComputed(() => this.mulch !== MulchType.None);
 
         this.stage = ko.pureComputed(() => {
             if (this.berry === BerryType.None) {
@@ -287,6 +289,13 @@ class Plot implements Saveable {
                 tooltip.push(`A wild <strong>${PokemonHelper.displayName(this.wanderer.name)()}</strong> is wandering around`);
             }
 
+            // Mutation
+            const possibleMutations = App.game.farming.possiblePlotMutations()[this.index];
+            if (possibleMutations.length) {
+                tooltip.push('<u>Possible Mutations</u>');
+                possibleMutations.forEach((mutation) => tooltip.push(mutation));
+            }
+
             return tooltip.join('<br/>');
         });
 
@@ -337,7 +346,7 @@ class Plot implements Saveable {
 
         // Updating Mulch
         if (this.mulch !== MulchType.None) {
-            this.mulchTimeLeft = Math.max(this.mulchTimeLeft - seconds, 0);
+            this.mulchTimeLeft = Math.max(this.mulchTimeLeft - seconds / App.game.farming.getMulchDurationMultiplier(), 0);
             if (this.mulchTimeLeft === 0) {
                 this.notifications.push(FarmNotificationType.MulchRanOut);
                 this.mulch = MulchType.None;
@@ -403,7 +412,6 @@ class Plot implements Saveable {
             if (Rand.chance(replantChance)) {
                 this.age = 0;
                 this.notifications.push(FarmNotificationType.Replanted);
-                App.game.oakItems.use(OakItemType.Sprinklotad);
                 GameHelper.incrementObservable(App.game.statistics.totalBerriesReplanted, 1);
                 return;
             }

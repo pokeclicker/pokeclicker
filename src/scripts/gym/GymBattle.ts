@@ -1,4 +1,3 @@
-///<reference path="../Battle.ts"/>
 class GymBattle extends Battle {
 
     static gym: Gym;
