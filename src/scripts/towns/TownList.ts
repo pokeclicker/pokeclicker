@@ -4667,7 +4667,7 @@ TownList['Pal Park'] = new Town(
     'Pal Park',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [PalParkShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Pal Park']), TemporaryBattleList['Manaphy Egg Protectors']],
+    [PalParkShop, TemporaryBattleList['Manaphy Egg Protectors']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 221)],
         npcs: [PalParkWarden, PalParkBurglar, HappinyBoulders],
@@ -5452,7 +5452,7 @@ TownList['Driftveil City'] = new Town(
     'Driftveil City',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [TemporaryBattleList['Hugh 7'], DriftveilCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Driftveil City']), DriftveilBerryMaster],
+    [TemporaryBattleList['Hugh 7'], DriftveilCityShop, DriftveilBerryMaster],
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.unova, 5),
