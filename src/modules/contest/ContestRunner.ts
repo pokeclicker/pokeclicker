@@ -145,8 +145,10 @@ export default class ContestRunner {
      * @param rally - by how much to increase the audience bar by
      */
     public static rally(rally: number): void {
-        // only expand audience bar after last rally has been calculated so players have time to process completion status
+        // expand audience bar after last rally has been calculated so players have time to process completion status
+        let alreadyRallied = false;
         if (ContestRunner.isRallied()) {
+            alreadyRallied = true;
             ContestRunner.maxAudienceAppeal(Math.round(ContestHelper.rankAppeal[ContestRunner.rank()] * Math.pow(1.5, ContestRunner.encoreRound())));
         }
 
@@ -158,6 +160,11 @@ export default class ContestRunner {
         ContestScore.encoreBonus(1 + encores);
 
         ContestRunner.audienceAppeal(rallyAmount);
+
+        // update bar if it's been full for too long to better indicate progress being made
+        if (ContestRunner.isRallied() && alreadyRallied) {
+            ContestRunner.maxAudienceAppeal(Math.round(ContestHelper.rankAppeal[ContestRunner.rank()] * Math.pow(1.5, ContestRunner.encoreRound())));
+        }
     }
 
     public static contestTokenReward() {
