@@ -22,6 +22,9 @@ class StoneUnlockedRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `You need to reach the ${GameConstants.Region[this.requiredValue]} region.`;
+        if (this.requiredValue > GameConstants.MAX_AVAILABLE_REGION) {
+            return 'This item is from a region that hasn\'t been released yet.';
+        }
+        return `You need to reach the ${GameConstants.camelCaseToString(GameConstants.Region[this.requiredValue])} region.`;
     }
 }

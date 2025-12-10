@@ -22,8 +22,8 @@ class CatchShadowsQuest extends Quest implements QuestInterface {
         return super.randomizeReward(reward);
     }
 
-    get description(): string {
-        return this.customDescription ?? `Catch ${this.amount.toLocaleString('en-US')} Shadow Pokémon.`;
+    get defaultDescription(): string {
+        return `Catch ${this.amount.toLocaleString('en-US')} Shadow Pokémon.`;
     }
 
     toJSON() {

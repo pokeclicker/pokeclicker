@@ -1,4 +1,4 @@
-import CaughtIndicatingItem from './CaughtIndicatingItem';
+import PokerusIndicatingItem from './PokerusIndicatingItem';
 import { PokemonNameType } from  '../pokemons/PokemonNameType';
 import CaughtStatus from '../enums/CaughtStatus';
 import { Computed as KnockoutComputed } from 'knockout';
@@ -11,7 +11,7 @@ import Notifier from '../notifications/Notifier';
 import { createLogContent } from '../logbook/helpers';
 import { LogBookTypes } from '../logbook/LogBookTypes';
 
-export default class PokemonItem extends CaughtIndicatingItem {
+export default class PokemonItem extends PokerusIndicatingItem {
     type: PokemonNameType;
     private _translatedOrDisplayName: KnockoutComputed<string>;
 
@@ -22,7 +22,8 @@ export default class PokemonItem extends CaughtIndicatingItem {
         public ignoreEV = false,
         displayName: string = undefined,
         options?: ShopOptions,
-        name: string = pokemon) {
+        name: string = pokemon,
+    ) {
         super(name, basePrice, currency, options, undefined, `Add ${pokemon} to your party.`, 'pokemonItem');
         this.type = pokemon;
         this._translatedOrDisplayName = ko.pureComputed(() => displayName ?? PokemonHelper.displayName(pokemon)());
@@ -43,8 +44,8 @@ export default class PokemonItem extends CaughtIndicatingItem {
             // Statistics
             if (i < amt - 1) { // -1 because gainPokemonById will add 1 to statistics
                 const gender = PokemonFactory.generateGenderById(pokemonID);
-                const shadow = ShadowStatus.None;
-                PokemonHelper.incrementPokemonStatistics(pokemonID, PokemonStatisticsType.Captured, shinyBool, gender, shadow);
+                const shinyStatistic = shinyBool && numShiny > 1;
+                PokemonHelper.incrementPokemonStatistics(pokemonID, PokemonStatisticsType.Captured, shinyStatistic, gender, ShadowStatus.None);
             }
         }
 
@@ -80,6 +81,15 @@ export default class PokemonItem extends CaughtIndicatingItem {
 
     getPokerusStatus(): Pokerus {
         return PartyController.getPokerusStatusByName(this.type);
+    }
+
+    getPokerusProgress(): string {
+        const evs = PartyController.getEvsByName(this.type);
+        return evs >= 50 ? 'Already resistant!' : `EVs: ${evs.toLocaleString('en-US')} / 50`;
+    }
+
+    showBagAmount() {
+        return false;
     }
 
     get image() {

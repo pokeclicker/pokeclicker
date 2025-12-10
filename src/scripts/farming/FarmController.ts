@@ -8,6 +8,7 @@ class FarmController {
     public static farmingModalTabSelected: KnockoutObservable<string> = ko.observable('berryFarmView');
 
     public static berryListEnd: KnockoutComputed<number>;
+    public static berryListSearch: KnockoutObservable<string> = ko.observable('');
 
     public static selectedBerry: KnockoutObservable<BerryType> = ko.observable(BerryType.Cheri);
     public static selectedMulch: KnockoutObservable<MulchType> = ko.observable(MulchType.Boost_Mulch);
@@ -25,7 +26,7 @@ class FarmController {
         this.berryListFiltered(Array.from(Array(GameHelper.enumLength(BerryType) - 1).keys()));
 
         this.numberOfTabs = ko.pureComputed(() => {
-            return Math.floor(App.game.farming.highestUnlockedBerry() / this.BERRIES_PER_PAGE);
+            return Math.max(1, Math.ceil(FarmController.filteredBerryList().length / this.BERRIES_PER_PAGE));
         });
 
         this.berryListEnd = ko.pureComputed(() => {
@@ -33,6 +34,8 @@ class FarmController {
             const highestMutationHint = highestMutation?.mutatedBerry ?? 0;
             return Math.max(App.game.farming.highestUnlockedBerry(), highestMutationHint);
         });
+
+        this.berryListSearch.subscribe(() => this.navigateIndex(0));
 
         this.navigateIndex(0);
     }
@@ -192,7 +195,7 @@ class FarmController {
     }
 
     public static navigateRight() {
-        if (FarmController.navigateIndex() < FarmController.numberOfTabs()) {
+        if (FarmController.navigateIndex() < FarmController.numberOfTabs() - 1) {
             FarmController.navigateIndex(FarmController.navigateIndex() + 1);
             this.selectedBerry(this.getUnlockedBerryListWithIndex()[0]);
         }
@@ -205,8 +208,18 @@ class FarmController {
         }
     }
 
+    public static filteredBerryList = ko.pureComputed((): Array<BerryType> => {
+        let berryList = FarmController.getUnlockedBerryList();
+        const searchVal = FarmController.berryListSearch().trim();
+        if (searchVal.length) {
+            const split = searchVal.toLowerCase().split(' ').filter(s => s);
+            berryList = berryList.filter((berry) => App.game.farming.unlockedBerries[berry]() && split.some((val) => BerryType[berry].toLowerCase().includes(val)));
+        }
+        return berryList;
+    });
+
     public static getUnlockedBerryListWithIndex() {
-        return this.getUnlockedBerryList().slice(this.navigateIndex() * this.BERRIES_PER_PAGE, (this.navigateIndex() * this.BERRIES_PER_PAGE) + this.BERRIES_PER_PAGE);
+        return FarmController.filteredBerryList().slice(this.navigateIndex() * this.BERRIES_PER_PAGE, (this.navigateIndex() * this.BERRIES_PER_PAGE) + this.BERRIES_PER_PAGE);
     }
 
     public static getUnlockedBerryList() {

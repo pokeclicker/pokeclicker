@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const gulp = require('gulp');
 const changed = require('gulp-changed');
-const minifyHtml = require('gulp-minify-html');
 const concat = require('gulp-concat');
 const autoprefix = require('gulp-autoprefixer');
-const minifyCSS = require('gulp-minify-css');
+const cleanCSS = require('gulp-clean-css');
 const typescript = require('gulp-typescript');
 const browserSync = require('browser-sync');
 const less = require('gulp-less');
-const gulpImport = require('gulp-html-import');
 const ejs = require('gulp-ejs');
 const plumber = require('gulp-plumber');
 const replace = require('gulp-replace');
@@ -20,6 +18,7 @@ const webpack = require('webpack');
 const del = require('del');
 const fs = require('fs');
 const path = require('path');
+const { Transform } = require('node:stream');
 const version = process.env.npm_package_version || '0.0.0';
 
 const webpackConfig = require('./webpack.config');
@@ -47,17 +46,78 @@ const escapeRegExp = (string) => {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 };
 
-const htmlImportIf = (html_str, is_true) => {
-    // Allow import if
-    if (is_true) {
-        // replace with standard import
-        return replace(`@importif ${html_str}`, '@import');
-    } else {
-        // remove the line
-        const replaceRegex = new RegExp(`\\s*@importif ${escapeRegExp(html_str)}.*\\n?`, 'g');
-        return replace(replaceRegex, '');
-    }
+/* Adapted from https://github.com/jrainlau/gulp-html-import */
+const importHTML = (componentsUrl) => {
+    const fileReg = /(?<=^\s*)(@import|@importif\s\$[\w.]+)\s"([^"\n]*)"/gim;
+
+    const recursiveImport = (data, importPaths) => {
+        const curPath = importPaths.at(-1);
+        const curDirectory = curPath.startsWith(path.normalize(componentsUrl)) ? path.parse(curPath).dir : componentsUrl;
+        return data.replace(fileReg, (match, importType, componentName) => {
+            if (importType.startsWith('@importif')) {
+                // Handle conditional imports
+                const configSetting = importType.match(/@importif \$(.+)/)[1];
+                let configVal;
+                try {
+                    configVal = configSetting.split('.').reduce((object, property) => object[property], config);
+                    if (configVal === undefined) {
+                        throw new Error();
+                    }
+                } catch (e) {
+                    console.error(`HTML importer could not find config '$${configSetting}' for conditional import in file ${curPath}`);
+                    return '' // import failed, remove this line
+                }
+                if (!configVal) {
+                    // Conditional import not met, remove this line
+                    console.log(`[skipped] ${match} --> condition not met`);
+                    return '';
+                }
+            }
+
+            const matchPath = path.join(curDirectory, componentName);
+            const importPathsNew = [...importPaths, matchPath];
+            console.log(`${match} --> ${matchPath}`);
+            if (importPaths.includes(matchPath)) {
+                throw new Error(`Recursive HTML importer encountered an import loop:\n${importPathsNew.join(' --> ')}`);
+            }
+            try {
+                const importContents = fs.readFileSync(matchPath, {
+                    encoding: 'utf8',
+                });
+                return `<!-- imported from ${matchPath} -->\n${recursiveImport(importContents, importPathsNew)}`;
+            } catch (e) {
+                if (e.code === 'ENOENT') {
+                    throw new Error(`HTML importer can't find imported file ${matchPath}`);
+                } else {
+                    throw e;
+                }
+            }
+        });
+    };
+
+    return new Transform({
+        objectMode: true,
+        highWaterMark: 16,
+        transform(file, enc, cb) {
+            if (file.isNull()) {
+                return cb(null, file);
+            }
+
+            if (file.isStream()) {
+                return cb(new Error('Our HTML importer doesn\'t support streams'));
+            }
+
+            let data = file.contents.toString();
+            let dataReplace = recursiveImport(data, [path.relative('./', file.path)]);
+
+            file.contents = Buffer.from(dataReplace);
+            file.extname = '.html';
+            console.log('Import finished.');
+            cb(null, file);
+        },
+    });
 };
+/* end adapted */
 
 /**
  * Push build to gh-pages
@@ -84,7 +144,6 @@ const srcs = {
         'node_modules/knockout/build/output/knockout-latest.js',
         'node_modules/bootstrap-notify/bootstrap-notify.min.js',
         'node_modules/sortablejs/Sortable.min.js',
-        'src/libs/*.js',
     ],
 };
 
@@ -139,11 +198,9 @@ gulp.task('browserSync', () => {
 gulp.task('compile-html', (done) => {
     const htmlDest = './build';
     const stream = gulp.src('./src/index.html');
-    // If we want the development banner displayed
-    stream.pipe(htmlImportIf('$DEV_BANNER', config.DEV_BANNER));
 
     stream.pipe(plumber())
-        .pipe(gulpImport('./src/components/'))
+        .pipe(importHTML('./src/components/'))
         .pipe(replace('$VERSION', version))
         .pipe(replace('$DEVELOPMENT', !!config.DEVELOPMENT))
         .pipe(replace('$FEATURE_FLAGS', process.env.NODE_ENV === 'production' ? '{}' : JSON.stringify(config.FEATURE_FLAGS)))
@@ -164,7 +221,7 @@ gulp.task('scripts', () => {
     const osPathModulePrefix = convertPathToOS('../src/declarations');
 
     // Declarations for modules globally available as module namespaces (the JS kind) need to be wrapped in namespaces (the TS kind)
-    const globalModules = ['GameConstants.d.ts', `pokemons/PokemonHelper.d.ts`].map(p => convertPathToOS(p));
+    const globalModules = ['GameConstants.d.ts', 'pokemons/PokemonHelper.d.ts'].map(p => convertPathToOS(p));
     const globalModulesFilter = filter((vinylPath) => globalModules.some(modPath => vinylPath.relative.includes(modPath)), {restore: true});
 
     const generateDeclarations = base
@@ -230,7 +287,7 @@ gulp.task('styles', () => gulp.src(srcs.styles)
     .pipe(less())
     .pipe(concat('styles.min.css'))
     .pipe(autoprefix('last 2 versions'))
-    .pipe(minifyCSS())
+    .pipe(cleanCSS())
     .pipe(gulp.dest(dests.styles))
     .pipe(browserSync.reload({stream: true})));
 
