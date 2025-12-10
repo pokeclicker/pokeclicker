@@ -169,7 +169,7 @@ export default class ContestHelper {
     }
 
     public static getContestHallRequirements(rank: ContestRank, type?: ContestType): (Requirement | OneFromManyRequirement)[] {
-        if (new DevelopmentRequirement().isCompleted()) {
+        if (new DevelopmentRequirement().isCompleted() && rank < ContestRank['Brilliant Shining']) {
             return [new DevelopmentRequirement()];
         }
         if (rank <= ContestRank.Normal) {
