@@ -906,10 +906,10 @@
         { name: "Miltank"
         , x: 10, y: 13
         , width: 2, height: 2
-        , databind: `attr: { class: MapHelper.accessToRoute(39, GameConstants.Region.johto) ? 'unlockedRoute' : 'lockedRoute' },
-            click: () => {
+        , databind: `click: () => {
                 Notifier.notify({message: 'Moo.'});
             }`
+        , visible: "App.game.statistics.routeKills[GameConstants.Region.johto][39]() >= 10"
         , image: "assets/images/map/transparent.png"
         })
     %>
