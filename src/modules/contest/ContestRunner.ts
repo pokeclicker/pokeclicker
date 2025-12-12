@@ -36,8 +36,8 @@ export default class ContestRunner {
     public static type: KnockoutObservable<number> = ko.observable(0);
 
     // Updated via ContestHall.ts
-    public static contestTypeObservable: KnockoutObservableArray<ContestType> = ko.observableArray();
-    public static contestRankObservable: KnockoutObservableArray<ContestRank> = ko.observableArray();
+    public static contestTypeObservable: KnockoutObservableArray<ContestType> = ko.observableArray([0, 1, 2, 3, 4]);
+    public static contestRankObservable: KnockoutObservableArray<ContestRank> = ko.observableArray([1]);
 
     // Start, End, Restart
     public static startContest() {
@@ -188,9 +188,9 @@ export default class ContestRunner {
         if (ContestRunner.running()) {
             ContestRunner.running(false);
 
-            if (ContestRunner.rank() > ContestRank.Practice) {
-                ContestRunner.updateScore();
-                // Award tokens after each round
+            ContestRunner.updateScore();
+
+            if (ContestRunner.encoreRound() > 0) {
                 ContestBattle.addContestTokenReward(ContestRunner.contestTokenReward());
                 Notifier.notify({
                     title: 'Pokémon Contest',

@@ -193,6 +193,26 @@ export default class ContestHelper {
         return [new ContestWonRequirement(1, rank - 1, type)];
     }
 
+    public static getRankInfo(rank: ContestRank) {
+        switch (rank) {
+            case ContestRank.Normal:
+            case ContestRank.Super:
+            case ContestRank.Hyper:
+            case ContestRank.Master:
+                return 'Hoenn';
+            case ContestRank.Practice:
+            case ContestRank['Super Normal']:
+            case ContestRank['Super Great']:
+            case ContestRank['Super Ultra']:
+            case ContestRank['Super Master']:
+                return 'Sinnoh';
+            case ContestRank.Spectacular:
+                return 'Spectacular';
+            case ContestRank['Brilliant Shining']:
+                return 'BrilliantShining';
+        }
+    }
+
     // Emojis
     public static getContestEmoji(type?: ContestType) {
         switch (type) {

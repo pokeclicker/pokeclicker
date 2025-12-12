@@ -31,7 +31,7 @@
                   </tr>
                   <tr>
                     <td data-bind="text: `${ContestRunner.rank() != ContestRank.Practice ? 'Highest Score' : 'Last Practice Score'}: ${App.game.statistics.contestHighestScore[ContestRunner.rank()][ContestRunner.type()]().toLocaleString('en-US') ?? 0}`"></td>
-                    <td data-bind="text: `Highest Round Won: ${App.game.statistics.contestHighestRound[ContestRunner.rank()][ContestRunner.type()]().toLocaleString('en-US') ?? 0}`"></td>
+                    <td data-bind="text: `Total Won: ${App.game.statistics.contestHighestRound[ContestRunner.rank()][ContestRunner.type()]().toLocaleString('en-US') ?? 0}`"></td>
                   </tr>
                 </table>
               </h2>
@@ -110,7 +110,7 @@
         <table width="100%" style="font-size: small;">
           <tr>
             <td colspan="4" data-bind="text: ContestBattle.trainerInfo(ContestBattle.selectedEnemy())">Opponent name</td>
-            <td colspan="2" rowspan="3" class="" width="25%">
+            <td colspan="2" rowspan="3" class="" width="30%">
               <button class="btn btn-block btn-secondary">
                 <span data-bind="text: 'Crowd Hype'"></span></br>
                 <span data-bind="text: ContestRunner.crowdHypeComputable()"></span>
