@@ -113,7 +113,7 @@ TemporaryBattleList['Blue 4'] = new TemporaryBattle(
         ])),
         new GymPokemon('Magnemite', 28878, 23, new MultiRequirement([
             new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
-            new TemporaryBattleRequirement('Blue 1', GameConstants.AchievementOption.less),
+            new TemporaryBattleRequirement('Blue 1', 1, GameConstants.AchievementOption.less),
         ])),
         new GymPokemon('Gyarados', 28878, 22, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
         new GymPokemon('Exeggcute', 28878, 22, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
@@ -124,7 +124,7 @@ TemporaryBattleList['Blue 4'] = new TemporaryBattle(
         ])),
         new GymPokemon('Shellder', 28878, 23, new MultiRequirement([
             new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
-            new TemporaryBattleRequirement('Blue 1', GameConstants.AchievementOption.less),
+            new TemporaryBattleRequirement('Blue 1', 1, GameConstants.AchievementOption.less),
         ])),
         new GymPokemon('Kadabra', 30398, 20, new OneFromManyRequirement([
             new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass),
@@ -220,7 +220,7 @@ TemporaryBattleList['Blue 5'] = new TemporaryBattle(
         ])),
         new GymPokemon('Cloyster', 38447, 35, new MultiRequirement([
             new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
-            new TemporaryBattleRequirement('Blue 1', GameConstants.AchievementOption.less),
+            new TemporaryBattleRequirement('Blue 1', 1, GameConstants.AchievementOption.less),
         ])),
         new GymPokemon('Gyarados', 38447, 35, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
         new GymPokemon('Exeggcute', 38447, 35, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
@@ -231,7 +231,7 @@ TemporaryBattleList['Blue 5'] = new TemporaryBattle(
         ])),
         new GymPokemon('Magneton', 38447, 37, new MultiRequirement([
             new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
-            new TemporaryBattleRequirement('Blue 1', GameConstants.AchievementOption.less),
+            new TemporaryBattleRequirement('Blue 1', 1, GameConstants.AchievementOption.less),
         ])),
         new GymPokemon('Alakazam', 41482, 35, new OneFromManyRequirement([
             new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass),
@@ -248,7 +248,7 @@ TemporaryBattleList['Blue 5'] = new TemporaryBattle(
         ])),
         new GymPokemon('Flareon', 44113, 35, new MultiRequirement([
             new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
-            new TemporaryBattleRequirement('Blue 1', GameConstants.AchievementOption.less),
+            new TemporaryBattleRequirement('Blue 1', 1, GameConstants.AchievementOption.less),
         ])),
     ],
     'I\'m moving on up and ahead! I\'m going to the Pokémon League to boot out the Elite Four! I\'ll become the world\'s most powerful Trainer! Well, good luck to you! Don\'t sweat it! Smell ya!',
@@ -362,7 +362,7 @@ TemporaryBattleList['Blue 6'] = new TemporaryBattle(
         ])),
         new GymPokemon('Cloyster', 82269, 45, new MultiRequirement([
             new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
-            new TemporaryBattleRequirement('Blue 1', GameConstants.AchievementOption.less),
+            new TemporaryBattleRequirement('Blue 1', 1, GameConstants.AchievementOption.less),
         ])),
         new GymPokemon('Gyarados', 82269, 45, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
         new GymPokemon('Exeggcute', 82269, 45, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
@@ -373,7 +373,7 @@ TemporaryBattleList['Blue 6'] = new TemporaryBattle(
         ])),
         new GymPokemon('Magneton', 82269, 47, new MultiRequirement([
             new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
-            new TemporaryBattleRequirement('Blue 1', GameConstants.AchievementOption.less),
+            new TemporaryBattleRequirement('Blue 1', 1, GameConstants.AchievementOption.less),
         ])),
         new GymPokemon('Alakazam', 84840, 47, new OneFromManyRequirement([
             new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass),
@@ -390,7 +390,7 @@ TemporaryBattleList['Blue 6'] = new TemporaryBattle(
         ])),
         new GymPokemon('Flareon', 92553, 53, new MultiRequirement([
             new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
-            new TemporaryBattleRequirement('Blue 1', GameConstants.AchievementOption.less),
+            new TemporaryBattleRequirement('Blue 1', 1, GameConstants.AchievementOption.less),
         ])),
     ],
     'That loosened me up. I\'m ready for the Pokémon League! You need more practice! But hey, you know that! I\'m out of here. Smell ya!',

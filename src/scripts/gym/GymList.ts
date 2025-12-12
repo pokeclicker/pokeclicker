@@ -258,15 +258,15 @@ GymList['Champion Blue'] = new Gym(
         ])),
         new GymPokemon('Cloyster', 65340, 61, new MultiRequirement([
             new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
-            new TemporaryBattleRequirement('Blue 1', GameConstants.AchievementOption.less),
+            new TemporaryBattleRequirement('Blue 1', 1, GameConstants.AchievementOption.less),
         ])),
         new GymPokemon('Magneton', 70000, 63, new MultiRequirement([
             new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
-            new TemporaryBattleRequirement('Blue 1', GameConstants.AchievementOption.less),
+            new TemporaryBattleRequirement('Blue 1', 1, GameConstants.AchievementOption.less),
         ])),
         new GymPokemon('Flareon', 70000, 65, new MultiRequirement([
             new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
-            new TemporaryBattleRequirement('Blue 1', GameConstants.AchievementOption.less),
+            new TemporaryBattleRequirement('Blue 1', 1, GameConstants.AchievementOption.less),
         ])),
     ],
     BadgeEnums.Elite_KantoChampion,
