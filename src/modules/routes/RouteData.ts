@@ -1141,9 +1141,6 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Eterna Forest'))],
     205.1,
-    undefined,
-    true,
-    1073616,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 211 West', Region.sinnoh, 232,
@@ -1152,9 +1149,6 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 231)],
     205.2,
-    undefined,
-    true,
-    1084013,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 206', Region.sinnoh, 206,
@@ -1236,9 +1230,6 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Fen)],
     210.5,
-    undefined,
-    true,
-    1382025,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 211 East', Region.sinnoh, 211,
