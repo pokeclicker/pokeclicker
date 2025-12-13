@@ -167,7 +167,7 @@ export default class ContestRunner {
         }
     }
 
-    public static contestTokenReward() {
+    public static contestScoreTokens() {
         let multiplier = 100;
         multiplier += ContestBattle.contestClearedMultiplier();
         multiplier /= 100;
@@ -191,19 +191,7 @@ export default class ContestRunner {
             ContestRunner.updateScore();
 
             if (ContestRunner.encoreRound() > 0) {
-                ContestBattle.addContestTokenReward(ContestRunner.contestTokenReward());
-                Notifier.notify({
-                    title: 'Pokémon Contest',
-                    message: `Congratulations! You won <img src="./assets/images/currency/contestToken.svg" height="16px"/> ${ContestRunner.contestTokenReward()} Contest Tokens!`,
-                    type: NotificationConstants.NotificationOption.success,
-                    // TODO: setting to turn off contest notifications
-                });
-
-                // Compensate berries for dance halls
-                ContestBattle.addContestBerryReward(ContestRunner.rank() < ContestRank.Spectacular ? Math.max(0, ContestRunner.rank() - 1) % 4 + 1 : ContestRunner.rank(),
-                    Number(ContestRunner.danceMode()) * Math.min(ContestRunner.rank(), ContestRunner.encoreRound() || 1),
-                    true,
-                );
+                ContestBattle.addContestTokenReward(ContestRunner.contestScoreTokens(), true);
 
                 // First time completion - end here and don't proceed to encore bonus rounds
                 if (App.game.statistics.contestHighestRound[this.rank()][this.type()]() == 0) {

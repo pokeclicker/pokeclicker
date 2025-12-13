@@ -207,18 +207,27 @@ export default class ContestBattle extends Battle {
             if (ContestRunner.frenzyMode()) {
                 // score bonus
                 ContestScore.increaseScore(1.5 * ContestScore.calculateMoveScore(ContestBattle.moveArray()[opponentIndex], ContestRunner.type()));
-                // dancing gives more tokens but no berries, to make ranks more distinct
+
+                // berries
+                // berry rank tiers are repeated for the equivalent super contests ranks
+                const berryRank = ContestRunner.rank() < ContestRank.Spectacular ? Math.max(0, ContestRunner.rank() - 1) % 4 + 1 : ContestRunner.rank();
+                // dancing gives less berries (but more tokens), to make regional ranks more distinct
                 if (!ContestRunner.danceMode()) {
-                    ContestBattle.addContestBerryReward(ContestRunner.rank(), ContestBattle.getBerryMultiplier());
-                } else if (ContestRunner.rank() > ContestRank.Practice) {
+                    ContestBattle.addContestBerryReward(berryRank, ContestBattle.getBerryMultiplier());
+                } else if (opponentIndex >= ContestBattle.pokemons().length - 1) {
+                    ContestBattle.addContestBerryReward(berryRank, Math.min(ContestRunner.rank(), ContestBattle.getBerryMultiplier()));
+                }
+
+                // tokens
+                if (ContestRunner.rank() > ContestRank.Practice) {
                     const tokenRank = Math.max(0, ContestRunner.rank() - 1) % 4 + 1 + Math.max(0,  ContestRunner.rank() - 8);
                     const tokRew = Math.round(tokenRank * (10 + opponent.danceHearts()) / 10);
                     if (opponent.danceHearts() > 0) {
                         ContestBattle.addContestTokenReward(tokRew);
                     }
-                } else if (opponentIndex >= ContestBattle.pokemons().length - 1) {
-                    ContestScore.increaseChain(ContestBattleDance.frenzyHeartsTotal());
                 }
+
+                // items
                 ContestRewards.itemRewards().forEach(i => ContestBattle.addContestItemReward(i));
             }
         }
@@ -362,6 +371,7 @@ export default class ContestBattle extends Battle {
 
     public static getBerryMultiplier(): number {
         // check if any move pool has a good matchup against the running contest type
+        // more opponents = more berries
         let sum = 0;
         ContestBattle.moveArray().forEach(ct => {
             sum += ContestTypeHelper.getAppealModifier(ct, [ContestRunner.type()]);
@@ -393,11 +403,17 @@ export default class ContestBattle extends Battle {
 
     // Rewards and Reward Log
     // Tokens
-    public static addContestTokenReward(amount: number) {
+    public static addContestTokenReward(amount: number, finishedContest = false) {
         // gain tokens
         App.game.wallet.gainContestTokens(amount);
         // log token gain
         GameHelper.incrementObservable(ContestBattle.tokenReward, amount);
+        Notifier.notify({
+            title: 'Pokémon Contest',
+            message: `${!finishedContest ? 'You got' : 'Congratulations! You won'} <img src="./assets/images/currency/contestToken.svg" height="16px"/> ${amount} Contest Tokens!`,
+            type: NotificationConstants.NotificationOption.success,
+            // TODO: setting to turn off contest notifications
+        });
     }
 
     // Berries
