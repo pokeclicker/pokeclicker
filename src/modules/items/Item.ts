@@ -72,7 +72,7 @@ export default class Item {
             return Math.max(0, this.basePrice * targetAmount);
         }
 
-        if (this.multiplier === 1 && this.badgeMult === true) {
+        if (this.multiplier === 1) {
             return Math.max(0, this.basePrice + ( this.basePrice * targetAmount * App.game.badgeCase.badgeCount() ));
         }
 
