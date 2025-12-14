@@ -4,6 +4,7 @@ import MultiplierType from '../multiplier/MultiplierType';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
 import Item from './Item';
+import { ShopOptions } from './types';
 
 export default class BattleItem extends Item {
     type: BattleItemType;
@@ -13,11 +14,12 @@ export default class BattleItem extends Item {
         description: string,
         basePrice: number,
         currency: Currency = Currency.money,
+        options?: ShopOptions,
         displayName?: string,
         public multiplierType?: keyof typeof MultiplierType,
         public multiplyBy?: number,
     ) {
-        super(BattleItemType[type], basePrice, currency, undefined, displayName, description, 'battleItem');
+        super(BattleItemType[type], basePrice, currency, options, displayName, description, 'battleItem');
         this.type = type;
     }
 
