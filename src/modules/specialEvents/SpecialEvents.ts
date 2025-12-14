@@ -167,7 +167,7 @@ export default class SpecialEvents implements Feature {
             },
         );
         // Halloween
-        this.newEvent('Halloween!', 'Encounter Spooky Pokémon for a limited time around Kanto, Johto and Hoenn.',
+        this.newEvent('Halloween!', 'Spooky Pokémon are trick-or-treating for a limited time around Kanto, Johto and Hoenn.',
             // Start
             new Date(new Date().getFullYear(), 9, 30, 1), () => {
             },
