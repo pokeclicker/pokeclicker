@@ -85,7 +85,7 @@ ItemList.Amaze_Mulch = new MulchItem(MulchType.Amaze_Mulch, 200, 'Amaze Mulch', 
 ItemList.Freeze_Mulch = new MulchItem(MulchType.Freeze_Mulch, 350, 'Freeze Mulch', 'Stops Berry growth and auras. Mutations will still occur while berries are frozen.');
 ItemList.Gooey_Mulch = new MulchItem(MulchType.Gooey_Mulch, 100, 'Gooey Mulch', 'Helps attract rarer species. Gooed Pokémon are more likely to be caught.');
 
-ItemList.Pokeball   = new PokeballItem(Pokeball.Pokeball, 100, undefined, { multiplier: 1 }, 'Poké Ball');
+ItemList.Pokeball   = new PokeballItem(Pokeball.Pokeball, 100, undefined, { multiplier: 1, badgeMult?: true }, 'Poké Ball');
 ItemList.Greatball  = new PokeballItem(Pokeball.Greatball, 500, undefined, undefined, 'Great Ball');
 ItemList.Ultraball  = new PokeballItem(Pokeball.Ultraball, 2000, undefined, undefined, 'Ultra Ball');
 ItemList.Masterball = new PokeballItem(Pokeball.Masterball, 2500, Currency.questPoint, undefined, 'Master Ball');

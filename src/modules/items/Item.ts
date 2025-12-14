@@ -25,6 +25,7 @@ export default class Item {
     _displayName: string;
     imageDirectory?: string;
     visible?: Requirement;
+    badgeMult?: boolean;
 
     constructor(
         public name: string,
@@ -41,6 +42,7 @@ export default class Item {
         displayName?: string,
         description?: string,
         imageDirectory?: string,
+        badgeMult?: false,
     ) {
         // Base price needs to be positive, items that can't be purchased via currency should be priced at Infinity
         if (this.basePrice <= 0) {
@@ -82,7 +84,13 @@ export default class Item {
         const maxCost = (this.basePrice * 100 * (targetAmount - incAmount));
         const total = incCost + maxCost;
 
-        return Math.max(0, Math.round(total));
+        if (this.badgeMult = false) {
+            return Math.max(0, Math.round(total));
+        }
+
+        const badgeMultTotal = total + (total * App.game.badgeCase.badgeCount());
+
+        return Math.max(0, Math.round(badgeMultTotal));
     }
 
     buy(amt: number) {
