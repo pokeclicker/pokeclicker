@@ -395,6 +395,7 @@ class GameController {
                     // Open the achievmeents tracker
                     if (achievements.canAccess() && !$achievementsModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
+                        AchievementHandler.filterAchievementList(true);
                         $achievementsModal.modal('toggle');
                         return e.preventDefault();
                     }

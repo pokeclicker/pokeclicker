@@ -1563,7 +1563,7 @@ const VioletPrimo = new NPC('Primo', [
     'Once you have obtained a Held Item, visit your Item Bag. They are most often found in Dungeons, but some, like the Wonder Chest, are for sale!',
     'From there, go into your Held Items pocket and once an item is selected, you can use it by choosing from the list of available Pokémon to hold it.',
     'Choose who you select carefully! Once you remove a Held Item from your Pokémon, the item will break!',
-    'All righty, be seeing you!',
+    'All righty, be seeing you and your <b>NEW‑COLLECTION</b>!',
 ]);
 
 
