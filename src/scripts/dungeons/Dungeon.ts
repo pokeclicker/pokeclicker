@@ -361,6 +361,7 @@ class Dungeon {
 
 
     private getEncounterInfo(pokemonName: PokemonNameType, mimicData, hideEncounter = false, shadow = false): EncounterInfo {
+        const id = pokemonMap[pokemonName].id;
         const partyPokemon = App.game.party.getPokemonByName(pokemonName);
         const pokerus = partyPokemon?.pokerus;
         const caught = App.game.party.alreadyCaughtPokemonByName(pokemonName);
@@ -368,9 +369,10 @@ class Dungeon {
         const shadowCaught = partyPokemon?.shadow >= GameConstants.ShadowStatus.Shadow;
         const purified = partyPokemon?.shadow >= GameConstants.ShadowStatus.Purified;
         const encounter = {
+            id,
             pokemonName,
-            image: `assets/images/${shinyCaught ? 'shiny' : ''}${shadow && shadowCaught ? 'shadow' : ''}pokemon/${pokemonMap[pokemonName].id}.png`,
-            shadowBackground: shadow && !shadowCaught ? `assets/images/shadowpokemon/${pokemonMap[pokemonName].id}.png` : '',
+            image: `assets/images/${shinyCaught ? 'shiny' : ''}${shadow && shadowCaught ? 'shadow' : ''}pokemon/${id}.png`,
+            shadowBackground: shadow && !shadowCaught ? `assets/images/shadowpokemon/${id}.png` : '',
             pkrsImage: pokerus > GameConstants.Pokerus.Uninfected ? `assets/images/breeding/pokerus/${GameConstants.Pokerus[pokerus]}.png` : '',
             EVs: pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${partyPokemon.evs().toLocaleString('en-US')}` : '',
             shiny: shinyCaught,

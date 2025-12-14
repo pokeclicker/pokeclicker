@@ -424,6 +424,15 @@ const VermilionEusine = new NPC('Eusine', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 5), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 7, GameConstants.AchievementOption.less )]),
 });
 
+const SquirtleJenny = new NPC('Officer Jenny', [
+    'Watch out for mischievous Squirtle around here.',
+    'You can\'t miss them: they wear black glasses and they\'ll try to play tricks on you.',
+],
+{
+    image: 'assets/images/npcs/Officer Jenny.png',
+    requirement: new MultiRequirement([new ObtainedPokemonRequirement('Squirtle'), new MaxRegionRequirement(GameConstants.Region.johto)]),
+});
+
 const LavenderMrFuji = new NPC('Mr. Fuji', [
     'Welcome. In our Volunteer House here we take in all kinds of Pokémon to care for them.',
     'Did you know that sparkling Pokémon are more often found in Dungeons, on Farms, from Eggs, and even from Shops, the Safari Zone, and Evolutions from Items?',
@@ -965,7 +974,7 @@ TownList['Vermilion City'] = new Town(
     [VermilionCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Vermilion City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
-        npcs: [VermilionFanClubChairman, VermilionShardApprentice, VermilionEusine],
+        npcs: [VermilionFanClubChairman, VermilionShardApprentice, VermilionEusine, SquirtleJenny],
     }
 );
 TownList['Lavender Town'] = new Town(
@@ -1554,7 +1563,7 @@ const VioletPrimo = new NPC('Primo', [
     'Once you have obtained a Held Item, visit your Item Bag. They are most often found in Dungeons, but some, like the Wonder Chest, are for sale!',
     'From there, go into your Held Items pocket and once an item is selected, you can use it by choosing from the list of available Pokémon to hold it.',
     'Choose who you select carefully! Once you remove a Held Item from your Pokémon, the item will break!',
-    'All righty, be seeing you!',
+    'All righty, be seeing you and your <b>NEW‑COLLECTION</b>!',
 ]);
 
 
@@ -5363,8 +5372,8 @@ const AncientBugHunter2 = new NPC('Ancient Bug Hunter', [
 
 const AncientBugHunter3 = new NPC('Ancient Bug Hunter', [
     'Trainers report on sightings of various Genesect holding the same Drives as the Genesect they own.',
-    'It seems like this Dungeon\'s Genesect is choosing it\'s Drive based on the Moon Cycle!',
-    'While the high-speed form races to different Dungeons all across Unova.',
+    'It seems like this Dungeon\'s Genesect is choosing its Drive based on the Moon Cycle!',
+    'Meanwhile the high-speed form races to different Dungeons all across Unova.',
 ], {
     image: 'assets/images/npcs/Super Nerd.png',
     requirement: new QuestLineCompletedRequirement('The Legend Awakened'),
