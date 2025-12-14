@@ -19,13 +19,13 @@ export default class Item {
     multiplier: number;
     multiplierDecrease: boolean;
     multiplierDecreaser: MultiplierDecreaser;
+    badgeMult: boolean;
 
     maxAmount: number;
     _description?: string;
     _displayName: string;
     imageDirectory?: string;
     visible?: Requirement;
-    badgeMult?: boolean;
 
     constructor(
         public name: string,
@@ -37,12 +37,12 @@ export default class Item {
             multiplier = ITEM_PRICE_MULTIPLIER,
             multiplierDecrease = true,
             multiplierDecreaser = MultiplierDecreaser.Battle,
+            badgeMult = false,
             visible = undefined,
         } : ShopOptions = {},
         displayName?: string,
         description?: string,
         imageDirectory?: string,
-        badgeMult?: false,
     ) {
         // Base price needs to be positive, items that can't be purchased via currency should be priced at Infinity
         if (this.basePrice <= 0) {
@@ -57,6 +57,7 @@ export default class Item {
         this.multiplier = Math.max(1, multiplier || ITEM_PRICE_MULTIPLIER);
         this.multiplierDecrease = this.multiplier > 1 ? multiplierDecrease : false;
         this.multiplierDecreaser = multiplierDecreaser || MultiplierDecreaser.Battle;
+        this.badgeMult = badgeMult;
         this.visible = visible;
 
         this._displayName = displayName;
@@ -84,7 +85,7 @@ export default class Item {
         const maxCost = (this.basePrice * 100 * (targetAmount - incAmount));
         const total = incCost + maxCost;
 
-        if (this.badgeMult = false) {
+        if (!this.badgeMult) {
             return Math.max(0, Math.round(total));
         }
 
