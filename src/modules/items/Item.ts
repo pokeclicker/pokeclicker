@@ -68,8 +68,12 @@ export default class Item {
     totalPrice(amount: number): number {
         const targetAmount = Math.min(amount, this.maxAmount);
 
-        if (this.multiplier === 1) {
+        if (this.multiplier === 1 && !this.badgeMult) {
             return Math.max(0, this.basePrice * targetAmount);
+        }
+
+        if (this.multiplier === 1 && this.badgeMult === true) {
+            return Math.max(0, this.basePrice + ( this.basePrice * targetAmount * App.game.badgeCase.badgeCount() ));
         }
 
         // multiplier should be capped at 100, so work out how many to buy at increasing price and how many at max
