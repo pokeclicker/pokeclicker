@@ -73,7 +73,7 @@ export default class Item {
         }
 
         if (this.multiplier === 1) {
-            return Math.max(0, this.basePrice + ( this.basePrice * targetAmount * App.game.badgeCase.badgeCount() ));
+            return Math.max(0, this.basePrice * targetAmount * ( App.game.badgeCase.badgeCount() + 1 ) );
         }
 
         // multiplier should be capped at 100, so work out how many to buy at increasing price and how many at max
@@ -93,7 +93,7 @@ export default class Item {
             return Math.max(0, Math.round(total));
         }
 
-        const badgeMultTotal = total + (total * App.game.badgeCase.badgeCount());
+        const badgeMultTotal = ( total * ( App.game.badgeCase.badgeCount() + 1 ) );
 
         return Math.max(0, Math.round(badgeMultTotal));
     }
