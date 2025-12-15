@@ -3373,7 +3373,7 @@ TownList['Sea Mauville'] = new Town(
     [TemporaryBattleList['Delta Giovanni'], TemporaryBattleList['Captain Stern']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 109)],
-        npcs: [SeaMauvilleRocket1, SeaMauvilleRocket2, Stern1, SternSubstitute, Stern2, Stern3],
+        npcs: [SeaMauvilleRocket1, SeaMauvilleRocket2, SternSubstitute, Stern1, Stern2, Stern3],
     }
 );
 TownList['Verdanturf Town'] = new Town(
@@ -3401,7 +3401,7 @@ TownList['Fallarbor Town'] = new Town(
     [FallarborTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Fallarbor Town']), HoennFluteMaster, HoennStoneSalesman, TemporaryBattleList['Hoenn Stone Salesman']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 113)],
-        npcs: [FallarborProfessorCozmo, Cozmo1, HoennStoneSalesman1, HoennStoneSalesman2],
+        npcs: [HoennStoneSalesman1, HoennStoneSalesman2, FallarborProfessorCozmo, Cozmo1],
     }
 );
 TownList['Lavaridge Town'] = new Town(
@@ -3472,7 +3472,7 @@ TownList['Mossdeep Space Center'] = new Town(
     'Mossdeep Space Center',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [TemporaryBattleList['Aqua Grunt'], TemporaryBattleList['Magma Grunt'], TemporaryBattleList['Courtney 2'], TemporaryBattleList['Matt 2'], TemporaryBattleList['Dr Cozmo'], new MoveToDungeon(dungeonList['Near Space'])],
+    [new MoveToDungeon(dungeonList['Near Space']), TemporaryBattleList['Aqua Grunt'], TemporaryBattleList['Magma Grunt'], TemporaryBattleList['Courtney 2'], TemporaryBattleList['Matt 2'], TemporaryBattleList['Dr Cozmo']],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Mind)],
         npcs: [Cozmo2, Zinnia4, Cozmo3, Zinnia5, Cozmo4],
@@ -3685,7 +3685,7 @@ TownList['Granite Cave'] = new DungeonTown(
     [new TemporaryBattleRequirement('May 2')],
     [TemporaryBattleList['Zinnia 1'], TemporaryBattleList['Delta Brock']],
     {
-        npcs: [Zinnia2, Zinnia3, GraniteCamper1, GraniteCamper2, PrimalMural1, PrimalMural2, PrimalSteven],
+        npcs: [GraniteCamper1, GraniteCamper2, Zinnia2, Zinnia3, PrimalMural1, PrimalMural2, PrimalSteven],
     }
 );
 TownList['Fiery Path'] = new DungeonTown(
