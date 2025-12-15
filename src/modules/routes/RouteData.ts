@@ -28,6 +28,7 @@ import StatisticRequirement from '../requirements/StatisticRequirement';
 import PokemonLevelRequirement from '../requirements/PokemonLevelRequirement';
 import { getPokemonByName } from '../pokemons/PokemonHelper';
 import CustomRequirement from '../requirements/CustomRequirement';
+import SeededDateSelectNRequirement from '../requirements/SeededDateSelectNRequirement';
 
 /*
 KANTO
@@ -1215,13 +1216,57 @@ Routes.add(new RegionRoute(
     210.5,
 ));
 Routes.add(new RegionRoute(
+    'Trophy Garden', Region.sinnoh, 231,
+    new RoutePokemon({
+        land: ['Pikachu', 'Pichu', 'Bellsprout', 'Roselia', 'Staravia', 'Kricketune'],
+        special:
+        [
+            new SpecialRoutePokemon(['Clefairy'], new SeededDateSelectNRequirement(0, 33, 3)),
+            new SpecialRoutePokemon(['Jigglypuff'], new SeededDateSelectNRequirement(1, 33, 3)),
+            new SpecialRoutePokemon(['Meowth'], new SeededDateSelectNRequirement(2, 33, 3)),
+            new SpecialRoutePokemon(['Chansey'], new SeededDateSelectNRequirement(3, 33, 3)),
+            new SpecialRoutePokemon(['Kangaskhan'], new SeededDateSelectNRequirement(4, 33, 3)),
+            new SpecialRoutePokemon(['Baby Kangaskhan'], new MultiRequirement([new SeededDateSelectNRequirement(5, 33, 3), new ObtainedPokemonRequirement('Baby Kangaskhan')])),
+            new SpecialRoutePokemon(['Mr. Mime'], new SeededDateSelectNRequirement(6, 33, 3)),
+            new SpecialRoutePokemon(['Jynx'], new SeededDateSelectNRequirement(7, 33, 3)),
+            new SpecialRoutePokemon(['Ditto'], new SeededDateSelectNRequirement(8, 33, 3)),
+            new SpecialRoutePokemon(['Eevee'], new SeededDateSelectNRequirement(9, 33, 3)),
+            new SpecialRoutePokemon(['Porygon'], new SeededDateSelectNRequirement(10, 33, 3)),
+            new SpecialRoutePokemon(['Cleffa'], new MultiRequirement([new SeededDateSelectNRequirement(11, 33, 3), new ObtainedPokemonRequirement('Cleffa')])),
+            new SpecialRoutePokemon(['Igglybuff'], new MultiRequirement([new SeededDateSelectNRequirement(12, 33, 3), new ObtainedPokemonRequirement('Igglybuff')])),
+            new SpecialRoutePokemon(['Marill'], new SeededDateSelectNRequirement(13, 33, 3)),
+            new SpecialRoutePokemon(['Tyrogue'], new MultiRequirement([new SeededDateSelectNRequirement(14, 33, 3), new ObtainedPokemonRequirement('Tyrogue')])),
+            new SpecialRoutePokemon(['Smoochum'], new MultiRequirement([new SeededDateSelectNRequirement(15, 33, 3), new ObtainedPokemonRequirement('Smoochum')])),
+            new SpecialRoutePokemon(['Elekid'], new MultiRequirement([new SeededDateSelectNRequirement(16, 33, 3), new ObtainedPokemonRequirement('Elekid')])),
+            new SpecialRoutePokemon(['Magby'], new MultiRequirement([new SeededDateSelectNRequirement(17, 33, 3), new ObtainedPokemonRequirement('Magby')])),
+            new SpecialRoutePokemon(['Azurill'], new MultiRequirement([new SeededDateSelectNRequirement(18, 33, 3), new ObtainedPokemonRequirement('Azurill')])),
+            new SpecialRoutePokemon(['Plusle'], new SeededDateSelectNRequirement(19, 33, 3)),
+            new SpecialRoutePokemon(['Minun'], new SeededDateSelectNRequirement(20, 33, 3)),
+            new SpecialRoutePokemon(['Castform'], new SeededDateSelectNRequirement(21, 33, 3)),
+            new SpecialRoutePokemon(['Budew'], new MultiRequirement([new SeededDateSelectNRequirement(22, 33, 3), new ObtainedPokemonRequirement('Budew')])),
+            new SpecialRoutePokemon(['Chingling'], new MultiRequirement([new SeededDateSelectNRequirement(23, 33, 3), new ObtainedPokemonRequirement('Chingling')])),
+            new SpecialRoutePokemon(['Bonsly'], new MultiRequirement([new SeededDateSelectNRequirement(24, 33, 3), new ObtainedPokemonRequirement('Bonsly')])),
+            new SpecialRoutePokemon(['Mime Jr.'], new MultiRequirement([new SeededDateSelectNRequirement(25, 33, 3), new ObtainedPokemonRequirement('Mime Jr.')])),
+            new SpecialRoutePokemon(['Happiny'], new MultiRequirement([new SeededDateSelectNRequirement(26, 33, 3), new ObtainedPokemonRequirement('Happiny')])),
+            new SpecialRoutePokemon(['Handout Happiny'], new MultiRequirement([new SeededDateSelectNRequirement(27, 33, 3), new ObtainedPokemonRequirement('Handout Happiny')])),
+            new SpecialRoutePokemon(['Munchlax'], new MultiRequirement([new SeededDateSelectNRequirement(28, 33, 3), new ObtainedPokemonRequirement('Munchlax')])),
+            new SpecialRoutePokemon(['Riolu'], new MultiRequirement([new SeededDateSelectNRequirement(29, 33, 3), new ObtainedPokemonRequirement('Riolu')])),
+            new SpecialRoutePokemon(['Mantyke'], new MultiRequirement([new SeededDateSelectNRequirement(30, 33, 3), new ObtainedPokemonRequirement('Mantyke')])),
+            new SpecialRoutePokemon(['Phione'], new MultiRequirement([new SeededDateSelectNRequirement(31, 33, 3), new ObtainedPokemonRequirement('Phione')])),
+            new SpecialRoutePokemon(['Toxel'], new MultiRequirement([new SeededDateSelectNRequirement(32, 33, 3), new ObtainedPokemonRequirement('Toxel')])),
+        ],
+    }),
+    [new RouteKillRequirement(10, Region.sinnoh, 212)],
+    210.6,
+));
+Routes.add(new RegionRoute(
     'Sinnoh Route 218', Region.sinnoh, 218,
     new RoutePokemon({
         land: ['Mr. Mime', 'Floatzel', 'Gastrodon (West)', 'Glameow', 'Chatot'],
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Shellos (West)', 'Finneon', 'Lumineon'],
     }),
     [new TemporaryBattleRequirement('Galactic Boss Cyrus')],
-    210.6,
+    210.7,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 216', Region.sinnoh, 216,
