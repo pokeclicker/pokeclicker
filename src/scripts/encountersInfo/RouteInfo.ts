@@ -52,7 +52,7 @@ class RouteInfo {
                 return {tooltip: 'Weather Pokémon', image: 'weather.png'};
             } else if (RouteInfo.hasRequirement(pokemon.requirement, DayOfWeekRequirement)) {
                 return {tooltip: 'Day of Week Pokémon', image: 'day_of_week.png'};
-            } else if (player.region === GameConstants.Region.sinnoh && player.route === 231) {
+            } else if (MapHelper.isRouteCurrentLocation(231, GameConstants.Region.sinnoh)) {
                 return {tooltip: 'Mr. Backlot\'s Daily Special', image: 'backlot_catches.png'};
             }
         } else if (pokemon.type == 'water' && pokemon.fishing) {
