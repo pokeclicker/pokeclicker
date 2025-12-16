@@ -1,7 +1,7 @@
 <div id="startMenu" class="dropdown clearfix" style="position:absolute; right:0; top:0; z-index: 100;">
     <button class="btn btn-secondary mr-1 float-left" style="display: none;"
         data-bind="visible: Settings.getSetting('disableAutoSave').observableValue,
-            click: () => { Save.store(player) },
+            click: () => { Save.store(player, true); },
             tooltip: {
                 html: true,
                 title: `Save the game.<br/>Shortcut: ${Settings.getSetting('hotkey.forceSave').prefix}${Settings.getSetting('hotkey.forceSave').observableValue()}`,

@@ -5147,16 +5147,6 @@
         %>
 
         <%- include('templates/mapOverlay',
-           { name: "Ash Ketchum"
-           , x: 45, y: 10
-           , width: 4, height: 4
-           , databind: "click: () => TemporaryBattleList['Ash Ketchum Alola'].protectedOnclick()"
-           , visible:  "TemporaryBattleList['Ash Ketchum Alola'] && TemporaryBattleList['Ash Ketchum Alola'].isVisible()"
-           , image: "assets/images/map/ashketchumoverworld.png"
-           })
-        %>
-
-        <%- include('templates/mapOverlay',
             { name: "Team Skull Gang"
             , x: 48, y: 33
             , width: 8, height: 4

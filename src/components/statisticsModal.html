@@ -26,6 +26,10 @@
                             </thead>
                             <tbody>
                             <tr>
+                                <td class="text-left">Start Date/Time</td>
+                                <td class="text-left tight text-muted" data-bind="text: player.createdTime ? new Date(player.createdTime).toLocaleString() : 'N/A'"></td>
+                            </tr>
+                            <tr>
                                 <td class="text-left">Time Played</td>
                                 <td class="text-left tight text-muted" data-bind="html: GameConstants.formatSecondsToTime(App.game.statistics['secondsPlayed']())">-</td>
                             </tr>
@@ -33,6 +37,25 @@
                             <tr>
                                 <td class="text-left" data-bind="text: GameConstants.camelCaseToString($data)">-</td>
                                 <td class="text-left tight text-muted" data-bind="text: App.game.statistics[$data]().toLocaleString('en-US')">-</td>
+                            </tr>
+                            <!-- /ko -->
+                            <!-- ko foreach: App.game.statistics.genderStatisticGroups -->
+                            <tr>
+                                <td class="text-left" data-bind="text: GameConstants.camelCaseToString($data[0])">-</td>
+                                <td class="text-left tight text-muted"
+                                    data-bind="tooltip: {
+                                        title: `Male: ${App.game.statistics[$data[1]]().toLocaleString('en-US')}
+                                            <br/>
+                                            Female: ${App.game.statistics[$data[2]]().toLocaleString('en-US')}
+                                            <br/>
+                                            Genderless: ${App.game.statistics[$data[3]]().toLocaleString('en-US')}`,
+                                        html: true,
+                                        trigger: 'hover',
+                                        placement: 'top',
+                                        boundary: 'window'
+                                    },
+                                    text: App.game.statistics[$data[0]]().toLocaleString('en-US')">
+                                </td>
                             </tr>
                             <!-- /ko -->
                             </tbody>
@@ -99,14 +122,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Achievement Bonus</td>
-                                    <td class="text-center">
-                                        <code data-bind="text: AchievementHandler.achievementBonus()"></code>
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td colspan="2" class="text-center">
-                                        <code data-bind="html: `(1 + ${$data.caughtPokemon} + ${$data.shinyPokemon} + ${$data.resistantPokemon} + ${$data.purifiedPokemon})<sup>1.4</sup> * (1 + ${AchievementHandler.achievementBonus()})`"></code>
+                                        <code data-bind="html: `(1 + ${$data.caughtPokemon} + ${$data.shinyPokemon} + ${$data.resistantPokemon} + ${$data.purifiedPokemon})<sup>1.4</sup>`"></code>
                                     </td>
                                 </tr>
                                 <tr>
@@ -120,6 +137,12 @@
                         <h5>Modifiers</h5>
                         <table class="table table-bordered table-sm mb-0">
                             <tbody>
+                                <tr>
+                                    <td>Achievement Bonus</td>
+                                    <td class="text-center">
+                                        <code data-bind="text: `×(1 + ${AchievementHandler.achievementBonus()})`"></code>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td class="w-50">xClick</td>
                                     <td class="text-center w-50">
@@ -140,7 +163,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="text-center">
-                                        <code data-bind="text: `${$data.baseClickAttack} * ${$data.xClickModifier} * ${$data.rockyHelmetModifier} * ${$data.blackFluteModifier}`"></code>
+                                        <code data-bind="text: `${$data.baseClickAttack} * (1 + ${AchievementHandler.achievementBonus()}) * ${$data.xClickModifier} * ${$data.rockyHelmetModifier} * ${$data.blackFluteModifier}`"></code>
                                     </td>
                                 </tr>
                                 <tr>
