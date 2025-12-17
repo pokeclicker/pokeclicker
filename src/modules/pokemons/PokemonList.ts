@@ -175,6 +175,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 1.03,
@@ -606,7 +607,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Squirtle', 'Wartortle', 16)],
+        'evolutions': [
+            LevelEvolution('Squirtle', 'Wartortle', 16),
+            HeldItemLevelEvolution('Black_Glasses', 'Squirtle', 'Squad Leader Squirtle', 10, true),
+        ],
         'base': {
             'hitpoints': 44,
             'attack': 48,
@@ -638,6 +642,26 @@ export const pokemonList = createPokemonArray(
         },
         'gender': {
             'femaleRatio': 0.125,
+        },
+    },
+    {
+        'id': 7.02,
+        'name': 'Squad Leader Squirtle',
+        'catchRate': 45,
+        'type': [PokemonType.Water, PokemonType.Dark],
+        'levelType': LevelType.mediumslow,
+        'exp': 63,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 44,
+            'attack': 48,
+            'specialAttack': 50,
+            'defense': 65,
+            'specialDefense': 64,
+            'speed': 43,
+        },
+        'gender': {
+            'femaleRatio': 0,
         },
     },
     {
@@ -1617,6 +1641,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 25.13,
@@ -7327,6 +7352,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 175.02,
@@ -12937,6 +12963,46 @@ export const pokemonList = createPokemonArray(
             'defense': 90,
             'specialDefense': 90,
             'speed': 180,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 386.04,
+        'name': 'Deoxys (Green Core)',
+        'type': [PokemonType.Psychic],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 50,
+            'attack': 150,
+            'specialAttack': 150,
+            'defense': 50,
+            'specialDefense': 50,
+            'speed': 150,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 386.05,
+        'name': 'Deoxys (Clone)',
+        'type': [PokemonType.Psychic],
+        'eggCycles': 30,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 25,
+            'attack': 75,
+            'specialAttack': 75,
+            'defense': 25,
+            'specialDefense': 25,
+            'speed': 75,
         },
         'gender': {
             'type': Genders.Genderless,
@@ -21916,7 +21982,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 306,
-        'evolutions': [AttackEvolution(100, 'Xerneas', 'Xerneas (Active)', 1)],
+        'evolutions': [AttackEvolution(100, true, 'Xerneas', 'Xerneas (Active)', 1)],
         'catchRate': 45,
         'base': {
             'hitpoints': 126,
@@ -24111,8 +24177,8 @@ export const pokemonList = createPokemonArray(
         'exp': 140,
         'catchRate': 45,
         'evolutions': [
-            LevelEvolution('Cosmoem', 'Solgaleo', 53),
-            LevelEvolution('Cosmoem', 'Lunala', 53),
+            DayTimedLevelEvolution('Cosmoem', 'Solgaleo', 53),
+            NightTimedLevelEvolution('Cosmoem', 'Lunala', 53),
         ],
         'base': {
             'hitpoints': 43,
