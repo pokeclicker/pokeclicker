@@ -550,11 +550,11 @@ ItemList['Onix (Rocker)'] = new PokemonItem('Onix (Rocker)', 1200, Currency.cont
 ItemList['Tangela (Pom-pom)'] = new PokemonItem('Tangela (Pom-pom)', 1400, Currency.contestToken);
 ItemList['Weepinbell (Fancy)'] = new PokemonItem('Weepinbell (Fancy)', 1700, Currency.contestToken);
 ItemList['Sudowoodo (Golden)'] = new PokemonItem('Sudowoodo (Golden)', 2000, Currency.contestToken);
-ItemList['Pikachu (Rock Star)'] = new PokemonItem('Pikachu (Rock Star)', 10000, Currency.contestToken);
-ItemList['Pikachu (Belle)'] = new PokemonItem('Pikachu (Belle)', 10000, Currency.contestToken);
-ItemList['Pikachu (Pop Star)'] = new PokemonItem('Pikachu (Pop Star)', 10000, Currency.contestToken);
-ItemList['Pikachu (Ph. D.)'] = new PokemonItem('Pikachu (Ph. D.)', 10000, Currency.contestToken);
-ItemList['Pikachu (Libre)'] = new PokemonItem('Pikachu (Libre)', 10000, Currency.contestToken);
+ItemList['Pikachu (Rock Star)'] = new PokemonItem('Pikachu (Rock Star)', 25000, Currency.contestToken);
+ItemList['Pikachu (Belle)'] = new PokemonItem('Pikachu (Belle)', 25000, Currency.contestToken);
+ItemList['Pikachu (Pop Star)'] = new PokemonItem('Pikachu (Pop Star)', 25000, Currency.contestToken);
+ItemList['Pikachu (Ph. D.)'] = new PokemonItem('Pikachu (Ph. D.)', 25000, Currency.contestToken);
+ItemList['Pikachu (Libre)'] = new PokemonItem('Pikachu (Libre)', 25000, Currency.contestToken);
 // Event
 ItemList['Elf Munchlax'] = new PokemonItem('Elf Munchlax', 3108, Currency.questPoint, undefined, undefined,
     { visible: new MultiRequirement([new SpecialEventRequirement('Merry Christmas!'), new ObtainedPokemonRequirement('Santa Snorlax')]) });
