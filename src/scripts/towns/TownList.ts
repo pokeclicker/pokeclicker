@@ -9226,7 +9226,7 @@ TownList['Slumbering Weald'] = new Town(
     'Slumbering Weald',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.SouthGalar,
-    [TemporaryBattleList.Mirages, new MoveToDungeon(dungeonList['Slumbering Weald Shrine'])],
+    [new MoveToDungeon(dungeonList['Slumbering Weald Shrine']), TemporaryBattleList.Mirages],
     {
         requirements: [new TemporaryBattleRequirement('Hop 1')],
     }
@@ -9235,7 +9235,7 @@ TownList.Wedgehurst = new Town(
     'Wedgehurst',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.SouthGalar,
-    [TemporaryBattleList['Sordward & Shielbert'], WedgehurstShop],
+    [WedgehurstShop, TemporaryBattleList['Sordward & Shielbert']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
         npcs: [WedgehurstRailStaff, SouthGalarRoamerNPC, SordwardShielbert2],
@@ -9255,7 +9255,7 @@ TownList.Motostoke = new Town(
     'Motostoke',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.SouthGalar,
-    [TemporaryBattleList['Marnie 1'], TemporaryBattleList['Rampaging Torkoal'], MotostokeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Motostoke), new BattleCafe()],
+    [MotostokeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Motostoke), new BattleCafe(), TemporaryBattleList['Marnie 1'], TemporaryBattleList['Rampaging Torkoal']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
         npcs: [BattleCafeMaster, MotostokeArtist],
@@ -9265,7 +9265,7 @@ TownList.Turffield = new Town(
     'Turffield',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.SouthGalar,
-    [TemporaryBattleList['Rampaging Tsareena'], TurffieldShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Turffield)],
+    [TurffieldShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Turffield), TemporaryBattleList['Rampaging Tsareena']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 13)],
         npcs: [TurffieldCook],
@@ -9275,7 +9275,7 @@ TownList.Hulbury = new Town(
     'Hulbury',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.SouthGalar,
-    [TemporaryBattleList['Rampaging Gyarados'], HulburyShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Hulbury)],
+    [HulburyShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Hulbury), TemporaryBattleList['Rampaging Gyarados']],
     {
         requirements: [new TemporaryBattleRequirement('Hop 4')],
         npcs: [Meteorologist],
@@ -9285,17 +9285,17 @@ TownList['Stow-on-Side'] = new Town(
     'Stow-on-Side',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.NorthGalar,
-    [TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side']), new GenericTraderShop('FossilMasterGalarRoute6', 'Cara Liss')],
+    [GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side']), new GenericTraderShop('FossilMasterGalarRoute6', 'Cara Liss'), TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
-        npcs: [AncientMural1, AncientMural2, StowonSideSonia, Archaeologist],
+        npcs: [AncientMural1, AncientMural2, Archaeologist, StowonSideSonia],
     }
 );
 TownList.Ballonlea = new Town(
     'Ballonlea',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.NorthGalar,
-    [TemporaryBattleList['Gym Leader Bede'], BallonleaShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Ballonlea)],
+    [BallonleaShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Ballonlea), TemporaryBattleList['Gym Leader Bede']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glimwood Tangle'))],
     }
@@ -9305,7 +9305,7 @@ TownList.Hammerlocke = new Town(
     'Hammerlocke',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.NorthGalar,
-    [TemporaryBattleList['Rampaging Haxorus'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Hammerlocke), new BattleCafe()],
+    [HammerlockeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Hammerlocke), new BattleCafe(), new MoveToDungeon(dungeonList['Energy Plant']), TemporaryBattleList['Rampaging Haxorus']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
         npcs: [HammerlockeHiker],
@@ -9316,17 +9316,17 @@ TownList.Circhester = new Town(
     'Circhester',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.NorthGalar,
-    [TemporaryBattleList['Rampaging Gigalith'], TemporaryBattleList['Rampaging Froslass'], GymList.Circhester1, GymList.Circhester2, CirchesterShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Circhester)],
+    [GymList.Circhester1, GymList.Circhester2, CirchesterShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Circhester), TemporaryBattleList['Rampaging Gigalith'], TemporaryBattleList['Rampaging Froslass']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
-        npcs: [HerosBath, CirchesterHop, CirchesterSonia, CirchesterGuitarist],
+        npcs: [HerosBath, CirchesterGuitarist, CirchesterHop, CirchesterSonia],
     }
 );
 TownList.Spikemuth = new Town(
     'Spikemuth',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.NorthGalar,
-    [TemporaryBattleList['Gym Leader Marnie'], SpikemuthShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Spikemuth), new DockTownContent()],
+    [SpikemuthShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Spikemuth), TemporaryBattleList['Gym Leader Marnie'], new DockTownContent()],
     {
         requirements: [new TemporaryBattleRequirement('Marnie 2')],
         npcs: [TeamYellGrunts],
@@ -9367,10 +9367,10 @@ TownList['Master Dojo'] = new Town(
     'Master Dojo',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.IsleofArmor,
-    [new BulletinBoard(GameConstants.BulletinBoards.Armor), TemporaryBattleList.Mustard, TemporaryBattleList.Kubfu, MasterDojoShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Master Dojo']), new DockTownContent()],
+    [new BulletinBoard(GameConstants.BulletinBoards.Armor), MasterDojoShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Master Dojo']), TemporaryBattleList.Mustard, TemporaryBattleList.Kubfu, new DockTownContent()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
-        npcs: [Mustard1, Mustard2, Mustard3, Mustard4, Mustard5, Klara2, Avery2, Mustard6, Mustard7, Mustard8, Mustard9, JungleAsh1, JungleAsh2, IsleofArmorRoamerNPC],
+        npcs: [IsleofArmorRoamerNPC, Mustard1, Mustard2, Mustard3, Mustard4, Mustard5, Klara2, Avery2, Mustard6, Mustard7, Mustard8, Mustard9, JungleAsh1, JungleAsh2],
     }
 );
 TownList['Master Dojo Battle Court'] = new Town(
@@ -9388,7 +9388,7 @@ TownList['Crown Tundra Station'] = new Town(
     'Crown Tundra Station',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
-    [new DockTownContent(), TemporaryBattleList.Peony],
+    [TemporaryBattleList.Peony, new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
     }
@@ -9397,10 +9397,10 @@ TownList.Freezington = new Town(
     'Freezington',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
-    [new BulletinBoard(GameConstants.BulletinBoards.Crown), GymList['Elite Trainer Peony'], TemporaryBattleList.Calyrex, TemporaryBattleList.Glastrier, TemporaryBattleList.Spectrier, FreezingtonShop],
+    [new BulletinBoard(GameConstants.BulletinBoards.Crown), GymList['Elite Trainer Peony'], FreezingtonShop, TemporaryBattleList.Calyrex, TemporaryBattleList.Glastrier, TemporaryBattleList.Spectrier],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 46)],
-        npcs: [CrownPeony1, Calyrex1, Calyrex2, Calyrex3, CrownPeony2, BirdPeony1, BirdPeony2, BirdPeony3, BirdPeony4, GolemPeony1, GolemPeony2, GolemPeony3, GolemPeony4, GolemPeony5, GolemPeony6, PeonyComplete, Peonia1, CrownTundraRoamerNPC],
+        npcs: [CrownTundraRoamerNPC, CrownPeony1, Calyrex1, Calyrex2, Calyrex3, CrownPeony2, BirdPeony1, BirdPeony2, BirdPeony3, BirdPeony4, GolemPeony1, GolemPeony2, GolemPeony3, GolemPeony4, GolemPeony5, GolemPeony6, PeonyComplete, Peonia1],
     }
 );
 
@@ -9435,7 +9435,7 @@ TownList['Glimwood Tangle'] = new DungeonTown(
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.NorthGalar,
     [new QuestLineStepCompletedRequirement('The Darkest Day', 2)],
-    [TemporaryBattleList['Zarude Tribe 1'], TemporaryBattleList['Zarude Tribe 2'], TemporaryBattleList['Zarude Tribe 3'], TemporaryBattleList['Zarude (Dada)'], TemporaryBattleList['Flowering Celebi'], GlimwoodTangleShop],
+    [GlimwoodTangleShop, TemporaryBattleList['Zarude Tribe 1'], TemporaryBattleList['Zarude Tribe 2'], TemporaryBattleList['Zarude Tribe 3'], TemporaryBattleList['Zarude (Dada)'], TemporaryBattleList['Flowering Celebi']],
     {
         npcs: [JungleKoko1, JungleKoko2, JungleKoko3, JungleKoko4, JungleKoko5, JungleAsh3, JungleKoko6],
     }
@@ -9578,7 +9578,7 @@ TownList['Crown Shrine'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.galar, 55)],
     [],
     {
-        npcs: [Calyrex4, Calyrex5, CrownShrineExplorer],
+        npcs: [CrownShrineExplorer, Calyrex4, Calyrex5],
     }
 );
 TownList['Max Lair'] = new DungeonTown(
@@ -9588,7 +9588,7 @@ TownList['Max Lair'] = new DungeonTown(
     [new QuestLineStepCompletedRequirement('The Lair of Giants', 0)],
     [],
     {
-        npcs: [Peonia2, Peonia3, Peonia4, MaxLairScientist],
+        npcs: [MaxLairScientist, Peonia2, Peonia3, Peonia4],
     }
 );
 
