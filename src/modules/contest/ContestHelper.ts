@@ -111,9 +111,7 @@ export default class ContestHelper {
             case ContestRank['Super Great']:
             case ContestRank['Super Ultra']:
             case ContestRank['Super Master']:
-                return App.game.party.caughtPokemon.filter((p) => {
-                    ContestTypeHelper.getAppealModifier(p.currentContestTypes, [type]) > 0;
-                });
+                return App.game.party.caughtPokemon.filter((p) => ContestTypeHelper.getAppealModifier(p.currentContestTypes, [type]) > 0);
             // Kalos (in Hoenn)
             case ContestRank.Spectacular:
                 return ContestHelper.getPartyPokemonByContestType(type);
@@ -404,8 +402,8 @@ export default class ContestHelper {
         }
         // For lower ranks compute intersecting appeals
         const adjData = Object.entries(p.contestSaveData).filter(([d]) => p.contestSaveData[d] != p.contestSaveData[t]);
-        const adjAppeal = Math.max(...Object.values(adjData).flatMap(t => t[1][1]()));
-        const adjTypes = [...adjData.flatMap(t => Number(t[0]))];
+        const adjAppeal = Math.max(...Object.values(adjData).flatMap(d => d[1][1]()));
+        const adjTypes = [...adjData.flatMap(d => Number(d[0]))];
         if (adjAppeal * ContestTypeHelper.getAppealModifier(adjTypes, [t]) >= ContestHelper.rankAppeal[r]) {
             return true;
         }
