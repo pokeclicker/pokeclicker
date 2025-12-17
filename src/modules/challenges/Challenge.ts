@@ -18,7 +18,7 @@ export default class Challenge {
         this.active(true);
     }
 
-    async disable(): Promise<void> {
+    async disable(confirm = true) {
         // If the player hasn't selected a starter yet, no need to confirm
         if (player.regionStarters[GameConstants.Region.kanto]() === GameConstants.Starter.None) {
             this.active(false);
@@ -26,7 +26,7 @@ export default class Challenge {
         }
 
         // Confirm they want to disable the challenge mode
-        if (await Notifier.confirm({
+        if (!confirm || await Notifier.confirm({
             title: 'DISABLE CHALLENGE',
             message: `<p class="text-center m-2"><b>Warning</b>: Disabling "${this.type}" challenge is <b>permanent</b>.<br/><br/>Are you sure you want to continue?</p>`,
             confirm: '<span style="white-space: nowrap;">Permanently disable</span>',

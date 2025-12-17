@@ -11,6 +11,6 @@ export default class QuestRequirement extends AchievementRequirement {
     }
 
     public hint(): string {
-        return `${this.requiredValue} Quests need to be completed.`;
+        return `Complete ${this.requiredValue.toLocaleString('en-US')} quests.`;
     }
 }

@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body pt-0" style="background-color: inherit;">
                 <!-- ko foreach: { data: Object.entries(DungeonInfo.getLootList()), as: 'lootEntries' } -->
-                <div class="bg-primary text-left rounded px-3 py-2 mb-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#tier-${lootEntries[0]}` }">
+                <div class="bg-primary text-left rounded px-3 py-2 mt-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#tier-${lootEntries[0]}` }">
                     <img width="42px" data-bind="attr: { src: `assets/images/dungeons/chest-${lootEntries[0]}.png` }" />
                     <h5 class="my-0 mx-1 text-light d-inline-block" data-bind="text: GameConstants.camelCaseToString(lootEntries[0])">Tier name</h5>
                 </div>
@@ -16,23 +16,25 @@
                         <div class="row justify-content-center">
                             <!-- ko foreach: { data: lootEntries[1], as: 'item' } -->
                             <div class="col-6 col-lg-4 mb-2">
-                                <!-- ko using: PokemonHelper.getPokemonByName(item.loot).name != 'MissingNo.' && !App.game.party.getPokemonByName(item.loot), as: 'isPokemonAndNotCaught' -->
-                                    <!-- ko using: isPokemonAndNotCaught ? '???' : DungeonInfo.getLootName(item.loot), as: 'lootName' -->
-                                        <div class="btn btn-secondary px-1 py-0 d-flex align-items-center text-left" style="cursor: default;">
-                                            <img width="42px" data-bind="attr: { src: DungeonInfo.getLootImage(item.loot) },
-                                                style: { 'filter': isPokemonAndNotCaught ? 'brightness(0)' : '' }">
-                                            <div class="flex-grow-1 small ml-2" style="min-width: 0;">
-                                                <div class="text-truncate" data-bind="text: lootName"></div>
-                                            </div>
-                                            <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
-                                            tooltip: {
-                                                title: item.requirement?.hint() || '',
-                                                placement: 'bottom',
-                                                trigger: 'hover'
-                                            }, visible: item.requirement && !item.requirement.isCompleted()" />
-                                        </div>
-                                    <!-- /ko -->
-                                <!-- /ko -->
+                                <div class="btn btn-secondary px-1 py-0 d-flex align-items-center text-left" style="cursor: default;">
+                                    <img width="42px" data-bind="attr: { src: DungeonInfo.getLootImage(item.loot) }">
+                                    <div class="flex-grow-1 small ml-2" style="min-width: 0;">
+                                        <div class="text-truncate" data-bind="text: DungeonInfo.getLootName(item.loot)"></div>
+                                    </div>
+                                    <img width="24px" class="lock" src="assets/images/breeding/lock.svg" data-bind="
+                                    tooltip: {
+                                        title: item.requirement?.hint() || '',
+                                        placement: 'bottom',
+                                        trigger: 'hover'
+                                    }, visible: item.requirement && !item.requirement.isCompleted()" />
+                                    <knockout class="h4 text-success no-emoji-font mr-2 mb-0 align-self-center" data-bind="
+                                        visible: DungeonRunner.isDungeonDebuffed(player.town.dungeon) && item.ignoreDebuff && (item.requirement?.isCompleted() ?? true),
+                                        tooltip: {
+                                            title: 'The odds for this item are preserved despite the dungeon being debuffed.',
+                                            trigger: 'hover',
+                                        }">⚠
+                                    </knockout>
+                                </div>
                             </div>
                             <!-- /ko -->
                         </div>

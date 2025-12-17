@@ -46,7 +46,6 @@ class Game implements TmpGameType {
     public purifyChamber: PurifyChamber;
     public weatherApp: WeatherApp;
     public zMoves: ZMoves;
-    public pokemonContest: PokemonContest;
 
     constructor() {
         // Needs to be loaded first so save data can be updated (specifically "player" data)
@@ -86,7 +85,6 @@ class Game implements TmpGameType {
         this.purifyChamber = new PurifyChamber();
         this.weatherApp = new WeatherApp();
         this.zMoves = new ZMoves();
-        this.pokemonContest = new PokemonContest();
 
         this._gameState = ko.observable(GameConstants.GameState.loading);
     }
@@ -154,7 +152,6 @@ class Game implements TmpGameType {
         SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
         WeatherApp.initialize();
-        PokemonContestController.generateDailyContest(now);
         DamageCalculator.initialize();
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
@@ -288,10 +285,13 @@ class Game implements TmpGameType {
                 }
             }
         });
-        // Check for breeding pokemons not in queue
-        const breeding = [...App.game.breeding.eggList.map((l) => l().pokemon), ...App.game.breeding.queueList()];
+        // Check for breeding pokemons not in list or queue
+        const breeding = new Set([
+            ...App.game.breeding.eggList.map((l) => l().pokemon),
+            ...App.game.breeding.queueList().filter((q: HatcheryQueueEntry) => q[0] === EggType.Pokemon).map(q => q[1]),
+        ]);
         App.game.party.caughtPokemon.filter((p) => p.breeding).forEach((p) => {
-            if (!breeding.includes(p.id)) {
+            if (!breeding.has(p.id)) {
                 p.breeding = false;
             }
         });
@@ -475,6 +475,7 @@ class Game implements TmpGameType {
                 }
 
                 GameHelper.updateDay();
+                (App.game.farming.mutations.find(m => m instanceof EnigmaMutation) as EnigmaMutation).resetIndex();
 
                 SeededDateRand.seedWithDate(now);
                 // Give the player a free quest refresh

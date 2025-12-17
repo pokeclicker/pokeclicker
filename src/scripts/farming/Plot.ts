@@ -55,7 +55,7 @@ class Plot implements Saveable {
         this._isSafeLocked = ko.observable(false);
         this._berry = ko.observable(berry).extend({ numeric: 0 });
         this._lastPlanted = ko.observable(berry).extend({ numeric: 0 });
-        this._age = ko.observable(age);
+        this._age = ko.observable(age).extend({ numeric: 5 });
         this._mulch = ko.observable(mulch).extend({ numeric: 0 });
         this._mulchTimeLeft = ko.observable(mulchTimeLeft).extend({ numeric: 3 });
         this._wanderer = ko.observable(undefined);
@@ -75,7 +75,7 @@ class Plot implements Saveable {
 
                 const boost = this.auraBoost();
                 const value = this.berryData.aura.getAuraValue(this.stage());
-                return value > 1 || this.berry === BerryType.Micle ? value * boost : value / boost;
+                return value > 1 ? value * boost : value / boost;
             }).extend({ rateLimit: 50 }),
         };
 
@@ -127,7 +127,7 @@ class Plot implements Saveable {
             if (this.mulch === MulchType.None) {
                 return '';
             }
-            return GameConstants.formatTime(this.mulchTimeLeft);
+            return GameConstants.formatTime(this.mulchTimeLeft * App.game.farming.getMulchDurationMultiplier());
         });
 
         this.auraGrowth = ko.pureComputed(() => {
@@ -188,11 +188,13 @@ class Plot implements Saveable {
             return this.berry === BerryType.None;
         });
 
+        this.isMulched = ko.pureComputed(() => this.mulch !== MulchType.None);
+
         this.stage = ko.pureComputed(() => {
             if (this.berry === BerryType.None) {
                 return PlotStage.Seed;
             }
-            return this.berryData.growthTime.findIndex(t => this.age <= t);
+            return this.berryData.growthTime.findIndex(t => this.age < t);
         });
 
         this.tooltip = ko.pureComputed(() => {
@@ -284,7 +286,14 @@ class Plot implements Saveable {
 
             // Wanderer
             if (this.wanderer) {
-                tooltip.push(`A wild <strong>${PokemonHelper.displayName(this.wanderer.name)()}</strong> is wandering around`);
+                tooltip.push(`A wild <strong>${PokemonHelper.displayName(this.wanderer.name)}</strong> is wandering around`);
+            }
+
+            // Mutation
+            const possibleMutations = App.game.farming.possiblePlotMutations()[this.index];
+            if (possibleMutations.length) {
+                tooltip.push('<u>Possible Mutations</u>');
+                possibleMutations.forEach((mutation) => tooltip.push(mutation));
             }
 
             return tooltip.join('<br/>');
@@ -310,7 +319,7 @@ class Plot implements Saveable {
 
             // Checking for Petaya Berries
             if (App.game.farming.berryInFarm(BerryType.Petaya, PlotStage.Berry, true) && this.berry !== BerryType.Petaya) {
-                this.age = Math.min(this.age, this.berryData.growthTime[3] + 1);
+                this.age = Math.min(this.age, this.berryData.growthTime[3]);
             }
 
             const updatedStage = this.stageUpdated(oldAge, this.age);
@@ -324,12 +333,12 @@ class Plot implements Saveable {
                 change = true;
             }
 
-            if (!this._hasWarnedAboutToWither && this.age + 15 > this.berryData.growthTime[4]) {
+            if (!this._hasWarnedAboutToWither && this.age + 15 >= this.berryData.growthTime[4]) {
                 this.notifications.push(FarmNotificationType.AboutToWither);
                 this._hasWarnedAboutToWither = true;
             }
 
-            if (this.age > this.berryData.growthTime[4]) {
+            if (this.age >= this.berryData.growthTime[4]) {
                 this.die();
                 change = true;
             }
@@ -337,7 +346,7 @@ class Plot implements Saveable {
 
         // Updating Mulch
         if (this.mulch !== MulchType.None) {
-            this.mulchTimeLeft = Math.max(this.mulchTimeLeft - seconds, 0);
+            this.mulchTimeLeft = Math.max(this.mulchTimeLeft - seconds / App.game.farming.getMulchDurationMultiplier(), 0);
             if (this.mulchTimeLeft === 0) {
                 this.notifications.push(FarmNotificationType.MulchRanOut);
                 this.mulch = MulchType.None;
@@ -403,7 +412,6 @@ class Plot implements Saveable {
             if (Rand.chance(replantChance)) {
                 this.age = 0;
                 this.notifications.push(FarmNotificationType.Replanted);
-                App.game.oakItems.use(OakItemType.Sprinklotad);
                 GameHelper.incrementObservable(App.game.statistics.totalBerriesReplanted, 1);
                 return;
             }

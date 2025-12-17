@@ -74,32 +74,21 @@ const playerSpriteMoveHandler = {
 };
 //TODO END
 
+/**
+ * Creates a foreach binding where the user can drag elements to reorder them, and updates the underlying array's order
+ * 
+ * Syntax: sortable: { foreach: <observable array>, options: { ... } }
+ *  - foreach: the observable array used for the foreach binding
+ *  - dataToId: optional function that maps array elements to unique (when converted to strings) IDs 
+ *  - options: optional object for Sortablejs options
+ */
 const sortableControllers = new WeakMap();
 const sortableHandler = {
     init: function (element, valueAccessor, allBindings, viewModel) {
-        sortableControllers.set(element, null);
-        const value = valueAccessor();
-        ko.applyBindingsToNode(element, {
-            template: {
-                ...value,
-                afterRender(nodes, el) {
-                    nodes.forEach((n) => {
-                        if (n.dataset) {
-                            n.dataset.sortableId = value.options.getId(el);
-                        }
-                    });
-                },
-                beforeRemove(node: HTMLElement, idx, el) {
-                    // Sortable may have cloned the node, so we need to get the real one
-                    const found = element.querySelector(`[data-sortable-id="${value.options.getId(el)}"]`);
-                    (found ?? node)?.remove();
-                },
-            },
-        }, viewModel);
-        return { controlsDescendantBindings: true };
-    },
-    update: function (element, valueAccessor) {
-        const value = ko.unwrap(valueAccessor());
+        const bindingParameters = valueAccessor();
+        const getDataId = bindingParameters.getDataId ? (data) => String(bindingParameters.getDataId(data)) : (data) => String(data);
+
+        // Create Sortable instance
         const options = {
             // defaults
             animation: 100,
@@ -107,29 +96,70 @@ const sortableHandler = {
             delay: 500,
             delayOnTouchOnly: true,
             touchStartThreshold: 20,
-
-            // override with options passed through knockout binding
-            ...(value.options ?? {}),
             dataIdAttr: 'data-sortable-id',
+            
+            // override with options passed through knockout binding
+            ...(bindingParameters.options ?? {}),
+
+            // not used by Sortable, but putting it in the instance anyway for ease of access
+            getDataId,
 
             // handle updating underlying knockout array when moving items
             onEnd: (evt, originalEvt) => {
-                value.options?.onEnd?.(evt, originalEvt);
+                // If an onEnd function was supplied, call that first
+                bindingParameters.options?.onEnd?.(evt, originalEvt);
 
-                const { oldIndex, newIndex } = evt;
-                const list = [...value.foreach()];
-                const movedItem = list.splice(oldIndex, 1)[0];
+                const list = [...bindingParameters.foreach()]; // shallow copy of the observable array
+                const sortableList = sortableControllers.get(element).toArray();
 
-                const newList = [
-                    ...list.slice(0, newIndex),
-                    movedItem,
-                    ...list.slice(newIndex),
-                ];
-                value.foreach(newList);
+                // Find the current indices of each element in the UI and sort the underlying array to match
+                // This avoids potential desync issues
+                const newIndices = new Map();
+                list.forEach(val => newIndices.set(val, sortableList.indexOf(options.getDataId(val))));
+                list.sort((a, b) => newIndices.get(a)  - newIndices.get(b));
+
+                // Update the observable array's order
+                bindingParameters.foreach(list);
             },
         };
-
+        // If some elements aren't draggable, prevent dragging other elements onto them
+        if (options.filter) {
+            options.preventOnFilter = false;
+            options.onMove = (evt) => !evt.related.matches(options.filter);
+        }
         sortableControllers.set(element, Sortable.create(element, options));
+
+        // Apply the sortable binding
+        ko.applyBindingsToNode(element, {
+            template: {
+                foreach: bindingParameters.foreach,
+                afterRender(nodes, el) {
+                    nodes.forEach((n) => {
+                        if (n instanceof Element) {
+                            n.setAttribute(options.dataIdAttr, options.getDataId(el));
+                        }
+                    });
+                },
+                beforeRemove(node: HTMLElement, idx, el) {
+                    // Sortable may have cloned the node, so we need to get the real one
+                    const found = element.querySelector(`[${options.dataIdAttr}="${options.getDataId(el)}"]`);
+                    (found ?? node)?.remove();
+                },
+            },
+        }, viewModel);
+        return { controlsDescendantBindings: true };
+    },
+    update: function (element, valueAccessor) {
+        // When the observable array changes, keep the UI order synced
+        // It should always match for changes via the user dragging elements
+        // but this lets us safely change the order via code
+        const sortInstance = sortableControllers.get(element);
+        const internalOrder = valueAccessor().foreach().map(x => sortInstance.options.getDataId(x));
+        const visibleOrder = sortInstance.toArray();
+        if (internalOrder.some((x, i) => x !== visibleOrder[i])) {
+            // Out of sync, reorder the UI to match the internal model
+            sortInstance.sort(internalOrder);
+        }
     },
 };
 

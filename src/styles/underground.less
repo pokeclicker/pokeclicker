@@ -1,6 +1,66 @@
-#mineModal {
-    ul.nav {
-        width: 100%;
+.underground-tool-color {
+    --tool-color: white;
+    --tool-color-darker: black;
+
+    &.underground-tool-color__chisel {
+        --tool-color: #5468EC;
+        --tool-color-darker: #0c1868;
+    }
+
+    &.underground-tool-color__hammer {
+        --tool-color: #F86058;
+        --tool-color-darker: #7f0b05;
+    }
+
+    &.underground-tool-color__bomb {
+        --tool-color: #85DD9D;
+        --tool-color-darker: #217538;
+    }
+
+    &.underground-tool-color__survey {
+        --tool-color: #FFC300;
+        --tool-color-darker: #332700;
+    }
+
+    &.underground-tool-color__discharge {
+        --tool-color: rgb(177, 215, 237);
+        --tool-color-darker: #277aab;
+    }
+}
+
+.underground-mining-container {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(12, 1fr);
+
+    .underground-mining-container__treasure-count {
+        grid-column-end: span 12;
+    }
+
+    .underground-mining-container__mine {
+        grid-column-end: span 12;
+    }
+
+    .underground-mining-container__tools {
+        grid-column-end: span 12;
+    }
+
+    .underground-mining-container__cell-battery {
+        grid-column-end: span 12;
+    }
+
+    .underground-mining-container__tool-info {
+        grid-column-end: span 12;
+    }
+
+    @media (min-width: 992px) {
+        .underground-mining-container__tools {
+            grid-column-end: span 9;
+        }
+
+        .underground-mining-container__cell-battery {
+            grid-column-end: span 3;
+        }
     }
 }
 
@@ -141,7 +201,6 @@
 
 #mineBody {
     display: grid;
-    grid-template-columns: repeat(25, 1fr);
     position: relative;
     overflow: hidden;
 
@@ -222,25 +281,137 @@
 
 .search-mine-display {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.25rem;
 }
 
-.tool-ui {
-    --tool-color: white;
+.underground-all-tools-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+    gap: 0.5rem;
 
-    &.Chisel-tool-ui {
-        --tool-color: #5468EC;
+    .underground-tool-container {
+        > div {
+            display: grid;
+            gap: 0.25rem;
+            justify-items: center;
+        }
+
+        .underground-tool__background-gradient {
+            border-radius: 10px;
+            padding: 5px;
+            aspect-ratio: 1;
+
+            > :first-child {
+                border-radius: 5px;
+            }
+
+            &.conic {
+                background: conic-gradient(var(--tool-color) var(--gradient-percentage, 50%), var(--tool-color-darker) 0);
+            }
+
+            &.infinite {
+                background-image: linear-gradient(45deg,var(--tool-color) 25%,var(--tool-color-darker) 25%,var(--tool-color-darker) 50%,var(--tool-color) 50%,var(--tool-color) 75%,var(--tool-color-darker) 75%,var(--tool-color-darker));
+                background-size: 1rem 1rem;
+                animation: 3s linear infinite progress-bar-stripes;
+            }
+        }
+    }
+}
+
+.underground-all-tools-container.mini {
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    gap: 0;
+
+    .underground-tool-container {
+        > div {
+            gap: 0;
+        }
+
+        .underground-tool__background-gradient {
+            padding: 2px;
+
+            > :first-child {
+                border-radius: 8px;
+            }
+
+            img {
+                width: 20px;
+                height: 20px;
+                object-fit: contain;
+            }
+        }
+    }
+}
+
+.treasure-item-container {
+    display: grid;
+    gap: 0.25rem;
+    text-align: center;
+
+    > div {
+        container-type: inline-size;
     }
 
-    &.Hammer-tool-ui {
-        --tool-color: #F86058;
+    &.grid-view {
+        grid-template-columns: repeat(auto-fit, 75px);
+
+        > div {
+            aspect-ratio: 1 / 1;
+
+            > div:first-child {
+                width: 100%;
+                height: 100%;
+            }
+        }
     }
 
-    &.Bomb-tool-ui {
-        --tool-color: #85DD9D;
+    &.list-view {
+        grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
     }
 
-    &.Survey-tool-ui {
-        --tool-color: #FFC300;
+    .treasure-item-data-wrapper {
+        display: grid;
+        flex: 1;
+        gap: 0.25rem;
+        justify-content: center;
+    }
+}
+
+.treasure-item {
+    display: grid;
+    gap: 0.25rem;
+    place-items: center center;
+    justify-content: center;
+}
+
+.quickSellMode .btn.has-sell-value {
+    box-shadow: inset 0 0 6px 2px var(--danger);
+}
+
+@container (max-width: 100px) {
+    .treasure-item {
+        .treasure-item-name {
+            display: none;
+        }
+
+        .long-format {
+            display: none;
+        }
+    }
+}
+
+@container (min-width: 100px) {
+    .treasure-item {
+        display: flex;
+
+        .treasure-item-data-wrapper {
+            text-align: left;
+            justify-content: space-between;
+        }
+
+        .short-format {
+            display: none;
+        }
     }
 }

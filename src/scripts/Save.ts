@@ -7,12 +7,15 @@ class Save {
     static counter = GameConstants.SAVE_TICK - GameConstants.TICK_TIME;
     static key = '';
 
-    public static store(player: Player) {
+    public static store(player: Player, showNotification = false) {
         localStorage.setItem(`player${Save.key}`, JSON.stringify(player));
         localStorage.setItem(`save${Save.key}`, JSON.stringify(this.getSaveObject()));
         localStorage.setItem(`settings${Save.key}`, JSON.stringify(Settings.toJSON()));
 
         this.counter = 0;
+        if (showNotification) {
+            Notifier.notify({ message: 'Game Saved!'});
+        }
         //console.log('%cGame saved', 'color:#3498db;font-weight:900;');
     }
 
@@ -47,12 +50,7 @@ class Save {
     public static download() {
         const backupSaveData = {player, save: this.getSaveObject(), settings: Settings.toJSON()};
         try {
-            const element = document.createElement('a');
-            element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(SaveSelector.btoa(JSON.stringify(backupSaveData)))}`);
-            const datestr = GameConstants.formatDate(new Date());
-            const filename = Settings.getSetting('saveFilename').value ? Settings.getSetting('saveFilename').value : Settings.getSetting('saveFilename').defaultValue;
-            element.setAttribute('download', GameHelper.saveFileName(filename, {'{date}' : datestr, '{version}' : App.game.update.version, '{name}' : App.game.profile.name()}));
-
+            const element = SaveSelector.createDownloadElement(backupSaveData, App.game.update.version);
             element.style.display = 'none';
             document.body.appendChild(element);
 
@@ -216,46 +214,6 @@ class Save {
                 });
             }
         }, 1000);
-    }
-
-    public static convert() {
-        const base64 = $('#convertTextArea').val().toString();
-        try {
-            const json = atob(base64);
-            const p = JSON.parse(json);
-            Save.convertShinies(p.caughtPokemonList);
-            $('#saveModal').modal('hide');
-        } catch (e) {
-            Notifier.notify({
-                message: 'Invalid save data.',
-                type: NotificationConstants.NotificationOption.danger,
-            });
-        }
-    }
-
-    public static convertShinies(list: Array<any>) {
-        const converted = [];
-        list = list.filter(p => p.shiny);
-        for (const pokemon of list) {
-            const id = +pokemon.id;
-            const partyPokemon = App.game.party.getPokemon(id);
-            if (partyPokemon) {
-                converted.push(pokemon.name);
-                partyPokemon.shiny = true;
-            }
-        }
-        if (converted.length > 0) {
-            Notifier.notify({
-                message: `You have gained the following shiny Pokémon:</br>${converted.join(',</br>')}`,
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 1e4,
-            });
-        } else {
-            Notifier.notify({
-                message: 'No new shiny Pokémon to import.',
-                type: NotificationConstants.NotificationOption.info,
-            });
-        }
     }
 }
 
