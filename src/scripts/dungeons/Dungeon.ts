@@ -310,7 +310,7 @@ class Dungeon {
         const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]();
         const debuffed = DungeonRunner.isDungeonDebuffed(this);
 
-        const tierWeights = (loot.ignoreDebuff ? this.getLootTierWeights(clears, false) : this.getLootTierWeights(clears, debuffed));
+        const tierWeights = this.getLootTierWeights(clears, !loot.ignoreDebuff && debuffed, true);
         const weightSum = Object.keys(tierWeights)
             .filter(tier => this.lootTable[tier].some((item: Loot) => item.requirement?.isCompleted() ?? true))
             .map(tier => tierWeights[tier])
@@ -319,7 +319,12 @@ class Dungeon {
         const tierLoot = this.lootTable[tier].filter((item) => item.requirement?.isCompleted() ?? true);
         const tierWeightSum = tierLoot.reduce((acc, item) => acc + (item.weight ?? 1), 0);
         const lootWeight = loot.weight ?? 1;
-        return lootWeight / tierWeightSum * tierWeights[tier] / weightSum;
+        if (loot.ignoreDebuff) {
+            return lootWeight / tierWeightSum * tierWeights[tier] / weightSum;
+        }
+        const onlyDebuffableMultiplier = 1 - Object.keys(this.lootTable).map(k => [k, this.lootTable[k]])
+            .reduce((tierSum: number, [tier, loots]) => tierSum + loots.reduce((chanceSum: number, loot: Loot) => chanceSum + (loot.ignoreDebuff && this.lootFilter(loot, false) ? this.getLootChance(loot, tier as LootTier) : 0), 0), 0);
+        return lootWeight / tierWeightSum * tierWeights[tier] / weightSum * onlyDebuffableMultiplier;
     }
 
     /**
