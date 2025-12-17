@@ -3,7 +3,10 @@ import ContestType from '../enums/ContestType';
 import Direction from '../enums/Direction';
 import { ContestColor, Region } from '../GameConstants';
 import GameHelper from '../GameHelper';
+import NotificationConstants from '../notifications/NotificationConstants';
+import Notifier from '../notifications/Notifier';
 import { pokemonMap } from '../pokemons/PokemonList';
+import { PokemonNameType } from '../pokemons/PokemonNameType';
 import ContestWonRequirement from '../requirements/ContestWonRequirement';
 import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
@@ -43,6 +46,43 @@ export default class ContestHelper {
         return appeal / 10;
     }
 
+    public static reduceSheenPerTick(conRank: ContestRank, conType: ContestType, pokemons?: TmpPartyPokemonType[]) {
+        const pks = pokemons ? pokemons : ContestHelper.getPartyPokemonByContestTypeRank(conType, conRank);
+        let ranOutOfSheenPokemon = 0;
+
+        for (const pokemon of pks) {
+            if (pokemon.contestExp > 0 && !pokemon.breeding) {
+                pokemon.contestExp -= conRank;
+                pokemon.contestExp = Math.max(0, pokemon.contestExp);
+
+                // Reset contest types when sheen/exp has run out
+                if (pokemon.contestExp <= 0) {
+                    // Special contest pokemon are exempt
+                    pokemon.currentContestTypes = !ContestHelper.isSpecialContestPokemon(pokemon.name) ? [] : pokemonMap[pokemon.name].contestTypes;
+                    ranOutOfSheenPokemon += 1;
+                }
+            }
+        }
+
+        if (ranOutOfSheenPokemon > 0) {
+            Notifier.notify({
+                title: 'Pokémon Contest',
+                message: `${ranOutOfSheenPokemon} of your Pokemon ran out of Sheen!`,
+                type: NotificationConstants.NotificationOption.warning,
+                // TODO: setting to turn off contest notifications
+            });
+        }
+
+        return;
+    }
+
+    public static isSpecialContestPokemon(pk: PokemonNameType) {
+        const shopPokemon = ['Tangela (Pom-pom)', 'Goldeen (Diva)', 'Weepinbell (Fancy)', 'Onix (Rocker)', 'Dugtrio (Punk)', 'Gengar (Punk)', 'Sudowoodo (Golden)'];
+        const contestPikachu = ['Pikachu (Rock Star)', 'Pikachu (Belle)', 'Pikachu (Pop Star)', 'Pikachu (Ph. D.)', 'Pikachu (Libre)'];
+        const contestPokemon = shopPokemon.concat(contestPikachu);
+        return contestPokemon.includes(pk);
+    }
+
     // Contest eligibility
     public static getPartyPokemonByMaxSheen(): TmpPartyPokemonType[] {
         return App.game.party.caughtPokemon.filter((p) => {
@@ -66,21 +106,21 @@ export default class ContestHelper {
             case ContestRank.Super:
             case ContestRank.Hyper:
             case ContestRank.Master:
-                return App.game.party.caughtPokemon;
             // Sinnoh
             case ContestRank['Super Normal']:
             case ContestRank['Super Great']:
             case ContestRank['Super Ultra']:
             case ContestRank['Super Master']:
-                // todo: filter by sheen > 0
-                return App.game.party.caughtPokemon;
+                return App.game.party.caughtPokemon.filter((p) => {
+                    ContestTypeHelper.getAppealModifier(p.currentContestTypes, [type]) > 0;
+                });
             // Kalos (in Hoenn)
             case ContestRank.Spectacular:
                 return ContestHelper.getPartyPokemonByContestType(type);
             // Galar (in Sinnoh)
             case ContestRank['Brilliant Shining']:
-                // todo: sheen requirement
-                return ContestHelper.getPartyPokemonByMaxSheen();
+                // not coded yet, may have a different requirement
+                return ContestHelper.getPartyPokemonByContestType(type);
         }
     }
 
@@ -131,26 +171,34 @@ export default class ContestHelper {
         return App.game.party.getPokemon(p) ? App.game.party.getPokemon(p).currentContestTypes : pokemonMap[p];
     }
 
-    public static increaseAppeal(appeal: number, amount: number, sheenCap = false) {
-        let sum = appeal * 100;
-
-        let blocksLeft = amount;
-
-        const rankBracket = 10 - Object.values(ContestHelper.rankAppeal).reverse().findIndex(i => i <= Math.min(appeal, ContestHelper.rankAppeal[ContestRank['Brilliant Shining']]));
+    public static increaseAppeal(initialAppeal: number, amount: number, sheenDebuff = false, ignoreRankDebuff = false) {
+        let resultingAppeal = initialAppeal * 100;
+        let amountLeft = amount;
+        const rankBracket = 10 - Object.values(ContestHelper.rankAppeal).reverse().findIndex(i => i <= Math.min(initialAppeal, ContestHelper.rankAppeal[ContestRank['Brilliant Shining']]));
 
         for (let i = rankBracket; i <= ContestRank['Brilliant Shining']; i++) {
-            if (blocksLeft > 0) {
-                const multiplier = Math.max(10 - i, 1) * 10;
-                let addition = blocksLeft * multiplier;
-                if (i < ContestRank['Brilliant Shining'] && !sheenCap) {
-                    addition = Math.min((ContestHelper.rankAppeal[i + 1] - ContestHelper.rankAppeal[i]) * 100, blocksLeft * multiplier);
+            if (amountLeft > 0) {
+                // Rank debuff
+                let debuff = Math.max(10 - i, 1);
+                if (ignoreRankDebuff) {
+                    debuff = 10;
                 }
-                sum = sum + addition;
-                blocksLeft = Math.ceil(blocksLeft - addition / multiplier);
+                if (sheenDebuff) {
+                    debuff = 1;
+                }
+
+                let addition = amountLeft * debuff * 10;
+
+                // "Fill" per rank
+                if (i < ContestRank['Brilliant Shining']) {
+                    addition = Math.min((ContestHelper.rankAppeal[i + 1] - ContestHelper.rankAppeal[i]) * 100, addition);
+                }
+
+                resultingAppeal = resultingAppeal + addition;
+                amountLeft = Math.ceil(amountLeft - addition / debuff);
             }
         }
-
-        return sum / 100;
+        return resultingAppeal / 100;
     }
 
     // Sheen
@@ -330,11 +378,37 @@ export default class ContestHelper {
                         RibbonType = 'Star';
                         break;
                 }
+                if (rank > ContestRank.Spectacular) {
+                    RibbonType = 'Twinkling Star';
+                }
                 return `${RibbonRank} ${RibbonType} Ribbon`;
             }
             return badgeCase ? `${RibbonType} Ribbon` : `${RibbonRank} ${RibbonType} Ribbon`;
         } else {
-            return 'Unaivalable';
+            return 'Unavailable';
         }
+    }
+
+    public static getPokemonContestRibbon(p: TmpPartyPokemonType, t: ContestType, r: ContestRank) {
+        // No pokemon ribbon if contest hasn't been beaten
+        if (!App.game.statistics.contestHighestRound[r][t]()) {
+            return false;
+        }
+        const typeAppeal = p.contestSaveData[t][1]();
+        if (typeAppeal * ContestTypeHelper.getAppealModifier([t], [t]) >= ContestHelper.rankAppeal[r]) {
+            return true;
+        }
+        // Return if failed for type-specific ribbons
+        if (r >= ContestRank.Spectacular) {
+            return false;
+        }
+        // For lower ranks compute intersecting appeals
+        const adjData = Object.entries(p.contestSaveData).filter(([d]) => p.contestSaveData[d] != p.contestSaveData[t]);
+        const adjAppeal = Math.max(...Object.values(adjData).flatMap(t => t[1][1]()));
+        const adjTypes = [...adjData.flatMap(t => Number(t[0]))];
+        if (adjAppeal * ContestTypeHelper.getAppealModifier(adjTypes, [t]) >= ContestHelper.rankAppeal[r]) {
+            return true;
+        }
+        return false;
     }
 }
