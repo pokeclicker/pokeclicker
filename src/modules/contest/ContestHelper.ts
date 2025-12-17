@@ -1,7 +1,7 @@
 import ContestRank from '../enums/ContestRank';
 import ContestType from '../enums/ContestType';
 import Direction from '../enums/Direction';
-import { ContestColor, Region } from '../GameConstants';
+import { ContestColor, Region, SECOND } from '../GameConstants';
 import GameHelper from '../GameHelper';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
@@ -46,7 +46,11 @@ export default class ContestHelper {
         return appeal / 10;
     }
 
-    public static reduceSheenPerTick(conRank: ContestRank, conType: ContestType, pokemons?: TmpPartyPokemonType[]) {
+    public static reduceSheenPerSecond(conRank: ContestRank, conType: ContestType, timerValue: number, pokemons?: TmpPartyPokemonType[]) {
+        const isWholeNumber = (timerValue / SECOND) === Math.floor(timerValue / SECOND);
+        if (!isWholeNumber) {
+            return;
+        }
         const pks = pokemons ? pokemons : ContestHelper.getPartyPokemonByContestTypeRank(conType, conRank);
         let ranOutOfSheenPokemon = 0;
 
@@ -60,6 +64,15 @@ export default class ContestHelper {
                     // Special contest pokemon are exempt
                     pokemon.currentContestTypes = !ContestHelper.isSpecialContestPokemon(pokemon.name) ? [] : pokemonMap[pokemon.name].contestTypes;
                     ranOutOfSheenPokemon += 1;
+                }
+                if (!ContestHelper.somePartyPokemonHasSheen()) {
+                    Notifier.notify({
+                        title: 'Pokémon Contest',
+                        message: 'All of your Pokemon ran out of Sheen! Berry rewards are limited to 1 per combo!',
+                        type: NotificationConstants.NotificationOption.danger,
+                        // TODO: setting to turn off contest notifications
+                    });
+                    return;
                 }
             }
         }
@@ -84,10 +97,8 @@ export default class ContestHelper {
     }
 
     // Contest eligibility
-    public static getPartyPokemonByMaxSheen(): TmpPartyPokemonType[] {
-        return App.game.party.caughtPokemon.filter((p) => {
-            return p.contestSheen() >= 100;
-        });
+    public static somePartyPokemonHasSheen(): boolean {
+        return App.game.party.caughtPokemon.some((p) => p.contestSheen() > 0);
     }
 
     public static getPartyPokemonByContestType(type: ContestType): TmpPartyPokemonType[] {

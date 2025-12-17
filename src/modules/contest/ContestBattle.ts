@@ -422,7 +422,7 @@ export default class ContestBattle extends Battle {
             return;
         }
         const b = ContestRewards.getContestBerryReward(rank ?? ContestRunner.rank(), fromSpecifiedRank);
-        const amount = Math.ceil(b.amount() * multiplier);
+        const amount = ContestHelper.somePartyPokemonHasSheen() ? Math.ceil(b.amount() * multiplier) : 1;
         // give the berry
         App.game.farming.gainBerry(b.berry, amount, false);
         Notifier.notify({

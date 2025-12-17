@@ -110,8 +110,9 @@ export default class ContestRunner {
         if (!ContestRunner.running()) {
             return;
         }
-        // Reduce Sheen
-        ContestHelper.reduceSheenPerTick(ContestRunner.rank(), ContestRunner.type());
+        if (!ContestRunner.frenzyMode()) {
+            ContestHelper.reduceSheenPerSecond(ContestRunner.rank(), ContestRunner.type(), ContestRunner.timeLeft());
+        }
         // Assess completion
         if (ContestRunner.timeLeft() < 0) {
             ContestRunner.finishContest();
