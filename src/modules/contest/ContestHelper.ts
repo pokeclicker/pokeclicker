@@ -387,7 +387,7 @@ export default class ContestHelper {
         }
     }
 
-    public static getPokemonContestRibbon(p: TmpPartyPokemonType, t: ContestType, r: ContestRank) {
+    public static getPartyPokemonContestRibbon(p: TmpPartyPokemonType, t: ContestType, r: ContestRank) {
         // No pokemon ribbon if contest hasn't been beaten
         if (!App.game.statistics.contestHighestRound[r][t]()) {
             return false;
