@@ -302,6 +302,7 @@ export type TmpPartyPokemonType = {
     contestAppeal: number;
     currentContestTypes: ContestType[];
     contestExp: number;
+    contestSaveData: Record<ContestType, [KnockoutObservable<boolean>, KnockoutObservable<number>]>;
     vitaminsUsed: Record<GameConstants.VitaminType, KnockoutObservable<number>>;
     heldItem: KnockoutObservable<TmpHeldItemType>;
     defaultFemaleSprite: KnockoutObservable<boolean>;
