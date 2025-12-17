@@ -110,7 +110,7 @@ export default class ContestRunner {
         if (!ContestRunner.running()) {
             return;
         }
-        if (!ContestRunner.frenzyMode()) {
+        if (!ContestRunner.frenzyMode() && ContestRunner.timeLeftPercentage() < 100) {
             ContestHelper.reduceSheenPerSecond(ContestRunner.rank(), ContestRunner.type(), ContestRunner.timeLeft());
         }
         // Assess completion

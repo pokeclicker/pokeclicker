@@ -795,7 +795,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     }
 
     private calculateDefaultContestAppeal(t: ContestType): number {
-        if (!ContestHelper.isSpecialContestPokemon(this.name) || this.calculateDefaultContestType(t)) {
+        if (!ContestHelper.isSpecialContestPokemon(this.name) || !this.calculateDefaultContestType(t)) {
             return 0;
         }
         const contestPikachu = ['Pikachu (Rock Star)', 'Pikachu (Belle)', 'Pikachu (Pop Star)', 'Pikachu (Ph. D.)', 'Pikachu (Libre)'];

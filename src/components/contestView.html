@@ -24,7 +24,19 @@
           <div class="justify-content-center">
             <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
                 <table width="100%">
-                  <th colspan="2" data-bind="text: `${ContestHelper.getContestEmoji(ContestRunner.type())}${ContestRank[ContestRunner.rank()]} Rank ${ContestType[ContestRunner.type()]} Contest Stats${ContestHelper.getContestEmoji(ContestRunner.type())}`"></th>
+                  <tr>
+                    <th colspan="100%" class="bg-warning" data-bind="visible: !ContestHelper.hasSheenForContest(ContestRunner.rank(), ContestRunner.type())">
+                      Your Pokemon have no Sheen for this contest. Berry rewards are limited to 1 per combo.
+                    </th>
+                  </tr>
+                  <tr>
+                    <th colspan="100%" class="bg-danger" data-bind="visible: !ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()])">
+                      You have no eligible Pokemon for this contest. The audience bar will not increase.
+                    </th>
+                  </tr>
+                  <tr>
+                    <th colspan="2" data-bind="text: `${ContestHelper.getContestEmoji(ContestRunner.type())}${ContestRank[ContestRunner.rank()]} Rank ${ContestType[ContestRunner.type()]} Contest Stats${ContestHelper.getContestEmoji(ContestRunner.type())}`"></th>
+                  </tr>
                   <tr>
                     <!-- <td colspan="2" data-bind="text: `${ContestType[ContestRunner.type()]} Audience Appeal: ${ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]).toLocaleString('en-US')}`"></td> -->
                     <td colspan="2" data-bind="text: `Audience Appeal: ${ContestBattle.testAppeal().toLocaleString('en-US')}`"></td>

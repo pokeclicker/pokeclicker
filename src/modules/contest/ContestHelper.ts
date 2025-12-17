@@ -65,7 +65,7 @@ export default class ContestHelper {
                     pokemon.currentContestTypes = !ContestHelper.isSpecialContestPokemon(pokemon.name) ? [] : pokemonMap[pokemon.name].contestTypes;
                     ranOutOfSheenPokemon += 1;
                 }
-                if (!ContestHelper.somePartyPokemonHasSheen()) {
+                if (!ContestHelper.hasSheenForContest(conRank, conType)) {
                     Notifier.notify({
                         title: 'Pokémon Contest',
                         message: 'All of your Pokemon ran out of Sheen! Berry rewards are limited to 1 per combo!',
@@ -97,8 +97,8 @@ export default class ContestHelper {
     }
 
     // Contest eligibility
-    public static somePartyPokemonHasSheen(): boolean {
-        return App.game.party.caughtPokemon.some((p) => p.contestSheen() > 0);
+    public static hasSheenForContest(rank: ContestRank, type: ContestType): boolean {
+        return ContestHelper.getPartyPokemonByContestTypeRank(type, rank).some((p) => p.contestSheen() > 0);
     }
 
     public static getPartyPokemonByContestType(type: ContestType): TmpPartyPokemonType[] {
