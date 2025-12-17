@@ -1222,16 +1222,6 @@ export enum PokeBlockColor {
     Smart,
     Tough,
     Balanced,
-    Spicy,
-    Dry,
-    Sweet,
-    Bitter,
-    Sour,
-    Mild,
-    Foul,
-    Overripe,
-    Rich,
-    Super_Rich,
 }
 
 export enum VitaminType {
