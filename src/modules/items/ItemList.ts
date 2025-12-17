@@ -44,6 +44,7 @@ import TreasureItem from './TreasureItem';
 import { pokemonMap } from '../pokemons/PokemonList';
 import AttackGainConsumable from './AttackGainConsumable';
 import ContestType from '../enums/ContestType';
+import ContestHelper from '../contest/ContestHelper';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -107,85 +108,75 @@ ItemList.Moonball = new PokeballItem(Pokeball.Moonball, Infinity, Currency.farmP
 ItemList.Berry_Shovel   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.');
 ItemList.Mulch_Shovel = new MulchShovelItem(300, 'Mulch Shovel', 'Removes Mulch from a plot in the Farm.');
 
-// Contest Treats
-ItemList.PokeBlock_Red       = new PokeBlock(PokeBlockColor.Red, 1, undefined, undefined,
-    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Cool), 'A Spicy Pokéblock that boosts the Appeal of Cool Pokémon by a variable amount.');
-ItemList.PokeBlock_Blue      = new PokeBlock(PokeBlockColor.Blue, 1, undefined, undefined,
-    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Beautiful), 'A Dry Pokéblock that boosts the Appeal of Beautiful Pokémon by a variable amount.');
-ItemList.PokeBlock_Pink      = new PokeBlock(PokeBlockColor.Pink, 1, undefined, undefined,
-    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Cute), 'A Sweet Pokéblock that boosts the Appeal of Cute Pokémon by a variable amount.');
-ItemList.PokeBlock_Green     = new PokeBlock(PokeBlockColor.Green, 1, undefined, undefined,
-    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Smart), 'A Bitter Pokéblock that boosts the Appeal of Smart Pokémon by a variable amount.');
-ItemList.PokeBlock_Yellow    = new PokeBlock(PokeBlockColor.Yellow, 1, undefined, undefined,
-    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Tough), 'A Sour Pokéblock that boosts the Appeal of Tough Pokémon by a variable amount.');
-ItemList.PokeBlock_White     = new PokeBlock(PokeBlockColor.White, 1, undefined, undefined,
-    undefined, 'A Mild Pokéblock that boosts the Appeal of any Pokémon by a variable amount.');
-ItemList.PokeBlock_Spicy     = new PokeBlock(PokeBlockColor.Spicy, 1, undefined, undefined,
-    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Cool) && pokemon.contestSheen() < 100, 'A Spicy Poffin that boosts the Appeal and Sheen of Cool Pokémon by a steady amount.', 'Spicy Poffin', 5);
-ItemList.PokeBlock_Dry       = new PokeBlock(PokeBlockColor.Dry, 1, undefined, undefined,
-    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Beautiful) && pokemon.contestSheen() < 100, 'A Dry Poffin that boosts the Appeal and Sheen of Beautiful Pokémon by a steady amount.', 'Dry Poffin', 5);
-ItemList.PokeBlock_Sweet     = new PokeBlock(PokeBlockColor.Sweet, 1, undefined, undefined,
-    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Cute) && pokemon.contestSheen() < 100, 'A Sweet Poffin that boosts the Appeal and Sheen of Cute Pokémon by a steady amount.', 'Sweet Poffin', 5);
-ItemList.PokeBlock_Bitter    = new PokeBlock(PokeBlockColor.Bitter, 1, undefined, undefined,
-    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Smart) && pokemon.contestSheen() < 100, 'A Bitter Poffin that boosts the Appeal and Sheen of Smart Pokémon by a steady amount.', 'Bitter Poffin', 5);
-ItemList.PokeBlock_Sour      = new PokeBlock(PokeBlockColor.Sour, 1, undefined, undefined,
-    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Tough) && pokemon.contestSheen() < 100, 'A Sour Poffin that boosts the Appeal and Sheen of Tough Pokémon by a steady amount.', 'Sour Poffin', 5);
-ItemList.PokeBlock_Mild      = new PokeBlock(PokeBlockColor.Mild, 1, undefined, undefined,
-    (pokemon) =>  pokemon.contestSheen() < 100, 'A Mild Poffin that boosts the Appeal and Sheen of any Pokémon by a steady amount.', 'Mild Poffin', 10);
+// Pokeblocks
+ItemList.PokeBlock_Red       = new PokeBlock(PokeBlockColor.Red, 1, undefined, [ContestType.Cool],
+    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Cool) || (pokemon.currentContestTypes.length < 1 && pokemonMap[pokemon.name].contestTypes.includes(ContestType.Cool)),
+    'A Spicy Pokéblock that boosts the Appeal of Cool Pokémon by a variable amount and activates the type if it has none.');
+ItemList.PokeBlock_Blue      = new PokeBlock(PokeBlockColor.Blue, 1, undefined, [ContestType.Beautiful],
+    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Beautiful) || pokemon.currentContestTypes.length < 1 && pokemonMap[pokemon.name].contestTypes.includes(ContestType.Beautiful),
+    'A Dry Pokéblock that boosts the Appeal of Beautiful Pokémon by a variable amount and activates the type if it has none.');
+ItemList.PokeBlock_Pink      = new PokeBlock(PokeBlockColor.Pink, 1, undefined, [ContestType.Cute],
+    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Cute) || pokemon.currentContestTypes.length < 1 && pokemonMap[pokemon.name].contestTypes.includes(ContestType.Cute),
+    'A Sweet Pokéblock that boosts the Appeal of Cute Pokémon by a variable amount and activates the type if it has none.');
+ItemList.PokeBlock_Green     = new PokeBlock(PokeBlockColor.Green, 1, undefined, [ContestType.Smart],
+    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Smart) || pokemon.currentContestTypes.length < 1 && pokemonMap[pokemon.name].contestTypes.includes(ContestType.Smart),
+    'A Bitter Pokéblock that boosts the Appeal of Smart Pokémon by a variable amount and activates the type if it has none.');
+ItemList.PokeBlock_Yellow    = new PokeBlock(PokeBlockColor.Yellow, 1, undefined, [ContestType.Tough],
+    (pokemon) => pokemon.currentContestTypes.includes(ContestType.Tough) || pokemon.currentContestTypes.length < 1 && pokemonMap[pokemon.name].contestTypes.includes(ContestType.Tough),
+    'A Sour Pokéblock that boosts the Appeal of Tough Pokémon by a variable amount and activates the type if it has none.');
+ItemList.PokeBlock_White     = new PokeBlock(PokeBlockColor.White, 1, undefined, [ContestType.Balanced],
+    undefined, 'A Mild Pokéblock that boosts the Appeal of any Pokémon by a variable amount and activates the default Balanced type of some Pokémon.');
 
 ItemList.PokeBlock_Purple    = new PokeBlock(PokeBlockColor.Purple, 1, undefined, [ContestType.Cool, ContestType.Beautiful],
-    (pokemon) => (pokemon.contestExp >= 350 &&
+    (pokemon) => (ContestHelper.maxSheen() - pokemon.contestExp >= 350 &&
     ![ContestType.Cool, ContestType.Beautiful].every(ct => pokemon.currentContestTypes.includes(ct)) && [ContestType.Cool, ContestType.Beautiful].some(ct => pokemon.currentContestTypes.includes(ct))),
-    'A Spicy-Dry Pokéblock that uses 350 Sheen points to change a Pokémon\'s Contest Type from Cool to Beautiful or vice versa.');
+    'A Spicy-Dry Pokéblock that adds 350 Sheen points and changes a Pokémon\'s Contest Type from Cool to Beautiful or vice versa.', undefined, 350);
 ItemList.PokeBlock_Indigo    = new PokeBlock(PokeBlockColor.Indigo, 1, undefined, [ContestType.Beautiful, ContestType.Cute],
-    (pokemon) => (pokemon.contestExp >= 350 &&
+    (pokemon) => (ContestHelper.maxSheen() - pokemon.contestExp >= 350 &&
     ![ContestType.Beautiful, ContestType.Cute].every(ct => pokemon.currentContestTypes.includes(ct)) && [ContestType.Beautiful, ContestType.Cute].some(ct => pokemon.currentContestTypes.includes(ct))),
-    'A Dry-Sweet Pokéblock that uses 350 Sheen points to change a Pokémon\'s Contest Type from Beautiful to Cute or vice versa.');
+    'A Dry-Sweet Pokéblock that adds 350 Sheen points and changes a Pokémon\'s Contest Type from Beautiful to Cute or vice versa.', undefined, 350);
 ItemList.PokeBlock_Brown     = new PokeBlock(PokeBlockColor.Brown, 1, undefined, [ContestType.Cute, ContestType.Smart],
-    (pokemon) => (pokemon.contestExp >= 350 &&
+    (pokemon) => (ContestHelper.maxSheen() - pokemon.contestExp >= 350 &&
     ![ContestType.Cute, ContestType.Smart].every(ct => pokemon.currentContestTypes.includes(ct)) && [ContestType.Cute, ContestType.Smart].some(ct => pokemon.currentContestTypes.includes(ct))),
-    'A Sweet-Bitter Pokéblock that uses 350 Sheen apoints to change a Pokémon\'s Contest Type from Cute to Smart or vice versa.');
+    'A Sweet-Bitter Pokéblock that adds 350 Sheen apoints and changes a Pokémon\'s Contest Type from Cute to Smart or vice versa.', undefined, 350);
 ItemList.PokeBlock_Olive     = new PokeBlock(PokeBlockColor.Olive, 1, undefined, [ContestType.Smart, ContestType.Tough],
-    (pokemon) => (pokemon.contestExp >= 350 &&
+    (pokemon) => (ContestHelper.maxSheen() - pokemon.contestExp >= 350 &&
     ![ContestType.Smart, ContestType.Tough].every(ct => pokemon.currentContestTypes.includes(ct)) && [ContestType.Smart, ContestType.Tough].some(ct => pokemon.currentContestTypes.includes(ct))),
-    'A Bitter-Sour Pokéblock that uses 350 Sheen points to change a Pokémon\'s Contest Type from Smart to Tough or vice versa.');
+    'A Bitter-Sour Pokéblock that adds 350 Sheen points and changes a Pokémon\'s Contest Type from Smart to Tough or vice versa.', undefined, 350);
 ItemList.PokeBlock_Orange    = new PokeBlock(PokeBlockColor.Orange, 1, undefined, [ContestType.Cool, ContestType.Tough],
-    (pokemon) => (pokemon.contestExp >= 350 &&
+    (pokemon) => (ContestHelper.maxSheen() - pokemon.contestExp >= 350 &&
     ![ContestType.Cool, ContestType.Tough].every(ct => pokemon.currentContestTypes.includes(ct)) && [ContestType.Cool, ContestType.Tough].some(ct => pokemon.currentContestTypes.includes(ct))),
-    'A Sour-Spicy Pokéblock that uses 350 Sheen points to change a Pokémon\'s Contest Type from Tough to Cool or vice versa.');
-ItemList.PokeBlock_Rainbow   = new PokeBlock(PokeBlockColor.Rainbow, 1, undefined, undefined,
-    (pokemon) => pokemon.contestSheen() >= 100, 'A Flavorful Pokéblock that converts Sheen into a tiny bit of Appeal.');
+    'A Sour-Spicy Pokéblock that adds 350 Sheen points and changes a Pokémon\'s Contest Type from Tough to Cool or vice versa.', undefined, 350);
 
 ItemList.PokeBlock_Black     = new PokeBlock(PokeBlockColor.Black, 1, undefined, undefined,
-    (pokemon) =>  pokemon.contestSheen() < 100, 'A Pokéblock of nondescript flavor that slightly increases the Sheen of any Pokémon.');
+    (pokemon) =>  pokemon.contestSheen() < 100, 'A bland Pokéblock that slightly increases the Sheen of any Pokémon.');
 ItemList.PokeBlock_Gray      = new PokeBlock(PokeBlockColor.Gray, 1, undefined, undefined,
-    (pokemon) => pokemon.contestSheen() >= 100, 'A pleasantly flavored Pokéblock that reduces the Pokémon\'s Sheen, opening up its appetite.', undefined, 100); // -100 sheen
-ItemList.PokeBlock_Overripe      = new PokeBlock(PokeBlockColor.Overripe, 1, undefined, undefined,
-    (pokemon) =>  pokemon.contestSheen() < 100, 'An overbaked Poffin that greatly increases the Sheen of any Pokémon and resets its default Contest Types.', 'Overripe Poffin', 20); // +50%, but resets types
-ItemList.PokeBlock_Foul      = new PokeBlock(PokeBlockColor.Foul, 1, undefined, undefined,
-    (pokemon) => pokemon.contestSheen() >= 100, 'A somewhat ill-flavored Poffin that greatly reduces the Pokémon\'s Sheen and resets its default Contest Types.', 'Foul Poffin'); // -50%
-
+    (pokemon) => (pokemon.contestSheen() > 0 || pokemon.currentContestTypes.length > 0), 'A plain Pokéblock that resets the Pokémon\'s Sheen and Contest Types.');
+ItemList.PokeBlock_Rainbow   = new PokeBlock(PokeBlockColor.Rainbow, 1, undefined, undefined,
+    undefined, 'A flavorful Pokéblock that restores the Pokémon\'s default contest types and boosts Appeal.', undefined, 5);
 ItemList.PokeBlock_Silver    = new PokeBlock(PokeBlockColor.Silver, 1, undefined, undefined,
-    (pokemon) =>  pokemon.contestSheen() < 100, 'A Flavorfully Rich Pokéblock that increases Appeal the less Sheen percentage a Pokémon has.');
+    (pokemon) =>  pokemon.contestSheen() > 0, 'A tender Pokéblock that decreases Sheen by 100.', undefined, -100);
 ItemList.PokeBlock_Gold      = new PokeBlock(PokeBlockColor.Gold, 1, undefined, undefined,
-    (pokemon) =>  pokemon.contestSheen() < 100, 'A Flavorfully Rich Pokéblock that increases Appeal the more Sheen percentage a Pokémon has.');
-ItemList.PokeBlock_Rich      = new PokeBlock(PokeBlockColor.Rich, 1, undefined, undefined,
-    (pokemon) =>  pokemon.contestSheen() < 100, 'A substantially Rich Poffin that can be consumed well after max sheen.', 'Rich Poffin', 20); // goes beyond 100%, to something like 120%?
-ItemList.PokeBlock_Super_Rich      = new PokeBlock(PokeBlockColor.Super_Rich, 1, undefined, undefined,
-    (pokemon) =>  pokemon.contestSheen() < 100, 'An exceptionally Rich Poffin that fills sheen and converts all a Pokémon\'s contest types to Appeal.', 'Super Rich Poffin', 20);
+    undefined, 'A smooth Pokéblock that increases Sheen by 35 with no limit.', undefined, 35);
 
 ItemList.PokeBlock_Cool      = new PokeBlock(PokeBlockColor.Cool, 1, undefined, [ContestType.Cool],
-    (pokemon) => (pokemon.contestExp >= 1500 && !pokemon.currentContestTypes.includes(ContestType.Cool)), 'A super Spicy Pokéblock that converts 1,500 Sheen points into the Cool Contest Type.');
+    (pokemon) => (ContestHelper.maxSheen() - pokemon.contestExp >= 1200 && !pokemon.currentContestTypes.includes(ContestType.Cool)),
+    'A super Spicy Pokéblock that adds 1,200 Sheen points and the Cool Contest Type.', undefined, 1200);
 ItemList.PokeBlock_Beautiful = new PokeBlock(PokeBlockColor.Beautiful, 1, undefined, [ContestType.Beautiful],
-    (pokemon) => (pokemon.contestExp >= 1500 && !pokemon.currentContestTypes.includes(ContestType.Beautiful)), 'A super Dry Pokéblock that converts 1,500 Sheen points into the Beautiful Contest Type.');
+    (pokemon) => (ContestHelper.maxSheen() - pokemon.contestExp >= 1200 && !pokemon.currentContestTypes.includes(ContestType.Beautiful)),
+    'A super Dry Pokéblock that adds 1,200 Sheen points and the Beautiful Contest Type.', undefined, 1200);
 ItemList.PokeBlock_Cute      = new PokeBlock(PokeBlockColor.Cute, 1, undefined, [ContestType.Cute],
-    (pokemon) => (pokemon.contestExp >= 1500 && !pokemon.currentContestTypes.includes(ContestType.Cute)), 'A super Sweet Pokéblock that converts 1,500 Sheen points into the Cute Contest Type.');
+    (pokemon) => (ContestHelper.maxSheen() - pokemon.contestExp >= 1200 && !pokemon.currentContestTypes.includes(ContestType.Cute)),
+    'A super Sweet Pokéblock that adds 1,200 Sheen points and the Cute Contest Type.', undefined, 1200);
 ItemList.PokeBlock_Smart     = new PokeBlock(PokeBlockColor.Smart, 1, undefined, [ContestType.Smart],
-    (pokemon) => (pokemon.contestExp >= 1500 && !pokemon.currentContestTypes.includes(ContestType.Smart)), 'A super Bitter Pokéblock that converts 1,500 Sheen points into the Smart Contest Type.');
+    (pokemon) => (ContestHelper.maxSheen() - pokemon.contestExp >= 1200 && !pokemon.currentContestTypes.includes(ContestType.Smart)),
+    'A super Bitter Pokéblock that adds 1,200 Sheen points and the Smart Contest Type.', undefined, 1200);
 ItemList.PokeBlock_Tough     = new PokeBlock(PokeBlockColor.Tough, 1, undefined, [ContestType.Tough],
-    (pokemon) => (pokemon.contestExp >= 1500 && !pokemon.currentContestTypes.includes(ContestType.Tough)), 'A super Sour Pokéblock that converts 1,500 Sheen points into the Tough Contest Type.');
+    (pokemon) => (ContestHelper.maxSheen() - pokemon.contestExp >= 1200 && !pokemon.currentContestTypes.includes(ContestType.Tough)),
+    'A super Sour Pokéblock that adds 1,200 Sheen points and the Tough Contest Type.', undefined, 1200);
 ItemList.PokeBlock_Balanced  = new PokeBlock(PokeBlockColor.Balanced, 1, undefined, [ContestType.Balanced],
-    (pokemon) => (pokemon.contestExp >= 1500 && !pokemon.currentContestTypes.includes(ContestType.Balanced)), 'A super Flavorful Pokéblock that converts 1,500 Sheen points into the Balanced Contest Type.');
+    (pokemon) => (ContestHelper.maxSheen() - pokemon.contestExp >= 1500 && !pokemon.currentContestTypes.includes(ContestType.Balanced)),
+    'A super flavorful Pokéblock that adds 1,500 Sheen points and the Balanced Contest Type.', undefined, 1500);
 
 // Mega Stones
 ItemList.Abomasite          = new MegaStoneItem(MegaStoneType.Abomasite, 'Abomasnow', 10000);
@@ -552,18 +543,18 @@ ItemList['Tornadus (Therian)']  = new PokemonItem('Tornadus (Therian)');
 ItemList['Thundurus (Therian)']  = new PokemonItem('Thundurus (Therian)');
 ItemList['Landorus (Therian)']  = new PokemonItem('Landorus (Therian)');
 // Contest
-ItemList['Dugtrio (Punk)'] = new PokemonItem('Dugtrio (Punk)', 1500, Currency.contestToken);
-ItemList['Gengar (Punk)'] = new PokemonItem('Gengar (Punk)', 3000, Currency.contestToken);
-ItemList['Goldeen (Diva)'] = new PokemonItem('Goldeen (Diva)', 500, Currency.contestToken);
-ItemList['Onix (Rocker)'] = new PokemonItem('Onix (Rocker)', 1000, Currency.contestToken);
-ItemList['Tangela (Pom-pom)'] = new PokemonItem('Tangela (Pom-pom)', 400, Currency.contestToken);
-ItemList['Weepinbell (Fancy)'] = new PokemonItem('Weepinbell (Fancy)', 700, Currency.contestToken);
+ItemList['Dugtrio (Punk)'] = new PokemonItem('Dugtrio (Punk)', 2500, Currency.contestToken);
+ItemList['Gengar (Punk)'] = new PokemonItem('Gengar (Punk)', 3600, Currency.contestToken);
+ItemList['Goldeen (Diva)'] = new PokemonItem('Goldeen (Diva)', 1500, Currency.contestToken);
+ItemList['Onix (Rocker)'] = new PokemonItem('Onix (Rocker)', 1200, Currency.contestToken);
+ItemList['Tangela (Pom-pom)'] = new PokemonItem('Tangela (Pom-pom)', 1400, Currency.contestToken);
+ItemList['Weepinbell (Fancy)'] = new PokemonItem('Weepinbell (Fancy)', 1700, Currency.contestToken);
 ItemList['Sudowoodo (Golden)'] = new PokemonItem('Sudowoodo (Golden)', 2000, Currency.contestToken);
-ItemList['Pikachu (Rock Star)'] = new PokemonItem('Pikachu (Rock Star)', 1000, Currency.contestToken);
-ItemList['Pikachu (Belle)'] = new PokemonItem('Pikachu (Belle)', 1000, Currency.contestToken);
-ItemList['Pikachu (Pop Star)'] = new PokemonItem('Pikachu (Pop Star)', 1000, Currency.contestToken);
-ItemList['Pikachu (Ph. D.)'] = new PokemonItem('Pikachu (Ph. D.)', 1000, Currency.contestToken);
-ItemList['Pikachu (Libre)'] = new PokemonItem('Pikachu (Libre)', 1000, Currency.contestToken);
+ItemList['Pikachu (Rock Star)'] = new PokemonItem('Pikachu (Rock Star)', 10000, Currency.contestToken);
+ItemList['Pikachu (Belle)'] = new PokemonItem('Pikachu (Belle)', 10000, Currency.contestToken);
+ItemList['Pikachu (Pop Star)'] = new PokemonItem('Pikachu (Pop Star)', 10000, Currency.contestToken);
+ItemList['Pikachu (Ph. D.)'] = new PokemonItem('Pikachu (Ph. D.)', 10000, Currency.contestToken);
+ItemList['Pikachu (Libre)'] = new PokemonItem('Pikachu (Libre)', 10000, Currency.contestToken);
 // Event
 ItemList['Elf Munchlax'] = new PokemonItem('Elf Munchlax', 3108, Currency.questPoint, undefined, undefined,
     { visible: new MultiRequirement([new SpecialEventRequirement('Merry Christmas!'), new ObtainedPokemonRequirement('Santa Snorlax')]) });
