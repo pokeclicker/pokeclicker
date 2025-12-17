@@ -125,7 +125,7 @@ ItemList.PokeBlock_Yellow    = new PokeBlock(PokeBlockColor.Yellow, 1, undefined
     (pokemon) => pokemon.currentContestTypes.includes(ContestType.Tough) || pokemon.currentContestTypes.length < 1 && pokemonMap[pokemon.name].contestTypes.includes(ContestType.Tough),
     'A Sour Pokéblock that boosts the Appeal of Tough Pokémon by a variable amount and activates the type if it has none.');
 ItemList.PokeBlock_White     = new PokeBlock(PokeBlockColor.White, 1, undefined, [ContestType.Balanced],
-    undefined, 'A Mild Pokéblock that boosts the Appeal of any Pokémon by a variable amount and activates the default Balanced type of some Pokémon.');
+    undefined, 'A Mild Pokéblock that boosts the Appeal of any Pokémon by a variable amount and activates a random Contest Type, or Balanced, if it is a default type.');
 
 ItemList.PokeBlock_Purple    = new PokeBlock(PokeBlockColor.Purple, 1, undefined, [ContestType.Cool, ContestType.Beautiful],
     (pokemon) => (ContestHelper.maxSheen() - pokemon.contestExp >= 350 &&

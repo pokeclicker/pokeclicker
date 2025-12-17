@@ -432,8 +432,12 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
             case GameConstants.PokeBlockColor.Yellow:
             case GameConstants.PokeBlockColor.White:
                 // Give contest type if the pokemon has none
-                if (this.currentContestTypes.length < 1 && pokemonMap[this.name].contestTypes?.includes((ItemList[itemName] as PokeBlock).contestType[0])) {
-                    this.currentContestTypes = !ContestHelper.isSpecialContestPokemon(this.name) ? (ItemList[itemName] as PokeBlock).contestType : pokemonMap[this.name].contestTypes;
+                if (this.currentContestTypes.length < 1) {
+                    if (pokemonMap[this.name].contestTypes?.includes((ItemList[itemName] as PokeBlock).contestType[0])) {
+                        this.currentContestTypes = !ContestHelper.isSpecialContestPokemon(this.name) ? (ItemList[itemName] as PokeBlock).contestType : pokemonMap[this.name].contestTypes;
+                    } else {
+                        this.currentContestTypes = [Rand.fromArray(pokemonMap[this.name].contestTypes)];
+                    }
                 }
 
                 amount = Math.min(amount, player.itemList[itemName]());
