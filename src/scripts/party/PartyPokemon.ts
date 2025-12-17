@@ -18,9 +18,8 @@ enum PartyPokemonSaveKeys {
     nickname,
     shadow,
     showShadowImage,
-    contestAppealBonusAmount,
-    currentContestTypes,
     contestExp,
+    contestSaveData,
 }
 
 class PartyPokemon implements Saveable, TmpPartyPokemonType {
@@ -28,7 +27,6 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     public exp = 0;
     public evs: KnockoutComputed<number>;
     _attack: KnockoutComputed<number>;
-    _contestAppeal: KnockoutComputed<number>;
     private _canUseHeldItem: KnockoutComputed<boolean>;
 
     defaults = {
@@ -47,9 +45,8 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         nickname: '',
         shadow: GameConstants.ShadowStatus.None,
         showShadowImage: false,
-        contestAppealBonusAmount: 0,
-        currentContestTypes: pokemonMap[this.name].contestTypes,
         contestExp: 0,
+        contestSaveData: {},
     };
 
     // Saveable observables
@@ -71,9 +68,8 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     hideShinyImage: KnockoutObservable<boolean>;
     _shadow: KnockoutObservable<GameConstants.ShadowStatus>;
     _showShadowImage: KnockoutObservable<boolean>;
-    _contestAppealBonusAmount: KnockoutObservable<number>;
-    _currentContestTypes: KnockoutObservableArray<ContestType>;
     _contestExp: KnockoutObservable<number>;
+    contestSaveData: Record<ContestType, [KnockoutObservable<boolean>, KnockoutObservable<number>]>;
 
     constructor(
         public id: number,
@@ -93,9 +89,10 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this._level = ko.observable(1).extend({ numeric: 0 });
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
-        this._contestAppealBonusAmount = ko.observable(0).extend({ numeric: 10 });
-        this._currentContestTypes = ko.observableArray(pokemonMap[this.name].contestTypes);
-        this._contestExp = ko.observable(1).extend({ numberic: 0 });
+        this.contestSaveData = Object.fromEntries(GameHelper.enumNumbers(ContestType).map((contestType) => {
+            return [contestType, [ko.observable(this.calculateDefaultContestType(contestType)), ko.observable(this.calculateDefaultContestAppeal(contestType)).extend({ numeric: 10 })]];
+        })) as Record<ContestType, [KnockoutObservable<boolean>, KnockoutObservable<number>]>;
+        this._contestExp = ko.observable(0).extend({ numeric: 0 });
         this._category = ko.observableArray([0]);
         this._translatedName = PokemonHelper.displayName(name);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
@@ -136,7 +133,6 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this._shadow = ko.observable(shadow);
         this._showShadowImage = ko.observable(false);
         this._attack = ko.computed(() => this.calculateAttack());
-        this._contestAppeal = ko.computed(() => this.calculateContestAppeal());
         this._canUseHeldItem = ko.pureComputed(() => this.heldItem()?.canUse(this));
         this._canUseHeldItem.subscribe((canUse) => {
             if (!canUse && this.heldItem()) {
@@ -167,10 +163,6 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         const heldItemMultiplier = this.heldItem() instanceof HybridAttackBonusHeldItem ? (this.heldItem() as HybridAttackBonusHeldItem).clickAttackBonus : 1;
         return bonus * heldItemMultiplier;
     });
-
-    public calculateContestAppeal(): number {
-        return Math.max(0, this.contestAppealBonusAmount);
-    }
 
     public canCatchPokerus(): boolean {
         return App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);
@@ -430,31 +422,28 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
 
         switch (type) {
             // Appeal boosting
-            case GameConstants.PokeBlockColor.Spicy:
-            case GameConstants.PokeBlockColor.Dry:
-            case GameConstants.PokeBlockColor.Sweet:
-            case GameConstants.PokeBlockColor.Bitter:
-            case GameConstants.PokeBlockColor.Sour:
-            case GameConstants.PokeBlockColor.Mild:
-                if (this.contestExp >= ContestHelper.maxSheen()) {
-                    amount = Math.min(amount, player.itemList[itemName]()) * (ItemList[itemName] as PokeBlock).value;
-                    this.contestExp = this.contestExp + amount;
-                    Notifier.notify({
-                        message : `${this.displayName} Sheen increased by ${amount}!`,
-                        type : NotificationConstants.NotificationOption.success,
-                        pokemonImage : PokemonHelper.getImage(this.id),
-                    });
-                    break;
-                }
+            case GameConstants.PokeBlockColor.Rainbow:
+                // Bonus type change for Rainbow
+                this.currentContestTypes = pokemonMap[this.name].contestTypes ?? [];
             case GameConstants.PokeBlockColor.Red:
             case GameConstants.PokeBlockColor.Blue:
             case GameConstants.PokeBlockColor.Pink:
             case GameConstants.PokeBlockColor.Green:
             case GameConstants.PokeBlockColor.Yellow:
             case GameConstants.PokeBlockColor.White:
-                amount = Math.min(amount, player.itemList[itemName](), ContestHelper.maxSheen() - this.contestExp);
-                const difference = Math.floor(ContestHelper.increaseAppeal(this._contestAppealBonusAmount() * (ItemList[itemName] as PokeBlock).value, amount, ContestHelper.maxSheen() <= this.contestExp) * 10 - this._contestAppealBonusAmount() * 10);
-                this._contestAppealBonusAmount(ContestHelper.increaseAppeal(this._contestAppealBonusAmount() * (ItemList[itemName] as PokeBlock).value, amount, ContestHelper.maxSheen() <= this.contestExp));
+                // Give contest type if the pokemon has none
+                if (this.currentContestTypes.length < 1 && pokemonMap[this.name].contestTypes?.includes((ItemList[itemName] as PokeBlock).contestType[0])) {
+                    this.currentContestTypes = !ContestHelper.isSpecialContestPokemon(this.name) ? (ItemList[itemName] as PokeBlock).contestType : pokemonMap[this.name].contestTypes;
+                }
+
+                amount = Math.min(amount, player.itemList[itemName]());
+
+                const app = this.contestAppeal;
+                const sheenCap = ContestHelper.maxSheen() <= this.contestExp;
+                const ignoreRankDebuff = (ItemList[itemName] as PokeBlock).type === GameConstants.PokeBlockColor.Rainbow;
+                const difference = Math.floor(ContestHelper.increaseAppeal(app * (ItemList[itemName] as PokeBlock).value, amount, sheenCap, ignoreRankDebuff) * 10 - app * 10);
+                this.contestAppeal = ContestHelper.increaseAppeal(app * (ItemList[itemName] as PokeBlock).value, amount, sheenCap, ignoreRankDebuff);
+
                 Notifier.notify({
                     message : `${this.displayName} gained ${difference / 10} appeal point(s)`,
                     type : NotificationConstants.NotificationOption.success,
@@ -467,10 +456,9 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
                         pokemonImage : PokemonHelper.getImage(this.id),
                     });
                 }
-                this.contestExp += amount;
+                this.contestExp = Math.min(ContestHelper.maxSheen(), this.contestExp + amount);
                 break;
             // Sheen boosting
-            case GameConstants.PokeBlockColor.Rich:
             case GameConstants.PokeBlockColor.Black:
                 if (this.contestExp >= ContestHelper.maxSheen()) {
                     Notifier.notify({
@@ -483,19 +471,35 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
                 amount = Math.min(amount, player.itemList[itemName](), Math.ceil((ContestHelper.maxSheen() - this.contestExp) / (ItemList[itemName] as PokeBlock).value));
                 this.contestExp = Math.min(this.contestExp + amount * (ItemList[itemName] as PokeBlock).value, ContestHelper.maxSheen());
                 Notifier.notify({
-                    message : this.contestExp + amount < ContestHelper.maxSheen() ? `${this.displayName} Sheen increased by ${amount}!` : `${this.displayName}\'s Sheen is maxed out! Pokéblocks will only add 1 Appeal point until its reduced.`,
+                    message : this.contestExp + amount < ContestHelper.maxSheen() ? `${this.displayName}\'s  Sheen increased by ${amount}!` : `${this.displayName}\'s Sheen is maxed out! Pokéblocks will only add 1 Appeal point until its reduced.`,
                     type : NotificationConstants.NotificationOption.success,
                     pokemonImage : PokemonHelper.getImage(this.id),
                 });
                 break;
-            // Sheen reducing
+            case GameConstants.PokeBlockColor.Silver:
+                amount = Math.min(amount, player.itemList[itemName](), Math.ceil(this.contestExp / Math.abs((ItemList[itemName] as PokeBlock).value)));
+                this.contestExp = Math.max(this.contestExp + amount * (ItemList[itemName] as PokeBlock).value, 0);
+                Notifier.notify({
+                    message : `${this.displayName}\'s  Sheen decreased by ${amount * (ItemList[itemName] as PokeBlock).value}!`,
+                    type : NotificationConstants.NotificationOption.success,
+                    pokemonImage : PokemonHelper.getImage(this.id),
+                });
+                break;
+            case GameConstants.PokeBlockColor.Gold:
+                amount = Math.min(amount, player.itemList[itemName]());
+                this.contestExp += amount * (ItemList[itemName] as PokeBlock).value;
+                Notifier.notify({
+                    message : `${this.displayName}\'s  Sheen increased by ${amount * (ItemList[itemName] as PokeBlock).value}! ${this.displayName}\'s Sheen is at ${this.contestSheen()}%!`,
+                    type : NotificationConstants.NotificationOption.success,
+                    pokemonImage : PokemonHelper.getImage(this.id),
+                });
+                break;
+            // Type changing
             case GameConstants.PokeBlockColor.Gray:
-                this._currentContestTypes(pokemonMap[this.name].contestTypes);
-            case GameConstants.PokeBlockColor.Rainbow:
+                this.currentContestTypes = [];
                 amount = 1;
                 this.contestExp = 0;
                 break;
-            // Type changing
             case GameConstants.PokeBlockColor.Purple:
             case GameConstants.PokeBlockColor.Indigo:
             case GameConstants.PokeBlockColor.Brown:
@@ -509,8 +513,8 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
             case GameConstants.PokeBlockColor.Balanced:
                 amount = 1;
                 const blockType = (ItemList[itemName] as PokeBlock).contestType;
-                const addedType = blockType.filter(t => !this._currentContestTypes().includes(t));
-                const newTypes = this._currentContestTypes().filter(t => !blockType.includes(t)).concat(addedType);
+                const addedType = blockType.filter(t => !this.currentContestTypes.includes(t));
+                const newTypes = this.currentContestTypes.filter(t => !blockType.includes(t)).concat(addedType);
 
                 if (!addedType.length) {
                     Notifier.notify({
@@ -522,8 +526,8 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
                 }
 
                 // Apply the new contest types in order
-                this._currentContestTypes(newTypes.sort());
-                this.contestExp = Math.max(0, this.contestExp - (ItemList[itemName] as PokeBlock).value);
+                this.currentContestTypes = newTypes.sort();
+                this.contestExp = Math.min(ContestHelper.maxSheen(), this.contestExp + (ItemList[itemName] as PokeBlock).value);
 
                 Notifier.notify({
                     message : `${this.displayName} became ${addedType.map(t => ContestType[t]).join(' and ')}!`,
@@ -535,7 +539,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
                 amount = 1;
                 Notifier.notify({
                     message : `The ${ItemList[itemName].displayName} had no effect, but ${this.displayName} happily ate it!`,
-                    type : NotificationConstants.NotificationOption.success,
+                    type : NotificationConstants.NotificationOption.warning,
                     pokemonImage : PokemonHelper.getImage(this.id),
                 });
         }
@@ -782,6 +786,21 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
             .map(([_, index]) => index);
     }
 
+    private calculateDefaultContestType(t: ContestType): boolean {
+        return ContestHelper.isSpecialContestPokemon(this.name) && Boolean(pokemonMap[this.name].contestTypes?.includes(t));
+    }
+
+    private calculateDefaultContestAppeal(t: ContestType): number {
+        if (!ContestHelper.isSpecialContestPokemon(this.name) || this.calculateDefaultContestType(t)) {
+            return 0;
+        }
+        const contestPikachu = ['Pikachu (Rock Star)', 'Pikachu (Belle)', 'Pikachu (Pop Star)', 'Pikachu (Ph. D.)', 'Pikachu (Libre)'];
+        if (contestPikachu.includes(this.name)) {
+            return 1420;
+        }
+        return 500;
+    }
+
     contestSheen = ko.pureComputed((): number => {
         return Math.floor(this.contestExp * 10000 / ContestHelper.maxSheen()) / 100;
     });
@@ -819,8 +838,12 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this._nickname(json[PartyPokemonSaveKeys.nickname] || this.defaults.nickname);
         this.shadow = json[PartyPokemonSaveKeys.shadow] ?? this.defaults.shadow;
         this._showShadowImage(json[PartyPokemonSaveKeys.showShadowImage] ?? this.defaults.showShadowImage);
-        this.contestAppealBonusAmount = json[PartyPokemonSaveKeys.contestAppealBonusAmount] ?? this.defaults.contestAppealBonusAmount;
-        this.currentContestTypes = json[PartyPokemonSaveKeys.currentContestTypes] ?? this.defaults.currentContestTypes;
+        if (json[PartyPokemonSaveKeys.contestSaveData]) {
+            Object.entries(json[PartyPokemonSaveKeys.contestSaveData]).forEach(([t, b]) => {
+                this.contestSaveData[t][0](b[0] ?? 0);
+                this.contestSaveData[t][1](b[1] ?? 0);
+            });
+        }
         this.contestExp = json[PartyPokemonSaveKeys.contestExp] ?? this.defaults.contestExp;
     }
 
@@ -842,8 +865,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
             [PartyPokemonSaveKeys.nickname]: this.nickname || undefined,
             [PartyPokemonSaveKeys.shadow]: this.shadow,
             [PartyPokemonSaveKeys.showShadowImage]: this._showShadowImage(),
-            [PartyPokemonSaveKeys.contestAppealBonusAmount]: this.contestAppealBonusAmount,
-            [PartyPokemonSaveKeys.currentContestTypes]: this.currentContestTypes,
+            [PartyPokemonSaveKeys.contestSaveData]: ko.toJS(this.contestSaveData),
             [PartyPokemonSaveKeys.contestExp]: this.contestExp,
         };
 
@@ -901,23 +923,30 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     }
 
     get contestAppeal(): number {
-        return this._contestAppeal();
+        return Math.max(...Object.values(this.contestSaveData).flatMap(t => t[1]()));
     }
 
-    get contestAppealBonusAmount(): number {
-        return this._contestAppealBonusAmount();
-    }
-
-    set contestAppealBonusAmount(contestAppealBonusAmount: number) {
-        this._contestAppealBonusAmount(contestAppealBonusAmount);
+    set contestAppeal(amount: number) {
+        Object.entries(this.contestSaveData).forEach(([t]) => {
+            if (this.contestSaveData[t][0]()) {
+                this.contestSaveData[t][1](amount);
+            }
+        });
     }
 
     get currentContestTypes(): ContestType[] {
-        return this._currentContestTypes();
+        return [...Object.entries(this.contestSaveData).filter(([t]) => this.contestSaveData[t][0]()).flatMap(t => Number(t[0]))];
     }
 
-    set currentContestTypes(currentContestTypes: ContestType[]) {
-        this._currentContestTypes(currentContestTypes);
+    set currentContestTypes(contestTypes: ContestType[]) {
+        Object.entries(this.contestSaveData).forEach(([t]) => {
+            if (contestTypes.includes(Number(t))) {
+                this.contestSaveData[t][0](true);
+                this.contestSaveData[t][1](this.contestAppeal);
+            } else {
+                this.contestSaveData[t][0](false);
+            }
+        });
     }
 
     get contestExp(): number {
