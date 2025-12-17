@@ -2374,25 +2374,38 @@ const HoennContestShop = new Shop([
     ItemList['Onix (Rocker)'],
     ItemList['Dugtrio (Punk)'],
     ItemList['Gengar (Punk)'],
-    // ItemList.Pokeblock_case, // only for dev
-    // ItemList.PokeBlock_Red,
-    // ItemList.PokeBlock_Blue,
-    // ItemList.PokeBlock_Pink,
-    // ItemList.PokeBlock_Green,
-    // ItemList.PokeBlock_Yellow,
-    // ItemList.PokeBlock_White,
-    // ItemList.PokeBlock_Gold,
-    // ItemList.PokeBlock_Cool,
-    // ItemList.PokeBlock_Beautiful,
-    // ItemList.PokeBlock_Cute,
-    // ItemList.PokeBlock_Smart,
-    // ItemList.PokeBlock_Tough,
-    // ItemList.PokeBlock_Balanced,
     new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
     new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
     new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
     new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
-], 'Contest Shop', [new DevelopmentRequirement()]);
+], 'Contest Shop');
+
+// only for testing
+const PokeblockShop = new Shop([
+    ItemList.Pokeblock_case, // only for dev
+    ItemList.PokeBlock_Red,
+    ItemList.PokeBlock_Blue,
+    ItemList.PokeBlock_Pink,
+    ItemList.PokeBlock_Green,
+    ItemList.PokeBlock_Yellow,
+    ItemList.PokeBlock_White,
+    ItemList.PokeBlock_Black,
+    ItemList.PokeBlock_Purple,
+    ItemList.PokeBlock_Indigo,
+    ItemList.PokeBlock_Brown,
+    ItemList.PokeBlock_Olive,
+    ItemList.PokeBlock_Orange,
+    ItemList.PokeBlock_Gray,
+    ItemList.PokeBlock_Rainbow,
+    ItemList.PokeBlock_Silver,
+    ItemList.PokeBlock_Gold,
+    ItemList.PokeBlock_Cool,
+    ItemList.PokeBlock_Beautiful,
+    ItemList.PokeBlock_Cute,
+    ItemList.PokeBlock_Smart,
+    ItemList.PokeBlock_Tough,
+    ItemList.PokeBlock_Balanced,
+], 'Pokeblock Shop', [new DevelopmentRequirement()]);
 
 //Hoenn Flute Master
 const HoennFluteMaster = new GemMasterShop(GameConstants.GemShops.HoennFluteMaster);
@@ -3471,7 +3484,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new ContestHall([ContestRank.Master]), SpectacularContestHall, HoennContests, SuperContests, DepartmentStoreShop, HoennContestShop],
+    [new ContestHall([ContestRank.Master]), SpectacularContestHall, HoennContests, SuperContests, DepartmentStoreShop, HoennContestShop, PokeblockShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }
