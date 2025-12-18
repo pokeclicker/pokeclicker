@@ -963,13 +963,13 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
     },
 
     Mansion: {
-        [Region.kanto]: new Set(['Kumquat Island', 'Mikan Island', 'Silph Co.', 'Pokémon Mansion']),
+        [Region.kanto]: new Set(['Bill\s House', 'Kumquat Island', 'Mikan Island', 'Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Olivine Lighthouse', 'Sprout Tower', 'Burned Tower']),
         [Region.hoenn]: new Set(['Petalburg City', 'Phenac City', 'Phenac City Battles', 'Pyrite Building', 'Snagem Hideout', 'Phenac Stadium', 'Citadark Isle Dome']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
         [Region.kalos]: new Set(['Lost Hotel']),
-        [Region.alola]: new Set(['Aether House', 'Trainers\' School', 'Thrifty Megamart', 'Po Town', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
+        [Region.alola]: new Set(['Po Town', 'Aether House', 'Trainers\' School', 'Thrifty Megamart', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
         [Region.galar]: new Set([11, 'Professor Magnolia\'s House', 'Hammerlocke', 'Wyndon', 'Wyndon Stadium', 'Master Dojo', 'Rose Tower', 'Tower of Darkness', 'Tower of Waters']),
     },
 
