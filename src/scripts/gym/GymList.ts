@@ -422,7 +422,7 @@ GymList['Elite Karen'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Bruno2)],
     undefined,
     undefined,
-    { battleBackground: 'Mansion' },
+    { battleBackground: 'Mansion' }
 );
 // Johto Champion
 GymList['Champion Lance'] = new Gym(
