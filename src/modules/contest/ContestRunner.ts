@@ -52,11 +52,10 @@ export default class ContestRunner {
 
         ContestRunner.running(false);
         ContestRunner.danceMode(ContestHelper.isDanceHall(ContestRunner.rank()));
-        ContestRunner.timeLeft(ContestBattle.testTimer() * SECOND);
+        ContestRunner.timeLeft((!ContestBattle.toggleTesting() ? (ContestHelper.contestRankTimer(ContestRunner.rank()) * 10) : ContestBattle.testTimer()) * SECOND);
         ContestRunner.timeLeftPercentage(100);
         ContestRunner.audienceAppeal(0);
-        ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()]); // todo: increase number when pokeblocks are in
-        // ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * ContestRunner.rank() * ContestRunner.rank() * ContestHelper.contestRankTimer(ContestRunner.rank()));
+        ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * ContestRunner.rank() * ContestRunner.rank() * ContestHelper.contestRankTimer(ContestRunner.rank()));
 
         // Reset gameplay gimmicks
         ContestRunner.crowdHype(0);
@@ -110,7 +109,7 @@ export default class ContestRunner {
         if (!ContestRunner.running()) {
             return;
         }
-        if (!ContestRunner.frenzyMode() && ContestRunner.timeLeftPercentage() < 100) {
+        if (!ContestRunner.frenzyMode() && ContestRunner.timeLeftPercentage() < 100 && !ContestBattle.toggleTesting()) {
             ContestHelper.reduceSheenPerSecond(ContestRunner.rank(), ContestRunner.type(), ContestRunner.timeLeft());
         }
         // Assess completion

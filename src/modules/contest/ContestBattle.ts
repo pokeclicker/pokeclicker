@@ -28,6 +28,7 @@ import ContestScore from './ContestScore';
 import ContestTrainer from './ContestTrainer';
 import ContestRewards from './ContestRewards';
 import ContestTrainerList from './ContestTrainerList';
+import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 
 export default class ContestBattle extends Battle {
     // Mechanics
@@ -58,6 +59,7 @@ export default class ContestBattle extends Battle {
     static infoCrotchetValue: KnockoutObservable<number> = ko.observable(0);
     static infoFormation: KnockoutObservable<number> = ko.observable(0);
     // Testing
+    public static toggleTesting: KnockoutObservable<boolean> = ko.observable(new DevelopmentRequirement().isCompleted());
     public static testAppeal: KnockoutObservable<number> = ko.observable(10);
     public static testTimer: KnockoutObservable<number> = ko.observable(10);
 
@@ -139,8 +141,10 @@ export default class ContestBattle extends Battle {
         // convert to single digit
         multiplier /= 100;
 
-        // (commented out for testing) const rallyAppeal = ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]) * multiplier;
-        ContestRunner.rally(ContestBattle.testAppeal() * multiplier);
+        // todo:
+        const rallyAppeal = !ContestBattle.toggleTesting() ?
+            ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]) : ContestBattle.testAppeal();
+        ContestRunner.rally(rallyAppeal * multiplier);
     }
 
     /**
@@ -422,7 +426,8 @@ export default class ContestBattle extends Battle {
             return;
         }
         const b = ContestRewards.getContestBerryReward(rank ?? ContestRunner.rank(), fromSpecifiedRank);
-        const amount = ContestHelper.hasSheenForContest(ContestRunner.rank(), ContestRunner.type()) ? Math.ceil(b.amount() * multiplier) : 1;
+        const fullReward = ContestHelper.hasSheenForContest(ContestRunner.rank(), ContestRunner.type()) || ContestBattle.toggleTesting();
+        const amount = fullReward ? Math.ceil(b.amount() * multiplier) : 1;
         // give the berry
         App.game.farming.gainBerry(b.berry, amount, false);
         Notifier.notify({

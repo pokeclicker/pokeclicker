@@ -2413,7 +2413,6 @@ const HoennStoneSalesman = new GemMasterShop(GameConstants.GemShops.HoennStoneSa
 
 const SpectacularContestHall = new ContestHall([ContestRank.Spectacular], [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough, ContestType.Balanced]);
 const SuperContests = new ContestHall([ContestRank['Super Normal'], ContestRank['Super Great'], ContestRank['Super Ultra'], ContestRank['Super Master'], ContestRank.Practice], undefined, undefined, 'Sinnoh Contests');
-const HoennContests = new ContestHall([ContestRank.Normal, ContestRank.Super, ContestRank.Hyper, ContestRank.Master], undefined, undefined, 'Hoenn Contests');
 
 //Hoenn NPCs
 
@@ -3484,7 +3483,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new ContestHall([ContestRank.Master]), SpectacularContestHall, HoennContests, SuperContests, DepartmentStoreShop, HoennContestShop, PokeblockShop],
+    [new ContestHall([ContestRank.Master]), SpectacularContestHall, SuperContests, DepartmentStoreShop, HoennContestShop, PokeblockShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }
