@@ -901,7 +901,7 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
         [Region.johto]: new Set(),
         [Region.hoenn]: new Set(['Lavaridge Town', 'Fiery Path', 'Mt. Chimney', 'Mt. Chimney Crater', 'Magma Hideout', 'Mt. Battle']),
         [Region.sinnoh]: new Set(['Stark Mountain']),
-        [Region.unova]: new Set([]),
+        [Region.unova]: new Set(),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(['Wela Volcano Park']),
         [Region.galar]: new Set(['Motostoke']),
@@ -936,7 +936,7 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
         [Region.sinnoh]: new Set(['Spear Pillar', 'Hall of Origin']),
         [Region.unova]: new Set(['Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
         [Region.kalos]: new Set(['Glittering Cave', 'Reflection Cave']),
-        [Region.alola]: new Set(['Altar of the Sunne and Moone', 'Resolution Cave']),
+        [Region.alola]: new Set(['Resolution Cave']),
         [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2', 'Iron Ruins', 'Max Lair']),
     },
 
@@ -954,7 +954,7 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
     PowerPlant: {
         [Region.kanto]: new Set(['Vermilion City', 'Rocket Game Corner', 'Power Plant', 'New Island', 'Rocket Warehouse']),
         [Region.johto]: new Set(['Tin Tower', 'Team Rocket\'s Hideout', 'Radio Tower']),
-        [Region.hoenn]: new Set(['Mauville City', 'Mossdeep Space Center', 'New Mauville', 'Weather Institute', 'Aqua Hideout', 'Near Space', 'Pyrite Colosseum', 'Cipher Lab', 'Realgam Tower Battles', 'Realgam Colosseum', 'Cipher Key Lair']),
+        [Region.hoenn]: new Set(['Mauville City', 'Mossdeep Space Center', 'New Mauville', 'Weather Institute', 'Aqua Hideout', 'Pyrite Colosseum', 'Cipher Lab', 'Realgam Tower Battles', 'Realgam Colosseum', 'Cipher Key Lair']),
         [Region.sinnoh]: new Set(['Sunyshore City', 'Valley Windworks', 'Team Galactic Eterna Building', 'Team Galactic HQ']),
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City', 'A Totally Unsuspicious Frigate', 'Plasma Frigate', 'P2 Laboratory']),
         [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Poké Ball Factory', 'Team Flare Secret HQ']),
@@ -970,18 +970,40 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
         [Region.kalos]: new Set(['Lost Hotel']),
         [Region.alola]: new Set(['Po Town', 'Aether House', 'Trainers\' School', 'Thrifty Megamart', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
-        [Region.galar]: new Set([11, 'Professor Magnolia\'s House', 'Hammerlocke', 'Wyndon', 'Wyndon Stadium', 'Master Dojo', 'Rose Tower', 'Tower of Darkness', 'Tower of Waters']),
+        [Region.galar]: new Set([11, 'Professor Magnolia\'s House', 'Hammerlocke', 'Wyndon', 'Master Dojo', 'Rose Tower', 'Tower of Darkness', 'Tower of Waters']),
     },
 
     Graveyard: {
         [Region.kanto]: new Set(['Saffron City', 'Pokémon Tower']),
         [Region.johto]: new Set(['Ecruteak City']),
         [Region.hoenn]: new Set(['Mossdeep City', 'Mt. Pyre']),
-        [Region.sinnoh]: new Set(['Hearthome City', 'Old Chateau', 'Solaceon Ruins', 'Distortion World']),
+        [Region.sinnoh]: new Set(['Hearthome City', 'Old Chateau', 'Solaceon Ruins']),
         [Region.unova]: new Set(['Celestial Tower']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(['Hau\'oli Cemetery', 'Memorial Hill']),
         [Region.galar]: new Set([49]),
+    },
+
+    Battlefield: {
+        [Region.kanto]: new Set(['Indigo Plateau Kanto', 'Pummelo Island']),
+        [Region.johto]: new Set(['Indigo Plateau Johto']),
+        [Region.hoenn]: new Set(['Pokémon League Hoenn']),
+        [Region.sinnoh]: new Set(['Pokémon League Sinnoh']),
+        [Region.unova]: new Set(['Pokémon League Unova']),
+        [Region.kalos]: new Set(['Pokémon League Kalos']),
+        [Region.alola]: new Set(['Pokémon League Alola']),
+        [Region.galar]: new Set(['Wyndon Stadium']),
+    },
+
+    Space: {
+        [Region.kanto]: new Set(),
+        [Region.johto]: new Set(),
+        [Region.hoenn]: new Set(['Near Space']),
+        [Region.sinnoh]: new Set(['Distortion World']),
+        [Region.unova]: new Set(),
+        [Region.kalos]: new Set(),
+        [Region.alola]: new Set('Altar of the Sunne and Moone'),
+        [Region.galar]: new Set(),
     },
 
     // No need to set anything here, only exists for battle overrides
@@ -1001,6 +1023,8 @@ export const BattleBackgroundImage: Record<BattleBackground, string> = {
     PowerPlant: 'power-plant',
     Mansion: 'mansion',
     Graveyard: 'graveyard',
+    Battlefield: 'battlefield',
+    Space: 'space',
     Default: '',
 };
 
