@@ -20,7 +20,7 @@
       <div style="margin-top: 60px;">
         <button class="btn w-25 btn-success" onclick="ContestRunner.startContest()">Start Contest</button>
         <!-- ko if: new DevelopmentRequirement().isCompleted() -->
-        <button class="btn w-25 btn-warning" onclick="!ContestBattle.toggleTesting(ContestBattle.toggleTesting())" data-bind="css: { active: ContestBattle.toggleTesting() }">Toggle Testing</button>
+        <button class="btn w-25 btn-warning" onclick="ContestBattle.toggleTesting(!ContestBattle.toggleTesting())" data-bind="css: { active: ContestBattle.toggleTesting() }">Toggle Testing</button>
         <!-- /ko -->
       </div>
       <div class="">
@@ -28,7 +28,7 @@
             <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
                 <table width="100%">
                   <tr>
-                    <th colspan="100%" class="bg-warning" data-bind="visible: !ContestHelper.hasSheenForContest(ContestRunner.rank(), ContestRunner.type() && !ContestBattle.toggleTesting())">
+                    <th colspan="100%" class="bg-warning" data-bind="visible: !ContestHelper.hasSheenForContest(ContestRunner.rank(), ContestRunner.type()) && !ContestBattle.toggleTesting()">
                       Your Pokemon have no Sheen for this contest. Berry rewards are limited to 1 per combo.
                     </th>
                   </tr>
