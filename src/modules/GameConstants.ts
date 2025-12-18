@@ -969,7 +969,7 @@ export const BattleBackgrounds: Record<string, BattleBackgroundData> = {
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
         [Region.kalos]: new Set(['Lost Hotel']),
-        [Region.alola]: new Set(['Po Town', 'Aether House', 'Trainers\' School', 'Thrifty Megamart', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
+        [Region.alola]: new Set(['Aether House', 'Trainers\' School', 'Thrifty Megamart', 'Po Town', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
         [Region.galar]: new Set([11, 'Professor Magnolia\'s House', 'Hammerlocke', 'Wyndon', 'Master Dojo', 'Rose Tower', 'Tower of Darkness', 'Tower of Waters']),
     },
 
