@@ -175,6 +175,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 1.03,
@@ -1640,6 +1641,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 25.13,
@@ -7350,6 +7352,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 175.02,
@@ -24174,8 +24177,8 @@ export const pokemonList = createPokemonArray(
         'exp': 140,
         'catchRate': 45,
         'evolutions': [
-            LevelEvolution('Cosmoem', 'Solgaleo', 53),
-            LevelEvolution('Cosmoem', 'Lunala', 53),
+            DayTimedLevelEvolution('Cosmoem', 'Solgaleo', 53),
+            NightTimedLevelEvolution('Cosmoem', 'Lunala', 53),
         ],
         'base': {
             'hitpoints': 43,

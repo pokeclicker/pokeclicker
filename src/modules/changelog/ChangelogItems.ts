@@ -10,6 +10,22 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.25
+    new ChangelogUpdate('v0.10.25', new Date(2025, 7, 13)),
+    new Changelog(changelogType.NEW, 'New Pokémon'),
+    new Changelog(changelogType.NEW, 'Added quest line <b>Destiny Deoxys</b>, available at the Unova bulletin board after completing <i>Hollow Truth and Ideals</i>'),
+    new Changelog(changelogType.CHANGE, 'Removed <i>Incomplete Area</i> status from Battle Café'),
+    new Changelog(changelogType.CHANGE, 'Secret achievements are now only shown when the <i>Secret</i> category is selected'),
+    new Changelog(changelogType.CHANGE, 'Adjusted requirement for <i>Blue is my favorite color</i> secret achievement (1,000,000 → 123,456)'),
+    new Changelog(changelogType.CHANGE, 'Pokémon search fields now support searching by nickname, current language name, and English name'),
+    new Changelog(changelogType.CHANGE, 'Reduced clear requirement for Castelia Sewers in <i>Hollow Truth and Ideals</i> (10 → 1)'),
+    new Changelog(changelogType.CHANGE, 'Farm mutation indicator will now appear even if the player has not discovered the hint for the mutated berry'),
+    new Changelog(changelogType.CHANGE, 'Adjustments to where some Pokémon can be obtained'),
+    new Changelog(changelogType.FIXED, 'Fixed bug that allowed duplicate Pokémon to be added to the hatchery queue'),
+    new Changelog(changelogType.FIXED, 'Fixed ability to sell/trade fractional items'),
+    new Changelog(changelogType.FIXED, 'Fixed issues with several secret achievements'),
+    new Changelog(changelogType.FIXED, 'Fixed Farm Hands instantly regaining all energy after being fired'),
+
     // v0.10.24
     new ChangelogUpdate('v0.10.24', new Date(2025, 6, 4)),
     new Changelog(changelogType.NEW, 'New Achievements'),
