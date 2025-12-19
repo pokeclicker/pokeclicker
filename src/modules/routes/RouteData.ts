@@ -1445,7 +1445,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 230', Region.sinnoh, 230,
     new RoutePokemon({
-        land: ['Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Wingull', 'Pelipper', 'Roselia', 'Floatzel'],
+        land: ['Gloom', 'Weepinbell', 'Wingull', 'Pelipper', 'Roselia', 'Floatzel'],
         water: ['Tentacruel', 'Magikarp', 'Gyarados', 'Remoraid', 'Octillery', 'Wailmer', 'Wailord', 'Sealeo'],
         special: [
             new SpecialRoutePokemon(['Bellsprout'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
