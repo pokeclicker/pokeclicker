@@ -542,7 +542,7 @@ export function pluralizeString(str: string, amt: number): string {
     switch (true) {
         case /s$/.test(str):
             return str;
-        case /y$/.test(str):
+        case /[^aeiou]y$/.test(str):
             return str.replace(/y$/, 'ies');
         case /ch$/.test(str):
             return `${str}es`;
@@ -1268,7 +1268,6 @@ export const MAX_HIRES = 1;
 export const REWARD_RETENTION_BASE = 0.6;
 export const REWARD_RETENTION_DECREASE_PER_LEVEL = 0.01;
 export const REWARD_RETENTION_MINIMUM = 0.1;
-export const HELPER_AUTO_SELL_LEVEL_REQUIREMENT = 20;
 
 export const SMART_TOOL_CHANCE_BASE = 0.5;
 export const SMART_TOOL_CHANCE_INCREASE_PER_LEVEL = 0.025;
@@ -2054,7 +2053,6 @@ export const TemporaryBattles = [
     'Merilyn',
     'Millis and Argus Steel',
     'Rampaging Yveltal',
-    'Storyline AZ',
     'AZ',
     'Ash Ketchum Kanto',
     'Ash Ketchum Johto',
@@ -2256,6 +2254,9 @@ export const TemporaryBattles = [
     'Kyurem 2',
     'Kyurem 3',
     'Twerps',
+    'Destiny Deoxys Rayquaza',
+    'Destiny Deoxys Army',
+    'Destiny Rayquaza',
     'Volo 1',
     'Akari 1',
     'Warden Mai',
@@ -2478,6 +2479,7 @@ export enum ExtraAchievementCategories {
     sevii,
     orre,
     magikarpJump,
+    secret, // secret should be last
 }
 export const DayCycleStartHours: Record<DayCyclePart, number> = {
     [DayCyclePart.Dawn]: 5,
@@ -2588,6 +2590,7 @@ export enum GemShops {
     HoennFluteMaster,
     HoennStoneSalesman,
     UnovaFluteMaster,
+    hoennBattleFrontierDeoxysDeal,
     FurfrouGemTrader,
     KalosStoneSalesman,
     SilvallyTrader,
@@ -2598,6 +2601,7 @@ export enum DungeonInteractionSource {
     Click,
     Keybind,
     HeldKeybind,
+    DungeonGuide,
 }
 
 export const ModalCollapseList = [
@@ -2614,6 +2618,8 @@ export const ModalCollapseList = [
     'currencyBody',
     'undergroundCard',
     'undergroundDailyTradesCard',
+    'undergroundDisplayHelpers',
+    'undergroundDisplayBattery',
     'plotListCard',
     'zCrystalItemContainerBody',
 ];

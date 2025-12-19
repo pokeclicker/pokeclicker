@@ -537,15 +537,13 @@ class PokemonLocations {
                 return false;
             }
 
-            const npcs = town.npcs?.filter(n => n instanceof GiftNPC);
+            const npcs = town.npcs?.filter(n => n instanceof PokemonGiftNPC);
             npcs?.forEach(npc => {
-                const rewardFunction = (npc as GiftNPC).giftFunction?.toString();
-                this.getPokemonRewards(rewardFunction).forEach(pokemon => {
-                    cacheLine[pokemon].push({
-                        town: townName,
-                        npc: npc.name,
-                        requirements: npc.options?.requirement,
-                    });
+                const pokemon = (npc as PokemonGiftNPC).giftPokemon;
+                cacheLine[pokemon].push({
+                    town: townName,
+                    npc: npc.name,
+                    requirements: npc.options?.requirement,
                 });
             });
         });

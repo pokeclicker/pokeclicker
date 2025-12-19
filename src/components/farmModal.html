@@ -47,7 +47,16 @@
                                             data-bind="click: function() {
                                                 FarmController.selectedBerry($data);
                                                 FarmController.selectedFarmTool(FarmingTool.Berry);
-                                            }, css: { 'active': FarmController.selectedBerry() === $data && FarmController.selectedFarmTool() == FarmingTool.Berry }">
+                                            }, css: { 'active': FarmController.selectedBerry() === $data && FarmController.selectedFarmTool() == FarmingTool.Berry },
+                                            tooltip: App.game.farming.unlockedBerries[$data]() ? {
+                                                html: true,
+                                                title: `<u>Growth Duration</u>: ${GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[3])}<br/>
+                                                    ${App.game.farming.berryData[$data].harvestAmount.toLocaleString('en-US')} <img width='12px' alt='${BerryType[$data]}' src='${FarmController.getBerryImage($data)}' /> per harvest<br/>
+                                                    ${App.game.farming.berryData[$data].farmValue.toLocaleString('en-US')} <img width='12px' alt='Farm Points' src='assets/images/currency/farmPoint.svg' /> per harvest`,
+                                                placement: 'right',
+                                                trigger: 'hover',
+                                                animation: false,
+                                            } : {}">
                                             <img src="" height="28px"
                                                 data-bind="attr:{ src: FarmController.getBerryImage($data) },
                                                 css: {'berryLocked': !App.game.farming.unlockedBerries[$data]() }">

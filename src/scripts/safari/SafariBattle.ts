@@ -178,6 +178,9 @@ class SafariBattle {
         GameHelper.incrementObservable(App.game.statistics.safariPokemonCaptured, 1);
         if (SafariBattle.enemy.shiny) {
             GameHelper.incrementObservable(App.game.statistics.safariShinyPokemonCaptured, 1);
+            if (Safari.balls() <= 0) {
+                AchievementHandler.unlockAchievement('A Glimmer of Luck');
+            }
         }
         const pokemonID = PokemonHelper.getPokemonByName(SafariBattle.enemy.name).id;
         App.game.party.gainPokemonById(pokemonID, SafariBattle.enemy.shiny);
