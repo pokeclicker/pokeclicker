@@ -52,6 +52,8 @@ class RouteInfo {
                 return {tooltip: 'Weather Pokémon', image: 'weather.png'};
             } else if (RouteInfo.hasRequirement(pokemon.requirement, DayOfWeekRequirement)) {
                 return {tooltip: 'Day of Week Pokémon', image: 'day_of_week.png'};
+            } else if (RouteInfo.hasRequirement(pokemon.requirement, DayCyclePartRequirement)) {
+                return {tooltip: 'Time of Day Pokémon', image: 'time_of_day.png'};
             }
         } else if (pokemon.type == 'water' && pokemon.fishing) {
             return {tooltip: 'Fishing Pokémon', image: 'fishing.png'};
