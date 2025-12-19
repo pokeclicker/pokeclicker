@@ -84,7 +84,7 @@ TemporaryBattleList['Blue 4'] = new TemporaryBattle(
         new GymPokemon('Ivysaur', 33438, 25, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
     ],
     'What? You stinker! I took it easy on you, too!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rock Tunnel'))],
     undefined,
     {
         displayName: 'Rival Blue',
@@ -123,7 +123,7 @@ TemporaryBattleList['Snorlax route 12'] = new TemporaryBattle(
     undefined,
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 12),
-        new TemporaryBattleRequirement('Blue 4'),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower')),
     ],
     [new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement('Snorlax')],
     {
@@ -138,7 +138,7 @@ TemporaryBattleList['Snorlax route 16'] = new TemporaryBattle(
     'Snorlax route 16',
     [new GymPokemon('Snorlax', 189990, 30)],
     undefined,
-    [new TemporaryBattleRequirement('Blue 4')],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
     [new TemporaryBattleRequirement('Snorlax route 16'), new ObtainedPokemonRequirement('Snorlax')],
     {
         displayName: 'Snorlax',

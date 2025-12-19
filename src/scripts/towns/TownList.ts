@@ -1290,8 +1290,8 @@ TownList['Pokémon Tower'] = new DungeonTown(
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
     [
-        new RouteKillRequirement(10, GameConstants.Region.kanto, 7),
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 10),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rock Tunnel')),
     ],
     [TemporaryBattleList['Blue 4']]
 );
@@ -1299,7 +1299,7 @@ TownList['Silph Co.'] = new DungeonTown(
     'Silph Co.',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [new TemporaryBattleRequirement('Blue 4')],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
     [TemporaryBattleList['Blue 5']],
     {
         npcs: [LaprasGift],
