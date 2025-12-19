@@ -1187,14 +1187,16 @@ SINNOH
 Routes.add(new RegionRoute(
     'Sinnoh Route 201', Region.sinnoh, 201,
     new RoutePokemon({
-        land: ['Starly', 'Bidoof', 'Kricketot'],
+        land: ['Starly', 'Bidoof'],
+        special: [new SpecialRoutePokemon(['Kricketot'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn]))],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 202', Region.sinnoh, 202,
     new RoutePokemon({
-        land: ['Starly', 'Bidoof', 'Kricketot', 'Shinx'],
+        land: ['Starly', 'Bidoof', 'Shinx'],
+        special: [new SpecialRoutePokemon(['Kricketot'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn]))],
     }),
     [
         new RouteKillRequirement(10, Region.sinnoh, 201),
@@ -1204,62 +1206,93 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 203', Region.sinnoh, 203,
     new RoutePokemon({
-        land: ['Zubat', 'Abra', 'Starly', 'Bidoof', 'Kricketot', 'Shinx'],
+        land: ['Abra', 'Starly', 'Bidoof', 'Shinx'],
         water: ['Psyduck', 'Golduck', 'Magikarp', 'Goldeen', 'Seaking', 'Gyarados'],
+        special: [
+            new SpecialRoutePokemon(['Zubat'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Kricketot'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])),
+        ],
     }),
     [new TemporaryBattleRequirement('Barry 2')],
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 204', Region.sinnoh, 204,
     new RoutePokemon({
-        land: ['Zubat', 'Wurmple', 'Starly', 'Bidoof', 'Kricketot', 'Shinx', 'Budew'],
+        land: ['Starly', 'Bidoof', 'Shinx', 'Budew'],
         water: ['Psyduck', 'Golduck', 'Magikarp', 'Goldeen', 'Seaking', 'Gyarados'],
+        special: [
+            new SpecialRoutePokemon(['Zubat'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Wurmple'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+            new SpecialRoutePokemon(['Kricketot'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])),
+        ],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 202)],
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 205', Region.sinnoh, 205,
     new RoutePokemon({
-        land: ['Hoothoot', 'Wurmple', 'Silcoon', 'Beautifly', 'Cascoon', 'Dustox', 'Bidoof', 'Kricketot', 'Budew', 'Buizel', 'Shellos (West)'],
+        land: ['Silcoon', 'Beautifly', 'Cascoon', 'Dustox', 'Bidoof', 'Budew', 'Buizel', 'Shellos (West)'],
         water: ['Psyduck', 'Golduck', 'Tentacool', 'Tentacruel', 'Shellder', 'Magikarp', 'Gyarados', 'Gastrodon (West)', 'Finneon', 'Lumineon', 'Barboach', 'Whiscash'],
+        special: [
+            new SpecialRoutePokemon(['Hoothoot'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Wurmple'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+            new SpecialRoutePokemon(['Kricketot'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])),
+        ],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Valley Windworks'))],
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 206', Region.sinnoh, 206,
     new RoutePokemon({
-        land: ['Zubat', 'Machop', 'Geodude', 'Ponyta', 'Gligar', 'Kricketune', 'Stunky'],
+        land: ['Machop', 'Geodude', 'Ponyta', 'Gligar', 'Stunky'],
+        special: [
+            new SpecialRoutePokemon(['Zubat'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Kricketune'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])),
+        ],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Team Galactic Eterna Building'))],
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 207', Region.sinnoh, 207,
     new RoutePokemon({
-        land: ['Zubat', 'Machop', 'Geodude', 'Ponyta', 'Kricketot'],
+        land: ['Machop', 'Geodude', 'Ponyta'],
+        special: [
+            new SpecialRoutePokemon(['Zubat'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Kricketot'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])),
+        ],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 206)],
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 208', Region.sinnoh, 208,
     new RoutePokemon({
-        land: ['Zubat', 'Ralts', 'Roselia', 'Bidoof', 'Bibarel', 'Budew'],
+        land: ['Ralts', 'Roselia', 'Bidoof', 'Bibarel', 'Budew'],
         water: ['Psyduck', 'Golduck', 'Goldeen', 'Seaking', 'Magikarp', 'Gyarados', 'Barboach', 'Whiscash'],
+        special: [new SpecialRoutePokemon(['Zubat'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night]))],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Mt. Coronet South'))],
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 209', Region.sinnoh, 209,
     new RoutePokemon({
-        land: ['Zubat', 'Chansey', 'Ralts', 'Roselia', 'Duskull', 'Staravia', 'Bibarel'],
+        land: ['Chansey', 'Ralts', 'Roselia', 'Staravia', 'Bibarel'],
         water: ['Psyduck', 'Golduck', 'Goldeen', 'Seaking', 'Magikarp', 'Gyarados'],
+        special: [
+            new SpecialRoutePokemon(['Zubat'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Duskull'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+        ],
     }),
     [new TemporaryBattleRequirement('Barry 3')],
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 210', Region.sinnoh, 210,
     new RoutePokemon({
-        land: ['Psyduck', 'Machop', 'Machoke', 'Geodude', 'Ponyta', 'Chansey', 'Scyther', 'Hoothoot', 'Noctowl', 'Roselia', 'Meditite', 'Swablu', 'Bibarel', 'Staravia'],
+        land: ['Psyduck', 'Machop', 'Machoke', 'Geodude', 'Ponyta', 'Chansey', 'Scyther', 'Roselia', 'Meditite', 'Swablu', 'Bibarel', 'Staravia'],
         water: ['Golduck', 'Magikarp', 'Gyarados', 'Barboach', 'Whiscash'],
+        special: [
+            new SpecialRoutePokemon(['Hoothoot'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Noctowl'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+        ],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 209)],
 ));
@@ -1274,8 +1307,9 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 214', Region.sinnoh, 214,
     new RoutePokemon({
-        land: ['Zubat', 'Geodude', 'Graveler', 'Rhyhorn', 'Houndour', 'Stunky'],
+        land: ['Geodude', 'Graveler', 'Rhyhorn', 'Houndour', 'Stunky'],
         water: ['Psyduck', 'Golduck', 'Goldeen', 'Seaking', 'Magikarp', 'Gyarados'],
+        special: [new SpecialRoutePokemon(['Zubat'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night]))],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 215)],
     210.2,
@@ -1283,8 +1317,9 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 213', Region.sinnoh, 213,
     new RoutePokemon({
-        land: ['Wingull', 'Buizel', 'Shellos (East)', 'Chatot'],
+        land: ['Wingull', 'Buizel', 'Shellos (East)'],
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Remoraid', 'Octillery', 'Gastrodon (East)'],
+        special: [new SpecialRoutePokemon(['Chatot'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day]))],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 214)],
     210.3,
@@ -1292,8 +1327,9 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 212', Region.sinnoh, 212,
     new RoutePokemon({
-        land: ['Marill', 'Quagsire', 'Ralts', 'Kirlia', 'Roselia', 'Staravia', 'Buizel', 'Shellos (East)', 'Croagunk'],
+        land: ['Marill', 'Quagsire', 'Kirlia', 'Roselia', 'Staravia', 'Buizel', 'Shellos (East)', 'Croagunk'],
         water: ['Psyduck', 'Golduck', 'Goldeen', 'Seaking', 'Magikarp', 'Gyarados', 'Remoraid', 'Octillery', 'Gastrodon (East)'],
+        special: [new SpecialRoutePokemon(['Ralts'], new DayCyclePartRequirement([DayCyclePart.Day]))],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 213)],
     210.4,
@@ -1301,7 +1337,12 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 211', Region.sinnoh, 211,
     new RoutePokemon({
-        land: ['Zubat', 'Machop', 'Machoke', 'Graveler', 'Hoothoot', 'Noctowl', 'Meditite', 'Bidoof', 'Chingling', 'Bronzor'],
+        land: ['Machop', 'Machoke', 'Graveler', 'Meditite', 'Bidoof', 'Chingling', 'Bronzor'],
+        special: [
+            new SpecialRoutePokemon(['Zubat'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Hoothoot'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Noctowl'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+        ],
     }),
     [new GymBadgeRequirement(BadgeEnums.Fen)],
     210.5,
@@ -1309,8 +1350,9 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 218', Region.sinnoh, 218,
     new RoutePokemon({
-        land: ['Mr. Mime', 'Floatzel', 'Gastrodon (West)', 'Glameow', 'Chatot'],
+        land: ['Mr. Mime', 'Floatzel', 'Gastrodon (West)', 'Glameow'],
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Shellos (West)', 'Finneon', 'Lumineon'],
+        special: [new SpecialRoutePokemon(['Chatot'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day]))],
     }),
     [new TemporaryBattleRequirement('Galactic Boss Cyrus')],
     210.6,
@@ -1318,14 +1360,19 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 216', Region.sinnoh, 216,
     new RoutePokemon({
-        land: ['Zubat', 'Graveler', 'Sneasel', 'Meditite', 'Snorunt', 'Snover'],
+        land: ['Graveler', 'Sneasel', 'Meditite', 'Snover'],
+        special: [
+            new SpecialRoutePokemon(['Zubat'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Snorunt'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+        ],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Mt. Coronet North'))],
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 217', Region.sinnoh, 217,
     new RoutePokemon({
-        land: ['Sneasel', 'Swinub', 'Snorunt', 'Snover'],
+        land: ['Sneasel', 'Swinub', 'Snover'],
+        special: [new SpecialRoutePokemon(['Snorunt'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night]))],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 216)],
 ));
@@ -1354,8 +1401,9 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 222', Region.sinnoh, 222,
     new RoutePokemon({
-        land: ['Magnemite', 'Magneton', 'Electabuzz', 'Wingull', 'Pelipper', 'Luxio', 'Floatzel', 'Gastrodon (East)', 'Glameow', 'Purugly', 'Chatot'],
+        land: ['Magnemite', 'Magneton', 'Electabuzz', 'Wingull', 'Pelipper', 'Luxio', 'Floatzel', 'Glameow', 'Purugly'],
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Remoraid', 'Octillery', 'Sharpedo'],
+        special: [new SpecialRoutePokemon(['Chatot'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day]))],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Distortion World'))],
 ));
@@ -1369,32 +1417,42 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 224', Region.sinnoh, 224,
     new RoutePokemon({
-        land: ['Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Beautifly', 'Dustox', 'Roselia', 'Floatzel', 'Gastrodon (East)', 'Chatot'],
+        land: ['Gloom', 'Weepinbell', 'Beautifly', 'Dustox', 'Roselia', 'Floatzel', 'Gastrodon (East)'],
         water: ['Tentacruel', 'Magikarp', 'Gyarados', 'Remoraid', 'Octillery', 'Pelipper', 'Luvdisc'],
+        special: [
+            new SpecialRoutePokemon(['Oddish'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Bellsprout'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+        ],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 225', Region.sinnoh, 225,
     new RoutePokemon({
-        land: ['Rattata', 'Raticate', 'Spearow', 'Fearow', 'Machoke', 'Graveler', 'Skuntank', 'Banette'],
+        land: ['Rattata', 'Raticate', 'Spearow', 'Fearow', 'Machoke', 'Graveler', 'Skuntank'],
         water: ['Psyduck', 'Golduck', 'Magikarp', 'Gyarados', 'Barboach', 'Whiscash'],
+        special: [new SpecialRoutePokemon(['Banette'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night]))],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 226', Region.sinnoh, 226,
     new RoutePokemon({
-        land: ['Rattata', 'Raticate', 'Fearow', 'Machoke', 'Graveler', 'Wingull', 'Banette'],
+        land: ['Rattata', 'Raticate', 'Machoke', 'Graveler', 'Wingull'],
         water: ['Tentacruel', 'Horsea', 'Seadra', 'Magikarp', 'Gyarados', 'Pelipper', 'Relicanth'],
+        special: [
+            new SpecialRoutePokemon(['Fearow'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+            new SpecialRoutePokemon(['Banette'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+        ],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 225)],
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 227', Region.sinnoh, 227,
     new RoutePokemon({
-        land: ['Fearow', 'Golbat', 'Graveler', 'Weezing', 'Rhyhorn', 'Rhydon', 'Skarmory', 'Numel', 'Camerupt'],
+        land: ['Fearow', 'Graveler', 'Weezing', 'Rhyhorn', 'Rhydon', 'Skarmory', 'Numel', 'Camerupt'],
         water: ['Poliwag', 'Poliwhirl', 'Magikarp', 'Gyarados', 'Barboach', 'Whiscash'],
+        special: [new SpecialRoutePokemon(['Golbat'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night]))],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 226)],
 ));
@@ -1409,8 +1467,12 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 229', Region.sinnoh, 229,
     new RoutePokemon({
-        land: ['Pidgey', 'Ledian', 'Ariados', 'Beautifly', 'Dustox', 'Volbeat', 'Illumise', 'Roselia', 'Purugly'],
+        land: ['Pidgey', 'Beautifly', 'Dustox', 'Volbeat', 'Illumise', 'Roselia', 'Purugly'],
         water: ['Surskit', 'Masquerain', 'Goldeen', 'Seaking', 'Magikarp', 'Gyarados'],
+        special: [
+            new SpecialRoutePokemon(['Ledian'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+            new SpecialRoutePokemon(['Ariados'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+        ],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 228)],
 ));
@@ -1419,6 +1481,10 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Wingull', 'Pelipper', 'Roselia', 'Floatzel'],
         water: ['Tentacruel', 'Magikarp', 'Gyarados', 'Remoraid', 'Octillery', 'Wailmer', 'Wailord', 'Sealeo'],
+        special: [
+            new SpecialRoutePokemon(['Oddish'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Bellsprout'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+        ],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 229)],
 ));
