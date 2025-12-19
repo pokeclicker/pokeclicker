@@ -1955,8 +1955,14 @@ ALOLA
 Routes.add(new RegionRoute(
     'Alola Route 1', Region.alola, 1,
     new RoutePokemon({
-        land: ['Caterpie', 'Alolan Rattata', 'Ledyba', 'Spinarak', 'Pichu', 'Buneary', 'Pikipek', 'Yungoos', 'Grubbin'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        land: ['Caterpie', 'Pichu', 'Buneary', 'Pikipek', 'Grubbin'],
+        special: [
+            new SpecialRoutePokemon(['Alolan Rattata'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Ledyba'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+            new SpecialRoutePokemon(['Spinarak'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Yungoos'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+        ],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
     undefined,
@@ -1976,8 +1982,10 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 2', Region.alola, 2,
     new RoutePokemon({
-        land: ['Alolan Rattata', 'Spearow', 'Ekans', 'Alolan Meowth', 'Growlithe', 'Abra', 'Drowzee', 'Smeargle', 'Makuhita', 'Furfrou', 'Yungoos', 'Cutiefly'],
+        land: ['Spearow', 'Ekans', 'Alolan Meowth', 'Growlithe', 'Abra', 'Drowzee', 'Smeargle', 'Makuhita', 'Furfrou', 'Cutiefly'],
         special: [
+            new SpecialRoutePokemon(['Alolan Rattata'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Yungoos'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Bulbasaur', 'Chikorita'], new DayOfWeekRequirement(DayOfWeek.Friday)),
         ],
@@ -2030,8 +2038,11 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 4', Region.alola, 4,
     new RoutePokemon({
-        land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
+        land: ['Eevee', 'Lillipup', 'Pikipek', 'Grubbin', 'Mudbray'],
         special: [
+            new SpecialRoutePokemon(['Alolan Rattata'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Igglybuff'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+            new SpecialRoutePokemon(['Yungoos'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Beedrill', 'Venipede'], new DayOfWeekRequirement(DayOfWeek.Thursday)),
         ],
@@ -2056,8 +2067,11 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 6', Region.alola, 6,
     new RoutePokemon({
-        land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
+        land: ['Eevee', 'Lillipup', 'Pikipek', 'Grubbin', 'Mudbray'],
         special: [
+            new SpecialRoutePokemon(['Alolan Rattata'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Igglybuff'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+            new SpecialRoutePokemon(['Yungoos'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Ralts', 'Gothita'], new DayOfWeekRequirement(DayOfWeek.Sunday)),
         ],
@@ -2082,13 +2096,15 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 8', Region.alola, 8,
     new RoutePokemon({
-        land: ['Alolan Rattata', 'Fletchling', 'Trumbeak', 'Yungoos', 'Stufful'],
+        land: ['Fletchling', 'Trumbeak', 'Stufful'],
         water: ['Tentacool', 'Magikarp', 'Chinchou', 'Remoraid', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
         special:
         [
-            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+            new SpecialRoutePokemon(['Alolan Rattata'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Yungoos'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
             new SpecialRoutePokemon(['Salandit'], new ObtainedPokemonRequirement('Salandit')),
             new SpecialRoutePokemon(['Wimpod'], new ObtainedPokemonRequirement('Wimpod')),
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Combusken', 'Luxio'], new DayOfWeekRequirement(DayOfWeek.Tuesday)),
         ],
     }),
@@ -2109,9 +2125,12 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Akala Outskirts', Region.alola, 21,
     new RoutePokemon({
-        land: ['Alolan Raticate', 'Natu', 'Wingull', 'Nosepass', 'Gumshoos', 'Stufful'],
+        land: ['Wingull', 'Nosepass', 'Stufful'],
         water: ['Magikarp', 'Chinchou', 'Wishiwashi (Solo)'],
         special: [
+            new SpecialRoutePokemon(['Alolan Raticate'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Natu'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+            new SpecialRoutePokemon(['Gumshoos'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Honedge'], new DayOfWeekRequirement(DayOfWeek.Wednesday)),
         ],
@@ -2123,8 +2142,12 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 10', Region.alola, 10,
     new RoutePokemon({
-        land: ['Alolan Raticate', 'Fearow', 'Ledian', 'Ariados', 'Skarmory', 'Pancham', 'Gumshoos'],
+        land: ['Fearow', 'Skarmory', 'Pancham'],
         special: [
+            new SpecialRoutePokemon(['Ledian'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+            new SpecialRoutePokemon(['Ariados'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Alolan Raticate'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Gumshoos'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Pidgeot', 'Staravia'], new DayOfWeekRequirement(DayOfWeek.Thursday)),
         ],
@@ -2136,8 +2159,9 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Mount Hokulani', Region.alola, 22,
     new RoutePokemon({
-        land: ['Fearow', 'Ditto', 'Cleffa', 'Skarmory', 'Elekid', 'Beldum', 'Elgyem', 'Minior (Meteor)', 'Minior (Blue Core)', 'Minior (Green Core)', 'Minior (Indigo Core)', 'Minior (Orange Core)', 'Minior (Red Core)', 'Minior (Violet Core)', 'Minior (Yellow Core)'],
+        land: ['Fearow', 'Ditto', 'Skarmory', 'Elekid', 'Beldum', 'Elgyem', 'Minior (Meteor)', 'Minior (Blue Core)', 'Minior (Green Core)', 'Minior (Indigo Core)', 'Minior (Orange Core)', 'Minior (Red Core)', 'Minior (Violet Core)', 'Minior (Yellow Core)'],
         special: [
+            new SpecialRoutePokemon(['Cleffa'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Axew'], new DayOfWeekRequirement(DayOfWeek.Saturday)),
         ],
@@ -2152,11 +2176,14 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 11', Region.alola, 11,
     new RoutePokemon({
-        land: ['Parasect', 'Ledian', 'Ariados', 'Pancham', 'Trumbeak', 'Toucannon', 'Komala'],
+        land: ['Pancham', 'Trumbeak', 'Toucannon', 'Komala'],
         special:
         [
+            new SpecialRoutePokemon(['Parasect'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+            new SpecialRoutePokemon(['Ledian'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+            new SpecialRoutePokemon(['Ariados'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
-            new SpecialRoutePokemon(['Shiinotic'], new ObtainedPokemonRequirement('Shiinotic')),
+            new SpecialRoutePokemon(['Shiinotic'], new MultiRequirement([new ObtainedPokemonRequirement('Shiinotic'), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
             new SpecialRoutePokemon(['Vigoroth', 'Monferno'], new DayOfWeekRequirement(DayOfWeek.Friday)),
         ],
     }),
@@ -2213,9 +2240,13 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 15', Region.alola, 15,
     new RoutePokemon({
-        land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Gumshoos', 'Sandygast'],
+        land: ['Slowpoke', 'Pelipper', 'Sandygast'],
         water: ['Tentacruel', 'Magikarp', 'Clamperl', 'Finneon', 'Wishiwashi (Solo)', 'Bruxish'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        special: [
+            new SpecialRoutePokemon(['Alolan Raticate'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Gumshoos'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+            new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
+        ],
     }),
     [new RouteKillRequirement(10, Region.alola, 13)],
     undefined,
@@ -2224,8 +2255,10 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 16', Region.alola, 16,
     new RoutePokemon({
-        land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Scraggy', 'Gumshoos'],
+        land: ['Slowpoke', 'Pelipper', 'Scraggy'],
         special: [
+            new SpecialRoutePokemon(['Alolan Raticate'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Gumshoos'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Prinplup', 'Duosion'], new DayOfWeekRequirement(DayOfWeek.Tuesday)),
         ],
@@ -2237,8 +2270,12 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 17', Region.alola, 17,
     new RoutePokemon({
-        land: ['Alolan Raticate', 'Fearow', 'Alolan Graveler', 'Ledian', 'Ariados', 'Scraggy', 'Bisharp', 'Gumshoos'],
+        land: ['Fearow', 'Alolan Graveler', 'Scraggy', 'Bisharp'],
         special: [
+            new SpecialRoutePokemon(['Alolan Raticate'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Ledian'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
+            new SpecialRoutePokemon(['Ariados'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Gumshoos'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
             new SpecialRoutePokemon(['Kartana'], new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 11)),
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
         ],
@@ -2289,8 +2326,9 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Poni Grove', Region.alola, 27,
     new RoutePokemon({
-        land: ['Pinsir', 'Heracross', 'Buneary', 'Riolu', 'Zoroark', 'Trumbeak', 'Toucannon'],
+        land: ['Pinsir', 'Heracross', 'Buneary', 'Zoroark', 'Trumbeak', 'Toucannon'],
         special: [
+            new SpecialRoutePokemon(['Riolu'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
             new SpecialRoutePokemon(['Blacephalon'], new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 15)),
             new SpecialRoutePokemon(['Stakataka'], new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 15)),
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
@@ -2304,8 +2342,10 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Poni Plains', Region.alola, 28,
     new RoutePokemon({
-        land: ['Alolan Raticate', 'Fearow', 'Hypno', 'Tauros', 'Miltank', 'Pelipper', 'Hariyama', 'Ambipom', 'Cottonee', 'Petilil', 'Trumbeak', 'Toucannon', 'Gumshoos', 'Mudsdale', 'Pyroar'],
+        land: ['Fearow', 'Hypno', 'Tauros', 'Miltank', 'Pelipper', 'Hariyama', 'Ambipom', 'Cottonee', 'Petilil', 'Trumbeak', 'Toucannon', 'Mudsdale', 'Pyroar'],
         special: [
+            new SpecialRoutePokemon(['Alolan Raticate'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
+            new SpecialRoutePokemon(['Gumshoos'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
             new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9)),
             new SpecialRoutePokemon(['Aggron', 'Conkeldurr'], new DayOfWeekRequirement(DayOfWeek.Monday)),
         ],
