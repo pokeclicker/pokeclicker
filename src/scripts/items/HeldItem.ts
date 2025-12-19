@@ -184,6 +184,7 @@ ItemList.Excite_Scent = new ExpGainedBonusHeldItem('Excite_Scent', 10000, GameCo
     (p) => p.shadow >= GameConstants.ShadowStatus.Shadow   );
 ItemList.Vivid_Scent = new ExpGainedBonusHeldItem('Vivid_Scent', 10000, GameConstants.Currency.money, undefined, 'Vivid Scent', 2.5, GameConstants.Region.hoenn, 'the holding Shadow Pokémon',
     (p) => p.shadow >= GameConstants.ShadowStatus.Shadow  );
+ItemList.Leftovers = new ExpGainedBonusHeldItem('Leftovers', 7500, GameConstants.Currency.battlePoint, undefined, 'Leftovers', 2, GameConstants.Region.johto);
 ItemList.Muscle_Band = new AttackBonusHeldItem('Muscle_Band', 1000, GameConstants.Currency.battlePoint, undefined, 'Muscle Band', 1.05, GameConstants.Region.hoenn);
 // Pokemon specific items
 ItemList.Light_Ball = new PokemonRestrictedAttackBonusHeldItem('Light_Ball', 10000, GameConstants.Currency.money, undefined, 'Light Ball', 1.3, GameConstants.Region.johto, 'Pikachu',
