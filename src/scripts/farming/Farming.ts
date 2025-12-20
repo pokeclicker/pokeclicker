@@ -54,7 +54,6 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Roaming] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Roaming));
         this.externalAuras[AuraType.Ev] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Ev));
         this.externalAuras[AuraType.Xp] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Xp));
-        this.externalAuras[AuraType.Charge] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Charge));
 
         const multiplierSource = 'Farm Aura';
         this.multiplier.addBonus('shiny', () => this.externalAuras[AuraType.Shiny](), multiplierSource);
@@ -62,7 +61,6 @@ class Farming implements Feature {
         this.multiplier.addBonus('roaming', () => this.externalAuras[AuraType.Roaming](), multiplierSource);
         this.multiplier.addBonus('ev', () => this.externalAuras[AuraType.Ev](), multiplierSource);
         this.multiplier.addBonus('exp', () => this.externalAuras[AuraType.Xp](), multiplierSource);
-        this.multiplier.addBonus('undergroundCharge', () => this.externalAuras[AuraType.Charge](), multiplierSource);
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
             for (let i = GameHelper.enumLength(BerryType) - 2; i >= 0; i--) {
@@ -1121,8 +1119,7 @@ class Farming implements Feature {
             BerryColor.Yellow,
             5.7,
             BerryFirmness.Very_Hard,
-            ['This Berry remains poisonous until fully ripened. Once ripe it has a spicy and sweet complex flavor.'],
-            new Aura(AuraType.Charge, [1.01, 1.025, 1.04])
+            ['This Berry remains poisonous until fully ripened. Once ripe it has a spicy and sweet complex flavor.']
         );
 
         this.berryData[BerryType.Maranga] = new Berry(
