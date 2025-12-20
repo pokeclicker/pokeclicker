@@ -79,7 +79,8 @@ class PokedexHelper {
             const highestEncountered = App.game.statistics.pokemonEncountered.highestID;
             const highestDefeated = App.game.statistics.pokemonDefeated.highestID;
             const highestCaught = App.game.statistics.pokemonCaptured.highestID;
-            return Math.max(highestSeen, highestEncountered, highestDefeated, highestCaught);
+            const highestRegionID = player.hasBeatenChampOfRegion() ? GameConstants.MaxIDPerRegion[player.highestRegion()] : -1;
+            return Math.max(highestSeen, highestEncountered, highestDefeated, highestCaught, highestRegionID);
         }).peek();
 
         const shadowPokemon = PokemonHelper.getAllShadowPokemon.peek();
@@ -115,10 +116,7 @@ class PokedexHelper {
 
             const nameFilterSetting = Settings.getSetting('pokedexNameFilter') as SearchSetting;
             if (nameFilterSetting.observableValue() != '') {
-                const nameFilter = nameFilterSetting.regex();
-                const displayName = PokemonHelper.displayName(pokemon.name)();
-                const partyName = App.game.party.getPokemonByName(pokemon.name)?.displayName;
-                if (!nameFilter.test(displayName) && !nameFilter.test(pokemon.name) && !(partyName != undefined && nameFilter.test(partyName))) {
+                if (!PokemonHelper.matchPokemonByNames(nameFilterSetting.regex(), pokemon.name)) {
                     return false;
                 }
             }

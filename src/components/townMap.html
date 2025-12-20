@@ -1,0 +1,99 @@
+<div id="middle-bottom-sort-column">
+    <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
+        App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.temporaryBattle || App.game.gameState === GameConstants.GameState.paused)">
+        <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
+            <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
+        </div>
+        <button class='btn btn-sm' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;" data-toggle="popover" data-trigger="hover" data-html="true" data-title="Map Legend:"
+        data-content=""
+        data-placement="bottom" data-bind="attr: {'data-content': `<div class='row map-legend'>
+                <div class='col-12'>
+                    Map locations will be coloured based on the following:
+                </div>
+                ${MapHelper.getUsableFilters().map(setting => {
+                    return `<div class='col-10 legend-item ${setting.name}'>
+                        <span>${setting.displayName}:</span>
+                    </div>
+                    <div class='col-2'>
+                        <span class='float-right px-4 bg-${setting.name.substring(2)}'>&nbsp;</span>
+                    </div>`
+                }).join('\n')}
+                <div class='col-12'>
+                    <i>NOTE: Colors and priority can be customized in the settings menu</i>
+                </div>
+            </div>`}">ⓘ</button>
+        <button class='btn btn-sm' style="position: absolute; right: 96px; top: 0px; width: auto; height: 41px; cursor: default;"
+        data-bind='style: { background: DayCycle.color() },
+            tooltip: {
+                title: DayCycle.tooltip(),
+                html: true,
+                placement: "bottom",
+                trigger: "hover"
+            }'>
+            <img width=30px src="" data-bind="attr: { src: DayCycle.image() }"/>
+        </button>
+        <button class='btn btn-sm' style="position: absolute; right: 48px; top: 0px; width: auto; height: 41px; cursor: default;"
+        data-bind='style: { background: Weather.color() },
+            tooltip: {
+                title: Weather.tooltip(),
+                html: true,
+                placement: "bottom",
+                trigger: "hover"
+            }'>
+            <img width=30px src="" data-bind="attr: { src: Weather.image() }"/>
+        </button>
+        <button class='btn btn-sm' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" data-toggle="modal" data-target="#moonPhaseModal"
+            data-bind='style: { background: MoonCycle.color() },
+                tooltip: {
+                    title: `${MoonCycle.tooltip()}<br/><br/>Click for more information.`,
+                    html: true,
+                    placement: "bottom",
+                    trigger: "hover"
+                }'>
+            <img width=30px src="" data-bind="attr: { src: MoonCycle.image() }"/>
+        </button>
+        <div id="mapBody" class="card-body p-0 show">
+            <div id="subregion-travel-buttons" class="btn-group mr-2" role="group" style="width: 100%;" data-bind="
+                visible: SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > 1,
+                css: { 'slow-flash': player.highestRegion() == player.region && SubRegions.getSubRegions(player.region).filter(sr => sr.unlocked()).length > player.highestSubRegion() + 1 }">
+                <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion - 1">&lt;</button>
+                <button class="btn btn-sm btn-primary" style="width: 70%;" data-bind="
+                    click: () => SubRegions.openModal(),
+                    text: 'Subregional Travel (' + player.subregionObject()?.name + ')'"
+                    >Subregional Travel</button>
+                <button class="btn btn-sm btn-secondary" data-bind="click: () => player.subregion = player.subregion + 1">&gt;</button>
+            </div>
+            <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
+            <svg id="map" viewBox="0 0 1600 960" preserveAspectRatio="xMaxYMax meet">
+                <defs>
+                    <lineargradient id="mx-gradient-f8cecc-1-ea583b-1-s-0" x1="0%" x2="0%" y1="0%"
+                                    y2="100%">
+                        <stop offset="0%" style="stop-color:#909090"></stop>
+                        <stop offset="100%" style="stop-color:#c1c1c1"></stop>
+                    </lineargradient>
+                    <lineargradient id="mx-gradient-dae8fc-1-7ea6e0-1-s-0" x1="0%" x2="0%" y1="0%"
+                                    y2="100%">
+                        <stop offset="0%" style="stop-color:#DAE8FC"></stop>
+                        <stop offset="100%" style="stop-color:#7EA6E0"></stop>
+                    </lineargradient>
+                </defs>
+
+                @import "regionMaps/KantoSVG.html"
+                @import "regionMaps/JohtoSVG.html"
+                @import "regionMaps/HoennSVG.html"
+                @import "regionMaps/SinnohSVG.html"
+                @import "regionMaps/UnovaSVG.html"
+                @import "regionMaps/KalosSVG.html"
+                @import "regionMaps/AlolaSVG.html"
+                @import "regionMaps/GalarSVG.html"
+                @importif $DEVELOPMENT "regionMaps/HisuiSVG.html"
+                @importif $DEVELOPMENT "regionMaps/PaldeaSVG.html"
+
+                <g id="playerSprite">
+                    <!-- This group is cleared actively via koExtenders.ts added to fix #3358 -->
+                    <!-- TODO: Replace current PlayerSprite rendering logic so a singular SVG is used / updated like so:-->
+                </g>
+            </svg>
+        </div>
+    </div>
+</div>

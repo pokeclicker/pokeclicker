@@ -46,8 +46,9 @@
 
                 <div class="title-right" data-bind="if: isDungeon && QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">
                     <div class="d-flex ml-auto">
-                        <knockout class="h4 text-danger no-emoji-font mr-2 mb-0 align-self-center" data-bind="
+                        <knockout class="h4 no-emoji-font mr-2 mb-0 align-self-center" data-bind="
                             visible: DungeonRunner.isDungeonDebuffed(player.town.dungeon),
+                            class: Object.values(player.town.dungeon.lootTable).flat().find(l => l.ignoreDebuff && (l.requirement?.isCompleted() ?? true)) ? 'text-warning' : 'text-danger',
                             tooltip: {
                                 title: 'This dungeon is debuffed and will be significantly less likely to drop Epic, Legendary, and Mythic loot.',
                                 trigger: 'hover',
@@ -128,7 +129,15 @@
         <!--Display all available Pokémon in this dungeon-->
         <ul class="list-inline mb-0">
           <!-- ko foreach: player.town.dungeon.normalEncounterList.filter(i => !i.hide) -->
-          <li class="list-inline-item">
+          <li class="list-inline-item" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="
+                click: () => {
+                    if (!$data.uncaught && $data.pokemonName) {
+                        App.game.statistics.selectedPokemonID($data.id);
+                    } else {
+                        event.stopPropagation();
+                    }
+                },
+                css: { 'clickable': !$data.uncaught && $data.pokemonName }">
             <!-- ko if: $data.mimic -->
             <img class="boss" data-bind="attr: { src: `assets/images/dungeons/chest-${$data.mimicTier}.png` }, tooltip: {
                 title: GameConstants.camelCaseToString($data.mimicTier),
@@ -161,7 +170,15 @@
           <!-- /ko -->
           <!--Display all available bosses in this dungeon-->
           <!-- ko foreach: player.town.dungeon.bossEncounterList.filter(i => !i.hide) -->
-          <li class="list-inline-item">
+          <li class="list-inline-item" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="
+                click: () => {
+                    if (!$data.uncaught && $data.pokemonName) {
+                        App.game.statistics.selectedPokemonID($data.id);
+                    } else {
+                        event.stopPropagation();
+                    }
+                },
+                css: { 'clickable': !$data.uncaught && $data.pokemonName }">
             <!-- ko ifnot: $data.shadow -->
             <img class="boss" src="assets/images/dungeons/boss.svg"/>
             <!-- /ko -->

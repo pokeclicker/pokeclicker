@@ -1,5 +1,4 @@
 ///<reference path="../../declarations/globals.d.ts"/>
-///<reference path="BattlePokemon.ts"/>
 
 class PokemonFactory {
 
@@ -35,15 +34,15 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const level: number = this.routeLevel(route, region);
-        const heldItem: BagItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROUTE_HELD_ITEM_MODIFIER);
         const money: number = this.routeMoney(route,region);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        const heldItem: BagItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROUTE_HELD_ITEM_MODIFIER, shiny);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const encounterType = roaming ? EncounterType.roamer : EncounterType.route;
 
         if (shiny) {
             Notifier.notify({
-                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
+                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)}! ✨`,
                 pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender, GameConstants.ShadowStatus.None),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
@@ -141,6 +140,9 @@ class PokemonFactory {
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const shadow = pokemon.shadow;
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
+        if (shiny && !pokemon.shiny) {
+            GameHelper.incrementObservable(App.game.statistics.totalShinyTrainerPokemonSeen);
+        }
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer);
     }
 
@@ -151,12 +153,12 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const money = 0;
-        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_HELD_ITEM_MODIFIER);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
+        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_HELD_ITEM_MODIFIER, shiny);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         if (shiny) {
             Notifier.notify({
-                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
+                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)}! ✨`,
                 pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender, GameConstants.ShadowStatus.None),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
@@ -181,6 +183,9 @@ class PokemonFactory {
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const shadow = pokemon.shadow;
         const ep = GameConstants.BASE_EP_YIELD * (isBoss ? GameConstants.DUNGEON_BOSS_EP_MODIFIER : GameConstants.DUNGEON_EP_MODIFIER);
+        if (shiny && !pokemon.shiny) {
+            GameHelper.incrementObservable(App.game.statistics.totalShinyTrainerPokemonSeen);
+        }
         return new BattlePokemon(name, basePokemon.id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, gender, shadow, EncounterType.trainer, undefined, ep);
     }
 
@@ -192,12 +197,12 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const money = 0;
-        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_BOSS_HELD_ITEM_MODIFIER);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
+        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_BOSS_HELD_ITEM_MODIFIER, shiny);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         if (shiny) {
             Notifier.notify({
-                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
+                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)}! ✨`,
                 pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender, GameConstants.ShadowStatus.None),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
@@ -222,6 +227,9 @@ class PokemonFactory {
         const shiny = pokemon.shiny ? pokemon.shiny : this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const shadow = pokemon.shadow;
+        if (shiny && !pokemon.shiny && battle.optionalArgs.isTrainerBattle) {
+            GameHelper.incrementObservable(App.game.statistics.totalShinyTrainerPokemonSeen);
+        }
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, encounterType);
     }
 
@@ -269,13 +277,17 @@ class PokemonFactory {
         return GameConstants.clipNumber(catchRateRaw, 0, 100);
     }
 
-    private static generateHeldItem(item: BagItem, modifier: number): BagItem | null {
+    private static generateHeldItem(item: BagItem, modifier: number, shiny: boolean): BagItem | null {
         if (!item || !BagHandler.displayName(item)) {
             return null;
         }
 
         if (!(item.requirement?.isCompleted() ?? true)) {
             return null;
+        }
+
+        if (shiny) {
+            return item;
         }
 
         let chance = GameConstants.HELD_ITEM_CHANCE;

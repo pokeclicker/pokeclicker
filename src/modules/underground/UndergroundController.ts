@@ -10,6 +10,7 @@ import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import {
+    camelCaseToString,
     DISCOVER_MINE_TIMEOUT_BASE,
     DISCOVER_MINE_TIMEOUT_LEVEL_START,
     DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL,
@@ -17,6 +18,8 @@ import {
     humanifyString,
     PLATE_VALUE,
     PLAYER_EXPERIENCE_HELPER_FRACTION,
+    Region,
+    SECOND,
     SPECIAL_MINE_CHANCE,
     SURVEY_RANGE_BASE,
     SURVEY_RANGE_REDUCTION_LEVELS,
@@ -27,9 +30,59 @@ import { UndergroundHelper } from './helper/UndergroundHelper';
 import NotificationOption from '../notifications/NotificationOption';
 import GameHelper from '../GameHelper';
 import { Coordinate } from './mine/Mine';
+import { SortOptionConfigs, SortOptions } from './UndergroundTreasuresSortOptions';
+import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
+import UndergroundToolType from './tools/UndergroundToolType';
+
+export const UNDERGROUND_MAX_CLICKS_PER_SECOND = 20;
 
 export class UndergroundController {
     private static lastMineClick: number = Date.now();
+
+    public static organisedTreasuresList = ko.pureComputed(() => {
+        const exceptions = [ UndergroundItemValueType.MegaStone ];
+        const list = UndergroundItems.list
+            .filter(item => !exceptions.includes(item.valueType))
+            .filter(item => item.isUnlocked() || Settings.getSetting('undergroundTreasureDisplayShowLocked').observableValue())
+            .sort(UndergroundController.organisedTreasuresListCompareBy(Settings.getSetting('undergroundTreasureDisplaySorting').observableValue(), Settings.getSetting('undergroundTreasureDisplaySortingDirection').observableValue()));
+
+        switch (Settings.getSetting('undergroundTreasureDisplayGrouping').observableValue()) {
+            case 'type':
+                return GameHelper.enumNumbers(UndergroundItemValueType)
+                    .filter(value => !exceptions.includes(value))
+                    .map(enumValue => {
+                        return {
+                            title: camelCaseToString(GameHelper.enumStrings(UndergroundItemValueType)[enumValue]),
+                            treasures: list.filter(item => item.valueType === enumValue),
+                        };
+                    })
+                    .filter(value => value.treasures.length > 0);
+            case 'sellable':
+                return [{
+                    title: 'Can be sold',
+                    treasures: list.filter(item => item.hasSellValue()),
+                }, {
+                    title: 'Cannot be sold',
+                    treasures: list.filter(item => !item.hasSellValue()),
+                }];
+            case 'region':
+                return GameHelper.enumNumbers(Region).sort((a, b) => a - b)
+                    .map(enumValue => {
+                        return {
+                            title: camelCaseToString(Region[enumValue]),
+                            treasures: list.filter(item => (!(item.requirement instanceof MaxRegionRequirement) && enumValue === Region.none) ||
+                                (item.requirement instanceof MaxRegionRequirement && (item.requirement as MaxRegionRequirement).requiredValue === enumValue)),
+                        };
+                    })
+                    .filter(value => value.treasures.length > 0);
+            case 'none':
+            default:
+                return [{
+                    title: 'All',
+                    treasures: list,
+                }];
+        }
+    });
 
     public static shortcutVisible: PureComputed<boolean> = ko.pureComputed(() => {
         return App.game.underground.canAccess() && !Settings.getSetting('showUndergroundModule').observableValue();
@@ -116,9 +169,6 @@ export class UndergroundController {
         if (amount <= 0) {
             return;
         }
-        if (item.valueType == UndergroundItemValueType.Fossil) {
-            amount = 1;
-        }
         const curAmt = player.itemList[item.itemName]();
         if (curAmt > 0) {
             const sellAmt = Math.min(curAmt, amount);
@@ -139,12 +189,6 @@ export class UndergroundController {
             case UndergroundItemValueType.Diamond:
                 App.game.wallet.gainDiamonds(Math.floor(item.value * amount * percentage));
                 break;
-            case UndergroundItemValueType.Fossil:
-                if (!App.game.breeding.hasFreeEggSlot()) {
-                    return false;
-                }
-                success = App.game.breeding.gainEgg(App.game.breeding.createFossilEgg(item.name));
-                break;
             case UndergroundItemValueType.Gem:
                 const type = item.type;
                 App.game.gems.gainGems(Math.floor(PLATE_VALUE * amount * percentage), type);
@@ -161,6 +205,7 @@ export class UndergroundController {
             $('#mineModal').modal('show');
         } else {
             Notifier.notify({
+                title: 'Underground',
                 message: 'You need the Explorer Kit to access this location.\n<i>Check out the shop at Cinnabar Island.</i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
@@ -170,7 +215,7 @@ export class UndergroundController {
     public static clickModalMineSquare(index: number) {
         const now = Date.now();
 
-        if (this.lastMineClick > now - 50) {
+        if (this.lastMineClick > now - (1000 / UNDERGROUND_MAX_CLICKS_PER_SECOND)) {
             return;
         }
         this.lastMineClick = now;
@@ -179,7 +224,7 @@ export class UndergroundController {
         App.game.underground.tools.useTool(App.game.underground.tools.selectedToolType, coordinates.x, coordinates.y);
     }
 
-    public static handleCoordinatesMined(coordinates: Coordinate[], helper: UndergroundHelper = undefined) {
+    public static handleCoordinatesMined(coordinates: Coordinate[], toolType: UndergroundToolType | null, helper: UndergroundHelper = undefined) {
         if (coordinates.length === 0) {
             return;
         }
@@ -189,21 +234,26 @@ export class UndergroundController {
             .filter(item => item);
 
         // Handle gaining items
-        itemsFound.forEach(value => {
-            const { item, amount } = value;
+        itemsFound.forEach(item => {
+            const amount = UndergroundController.calculateRewardAmountFromMining();
+
+            App.game.oakItems.use(OakItemType.Treasure_Scanner);
+            GameHelper.incrementObservable(App.game.statistics.undergroundItemsFound, amount);
+            GameHelper.incrementObservable(App.game.statistics.undergroundSpecificItemsFound[item.id], amount);
+
+            if (Rand.chance(App.game.underground.tools.getTool(toolType)?.itemDestroyChance ?? 0)) {
+                UndergroundController.notifyItemDestroyed(item, amount, helper);
+                return;
+            }
+
             UndergroundController.notifyItemFound(item, amount, helper);
 
             if (helper) {
                 if (Rand.chance(helper.rewardRetention)) {
                     // Helper keeps the reward
-                    UndergroundController.notifyHelperItemRetention(item, amount, helper);
+                    helper.retainItem(item, amount);
                 } else {
-                    // If we can auto sell then do so
-                    if (helper.autoSellToggle && (item.valueType === UndergroundItemValueType.Diamond || item.valueType === UndergroundItemValueType.Gem)) {
-                        UndergroundController.gainProfit(item, amount);
-                    } else {
-                        UndergroundController.gainMineItem(item.id, amount);
-                    }
+                    UndergroundController.gainMineItem(item.id, amount);
                 }
 
                 UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_DIG_UP_ITEM, true);
@@ -217,6 +267,10 @@ export class UndergroundController {
         if (itemsFound.length > 0) {
             if (App.game.underground.mine.attemptCompleteLayer()) {
                 UndergroundController.notifyMineCompleted(helper);
+
+                if (App.game.underground.mine.grid.every((tile) => tile.layerDepth === 0)) {
+                    GameHelper.incrementObservable(App.game.statistics.undergroundLayersFullyMined);
+                }
 
                 if (helper) {
                     UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER, true);
@@ -281,31 +335,33 @@ export class UndergroundController {
 
     public static notifyMineCompleted(helper?: UndergroundHelper) {
         Notifier.notify({
-            message: helper ? `${helper.name} digging deeper...` : 'You dig deeper...',
+            title: 'Underground',
+            message: helper ? `${helper.name} dug deeper...` : 'You dug deeper...',
             type: NotificationOption.info,
             setting: NotificationConstants.NotificationSetting.Underground.underground_dig_deeper,
         });
     }
 
     public static notifyItemFound(item: UndergroundItem, amount: number, helper?: UndergroundHelper) {
-        const { name: itemName } = item;
+        const { name: itemName, image } = item;
 
         Notifier.notify({
-            message: `${helper ? `${helper.name}` : 'You'} found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}.`,
+            title: 'Underground',
+            message: `<img src="${image}" height="24px" class="pixelated"/> ${helper?.name ?? 'You'} found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}.`,
             type: NotificationConstants.NotificationOption.success,
             setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
             timeout: 3000,
         });
 
         for (let i = 1; i < amount; i++) {
-            let message = `${helper ? `${helper.name}` : 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
-            if (i === 2) message = `Lucky! ${helper ? `${helper.name}` : 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
-            else if (i === 3) message = `Jackpot! ${helper ? `${helper.name}` : 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
-            else if (i > 3) message = `Jackpot ×${i - 2}! ${helper ? `${helper.name}` : 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
+            let message = `${helper?.name ?? 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
+            if (i === 2) message = `Lucky! ${helper?.name ?? 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
+            else if (i === 3) message = `Jackpot! ${helper?.name ?? 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
+            else if (i > 3) message = `Jackpot ×${i - 2}! ${helper?.name ?? 'You'} found an extra ${humanifyString(itemName)} in the Mine!`;
 
             Notifier.notify({
                 title: 'Treasure Scanner',
-                message: message,
+                message: `<img src="${image}" height="24px" class="pixelated"/> ${message}`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
                 timeout: 3000 + i * 2000,
@@ -313,12 +369,45 @@ export class UndergroundController {
         }
     }
 
-    public static notifyHelperItemRetention(item: UndergroundItem, amount: number, helper: UndergroundHelper) {
+    public static notifyItemDestroyed(item: UndergroundItem, amount: number, helper?: UndergroundHelper) {
+        const { name: itemName, image } = item;
+
         Notifier.notify({
-            message: `${helper.name} kept this treasure as payment.`,
+            title: 'Underground',
+            message: `<img src="${image}" height="24px" class="pixelated"/> ${helper?.name ?? 'You'} found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}, but the item was destroyed in the process.`,
             type: NotificationConstants.NotificationOption.warning,
             setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
             timeout: 3000,
+        });
+    }
+
+    public static notifyHelperHired(helper: UndergroundHelper) {
+        Notifier.notify({
+            title: `${this.buildHelperNotificationTitle(helper)} ${helper.name}`,
+            message: 'Thanks for hiring me,\nI won\'t let you down!',
+            type: NotificationConstants.NotificationOption.success,
+            timeout: 30 * SECOND,
+            setting: NotificationConstants.NotificationSetting.Underground.helper,
+        });
+    }
+
+    public static notifyHelperFired(helper: UndergroundHelper) {
+        Notifier.notify({
+            title: `${this.buildHelperNotificationTitle(helper)} ${helper.name}`,
+            message: 'Happy to work for you! Let me know when you\'re hiring again!',
+            type: NotificationConstants.NotificationOption.success,
+            timeout: 30 * SECOND,
+            setting: NotificationConstants.NotificationSetting.Underground.helper,
+        });
+    }
+
+    public static notifyHelperItemRetention(item: UndergroundItem, amount: number, helper: UndergroundHelper) {
+        Notifier.notify({
+            title: `${this.buildHelperNotificationTitle(helper)} ${helper.name}`,
+            message: `<img src="${item.image}" height="24px" class="pixelated"/> ${helper.retentionText}`,
+            type: NotificationConstants.NotificationOption.warning,
+            setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
+            timeout: 3 * SECOND,
         });
     }
 
@@ -327,7 +416,28 @@ export class UndergroundController {
             message: 'Your Underground Battery has been fully charged and is ready to be discharged.',
             type: NotificationOption.info,
             setting: NotificationConstants.NotificationSetting.Underground.battery_full,
-            timeout: 10000,
+            timeout: 10 * SECOND,
         });
+    }
+
+    private static buildHelperNotificationTitle(helper: UndergroundHelper) {
+        return [
+            '<div class="d-inline-flex align-items-center justify-content-center position-relative mr-2">',
+            ...helper.images.map(image => `<img src="${image}" height="24px" class="pixelated"/>`),
+            (helper.hasStolenItem(600) ? '<img class="pixelated position-absolute" src="assets/images/pokemon/25.23.png" alt="" style="width: 24px; right: -16px; bottom: -10px;">' : ''),
+            '</div>',
+        ].join('');
+    }
+
+    private static organisedTreasuresListCompareBy(option: SortOptions, direction: boolean): (a: UndergroundItem, b: UndergroundItem) => number {
+        return function (a, b) {
+            const config = SortOptionConfigs[option];
+
+            if (config.getValue(a) < config.getValue(b))
+                return direction ? 1 : -1;
+            if (config.getValue(a) > config.getValue(b))
+                return direction ? -1 : 1;
+            return 0;
+        };
     }
 }
