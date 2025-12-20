@@ -137,7 +137,7 @@ RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Ash-Greninja', new T
 RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Magearna', new GymBadgeRequirement(BadgeEnums.Champion_Stamp)));
 RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Marshadow', new GymBadgeRequirement(BadgeEnums.Champion_Stamp)));
 RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Zeraora', new GymBadgeRequirement(BadgeEnums.Champion_Stamp)));
-RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Mimikyu (Busted)', new DefeatedSpecificPokemonRequirement(778, 5, true)));
+RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Mimikyu (Busted)', new StatisticRequirement(['shinyPokemonDefeated', PokemonHelper.getPokemonByName('Mimikyu').id], 5, 'Defeat 5 shiny Mimikyu')));
 // Magikarp Jump
 RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Purple Diamonds', new GymBadgeRequirement(BadgeEnums.Luxury_League)));
 RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Apricot Stripes', new GymBadgeRequirement(BadgeEnums.Heal_League)));
