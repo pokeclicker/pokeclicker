@@ -39,7 +39,7 @@ class RouteHelper {
     }
 
     public static routePokerusEVs(route:number, region:GameConstants.Region): string {
-        const possiblePokemon: PokemonNameType[] = RouteHelper.getAvailablePokemonList(route, region);
+        const possiblePokemon: PokemonNameType[] = [...new Set(RouteHelper.getAvailablePokemonList(route, region))];
         if (this.minPokerus(possiblePokemon) == GameConstants.Pokerus.Resistant) {
             return 'All Pokémon on this route are resistant!';
         }

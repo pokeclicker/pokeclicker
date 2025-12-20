@@ -40,12 +40,12 @@
                         <div id="pokeballFilterConfigs"
                             data-bind="sortable: {
                                 foreach: App.game.pokeballFilters.list,
+                                getDataId: (filter) => filter.uuid,
                                 options: {
                                     group: 'pokeballFilters',
                                     draggable: '.pokeballFilterWrapper',
                                     handle: '.pokeballFilterDragHandle',
                                     dataIdAttr: 'data-key',
-                                    getId: (filter) => filter.uuid,
                                 }
                             }">
                             <div class="pokeballFilterWrapper" data-bind="

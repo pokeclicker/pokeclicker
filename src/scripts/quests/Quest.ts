@@ -10,7 +10,8 @@ abstract class Quest {
 
     index: number;
     amount: number
-    customDescription?: string;
+    protected customDescription?: string;
+    private cachedTranslatedDescription?: KnockoutComputed<string>;
     pointsReward: number;
     progress: KnockoutComputed<number>;
     progressText: KnockoutComputed<string>;
@@ -49,7 +50,24 @@ abstract class Quest {
     }
 
     get description(): string {
-        return this.customDescription ?? 'Generic Quest Description. This should be overriden.';
+        const description = this.customDescription ?? this.defaultDescription;
+        if (!this.inQuestLine) {
+            // Quest translations currently only supported for questlines
+            return description;
+        }
+        if (!this.cachedTranslatedDescription) {
+            this.cachedTranslatedDescription = App.translation.getHashed(
+                // Pre-hash keys are formatted like "Example Quest.step 1"
+                `${this.parentQuestLine.name}.step ${this.parentQuestLine.quests().indexOf(this) + 1}`,
+                'questlines',
+                description
+            );
+        }
+        return this.cachedTranslatedDescription();
+    }
+
+    get defaultDescription() {
+        return 'Generic Quest Description. This should be overriden.';
     }
 
     public static generateData(): any[] {

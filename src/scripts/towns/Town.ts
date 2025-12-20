@@ -5,6 +5,8 @@
 ///<reference path="ProfNPC.ts"/>
 ///<reference path="RoamerNPC.ts"/>
 ///<reference path="GiftNPC.ts"/>
+///<reference path="PokemonGiftNPC.ts"/>
+///<reference path="AssistantNPC.ts"/>
 ///<reference path="TownContent.ts"/>
 
 type TownOptionalArgument = {
@@ -50,6 +52,9 @@ class Town implements TmpTownType {
             this.content.push(new DockTownContent());
         }
         if (GameConstants.StartingTowns.includes(name)) {
+            if (region > GameConstants.Region.kanto) {// Kanto is treated separately
+                this.content.push(new PickStarterContent());
+            }
             this.content.push(new NextRegionTownContent());
         }
         content.forEach((c) => {

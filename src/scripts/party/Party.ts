@@ -2,7 +2,7 @@
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 ///<reference path="../../declarations/enums/CaughtStatus.d.ts"/>
 
-class Party implements Feature {
+class Party implements Feature, TmpPartyType {
     name = 'Pokemon Party';
     saveKey = 'party';
 
@@ -71,6 +71,9 @@ class Party implements Feature {
         if (newCatch) {
             // Create new party pokemon
             this._caughtPokemon.push(PokemonFactory.generatePartyPokemon(id, shiny, gender, shadow));
+
+            // Keep caughtPokemon array sorted by ID
+            this._caughtPokemon.sort((a, b) => a.id - b.id);
         }
 
         // Update existing party pokemon
@@ -168,9 +171,10 @@ class Party implements Feature {
     ): number {
         let attack = 0;
         const pokemon = this.partyPokemonActiveInSubRegion(region, subregion);
+        const ignoreRegionMultiplierOrMKJ = ignoreRegionMultiplier || region == GameConstants.Region.alola && subregion == GameConstants.AlolaSubRegions.MagikarpJump;
 
         for (const p of pokemon) {
-            attack += this.calculateOnePokemonAttack(p, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeTempBonuses);
+            attack += this.calculateOnePokemonAttack(p, type1, type2, region, ignoreRegionMultiplierOrMKJ, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeTempBonuses);
         }
 
         const bonus = this.multiplier.getBonus('pokemonAttack');
@@ -185,7 +189,7 @@ class Party implements Feature {
         ignoreRegionMultiplier = false,
         includeBreeding = false,
         useBaseAttack = false,
-        overrideWeather: WeatherType,
+        overrideWeather?: WeatherType,
         ignoreLevel = false,
         includeTempBonuses = true
     ): number {
@@ -313,6 +317,32 @@ class Party implements Feature {
         return Math.floor(clickAttack * bonus);
     }
 
+    public clickAttackBreakdown = ko.pureComputed((): ClickAttackBreakdown => {
+        let numShiny = 0, numResistant = 0, numPurified = 0;
+        this.activePartyPokemon.forEach((p) => {
+            if (p.shiny) {
+                numShiny += 1;
+            }
+            if (p.pokerus >= GameConstants.Pokerus.Resistant) {
+                numResistant += 1;
+            }
+            if (p.shadow >= GameConstants.ShadowStatus.Purified) {
+                numPurified += 1;
+            }
+        });
+
+        return {
+            caughtPokemon: this.activePartyPokemon.length,
+            shinyPokemon: numShiny,
+            resistantPokemon: numResistant,
+            purifiedPokemon: numPurified,
+            xClickModifier: EffectEngineRunner.isActive(ItemList.xClick.name)() ? (ItemList.xClick as BattleItem).multiplyBy : 1,
+            blackFluteModifier: FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Black_Flute),
+            rockyHelmetModifier: App.game.oakItems.calculateBonus(OakItemType.Rocky_Helmet),
+            baseClickAttack: Number(App.game.party.calculateBaseClickAttack().toFixed(4)),
+        };
+    });
+
     canAccess(): boolean {
         return true;
     }
@@ -323,11 +353,12 @@ class Party implements Feature {
         }
 
         const caughtPokemonSave = json.caughtPokemon;
-        for (let i = 0; i < caughtPokemonSave.length; i++) {
-            const partyPokemon = PokemonFactory.generatePartyPokemon(caughtPokemonSave[i].id);
-            partyPokemon.fromJSON(caughtPokemonSave[i]);
-            this._caughtPokemon.push(partyPokemon);
-        }
+        const caughtPokemon = caughtPokemonSave.map(caughtPoke => {
+            const partyPokemon = PokemonFactory.generatePartyPokemon(caughtPoke.id);
+            partyPokemon.fromJSON(caughtPoke);
+            return partyPokemon;
+        });
+        this._caughtPokemon(caughtPokemon);
     }
 
     initialize(): void {
