@@ -1563,7 +1563,7 @@ const VioletPrimo = new NPC('Primo', [
     'Once you have obtained a Held Item, visit your Item Bag. They are most often found in Dungeons, but some, like the Wonder Chest, are for sale!',
     'From there, go into your Held Items pocket and once an item is selected, you can use it by choosing from the list of available Pokémon to hold it.',
     'Choose who you select carefully! Once you remove a Held Item from your Pokémon, the item will break!',
-    'All righty, be seeing you!',
+    'All righty, be seeing you and your <b>NEW‑COLLECTION</b>!',
 ]);
 
 
@@ -2314,6 +2314,7 @@ const BattleFrontierShop = new Shop([
     ItemList.FarmHandJamie,
     ItemList.HatcheryHelperNoel,
     ItemList.Muscle_Band,
+    ItemList.Power_Herb,
 ]);
 const OutskirtStandShop = new Shop([
     ItemList.Pokeball,
@@ -7244,6 +7245,12 @@ const HapuHope = new NPC('Hapu', [
     image: 'assets/images/npcs/Hapu.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 0), new  QuestLineStepCompletedRequirement('Emissary of Light', 3, GameConstants.AchievementOption.less)]),
 });
+
+const AlolanAstronomer = new NPC('Alolan Astronomer', [
+    'I have been studying Cosmoem and noticed that it needs the light from either the sun or the moon to reach its fullest potential.',
+    'When exposed to the light of the sun and leveling up, it will transform into Solgaleo. And it will turn into Lunala with the light of the moon.',
+]);
+
 const SunFlute = new NPC('Play the Sun Flute', [
     'Oh my goodness, Nebby! To think you would be the emissary of the sun, Solgaleo!',
     '<img src="assets/images/pokemon/791.png">',
@@ -8006,7 +8013,7 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     [TemporaryBattleList.Lusamine, TemporaryBattleList.Necrozma, TemporaryBattleList['Ultra Megalopolis'], TemporaryBattleList.Lillie, AltaroftheSunneandMooneShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Altar of the Sunne and Moone'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
-        npcs: [SunFlute, MoonFlute, LillieAltar1, Lillie7, HapuAltar, PhycoAltar, LillieAltar2, ReconSquadAltar, Lillie8],
+        npcs: [SunFlute, MoonFlute, LillieAltar1, Lillie7, HapuAltar, PhycoAltar, LillieAltar2, ReconSquadAltar, Lillie8, AlolanAstronomer],
     }
 );
 TownList['Pokémon League Alola'] = new Town(
