@@ -30,7 +30,7 @@ export type ItemNameType
     | 'Sprinklotad'
     | 'Explosive_Charge'
     | 'Treasure_Scanner'
-    | 'Pokeblock_case' // only for dev
+    | 'Pokeblock_kit'
     | 'Yellow_Flute'
     | 'Black_Flute'
     | 'Time_Flute'

@@ -67,7 +67,7 @@ ItemList.LargeRestore    = new EnergyRestore(EnergyRestoreSize.LargeRestore, 200
 ItemList.Dungeon_ticket = new BuyKeyItem(KeyItemType.Dungeon_ticket, 100, undefined, undefined, 'Dungeon Ticket');
 ItemList.Explorer_kit = new BuyKeyItem(KeyItemType.Explorer_kit, 5000, undefined, undefined, 'Explorer Kit');
 ItemList.Event_calendar = new BuyKeyItem(KeyItemType.Event_calendar, 100000, undefined, undefined, 'Event Calendar');
-ItemList.Pokeblock_case = new BuyKeyItem(KeyItemType.Pokeblock_case, 10, undefined, undefined, 'Pokéblock Case'); // only for dev
+ItemList.Pokeblock_kit = new BuyKeyItem(KeyItemType.Pokeblock_kit, 500, undefined, undefined, 'Pokéblock Kit');
 
 ItemList.Squirtbottle = new BuyOakItem(OakItemType.Squirtbottle, 5000, Currency.farmPoint);
 ItemList.Sprinklotad = new BuyOakItem(OakItemType.Sprinklotad, 10000, Currency.farmPoint);
