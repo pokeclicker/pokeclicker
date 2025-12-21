@@ -308,23 +308,47 @@ class Dungeon {
 
     public getLootChance(loot: Loot, tier: LootTier): number {
         const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]();
-        const debuffed = DungeonRunner.isDungeonDebuffed(this);
+        const isDungeonDebuffed = DungeonRunner.isDungeonDebuffed(this);
 
-        const tierWeights = this.getLootTierWeights(clears, !loot.ignoreDebuff && debuffed, true);
-        const weightSum = Object.keys(tierWeights)
-            .filter(tier => this.lootTable[tier].some((item: Loot) => item.requirement?.isCompleted() ?? true))
-            .map(tier => tierWeights[tier])
-            .reduce((acc, weight) => acc + weight, 0);
+        // Loot debuff and "re-roll" logic in DungeonRunner.generateChestLoot complicates this
 
-        const tierLoot = this.lootTable[tier].filter((item) => item.requirement?.isCompleted() ?? true);
-        const tierWeightSum = tierLoot.reduce((acc, item) => acc + (item.weight ?? 1), 0);
-        const lootWeight = loot.weight ?? 1;
-        if (loot.ignoreDebuff) {
-            return lootWeight / tierWeightSum * tierWeights[tier] / weightSum;
+        let tierWeights = this.getLootTierWeights(clears, false, false);
+        let totalTierWeight = Object.values(tierWeights).reduce((a, b) => a + b, 0);
+
+        let tierProbability = (tierWeights[tier] || 0) / totalTierWeight;
+        let tierLoot = this.lootTable[tier].filter(i => this.lootFilter(i, false));
+        let tierLootWeight = tierLoot.reduce((acc, i) => acc + (i.weight ?? 1), 0);
+        let lootChance = tierProbability * ((loot.weight ?? 1) / tierLootWeight);
+
+        // If dungeon isn't debuffed or if the loot ignores debuff, re-roll logic never triggers
+        if (!isDungeonDebuffed || loot.ignoreDebuff) {
+            return this.lootFilter(loot, false) ? lootChance : 0;
         }
-        const onlyDebuffableMultiplier = 1 - Object.keys(this.lootTable).map(k => [k, this.lootTable[k]])
-            .reduce((tierSum: number, [tier, loots]) => tierSum + loots.reduce((chanceSum: number, loot: Loot) => chanceSum + (loot.ignoreDebuff && this.lootFilter(loot, false) ? this.getLootChance(loot, tier as LootTier) : 0), 0), 0);
-        return lootWeight / tierWeightSum * tierWeights[tier] / weightSum * onlyDebuffableMultiplier;
+
+        // Re-roll logic
+
+        let pRerollTrigger = 0;
+        Object.keys(tierWeights).forEach(t => {
+            const pT = tierWeights[t] / totalTierWeight;
+            const items: Loot[] = this.lootTable[t].filter((i: Loot) => this.lootFilter(i, false));
+            const totalWeight = items.reduce((acc, i) => acc + (i.weight ?? 1), 0);
+
+            const debuffableWeight = items
+                .filter(i => !i.ignoreDebuff)
+                .reduce((acc, i) => acc + (i.weight ?? 1), 0);
+
+            pRerollTrigger += pT * (debuffableWeight / totalWeight);
+        });
+
+        tierWeights = this.getLootTierWeights(clears, true, true);
+        totalTierWeight = Object.values(tierWeights).reduce((a, b) => a + b, 0);
+
+        tierProbability = (tierWeights[tier] || 0) / totalTierWeight;
+        tierLoot = this.lootTable[tier].filter(i => this.lootFilter(i, true));
+        tierLootWeight = tierLoot.reduce((acc, i) => acc + (i.weight ?? 1), 0);
+
+        lootChance = tierProbability * ((loot.weight ?? 1) / tierLootWeight);
+        return pRerollTrigger * lootChance;
     }
 
     /**
