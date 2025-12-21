@@ -397,27 +397,4 @@ export default class ContestHelper {
             return 'Unavailable';
         }
     }
-
-    public static getPartyPokemonContestRibbon(p: TmpPartyPokemonType, t: ContestType, r: ContestRank) {
-        // No pokemon ribbon if contest hasn't been beaten
-        if (!App.game.statistics.contestHighestRound[r][t]()) {
-            return false;
-        }
-        const typeAppeal = p.contestSaveData[t][1]();
-        if (typeAppeal * ContestTypeHelper.getAppealModifier([t], [t]) >= ContestHelper.rankAppeal[r]) {
-            return true;
-        }
-        // Return if failed for type-specific ribbons
-        if (r >= ContestRank.Spectacular) {
-            return false;
-        }
-        // For lower ranks compute intersecting appeals
-        const adjData = Object.entries(p.contestSaveData).filter(([d]) => p.contestSaveData[d] != p.contestSaveData[t]);
-        const adjAppeal = Math.max(...Object.values(adjData).flatMap(d => d[1][1]()));
-        const adjTypes = [...adjData.flatMap(d => Number(d[0]))];
-        if (adjAppeal * ContestTypeHelper.getAppealModifier(adjTypes, [t]) >= ContestHelper.rankAppeal[r]) {
-            return true;
-        }
-        return false;
-    }
 }
