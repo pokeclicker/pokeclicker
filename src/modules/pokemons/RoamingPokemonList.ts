@@ -24,6 +24,7 @@ import MoonCyclePhaseRequirement from '../requirements/MoonCyclePhaseRequirement
 import MoonCyclePhase from '../moonCycle/MoonCyclePhase';
 import StatisticRequirement from '../requirements/StatisticRequirement';
 import { getPokemonByName } from './PokemonHelper';
+import OneFromManyRequirement from '../requirements/OneFromManyRequirement';
 
 export default class RoamingPokemonList {
     public static roamerGroups: RoamingGroup[][] = [
@@ -108,8 +109,8 @@ RoamingPokemonList.add(Region.johto, 0, new RoamingPokemon('Raikou', new QuestLi
 RoamingPokemonList.add(Region.johto, 0, new RoamingPokemon('Entei', new QuestLineStepCompletedRequirement('The Legendary Beasts', 3)));
 
 // Hoenn
-RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latios', new QuestLineStepCompletedRequirement('The Eon Duo', 3)));
-RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latias', new QuestLineStepCompletedRequirement('The Eon Duo', 3)));
+RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latios', new OneFromManyRequirement([new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 3), new ObtainedPokemonRequirement('Latias')]), new QuestLineCompletedRequirement('The Eon Duo')])));
+RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latias', new OneFromManyRequirement([new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 3), new ObtainedPokemonRequirement('Latios')]), new QuestLineCompletedRequirement('The Eon Duo')])));
 RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Jirachi', new QuestLineStepCompletedRequirement('Wish Maker', 8)));
 // Orre
 RoamingPokemonList.add(Region.hoenn, 1, new RoamingPokemon('Ho-Oh', new QuestLineCompletedRequirement('Shadows in the Desert')));
