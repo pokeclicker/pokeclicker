@@ -122,6 +122,7 @@ export class UndergroundBattery {
         this._batteryCooldown(UNDERGROUND_BATTERY_COOLDOWN_SECONDS);
 
         if (this._charges() >= this.maxCharges) {
+            this._charges(this.maxCharges);
             UndergroundController.notifyBatteryFull();
         }
     }
