@@ -2224,6 +2224,7 @@ const SlateportCityShop = new Shop([
     ItemList.MediumRestore,
     ItemList.Water_egg,
     ItemList.Linking_cord,
+    ItemList.Pokeblock_kit,
 ]);
 const MauvilleCityShop = new Shop([
     ItemList.Pokeball,
@@ -2387,7 +2388,7 @@ const HoennContestShop = new Shop([
 
 // only for testing
 const PokeblockShop = new Shop([
-    ItemList.Pokeblock_case, // only for dev
+    ItemList.Pokeblock_kit,
     ItemList.PokeBlock_Red,
     ItemList.PokeBlock_Blue,
     ItemList.PokeBlock_Pink,
