@@ -6269,7 +6269,7 @@ const CamphrierEeveeMoveTutor1 = new GiftNPC('Baby-Doll Eyes Move Tutor', [
 
 const CamphrierEeveeMoveTutor2 = new NPC('Baby-Doll Eyes Move Tutor', [
     'Did you know that Eevee can evolve into Sylveon if it levels up while it knows a fairy type move?',
-    'Of course, if you want a Sylveon, you\'ll first need an Eevee.'
+    'Of course, if you want a Sylveon, you\'ll first need an Eevee.',
 ], {
     image: 'assets/images/npcs/Beauty.png',
     requirement: new MultiRequirement([
