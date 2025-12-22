@@ -6252,6 +6252,46 @@ const CamphrierFlabébéEnthusiast = new NPC('Flabébé Enthusiast', [
     'They simply can\'t resist berries that match their colors - just plant a few and they\'ll soon come wandering in.',
 ]);
 
+const CamphrierEeveeMoveTutor1 = new GiftNPC('Baby-Doll Eyes Move Tutor', [
+    'Did you know that Eevee can evolve into Sylveon if it levels up while it knows a fairy type move?',
+    'Well, you\'re in luck! I\'m the cutest person in this town, and I can teach your Eevee the mystery of cuteness.',
+    'I will need 2000 Fairy Gems to teach your Eevee the special move Baby-Doll Eyes.',
+], () => {
+    App.game.gems.gainGems(-2000, 17);
+}, undefined, {
+    saveKey: 'EeveeEvolutionKey',
+    image: 'assets/images/npcs/Beauty.png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Eevee'),
+        new CustomRequirement(ko.pureComputed(() => +App.game.gems.gemWallet[17] () >= 2000), true, 'Have enough Fairy Gems'),
+    ]),
+});
+
+const CamphrierEeveeMoveTutor2 = new NPC('Baby-Doll Eyes Move Tutor', [
+    'Did you know that Eevee can evolve into Sylveon if it levels up while it knows a fairy type move?',
+    'Of course, if you want a Sylveon, you\'ll first need an Eevee.'
+], {
+    image: 'assets/images/npcs/Beauty.png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Eevee', true),
+        new ObtainedPokemonRequirement('Sylveon', true),
+        new StatisticRequirement(['npcTalkedTo', CamphrierEeveeMoveTutor1.saveKey], 1, 'Your Eevee already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
+
+const CamphrierEeveeMoveTutor3 = new NPC('Baby-Doll Eyes Move Tutor', [
+    'Did you know that Eevee can evolve into Sylveon if it levels up while it knows a fairy type move?',
+    'Well, you\'re in luck! I\'m the cutest person in this town, and I can teach your Eevee the mystery of cuteness.',
+    'I will need 2000 Fairy Gems to teach your Eevee the special move Baby-Doll Eyes. Go get some more of those gems!',
+], {
+    image: 'assets/images/npcs/Beauty.png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Eevee'),
+        new CustomRequirement(ko.pureComputed(() => +App.game.gems.gemWallet[17] () < 2000), true, 'Don\'t have enough Fairy Gems'),
+        new StatisticRequirement(['npcTalkedTo', CamphrierEeveeMoveTutor1.saveKey], 1, 'Your Eevee already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
+
 const Calem2 = new NPC('Calem', [
     'Oh $playername$, you made it here. I wanted to learn about fossils so I went to the fossil lab, but the head scientist is not here.',
     'I heard he\'s in Glittering Cave but I also saw some weird guys in orange going there. Will you come with me and check it out?',
@@ -6774,7 +6814,7 @@ TownList['Camphrier Town'] = new Town(
     [CamphrierTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Camphrier Town'])],
     {
         requirements: [new TemporaryBattleRequirement('Tierno 1')],
-        npcs: [CamphrierFlabébéEnthusiast],
+        npcs: [CamphrierFlabébéEnthusiast, CamphrierEeveeMoveTutor1, CamphrierEeveeMoveTutor2, CamphrierEeveeMoveTutor3],
     }
 );
 TownList['Parfum Palace'] = new Town(

@@ -6190,7 +6190,7 @@ export const pokemonList = createPokemonArray(
             NightTimedStoneEvolution('Eevee', 'Umbreon', StoneType.Soothe_bell),
             EnvironmentRestrictedLevelEvolution('MossRock', 'Eevee', 'Leafeon', 20),
             EnvironmentRestrictedLevelEvolution('IceRock', 'Eevee', 'Glaceon', 20),
-            LevelEvolution('Eevee', 'Sylveon', 29),
+            NPCRestrictedLevelEvolution('Eevee', 'Sylveon', 2),
             RegionStoneEvolution(galarOnly, 'Eevee', 'Leafeon', StoneType.Leaf_stone),
             RegionStoneEvolution(galarOnly, 'Eevee', 'Glaceon', StoneType.Ice_stone),
         ],
