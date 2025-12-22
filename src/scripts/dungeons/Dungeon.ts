@@ -306,6 +306,51 @@ class Dungeon {
         return updatedChances;
     }
 
+    public getLootChance(loot: Loot, tier: LootTier): number {
+        const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]();
+        const isDungeonDebuffed = DungeonRunner.isDungeonDebuffed(this);
+
+        // Loot debuff and "re-roll" logic in DungeonRunner.generateChestLoot complicates this
+
+        let tierWeights = this.getLootTierWeights(clears, false, false);
+        let totalTierWeight = Object.values(tierWeights).reduce((a, b) => a + b, 0);
+
+        let tierProbability = (tierWeights[tier] || 0) / totalTierWeight;
+        let tierLoot = this.lootTable[tier].filter(i => this.lootFilter(i, false));
+        let tierLootWeight = tierLoot.reduce((acc, i) => acc + (i.weight ?? 1), 0);
+        let lootChance = tierProbability * ((loot.weight ?? 1) / tierLootWeight);
+
+        // If dungeon isn't debuffed or if the loot ignores debuff, re-roll logic never triggers
+        if (!isDungeonDebuffed || loot.ignoreDebuff) {
+            return this.lootFilter(loot, false) ? lootChance : 0;
+        }
+
+        // Re-roll logic
+
+        let pRerollTrigger = 0;
+        Object.keys(tierWeights).forEach(t => {
+            const pT = tierWeights[t] / totalTierWeight;
+            const items: Loot[] = this.lootTable[t].filter((i: Loot) => this.lootFilter(i, false));
+            const totalWeight = items.reduce((acc, i) => acc + (i.weight ?? 1), 0);
+
+            const debuffableWeight = items
+                .filter(i => !i.ignoreDebuff)
+                .reduce((acc, i) => acc + (i.weight ?? 1), 0);
+
+            pRerollTrigger += pT * (debuffableWeight / totalWeight);
+        });
+
+        tierWeights = this.getLootTierWeights(clears, true, true);
+        totalTierWeight = Object.values(tierWeights).reduce((a, b) => a + b, 0);
+
+        tierProbability = (tierWeights[tier] || 0) / totalTierWeight;
+        tierLoot = this.lootTable[tier].filter(i => this.lootFilter(i, true));
+        tierLootWeight = tierLoot.reduce((acc, i) => acc + (i.weight ?? 1), 0);
+
+        lootChance = tierProbability * ((loot.weight ?? 1) / tierLootWeight);
+        return pRerollTrigger * lootChance;
+    }
+
     /**
      * Retrieves the weights for all the possible enemies
      */
