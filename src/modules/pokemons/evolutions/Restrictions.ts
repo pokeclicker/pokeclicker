@@ -17,6 +17,8 @@ import { EvoData, restrict } from './Base';
 import DayCyclePart from '../../dayCycle/DayCyclePart';
 import MoonCyclePhase from '../../moonCycle/MoonCyclePhase';
 import PokemonAttackRequirement from '../../requirements/PokemonAttackRequirement';
+import StatisticRequirement from '../../requirements/StatisticRequirement';
+import GameHelper from '../../GameHelper';
 
 export type EvoFn = (...args: unknown[]) => EvoData;
 
@@ -140,4 +142,14 @@ export const attackRestrict = <T extends EvoFn>(evo: T) => (
         new PokemonAttackRequirement(data.basePokemon, attackValue, isMultiplier, AchievementOption.more),
     );
 
+};
+
+export const npcRestrict = <T extends EvoFn>(evo: T) => (
+    ...rest: Parameters<T>
+) => {
+    const data = evo(...rest);
+    return restrict(
+        data,
+        new StatisticRequirement(['npcTalkedTo', GameHelper.hash(`${data.basePokemon}EvolutionKey`)], 1, 'Description'),
+    );
 };

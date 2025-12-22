@@ -16,6 +16,7 @@ import {
     weatherRestrict,
     megaEvolveRestrict,
     attackRestrict,
+    npcRestrict,
 } from './Restrictions';
 
 // DayCyclePartRestrictedLevelEvolution(start: number, end: number, basePokemon: string, evolvedPokemon: string, level: number)
@@ -91,3 +92,5 @@ export const DayTimedMegaEvolution = dayRestrict(MegaEvolution);
 export const NightTimedMegaEvolution = nightRestrict(MegaEvolution);
 
 export const AttackEvolution = attackRestrict(LevelEvolution);
+
+export const NPCRestrictedLevelEvolution = npcRestrict(LevelEvolution);
