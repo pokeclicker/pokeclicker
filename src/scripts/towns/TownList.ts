@@ -2367,25 +2367,6 @@ const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
     ItemList.HatcheryHelperCameron,
 ], 'Hoenn Berry Master');
 
-//Hoenn Contest Shop
-const HoennContestShop = new Shop([
-    ItemList['Tangela (Pom-pom)'],
-    ItemList['Goldeen (Diva)'],
-    ItemList['Weepinbell (Fancy)'],
-    ItemList['Onix (Rocker)'],
-    ItemList['Dugtrio (Punk)'],
-    ItemList['Gengar (Punk)'],
-    ItemList['Pikachu (Rock Star)'],
-    ItemList['Pikachu (Belle)'],
-    ItemList['Pikachu (Pop Star)'],
-    ItemList['Pikachu (Ph. D.)'],
-    ItemList['Pikachu (Libre)'],
-    new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
-], 'Contest Shop');
-
 // only for testing
 const PokeblockShop = new Shop([
     ItemList.Pokeblock_kit,
@@ -3488,7 +3469,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new ContestHall([ContestRank.Master]), SpectacularContestHall, DepartmentStoreShop, HoennContestShop, PokeblockShop],
+    [new ContestHall([ContestRank.Master]), SpectacularContestHall, DepartmentStoreShop, new GenericTraderShop('ContestCosplayShop', 'Cosplay Concessions & Co.'), PokeblockShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }
@@ -5934,7 +5915,7 @@ const FriseurFurfrouShop = new Shop([
     ItemList['Furfrou (Dandy)'],
     ItemList['Furfrou (Kabuki)'],
     ItemList['Furfrou (Pharaoh)'],
-    //ItemList['Furfrou (Heart)'],
+    ItemList['Furfrou (Heart)'],
 ], 'Friseur Furfrou');
 const CamphrierTownShop = new Shop([
     ItemList.Pokeball,
