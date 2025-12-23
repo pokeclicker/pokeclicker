@@ -25951,7 +25951,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'catchRate': 180,
-        'evolutions': [LevelEvolution('Clobbopus', 'Grapploct', 35)],
+        'evolutions': [NPCRestrictedLevelEvolution('Clobbopus', 'Grapploct', 2)],
     },
     {
         'id': 853,
