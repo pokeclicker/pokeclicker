@@ -8980,7 +8980,7 @@ const TeamYellGrunts = new NPC('Team Yell Grunts', [
 const SpikemuthClobbopusMoveTutor1 = new GiftNPC('Taunt Move Tutor', [
     'Hey! Hey you! You\'re a monkey face and you have nachos for brains!',
     'Haha! You see? We have the best taunts! We are the taunting experts, and we can teach your Clobopuss the special move Taunt!',
-    'We just need... 1000 quest points! That\'s a lot right? Is that a lot?',
+    'We just need... 1000 Quest Points! That\'s a lot right? Is that a lot?',
 ], () => {
     App.game.wallet.loseAmount(new Amount(1000, GameConstants.Currency.questPoint));
 }, undefined, {
@@ -9007,7 +9007,7 @@ const SpikemuthClobbopusMoveTutor2 = new NPC('Taunt Move Tutor', [
 const SpikemuthClobbopusMoveTutor3 = new NPC('Taunt Move Tutor', [
     'Hey! Hey you! You\'re a monkey face and you have nachos for brains!',
     'Haha! You see? We have the best taunts! We are the taunting experts, and we can teach your Clobopuss the special move Taunt!',
-    'We just need... 1000 quest points! That\'s a lot right? Is that a lot? It must be a lot if you don\'t even have that.',
+    'We just need... 1000 Quest Points! That\'s a lot right? Is that a lot? It must be a lot if you don\'t even have that.',
 ], {
     image: 'assets/images/npcs/Team Yell Grunts.png',
     requirement: new MultiRequirement([
