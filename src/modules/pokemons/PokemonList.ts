@@ -23173,7 +23173,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 102,
         'catchRate': 120,
-        'evolutions': [LevelEvolution('Steenee', 'Tsareena', 29)],
+        'evolutions': [NPCRestrictedLevelEvolution('Steenee', 'Tsareena', 2)],
         'base': {
             'hitpoints': 52,
             'attack': 40,
@@ -24614,7 +24614,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 189,
         'catchRate': 45,
-        'evolutions': [LevelEvolution('Poipole', 'Naganadel', 41)],
+        'evolutions': [NPCRestrictedLevelEvolution('Poipole', 'Naganadel', 2)],
         'base': {
             'hitpoints': 67,
             'attack': 73,

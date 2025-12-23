@@ -7343,6 +7343,43 @@ const RoyalAvenueSpectator = new NPC('Spectator', [
     'I like sneaking snacks inside the Battle Royal Dome. One time I snuck in pancakes and there were two trainers from Kanto who both had a Pikachu. I ended up sharing some with one.',
     'Weird thing is, both trainers evolved their Pikachu after the battle, but one had a different form from usual! Maybe there\'s something about Alola that makes certain Pokémon evolve differently? I would check my Evolution Items if I were you.',
 ], {image: 'assets/images/npcs/Preschooler (female).png'});
+const RoyalAvenueSteeneeMoveTutor1 = new GiftNPC('Stomp Move Tutor', [
+    'Steenee will evolve if it levels up while knowing the special move Stomp. Teaching Stomp is actually very easy. So easy, I could even do it for free...',
+    '...But I won\'t. I owe a debt to this woman in Celestic Town, in Sinnoh, and all she wants is Heart Scales. I don\'t know why she needs so many, but she did me a huge favor. I need to repay that, so I need Heart Scales. Maybe she\'s building a house?',
+    'Give me 20 Heart Scales, and I will teach your Steenee Stomp. Remember, this won\'t make your Steenee any stronger, but it will allow it to evolve.',
+], () => {
+    player.loseItem('Heart_scale', 20);
+}, undefined, {
+    saveKey: 'SteeneeEvolutionKey',
+    image: 'assets/images/npcs/Gentleman (Gen 4).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Steenee'),
+        new ItemOwnedRequirement('Heart_scale', 20),
+    ]),
+});
+const RoyalAvenueSteeneeMoveTutor2 = new NPC('Stomp Move Tutor', [
+    'Steenee will evolve if it levels up while knowing the special move Stomp. Teaching Stomp is actually very easy. So easy, I could even do it for free...',
+    '...But I can\'t. Because you don\'t have a Steenee.',
+], {
+    image: 'assets/images/npcs/Gentleman (Gen 4).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Steenee', true),
+        new ObtainedPokemonRequirement('Tsareena', true),
+        new StatisticRequirement(['npcTalkedTo', RoyalAvenueSteeneeMoveTutor1.saveKey], 1, 'Your Steenee already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
+const RoyalAvenueSteeneeMoveTutor3 = new NPC('Stomp Move Tutor', [
+    'Steenee will evolve if it levels up while knowing the special move Stomp. Teaching Stomp is actually very easy. So easy, I could even do it for free...',
+    '...But I won\'t. I owe a debt to this woman in Celestic Town, in Sinnoh, and all she wants is Heart Scales. I don\'t know why she needs so many, but she did me a huge favor. I need to repay that, so I need Heart Scales. Maybe she\'s building a house?',
+    'Go gather 20 Heart Scales, and I will teach your Steenee Stomp. Remember, this won\'t make your Steenee any stronger, but it will allow it to evolve.',
+], {
+    image: 'assets/images/npcs/Gentleman (Gen 4).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Steenee'),
+        new ItemOwnedRequirement('Heart_scale', 20, GameConstants.AchievementOption.less),
+        new StatisticRequirement(['npcTalkedTo', RoyalAvenueSteeneeMoveTutor1.saveKey], 1, 'Your Steenee already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
 const KonikoniKahuna = new NPC('Kahuna Olivia', [
     'What do you mean Grand trials are just like gym battles? It\'s a totally different thing!',
     'Come fight me in our very special and unique brand new Pokémon League and see if you still think our Island Challenge is nothing special!',
@@ -7413,6 +7450,37 @@ const ReconSquadAltar = new NPC('Ultra Recon Squad', [
 ], {
     image: 'assets/images/npcs/specialNPCs/Ultra Recon Squad (all).png',
     requirement: new QuestLineStepCompletedRequirement('Eater of Light', 0),
+});
+const AltaroftheSunneandMoonePoipoleMoveTutor1 = new GiftNPC('Dragon Pulse Move Tutor', [
+    'That Poipole can evolve as well. It just needs to level up while knowing the special move Dragon Pulse. We can teach that move to the Poipole you bought from us, but we will need some additional materials.',
+    'It doesn\'t seem fair after you just paid us for the Poipole, does it? Truly, it is not for our benefit, we do absolutely need these materials. Do you know how difficult it is to teach a dragon type move to a poison type Pokémon?',
+    'We will need 10,000 Dragon Gems and 15 Draco Plates. It will be well worth it.',
+], () => {
+    player.loseItem('Draco_plate', 15);
+    App.game.gems.gainGems(-10000, 14);
+}, undefined, {
+    saveKey: 'PoipoleEvolutionKey',
+    image: 'assets/images/npcs/specialNPCs/Ultra Recon Squad (all).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Poipole'),
+        new ItemOwnedRequirement('Draco_plate', 15),
+        new CustomRequirement(ko.pureComputed(() => +App.game.gems.gemWallet[14] () >= 10000), true, 'Have enough Dragon Gems'),
+    ]),
+});
+const AltaroftheSunneandMoonePoipoleMoveTutor2 = new NPC('Dragon Pulse Move Tutor', [
+    'That Poipole can evolve as well. It just needs to level up while knowing the special move Dragon Pulse. We can teach that move to the Poipole you bought from us, but we will need some additional materials.',
+    'It doesn\'t seem fair after you just paid us for the Poipole, does it? Truly, it is not for our benefit, we do absolutely need these materials. Do you know how difficult it is to teach a dragon type move to a poison type Pokémon?',
+    'We will need 10,000 Dragon Gems and 15 Draco Plates. You should come see us when you have those materials. It will be well worth it.',
+], {
+    image: 'assets/images/npcs/specialNPCs/Ultra Recon Squad (all).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Poipole'),
+        new StatisticRequirement(['npcTalkedTo', AltaroftheSunneandMoonePoipoleMoveTutor1.saveKey], 1, 'Your Poipole already knows this move.', GameConstants.AchievementOption.less),
+        new OneFromManyRequirement([
+            new ItemOwnedRequirement('Draco_plate', 15, GameConstants.AchievementOption.less),
+            new CustomRequirement(ko.pureComputed(() => +App.game.gems.gemWallet[14] () < 10000), true, 'Don\'t have enough Dragon Gems'),
+        ]),
+    ]),
 });
 
 const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [
@@ -8182,7 +8250,7 @@ TownList['Royal Avenue'] = new Town(
     [TemporaryBattleList['Battle Royal'], DepartmentStoreShop, TemporaryBattleList['Molayne Steel Memory']],
     {
         requirements: [new TemporaryBattleRequirement('Skull 3')],
-        npcs: [RoyalAvenueSpectator, MolayneSilvally],
+        npcs: [RoyalAvenueSpectator, RoyalAvenueSteeneeMoveTutor1, RoyalAvenueSteeneeMoveTutor2, RoyalAvenueSteeneeMoveTutor3, MolayneSilvally],
     }
 );
 TownList['Konikoni City'] = new Town(
@@ -8267,7 +8335,7 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     [TemporaryBattleList.Lusamine, TemporaryBattleList.Necrozma, TemporaryBattleList['Ultra Megalopolis'], TemporaryBattleList.Lillie, AltaroftheSunneandMooneShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Altar of the Sunne and Moone'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
-        npcs: [SunFlute, MoonFlute, LillieAltar1, Lillie7, HapuAltar, PhycoAltar, LillieAltar2, ReconSquadAltar, Lillie8, AlolanAstronomer],
+        npcs: [SunFlute, MoonFlute, LillieAltar1, Lillie7, HapuAltar, PhycoAltar, LillieAltar2, ReconSquadAltar, Lillie8, AlolanAstronomer, AltaroftheSunneandMoonePoipoleMoveTutor1, AltaroftheSunneandMoonePoipoleMoveTutor2],
     }
 );
 TownList['Pokémon League Alola'] = new Town(
