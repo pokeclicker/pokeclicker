@@ -489,11 +489,11 @@ export default class ContestTrainerList {
                 new ContestPokemon('Pikachu', 'Cosplay Pikachu', 5, 90, [ContestType.Balanced], [ContestType.Balanced, ContestType.Balanced, ContestType.Balanced, ContestType.Balanced], new InContestTypeRequirement(ContestType.Balanced), BattlePokemonGender.Female),
             ], '(female gen3)', {
                 rankedBerryReward: { rank: ContestRank.Spectacular, amount: 2 },
-                // { item: 'PokeBlock_Cool', amount: ko.observable(5), chance: 10, requirement: new InContestTypeRequirement(ContestType.Cool) },
-                // { item: 'PokeBlock_Beautiful', amount: ko.observable(5), chance: 10, requirement: new InContestTypeRequirement(ContestType.Beautiful) },
-                // { item: 'PokeBlock_Cute', amount: ko.observable(5), chance: 10, requirement: new InContestTypeRequirement(ContestType.Cute) },
-                // { item: 'PokeBlock_Smart', amount: ko.observable(5), chance: 10, requirement: new InContestTypeRequirement(ContestType.Smart) },
-                // { item: 'PokeBlock_Tough', amount: ko.observable(5), chance: 10, requirement: new InContestTypeRequirement(ContestType.Tough) },
+                // { item: 'PokeBlock_Cool', amount: ko.observable(1), requirement: new InContestTypeRequirement(ContestType.Cool) },
+                // { item: 'PokeBlock_Beautiful', amount: ko.observable(1), requirement: new InContestTypeRequirement(ContestType.Beautiful) },
+                // { item: 'PokeBlock_Cute', amount: ko.observable(1), requirement: new InContestTypeRequirement(ContestType.Cute) },
+                // { item: 'PokeBlock_Smart', amount: ko.observable(1), requirement: new InContestTypeRequirement(ContestType.Smart) },
+                // { item: 'PokeBlock_Tough', amount: ko.observable(1), requirement: new InContestTypeRequirement(ContestType.Tough) },
                 itemReward: [],
             }),
             // Chaz
