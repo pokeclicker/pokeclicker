@@ -447,7 +447,7 @@ export default class GenericDeal {
                     { type: DealCostOrProfitType.Amount, currency: new Amount(20, Currency.contestToken), amount: 1 },
                 ],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.MediumRestore, amount: 1 }],
-            }),            
+            }),
             new GenericDeal({
                 costs: [
                     { type: DealCostOrProfitType.Amount, currency: new Amount(30, Currency.contestToken), amount: 1 },
