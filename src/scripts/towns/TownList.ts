@@ -234,17 +234,6 @@ const PinkanBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
     ItemList.Gooey_Mulch,
 ], 'Officer Jenny\'s Pinkan Trade Shop', [new QuestLineCompletedRequirement('Team Rocket\'s Pinkan Theme Park')]);
 
-const SecretCaveShop = new Shop(
-    [
-        ItemList.Heavy_tools,
-    ],
-    'Here\'s what I need',
-    [
-        new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
-    ],
-    true
-);
-
 // Kanto NPCs
 
 const PalletProfOak = new ProfNPC('Prof. Oak',
