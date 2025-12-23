@@ -1019,15 +1019,35 @@
             , isExtension: true
             })
         %>
-        <!--Secret Cave-->
+        <!--Three Isle Cave-->
         <%- include('templates/mapOverlay',
             { name: "Cave Entrance"
             , x: 81, y: 46
             , width: 1, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Secret Cave')}, attr:{ class: MapHelper.calculateTownCssClass('Secret Cave') }"
-            , visible:  "App.game.badgeCase.hasBadge(BadgeEnums.Elite_HoennChampion)"
+            , databind: "click:function(){MapHelper.moveToTown('Three Isle Cave')}, attr:{ class: MapHelper.calculateTownCssClass('Three Isle Cave') }"
+            , visible:  "TownList['Three Isle Cave'].isUnlocked()"
             , image: "assets/images/map/cave_entrance.png"
-            , connectedToTown: "Secret Cave"
+            })
+        %>
+        <!--Three Isle Path-->
+        <%- include('templates/mapOverlay',
+            { name: "Cave Entrance"
+            , x: 81, y: 46
+            , width: 1, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Three Isle Path')}, attr:{ class: MapHelper.calculateTownCssClass('Three Isle Path') }"
+            , visible:  "TownList['Three Isle Path'].isUnlocked()"
+            , image: "assets/images/map/cave_entrance.png"
+            })
+        %>
+        <!--Three Isle Path extension-->
+        <%- include('templates/mapOverlay',
+            { name: "Cave Exit"
+            , x: 84, y: 46
+            , width: 1, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Three Isle Path')}, attr:{ class: MapHelper.calculateTownCssClass('Three Isle Path') }"
+            , visible:  "TownList['Three Isle Path'].isUnlocked()"
+            , image: "assets/images/map/cave_entrance.png"
+            , isExtension: true
             })
         %>
 

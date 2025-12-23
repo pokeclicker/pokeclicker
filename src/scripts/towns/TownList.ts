@@ -906,11 +906,27 @@ const UnownFigure = new NPC('Unown Figure', [
     '3. <b>Limited Variety in the Region</b>: Not all versions of Unown are found here. Although 28 forms exist, some have only been encountered in other regions.',
 ], { image: 'assets/images/npcs/Scientist (male).png' });
 
+const SecretPasserBy1 = new NPC('Passer-by', [
+    'I heard some strange noises from the mountain just east of town. Could something be going on there? Someone should check it out.',
+], {
+    image: 'assets/images/npcs/Beauty.png',
+    requirement: new MultiRequirement([
+        new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion),
+        new OneFromManyRequirement([
+            new StatisticRequirement(['npcTalkedTo', SecretCaveMiner1.saveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
+            new StatisticRequirement(['npcTalkedTo', SecretCaveMiner2.saveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
+            new StatisticRequirement(['npcTalkedTo', SecretCaveMiner3.saveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
+        ]),
+    ]),
+    saveKey: 'DunsparceSecretKey1',
+});
+
 const SecretCaveMiner1 = new NPC('Secret Miner', [
     'Hey. I see you there. I\'m digging here, can you leave me alone?',
     'Alright, fine. Will you keep quiet about this if I share what I\'ll find? It\'s probably gonna take a while though. Come back when you\'re champion of at least four... no... five regions! That should give me enough time.',
 ], {
     requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion, GameConstants.AchievementOption.less),
+    saveKey: 'DunsparceSecretKey2',
 });
 
 const SecretCaveMiner2 = new NPC ('Secret Miner', [
@@ -922,6 +938,7 @@ const SecretCaveMiner2 = new NPC ('Secret Miner', [
         new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
         new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion, GameConstants.AchievementOption.less),
     ]),
+    saveKey: 'DunsparceSecretKey3',
 });
 
 const SecretCaveMiner3 = new NPC('Secret Miner', [
@@ -929,8 +946,29 @@ const SecretCaveMiner3 = new NPC('Secret Miner', [
     'I really wanted to be done by now, but I\'ve hit a bit of a snag. You see, there is this thick layer of very strong crystal back there. I need some heavy equipment to go through it.',
     'Don\'t worry, I\'ll do the job myself once I have the tools. You won\'t even need to lift a finger, and it\'ll only take a second. You\'ll get your share of whatever I find back there. I\'m a bit short on funds though...',
 ], {
-    requirement: new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+    requirement: new MultiRequirement([
+        new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+        new StatisticRequirement(['npcTalkedTo', SecretPasserBy2.saveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
+    ]),
+    saveKey: 'DunsparceSecretKey4',
 });
+
+const SecretPasserBy2 = new NPC('Passer-by', [
+    'So it\'s just a strange man digging for something? Oh. Well that\'s fine. The mountain does not belong to anyone. Nothing to worry about then.',
+    'Hm? Heavy mining tools? I don\'t know anything about that. But I do know that they are all about mining in Oreburgh City in Sinnoh. Maybe you should ask there?',
+], {
+    image: 'assets/images/npcs/Beauty.png',
+    requirement: new MultiRequirement([
+        new StatisticRequirement(['npcTalkedTo', SecretCaveMiner3.saveKey], 1),
+        new StatisticRequirement(['npcTalkedTo', SecretOreburghMineOverseer1.saveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
+    ]),
+    saveKey: 'DunsparceSecretKey5',
+});
+
+const SecretThreeIslePath = new NPC('A New Path', [
+    '<i>The miner has certainly been busy with his new tools. The hard crystal layer has been breached, and the tunnel stretches far. You can see light at the other end.</i>',
+    '<i>You follow the path to the end.</i>',
+], { saveKey: 'DunsparceSecretKey7' });
 
 const SecretCaveMiner4 = new NPC('Secret Miner', [
     'What? This is it? I was expecting riches beyond my wildest dreams! Sorry, <i>our</i> wildest dreams!',
@@ -1139,7 +1177,7 @@ TownList['Three Island'] = new Town(
     [ThreeIslandShop, TemporaryBattleList['Biker Goon 1'], TemporaryBattleList['Biker Goon 2'], TemporaryBattleList['Biker Goon 3'], TemporaryBattleList['Cue Ball Paxton']],
     {
         requirements: [new QuestLineStepCompletedRequirement('Bill\'s Errand', 1)],
-        npcs: [ThreeIslandBiker1, ThreeIslandBiker2, ThreeIslandBiker3],
+        npcs: [ThreeIslandBiker1, ThreeIslandBiker2, ThreeIslandBiker3, SecretPasserBy1, SecretPasserBy2],
     }
 );
 TownList['Professor Ivy\'s Lab'] = new Town(
@@ -1162,14 +1200,29 @@ TownList['Client Island'] = new Town(
         npcs: [ClientSignpost, RedSpearow],
     }
 );
-TownList['Secret Cave'] = new Town(
-    'Secret Cave',
+TownList['Three Isle Cave'] = new Town(
+    'Three Isle Cave',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Sevii123,
-    [SecretCaveShop],
+    [],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+        requirements: [new MultiRequirement([
+            new StatisticRequirement(['npcTalkedTo', SecretPasserBy1.saveKey], 1),
+            new StatisticRequirement(['npcTalkedTo', SecretOreburghMineOverseer1.saveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
+        ])],
         npcs: [SecretCaveMiner1, SecretCaveMiner2, SecretCaveMiner3],
+        ignoreAreaStatus: true,
+    }
+);
+TownList['Three Isle Path'] = new Town(
+    'Three Isle Path',
+    GameConstants.Region.kanto,
+    GameConstants.KantoSubRegions.Sevii123,
+    [],
+    {
+        requirements: [new StatisticRequirement(['npcTalkedTo', SecretOreburghMineOverseer1.saveKey], 1)],
+        npcs: [SecretThreeIslePath],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Four Island'] = new Town(
@@ -1498,7 +1551,7 @@ TownList['Secret Field'] = new DungeonTown(
     'Secret Field',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Sevii123,
-    [new CustomRequirement(ko.pureComputed(() => +App.game.keyItems.hasKeyItem(KeyItemType.Heavy_tools)), 1, 'Obtain the Heavy Tools')],
+    [new StatisticRequirement(['npcTalkedTo', SecretThreeIslePath.saveKey], 1)],
     undefined,
     {
         npcs: [SecretCaveMiner4],
@@ -4599,6 +4652,34 @@ const GrotleAcornParty = new NPC('Grotle and Friends', [
     requirement: new ObtainedPokemonRequirement('Grotle (Acorn)'),
 });
 
+const SecretOreburghMineOverseer1 = new GiftNPC('Mine Overseer', [
+    'Heavy mining equipment? Oh, is this about that weird guy that was talking about a big project in the Sevii Islands a while ago? Yeah. Sure. I can get that for you.',
+    'Don\'t worry about bringing it to him. We can deliver the equipment for you. It\'s a very fast service, it will probably have arrived there before you\'ve even made it back to him.',
+    'Won\'t come cheap though. I\'m gonna need 200,000 Quest Points.',
+], () => {
+    App.game.wallet.loseAmount(new Amount(200000, GameConstants.Currency.questPoint));
+}, undefined, {
+    image: 'assets/images/npcs/specialNPCs/Worker (female).png',
+    requirement: new MultiRequirement([
+        new StatisticRequirement(['npcTalkedTo', SecretPasserBy2.saveKey], 1),
+        new CustomRequirement(ko.pureComputed(() => +App.game.wallet.hasAmount(new Amount(200000, GameConstants.Currency.questPoint))), 1, 'Get more quest points'),
+    ]),
+    saveKey: 'DunsparceSecretKey6',
+});
+
+const SecretOreburghMineOverseer2 = new NPC('Mine Overseer', [
+    'Heavy mining equipment? Oh, is this about that weird guy that was talking about a big project in the Sevii Islands a while ago? Yeah. Sure. I can get that for you.',
+    'Don\'t worry about bringing it to him. We can deliver the equipment for you. It\'s a very fast service, it will probably have arrived there before you\'ve even made it back to him.',
+    'Won\'t come cheap though. I\'m gonna need 200,000 Quest Points.',
+], {
+    image: 'assets/images/npcs/specialNPCs/Worker (female).png',
+    requirement: new MultiRequirement([
+        new StatisticRequirement(['npcTalkedTo', SecretPasserBy2.saveKey], 1),
+        new CustomRequirement(ko.pureComputed(() => +App.game.wallet.hasAmount(new Amount(200000, GameConstants.Currency.questPoint))), 1, 'Get more quest points', GameConstants.AchievementOption.less),
+        new StatisticRequirement(['npcTalkedTo', SecretOreburghMineOverseer1.saveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
+    ]),
+});
+
 const EvolutionAssistant = new AssistantNPC('Prof. Rowan\'s Assistant', [
     'Hey, $playername$! According to Prof. Rowan\'s research, 90% of all Pokémon are somehow tied to evolution! Yup, you can also see a Pokémon\'s evolution line in your Pokédex.',
 ], [
@@ -4643,7 +4724,7 @@ TownList['Oreburgh City'] = new Town(
     [OreburghCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Oreburgh City']), new GenericTraderShop('FossilOreburghMiningMuseum', 'Oreburgh Mining Museum')],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Oreburgh Gate'))],
-        npcs: [OreburghConstructionWorker, HappinyWitness7],
+        npcs: [OreburghConstructionWorker, HappinyWitness7, SecretOreburghMineOverseer1, SecretOreburghMineOverseer2],
     }
 );
 TownList['Floaroma Town'] = new Town(
