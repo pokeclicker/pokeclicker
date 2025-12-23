@@ -895,17 +895,25 @@ const UnownFigure = new NPC('Unown Figure', [
     '3. <b>Limited Variety in the Region</b>: Not all versions of Unown are found here. Although 28 forms exist, some have only been encountered in other regions.',
 ], { image: 'assets/images/npcs/Scientist (male).png' });
 
+const SecretCaveMiner1SaveKey = 'DunsparceSecretKey2';
+
+const SecretCaveMiner2SaveKey = 'DunsparceSecretKey3';
+
+const SecretCaveMiner3SaveKey = 'DunsparceSecretKey4';
+
+const SecretPasserBy2SaveKey = 'DunsparceSecretKey5';
+
+const SecretOreburgMineOverseer1SaveKey = 'DunsparceSecretKey6';
+
 const SecretPasserBy1 = new NPC('Passer-by', [
     'I heard some strange noises from the mountain just east of town. Could something be going on there? Someone should check it out.',
 ], {
     image: 'assets/images/npcs/Beauty.png',
     requirement: new MultiRequirement([
         new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion),
-        new OneFromManyRequirement([
-            new StatisticRequirement(['npcTalkedTo', SecretCaveMiner1.saveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
-            new StatisticRequirement(['npcTalkedTo', SecretCaveMiner2.saveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
-            new StatisticRequirement(['npcTalkedTo', SecretCaveMiner3.saveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
-        ]),
+        new StatisticRequirement(['npcTalkedTo', SecretCaveMiner1SaveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
+        new StatisticRequirement(['npcTalkedTo', SecretCaveMiner2SaveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
+        new StatisticRequirement(['npcTalkedTo', SecretCaveMiner3SaveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
     ]),
     saveKey: 'DunsparceSecretKey1',
 });
@@ -937,7 +945,7 @@ const SecretCaveMiner3 = new NPC('Secret Miner', [
 ], {
     requirement: new MultiRequirement([
         new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
-        new StatisticRequirement(['npcTalkedTo', SecretPasserBy2.saveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
+        new StatisticRequirement(['npcTalkedTo', SecretPasserBy2SaveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
     ]),
     saveKey: 'DunsparceSecretKey4',
 });
@@ -948,8 +956,8 @@ const SecretPasserBy2 = new NPC('Passer-by', [
 ], {
     image: 'assets/images/npcs/Beauty.png',
     requirement: new MultiRequirement([
-        new StatisticRequirement(['npcTalkedTo', SecretCaveMiner3.saveKey], 1),
-        new StatisticRequirement(['npcTalkedTo', SecretOreburghMineOverseer1.saveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
+        new StatisticRequirement(['npcTalkedTo', SecretCaveMiner3SaveKey], 1),
+        new StatisticRequirement(['npcTalkedTo', SecretOreburgMineOverseer1SaveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
     ]),
     saveKey: 'DunsparceSecretKey5',
 });
@@ -1197,7 +1205,7 @@ TownList['Three Isle Cave'] = new Town(
     {
         requirements: [new MultiRequirement([
             new StatisticRequirement(['npcTalkedTo', SecretPasserBy1.saveKey], 1),
-            new StatisticRequirement(['npcTalkedTo', SecretOreburghMineOverseer1.saveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
+            new StatisticRequirement(['npcTalkedTo', SecretOreburgMineOverseer1SaveKey], 1, 'You\'ve had this conversation.', GameConstants.AchievementOption.less),
         ])],
         npcs: [SecretCaveMiner1, SecretCaveMiner2, SecretCaveMiner3],
         ignoreAreaStatus: true,
@@ -1209,7 +1217,7 @@ TownList['Three Isle Path'] = new Town(
     GameConstants.KantoSubRegions.Sevii123,
     [],
     {
-        requirements: [new StatisticRequirement(['npcTalkedTo', SecretOreburghMineOverseer1.saveKey], 1)],
+        requirements: [new StatisticRequirement(['npcTalkedTo', SecretOreburgMineOverseer1SaveKey], 1)],
         npcs: [SecretThreeIslePath],
         ignoreAreaStatus: true,
     }
