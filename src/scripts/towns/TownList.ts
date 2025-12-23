@@ -4648,7 +4648,7 @@ const SecretOreburghMineOverseer1 = new GiftNPC('Mine Overseer', [
 ], () => {
     App.game.wallet.loseAmount(new Amount(200000, GameConstants.Currency.questPoint));
 }, undefined, {
-    image: 'assets/images/npcs/specialNPCs/Worker (female).png',
+    image: 'assets/images/npcs/Worker (female).png',
     requirement: new MultiRequirement([
         new StatisticRequirement(['npcTalkedTo', SecretPasserBy2.saveKey], 1),
         new CustomRequirement(ko.pureComputed(() => +App.game.wallet.hasAmount(new Amount(200000, GameConstants.Currency.questPoint))), 1, 'Get more quest points'),
@@ -4661,7 +4661,7 @@ const SecretOreburghMineOverseer2 = new NPC('Mine Overseer', [
     'Don\'t worry about bringing it to him. We can deliver the equipment for you. It\'s a very fast service, it will probably have arrived there before you\'ve even made it back to him.',
     'Won\'t come cheap though. I\'m gonna need 200,000 Quest Points.',
 ], {
-    image: 'assets/images/npcs/specialNPCs/Worker (female).png',
+    image: 'assets/images/npcs/Worker (female).png',
     requirement: new MultiRequirement([
         new StatisticRequirement(['npcTalkedTo', SecretPasserBy2.saveKey], 1),
         new CustomRequirement(ko.pureComputed(() => +App.game.wallet.hasAmount(new Amount(200000, GameConstants.Currency.questPoint))), 1, 'Get more quest points', GameConstants.AchievementOption.less),
