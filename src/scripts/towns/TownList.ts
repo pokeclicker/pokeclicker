@@ -8979,7 +8979,7 @@ const TeamYellGrunts = new NPC('Team Yell Grunts', [
 
 const SpikemuthClobbopusMoveTutor1 = new GiftNPC('Taunt Move Tutor', [
     'Hey! Hey you! You\'re a monkey face and you have nachos for brains!',
-    'Haha! You see? We have the best taunts! We are the taunting experts, and we can teach your Clobopuss the special move Taunt!',
+    'Haha! You see? We have the best taunts! We are the taunting experts, and we can teach your Clobbopus the special move Taunt!',
     'We just need... 1000 Quest Points! That\'s a lot right? Is that a lot?',
 ], () => {
     App.game.wallet.loseAmount(new Amount(1000, GameConstants.Currency.questPoint));
@@ -8994,26 +8994,26 @@ const SpikemuthClobbopusMoveTutor1 = new GiftNPC('Taunt Move Tutor', [
 
 const SpikemuthClobbopusMoveTutor2 = new NPC('Taunt Move Tutor', [
     'Hey! Hey you! You\'re a monkey face and you have nachos for brains!',
-    'Hah! You see! We... Oh. You don\'t have a Clobopuss! Oh no. We\'re so sorry. Please move along. Please. Our sincerest apologies.',
+    'Hah! You see! We... Oh. You don\'t have a Clobbopus! Oh no. We\'re so sorry. Please move along. Please. Our sincerest apologies.',
 ], {
     image: 'assets/images/npcs/Team Yell Grunts.png',
     requirement: new MultiRequirement([
         new ObtainedPokemonRequirement('Clobbopus', true),
         new ObtainedPokemonRequirement('Grapploct', true),
-        new StatisticRequirement(['npcTalkedTo', SpikemuthClobbopusMoveTutor1.saveKey], 1, 'Your Clobopuss already knows this move.', GameConstants.AchievementOption.less),
+        new StatisticRequirement(['npcTalkedTo', SpikemuthClobbopusMoveTutor1.saveKey], 1, 'Your Clobbopus already knows this move.', GameConstants.AchievementOption.less),
     ]),
 });
 
 const SpikemuthClobbopusMoveTutor3 = new NPC('Taunt Move Tutor', [
     'Hey! Hey you! You\'re a monkey face and you have nachos for brains!',
-    'Haha! You see? We have the best taunts! We are the taunting experts, and we can teach your Clobopuss the special move Taunt!',
+    'Haha! You see? We have the best taunts! We are the taunting experts, and we can teach your Clobbopus the special move Taunt!',
     'We just need... 1000 Quest Points! That\'s a lot right? Is that a lot? It must be a lot if you don\'t even have that.',
 ], {
     image: 'assets/images/npcs/Team Yell Grunts.png',
     requirement: new MultiRequirement([
         new ObtainedPokemonRequirement('Clobbopus'),
         new CustomRequirement(ko.pureComputed(() => +App.game.wallet.hasAmount(new Amount(1000, GameConstants.Currency.questPoint))), 1, 'Get more quest points', GameConstants.AchievementOption.less),
-        new StatisticRequirement(['npcTalkedTo', SpikemuthClobbopusMoveTutor1.saveKey], 1, 'Your Clobopuss already knows this move.', GameConstants.AchievementOption.less),
+        new StatisticRequirement(['npcTalkedTo', SpikemuthClobbopusMoveTutor1.saveKey], 1, 'Your Clobbopus already knows this move.', GameConstants.AchievementOption.less),
     ]),
 });
 
