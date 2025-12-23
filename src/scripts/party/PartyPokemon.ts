@@ -90,7 +90,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
         this.contestSaveData = Object.fromEntries(GameHelper.enumNumbers(ContestType).map((contestType) => {
-            return [contestType, [ko.observable(this.calculateDefaultContestType(contestType)), ko.observable(this.calculateDefaultContestAppeal(contestType)).extend({ numeric: 10 })]];
+            return [contestType, [ko.observable(false), ko.observable(0).extend({ numeric: 10 })]];
         })) as Record<ContestType, [KnockoutObservable<boolean>, KnockoutObservable<number>]>;
         this._contestExp = ko.observable(0).extend({ numeric: 0 });
         this._category = ko.observableArray([0]);
@@ -788,21 +788,6 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         return PokemonCategories.categories().map((c, i) => [c.id, i])
             .filter(([id, _]) => this.category.includes(id))
             .map(([_, index]) => index);
-    }
-
-    private calculateDefaultContestType(t: ContestType): boolean {
-        return ContestHelper.isSpecialContestPokemon(this.name) && Boolean(pokemonMap[this.name].contestTypes?.includes(t));
-    }
-
-    private calculateDefaultContestAppeal(t: ContestType): number {
-        if (!ContestHelper.isSpecialContestPokemon(this.name) || !this.calculateDefaultContestType(t)) {
-            return 0;
-        }
-        const contestPikachu = ['Pikachu (Rock Star)', 'Pikachu (Belle)', 'Pikachu (Pop Star)', 'Pikachu (Ph. D.)', 'Pikachu (Libre)'];
-        if (contestPikachu.includes(this.name)) {
-            return 1420;
-        }
-        return 500;
     }
 
     contestSheen = ko.pureComputed((): number => {

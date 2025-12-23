@@ -45,6 +45,8 @@ import { pokemonMap } from '../pokemons/PokemonList';
 import AttackGainConsumable from './AttackGainConsumable';
 import ContestType from '../enums/ContestType';
 import ContestHelper from '../contest/ContestHelper';
+import ContestPokemonItem from './ContestPokemonItem';
+import ContestRank from '../enums/ContestRank';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -543,18 +545,18 @@ ItemList['Tornadus (Therian)']  = new PokemonItem('Tornadus (Therian)');
 ItemList['Thundurus (Therian)']  = new PokemonItem('Thundurus (Therian)');
 ItemList['Landorus (Therian)']  = new PokemonItem('Landorus (Therian)');
 // Contest
-ItemList['Dugtrio (Punk)'] = new PokemonItem('Dugtrio (Punk)');
-ItemList['Gengar (Punk)'] = new PokemonItem('Gengar (Punk)');
-ItemList['Goldeen (Diva)'] = new PokemonItem('Goldeen (Diva)');
-ItemList['Onix (Rocker)'] = new PokemonItem('Onix (Rocker)');
-ItemList['Tangela (Pom-pom)'] = new PokemonItem('Tangela (Pom-pom)');
-ItemList['Weepinbell (Fancy)'] = new PokemonItem('Weepinbell (Fancy)');
-ItemList['Sudowoodo (Golden)'] = new PokemonItem('Sudowoodo (Golden)', 2000, Currency.contestToken);
-ItemList['Pikachu (Rock Star)'] = new PokemonItem('Pikachu (Rock Star)');
-ItemList['Pikachu (Belle)'] = new PokemonItem('Pikachu (Belle)');
-ItemList['Pikachu (Pop Star)'] = new PokemonItem('Pikachu (Pop Star)');
-ItemList['Pikachu (Ph. D.)'] = new PokemonItem('Pikachu (Ph. D.)');
-ItemList['Pikachu (Libre)'] = new PokemonItem('Pikachu (Libre)');
+ItemList['Dugtrio (Punk)'] = new ContestPokemonItem('Dugtrio (Punk)');
+ItemList['Gengar (Punk)'] = new ContestPokemonItem('Gengar (Punk)');
+ItemList['Goldeen (Diva)'] = new ContestPokemonItem('Goldeen (Diva)');
+ItemList['Onix (Rocker)'] = new ContestPokemonItem('Onix (Rocker)');
+ItemList['Tangela (Pom-pom)'] = new ContestPokemonItem('Tangela (Pom-pom)');
+ItemList['Weepinbell (Fancy)'] = new ContestPokemonItem('Weepinbell (Fancy)');
+ItemList['Sudowoodo (Golden)'] = new ContestPokemonItem('Sudowoodo (Golden)', 2000);
+ItemList['Pikachu (Rock Star)'] = new ContestPokemonItem('Pikachu (Rock Star)', undefined, ContestRank.Spectacular);
+ItemList['Pikachu (Belle)'] = new ContestPokemonItem('Pikachu (Belle)', undefined, ContestRank.Spectacular);
+ItemList['Pikachu (Pop Star)'] = new ContestPokemonItem('Pikachu (Pop Star)', undefined, ContestRank.Spectacular);
+ItemList['Pikachu (Ph. D.)'] = new ContestPokemonItem('Pikachu (Ph. D.)', undefined, ContestRank.Spectacular);
+ItemList['Pikachu (Libre)'] = new ContestPokemonItem('Pikachu (Libre)', undefined, ContestRank.Spectacular);
 // Event
 ItemList['Elf Munchlax'] = new PokemonItem('Elf Munchlax', 3108, Currency.questPoint, undefined, undefined,
     { visible: new MultiRequirement([new SpecialEventRequirement('Merry Christmas!'), new ObtainedPokemonRequirement('Santa Snorlax')]) });

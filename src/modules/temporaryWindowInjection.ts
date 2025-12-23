@@ -206,6 +206,7 @@ import ItemHandler from './items/ItemHandler';
 import CaughtIndicatingItem from './items/CaughtIndicatingItem';
 import PokerusIndicatingItem from './items/PokerusIndicatingItem';
 import PokemonItem from './items/PokemonItem';
+import ContestPokemonItem from './items/ContestPokemonItem';
 import EggItem from './items/EggItem';
 import MegaStoneItem from './items/MegaStoneItem';
 import PokeballItem from './items/PokeballItem';
@@ -470,6 +471,7 @@ Object.assign(<any>window, {
     CaughtIndicatingItem,
     PokerusIndicatingItem,
     PokemonItem,
+    ContestPokemonItem,
     EggItem,
     MegaStoneItem,
     PokeballItem,
