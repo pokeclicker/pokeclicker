@@ -258,7 +258,7 @@ export const SpriteCredits: Credit[] = [
         // Notes: Made specifically for PokéClicker.
     },
     {
-        name: 'DatBoiWZ'
+        name: 'DatBoiWZ',
         link: 'https://bsky.app/profile/did:plc:2mhvb4rij3yms7yt7ejzpohp',
         resources: [
             'Dunsparsparce',
