@@ -55,7 +55,7 @@ export default class ContestRunner {
         ContestRunner.timeLeft((!ContestBattle.toggleTesting() ? (ContestHelper.contestRankTimer(ContestRunner.rank()) * 10) : ContestBattle.testTimer()) * SECOND);
         ContestRunner.timeLeftPercentage(100);
         ContestRunner.audienceAppeal(0);
-        ContestRunner.maxAudienceAppeal(ContestHelper.rankAppeal[ContestRunner.rank()] * 80 * ContestRunner.rank() * ContestRunner.rank() * ContestHelper.contestRankTimer(ContestRunner.rank()));
+        ContestRunner.maxAudienceAppeal(ContestHelper.getBaseAudienceHP(ContestRunner.rank()));
 
         // Reset gameplay gimmicks
         ContestRunner.crowdHype(0);
@@ -148,15 +148,16 @@ export default class ContestRunner {
      */
     public static rally(rally: number): void {
         // expand audience bar after last rally has been calculated so players have time to process completion status
+        const baseHP = ContestHelper.getBaseAudienceHP(ContestRunner.rank());
         let alreadyRallied = false;
         if (ContestRunner.isRallied()) {
             alreadyRallied = true;
-            ContestRunner.maxAudienceAppeal(Math.round(ContestHelper.rankAppeal[ContestRunner.rank()] * Math.pow(1.5, ContestRunner.encoreRound())));
+            ContestRunner.maxAudienceAppeal(Math.round(baseHP * Math.pow(1.5, ContestRunner.encoreRound())));
         }
 
         const rallyAmount = ContestRunner.audienceAppeal() + Math.round(rally);
 
-        const encores = Math.ceil(Math.log10(Math.max(rallyAmount / ContestHelper.rankAppeal[ContestRunner.rank()], 1)) / Math.log10(1.5));
+        const encores = Math.ceil(Math.log10(Math.max(rallyAmount / baseHP, 1)) / Math.log10(1.5));
 
         ContestRunner.encoreRound(encores);
         ContestScore.encoreBonus(1 + encores);
@@ -165,7 +166,7 @@ export default class ContestRunner {
 
         // update bar if it's been full for too long to better indicate progress being made
         if (ContestRunner.isRallied() && alreadyRallied) {
-            ContestRunner.maxAudienceAppeal(Math.round(ContestHelper.rankAppeal[ContestRunner.rank()] * Math.pow(1.5, ContestRunner.encoreRound())));
+            ContestRunner.maxAudienceAppeal(Math.round(baseHP * Math.pow(1.5, ContestRunner.encoreRound())));
         }
     }
 

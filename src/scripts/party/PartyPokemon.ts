@@ -445,8 +445,8 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
                 const app = this.contestAppeal;
                 const sheenCap = ContestHelper.maxSheen() <= this.contestExp;
                 const ignoreRankDebuff = (ItemList[itemName] as PokeBlock).type === GameConstants.PokeBlockColor.Rainbow;
-                const difference = Math.floor(ContestHelper.increaseAppeal(app * (ItemList[itemName] as PokeBlock).value, amount, sheenCap, ignoreRankDebuff) * 10 - app * 10);
-                this.contestAppeal = ContestHelper.increaseAppeal(app * (ItemList[itemName] as PokeBlock).value, amount, sheenCap, ignoreRankDebuff);
+                const difference = Math.floor(ContestHelper.increaseAppeal(app, amount * (ItemList[itemName] as PokeBlock).value, sheenCap, ignoreRankDebuff) * 10 - app * 10);
+                this.contestAppeal = ContestHelper.increaseAppeal(app, amount * (ItemList[itemName] as PokeBlock).value, sheenCap, ignoreRankDebuff);
 
                 Notifier.notify({
                     message : `${this.displayName} gained ${difference / 10} appeal point(s)`,
@@ -456,7 +456,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
                 if (this.contestExp < ContestHelper.maxSheen() && this.contestExp + amount >= ContestHelper.maxSheen()) {
                     Notifier.notify({
                         message : `${this.displayName}\'s Sheen is maxed out! Pokéblocks will only add 1 Appeal point until its reduced.`,
-                        type : NotificationConstants.NotificationOption.success,
+                        type : NotificationConstants.NotificationOption.warning,
                         pokemonImage : PokemonHelper.getImage(this.id),
                     });
                 }

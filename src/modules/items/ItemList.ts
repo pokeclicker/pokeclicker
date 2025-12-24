@@ -155,7 +155,7 @@ ItemList.PokeBlock_Black     = new PokeBlock(PokeBlockColor.Black, 1, undefined,
 ItemList.PokeBlock_Gray      = new PokeBlock(PokeBlockColor.Gray, 1, undefined, undefined,
     (pokemon) => (pokemon.contestSheen() > 0 || pokemon.currentContestTypes.length > 0), 'A plain Pokéblock that resets the Pokémon\'s Sheen and Contest Types.');
 ItemList.PokeBlock_Rainbow   = new PokeBlock(PokeBlockColor.Rainbow, 1, undefined, undefined,
-    undefined, 'A flavorful Pokéblock that restores the Pokémon\'s default contest types and boosts Appeal.', undefined, 5);
+    undefined, 'A flavorful Pokéblock that restores the Pokémon\'s default contest types and steadily boosts Appeal.', undefined, 5);
 ItemList.PokeBlock_Silver    = new PokeBlock(PokeBlockColor.Silver, 1, undefined, undefined,
     (pokemon) =>  pokemon.contestSheen() > 0, 'A tender Pokéblock that decreases Sheen by 100.', undefined, -100);
 ItemList.PokeBlock_Gold      = new PokeBlock(PokeBlockColor.Gold, 1, undefined, undefined,

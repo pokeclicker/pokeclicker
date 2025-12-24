@@ -175,19 +175,26 @@ export default class ContestHelper {
         }
     }
 
+    public static getBaseAudienceHP(rank: ContestRank) {
+        return ContestHelper.rankAppeal[rank] * 80 * rank * rank * ContestHelper.contestRankTimer(rank);
+    }
+
     // Pokeblocks
     public static getPokemonContestTypes(p: any) {
         return App.game.party.getPokemon(p) ? App.game.party.getPokemon(p).currentContestTypes : pokemonMap[p];
     }
 
     public static increaseAppeal(initialAppeal: number, amount: number, sheenDebuff = false, ignoreRankDebuff = false) {
-        let resultingAppeal = initialAppeal * 100;
+        let resultingAppeal = initialAppeal;
         let amountLeft = amount;
+
+        // Determine start of for loop
         const rankBracket = 10 - Object.values(ContestHelper.rankAppeal).reverse().findIndex(i => i <= Math.min(initialAppeal, ContestHelper.rankAppeal[ContestRank['Brilliant Shining']]));
 
+        // Add per rank
         for (let i = rankBracket; i <= ContestRank['Brilliant Shining']; i++) {
             if (amountLeft > 0) {
-                // Rank debuff
+                // Calculate rank debuff
                 let debuff = Math.max(10 - i, 1);
                 if (ignoreRankDebuff) {
                     debuff = 10;
@@ -195,19 +202,20 @@ export default class ContestHelper {
                 if (sheenDebuff) {
                     debuff = 1;
                 }
+                debuff /= 10;
 
-                let addition = amountLeft * debuff * 10;
+                let addition = amountLeft * debuff;
 
                 // "Fill" per rank
                 if (i < ContestRank['Brilliant Shining']) {
-                    addition = Math.min((ContestHelper.rankAppeal[i + 1] - ContestHelper.rankAppeal[i]) * 100, addition);
+                    addition = Math.min((ContestHelper.rankAppeal[i + 1] - ContestHelper.rankAppeal[i]), addition);
                 }
 
-                resultingAppeal = resultingAppeal + addition;
+                resultingAppeal += addition;
                 amountLeft = Math.ceil(amountLeft - addition / debuff);
             }
         }
-        return resultingAppeal / 100;
+        return resultingAppeal;
     }
 
     // Sheen
