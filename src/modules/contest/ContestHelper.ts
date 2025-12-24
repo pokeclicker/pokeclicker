@@ -56,7 +56,7 @@ export default class ContestHelper {
 
         for (const pokemon of pks) {
             if (pokemon.contestExp > 0 && !pokemon.breeding) {
-                pokemon.contestExp -= conRank;
+                pokemon.contestExp -= 1;
                 pokemon.contestExp = Math.max(0, pokemon.contestExp);
 
                 // Reset contest types when sheen/exp has run out
