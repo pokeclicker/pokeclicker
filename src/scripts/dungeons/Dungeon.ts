@@ -2030,9 +2030,21 @@ dungeonList['Pinkan Mountain'] = new Dungeon('Pinkan Mountain',
 dungeonList['Secret Field'] = new Dungeon('Secret Field',
     ['Dunsparce'],
     {
-        common: [{loot: 'Pokeball'}],
-        rare: [{loot: 'Greatball'}],
-        epic: [{loot: 'Ultraball'}],
+        common: [
+            {loot: 'Pokeball'},
+            {loot: 'Chesto'},
+            {loot: 'Lucky_incense'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Yellow Shard'},
+        ],
+        epic: [
+            {loot: 'Greatball'},
+            {loot: 'Ultraball'},
+            {loot: 'Light Clay'},
+        ],
+        legendary: [{loot: 'Silk_Scarf'}],
     },
     10205169,
     [
