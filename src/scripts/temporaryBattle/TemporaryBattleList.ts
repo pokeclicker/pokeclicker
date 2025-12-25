@@ -2245,6 +2245,38 @@ TemporaryBattleList['Hugh 7'] = new TemporaryBattle(
             Notifier.notify({message: 'Congratulations on beating Hugh at his best! Come back to fight him again at any time.'}),
     }
 );
+TemporaryBattleList['Subway Boss Ingo 1'] = new TemporaryBattle(
+    'Subway Boss Ingo 1',
+    [
+        new GymPokemon('Crustle', 51256366, 50),
+        new GymPokemon('Klinklang', 52451346, 50),
+        new GymPokemon('Garbodor', 53152374, 50),
+    ],
+    'Well fought, champion! Here\'s a little gift for you. If you can spare the time, you should speak to my brother Emmet, right over there. He has a very interesting offer for you.',
+    [
+        new MultiRequirement([
+            new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
+            new OneFromManyRequirement([
+                new ObtainedPokemonRequirement('Meloetta (Aria)'),
+                new ObtainedPokemonRequirement('Meloetta (Pirouette)'),
+            ]),
+        ]),
+    ],
+    undefined,
+    {
+        displayName: 'Subway Boss Ingo',
+        imageName: 'Ingo (BW)',
+        returnTown: 'Nimbasa City',
+        firstTimeRewardFunction: () => {
+            App.game.wallet.gainBattlePoints(250, true);
+            Notifier.notify({
+                message: 'You were awarded 250 <img src="./assets/images/currency/battlePoint.svg" height="24px"/> from Ingo!',
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+            });
+        },
+    }
+);
 TemporaryBattleList['Terrakion 1'] = new TemporaryBattle(
     'Terrakion 1',
     [new GymPokemon('Terrakion', 175698480, 50, undefined, false)],

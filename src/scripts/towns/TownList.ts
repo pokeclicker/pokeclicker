@@ -4964,6 +4964,8 @@ TownList['Snowpoint Temple'] = new DungeonTown(
 );
 
 //Unova Shops
+const CelestialDreamerSaveKey = 'MeloettaSwapKey';
+
 const FloccesyTownShop = new Shop([
     ItemList.Pokeball,
     ItemList.xAttack,
@@ -5097,9 +5099,14 @@ const NuvemaTownShop = new Shop([
     ItemList.Electirizer,
     ItemList.Magmarizer,
 ]);
-const AnvilleTownShop = new Shop([
+const AnvilleTownShop1 = new Shop([
+    ItemList['Meloetta (Aria)'],
+],  'Poké Mart', [new StatisticRequirement(['npcTalkedTo', GameHelper.hash(CelestialDreamerSaveKey)], 1, 'Talk to the Strange Woman.')], true
+);
+const AnvilleTownShop2 = new Shop([
     ItemList['Meloetta (Pirouette)'],
-]);
+],  'Poké Mart', [new StatisticRequirement(['npcTalkedTo', GameHelper.hash(CelestialDreamerSaveKey)], 1, 'Don\'t talk to the Strange Woman.', GameConstants.AchievementOption.less)], true
+);
 
 //Unova Gem Master
 const UnovaFluteMaster = new GemMasterShop(GameConstants.GemShops.UnovaFluteMaster);
@@ -5146,6 +5153,31 @@ const NimbasaExplorer = new NPC('Explorer', [
     'Sometimes I find some weird stuff out in the sand, sometimes even Pokémon hiding in Chests. Like this one time in Relic Castle, I found a Pokémon that looks like a statue that I\'ve never seen before!',
 ], {image: 'assets/images/npcs/Backpacker (male).png'});
 
+const NimbasaEmmet1 = new GiftNPC('Subway Boss Emmet', [
+    'Yo champion! You defeated my brother! This means you have earned the right to purchase this super exclusive VIP subway pass. It will take you to a far away town.',
+    'The price is 75,000 Quest Points.',
+], () => {
+    App.game.wallet.loseAmount(new Amount(75000, GameConstants.Currency.questPoint));
+}, undefined, {
+    saveKey: 'AnvilleUnlockKey',
+    image: 'assets/images/npcs/Emmet (BW).png',
+    requirement: new MultiRequirement([
+        new TemporaryBattleRequirement('Subway Boss Ingo 1'),
+        new CustomRequirement(ko.pureComputed(() => +App.game.wallet.hasAmount(new Amount(75000, GameConstants.Currency.questPoint))), 1, 'Get more quest points'),
+    ]),
+});
+
+const NimbasaEmmet2 = new NPC('Subway Boss Emmet', [
+    'Yo champion! You defeated my brother! This means you have earned the right to purchase this super exclusive VIP subway pass. It will take you to a far away town.',
+    'The price is 75,000 Quest Points.',
+], {
+    image: 'assets/images/npcs/Emmet (BW).png',
+    requirement: new MultiRequirement([
+        new TemporaryBattleRequirement('Subway Boss Ingo 1'),
+        new CustomRequirement(ko.pureComputed(() => +App.game.wallet.hasAmount(new Amount(75000, GameConstants.Currency.questPoint))), 1, 'Get more quest points', GameConstants.AchievementOption.less),
+    ]),
+});
+
 const PlasmaGrunt2 = new NPC('Team Plasma Grunt', [
     'I told you. There\'s nothing suspicious going on here. We aren\'t stealing any Pokémon.',
     'If you won\'t leave, we\'ll have to remove you.',
@@ -5162,6 +5194,26 @@ const DriftveilZinzolin = new NPC('Zinzolin', [
 ], {
     image: 'assets/images/npcs/Team Plasma (zinzolin).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 6), new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 7, GameConstants.AchievementOption.less)]),
+});
+
+const CelestialDreamer = new GiftNPC('Strange Woman', [
+    '<i>A strange woman stands alone. She seems to be in some sort of trance. Her eyes don\'t focus. It doesn\'t seem like she sees you.</i>',
+    'Aria... Pirouette...',
+    'The same elegance... yet their circumstances... so different.',
+    'One... always moving. It roams the region... as it pleases.',
+    'The other... isolated... stationary. Fated to stay... in a distant town.',
+    'What if... their circumstances... were reversed?',
+    'Is that... what you wish?',
+    '<i>It didn\'t seem like she was asking you, yet she seems to be waiting for an answer.</i>',
+    '<i>Is that your wish?</i>',
+    '<b>THIS CANNOT BE REVERSED</b>',
+], undefined, undefined, {
+    saveKey: 'MeloettaSwapKey',
+    requirement: new MultiRequirement([
+        new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
+        new ObtainedPokemonRequirement('Meloetta (Aria)', true),
+        new ObtainedPokemonRequirement('Meloetta (Pirouette)', true),
+    ]),
 });
 
 const PlasmaGrunt3 = new NPC('Team Plasma Grunt', [
@@ -5439,14 +5491,14 @@ TownList['Nimbasa City'] = new Town(
     'Nimbasa City',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [NimbasaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Nimbasa City']), TemporaryBattleList['Team Plasma Grunt 2'], TemporaryBattleList['Team Plasma Grunt 3']],
+    [NimbasaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Nimbasa City']), TemporaryBattleList['Team Plasma Grunt 2'], TemporaryBattleList['Team Plasma Grunt 3'], TemporaryBattleList['Subway Boss Ingo 1']],
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.unova, 4),
             new TemporaryBattleRequirement('Colress 1'),
             new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 2),
         ],
-        npcs: [NimbasaExplorer],
+        npcs: [NimbasaExplorer, NimbasaEmmet1, NimbasaEmmet2],
     }
 );
 TownList['Driftveil City'] = new Town(
@@ -5632,9 +5684,9 @@ TownList['Anville Town'] = new Town(
     'Anville Town',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [AnvilleTownShop],
+    [AnvilleTownShop1, AnvilleTownShop2],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
+        requirements: [new StatisticRequirement(['npcTalkedTo', NimbasaEmmet1.saveKey], 1, 'Gain access from Emmet in Nimbasa City.')],
     }
 );
 TownList['Pokémon League Unova'] = new Town(
@@ -5733,7 +5785,11 @@ TownList['Celestial Tower'] = new DungeonTown(
     'Celestial Tower',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 7)]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 7)],
+    [],
+    {
+        npcs: [CelestialDreamer],
+    }
 );
 TownList['Reversal Mountain'] = new DungeonTown(
     'Reversal Mountain',

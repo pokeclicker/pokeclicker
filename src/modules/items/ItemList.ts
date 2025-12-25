@@ -379,7 +379,8 @@ ItemList.Cherubi              = new PokemonItem('Cherubi', 6750);
 ItemList.Spiritomb            = new PokemonItem('Spiritomb', 20000, Currency.diamond);
 // Unova
 ItemList.Zorua                = new PokemonItem('Zorua', 50625);
-ItemList['Meloetta (Pirouette)'] = new PokemonItem('Meloetta (Pirouette)', 200000);
+ItemList['Meloetta (Aria)']   = new PokemonItem('Meloetta (Aria)', 125000);
+ItemList['Meloetta (Pirouette)'] = new PokemonItem('Meloetta (Pirouette)', 125000);
 // Kalos
 ItemList['Furfrou (Debutante)']  = new PokemonItem('Furfrou (Debutante)', 5000000000, Currency.money);
 ItemList['Furfrou (Diamond)']    = new PokemonItem('Furfrou (Diamond)', 300000, Currency.diamond);

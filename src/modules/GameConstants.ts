@@ -1978,6 +1978,7 @@ export const TemporaryBattles = [
     'Hugh 5',
     'Hugh 6',
     'Hugh 7',
+    'Subway Boss Ingo 1',
     'Red Genesect 1',
     'Genesect Burn',
     'Genesect Chill',

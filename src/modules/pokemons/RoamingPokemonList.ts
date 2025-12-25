@@ -2,7 +2,7 @@ import { Observable } from 'knockout';
 import BadgeEnums from '../enums/Badges';
 import {
     KantoSubRegions, JohtoSubRegions, HoennSubRegions, SinnohSubRegions, UnovaSubRegions, KalosSubRegions, AlolaSubRegions, GalarSubRegions, HisuiSubRegions, PaldeaSubRegions, Region,
-    getDungeonIndex, Starter,
+    getDungeonIndex, Starter, AchievementOption,
 } from '../GameConstants';
 import GameHelper from '../GameHelper';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
@@ -94,6 +94,8 @@ export default class RoamingPokemonList {
     }
 }
 
+const CelestialDreamerSaveKey = 'MeloettaSwapKey';
+
 // Kanto
 RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Mew'));
 
@@ -125,7 +127,8 @@ RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Darkrai', new Multi
 // Unova
 RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Tornadus', new GymBadgeRequirement(BadgeEnums.Legend)));
 RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Thundurus', new GymBadgeRequirement(BadgeEnums.Legend)));
-RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Meloetta (Aria)', new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)));
+RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Meloetta (Aria)', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion), new StatisticRequirement(['npcTalkedTo', GameHelper.hash(CelestialDreamerSaveKey)], 1, 'You\'ve had this conversation.', AchievementOption.less)])));
+RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Meloetta (Pirouette)', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion), new StatisticRequirement(['npcTalkedTo', GameHelper.hash(CelestialDreamerSaveKey)], 1)])));
 RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Genesect (High-Speed)', new QuestLineCompletedRequirement('The Legend Awakened')));
 
 // Kalos

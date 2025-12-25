@@ -2959,6 +2959,8 @@ class Update implements Saveable {
             if (saveData.badgeCase[17]) {
                 Update.startQuestLine(saveData, 'Team Rocket Again');
             }
+            // Add Ingo tempbattle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 126);
         },
     };
 
