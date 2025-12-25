@@ -127,8 +127,8 @@ RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Darkrai', new Multi
 // Unova
 RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Tornadus', new GymBadgeRequirement(BadgeEnums.Legend)));
 RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Thundurus', new GymBadgeRequirement(BadgeEnums.Legend)));
-RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Meloetta (Aria)', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion), new StatisticRequirement(['npcTalkedTo', GameHelper.hash(CelestialDreamerSaveKey)], 1, 'You\'ve had this conversation.', AchievementOption.less)])));
-RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Meloetta (Pirouette)', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion), new StatisticRequirement(['npcTalkedTo', GameHelper.hash(CelestialDreamerSaveKey)], 1)])));
+RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Meloetta (Aria)', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion), new StatisticRequirement(['npcTalkedTo', GameHelper.hash(CelestialDreamerSaveKey)], 1, 'Don\'t talk to the Strange Woman.', AchievementOption.less)])));
+RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Meloetta (Pirouette)', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion), new StatisticRequirement(['npcTalkedTo', GameHelper.hash(CelestialDreamerSaveKey)], 1, 'Talk to the Strange Woman.')])));
 RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Genesect (High-Speed)', new QuestLineCompletedRequirement('The Legend Awakened')));
 
 // Kalos
