@@ -5101,11 +5101,11 @@ const NuvemaTownShop = new Shop([
 ]);
 const AnvilleTownShop1 = new Shop([
     ItemList['Meloetta (Aria)'],
-],  'Poké Mart', [new StatisticRequirement(['npcTalkedTo', GameHelper.hash(CelestialDreamerSaveKey)], 1, 'Talk to the Strange Woman.')], true
+],  'Poké Mart', [new StatisticRequirement(['npcTalkedTo', GameHelper.hash(CelestialDreamerSaveKey)], 1, 'Talk to the Celestial Dreamer before catching any Meloetta.')], true
 );
 const AnvilleTownShop2 = new Shop([
     ItemList['Meloetta (Pirouette)'],
-],  'Poké Mart', [new StatisticRequirement(['npcTalkedTo', GameHelper.hash(CelestialDreamerSaveKey)], 1, 'Don\'t talk to the Strange Woman.', GameConstants.AchievementOption.less)], true
+],  'Poké Mart', [new StatisticRequirement(['npcTalkedTo', GameHelper.hash(CelestialDreamerSaveKey)], 1, 'Don\'t talk to the Celestial Dreamer.', GameConstants.AchievementOption.less)], true
 );
 
 //Unova Gem Master
@@ -5155,7 +5155,7 @@ const NimbasaExplorer = new NPC('Explorer', [
 
 const NimbasaEmmet1 = new GiftNPC('Subway Boss Emmet', [
     'Yo champion! You defeated my brother! This means you have earned the right to purchase this super exclusive VIP subway pass. It will take you to a far away town.',
-    'The price is 75,000 Quest Points.',
+    'The price is 75,000 <img src="./assets/images/currency/questPoint.svg" height="24px"/>.',
 ], () => {
     App.game.wallet.loseAmount(new Amount(75000, GameConstants.Currency.questPoint));
 }, undefined, {
@@ -5169,7 +5169,7 @@ const NimbasaEmmet1 = new GiftNPC('Subway Boss Emmet', [
 
 const NimbasaEmmet2 = new NPC('Subway Boss Emmet', [
     'Yo champion! You defeated my brother! This means you have earned the right to purchase this super exclusive VIP subway pass. It will take you to a far away town.',
-    'The price is 75,000 Quest Points.',
+    'The price is 75,000 <img src="./assets/images/currency/questPoint.svg" height="24px"/>.',
 ], {
     image: 'assets/images/npcs/Emmet (BW).png',
     requirement: new MultiRequirement([
@@ -5196,7 +5196,7 @@ const DriftveilZinzolin = new NPC('Zinzolin', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 6), new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 7, GameConstants.AchievementOption.less)]),
 });
 
-const CelestialDreamer = new GiftNPC('Strange Woman', [
+const CelestialDreamer = new GiftNPC('Celestial Dreamer', [
     '<i>A strange woman stands alone. She seems to be in some sort of trance. Her eyes don\'t focus. It doesn\'t seem like she sees you.</i>',
     'Aria... Pirouette...',
     'The same elegance... yet their circumstances... so different.',
