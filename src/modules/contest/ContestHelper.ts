@@ -137,16 +137,16 @@ export default class ContestHelper {
     // eslint-disable-next-line @typescript-eslint/member-ordering
     public static rankAppeal: Record<ContestRank, number> = {
         [ContestRank.Practice]: 0,
-        [ContestRank.Normal]: 80,
-        [ContestRank.Super]: 230,
-        [ContestRank.Hyper]: 380,
-        [ContestRank.Master]: 600,
-        [ContestRank['Super Normal']]: 680,
-        [ContestRank['Super Great']]: 830,
-        [ContestRank['Super Ultra']]: 980,
-        [ContestRank['Super Master']]: 1200,
-        [ContestRank.Spectacular]: 1420,
-        [ContestRank['Brilliant Shining']]: 1640,
+        [ContestRank.Normal]: 800,
+        [ContestRank.Super]: 2300,
+        [ContestRank.Hyper]: 3800,
+        [ContestRank.Master]: 6000,
+        [ContestRank['Super Normal']]: 6800,
+        [ContestRank['Super Great']]: 8300,
+        [ContestRank['Super Ultra']]: 9800,
+        [ContestRank['Super Master']]: 12000,
+        [ContestRank.Spectacular]: 14200,
+        [ContestRank['Brilliant Shining']]: 16400,
     };
 
     public static isDanceHall(rank: ContestRank) {

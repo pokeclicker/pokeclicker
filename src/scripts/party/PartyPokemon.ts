@@ -90,7 +90,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
         this.contestSaveData = Object.fromEntries(GameHelper.enumNumbers(ContestType).map((contestType) => {
-            return [contestType, [ko.observable(false), ko.observable(0).extend({ numeric: 10 })]];
+            return [contestType, [ko.observable(false), ko.observable(0).extend({ numeric: 0 })]];
         })) as Record<ContestType, [KnockoutObservable<boolean>, KnockoutObservable<number>]>;
         this._contestExp = ko.observable(0).extend({ numeric: 0 });
         this._category = ko.observableArray([0]);

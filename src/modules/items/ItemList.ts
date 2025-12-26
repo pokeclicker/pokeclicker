@@ -113,21 +113,21 @@ ItemList.Mulch_Shovel = new MulchShovelItem(300, 'Mulch Shovel', 'Removes Mulch 
 // Pokeblocks
 ItemList.PokeBlock_Red       = new PokeBlock(PokeBlockColor.Red, 1, undefined, [ContestType.Cool],
     (pokemon) => pokemon.currentContestTypes.includes(ContestType.Cool) || (pokemon.currentContestTypes.length < 1 && pokemonMap[pokemon.name].contestTypes.includes(ContestType.Cool)),
-    'A Spicy Pokéblock that boosts the Appeal of Cool Pokémon by a variable amount and activates the type if it has none.');
+    'A Spicy Pokéblock that boosts the Appeal of Cool Pokémon by a variable amount and activates the type if it has none.', undefined, 10);
 ItemList.PokeBlock_Blue      = new PokeBlock(PokeBlockColor.Blue, 1, undefined, [ContestType.Beautiful],
     (pokemon) => pokemon.currentContestTypes.includes(ContestType.Beautiful) || pokemon.currentContestTypes.length < 1 && pokemonMap[pokemon.name].contestTypes.includes(ContestType.Beautiful),
-    'A Dry Pokéblock that boosts the Appeal of Beautiful Pokémon by a variable amount and activates the type if it has none.');
+    'A Dry Pokéblock that boosts the Appeal of Beautiful Pokémon by a variable amount and activates the type if it has none.', undefined, 10);
 ItemList.PokeBlock_Pink      = new PokeBlock(PokeBlockColor.Pink, 1, undefined, [ContestType.Cute],
     (pokemon) => pokemon.currentContestTypes.includes(ContestType.Cute) || pokemon.currentContestTypes.length < 1 && pokemonMap[pokemon.name].contestTypes.includes(ContestType.Cute),
-    'A Sweet Pokéblock that boosts the Appeal of Cute Pokémon by a variable amount and activates the type if it has none.');
+    'A Sweet Pokéblock that boosts the Appeal of Cute Pokémon by a variable amount and activates the type if it has none.', undefined, 10);
 ItemList.PokeBlock_Green     = new PokeBlock(PokeBlockColor.Green, 1, undefined, [ContestType.Smart],
     (pokemon) => pokemon.currentContestTypes.includes(ContestType.Smart) || pokemon.currentContestTypes.length < 1 && pokemonMap[pokemon.name].contestTypes.includes(ContestType.Smart),
-    'A Bitter Pokéblock that boosts the Appeal of Smart Pokémon by a variable amount and activates the type if it has none.');
+    'A Bitter Pokéblock that boosts the Appeal of Smart Pokémon by a variable amount and activates the type if it has none.', undefined, 10);
 ItemList.PokeBlock_Yellow    = new PokeBlock(PokeBlockColor.Yellow, 1, undefined, [ContestType.Tough],
     (pokemon) => pokemon.currentContestTypes.includes(ContestType.Tough) || pokemon.currentContestTypes.length < 1 && pokemonMap[pokemon.name].contestTypes.includes(ContestType.Tough),
-    'A Sour Pokéblock that boosts the Appeal of Tough Pokémon by a variable amount and activates the type if it has none.');
+    'A Sour Pokéblock that boosts the Appeal of Tough Pokémon by a variable amount and activates the type if it has none.', undefined, 10);
 ItemList.PokeBlock_White     = new PokeBlock(PokeBlockColor.White, 1, undefined, [ContestType.Balanced],
-    undefined, 'A Mild Pokéblock that boosts the Appeal of any Pokémon by a variable amount and activates a random Contest Type, or Balanced, if it is a default type.');
+    undefined, 'A Mild Pokéblock that boosts the Appeal of any Pokémon by a variable amount and activates a random Contest Type, or Balanced, if it is a default type.', undefined, 10);
 
 ItemList.PokeBlock_Purple    = new PokeBlock(PokeBlockColor.Purple, 1, undefined, [ContestType.Cool, ContestType.Beautiful],
     (pokemon) => (ContestHelper.maxSheen() - pokemon.contestExp >= 600 &&
@@ -155,7 +155,7 @@ ItemList.PokeBlock_Black     = new PokeBlock(PokeBlockColor.Black, 1, undefined,
 ItemList.PokeBlock_Gray      = new PokeBlock(PokeBlockColor.Gray, 1, undefined, undefined,
     (pokemon) => (pokemon.contestSheen() > 0 || pokemon.currentContestTypes.length > 0), 'A plain Pokéblock that resets the Pokémon\'s Sheen and Contest Types.');
 ItemList.PokeBlock_Rainbow   = new PokeBlock(PokeBlockColor.Rainbow, 1, undefined, undefined,
-    undefined, 'A flavorful Pokéblock that restores the Pokémon\'s default contest types and steadily boosts Appeal.', undefined, 5);
+    undefined, 'A flavorful Pokéblock that restores the Pokémon\'s default contest types and steadily boosts Appeal.', undefined, 50);
 ItemList.PokeBlock_Silver    = new PokeBlock(PokeBlockColor.Silver, 1, undefined, undefined,
     (pokemon) =>  pokemon.contestSheen() > 0, 'A tender Pokéblock that decreases Sheen by 100.', undefined, -100);
 ItemList.PokeBlock_Gold      = new PokeBlock(PokeBlockColor.Gold, 1, undefined, undefined,
