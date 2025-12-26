@@ -18,7 +18,8 @@ export type GenericTraderShopIdentifier =
     'FossilNacreneMuseum' |
     'FossilAmbretteFossilLab' |
     'FossilMasterGalarRoute6' |
-    'ContestCosplayShop';
+    'ContestCosplayShop' |
+    'ContestCosplayShopPikachu';
 
 /* eslint-disable @typescript-eslint/no-shadow */
 export enum DealCostOrProfitType {
@@ -432,30 +433,6 @@ export default class GenericDeal {
         GenericDeal.list.ContestCosplayShop = ko.observableArray([
             new GenericDeal({
                 costs: [
-                    { type: DealCostOrProfitType.Amount, currency: new Amount(20, Currency.contestToken), amount: 1 },
-                ],
-                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Ultraball, amount: 1 }],
-            }),
-            new GenericDeal({
-                costs: [
-                    { type: DealCostOrProfitType.Amount, currency: new Amount(5, Currency.contestToken), amount: 1 },
-                ],
-                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.SmallRestore, amount: 1 }],
-            }),
-            new GenericDeal({
-                costs: [
-                    { type: DealCostOrProfitType.Amount, currency: new Amount(20, Currency.contestToken), amount: 1 },
-                ],
-                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.MediumRestore, amount: 1 }],
-            }),
-            new GenericDeal({
-                costs: [
-                    { type: DealCostOrProfitType.Amount, currency: new Amount(30, Currency.contestToken), amount: 1 },
-                ],
-                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.LargeRestore, amount: 1 }],
-            }),
-            new GenericDeal({
-                costs: [
                     { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Red, amount: 375 },
                     { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Green, amount: 375 },
                     { type: DealCostOrProfitType.Amount, currency: new Amount(2500, Currency.contestToken), amount: 1 },
@@ -508,6 +485,8 @@ export default class GenericDeal {
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Weepinbell (Fancy)'], amount: 1 }],
                 tradeRequirement: new ObtainedPokemonRequirement('Weepinbell'),
             }),
+        ]);
+        GenericDeal.list.ContestCosplayShopPikachu = ko.observableArray([
             new GenericDeal({
                 costs: [
                     { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Cool, amount: 25 },

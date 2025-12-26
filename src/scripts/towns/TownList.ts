@@ -2366,7 +2366,53 @@ const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
     ItemList.FarmHandKerry,
     ItemList.HatcheryHelperCameron,
 ], 'Hoenn Berry Master');
-
+// Hoenn Contest Shops
+const ContestShopNormal = new Shop([
+    ItemList.Normal_Rank_Treecko,
+    ItemList.Normal_Rank_Torchic,
+    ItemList.Normal_Rank_Mudkip,
+    ItemList.Normal_Rank_Plusle,
+    ItemList.Normal_Rank_Minun,
+    new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
+], 'Contest Shop');
+const ContestShopSuper = new Shop([
+    ItemList.Super_Rank_Treecko,
+    ItemList.Super_Rank_Torchic,
+    ItemList.Super_Rank_Mudkip,
+    ItemList.Super_Rank_Plusle,
+    ItemList.Super_Rank_Minun,
+    new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
+], 'Contest Shop');
+const ContestShopHyper = new Shop([
+    ItemList.Hyper_Rank_Treecko,
+    ItemList.Hyper_Rank_Torchic,
+    ItemList.Hyper_Rank_Mudkip,
+    ItemList.Hyper_Rank_Plusle,
+    ItemList.Hyper_Rank_Minun,
+    new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
+], 'Contest Shop');
+const ContestShopMaster = new Shop([
+    ItemList.Master_Rank_Treecko,
+    ItemList.Master_Rank_Torchic,
+    ItemList.Master_Rank_Mudkip,
+    ItemList.Master_Rank_Plusle,
+    ItemList.Master_Rank_Minun,
+    new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
+], 'Contest Shop');
+const CosplayShop = new GenericTraderShop('ContestCosplayShop', 'Cosplay Concessions & Co.');
+const CosplayShopPikachu = new GenericTraderShop('ContestCosplayShopPikachu', 'Cosplay Concessions & Co.', undefined, [new MaxRegionRequirement(GameConstants.Region.kalos)]);
 // only for testing
 const PokeblockShop = new Shop([
     ItemList.Pokeblock_kit,
@@ -3367,7 +3413,7 @@ TownList['Slateport City'] = new Town(
     'Slateport City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new ContestHall([ContestRank.Hyper]), SlateportCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Slateport City'])],
+    [new ContestHall([ContestRank.Hyper]), SlateportCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Slateport City']), ContestShopHyper],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Granite Cave'))],
         npcs: [SlateportHoennRoamerNPC, MrStone1, MrStone2],
@@ -3397,7 +3443,7 @@ TownList['Verdanturf Town'] = new Town(
     'Verdanturf Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new ContestHall([ContestRank.Normal]), VerdanturfTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Verdanturf Town'])],
+    [new ContestHall([ContestRank.Normal]), VerdanturfTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Verdanturf Town']), ContestShopNormal],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 117)],
     }
@@ -3415,7 +3461,7 @@ TownList['Fallarbor Town'] = new Town(
     'Fallarbor Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new ContestHall([ContestRank.Super]), FallarborTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Fallarbor Town']), HoennFluteMaster, HoennStoneSalesman, TemporaryBattleList['Hoenn Stone Salesman']],
+    [new ContestHall([ContestRank.Super]), FallarborTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Fallarbor Town']), ContestShopSuper, HoennFluteMaster, HoennStoneSalesman, TemporaryBattleList['Hoenn Stone Salesman']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 113)],
         npcs: [FallarborProfessorCozmo, Cozmo1, HoennStoneSalesman1, HoennStoneSalesman2],
@@ -3469,7 +3515,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new ContestHall([ContestRank.Master]), SpectacularContestHall, DepartmentStoreShop, new GenericTraderShop('ContestCosplayShop', 'Cosplay Concessions & Co.'), PokeblockShop],
+    [new ContestHall([ContestRank.Master]), SpectacularContestHall, DepartmentStoreShop, ContestShopMaster, CosplayShop, CosplayShopPikachu, PokeblockShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }

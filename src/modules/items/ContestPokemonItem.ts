@@ -16,17 +16,18 @@ export default class ContestPokemonItem extends PokemonItem {
     constructor(
         pokemon: PokemonNameType,
         basePrice: number = undefined,
-        public giftedContestAppealByRank: ContestRank = ContestRank.Master,
         public giftedContestTypes: ContestType[] = undefined,
-        currency: Currency = Currency.contestToken,
+        public giftedContestAppealByRank: ContestRank = ContestRank.Master,
         ignoreEV = false,
         displayName: string = undefined,
+        currency: Currency = Currency.contestToken,
         options?: ShopOptions,
+        description: string = `Get a contest-ready ${pokemon} with a base appeal of ${ContestHelper.rankAppeal[giftedContestAppealByRank]}!`,
     ) {
-        super(pokemon, basePrice, currency, ignoreEV, displayName, options);
+        super(pokemon, basePrice, currency, ignoreEV, displayName, options, undefined, description);
         this.type = pokemon;
-        this.contestAppeal = ContestHelper.rankAppeal[giftedContestAppealByRank];
         this.contestTypes = giftedContestTypes ?? pokemonMap[pokemon].contestTypes;
+        this.contestAppeal = ContestHelper.rankAppeal[giftedContestAppealByRank];
     }
 
     gain(amt: number) {
@@ -40,7 +41,11 @@ export default class ContestPokemonItem extends PokemonItem {
         partyPokemon.contestAppeal = Math.max(pAppeal, this.contestAppeal);
     }
 
-    getDescription(): string {
-        return `Get a ${ContestRank[this.giftedContestAppealByRank].replace(' ', '-')}-Rank-ready ${super.displayName}!`;
+    // eslint-disable-next-line class-methods-use-this
+    isSoldOut(): boolean {
+        if (this.maxAmount === 1) {
+            return App.game.party.caughtPokemon.find(p => p.name === this.type).contestAppeal >= ContestHelper.rankAppeal[this.giftedContestAppealByRank];
+        }
+        return false;
     }
 }

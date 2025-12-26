@@ -160,7 +160,7 @@ export default class ContestRunner {
         const encores = Math.ceil(Math.log10(Math.max(rallyAmount / baseHP, 1)) / Math.log10(1.5));
 
         ContestRunner.encoreRound(encores);
-        ContestScore.encoreBonus(1 + encores);
+        ContestScore.encoreBonus(1 + encores / 10);
 
         ContestRunner.audienceAppeal(rallyAmount);
 

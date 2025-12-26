@@ -427,6 +427,11 @@ ItemList.Togepi               = new PokemonItem('Togepi', 15000);
 ItemList['Pikachu (Palaeontologist)'] = new PokemonItem('Pikachu (Palaeontologist)');
 
 // Hoenn
+ItemList.Treecko = new PokemonItem('Treecko');
+ItemList.Torchic = new PokemonItem('Torchic');
+ItemList.Mudkip = new PokemonItem('Mudkip');
+ItemList.Plusle = new PokemonItem('Plusle');
+ItemList.Minun = new PokemonItem('Minun');
 ItemList['Probably Chimecho']  = new PokemonItem('Hoppip (Chimecho)', 35800, Currency.diamond, false, 'Probably Chimecho');
 ItemList.Beldum               = new PokemonItem('Beldum', 22500);
 ItemList['Deoxys (Clone)'] = new PokemonItem('Deoxys (Clone)', 100);
@@ -545,6 +550,26 @@ ItemList['Tornadus (Therian)']  = new PokemonItem('Tornadus (Therian)');
 ItemList['Thundurus (Therian)']  = new PokemonItem('Thundurus (Therian)');
 ItemList['Landorus (Therian)']  = new PokemonItem('Landorus (Therian)');
 // Contest
+ItemList.Normal_Rank_Treecko = new ContestPokemonItem('Treecko', 20, undefined, ContestRank.Normal, true, undefined, undefined, { maxAmount: 1 });
+ItemList.Normal_Rank_Torchic = new ContestPokemonItem('Torchic', 20, undefined, ContestRank.Normal, true, undefined, undefined, { maxAmount: 1 });
+ItemList.Normal_Rank_Mudkip = new ContestPokemonItem('Mudkip', 20, undefined, ContestRank.Normal, true, undefined, undefined, { maxAmount: 1 });
+ItemList.Normal_Rank_Plusle = new ContestPokemonItem('Plusle', 50, undefined, ContestRank.Normal, true, undefined, undefined, { maxAmount: 1 });
+ItemList.Normal_Rank_Minun = new ContestPokemonItem('Minun', 50, undefined, ContestRank.Normal, true, undefined, undefined, { maxAmount: 1 });
+ItemList.Super_Rank_Treecko = new ContestPokemonItem('Treecko', 100, [ContestType.Cool], ContestRank.Super, true, 'Super Cool Treecko', undefined, { maxAmount: 1 });
+ItemList.Super_Rank_Torchic = new ContestPokemonItem('Torchic', 100, [ContestType.Beautiful], ContestRank.Super, true, 'Super Beautiful Torchic', undefined, { maxAmount: 1 });
+ItemList.Super_Rank_Mudkip = new ContestPokemonItem('Mudkip', 100, [ContestType.Tough], ContestRank.Super, true, 'Super Tough Mudkip', undefined, { maxAmount: 1 });
+ItemList.Super_Rank_Plusle = new ContestPokemonItem('Plusle', 100, [ContestType.Cute], ContestRank.Super, true, 'Super Cute Plusle', undefined, { maxAmount: 1 });
+ItemList.Super_Rank_Minun = new ContestPokemonItem('Minun', 100, [ContestType.Smart], ContestRank.Super, true, 'Super Smart Minun', undefined, { maxAmount: 1 });
+ItemList.Hyper_Rank_Treecko = new ContestPokemonItem('Treecko', 250, [ContestType.Cool], ContestRank.Hyper, true, 'Hyper Cool Treecko');
+ItemList.Hyper_Rank_Torchic = new ContestPokemonItem('Torchic', 250, [ContestType.Beautiful], ContestRank.Hyper, true, 'Hyper Beautiful Torchic');
+ItemList.Hyper_Rank_Mudkip = new ContestPokemonItem('Mudkip', 250, [ContestType.Tough], ContestRank.Hyper, true, 'Hyper Tough Mudkip');
+ItemList.Hyper_Rank_Plusle = new ContestPokemonItem('Plusle', 250, [ContestType.Cute], ContestRank.Hyper, true, 'Hyper Cute Plusle');
+ItemList.Hyper_Rank_Minun = new ContestPokemonItem('Minun', 250, [ContestType.Smart], ContestRank.Hyper, true, 'Hyper Smart Minun');
+ItemList.Master_Rank_Treecko = new ContestPokemonItem('Treecko', 500, [ContestType.Cool], undefined, undefined, 'Master Cool Treecko');
+ItemList.Master_Rank_Torchic = new ContestPokemonItem('Torchic', 500, [ContestType.Beautiful], undefined, undefined, 'Master Beautiful Torchic');
+ItemList.Master_Rank_Mudkip = new ContestPokemonItem('Mudkip', 500, [ContestType.Tough], undefined, undefined, 'Master Tough Mudkip');
+ItemList.Master_Rank_Plusle = new ContestPokemonItem('Plusle', 500, [ContestType.Cute], undefined, undefined, 'Master Cute Plusle');
+ItemList.Master_Rank_Minun = new ContestPokemonItem('Minun', 500, [ContestType.Smart], undefined, undefined, 'Master Smart Minun');
 ItemList['Dugtrio (Punk)'] = new ContestPokemonItem('Dugtrio (Punk)');
 ItemList['Gengar (Punk)'] = new ContestPokemonItem('Gengar (Punk)');
 ItemList['Goldeen (Diva)'] = new ContestPokemonItem('Goldeen (Diva)');
@@ -552,11 +577,11 @@ ItemList['Onix (Rocker)'] = new ContestPokemonItem('Onix (Rocker)');
 ItemList['Tangela (Pom-pom)'] = new ContestPokemonItem('Tangela (Pom-pom)');
 ItemList['Weepinbell (Fancy)'] = new ContestPokemonItem('Weepinbell (Fancy)');
 ItemList['Sudowoodo (Golden)'] = new ContestPokemonItem('Sudowoodo (Golden)', 2000);
-ItemList['Pikachu (Rock Star)'] = new ContestPokemonItem('Pikachu (Rock Star)', undefined, ContestRank.Spectacular);
-ItemList['Pikachu (Belle)'] = new ContestPokemonItem('Pikachu (Belle)', undefined, ContestRank.Spectacular);
-ItemList['Pikachu (Pop Star)'] = new ContestPokemonItem('Pikachu (Pop Star)', undefined, ContestRank.Spectacular);
-ItemList['Pikachu (Ph. D.)'] = new ContestPokemonItem('Pikachu (Ph. D.)', undefined, ContestRank.Spectacular);
-ItemList['Pikachu (Libre)'] = new ContestPokemonItem('Pikachu (Libre)', undefined, ContestRank.Spectacular);
+ItemList['Pikachu (Rock Star)'] = new ContestPokemonItem('Pikachu (Rock Star)', ContestRank.Spectacular);
+ItemList['Pikachu (Belle)'] = new ContestPokemonItem('Pikachu (Belle)', ContestRank.Spectacular);
+ItemList['Pikachu (Pop Star)'] = new ContestPokemonItem('Pikachu (Pop Star)', ContestRank.Spectacular);
+ItemList['Pikachu (Ph. D.)'] = new ContestPokemonItem('Pikachu (Ph. D.)', ContestRank.Spectacular);
+ItemList['Pikachu (Libre)'] = new ContestPokemonItem('Pikachu (Libre)', ContestRank.Spectacular);
 // Event
 ItemList['Elf Munchlax'] = new PokemonItem('Elf Munchlax', 3108, Currency.questPoint, undefined, undefined,
     { visible: new MultiRequirement([new SpecialEventRequirement('Merry Christmas!'), new ObtainedPokemonRequirement('Santa Snorlax')]) });
