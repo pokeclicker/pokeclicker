@@ -2960,11 +2960,13 @@ class Update implements Saveable {
                 Update.startQuestLine(saveData, 'Team Rocket Again');
             }
             // Give Sudowoodo (Golden) its ContestPokemonItem stats
-            const goldowoodo = saveData.party.caughtPokemon.find((p: PartyPokemon) => p.id === 185.01);
-            if (goldowoodo) {
-                goldowoodo.currentContestTypes = [ContestType.Balanced];
-                goldowoodo.contestAppeal = ContestHelper.rankAppeal[ContestRank.Master];
-            }
+            setTimeout(async () => {
+                const goldowoodo = saveData.party.caughtPokemon.find((p: PartyPokemon) => p.id === 185.01);
+                if (goldowoodo) {
+                    App.game.party.caughtPokemon.find((p: PartyPokemon) => p.id === 185.01).currentContestTypes = [ContestType.Balanced];
+                    App.game.party.caughtPokemon.find((p: PartyPokemon) => p.id === 185.01).contestAppeal = ContestHelper.rankAppeal[ContestRank.Master];
+                }
+            }, GameConstants.SECOND);
         },
     };
 
