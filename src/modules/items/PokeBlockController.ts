@@ -4,7 +4,7 @@ import { PokeBlockColor } from '../GameConstants';
 export default class PokeBlockController {
     public static currentlySelected = ko.observable(0).extend({ numeric: 0 });
     public static currentlySelectedName = ko.computed(() => `PokeBlock_${PokeBlockColor[this.currentlySelected()]}`);
-    public static multiplier = ['×1', '×5', '×10', '×50', '×80', '×150', '×220', 'Max'];
+    public static multiplier = ['×1', '×5', '×10', '×50', '×100', '×200', '×500', 'Max'];
     public static multiplierIndex = ko.observable(0);
 
     public static incrementMultiplier() {
