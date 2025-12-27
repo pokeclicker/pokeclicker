@@ -123,7 +123,7 @@ export default class ContestBattle extends Battle {
 
     public static getActiveContestBattlePokemonAppeal() {
         return !ContestBattle.toggleTesting() ?
-        ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]) : ContestBattle.testAppeal()
+            ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]) : ContestBattle.testAppeal();
     }
 
     public static pokemonAppeal() {
