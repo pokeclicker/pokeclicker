@@ -202,9 +202,7 @@ export default class ContestRunner {
                 }
 
                 // Update statistics
-                App.game.statistics.contestHighestRound[ContestRunner.rank()][ContestRunner.type()](
-                    Math.max(App.game.statistics.contestHighestRound[ContestRunner.rank()][ContestRunner.type()](), ContestRunner.encoreRound() + 1),
-                );
+                GameHelper.incrementObservable(App.game.statistics.contestHighestRound[ContestRunner.rank()][ContestRunner.type()]);
             }
         }
     }

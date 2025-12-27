@@ -121,6 +121,11 @@ export default class ContestBattle extends Battle {
         }
     }
 
+    public static getActiveContestBattlePokemonAppeal() {
+        return !ContestBattle.toggleTesting() ?
+        ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]) : ContestBattle.testAppeal()
+    }
+
     public static pokemonAppeal() {
         if (!ContestRunner.running()) {
             throw new Error('ContestRunner must be running');
@@ -141,9 +146,8 @@ export default class ContestBattle extends Battle {
         // convert to single digit
         multiplier /= 100;
 
-        // todo:
-        const rallyAppeal = !ContestBattle.toggleTesting() ?
-            ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]) : ContestBattle.testAppeal();
+        // deal it
+        const rallyAppeal = ContestBattle.getActiveContestBattlePokemonAppeal();
         ContestRunner.rally(rallyAppeal * multiplier);
     }
 

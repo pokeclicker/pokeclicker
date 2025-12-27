@@ -41,8 +41,7 @@
                     <th colspan="2" data-bind="text: `${ContestHelper.getContestEmoji(ContestRunner.type())}${ContestRank[ContestRunner.rank()]} Rank ${ContestType[ContestRunner.type()]} Contest Stats${ContestHelper.getContestEmoji(ContestRunner.type())}`"></th>
                   </tr>
                   <tr>
-                    <!-- <td colspan="2" data-bind="text: `${ContestType[ContestRunner.type()]} Audience Appeal: ${ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]).toLocaleString('en-US')}`"></td> -->
-                    <td colspan="2" data-bind="text: `Audience Appeal: ${ContestBattle.testAppeal().toLocaleString('en-US')}`"></td>
+                    <td colspan="2" data-bind="text: `Audience Appeal: ${ContestBattle.getActiveContestBattlePokemonAppeal().toLocaleString('en-US')}`"></td>
                   </tr>
                   <tr>
                     <td data-bind="text: `${ContestRunner.rank() != ContestRank.Practice ? 'Highest Score' : 'Last Practice Score'}: ${App.game.statistics.contestHighestScore[ContestRunner.rank()][ContestRunner.type()]().toLocaleString('en-US') ?? 0}`"></td>
