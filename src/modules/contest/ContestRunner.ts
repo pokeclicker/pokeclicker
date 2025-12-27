@@ -11,6 +11,7 @@ import Notifier from '../notifications/Notifier';
 import ContestHelper from './ContestHelper';
 import ContestScore from './ContestScore';
 import ContestBattle from './ContestBattle';
+import GameHelper from '../GameHelper';
 
 export default class ContestRunner {
     // Timers
