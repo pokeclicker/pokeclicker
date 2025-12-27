@@ -27,7 +27,7 @@ export default class PokemonItem extends PokerusIndicatingItem {
     ) {
         super(name, basePrice, currency, options, undefined, description, 'pokemonItem');
         this.type = pokemon;
-        this._translatedOrDisplayName = ko.pureComputed(() => displayName ?? PokemonHelper.displayName(pokemon)());
+        this._translatedOrDisplayName = ko.pureComputed(() => displayName ?? PokemonHelper.displayName(pokemon));
     }
 
     gain(amt: number) {

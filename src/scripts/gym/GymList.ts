@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 
 const GymList: { [townName: string]: Gym } = {};
 
@@ -2638,3 +2639,5 @@ GymList['AI Turo'] = new Gym(
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
     undefined, undefined, { displayName: 'AI Turo' }
 );
+
+GymList satisfies TmpGymListType;

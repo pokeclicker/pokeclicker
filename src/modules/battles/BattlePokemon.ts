@@ -61,7 +61,7 @@ export default class BattlePokemon implements EnemyPokemonInterface {
         this.health = ko.observable(maxHealth);
         this.maxHealth = ko.observable(maxHealth);
         this.healthPercentage = ko.observable(100);
-        this._displayName = PokemonHelper.displayName(name);
+        this._displayName = PokemonHelper.displayNameObservable(name);
         this.support = ko.observable(0);
         this.supportPercentage = ko.observable(0);
     }

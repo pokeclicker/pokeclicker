@@ -420,6 +420,7 @@ class GameController {
                     // Open the achievmeents tracker
                     if (achievements.canAccess() && !$achievementsModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
+                        AchievementHandler.filterAchievementList(true);
                         $achievementsModal.modal('toggle');
                         return e.preventDefault();
                     }
@@ -451,8 +452,7 @@ class GameController {
                     break;
                 case Settings.getSetting('hotkey.forceSave').value:
                     if (GameController.keyHeld.Shift()) {
-                        Save.store(player);
-                        Notifier.notify({ message: 'Game Saved!'});
+                        Save.store(player, true);
                         return e.preventDefault();
                     }
                     break;
