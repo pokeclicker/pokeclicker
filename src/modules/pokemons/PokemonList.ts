@@ -948,6 +948,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0,
         },
+        'heldItem': { type: ItemType.item, id: 'Yellow_Scarf' },
         'contestTypes': [ContestType.Beautiful, ContestType.Tough],
     },
     {
