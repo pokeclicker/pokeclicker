@@ -120,6 +120,7 @@ class DungeonGuide {
             message: 'Thanks for the work.\nLet me know when you\'re hiring again!',
             type: NotificationConstants.NotificationOption.info,
             timeout: 30 * GameConstants.SECOND,
+            sound: NotificationConstants.NotificationSound.General.dungeon_guide_complete,
         });
         // Hide modals
         $('.modal.show').modal('hide');
@@ -255,8 +256,9 @@ DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is a treasure 
             if (paths?.length) {
                 const shortestPath = Math.min(...paths.map(p => p.length));
                 const path = Rand.fromArray(paths.filter(p => p.length == shortestPath));
-                // We found some treasure, move to it
-                DungeonRunner.map.moveToTile(path[0]);
+                if (path.length) { // If we're not already there
+                    DungeonRunner.map.moveToTile(path[0]);
+                }
                 return;
             }
         }
@@ -307,8 +309,9 @@ DungeonGuides.add(new DungeonGuide('Angeline', 'Can find treasure anywhere, love
             if (paths?.length) {
                 const shortestPath = Math.min(...paths.map(p => p.length));
                 const path = Rand.fromArray(paths.filter(p => p.length == shortestPath));
-                // We found some treasure, move to it
-                DungeonRunner.map.moveToTile(path[0]);
+                if (path.length) { // If we're not already there
+                    DungeonRunner.map.moveToTile(path[0]);
+                }
                 return;
             }
         }

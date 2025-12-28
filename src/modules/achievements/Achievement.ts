@@ -11,7 +11,12 @@ import AchievementCategory from './AchievementCategory';
 
 export default class Achievement {
     public isCompleted: KnockoutComputed<boolean> = ko.pureComputed(() => this.achievable() && (this.unlocked() || this.property.isCompleted()));
-    public getProgressText: KnockoutComputed<string> = ko.pureComputed(() => `${this.getProgress().toLocaleString('en-US')} / ${this.property.requiredValue.toLocaleString('en-US')}`);
+    public getProgressText: KnockoutComputed<string> = ko.pureComputed(() => {
+        // roundingMode isn't understood by our typescript version
+        // @ts-ignore
+        const progress = this.getProgress().toLocaleString('en-US', { roundingMode: 'trunc' });
+        return `${progress} / ${this.property.requiredValue.toLocaleString('en-US')}`;
+    });
     public bonus = 0;
     public unlocked : KnockoutObservable<boolean> = ko.observable(false);
     protected notificationTitle: string = 'Achievement';

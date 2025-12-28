@@ -91,21 +91,17 @@
                             <!-- /ko -->
                         </div>
                     </div>
-                    <!-- Hide/Show checkboxes -->
-                    <div class="form-row mt-2">
-                        <div class="col-12 col-sm-6 text-center">
-                            <div class="form-check align-middle">
-                                <input type="checkbox" id="hide-holding-item-pokemon" class="form-check-input"
-                                    data-bind="checked: Settings.getSetting('heldItemHideHoldingPokemon').observableValue" />
-                                <label for="hide-holding-item-pokemon" class="form-check-label">Hide Pokémon holding an item</label>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 text-center">
-                            <div class="form-check align-middle">
-                                <input type="checkbox" id="show-this-item-pokemon" class="form-check-input"
-                                    data-bind="checked: Settings.getSetting('heldItemHideHoldingThisItem').observableValue" />
-                                <label for="show-this-item-pokemon" class="form-check-label">Hide Pokémon holding <u>this</u> item</label>
-                            </div>
+                    <!-- Filter mode based on Held Item -->
+                    <div class="form-row px-1 mt-1">
+                        <div class="col-12 p-0 px-1">
+                            <!-- ko let: { heldItemCurrentItemFilter: Settings.getSetting('heldItemCurrentItemFilter') } -->
+                            <select id="held-item-current-item-filter" name="heldItemCurrentItemFilter" autocomplete="off" class="custom-select custom-select-sm"
+                                data-bind="options: heldItemCurrentItemFilter.options,
+                                    optionsValue: 'value',
+                                    optionsText: 'text',
+                                    value: heldItemCurrentItemFilter.observableValue">
+                            </select>
+                            <!-- /ko -->
                         </div>
                     </div>
                   </div>
