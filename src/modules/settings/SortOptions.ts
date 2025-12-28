@@ -29,7 +29,7 @@ export type SortOptionConfig = {
     invert?: boolean;
 };
 
-export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
+export const SortOptionConfigs: Partial<Record<SortOptions, SortOptionConfig>> = {
     [SortOptions.id]: {
         text: 'Pokémon ID #',
         getValue: (p) => p.id,
@@ -99,6 +99,24 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     [SortOptions.evs]: {
         text: 'EVs',
         getValue: (p) => p.evs() || 0,
+    },
+};
+
+export const PokeblockSortOptionConfigs: Partial<Record<SortOptions, SortOptionConfig>> = {
+    [SortOptions.id]: {
+        text: 'Pokémon ID #',
+        getValue: (p) => p.id,
+    },
+
+    [SortOptions.name]: {
+        text: 'Name',
+        getValue: (p) => p.displayName,
+    },
+
+    [SortOptions.category]: {
+        text: 'Category',
+        getValue: (p) => p.getCategorySortValues(),
+        invert: true,
     },
 
     [SortOptions.contestAppeal]: {

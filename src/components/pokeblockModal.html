@@ -1,5 +1,5 @@
 <div class="modal noselect fade" id="pokeblockModal" tabindex="-1" role="dialog" aria-labelledby="pokeblockModal">
-    <div class="modal-dialog modal-dialog-scrollable modal-sm" style="min-width: fit-content;" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-md" style="min-width: fit-content;" role="document">
         <div class="modal-content">
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
@@ -57,7 +57,7 @@
                         </div>
                         <div class="form-group col-6 m-0 px-1 py-0">
                             <!-- ko let: { pokeblockTypeFilter: Settings.getSetting('pokeblockTypeFilter') } -->
-                            <label class="mb-1" for="held-item-type-filter">Type</label>
+                            <label class="mb-1" for="held-item-type-filter">Contest Type</label>
                             <select id="held-item-type-filter" name="pokeblockTypeFilter" autocomplete="off" class="custom-select custom-select-sm" 
                                 data-bind="options: pokeblockTypeFilter.options,
                                     optionsValue: 'value',
@@ -66,12 +66,6 @@
                             </select>
                             <!-- /ko -->
                         </div>
-                    </div>
-                    <div class="form-check align-middle mt-1">
-                        <input type="checkbox" id="pokeblock-shiny-filter" class="form-check-input"
-                            data-bind="checked: Settings.getSetting('pokeblockHideShinyPokemon').observableValue" />
-                        <label for="pokeblock-shiny-filter" class="form-check-label" 
-                            data-bind="text: Settings.getSetting('pokeblockHideShinyPokemon').displayName"></label>
                     </div>
                   </div>
                 </div>

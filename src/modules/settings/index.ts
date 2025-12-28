@@ -7,7 +7,7 @@ import SearchSetting from './SearchSetting';
 import RangeSetting from './RangeSetting';
 import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
-import { SortOptionConfigs, SortOptions } from './SortOptions';
+import { SortOptionConfigs, PokeblockSortOptionConfigs, SortOptions } from './SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from '../achievements/AchievementSortOptions';
 import {
     SortOptionConfigs as UndergroundTreasureDisplaySortOptionConfigs,
@@ -291,12 +291,11 @@ Settings.add(new Setting<number>('consumableRegionFilter', 'Region', [new Settin
 Settings.add(new Setting<number>('consumableTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2, undefined, false));
 
 // Pokeblock Sorting
-const pokeblockSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
+const pokeblockSortSettings = Object.keys(PokeblockSortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
 Settings.add(new Setting<number>('pokeblockSort', 'Sort', pokeblockSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('pokeblockSortDirection', 'reverse', false));
-Settings.add(new BooleanSetting('pokeblockHideShinyPokemon', 'Hide shiny Pokémon', false));
 Settings.add(new SearchSetting('pokeblockSearchFilter', 'Search', ''));
 Settings.add(new Setting<number>('pokeblockRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptionsNoneLast], -2));
 Settings.add(new Setting<number>('pokeblockTypeFilter', 'Contest Type', [new SettingOption('All', -1), ...Settings.enumToNumberSettingOptionArray(ContestType, (t) => t !== 'None')], -1));
