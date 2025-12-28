@@ -60,7 +60,7 @@ import SeededRand from './utilities/SeededRand';
 import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
 import Settings, { breedingFilterSettingKeys, pokedexFilterSettingKeys } from './settings/index';
-import { SortOptionConfigs, PokeblockSortOptionConfigs, SortOptions } from './settings/SortOptions';
+import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from './achievements/AchievementSortOptions';
 import AchievementCategory from './achievements/AchievementCategory';
 import NotificationConstants from './notifications/NotificationConstants';
@@ -316,7 +316,6 @@ Object.assign(<any>window, {
     NotificationConstants,
     Notifier,
     SortOptionConfigs,
-    PokeblockSortOptionConfigs,
     SortOptions,
     AchievementSortOptionConfigs,
     AchievementSortOptions,

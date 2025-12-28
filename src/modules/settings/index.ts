@@ -7,7 +7,7 @@ import SearchSetting from './SearchSetting';
 import RangeSetting from './RangeSetting';
 import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
-import { SortOptionConfigs, PokeblockSortOptionConfigs, SortOptions } from './SortOptions';
+import { SortOptionConfigs, SortOptions } from './SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from '../achievements/AchievementSortOptions';
 import {
     SortOptionConfigs as UndergroundTreasureDisplaySortOptionConfigs,
@@ -263,7 +263,7 @@ Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
 // Hatchery Sorting
 const hatcherySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
-)).filter((opt) => ![SortOptions.level, SortOptions.attack].includes(opt.value));
+)).filter((opt) => ![SortOptions.level, SortOptions.attack, SortOptions.contestAppeal, SortOptions.contestSheen].includes(opt.value));
 Settings.add(new Setting<number>('hatcherySort', 'Sort', hatcherySortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('hatcherySortDirection', 'reverse', false));
 
@@ -291,7 +291,7 @@ Settings.add(new Setting<number>('consumableRegionFilter', 'Region', [new Settin
 Settings.add(new Setting<number>('consumableTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2, undefined, false));
 
 // Pokeblock Sorting
-const pokeblockSortSettings = Object.keys(PokeblockSortOptionConfigs).map((opt) => (
+const pokeblockSortSettings = Object.keys(SortOptionConfigs).filter(o => [SortOptions.id, SortOptions.name, SortOptions.category, SortOptions.contestAppeal, SortOptions.contestSheen].includes(Number(o))).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
 Settings.add(new Setting<number>('pokeblockSort', 'Sort', pokeblockSortSettings, SortOptions.id));
