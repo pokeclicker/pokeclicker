@@ -2374,10 +2374,8 @@ const ContestShopNormal = new Shop([
     ItemList.Normal_Rank_Mudkip,
     ItemList.Normal_Rank_Plusle,
     ItemList.Normal_Rank_Minun,
-    new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
+    new PokeballItem(GameConstants.Pokeball.Pokeball, 3, GameConstants.Currency.contestToken, undefined, 'Poké Ball'),
     new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
 ], 'Contest Shop');
 const ContestShopSuper = new Shop([
     ItemList.Super_Rank_Treecko,
@@ -2385,10 +2383,9 @@ const ContestShopSuper = new Shop([
     ItemList.Super_Rank_Mudkip,
     ItemList.Super_Rank_Plusle,
     ItemList.Super_Rank_Minun,
-    new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
+    new PokeballItem(GameConstants.Pokeball.Greatball, 12, GameConstants.Currency.contestToken, undefined, 'Great Ball'),
     new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
     new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 30, GameConstants.Currency.contestToken, 'Large Restore'),
 ], 'Contest Shop');
 const ContestShopHyper = new Shop([
     ItemList.Hyper_Rank_Treecko,
@@ -2407,6 +2404,11 @@ const ContestShopMaster = new Shop([
     ItemList.Master_Rank_Mudkip,
     ItemList.Master_Rank_Plusle,
     ItemList.Master_Rank_Minun,
+    ItemList.Red_Scarf,
+    ItemList.Blue_Scarf,
+    ItemList.Pink_Scarf,
+    ItemList.Green_Scarf,
+    ItemList.Yellow_Scarf,
     new PokeballItem(GameConstants.Pokeball.Ultraball, 20, GameConstants.Currency.contestToken, undefined, 'Ultra Ball'),
     new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 5, GameConstants.Currency.contestToken, 'Small Restore'),
     new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 10, GameConstants.Currency.contestToken, 'Medium Restore'),

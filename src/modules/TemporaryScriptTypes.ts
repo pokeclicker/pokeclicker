@@ -104,7 +104,6 @@ export type TmpDreamOrbControllerType = any;
 export type TmpPurifyChamberType = any;
 export type TmpWeatherAppType = any;
 export type TmpZMovesType = any;
-export type TmpHeldItemType = any;
 
 export type TmpGameType = {
     gameState: GameConstants.GameState;
@@ -388,4 +387,8 @@ export type TmpTemporaryBattleType = {
 
 export type TmpTownType = {
     name: string;
+};
+
+export type TmpHeldItemType = {
+    name: string,
 };

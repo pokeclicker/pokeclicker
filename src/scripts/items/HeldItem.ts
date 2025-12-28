@@ -1,4 +1,5 @@
 /// <reference path="../../declarations/items/Item.d.ts"/>
+/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 
 class HeldItem extends Item {
     public static heldItemSelected: KnockoutObservable<HeldItem> = ko.observable(undefined);
@@ -45,7 +46,7 @@ class HeldItem extends Item {
             },
             other: {
                 title: 'Other',
-                items: sortedHeldItems.filter(i => i.constructor.name === 'AttackBonusHeldItem' || i.constructor.name === 'HeldItem'),
+                items: sortedHeldItems.filter(i => i.constructor.name === 'AttackBonusHeldItem' || i.constructor.name === 'HeldItem' || i.constructor.name === 'ContestScarfHeldItem'),
             },
         };
     }
@@ -181,6 +182,29 @@ class ExpGainedBonusHeldItem extends HeldItem {
     }
 }
 
+class ContestScarfHeldItem extends HeldItem {
+    constructor(
+        name: string,
+        basePrice: number,
+        currency: GameConstants.Currency,
+        shopOptions : ShopOptions,
+        displayName: string,
+        public contestType: ContestType,
+        regionUnlocked: GameConstants.Region = GameConstants.Region.hoenn
+    ) {
+        super(
+            name,
+            basePrice,
+            currency,
+            shopOptions,
+            displayName,
+            `A held item for ${ContestType[contestType]} and Balanced Pokémon that lets them passively Appeal in Contests.`,
+            regionUnlocked,
+            (pokemon) => pokemon.currentContestTypes.includes(contestType) || pokemon.currentContestTypes.includes(ContestType.Balanced) || pokemon.heldItem() instanceof ContestScarfHeldItem
+        );
+    }
+}
+
 ItemList.Wonder_Chest = new ExpGainedBonusHeldItem('Wonder_Chest', 10000, GameConstants.Currency.money, undefined, 'Wonder Chest', 1.25, GameConstants.Region.johto);
 ItemList.Miracle_Chest = new ExpGainedBonusHeldItem('Miracle_Chest', 30000, GameConstants.Currency.money, { visible: new MaxRegionRequirement(GameConstants.Region.sinnoh) }, 'Miracle Chest', 1.5, GameConstants.Region.sinnoh);
 ItemList.Joy_Scent = new ExpGainedBonusHeldItem('Joy_Scent', 10000, GameConstants.Currency.money, undefined, 'Joy Scent', 1.75, GameConstants.Region.hoenn, ' the holding Shadow Pokémon',
@@ -279,3 +303,11 @@ ItemList.Everstone = new HeldItem('Everstone', 10000, GameConstants.Currency.mon
         return baby !== undefined && pokemon.name != baby;
     }
 );
+
+ItemList.Red_Scarf = new ContestScarfHeldItem('Red_Scarf', 50, GameConstants.Currency.contestToken, undefined, 'Red Scarf', ContestType.Cool);
+ItemList.Blue_Scarf = new ContestScarfHeldItem('Blue_Scarf', 50, GameConstants.Currency.contestToken, undefined, 'Blue Scarf', ContestType.Beautiful);
+ItemList.Pink_Scarf = new ContestScarfHeldItem('Pink_Scarf', 50, GameConstants.Currency.contestToken, undefined, 'Pink Scarf', ContestType.Cute);
+ItemList.Green_Scarf = new ContestScarfHeldItem('Green_Scarf', 50, GameConstants.Currency.contestToken, undefined, 'Green Scarf', ContestType.Smart);
+ItemList.Yellow_Scarf = new ContestScarfHeldItem('Yellow_Scarf', 50, GameConstants.Currency.contestToken, undefined, 'Yellow Scarf', ContestType.Tough);
+
+HeldItem satisfies TmpHeldItemType;

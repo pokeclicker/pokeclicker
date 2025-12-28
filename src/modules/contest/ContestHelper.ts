@@ -61,8 +61,17 @@ export default class ContestHelper {
 
                 // Reset contest types when sheen/exp has run out
                 if (pokemon.contestExp <= 0) {
+                    let appliedContestTypes = [];
+                    const scarves = ['Red_Scarf', 'Blue_Scarf', 'Pink_Scarf', 'Green_Scarf', 'Yellow_Scarf'];
+                    // Scarves restore their equivalent type
+                    if (scarves.includes(pokemon.heldItem().name)) {
+                        appliedContestTypes = [(scarves.indexOf(pokemon.heldItem().name) as ContestType)];
+                    }
                     // Special contest pokemon are exempt
-                    pokemon.currentContestTypes = !ContestHelper.isSpecialContestPokemon(pokemon.name) ? [] : pokemonMap[pokemon.name].contestTypes;
+                    if (ContestHelper.isSpecialContestPokemon(pokemon.name)) {
+                        appliedContestTypes = appliedContestTypes.concat(pokemonMap[pokemon.name].contestTypes);
+                    }
+                    pokemon.currentContestTypes = appliedContestTypes;
                     ranOutOfSheenPokemon += 1;
                 }
                 if (!ContestHelper.hasSheenForContest(conRank, conType)) {

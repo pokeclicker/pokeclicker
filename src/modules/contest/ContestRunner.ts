@@ -110,6 +110,9 @@ export default class ContestRunner {
         if (!ContestRunner.running()) {
             return;
         }
+
+        ContestBattle.pokemonAppeal(true);
+
         if (!ContestRunner.frenzyMode() && ContestRunner.timeLeftPercentage() < 100 && !ContestBattle.toggleTesting()) {
             ContestHelper.reduceSheenPerSecond(ContestRunner.rank(), ContestRunner.type(), ContestRunner.timeLeft());
         }

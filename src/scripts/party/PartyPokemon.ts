@@ -498,7 +498,19 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
                 break;
             // Type changing
             case GameConstants.PokeBlockColor.Gray:
-                this.currentContestTypes = [];
+                let resetTypes = [];
+                if (this.heldItem() instanceof ContestScarfHeldItem) {
+                    resetTypes = [(this.heldItem() as ContestScarfHeldItem).contestType];
+                    Notifier.notify({
+                        message : `${this.displayName}\'s Scarf keeps it ${ContestType[(this.heldItem() as ContestScarfHeldItem).contestType]}!`,
+                        type : NotificationConstants.NotificationOption.info,
+                        pokemonImage : PokemonHelper.getImage(this.id),
+                    });
+                }
+                if (ContestHelper.isSpecialContestPokemon(this.name)) {
+                    resetTypes = resetTypes.concat(PokemonHelper.getPokemonById(this.id).contestTypes);
+                }
+                this.currentContestTypes = resetTypes;
                 amount = 1;
                 this.contestExp = 0;
                 break;
