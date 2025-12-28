@@ -291,7 +291,8 @@ Settings.add(new Setting<number>('consumableRegionFilter', 'Region', [new Settin
 Settings.add(new Setting<number>('consumableTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2, undefined, false));
 
 // Pokeblock Sorting
-const pokeblockSortSettings = Object.keys(SortOptionConfigs).filter(o => [SortOptions.id, SortOptions.name, SortOptions.category, SortOptions.contestAppeal, SortOptions.contestSheen].includes(Number(o))).map((opt) => (
+const pokeblockOptions = [SortOptions.id, SortOptions.name, SortOptions.category, SortOptions.contestAppeal, SortOptions.contestSheen];
+const pokeblockSortSettings = Object.keys(SortOptionConfigs).filter(o => pokeblockOptions.includes(Number(o))).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
 Settings.add(new Setting<number>('pokeblockSort', 'Sort', pokeblockSortSettings, SortOptions.id));
