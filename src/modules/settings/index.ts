@@ -309,7 +309,7 @@ Settings.add(new Setting<number>('heldItemType2Filter', 'Type 2', [
     new SettingOption('None', PokemonType.None),
 ], -2, undefined, false));
 Settings.add(new Setting('heldItemCurrentItemFilter', 'Held Item filter', [
-    new SettingOption('Show all Pokémon regarless of their current held item', 'none'),
+    new SettingOption('Show all Pokémon', 'none'),
     new SettingOption('Hide Pokémon holding ANY item', 'HideHoldingAnyItem'),
     new SettingOption('Hide Pokémon holding THIS item', 'HideHoldingThisItem'),
 ], 'none'));

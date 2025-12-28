@@ -92,15 +92,17 @@
                         </div>
                     </div>
                     <!-- Filter mode based on Held Item -->
-                    <div class="col-12 m-0 p-0 pt-1">
-                        <!-- ko let: { heldItemCurrentItemFilter: Settings.getSetting('heldItemCurrentItemFilter') } -->
-                        <select id="held-item-current-item-filter" name="heldItemCurrentItemFilter" autocomplete="off" class="custom-select"
-                            data-bind="options: heldItemCurrentItemFilter.options,
-                                optionsValue: 'value',
-                                optionsText: 'text',
-                                value: heldItemCurrentItemFilter.observableValue">
-                        </select>
-                        <!-- /ko -->
+                    <div class="form-row px-1 mt-1">
+                        <div class="col-12 p-0 px-1">
+                            <!-- ko let: { heldItemCurrentItemFilter: Settings.getSetting('heldItemCurrentItemFilter') } -->
+                            <select id="held-item-current-item-filter" name="heldItemCurrentItemFilter" autocomplete="off" class="custom-select custom-select-sm"
+                                data-bind="options: heldItemCurrentItemFilter.options,
+                                    optionsValue: 'value',
+                                    optionsText: 'text',
+                                    value: heldItemCurrentItemFilter.observableValue">
+                            </select>
+                            <!-- /ko -->
+                        </div>
                     </div>
                   </div>
                 </div>
