@@ -509,6 +509,7 @@
                                                 title: 'Automatically paid every hour while hired.',
                                                 trigger: 'hover',
                                                 placement: 'right',
+                                                boundary: 'window',
                                             }">
                                             <td class="text-left">Cost:</td>
                                             <td class="text-right tight"><img alt="Farm Points" src="assets/images/currency/farmPoint.svg" style="height: 18px; width: 18px;">&nbsp;<knockout data-bind="text: `${$data.cost.amount.toLocaleString('en-US')}/hour`">0/hour</knockout></td>
@@ -517,15 +518,17 @@
                                                 title: 'How often they work or recover energy.',
                                                 trigger: 'hover',
                                                 placement: 'right',
+                                                boundary: 'window',
                                             }">
                                             <td class="text-left">Work Cycle:</td>
                                             <td class="text-right tight" data-bind="text: GameConstants.formatTimeFullLetters($data.workTick / 1000)">01m 00s</td>
                                         </tr>
                                         <tr data-bind="tooltip: {
                                                 html: true,
-                                                title: 'Number of actions they can do each cycle.',
+                                                title: 'Number of actions performed each cycle.',
                                                 trigger: 'hover',
                                                 placement: 'right',
+                                                boundary: 'window',
                                             }">
                                             <td class="text-left">Efficiency:</td>
                                             <td class="text-right tight" data-bind="text: `${$data.efficiency.toLocaleString('en-US')} ${GameConstants.pluralizeString('action', $data.efficiency)}/cycle`"></td>
@@ -535,6 +538,7 @@
                                                 title: 'Consumed when they work and recovers after cycles without work.',
                                                 trigger: 'hover',
                                                 placement: 'right',
+                                                boundary: 'window',
                                             }">
                                             <td class="text-left">Energy:</td>
                                             <td class="text-right tight align-middle">
@@ -551,6 +555,7 @@
                                                 title: 'Allow Farm Hand to plant berries.',
                                                 trigger: 'hover',
                                                 placement: 'right',
+                                                boundary: 'window',
                                             }">
                                             <td class="text-left align-middle">Berry Planting:</td>
                                             <td class="text-right tight">
@@ -561,6 +566,7 @@
                                                 title: 'Allow Farm Hand to harvest ripe berries.',
                                                 trigger: 'hover',
                                                 placement: 'right',
+                                                boundary: 'window',
                                             }">
                                             <td class="text-left">Berry Harvesting:</td>
                                             <td class="text-center tight align-middle">
@@ -571,6 +577,7 @@
                                                 title: 'Allow Farm Hand to catch wanderers, using your catch filters and consuming your Poké Balls.',
                                                 trigger: 'hover',
                                                 placement: 'right',
+                                                boundary: 'window',
                                             }">
                                             <td class="text-left">Manage Wanderers:</td>
                                             <td class="text-center tight align-middle">
@@ -581,11 +588,12 @@
                                                 title: 'Select plots where the Farm Hand can perform actions (Green plots are Allowed).',
                                                 trigger: 'hover',
                                                 placement: 'right',
+                                                boundary: 'window',
                                             }">
                                             <td colspan="2">
                                                 <div class="d-flex justify-content-between">
                                                     <div class="align-self-center">Allowed Plots</div>
-                                                    <button class="btn btn-outline-primary btn-sm col-4" data-toggle="collapse" data-bind="attr: { href: `#allowedPlots${$data.name}`}" >
+                                                    <button class="btn btn-primary btn-sm col-4" data-toggle="collapse" data-bind="attr: { href: `#allowedPlots${$data.name}`}" >
                                                         Edit
                                                     </button>
                                                 </div>
