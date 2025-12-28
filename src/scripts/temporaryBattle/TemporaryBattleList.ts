@@ -491,6 +491,7 @@ TemporaryBattleList['Silver 4'] = new TemporaryBattle(
     {
         displayName: 'Rival Silver',
         imageName: 'Silver',
+        visibleRequirement: new QuestLineStepCompletedRequirement('Team Rocket Again', 1),
     }
 );
 TemporaryBattleList['Silver 5'] = new TemporaryBattle(
@@ -2130,6 +2131,52 @@ TemporaryBattleList['Ghetsis 2'] = new TemporaryBattle(
         imageName: 'Ghetsis',
     }
 );
+TemporaryBattleList['Destiny Deoxys Rayquaza'] = new TemporaryBattle(
+    'Destiny Deoxys Rayquaza',
+    [
+        new GymPokemon('Deoxys', 47276622, 70),
+        new GymPokemon('Rayquaza', 57782538, 70),
+    ],
+    '<i>Rayquaza and Deoxys fled seperate ways.</i>',
+    [new QuestLineStepCompletedRequirement('Destiny Deoxys', 1)],
+    undefined,
+    {
+        displayName: 'Deoxys & Rayquaza',
+        imageName: 'specialNPCs/Transparent',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Destiny Deoxys Army'] = new TemporaryBattle(
+    'Destiny Deoxys Army',
+    [
+        new GymPokemon('Deoxys (Clone)', 11766624, 70),
+        new GymPokemon('Deoxys (Clone)', 11766624, 70),
+        new GymPokemon('Deoxys (Clone)', 11766624, 70),
+        new GymPokemon('Deoxys (Clone)', 11766624, 70),
+        new GymPokemon('Deoxys (Clone)', 11766624, 70),
+        new GymPokemon('Deoxys', 58833120, 70),
+    ],
+    '<i>The Deoxys are scattering.</i>',
+    [new QuestLineStepCompletedRequirement('Destiny Deoxys', 4)],
+    undefined,
+    {
+        displayName: 'Deoxys Army',
+        imageName: '../pokemon/386',
+        finalPokemonImage: 'specialNPCs/Transparent',
+    }
+);
+TemporaryBattleList['Destiny Rayquaza'] = new TemporaryBattle(
+    'Destiny Rayquaza',
+    [new GymPokemon('Rayquaza', 127079520, 70)],
+    '<i>Rayquaza calmed down.</i>',
+    [new QuestLineStepCompletedRequirement('Destiny Deoxys', 7)],
+    undefined,
+    {
+        displayName: 'Rayquaza',
+        imageName: '../pokemon/384',
+        hideTrainer: true,
+    }
+);
 TemporaryBattleList['Hugh 5'] = new TemporaryBattle(
     'Hugh 5',
     [
@@ -2373,7 +2420,7 @@ TemporaryBattleList['Shauna 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Shauna',
-        returnTown: 'Aquacorde Town',
+        returnTown: 'Vaniville Town',
         imageName: 'Shauna',
     }
 );
@@ -3415,8 +3462,8 @@ TemporaryBattleList['Calem 5'] = new TemporaryBattle(
         imageName: 'Calem',
     }
 );
-TemporaryBattleList['Storyline AZ'] = new TemporaryBattle(
-    'Storyline AZ',
+TemporaryBattleList.AZ = new TemporaryBattle(
+    'AZ',
     [
         new GymPokemon('Torkoal', 153757520, 60),
         new GymPokemon('Golurk', 153757520, 60),
@@ -3427,24 +3474,6 @@ TemporaryBattleList['Storyline AZ'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer AZ',
-        imageName: 'AZ',
-    }
-);
-TemporaryBattleList.AZ = new TemporaryBattle(
-    'AZ',
-    [
-        new GymPokemon('Torkoal', 161445396, 80),
-        new GymPokemon('Golurk', 161445396, 80),
-        new GymPokemon('Sigilyph', 161445396, 80),
-    ],
-    'Floette... It\'s been 3,000 years...',
-    [new QuestLineCompletedRequirement('A Beautiful World')],
-    undefined,
-    {
-        displayName: 'Pokémon Trainer AZ',
-        firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Floette (Eternal)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-        },
     }
 );
 TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(

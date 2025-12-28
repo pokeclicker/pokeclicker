@@ -277,6 +277,7 @@ export type ItemNameType
     | 'Togepi'
     | 'Hoppip (Chimecho)'
     | 'Beldum'
+    | 'Deoxys (Clone)'
     | 'Grotle (Acorn)'
     | 'Combee'
     | 'Burmy (Plant)'

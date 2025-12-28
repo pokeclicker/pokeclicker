@@ -168,7 +168,8 @@ class PartyController {
             if (pokemon.id <= 0) {
                 return false;
             }
-            if (!(Settings.getSetting('vitaminSearchFilter') as SearchSetting).regex().test(pokemon.displayName)) {
+            const searchFilterSetting = Settings.getSetting('vitaminSearchFilter') as SearchSetting;
+            if (searchFilterSetting.observableValue() != '' && !PokemonHelper.matchPokemonByNames(searchFilterSetting.regex(), pokemon.name, pokemon)) {
                 return false;
             }
             if (Settings.getSetting('vitaminRegionFilter').observableValue() > -2) {
@@ -210,10 +211,18 @@ class PartyController {
                 return false;
             }
 
-            const testString = Settings.getSetting('heldItemDropdownPokemonOrItem').observableValue() === 'pokemon'
-                ? pokemon.displayName : pokemon.heldItem()?.displayName;
-            if (!(Settings.getSetting('heldItemSearchFilter') as SearchSetting).regex().test(testString)) {
-                return false;
+            const searchFilterSetting = Settings.getSetting('heldItemSearchFilter') as SearchSetting;
+            if (searchFilterSetting.observableValue() != '') {
+                const regex = searchFilterSetting.regex();
+                let match;
+                if (Settings.getSetting('heldItemDropdownPokemonOrItem').observableValue() === 'pokemon') {
+                    match = PokemonHelper.matchPokemonByNames(regex, pokemon.name, pokemon);
+                } else {
+                    match = regex.test(pokemon.heldItem()?.displayName);
+                }
+                if (!match) {
+                    return false;
+                }
             }
 
             if (Settings.getSetting('heldItemRegionFilter').observableValue() > -2) {
@@ -234,11 +243,11 @@ class PartyController {
                     return false;
                 }
             }
-
-            if (Settings.getSetting('heldItemHideHoldingPokemon').observableValue() && pokemon.heldItem()) {
+            const heldItemCurrentItemFilter = Settings.getSetting('heldItemCurrentItemFilter').observableValue();
+            if (heldItemCurrentItemFilter == 'HideHoldingAnyItem' && pokemon.heldItem()) {
                 return false;
             }
-            if (Settings.getSetting('heldItemHideHoldingThisItem').observableValue() && pokemon.heldItem() === HeldItem.heldItemSelected()) {
+            if (heldItemCurrentItemFilter == 'HideHoldingThisItem' && pokemon.heldItem() === HeldItem.heldItemSelected()) {
                 return false;
             }
 
@@ -265,7 +274,8 @@ class PartyController {
             if (!consumable.canUse(pokemon)) {
                 return false;
             }
-            if (!(Settings.getSetting('consumableSearchFilter') as SearchSetting).regex().test(pokemon.displayName)) {
+            const searchFilterSetting = Settings.getSetting('consumableSearchFilter') as SearchSetting;
+            if (searchFilterSetting.observableValue() != '' && !PokemonHelper.matchPokemonByNames(searchFilterSetting.regex(), pokemon.name, pokemon)) {
                 return false;
             }
             if (Settings.getSetting('consumableRegionFilter').observableValue() > -2) {
