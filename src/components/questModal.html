@@ -95,11 +95,13 @@
                                 </thead>
                                 <tbody data-bind="foreach: $data.active">
                                     <tr>
-                                        <td>
+                                        <td class="clickable" data-bind="click: () => { QuestLineController.showQuestLineDetailsModal($data) }">
                                             <knockout class="font-weight-bold d-block" data-bind="text: $data.displayName"></knockout>
                                             <knockout class="small" data-bind="text: $data.description"></knockout>
                                         </td>
-                                        <td class="text-nowrap align-middle text-center" data-bind="text: `${$data.curQuest() + 1} / ${$data.totalQuests}`"></td>
+                                        <td class="clickable text-nowrap align-middle text-center" data-bind="
+                                            text: `${$data.curQuest() + 1} / ${$data.totalQuests}`,
+                                            click: () => { QuestLineController.showQuestLineDetailsModal($data) }"></td>
                                         <td class="align-middle text-center">
                                             <button type="button" class="btn btn-danger btn-sm" data-bind="click: () => { $data.suspendQuest() }, tooltip: {
                                                 title: $data.pauseTooltip,
@@ -126,7 +128,7 @@
                                     </tr>
                                 </thead>
                                 <tbody data-bind="foreach: $data.available">
-                                    <tr>
+                                    <tr class="clickable" data-bind="click: () => { QuestLineController.showQuestLineDetailsModal($data) }">
                                         <td>
                                             <knockout class="font-weight-bold d-block" data-bind="text: $data.displayName"></knockout>
                                             <knockout class="small" data-bind="text: $data.description"></knockout>
@@ -143,7 +145,7 @@
                             </div>
                             <table class="table table-striped table-bordered table-hover table-sm">
                                 <tbody data-bind="foreach: $data.complete">
-                                    <tr>
+                                    <tr class="clickable" data-bind="click: () => { QuestLineController.showQuestLineDetailsModal($data) }">
                                         <td>
                                             <knockout class="font-weight-bold d-block" data-bind="text: $data.displayName"></knockout>
                                             <knockout class="small" data-bind="text: $data.description"></knockout>
