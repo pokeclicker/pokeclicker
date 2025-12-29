@@ -154,6 +154,7 @@ class SafariBattle {
                 if (!isgameOver) {
                     Safari.spawnItemCheck();
                 }
+                App.game.oakItems.use(OakItemType.Magic_Ball);
                 $('#safariBall').css('filter', 'brightness(0.4) grayscale(100%)');
                 SafariBattle.delay(SafariBattle.Speed.enemyCaught * (1 + SafariBattle.getTierMultiplier()) / 2, false)
                     .then(() => {
