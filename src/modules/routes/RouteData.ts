@@ -1207,45 +1207,21 @@ Routes.add(new RegionRoute(
     [new RouteKillRequirement(10, Region.sinnoh, 213)],
     210.4,
 ));
+const TrophyGardenList = ['Clefairy', 'Jigglypuff', 'Meowth', 'Chansey', 'Baby Kangaskhan', 'Mr. Mime', 'Jynx', 'Ditto', 'Eevee', 'Porygon', 'Cleffa', 'Igglybuff', 'Togepi', 'Marill', 'Tyrogue', 'Smoochum', 'Elekid', 'Magby', 'Azurill', 'Plusle', 'Minun', 'Castform', 'Budew', 'Chingling', 'Bonsly', 'Mime Jr.', 'Happiny', 'Handout Happiny', 'Munchlax', 'Riolu', 'Mantyke', 'Phione', 'Toxel'];
+
 Routes.add(new RegionRoute(
     'Trophy Garden', Region.sinnoh, 231,
     new RoutePokemon({
         land: ['Pikachu', 'Pichu', 'Roselia', 'Staravia', 'Kricketune'],
         special:
         [
-            new SpecialRoutePokemon(['Clefairy'], new MultiRequirement([new SeededDateSelectNRequirement(0, 33, 3), new ObtainedPokemonRequirement('Clefairy')])),
-            new SpecialRoutePokemon(['Jigglypuff'], new MultiRequirement([new SeededDateSelectNRequirement(1, 33, 3), new ObtainedPokemonRequirement('Jigglypuff')])),
-            new SpecialRoutePokemon(['Meowth'], new MultiRequirement([new SeededDateSelectNRequirement(2, 33, 3), new ObtainedPokemonRequirement('Meowth')])),
-            new SpecialRoutePokemon(['Chansey'], new MultiRequirement([new SeededDateSelectNRequirement(3, 33, 3), new ObtainedPokemonRequirement('Chansey')])),
-            new SpecialRoutePokemon(['Baby Kangaskhan'], new MultiRequirement([new SeededDateSelectNRequirement(4, 33, 3), new ObtainedPokemonRequirement('Baby Kangaskhan')])),
-            new SpecialRoutePokemon(['Mr. Mime'], new MultiRequirement([new SeededDateSelectNRequirement(5, 33, 3), new ObtainedPokemonRequirement('Mr. Mime')])),
-            new SpecialRoutePokemon(['Jynx'], new MultiRequirement([new SeededDateSelectNRequirement(6, 33, 3), new ObtainedPokemonRequirement('Jynx')])),
-            new SpecialRoutePokemon(['Ditto'], new MultiRequirement([new SeededDateSelectNRequirement(7, 33, 3), new ObtainedPokemonRequirement('Ditto')])),
-            new SpecialRoutePokemon(['Eevee'], new MultiRequirement([new SeededDateSelectNRequirement(8, 33, 3), new ObtainedPokemonRequirement('Eevee')])),
-            new SpecialRoutePokemon(['Porygon'], new MultiRequirement([new SeededDateSelectNRequirement(9, 33, 3), new ObtainedPokemonRequirement('Porygon')])),
-            new SpecialRoutePokemon(['Cleffa'], new MultiRequirement([new SeededDateSelectNRequirement(10, 33, 3), new ObtainedPokemonRequirement('Cleffa')])),
-            new SpecialRoutePokemon(['Igglybuff'], new MultiRequirement([new SeededDateSelectNRequirement(11, 33, 3), new ObtainedPokemonRequirement('Igglybuff')])),
-            new SpecialRoutePokemon(['Togepi'], new MultiRequirement([new SeededDateSelectNRequirement(12, 33, 3), new ObtainedPokemonRequirement('Togepi')])),
-            new SpecialRoutePokemon(['Marill'], new MultiRequirement([new SeededDateSelectNRequirement(13, 33, 3), new ObtainedPokemonRequirement('Marill')])),
-            new SpecialRoutePokemon(['Tyrogue'], new MultiRequirement([new SeededDateSelectNRequirement(14, 33, 3), new ObtainedPokemonRequirement('Tyrogue')])),
-            new SpecialRoutePokemon(['Smoochum'], new MultiRequirement([new SeededDateSelectNRequirement(15, 33, 3), new ObtainedPokemonRequirement('Smoochum')])),
-            new SpecialRoutePokemon(['Elekid'], new MultiRequirement([new SeededDateSelectNRequirement(16, 33, 3), new ObtainedPokemonRequirement('Elekid')])),
-            new SpecialRoutePokemon(['Magby'], new MultiRequirement([new SeededDateSelectNRequirement(17, 33, 3), new ObtainedPokemonRequirement('Magby')])),
-            new SpecialRoutePokemon(['Azurill'], new MultiRequirement([new SeededDateSelectNRequirement(18, 33, 3), new ObtainedPokemonRequirement('Azurill')])),
-            new SpecialRoutePokemon(['Plusle'], new MultiRequirement([new SeededDateSelectNRequirement(19, 33, 3), new ObtainedPokemonRequirement('Plusle')])),
-            new SpecialRoutePokemon(['Minun'], new MultiRequirement([new SeededDateSelectNRequirement(20, 33, 3), new ObtainedPokemonRequirement('Minun')])),
-            new SpecialRoutePokemon(['Castform'], new MultiRequirement([new SeededDateSelectNRequirement(21, 33, 3), new ObtainedPokemonRequirement('Castform')])),
-            new SpecialRoutePokemon(['Budew'], new MultiRequirement([new SeededDateSelectNRequirement(22, 33, 3), new ObtainedPokemonRequirement('Budew')])),
-            new SpecialRoutePokemon(['Chingling'], new MultiRequirement([new SeededDateSelectNRequirement(23, 33, 3), new ObtainedPokemonRequirement('Chingling')])),
-            new SpecialRoutePokemon(['Bonsly'], new MultiRequirement([new SeededDateSelectNRequirement(24, 33, 3), new ObtainedPokemonRequirement('Bonsly')])),
-            new SpecialRoutePokemon(['Mime Jr.'], new MultiRequirement([new SeededDateSelectNRequirement(25, 33, 3), new ObtainedPokemonRequirement('Mime Jr.')])),
-            new SpecialRoutePokemon(['Happiny'], new MultiRequirement([new SeededDateSelectNRequirement(26, 33, 3), new ObtainedPokemonRequirement('Happiny')])),
-            new SpecialRoutePokemon(['Handout Happiny'], new MultiRequirement([new SeededDateSelectNRequirement(27, 33, 3), new ObtainedPokemonRequirement('Handout Happiny')])),
-            new SpecialRoutePokemon(['Munchlax'], new MultiRequirement([new SeededDateSelectNRequirement(28, 33, 3), new ObtainedPokemonRequirement('Munchlax')])),
-            new SpecialRoutePokemon(['Riolu'], new MultiRequirement([new SeededDateSelectNRequirement(29, 33, 3), new ObtainedPokemonRequirement('Riolu')])),
-            new SpecialRoutePokemon(['Mantyke'], new MultiRequirement([new SeededDateSelectNRequirement(30, 33, 3), new ObtainedPokemonRequirement('Mantyke')])),
-            new SpecialRoutePokemon(['Phione'], new MultiRequirement([new SeededDateSelectNRequirement(31, 33, 3), new ObtainedPokemonRequirement('Phione')])),
-            new SpecialRoutePokemon(['Toxel'], new MultiRequirement([new SeededDateSelectNRequirement(32, 33, 3), new ObtainedPokemonRequirement('Toxel')])),
+            ...TrophyGardenList.map((pokemon, index) => {
+                const req = new MultiRequirement([
+                    new SeededDateSelectNRequirement(index, TrophyGardenList.length, 3),
+                    new ObtainedPokemonRequirement(pokemon),
+                ]);
+                return new SpecialRoutePokemon([pokemon], req)
+            }),
         ],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 212)],
