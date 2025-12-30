@@ -120,6 +120,7 @@ class DungeonGuide {
             message: 'Thanks for the work.\nLet me know when you\'re hiring again!',
             type: NotificationConstants.NotificationOption.info,
             timeout: 30 * GameConstants.SECOND,
+            sound: NotificationConstants.NotificationSound.General.dungeon_guide_complete,
         });
         // Hide modals
         $('.modal.show').modal('hide');
