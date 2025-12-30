@@ -154,7 +154,6 @@ class SafariBattle {
                 if (!isgameOver) {
                     Safari.spawnItemCheck();
                 }
-                App.game.oakItems.use(OakItemType.Magic_Ball);
                 $('#safariBall').css('filter', 'brightness(0.4) grayscale(100%)');
                 SafariBattle.delay(SafariBattle.Speed.enemyCaught * (1 + SafariBattle.getTierMultiplier()) / 2, false)
                     .then(() => {
@@ -176,6 +175,7 @@ class SafariBattle {
 
     private static capturePokemon() {
         SafariBattle.text(`GOTCHA!<br>${SafariBattle.enemy.displayName} was caught!`);
+        App.game.oakItems.use(OakItemType.Magic_Ball);
         GameHelper.incrementObservable(App.game.statistics.safariPokemonCaptured, 1);
         if (SafariBattle.enemy.shiny) {
             GameHelper.incrementObservable(App.game.statistics.safariShinyPokemonCaptured, 1);
