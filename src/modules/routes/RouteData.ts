@@ -29,6 +29,7 @@ import PokemonLevelRequirement from '../requirements/PokemonLevelRequirement';
 import { getPokemonByName } from '../pokemons/PokemonHelper';
 import CustomRequirement from '../requirements/CustomRequirement';
 import SeededDateSelectNRequirement from '../requirements/SeededDateSelectNRequirement';
+import type { PokemonNameType } from '../pokemons/PokemonNameType';
 
 /*
 KANTO
@@ -1215,12 +1216,12 @@ Routes.add(new RegionRoute(
         land: ['Pikachu', 'Pichu', 'Roselia', 'Staravia', 'Kricketune'],
         special:
         [
-            ...TrophyGardenList.map((pokemon, index) => {
+            ...TrophyGardenList.map((pokemon: PokemonNameType, index) => {
                 const req = new MultiRequirement([
                     new SeededDateSelectNRequirement(index, TrophyGardenList.length, 3),
                     new ObtainedPokemonRequirement(pokemon),
                 ]);
-                return new SpecialRoutePokemon([pokemon], req)
+                return new SpecialRoutePokemon([pokemon], req);
             }),
         ],
     }),
