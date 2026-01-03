@@ -441,7 +441,7 @@ export const BASE_WANDERER_EP_MODIFIER = 2;
 export const WANDERER_EP_MODIFIER = 10;
 
 export const EP_EV_RATIO = 1000;
-export const EP_CHALLENGE_MODIFIER = 10;
+export const EP_CHALLENGE_MODIFIER = 4;
 
 // Mega Evolution
 export const MEGA_REQUIRED_ATTACK_MULTIPLIER = 500;

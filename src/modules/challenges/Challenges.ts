@@ -15,7 +15,7 @@ export default class Challenges implements Saveable {
         disableOakItems: new Challenge('No Oak Items', 'Disables the usage of all Oak Items'),
         disableGems: new Challenge('No Gem Upgrades', 'Disables the usage of Gems to increase type effectiveness'),
         disableVitamins: new Challenge('No Vitamins', 'Disables the usage of Vitamins'),
-        slowEVs: new Challenge('Slow EVs', 'Gain EVs 10x slower'),
+        slowEVs: new Challenge('Slow EVs', 'Gain EVs 4x slower'),
         realEvolutions: new Challenge('Real Evolution', 'Your Pokémon go away when they evolve'),
     };
 
