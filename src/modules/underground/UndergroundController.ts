@@ -136,6 +136,10 @@ export class UndergroundController {
             0,
         );
 
+        if (baseTimeout == 0) {
+            return -60
+        }
+
         if (mineType === MineType.Random) {
             if (App.game.underground.mine?.mineType === MineType.Random) {
                 const rewardTiles = App.game.underground.mine.grid.filter(tile => tile.reward);
@@ -146,7 +150,7 @@ export class UndergroundController {
             return baseTimeout;
         }
 
-        return 0;
+        return -60;
     }
 
     public static calculateSurveyRange(): number {
@@ -416,6 +420,16 @@ export class UndergroundController {
             message: 'Your Underground Battery has been fully charged and is ready to be discharged.',
             type: NotificationOption.info,
             setting: NotificationConstants.NotificationSetting.Underground.battery_full,
+            timeout: 10 * SECOND,
+        });
+    }
+
+    public static notifyMineFound() {
+        Notifier.notify({
+            title: 'Underground',
+            message: 'A new Underground Layer has been discovered.',
+            type: NotificationOption.info,
+            setting: NotificationConstants.NotificationSetting.Underground.underground_mine_found,
             timeout: 10 * SECOND,
         });
     }

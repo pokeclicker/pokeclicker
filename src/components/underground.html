@@ -932,7 +932,7 @@
 
                     <div class="card-footer">
                         <div class="small">
-                            Discovery time: <label data-bind="text: GameConstants.formatTime(UndergroundController.calculateDiscoverMineTimeout(App.game.underground.autoSearchMineType)), css: { 'text-warning': UndergroundController.calculateDiscoverMineTimeout(App.game.underground.autoSearchMineType) > 0 }"></label>
+                            Discovery time: <label data-bind="text: GameConstants.formatTime(Math.max(UndergroundController.calculateDiscoverMineTimeout(App.game.underground.autoSearchMineType), 0)), css: { 'text-warning': UndergroundController.calculateDiscoverMineTimeout(App.game.underground.autoSearchMineType) > 0 }"></label>
                         </div>
 
                         <button class="btn btn-primary" data-bind="click: () => App.game.underground.generateMine(App.game.underground.autoSearchMineType);" data-dismiss="modal">Search for mine</button>
