@@ -19,6 +19,7 @@ import {
     DayTimedMegaEvolution,
     NightTimedMegaEvolution,
     AttackEvolution,
+    NPCRestrictedLevelEvolution,
 } from './evolutions/Methods';
 import BerryType from '../enums/BerryType';
 import ItemType from '../enums/ItemType';
@@ -4635,7 +4636,7 @@ export const pokemonList = createPokemonArray(
         'type': [PokemonType.Normal],
         'levelType': LevelType.mediumfast,
         'exp': 77,
-        'evolutions': [LevelEvolution('Lickitung', 'Lickilicky', 33)],
+        'evolutions': [NPCRestrictedLevelEvolution('Lickitung', 'Lickilicky', 2)],
         'eggCycles': 20,
         'base': {
             'hitpoints': 90,
@@ -4855,7 +4856,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 87,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Tangela', 'Tangrowth', 33)],
+        'evolutions': [NPCRestrictedLevelEvolution('Tangela', 'Tangrowth', 2)],
         'base': {
             'hitpoints': 65,
             'attack': 55,
@@ -6189,7 +6190,7 @@ export const pokemonList = createPokemonArray(
             NightTimedStoneEvolution('Eevee', 'Umbreon', StoneType.Soothe_bell),
             EnvironmentRestrictedLevelEvolution('MossRock', 'Eevee', 'Leafeon', 20),
             EnvironmentRestrictedLevelEvolution('IceRock', 'Eevee', 'Glaceon', 20),
-            LevelEvolution('Eevee', 'Sylveon', 29),
+            NPCRestrictedLevelEvolution('Eevee', 'Sylveon', 2),
             RegionStoneEvolution(galarOnly, 'Eevee', 'Leafeon', StoneType.Leaf_stone),
             RegionStoneEvolution(galarOnly, 'Eevee', 'Glaceon', StoneType.Ice_stone),
         ],
@@ -7714,7 +7715,7 @@ export const pokemonList = createPokemonArray(
         'catchRate': 45,
         'type': [PokemonType.Normal],
         'levelType': LevelType.fast,
-        'evolutions': [LevelEvolution('Aipom', 'Ambipom', 32)],
+        'evolutions': [NPCRestrictedLevelEvolution('Aipom', 'Ambipom', 2)],
         'exp': 72,
         'eggCycles': 20,
         'base': {
@@ -7773,7 +7774,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 78,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Yanma', 'Yanmega', 33)],
+        'evolutions': [NPCRestrictedLevelEvolution('Yanma', 'Yanmega', 2)],
         'base': {
             'hitpoints': 65,
             'attack': 65,
@@ -9028,7 +9029,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 158,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Piloswine', 'Mamoswine', 53)],
+        'evolutions': [NPCRestrictedLevelEvolution('Piloswine', 'Mamoswine', 2)],
         'base': {
             'hitpoints': 100,
             'attack': 100,
@@ -23172,7 +23173,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 102,
         'catchRate': 120,
-        'evolutions': [LevelEvolution('Steenee', 'Tsareena', 29)],
+        'evolutions': [NPCRestrictedLevelEvolution('Steenee', 'Tsareena', 2)],
         'base': {
             'hitpoints': 52,
             'attack': 40,
@@ -24613,7 +24614,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 189,
         'catchRate': 45,
-        'evolutions': [LevelEvolution('Poipole', 'Naganadel', 41)],
+        'evolutions': [NPCRestrictedLevelEvolution('Poipole', 'Naganadel', 2)],
         'base': {
             'hitpoints': 67,
             'attack': 73,
@@ -25950,7 +25951,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'catchRate': 180,
-        'evolutions': [LevelEvolution('Clobbopus', 'Grapploct', 35)],
+        'evolutions': [NPCRestrictedLevelEvolution('Clobbopus', 'Grapploct', 2)],
     },
     {
         'id': 853,

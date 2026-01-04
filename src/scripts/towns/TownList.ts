@@ -4193,6 +4193,13 @@ const SinnohFossilNpc = new NPC('Gossiper', [
     'What? Oh you didn\'t know? The ace Pokémon of Gym Leaders Byron and Roark are resurrected from fossils!',
 ], {image: 'assets/images/npcs/Aroma Lady.png'});
 
+const JubilifeMoveEvolutionExplainer = new NPC('News Host', [
+    'Move! Move! I need to get to the studio! I need to be live in five minutes!',
+    'What was this item about again? Ah yes. Move based evolution.',
+    'Move tutors are available in various towns in the region to teach specific Pokémon special moves, these moves will not make your Pokémon stronger but they will allow them to evolve if you level them up again, don\'t forget you can set their level back to one if you hatch them, yadda yadda.',
+    'Alright! I got this! Confidence, hair, anchor voice! It\'s show time!',
+], {image: 'assets/images/npcs/Reporter.png'});
+
 const FloaromaFlowerGirl = new NPC('Flower Girl', [
     'Something amazing just happened!',
     'My friend was taking their Eevee on a walk through Eterna Forest, and it suddenly evolved!',
@@ -4202,6 +4209,45 @@ const FloaromaFlowerGirl = new NPC('Flower Girl', [
 const EternaLassCaroline = new NPC('Lass Caroline', [
     'Oh, you came from the Forest! That Old Chateau is so creepy, isn’t it? I’ve heard that trainers that catch the weird ghost in the TV have found ghosts in other appliances. Even lawnmowers!',
 ], {image: 'assets/images/npcs/Lass.png'});
+
+const EternaAipomMoveTutor1 = new GiftNPC('Double Hit Move Tutor', [
+    'I see you have an Aipom there. I can teach it the special move Double Hit!',
+    'It won\'t actually make your Aipom any stronger, but knowing this special move would allow it to evolve when it levels up!',
+    'I\'ll do this for you for 10 heart scales.',
+], () => {
+    player.loseItem('Heart_scale', 10);
+}, undefined, {
+    saveKey: 'AipomEvolutionKey',
+    image: 'assets/images/npcs/Black Belt.png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Aipom'),
+        new ItemOwnedRequirement('Heart_scale', 10),
+    ]),
+});
+
+const EternaAipomMoveTutor2 = new NPC('Double Hit Move Tutor', [
+    'I could teach your Aipom the special move Double Hit. If you had one.',
+], {
+    image: 'assets/images/npcs/Black Belt.png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Aipom', true),
+        new ObtainedPokemonRequirement('Ambipom', true),
+        new StatisticRequirement(['npcTalkedTo', EternaAipomMoveTutor1.saveKey], 1, 'Your Aipom already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
+
+const EternaAipomMoveTutor3 = new NPC('Double Hit Move Tutor', [
+    'I see you have an Aipom there. I can teach it the special move Double Hit!',
+    'It won\'t actually make your Aipom any stronger, but knowing this special move would allow it to evolve when it levels up!',
+    'I\'ll do this for you for 10 heart scales. Come back when you have enough.',
+], {
+    image: 'assets/images/npcs/Black Belt.png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Aipom'),
+        new ItemOwnedRequirement('Heart_scale', 10, GameConstants.AchievementOption.less),
+        new StatisticRequirement(['npcTalkedTo', EternaAipomMoveTutor1.saveKey], 1, 'Your Aipom already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
 
 const SinnohBerryMasterAssistant = new NPC('Berry Master Assistant', [
     'I have so many Gracidea right now, so i\'ll sell you one.',
@@ -4219,10 +4265,172 @@ const HearthomeContestFan = new NPC('Contest Fan', [
     'I\'m so happy for them, all of that training in Mt. Coronet must have paid off!',
 ]);
 
+const VeilstoneLickitungMoveTutor1 = new GiftNPC('Rollout Move Tutor', [
+    'Lickitung is the best Pokémon ever!',
+    'But do you know what\'s even better than Lickitung? Rolling Lickitung!',
+    'If you give me 10 Heart Scales, I will teach your Lickitung the special move Rollout!',
+], () => {
+    player.loseItem('Heart_scale', 10);
+}, undefined, {
+    saveKey: 'LickitungEvolutionKey',
+    image: 'assets/images/npcs/School Kid (male).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Lickitung'),
+        new ItemOwnedRequirement('Heart_scale', 10),
+    ]),
+});
+
+const VeilstoneLickitungMoveTutor2 = new NPC('Rollout Move Tutor', [
+    'Lickitung is the best Pokémon ever! If you don\'t have a Lickitung, I don\'t want to talk to you.',
+], {
+    image: 'assets/images/npcs/School Kid (male).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Lickitung', true),
+        new ObtainedPokemonRequirement('Lickilicky', true),
+        new StatisticRequirement(['npcTalkedTo', VeilstoneLickitungMoveTutor1.saveKey], 1, 'Your Lickitung already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
+
+const VeilstoneLickitungMoveTutor3 = new NPC('Rollout Move Tutor', [
+    'Lickitung is the best Pokémon ever!',
+    'But do you know what\'s even better than Lickitung? Rolling Lickitung!',
+    'If you give me 10 Heart Scales, I will teach your Lickitung the special move Rollout! Come see me when you have the Heart Scales.',
+], {
+    image: 'assets/images/npcs/School Kid (male).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Lickitung'),
+        new ItemOwnedRequirement('Heart_scale', 10, GameConstants.AchievementOption.less),
+        new StatisticRequirement(['npcTalkedTo', VeilstoneLickitungMoveTutor1.saveKey], 1, 'Your Lickitung already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
+
 const CelesticGrandma = new NPC('Cynthia\'s Grandmother', [
-    'Hello young one, have you come here to learn of Sinnoh’s mysteries?',
-    'Did you know that in Johto they don’t see Pokémon like Mamoswine? It’s strange too, because you don’t even need a stone to evolve Piloswine… maybe they should try the Day Care?',
-]);
+    'Hmph. Her and her "special rooms". I don\'t know what that Move Tutor\'s trick is, but somehow it does work.',
+    'But what is with that woman and Heart Scales!? One of these days she\'ll have so many that she can build an entire house out of them. That\'d be quite a sight.',
+], {image: 'assets/images/npcs/Old Lady.png'});
+
+const CelesticTangelaMoveTutor1 = new GiftNPC('Ancient Power Move Tutor', [
+    'I am the Ancient Power move tutor. I know all about ancient powers, and the three Pokémon that can learn them.',
+    'I have a special training room for each of them. This is where I teach Ancient Power to Tangela.',
+    'Don\'t worry. The training will be over before you know it. All I need is 10 Heart Scales.',
+], () => {
+    player.loseItem('Heart_scale', 10);
+}, undefined, {
+    saveKey: 'TangelaEvolutionKey',
+    image: 'assets/images/npcs/Veteran (female).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Tangela'),
+        new ItemOwnedRequirement('Heart_scale', 10),
+    ]),
+});
+
+const CelesticTangelaMoveTutor2 = new NPC('Ancient Power Move Tutor', [
+    'I am the Ancient Power move tutor. I know all about ancient powers, and the three Pokémon that can learn them.',
+    'I have has a special training room for each of them. This is where I teach Ancient Power to Tangela.',
+    'I see you don\'t have a Tangela. Come back when you\'ve found one.',
+], {
+    image: 'assets/images/npcs/Veteran (female).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Tangela', true),
+        new ObtainedPokemonRequirement('Tangrowth', true),
+        new StatisticRequirement(['npcTalkedTo', CelesticTangelaMoveTutor1.saveKey], 1, 'Your Tangela already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
+
+const CelesticTangelaMoveTutor3 = new NPC('Ancient Power Move Tutor', [
+    'I am the Ancient Power move tutor. I know all about ancient powers, and the three Pokémon that can learn them.',
+    'I have has a special training room for each of them. This is where I teach Ancient Power to Tangela.',
+    'Don\'t worry. The training will be over before you know it. All I need is 10 Heart Scales. Come back when you can afford my training.',
+], {
+    image: 'assets/images/npcs/Veteran (female).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Tangela'),
+        new ItemOwnedRequirement('Heart_scale', 10, GameConstants.AchievementOption.less),
+        new StatisticRequirement(['npcTalkedTo', CelesticTangelaMoveTutor1.saveKey], 1, 'Your Tangela already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
+
+const CelesticYanmaMoveTutor1 = new GiftNPC('Ancient Power Move Tutor', [
+    'I am the Ancient Power move tutor. I know all about ancient powers, and the three Pokémon that can learn them.',
+    'This is the Yanma training room, where I teach Ancient Power to Yanma.',
+    'I can use my expertise to teach your Yanma too. For the low low cost of 10 Heart Scales.',
+], () => {
+    player.loseItem('Heart_scale', 10);
+}, undefined, {
+    saveKey: 'YanmaEvolutionKey',
+    image: 'assets/images/npcs/Veteran (female).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Yanma'),
+        new ItemOwnedRequirement('Heart_scale', 10),
+    ]),
+});
+
+const CelesticYanmaMoveTutor2 = new NPC('Ancient Power Move Tutor', [
+    'I am the Ancient Power move tutor. I know all about ancient powers, and the three Pokémon that can learn them.',
+    'This is the Yanma training room, where I teach Ancient Power to Yanma.',
+    'You don\'t have a Yanma. That means this room won\'t be of much use to you.',
+], {
+    image: 'assets/images/npcs/Veteran (female).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Yanma', true),
+        new ObtainedPokemonRequirement('Yanmega', true),
+        new StatisticRequirement(['npcTalkedTo', CelesticYanmaMoveTutor1.saveKey], 1, 'Your Yanma already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
+
+const CelesticYanmaMoveTutor3 = new NPC('Ancient Power Move Tutor', [
+    'I am the Ancient Power move tutor. I know all about ancient powers, and the three Pokémon that can learn them.',
+    'This is the Yanma training room, where I teach Ancient Power to Yanma.',
+    'I can use my expertise to teach your Yanma too. For the low low cost of 10 Heart Scales. Come back with those Heart Scales if you want my services.',
+], {
+    image: 'assets/images/npcs/Veteran (female).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Yanma'),
+        new ItemOwnedRequirement('Heart_scale', 10, GameConstants.AchievementOption.less),
+        new StatisticRequirement(['npcTalkedTo', CelesticYanmaMoveTutor1.saveKey], 1, 'Your Yanma already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
+
+const CelesticPiloswineMoveTutor1 = new GiftNPC('Ancient Power Move Tutor', [
+    'I am the Ancient Power move tutor. I know all about ancient powers, and the three Pokémon that can learn them.',
+    'This is the third of my three special rooms. It is fully dedicated to teaching Ancient Power to Piloswine.',
+    'Any Piloswine that spends any amount of time in this room with me (and 10 Heart Scales) will learn this special move and unlock its ability to evolve.',
+], () => {
+    player.loseItem('Heart_scale', 10);
+}, undefined, {
+    saveKey: 'PiloswineEvolutionKey',
+    image: 'assets/images/npcs/Veteran (female).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Piloswine'),
+        new ItemOwnedRequirement('Heart_scale', 10),
+    ]),
+});
+
+const CelesticPiloswineMoveTutor2 = new NPC('Ancient Power Move Tutor', [
+    'I am the Ancient Power move tutor. I know all about ancient powers, and the three Pokémon that can learn them.',
+    'This is the third of my three special rooms. It is fully dedicated to teaching Ancient Power to Piloswine.',
+    'Since you don\'t have a Piloswine, you won\'t be able to use this room\'s potential.',
+], {
+    image: 'assets/images/npcs/Veteran (female).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Piloswine', true),
+        new ObtainedPokemonRequirement('Mamoswine', true),
+        new StatisticRequirement(['npcTalkedTo', CelesticPiloswineMoveTutor1.saveKey], 1, 'Your Piloswine already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
+
+const CelesticPiloswineMoveTutor3 = new NPC('Ancient Power Move Tutor', [
+    'I am the Ancient Power move tutor. I know all about ancient powers, and the three Pokémon that can learn them.',
+    'This is the third of my three special rooms. It is fully dedicated to teaching Ancient Power to Piloswine.',
+    'Any Piloswine that spends any amount of time in this room with me (and 10 Heart Scales, which you don\'t have) will learn this special move and unlock its ability to evolve.',
+], {
+    image: 'assets/images/npcs/Veteran (female).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Piloswine'),
+        new ItemOwnedRequirement('Heart_scale', 10, GameConstants.AchievementOption.less),
+        new StatisticRequirement(['npcTalkedTo', CelesticPiloswineMoveTutor1.saveKey], 1, 'Your Piloswine already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
 
 const PalParkWarden = new NPC('Pal Park Warden', [
     'Hey, welcome to the Pal Park! Have you been to my Dad’s Safari Zone in Kanto? We don’t have as many Pokémon here, but I’ve heard that a flower Pokémon found here can bloom when it’s sunny outside!',
@@ -4570,7 +4778,7 @@ TownList['Jubilife City'] = new Town(
     [JubilifeCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 202)],
-        npcs: [SinnohFossilNpc, HappinyWitness1, HappinyWitness8],
+        npcs: [SinnohFossilNpc, JubilifeMoveEvolutionExplainer, HappinyWitness1, HappinyWitness8],
     }
 );
 TownList['Oreburgh City'] = new Town(
@@ -4603,7 +4811,7 @@ TownList['Eterna City'] = new Town(
     [EternaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Eterna City']), new MoveToDungeon(dungeonList['Team Galactic Eterna Building'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Eterna Forest'))],
-        npcs: [EternaLassCaroline, HappinyWitness3],
+        npcs: [EternaLassCaroline, EternaAipomMoveTutor1, EternaAipomMoveTutor2, EternaAipomMoveTutor3, HappinyWitness3],
     }
 );
 TownList['Mt. Coronet'] = new Town(
@@ -4642,7 +4850,7 @@ TownList['Veilstone City'] = new Town(
     [DepartmentStoreShop, new MoveToDungeon(dungeonList['Team Galactic HQ'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 215)],
-        npcs: [],
+        npcs: [VeilstoneLickitungMoveTutor1, VeilstoneLickitungMoveTutor2, VeilstoneLickitungMoveTutor3],
     }
 );
 TownList['Pastoria City'] = new Town(
@@ -4661,7 +4869,7 @@ TownList['Celestic Town'] = new Town(
     [CelesticTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Celestic Town']), TemporaryBattleList['Galactic Boss Cyrus']],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Fen)],
-        npcs: [CelesticGrandma, HappinyWitness4],
+        npcs: [CelesticGrandma, CelesticTangelaMoveTutor1, CelesticTangelaMoveTutor2, CelesticTangelaMoveTutor3, CelesticYanmaMoveTutor1, CelesticYanmaMoveTutor2, CelesticYanmaMoveTutor3, CelesticPiloswineMoveTutor1, CelesticPiloswineMoveTutor2, CelesticPiloswineMoveTutor3, HappinyWitness4],
     }
 );
 TownList['Pal Park'] = new Town(
@@ -6044,6 +6252,46 @@ const CamphrierFlabébéEnthusiast = new NPC('Flabébé Enthusiast', [
     'They simply can\'t resist berries that match their colors - just plant a few and they\'ll soon come wandering in.',
 ]);
 
+const CamphrierEeveeMoveTutor1 = new GiftNPC('Baby-Doll Eyes Move Tutor', [
+    'Did you know that Eevee can evolve into Sylveon if it levels up while it knows a fairy type move?',
+    'Well, you\'re in luck! I\'m the cutest person in this town, and I can teach your Eevee the mystery of cuteness.',
+    'I will need 2000 Fairy Gems to teach your Eevee the special move Baby-Doll Eyes.',
+], () => {
+    App.game.gems.gainGems(-2000, 17);
+}, undefined, {
+    saveKey: 'EeveeEvolutionKey',
+    image: 'assets/images/npcs/Beauty.png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Eevee'),
+        new CustomRequirement(ko.pureComputed(() => +App.game.gems.gemWallet[17] () >= 2000), true, 'Have enough Fairy Gems'),
+    ]),
+});
+
+const CamphrierEeveeMoveTutor2 = new NPC('Baby-Doll Eyes Move Tutor', [
+    'Did you know that Eevee can evolve into Sylveon if it levels up while it knows a fairy type move?',
+    'Of course, if you want a Sylveon, you\'ll first need an Eevee.',
+], {
+    image: 'assets/images/npcs/Beauty.png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Eevee', true),
+        new ObtainedPokemonRequirement('Sylveon', true),
+        new StatisticRequirement(['npcTalkedTo', CamphrierEeveeMoveTutor1.saveKey], 1, 'Your Eevee already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
+
+const CamphrierEeveeMoveTutor3 = new NPC('Baby-Doll Eyes Move Tutor', [
+    'Did you know that Eevee can evolve into Sylveon if it levels up while it knows a fairy type move?',
+    'Well, you\'re in luck! I\'m the cutest person in this town, and I can teach your Eevee the mystery of cuteness.',
+    'I will need 2000 Fairy Gems to teach your Eevee the special move Baby-Doll Eyes. Go get some more of those gems!',
+], {
+    image: 'assets/images/npcs/Beauty.png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Eevee'),
+        new CustomRequirement(ko.pureComputed(() => +App.game.gems.gemWallet[17] () < 2000), true, 'Don\'t have enough Fairy Gems'),
+        new StatisticRequirement(['npcTalkedTo', CamphrierEeveeMoveTutor1.saveKey], 1, 'Your Eevee already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
+
 const Calem2 = new NPC('Calem', [
     'Oh $playername$, you made it here. I wanted to learn about fossils so I went to the fossil lab, but the head scientist is not here.',
     'I heard he\'s in Glittering Cave but I also saw some weird guys in orange going there. Will you come with me and check it out?',
@@ -6566,7 +6814,7 @@ TownList['Camphrier Town'] = new Town(
     [CamphrierTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Camphrier Town'])],
     {
         requirements: [new TemporaryBattleRequirement('Tierno 1')],
-        npcs: [CamphrierFlabébéEnthusiast],
+        npcs: [CamphrierFlabébéEnthusiast, CamphrierEeveeMoveTutor1, CamphrierEeveeMoveTutor2, CamphrierEeveeMoveTutor3],
     }
 );
 TownList['Parfum Palace'] = new Town(
@@ -7095,6 +7343,43 @@ const RoyalAvenueSpectator = new NPC('Spectator', [
     'I like sneaking snacks inside the Battle Royal Dome. One time I snuck in pancakes and there were two trainers from Kanto who both had a Pikachu. I ended up sharing some with one.',
     'Weird thing is, both trainers evolved their Pikachu after the battle, but one had a different form from usual! Maybe there\'s something about Alola that makes certain Pokémon evolve differently? I would check my Evolution Items if I were you.',
 ], {image: 'assets/images/npcs/Preschooler (female).png'});
+const RoyalAvenueSteeneeMoveTutor1 = new GiftNPC('Stomp Move Tutor', [
+    'Steenee will evolve if it levels up while knowing the special move Stomp. Teaching Stomp is actually very easy. So easy, I could even do it for free...',
+    '...But I won\'t. I owe a debt to this woman in Celestic Town, in Sinnoh, and all she wants is Heart Scales. I don\'t know why she needs so many, but she did me a huge favor. I need to repay that, so I need Heart Scales. Maybe she\'s building a house?',
+    'Give me 20 Heart Scales, and I will teach your Steenee Stomp. Remember, this won\'t make your Steenee any stronger, but it will allow it to evolve.',
+], () => {
+    player.loseItem('Heart_scale', 20);
+}, undefined, {
+    saveKey: 'SteeneeEvolutionKey',
+    image: 'assets/images/npcs/Gentleman (Gen 4).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Steenee'),
+        new ItemOwnedRequirement('Heart_scale', 20),
+    ]),
+});
+const RoyalAvenueSteeneeMoveTutor2 = new NPC('Stomp Move Tutor', [
+    'Steenee will evolve if it levels up while knowing the special move Stomp. Teaching Stomp is actually very easy. So easy, I could even do it for free...',
+    '...But I can\'t. Because you don\'t have a Steenee.',
+], {
+    image: 'assets/images/npcs/Gentleman (Gen 4).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Steenee', true),
+        new ObtainedPokemonRequirement('Tsareena', true),
+        new StatisticRequirement(['npcTalkedTo', RoyalAvenueSteeneeMoveTutor1.saveKey], 1, 'Your Steenee already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
+const RoyalAvenueSteeneeMoveTutor3 = new NPC('Stomp Move Tutor', [
+    'Steenee will evolve if it levels up while knowing the special move Stomp. Teaching Stomp is actually very easy. So easy, I could even do it for free...',
+    '...But I won\'t. I owe a debt to this woman in Celestic Town, in Sinnoh, and all she wants is Heart Scales. I don\'t know why she needs so many, but she did me a huge favor. I need to repay that, so I need Heart Scales. Maybe she\'s building a house?',
+    'Go gather 20 Heart Scales, and I will teach your Steenee Stomp. Remember, this won\'t make your Steenee any stronger, but it will allow it to evolve.',
+], {
+    image: 'assets/images/npcs/Gentleman (Gen 4).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Steenee'),
+        new ItemOwnedRequirement('Heart_scale', 20, GameConstants.AchievementOption.less),
+        new StatisticRequirement(['npcTalkedTo', RoyalAvenueSteeneeMoveTutor1.saveKey], 1, 'Your Steenee already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
 const KonikoniKahuna = new NPC('Kahuna Olivia', [
     'What do you mean Grand trials are just like gym battles? It\'s a totally different thing!',
     'Come fight me in our very special and unique brand new Pokémon League and see if you still think our Island Challenge is nothing special!',
@@ -7165,6 +7450,37 @@ const ReconSquadAltar = new NPC('Ultra Recon Squad', [
 ], {
     image: 'assets/images/npcs/specialNPCs/Ultra Recon Squad (all).png',
     requirement: new QuestLineStepCompletedRequirement('Eater of Light', 0),
+});
+const AltaroftheSunneandMoonePoipoleMoveTutor1 = new GiftNPC('Dragon Pulse Move Tutor', [
+    'That Poipole can evolve as well. It just needs to level up while knowing the special move Dragon Pulse. We can teach that move to the Poipole you bought from us, but we will need some additional materials.',
+    'It doesn\'t seem fair after you just paid us for the Poipole, does it? Truly, it is not for our benefit, we do absolutely need these materials. Do you know how difficult it is to teach a dragon type move to a poison type Pokémon?',
+    'We will need 10,000 Dragon Gems and 15 Draco Plates. It will be well worth it.',
+], () => {
+    player.loseItem('Draco_plate', 15);
+    App.game.gems.gainGems(-10000, 14);
+}, undefined, {
+    saveKey: 'PoipoleEvolutionKey',
+    image: 'assets/images/npcs/specialNPCs/Ultra Recon Squad (all).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Poipole'),
+        new ItemOwnedRequirement('Draco_plate', 15),
+        new CustomRequirement(ko.pureComputed(() => +App.game.gems.gemWallet[14] () >= 10000), true, 'Have enough Dragon Gems'),
+    ]),
+});
+const AltaroftheSunneandMoonePoipoleMoveTutor2 = new NPC('Dragon Pulse Move Tutor', [
+    'That Poipole can evolve as well. It just needs to level up while knowing the special move Dragon Pulse. We can teach that move to the Poipole you bought from us, but we will need some additional materials.',
+    'It doesn\'t seem fair after you just paid us for the Poipole, does it? Truly, it is not for our benefit, we do absolutely need these materials. Do you know how difficult it is to teach a dragon type move to a poison type Pokémon?',
+    'We will need 10,000 Dragon Gems and 15 Draco Plates. You should come see us when you have those materials. It will be well worth it.',
+], {
+    image: 'assets/images/npcs/specialNPCs/Ultra Recon Squad (all).png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Poipole'),
+        new StatisticRequirement(['npcTalkedTo', AltaroftheSunneandMoonePoipoleMoveTutor1.saveKey], 1, 'Your Poipole already knows this move.', GameConstants.AchievementOption.less),
+        new OneFromManyRequirement([
+            new ItemOwnedRequirement('Draco_plate', 15, GameConstants.AchievementOption.less),
+            new CustomRequirement(ko.pureComputed(() => +App.game.gems.gemWallet[14] () < 10000), true, 'Don\'t have enough Dragon Gems'),
+        ]),
+    ]),
 });
 
 const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [
@@ -7934,7 +8250,7 @@ TownList['Royal Avenue'] = new Town(
     [DepartmentStoreShop, TemporaryBattleList['Battle Royal'], TemporaryBattleList['Molayne Steel Memory']],
     {
         requirements: [new TemporaryBattleRequirement('Skull 3')],
-        npcs: [RoyalAvenueSpectator, MolayneSilvally],
+        npcs: [RoyalAvenueSpectator, RoyalAvenueSteeneeMoveTutor1, RoyalAvenueSteeneeMoveTutor2, RoyalAvenueSteeneeMoveTutor3, MolayneSilvally],
     }
 );
 TownList['Konikoni City'] = new Town(
@@ -8019,7 +8335,7 @@ TownList['Altar of the Sunne and Moone'] = new Town(
     [TemporaryBattleList.Lusamine, TemporaryBattleList.Necrozma, TemporaryBattleList['Ultra Megalopolis'], TemporaryBattleList.Lillie, AltaroftheSunneandMooneShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Altar of the Sunne and Moone'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
-        npcs: [SunFlute, MoonFlute, LillieAltar1, Lillie7, HapuAltar, PhycoAltar, LillieAltar2, ReconSquadAltar, Lillie8, AlolanAstronomer],
+        npcs: [SunFlute, MoonFlute, LillieAltar1, Lillie7, HapuAltar, PhycoAltar, LillieAltar2, ReconSquadAltar, Lillie8, AlolanAstronomer, AltaroftheSunneandMoonePoipoleMoveTutor1, AltaroftheSunneandMoonePoipoleMoveTutor2],
     }
 );
 TownList['Pokémon League Alola'] = new Town(
@@ -8660,6 +8976,46 @@ const TeamYellGrunts = new NPC('Team Yell Grunts', [
     'When it’s hungry, though, it gets so angry it changes forms.',
     'If you want to catch it in that form, you would probably be best trying to attract it with a berry that electric Pokémon like.',
 ], {image: 'assets/images/npcs/Team Yell Grunts.png'});
+
+const SpikemuthClobbopusMoveTutor1 = new GiftNPC('Taunt Move Tutor', [
+    'Hey! Hey you! You\'re a monkey face and you have nachos for brains!',
+    'Haha! You see? We have the best taunts! We are the taunting experts, and we can teach your Clobbopus the special move Taunt!',
+    'We just need... 1000 Quest Points! That\'s a lot right? Is that a lot?',
+], () => {
+    App.game.wallet.loseAmount(new Amount(1000, GameConstants.Currency.questPoint));
+}, undefined, {
+    saveKey: 'ClobbopusEvolutionKey',
+    image: 'assets/images/npcs/Team Yell Grunts.png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Clobbopus'),
+        new CustomRequirement(ko.pureComputed(() => +App.game.wallet.hasAmount(new Amount(1000, GameConstants.Currency.questPoint))), 1, 'Get more quest points'),
+    ]),
+});
+
+const SpikemuthClobbopusMoveTutor2 = new NPC('Taunt Move Tutor', [
+    'Hey! Hey you! You\'re a monkey face and you have nachos for brains!',
+    'Hah! You see! We... Oh. You don\'t have a Clobbopus! Oh no. We\'re so sorry. Please move along. Please. Our sincerest apologies.',
+], {
+    image: 'assets/images/npcs/Team Yell Grunts.png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Clobbopus', true),
+        new ObtainedPokemonRequirement('Grapploct', true),
+        new StatisticRequirement(['npcTalkedTo', SpikemuthClobbopusMoveTutor1.saveKey], 1, 'Your Clobbopus already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
+
+const SpikemuthClobbopusMoveTutor3 = new NPC('Taunt Move Tutor', [
+    'Hey! Hey you! You\'re a monkey face and you have nachos for brains!',
+    'Haha! You see? We have the best taunts! We are the taunting experts, and we can teach your Clobbopus the special move Taunt!',
+    'We just need... 1000 Quest Points! That\'s a lot right? Is that a lot? It must be a lot if you don\'t even have that.',
+], {
+    image: 'assets/images/npcs/Team Yell Grunts.png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Clobbopus'),
+        new CustomRequirement(ko.pureComputed(() => +App.game.wallet.hasAmount(new Amount(1000, GameConstants.Currency.questPoint))), 1, 'Get more quest points', GameConstants.AchievementOption.less),
+        new StatisticRequirement(['npcTalkedTo', SpikemuthClobbopusMoveTutor1.saveKey], 1, 'Your Clobbopus already knows this move.', GameConstants.AchievementOption.less),
+    ]),
+});
 
 const RoseBroadcast = new NPC('Broadcast of Chairman Rose', [
     'Hello there, Leon! Just letting you know...',
@@ -9342,7 +9698,7 @@ TownList.Spikemuth = new Town(
     [SpikemuthShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Spikemuth), TemporaryBattleList['Gym Leader Marnie'], new DockTownContent()],
     {
         requirements: [new TemporaryBattleRequirement('Marnie 2')],
-        npcs: [TeamYellGrunts],
+        npcs: [TeamYellGrunts, SpikemuthClobbopusMoveTutor1, SpikemuthClobbopusMoveTutor2, SpikemuthClobbopusMoveTutor3],
     }
 );
 TownList.Wyndon = new Town(
