@@ -137,7 +137,7 @@ export class UndergroundController {
         );
 
         if (baseTimeout == 0) {
-            return -60
+            return -60;
         }
 
         if (mineType === MineType.Random) {
