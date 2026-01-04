@@ -1,6 +1,7 @@
 /// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/enums/Badges.d.ts" />
+/// <reference path="../../declarations/utilities/UI.d.ts" />
 
 class GymRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
@@ -151,12 +152,35 @@ class GymRunner {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    $('#receiveBadgeModal').on('hidden.bs.modal', () => {
+    $('#receiveBadgeModal').on('hidden.bs.modal', async () => {
         if (GymBattle.gym.badgeReward == BadgeEnums.Soul) {
-            KeyItemController.showGainModal(KeyItemType.Safari_ticket);
+            const modal = KeyItemController.showGainModal(KeyItemType.Safari_ticket);
+            await asyncEvent(modal, 'hidden.bs.modal');
+            KeyItemController.showGainModal(KeyItemType.HM03_surf);
         }
         if (GymBattle.gym.badgeReward == BadgeEnums.Earth) {
             KeyItemController.showGainModal(KeyItemType.Gem_case);
+        }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Fog) {
+            KeyItemController.showGainModal(KeyItemType.HM03_surf);
+        }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Heat) {
+            KeyItemController.showGainModal(KeyItemType.Go_goggles);
+        }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Balance) {
+            KeyItemController.showGainModal(KeyItemType.HM03_surf);
+        }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Mind) {
+            KeyItemController.showGainModal(KeyItemType.HM08_dive);
+        }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Fen) {
+            KeyItemController.showGainModal(KeyItemType.HM03_surf);
+        }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Quake) {
+            KeyItemController.showGainModal(KeyItemType.HM03_surf);
+        }
+        if (GymBattle.gym.badgeReward == BadgeEnums.Rumble) {
+            KeyItemController.showGainModal(KeyItemType.HM03_surf);
         }
     });
 });

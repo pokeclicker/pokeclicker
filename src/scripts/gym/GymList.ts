@@ -93,6 +93,7 @@ GymList['Fuchsia City'] = new Gym(
     ],
     () => {
         App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
         App.game.quests.getQuestLine('Mining Expedition').beginQuest(0, undefined, true);
     }
 );
@@ -295,6 +296,7 @@ GymList['Ecruteak City'] = new Gym(
     'I\'m not good enough yet... All right. This Badge is yours.',
     [new GymBadgeRequirement(BadgeEnums.Plain)],
     () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
         App.game.quests.getQuestLine('Team Rocket Again').beginQuest(0, undefined, true);
         App.game.quests.getQuestLine('The Sick Ampharos').beginQuest(0, undefined, true);
     }
@@ -491,7 +493,10 @@ GymList['Lavaridge Town'] = new Gym(
     BadgeEnums.Heat,
     4000,
     'Oh... I guess I was trying too hard... I... I\'ve only recently become a Gym Leader. I tried too hard to be someone I\'m not. I have to do things my natural way. If I don\'t, my Pokémon will be confused. Thanks for teaching me that. For that, you deserve this.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Jagged Pass'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Jagged Pass'))],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.Go_goggles, true);
+    }
 );
 GymList['Petalburg City'] = new Gym(
     'Norman',
@@ -508,7 +513,10 @@ GymList['Petalburg City'] = new Gym(
     [
         new GymBadgeRequirement(BadgeEnums.Knuckle),
         new GymBadgeRequirement(BadgeEnums.Heat),
-    ]
+    ],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
+    }
 );
 GymList['Fortree City'] = new Gym(
     'Winona',
@@ -537,7 +545,10 @@ GymList['Mossdeep City'] = new Gym(
     BadgeEnums.Mind,
     8000,
     'What? Our combination... was shattered! It can\'t be helped. You\'ve won... So, in recognition, take this Gym Badge.',
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 125)]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 125)],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM08_dive, true);
+    }
 );
 GymList['Sootopolis City'] = new Gym(
     'Juan',
@@ -935,7 +946,10 @@ GymList['Pastoria City'] = new Gym(
     BadgeEnums.Fen,
     2500,
     'It seems the undertow pulled me under... But I had a great time battling with you! You\'ve earned this!',
-    [new TemporaryBattleRequirement('Barry 4')]
+    [new TemporaryBattleRequirement('Barry 4')],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
+    }
 );
 GymList['Canalave City'] = new Gym(
     'Byron',
@@ -1131,7 +1145,10 @@ GymList['Driftveil City'] = new Gym(
     BadgeEnums.Quake,
     4800,
     'Phew… You\'re really somethin\'! Li\'l whippersnapper Trainers who pack a real punch keep showin\' up one after another. Mrmph. Here! Take this!',
-    [new GymBadgeRequirement(BadgeEnums.Bolt)]
+    [new GymBadgeRequirement(BadgeEnums.Bolt)],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
+    }
 );
 GymList['Mistralton City'] = new Gym(
     'Skyla',
@@ -1299,7 +1316,10 @@ GymList['Shalour City'] = new Gym(
     BadgeEnums.Rumble,
     3800,
     'Oh! I have been defeated! Alack, alay! Lady Korrina gave a terrible display! This is it. I must give up my title and admit that your strength far exceeds-- Just teasing! But here\'s your Badge. Boy, you\'ll be rolling in \'em soon!',
-    [new TemporaryBattleRequirement('Calem 1')]
+    [new TemporaryBattleRequirement('Calem 1')],
+    () => {
+        App.game.keyItems.gainKeyItem(KeyItemType.HM03_surf, true);
+    }
 );
 GymList['Coumarine City'] = new Gym(
     'Ramos',

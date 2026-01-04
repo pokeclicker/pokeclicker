@@ -1,11 +1,11 @@
 // Utilities for controlling the user interface
 
+import type JQuery from 'jquery';
 import Amount from '../wallet/Amount';
 import Settings from '../settings';
 import { Currency } from '../GameConstants';
 import Rand from './Rand';
 
-// eslint-disable-next-line import/prefer-default-export
 export function animateCurrency({ amount, currency }: Amount) {
     // Check if animations have been disabled
     if (amount > 0 && !Settings.getSetting('showCurrencyGainedAnimation').observableValue()) {
@@ -38,5 +38,12 @@ export function animateCurrency({ amount, currency }: Amount) {
     }, animationTime, 'linear',
     () => {
         $(aniElement).remove();
+    });
+}
+
+// return a Promise which will resolve when `event` is fired on `elem`
+export function asyncEvent(elem: JQuery<HTMLElement>, event: string): Promise<unknown> {
+    return new Promise((resolve) => {
+        elem.one(event, resolve);
     });
 }

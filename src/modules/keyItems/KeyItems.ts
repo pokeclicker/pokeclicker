@@ -6,6 +6,7 @@ import { Feature } from '../DataStore/common/Feature';
 import {
     getDungeonIndex, Region, RegionalStarters, ROUTE_KILLS_NEEDED, Pokerus,
 } from '../GameConstants';
+import LevelableKeyItem, { KeyItemLevel } from './LevelableKeyItem';
 
 export default class KeyItems implements Feature {
     name = 'Key Items';
@@ -38,15 +39,49 @@ export default class KeyItems implements Feature {
                     });
                 }, 'Town Map'),
             new KeyItem(KeyItemType.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region and beyond.<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon.', undefined, undefined, undefined, 'Dungeon Ticket'),
-            new KeyItem(KeyItemType.Super_rod, 'The best fishing rod for catching wild water Pokémon.',
-                () => App.game.statistics.routeKills[Region.kanto][12]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Super Rod'),
+            new KeyItem(KeyItemType.Super_rod, 'The best fishing rod for catching wild water Pokémon.', undefined, undefined, undefined, 'Super Rod'),
+            new LevelableKeyItem(KeyItemType.Fishing_rod, [
+                new KeyItemLevel('Allows you to encounter some common Pokémon that live in Kanto\'s water', () => App.game.statistics.routeKills[Region.kanto][6]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter uncommon Pokémon that live in Kanto\'s water', () => MapHelper.accessToTown('Fuchsia City')),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s waters.', () => App.game.statistics.routeKills[Region.kanto][13]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s waters and common Pokémon that live in Johto\'s waters.', () => App.game.statistics.routeKills[Region.johto][32]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s waters and uncommon Pokémon that live in Johto\'s waters.', () => App.game.statistics.routeKills[Region.johto][39]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s and Johto\'s waters.', () => App.game.statistics.routeKills[Region.johto][28]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s and Johto\'s waters and common Pokémon that live in Hoenn\'s waters.', () => App.game.statistics.dungeonsCleared[getDungeonIndex('Granite Cave')]() > 0),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s and Johto\'s waters and uncommon Pokémon that live in Hoenn\'s waters.', () => App.game.statistics.routeKills[Region.hoenn][118]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s and Hoenn\'s waters.', () => App.game.statistics.routeKills[Region.hoenn][125]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s and Hoenn\'s waters and common Pokémon that live in Sinnoh\'s waters.', () => App.game.statistics.routeKills[Region.sinnoh][202]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s and Hoenn\'s waters and uncommon Pokémon that live in Sinnoh\'s waters.', () => App.game.statistics.routeKills[Region.sinnoh][209]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s, Hoenn\'s and Sinnoh\'s waters.', () => App.game.statistics.routeKills[Region.sinnoh][225]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s, Hoenn\'s, Sinnoh\'s and Unova\'s waters.', () => App.game.statistics.routeKills[Region.unova][1]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s, Hoenn\'s, Sinnoh\'s and Unova\'s waters and common Pokémon that live in Kalos\' waters.', () => App.game.statistics.routeKills[Region.kalos][8]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s, Hoenn\'s, Sinnoh\'s and Unova\'s waters and uncommon Pokémon that live in Kalos\' waters.', () => App.game.statistics.routeKills[Region.kalos][12]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s, Hoenn\'s, Sinnoh\'s, Unova\'s and Kalos\' waters.', () => App.game.statistics.routeKills[Region.kalos][16]() >= ROUTE_KILLS_NEEDED),
+                new KeyItemLevel('Allows you to encounter rare Pokémon that live in Kanto\'s, Johto\'s, Hoenn\'s, Sinnoh\'s, Unova\'s, Kalos\' and Alola\'s waters.', () => App.game.statistics.dungeonsCleared[getDungeonIndex('Brooklet Hill')]() > 0),
+            ], undefined, undefined, 'Fishing Rod'),
+
+            new LevelableKeyItem(KeyItemType.HM03_surf, [
+                new KeyItemLevel('Can be used for crossing water in Kanto', undefined),
+                new KeyItemLevel('Can be used for crossing water in Kanto and Johto', undefined),
+                new KeyItemLevel('Can be used for crossing water in Kanto, Johto and Hoenn', undefined),
+                new KeyItemLevel('Can be used for crossing water in Kanto, Johto, Hoenn and Sinnoh', undefined),
+                new KeyItemLevel('Can be used for crossing water in Kanto, Johto, Hoenn, Sinnoh and Unova', undefined),
+                new KeyItemLevel('Can be used for crossing water in Kanto, Johto, Hoenn, Sinnoh, Unova and Kalos', undefined),
+                new KeyItemLevel('Can be used for crossing water in Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos and Alola', () => App.game.statistics.routeKills[Region.alola][5]() >= ROUTE_KILLS_NEEDED),
+            ], undefined, undefined, 'HM03 Surf'),
+
+            new KeyItem(KeyItemType.TM02_headbutt, 'Can be used to knock wild Pokémon from trees. Warning, may cause concussion.',
+                () => App.game.statistics.dungeonsCleared[getDungeonIndex('Ilex Forest')]() > 0,
+                undefined, undefined, 'TM02 Headbutt'),
+            new KeyItem(KeyItemType.Go_goggles, 'Can be used to access new parts of route 111 and encounter new Pokémon.', undefined, undefined, undefined, 'Go-Goggles'),
+            new KeyItem(KeyItemType.HM08_dive, 'Can be used to dive to the bottom of the ocean to find new kinds of Pokémon.', undefined, undefined, undefined, 'HM08 Dive'),
             new KeyItem(KeyItemType.Holo_caster, 'A device that allows users to see and track Achievements. Completing Achievements gives useful bonuses.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Victory Road')]() > 0, undefined, undefined, 'Holo Caster'),
             new KeyItem(KeyItemType.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémon Attack. Some baby Pokémon can only be found through breeding, too!',
                 () => App.game.statistics.routeKills[Region.kanto][3]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Mystery Egg'),
             new KeyItem(KeyItemType.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City.', undefined, undefined, undefined, 'Safari Ticket'),
             new KeyItem(KeyItemType.Wailmer_pail, 'This is a tool for watering Berries to allow you to operate the farm.',
-                () => MapHelper.accessToRoute(11, Region.kanto), undefined, undefined, 'Wailmer Pail'),
+                () => App.game.statistics.routeKills[Region.kanto][11]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Wailmer Pail'),
 
             new KeyItem(KeyItemType.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground.', undefined, undefined, undefined, 'Explorer Kit'),
             new KeyItem(KeyItemType.Eon_ticket, 'A limited edition ticket for a cruise to the Southern Island.', undefined, undefined, undefined, 'Eon Ticket'),
@@ -90,6 +125,13 @@ export default class KeyItems implements Feature {
             return false;
         }
         return keyItem.isUnlocked();
+    }
+
+    hasKeyItemLevel(item: KeyItemType, level: number): boolean {
+        if (this.itemList[item] === undefined) {
+            return false;
+        }
+        return this.itemList[item].isUnlocked() && this.itemList[item] instanceof LevelableKeyItem && (this.itemList[item] as LevelableKeyItem).level >= level;
     }
 
     gainKeyItem(item: KeyItemType, silent = false): void {
