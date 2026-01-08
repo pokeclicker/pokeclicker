@@ -1368,7 +1368,7 @@
         <!--Fields of Honor extension-->
         <%- include('templates/mapRoute',
             { route: 33, region: 7
-            , width: 1, height: 2
+            , width: 1, height: 1
             , x: 62, y: 42, name: "FoH"
             , noText: true
             })
@@ -1377,7 +1377,7 @@
         <!--Fields of Honor extension-->
         <%- include('templates/mapRoute',
             { route: 33, region: 7
-            , width: 8, height: 2
+            , width: 9, height: 2
             , x: 54, y: 43, name: "FoH"
             , noText: true
             })
@@ -1774,8 +1774,8 @@
         <!--Workout Sea extension-->
         <%- include('templates/mapRoute',
             { route: 41, region: 7
-            , width: 9, height: 3
-            , x: 70, y: 44, name: "WS"
+            , width: 16, height: 1
+            , x: 63, y: 44, name: "WS"
             , noText: true
             })
         %>
@@ -1783,7 +1783,7 @@
         <!--Workout Sea extension-->
         <%- include('templates/mapRoute',
             { route: 41, region: 7
-            , width: 1, height: 2
+            , width: 18, height: 2
             , x: 61, y: 45, name: "WS"
             , noText: true
             })
@@ -2449,15 +2449,17 @@
             { name: "Dock"
             , x: 63, y: 42
             , width: 2, height: 2
-            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Master Dojo') }"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: player.highestRegion() >= 7 ? 'completed' : 'locked'}"
             })
         %>
 
-        <%- include('templates/mapPOI',
+        <%- include('templates/mapOverlay',
             { name: "S. S. Anne"
             , x: 62, y: 44
             , width: 8, height: 3
-            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Master Dojo') }"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: player.highestRegion() >= 7 ? 'completed' : 'locked'}"
+            , visible:  "player.highestRegion() >= 7"
+            , image: "assets/images/shipeast.png"
             })
         %>
 
