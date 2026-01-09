@@ -1126,12 +1126,29 @@ Routes.add(new RegionRoute(
     [new RouteKillRequirement(10, Region.sinnoh, 202)],
 ));
 Routes.add(new RegionRoute(
-    'Sinnoh Route 205', Region.sinnoh, 205,
+    'Sinnoh Route 205 South', Region.sinnoh, 205,
     new RoutePokemon({
-        land: ['Hoothoot', 'Wurmple', 'Silcoon', 'Beautifly', 'Cascoon', 'Dustox', 'Bidoof', 'Kricketot', 'Budew', 'Buizel', 'Shellos (West)'],
-        water: ['Psyduck', 'Golduck', 'Tentacool', 'Tentacruel', 'Shellder', 'Magikarp', 'Gyarados', 'Gastrodon (West)', 'Finneon', 'Lumineon', 'Barboach', 'Whiscash'],
+        land: ['Bidoof', 'Buizel', 'Shellos (West)'],
+        water: ['Tentacool', 'Tentacruel', 'Shellder', 'Magikarp', 'Gyarados', 'Shellos (West)', 'Gastrodon (West)', 'Finneon', 'Lumineon'],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Valley Windworks'))],
+));
+Routes.add(new RegionRoute(
+    'Sinnoh Route 205 North', Region.sinnoh, 231,
+    new RoutePokemon({
+        land: ['Hoothoot', 'Wurmple', 'Silcoon', 'Beautifly', 'Cascoon', 'Dustox', 'Bidoof', 'Kricketot', 'Budew', 'Buizel', 'Shellos (West)'],
+        water: ['Psyduck', 'Golduck', 'Magikarp', 'Gyarados', 'Barboach', 'Whiscash'],
+    }),
+    [new ClearDungeonRequirement(1, getDungeonIndex('Eterna Forest'))],
+    205.1,
+));
+Routes.add(new RegionRoute(
+    'Sinnoh Route 211 West', Region.sinnoh, 232,
+    new RoutePokemon({
+        land: ['Zubat', 'Machop', 'Hoothoot', 'Meditite', 'Bidoof', 'Chingling', 'Bronzor'],
+    }),
+    [new RouteKillRequirement(10, Region.sinnoh, 231)],
+    205.2,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 206', Region.sinnoh, 206,
@@ -1164,10 +1181,9 @@ Routes.add(new RegionRoute(
     [new TemporaryBattleRequirement('Barry 3')],
 ));
 Routes.add(new RegionRoute(
-    'Sinnoh Route 210', Region.sinnoh, 210,
+    'Sinnoh Route 210 South', Region.sinnoh, 210,
     new RoutePokemon({
-        land: ['Psyduck', 'Machop', 'Machoke', 'Geodude', 'Ponyta', 'Chansey', 'Scyther', 'Hoothoot', 'Noctowl', 'Roselia', 'Meditite', 'Swablu', 'Bibarel', 'Staravia'],
-        water: ['Golduck', 'Magikarp', 'Gyarados', 'Barboach', 'Whiscash'],
+        land: ['Geodude', 'Ponyta', 'Chansey', 'Scyther', 'Hoothoot', 'Noctowl', 'Roselia', 'Staravia'],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 209)],
 ));
@@ -1207,12 +1223,21 @@ Routes.add(new RegionRoute(
     210.4,
 ));
 Routes.add(new RegionRoute(
-    'Sinnoh Route 211', Region.sinnoh, 211,
+    'Sinnoh Route 210 North', Region.sinnoh, 233,
     new RoutePokemon({
-        land: ['Zubat', 'Machop', 'Machoke', 'Graveler', 'Hoothoot', 'Noctowl', 'Meditite', 'Bidoof', 'Chingling', 'Bronzor'],
+        land: ['Psyduck', 'Machop', 'Machoke', 'Scyther', 'Hoothoot', 'Noctowl', 'Meditite', 'Swablu', 'Bibarel'],
+        water: ['Psyduck', 'Golduck', 'Magikarp', 'Gyarados', 'Barboach', 'Whiscash'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Fen)],
     210.5,
+));
+Routes.add(new RegionRoute(
+    'Sinnoh Route 211 East', Region.sinnoh, 211,
+    new RoutePokemon({
+        land: ['Zubat', 'Machoke', 'Graveler', 'Noctowl', 'Meditite', 'Chingling', 'Bronzor'],
+    }),
+    [new RouteKillRequirement(10, Region.sinnoh, 233)],
+    210.6,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 218', Region.sinnoh, 218,
@@ -1221,7 +1246,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Shellos (West)', 'Finneon', 'Lumineon'],
     }),
     [new TemporaryBattleRequirement('Galactic Boss Cyrus')],
-    210.6,
+    210.7,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 216', Region.sinnoh, 216,

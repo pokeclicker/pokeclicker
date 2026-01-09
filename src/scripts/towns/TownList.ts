@@ -4602,7 +4602,7 @@ TownList['Eterna City'] = new Town(
     GameConstants.SinnohSubRegions.Sinnoh,
     [EternaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Eterna City']), new MoveToDungeon(dungeonList['Team Galactic Eterna Building'])],
     {
-        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Eterna Forest'))],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 231)],
         npcs: [EternaLassCaroline, HappinyWitness3],
     }
 );
@@ -4660,7 +4660,7 @@ TownList['Celestic Town'] = new Town(
     GameConstants.SinnohSubRegions.Sinnoh,
     [CelesticTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Celestic Town']), TemporaryBattleList['Galactic Boss Cyrus']],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Fen)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 233)],
         npcs: [CelesticGrandma, HappinyWitness4],
     }
 );
@@ -4867,8 +4867,13 @@ TownList['Mt. Coronet North'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
     [
-        new RouteKillRequirement(10, GameConstants.Region.sinnoh, 211),
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lake Verity')),
+        new MultiRequirement([
+            new OneFromManyRequirement([
+                new RouteKillRequirement(10, GameConstants.Region.sinnoh, 211),
+                new RouteKillRequirement(10, GameConstants.Region.sinnoh, 232),
+            ]),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lake Verity')),
+        ]),
     ]
 );
 TownList['Lake Acuity'] = new DungeonTown(

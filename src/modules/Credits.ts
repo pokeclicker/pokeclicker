@@ -643,6 +643,14 @@ export const SpriteCredits: Credit[] = [
         // Notes: Allowed use with credit
     },
     {
+        name: 'Fanking Omega',
+        link: 'https://fanart.pokefans.net/tutorials/mapping/tilesets',
+        resources: [
+            'Snow Tileset',
+        ],
+        // NOTES: Free to use with credit according to the website
+    },
+    {
         name: 'Farboo171',
         link: 'https://github.com/Farboo171',
         resources: [
