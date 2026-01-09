@@ -258,6 +258,29 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 </div>
                                                 <!-- /ko -->
                                             </div>
+                                            <div class="form-group col-lg-6 col-6">
+                                                <!-- ko let: { breedingType1Attack: Settings.getSetting('breedingType1Attack') } -->
+                                                <label>Types Attacking</label>
+                                                <select id="breeding-attack-type1" class="custom-select"
+                                                        data-bind="options: breedingType1Attack.options,
+                                                                optionsValue: 'value',
+                                                                optionsText: 'text',
+                                                                value: breedingType1Attack.observableValue">
+                                                </select>
+                                                <!-- /ko -->
+                                            </div>
+                                            <div class="form-group col-lg-6 col-6">
+                                                <!-- ko let: { breedingType2Attack: Settings.getSetting('breedingType2Attack') } -->
+                                                <label> </label>
+                                                <select id="breeding-attack-type2" class="custom-select"
+                                                        data-bind="options: breedingType2Attack.options,
+                                                                optionsValue: 'value',
+                                                                optionsText: 'text',
+                                                                value: breedingType2Attack.observableValue">
+                                                </select>
+                                                <!-- /ko -->
+                                            </div>
+
 
                                             <div class="col-12">
                                                 <hr style="border-color:grey;">

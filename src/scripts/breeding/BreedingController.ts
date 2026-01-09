@@ -10,7 +10,7 @@ class BreedingController {
 
     public static initialize() {
         // Track view settings for hatchery list rerendering
-        const hatcheryListSettings = [...breedingFilterSettingKeys, 'hatcherySort', 'hatcherySortDirection'];
+        const hatcheryListSettings = [...breedingFilterSettingKeys, 'hatcherySort', 'hatcherySortDirection', 'breedingType1Attack', 'breedingType2Attack'];
 
         hatcheryListSettings.forEach((setting) => {
             Settings.getSetting(setting).observableValue.subscribe(() => {
@@ -125,18 +125,32 @@ class BreedingController {
     public static getDisplayValue(pokemon: PartyPokemon): string {
         const pokemonData = pokemonMap[pokemon.name];
         switch (Settings.getSetting('breedingDisplayTextSetting').observableValue()) {
-            case 'attackBonus': return `Attack Bonus: ${Math.floor(pokemon.getBreedingAttackBonus() * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
+            case 'attackBonus': return Settings.getSetting('typeMultiplierHatcheryDisplay').observableValue() ? `Attack Bonus: ${Math.floor(pokemon.getBreedingAttackBonus() * BreedingController.calculateRegionalMultiplier(pokemon) * BreedingController.calculateTypeEffectivenessMultiplier(pokemon)).toLocaleString('en-US')}` : `Attack Bonus: ${Math.floor(pokemon.getBreedingAttackBonus() * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
             case 'baseAttack': return `Base Attack: ${pokemon.baseAttack.toLocaleString('en-US')}`;
             case 'eggSteps': return `Egg Steps: ${pokemon.getEggSteps().toLocaleString('en-US')}`;
             case 'timesHatched': return `Hatches: ${App.game.statistics.pokemonHatched[pokemonData.id]().toLocaleString('en-US')}`;
-            case 'breedingEfficiency': return `Efficiency: ${(pokemon.breedingEfficiency() * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US', { maximumFractionDigits: 3 })}`;
-            case 'stepsPerAttack': return `Steps/Att: ${(pokemon.getEggSteps() / (pokemon.getBreedingAttackBonus() * BreedingController.calculateRegionalMultiplier(pokemon))).toLocaleString('en-US', { maximumFractionDigits: 3 })}`;
+            case 'breedingEfficiency': return Settings.getSetting('typeMultiplierHatcheryDisplay').observableValue() ? `Efficiency: ${(pokemon.breedingEfficiency() * BreedingController.calculateRegionalMultiplier(pokemon) * BreedingController.calculateTypeEffectivenessMultiplier(pokemon)).toLocaleString('en-US', { maximumFractionDigits: 3 })}` : `Efficiency: ${(pokemon.breedingEfficiency() * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US', { maximumFractionDigits: 3 })}`;
+            case 'stepsPerAttack': return Settings.getSetting('typeMultiplierHatcheryDisplay').observableValue() ? `Steps/Att: ${(pokemon.getEggSteps() / (pokemon.getBreedingAttackBonus() * BreedingController.calculateRegionalMultiplier(pokemon) * BreedingController.calculateTypeEffectivenessMultiplier(pokemon))).toLocaleString('en-US', { maximumFractionDigits: 3 })}` : `Steps/Att: ${(pokemon.getEggSteps() / (pokemon.getBreedingAttackBonus() * BreedingController.calculateRegionalMultiplier(pokemon))).toLocaleString('en-US', { maximumFractionDigits: 3 })}`;
             case 'dexId': return `#${pokemon.id <= 0 ? '???' : Math.floor(pokemon.id).toString().padStart(3,'0')}`;
             case 'vitamins': return `Vitamins: ${pokemon.totalVitaminsUsed()}`;
             case 'evs': return `EVs: ${pokemon.evs().toLocaleString('en-US')}`;
             case 'attack':
             default:
-                return `Attack: ${Math.floor(pokemon.attack * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
+                return Settings.getSetting('typeMultiplierHatcheryDisplay').observableValue() ? `Attack: ${Math.floor(pokemon.attack * BreedingController.calculateRegionalMultiplier(pokemon) * BreedingController.calculateTypeEffectivenessMultiplier(pokemon)).toLocaleString('en-US')}` : `Attack: ${Math.floor(pokemon.attack * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
+        }
+    }
+
+    public static calculateTypeEffectivenessMultiplier(pokemon: PartyPokemon): number {
+        // Check if any types are selected
+        if (Settings.getSetting('breedingType1Attack').observableValue() == PokemonType.None && Settings.getSetting('breedingType2Attack').observableValue() == PokemonType.None) {
+            return 1.0;
+        }
+        const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+        // If only Type 2 is set, use it for both Types
+        if (Settings.getSetting('breedingType1Attack').observableValue() == PokemonType.None) {
+            return TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Settings.getSetting('breedingType2Attack').observableValue(), Settings.getSetting('breedingType2Attack').observableValue());
+        } else {
+            return TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Settings.getSetting('breedingType1Attack').observableValue(), Settings.getSetting('breedingType2Attack').observableValue());
         }
     }
 
@@ -198,7 +212,8 @@ class BreedingController {
         const hatcheryList = Array.from(BreedingController.hatcheryFilteredList());
         // Don't adjust attack based on region if debuff is disabled
         const region = App.game.challenges.list.regionalAttackDebuff.active() ? Settings.getSetting('breedingRegionalAttackDebuffSetting').observableValue() : -1;
-        hatcheryList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
+        hatcheryList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region,
+            Settings.getSetting('breedingType1Attack').observableValue(), Settings.getSetting('breedingType2Attack').observableValue()));
         // If a filter or sort order just changed
         if (BreedingController.viewResetWaiting.peek()) {
             // Ready to rerender now that the list is up to date

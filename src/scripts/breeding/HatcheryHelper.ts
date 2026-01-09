@@ -216,10 +216,13 @@ class HatcheryHelpers {
             if (egg.isNone()) {
                 // Check if there's a pokemon we can chuck into an egg
                 const regionalAttackDebuff = App.game.challenges.list.regionalAttackDebuff.active() ? Settings.getSetting('breedingRegionalAttackDebuffSetting').value : GameConstants.Region.none;
-                const compare = PartyController.compareBy(helper.sortOption(), helper.sortDirection(), regionalAttackDebuff);
+                const useHatcheryFilters = helper.useHatcheryFilters();
+                const typeOne = useHatcheryFilters ? Settings.getSetting('breedingType1Attack').observableValue() : PokemonType.None;
+                const typeTwo = useHatcheryFilters ? Settings.getSetting('breedingType2Attack').observableValue() : PokemonType.None;
+
+                const compare = PartyController.compareBy(helper.sortOption(), helper.sortDirection(), regionalAttackDebuff, typeOne, typeTwo);
 
                 const categories = helper.categories();
-                const useHatcheryFilters = helper.useHatcheryFilters();
                 const pokemon = App.game.party.caughtPokemon.reduce((best, pokemon) => {
                     if (useHatcheryFilters && !pokemon.isHatchableFiltered()) {
                         return best;

@@ -362,7 +362,7 @@ class PartyController {
         pokemonList.forEach((p) => p.removeCategory(category));
     }
 
-    public static compareBy(option: SortOptions, direction: boolean, region = -1): (a: PartyPokemon, b: PartyPokemon) => number {
+    public static compareBy(option: SortOptions, direction: boolean, region = -1, typeOne = PokemonType.None, typeTwo = PokemonType.None): (a: PartyPokemon, b: PartyPokemon) => number {
         return function (a, b) {
             let res, dir = (direction) ? -1 : 1;
             const config = SortOptionConfigs[option];
@@ -374,6 +374,21 @@ class PartyController {
             if (region > -1 && [SortOptions.attackMaxLevel, SortOptions.breedingEfficiency, SortOptions.attackBonus].includes(option)) {
                 aValue *= PartyController.calculateRegionalMultiplier(a, region);
                 bValue *= PartyController.calculateRegionalMultiplier(b, region);
+            }
+
+            // Apply defending types if needed
+            if ((typeOne != PokemonType.None || typeTwo != PokemonType.None) && [SortOptions.attackMaxLevel, SortOptions.breedingEfficiency, SortOptions.attackBonus].includes(option)) {
+                if (typeOne == PokemonType.None) {
+                    const dataPokemonA = PokemonHelper.getPokemonByName(a.name);
+                    aValue *= TypeHelper.getAttackModifier(dataPokemonA.type1, dataPokemonA.type2, typeTwo, typeTwo);
+                    const dataPokemonB = PokemonHelper.getPokemonByName(b.name);
+                    bValue *= TypeHelper.getAttackModifier(dataPokemonB.type1, dataPokemonB.type2, typeTwo, typeTwo);
+                } else {
+                    const dataPokemonA = PokemonHelper.getPokemonByName(a.name);
+                    aValue *= TypeHelper.getAttackModifier(dataPokemonA.type1, dataPokemonA.type2, typeOne, typeTwo);
+                    const dataPokemonB = PokemonHelper.getPokemonByName(b.name);
+                    bValue *= TypeHelper.getAttackModifier(dataPokemonB.type1, dataPokemonB.type2, typeOne, typeTwo);
+                }
             }
 
             if (option === SortOptions.category) {
