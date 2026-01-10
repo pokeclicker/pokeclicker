@@ -43,6 +43,7 @@ class BattleFrontierRunner {
 
         this.started(true);
         this.stage(useCheckpoint ? this.checkpoint() : 1);
+        this.checkpoint(this.stage());
         this.highest(App.game.statistics.battleFrontierHighestStageCompleted());
         BattleFrontierBattle.pokemonIndex(0);
         BattleFrontierBattle.generateNewEnemy();

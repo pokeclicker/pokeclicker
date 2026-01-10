@@ -2959,6 +2959,11 @@ class Update implements Saveable {
             if (saveData.badgeCase[17]) {
                 Update.startQuestLine(saveData, 'Team Rocket Again');
             }
+
+            // Remove all BF rewards from the save
+            if (saveData.battleFrontier) {
+                delete saveData.battleFrontier.milestones;
+            }
         },
     };
 

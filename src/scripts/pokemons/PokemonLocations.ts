@@ -356,16 +356,16 @@ class PokemonLocations {
         return (evolutionPokemon as PokemonListData)?.evolutions?.find(e => e.evolvedPokemon == pokemonName);
     }
 
-    public static getPokemonBattleFrontier(pokemonName: PokemonNameType): Array<number> {
-        const cache = this.getCache<number[]>(this.getPokemonBattleFrontier.name);
+    public static getPokemonBattleFrontier(pokemonName: PokemonNameType): Array<BattleFrontierMilestone> {
+        const cache = this.getCache<BattleFrontierMilestone[]>(this.getPokemonBattleFrontier.name);
         if (cache[pokemonName]) {
             return cache[pokemonName];
         }
-        const cacheLine = this.initCacheLine(cache, Array<number>);
+        const cacheLine = this.initCacheLine(cache, Array<BattleFrontierMilestone>);
         pokemonList.forEach(p => cacheLine[p.name] = []);
         BattleFrontierMilestones.milestoneRewards.filter(m => m instanceof BattleFrontierMilestonePokemon).forEach(milestone => {
             if (this.pokemonNames.includes(milestone._description)) {
-                cacheLine[milestone._description].push(milestone.stage);
+                cacheLine[milestone._description].push(milestone);
             }
         });
         return cacheLine[pokemonName];
@@ -777,7 +777,8 @@ class PokemonLocations {
             locations[PokemonLocationType.ShadowPokemon] ||
             locations[PokemonLocationType.DreamOrb] ||
             locations[PokemonLocationType.BattleCafe] ||
-            locations[PokemonLocationType.SafariItem];
+            locations[PokemonLocationType.SafariItem] ||
+            (locations[PokemonLocationType.BattleFrontier]?.some(milestone => milestone.repeatStage));
         return !isEvable && Object.keys(locations).length > 0;
     };
 }

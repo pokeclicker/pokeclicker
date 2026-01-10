@@ -32,7 +32,7 @@ class BattleFrontier implements Feature {
 
     toJSON(): Record<string, any> {
         return {
-            milestones: this.milestones.milestoneRewards.filter(m => m.obtained()).map(m => [m.stage, m.description]),
+            milestones: this.milestones.milestoneRewards.map(r => r.toJSON()),
             checkpoint: BattleFrontierRunner.checkpoint(),
         };
     }
@@ -42,8 +42,8 @@ class BattleFrontier implements Feature {
             return;
         }
 
-        json.milestones?.forEach(([stage, description]) => {
-            this.milestones.milestoneRewards.find(m => m.stage == stage && m.description == description)?.obtained(true);
+        json.milestones?.forEach((data, index) => {
+            this.milestones.milestoneRewards[index].fromJSON(data);
         });
 
         BattleFrontierRunner.checkpoint(json.checkpoint);

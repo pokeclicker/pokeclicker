@@ -430,6 +430,7 @@ export const BASE_EP_YIELD = 100;
 export const STONE_EP_YIELD = 1000;
 export const SHOPMON_EP_YIELD = 1000;
 export const SAFARI_EP_YIELD = 1000;
+export const REWARD_EP_YIELD = 1000;
 
 export const SHINY_EP_MODIFIER = 5;
 export const REPEATBALL_EP_MODIFIER = 5;
