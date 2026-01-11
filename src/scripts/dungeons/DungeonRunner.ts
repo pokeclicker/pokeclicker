@@ -61,10 +61,8 @@ class DungeonRunner {
         DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME * DungeonRunner.timeBonus());
 
         DungeonRunner.timeLeftPercentage(100);
-        // Dungeon size increases with each region
-        let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + (dungeon.difficulty);
-        // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes
-        dungeonSize -= Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toString().length - 1);
+        const dungeonSize = DungeonRunner.dungeon.getDungeonSize(false);
+
         const flash = DungeonRunner.getFlash(DungeonRunner.dungeon.name);
         const generateChestLoot = () => {
             const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeon.name)]();
@@ -80,7 +78,7 @@ class DungeonRunner {
             return { tier, loot };
         };
         // Dungeon size minimum of MIN_DUNGEON_SIZE
-        DungeonRunner.map = new DungeonMap(Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize), generateChestLoot, flash);
+        DungeonRunner.map = new DungeonMap(dungeonSize, generateChestLoot, flash);
 
         DungeonRunner.chestsOpened(0);
         DungeonRunner.encountersWon(0);
