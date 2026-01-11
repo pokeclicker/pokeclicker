@@ -11,7 +11,7 @@ class BattleFrontierMilestones {
 
     public static availableMilestones() {
         const stage = BattleFrontierRunner.checkpoint();
-        return BattleFrontierMilestones.milestoneRewards.filter(r => r.nextStageReward(stage) >= stage).sort((a, b) => a.nextStageReward(stage) - b.nextStageReward(stage))
+        return BattleFrontierMilestones.milestoneRewards.filter(r => r.nextStageReward(stage) >= stage).sort((a, b) => a.nextStageReward(stage) - b.nextStageReward(stage));
     }
 
     public static gainReward(defeatedStage: number): void {
