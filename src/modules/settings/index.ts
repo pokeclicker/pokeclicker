@@ -308,8 +308,11 @@ Settings.add(new Setting<number>('heldItemType2Filter', 'Type 2', [
     ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
     new SettingOption('None', PokemonType.None),
 ], -2, undefined, false));
-Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false, undefined, false));
-Settings.add(new BooleanSetting('heldItemHideHoldingThisItem', 'Hide Pokémon holding this item', false, undefined, false));
+Settings.add(new Setting('heldItemCurrentItemFilter', 'Held Item filter', [
+    new SettingOption('Show all Pokémon', 'none'),
+    new SettingOption('Hide Pokémon holding ANY item', 'HideHoldingAnyItem'),
+    new SettingOption('Hide Pokémon holding THIS item', 'HideHoldingThisItem'),
+], 'none'));
 
 // Hatchery Filters
 export const breedingFilterSettingKeys = ['breedingNameFilter', 'breedingIDFilter', 'breedingRegionFilter', 'breedingType1Filter', 'breedingType2Filter',

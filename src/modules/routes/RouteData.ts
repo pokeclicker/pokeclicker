@@ -543,7 +543,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Johto Route 30', Region.johto, 30,
     new RoutePokemon({
-        land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Hoothoot', 'Ledyba', 'Spinarak'],
+        land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Hoothoot', 'Ledyba', 'Spinarak'],
         water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
         headbutt: ['Exeggcute', 'Pineco'],
     }),
@@ -552,8 +552,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Johto Route 31', Region.johto, 31,
     new RoutePokemon({
-        land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Poliwag', 'Hoothoot', 'Ledyba', 'Spinarak', 'Bellsprout'],
-        water: ['Poliwhirl', 'Magikarp'],
+        land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Hoothoot', 'Ledyba', 'Spinarak', 'Bellsprout'],
+        water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
         headbutt: ['Spearow', 'Exeggcute', 'Aipom', 'Pineco', 'Heracross'],
     }),
     [new TemporaryBattleRequirement('Silver 1')],
@@ -1284,7 +1284,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 222', Region.sinnoh, 222,
     new RoutePokemon({
-        land: ['Magnemite', 'Magneton', 'Electabuzz', 'Wingull', 'Pelipper', 'Luxio', 'Floatzel', 'Gastrodon (East)', 'Glameow', 'Purugly', 'Chatot'],
+        land: ['Magnemite', 'Magneton', 'Electabuzz', 'Wingull', 'Pelipper', 'Luxio', 'Floatzel', 'Glameow', 'Purugly', 'Chatot'],
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Remoraid', 'Octillery', 'Sharpedo'],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Distortion World'))],
@@ -1299,7 +1299,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 224', Region.sinnoh, 224,
     new RoutePokemon({
-        land: ['Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Beautifly', 'Dustox', 'Roselia', 'Floatzel', 'Gastrodon (East)', 'Chatot'],
+        land: ['Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Beautifly', 'Dustox', 'Roselia', 'Floatzel', 'Gastrodon (East)'],
         water: ['Tentacruel', 'Magikarp', 'Gyarados', 'Remoraid', 'Octillery', 'Pelipper', 'Luvdisc'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],

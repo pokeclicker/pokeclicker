@@ -20,6 +20,7 @@ const NotificationConstants = {
             dream_orb: new Sound('dream_orb', 'Opening Dream Orb'),
             pokerus: new Sound('pokerus_resistant', 'Pokémon has become Resistant to Pokérus'),
             max_flow: new Sound('max_flow', 'Maximum Flow has accumulated at the Purify Chamber'),
+            dungeon_guide_complete: new Sound('battle_frontier', 'Dungeon Guide has completed all dungeon attempts'),
         },
         Hatchery: {
             ready_to_hatch: new Sound('ready_to_hatch', 'Egg ready to hatch'),
