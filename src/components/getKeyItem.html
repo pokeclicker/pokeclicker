@@ -7,18 +7,20 @@
                     <h5 class="modal-title" id="keyItemModalLabel">New key item!</h5>
                 </div>
             </div>
+            <!-- ko with: App.game.keyItems.itemList.find(k=> k.id == KeyItemController.latestGainedItem()) -->
             <div class="modal-body">
                 <h5><strong>Congratulations!</strong></h5>
                 <span>You have gained a</span><br>
-                <img class="key-item" src="" data-bind="attr:{ title: App.game.keyItems.itemList[KeyItemController.latestGainedItem()].displayName,  src: 'assets/images/keyitems/' + KeyItemType[KeyItemController.latestGainedItem()] + '.png'}"/><br>
+                <img class="key-item" src="" data-bind="attr:{ title: $data.displayName,  src: 'assets/images/keyitems/' + KeyItemType[KeyItemController.latestGainedItem()] + '.png'}"/><br>
                 <span>
-                    <strong data-bind="text: App.game.keyItems.itemList[KeyItemController.latestGainedItem()].displayName">Name</strong>
+                    <strong data-bind="text: $data.displayName">Name</strong>
                 </span><br>
-                <span data-bind="html:  App.game.keyItems.itemList[KeyItemController.latestGainedItem()].description">Description</span>
+                <span data-bind="html: $data.description">Description</span>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: App.game.keyItems.itemList[KeyItemController.latestGainedItem()].unlockRewardOnClose">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: $data.unlockRewardOnClose">Close</button>
             </div>
+            <!-- /ko -->
         </div>
     </div>
 </div>

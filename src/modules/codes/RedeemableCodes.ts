@@ -16,6 +16,7 @@ import GameHelper from '../GameHelper';
 import Amount from '../wallet/Amount';
 import Item from '../items/Item';
 import QuestLineState from '../quests/QuestLineState';
+import Rand from '../utilities/Rand';
 
 export default class RedeemableCodes implements Saveable {
     defaults: Record<string, any>;
@@ -81,12 +82,13 @@ export default class RedeemableCodes implements Saveable {
 
                 return true;
             }),
-            new RedeemableCode('typed-held-item', -2046503095, false, async () => {
+            new RedeemableCode('typed-held-item', -1718195957, false, async () => {
                 // Give the player 3 random typed held items
-                const items = Object.values(ItemList).filter((i) => i.constructor.name === 'TypeRestrictedAttackBonusHeldItem')
-                    .sort(() => 0.5 - Math.random())
-                    .slice(0, 3);
-                items.forEach((i) => i.gain(1));
+                Rand.shuffleArray([
+                    'Black_Belt', 'Black_Glasses', 'Charcoal', 'Dragon_Fang', 'Magnet', 'Metal_Powder',
+                    'Miracle_Seed', 'Mystic_Water', 'Never_Melt_Ice', 'Fairy_Feather', 'Poison_Barb', 'Rock_Incense',
+                    'Sharp_Beak', 'Silk_Scarf', 'Silver_Powder', 'Soft_Sand', 'Spell_Tag', 'Twisted_Spoon',
+                ]).slice(0, 3).forEach(name => ItemList[name].gain(1));
                 // Notify that the code was activated successfully
                 Notifier.notify({
                     title: 'Code activated!',
@@ -215,9 +217,10 @@ export default class RedeemableCodes implements Saveable {
                     quest.curQuestObject().complete();
                 }
                 App.game.wallet.gainDungeonTokens(200);
+                App.game.keyItems.gainKeyItem(KeyItemType.Dungeon_ticket, true);
                 Notifier.notify({
                     title: 'Tutorial Skip',
-                    message: 'You have skipped the tutorial, and found a stash of Dungeon Tokens.',
+                    message: 'You have skipped the tutorial, and found a stash of Dungeon Tokens with a Dungeon Ticket.',
                     type: NotificationConstants.NotificationOption.warning,
                     timeout: 1e4,
                 });
@@ -247,7 +250,7 @@ export default class RedeemableCodes implements Saveable {
 
     enterCode(code: string): void {
         // If this is a Discord code, send it to the Discord class to check
-        if (App.game.discord.enabled && this.isDiscordCode(code)) {
+        if (this.isDiscordCode(code)) {
             App.game.discord.enterCode(code);
             return;
         }

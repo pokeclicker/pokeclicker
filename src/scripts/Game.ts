@@ -46,7 +46,6 @@ class Game implements TmpGameType {
     public purifyChamber: PurifyChamber;
     public weatherApp: WeatherApp;
     public zMoves: ZMoves;
-    public pokemonContest: PokemonContest;
 
     constructor() {
         // Needs to be loaded first so save data can be updated (specifically "player" data)
@@ -86,7 +85,6 @@ class Game implements TmpGameType {
         this.purifyChamber = new PurifyChamber();
         this.weatherApp = new WeatherApp();
         this.zMoves = new ZMoves();
-        this.pokemonContest = new PokemonContest();
 
         this._gameState = ko.observable(GameConstants.GameState.loading);
     }
@@ -142,20 +140,18 @@ class Game implements TmpGameType {
             Battle.enemyPokemon(battlePokemon);
         }
         //Safari.load();
-        Underground.energyTick(this.underground.getEnergyRegenTime());
         AchievementHandler.calculateMaxBonus(); //recalculate bonus based on active challenges
 
         const now = new Date();
         SeededDateRand.seedWithDate(now);
-        DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
         BerryDeal.generateDeals(now);
         Weather.generateWeather(now);
         GemDeals.generateDeals();
         ShardDeal.generateDeals();
+        GenericDeal.generateDeals();
         SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
         WeatherApp.initialize();
-        PokemonContestController.generateDailyContest(now);
         DamageCalculator.initialize();
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
@@ -289,10 +285,13 @@ class Game implements TmpGameType {
                 }
             }
         });
-        // Check for breeding pokemons not in queue
-        const breeding = [...App.game.breeding.eggList.map((l) => l().pokemon), ...App.game.breeding.queueList()];
+        // Check for breeding pokemons not in list or queue
+        const breeding = new Set([
+            ...App.game.breeding.eggList.map((l) => l().pokemon),
+            ...App.game.breeding.queueList().filter((q: HatcheryQueueEntry) => q[0] === EggType.Pokemon).map(q => q[1]),
+        ]);
         App.game.party.caughtPokemon.filter((p) => p.breeding).forEach((p) => {
-            if (!breeding.includes(p.id)) {
+            if (!breeding.has(p.id)) {
                 p.breeding = false;
             }
         });
@@ -476,24 +475,26 @@ class Game implements TmpGameType {
                 }
 
                 GameHelper.updateDay();
+                (App.game.farming.mutations.find(m => m instanceof EnigmaMutation) as EnigmaMutation).resetIndex();
 
                 SeededDateRand.seedWithDate(now);
                 // Give the player a free quest refresh
                 this.quests.freeRefresh(true);
                 //Refresh the Underground deals
-                DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
                 BerryDeal.generateDeals(now);
-                if (this.underground.canAccess() || App.game.quests.isDailyQuestsUnlocked()) {
+                if (App.game.quests.isDailyQuestsUnlocked()) {
                     Notifier.notify({
                         title: 'It\'s a new day!',
-                        message: `${this.underground.canAccess() ? 'Your Underground deals have been updated.\n' : ''}` +
-                        `${App.game.quests.isDailyQuestsUnlocked() ? '<i>You have a free quest refresh.</i>' : ''}`,
+                        message: `${App.game.quests.isDailyQuestsUnlocked() ? '<i>You have a free quest refresh.</i>' : ''}`,
                         type: NotificationConstants.NotificationOption.info,
                         timeout: 3e4,
                     });
                 }
                 // Give the players more Battle Cafe spins
-                BattleCafeController.spinsLeft(BattleCafeController.spinsPerDay());
+                if (this.party.getPokemonByName('Milcery')) {
+                    BattleCafeController.accumulateSpins();
+                }
+
                 // Generate the weather forecast
                 WeatherApp.initialize();
                 // Refresh Friend Safari Pokemon List
@@ -522,16 +523,8 @@ class Game implements TmpGameType {
         }
 
         // Underground
-        Underground.counter += GameConstants.TICK_TIME;
-        if (Underground.counter >= GameConstants.UNDERGROUND_TICK) {
-            Underground.energyTick(Math.max(0, Underground.energyTick() - 1));
-            if (Underground.energyTick() == 0) {
-                // Check completed in case mine is locked out
-                Mine.checkCompleted();
-                this.underground.gainEnergy();
-                Underground.energyTick(this.underground.getEnergyRegenTime());
-            }
-            Underground.counter = 0;
+        if (this.underground.canAccess()) {
+            this.underground.update(GameConstants.TICK_TIME / GameConstants.SECOND);
         }
 
         // Farm

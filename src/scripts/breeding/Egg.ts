@@ -99,9 +99,7 @@ class Egg implements Saveable {
         if (this.canHatch() && !helper && !this.notified) {
             let notifMessage;
             if (this.type == EggType.Pokemon) {
-                notifMessage = `${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)()} is ready to hatch!`;
-            } else if (this.type == EggType.Fossil) {
-                notifMessage = `The ${GameConstants.PokemonToFossil[PokemonHelper.getPokemonById(this.pokemon).name]} is ready to revive!`;
+                notifMessage = `${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)} is ready to hatch!`;
             } else {
                 notifMessage = 'An egg is ready to hatch!';
             }
@@ -153,8 +151,8 @@ class Egg implements Saveable {
 
         if (shiny) {
             Notifier.notify({
-                message: `✨ You hatched a shiny ${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)()}! ✨`,
-                pokemonImage: PokemonHelper.getImage(PokemonHelper.getPokemonById(this.pokemon).id, shiny),
+                message: `✨ You hatched a shiny ${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)}! ✨`,
+                pokemonImage: PokemonHelper.getImage(PokemonHelper.getPokemonById(this.pokemon).id, shiny, gender, GameConstants.ShadowStatus.None),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched_shiny,
@@ -168,8 +166,8 @@ class Egg implements Saveable {
             );
         } else {
             Notifier.notify({
-                message: `You hatched ${GameHelper.anOrA(PokemonHelper.getPokemonById(this.pokemon).name)} ${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)()}!`,
-                pokemonImage: PokemonHelper.getImage(PokemonHelper.getPokemonById(this.pokemon).id),
+                message: `You hatched ${GameHelper.anOrA(PokemonHelper.getPokemonById(this.pokemon).name)} ${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)}!`,
+                pokemonImage: PokemonHelper.getImage(PokemonHelper.getPokemonById(this.pokemon).id, shiny, gender, GameConstants.ShadowStatus.None),
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched,
             });
@@ -182,14 +180,16 @@ class Egg implements Saveable {
             const baseFormName = App.game.breeding.calculateBaseForm(pokemonName);
             const baseForm = PokemonHelper.getPokemonByName(baseFormName);
             if (pokemonName != baseFormName && !App.game.party.alreadyCaughtPokemon(baseForm.id)) {
+                const babyShiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BREEDING);
+                const babyGender = PokemonFactory.generateGenderById(baseForm.id);
                 Notifier.notify({
                     message: `You also found ${GameHelper.anOrA(baseFormName)} ${baseFormName} nearby!`,
-                    pokemonImage: PokemonHelper.getImage(baseForm.id),
+                    pokemonImage: PokemonHelper.getImage(baseForm.id, babyShiny, babyGender, GameConstants.ShadowStatus.None),
                     type: NotificationConstants.NotificationOption.success,
                     sound: NotificationConstants.NotificationSound.General.new_catch,
                     setting: NotificationConstants.NotificationSetting.General.new_catch,
                 });
-                App.game.party.gainPokemonById(baseForm.id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BREEDING));
+                App.game.party.gainPokemonById(baseForm.id, babyShiny, undefined, babyGender, GameConstants.ShadowStatus.None);
             }
         }
 

@@ -1,5 +1,4 @@
 import type { Observable as KnockoutObservable } from 'knockout';
-import { ContestResults, ContestStyle } from '../../GameConstants';
 import '../../koExtenders';
 import type { PokemonList } from '../../pokemons/PokemonList';
 import { Saveable } from '../common/Saveable';
@@ -82,10 +81,14 @@ export default class Statistics implements Saveable {
     totalShadowFemalePokemonDefeated: KnockoutObservable<number>;
     totalShadowGenderlessPokemonCaptured: KnockoutObservable<number>;
     totalShadowGenderlessPokemonDefeated: KnockoutObservable<number>;
+
+    totalShinyTrainerPokemonSeen: KnockoutObservable<number>;
     // Underground
     undergroundItemsFound: KnockoutObservable<number>;
     undergroundLayersMined: KnockoutObservable<number>;
-    undergroundDailyDealTrades: KnockoutObservable<number>;
+    undergroundLayersFullyMined: KnockoutObservable<number>;
+    undergroundTrades: KnockoutObservable<number>;
+    undergroundToolsUsed: Record<string, KnockoutObservable<number>>;
     // Farm
     totalManualHarvests: KnockoutObservable<number>;
     totalBerriesObtained: KnockoutObservable<number>;
@@ -95,6 +98,8 @@ export default class Statistics implements Saveable {
     totalMulchesUsed: KnockoutObservable<number>;
     totalShovelsUsed: KnockoutObservable<number>;
     berryDailyDealTrades: KnockoutObservable<number>;
+    farmWandererFarmPointsObtained: KnockoutObservable<number>;
+    farmWandererDungeonTokensObtained: KnockoutObservable<number>;
     // Battle Frontier
     battleFrontierTotalStagesCompleted: KnockoutObservable<number>;
     battleFrontierHighestStageCompleted: KnockoutObservable<number>;
@@ -126,9 +131,6 @@ export default class Statistics implements Saveable {
     gymsDefeated: Array<KnockoutObservable<number>>;
     dungeonsCleared: Array<KnockoutObservable<number>>;
     temporaryBattleDefeated: Array<KnockoutObservable<number>>;
-    // Contests
-    contestResults: Record<ContestResults, KnockoutObservable<number>>;
-    contestStyleMaster: Record<ContestStyle, KnockoutObservable<number>>;
     // DungeonGuides
     dungeonGuideAttempts: Array<KnockoutObservable<number>>;
     dungeonGuideClears: Array<KnockoutObservable<number>>;
@@ -145,29 +147,12 @@ export default class Statistics implements Saveable {
     shinyPokemonDefeated: PokemonStats;
     shinyPokemonEncountered: PokemonStats;
     shinyPokemonHatched: PokemonStats;
-    malePokemonCaptured: PokemonStats;
-    malePokemonDefeated: PokemonStats;
-    malePokemonEncountered: PokemonStats;
-    malePokemonHatched: PokemonStats;
-    femalePokemonCaptured: PokemonStats;
-    femalePokemonDefeated: PokemonStats;
-    femalePokemonEncountered: PokemonStats;
-    femalePokemonHatched: PokemonStats;
-    shinyMalePokemonCaptured: PokemonStats;
-    shinyFemalePokemonCaptured: PokemonStats;
-    shinyMalePokemonDefeated: PokemonStats;
-    shinyFemalePokemonDefeated: PokemonStats;
-    shinyMalePokemonEncountered: PokemonStats;
-    shinyFemalePokemonEncountered: PokemonStats;
-    shinyMalePokemonHatched: PokemonStats;
-    shinyFemalePokemonHatched: PokemonStats;
     shadowPokemonCaptured: PokemonStats;
     shadowPokemonDefeated: PokemonStats;
-    shadowMalePokemonCaptured: PokemonStats;
-    shadowFemalePokemonCaptured: PokemonStats;
-    shadowMalePokemonDefeated: PokemonStats;
-    shadowFemalePokemonDefeated: PokemonStats;
     npcTalkedTo: Record<string, KnockoutObservable<number>>;
+    undergroundBatteryDischarges: Record<string, KnockoutObservable<number>>;
+    undergroundSpecificItemsFound: Record<string, KnockoutObservable<number>>;
+    undergroundSpecificLayersMined: Record<string, KnockoutObservable<number>>;
 
     observables = [
         'secondsPlayed',
@@ -183,49 +168,9 @@ export default class Statistics implements Saveable {
         'totalFarmPoints',
         'totalBattlePoints',
         'totalContestTokens',
-        'totalPokemonCaptured',
-        'totalPokemonDefeated',
-        'totalPokemonEncountered',
-        'totalPokemonHatched',
-        'totalShinyPokemonCaptured',
-        'totalShinyPokemonDefeated',
-        'totalShinyPokemonEncountered',
-        'totalShinyPokemonHatched',
-        'totalMalePokemonCaptured',
-        'totalMalePokemonDefeated',
-        'totalMalePokemonEncountered',
-        'totalMalePokemonHatched',
-        'totalFemalePokemonCaptured',
-        'totalFemalePokemonDefeated',
-        'totalFemalePokemonEncountered',
-        'totalFemalePokemonHatched',
-        'totalGenderlessPokemonCaptured',
-        'totalGenderlessPokemonDefeated',
-        'totalGenderlessPokemonEncountered',
-        'totalGenderlessPokemonHatched',
-        'totalShinyMalePokemonCaptured',
-        'totalShinyMalePokemonDefeated',
-        'totalShinyMalePokemonEncountered',
-        'totalShinyMalePokemonHatched',
-        'totalShinyFemalePokemonCaptured',
-        'totalShinyFemalePokemonDefeated',
-        'totalShinyFemalePokemonEncountered',
-        'totalShinyFemalePokemonHatched',
-        'totalShinyGenderlessPokemonCaptured',
-        'totalShinyGenderlessPokemonDefeated',
-        'totalShinyGenderlessPokemonEncountered',
-        'totalShinyGenderlessPokemonHatched',
-        'totalShadowPokemonCaptured',
-        'totalShadowPokemonDefeated',
-        'totalShadowMalePokemonCaptured',
-        'totalShadowMalePokemonDefeated',
-        'totalShadowFemalePokemonCaptured',
-        'totalShadowFemalePokemonDefeated',
-        'totalShadowGenderlessPokemonCaptured',
-        'totalShadowGenderlessPokemonDefeated',
         'undergroundItemsFound',
         'undergroundLayersMined',
-        'undergroundDailyDealTrades',
+        'undergroundTrades',
         'totalManualHarvests',
         'totalBerriesHarvested',
         'totalBerriesObtained',
@@ -234,6 +179,8 @@ export default class Statistics implements Saveable {
         'totalMulchesUsed',
         'totalShovelsUsed',
         'berryDailyDealTrades',
+        'farmWandererFarmPointsObtained',
+        'farmWandererDungeonTokensObtained',
         'battleFrontierTotalStagesCompleted',
         'battleFrontierHighestStageCompleted',
         'safariTimesEntered',
@@ -245,6 +192,12 @@ export default class Statistics implements Saveable {
         'safariStepsTaken',
         'safariItemsObtained',
     ];
+
+    hiddenObservables = [
+        'totalShinyTrainerPokemonSeen',
+        'undergroundLayersFullyMined',
+    ];
+
     arrayObservables = [
         'gymsDefeated',
         'dungeonsCleared',
@@ -257,8 +210,6 @@ export default class Statistics implements Saveable {
         'berriesObtained',
         'mulchesUsed',
         'temporaryBattleDefeated',
-        'contestResults',
-        'contestStyleMaster',
         'dungeonGuideAttempts',
         'dungeonGuideClears',
     ];
@@ -273,37 +224,48 @@ export default class Statistics implements Saveable {
         'shinyPokemonDefeated',
         'shinyPokemonEncountered',
         'shinyPokemonHatched',
-        'malePokemonCaptured',
-        'malePokemonDefeated',
-        'malePokemonEncountered',
-        'malePokemonHatched',
-        'femalePokemonCaptured',
-        'femalePokemonDefeated',
-        'femalePokemonEncountered',
-        'femalePokemonHatched',
-        'shinyMalePokemonCaptured',
-        'shinyFemalePokemonCaptured',
-        'shinyMalePokemonDefeated',
-        'shinyFemalePokemonDefeated',
-        'shinyMalePokemonEncountered',
-        'shinyFemalePokemonEncountered',
-        'shinyMalePokemonHatched',
-        'shinyFemalePokemonHatched',
         'shadowPokemonCaptured',
         'shadowPokemonDefeated',
-        'shadowMalePokemonCaptured',
-        'shadowFemalePokemonCaptured',
-        'shadowMalePokemonDefeated',
-        'shadowFemalePokemonDefeated',
         'npcTalkedTo',
+        'undergroundToolsUsed',
+        'undergroundBatteryDischarges',
+        'undergroundSpecificItemsFound',
+        'undergroundSpecificLayersMined',
     ];
     // Observables that can be automatically generated
     autogeneratedObservables = [
         'routeKills',
     ];
 
+    statisticGenders = ['', 'Male', 'Female', 'Genderless'];
+
+    baseGenderObservables = [
+        'total{{GENDER}}PokemonCaptured',
+        'total{{GENDER}}PokemonDefeated',
+        'total{{GENDER}}PokemonEncountered',
+        'total{{GENDER}}PokemonHatched',
+        'totalShiny{{GENDER}}PokemonCaptured',
+        'totalShiny{{GENDER}}PokemonDefeated',
+        'totalShiny{{GENDER}}PokemonEncountered',
+        'totalShiny{{GENDER}}PokemonHatched',
+        'totalShadow{{GENDER}}PokemonCaptured',
+        'totalShadow{{GENDER}}PokemonDefeated',
+    ];
+
+    genderStatisticGroups = this.baseGenderObservables.map((observableString) => {
+        return this.statisticGenders.map((gender) => {
+            return observableString.replace('{{GENDER}}', gender);
+        });
+    });
+
+    genderObservables = this.genderStatisticGroups.flat();
+
     constructor() {
-        this.observables.forEach((prop) => {
+        [].concat(
+            this.observables,
+            this.hiddenObservables,
+            this.genderObservables,
+        ).forEach((prop) => {
             this[prop] = ko.observable<number>(0).extend({ numeric: 0 });
         });
 
@@ -367,17 +329,9 @@ export default class Statistics implements Saveable {
                         return highestID;
                     }
 
-                    // If it's not an int, we do not want to set it
-                    const id = Number(prop);
-                    if (Number.isNaN(id)) {
-                        // eslint-disable-next-line no-console
-                        console.trace(`[Statistics] [${object}] Invalid property requested:`, prop);
-                        return () => 0;
-                    }
-
                     // eslint-disable-next-line no-param-reassign
-                    statistics[id] = ko.observable<number>(0).extend({ numeric: 0 });
-                    return statistics[id];
+                    statistics[prop] = ko.observable<number>(0).extend({ numeric: 0 });
+                    return statistics[prop];
                 },
 
                 // This makes it so the stats observable can't be accidently changed
@@ -431,6 +385,8 @@ export default class Statistics implements Saveable {
         // process all of them together
         [].concat(
             this.observables,
+            this.hiddenObservables,
+            this.genderObservables,
             this.arrayObservables,
             this.objectObservables,
             this.autogeneratedObservables,
@@ -444,7 +400,11 @@ export default class Statistics implements Saveable {
             return;
         }
 
-        this.observables.forEach((prop) => { this[prop](json[prop] || 0); });
+        [].concat(
+            this.observables,
+            this.hiddenObservables,
+            this.genderObservables,
+        ).forEach((prop) => { this[prop](json[prop] || 0); });
 
         this.arrayObservables.forEach((array) => {
             json[array]?.forEach((el, index) => {

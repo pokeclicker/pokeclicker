@@ -46,15 +46,17 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
             route = 1, region = GameConstants.Region.kanto;
         }
         const tokens = PokemonFactory.routeDungeonTokens(route,region);
-        const routeKillsPerDungeon = dungeonList[dungeon].tokenCost / tokens;
+        const routeKillsPerDungeon = dungeonList[dungeon].baseTokenCost / tokens;
         const collectTokensReward = routeKillsPerDungeon * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * amount;
 
         const reward = Math.min(5000, Math.ceil(completeDungeonsReward + collectTokensReward));
         return super.randomizeReward(reward);
     }
 
-    get description(): string {
-        return this.customDescription ?? `Defeat the ${this.dungeon} dungeon in ${GameConstants.camelCaseToString(GameConstants.Region[this.region])} ${this.amount.toLocaleString('en-US')} times.`;
+    get defaultDescription(): string {
+        const { subRegion } = TownList[this.dungeon];
+        const subRegionName = SubRegions.getSubRegionById(this.region, subRegion).name;
+        return `Defeat the ${this.dungeon} dungeon in ${subRegionName} ${this.amount.toLocaleString('en-US')} times.`;
     }
 
     toJSON() {

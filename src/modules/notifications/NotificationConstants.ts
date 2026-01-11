@@ -10,16 +10,17 @@ const NotificationConstants = {
     NotificationOption,
     NotificationSound: {
         General: {
-            shiny_long: new Sound('shiny_long', 'Shiny Pokémon encountered/hatched'),
+            shiny_long: new Sound('shiny_long', 'Shiny Pokémon encountered/hatched/wandering'),
             new_catch: new Sound('new_catch', 'New Pokémon/shiny captured'),
             roaming: new Sound('roaming', 'Roaming Pokémon encountered'),
             achievement: new Sound('achievement', 'New achievement earned'),
             battle_item_timer: new Sound('battle_item_timer', 'Battle item about to wear off'),
-            underground_energy_full: new Sound('underground_energy_full', 'Mining energy reached maximum capacity'),
+            underground_energy_full: new Sound('underground_energy_full', 'Mining tool reached maximum free use storage'),
             battle_frontier: new Sound('battle_frontier', 'Battle Frontier'),
             dream_orb: new Sound('dream_orb', 'Opening Dream Orb'),
             pokerus: new Sound('pokerus_resistant', 'Pokémon has become Resistant to Pokérus'),
             max_flow: new Sound('max_flow', 'Maximum Flow has accumulated at the Purify Chamber'),
+            dungeon_guide_complete: new Sound('battle_frontier', 'Dungeon Guide has completed all dungeon attempts'),
         },
         Hatchery: {
             ready_to_hatch: new Sound('ready_to_hatch', 'Egg ready to hatch'),
@@ -73,10 +74,12 @@ const NotificationConstants = {
             item_bought: new NotificationSetting('notification.item_bought', 'Item bought', true),
         },
         Underground: {
-            underground_energy_full: new NotificationSetting('notification.underground_energy_full', 'Mining energy reached maximum capacity', true),
-            underground_energy_restore: new NotificationSetting('notification.underground_energy_restore', 'Mining energy restored', true),
-            underground_dig_deeper: new NotificationSetting('notifcation.underground_dig_deeper', 'You dig deeper...', true),
+            underground_energy_full: new NotificationSetting('notification.underground_energy_full', 'Mining tool reached maximum free use storage', true),
+            underground_energy_restore: new NotificationSetting('notification.underground_energy_restore', 'Mining tool restored 1 free use', true),
+            underground_dig_deeper: new NotificationSetting('notification.underground_dig_deeper', 'You dig deeper...', true),
             underground_item_found: new NotificationSetting('notification.underground_item_found', 'Item found while mining', true),
+            helper: new NotificationSetting('notification.underground_helper', 'Underground Expert Hired/Fired', true),
+            battery_full: new NotificationSetting('notification.battery_full', 'Underground Battery is ready to be discharged', true),
         },
         Farming: {
             berry_discovered: new NotificationSetting('notification.berry_discovered', 'New Berry discovered', true),

@@ -1,8 +1,8 @@
 import { Computed, Observable } from 'knockout';
 import { AchievementOption } from '../GameConstants';
-import Requirement from './Requirement';
+import AchievementRequirement from './AchievementRequirement';
 
-export default class CustomRequirement<T> extends Requirement {
+export default class CustomRequirement<T> extends AchievementRequirement {
     constructor(
         private focus: Observable<T> | Computed<T>,
         private required: T,

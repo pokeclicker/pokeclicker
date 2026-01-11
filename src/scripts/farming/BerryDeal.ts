@@ -35,7 +35,7 @@ class BerryDeal {
     }
 
     private static randomUndergroundItem(): Item {
-        return ItemList[SeededRand.fromArray(UndergroundItems.list.filter(item => item.valueType !== UndergroundItemValueType.MegaStone)).itemName];
+        return ItemList[SeededRand.fromArray(UndergroundItems.list.filter(item => item.valueType !== UndergroundItemValueType.MegaStone && item.valueType !== UndergroundItemValueType.Special)).itemName];
     }
 
     private static randomPokeballDeal(): BerryDeal {
@@ -442,7 +442,7 @@ class BerryDeal {
             const maxTrades = trades.reduce((a,b) => Math.min(a,b), tradeTimes);
             deal.berries.forEach((value) => GameHelper.incrementObservable(App.game.farming.berryList[value.berryType], -value.amount * maxTrades));
             if (deal.item.itemType instanceof UndergroundItem) {
-                Underground.gainMineItem(deal.item.itemType.id, deal.item.amount * maxTrades);
+                UndergroundController.gainMineItem(deal.item.itemType.id, deal.item.amount * maxTrades);
             } else {
                 deal.item.itemType.gain(deal.item.amount * maxTrades);
             }

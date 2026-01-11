@@ -82,34 +82,30 @@ class QuestLineHelper {
                     exitOnEsc: false,
                     showButtons: false,
                 });
-                const caughtSelector: HTMLElement = document.querySelector('tr[data-name="Caught"] img.pokeball-small.clickable.pokeball-selected');
-                caughtSelector.addEventListener('click', () => {
-                    Information.hide();
-                    $('#pokeballSelectorModal').one('shown.bs.modal', null, () => {
-                        // Need to set a timeout, otherwise it messes up the modal layout
-                        setTimeout(() => {
-                            Information.show({
-                                steps: [
-                                    {
-                                        element: document.querySelector('#pokeballSelectorModal .modal-body'),
-                                        intro: 'Select the <img title="Poké Ball" src="assets/images/pokeball/Pokeball.svg" height="25px"> Poké Ball to use this type of ball to capture already caught Pokémon, which will give you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens when captured.',
-                                    },
-                                ],
-                                // Needed for IntroJs on modals
-                                overlayOpacity: 0,
-                            });
-                        }, 100);
 
-                        // Hide the IntroJS overlay once the user selects the Pokeball
-                        const selectPokeball = document.querySelectorAll('#pokeballSelectorModal .clickable')[1];
-                        selectPokeball.addEventListener('click', () => {
-                            Information.hide();
-                        }, {
-                            once: true,
+                $('#pokeballSelectorModal').one('show.bs.modal', () => {
+                    Information.hide();
+                });
+
+                $('#pokeballSelectorModal').one('shown.bs.modal', () => {
+                    // Need to set a timeout, otherwise it messes up the modal layout
+                    setTimeout(() => {
+                        Information.show({
+                            steps: [
+                                {
+                                    element: document.querySelector('#pokeballSelectorModal .modal-body'),
+                                    intro: 'Select the <img title="Poké Ball" src="assets/images/pokeball/Pokeball.svg" height="25px"> Poké Ball to use this type of ball to capture already caught Pokémon, which will give you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens when captured.',
+                                },
+                            ],
+                            // Needed for IntroJs on modals
+                            overlayOpacity: 0,
                         });
+                    }, 100);
+
+                    // Hide the IntroJS overlay once the user selects the Pokeball
+                    $('#pokeballSelectorModal .clickable').one('click', () => {
+                        Information.hide();
                     });
-                }, {
-                    once: true,
                 });
             });
         };
@@ -234,7 +230,7 @@ class QuestLineHelper {
 
         // Talk to Bill's Grandpa after battling him
         const EeveeReward = () => {
-            App.game.party.gainPokemonByName('Eevee');
+            App.game.party.gainPokemonByName('Eevee', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
             Notifier.notify({
                 title: BillsGrandpaQuestLine.name,
                 message: 'Bill\'s Grandpa has given you an Eevee, treat it well!',
@@ -311,12 +307,12 @@ class QuestLineHelper {
             ItemList.Old_amber.gain(1);
             Notifier.notify({
                 title: undergroundQuestLine.name,
-                message: 'You have gained an Old Amber fossil!\n<i>You can breed this in the hatchery.</i>',
+                message: 'You have gained an Old Amber!\n<i>Have a look around Cinnabar island to revive this fossil.</i>',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: GameConstants.MINUTE,
             });
         };
-        const mineLayers = new MineLayersQuest(5, 0).withDescription('Mine 5 layers in the Underground.').withCustomReward(oldAmberReward);
+        const mineLayers = new MineLayersQuest(5, 0).withDescription('Collect all buried treasure 5 times in the Underground mines.').withCustomReward(oldAmberReward);
         undergroundQuestLine.addQuest(mineLayers);
 
         App.game.quests.questLines().push(undergroundQuestLine);
@@ -449,11 +445,11 @@ class QuestLineHelper {
         const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.').withCustomReward(() => App.game.quests.getQuestLine('Eusine\'s Chase').beginQuest(0, undefined, true));
         johtoBeastsQuestLine.addQuest(talktoPokéfanDerek);
 
-        const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 1, true);
+        const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 1, true).withDescription('Catch Raikou.');
 
-        const catchEntei = new CaptureSpecificPokemonQuest('Entei', 1, true);
+        const catchEntei = new CaptureSpecificPokemonQuest('Entei', 1, true).withDescription('Catch Entei.');
 
-        const catchSuicune = new CaptureSpecificPokemonQuest('Suicune');
+        const catchSuicune = new CaptureSpecificPokemonQuest('Suicune').withDescription('Catch Suicune.');
 
         johtoBeastsQuestLine.addQuest(new MultipleQuestsQuest(
             [
@@ -765,15 +761,15 @@ class QuestLineHelper {
         const southernIslandClearing = new TalkToNPCQuest(SouthernIsland1, 'Claim your Eon Ticket in the Start Menu and investigate the Southern Island.');
         eonDuoQuestLine.addQuest(southernIslandClearing);
 
-        const catchLatias = new CaptureSpecificPokemonQuest('Latias', 1, true);
+        const catchLatias = new CaptureSpecificPokemonQuest('Latias', 1, true).withDescription('Catch Latias.');
 
-        const catchLatios = new CaptureSpecificPokemonQuest('Latios', 1, true);
+        const catchLatios = new CaptureSpecificPokemonQuest('Latios', 1, true).withDescription('Catch Latios.');
 
         eonDuoQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 catchLatias,
                 catchLatios,
-            ], 'Catch or hatch the Eon Duo.'));
+            ], 'Catch the Eon Duo.'));
 
         App.game.quests.questLines().push(eonDuoQuestLine);
     }
@@ -958,7 +954,7 @@ class QuestLineHelper {
         const fightMetaGroudon1 = new DefeatTemporaryBattleQuest('Meta Groudon', 'Butler\'s attempts to resurrect Groudon have gone terribly wrong! Fight the resulting abomination!');
         jirachiQuestLine.addQuest(fightMetaGroudon1);
 
-        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 1, true).withDescription('Jirachi has escaped in the chaos and is roaming Hoenn. Catch or hatch Jirachi.');
+        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 1, true).withDescription('Jirachi has escaped in the chaos and is roaming Hoenn. Catch Jirachi.');
 
         jirachiQuestLine.addQuest(catchJirachi);
 
@@ -1010,7 +1006,23 @@ class QuestLineHelper {
         const fightFolly = new DefeatTemporaryBattleQuest('Folly', 'Fight Folly the Shady Guy in Phenac City');
         orreColosseumQuestLine.addQuest(fightFolly);
 
-        const checkSack = new TalkToNPCQuest(Sack, 'Check what is in the mysterious sack.'); // Step 3
+        const talkToSackReward = () => {
+            $('#npc-modal').one('hidden.bs.modal', () => {
+                Information.show({
+                    steps: [
+                        {
+                            element: document.getElementById('pokeballSelector'),
+                            intro: 'You can now start catching Shadow Pokémon!<br/><br/>A "New Shadow" filter has been added to your list, be sure to select a Poké Ball and move it to the desired position!',
+                        },
+                    ],
+                    highlightClass: 'bg-secondary',
+                    overlayOpacity: 1,
+                    positionPrecedence: ['right', 'bottom'],
+                });
+            });
+        };
+
+        const checkSack = new TalkToNPCQuest(Sack, 'Check what is in the mysterious sack.').withCustomReward(talkToSackReward); // Step 3
         orreColosseumQuestLine.addQuest(checkSack);
 
         const defeatShadowsPhenac = new CustomQuest(10, 0, 'Defeat 10 trainers who are using Shadow Pokémon in Phenac City.', () => App.game.statistics.totalShadowPokemonDefeated());
@@ -1326,7 +1338,7 @@ class QuestLineHelper {
         const clearVirbankGrunt = new DefeatTemporaryBattleQuest('Team Plasma Grunt 1', 'A Team Plasma Grunt in Virbank City would like to steal your Pokémon. Defeat the grunt.');
         plasmaUnovaQuestLine.addQuest(clearVirbankGrunt);
 
-        const clearCastliaSewers = new DefeatDungeonQuest(10, 0, 'Castelia Sewers').withDescription('Some Team Plasma Grunts were seen entering the Castelia Sewers. Clear Castelia Sewers.');
+        const clearCastliaSewers = new DefeatDungeonQuest(1, 0, 'Castelia Sewers').withDescription('Some Team Plasma Grunts were seen entering the Castelia Sewers. Clear Castelia Sewers.');
         plasmaUnovaQuestLine.addQuest(clearCastliaSewers);
 
         const talktoPlasmaGrunt1 = new TalkToNPCQuest(PlasmaGrunt1, 'Investigate the Perfectly Ordinary Frigate.');
@@ -1437,6 +1449,48 @@ class QuestLineHelper {
         plasmaUnovaQuestLine.addQuest(clearGhetsis2);
 
         App.game.quests.questLines().push(plasmaUnovaQuestLine);
+    }
+
+    // Destiny Deoxys Quest
+    public static createDestinyDeoxysQuestLine() {
+        const destinyDeoxysQuest = new QuestLine('Destiny Deoxys', 'Discover the mystery of the crashed meteor.', new QuestLineCompletedRequirement('Hollow Truth and Ideals'), GameConstants.BulletinBoards.Unova);
+
+        const clearGiantChasm = new DefeatDungeonQuest(5, 0, 'Giant Chasm').withDescription('There seems to be a big fuss about a new discovery in the Giant Chasm. Try finding it.');
+        destinyDeoxysQuest.addQuest(clearGiantChasm);
+
+        const talkToGreenGem = new TalkToNPCQuest(destinyGem, 'You found a pulsating Green Gemstone. Take a closer look.');
+        destinyDeoxysQuest.addQuest(talkToGreenGem);
+
+        const rayquazaDeoxysBattle = new DefeatTemporaryBattleQuest('Destiny Deoxys Rayquaza', 'Rayquaza and Deoxys are rampaging in the area. Try to calm them down.');
+        destinyDeoxysQuest.addQuest(rayquazaDeoxysBattle);
+
+        const talkToScientistChasm = new TalkToNPCQuest(destinyScientistChasm, 'Now that the situation has calmed down talk to the local scientists about the Green Gemstone.');
+        destinyDeoxysQuest.addQuest(talkToScientistChasm);
+
+        const clearBattleFrontier = new ClearBattleFrontierQuest(386, 0).withDescription('Check out the Battle Frontier while the scientist analyzes the gemstone.');
+        destinyDeoxysQuest.addQuest(clearBattleFrontier);
+
+        const defeatDeoxysClones = new DefeatTemporaryBattleQuest('Destiny Deoxys Army', 'While you were in the Battle Frontier an army of Deoxys attacked. Fight your way out!');
+        destinyDeoxysQuest.addQuest(defeatDeoxysClones);
+
+        const talkToScientistBF = new TalkToNPCQuest(destinyScientistBF, 'The scientist you met at Giant Chasm is looking for you at the Battle Frontier.');
+        destinyDeoxysQuest.addQuest(talkToScientistBF);
+
+        const gainElectricGems = new GainGemsQuest(15000, 0, PokemonType.Electric);
+        const gainSteelGems = new GainGemsQuest(5000, 0, PokemonType.Steel);
+        destinyDeoxysQuest.addQuest(new MultipleQuestsQuest([
+            gainElectricGems,
+            gainSteelGems,
+        ], 'The generator isn\'t working. Look around for scraps to repair it.'));
+
+
+        const rayquazaBFBattle = new DefeatTemporaryBattleQuest('Destiny Rayquaza', 'Rayquaza attacks again. Calm it down for the last time.');
+        destinyDeoxysQuest.addQuest(rayquazaBFBattle);
+
+        const talkToDeoxys = new TalkToNPCQuest(destinyDeoxysReunion, 'Rayquaza realized that the Deoxys are no threat. Reunite the Purple and Green Gemmed Deoxys.');
+        destinyDeoxysQuest.addQuest(talkToDeoxys);
+
+        App.game.quests.questLines().push(destinyDeoxysQuest);
     }
 
     // Swords of Justice quest
@@ -1571,7 +1625,7 @@ class QuestLineHelper {
         const talkToGateonSailor = new TalkToNPCQuest(GateonSailor, 'Ask around Gateon Port for clues about new Team Cipher activity.');
         orreXDQuestLine.addQuest(talkToGateonSailor);
 
-        const battleNaps = new DefeatTemporaryBattleQuest('Cipher Peon Naps', 'Fight the Cipher Peons attacking the Pokemon HQ Lab.');
+        const battleNaps = new DefeatTemporaryBattleQuest('Cipher Peon Naps', 'Fight the Cipher Peons attacking the Pokémon HQ Lab.');
         orreXDQuestLine.addQuest(battleNaps);
 
         const clearGateonPort = new DefeatDungeonQuest(1, 0, 'Gateon Port Battles').withDescription('Clear Gateon Port to search for the Cipher Peons who kidnapped Professor Krane.')
@@ -1889,7 +1943,7 @@ class QuestLineHelper {
         flareKalosQuestLine.addQuest(clearKalosLeague);
 
         // Battle AZ and finish the quest
-        const battleAZ1 = new DefeatTemporaryBattleQuest('Storyline AZ', 'What an amazing trainer! You became Kalos Champion! There is a parade in your honor in Lumiose City. But wait, AZ is there asking you for a battle. Show him what being a Pokémon Trainer is like!').withCustomReward(this.itemReward('Key_stone', 1));
+        const battleAZ1 = new DefeatTemporaryBattleQuest('AZ', 'What an amazing trainer! You became Kalos Champion! There is a parade in your honor in Lumiose City. But wait, AZ is there asking you for a battle. Show him what being a Pokémon Trainer is like!').withCustomReward(this.itemReward('Key_stone', 1));
         flareKalosQuestLine.addQuest(battleAZ1);
 
         App.game.quests.questLines().push(flareKalosQuestLine);
@@ -2195,7 +2249,7 @@ class QuestLineHelper {
         detectivePikachuQuestLine.addQuest(searchForClues10);
 
         const DetectiveRaichuReward = () => {
-            App.game.party.gainPokemonByName('Detective Raichu');
+            App.game.party.gainPokemonByName('Detective Raichu', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
             Notifier.notify({
                 title: detectivePikachuQuestLine.name,
                 message: 'Detective Pikachu\'s partner has been nursed back to health!',
@@ -3278,7 +3332,7 @@ class QuestLineHelper {
         const meltanRainbowRocket = new DefeatTemporaryBattleQuest('Team Rainbow Leader Giovanni', 'Defeat Team Rainbow Rocket.');
 
         const meltanGetMelmetal = () => {
-            App.game.party.gainPokemonByName('Melmetal');
+            App.game.party.gainPokemonByName('Melmetal', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
             Notifier.notify({
                 title: meltanQuestLine.name,
                 message: 'You found Melmetal!',
@@ -3347,7 +3401,7 @@ class QuestLineHelper {
 
     // Available upon clearing the Great League
     public static createDrSplashQuestLine() {
-        const drSplashQuestLine = new QuestLine('Dr. Splash\'s Research Project', 'Help Dr. Splash unlock the full potential of your Magikarps.', new GymBadgeRequirement(BadgeEnums.Great_League), GameConstants.BulletinBoards.Hoppy);
+        const drSplashQuestLine = new QuestLine('Dr. Splash\'s Research Project', 'Help Dr. Splash unlock the full potential of your Magikarp.', new GymBadgeRequirement(BadgeEnums.Great_League), GameConstants.BulletinBoards.Hoppy);
 
         const talkToDrSplash1 = new TalkToNPCQuest(DrSplash1, 'Talk to Dr. Splash in Hoppy Town.');
         drSplashQuestLine.addQuest(talkToDrSplash1);
@@ -3434,7 +3488,7 @@ class QuestLineHelper {
         drSplashQuestLine.quests().forEach(q => q.withCustomReward(karpStepReward));
 
         const SaucyBlueReward = () => {
-            App.game.party.gainPokemonByName('Magikarp Saucy Blue');
+            App.game.party.gainPokemonByName('Magikarp Saucy Blue', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
             Notifier.notify({
                 title: drSplashQuestLine.name,
                 message: 'Dr. Splash gives you a Saucy Blue Magikarp!',
@@ -3734,13 +3788,13 @@ class QuestLineHelper {
         const talktoMustard9 = new TalkToNPCQuest(Mustard9, 'Talk to Mustard at the Master Dojo.');
         dojoArmorQuestLine.addQuest(talktoMustard9);
 
-        const clearTowerofDarkness = new DefeatDungeonQuest(1, 0, 'Tower of Darkness').withDescription('Defeat Tower of Darkness.');
-        const clearTowerofWaters = new DefeatDungeonQuest(1, 0, 'Tower of Waters').withDescription('Defeat Tower of Waters');
+        const catchUrshifuSingleStrike = new CaptureSpecificPokemonQuest('Urshifu (Single Strike)');
+        const catchUrshifuRapidStrike = new CaptureSpecificPokemonQuest('Urshifu (Rapid Strike)');
         dojoArmorQuestLine.addQuest(new MultipleQuestsQuest(
             [
-                clearTowerofDarkness,
-                clearTowerofWaters,
-            ], 'Complete Kubfu\'s training in the Tower of Darkness and the Tower of Waters so it can evolve!'));
+                catchUrshifuSingleStrike,
+                catchUrshifuRapidStrike,
+            ], 'Level up Kubfu in both of the Towers of Two Fists to obtain Urshifu!'));
 
         const talktoMustard10 = new TalkToNPCQuest(Mustard10, 'Talk to Mustard at one of the Towers of Two Fists.');
         dojoArmorQuestLine.addQuest(talktoMustard10);
@@ -4055,33 +4109,6 @@ class QuestLineHelper {
         App.game.quests.questLines().push(gigantamaxQuestLine);
     }
 
-    public static createOriginalColorMagearnaQuestLine() {
-        const magearnaQuestLine = new QuestLine('A Mystery Gift', 'You have received a Mystery Gift.',
-            new MultiRequirement([
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kanto),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.johto),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.hoenn),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.sinnoh),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.unova),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kalos),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.alola),
-                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.galar),
-            ]), GameConstants.BulletinBoards.Galar);
-
-        const mysteryGift = new TalkToNPCQuest(MagearnaMysteryGift, 'Go home and open your Mystery Gift').withCustomReward(() => {
-            App.game.party.gainPokemonByName('Magearna (Original Color)');
-            Notifier.notify({
-                title: magearnaQuestLine.name,
-                message: 'You obtained Magearna (Original Color)!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        });
-        magearnaQuestLine.addQuest(mysteryGift);
-
-        App.game.quests.questLines().push(magearnaQuestLine);
-    }
-
     /* Hisui QuestLines */
 
     public static createHisuiForcesQuestLine() {
@@ -4246,6 +4273,7 @@ class QuestLineHelper {
         this.createManaphyQuestLine();
         this.createGiratinaQuestLine();
         this.createPlasmaUnovaQuestLine();
+        this.createDestinyDeoxysQuestLine();
         this.createSwordsQuestLine();
         this.createGenesectQuestLine();
         this.createOrreXDQuestLine();
@@ -4274,7 +4302,6 @@ class QuestLineHelper {
         this.createDynaTreeBirdsQuestLine();
         this.createAncientGolemsQuestLine();
         this.createGigantamaxQuestLine();
-        this.createOriginalColorMagearnaQuestLine();
         this.createHisuiForcesQuestLine();
         this.createHisuiArceusQuestLine();
         this.createPaldeaLegendsQuestLine();
@@ -4286,5 +4313,10 @@ class QuestLineHelper {
         this.createDrSplashQuestLine();
         this.createMeltanQuestLine();
         this.createRainbowRocketQuestLine();
+        // Enforce unique questline names
+        const numQuestLines = App.game.quests.questLines().length;
+        if (numQuestLines != [...new Set(App.game.quests.questLines().map(ql => ql.name))].length) {
+            throw new Error('QuestLineHelper: Duplicate QuestLine names detected');
+        }
     }
 }

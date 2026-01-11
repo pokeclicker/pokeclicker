@@ -5,7 +5,7 @@ import { DAY, HOUR, formatTimeShortWords, formatTime, Currency, SPECIAL_EVENT_TI
 import NotificationOption from '../notifications/NotificationOption';
 import { SpecialEventTitleType } from './SpecialEventTitleType';
 
-type EmptyCallback = () => void;
+export type EventCallback = () => void;
 
 export enum SpecialEventStatus {
     none,
@@ -18,9 +18,9 @@ export default class SpecialEvent {
     description: string;
     status: KnockoutObservable<SpecialEventStatus>;
     startTime: Date;
-    startFunction: EmptyCallback;
+    startFunction: EventCallback;
     endTime: Date;
-    endFunction: EmptyCallback;
+    endFunction: EventCallback;
     hideFromEventCalendar: boolean;
     eventCalendarTimeLeft: KnockoutObservable<number>;
     isActive: KnockoutObservable<boolean>;
@@ -28,7 +28,7 @@ export default class SpecialEvent {
     // TODO: only notify once initially until event about to start/end
     notified: SpecialEventNotifiedStatus;
 
-    constructor(title: SpecialEventTitleType, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback, hideFromEventCalendar: boolean) {
+    constructor(title: SpecialEventTitleType, description: string, startTime: Date, startFunction: EventCallback, endTime: Date, endFunction: EventCallback, hideFromEventCalendar: boolean) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;

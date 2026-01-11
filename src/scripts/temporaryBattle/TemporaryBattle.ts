@@ -1,5 +1,3 @@
-/// <reference path="../../declarations/TemporaryScriptTypes.d.ts" />
-
 type TemporaryBattleOptionalArgument = {
     rewardFunction?: () => void,
     firstTimeRewardFunction?: () => void,
@@ -34,19 +32,19 @@ class TemporaryBattle extends TownContent implements TmpTemporaryBattleType {
     }
     public areaStatus() {
         if (!this.isUnlocked()) {
-            return areaStatus.locked;
-        } else if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.name)]() == 0 && this.isVisible()) {
-            return areaStatus.incomplete;
-        } else {
-            return areaStatus.completed;
+            return [areaStatus.locked];
         }
+        if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.name)]() == 0 && this.isVisible()) {
+            return [areaStatus.incomplete];
+        }
+        return [areaStatus.completed];
     }
     public getDisplayName() {
         return this.optionalArgs.displayName ?? this.name.replace(/( route)? \d+$/, '');
     }
 
-    public getTown() {
-        return this.parent ?? TownList[this.optionalArgs.returnTown] ?? TownList[GameConstants.DockTowns[player.region]];
+    public getTown(): Town | undefined {
+        return this.parent ?? TownList[this.optionalArgs.returnTown];
     }
     public getImage() {
         const imageName = this.optionalArgs?.imageName ?? this.name;
@@ -56,7 +54,7 @@ class TemporaryBattle extends TownContent implements TmpTemporaryBattleType {
 
     constructor(
         public name: string,
-        private pokemons: GymPokemon[],
+        public readonly pokemons: GymPokemon[],
         public defeatMessage: string,
         requirements: Requirement[] = [],
         completeRequirements: Requirement[] = undefined,

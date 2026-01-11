@@ -1,6 +1,6 @@
 <script type="text/html" id="currency-display-template">
-    <div class="currency-display d-flex flex-wrap mx-1 my-2 justify-content-center">
-        <img src="" class="mx-1" height="25px" data-bind="attr: { src: `assets/images/currency/${GameConstants.Currency[$data.currency]}.svg` },
+    <div class="d-flex flex-column mx-1 my-2 justify-content-center">
+        <img src="" height="25px" data-bind="attr: { src: `assets/images/currency/${GameConstants.Currency[$data.currency]}.svg` },
             tooltip: {
                 html: true,
                 title: $data.tooltip,

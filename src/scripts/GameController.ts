@@ -81,10 +81,23 @@ class GameController {
         const $hatcheryModal = $('#breedingModal');
         $hatcheryModal.on('hide.bs.modal', _ => $hatcheryModal.data('disable-toggle', true));
         $hatcheryModal.on('hidden.bs.modal shown.bs.modal', _ => $hatcheryModal.data('disable-toggle', false));
+        // Achievements Tracker
+        const achievements = App.game.achievementTracker;
+        const $achievementsModal = $('#achievementsModal');
+        $achievementsModal.on('hide.bs.modal', _ => $achievementsModal.data('disable-toggle', true));
+        $achievementsModal.on('hidden.bs.modal shown.bs.modal', _ => $achievementsModal.data('disable-toggle', false));
         // Shop
         const $shopModal = $('#shopModal');
         $shopModal.on('hide.bs.modal', _ => $shopModal.data('disable-toggle', true));
         $shopModal.on('hidden.bs.modal shown.bs.modal', _ => $shopModal.data('disable-toggle', false));
+        // Castform App (Weather)
+        const $weatherModal = $('#weatherAppModal');
+        $weatherModal.on('hide.bs.modal', _ => $weatherModal.data('disable-toggle', true));
+        $weatherModal.on('hidden.bs.modal shown.bs.modal', _ => $weatherModal.data('disable-toggle', false));
+        // Purify Chamber
+        const $purifyChamberModal = $('#purifyChamberModal');
+        $purifyChamberModal.on('hide.bs.modal', _ => $purifyChamberModal.data('disable-toggle', true));
+        $purifyChamberModal.on('hidden.bs.modal shown.bs.modal', _ => $purifyChamberModal.data('disable-toggle', false));
         // Ship
         const $shipModal = $('#ShipModal');
         // Modal Collapse
@@ -182,27 +195,20 @@ class GameController {
             if ($undergroundModal.data('bs.modal')?._isShown) {
                 switch (key) {
                     case Settings.getSetting('hotkey.underground.hammer').value:
-                        Mine.toolSelected(Mine.Tool.Hammer);
+                        App.game.underground.tools.selectedToolType = UndergroundToolType.Hammer;
                         return e.preventDefault();
                     case Settings.getSetting('hotkey.underground.chisel').value:
-                        Mine.toolSelected(Mine.Tool.Chisel);
-                        return e.preventDefault();
-                    case Settings.getSetting('hotkey.underground.survey').value:
-                        Mine.survey();
+                        App.game.underground.tools.selectedToolType = UndergroundToolType.Chisel;
                         return e.preventDefault();
                     case Settings.getSetting('hotkey.underground.bomb').value:
-                        Mine.bomb();
+                        App.game.underground.tools.selectedToolType = UndergroundToolType.Bomb;
                         return e.preventDefault();
-                }
-                if (isNumberKey) {
-                    if (numberKey === 0) {
-                        ItemList.SmallRestore.use(1);
-                    } else if (numberKey === 1) {
-                        ItemList.MediumRestore.use(1);
-                    } else if (numberKey === 2) {
-                        ItemList.LargeRestore.use(1);
-                    }
-                    return e.preventDefault();
+                    case Settings.getSetting('hotkey.underground.survey').value:
+                        App.game.underground.tools.selectedToolType = UndergroundToolType.Survey;
+                        return e.preventDefault();
+                    case Settings.getSetting('hotkey.underground.discharge').value:
+                        App.game.underground.battery.discharge();
+                        return e.preventDefault();
                 }
             }
             if ($oakItemsModal.data('bs.modal')?._isShown) {
@@ -385,6 +391,15 @@ class GameController {
                         return e.preventDefault();
                     }
                     break;
+                case Settings.getSetting('hotkey.achievementsTracker').value:
+                    // Open the achievmeents tracker
+                    if (achievements.canAccess() && !$achievementsModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        AchievementHandler.filterAchievementList(true);
+                        $achievementsModal.modal('toggle');
+                        return e.preventDefault();
+                    }
+                    break;
                 case Settings.getSetting('hotkey.oakItems').value:
                     // Open oak items
                     if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
@@ -412,8 +427,7 @@ class GameController {
                     break;
                 case Settings.getSetting('hotkey.forceSave').value:
                     if (GameController.keyHeld.Shift()) {
-                        Save.store(player);
-                        Notifier.notify({ message: 'Game Saved!'});
+                        Save.store(player, true);
                         return e.preventDefault();
                     }
                     break;
@@ -434,6 +448,20 @@ class GameController {
                     if (quests.isDailyQuestsUnlocked() && !$questModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
                         $questModal.modal('toggle');
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.castformApp').value:
+                    if (WeatherApp.shortcutVisible() && !$weatherModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        WeatherApp.openWeatherAppModal();
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.purifyChamber').value:
+                    if (PurifyChamber.shortcutVisible() && !$purifyChamberModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        PurifyChamber.openPurifyChamberModal();
                         return e.preventDefault();
                     }
                     break;

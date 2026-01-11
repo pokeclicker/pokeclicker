@@ -41,6 +41,8 @@ class StartSequenceRunner {
                     Information.hide();
                     player.regionStarters[GameConstants.Region.kanto](StartSequenceRunner.starterPicked);
                     App.game.profile.pokemon(dataPokemon.id);
+                    // Re-enable filters in case the player toggled off the hidden Capture Starter
+                    App.game.pokeballFilters.toggleAllFiltersEnabled(true);
                     StartSequenceRunner.showCaughtMessage();
                 }, 1000);
 
@@ -82,6 +84,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         <input class="image-starter" type="image"
                            src="assets/images/pokemon/25.png"
                            onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Special)">
+                    </div>`);
+            }
+            if (StartSequenceRunner.noStarterCount == 20) {
+                $('#pickStarterTutorialModal .modal-body').append(`<div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="toggleCaptureStarter" onchange="App.game.pokeballFilters.toggleAllFiltersEnabled(this.checked)" checked>
+                        <label class="custom-control-label" for="toggleCaptureStarter">Capture Starter</label>
                     </div>`);
             }
         }
