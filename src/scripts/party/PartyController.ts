@@ -250,10 +250,10 @@ class PartyController {
             if (heldItemCurrentItemFilter == 'HideHoldingThisItem' && pokemon.heldItem() === HeldItem.heldItemSelected()) {
                 return false;
             }
-            if (Settings.getSetting('heldItemHideHoldingSameOrBetter').observableValue() && pokemon.heldItem() && pokemon.heldItem().isSameOrBetter(HeldItem.heldItemSelected())) {
+            if (heldItemCurrentItemFilter == 'HideHoldingSameOrBetter' && pokemon.heldItem() && pokemon.heldItem().isSameOrBetter(HeldItem.heldItemSelected())) {
                 return false;
             }
-            if (Settings.getSetting('heldItemOnlyShowWorse').observableValue() && pokemon.heldItem() && !pokemon.heldItem().isInferior(HeldItem.heldItemSelected())) {
+            if (heldItemCurrentItemFilter == 'OnlyShowWorse' && pokemon.heldItem() && !pokemon.heldItem().isInferior(HeldItem.heldItemSelected())) {
                 return false;
             }
 
