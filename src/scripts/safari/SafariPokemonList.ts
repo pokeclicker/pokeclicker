@@ -123,8 +123,8 @@ class SafariPokemonList {
             // Water
             new SafariEncounter('Yanma', 1, [SafariEnvironments.Water]),
             new SafariEncounter('Surskit', 5, [SafariEnvironments.Water], true),
-            new SafariEncounter('Masquerain', 1, [SafariEnvironments.Grass], true),
-            new SafariEncounter('Yanmega', 1, [SafariEnvironments.Grass], true),
+            new SafariEncounter('Masquerain', 1, [SafariEnvironments.Water], true),
+            new SafariEncounter('Yanmega', 1, [SafariEnvironments.Water], true),
             new SafariEncounter('Dewpider', 5, [SafariEnvironments.Water], true),
             new SafariEncounter('Araquanid', 1, [SafariEnvironments.Water], true),
             new SafariEncounter('Wimpod', 1, [SafariEnvironments.Water], true),
