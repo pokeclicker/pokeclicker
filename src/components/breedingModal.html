@@ -230,6 +230,28 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <!-- /ko -->
                                             </div>
                                             <!-- /ko -->
+                                            <div class="form-group col-lg-6 col-6">
+                                                <!-- ko let: { breedingType1Attack: Settings.getSetting('breedingType1Attack') } -->
+                                                <label>Types Attacking</label>
+                                                <select id="breeding-attack-type1" class="custom-select"
+                                                        data-bind="options: breedingType1Attack.options,
+                                                                optionsValue: 'value',
+                                                                optionsText: 'text',
+                                                                value: breedingType1Attack.observableValue">
+                                                </select>
+                                                <!-- /ko -->
+                                            </div>
+                                            <div class="form-group col-lg-6 col-6">
+                                                <!-- ko let: { breedingType2Attack: Settings.getSetting('breedingType2Attack') } -->
+                                                <label> </label>
+                                                <select id="breeding-attack-type2" class="custom-select"
+                                                        data-bind="options: breedingType2Attack.options,
+                                                                optionsValue: 'value',
+                                                                optionsText: 'text',
+                                                                value: breedingType2Attack.observableValue">
+                                                </select>
+                                                <!-- /ko -->
+                                            </div>
                                             <div class="form-group col-lg-12 col-12" style="max-width: 100%; flex-grow: 1">
                                                 <!-- ko let: { hatcherySort: Settings.getSetting('hatcherySort') } -->
                                                 <label for="hatchery-setting-sort" data-bind="text: hatcherySort.displayName">Sort</label>
@@ -256,28 +278,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                         <!-- /ko -->
                                                     </div>
                                                 </div>
-                                                <!-- /ko -->
-                                            </div>
-                                            <div class="form-group col-lg-6 col-6">
-                                                <!-- ko let: { breedingType1Attack: Settings.getSetting('breedingType1Attack') } -->
-                                                <label>Types Attacking</label>
-                                                <select id="breeding-attack-type1" class="custom-select"
-                                                        data-bind="options: breedingType1Attack.options,
-                                                                optionsValue: 'value',
-                                                                optionsText: 'text',
-                                                                value: breedingType1Attack.observableValue">
-                                                </select>
-                                                <!-- /ko -->
-                                            </div>
-                                            <div class="form-group col-lg-6 col-6">
-                                                <!-- ko let: { breedingType2Attack: Settings.getSetting('breedingType2Attack') } -->
-                                                <label> </label>
-                                                <select id="breeding-attack-type2" class="custom-select"
-                                                        data-bind="options: breedingType2Attack.options,
-                                                                optionsValue: 'value',
-                                                                optionsText: 'text',
-                                                                value: breedingType2Attack.observableValue">
-                                                </select>
                                                 <!-- /ko -->
                                             </div>
 
