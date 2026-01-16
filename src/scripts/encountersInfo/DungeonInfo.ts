@@ -52,4 +52,13 @@ class DungeonInfo {
                 return GameConstants.camelCaseToString(GameConstants.humanifyString(input.toLowerCase()));
         }
     }
+
+    public static getLootChanceFormatted(loot: Loot, tier: LootTier) {
+        const value = player.town.dungeon?.getLootChance(loot, tier) ?? 0;
+        return value.toLocaleString('en-US', {
+            style: 'percent',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: value < 0.00005 ? 4 : 3,
+        });
+    }
 }
