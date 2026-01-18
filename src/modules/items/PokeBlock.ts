@@ -1,31 +1,40 @@
 import { PokeBlockColor, Currency } from '../GameConstants';
+import { TmpPartyPokemonType } from '../TemporaryScriptTypes';
 import ContestType from '../enums/ContestType';
+import { pokemonMap } from '../pokemons/PokemonList';
 import Item from './Item';
 
 export default class PokeBlock extends Item {
     type: PokeBlockColor;
     contestType: ContestType[];
-    _canUse: (pokemon: any) => boolean;
+    _canUse: (pokemon?: TmpPartyPokemonType) => boolean;
     value: number;
+    exp: number;
+    ignoreDebuff: boolean;
 
     constructor(
         color: PokeBlockColor,
-        basePrice: number,
-        currency: Currency = Currency.money,
+        value: number,
+        exp: number,
         contestType?: ContestType[],
-        canUse?: (pokemon: any) => boolean,
         description: string = `A ${PokeBlockColor[color]} Pokéblock`,
+        canUse?: (pokemon?: TmpPartyPokemonType) => boolean,
+        ignoreDebuff: boolean = false,
         displayName: string = `${PokeBlockColor[color]} Pokéblock`,
-        value: number = 1,
+        basePrice: number = 1,
+        currency: Currency = Currency.money,
     ) {
         super(`PokeBlock_${PokeBlockColor[color]}`, basePrice, currency, undefined, displayName, description, 'pokeblock');
         this.type = color;
         this.contestType = contestType;
         this._canUse = canUse;
         this.value = value;
+        this.exp = exp;
+        this.ignoreDebuff = ignoreDebuff;
     }
 
-    canUse(pokemon: { [key: string]: any }): boolean {
-        return this._canUse?.(pokemon) ?? true;
+    canUse(pokemon: TmpPartyPokemonType): boolean {
+        const hasBlockType = this.contestType?.some(ct => pokemon.currentContestTypes.includes(ct) || pokemonMap[pokemon.name].contestTypes.includes(ct));
+        return this._canUse?.(pokemon) ?? hasBlockType ?? true;
     }
 }

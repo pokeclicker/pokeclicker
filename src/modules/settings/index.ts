@@ -300,6 +300,7 @@ Settings.add(new BooleanSetting('pokeblockSortDirection', 'reverse', false));
 Settings.add(new SearchSetting('pokeblockSearchFilter', 'Search', ''));
 Settings.add(new Setting<number>('pokeblockRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptionsNoneLast], -2));
 Settings.add(new Setting<number>('pokeblockTypeFilter', 'Contest Type', [new SettingOption('All', -1), ...Settings.enumToNumberSettingOptionArray(ContestType, (t) => t !== 'None')], -1));
+Settings.add(new BooleanSetting('stopPokeblockAtMaxAppeal', 'Stop feeding Pokéblocks at max Appeal', false, undefined, false));
 
 // Held Item Sorting
 const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (

@@ -193,46 +193,12 @@ export default class ContestHelper {
         return App.game.party.getPokemon(p) ? App.game.party.getPokemon(p).currentContestTypes : pokemonMap[p];
     }
 
-    public static increaseAppeal(initialAppeal: number, amount: number, sheenDebuff = false, ignoreRankDebuff = false) {
-        let resultingAppeal = initialAppeal;
-        let amountLeft = amount;
-
-        // Determine start of for loop
-        const rankBracket = 10 - Object.values(ContestHelper.rankAppeal).reverse().findIndex(i => i <= Math.min(initialAppeal, ContestHelper.rankAppeal[ContestRank['Brilliant Shining']]));
-
-        // Add per rank
-        for (let i = rankBracket; i <= ContestRank['Brilliant Shining']; i++) {
-            if (amountLeft > 0) {
-                // Calculate rank debuff
-                let debuff = Math.max(10 - i, 1);
-                if (ignoreRankDebuff) {
-                    debuff = 10;
-                }
-                if (sheenDebuff) {
-                    debuff = 1;
-                }
-                debuff /= 10;
-
-                let addition = amountLeft * debuff;
-
-                // "Fill" per rank
-                if (i < ContestRank['Brilliant Shining']) {
-                    addition = Math.min((ContestHelper.rankAppeal[i + 1] - ContestHelper.rankAppeal[i]), addition);
-                }
-
-                resultingAppeal += addition;
-                amountLeft = Math.ceil(amountLeft - addition / debuff);
-            }
-        }
-        return resultingAppeal;
-    }
-
     // Sheen
     // eslint-disable-next-line @typescript-eslint/member-ordering
     public static maxSheen: PureComputed<number> = ko.pureComputed(() => {
         let capMultiplier = 0;
         GameHelper.enumNumbers(ContestRank).filter(r => r > ContestRank.Practice).forEach(r => GameHelper.enumNumbers(ContestType).forEach(ct => {
-            capMultiplier += Math.min(1, App.game.statistics.contestHighestRound[r][ct]());
+            capMultiplier += Math.min(1, Number(App.game.statistics.contestHighestRound[r][ct]()));
         }));
         return 80 + 35 * capMultiplier;
     });
