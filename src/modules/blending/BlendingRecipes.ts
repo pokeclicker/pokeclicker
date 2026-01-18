@@ -7,28 +7,32 @@ import BlendingRecipe from './BlendingRecipe';
 export default class BlendingRecipes {
     public static blendingRecipeList: Record<BlendingRecipeType, BlendingRecipe[]> = {
         // if there are too many recipe types, you can combine pokeblocks into one "Pokeblock" recipe type for a cleaner list
-        [BlendingRecipeType.Contest_Appeal]: [
+        [BlendingRecipeType.Basic_Pokeblock]: [
             new BlendingRecipe('PokeBlock_Red', [40, 0, 0, 0, 0]),
             new BlendingRecipe('PokeBlock_Blue', [0, 40, 0, 0, 0]),
             new BlendingRecipe('PokeBlock_Pink', [0, 0, 40, 0, 0]),
             new BlendingRecipe('PokeBlock_Green', [0, 0, 0, 40, 0]),
             new BlendingRecipe('PokeBlock_Yellow', [0, 0, 0, 0, 40]),
-            new BlendingRecipe('PokeBlock_White', [10, 10, 10, 10, 10]),
+            new BlendingRecipe('PokeBlock_White', [15, 15, 15, 15, 15]),
+            new BlendingRecipe('PokeBlock_Black', [5, 5, 5, 5, 5]),
+            new BlendingRecipe('PokeBlock_Gray', [25, 25, 25, 25, 25]),
         ],
-        [BlendingRecipeType.Contest_Type]: [
-            // Todo: proper requirements
+        [BlendingRecipeType.Mixed_PokeBlock]: [
             new BlendingRecipe('PokeBlock_Purple', [80, 80, 0, 0, 0]),
             new BlendingRecipe('PokeBlock_Indigo', [0, 80, 80, 0, 0]),
             new BlendingRecipe('PokeBlock_Brown', [0, 0, 80, 80, 0]),
             new BlendingRecipe('PokeBlock_Olive', [0, 0, 0, 80, 80]),
             new BlendingRecipe('PokeBlock_Orange', [80, 0, 0, 0, 80]),
-            new BlendingRecipe('PokeBlock_Black', [5, 5, 5, 5, 5]),
-            new BlendingRecipe('PokeBlock_Cool', [3200, 0, 0, 0, 0], new MaxRegionRequirement(Region.kalos)),
-            new BlendingRecipe('PokeBlock_Beautiful', [0, 3200, 0, 0, 0], new MaxRegionRequirement(Region.kalos)),
-            new BlendingRecipe('PokeBlock_Cute', [0, 0, 3200, 0, 0], new MaxRegionRequirement(Region.kalos)),
-            new BlendingRecipe('PokeBlock_Smart', [0, 0, 0, 3200, 0], new MaxRegionRequirement(Region.kalos)),
-            new BlendingRecipe('PokeBlock_Tough', [0, 0, 0, 0, 3200], new MaxRegionRequirement(Region.kalos)),
-            new BlendingRecipe('PokeBlock_Balanced', [2400, 2400, 2400, 2400, 2400], new MaxRegionRequirement(Region.kalos)),
+            new BlendingRecipe('PokeBlock_Rainbow', [50, 50, 50, 50, 50]),
+        ],
+        [BlendingRecipeType.Pokeblock_Plus]: [
+            // Todo: proper contest requirements
+            new BlendingRecipe('PokeBlock_Cool', [300, 0, 0, 0, 0], new MaxRegionRequirement(Region.kalos)),
+            new BlendingRecipe('PokeBlock_Beautiful', [0, 300, 0, 0, 0], new MaxRegionRequirement(Region.kalos)),
+            new BlendingRecipe('PokeBlock_Cute', [0, 0, 300, 0, 0], new MaxRegionRequirement(Region.kalos)),
+            new BlendingRecipe('PokeBlock_Smart', [0, 0, 0, 300, 0], new MaxRegionRequirement(Region.kalos)),
+            new BlendingRecipe('PokeBlock_Tough', [0, 0, 0, 0, 300], new MaxRegionRequirement(Region.kalos)),
+            new BlendingRecipe('PokeBlock_Balanced', [120, 120, 120, 120, 120], new MaxRegionRequirement(Region.kalos)),
         ],
         [BlendingRecipeType.Alcremie_Sweet]: [
         ],

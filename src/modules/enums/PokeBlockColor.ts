@@ -5,18 +5,22 @@ enum PokeBlockColor {
     Green,
     Yellow,
     White,
+    Black,
+    Gray,
     Purple,
     Indigo,
     Brown,
     Olive,
     Orange,
-    Black,
+    Rainbow,
     Cool,
     Beautiful,
     Cute,
     Smart,
     Tough,
     Balanced,
+    Silver,
+    Gold,
 }
 
 export default PokeBlockColor;

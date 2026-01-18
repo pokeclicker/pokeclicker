@@ -1,6 +1,7 @@
 enum BlendingRecipeType {
-    Contest_Appeal,
-    Contest_Type,
+    Basic_Pokeblock,
+    Mixed_PokeBlock,
+    Pokeblock_Plus,
     Alcremie_Sweet,
     Event,
 }
