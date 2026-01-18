@@ -119,7 +119,7 @@
                                                                 click: function(data, event){App.game.blending.insertBerry($index(), BlendingController.selectedBerry(), $parentContext.$index())},
                                                                 event: { contextmenu: function(data, event){App.game.blending.insertBerry($index(), BerryType.None, $parentContext.$index())} },">
                                                             <img width="100%" height="100%" style="padding:0.1cap;" src=""
-                                                                data-bind="attr:{ src: FarmController.getBerryImage($parent.blendSlots[$index()].berry)}">
+                                                                data-bind="attr:{ src: FarmController.getBerryImage($parent.blendSlots[$index()].berry), class: 'blender' + `${$parent.blendSlots[$index()].berry}` }">
                                                         </div>
                                                     </div>
                                                     <!-- /ko -->
@@ -443,7 +443,7 @@
                         <div class="input-group-append">
                             <button id="blendBerryButton" class="btn btn-sm btn-primary px-1 py-1" onclick="BlendingController.berrySpin()">
                                 <img id="blendBerry" height="28px" data-bind="
-                                    attr: { src: FarmController.getBerryImage(BlendingController.selectedBerry()) }"/>
+                                    attr: { src: FarmController.getBerryImage(BlendingController.selectedBerry()), class: 'blender' + `${BlendingController.selectedBerry()}` }"/>
                             </button>
                         </div>
                     </div>
