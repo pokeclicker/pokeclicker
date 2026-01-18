@@ -207,7 +207,7 @@
                                             <div class="d-none d-md-block">
                                                 <ul class="pl-0 list-group-flush" data-bind="foreach: BlendingRecipes.getBlendingRecipeSet($data)">
                                                     <li class="d-flex list-group-item py-1 align-items-center">
-                                                        <img src="" max-height="24px" data-bind="attr:{ src: BlendingController.spriteMini($data) }">
+                                                        <img src="" max-height="24px" data-bind="attr:{ src: BlendingController.recipeImage($data) }">
                                                         <a class="text-info" href="#" data-bind="text: ItemList[$data.item].displayName, click: () => BlendingController.scrollIntoView($data)"></a>
                                                     </li>
                                                 </ul>
@@ -216,7 +216,7 @@
                                                 <ul class="d-flex flex-wrap justify-content-center p-0 m-0" data-bind="foreach: BlendingRecipes.getBlendingRecipeSet($data)">
                                                     <li class="d-flex d-flex flex-column align-items-center">
                                                         <button class="btn btn-primary m-1" data-bind="click: () => BlendingController.scrollIntoView($data)">
-                                                            <img src="" max-height="24px" data-bind="attr:{ src: BlendingController.spriteMini($data) }">
+                                                            <img src="" max-height="24px" data-bind="attr:{ src: BlendingController.recipeImage($data) }">
                                                         </button>
                                                     </li>
                                                 </ul>

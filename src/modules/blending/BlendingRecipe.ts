@@ -9,7 +9,6 @@ export default class BlendingRecipe {
         public item: ItemNameType,
         flavors: number[],
         public requirement?: Requirement,
-        public sprite: boolean = false,
     ) {
         this.flavorPrice = [];
         for (let i = 0; i < 5; i++) {

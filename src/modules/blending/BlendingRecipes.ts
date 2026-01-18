@@ -34,8 +34,6 @@ export default class BlendingRecipes {
             new BlendingRecipe('PokeBlock_Tough', [0, 0, 0, 0, 300], new MaxRegionRequirement(Region.kalos)),
             new BlendingRecipe('PokeBlock_Balanced', [120, 120, 120, 120, 120], new MaxRegionRequirement(Region.kalos)),
         ],
-        [BlendingRecipeType.Alcremie_Sweet]: [
-        ],
         // Keep Event recipes at bottom. Add new recipes anywhere above
         [BlendingRecipeType.Event]: [
         ],
