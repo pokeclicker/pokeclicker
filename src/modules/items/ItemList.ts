@@ -44,7 +44,6 @@ import TreasureItem from './TreasureItem';
 import { pokemonMap } from '../pokemons/PokemonList';
 import AttackGainConsumable from './AttackGainConsumable';
 import ContestType from '../enums/ContestType';
-import ContestHelper from '../contest/ContestHelper';
 import ContestPokemonItem from './ContestPokemonItem';
 import ContestRank from '../enums/ContestRank';
 // eslint-disable-next-line import/prefer-default-export
@@ -127,7 +126,7 @@ ItemList.PokeBlock_Orange    = new PokeBlock(PokeBlockColor.Orange, 40, 2, [Cont
 ItemList.PokeBlock_Rainbow   = new PokeBlock(PokeBlockColor.Rainbow, 65, 2, undefined, 'A flavorful Pokéblock that significantly boosts the Appeal of any Pokémon and activates all its default contest types.');
 ItemList.PokeBlock_Cool      = new PokeBlock(PokeBlockColor.Cool, 85, 3, [ContestType.Cool], 'A super Spicy Pokéblock that substantially boosts Appeal and adds the Cool Contest Type.', () => true);
 ItemList.PokeBlock_Beautiful = new PokeBlock(PokeBlockColor.Beautiful, 85, 3, [ContestType.Beautiful], 'A super Dry Pokéblock that substantially boosts Appeal and adds the Beautiful Contest Type.', () => true);
-ItemList.PokeBlock_Cute      = new PokeBlock(PokeBlockColor.Cute, 85, 3, [ContestType.Cute],'A super Sweet Pokéblock that substantially boosts Appeal and the Cute Contest Type.', () => true);
+ItemList.PokeBlock_Cute      = new PokeBlock(PokeBlockColor.Cute, 85, 3, [ContestType.Cute], 'A super Sweet Pokéblock that substantially boosts Appeal and the Cute Contest Type.', () => true);
 ItemList.PokeBlock_Smart     = new PokeBlock(PokeBlockColor.Smart, 85, 3, [ContestType.Smart], 'A super Bitter Pokéblock that substantially boosts Appeal and adds the Smart Contest Type.', () => true);
 ItemList.PokeBlock_Tough     = new PokeBlock(PokeBlockColor.Tough, 85, 3, [ContestType.Tough], 'A super Sour Pokéblock that substantially boosts Appeal and adds the Tough Contest Type.', () => true);
 ItemList.PokeBlock_Balanced  = new PokeBlock(PokeBlockColor.Balanced, 180, 5, [ContestType.Balanced], 'A super flavorful Pokéblock that immensely boosts Appeal adds the Balanced Contest Type.', () => true);
