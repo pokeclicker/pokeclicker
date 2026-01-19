@@ -1,7 +1,12 @@
 import type {
     Observable as KnockoutObservable,
+    ObservableArray as KnockoutObservableArray,
 } from 'knockout';
+import ContestRank from '../enums/ContestRank';
+import ContestType from '../enums/ContestType';
 import { CONTEST_TICK, CONTEST_TIME, GameState, SECOND } from '../GameConstants';
+import NotificationConstants from '../notifications/NotificationConstants';
+import Notifier from '../notifications/Notifier';
 import ContestHelper from './ContestHelper';
 import ContestScore from './ContestScore';
 import ContestBattle from './ContestBattle';
@@ -28,8 +33,21 @@ export default class ContestRunner {
     public static rank: KnockoutObservable<number> = ko.observable(0);
     public static type: KnockoutObservable<number> = ko.observable(0);
 
+    // Updated via ContestHall.ts
+    public static contestTypeObservable: KnockoutObservableArray<ContestType> = ko.observableArray([0, 1, 2, 3, 4]);
+    public static contestRankObservable: KnockoutObservableArray<ContestRank> = ko.observableArray([1]);
+
     // Start, End
     public static startContest() {
+        if (!ContestHelper.contestIsUnlocked(ContestRunner.rank(), ContestRunner.type())) {
+            Notifier.notify({
+                title: 'Pokémon Contest',
+                message: ContestHelper.getContestHallRequirements(ContestRunner.rank(), ContestRunner.type()).flatMap(r => r.hint()).join(' and '),
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return;
+        }
+
         ContestRunner.running(false);
         ContestRunner.timeLeft((!ContestBattle.toggleTesting() ? (ContestHelper.contestRankTimer(ContestRunner.rank()) * 10) : ContestBattle.testTimer()) * SECOND);
         ContestRunner.timeLeftPercentage(100);

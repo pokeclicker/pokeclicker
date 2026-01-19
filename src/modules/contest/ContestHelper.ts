@@ -1,4 +1,11 @@
 import ContestRank from '../enums/ContestRank';
+import ContestType from '../enums/ContestType';
+import { Region } from '../GameConstants';
+import ContestWonRequirement from '../requirements/ContestWonRequirement';
+import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
+import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
+import OneFromManyRequirement from '../requirements/OneFromManyRequirement';
+import Requirement from '../requirements/Requirement';
 
 export default class ContestHelper {
     // Rank Mechanics
@@ -42,5 +49,20 @@ export default class ContestHelper {
 
     public static getBaseAudienceHP(rank: ContestRank) {
         return ContestHelper.rankAppeal[rank] * 80 * rank * rank * ContestHelper.contestRankTimer(rank);
+    }
+
+    // Requirements
+    public static contestIsUnlocked(rank: ContestRank, type: ContestType) {
+        return ContestHelper.getContestHallRequirements(rank, type).every(r => r.isCompleted());
+    }
+
+    public static getContestHallRequirements(rank: ContestRank, type?: ContestType): (Requirement | OneFromManyRequirement)[] {
+        if (new DevelopmentRequirement().isCompleted()) {
+            return [new DevelopmentRequirement()];
+        }
+        if (rank <= ContestRank.Normal) {
+            return [new MaxRegionRequirement(Region.hoenn)];
+        }
+        return [new ContestWonRequirement(1, rank - 1, type)];
     }
 }
