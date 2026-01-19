@@ -450,6 +450,12 @@ class Game implements TmpGameType {
                 TemporaryBattleRunner.tick();
                 break;
             }
+            case GameConstants.GameState.contest: {
+                ContestBattle.counter += GameConstants.TICK_TIME;
+                ContestBattle.tick();
+                ContestRunner.tick();
+                break;
+            }
         }
 
         // Auto Save

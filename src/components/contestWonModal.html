@@ -1,0 +1,20 @@
+<div class="modal fade" data-keyboard="false" data-backdrop="static" id="contestWonModal" tabindex="-1" role="dialog"
+aria-labelledby="contestWonModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div style="width: 100%;">
+                    <h5 class="modal-title" id="contestWonModalLabel"
+                        data-bind="text: `${ContestRank[ContestRunner.rank()]} Rank Contest Won!`">Modal title</h5>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- placeholder text -->
+                <p>Congratulations, you won!</p>
+            </div>
+            <div class="modal-footer" style="justify-content: center;">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Hooray!</button>
+            </div>
+        </div>
+    </div>
+</div>

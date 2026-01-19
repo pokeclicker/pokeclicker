@@ -19,6 +19,9 @@ export default class BattlePokemon implements EnemyPokemonInterface {
     maxHealth: KnockoutObservable<number>;
     healthPercentage: KnockoutObservable<number>;
     _displayName: KnockoutComputed<string>;
+    rapport: KnockoutObservable<number>;
+    maxRapport: KnockoutObservable<number>;
+    rapportPercentage: KnockoutObservable<number>;
 
     /**
      * In case you want to manually create a Pokémon instead of generating it from the route number
@@ -35,6 +38,7 @@ export default class BattlePokemon implements EnemyPokemonInterface {
      * @param gender Pokémon gender
      * @param [heldItem] item to possibly gain for defeating this Pokémon
      * @param shadow is shadow or purified
+     * @param maxRapport how much rapport the Pokémon needs for it to be rallied
      */
 
     /* eslint-disable @typescript-eslint/default-param-last */
@@ -55,16 +59,24 @@ export default class BattlePokemon implements EnemyPokemonInterface {
         public encounterType: EncounterType,
         public heldItem?: BagItem,
         public ep: number = GameConstants.BASE_EP_YIELD,
+        maxRapport?: number,
     ) {
         this.health = ko.observable(maxHealth);
         this.maxHealth = ko.observable(maxHealth);
         this.healthPercentage = ko.observable(100);
         this._displayName = PokemonHelper.displayNameObservable(name);
+        this.rapport = ko.observable(0);
+        this.maxRapport = ko.observable(maxRapport ?? maxHealth);
+        this.rapportPercentage = ko.observable(0);
     }
     /* eslint-enable @typescript-eslint/default-param-last */
 
     public isAlive(): boolean {
         return this.health() > 0;
+    }
+
+    public isRallied(): boolean {
+        return this.rapport() >= this.maxRapport();
     }
 
     /**
@@ -74,6 +86,15 @@ export default class BattlePokemon implements EnemyPokemonInterface {
     public damage(damage: number): void {
         this.health(Math.max(0, this.health() - damage));
         this.healthPercentage(Math.floor(this.health() / this.maxHealth() * 100));
+    }
+
+    /**
+     * Gain assist points
+     * @param rally
+     */
+    public rally(rally: number): void {
+        this.rapport(Math.max(0, Math.min(this.rapport() + rally, this.maxRapport())));
+        this.rapportPercentage(Math.floor(this.rapport() / this.maxRapport() * 100));
     }
 
     public defeat(trainer = false): void {
