@@ -35,8 +35,12 @@ import Battle from './battles/Battle';
 import BattlePokemon from './battles/BattlePokemon';
 import Trainer from './battles/Trainer';
 import GymPokemon from './gym/GymPokemon';
+import ContestBattle from './contest/ContestBattle';
 import ContestBattlePokemon from './contest/ContestBattlePokemon';
+import ContestHelper from './contest/ContestHelper';
+import ContestRunner from './contest/ContestRunner';
 import ContestTrainerList from './contest/ContestTrainerList';
+import ContestScore from './contest/ContestScore';
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
@@ -275,8 +279,12 @@ Object.assign(<any>window, {
     BattlePokemon,
     Trainer,
     GymPokemon,
+    ContestBattle,
     ContestBattlePokemon,
+    ContestHelper,
+    ContestRunner,
     ContestTrainerList,
+    ContestScore,
     BooleanSetting,
     RangeSetting,
     Setting,
