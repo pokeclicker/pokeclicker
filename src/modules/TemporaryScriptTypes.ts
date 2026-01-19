@@ -34,6 +34,8 @@ import type WeatherType from './weather/WeatherType';
 import type { MultiplierDecreaser } from './items/types';
 import type BagItem from './interfaces/BagItem';
 import type BattlePokemon from './battles/BattlePokemon';
+import ContestBattlePokemon from './contest/ContestBattlePokemon';
+import ContestTrainer from './contest/ContestTrainer';
 
 /*
     These types are only temporary while we are converting things to modules. As things are converted,
@@ -281,6 +283,7 @@ export type TmpPokemonFactoryType = {
     routeDungeonTokens(route: number, region: GameConstants.Region): number;
     generateShiny(chance: number, skipBonus?: boolean): boolean;
     generateGenderById(id: number): GameConstants.BattlePokemonGender;
+    generateContestTrainerPokemon(trainer: ContestTrainer, partyIndex: number): ContestBattlePokemon;
 };
 
 export type TmpPartyPokemonType = {
