@@ -18,6 +18,7 @@ import CaughtStatus from './enums/CaughtStatus';
 import ContestType from './enums/ContestType';
 import ContestRank from './enums/ContestRank';
 import ContestOpponentStatus from './enums/ContestOpponentStatus';
+import Direction from './enums/Direction';
 import EvolutionType from './enums/EvolutionType';
 import FarmNotificationType from './enums/FarmNotificationType';
 import FlavorType from './enums/FlavorType';
@@ -259,6 +260,7 @@ Object.assign(<any>window, {
     ContestType,
     ContestRank,
     ContestOpponentStatus,
+    Direction,
     FarmNotificationType,
     FlavorType,
     ItemType,
