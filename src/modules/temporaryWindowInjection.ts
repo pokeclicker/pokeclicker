@@ -17,6 +17,7 @@ import PokemonType from './enums/PokemonType';
 import CaughtStatus from './enums/CaughtStatus';
 import ContestType from './enums/ContestType';
 import ContestRank from './enums/ContestRank';
+import ContestOpponentStatus from './enums/ContestOpponentStatus';
 import EvolutionType from './enums/EvolutionType';
 import FarmNotificationType from './enums/FarmNotificationType';
 import FlavorType from './enums/FlavorType';
@@ -33,6 +34,7 @@ import Battle from './battles/Battle';
 import BattlePokemon from './battles/BattlePokemon';
 import Trainer from './battles/Trainer';
 import GymPokemon from './gym/GymPokemon';
+import ContestBattlePokemon from './contest/ContestBattlePokemon';
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
@@ -255,6 +257,7 @@ Object.assign(<any>window, {
     EvolutionType,
     ContestType,
     ContestRank,
+    ContestOpponentStatus,
     FarmNotificationType,
     FlavorType,
     ItemType,
@@ -269,6 +272,7 @@ Object.assign(<any>window, {
     BattlePokemon,
     Trainer,
     GymPokemon,
+    ContestBattlePokemon,
     BooleanSetting,
     RangeSetting,
     Setting,
