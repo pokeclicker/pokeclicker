@@ -1,0 +1,163 @@
+<div class="modal fade noselect" id="contestInfoModal" tabindex="-1" role="dialog"
+aria-labelledby="contestInfoModalLabel"
+style="cursor:default">
+
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 data-bind="text: 'Contest Info - ' +  ContestHelper.getRankInfo(ContestRunner.contestRankObservable()[0]) + ' Hall'">Contest Info</h4>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" style="right:0; top:0; font-size: 18px; font-weight: 700;">×</button>
+            </div>
+
+            <div class="modal-header p-0" style='justify-content: space-around;'>
+                <ul class="nav nav-tabs nav-fill w-100">
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#contestInfo">Gameplay</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#contestTrainersAndRewards">Trainers & Rewards</a></li>
+                </ul>
+            </div>
+
+            <div id="contestInformation" class="modal-body sortable-disabled border-secondary mb-3 no-select tab-content p-0">
+
+                <div id="contestInfo" class="tab-content tab-pane fade in active show modal-body text-center p-0">
+                    <div class="modal-header p-0" style='justify-content: space-around;'>
+                        <ul class="nav nav-tabs nav-fill w-100">
+                            <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#contestInfoGen">General</a></li>
+                            <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#contestInfoRank"
+                                data-bind="text: ContestHelper.getRankInfo(ContestRunner.contestRankObservable()[0]) + ' Rank Gameplay'">Rank Gameplay</a>
+                            </li>
+                            <li class="nav-item"><a data-toggle='tab' class="nav-link" href="#contestInfoType">Contest Types</a></li>
+                        </ul>
+                    </div>
+                    <div id="contestInfoGen" class="modal-body tab-pane fade in active show">
+                        <h4><u>Audience Bar</u></h4>
+
+                        <p>Successfully perform actions to increase the large bottom bar. The rate it increases by
+                            will be calculated from the sum of your party's Appeal, but for testing purposes you can change it at will.
+                            Max it out at least one time to win a contest and be awarded with a ribbon and contest tokens.
+                        </p>
+
+                        <p>The audience will call for an encore when you max out the bar. This slightly increases the audience bar. Encores act as point multipliers.</p>
+
+                        <h4><u>Gameplay gimmicks</u></h4>
+                        <p>The bars underneath the individual pokemon change depending on their status. Successfully performing an action makes the pokemon appeal to the audience (💖). If the action results in a failure, the pokemon is jammed (🖤).
+                            There are three gameplay styles. Click on the "Rank Gameplay" tab for more information on this Hall's game style.</p>
+
+                        <h4><u>Crowd Hype and Frenzy Mode</u></h4>
+                        <p>When all pokemon on stage have performed, their statuses are evaluated to generate Crowd Hype. A fully hyped crowd will induce Frenzy Mode. Hype will not go up if a Pokemon is jammed.</p>
+                        <p>In Hoenn, jamming prevents Crowd Hype from being generated and reduces the amount of audience Appeal that is produced for a short while.</p>
+                        <p>In Sinnoh, jammed Pokemon decrease the hype bar by 1 with no extra effects.</p>
+
+                        <p>Gameplay is slightly altered during Frenzy Mode and chains cannot be broken for its duration. Your audience appeal dealt will also be buffed based on how many contests you've won.</p>
+                        <p>Extra points and rewards can be rewarded during Frenzy Mode.</p>
+
+                        <h4><u>Scoring</u></h4>
+                        <p>Successful actions increase the chain, add to your score, and can give a small bonus dealt audience appeal. Chains are broken when a poor action is performed.</p>
+                        <p>The higher your score the more tokens you get upon completion.</p>
+
+                    </div>
+                    <div id="contestInfoType" class="modal-body tab-pane fade">
+                        <h4>Contest matchups</h4>
+                        <p>Contests use 6 different Contest Conditions (Types) instead of the regular Pokémon Types. Contest matchups are additive and only deal zero, half, or full effectiveness.</p>
+                        <table class="table table-bordered table-striped" data-bind="with: GameHelper.enumNumbers(ContestType)">
+                            <thead><tr><th colspan="8">Contest Type Effectiveness</th></tr></thead>
+                            <tr>
+                                <td></td>
+                                <td colspan="7">Defending Type</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="8" class="text-center" style="width: 1px; vertical-align: middle;">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <span style="writing-mode: sideways-lr;">Attacking Type</span>
+                                    </div>
+                                </td>
+                                <td></td>
+                                <!-- ko foreach: $data -->
+                                <td data-bind="text: ContestType[$data]"></td>
+                                <!-- /ko -->
+                            </tr>
+                            <!-- ko foreach: $data -->
+                            <tr>
+                                <td data-bind="text: ContestType[$data]"></td>
+                                <!-- ko foreach: ContestTypeHelper.contestTypeMatrix[$data] -->
+                                <td data-bind="text: $data"></td>
+                                <!-- /ko -->
+                            </tr>
+                            <!-- /ko -->
+                        </table>
+                    </div>
+                    <div id="contestInfoRank" class="modal-body tab-pane fade tab-content">
+                        <div data-bind="template: {name: 'rankInfo' + ContestHelper.getRankInfo(ContestRunner.contestRankObservable()[0])}"></div>
+                    </div>
+                </div>
+
+                <div id="contestTrainersAndRewards" class="modal-body tab-pane fade">
+                    <div class="p-0 modal-body">
+                        <div class="justify-content-center" style="overflow-x: hidden; height: 500px;">
+                            <div data-bind="foreach: { data: [ContestRunner.rank()], as: 'rank' }">
+                                <div data-bind="template: {name: 'trainerInfoTable', data: ContestTrainerList.ContestOpponents[rank]}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="trainerInfoTable">
+    <table class="table table-striped table-hover table-sm mb-1 p-0 show" style="justify-content: space-evenly;">
+        <thead class="sticky-top bg-secondary">
+            <tr>
+                <th colspan="100%" class="p-0">
+                    <h4 class="mt-1 p-0 mb-0" data-bind="text: `${ContestRank[$parent]} Rank Trainers`"></h4>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="2" class="pt-0">Trainer</th>
+                <th class="pt-0">Pokémon</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: { data: $data, as: 'trainer' }">
+            <tr class="m-0">
+                <td class="text-left" style="vertical-align: middle;">
+                    <img class="smallImage m-0" data-bind="attr:{ src: trainer.image }, css: { 'pokemon-not-seen': trainer.options?.requirement && !trainer.options?.requirement?.isCompleted()}">
+                </td>
+                <td class="p-0 text-left" style="vertical-align: middle;">
+                    <span data-bind="text: trainer.name"></span>
+                </td>
+                <td class="text-left" style="vertical-align: middle;">
+                    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
+                    <!-- ko foreach: trainer.getTeam() -->
+                        <img class="smallImage m-0" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data.name].id, $data.shiny ?? 0, $data.gender, 0) }, css: { 'pokemon-not-seen': trainer.options?.requirement && !trainer.options?.requirement?.isCompleted()}">
+                        <span class="align-middle" data-bind="text: $data.nickname"></span>
+                        <!-- ko if: (trainer.getTeam().indexOf($data) + 1) % 2 === 0 -->
+                        <br/>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</script>
+
+<script type="text/html" id="rankInfoHoenn">
+    <p>Press the spacebar when the hearts are colored to successfully appeal</p>
+    <div class="row">
+    <!-- ko foreach: GameHelper.enumNumbers(ContestType).filter(type => type < 3) -->
+        <!-- ko with: ContestBattle.healthDisplayBeat(ContestBattle.infoBeat() + ContestTypeHelper.contestTypeMatrix[ContestType.Cool][$data] * 2, '❤️', '🖤', '🤍', ContestBattle.infoBeat()) -->
+         <div class="col">
+            <img data-bind="attr: {src: PokemonHelper.getImage(GameConstants.RegionalStarters[GameConstants.Region.hoenn][$parent], false)}">
+            <p data-bind="text: $data"></p>
+            <p data-bind="text: `${ContestBattle.infoBeat() + ContestTypeHelper.contestTypeMatrix[ContestType.Cool][$parent] * 2 >= 2 ? 'Success ✔️' : 'Failure ❌'}`"></p>
+        </div>
+        <!-- /ko -->
+    <!-- /ko -->
+    </div>
+
+    <p>If you pressed it at the wrong time, the pokemon will become jammed. Jammed pokemon won't excite the crowd and will halve the amount of audience appeal that can be dealt for a short while.</p>
+    <p>Time the beat to chain successful appeals and hype the audience into a frenzy.</p>
+    <p>During frenzy mode, select moves that the audience likes with the directional keys to gain points. Moves are calculated when you appeal with the spacebar. Use your knowledge of contest types to score a big bonus.</p>
+    <p>Berries are rewarded during frenzy depending on the cumulative performance of all Pokemon on stage.</p>
+</script>
