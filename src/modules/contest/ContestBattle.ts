@@ -335,4 +335,29 @@ export default class ContestBattle extends Battle {
             // TODO: setting to turn off contest notifications
         });
     }
+
+    // HTML display
+    public static contestViewGimmickBar(): string {
+        if (!ContestRunner.running()) {
+            return '';
+        }
+        if (ContestRunner.frenzyMode()) {
+            return 'contestMovesTemplate';
+        }
+        return 'contestBeatTemplate';
+    }
+
+    public static disableCheerButton(): boolean {
+        if (ContestRunner.frenzyMode()) {
+            return false;
+        }
+        return false;
+    }
+
+    public static disableDirectionalButtons(index: number): boolean {
+        if (ContestBattle.contestViewGimmickBar() === 'contestMovesTemplate') {
+            return !ContestBattle.pokemons()[ContestBattle.selectedEnemy()].usableMoves[index].pp();
+        }
+        return ContestRunner.rank() <= ContestRank.Master && ContestRunner.rank() >= ContestRank.Normal;
+    }
 }

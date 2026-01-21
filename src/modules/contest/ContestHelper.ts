@@ -1,5 +1,6 @@
 import ContestRank from '../enums/ContestRank';
 import ContestType from '../enums/ContestType';
+import Direction from '../enums/Direction';
 import { Region } from '../GameConstants';
 import ContestWonRequirement from '../requirements/ContestWonRequirement';
 import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
@@ -64,6 +65,20 @@ export default class ContestHelper {
             return [new MaxRegionRequirement(Region.hoenn)];
         }
         return [new ContestWonRequirement(1, rank - 1, type)];
+    }
+
+    // Emojis
+    public static getArrowEmoji(direction: Direction) {
+        switch (direction) {
+            case Direction.Up:
+                return '⬆️';
+            case Direction.Down:
+                return '⬇️';
+            case Direction.Left:
+                return '⬅️';
+            case Direction.Right:
+                return '➡️';
+        }
     }
 
     // HTML

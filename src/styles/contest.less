@@ -1,0 +1,42 @@
+#contestSelectButtons {
+  flex-wrap: wrap;
+
+  [contest-type="Balanced"] {
+    flex-basis: 100% !important;
+    order: 1; // default order is 0, this moves it to end of div in case it's not already
+  }
+
+  @media (max-width: 767px) { // phone
+    flex-direction: column;
+  }
+
+  // for fullWidth5 gameDisplayStyle setting
+  #middle-column.col-lg-4 &{
+    @media (min-width: 992px) {
+      @media (max-width: 1100px) {
+        flex-wrap: nowrap;
+        flex-direction: column;
+        overflow-y: scroll;
+        max-height: 120px;
+      }
+    }
+  }
+}
+
+#contestControlButtons {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr 2fr;
+  grid-template-areas:
+    ". up . space"
+    "left down right space";
+
+  @media (max-width: 767px) { // phone
+    grid-template-columns: 1fr 1fr 1fr;
+    min-height: 200pt;
+    grid-template-areas:
+      "up up up"
+      "left space right"
+      "down down down";
+  }
+}
