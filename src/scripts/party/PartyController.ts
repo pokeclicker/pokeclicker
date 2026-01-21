@@ -153,6 +153,16 @@ class PartyController {
         return list.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
     }).extend({ rateLimit: 500 });
 
+    // Pokemon List filtered list
+    static pokemonListFilteredList = ko.pureComputed(() => {
+        return App.game.party.caughtPokemon.filter(p => p.matchesPokemonListFilters());
+    }).extend({ rateLimit: 500 });
+
+    static getPokemonListSortedFilteredList = ko.pureComputed(() => {
+        const filtered = PartyController.pokemonListFilteredList();
+        return filtered.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
+    }).extend({ rateLimit: 500 });
+
     private static vitaminSortedList = [];
     static getVitaminSortedList = ko.pureComputed(() => {
         // If the vitamin modal is open, we should sort it.
