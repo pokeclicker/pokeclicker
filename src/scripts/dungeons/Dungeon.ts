@@ -2817,9 +2817,7 @@ dungeonList['Radio Tower'] = new Dungeon('Radio Tower',
             {loot: 'Aguav'},
             {loot: 'Iapapa'},
         ],
-        legendary: [
-            {loot: 'Metal_Powder'},
-        ],
+        legendary: [{loot: 'Metal_Powder'}],
         mythic: [
             {loot: 'Max Revive'},
             {loot: 'Lum', requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Radio Tower'))},
