@@ -175,6 +175,7 @@ class SafariBattle {
 
     private static capturePokemon() {
         SafariBattle.text(`GOTCHA!<br>${SafariBattle.enemy.displayName} was caught!`);
+        App.game.oakItems.use(OakItemType.Magic_Ball);
         GameHelper.incrementObservable(App.game.statistics.safariPokemonCaptured, 1);
         if (SafariBattle.enemy.shiny) {
             GameHelper.incrementObservable(App.game.statistics.safariShinyPokemonCaptured, 1);
