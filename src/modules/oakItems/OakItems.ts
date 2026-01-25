@@ -47,8 +47,8 @@ export default class OakItems implements Feature {
                 true, [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, 70, 150),
             new OakItem(OakItemType.Magma_Stone, 'Magma Stone', 'Hatch eggs faster',
                 false, [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, 80, 10),
-            new OakItem(OakItemType.Cell_Battery, 'Cell Battery', 'Reduce the charges needed to discharge',
-                false, [-5, -10, -15, -20, -25, -30], 0, 90, 1, [5, 10, 30, 60, 150], undefined, undefined, ' Charges'),
+            new OakItem(OakItemType.Cell_Battery, 'Cell Battery', 'Increase the rate of charging the battery',
+                false, [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, 90, 1, [5, 10, 30, 60, 150]),
             new BoughtOakItem(OakItemType.Squirtbottle, 'Squirtbottle', 'Increases the chance of berry mutations', 'Johto Berry Master',
                 true, [1.25, 1.5, 1.75, 2, 2.25, 2.5], 1, 10, undefined, undefined, AmountFactory.createArray([2000, 5000, 10000, 20000, 50000], Currency.farmPoint)),
             new BoughtOakItem(OakItemType.Sprinklotad, 'Sprinklotad', 'Increases the duration of Mulch', 'Hoenn Berry Master',
@@ -64,6 +64,7 @@ export default class OakItems implements Feature {
         this.addMultiplier('money', OakItemType.Amulet_Coin);
         this.addMultiplier('shiny', OakItemType.Shiny_Charm);
         this.addMultiplier('eggStep', OakItemType.Magma_Stone);
+        this.addMultiplier('undergroundCharge', OakItemType.Cell_Battery);
 
         this.itemList.forEach((i) => i.levelKO.subscribe(() => this.maxLevelOakItems(this.itemList.filter((i2) => i2.isMaxLevel()).length)));
     }

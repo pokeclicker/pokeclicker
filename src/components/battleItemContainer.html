@@ -41,6 +41,7 @@
                             tooltip: {
                               title: '<strong>' + ItemList[$data].displayName + '</strong>' + '<br/>' + ItemList[$data].description,
                               trigger: 'hover',
+                              animation: false,
                               placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
                               html: true
                             }">
@@ -51,7 +52,7 @@
             <tr data-bind="foreach: $data">
                 <td class="text-light p-0">
               <!-- ko if: EffectEngineRunner.getEffect($data) > 0 -->
-                <code data-bind="text: player.effectTimer[$data](),tooltip: {title:GameConstants.formatSecondsToTime(player.effectList[$data]()),trigger:'hover',placement:'bottom',html:true}"></code>
+                <code data-bind="text: player.effectTimer[$data](),tooltip: {title:GameConstants.formatSecondsToTime(player.effectList[$data]()),trigger:'hover',animation:false,placement:'bottom',html:true}"></code>
               <!-- /ko -->
                 </td>
             </tr>
@@ -121,6 +122,7 @@
                           tooltip: {
                             title: ItemList[$data].getFormattedTooltip(ItemList[$data]),
                             trigger: 'hover',
+                            animation: false,
                             placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
                             sanitize: false,
                             html: true
@@ -133,6 +135,7 @@
                 tooltip: {
                   title: FluteEffectRunner.fluteTooltip($data),
                   trigger:'hover',
+                  animation:false,
                   placement:'bottom',
                   html:true
               }">
