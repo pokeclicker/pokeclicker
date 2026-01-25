@@ -7,12 +7,15 @@ class Save {
     static counter = GameConstants.SAVE_TICK - GameConstants.TICK_TIME;
     static key = '';
 
-    public static store(player: Player) {
+    public static store(player: Player, showNotification = false) {
         localStorage.setItem(`player${Save.key}`, JSON.stringify(player));
         localStorage.setItem(`save${Save.key}`, JSON.stringify(this.getSaveObject()));
         localStorage.setItem(`settings${Save.key}`, JSON.stringify(Settings.toJSON()));
 
         this.counter = 0;
+        if (showNotification) {
+            Notifier.notify({ message: 'Game Saved!'});
+        }
         //console.log('%cGame saved', 'color:#3498db;font-weight:900;');
     }
 
