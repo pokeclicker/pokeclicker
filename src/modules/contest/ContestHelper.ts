@@ -62,12 +62,31 @@ export default class ContestHelper {
             return [new DevelopmentRequirement()];
         }
         if (rank <= ContestRank.Normal) {
-            return [new MaxRegionRequirement(Region.hoenn)];
+            return [new DevelopmentRequirement(new MaxRegionRequirement(Region.hoenn))];
         }
-        return [new ContestWonRequirement(1, rank - 1, type)];
+        return [new DevelopmentRequirement(new ContestWonRequirement(1, rank - 1, type))];
     }
 
     // Emojis
+    public static getContestEmoji(type?: ContestType) {
+        switch (type) {
+            case ContestType.Cool:
+                return '🧡';
+            case ContestType.Beautiful:
+                return '💙';
+            case ContestType.Cute:
+                return '🩷';
+            case ContestType.Smart:
+                return '💚';
+            case ContestType.Tough:
+                return '💛';
+            case ContestType.Balanced:
+                return '💜';
+            default:
+                return '🤍';
+        }
+    }
+
     public static getArrowEmoji(direction: Direction) {
         switch (direction) {
             case Direction.Up:
@@ -82,6 +101,18 @@ export default class ContestHelper {
     }
 
     // HTML
+    public static scaleTextHorizontal() {
+        let els = document.getElementsByClassName("scaled-text") as HTMLCollectionOf<HTMLElement>;
+        for (let el of Array.from(els)) {
+            let xScale = el.clientWidth / el.scrollWidth;
+            if (xScale < 1) { 
+                el.style.transform = "scaleX(" + xScale + ")";
+            } else {
+                el.style.transform = "scaleX(1)";
+            }
+        }
+    }
+
     // Info modal
     public static getRankInfo(rank: ContestRank) {
         switch (rank) {

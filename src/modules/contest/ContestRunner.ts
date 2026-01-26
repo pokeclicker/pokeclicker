@@ -1,6 +1,7 @@
 import type {
     Observable as KnockoutObservable,
     ObservableArray as KnockoutObservableArray,
+    PureComputed,
 } from 'knockout';
 import ContestRank from '../enums/ContestRank';
 import ContestType from '../enums/ContestType';
@@ -187,4 +188,10 @@ export default class ContestRunner {
             }
         }
     }
+
+    // HTML Computables
+    // eslint-disable-next-line @typescript-eslint/member-ordering
+    public static timeLeftSeconds: PureComputed<string> = ko.pureComputed(() => {
+        return (Math.ceil((!ContestRunner.frenzyMode() ? ContestRunner.timeLeft() : ContestRunner.frenzyTime()) / 100) / 10).toFixed(1);
+    });
 }

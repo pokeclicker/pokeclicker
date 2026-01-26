@@ -11,10 +11,12 @@ import GameHelper from '../GameHelper';
 import { MultiplierDecreaser } from '../items/types';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
+import ContestWonRequirement from '../requirements/ContestWonRequirement';
 import ContestTypeHelper from '../types/ContestTypeHelper';
 import Rand from '../utilities/Rand';
 import ContestBattleDefault from './ContestBattleDefault';
 import ContestBattlePokemon from './ContestBattlePokemon';
+import ContestHelper from './ContestHelper';
 import ContestRunner from './ContestRunner';
 import ContestScore from './ContestScore';
 import ContestTrainer from './ContestTrainer';
@@ -50,6 +52,8 @@ export default class ContestBattle extends Battle {
     public static tokenReward: KnockoutObservable<number> = ko.observable(0);
 
     public static tick() {
+        ContestHelper.scaleTextHorizontal()
+
         // Info tab has separate beat cycle
         if (GameHelper.counter % 500 === 0) {
             if (ContestBattle.infoBeat() >= 2) {
@@ -345,6 +349,20 @@ export default class ContestBattle extends Battle {
             return 'contestMovesTemplate';
         }
         return 'contestBeatTemplate';
+    }
+
+    // Info HTML
+    public static getBattleViewTitle() {
+        const heart = ContestHelper.getContestEmoji(ContestRunner.type());
+        let emoji = '🤍';
+        if (ContestRunner.contestRankObservable().filter(rank => rank > ContestRank.Practice).every(rank => {
+            ContestRunner.contestTypeObservable().every(
+                type => new ContestWonRequirement(1, rank, type).isCompleted(),
+            );
+        })) {
+            emoji = '💖';
+        }
+        return !ContestRunner.running() ? `${emoji}Contest Hall${emoji}` : `${heart}${ContestRank[ContestRunner.rank()]} Rank ${ContestType[ContestRunner.type()]}${heart}`;
     }
 
     public static disableCheerButton(): boolean {

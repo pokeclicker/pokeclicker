@@ -1,0 +1,23 @@
+<div id="contestView" class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.contest">
+  <div class="col no-gutters" style="height: 280px; display: block;">
+
+    <h2 class="pageItemTitle">
+      <div class="scaled-text-container">
+        <span class="scaled-text" style="line-height: unset;" data-bind="text: ContestBattle.getBattleViewTitle()"></span>
+      </div>
+      <div data-bind="visible: ContestRunner.running()" class="progress timer" style="z-index: 1;">
+        <div class="progress-bar" role="progressbar" style="animation-direction: reverse;"
+          data-bind="attr:{ style: 'width:' + ContestRunner.timeLeftPercentage() + '%' },
+          css: {
+            'bg-danger': !ContestRunner.frenzyMode() && ContestRunner.timeLeftSeconds() < 3,
+            'bg-primary': ContestRunner.timeLeftSeconds() >= 10,
+            'progress-bar-striped progress-bar-animated bg-warning': ContestRunner.frenzyMode(),
+          }"
+          aria-valuemin="0" aria-valuemax="100">
+          <span data-bind="text: ContestRunner.timeLeftSeconds() + 's'" style="font-size: 12px;"></span>
+        </div>
+      </div>
+    </h2>
+
+  </div>
+</div>
