@@ -19,5 +19,62 @@
       </div>
     </h2>
 
+    <div data-bind="visible: !ContestRunner.running()">
+      <div style="margin-top: 60px;">
+        <button class="btn w-25 btn-success" onclick="ContestRunner.startContest()">Start Contest</button>
+        <!-- ko if: new DevelopmentRequirement().isCompleted() -->
+        <button class="btn w-25 btn-warning" onclick="ContestBattle.toggleTesting(!ContestBattle.toggleTesting())" data-bind="css: { active: ContestBattle.toggleTesting() }">Toggle Testing</button>
+        <!-- /ko -->
+      </div>
+      <div>
+          <div class="justify-content-center">
+            <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
+                <table width="100%">
+                  <tr>
+                    <th colspan="2" data-bind="text: `${ContestHelper.getContestEmoji(ContestRunner.type())}${ContestRank[ContestRunner.rank()]} Rank ${ContestType[ContestRunner.type()]} Contest Stats${ContestHelper.getContestEmoji(ContestRunner.type())}`"></th>
+                  </tr>
+                  <tr>
+                    <td colspan="2" data-bind="text: `Audience Appeal: ${ContestBattle.getActiveContestBattlePokemonAppeal().toLocaleString('en-US')}`"></td>
+                  </tr>
+                  <tr>
+                    <td data-bind="text: `Highest Score: ${App.game.statistics.contestHighestScore[ContestRunner.rank()][ContestRunner.type()]().toLocaleString('en-US') ?? 0}`"></td>
+                    <td data-bind="text: `Total Won: ${App.game.statistics.contestsWon[ContestRunner.rank()][ContestRunner.type()]().toLocaleString('en-US') ?? 0}`"></td>
+                  </tr>
+                </table>
+              </h2>
+          </div>
+      </div>
+    </div>
+
+    <div data-bind="if: ContestRunner.running()">
+      <div class="d-flex px-3" style="justify-content: space-evenly; overflow-x: hidden;" data-bind="foreach: ContestBattle.trainers()">
+        <div style="position: relative;" data-bind="if: ContestBattle.trainers().length > $index(),
+          css: { 'contest-inactive': !ContestBattle.getSpotlightStatus($index()) && !ContestBattle.prepareNextTrainerBatch() }">
+
+          <div class="mr-3">
+            <img class="contestTrainer" data-bind="attr:{ src: ContestBattle.trainers()[$index()].image }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <img class="contestSpotlight" src="assets/images/contest/contestSpotlight.png" data-bind="
+              visible: ContestBattle.getSpotlightStatus($index()),
+              style: { 'opacity': ($index() != ContestBattle.selectedEnemy()) ? '70%' : '' }"/>
+          </div>
+
+          <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': ContestBattle.pokemons()[$index()] } }">Pokémon sprite</knockout>
+
+          <div class="progress mx-1" style="bottom: 10px;">
+            <div class="progress-bar scaled-text-container" role="progressbar"
+                    data-bind="style: { 'width': ContestBattle.pokemons()[$index()].isRallied() ? '100%' : '0%' },
+                      attr: { 'contest-color': ContestType[ContestRunner.type()] }"
+                    aria-valuemin="0" aria-valuemax="100">
+                  <span class="scaled-text" style="font-size: 12px;" data-bind="text: ContestBattle.contestHealth(ContestBattle.pokemons()[$index()])"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 </div>

@@ -1,6 +1,8 @@
 import ContestOpponentStatus from '../enums/ContestOpponentStatus';
 import ContestTypeHelper from '../types/ContestTypeHelper';
 import ContestBattle from './ContestBattle';
+import ContestBattlePokemon from './ContestBattlePokemon';
+import ContestHelper from './ContestHelper';
 import ContestRunner from './ContestRunner';
 import ContestScore from './ContestScore';
 
@@ -44,5 +46,21 @@ export default class ContestBattleDefault {
         ContestBattle.beat(0);
         ContestBattle.counter = 0;
         return;
+    }
+
+    public static contestHealth(pokemon: ContestBattlePokemon) {
+        const oppStatus = pokemon.status();
+        if (oppStatus === ContestOpponentStatus.Jammed) {
+            return ('🖤').repeat(5);
+        }
+        if (ContestBattle.pokemons().indexOf(pokemon) != ContestBattle.selectedEnemy()) {
+            return new Array(5).fill('🤍').join('');
+        }
+        if (ContestRunner.frenzyMode()) {
+            return new Array(5).fill(ContestHelper.getContestEmoji(ContestRunner.type())).join('');
+        }
+        const visual = ContestBattle.beat() +
+            Math.max(...ContestBattle.pokemons()[ContestBattle.pokemons().indexOf(pokemon)].contestTypes.map(ct => ContestTypeHelper.contestTypeMatrix[ct][ContestRunner.type()] * 2));
+        return ContestBattle.healthDisplayBeat(visual, ContestHelper.getContestEmoji(ContestRunner.type()), '🖤', '🤍');
     }
 }

@@ -341,6 +341,43 @@ export default class ContestBattle extends Battle {
     }
 
     // HTML display
+    // Highlight selected/affected Pokemon
+    public static getSpotlightStatus(index: number): boolean {
+        if (ContestBattle.prepareNextTrainerBatch()) {
+            return false;
+        }
+        return index === ContestBattle.selectedEnemy();
+    }
+
+    public static contestHealth(pokemon: ContestBattlePokemon) {
+        const oppStatus = pokemon.status();
+        if (oppStatus === ContestOpponentStatus.Appealed) {
+            return ('💖').repeat(5);
+        }
+        switch (ContestRunner.rank()) {
+            case ContestRank.Normal:
+            case ContestRank.Super:
+            case ContestRank.Hyper:
+            case ContestRank.Master:
+                return ContestBattleDefault.contestHealth(pokemon);
+            case ContestRank.Practice:
+            case ContestRank['Super Normal']:
+            case ContestRank['Super Great']:
+            case ContestRank['Super Ultra']:
+            case ContestRank['Super Master']:
+            case ContestRank.Spectacular:
+            case ContestRank['Brilliant Shining']:
+            default:
+                return new Array(5).fill('🤍').join('');
+        }
+    }
+
+    public static healthDisplayBeat(grade: number, emojiSucceed: string, emojiFail: string, emojiNeutral: string, beat = ContestBattle.beat()) {
+        const hearts = new Array(beat * 2 + 1).fill(grade >= 2 ? emojiSucceed : emojiFail);
+        const hpBar = new Array(2).fill(emojiNeutral).splice(0, 2 - Math.max(0, beat));
+        return hpBar.concat(hearts).concat(hpBar).join('');
+    }
+
     public static contestViewGimmickBar(): string {
         if (!ContestRunner.running()) {
             return '';
