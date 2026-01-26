@@ -102,13 +102,13 @@ export default class ContestHelper {
 
     // HTML
     public static scaleTextHorizontal() {
-        let els = document.getElementsByClassName("scaled-text") as HTMLCollectionOf<HTMLElement>;
+        let els = document.getElementsByClassName('scaled-text') as HTMLCollectionOf<HTMLElement>;
         for (let el of Array.from(els)) {
             let xScale = el.clientWidth / el.scrollWidth;
             if (xScale < 1) { 
-                el.style.transform = "scaleX(" + xScale + ")";
+                el.style.transform = 'scaleX(' + xScale + ')';
             } else {
-                el.style.transform = "scaleX(1)";
+                el.style.transform = 'scaleX(1)';
             }
         }
     }

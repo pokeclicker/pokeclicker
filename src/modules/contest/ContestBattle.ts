@@ -52,7 +52,7 @@ export default class ContestBattle extends Battle {
     public static tokenReward: KnockoutObservable<number> = ko.observable(0);
 
     public static tick() {
-        ContestHelper.scaleTextHorizontal()
+        ContestHelper.scaleTextHorizontal();
 
         // Info tab has separate beat cycle
         if (GameHelper.counter % 500 === 0) {
