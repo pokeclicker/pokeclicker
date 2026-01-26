@@ -56,6 +56,7 @@
 #contestView{
   .scaled-text-container {
     white-space: nowrap;
+
     .scaled-text {
       text-align: center;
       display: block;
@@ -74,6 +75,12 @@
     min-height: unset !important;
     max-width: 100%;
   }
+
+  .lux & {
+    td, tr, tbody {
+      font-size: x-small;
+    }
+  }
 }
 
 .contest-inactive {
@@ -90,6 +97,20 @@
 .contestTrainer {
   position: absolute;
   max-width: 100%;
+}
+
+#middle-column.col-lg-4 & {
+  @media (min-width: 992px) {
+    @media (max-width: 1300px) {
+      .crowdHypeCell {
+        display: none;
+      }
+
+      .crowdHypeRow {
+        display: block !important; // override d-none display
+      }
+    }
+  }
 }
 
 /* stylelint-disable-next-line no-duplicate-selectors */

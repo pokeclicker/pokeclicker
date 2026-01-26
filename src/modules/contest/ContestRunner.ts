@@ -204,4 +204,19 @@ export default class ContestRunner {
     public static timeLeftSeconds: PureComputed<string> = ko.pureComputed(() => {
         return (Math.ceil((!ContestRunner.frenzyMode() ? ContestRunner.timeLeft() : ContestRunner.frenzyTime()) / 100) / 10).toFixed(1);
     });
+
+    // eslint-disable-next-line @typescript-eslint/member-ordering
+    public static crowdHypeComputable: PureComputed<string> = ko.pureComputed(() => {
+        const appealLeft = '🤍';
+        const appeal = ContestHelper.getContestEmoji(ContestRunner.type());
+        if (!ContestRunner.jamTime()) {
+            const hypePoints = Math.min(5, ContestRunner.crowdHype());
+            return appeal.repeat(hypePoints).concat(appealLeft.repeat(5 - hypePoints));
+        }
+
+        // Jamming is specific to Hoenn contests and prevents crowd hype for its duration, so we turn the emojis into a timer
+        const jam = '🖤';
+        const jamTickInterval = ContestBattle.totalJamTime() / 5;
+        return jam.repeat(Math.ceil(ContestRunner.jamTime() / jamTickInterval)).concat(Math.ceil(ContestRunner.jamTime() / jamTickInterval) === 5 ? '' : '🩶').concat(appealLeft.repeat(Math.max(4 - Math.ceil(ContestRunner.jamTime() / jamTickInterval), 0)));
+    });
 }

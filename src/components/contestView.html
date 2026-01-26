@@ -89,6 +89,90 @@
         </div>
       </div>
 
+      <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
+        <btn class="btn btn-block btn-secondary p-1 crowdHypeRow d-none">
+          <span data-bind="text: `Crowd Hype: ${ContestRunner.crowdHypeComputable()}`"></span>
+        </btn>
+        <table width="100%" style="font-size: small;">
+          <tbody>
+            <tr>
+              <td data-bind="text: ContestBattle.trainerInfo(ContestBattle.selectedEnemy()),
+                attr: { colspan: ContestBattle.contestViewGimmickBar() === 'contestBeatTemplate' ? '3' : '2' }">Opponent name</td>
+              <td data-bind="text: `Score: ${Math.round(ContestScore.totalScore()).toLocaleString('en-US')}`, visible: ContestBattle.contestViewGimmickBar() === 'contestMovesTemplate'">
+                Score
+              </td>
+              <td class="crowdHypeCell" rowspan="3" width="30%">
+                <btn class="btn btn-block btn-secondary p-1">
+                    <span data-bind="text: 'Crowd Hype'"></span></br>
+                    <span data-bind="text: ContestRunner.crowdHypeComputable()"></span>
+                </btn>
+              </td>
+            </tr>
+
+            <!-- ko if: ContestBattle.contestViewGimmickBar() === 'contestBeatTemplate' -->
+              <tr>
+                <td class="tight" colspan="3" data-bind="foreach: GameHelper.enumNumbers(ContestType).filter(e => e != ContestType.Balanced)">
+                  <span class="badge text-light px-1" data-bind="
+                              style: {
+                                'border': ContestRunner.type() === $data ? 'thin solid whitesmoke' : '',
+                              },
+                              attr: { 'contest-color': ContestBattle.enemyTypes(ContestBattle.selectedEnemy()).includes($data) ? ContestType[$data] : '' }">
+                    <small>
+                      <strong data-bind="text: ContestType[$data].toUpperCase()" style="color: white;"></strong>
+                    </small>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td data-bind="text: `Round: ×${ContestScore.encoreBonus().toLocaleString('en-US')}`">
+                  Encore Round
+                </td>
+                <td data-bind="text: `Score: ${Math.round(ContestScore.totalScore()).toLocaleString('en-US')}`">
+                  Score
+                </td>
+                <td data-bind="text: `Chain: &plus;${ContestScore.activeChain().toLocaleString('en-US')}`">
+                  Combo Chain
+                </td>
+              </tr>
+            <!-- /ko -->
+
+            <!-- ko if: ContestBattle.contestViewGimmickBar() === 'contestMovesTemplate' -->
+              <tr>
+                <td data-bind="text: `Round: ×${ContestScore.encoreBonus().toLocaleString('en-US')}`">
+                  Encore Round
+                </td>
+                <!-- ko with: ContestBattle.pokemons()[ContestBattle.selectedEnemy()].usableMoves[Direction.Up] -->
+                <td class="tight" data-bind="attr: { 'contest-color': ContestType[$data.moveType] },
+                    style: {
+                      'opacity': $data.pp() ? '' : '50%',
+                }">
+                      <span class="text-light p-1">
+                        <strong data-bind="text: `${ContestHelper.getArrowEmoji(Direction.Up)} ${ContestType[$data.moveType].toUpperCase()}`" style="color: white;"></strong>
+                      </span>
+                  </td>
+                  <!-- /ko -->
+                  <td data-bind="text: `Chain: &plus;${ContestScore.activeChain().toLocaleString('en-US')}`">
+                    Combo Chain
+                  </td>
+              </tr>
+              <tr>
+                <!-- ko foreach: GameHelper.enumNumbers(Direction).filter(d => d != Direction.Up) -->
+                  <!-- ko with: ContestBattle.pokemons()[ContestBattle.selectedEnemy()].usableMoves[$data] -->
+                  <td class="tight" data-bind="attr: { 'contest-color': ContestType[$data.moveType] },
+                      style: {
+                        'opacity': $data.pp() ? '' : '50%',
+                    }">
+                      <span class="text-light p-1">
+                        <strong data-bind="text: `${ContestHelper.getArrowEmoji($parent)} ${ContestType[$data.moveType].toUpperCase()}`" style="color: white;"></strong>
+                      </span>
+                  </td>
+                  <!-- /ko -->
+                <!-- /ko -->
+              </tr>
+            <!-- /ko -->
+          </tbody>
+        </table>
+      </h2>
     </div>
 
   </div>

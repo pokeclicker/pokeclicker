@@ -378,6 +378,35 @@ export default class ContestBattle extends Battle {
         return hpBar.concat(hearts).concat(hpBar).join('');
     }
 
+    // Table HTML
+    public static trainerInfo(index: number) {
+        let action = '';
+        switch (ContestRunner.rank()) {
+            case ContestRank.Normal:
+            case ContestRank.Super:
+            case ContestRank.Hyper:
+            case ContestRank.Master:
+                action = ContestRunner.frenzyMode() ? 'Moves' : 'Appeal';
+                break;
+            case ContestRank.Spectacular:
+            case ContestRank.Practice:
+            case ContestRank['Super Normal']:
+            case ContestRank['Super Great']:
+            case ContestRank['Super Ultra']:
+            case ContestRank['Super Master']:
+            case ContestRank['Brilliant Shining']:
+                break;
+        }
+        return `${ContestBattle.trainers()[index].name.replace(/\d/g, '')}\'s ${ContestBattle.pokemons()[index].nickname}\'s ${action}`;
+    }
+
+    public static enemyTypes(index: number): ContestType[] {
+        if (ContestBattle.pokemons()[index] === undefined) {
+            return [ContestRunner.type()];
+        }
+        return ContestBattle.pokemons()[index].contestTypes;
+    }
+
     public static contestViewGimmickBar(): string {
         if (!ContestRunner.running()) {
             return '';
