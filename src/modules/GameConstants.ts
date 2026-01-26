@@ -722,15 +722,6 @@ export const TypeColor = [
     '#D685AD', // Fairy
 ];
 
-export const ContestColor = [
-    '#F5AC78', // Cool
-    '#9DB7F5', // Beautiful
-    '#FA92B2', // Cute
-    '#A7DB8D', // Smart
-    '#FAE078', // Tough
-    '#EBB7C6', // Balanced
-];
-
 export const ROUTE_KILLS_NEEDED = 10;
 
 // Achievements
