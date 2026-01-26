@@ -101,10 +101,12 @@ class Tile {
     private _layerDepth: Observable<number>;
     private _reward?: Reward;
     private _survey: Observable<number>;
+    private _surveyRewardID: Observable<number>;
 
     constructor(layerDepth: number) {
         this._layerDepth = ko.observable<number>(layerDepth);
         this._survey = ko.observable<number>(-1);
+        this._surveyRewardID = ko.observable<number>(-1);
     }
 
     get layerDepth(): number {
@@ -131,15 +133,25 @@ class Tile {
         this._survey(range);
     }
 
+    get surveyRewardID(): number | undefined {
+        return this._surveyRewardID?.();
+    }
+
+    set surveyRewardID(rewardID: number | undefined) {
+        this._surveyRewardID(rewardID ?? -1);
+    }
+
     public save = () => ({
         layerDepth: this._layerDepth(),
         reward: this._reward?.save(),
         survey: this._survey(),
+        surveyRewardID: this._surveyRewardID(),
     });
 
     public static load = (json): Tile => {
         const tile = new Tile(json.layerDepth);
         tile.survey = json.survey;
+        tile.surveyRewardID = json.surveyRewardID;
 
         if (json.reward) {
             tile.reward = Reward.load(json.reward);
@@ -318,7 +330,7 @@ export class Mine {
         return this._grid[index];
     }
 
-    public survey(coordinate: Coordinate, range: number) {
+    public survey(coordinate: Coordinate, range: number, rewardID: number) {
         const tile = this.getTileForCoordinate(coordinate);
 
         if (!tile) {
@@ -326,6 +338,14 @@ export class Mine {
         }
 
         tile.survey = range;
+        tile.surveyRewardID = rewardID;
+    }
+
+    public removeSurveyForRewardID(rewardID: number) {
+        this.grid.filter(tile => tile.surveyRewardID === rewardID).forEach(tile => {
+            tile.survey = -1;
+            tile.surveyRewardID = -1;
+        });
     }
 
     public attemptBreakTile(coordinate: Coordinate, layers: number = 1): boolean {
@@ -345,7 +365,7 @@ export class Mine {
         return false;
     }
 
-    public attemptFindItem(coordinate: Coordinate): { item: UndergroundItem, amount: number } {
+    public attemptFindItem(coordinate: Coordinate): UndergroundItem {
         const digTile: Tile = this.getTileForCoordinate(coordinate);
 
         if (!digTile || !digTile.reward || digTile.layerDepth > 0 || digTile.reward.rewarded) {
@@ -361,18 +381,11 @@ export class Mine {
         undergroundItemTiles.forEach(tile => {
             tile.reward.rewarded = true;
         });
+        this.removeSurveyForRewardID(undergroundItemTiles[0].reward.rewardID);
 
         this._updateItemsFoundObservable();
 
-        const amount = UndergroundController.calculateRewardAmountFromMining();
-
-        App.game.oakItems.use(OakItemType.Treasure_Scanner);
-        GameHelper.incrementObservable(App.game.statistics.undergroundItemsFound, amount);
-
-        return {
-            item: UndergroundItems.getById(digTile.reward.undergroundItemID),
-            amount: amount,
-        };
+        return UndergroundItems.getById(digTile.reward.undergroundItemID);
     }
 
     public attemptCompleteLayer(): boolean {
@@ -380,6 +393,7 @@ export class Mine {
             this._completed(true);
 
             GameHelper.incrementObservable(App.game.statistics.undergroundLayersMined);
+            GameHelper.incrementObservable(App.game.statistics.undergroundSpecificLayersMined[this.mineType]);
             App.game.oakItems.use(OakItemType.Explosive_Charge);
 
             return true;
@@ -429,15 +443,15 @@ export class Mine {
     }
 
     private _updateItemsBuriedObservable() {
-        this._itemsBuried(new Set(this._grid.filter(tile => tile.reward).map(tile => tile.reward.rewardID)).size);
+        this._itemsBuried(Mine.buriedItemsIDSet(this).size);
     }
 
     private _updateItemsFoundObservable() {
-        this._itemsFound(new Set(this._grid.filter(tile => tile.reward && tile.reward.rewarded).map(tile => tile.reward.rewardID)).size);
+        this._itemsFound(Mine.foundItemsIDSet(this).size);
     }
 
     private _updateItemsPartiallyFoundObservable() {
-        this._itemsPartiallyFound(new Set(this._grid.filter(tile => tile.reward && tile.layerDepth === 0).map(tile => tile.reward.rewardID)).size);
+        this._itemsPartiallyFound(Mine.partiallyFoundItemsIDSet(this).size);
     }
 
     public save() {
@@ -460,5 +474,26 @@ export class Mine {
         mine._updateItemsPartiallyFoundObservable();
 
         return mine;
+    }
+
+    public static buriedItemsIDSet(mine: Mine): Set<number> {
+        return new Set(mine.grid.filter(tile => tile.reward).map(tile => tile.reward.rewardID));
+    }
+
+    public static hiddenItemsIDSet(mine: Mine): Set<number> {
+        const buried = this.buriedItemsIDSet(mine);
+
+        this.foundItemsIDSet(mine).forEach(value => buried.delete(value));
+        this.partiallyFoundItemsIDSet(mine).forEach(value => buried.delete(value));
+
+        return buried;
+    }
+
+    public static foundItemsIDSet(mine: Mine): Set<number> {
+        return new Set(mine.grid.filter(tile => tile.reward && tile.reward.rewarded).map(tile => tile.reward.rewardID));
+    }
+
+    public static partiallyFoundItemsIDSet(mine: Mine): Set<number> {
+        return new Set(mine.grid.filter(tile => tile.reward && tile.layerDepth === 0).map(tile => tile.reward.rewardID));
     }
 }

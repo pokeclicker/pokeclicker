@@ -11,7 +11,7 @@ export default class UndergroundLayersMinedRequirement extends AchievementRequir
     }
 
     public hint(): string {
-        const suffix = (this.requiredValue > 1) ? 's' : '';
-        return `Mine ${this.requiredValue.toLocaleString('en-US')} layer${suffix} in the Underground.`;
+        const suffix = this.requiredValue > 1 ? 's' : '';
+        return `Collect all buried treasure ${this.requiredValue.toLocaleString('en-US')} time${suffix} in the Underground mines.`;
     }
 }

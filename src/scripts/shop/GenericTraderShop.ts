@@ -15,11 +15,14 @@ class GenericTraderShop extends Shop {
         $('#genericTraderModal').modal('show');
     }
 
-    public areaStatus(): number {
-        const itemStatusArray = [super.areaStatus()];
+    public areaStatus() {
+        const itemStatusArray = super.areaStatus();
+        if (itemStatusArray.includes(areaStatus.locked)) {
+            return [areaStatus.locked];
+        }
         const deals = GenericDeal.getDeals(this.traderID)?.();
 
-        if ((deals?.length || 0) > 0) {
+        if (deals?.length) {
             const pokemonDeals: PokemonNameType[] = deals
                 .flatMap(deal => deal.profits)
                 .filter(profit => {
@@ -29,21 +32,11 @@ class GenericTraderShop extends Shop {
                     return false;
                 })
                 .map(profit => (profit as unknown as ItemDealProfit).item.type) as PokemonNameType[];
-
-            if (!RouteHelper.listCompleted(pokemonDeals, false)) {
-                itemStatusArray.push(areaStatus.uncaughtPokemon);
-            }
-
-            if (!RouteHelper.listCompleted(pokemonDeals, true)) {
-                itemStatusArray.push(areaStatus.uncaughtShinyPokemon);
-            }
-
-            if (Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(pokemonDeals) < GameConstants.Pokerus.Resistant) {
-                itemStatusArray.push(areaStatus.missingResistant);
-            }
+            const statuses = MapHelper.getPokemonAreaStatus(pokemonDeals);
+            itemStatusArray.push(...statuses);
         }
 
-        return Math.min(...itemStatusArray);
+        return [...new Set(itemStatusArray)];
     }
 
     public isVisible(): boolean {

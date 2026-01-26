@@ -5,7 +5,7 @@ export default class EnergyRestore extends Item {
     type: EnergyRestoreSize;
 
     constructor(type: EnergyRestoreSize, basePrice: number, currency: Currency = Currency.money, displayName?: string) {
-        super(EnergyRestoreSize[type], basePrice, currency, undefined, displayName, 'Restores Energy in the Underground.');
+        super(EnergyRestoreSize[type], basePrice, currency, undefined, displayName, 'Restores Expert Energy in the Underground.');
         this.type = type;
     }
 

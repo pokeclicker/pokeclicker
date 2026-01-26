@@ -29,8 +29,8 @@ class DefeatGymQuest extends Quest implements QuestInterface {
             maxRegion -= 1;
         }
         const region = SeededRand.intBetween(0, maxRegion);
-        // Only use cleared gyms.
-        const possibleGyms = GameConstants.RegionGyms[region].filter(gymTown => GymList[gymTown].flags.quest && GymList[gymTown].clears());
+        // Only use cleared and unlocked gyms.
+        const possibleGyms = GameConstants.RegionGyms[region].filter(gymTown => GymList[gymTown].flags.quest && GymList[gymTown].clears() && GymList[gymTown].isUnlocked());
         const gymTown = SeededRand.fromArray(possibleGyms);
         const reward = this.calcReward(amount, gymTown);
         return [amount, reward, gymTown];
@@ -47,10 +47,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         return super.randomizeReward(reward);
     }
 
-    get description(): string {
-        if (this.customDescription) {
-            return this.customDescription;
-        }
+    get defaultDescription(): string {
         const elite = this.gymTown.includes('Elite') || this.gymTown.includes('Champion');
         const displayName = GymList[this.gymTown]?.displayName;
         const leaderName = GymList[this.gymTown].leaderName.replace(/\d+/g, '').trim();

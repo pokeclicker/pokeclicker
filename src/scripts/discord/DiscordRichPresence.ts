@@ -153,8 +153,8 @@ class DiscordRichPresence {
             default: 0,
         },
         {
-            key: 'underground_deal_trades',
-            value: () => App.game.statistics.undergroundDailyDealTrades(),
+            key: 'underground_trades',
+            value: () => App.game.statistics.undergroundTrades(),
             default: 0,
         },
         {
