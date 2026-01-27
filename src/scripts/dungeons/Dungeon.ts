@@ -100,14 +100,13 @@ const DungeonGainGymBadge = (gym: Gym) => {
 }
 class Dungeon {
     private mimicList: PokemonNameType[] = [];
-
     constructor(
         public name: string,
         public enemyList: Enemy[],
         public lootTable: LootTable,
         public baseHealth: number,
         public bossList: Boss[],
-        public tokenCost: number,
+        public baseTokenCost: number,
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
         public rewardFunction = () => {},
         private optionalParameters: optionalDungeonParameters = {}
@@ -189,6 +188,18 @@ class Dungeon {
         return this.availableBosses().map((boss) => {
             return boss.options?.weight ?? 1;
         });
+    }
+
+    get tokenCost(): number {
+        return Math.ceil(this.baseTokenCost * this.getDungeonSize(false) / this.getDungeonSize(true));
+    }
+
+    public getDungeonSize(ignoreReduction = true) {
+        let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + (this.difficulty);
+        if (!ignoreReduction) {
+            dungeonSize -= Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]().toString().length - 1);
+        }
+        return Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize);
     }
 
     /**
@@ -3447,9 +3458,9 @@ dungeonList['Weather Institute'] = new Dungeon('Weather Institute',
                 new GymPokemon('Mightyena', 4500000, 58),
             ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 9)}, 'Shelly', '(shelly)'),
         new DungeonBossPokemon('Castform', 1820000, 20, {hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))}),
-        new DungeonBossPokemon('Castform (Sunny)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Harsh_Sunlight])])}),
-        new DungeonBossPokemon('Castform (Rainy)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])])}),
-        new DungeonBossPokemon('Castform (Snowy)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail])])}),
+        new DungeonBossPokemon('Castform (Sunny)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform (Sunny)'), new WeatherRequirement([WeatherType.Harsh_Sunlight])])}),
+        new DungeonBossPokemon('Castform (Rainy)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform (Rainy)'), new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])])}),
+        new DungeonBossPokemon('Castform (Snowy)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform (Snowy)'), new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail])])}),
     ],
     26000, 101);
 

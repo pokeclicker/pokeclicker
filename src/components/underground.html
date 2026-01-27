@@ -163,8 +163,8 @@
                                             <div class="underground-tool__background-gradient conic" data-bind="style: { '--gradient-percentage': Math.min(App.game.underground.battery.charges / App.game.underground.battery.maxCharges, 1).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) }">
                                                 <div class="bg-secondary p-1 p-xl-2">
                                                     <img alt="" width="27px" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItemType[OakItemType.Cell_Battery] + '.png'}">
-                                                    <div class="small font-weight-bold">
-                                                        <knockout data-bind="text: Math.min(App.game.underground.battery.charges, App.game.underground.battery.maxCharges), css: { 'text-warning': App.game.underground.battery.charges < App.game.underground.battery.maxCharges }"></knockout> / <knockout data-bind="text: App.game.underground.battery.maxCharges"></knockout>
+                                                    <div class="small font-weight-bold"  data-bind="css: { 'text-warning': App.game.underground.battery.charges < App.game.underground.battery.maxCharges }">
+                                                        <knockout data-bind="text: (App.game.underground.battery.charges / App.game.underground.battery.maxCharges).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })"></knockout>
                                                     </div>
                                                 </div>
                                             </div>
@@ -692,9 +692,9 @@
                                 The Battery is a system that charges up as you or your expert mines tiles.
                             </p>
                             <p>
-                                Each successful mining attempt will add 1 charge, up to a maximum of <knockout data-bind="text: GameConstants.UNDERGROUND_BATTERY_MAX_CHARGES"></knockout> charges.
+                                Each successful mining attempt will add a charge, requiring <knockout data-bind="text: GameConstants.UNDERGROUND_BATTERY_MAX_CHARGES"></knockout> charges to be activated.
                                 You can only gain 1 charge per <knockout data-bind="text: GameConstants.UNDERGROUND_BATTERY_COOLDOWN_SECONDS"></knockout> second.
-                                Equipping your Cell Battery Oak Item will reduce the maximum charges needed to discharge.
+                                Equipping your Cell Battery Oak Item will increase the amount of energy gained per charge.
                             </p>
                             <p>
                                 When your battery is fully charged up, you can discharge it. This discharge will leave a pattern of cleared tiles behind.
