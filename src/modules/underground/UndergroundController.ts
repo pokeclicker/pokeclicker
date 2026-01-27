@@ -136,10 +136,6 @@ export class UndergroundController {
             0,
         );
 
-        if (baseTimeout == 0) {
-            return -60;
-        }
-
         if (mineType === MineType.Random) {
             if (App.game.underground.mine?.mineType === MineType.Random) {
                 const rewardTiles = App.game.underground.mine.grid.filter(tile => tile.reward);
@@ -150,7 +146,7 @@ export class UndergroundController {
             return baseTimeout;
         }
 
-        return -60;
+        return 0;
     }
 
     public static calculateSurveyRange(): number {
