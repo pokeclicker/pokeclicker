@@ -1,10 +1,8 @@
-import { Observable, PureComputed } from 'knockout';
+import { Observable, ObservableArray, PureComputed } from 'knockout';
 import { MineType } from '../mine/MineConfig';
 import Requirement from '../../requirements/Requirement';
 import MultiRequirement from '../../requirements/MultiRequirement';
 import OneFromManyRequirement from '../../requirements/OneFromManyRequirement';
-import Notifier from '../../notifications/Notifier';
-import NotificationConstants from '../../notifications/NotificationConstants';
 import {
     REWARD_RETENTION_BASE,
     REWARD_RETENTION_DECREASE_PER_LEVEL,
@@ -14,22 +12,37 @@ import {
     FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL,
     FAVORITE_MINE_CHANCE_MAXIMUM,
     MAX_HIRES,
-    SECOND,
     SMART_TOOL_CHANCE_BASE,
     SMART_TOOL_CHANCE_INCREASE_PER_LEVEL,
     SMART_TOOL_CHANCE_MAXIMUM,
     WORKCYCLE_TIMEOUT_BASE,
     WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL,
     WORKCYCLE_TIMEOUT_MINIMUM,
-    HELPER_AUTO_SELL_LEVEL_REQUIREMENT,
 } from '../../GameConstants';
 import GameHelper from '../../GameHelper';
 import UndergroundToolType from '../tools/UndergroundToolType';
 import { UndergroundController } from '../UndergroundController';
 import Rand from '../../utilities/Rand';
 import UndergroundTool from '../tools/UndergroundTool';
+import UndergroundItem from '../UndergroundItem';
+
+type UndergroundHelperParams = {
+    id: string,
+    name: string,
+    images: string[],
+    favoriteMine: MineType,
+    unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement,
+    retentionText?: string[],
+};
 
 export class UndergroundHelper {
+    private _id: string;
+    private _name: string;
+    private _images: string[];
+    private _favoriteMine: MineType;
+    private _unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement;
+    private _retentionText: string[];
+
     private _experience: Observable<number> = ko.observable<number>(0);
     private _hired: Observable<boolean> = ko.observable<boolean>(false);
     private _timeSinceWork: Observable<number> = ko.observable<number>(0);
@@ -39,28 +52,35 @@ export class UndergroundHelper {
         (this._experience() - UndergroundHelper.convertLevelToExperience(this._level())) /
         (UndergroundHelper.convertLevelToExperience(this._level() + 1) - UndergroundHelper.convertLevelToExperience(this._level())));
     private _rewardRetention: PureComputed<number> = ko.pureComputed(() => Math.max(REWARD_RETENTION_BASE - REWARD_RETENTION_DECREASE_PER_LEVEL * this._level(), REWARD_RETENTION_MINIMUM));
-    private _autoSellToggle: Observable<boolean> = ko.observable<boolean>(false);
     private _smartToolUsageChance: PureComputed<number> = ko.pureComputed(() => Math.min(SMART_TOOL_CHANCE_BASE + SMART_TOOL_CHANCE_INCREASE_PER_LEVEL * this._level(), SMART_TOOL_CHANCE_MAXIMUM));
     private _favoriteMineChance: PureComputed<number> = ko.pureComputed(() =>
         Math.min(FAVORITE_MINE_CHANCE_BASE + FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL * this._level(), FAVORITE_MINE_CHANCE_MAXIMUM));
     private _shouldDiscoverFavorite: Observable<boolean> = ko.observable<boolean>(false);
     private _workCycleTime: PureComputed<number> = ko.pureComputed(() => Math.max(WORKCYCLE_TIMEOUT_BASE - WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL * this._level(), WORKCYCLE_TIMEOUT_MINIMUM));
 
-    private _selectedEnergyRestore: Observable<EnergyRestoreSize> = ko.observable(-1);
+    private _allowedEnergyRestores: ObservableArray<EnergyRestoreSize> = ko.observableArray([]);
+    public selectedEnergyRestore: PureComputed<EnergyRestoreSize | -1> = ko.pureComputed(() => this._allowedEnergyRestores().find(potion => player.itemList[EnergyRestoreSize[potion]]() > 0) ?? -1);
 
-    public static RESTORE_OPTIONS = [
-        { value: null, name: 'None' },
-        { value: EnergyRestoreSize.SmallRestore, name: 'Small Restore' },
-        { value: EnergyRestoreSize.MediumRestore, name: 'Medium Restore' },
-        { value: EnergyRestoreSize.LargeRestore, name: 'Large Restore' },
-    ];
+    private _trackedStolenItems: Record<600, Observable<number>> = {
+        600: ko.observable(0),
+    };
 
-    constructor(
-        private _id: string,
-        private _name: string,
-        private _favoriteMine: MineType,
-        private _unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement,
-    ) {
+    constructor(options: UndergroundHelperParams) {
+        const {
+            id,
+            name,
+            images,
+            favoriteMine,
+            unlockRequirement = undefined,
+            retentionText = undefined,
+        } = options;
+
+        this._id = id;
+        this._name = name;
+        this._images = images;
+        this._favoriteMine = favoriteMine;
+        this._unlockRequirement = unlockRequirement;
+        this._retentionText = retentionText?.length > 0 ? retentionText : [`${name} kept this treasure as payment.`];
     }
 
     public isUnlocked(): boolean {
@@ -117,7 +137,7 @@ export class UndergroundHelper {
         const { coordinatesMined, success } = tool.action(x, y);
 
         if (success) {
-            UndergroundController.handleCoordinatesMined(coordinatesMined, this);
+            UndergroundController.handleCoordinatesMined(coordinatesMined, tool.id, this);
         }
     }
 
@@ -132,14 +152,14 @@ export class UndergroundHelper {
     }
 
     public tryUseEnergyPotion() {
-        if (this.selectedEnergyRestore < 0)
+        if (this.selectedEnergyRestore() < 0)
             return;
 
-        const potionName = EnergyRestoreSize[this.selectedEnergyRestore];
+        const potionName = EnergyRestoreSize[this.selectedEnergyRestore()];
         if (player.itemList[potionName]() <= 0)
             return;
 
-        switch (this.selectedEnergyRestore) {
+        switch (this.selectedEnergyRestore()) {
             case EnergyRestoreSize.SmallRestore:
                 GameHelper.incrementObservable(this._timeSinceWork, 0.25 * this.workCycleTime);
                 break;
@@ -157,29 +177,40 @@ export class UndergroundHelper {
     public hire() {
         this._hired(true);
         this._timeSinceWork(0);
-        Notifier.notify({
-            title: `[UNDERGROUND HELPER] ${this._name}`,
-            message: 'Thanks for hiring me,\nI won\'t let you down!',
-            type: NotificationConstants.NotificationOption.success,
-            timeout: 30 * SECOND,
-            setting: NotificationConstants.NotificationSetting.Underground.helper,
-        });
+        UndergroundController.notifyHelperHired(this);
     }
 
     public fire() {
         this._hired(false);
         this._timeSinceWork(0);
-        Notifier.notify({
-            title: `[UNDERGROUND HELPER] ${this._name}`,
-            message: 'Happy to work for you! Let me know when you\'re hiring again!',
-            type: NotificationConstants.NotificationOption.success,
-            timeout: 30 * SECOND,
-            setting: NotificationConstants.NotificationSetting.Underground.helper,
-        });
+        UndergroundController.notifyHelperFired(this);
+    }
+
+    public toggleEnergyRestore(energyRestore: EnergyRestoreSize) {
+        if (this._allowedEnergyRestores().includes(energyRestore)) {
+            this._allowedEnergyRestores.remove(energyRestore);
+        } else {
+            this._allowedEnergyRestores.push(energyRestore);
+            this._allowedEnergyRestores.sort().reverse();
+        }
+    }
+
+    public hasAllowedEnergyRestore(energyRestore: EnergyRestoreSize) {
+        return this._allowedEnergyRestores().includes(energyRestore);
     }
 
     public addExp(experience: number) {
         GameHelper.incrementObservable(this._experience, experience);
+    }
+
+    public retainItem(item: UndergroundItem, amount: number) {
+        UndergroundController.notifyHelperItemRetention(item, amount, this);
+
+        GameHelper.incrementObservable(this._trackedStolenItems[item.id]);
+    }
+
+    public hasStolenItem(stolenItemID: number): boolean {
+        return this._trackedStolenItems[stolenItemID]?.() > 0;
     }
 
     get id(): string {
@@ -190,12 +221,16 @@ export class UndergroundHelper {
         return this._name;
     }
 
+    get images(): string[] {
+        return this._images.map(image => `assets/images/underground/helpers/${image}.png`);
+    }
+
     get hired(): boolean {
         return this._hired();
     }
 
     get experience(): number {
-        return this._experience();
+        return Math.floor(this._experience());
     }
 
     get level(): number {
@@ -210,12 +245,8 @@ export class UndergroundHelper {
         return this._rewardRetention();
     }
 
-    get autoSellToggle(): boolean {
-        return this.level >= HELPER_AUTO_SELL_LEVEL_REQUIREMENT ? this._autoSellToggle() : false;
-    }
-
-    set autoSellToggle(value: boolean) {
-        this._autoSellToggle(value);
+    get retentionText(): string {
+        return Rand.fromArray(this._retentionText);
     }
 
     get smartToolUsageChance(): number {
@@ -250,23 +281,15 @@ export class UndergroundHelper {
         return this._workCycleTime();
     }
 
-    get selectedEnergyRestore(): EnergyRestoreSize | null {
-        return this._selectedEnergyRestore();
-    }
-
-    set selectedEnergyRestore(value: EnergyRestoreSize | null) {
-        this._selectedEnergyRestore(value);
-    }
-
     public toJSON(): Record<string, any> {
         return {
             id: this.id,
             experience: this._experience(),
             hired: this._hired(),
             timeSinceWork: this._timeSinceWork(),
-            selectedEnergyRestore: this._selectedEnergyRestore(),
+            allowedEnergyRestores: this._allowedEnergyRestores(),
             shouldDiscoverFavorite: this._shouldDiscoverFavorite(),
-            autoSellToggle: this._autoSellToggle(),
+            retainedItems: ko.toJS(this._trackedStolenItems),
         };
     }
 
@@ -274,9 +297,11 @@ export class UndergroundHelper {
         this._experience(json?.experience || 0);
         this._hired(json?.hired || false);
         this._timeSinceWork(json?.timeSinceWork || 0);
-        this._selectedEnergyRestore(json?.selectedEnergyRestore ?? -1);
+        this._allowedEnergyRestores(json?.allowedEnergyRestores ?? []);
         this._shouldDiscoverFavorite(json?.shouldDiscoverFavorite ?? false);
-        this._autoSellToggle(json?.autoSellToggle ?? false);
+        Object.keys(this._trackedStolenItems).forEach(value => {
+            this._trackedStolenItems[value](json?.retainedItems?.[value] ?? 0);
+        });
     }
 
     public static convertLevelToExperience(level: number): number {
@@ -331,8 +356,36 @@ export class UndergroundHelpers {
     }
 }
 
-UndergroundHelpers.add(new UndergroundHelper('diamond', 'Steve and Alex', MineType.Diamond, null));
-UndergroundHelpers.add(new UndergroundHelper('gemplates', 'Gemma', MineType.GemPlate, null));
-UndergroundHelpers.add(new UndergroundHelper('shards', 'Sharlene', MineType.Shard, null));
-UndergroundHelpers.add(new UndergroundHelper('fossils', 'Jones', MineType.Fossil, null));
-UndergroundHelpers.add(new UndergroundHelper('evolutionitems', 'Darwin', MineType.EvolutionItem, null));
+UndergroundHelpers.add(new UndergroundHelper({ id: 'diamond', name: 'Steve and Alex', images: ['steve', 'alex'], favoriteMine: MineType.Diamond, retentionText: [
+    'This is as rare as a Master Ball. We’re keeping it for our... crafting projects.',
+    'This treasure’s as valuable as diamonds. We’ll hold onto it for now.',
+    'Rare finds like this are hard to come by. Consider it ‘Steve and Alex tax.’',
+] }));
+UndergroundHelpers.add(new UndergroundHelper({ id: 'gemplates', name: 'Gemma', images: ['perrin'], favoriteMine: MineType.GemPlate, retentionText: [
+    'Shiny, sparkly, and absolutely mine!',
+    'This is too beautiful to part with. It’s coming with me.',
+    'Looks like I’ve struck crystal gold! Finders keepers, right?',
+    'A treasure this dazzling belongs with someone who appreciates its beauty.',
+    'Ooh, this is as radiant as a Legendary Pokémon! Definitely keeping it.',
+] }));
+UndergroundHelpers.add(new UndergroundHelper({ id: 'shards', name: 'Sharlene', images: ['sharlene'], favoriteMine: MineType.Shard, retentionText: [
+    'This is sharp and shiny—just my style. It’s staying with me!',
+    'Looks like another piece for my ultimate collection!',
+    'Items like these hold secrets. I’ll study this one closely.',
+    'This speaks to me. Its place is with me now.',
+    'A perfect item for a perfect treasure hunter. Thanks for the assist!',
+] }));
+UndergroundHelpers.add(new UndergroundHelper({ id: 'fossils', name: 'Jones', images: ['jones'], favoriteMine: MineType.Fossil, retentionText: [
+    'This artifact belongs in a museum—or maybe just my backpack!',
+    'A rare treasure like this deserves a careful keeper. That’s me!',
+    'Looks like I’ve uncovered another legendary find. I’ll hold onto it for safekeeping.',
+    'Every dig uncovers a story... and this one’s staying with me.',
+    'Another relic of the underground! Don’t worry, I’ll keep it safe from Team Rocket.',
+] }));
+UndergroundHelpers.add(new UndergroundHelper({ id: 'evolutionitems', name: 'Darwin', images: ['darwin'], favoriteMine: MineType.EvolutionItem, retentionText: [
+    'Fascinating! This item clearly demonstrates adaptation at its finest. I’ll study it further.',
+    'A perfect example of survival of the fittest... in my bag.',
+    'This discovery is essential to understanding underground ecosystems. I’ll keep it!',
+    'Nature is full of wonders, and this is one I simply must preserve.',
+    'Remarkable! I’ll add this to my collection of evolutionary evidence.',
+] }));

@@ -15,4 +15,8 @@ export default class MulchItem extends Item {
     gain(amt: number) {
         GameHelper.incrementObservable(App.game.farming.mulchList[this.type], amt);
     }
+
+    getBagAmount() {
+        return App.game.farming.mulchList[this.type]();
+    }
 }

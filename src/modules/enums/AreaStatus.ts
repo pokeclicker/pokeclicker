@@ -6,7 +6,6 @@ enum areaStatus {
     questAtLocation,
     uncaughtPokemon,
     uncaughtShadowPokemon,
-    uncaughtShinyPokemonAndMissingAchievement,
     uncaughtShinyPokemon,
     missingAchievement,
     missingResistant,

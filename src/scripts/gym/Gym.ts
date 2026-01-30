@@ -59,7 +59,7 @@ class Gym extends TownContent implements TmpGymType {
     public areaStatus(): areaStatus[] {
         const states = [];
         if (!this.isUnlocked()) {
-            states.push(areaStatus.locked);
+            return [areaStatus.locked];
         }
         if (!App.game.badgeCase.hasBadge(this.badgeReward)) {
             states.push(areaStatus.incomplete);
@@ -110,7 +110,7 @@ class Gym extends TownContent implements TmpGymType {
     private isAchievementsComplete() {
         const gymIndex = GameConstants.getGymIndex(this.town);
         return AchievementHandler.achievementList.every(achievement => {
-            return !(achievement.property instanceof ClearGymRequirement && achievement.property.gymIndex === gymIndex && !achievement.isCompleted());
+            return !(achievement.property instanceof ClearGymRequirement && achievement.property.gymIndex === gymIndex && !(achievement instanceof SecretAchievement) && !achievement.isCompleted());
         });
     }
 
