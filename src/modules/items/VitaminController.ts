@@ -1,5 +1,7 @@
 import '../koExtenders';
-import { VitaminType } from '../GameConstants';
+import { getDungeonIndex, VitaminType } from '../GameConstants';
+import Notifier from '../notifications/Notifier';
+import NotificationConstants from '../notifications/NotificationConstants';
 
 export default class VitaminController {
     public static currentlySelected = ko.observable(VitaminType.Protein).extend({ numeric: 0 });
@@ -22,5 +24,20 @@ export default class VitaminController {
     public static getImage(vitaminType) {
         const vitaminName = VitaminType[vitaminType ?? this.currentlySelected()];
         return `assets/images/items/vitamin/${vitaminName}.png`;
+    }
+
+    public static shortcutVisible = ko.pureComputed((): boolean => {
+        return App.game.statistics.dungeonsCleared[getDungeonIndex('Victory Road')]() > 0;
+    });
+
+    public static openVitaminExpandedModal() {
+        if( VitaminController.shortcutVisible()) {
+             $('#pokemonVitaminExpandedModal').modal('show');
+        } else {
+            Notifier.notify({
+                message: 'You need to defeat Victory Road to unlock this feature.',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+        }
     }
 }

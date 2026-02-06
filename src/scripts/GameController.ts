@@ -98,6 +98,10 @@ class GameController {
         const $purifyChamberModal = $('#purifyChamberModal');
         $purifyChamberModal.on('hide.bs.modal', _ => $purifyChamberModal.data('disable-toggle', true));
         $purifyChamberModal.on('hidden.bs.modal shown.bs.modal', _ => $purifyChamberModal.data('disable-toggle', false));
+        // Vitamins
+        const $pokemonVitaminExpandedModal = $('#pokemonVitaminExpandedModal');
+        $pokemonVitaminExpandedModal.on('hide.bs.modal', _ => $pokemonVitaminExpandedModal.data('disable-toggle', true));
+        $pokemonVitaminExpandedModal.on('hidden.bs.modal shown.bs.modal', _ => $pokemonVitaminExpandedModal.data('disable-toggle', false));
         // Ship
         const $shipModal = $('#ShipModal');
         // Modal Collapse
@@ -462,6 +466,13 @@ class GameController {
                     if (PurifyChamber.shortcutVisible() && !$purifyChamberModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
                         PurifyChamber.openPurifyChamberModal();
+                        return e.preventDefault();
+                    }
+                    break;                
+                case Settings.getSetting('hotkey.vitamins').value:
+                    if (VitaminController.shortcutVisible() && !$pokemonVitaminExpandedModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        VitaminController.openVitaminExpandedModal();
                         return e.preventDefault();
                     }
                     break;
