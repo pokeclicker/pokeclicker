@@ -9,6 +9,10 @@ export default class VitaminController {
     public static multiplier = ['×1', '×5', '×10', 'Max'];
     public static multiplierIndex = ko.observable(0);
 
+    public static shortcutVisible = ko.pureComputed((): boolean => {
+        return App.game.statistics.dungeonsCleared[getDungeonIndex('Victory Road')]() > 0;
+    });
+
     public static incrementMultiplier() {
         this.multiplierIndex((this.multiplierIndex() + 1) % this.multiplier.length);
     }
@@ -26,13 +30,9 @@ export default class VitaminController {
         return `assets/images/items/vitamin/${vitaminName}.png`;
     }
 
-    public static shortcutVisible = ko.pureComputed((): boolean => {
-        return App.game.statistics.dungeonsCleared[getDungeonIndex('Victory Road')]() > 0;
-    });
-
     public static openVitaminExpandedModal() {
-        if( VitaminController.shortcutVisible()) {
-             $('#pokemonVitaminExpandedModal').modal('show');
+        if (VitaminController.shortcutVisible()) {
+            $('#pokemonVitaminExpandedModal').modal('show');
         } else {
             Notifier.notify({
                 message: 'You need to defeat Victory Road to unlock this feature.',

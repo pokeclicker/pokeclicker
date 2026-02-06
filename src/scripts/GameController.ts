@@ -468,7 +468,7 @@ class GameController {
                         PurifyChamber.openPurifyChamberModal();
                         return e.preventDefault();
                     }
-                    break;                
+                    break;
                 case Settings.getSetting('hotkey.vitamins').value:
                     if (VitaminController.shortcutVisible() && !$pokemonVitaminExpandedModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
