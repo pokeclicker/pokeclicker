@@ -1253,6 +1253,8 @@ export const SpriteCredits: Credit[] = [
             'Gengar (Punk)',
             'Tangela (Pom-pom)',
             'Goldeen (Diva)',
+            'Illumina Overworld Sprites',
+            'Lental Map',
         ],
         // NOTES: Made specifically for Pokeclicker.
     },
@@ -1303,6 +1305,15 @@ export const SpriteCredits: Credit[] = [
             'Glacia revamp',
         ],
         // Notes: Permission if credited.
+    },
+    {
+        name: 'Wergan',
+        link: 'https://www.deviantart.com/wergan',
+        image: 'https://a.deviantart.net/avatars-big/w/e/wergan.png?14',
+        resources: [
+            'New Pokemon Snap player character overworlds',
+        ],
+        // Notes: Permission given on image page if credited.
     },
     {
         name: 'Wolfang62',

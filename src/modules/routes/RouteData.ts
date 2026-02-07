@@ -3748,12 +3748,6 @@ Routes.add(new RegionRoute(
 ));
 
 // Lental
-/*
- * Introduces Day/Night Route Encounters
- * To simulate Research Level:
- *  1000 Route Defeats is Research Level 2
- *  5000 Route Defeats is Research Level 3
- */
 Routes.add(new RegionRoute(
     'Nature Park', Region.galar, 56,
     new RoutePokemon({
@@ -3776,6 +3770,7 @@ Routes.add(new RegionRoute(
     [new QuestLineStepCompletedRequirement('New Pokémon Snap', 0)], // talk to Mirror
     undefined,
     GalarSubRegions.Lental,
+    true, 13352062,
 ));
 Routes.add(new RegionRoute(
     'Founja Jungle', Region.galar, 57,
@@ -3795,6 +3790,7 @@ Routes.add(new RegionRoute(
     [new QuestLineStepCompletedRequirement('New Pokémon Snap', 3)], // beat Florio Island Illumina Pokemon and talk to mirror
     undefined,
     GalarSubRegions.Lental,
+    true, 13504752,
 ));
 Routes.add(new RegionRoute(
     'Blushing Beach', Region.galar, 58,
@@ -3804,6 +3800,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Crabrawler', 'Exeggutor', 'Wingull', 'Bellossom', 'Pikachu', 'Octillery', 'Finneon', 'Pyukumuku', 'Machamp', 'Stunfisk'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
           new SpecialRoutePokemon(['Corsola', 'Alolan Raichu', 'Lapras', 'Squirtle'], new MultiRequirement([new RouteKillRequirement(ResearchLevel[2], Region.galar, 58), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
           new SpecialRoutePokemon(['Blastoise'], new MultiRequirement([new RouteKillRequirement(ResearchLevel[3], Region.galar, 58), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Surfing Pikachu'], new MultiRequirement([new ObtainedPokemonRequirement('Surfing Pikachu'), new RouteKillRequirement(ResearchLevel[4], Region.galar, 58), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
 
           new SpecialRoutePokemon(['Exeggutor', 'Zangoose', 'Drifblim', 'Seviper', 'Inkay', 'Pyukumuku', 'Magikarp', 'Octillery', 'Clamperl', 'Corsola', 'Sandygast', 'Alolan Raichu', 'Finneon', 'Wingull', 'Crabrawler'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
           new SpecialRoutePokemon(['Mareanie', 'Primarina', 'Bellossom', 'Pikachu'], new MultiRequirement([new RouteKillRequirement(ResearchLevel[2], Region.galar, 58), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])])),
@@ -3812,6 +3809,7 @@ Routes.add(new RegionRoute(
     [new RouteKillRequirement(ResearchLevel[2], Region.galar, 57)], // Founja Jungle Research Level 2
     undefined,
     GalarSubRegions.Lental,
+    true, 13658494,
 ));
 Routes.add(new RegionRoute(
     'Sweltering Sands', Region.galar, 59,
@@ -3829,6 +3827,7 @@ Routes.add(new RegionRoute(
     [new RouteKillRequirement(ResearchLevel[2], Region.galar, 57)], // Founja Jungle Research Level 2
     undefined,
     GalarSubRegions.Lental,
+    true, 13813289,
 ));
 Routes.add(new RegionRoute(
     'Side Path', Region.galar, 60,
@@ -3845,6 +3844,7 @@ Routes.add(new RegionRoute(
     [new RouteKillRequirement(ResearchLevel[1], Region.galar, 58), new RouteKillRequirement(ResearchLevel[1], Region.galar, 59)], // Blushing Beach and Sweltering Sands explored
     undefined,
     GalarSubRegions.Lental,
+    true, 13969140,
 ));
 Routes.add(new RegionRoute(
     'Fireflow Volcano', Region.galar, 61,
@@ -3859,6 +3859,7 @@ Routes.add(new RegionRoute(
     [new RouteKillRequirement(ResearchLevel[2], Region.galar, 59)], // Sweltering Sands Research Level 2
     undefined,
     GalarSubRegions.Lental,
+    true, 14126050,
 ));
 Routes.add(new RegionRoute(
     'Elsewhere Forest', Region.galar, 62,
@@ -3873,6 +3874,7 @@ Routes.add(new RegionRoute(
     [new RouteKillRequirement(ResearchLevel[2], Region.galar, 61)], // Fireflow Volcano Research Level 2
     undefined,
     GalarSubRegions.Lental,
+    true, 14284021,
 ));
 Routes.add(new RegionRoute(
     'Maricopia Reef', Region.galar, 63,
@@ -3882,6 +3884,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Finneon', 'Sharpedo', 'Wingull', 'Pelipper', 'Magikarp', 'Machamp', 'Mareanie', 'Corsola', 'Mantine', 'Wailord', 'Pyukumuku'], new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])),
           new SpecialRoutePokemon(['Pikachu', 'Squirtle'], new MultiRequirement([new RouteKillRequirement(ResearchLevel[2], Region.galar, 63), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
           new SpecialRoutePokemon(['Lapras', 'Wailmer'], new MultiRequirement([new RouteKillRequirement(ResearchLevel[3], Region.galar, 63), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
+          new SpecialRoutePokemon(['Surfing Pikachu'], new MultiRequirement([new ObtainedPokemonRequirement('Surfing Pikachu'), new RouteKillRequirement(ResearchLevel[4], Region.galar, 63), new DayCyclePartRequirement([DayCyclePart.Dawn, DayCyclePart.Day])])),
 
           new SpecialRoutePokemon(['Inkay', 'Wailord', 'Squirtle', 'Alolan Raichu', 'Wingull', 'Mareanie', 'Drifblim', 'Mantine', 'Primarina', 'Lapras', 'Clamperl', 'Vaporeon', 'Blastoise'], new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Night])),
       ],
@@ -3889,6 +3892,7 @@ Routes.add(new RegionRoute(
     [new RouteKillRequirement(ResearchLevel[2], Region.galar, 58)], // Blushing Beach Research Level 2
     undefined,
     GalarSubRegions.Lental,
+    true, 14443056,
 ));
 Routes.add(new RegionRoute(
     'Lental Seafloor', Region.galar, 64,
@@ -3903,6 +3907,7 @@ Routes.add(new RegionRoute(
     [new RouteKillRequirement(ResearchLevel[2], Region.galar, 63)], // Maricopia Reef Research Level 2
     undefined,
     GalarSubRegions.Lental,
+    true, 14603157,
 ));
 Routes.add(new RegionRoute(
     'Research Camp', Region.galar, 65,
@@ -3912,6 +3917,7 @@ Routes.add(new RegionRoute(
     [new QuestLineStepCompletedRequirement('New Pokémon Snap', 9)], // 3 Illumina Pokemon encountered
     undefined,
     GalarSubRegions.Lental,
+    true, 14764326,
 ));
 Routes.add(new RegionRoute(
     'Shiver Snowfields', Region.galar, 66,
@@ -3929,6 +3935,7 @@ Routes.add(new RegionRoute(
     [new QuestLineStepCompletedRequirement('New Pokémon Snap', 12)], // 4 Illumina Pokemon encountered
     undefined,
     GalarSubRegions.Lental,
+    true, 14926567,
 ));
 Routes.add(new RegionRoute(
     'Outaway Cave', Region.galar, 67,
@@ -3943,6 +3950,7 @@ Routes.add(new RegionRoute(
     [new RouteKillRequirement(ResearchLevel[2], Region.galar, 66)], // Shiver Snowfields Research Level 2
     undefined,
     GalarSubRegions.Lental,
+    true, 15089881,
 ));
 Routes.add(new RegionRoute(
     'Ruins of Remembrance', Region.galar, 68,
@@ -3957,6 +3965,7 @@ Routes.add(new RegionRoute(
     [new QuestLineStepCompletedRequirement('New Pokémon Snap', 15)], // 5 Illumina Pokemon
     undefined,
     GalarSubRegions.Lental,
+    true, 15254270,
 ));
 Routes.add(new RegionRoute(
     'Mightywide River', Region.galar, 69,
@@ -3976,6 +3985,7 @@ Routes.add(new RegionRoute(
     [new QuestLineCompletedRequirement('New Pokémon Snap')], // Post-game DLC
     undefined,
     GalarSubRegions.Lental,
+    true, 15419739,
 ));
 Routes.add(new RegionRoute(
     'Barren Badlands', Region.galar, 70,
@@ -3992,6 +4002,7 @@ Routes.add(new RegionRoute(
     [new QuestLineCompletedRequirement('New Pokémon Snap')], // Post-game DLC
     undefined,
     GalarSubRegions.Lental,
+    true, 15586288,
 ));
 // Pokémon Island
 // In Pokemon Snap, there isn't a Research Level equivalent. I'm giving the encounters that need a bit of extra prompting a RL2 req (think gathering magnemites to evolve).
@@ -4003,11 +4014,13 @@ Routes.add(new RegionRoute(
         special:
       [
           new SpecialRoutePokemon(['Chansey'], new RouteKillRequirement(ResearchLevel[2], Region.galar, 71)),
+          new SpecialRoutePokemon(['Surfing Pikachu'], new MultiRequirement([new ObtainedPokemonRequirement('Surfing Pikachu'), new RouteKillRequirement(ResearchLevel[4], Region.galar, 71)])),
       ],
     }),
     [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 0)],
     undefined,
     GalarSubRegions.Lental,
+    true, 15753920,
 ));
 Routes.add(new RegionRoute(
     'Pokémon Island Tunnel', Region.galar, 72,
@@ -4022,6 +4035,7 @@ Routes.add(new RegionRoute(
     [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 3)],
     undefined,
     GalarSubRegions.Lental,
+    true, 15922638,
 ));
 Routes.add(new RegionRoute(
     'Pokémon Island Volcano', Region.galar, 73,
@@ -4037,6 +4051,7 @@ Routes.add(new RegionRoute(
     [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 6)],
     undefined,
     GalarSubRegions.Lental,
+    true, 16092444,
 ));
 Routes.add(new RegionRoute(
     'Pokémon Island River', Region.galar, 74,
@@ -4053,6 +4068,7 @@ Routes.add(new RegionRoute(
     [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 9)],
     undefined,
     GalarSubRegions.Lental,
+    true, 16263341,
 ));
 Routes.add(new RegionRoute(
     'Pokémon Island Cave', Region.galar, 75,
@@ -4068,6 +4084,7 @@ Routes.add(new RegionRoute(
     [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 12)],
     undefined,
     GalarSubRegions.Lental,
+    true, 16435330,
 ));
 Routes.add(new RegionRoute(
     'Pokémon Island Valley', Region.galar, 76,
@@ -4083,6 +4100,7 @@ Routes.add(new RegionRoute(
     [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 15)],
     undefined,
     GalarSubRegions.Lental,
+    true, 16608415,
 ));
 
 /*

@@ -9299,7 +9299,7 @@ const ToddSnap3 = new NPC ('Todd Snap', [
     image: 'assets/images/npcs/Todd Snap (New).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Pokémon Snap 64', 5), new QuestLineStepCompletedRequirement('Pokémon Snap 64', 8, GameConstants.AchievementOption.less)]),
 });
-const ToddSnap4 = new NPC ('Todd Snap', [ // Add some comments about not examining every suspicious thing that might be dangerous
+const ToddSnap4 = new NPC ('Todd Snap', [
     'You are pretty lucky that the poison gas wasn\'t hiding any Pokémon, the wild Pokémon would have attacked you again! You should be more careful.',
     'Actually, I think I remember seeing it on the edge of the River. I bet it was there!',
     'I could be remembering wrong though, so look back at the Tunnel and Volcano as well.',
@@ -9353,9 +9353,22 @@ const ToddSnap64 = new NPC ('Todd Snap\'s Journal', [
     '<i>3 elemental birds will sometimes roam part of the island, but you have to hatch them from their eggs first!</i>',
     '<i>After I explored the whole island, the mythical Pokémon Mew would float right up next to me. And then disappear for a long time!</i>',
     '<i>Once I had visited the Cave enough times, some Jigglypuff would sing and dance while I was around. Their music always makes me tired though.</i>',
+    '<i>There are also some structures found all over the island that look like Pokemon! Professor Oak and I call them Pokémon Signs.</i>',
+    '<i>The first one I found was a group of rocks that looked like a giant Kingler.</i>',
+    '<img src="assets/images/pokemon/-99.01.png" style="max-width:100%; height:auto"/>',
+    '<i>In the Tunnel, I saw some scrap pieces that cast shadows in the shape of a Pinsir.</i>',
+    '<img src="assets/images/pokemon/-127.01.png" style="max-width:100%; height:auto"/>',
+    '<i>There was also some puffs of gas coming from the Volcano that formed a Koffing.</i>',
+    '<img src="assets/images/pokemon/-109.01.png" style="max-width:100%; height:auto"/>',
+    '<i>Along the River\'s edge, there was a tree shaped just like a cubone.</i>',
+    '<img src="assets/images/pokemon/-104.01.png" style="max-width:100%; height:auto"/>',
+    '<i>I later saw some crystals that lined up as if they were a Mewtwo!</i>',
+    '<img src="assets/images/pokemon/-150.01.png" style="max-width:100%; height:auto"/>',
+    '<i>The last sign I saw was a giant mountain dubbed Mt. Dugtrio.</i>',
+    '<img src="assets/images/pokemon/-51.01.png" style="max-width:100%; height:auto"/>',
 ], {
     image: 'assets/images/npcs/Todd Snap (64).png',
-    requirement: new QuestLineStartedRequirement('Pokémon Snap 64'),
+    requirement: new QuestLineCompletedRequirement('Pokémon Snap 64'),
 });
 
 //Galar Towns

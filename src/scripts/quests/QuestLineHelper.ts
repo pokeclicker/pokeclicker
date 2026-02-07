@@ -4181,7 +4181,7 @@ class QuestLineHelper {
     public static createPokemonSnap64QuestLine() {
         const PokemonSnap64QuestLine = new QuestLine('Pokémon Snap 64', 'Todd would like your help locating rare Pokémon on Pokémon Island.', new QuestLineCompletedRequirement('New Pokémon Snap'), GameConstants.BulletinBoards.Galar);
 
-        const talktoToddSnap1 = new TalkToNPCQuest(ToddSnap1, 'Speak to Todd Snap about the Pokémon he wants to see.');
+        const talktoToddSnap1 = new TalkToNPCQuest(ToddSnap1, 'Speak to Todd Snap at Professor Mirror\'s Lab about the Pokémon he wants to see.');
         PokemonSnap64QuestLine.addQuest(talktoToddSnap1);
 
         const snapBeach = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 71, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Beach to find the hidden Pokémon.');
@@ -4234,7 +4234,7 @@ class QuestLineHelper {
         const talktoToddSnap5 = new TalkToNPCQuest(ToddSnap5, 'Speak to Todd about what you saw.');
         PokemonSnap64QuestLine.addQuest(talktoToddSnap5); // 12
 
-        const snapCave = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 75, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Cave... and and only the Cave.');
+        const snapCave = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 75, GameConstants.Region.galar).withDescription('Explore Pokémon Island\'s Cave and only the Cave.');
         PokemonSnap64QuestLine.addQuest(snapCave);
 
         const snapMewtwo = new DefeatTemporaryBattleQuest('Mewtwo?', 'Defeat the suspicious looking Mewtwo in Pokémon Island\'s Cave');

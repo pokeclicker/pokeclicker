@@ -13444,9 +13444,12 @@ dungeonList['Florio Island Illumina Spot'] = new Dungeon('Florio Island Illumina
         ],
         mythic: [{loot: 'Illumina_Orb'}],
     },
-    100,
-    [new DungeonBossPokemon('Illumina Meganium', 100, 40)],
-    100, 56
+    26704124,
+    [
+        new DungeonBossPokemon('Meganium', 135047520, 50, { weight: 3 }),
+        new DungeonBossPokemon('Illumina Meganium', 144430560, 60),
+    ],
+    1500000, 56 // after nature park
 );
 dungeonList['Belusylva Island Illumina Spot'] = new Dungeon('Belusylva Island Illumina Spot',
     ['Magikarp', 'Lotad', 'Bulbasaur', 'Ninetales', 'Serperior', 'Trevenant', 'Espeon', 'Kecleon'],
@@ -13466,15 +13469,18 @@ dungeonList['Belusylva Island Illumina Spot'] = new Dungeon('Belusylva Island Il
         legendary: [{loot: 'Fluffruit'}],
         mythic: [{loot: 'Illumina_Orb'}],
     },
-    100,
-    [new DungeonBossPokemon('Illumina Milotic', 100, 40)],
-    100, 58
+    26704124,
+    [
+        new DungeonBossPokemon('Milotic', 135047520, 50, { weight: 3 }),
+        new DungeonBossPokemon('Illumina Milotic', 144430560, 60),
+    ],
+    1600000, 62 // after elsewhere forest
 );
 dungeonList['Maricopia Islands Illumina Spot'] = new Dungeon('Maricopia Islands Illumina Spot',
     ['Wailmer', 'Finneon', 'Luvdisc', 'Wailord'],
     {
         common: [
-            {loot: 'Wishiwashi (Solo)', weight: 5},
+            {loot: 'Wishiwashi (Solo)', weight: 4},
             {loot: 'Luvdisc', weight: 1},
             {loot: 'Finneon', weight: 1},
         ],
@@ -13486,9 +13492,13 @@ dungeonList['Maricopia Islands Illumina Spot'] = new Dungeon('Maricopia Islands 
         legendary: [{loot: 'Fluffruit'}],
         mythic: [{loot: 'Illumina_Orb'}],
     },
-    100,
-    [new DungeonBossPokemon('Illumina Wishiwashi', 100, 40)],
-    100, 60
+    26704124,
+    [
+        new DungeonBossPokemon('Wishiwashi (Solo)', 105047520, 40),
+        new DungeonBossPokemon('Wishiwashi (School)', 135047520, 50, { weight: 2 }),
+        new DungeonBossPokemon('Illumina Wishiwashi', 144430560, 60),
+    ],
+    1700000, 64 // after lental seafloor
 );
 dungeonList['Voluca Island Illumina Spot'] = new Dungeon('Voluca Island Illumina Spot',
     ['Monferno', 'Talonflame', 'Archeops'],
@@ -13509,9 +13519,12 @@ dungeonList['Voluca Island Illumina Spot'] = new Dungeon('Voluca Island Illumina
         legendary: [{loot: 'Fluffruit'}],
         mythic: [{loot: 'Illumina_Orb'}],
     },
-    100,
-    [new DungeonBossPokemon('Illumina Volcarona', 100, 40)],
-    100, 62
+    26704124,
+    [
+        new DungeonBossPokemon('Volcarona', 135047520, 60, { weight: 2 }), // evenly weighted because the illumina volcarona are a pair
+        new DungeonBossPokemon('Illumina Volcarona', 144430560, 70, { weight: 2 }), // I also want the wiki to show a weight of 2 for them
+    ],
+    1800000, 65 // after fireflow volcano... but thats unlocked much earlier so after the latest possible route unlocked, research camp
 );
 dungeonList['Durice Island Illumina Spot'] = new Dungeon('Durice Island Illumina Spot',
     ['Noibat', 'Carbink', 'Sableye', 'Joltik', 'Crobat'],
@@ -13532,9 +13545,12 @@ dungeonList['Durice Island Illumina Spot'] = new Dungeon('Durice Island Illumina
         legendary: [{loot: 'Fluffruit'}],
         mythic: [{loot: 'Illumina_Orb'}],
     },
-    100,
-    [new DungeonBossPokemon('Illumina Steelix', 100, 40)],
-    100, 64
+    26704124,
+    [
+        new DungeonBossPokemon('Steelix', 135047520, 50, { weight: 3 }),
+        new DungeonBossPokemon('Illumina Steelix', 144430560, 60),
+    ],
+    1900000, 67 // after outaway cave
 );
 dungeonList['Aurus Island Illumina Spot'] = new Dungeon('Aurus Island Illumina Spot',
     ['Sigilyph', 'Woobat', 'Eldegoss', 'Chandelure', 'Houndoom', 'Absol', 'Noivern', 'Natu', 'Golurk'],
@@ -13552,9 +13568,14 @@ dungeonList['Aurus Island Illumina Spot'] = new Dungeon('Aurus Island Illumina S
         legendary: [{loot: 'Fluffruit'}],
         mythic: [{loot: 'Illumina_Orb'}],
     },
-    100,
-    [new DungeonBossPokemon('Illumina Xerneas', 100, 40)],
-    100, 65
+    28886112,
+    [
+        new DungeonBossPokemon('Xerneas', 144430560, 60, { weight: 2 }),
+        new DungeonBossPokemon('Xerneas', 144430560, 60, { hide: true, requirement: new ObtainedPokemonRequirement('Xerneas (Active)', true) }), // to keep the illumina ratio at 1:4
+        new DungeonBossPokemon('Xerneas (Active)', 144430560, 60, { hide: true, requirement: new ObtainedPokemonRequirement('Xerneas (Active)') }),
+        new DungeonBossPokemon('Illumina Xerneas', 160924440, 70),
+    ],
+    2000000, 68 // after ruins of remembrance
 );
 
 //Hisui Dungeons
