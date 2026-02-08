@@ -30,6 +30,8 @@ import StatisticRequirement from '../requirements/StatisticRequirement';
 import PokemonLevelRequirement from '../requirements/PokemonLevelRequirement';
 import { getPokemonByName } from '../pokemons/PokemonHelper';
 import CustomRequirement from '../requirements/CustomRequirement';
+import SeededDateSelectNRequirement from '../requirements/SeededDateSelectNRequirement';
+import type { PokemonNameType } from '../pokemons/PokemonNameType';
 
 /*
 KANTO
@@ -134,6 +136,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Spearow', 'Ekans', 'Sandshrew', 'Drowzee'],
         water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
+        special: [new SpecialRoutePokemon(['Squad Leader Squirtle'], new ObtainedPokemonRequirement('Squad Leader Squirtle'))],
     }),
     [new RouteKillRequirement(10, Region.kanto, 6)],
     6.1,
@@ -542,7 +545,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Johto Route 30', Region.johto, 30,
     new RoutePokemon({
-        land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Hoothoot', 'Ledyba', 'Spinarak'],
+        land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Hoothoot', 'Ledyba', 'Spinarak'],
         water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
         headbutt: ['Exeggcute', 'Pineco'],
     }),
@@ -551,8 +554,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Johto Route 31', Region.johto, 31,
     new RoutePokemon({
-        land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Poliwag', 'Hoothoot', 'Ledyba', 'Spinarak', 'Bellsprout'],
-        water: ['Poliwhirl', 'Magikarp'],
+        land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Hoothoot', 'Ledyba', 'Spinarak', 'Bellsprout'],
+        water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
         headbutt: ['Spearow', 'Exeggcute', 'Aipom', 'Pineco', 'Heracross'],
     }),
     [new TemporaryBattleRequirement('Silver 1')],
@@ -1207,13 +1210,33 @@ Routes.add(new RegionRoute(
     [new RouteKillRequirement(10, Region.sinnoh, 213)],
     210.4,
 ));
+const TrophyGardenList = ['Clefairy', 'Jigglypuff', 'Meowth', 'Chansey', 'Baby Kangaskhan', 'Mr. Mime', 'Jynx', 'Ditto', 'Eevee', 'Porygon', 'Cleffa', 'Igglybuff', 'Togepi', 'Marill', 'Tyrogue', 'Smoochum', 'Elekid', 'Magby', 'Azurill', 'Plusle', 'Minun', 'Castform', 'Budew', 'Chingling', 'Bonsly', 'Mime Jr.', 'Happiny', 'Handout Happiny', 'Munchlax', 'Riolu', 'Mantyke', 'Phione', 'Toxel'];
+
+Routes.add(new RegionRoute(
+    'Trophy Garden', Region.sinnoh, 231,
+    new RoutePokemon({
+        land: ['Pikachu', 'Pichu', 'Roselia', 'Staravia', 'Kricketune'],
+        special:
+        [
+            ...TrophyGardenList.map((pokemon: PokemonNameType, index) => {
+                const req = new MultiRequirement([
+                    new SeededDateSelectNRequirement(index, TrophyGardenList.length, 3),
+                    new ObtainedPokemonRequirement(pokemon),
+                ]);
+                return new SpecialRoutePokemon([pokemon], req);
+            }),
+        ],
+    }),
+    [new RouteKillRequirement(10, Region.sinnoh, 212)],
+    210.5,
+));
 Routes.add(new RegionRoute(
     'Sinnoh Route 211', Region.sinnoh, 211,
     new RoutePokemon({
         land: ['Zubat', 'Machop', 'Machoke', 'Graveler', 'Hoothoot', 'Noctowl', 'Meditite', 'Bidoof', 'Chingling', 'Bronzor'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Fen)],
-    210.5,
+    210.6,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 218', Region.sinnoh, 218,
@@ -1222,7 +1245,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Shellos (West)', 'Finneon', 'Lumineon'],
     }),
     [new TemporaryBattleRequirement('Galactic Boss Cyrus')],
-    210.6,
+    210.7,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 216', Region.sinnoh, 216,
@@ -1263,7 +1286,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 222', Region.sinnoh, 222,
     new RoutePokemon({
-        land: ['Magnemite', 'Magneton', 'Electabuzz', 'Wingull', 'Pelipper', 'Luxio', 'Floatzel', 'Gastrodon (East)', 'Glameow', 'Purugly', 'Chatot'],
+        land: ['Magnemite', 'Magneton', 'Electabuzz', 'Wingull', 'Pelipper', 'Luxio', 'Floatzel', 'Glameow', 'Purugly', 'Chatot'],
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Remoraid', 'Octillery', 'Sharpedo'],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Distortion World'))],
@@ -1278,7 +1301,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 224', Region.sinnoh, 224,
     new RoutePokemon({
-        land: ['Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Beautifly', 'Dustox', 'Roselia', 'Floatzel', 'Gastrodon (East)', 'Chatot'],
+        land: ['Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Beautifly', 'Dustox', 'Roselia', 'Floatzel', 'Gastrodon (East)'],
         water: ['Tentacruel', 'Magikarp', 'Gyarados', 'Remoraid', 'Octillery', 'Pelipper', 'Luvdisc'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
@@ -4609,26 +4632,26 @@ const santaJynxReq = new OneFromManyRequirement([
     new MultiRequirement([
         new ItemOwnedRequirement('Christmas_present', 11, AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 1'),
-        new SpecialEventRequirement('Merry Christmas!'),
     ]),
     new MultiRequirement([
         new ItemOwnedRequirement('Christmas_present', 27, AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 2'),
-        new SpecialEventRequirement('Merry Christmas!'),
     ]),
     new MultiRequirement([
         new ItemOwnedRequirement('Christmas_present', 49, AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 3'),
-        new SpecialEventRequirement('Merry Christmas!'),
     ]),
     new MultiRequirement([
         new ItemOwnedRequirement('Christmas_present', 150, AchievementOption.less),
         new TemporaryBattleRequirement('Santa Jynx 4'),
-        new SpecialEventRequirement('Merry Christmas!'),
     ]),
 ]);
 Routes.getRoutesByRegion(Region.kanto).forEach(route => {
     route.pokemon.special.push(
-        new SpecialRoutePokemon(['Santa Jynx'], new CustomRequirement(ko.pureComputed(() => santaJynxReq.isCompleted()), true, 'During Merry Christmas! event, Santa Jynx appears for the day once its band is defeated at Bill\'s House and until too many Christmas presents have been collected.')),
-    );
+        new SpecialRoutePokemon(['Santa Jynx'], new MultiRequirement([
+            new SpecialEventRequirement('Merry Christmas!'),
+            new CustomRequirement(ko.pureComputed(() => santaJynxReq.isCompleted()), true,
+                'Santa Jynx appears for the day after defeating its Band at Bill\'s House, and will remain until the maximum number of Christmas presents have been collected.'),
+        ]),
+        ));
 });

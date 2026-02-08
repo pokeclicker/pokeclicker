@@ -81,7 +81,7 @@ export class UndergroundBatteryPattern {
 }
 
 export class UndergroundBattery {
-    private _charges: Observable<number> = ko.observable(0);
+    private _charges: Observable<number> = ko.observable(0).extend({ numeric : 1 });
     private _batteryCooldown: Observable<number> = ko.observable(0);
 
     private static _patterns: Array<UndergroundBatteryPattern> = [];
@@ -118,10 +118,11 @@ export class UndergroundBattery {
             return;
         }
 
-        GameHelper.incrementObservable(this._charges, 1);
+        GameHelper.incrementObservable(this._charges, 1 * App.game.multiplier.getBonus('undergroundCharge'));
         this._batteryCooldown(UNDERGROUND_BATTERY_COOLDOWN_SECONDS);
 
         if (this._charges() >= this.maxCharges) {
+            this._charges(this.maxCharges);
             UndergroundController.notifyBatteryFull();
         }
     }
@@ -185,7 +186,7 @@ export class UndergroundBattery {
 
     get maxCharges() {
         // Additive as the bonus is a negative number
-        return UNDERGROUND_BATTERY_MAX_CHARGES + App.game.oakItems.calculateBonus(OakItemType.Cell_Battery);
+        return UNDERGROUND_BATTERY_MAX_CHARGES;
     }
 
     get patterns() {

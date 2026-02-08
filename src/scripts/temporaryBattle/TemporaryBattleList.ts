@@ -2420,7 +2420,7 @@ TemporaryBattleList['Shauna 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Shauna',
-        returnTown: 'Aquacorde Town',
+        returnTown: 'Vaniville Town',
         imageName: 'Shauna',
     }
 );

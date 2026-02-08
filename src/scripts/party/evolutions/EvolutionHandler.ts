@@ -21,7 +21,7 @@ class EvolutionHandler {
         if (newPokemon || shiny || notification) {
             // Notify the player if they haven't already caught the evolution, or notifications are forced
             Notifier.notify({
-                message: `Your ${PokemonHelper.displayName(data.basePokemon)()} evolved into ${shiny ? 'a shiny' : GameHelper.anOrA(evolvedPokemon)} ${PokemonHelper.displayName(evolvedPokemon)()}!`,
+                message: `Your ${PokemonHelper.displayName(data.basePokemon)} evolved into ${shiny ? 'a shiny' : GameHelper.anOrA(evolvedPokemon)} ${PokemonHelper.displayName(evolvedPokemon)}!`,
                 pokemonImage: PokemonHelper.getImage(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny, undefined, GameConstants.ShadowStatus.None),
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.General.new_catch,

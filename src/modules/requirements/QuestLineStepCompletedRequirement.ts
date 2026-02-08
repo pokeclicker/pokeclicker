@@ -1,11 +1,12 @@
 import { AchievementOption } from '../GameConstants';
 import QuestLineState from '../quests/QuestLineState';
 import { QuestLineNameType } from '../quests/QuestLineNameType';
+import type { TmpQuestType } from '../TemporaryScriptTypes';
 
 import Requirement from './Requirement';
 
 export default class QuestLineStepCompletedRequirement extends Requirement {
-    cachedQuest: any;
+    cachedQuest: TmpQuestType;
     get quest() {
         if (!this.cachedQuest) {
             this.cachedQuest = App.game.quests.getQuestLine(this.questLineName);
@@ -27,6 +28,6 @@ export default class QuestLineStepCompletedRequirement extends Requirement {
     }
 
     public hint(): string {
-        return this.option !== AchievementOption.less ? `Progress further in questline ${this.questLineName}.` : `Questline ${this.questLineName} has progressed past this point.`;
+        return this.option !== AchievementOption.less ? `Progress further in questline ${this.quest.displayName}.` : `Questline ${this.quest.displayName} has progressed past this point.`;
     }
 }

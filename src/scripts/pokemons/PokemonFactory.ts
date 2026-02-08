@@ -42,7 +42,7 @@ class PokemonFactory {
 
         if (shiny) {
             Notifier.notify({
-                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
+                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)}! ✨`,
                 pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender, GameConstants.ShadowStatus.None),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
@@ -158,7 +158,7 @@ class PokemonFactory {
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         if (shiny) {
             Notifier.notify({
-                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
+                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)}! ✨`,
                 pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender, GameConstants.ShadowStatus.None),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
@@ -202,7 +202,7 @@ class PokemonFactory {
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         if (shiny) {
             Notifier.notify({
-                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
+                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)}! ✨`,
                 pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender, GameConstants.ShadowStatus.None),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
