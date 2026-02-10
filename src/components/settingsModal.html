@@ -126,7 +126,7 @@
                                             mapAreaStateOrder.set(mapAreaStateOrder.defaultValue);
                                         }">Reset Order</button>
                                         <button type="button" class="btn btn-primary" data-bind="click: () => {
-                                            Settings.getSetting('mapAreaStateOrder').value.map(status => 
+                                            Settings.getSetting('mapAreaStateOrder').value.map(status =>
                                                 Settings.getSetting(`--${areaStatus[status]}`)
                                             ).forEach(setting => setting.set(setting.defaultValue));
                                         }">Reset Colors</button>
@@ -257,7 +257,9 @@
                                 <!-- ko if: Settings.getSetting('hotkey.purifyChamber').isUnlocked() -->
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.purifyChamber')}"></tr>
                                 <!-- /ko -->
+                                <!-- ko if: VitaminController.shortcutVisible -->
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.vitamins')}"></tr>
+                                <!-- /ko -->
                             </tbody>
                             <thead>
                                 <tr><th colspan="2">Farm</th></tr>

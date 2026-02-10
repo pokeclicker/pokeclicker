@@ -10,7 +10,7 @@ export default class VitaminController {
     public static multiplierIndex = ko.observable(0);
 
     public static shortcutVisible = ko.pureComputed((): boolean => {
-        return App.game.statistics.dungeonsCleared[getDungeonIndex('Victory Road')]() > 0;
+        return App.game.statistics.dungeonsCleared[getDungeonIndex('Victory Road')]() > 0 && App.game.challenges.list.disableVitamins.active() === false;
     });
 
     public static incrementMultiplier() {
