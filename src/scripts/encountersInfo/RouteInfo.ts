@@ -39,21 +39,17 @@ class RouteInfo {
     }
 
     public static getInformations(pokemon) {
-        if (pokemon.type == 'roamer') {
-            if (RouteInfo.hasRequirement(pokemon.requirement, SpecialEventRequirement)) {
-                return {tooltip: 'Event Roaming Pokémon', image: 'event_roaming.png'};
-            } else {
-                return {tooltip: 'Roaming Pokémon', image: 'roaming.png'};
-            }
-        } else if (pokemon.type == 'special') {
+        if (pokemon.type == 'special' || pokemon.type == 'roamer') {
             if (RouteInfo.hasRequirement(pokemon.requirement, SpecialEventRequirement)) {
                 return {tooltip: 'Event Pokémon', image: 'event.png'};
             } else if (RouteInfo.hasRequirement(pokemon.requirement, WeatherRequirement)) {
                 return {tooltip: 'Weather Pokémon', image: 'weather.png'};
             } else if (RouteInfo.hasRequirement(pokemon.requirement, DayOfWeekRequirement)) {
                 return {tooltip: 'Day of Week Pokémon', image: 'day_of_week.png'};
-            } else if (MapHelper.isRouteCurrentLocation(231, GameConstants.Region.sinnoh)) {
+            } else if (pokemon.type == 'special' && MapHelper.isRouteCurrentLocation(231, GameConstants.Region.sinnoh)) {
                 return {tooltip: 'Mr. Backlot\'s Daily Special', image: 'backlot_catches.png'};
+            } else if (RouteInfo.hasRequirement(pokemon.requirement, DayCyclePartRequirement)) {
+                return {tooltip: 'Time of Day Pokémon', image: 'time_of_day.png'};
             }
         } else if (pokemon.type == 'water' && pokemon.fishing) {
             return {tooltip: 'Fishing Pokémon', image: 'fishing.png'};
