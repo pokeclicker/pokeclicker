@@ -32,6 +32,8 @@ import { getPokemonByName } from '../pokemons/PokemonHelper';
 import CustomRequirement from '../requirements/CustomRequirement';
 import SeededDateSelectNRequirement from '../requirements/SeededDateSelectNRequirement';
 import type { PokemonNameType } from '../pokemons/PokemonNameType';
+import GameHelper from '../GameHelper';
+import EffectEngineRunner from '../effectEngine/effectEngineRunner';
 
 /*
 KANTO
@@ -4102,6 +4104,13 @@ Routes.add(new RegionRoute(
     GalarSubRegions.Lental,
     true, 16263341,
 ));
+
+const fluteRequirement = new CustomRequirement(ko.pureComputed(() => {
+    const id = Number(player.trainerId);
+    SeededRand.seed(id * 42 + 1e6);
+    // Specific flutes activated, the others deactivated
+    return SeededRand.shuffleArray(GameHelper.enumStrings(FluteItemType)).every((f: string, i: number) => EffectEngineRunner.isActive(f)() == (i < 2));
+}), true, 'Play the two right notes with flutes at once.');
 Routes.add(new RegionRoute(
     'Pokémon Island Cave', Region.galar, 75,
     new RoutePokemon({
@@ -4110,7 +4119,7 @@ Routes.add(new RegionRoute(
         special:
       [
           new SpecialRoutePokemon(['Victreebel', 'Muk', 'Ditto'], new RouteKillRequirement(ResearchLevel[2], Region.galar, 75)),
-          new SpecialRoutePokemon(['Jigglypuff (Singing)'], new RouteKillRequirement(ResearchLevel[3], Region.galar, 75)),
+          new SpecialRoutePokemon(['Jigglypuff (Singing)'], fluteRequirement),
       ],
     }),
     [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 12)],
