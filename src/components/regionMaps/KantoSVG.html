@@ -1019,6 +1019,37 @@
             , isExtension: true
             })
         %>
+        <!--Three Isle Cave-->
+        <%- include('templates/mapOverlay',
+            { name: "Cave Entrance"
+            , x: 81, y: 46
+            , width: 1, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Three Isle Cave')}, attr:{ class: MapHelper.calculateTownCssClass('Three Isle Cave') }"
+            , visible:  "TownList['Three Isle Cave'].isUnlocked()"
+            , image: "assets/images/map/cave_entrance.png"
+            })
+        %>
+        <!--Three Isle Path-->
+        <%- include('templates/mapOverlay',
+            { name: "Cave Entrance"
+            , x: 81, y: 46
+            , width: 1, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Three Isle Path')}, attr:{ class: MapHelper.calculateTownCssClass('Three Isle Path') }"
+            , visible:  "TownList['Three Isle Path'].isUnlocked()"
+            , image: "assets/images/map/cave_entrance.png"
+            })
+        %>
+        <!--Three Isle Path extension-->
+        <%- include('templates/mapOverlay',
+            { name: "Cave Exit"
+            , x: 84, y: 46
+            , width: 1, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Three Isle Path')}, attr:{ class: MapHelper.calculateTownCssClass('Three Isle Path') }"
+            , visible:  "TownList['Three Isle Path'].isUnlocked()"
+            , image: "assets/images/map/cave_entrance.png"
+            , isExtension: true
+            })
+        %>
 
         <!-- -------- -->
         <!-- DUNGEONS -->
@@ -1066,6 +1097,18 @@
             })
         %>
 
+        <!--Secret Field-->
+        <%- include('templates/mapOverlay',
+            { name: "Secret Field"
+            , x: 83, y: 47
+            , width: 2, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Secret Field')}, attr:{ class: MapHelper.calculateTownCssClass('Secret Field') }"
+            , visible:  "TownList['Secret Field'].isUnlocked()"
+            , image: "assets/images/map/transparent.png"
+            , connectedToTown: "Secret Field"
+            })
+        %>
+
         <!-- ------------------ -->
         <!-- PLACES OF INTEREST -->
         <!-- ------------------ -->
@@ -1086,6 +1129,18 @@
            , width: 3, height: 8
            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('One Island') }"
           })
+        %>
+
+        <!--Dunsparce-->
+        <%- include('templates/mapOverlay',
+            { name: "A Very Big Dunsparce"
+            , x: 82, y: 43
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Dunsparce 1'].protectedOnclick(), attr: { class: TemporaryBattleList['Dunsparce 1'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Dunsparce 1'] && TemporaryBattleList['Dunsparce 1'].isVisible()"
+            , image: "assets/images/map/dunsparceoverworld.png"
+            , connectedToTown: "Secret Field"
+            })
         %>
     </g>
 

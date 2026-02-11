@@ -284,6 +284,22 @@ TemporaryBattleList['Blue 6'] = new TemporaryBattle(
         imageName: 'Blue2',
     }
 );
+TemporaryBattleList['Dunsparce 1'] = new TemporaryBattle(
+    'Dunsparce 1',
+    [new GymPokemon('Dunsparce', 160000000, 50)],
+    'You defeated the very big Dunsparce. It left a strange Dunsparce behind...',
+    [new ClearDungeonRequirement(206, GameConstants.getDungeonIndex('Secret Field'))],
+    undefined,
+    {
+        displayName: 'A Very Big Dunsparce',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Dunsparsparce', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
+        },
+        returnTown: 'Secret Cave',
+        imageName: '../pokemon/206',
+        hideTrainer: true,
+    }
+);
 // Kanto Christmas Temporary Battles, based on Blue 2
 TemporaryBattleList['Santa Jynx 1'] = new TemporaryBattle(
     'Santa Jynx 1',

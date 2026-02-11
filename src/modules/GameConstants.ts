@@ -1563,6 +1563,7 @@ export const KantoDungeons = [
     'Altering Cave',
     'Tanoby Ruins',
     'Pinkan Mountain', // 22
+    'Secret Field',
 ];
 
 export const JohtoDungeons = [
@@ -1869,6 +1870,7 @@ export const TemporaryBattles = [
     'Ash Ketchum New Island',
     'Bill\'s Grandpa',
     'Blue 6',
+    'Dunsparce 1',
     'Santa Jynx 1',
     'Santa Jynx 2',
     'Santa Jynx 3',

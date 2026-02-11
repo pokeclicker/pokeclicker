@@ -449,6 +449,7 @@ export type PokemonNameType
     | 'Pineco'
     | 'Forretress'
     | 'Dunsparce'
+    | 'Dunsparsparce'
     | 'Gligar'
     | 'Steelix'
     | 'Mega Steelix'

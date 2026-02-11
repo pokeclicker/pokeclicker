@@ -8616,6 +8616,23 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 206.1,
+        'name': 'Dunsparsparce',
+        'catchRate': 190,
+        'type': [PokemonType.Normal],
+        'levelType': LevelType.mediumfast,
+        'exp': 145,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 100,
+            'attack': 70,
+            'specialAttack': 65,
+            'defense': 70,
+            'specialDefense': 65,
+            'speed': 45,
+        },
+    },
+    {
         'id': 207,
         'name': 'Gligar',
         'catchRate': 60,
