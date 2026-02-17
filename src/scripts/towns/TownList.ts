@@ -1524,7 +1524,7 @@ const BlackthornCityShop = new Shop([
     ItemList.Dragon_scale,
 ]);
 const JohtoBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Goldenrod City'], [
-    ItemList.Boost_Mulch,
+    ItemList.Growth_Mulch,
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,
     ItemList.Amaze_Mulch,
@@ -2354,7 +2354,7 @@ const GateonPortShop = new Shop([
 ]);
 //Hoenn Berry Master
 const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Mauville City'],[
-    ItemList.Boost_Mulch,
+    ItemList.Growth_Mulch,
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,
     ItemList.Amaze_Mulch,
@@ -4154,7 +4154,7 @@ const ResortAreaShop = new Shop([
 
 //Sinnoh Berry Master
 const SinnohBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Hearthome City'],[
-    ItemList.Boost_Mulch,
+    ItemList.Growth_Mulch,
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,
     ItemList.Amaze_Mulch,
@@ -5113,7 +5113,7 @@ const UnovaFluteMaster = new GemMasterShop(GameConstants.GemShops.UnovaFluteMast
 
 //Unova Berry Master
 const DriftveilBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Driftveil City'],[
-    ItemList.Boost_Mulch,
+    ItemList.Growth_Mulch,
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,
     ItemList.Amaze_Mulch,

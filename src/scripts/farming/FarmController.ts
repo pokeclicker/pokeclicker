@@ -11,7 +11,7 @@ class FarmController {
     public static berryListSearch: KnockoutObservable<string> = ko.observable('');
 
     public static selectedBerry: KnockoutObservable<BerryType> = ko.observable(BerryType.Cheri);
-    public static selectedMulch: KnockoutObservable<MulchType> = ko.observable(MulchType.Boost_Mulch);
+    public static selectedMulch: KnockoutObservable<MulchType> = ko.observable(MulchType.Growth_Mulch);
     public static selectedFarmTool: KnockoutObservable<FarmingTool> = ko.observable(FarmingTool.Berry);
     public static selectedFarmModuleTool: KnockoutObservable<FarmingTool> = ko.observable(FarmingTool.Berry);
 
