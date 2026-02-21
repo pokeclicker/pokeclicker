@@ -16,9 +16,11 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: 18.x
+        node-version: 24.x
     - run: npm ci
     - run: gulp scripts
     - run: npm run eslint
+      if: ${{ !cancelled() }}
     - run: npm run stylelint
+      if: ${{ !cancelled() }}
     - run: npm run vitest
