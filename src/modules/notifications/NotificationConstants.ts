@@ -77,6 +77,7 @@ const NotificationConstants = {
             underground_energy_full: new NotificationSetting('notification.underground_energy_full', 'Mining tool reached maximum free use storage', true),
             underground_energy_restore: new NotificationSetting('notification.underground_energy_restore', 'Mining tool restored 1 free use', true),
             underground_dig_deeper: new NotificationSetting('notification.underground_dig_deeper', 'You dig deeper...', true),
+            underground_mine_found: new NotificationSetting('notification.underground_mine_found', 'A new Underground Layer is discovered', true),
             underground_item_found: new NotificationSetting('notification.underground_item_found', 'Item found while mining', true),
             helper: new NotificationSetting('notification.underground_helper', 'Underground Expert Hired/Fired', true),
             battery_full: new NotificationSetting('notification.battery_full', 'Underground Battery is ready to be discharged', true),
