@@ -243,11 +243,11 @@ class PartyController {
                     return false;
                 }
             }
-
-            if (Settings.getSetting('heldItemHideHoldingPokemon').observableValue() && pokemon.heldItem()) {
+            const heldItemCurrentItemFilter = Settings.getSetting('heldItemCurrentItemFilter').observableValue();
+            if (heldItemCurrentItemFilter == 'HideHoldingAnyItem' && pokemon.heldItem()) {
                 return false;
             }
-            if (Settings.getSetting('heldItemHideHoldingThisItem').observableValue() && pokemon.heldItem() === HeldItem.heldItemSelected()) {
+            if (heldItemCurrentItemFilter == 'HideHoldingThisItem' && pokemon.heldItem() === HeldItem.heldItemSelected()) {
                 return false;
             }
 
