@@ -118,28 +118,26 @@ export default class Battle {
         this.counter = 0;
         this.enemyPokemon(PokemonFactory.generateWildPokemon(player.route, player.region, player.subregionObject()));
         const enemyPokemon = this.enemyPokemon();
+        this.logPokemonEncounter(enemyPokemon, Routes.getRoute(player.region, player.route).routeName);
+    }
+
+    /**
+     * Tracks encounter statistics and logs shiny / new-pokemon logbook entries.
+     * Call once per catchable pokemon spawned, passing the battle's location name.
+     */
+    protected static logPokemonEncounter(enemyPokemon: BattlePokemon, location: string): void {
         PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatisticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender, enemyPokemon.shadow);
-        // Shiny
         if (enemyPokemon.shiny) {
             App.game.logbook.newLog(
                 LogBookTypes.SHINY,
                 App.game.party.alreadyCaughtPokemon(enemyPokemon.id, true)
-                    ? createLogContent.encounterShinyDupe({
-                        location: Routes.getRoute(player.region, player.route).routeName,
-                        pokemon: enemyPokemon.name,
-                    })
-                    : createLogContent.encounterShiny({
-                        location: Routes.getRoute(player.region, player.route).routeName,
-                        pokemon: enemyPokemon.name,
-                    }),
+                    ? createLogContent.encounterShinyDupe({ location, pokemon: enemyPokemon.name })
+                    : createLogContent.encounterShiny({ location, pokemon: enemyPokemon.name }),
             );
-        } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id) && enemyPokemon.health()) {
+        } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id)) {
             App.game.logbook.newLog(
                 LogBookTypes.NEW,
-                createLogContent.encounterWild({
-                    location: Routes.getRoute(player.region, player.route).routeName,
-                    pokemon: enemyPokemon.name,
-                }),
+                createLogContent.encounterWild({ location, pokemon: enemyPokemon.name }),
             );
         }
     }

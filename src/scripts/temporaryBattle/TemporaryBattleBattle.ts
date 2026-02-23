@@ -66,6 +66,14 @@ class TemporaryBattleBattle extends Battle {
         this.catching(false);
         TemporaryBattleBattle.counter = 0;
         TemporaryBattleBattle.enemyPokemon(PokemonFactory.generateTemporaryBattlePokemon(TemporaryBattleBattle.battle, TemporaryBattleBattle.index()));
+
+        const enemyPokemon = TemporaryBattleBattle.enemyPokemon();
+        const isCatchable = !TemporaryBattleBattle.battle.optionalArgs.isTrainerBattle
+            || enemyPokemon.shadow == GameConstants.ShadowStatus.Shadow;
+
+        if (isCatchable) {
+            this.logPokemonEncounter(enemyPokemon, TemporaryBattleBattle.battle.getDisplayName());
+        }
     }
 
     public static pokemonsDefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {
