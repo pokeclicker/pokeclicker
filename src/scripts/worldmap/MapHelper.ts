@@ -89,7 +89,7 @@ class MapHelper {
                     envs.push('TrashCloak');
                     break;
             }
-        // if not in Hisui, add general envs for Burmy
+            // if not in Hisui, add general envs for Burmy
         } else if (envs.includes('Cave')) {
             envs.push('SandyCloak');
         } else if (typeof area === 'string' && ['City', 'League', 'Tower'].some(word => area.includes(word))) {
