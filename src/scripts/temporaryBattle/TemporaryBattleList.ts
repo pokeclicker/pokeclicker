@@ -5746,6 +5746,27 @@ TemporaryBattleList['Rampaging Zamazenta'] = new TemporaryBattle(
         imageName: '../pokemon/889.01',
     }
 );
+TemporaryBattleList['Miltank 1'] = new TemporaryBattle(
+    'Miltank 1',
+    [new GymPokemon('Miltank', 2822390965, 60)],
+    'Miltank had a great time battling you. It gave you a free sample! One free MooMoo Milk! How nice!',
+    [new CaughtUniquePokemonByFilterRequirement((p: PartyPokemon) => p.name.startsWith('Alcremie'), 'All Alcremie variations must be owned', 63)],
+    undefined,
+    {
+        displayName: 'Miltank',
+        firstTimeRewardFunction: () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'MooMoo_Milk'}, 1);
+            Notifier.notify({
+                message: 'You were awarded one free MooMoo Milk.',
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+            });
+        },
+        returnTown: 'MooMoo Farm',
+        hideTrainer: true,
+        imageName: '../pokemon/241',
+    }
+);
 TemporaryBattleList['Klara 1'] = new TemporaryBattle(
     'Klara 1',
     [

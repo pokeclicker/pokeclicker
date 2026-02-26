@@ -1538,6 +1538,16 @@ const JohtoBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
     ItemList.ShucaBerry,
     ItemList.ChartiBerry,
 ], 'Johto Berry Master');
+const MooMooFarmShop = new Shop(
+    [
+        ItemList.MooMoo_Milk,
+    ],
+    'Help them grow',
+    [
+        new CaughtUniquePokemonByFilterRequirement((p: PartyPokemon) => p.name.startsWith('Alcremie'), 'All Alcremie variations must be owned', 63),
+    ],
+    true
+);
 
 //Johto Contest Shop
 const JohtoContestShop = new Shop([
@@ -1812,6 +1822,11 @@ const OlivineSSAquaCaptain = new NPC('S.S. Aqua Captain', [
     'Aye! At this here dock you can travel to faraway regions! But only ones you’ve travelled to before; I’ve heard the Professor has his own vessel to take ye’ to new lands!',
 ], { image: 'assets/images/npcs/Sailor.png' });
 
+const MooMooFarmer = new NPC('Farmer', [
+    'Welcome to Moomoo Farm! Home of the world\'s best Moomoo Milk!',
+    'Say, I\'ve heard of a milk based Pokémon in a far away region. I was told it has many forms. If you can show me all of it\'s forms, I\'ll sell you something nice to help them grow.',
+], { image: 'assets/images/npcs/Rancher.png' });
+
 const CianwoodPhotographyAide = new NPC('Photography Aide', [
     'Cameron the Photographer isn’t here right now; he’s off taking photos of Pokémon on Berry Farms. Did you know that some Berries can even attract rare Pokémon?',
 ]);
@@ -1997,6 +2012,16 @@ TownList['Olivine City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 39)],
         npcs: [OlivineSSAquaCaptain],
+    }
+);
+TownList['MooMoo Farm'] = new Town(
+    'MooMoo Farm',
+    GameConstants.Region.johto,
+    GameConstants.JohtoSubRegions.Johto,
+    [MooMooFarmShop],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 39)],
+        npcs: [MooMooFarmer],
     }
 );
 TownList['Cianwood City'] = new Town(

@@ -428,6 +428,14 @@
          })
       %>
 
+    <!--MooMoo Farm-->
+    <%- include('templates/mapTown',
+        { name: "MooMoo Farm"
+        , x: 10, y: 8
+        , width: 5, height: 4
+        })
+    %>
+
     <!--Cianwood City-->
     <%- include('templates/mapTown',
         { name: "Cianwood City"
@@ -890,6 +898,30 @@
         , databind: "click: () => TemporaryBattleList['Anomaly Mewtwo 2'].protectedOnclick()"
         , visible:  "TemporaryBattleList['Anomaly Mewtwo 2'] && TemporaryBattleList['Anomaly Mewtwo 2'].isVisible()"
         , image: "assets/images/map/mewtwox.png"
+        })
+    %>
+
+    <!--Miltank 1-->
+    <%- include('templates/mapOverlay',
+        { name: "Miltank"
+        , x: 10, y: 13
+        , width: 2, height: 2
+        , databind: `click: () => {
+                Notifier.notify({message: 'Moo.'});
+            }`
+        , visible: "App.game.statistics.routeKills[GameConstants.Region.johto][39]() >= 10"
+        , image: "assets/images/map/transparent.png"
+        })
+    %>
+
+    <!--Miltank 2-->
+    <%- include('templates/mapOverlay',
+        { name: "Miltank"
+        , x: 10, y: 13
+        , width: 2, height: 2
+        , databind: "click: () => TemporaryBattleList['Miltank 1'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Miltank 1'] && TemporaryBattleList['Miltank 1'].isVisible()"
+        , image: "assets/images/map/transparent.png"
         })
     %>
 </g>
