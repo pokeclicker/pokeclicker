@@ -2959,6 +2959,12 @@ class Update implements Saveable {
             if (saveData.badgeCase[17]) {
                 Update.startQuestLine(saveData, 'Team Rocket Again');
             }
+
+            // Replace Razor Claw and Razor Fang stones with held items
+            playerData._itemList.Razor_Fang = playerData._itemList.Razor_fang;
+            delete playerData._itemList.Razor_fang;
+            playerData._itemList.Razor_Claw = playerData._itemList.Razor_claw;
+            delete playerData._itemList.Razor_claw;
         },
     };
 

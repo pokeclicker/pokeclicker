@@ -601,20 +601,6 @@ export class ShardDeal {
                     1),
                 new ShardDeal(
                     [
-                        { shardTypeString: 'Red Shard', amount: 20 },
-                        { shardTypeString: 'Lime Shard', amount: 30 },
-                    ],
-                    ItemList.Razor_claw,
-                    1),
-                new ShardDeal(
-                    [
-                        { shardTypeString: 'Blue Shard', amount: 20 },
-                        { shardTypeString: 'Lime Shard', amount: 20 },
-                    ],
-                    ItemList.Razor_fang,
-                    1),
-                new ShardDeal(
-                    [
                         { shardTypeString: 'Yellow Shard', amount: 20 },
                         { shardTypeString: 'White Shard', amount: 30 },
                     ],
@@ -801,24 +787,6 @@ export class ShardDeal {
                     1),
             ],
         );
-        ShardDeal.list[ShardTraderLocations['Pal Park']] = ko.observableArray(
-            [
-                new ShardDeal(
-                    [
-                        { shardTypeString: 'Red Shard', amount: 20 },
-                        { shardTypeString: 'Lime Shard', amount: 30 },
-                    ],
-                    ItemList.Razor_claw,
-                    1),
-                new ShardDeal(
-                    [
-                        { shardTypeString: 'Blue Shard', amount: 20 },
-                        { shardTypeString: 'Lime Shard', amount: 30 },
-                    ],
-                    ItemList.Razor_fang,
-                    1),
-            ],
-        );
         ShardDeal.list[ShardTraderLocations['Canalave City']] = ko.observableArray(
             [
                 new ShardDeal(
@@ -958,24 +926,6 @@ export class ShardDeal {
                         { shardTypeString: 'Grey Shard', amount: 30 },
                     ],
                     ItemList.Metal_coat,
-                    1),
-            ],
-        );
-        ShardDeal.list[ShardTraderLocations['Driftveil City']] = ko.observableArray(
-            [
-                new ShardDeal(
-                    [
-                        { shardTypeString: 'Red Shard', amount: 20 },
-                        { shardTypeString: 'Lime Shard', amount: 30 },
-                    ],
-                    ItemList.Razor_claw,
-                    1),
-                new ShardDeal(
-                    [
-                        { shardTypeString: 'Blue Shard', amount: 20 },
-                        { shardTypeString: 'Lime Shard', amount: 30 },
-                    ],
-                    ItemList.Razor_fang,
                     1),
             ],
         );
@@ -1367,20 +1317,6 @@ export class ShardDeal {
                     ],
                     ItemList.Sun_stone,
                     1),
-                new ShardDeal(
-                    [
-                        { shardTypeString: 'Red Shard', amount: 20 },
-                        { shardTypeString: 'Lime Shard', amount: 30 },
-                    ],
-                    ItemList.Razor_claw,
-                    1),
-                new ShardDeal(
-                    [
-                        { shardTypeString: 'Blue Shard', amount: 20 },
-                        { shardTypeString: 'Lime Shard', amount: 30 },
-                    ],
-                    ItemList.Razor_fang,
-                    1),
             ],
         );
         ShardDeal.list[ShardTraderLocations['Couriway Town']] = ko.observableArray(
@@ -1576,20 +1512,6 @@ export class ShardDeal {
         );
         ShardDeal.list[ShardTraderLocations['Tapu Village']] = ko.observableArray(
             [
-                new ShardDeal(
-                    [
-                        { shardTypeString: 'Red Shard', amount: 20 },
-                        { shardTypeString: 'Lime Shard', amount: 30 },
-                    ],
-                    ItemList.Razor_claw,
-                    1),
-                new ShardDeal(
-                    [
-                        { shardTypeString: 'Blue Shard', amount: 20 },
-                        { shardTypeString: 'Lime Shard', amount: 30 },
-                    ],
-                    ItemList.Razor_fang,
-                    1),
                 new ShardDeal(
                     [
                         { shardTypeString: 'Blue Shard', amount: 20 },
@@ -1923,20 +1845,6 @@ export class ShardDeal {
         );
         ShardDeal.list[ShardTraderLocations.Circhester] = ko.observableArray(
             [
-                new ShardDeal(
-                    [
-                        { shardTypeString: 'Red Shard', amount: 20 },
-                        { shardTypeString: 'Lime Shard', amount: 30 },
-                    ],
-                    ItemList.Razor_claw,
-                    1),
-                new ShardDeal(
-                    [
-                        { shardTypeString: 'Blue Shard', amount: 20 },
-                        { shardTypeString: 'Lime Shard', amount: 30 },
-                    ],
-                    ItemList.Razor_fang,
-                    1),
                 new ShardDeal(
                     [
                         { shardTypeString: 'Green Shard', amount: 20 },

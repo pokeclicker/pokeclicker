@@ -4106,8 +4106,8 @@ const CanalaveCityShop = new Shop ([
     ItemList.Metal_coat,
 ]);
 const PalParkShop = new Shop([
-    ItemList.Razor_claw,
-    ItemList.Razor_fang,
+    ItemList.Razor_Claw,
+    ItemList.Razor_Fang,
     ItemList.Combee,
     ItemList['Burmy (Plant)'],
     ItemList.Cherubi,
@@ -4675,7 +4675,7 @@ TownList['Pal Park'] = new Town(
     'Pal Park',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [PalParkShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Pal Park']), TemporaryBattleList['Manaphy Egg Protectors']],
+    [PalParkShop, TemporaryBattleList['Manaphy Egg Protectors']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 221)],
         npcs: [PalParkWarden, PalParkBurglar, HappinyBoulders],
@@ -5008,8 +5008,8 @@ const DriftveilCityShop = new Shop([
     ItemList.Greatball,
     ItemList.Dowsing_machine,
     ItemList.Lucky_incense,
-    ItemList.Razor_claw,
-    ItemList.Razor_fang,
+    ItemList.Razor_Claw,
+    ItemList.Razor_Fang,
     ItemList.Zorua,
 ]);
 const MistraltonCityShop = new Shop([
@@ -5460,7 +5460,7 @@ TownList['Driftveil City'] = new Town(
     'Driftveil City',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [TemporaryBattleList['Hugh 7'], DriftveilCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Driftveil City']), DriftveilBerryMaster],
+    [TemporaryBattleList['Hugh 7'], DriftveilCityShop, DriftveilBerryMaster],
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.unova, 5),
@@ -5988,8 +5988,8 @@ const AnistarCityShop = new Shop([
     ItemList.Ultraball,
     ItemList.Moon_stone,
     ItemList.Sun_stone,
-    ItemList.Razor_claw,
-    ItemList.Razor_fang,
+    ItemList.Razor_Claw,
+    ItemList.Razor_Fang,
 ]);
 const CouriwayTownShop = new Shop([
     ItemList.Pokeball,
@@ -6912,8 +6912,8 @@ const TapuVillageShop = new Shop([
     ItemList.Greatball,
     ItemList.Ultraball,
     ItemList.Lucky_egg,
-    ItemList.Razor_claw,
-    ItemList.Razor_fang,
+    ItemList.Razor_Claw,
+    ItemList.Razor_Fang,
     ItemList.Ice_stone,
 ]);
 const SeafolkVillageShop = new Shop([
@@ -8500,8 +8500,8 @@ const CirchesterShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
-    ItemList.Razor_claw,
-    ItemList.Razor_fang,
+    ItemList.Razor_Claw,
+    ItemList.Razor_Fang,
     ItemList.Protector,
     ItemList.Ice_stone,
 ]);

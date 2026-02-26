@@ -78,6 +78,10 @@ export const QuestlineStoneEvolution = questlineRestrict(StoneEvolution);
 
 export const HeldItemLevelEvolution = heldItemRestrict(LevelEvolution);
 
+export const DayTimedHeldItemLevelEvolution = dayRestrict(HeldItemLevelEvolution);
+
+export const NightTimedHeldItemLevelEvolution = nightRestrict(HeldItemLevelEvolution);
+
 export const WeatherRestrictedLevelEvolution = weatherRestrict(LevelEvolution);
 
 const KeyStoneEvolution = (basePokemon: PokemonNameType, evolvedPokemon: PokemonNameType) => StoneEvolution(basePokemon, evolvedPokemon, StoneType.Key_stone);

@@ -15,6 +15,8 @@ import {
     WeatherRestrictedLevelEvolution,
     DayTimedLevelEvolution,
     DayCyclePartRestrictedLevelEvolution,
+    DayTimedHeldItemLevelEvolution,
+    NightTimedHeldItemLevelEvolution,
     MegaEvolution,
     DayTimedMegaEvolution,
     NightTimedMegaEvolution,
@@ -8623,7 +8625,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 86,
         'eggCycles': 20,
-        'evolutions': [NightTimedStoneEvolution('Gligar', 'Gliscor', StoneType.Razor_fang)],
+        'evolutions': [NightTimedHeldItemLevelEvolution('Razor_Fang', 'Gligar', 'Gliscor', 25)],
         'base': {
             'hitpoints': 65,
             'attack': 75,
@@ -8890,7 +8892,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 86,
         'eggCycles': 20,
-        'evolutions': [NightTimedStoneEvolution('Sneasel', 'Weavile', StoneType.Razor_claw)],
+        'evolutions': [NightTimedHeldItemLevelEvolution('Razor_Claw', 'Sneasel', 'Weavile', 25)],
         'base': {
             'hitpoints': 55,
             'attack': 95,
@@ -8912,7 +8914,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 86,
         'eggCycles': 20,
-        'evolutions': [DayTimedStoneEvolution('Hisuian Sneasel', 'Sneasler', StoneType.Razor_claw)],
+        'evolutions': [DayTimedHeldItemLevelEvolution('Razor_Claw', 'Sneasel', 'Sneasler', 25)],
         'base': {
             'hitpoints': 55,
             'attack': 95,
@@ -23977,7 +23979,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 92,
         },
-        'heldItem': { type: ItemType.item, id: 'Razor_fang' },
+        'heldItem': { type: ItemType.item, id: 'Razor_Fang' },
     },
     {
         'id': 780,
@@ -24033,7 +24035,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 45,
         },
-        'heldItem': { type: ItemType.item, id: 'Razor_claw' },
+        'heldItem': { type: ItemType.item, id: 'Razor_Claw' },
     },
     {
         'id': 783,
@@ -24052,7 +24054,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 65,
         },
-        'heldItem': { type: ItemType.item, id: 'Razor_claw' },
+        'heldItem': { type: ItemType.item, id: 'Razor_Claw' },
     },
     {
         'id': 784,
@@ -24070,7 +24072,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 105,
             'speed': 85,
         },
-        'heldItem': { type: ItemType.item, id: 'Razor_claw' },
+        'heldItem': { type: ItemType.item, id: 'Razor_Claw' },
     },
     {
         'id': 784.01,
