@@ -23,7 +23,6 @@ export class ShardDeal {
         this.shards = shardCosts;
         this.shards.forEach((s) => { s.shardType = UndergroundItems.getByName(s.shardTypeString); });
         this.item = { itemType: item, amount: itemAmount };
-        this.questPointCost = 0;
         this.currencyType = this.item.itemType.currency ?? Currency.questPoint;
     }
 
