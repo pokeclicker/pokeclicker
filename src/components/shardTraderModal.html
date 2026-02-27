@@ -19,7 +19,6 @@
                                 <tr class="text-center">
                                     <th class="text-center">Inv</th>
                                     <th colspan="2" data-bind="text: ShopHandler.shopObservable().currencyName"></th>
-                                    <th colspan="2">Currency</th>
                                     <th></th>
                                     <th colspan="2">Item</th>
                                     <th data-bind="attr: { hidden: ShopHandler.shopObservable().hidePlayerInventory }">Inv</th>
@@ -36,11 +35,6 @@
                                         </td>
                                         <td class="align-middle" data-bind="text: amount.toLocaleString('en-US') + ' x ' + $data.shardType.name"></td>
                                         <!-- ko if: $index() === 0 -->
-                                        <td class="align-middle" data-bind="attr: { rowspan: $parent.shards.length }, text: $parent.questPointCost.toLocaleString('en-US')"></td>
-                                        <!-- TODO: Make the QP symbol appear in the same TD as the QP Cost -->
-                                        <td class="align-middle" data-bind="attr: { rowspan: $parent.shards.length }">
-                                            <img src='assets/images/currency/questPoint.svg' width="20px" data-bind="attr: { src: `assets/images/currency/${GameConstants.Currency[$parent.currencyType]}.svg`}">
-                                        </td>
                                         <td class="align-middle" data-bind="attr: { rowspan: $parent.shards.length }">→</td>
                                         <td class="align-middle" data-bind="attr: { rowspan: $parent.shards.length }">
                                             <img class='mineInventoryItem' data-bind="attr: {

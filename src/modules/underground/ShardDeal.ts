@@ -3,7 +3,6 @@ import Item from '../items/Item';
 import { ItemList } from '../items/ItemList';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
-import Amount from '../wallet/Amount';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
 
@@ -24,7 +23,7 @@ export class ShardDeal {
         this.shards = shardCosts;
         this.shards.forEach((s) => { s.shardType = UndergroundItems.getByName(s.shardTypeString); });
         this.item = { itemType: item, amount: itemAmount };
-        this.questPointCost = this.item.itemType.basePrice / 4 || 1;
+        this.questPointCost = 0;
         this.currencyType = this.item.itemType.currency ?? Currency.questPoint;
     }
 
@@ -58,14 +57,11 @@ export class ShardDeal {
                 const maxShardTrades = Math.floor(amt / shard.amount);
                 return maxShardTrades;
             });
-            const qp = App.game.wallet.currencies[deal.currencyType]();
-            const maxCurrencyTrades = Math.floor(qp / deal.questPointCost);
-            const maxTrades = Math.min(maxCurrencyTrades, trades.reduce((a, b) => Math.min(a, b), tradeTimes));
+            const maxTrades = trades.reduce((a, b) => Math.min(a, b), tradeTimes);
             deal.shards.forEach((value) => player.loseItem(value.shardType.itemName, value.amount * maxTrades));
 
             const amount = deal.item.amount * maxTrades;
             deal.item.itemType.gain(deal.item.amount * maxTrades);
-            App.game.wallet.loseAmount(new Amount(deal.questPointCost * maxTrades, deal.currencyType));
             Notifier.notify({
                 message: `You traded for ${amount.toLocaleString('en-US')} × <img src="${deal.item.itemType.image}" height="24px"/> ${pluralizeString(humanifyString(deal.item.itemType.displayName), amount)}.`,
                 type: NotificationConstants.NotificationOption.success,
