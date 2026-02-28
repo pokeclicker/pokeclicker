@@ -16,6 +16,7 @@
 
                 <div id="blendingView" class="tab-pane fade in active show">
                     <div id="blenderAndList" class="justify-content-center no-select my-2 d-flex flex-wrap">
+
                         <div class="justify-content-center no-select col-12 col-md-7">
                             <div id="blendBerryList" class="blendingColumn" style="overflow-y: auto;">
                                 <table id="berryBlendingListTable" class="table table-hover table-sm mb-0">
@@ -161,10 +162,11 @@
                                 <button class="clickable btn btn-block btn-success" onclick="App.game.blending.buyBlendingSlot()" data-bind="
                                     css: {disabled: App.game.wallet.currencies[GameConstants.Currency.contestToken]() < App.game.blending.nextBlendingSlotCost().amount},
                                     ">
-                                    <span data-bind="html: App.game.blending.getBlendingSlotCostDisplay()"</span>
+                                    <span data-bind="html: App.game.blending.getBlendingSlotCostDisplay()"></span>
                                 </button>
                             <!-- /ko -->
                         </div>
+
                     </div>
                 </div>
 
@@ -232,7 +234,7 @@
                                     <div class="input-group" style="display: block;">
                                         <div id="recipeCardContent" class="row no-gutters input-group-prepend">
                                             <button class="col-md-4 btn btn-secondary d-none d-md-block">
-                                                <img src="" height="48px" style="" data-bind="attr:{ src: ItemList[$data.item].image }, style:{ 'image-rendering': ItemList[$data.item].pixelated ? 'pixelated' : '' }">
+                                                <img src="" height="48px" style="image-rendering: pixelated" data-bind="attr:{ src: ItemList[$data.item].image }">
                                                 <div class="p-2">
                                                     <p data-bind="text: ItemList[$data.item].description"></p>
                                                     <p data-bind="text: `In Bag: ${player.itemList[$data.item]().toLocaleString('en-US')}`"></p>
@@ -243,7 +245,7 @@
                                                     <table width="100%">
                                                         <tr>
                                                             <td class="d-md-none">
-                                                                <img src="" height="48px" style="" data-bind="attr:{ src: ItemList[$data.item].image }, style:{ 'image-rendering': ItemList[$data.item].pixelated ? 'pixelated' : '' }">
+                                                                <img src="" height="48px" style="image-rendering: pixelated" data-bind="attr:{ src: ItemList[$data.item].image }">
                                                             </td>
                                                             <td>
                                                                 <h4 class="m-0" data-bind="text: ItemList[$data.item].displayName"></h4>
@@ -406,7 +408,7 @@
                     </p>
                     <p data-bind="text: `You currently have ${BlendingRecipes.getRecipeCompletion()} available recipes.`"></p>
                     <!-- ko if: BlendingRecipes.getBlendingRecipeSet(BlendingRecipeType.Event).length > 0 -->
-                        <p data-bind="text: `An extra amount of ${BlendingRecipes.getBlendingRecipeSet(BlendingRecipeType.Event).length} Special Event recipe(s) are also active.`"></p>
+                        <p data-bind="text: `A Special Event is in session! You have access to ${BlendingRecipes.getBlendingRecipeSet(BlendingRecipeType.Event).length} Special Event recipe(s)!`"></p>
                     <!-- /ko -->
 
                     <h4><u>Blending Buddies</u></h4>
@@ -415,6 +417,7 @@
                         They act like a fifth Blending Slot and affect the RPM and flavor output of a machine.
                     </p>
                 </div>
+
             </div>
 
             <div class="modal-footer">
@@ -456,7 +459,6 @@
 
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
-
 
         </div>
     </div>

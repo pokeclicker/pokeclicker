@@ -737,7 +737,6 @@ export const SpriteCredits: Credit[] = [
             'Lillie',
             'Lusamine (nihilego) shiny',
             'PokeBlock_Balanced',
-            'PokeBlock_Black',
             'PokeBlock_Brown',
             'PokeBlock_Gold',
             'PokeBlock_Gray',
@@ -1021,6 +1020,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://pokemmo.com/en/',
         resources: [
             'PokeBlock_Beautiful',
+            'PokeBlock_Black',
             'PokeBlock_Blue',
             'PokeBlock_Cool',
             'PokeBlock_Cute',

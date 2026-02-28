@@ -13,10 +13,8 @@ class HeldItem extends Item {
         displayName: string,
         description: string,
         regionUnlocked: GameConstants.Region,
-        public canUse: (pokemon: PartyPokemon) => boolean,
-        pixelated?: boolean
-    ) {
-        super(name, basePrice, currency, shopOptions, displayName, description, 'heldItems', pixelated);
+        public canUse: (pokemon: PartyPokemon) => boolean) {
+        super(name, basePrice, currency, shopOptions, displayName, description, 'heldItems');
         this.regionUnlocked = regionUnlocked;
     }
 
@@ -174,20 +172,19 @@ class ExpGainedBonusHeldItem extends HeldItem {
         regionUnlocked: GameConstants.Region,
         pokemonDescription = 'the holding Pokémon',
         canUse = (pokemon: PartyPokemon) => true,
-        pixelated = false
     ) {
-        super(name, basePrice, currency, shopOptions, displayName, `A held item that earns ${pokemonDescription} ${(gainedBonus - 1).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })} bonus Experience Points.`, regionUnlocked, canUse, pixelated);
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that earns ${pokemonDescription} ${(gainedBonus - 1).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })} bonus Experience Points.`, regionUnlocked, canUse);
     }
 }
 
 ItemList.Wonder_Chest = new ExpGainedBonusHeldItem('Wonder_Chest', 10000, GameConstants.Currency.money, undefined, 'Wonder Chest', 1.25, GameConstants.Region.johto);
 ItemList.Miracle_Chest = new ExpGainedBonusHeldItem('Miracle_Chest', 30000, GameConstants.Currency.money, { visible: new MaxRegionRequirement(GameConstants.Region.sinnoh) }, 'Miracle Chest', 1.5, GameConstants.Region.sinnoh);
 ItemList.Joy_Scent = new ExpGainedBonusHeldItem('Joy_Scent', 10000, GameConstants.Currency.money, undefined, 'Joy Scent', 1.75, GameConstants.Region.hoenn, ' the holding Shadow Pokémon',
-    (p) => p.shadow >= GameConstants.ShadowStatus.Shadow, true );
+    (p) => p.shadow >= GameConstants.ShadowStatus.Shadow );
 ItemList.Excite_Scent = new ExpGainedBonusHeldItem('Excite_Scent', 10000, GameConstants.Currency.money, undefined, 'Excite Scent', 2, GameConstants.Region.hoenn, 'the holding Shadow Pokémon',
-    (p) => p.shadow >= GameConstants.ShadowStatus.Shadow, true   );
+    (p) => p.shadow >= GameConstants.ShadowStatus.Shadow );
 ItemList.Vivid_Scent = new ExpGainedBonusHeldItem('Vivid_Scent', 10000, GameConstants.Currency.money, undefined, 'Vivid Scent', 2.5, GameConstants.Region.hoenn, 'the holding Shadow Pokémon',
-    (p) => p.shadow >= GameConstants.ShadowStatus.Shadow, true  );
+    (p) => p.shadow >= GameConstants.ShadowStatus.Shadow );
 ItemList.Muscle_Band = new AttackBonusHeldItem('Muscle_Band', 1000, GameConstants.Currency.battlePoint, undefined, 'Muscle Band', 1.05, GameConstants.Region.hoenn);
 // Pokemon specific items
 ItemList.Light_Ball = new PokemonRestrictedAttackBonusHeldItem('Light_Ball', 10000, GameConstants.Currency.money, undefined, 'Light Ball', 1.3, GameConstants.Region.johto, 'Pikachu',

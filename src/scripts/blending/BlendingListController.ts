@@ -3,6 +3,7 @@
 class BlendingListController {
 
     // For the berry list in the blending modal
+    // Todo: move to module when FarmController available
 
     public static sortOption: KnockoutObservable<string> = ko.observable('None');
     public static sortFactor: KnockoutObservable<number> = ko.observable(1);

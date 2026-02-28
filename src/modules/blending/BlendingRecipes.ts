@@ -6,7 +6,7 @@ import BlendingRecipe from './BlendingRecipe';
 
 export default class BlendingRecipes {
     public static blendingRecipeList: Record<BlendingRecipeType, BlendingRecipe[]> = {
-        // if there are too many recipe types, you can combine pokeblocks into one "Pokeblock" recipe type for a cleaner list
+        // if there are too many recipe types, feel free to combine pokeblocks into one "Pokeblock" recipe type for a cleaner list
         [BlendingRecipeType.Basic_Pokeblock]: [
             new BlendingRecipe('PokeBlock_Red', [40, 0, 0, 0, 0]),
             new BlendingRecipe('PokeBlock_Blue', [0, 40, 0, 0, 0]),
@@ -18,6 +18,7 @@ export default class BlendingRecipes {
             new BlendingRecipe('PokeBlock_Gray', [25, 25, 25, 25, 25]),
         ],
         [BlendingRecipeType.Mixed_PokeBlock]: [
+            // Todo: proper contest requirements
             new BlendingRecipe('PokeBlock_Purple', [80, 80, 0, 0, 0]),
             new BlendingRecipe('PokeBlock_Indigo', [0, 80, 80, 0, 0]),
             new BlendingRecipe('PokeBlock_Brown', [0, 0, 80, 80, 0]),
@@ -67,7 +68,7 @@ export default class BlendingRecipes {
     }
 
     public static getBlendingRecipeType(recipe: BlendingRecipe) {
-        return BlendingRecipeType[(Object.keys(BlendingRecipes.blendingRecipeList).filter((v)=>BlendingRecipes.blendingRecipeList[v].includes(recipe)))[0]];
+        return BlendingRecipeType[(Object.keys(BlendingRecipes.blendingRecipeList).filter((v) => BlendingRecipes.blendingRecipeList[v].includes(recipe)))[0]];
     }
 
     public static getRecipeCompletion() {

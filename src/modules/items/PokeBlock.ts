@@ -4,8 +4,8 @@ import Item from './Item';
 export default class PokeBlock extends Item {
     type: PokeBlockColor;
 
-    constructor(color: PokeBlockColor, basePrice: number, description?: string, pixelated = true) {
-        super(`PokeBlock_${PokeBlockColor[color]}`, basePrice, undefined, {}, undefined, description, 'pokeblock', pixelated);
+    constructor(color: PokeBlockColor, basePrice: number, description?: string) {
+        super(`PokeBlock_${PokeBlockColor[color]}`, basePrice, undefined, {}, undefined, description, 'pokeblock');
         this.type = color;
     }
     
