@@ -39,6 +39,7 @@ import ContestBattle from './contest/ContestBattle';
 import ContestBattlePokemon from './contest/ContestBattlePokemon';
 import ContestHelper from './contest/ContestHelper';
 import ContestRunner from './contest/ContestRunner';
+import ContestRewards from './contest/ContestRewards';
 import ContestTrainerList from './contest/ContestTrainerList';
 import ContestScore from './contest/ContestScore';
 import BooleanSetting from './settings/BooleanSetting';
@@ -286,6 +287,7 @@ Object.assign(<any>window, {
     ContestBattlePokemon,
     ContestHelper,
     ContestRunner,
+    ContestRewards,
     ContestTrainerList,
     ContestScore,
     BooleanSetting,
