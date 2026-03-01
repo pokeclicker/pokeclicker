@@ -47,7 +47,7 @@
     </div>
 
     <div data-bind="if: ContestRunner.running()">
-      <div class="d-flex px-3" style="justify-content: space-evenly; overflow-x: hidden;" data-bind="foreach: ContestBattle.trainers()">
+      <div class="d-flex px-3" style="justify-content: space-evenly; overflow-x: hidden; height: 132px;" data-bind="foreach: ContestBattle.trainers()">
         <div style="position: relative;" data-bind="if: ContestBattle.trainers().length > $index(),
           css: { 'contest-inactive': !ContestBattle.getSpotlightStatus($index()) && !ContestBattle.prepareNextTrainerBatch() }">
 
