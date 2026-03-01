@@ -9,6 +9,7 @@ import ContestRank from '../enums/ContestRank';
 import ContestType from '../enums/ContestType';
 import { SECOND } from '../GameConstants';
 import GameHelper from '../GameHelper';
+import { ItemList } from '../items/ItemList';
 import { MultiplierDecreaser } from '../items/types';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
@@ -23,6 +24,7 @@ import ContestItemReward from '../interfaces/ContestItemReward';
 import ContestRunner from './ContestRunner';
 import ContestScore from './ContestScore';
 import ContestTrainer from './ContestTrainer';
+import ContestRewards from './ContestRewards';
 import ContestTrainerList from './ContestTrainerList';
 import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 
@@ -192,6 +194,14 @@ export default class ContestBattle extends Battle {
             if (ContestRunner.frenzyMode()) {
                 // score bonus
                 ContestScore.increaseScore(1.5 * ContestScore.calculateMoveScore(ContestBattle.moveArray()[opponentIndex], ContestRunner.type()));
+
+                // berries
+                // berry rank tiers are repeated for the equivalent super contests ranks
+                const berryRank = ContestRunner.rank() < ContestRank.Spectacular ? Math.max(0, ContestRunner.rank() - 1) % 4 + 1 : ContestRunner.rank();
+                ContestBattle.addContestBerryReward(berryRank, ContestBattle.getBerryMultiplier());
+
+                // items
+                ContestRewards.itemRewards().forEach(i => ContestBattle.addContestItemReward(i));
             }
         }
 
@@ -317,6 +327,22 @@ export default class ContestBattle extends Battle {
         return Math.floor(contestsCleared);
     }
 
+    public static getBerryMultiplier(): number {
+        // check if any move pool has a good matchup against the running contest type
+        // more opponents = more berries
+        let sum = 0;
+        ContestBattle.moveArray().forEach((ct: ContestType[]) => {
+            sum += ContestTypeHelper.getAppealModifier(ct, [ContestRunner.type()]);
+        });
+        // consolidate all attacks
+        let multiplier = 1;
+        ContestBattle.moveArray().flatMap((ct: ContestType[]) => ct).forEach((moveType: ContestType) => {
+            const matchup = ContestTypeHelper.getAppealModifier([moveType], [ContestRunner.type()]);
+            multiplier += matchup ? matchup : -1;
+        });
+        return sum * Math.max(multiplier, 1);
+    }
+
     /**
      * Adds the selected move to the moveArray array
      * @param direction - one of four pokemons moves
@@ -346,6 +372,58 @@ export default class ContestBattle extends Battle {
             type: NotificationConstants.NotificationOption.success,
             // TODO: setting to turn off contest notifications
         });
+    }
+
+    // Berries
+    public static addContestBerryReward(rank: ContestRank, multiplier: number) {
+        if (!multiplier) {
+            return;
+        }
+        const b = ContestRewards.getContestBerryReward(rank ?? ContestRunner.rank());
+        const fullReward = true; // todo: const fullReward = ContestHelper.hasSheenForContest(ContestRunner.rank(), ContestRunner.type()) || ContestBattle.toggleTesting();
+        const amount = fullReward ? Math.ceil(b.amount() * multiplier) : 1;
+        // give the berry
+        App.game.farming.gainBerry(b.berry, amount, false);
+        Notifier.notify({
+            title: 'Pokémon Contest',
+            message: `The audience threw you ${amount} ${BerryType[b.berry]} ${amount > 1 ? 'Berries' : 'Berry'}!`,
+            image: `assets/images/items/berry/${BerryType[b.berry]}.png`, // image: FarmController.getBerryImage(b.berry), when module is imported
+            type: NotificationConstants.NotificationOption.success,
+        });
+        // log the berry
+        ContestBattle.berryRewardLog()[b.berry].amount(ContestBattle.berryRewardLog()[b.berry].amount() + amount);
+    }
+
+    // Items
+    public static addContestItemReward(item: ContestItemReward) {
+        // check for availability
+        const reqComplete = item.requirement?.isCompleted() ?? true;
+        const chanceLuck = Rand.chance(item.chance ?? 1);
+        if (!chanceLuck || !reqComplete) {
+            return;
+        }
+        // check for item limit
+        let gain = item.amount();
+        if (item.amountLimit) {
+            if (player.itemList[item.item]() >= item.amountLimit) {
+                return;
+            }
+            gain = Math.min(item.amountLimit, item.amount());
+        }
+        // give the item
+        player.gainItem(item.item, gain);
+        Notifier.notify({
+            title: 'Pokémon Contest',
+            message: 'The audience threw you a reward!',
+            image: ItemList[item.item].image,
+            type: NotificationConstants.NotificationOption.success,
+        });
+        // log the item
+        const oldAmount = ContestBattle.itemRewardLog().find((i: ContestItemReward) => i.item === item.item)?.amount() ?? 0;
+        const newAmount = oldAmount + gain;
+        ContestBattle.itemRewardLog(ContestBattle.itemRewardLog().filter((i: ContestItemReward) => i.item != item.item).concat({
+            item: item.item, amount: ko.observable(newAmount),
+        }).sort((a: ContestItemReward, b: ContestItemReward) => b.amount() - a.amount()));
     }
 
     // HTML display
