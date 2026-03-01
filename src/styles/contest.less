@@ -1,14 +1,15 @@
 @import url("for");
 
 @ContestColors:
-  // taken from bulbapedia. the "dark" color is actually the modern regular color, except for Balanced, which are all modern
-  // "type" color color-dark color-light,
-  "Cool" #F08030 #D42C04 #F5AC78,
-  "Beautiful" #6890F0 #1E93C0 #9DB7F5,
-  "Cute" #F85888 #D2458D #FA92B2,
-  "Smart" #78C850 #15A13F #A7DB8D,
-  "Tough" #F8D030 #CCA100 #FAE078,
-  "Balanced" #C08EEA #7D5C98 #D6B6F1; // from bulbapedia's default "Contest color" color
+  // taken from bulbapedia. "color-dark" is the modern regular color, except for Balanced, which has all modern
+  // ribbon svgs use colors as per the credited artwork (purple sample is taken from a battle ribbon)
+  // "type" color color-dark color-light color-ribbon,
+  "Cool" #F08030 #D42C04 #F5AC78 #bb0a34,
+  "Beautiful" #6890F0 #1E93C0 #9DB7F5 #1995c9,
+  "Cute" #F85888 #D2458D #FA92B2 #e2afd9,
+  "Smart" #78C850 #15A13F #A7DB8D #7fd244,
+  "Tough" #F8D030 #CCA100 #FAE078 #f2c43d,
+  "Balanced" #C08EEA #7D5C98 #D6B6F1 #a593d7; // from bulbapedia's default "Contest color" color
 
 #contestSelectButtons {
   flex-wrap: wrap;
@@ -118,6 +119,7 @@
   @color: extract(@value, 2);
   @color-dark: extract(@value, 3);
   @color-light: extract(@value, 4);
+  @color-ribbon: extract(@value, 5);
   &[contest-color='@{type}'] {
     .brite &, .cerulean &, .flatly &, .lux &, .quartz &, .sandstone &, .simplex &, .spacelab &, .united &, .yeti & {
       background-color: @color;
@@ -130,5 +132,8 @@
     .cosmo &, .journal &, .litera &, .lumen &, .materia &, .minty &, .morph &, .pulse &, .sketchy &, .zephyr & {
       background-color: @color-light;
     }
+  }
+  &[contest-ribbon='@{type}'] .ribbon-color {
+    fill: @color-ribbon;
   }
 }
