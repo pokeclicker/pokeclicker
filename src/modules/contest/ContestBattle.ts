@@ -3,6 +3,7 @@ import type {
     ObservableArray as KnockoutObservableArray,
 } from 'knockout';
 import Battle from '../battles/Battle';
+import BerryType from '../enums/BerryType';
 import ContestOpponentStatus from '../enums/ContestOpponentStatus';
 import ContestRank from '../enums/ContestRank';
 import ContestType from '../enums/ContestType';
@@ -17,6 +18,8 @@ import Rand from '../utilities/Rand';
 import ContestBattleDefault from './ContestBattleDefault';
 import ContestBattlePokemon from './ContestBattlePokemon';
 import ContestHelper from './ContestHelper';
+import ContestBerryReward from '../interfaces/ContestBerryReward';
+import ContestItemReward from '../interfaces/ContestItemReward';
 import ContestRunner from './ContestRunner';
 import ContestScore from './ContestScore';
 import ContestTrainer from './ContestTrainer';
@@ -50,6 +53,11 @@ export default class ContestBattle extends Battle {
 
     // Rewards
     public static tokenReward: KnockoutObservable<number> = ko.observable(0);
+    public static berryRewardLog: KnockoutObservableArray<ContestBerryReward> = ko.observableArray(
+        // Map them by number so we can display them already sorted
+        GameHelper.enumNumbers(BerryType).map((b) => Object({ berry: b, amount: ko.observable(0) }) as ContestBerryReward),
+    );
+    public static itemRewardLog: KnockoutObservableArray<ContestItemReward> = ko.observableArray(null);
 
     public static tick() {
         ContestHelper.scaleTextHorizontal();

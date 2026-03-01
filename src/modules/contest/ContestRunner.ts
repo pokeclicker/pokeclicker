@@ -12,6 +12,8 @@ import ContestHelper from './ContestHelper';
 import ContestScore from './ContestScore';
 import ContestBattle from './ContestBattle';
 import GameHelper from '../GameHelper';
+import ContestItemReward from '../interfaces/ContestItemReward';
+import ContestBerryReward from '../interfaces/ContestBerryReward';
 
 export default class ContestRunner {
     // Timers
@@ -74,6 +76,8 @@ export default class ContestRunner {
 
         // Give fresh reward log
         ContestBattle.tokenReward(0);
+        ContestBattle.itemRewardLog().forEach((i: ContestItemReward) => i.amount(0));
+        ContestBattle.berryRewardLog().forEach((b: ContestBerryReward) => b.amount(0));
 
         // Begin contest
         ContestBattle.generateNewEnemy();
