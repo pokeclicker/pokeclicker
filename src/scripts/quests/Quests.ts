@@ -112,7 +112,7 @@ class Quests implements Saveable {
         if (quest && quest.isCompleted() && !quest.claimed()) {
             quest.claim();
             if (player.highestRegion() >= GameConstants.Region.kalos && App.game.party.alreadyCaughtPokemonByName('Medicham') && !player.hasMegaStone(GameConstants.MegaStoneType.Medichamite)) {
-                if (Rand.chance(Math.max(0, (App.game.quests.level() - 15) / 8192))) {
+                if (Rand.chance(Math.max(0, (App.game.quests.level() - 15) / 4096))) {
                     player.gainMegaStone(GameConstants.MegaStoneType.Medichamite);
                 }
             }
