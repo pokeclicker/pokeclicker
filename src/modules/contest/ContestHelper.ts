@@ -2,6 +2,7 @@ import ContestRank from '../enums/ContestRank';
 import ContestType from '../enums/ContestType';
 import Direction from '../enums/Direction';
 import { Region } from '../GameConstants';
+import GameHelper from '../GameHelper';
 import ContestWonRequirement from '../requirements/ContestWonRequirement';
 import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
@@ -147,6 +148,20 @@ export default class ContestHelper {
         } else {
             return '<image href="assets/images/ribbons/Super Normal Rank Ribbon.svg">';
         }
+    }
+
+    public static getAvailableRibbons() {
+        const ranksWithRibbons = GameHelper.enumNumbers(ContestRank).filter(rank => rank > ContestRank.Practice);
+        const ribbonRecord = GameHelper.objectFromEnumStrings(ContestRank, () => [] as ContestType[]);
+        ranksWithRibbons.forEach(r => {
+            if (r <= ContestRank.Spectacular) {
+                GameHelper.enumNumbers(ContestType).filter(ct => ct < ContestType.Balanced).forEach(ct => Object.values(ribbonRecord)[r].push(ct));
+            }
+            if (r >= ContestRank.Spectacular) {
+                Object.values(ribbonRecord)[r].push(ContestType.Balanced);
+            }
+        });
+        return ribbonRecord;
     }
 
     public static getRibbonImageDescription(rank: ContestRank, type: ContestType, badgeCase = true) {
