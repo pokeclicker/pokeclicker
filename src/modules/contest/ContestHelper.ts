@@ -7,6 +7,7 @@ import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import OneFromManyRequirement from '../requirements/OneFromManyRequirement';
 import Requirement from '../requirements/Requirement';
+import ContestRibbonSVGs from './ContestRibbonSVGs';
 
 export default class ContestHelper {
     // Rank Mechanics
@@ -136,6 +137,18 @@ export default class ContestHelper {
     }
 
     // Ribbons
+    public static getRibbonImage(rank: ContestRank, type: ContestType) {
+        if (rank > ContestRank.Practice) {
+            const RibbonRank = ContestRank[rank];
+            const RibbonType = ContestType[type];
+            return RibbonType === 'Balanced' ?
+                `<image href="assets/images/ribbons/${RibbonRank} Star Ribbon.svg">` :
+                `<image href="assets/images/ribbons/${RibbonRank} Rank Ribbon.svg"></image> ${ContestRibbonSVGs.getContestRibbon[rank]}`;
+        } else {
+            return '<image href="assets/images/ribbons/Super Normal Rank Ribbon.svg">';
+        }
+    }
+
     public static getRibbonImageDescription(rank: ContestRank, type: ContestType, badgeCase = true) {
         const RibbonRank = ContestRank[rank];
         let RibbonType = ContestType[type];

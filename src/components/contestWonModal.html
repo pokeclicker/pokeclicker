@@ -4,6 +4,10 @@ aria-labelledby="contestWonModalLabel" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
                 <div style="width: 100%;">
+                    <svg class="ribbon" xmlns="http://www.w3.org/2000/svg" width="80px" viewBox="0 0 1280 1280" xmlns:v="https://vecta.io/nano"
+                        data-bind="attr: {'contest-ribbon': ContestType[ContestRunner.type()]}">
+                        <g data-bind="html: ContestHelper.getRibbonImage(ContestRunner.rank(), ContestRunner.type())"></g>
+                    </svg>
                     <h5 class="modal-title" id="contestWonModalLabel"
                         data-bind="text: `${ContestRank[ContestRunner.rank()]} Rank Contest Won!`">Modal title</h5>
                 </div>
