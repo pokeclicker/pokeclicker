@@ -134,4 +134,35 @@ export default class ContestHelper {
                 return 'Hoenn';
         }
     }
+
+    // Ribbons
+    public static getRibbonImageDescription(rank: ContestRank, type: ContestType, badgeCase = true) {
+        const RibbonRank = ContestRank[rank];
+        let RibbonType = ContestType[type];
+        if (rank > ContestRank.Practice) {
+            if (rank >= ContestRank.Spectacular) {
+                switch (type) {
+                    case ContestType.Smart:
+                        RibbonType = 'Clever';
+                    case ContestType.Cool:
+                    case ContestType.Cute:
+                    case ContestType.Tough:
+                        RibbonType = `${RibbonType}ness`;
+                        break;
+                    case ContestType.Beautiful:
+                        RibbonType = 'Beauty';
+                        break;
+                    case ContestType.Balanced:
+                        RibbonType = rank > ContestRank.Spectacular ? 'Twinkling Star' : 'Star';
+                        break;
+                }
+                if (rank === ContestRank.Spectacular || type != ContestType.Balanced) {
+                    return `${RibbonRank} ${RibbonType} Ribbon`;
+                }
+            }
+            return badgeCase ? `${RibbonType} Ribbon` : `${RibbonRank} ${RibbonType} Ribbon`;
+        } else {
+            return 'Unavailable';
+        }
+    }
 }

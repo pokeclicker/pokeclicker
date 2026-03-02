@@ -11,6 +11,20 @@ import ContestBerryReward from '../interfaces/ContestBerryReward';
 import ContestItemReward from '../interfaces/ContestItemReward';
 
 export default class ContestRewards {
+    public static congratulatoryWord: Record<ContestRank, string> = {
+        [ContestRank.Practice]: 'practically',
+        [ContestRank.Normal]: 'nifty',
+        [ContestRank.Super]: 'spurring',
+        [ContestRank.Hyper]: 'hypnotic',
+        [ContestRank.Master]: 'majestic',
+        [ContestRank['Super Normal']]: 'nice and formal',
+        [ContestRank['Super Great']]: 'top-rate',
+        [ContestRank['Super Ultra']]: 'apex, sorta,',
+        [ContestRank['Super Master']]: 'ever-laster of a',
+        [ContestRank.Spectacular]: 'inspirational, sparkling',
+        [ContestRank['Brilliant Shining']]: 'career-defining',
+    };
+
     public static berryRewards: Partial<Record<ContestRank, ContestBerryReward[]>> = {
         [ContestRank.Normal] : [
             { berry: BerryType.Cheri, amount: ko.observable(1), weight: 1, requirement: new InContestTypeRequirement(ContestType.Cool) },
