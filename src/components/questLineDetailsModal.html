@@ -1,0 +1,32 @@
+<div class="modal noselect fade" id="questLineDetailsModal" tabindex="-1" role="dialog" aria-labelledby="questLineDetailsModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content" data-bind="with: QuestLineController.questLineObservable(), as: 'questLine'">
+            <div class="modal-header align-items-center">
+                <h4 class="m-0" data-bind="text: questLine.displayName"></h4>
+            </div>
+            <div class="modal-body p-0 p-md-2 p-lg-3">
+                <table class="table table-striped table-bordered table-hover table-sm m-0">
+                    <tbody data-bind="foreach: questLine.quests()">
+                        <tr data-bind="css: { 'bg-info': (questLine.state() === QuestLineState.started || questLine.state() === QuestLineState.suspended) && $index() === questLine.curQuest() }">
+                            <td class="vertical-middle"><div class="px-2" data-bind="text: $index() + 1"></div></td>
+                            <td class="vertical-middle text-left">
+                                <div class="px-2" data-bind="text: ($index() <= questLine.curQuest() && questLine.state() !== QuestLineState.inactive) || questLine.state() === QuestLineState.ended ? $data.description : '???'"></div>
+                            </td>
+                            <td class="vertical-middle">
+                                <div class="px-2 text-nowrap">
+                                    <span class="text-success" data-bind="if: questLine.state() === QuestLineState.ended || $index() < questLine.curQuest()">Completed</span>
+                                    <span class="text-danger" data-bind="if: questLine.state() === QuestLineState.inactive || (questLine.state() !== QuestLineState.ended && $index() > questLine.curQuest())">Locked</span>
+                                    <span data-bind="if: questLine.state() === QuestLineState.started && $index() === questLine.curQuest()">In progress</span>
+                                    <span data-bind="if: questLine.state() === QuestLineState.suspended && $index() === questLine.curQuest()">Paused</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
