@@ -13384,7 +13384,7 @@ const maxLairQuestStepRandomIndex = (index: number) => {
     return SeededRand.shuffleArray([3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32])[index];
 };
 dungeonList['Max Lair'] = new Dungeon('Max Lair',
-    ['Ivysaur', 'Charmeleon', 'Wartortle', 'Grovyle', 'Sceptile', 'Combusken', 'Blaziken', 'Marshtomp', 'Swampert', 'Cradily', 'Cofagrigus', 'Fraxure', 'Toxtricity (Amped)', 'Toxtricity (Low Key)'],
+    ['Ivysaur', 'Charmeleon', 'Wartortle', 'Grovyle', 'Sceptile', 'Combusken', 'Blaziken', 'Marshtomp', 'Swampert', 'Cofagrigus', 'Fraxure', 'Toxtricity (Amped)', 'Toxtricity (Low Key)'],
     {
         common: [
             {loot: 'xAttack'},

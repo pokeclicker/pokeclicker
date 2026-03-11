@@ -312,6 +312,8 @@ Settings.add(new Setting('heldItemCurrentItemFilter', 'Held Item filter', [
     new SettingOption('Show all Pokémon', 'none'),
     new SettingOption('Hide Pokémon holding ANY item', 'HideHoldingAnyItem'),
     new SettingOption('Hide Pokémon holding THIS item', 'HideHoldingThisItem'),
+    new SettingOption('Hide Pokémon holding EQUIVALENT or BETTER item', 'HideHoldingSameOrBetter'),
+    new SettingOption('Show only Pokémon holding INFERIOR item', 'OnlyShowWorse'),
 ], 'none'));
 
 // Hatchery Filters
