@@ -57,10 +57,7 @@ export default class KeyItems implements Feature {
             new KeyItem(KeyItemType.Reins_of_unity, 'Reins that people presented to the king. They enhance Calyrex’s power over bountiful harvests and unite Calyrex with its beloved steeds.', undefined, undefined, undefined, 'Reins of Unity'),
             new KeyItem(KeyItemType.Pokerus_virus,
                 'A virus sample collected from your starter Pokémon. Infect more Pokémon in the hatchery, and use the new Pokérus Poké Ball option to focus catching Contagious pokemon for a damage boost.',
-                () => {
-                    return App.game.statistics.dungeonsCleared[getDungeonIndex('Distortion World')]() > 0
-                        || (!App.game.challenges.list.storyPokerus.active() && App.game.quests.getQuestLine('Tutorial Quests')?.state() === QuestLineState.ended);
-                },
+                () => App.game.statistics.dungeonsCleared[getDungeonIndex('Distortion World')]() > 0,
                 undefined,
                 () => {
                     App.game.pokeballs.alreadyCaughtContagiousSelection = App.game.pokeballs.alreadyCaughtSelection;

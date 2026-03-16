@@ -9,7 +9,6 @@ export default class Challenges implements Saveable {
     list: Record<string, Challenge> = {
         regionalAttackDebuff: new Challenge('Regional Attack Debuff (recommended)', 'Lowers Pokémon attack based on native region and highest-reached region', true),
         requireCompletePokedex: new Challenge('Require Complete Pokédex (recommended)', 'Requires a complete regional Pokédex before moving on to the next region', true),
-        storyPokerus: new Challenge('Story Pokérus (recommended)', 'Pokérus is unlocked as you progress through the story', true),
         disableClickAttack: new Challenge('No Click Attack', 'Disables the ability to use Click Attacks'),
         disableBattleItems: new Challenge('No Battle Items', 'Disables the usage of Battle Items'),
         disableMasterballs: new Challenge('No Master Balls', 'Disables the usage of Master Balls'),
