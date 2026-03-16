@@ -50,9 +50,6 @@ export default class SpecialEvents implements Feature {
         return true;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    update(delta: number): void {}  // This method intentionally left blank
-
     getEvent(eventName: SpecialEventTitleType) {
         return this.events.find((e) => e.title == eventName);
     }
@@ -167,7 +164,7 @@ export default class SpecialEvents implements Feature {
             },
         );
         // Halloween
-        this.newEvent('Halloween!', 'Encounter Spooky Pokémon for a limited time around Kanto, Johto and Hoenn.',
+        this.newEvent('Halloween!', 'Spooky Pokémon are trick-or-treating for a limited time around Kanto, Johto and Hoenn.',
             // Start
             new Date(new Date().getFullYear(), 9, 30, 1), () => {
             },
