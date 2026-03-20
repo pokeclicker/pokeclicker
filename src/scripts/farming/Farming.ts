@@ -950,7 +950,7 @@ class Farming implements Feature {
                 'It also prevents Kasib from mutating.',
             ],
             undefined,
-            ['Houndour', 'Absol', 'Stunky', 'Zorua', 'Impidimp']
+            ['Houndour', 'Absol', 'Stunky', 'Zorua', 'Alolan Grimer', 'Impidimp']
         );
 
         this.berryData[BerryType.Babiri] = new Berry(
