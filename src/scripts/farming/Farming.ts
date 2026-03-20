@@ -711,7 +711,7 @@ class Farming implements Feature {
                 'The same energy promotes the growth of nearby Berries.',
             ],
             new Aura(AuraType.Growth, [1.1, 1.2, 1.3]),
-            ['Pikachu', 'Plusle', 'Minun', 'Pachirisu', 'Emolga', 'Dedenne', 'Togedemaru', 'Morpeko (Hangry)', 'Pawmi']
+            ['Pikachu', 'Pichu', 'Plusle', 'Minun', 'Pachirisu', 'Emolga', 'Dedenne', 'Togedemaru', 'Morpeko (Hangry)', 'Pawmi']
         );
 
         this.berryData[BerryType.Rindo] = new Berry(
@@ -751,7 +751,7 @@ class Farming implements Feature {
                 'This Berry slows the decay of nearby Berries.',
             ],
             new Aura(AuraType.Decay, [0.9, 0.8, 0.7]),
-            ['Jynx', 'Swinub', 'Spheal', 'Snover', 'Snom']
+            ['Jynx', 'Swinub', 'Spheal', 'Snover', 'Cubchoo', 'Bergmite', 'Alolan Vulpix', 'Snom']
         );
 
         this.berryData[BerryType.Chople] = new Berry(
@@ -771,7 +771,7 @@ class Farming implements Feature {
                 'Growing these Berries will promote Egg growth.',
             ],
             new Aura(AuraType.Egg, [1.01, 1.02, 1.03]),
-            ['Mankey', 'Makuhita', 'Riolu', 'Scraggy', 'Crabrawler']
+            ['Mankey', 'Makuhita', 'Riolu', 'Scraggy', 'Hawlucha', 'Crabrawler', 'Clobbopus']
         );
 
         this.berryData[BerryType.Kebia] = new Berry(
@@ -792,7 +792,7 @@ class Farming implements Feature {
                 'Due to its poisonous nature, it increases the chances of mutations near it.',
             ],
             new Aura(AuraType.Mutation, [1.2, 1.4, 1.6]),
-            ['Grimer', 'Spinarak', 'Gulpin', 'Skorupi', 'Salandit', 'Toxel']
+            ['Grimer', 'Spinarak', 'Gulpin', 'Skorupi', 'Venipede', 'Salandit', 'Toxel']
         );
 
         this.berryData[BerryType.Shuca] = new Berry(
@@ -812,7 +812,7 @@ class Farming implements Feature {
                 'Growing these Berries will soften the ground around it, increasing the chances of replanting.',
             ],
             new Aura(AuraType.Replant, [1.01, 1.02, 1.03]),
-            ['Sandshrew', 'Larvitar', 'Numel', 'Hippopotas']
+            ['Sandshrew', 'Larvitar', 'Numel', 'Hippopotas', 'Drilbur', 'Mudbray', 'Silicobra']
         );
 
         this.berryData[BerryType.Coba] = new Berry(
@@ -829,7 +829,7 @@ class Farming implements Feature {
             BerryFirmness.Very_Hard,
             ['This Berry is said to be a new kind that is a cross of two Berries brought together by winds from far away.'],
             undefined,
-            ['Farfetch\'d', 'Murkrow', 'Tropius', 'Chatot']
+            ['Farfetch\'d', 'Murkrow', 'Tropius', 'Chatot', 'Cramorant']
         );
 
         this.berryData[BerryType.Payapa] = new Berry(
@@ -849,7 +849,7 @@ class Farming implements Feature {
                 'The same behavior affects nearby plants, causing additional mutations.',
             ],
             new Aura(AuraType.Mutation, [1.1, 1.2, 1.3]),
-            ['Mr. Mime', 'Natu', 'Ralts', 'Chingling']
+            ['Mr. Mime', 'Natu', 'Ralts', 'Chingling', 'Munna', 'Oranguru', 'Hatenna']
         );
 
         this.berryData[BerryType.Tanga] = new Berry(
@@ -869,7 +869,7 @@ class Farming implements Feature {
                 'The attracted Bug Pokémon decrease the amount of harvestable Berries in nearby plants.',
             ],
             new Aura(AuraType.Harvest, [0.9, 0.8, 0.7]),
-            ['Pinsir', 'Shuckle', 'Shuckle (Corked)', 'Nincada', 'Mothim', 'Sizzlipede']
+            ['Pinsir', 'Shuckle', 'Shuckle (Corked)', 'Nincada', 'Mothim', 'Larvesta', 'Wimpod', 'Sizzlipede']
         );
 
         this.berryData[BerryType.Charti] = new Berry(
@@ -889,7 +889,7 @@ class Farming implements Feature {
                 'This Berry plant hardens the surrounding soil, decreasing the chances of replanting.',
             ],
             new Aura(AuraType.Replant, [0.99, 0.98, 0.97]),
-            ['Rhyhorn', 'Sudowoodo', 'Aron', 'Bonsly', 'Rockruff']
+            ['Rhyhorn', 'Sudowoodo', 'Aron', 'Bonsly', 'Roggenrola', 'Carbink', 'Rockruff']
         );
 
         this.berryData[BerryType.Kasib] = new Berry(
@@ -909,7 +909,7 @@ class Farming implements Feature {
                 'This Berry causes other nearby Berries to wither away faster.',
             ],
             new Aura(AuraType.Death, [1.25, 1.5, 2.0]),
-            ['Gastly', 'Misdreavus', 'Shedinja', 'Drifloon']
+            ['Gastly', 'Misdreavus', 'Shedinja', 'Drifloon', 'Golett', 'Phantump', 'Mimikyu', 'Sinistea']
         );
 
         this.berryData[BerryType.Haban] = new Berry(
@@ -929,7 +929,7 @@ class Farming implements Feature {
                 'This Berry requires a lot of energy to grow, but isn\'t fussy about what it consumes, it helps other plants by removing toxins from the soil.',
             ],
             new Aura(AuraType.Decay, [0.8, 0.6, 0.5]),
-            ['Dratini', 'Bagon', 'Gible', 'Druddigon', 'Drampa', 'Applin', 'Exposed Applin']
+            ['Dratini', 'Bagon', 'Gible', 'Druddigon', 'Noibat', 'Drampa', 'Applin', 'Exposed Applin']
         );
 
         this.berryData[BerryType.Colbur] = new Berry(
@@ -970,7 +970,7 @@ class Farming implements Feature {
                 'This Berry plant is very hardy and resistant, making it resistant to mutations, and also decreasing the chance of mutations around it.',
             ],
             new Aura(AuraType.Mutation, [0.5, 0.25, 0.0]),
-            ['Magnemite', 'Skarmory', 'Beldum', 'Bronzor', 'Cufant']
+            ['Magnemite', 'Skarmory', 'Beldum', 'Bronzor', 'Durant', 'Alolan Sandshrew', 'Cufant']
         );
 
         this.berryData[BerryType.Chilan] = new Berry(
@@ -987,7 +987,7 @@ class Farming implements Feature {
             BerryFirmness.Very_Soft,
             ['This Berry can be cored out and dried to make a whistle. Blowing through its hole makes an indescribable sound.'],
             new Aura(AuraType.Egg, [0.99, 0.98, 0.97]),
-            ['Snorlax', 'Girafarig', 'Swablu', 'Munchlax', 'Audino', 'Skwovet']
+            ['Snorlax', 'Girafarig', 'Swablu', 'Munchlax', 'Audino', 'Komala', 'Skwovet']
         );
 
         this.berryData[BerryType.Roseli] = new Berry(
@@ -1007,7 +1007,7 @@ class Farming implements Feature {
                 'The scent of this Berry plant attracts wild Pokémon.',
             ],
             new Aura(AuraType.Attract, [1.02, 1.04, 1.07]),
-            ['Clefairy', 'Togepi', 'Ralts']
+            ['Clefairy', 'Togepi', 'Ralts', 'Mime Jr.', 'Cottonee', 'Comfey']
         );
 
         this.berryData[BerryType.Snover] = new Berry(
