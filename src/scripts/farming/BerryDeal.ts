@@ -207,6 +207,12 @@ class BerryDeal {
             }
             i++;
         }
+        temp.push(new BerryDeal(
+            [BerryType.Watmel],
+            [SeededRand.intBetween(80, 100)],
+            ItemList['Electrode (Melon)'],
+            1
+        ));
         return temp;
     }
 
