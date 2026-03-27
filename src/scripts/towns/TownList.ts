@@ -464,6 +464,12 @@ const BigSpender = new NPC('Big Spender', [
     'You can use the Shop Amount Button settings to make it easy for big purchases, too!',
 ], {image: 'assets/images/npcs/Beauty.png'});
 
+const RichBoy = new NPC('Rich Boy', [
+    'It\'s outrageous! I go through these dungeons over and over again, and the Trainers inside simply refuse to give me more money!',
+    'No matter what I do, they always give me the same amount of Pokédollars and Dungeon Tokens.',
+    'Be it Token Collectors, Lucky Incense, holding an Amulet Coin or even having a higher Achievement Bonus, it seems you simply cannot change what Dungeon Trainers will give you.',
+], {image: 'assets/images/npcs/Rich Boy.png'});
+
 const EggHuntErika = new NPC('Erika', [
     'Hello... Isn\'t the spring weather so relaxing? I adore how lovely the blooming flowers look during this time of year...',
     'Oh! I\'m sorry, I almost dozed off. I was reminiscing about my stroll in Viridian Forest earlier today. I came across the loveliest patch of flowers over there and...',
@@ -1005,7 +1011,7 @@ TownList['Celadon City'] = new Town(
     [CeladonDepartmentStoreShop, CeladonCityShop, new MoveToDungeon(dungeonList['Rocket Game Corner'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
-        npcs: [BigSpender, CandyMan, EggHuntErika],
+        npcs: [BigSpender, RichBoy, CandyMan, EggHuntErika],
     }
 );
 TownList['Saffron City'] = new Town(
