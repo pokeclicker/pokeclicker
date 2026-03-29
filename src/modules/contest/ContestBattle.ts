@@ -134,17 +134,19 @@ export default class ContestBattle extends Battle {
         // Determine opponents on field
         const opponentAmount =  Math.min(ContestRunner.rank(), 5);
         // Shuffle trainers
-        const opponents = Rand.shuffleArray(ContestBattle.getTrainerList().filter(t => !ContestBattle.trainers().some(tr => tr === t)));
+        const opponents = Rand.shuffleArray(ContestBattle.getTrainerList()).filter(t => !ContestBattle.trainers().includes(t)).slice(0, opponentAmount);
         // Create observable arrays
-        // Because some trainers have multiple mons, we track trainers in their own array, so we can refer to it for their next pokemon
-        ContestBattle.trainers(new Array(opponentAmount).fill(null).map((_, i) => opponents[i] as ContestTrainer));
+        // Because some trainers have multiple mons, we track trainers in a separate array from their pokemon...
+        ContestBattle.trainers(opponents);
+        // ...and use a party index number to determine which pokemon they've sent out
         ContestBattle.trainersPartyIndex(new Array(opponentAmount).fill(0));
+        // We can then use the trainer array to generate Contest Pokemon, aka - send out their first pokemon!
+        ContestBattle.pokemons(opponents.map(t => PokemonFactory.generateContestTrainerPokemon(t, 0)));
+        // For scoring, each opponent has an equivalent array that stores the total contest moves used from their party
         ContestBattle.moveArray(new Array(opponentAmount).fill([]));
-        // Use trainer array to generate Contest Pokemon, aka - send out their first pokemon!
-        ContestBattle.pokemons(new Array(opponentAmount).fill(null).map((_, i) => PokemonFactory.generateContestTrainerPokemon(ContestBattle.trainers()[i], 0)));
     }
 
-    public static getTrainerList() {
+    public static getTrainerList(): ContestTrainer[] {
         return ContestTrainerList.ContestOpponents[ContestRunner.rank()].filter(trainer => {
             return (trainer.options?.requirement) ? trainer.options.requirement.isCompleted() : true;
         });
