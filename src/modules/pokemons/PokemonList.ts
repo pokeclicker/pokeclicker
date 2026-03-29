@@ -26399,6 +26399,7 @@ export const pokemonList = createPokemonArray(
             DummyEvolution('Milcery', 'Alcremie (Ribbon Lemon)'),
             DummyEvolution('Milcery', 'Alcremie (Ribbon Mint)'),
             DummyEvolution('Milcery', 'Alcremie (Ribbon Rainbow)'),
+            StoneEvolution('Milcery', 'Alcremie (Flavorless)', StoneType.Whipped_dream),
             DummyEvolution('Milcery', 'Gigantamax Alcremie'),
         ],
         'gender': {
@@ -27668,6 +27669,26 @@ export const pokemonList = createPokemonArray(
     {
         'id': 869.68,
         'name': 'Alcremie (Ribbon Rainbow)',
+        'type': [PokemonType.Fairy],
+        'base': {
+            'hitpoints': 65,
+            'attack': 60,
+            'specialAttack': 110,
+            'defense': 75,
+            'specialDefense': 121,
+            'speed': 64,
+        },
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 173,
+        'catchRate': 100,
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 869.69,
+        'name': 'Alcremie (Flavorless)',
         'type': [PokemonType.Fairy],
         'base': {
             'hitpoints': 65,

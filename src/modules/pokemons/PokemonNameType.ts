@@ -1433,6 +1433,7 @@ export type PokemonNameType
     | 'Alcremie (Ribbon Lemon)'
     | 'Alcremie (Ribbon Mint)'
     | 'Alcremie (Ribbon Rainbow)'
+    | 'Alcremie (Flavorless)'
     | 'Gigantamax Alcremie'
     | 'Falinks'
     | 'Pincurchin'
