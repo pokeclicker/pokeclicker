@@ -234,7 +234,7 @@ class PokemonFactory {
     }
 
     public static generateContestTrainerPokemon(trainer: ContestTrainer, partyIndex: number): ContestBattlePokemon {
-        const pokemon = trainer.getTeam()[partyIndex] as ContestPokemon;
+        const pokemon = trainer.getTeam()[partyIndex];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
         const nickname = pokemon.nickname;
         const contestTypes = pokemon.contestTypes ?? [0, 1, 2, 3, 4, 5]; // todo: `?? basePokemon.contestTypes;` when PokemonList has contest types
