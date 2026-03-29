@@ -19,7 +19,7 @@
                     <!-- Quests -->
                     <div class="tab-pane active" id="questsModalQuestsPane">
                         <div class="container">
-                            <div class="form-row my-3">
+                            <div class="form-row mt-3 mb-2">
                                 <div class="col-3 align-self-center">
                                     <h5>
                                         <span class='' data-bind='text: "Quests (" + App.game.quests.currentQuests().length + "/" + App.game.quests.questSlots() + ")"'></span>
@@ -37,6 +37,9 @@
                                 <div class="col-3 align-self-center">
                                     <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.questPoint](), 'currency': GameConstants.Currency.questPoint}}"></span>
                                 </div>
+                            </div>
+                            <div class="text-center mb-2" data-bind="visible: App.game.quests.questSlots() < GameConstants.MAX_QUEST_SLOTS">
+                                <div class="small">Unlock additional quest slots at levels 5, 10, and 15!</div>
                             </div>
                         </div>
 

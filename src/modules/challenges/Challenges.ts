@@ -16,7 +16,7 @@ export default class Challenges implements Saveable {
         disableGems: new Challenge('No Gem Upgrades', 'Disables the usage of Gems to increase type effectiveness'),
         disableVitamins: new Challenge('No Vitamins', 'Disables the usage of Vitamins'),
         slowEVs: new Challenge('Slow EVs', 'Gain EVs 10x slower'),
-        realEvolutions: new Challenge('Real Evolution', 'Your Pokémon go away when they evolve'),
+        realEvolutions: new Challenge('Real Evolution', 'When a Pokémon evolves into a new form, the original form is lost. Attack bonus, shiny status, Pokérus & EVs, and other statistics are all transferred to the evolved form.'),
     };
 
     fromJSON(json): void {
