@@ -2416,11 +2416,11 @@ TemporaryBattleList['Shauna 1'] = new TemporaryBattle(
         new GymPokemon('Fennekin', 24906504, 5, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
     ],
     'Hey! I wasn\'t done watching my cute Li\'l Pokémon yet!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 1)],
     undefined,
     {
         displayName: 'Pokémon Trainer Shauna',
-        returnTown: 'Vaniville Town',
+        returnTown: 'Aquacorde Town',
         imageName: 'Shauna',
     }
 );
@@ -2450,7 +2450,7 @@ TemporaryBattleList['Tierno 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Tierno',
-        returnTown: 'Camphrier Town',
+        returnTown: 'Lumiose City',
         imageName: 'Tierno',
     }
 );
