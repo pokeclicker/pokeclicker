@@ -3579,7 +3579,7 @@ TownList['Agate Village'] = new Town(
     'Agate Village',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [AgateVillageShop, new MoveToTown('Relic Stone'), new MoveToDungeon(dungeonList['Relic Cave']), TemporaryBattleList['Cipher Peon Doven'], TemporaryBattleList['Cipher Peon Silton'], TemporaryBattleList['Cipher Peon Kass']],
+    [AgateVillageShop, new MoveToTown('Relic Stone'), new MoveToDungeon(dungeonList['Relic Cave']), TemporaryBattleList['Cipher Peon Doven'], TemporaryBattleList['Cipher Peon Silton'], TemporaryBattleList['Cipher Peon Kass'], new GenericTraderShop('ScentTrader', 'Perfumer')],
     {
         requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
         npcs: [AgateAthlete],

@@ -390,14 +390,15 @@ class PokemonFactory {
         berry.wander.forEach((p, i) => {
             if (pokemonMap[p].nativeRegion <= player.highestRegion()) {
                 availablePokemon.push(p);
-                weights.push(mulch === MulchType.Gooey_Mulch && i >= Berry.baseWander.length ? 2 : 1);
+                weights.push(mulch === MulchType.Gooey_Mulch && i >= Berry.baseWander.length ? 3 : 1);
             }
         });
         const pokemon = Rand.fromWeightedArray(availablePokemon, weights);
         const pokemonData = pokemonMap[pokemon];
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);
         const catchChance = PokemonFactory.catchRateHelper(pokemonData.catchRate + 25, true);
-        const wanderer = new WandererPokemon(pokemon, berry.type, catchChance, shiny);
+        const gender = PokemonFactory.generateGenderById(pokemonData.id);
+        const wanderer = new WandererPokemon(pokemon, berry.type, catchChance, gender, shiny);
         return wanderer;
     }
 }

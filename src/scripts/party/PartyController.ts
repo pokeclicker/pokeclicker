@@ -250,6 +250,12 @@ class PartyController {
             if (heldItemCurrentItemFilter == 'HideHoldingThisItem' && pokemon.heldItem() === HeldItem.heldItemSelected()) {
                 return false;
             }
+            if (heldItemCurrentItemFilter == 'HideHoldingSameOrBetter' && pokemon.heldItem() && pokemon.heldItem().isSameOrBetter(HeldItem.heldItemSelected())) {
+                return false;
+            }
+            if (heldItemCurrentItemFilter == 'OnlyShowWorse' && pokemon.heldItem() && !pokemon.heldItem().isInferior(HeldItem.heldItemSelected())) {
+                return false;
+            }
 
             return true;
         });
