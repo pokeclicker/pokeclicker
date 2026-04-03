@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="5" height="4" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="1">
+ <tileset firstgid="1" source="tiles_Advanced.tsx"/>
+ <tileset firstgid="7985" source="tiles_FRLG.tsx"/>
+ <layer id="1" name="Land" width="5" height="4">
+  <data encoding="csv">
+8424,8425,1167,8426,8427,
+8452,289,289,8453,8455,
+8452,8453,8453,289,8455,
+8480,8481,8482,8482,8483
+</data>
+ </layer>
+ <layer id="2" name="Decoration" width="5" height="4">
+  <data encoding="csv">
+0,3288,5008,3037,0,
+0,4346,3288,4338,0,
+0,3037,4354,5000,0,
+0,0,0,0,0
+</data>
+ </layer>
+</map>
