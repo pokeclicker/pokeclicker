@@ -16,7 +16,8 @@ export type GenericTraderShopIdentifier =
     'FossilOreburghMiningMuseum' |
     'FossilNacreneMuseum' |
     'FossilAmbretteFossilLab' |
-    'FossilMasterGalarRoute6';
+    'FossilMasterGalarRoute6' |
+    'ScentTrader';
 
 /* eslint-disable @typescript-eslint/no-shadow */
 export enum DealCostOrProfitType {
@@ -245,6 +246,10 @@ export default class GenericDeal {
                 costs: [ { type: DealCostOrProfitType.Item, item: ItemList.Palaeontologist_token, amount: 1 } ],
                 profits: [ { type: DealCostOrProfitType.Item, item: ItemList['Pikachu (Palaeontologist)'], amount: 1, hidePlayerInventory: true } ],
             }),
+            new GenericDeal({
+                costs: [ { type: DealCostOrProfitType.Item, item: ItemList.Palaeontologist_token, amount: 1 } ],
+                profits: [ { type: DealCostOrProfitType.Amount, currency: new Amount(750, Currency.diamond), amount: 1 } ],
+            }),
         ]);
 
         GenericDeal.list.EverstoneDealer = ko.observableArray([
@@ -420,6 +425,18 @@ export default class GenericDeal {
                 ],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Arctovish, amount: 1, hidePlayerInventory: true }],
                 tradeButtonOverride: 'Revive',
+            }),
+        ]);
+        GenericDeal.list.ScentTrader = ko.observableArray([
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Joy_Scent, amount: 12 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Excite_Scent, amount: 1 }],
+                tradeButtonOverride: 'Refine',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Excite_Scent, amount: 12 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Vivid_Scent, amount: 1 }],
+                tradeButtonOverride: 'Refine',
             }),
         ]);
     }

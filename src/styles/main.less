@@ -193,6 +193,10 @@ div.progress {
   color: whitesmoke;
 }
 
+button {
+  cursor: pointer;
+}
+
 body:hover {
   cursor: default;
 }
@@ -852,5 +856,14 @@ button.btn-circle {
 #dungeonGuidesModal {
     .card .currency-template span {
         line-height: 30px;
+    }
+}
+
+.vitamin-input {
+    appearance: textfield;
+
+    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+        appearance: none;
+        margin: 0;
     }
 }

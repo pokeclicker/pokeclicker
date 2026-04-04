@@ -17,20 +17,7 @@ class SafariTownContent extends TownContent {
             return [areaStatus.completed];
         }
         const pokemonStatusArray = [areaStatus.completed];
-        const pokerusUnlocked = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked();
-        SafariPokemonList.list[player.region]().forEach(p => {
-            if (!p.isAvailable()) {
-                return;
-            }
-            const caughtStatus = PartyController.getCaughtStatusByName(p.name);
-            if (caughtStatus == CaughtStatus.NotCaught) {
-                pokemonStatusArray.push(areaStatus.uncaughtPokemon);
-            } else if (caughtStatus == CaughtStatus.Caught) {
-                pokemonStatusArray.push(areaStatus.uncaughtShinyPokemon);
-            } else if (pokerusUnlocked && PartyController.getPokerusStatusByName(p.name) < GameConstants.Pokerus.Resistant) {
-                pokemonStatusArray.push(areaStatus.missingResistant);
-            }
-        });
-        return pokemonStatusArray;
+        const safariEncounters = SafariPokemonList.list[player.region]().filter(p => p.isAvailable()).map(p => p.name) as PokemonNameType[];
+        return [areaStatus.completed, ...MapHelper.getPokemonAreaStatus(safariEncounters)];
     }
 }

@@ -40,7 +40,7 @@
                     <!-- ko if: App.game.farming.berryData[$data].aura -->
                     <tr>
                       <td class="text-left">Aura</td>
-                      <td class="text-left tight"><code data-bind="text: AuraType[App.game.farming.berryData[$data].aura.auraType]"></code></td>
+                      <td class="text-left tight"><code data-bind="text: `${AuraType[App.game.farming.berryData[$data].aura.auraType]}${App.game.farming.berryData[$data].aura.auraMultipliers[0] > 1 ? '+' : '-'}`"></code></td>
                     </tr>
                     <!-- /ko -->
                     </tbody>
