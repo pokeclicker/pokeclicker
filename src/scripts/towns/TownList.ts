@@ -3284,24 +3284,35 @@ const destinyDeoxysReunion = new PokemonGiftNPC('Green and Purple Gem Deoxys', [
 
 
 // For Environment evolutions. Show up in Hoenn too
-const MossRock = new NPC('Moss Rock', [
+const MossRock = new AssistantNPC('Moss Rock', [
     'The rock is covered in moss. It feels pleasantly cool.',
-], {
-    image: 'assets/images/battleDecoration/Moss Rock.png',
-    requirement: new MaxRegionRequirement(GameConstants.Region.sinnoh),
-});
+], [
+    'Some of your Pokémon seem eager to train in the verdant environment...',
+],
+'environmentEvolution',
+'assets/images/battleDecoration/Moss Rock.png',
+new MaxRegionRequirement(GameConstants.Region.sinnoh)
+);
 
-const IceRock = new NPC('Ice Rock', [
+const IceRock = new AssistantNPC('Ice Rock', [
     'The rock is encrusted in ice. It is freezing to touch.',
-], {image: 'assets/images/battleDecoration/Ice Rock.png',
-    requirement: new MaxRegionRequirement(GameConstants.Region.sinnoh),
-});
+], [
+    'Some of your Pokémon seem eager to train the frigid environment...',
+],
+'environmentEvolution',
+'assets/images/battleDecoration/Ice Rock.png',
+new MaxRegionRequirement(GameConstants.Region.sinnoh)
+);
 
-const MagneticRock = new NPC('Magnetic Rock', [
-    'The rock is surrounded in a magnetic field. It feels metallic to touch.',
-], {image: 'assets/images/battleDecoration/Magnetic Field.png',
-    requirement: new MaxRegionRequirement(GameConstants.Region.sinnoh),
-});
+const MagneticRock = new AssistantNPC('Magnetic Rock', [
+    'The rock is surrounded in a magnetic field. It feels charged to touch.',
+], [
+    'Some of your Pokémon seem eager to train in the ionizing environment...',
+],
+'environmentEvolution',
+'assets/images/battleDecoration/Magnetic Field.png',
+new MaxRegionRequirement(GameConstants.Region.sinnoh)
+);
 
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
@@ -4203,12 +4214,6 @@ const SinnohFossilNpc = new NPC('Gossiper', [
     'What? Oh you didn\'t know? The ace Pokémon of Gym Leaders Byron and Roark are resurrected from fossils!',
 ], {image: 'assets/images/npcs/Aroma Lady.png'});
 
-const FloaromaFlowerGirl = new NPC('Flower Girl', [
-    'Something amazing just happened!',
-    'My friend was taking their Eevee on a walk through Eterna Forest, and it suddenly evolved!',
-    'Can you believe that?',
-], {image: 'assets/images/npcs/Aroma Lady.png'});
-
 const EternaLassCaroline = new NPC('Lass Caroline', [
     'Oh, you came from the Forest! That Old Chateau is so creepy, isn’t it? I’ve heard that trainers that catch the weird ghost in the TV have found ghosts in other appliances. Even lawnmowers!',
 ], {image: 'assets/images/npcs/Lass.png'});
@@ -4222,12 +4227,6 @@ const OreburghConstructionWorker = new NPC('Construction Worker', [
     'I was doing some exploring in Mt. Coronet last week, and my Nosepass gained a lot of levels.',
     'I had a big suprise when he reached level 20 though!',
 ], {image: 'assets/images/npcs/Worker (male).png'});
-
-const HearthomeContestFan = new NPC('Contest Fan', [
-    'My favourite contestant had a big reveal for us this week!',
-    'Their prized Magneton had evolved into a Magnezone!',
-    'I\'m so happy for them, all of that training in Mt. Coronet must have paid off!',
-]);
 
 const HearthomeTrophyGardenOwner = new NPC('Mr. Backlot', [
     'Greetings trainer! I own the Trophy Garden down south!',
@@ -4286,11 +4285,6 @@ const ValorAzelf = new NPC('Azelf', [
 ],{
     image: 'assets/images/pokemon/482.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 4), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 6, GameConstants.AchievementOption.less)])});
-
-const SnowpointYoungGirl = new NPC('Young Girl', [
-    'Someone told me that training an Eevee on Route 217 will make it evolve.',
-    'They must be lying, how can that be true?!',
-]);
 
 const MindyFriend = new NPC('Mindy\'s Friend', [
     'I recently traded with my friend Mindy expecting to get a Gengar. Instead, her Haunter came with this useless rock! I can\'t believe she would do this to me!',
@@ -4610,7 +4604,7 @@ TownList['Floaroma Town'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.sinnoh, 204),
             new GymBadgeRequirement(BadgeEnums.Coal),
         ],
-        npcs: [FloaromaFlowerGirl, HappinyWitness2],
+        npcs: [HappinyWitness2],
     }
 );
 TownList['Eterna City'] = new Town(
@@ -4640,7 +4634,7 @@ TownList['Hearthome City'] = new Town(
     [HearthomeCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hearthome City']), SinnohBerryMaster],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 208)],
-        npcs: [HearthomeContestFan, SinnohBerryMasterAssistant, HearthomeTrophyGardenOwner, LucyStevens1, HappinyWitness6],
+        npcs: [SinnohBerryMasterAssistant, HearthomeTrophyGardenOwner, LucyStevens1, HappinyWitness6],
     }
 );
 TownList['Solaceon Town'] = new Town(
@@ -4719,7 +4713,7 @@ TownList['Snowpoint City'] = new Town(
     [SnowpointCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Snowpoint City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 217)],
-        npcs: [SnowpointYoungGirl, MindyFriend],
+        npcs: [MindyFriend],
     }
 );
 TownList['Secret Berry Shop'] = new Town(
