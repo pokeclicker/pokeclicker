@@ -12,4 +12,8 @@ export default class ContestTrainer extends Trainer {
     ) {
         super(trainerClass, team, name, subTrainerClass);
     }
+
+    public getTeam() {
+        return super.getTeam() as ContestPokemon[];
+    }
 }

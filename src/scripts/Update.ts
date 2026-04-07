@@ -2959,6 +2959,14 @@ class Update implements Saveable {
             if (saveData.badgeCase[17]) {
                 Update.startQuestLine(saveData, 'Team Rocket Again');
             }
+
+            saveData.farming?.plotList?.forEach(plot => {
+                if (plot.wanderer) {
+                    // Force genderless
+                    plot.wanderer.gender = 0;
+                }
+            });
+
             // Give Sudowoodo (Golden) its ContestPokemonItem stats
             setTimeout(async () => {
                 const goldowoodo = saveData.party.caughtPokemon.find((p: PartyPokemon) => p.id === 185.01);

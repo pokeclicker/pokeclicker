@@ -23,7 +23,7 @@ class Quests implements Saveable {
     });
     public questSlots: KnockoutComputed<number> = ko.pureComputed((): number => {
         // Minimum of 1, Maximum of 4
-        return Math.min(4, Math.max(1, Math.floor((this.level() + 5) / 5)));
+        return Math.min(GameConstants.MAX_QUEST_SLOTS, Math.max(1, Math.floor((this.level() + 5) / 5)));
     });
 
     // Get current quests by status
@@ -112,7 +112,7 @@ class Quests implements Saveable {
         if (quest && quest.isCompleted() && !quest.claimed()) {
             quest.claim();
             if (player.highestRegion() >= GameConstants.Region.kalos && App.game.party.alreadyCaughtPokemonByName('Medicham') && !player.hasMegaStone(GameConstants.MegaStoneType.Medichamite)) {
-                if (Rand.chance(Math.max(0, (App.game.quests.level() - 15) / 8192))) {
+                if (Rand.chance(Math.max(0, (App.game.quests.level() - 15) / 4096))) {
                     player.gainMegaStone(GameConstants.MegaStoneType.Medichamite);
                 }
             }

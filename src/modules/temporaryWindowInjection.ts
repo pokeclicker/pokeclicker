@@ -18,6 +18,7 @@ import CaughtStatus from './enums/CaughtStatus';
 import ContestType from './enums/ContestType';
 import ContestRank from './enums/ContestRank';
 import ContestOpponentStatus from './enums/ContestOpponentStatus';
+import Direction from './enums/Direction';
 import EvolutionType from './enums/EvolutionType';
 import FarmNotificationType from './enums/FarmNotificationType';
 import FlavorType from './enums/FlavorType';
@@ -119,7 +120,6 @@ import CustomRequirement from './requirements/CustomRequirement';
 import DefeatedRequirement from './requirements/DefeatedRequirement';
 import DevelopmentRequirement from './requirements/DevelopmentRequirement';
 import DiamondRequirement from './requirements/DiamondRequirement';
-import Direction from './enums/Direction';
 import FarmHandRequirement from './requirements/FarmHandRequirement';
 import FarmPlotsUnlockedRequirement from './requirements/FarmPlotsUnlockedRequirement';
 import FarmPointsRequirement from './requirements/FarmPointsRequirement';
@@ -271,6 +271,7 @@ Object.assign(<any>window, {
     ContestType,
     ContestRank,
     ContestOpponentStatus,
+    Direction,
     FarmNotificationType,
     FlavorType,
     ItemType,
@@ -378,7 +379,6 @@ Object.assign(<any>window, {
     DefeatedRequirement,
     DevelopmentRequirement,
     DiamondRequirement,
-    Direction,
     FarmHandRequirement,
     FarmPlotsUnlockedRequirement,
     FarmPointsRequirement,

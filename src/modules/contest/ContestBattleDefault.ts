@@ -48,10 +48,6 @@ export default class ContestBattleDefault {
         return;
     }
 
-    public static enemyTypes(index: number) {
-        return ContestBattle.pokemons()[index].contestTypes;
-    }
-
     public static contestHealth(pokemon: ContestBattlePokemon) {
         const oppStatus = pokemon.status();
         if (oppStatus === ContestOpponentStatus.Jammed) {

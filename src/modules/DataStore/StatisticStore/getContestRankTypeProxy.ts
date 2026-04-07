@@ -4,7 +4,7 @@ import ContestRank from '../../enums/ContestRank';
 
 const failedSetValue = () => 0;
 
-// This is all copied from getRouteKillsProxy. Notes have been modified for Ranks and Types
+// This is all copied from getRouteKillsProxy, notes included. Routes have been swapped for Types, Regions for Ranks
 // TODO: Determine what the return type is
 export default (): any => {
     // Filter the Rank enum to only the string values (names)

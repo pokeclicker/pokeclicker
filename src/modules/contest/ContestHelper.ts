@@ -233,26 +233,6 @@ export default class ContestHelper {
         return [new ContestWonRequirement(1, rank - 1, type)];
     }
 
-    public static getRankInfo(rank: ContestRank) {
-        switch (rank) {
-            case ContestRank.Normal:
-            case ContestRank.Super:
-            case ContestRank.Hyper:
-            case ContestRank.Master:
-                return 'Hoenn';
-            case ContestRank.Practice:
-            case ContestRank['Super Normal']:
-            case ContestRank['Super Great']:
-            case ContestRank['Super Ultra']:
-            case ContestRank['Super Master']:
-                return 'Sinnoh';
-            case ContestRank.Spectacular:
-                return 'Spectacular';
-            case ContestRank['Brilliant Shining']:
-                return 'BrilliantShining';
-        }
-    }
-
     // Emojis
     public static getContestEmoji(type?: ContestType) {
         switch (type) {
@@ -287,7 +267,19 @@ export default class ContestHelper {
     }
 
     // HTML
-    // Contest modal
+    // Contest modals
+    public static scaleTextHorizontal() {
+        let els = document.getElementsByClassName('scaled-text') as HTMLCollectionOf<HTMLElement>;
+        for (let el of Array.from(els)) {
+            let xScale = el.clientWidth / el.scrollWidth;
+            if (xScale < 1) { 
+                el.style.transform = 'scaleX(' + xScale + ')';
+            } else {
+                el.style.transform = 'scaleX(1)';
+            }
+        }
+    }
+
     public static cycleThroughRanks(ranks: ContestRank[], selectedRank: ContestRank, cycleForwards = true) {
         if (!ranks.includes(selectedRank)) {
             throw new Error('The rank being used is not included in the given array');
@@ -321,6 +313,26 @@ export default class ContestHelper {
         //     tooltipString += `<div>${ContestType[type]}</div>`;
         // }
         return tooltipString;
+    }
+
+    public static getRankInfo(rank: ContestRank) {
+        switch (rank) {
+            case ContestRank.Normal:
+            case ContestRank.Super:
+            case ContestRank.Hyper:
+            case ContestRank.Master:
+                return 'Hoenn';
+            case ContestRank.Practice:
+            case ContestRank['Super Normal']:
+            case ContestRank['Super Great']:
+            case ContestRank['Super Ultra']:
+            case ContestRank['Super Master']:
+                return 'Sinnoh';
+            case ContestRank.Spectacular:
+                return 'Spectacular';
+            case ContestRank['Brilliant Shining']:
+                return 'BrilliantShining';
+        }
     }
 
     // Ribbons

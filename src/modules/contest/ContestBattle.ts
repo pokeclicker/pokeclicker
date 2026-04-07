@@ -72,6 +72,8 @@ export default class ContestBattle extends Battle {
     public static itemRewardLog: KnockoutObservableArray<ContestItemReward> = ko.observableArray(null);
 
     public static tick() {
+        ContestHelper.scaleTextHorizontal();
+
         // Info tab has separate beat cycle
         if (GameHelper.counter % 500 === 0) {
             if (ContestBattle.infoBeat() >= 2) {
@@ -85,7 +87,7 @@ export default class ContestBattle extends Battle {
         }
 
         if (ContestBattle.prepareNextTrainerBatch()) {
-            // Give some time to process results
+            // Give some time for players to process results
             const now = Date.now();
             if (now - 500 >= ContestBattle.lastTrainerRoll) {
                 // Assess batch completion
@@ -162,20 +164,23 @@ export default class ContestBattle extends Battle {
      */
     public static generateNewEnemy() {
         // Determine opponents on field
-        const opponentAmount = !ContestHelper.isDanceHall(ContestRunner.rank()) ? Math.min(ContestRunner.rank(), 5) : Math.max(4, ContestRunner.rank() - 5);
+        const opponentAmount =  Math.min(ContestRunner.rank(), 5);
         // Shuffle trainers
-        const opponents = Rand.shuffleArray(ContestBattle.getTrainerList().filter(t => !ContestBattle.trainers().some(tr => tr === t)));
+        const opponents = Rand.shuffleArray(ContestBattle.getTrainerList()).filter(t => !ContestBattle.trainers().includes(t)).slice(0, opponentAmount);
         // Create observable arrays
-        // Because some trainers have multiple mons, we track trainers in their own array, so we can refer to it for their next pokemon
-        ContestBattle.trainers(new Array(opponentAmount).fill(null).map((_, i) => opponents[i] as ContestTrainer));
+        // Because some trainers have multiple mons, we track trainers in a separate array from their pokemon...
+        ContestBattle.trainers(opponents);
+        // ...and use a party index number to determine which pokemon they've sent out
         ContestBattle.trainersPartyIndex(new Array(opponentAmount).fill(0));
+        // We can then use the trainer array to generate Contest Pokemon, aka - send out their first pokemon!
+        ContestBattle.pokemons(opponents.map(t => PokemonFactory.generateContestTrainerPokemon(t, 0)));
+        // For scoring, each opponent has an equivalent array that stores the total contest moves used from their party
         ContestBattle.moveArray(new Array(opponentAmount).fill([]));
+        // Dancing bonus
         ContestBattle.finishingPose(new Array(opponentAmount).fill(undefined));
-        // Use trainer array to generate Contest Pokemon, aka - send out their first pokemon!
-        ContestBattle.pokemons(new Array(opponentAmount).fill(null).map((_, i) => PokemonFactory.generateContestTrainerPokemon(ContestBattle.trainers()[i], 0)));
     }
 
-    public static getTrainerList() {
+    public static getTrainerList(): ContestTrainer[] {
         return ContestTrainerList.ContestOpponents[ContestRunner.rank()].concat(ContestTrainerList.SpecialEventContestOpponents).filter(trainer => {
             return (trainer.options?.requirement) ? trainer.options.requirement.isCompleted() : true;
         });
@@ -194,10 +199,10 @@ export default class ContestBattle extends Battle {
             ContestBattle.pokemonAppeal();
 
             // Eggs and stuff
-            // uncomment when module is imported
+            // uncomment when doable
             // PokemonHelper.incrementPokemonStatistics(opponent.id, PokemonStatisticsType.Defeated, opponent.shiny, opponent.gender, opponent.shadow);
             App.game.party.gainExp(30 + 10 * ContestRunner.rank(), 15 + Math.round(ContestScore.activeChain()), ContestRunner.frenzyMode());
-            App.game.breeding.progressEggsBattle(Battle.route, player.region); // double check what this does
+            App.game.breeding.progressEggsBattle(Battle.route, player.region);
             player.lowerItemMultipliers(MultiplierDecreaser.Battle);
 
             // Score
@@ -253,7 +258,7 @@ export default class ContestBattle extends Battle {
     }
 
     public static rallyPokemon(index: number) {
-        ContestBattle.pokemons()[index].rally(ContestBattle.pokemons()[ContestBattle.selectedEnemy()].maxHealth());
+        ContestBattle.pokemons()[index].rally(ContestBattle.pokemons()[ContestBattle.selectedEnemy()].maxRapport());
         ContestBattle.pokemons()[index].status(ContestOpponentStatus.Appealed);
         return;
     }
@@ -339,6 +344,7 @@ export default class ContestBattle extends Battle {
             case (ContestRank.Spectacular):
                 ContestBattleSpectacular.contestAction();
                 break;
+            case ContestRank['Brilliant Shining']:
             default:
                 break;
         }
@@ -377,7 +383,7 @@ export default class ContestBattle extends Battle {
         let contestsCleared = 0;
         GameHelper.enumNumbers(ContestRank).forEach(r =>
             GameHelper.enumNumbers(ContestType).forEach(ct => {
-                contestsCleared += (Math.min(1, App.game.statistics.contestHighestRound[r][ct]() ?? 0) * (ct != ContestType.Balanced ? 1 : 2.5));
+                contestsCleared += (Math.min(1, App.game.statistics.contestsWon[r][ct]() ?? 0) * (ct != ContestType.Balanced ? 1 : 2.5));
             }),
         );
         return Math.floor(contestsCleared);
@@ -585,6 +591,7 @@ export default class ContestBattle extends Battle {
         return 'contestBeatTemplate';
     }
 
+    // Info HTML
     public static getBattleViewTitle() {
         const heart = ContestHelper.getContestEmoji(ContestRunner.type());
         let emoji = '🤍';

@@ -18,6 +18,7 @@ export type GenericTraderShopIdentifier =
     'FossilNacreneMuseum' |
     'FossilAmbretteFossilLab' |
     'FossilMasterGalarRoute6' |
+    'ScentTrader' |
     'ContestCosplayShop' |
     'ContestCosplayShopPikachu';
 
@@ -430,6 +431,20 @@ export default class GenericDeal {
             }),
         ]);
 
+        
+        GenericDeal.list.ScentTrader = ko.observableArray([
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Joy_Scent, amount: 12 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Excite_Scent, amount: 1 }],
+                tradeButtonOverride: 'Refine',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Excite_Scent, amount: 12 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Vivid_Scent, amount: 1 }],
+                tradeButtonOverride: 'Refine',
+            }),
+        ]);
+
         GenericDeal.list.ContestCosplayShop = ko.observableArray([
             new GenericDeal({
                 costs: [
@@ -486,6 +501,7 @@ export default class GenericDeal {
                 tradeRequirement: new ObtainedPokemonRequirement('Weepinbell'),
             }),
         ]);
+
         GenericDeal.list.ContestCosplayShopPikachu = ko.observableArray([
             new GenericDeal({
                 costs: [
@@ -531,7 +547,6 @@ export default class GenericDeal {
                 ],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Pikachu (Libre)'], amount: 1 }],
                 tradeRequirement: new MaxRegionRequirement(Region.kalos),
-            }),
         ]);
     }
 }

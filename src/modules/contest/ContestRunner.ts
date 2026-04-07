@@ -40,7 +40,7 @@ export default class ContestRunner {
     public static contestTypeObservable: KnockoutObservableArray<ContestType> = ko.observableArray([0, 1, 2, 3, 4]);
     public static contestRankObservable: KnockoutObservableArray<ContestRank> = ko.observableArray([1]);
 
-    // Start, End, Restart
+    // Start, End
     public static startContest() {
         if (!ContestHelper.contestIsUnlocked(ContestRunner.rank(), ContestRunner.type())) {
             Notifier.notify({
@@ -151,7 +151,7 @@ export default class ContestRunner {
      * @param rally - by how much to increase the audience bar by
      */
     public static rally(rally: number): void {
-        // expand audience bar after last rally has been calculated so players have time to process completion status
+        // expand max width of audience bar after last rally has been calculated so players have time to process completion status
         const baseHP = ContestHelper.getBaseAudienceHP(ContestRunner.rank());
         let alreadyRallied = false;
         if (ContestRunner.isRallied()) {
@@ -200,18 +200,18 @@ export default class ContestRunner {
             if (ContestRunner.encoreRound() > 0) {
                 ContestBattle.addContestTokenReward(ContestRunner.contestScoreTokens(), true);
 
-                // First time completion - end here and don't proceed to encore bonus rounds
-                if (App.game.statistics.contestHighestRound[this.rank()][this.type()]() == 0) {
+                // First time completion
+                if (App.game.statistics.contestsWon[this.rank()][this.type()]() == 0) {
                     $('#contestWonModal').modal('show');
                 }
 
                 // Update statistics
-                GameHelper.incrementObservable(App.game.statistics.contestHighestRound[ContestRunner.rank()][ContestRunner.type()]);
+                GameHelper.incrementObservable(App.game.statistics.contestsWon[ContestRunner.rank()][ContestRunner.type()]);
             }
         }
     }
-    
-    // Computables
+
+    // HTML Computables
     // eslint-disable-next-line @typescript-eslint/member-ordering
     public static audienceAppealPercentage: PureComputed<number> = ko.pureComputed(() => {
         return Math.floor(ContestRunner.audienceAppeal() / ContestRunner.maxAudienceAppeal() * 100);
@@ -236,7 +236,7 @@ export default class ContestRunner {
             return appeal.repeat(hypePoints).concat(appealLeft.repeat(5 - hypePoints));
         }
 
-        // Jamming is specific to Hoenn contests and prevents riling up the crowd for its duration, so we turn the emojis into a timer
+        // Jamming is specific to Hoenn contests and prevents crowd hype for its duration, so we turn the emojis into a timer
         const jam = '🖤';
         const jamTickInterval = ContestBattle.totalJamTime() / 5;
         return jam.repeat(Math.ceil(ContestRunner.jamTime() / jamTickInterval)).concat(Math.ceil(ContestRunner.jamTime() / jamTickInterval) === 5 ? '' : '🩶').concat(appealLeft.repeat(Math.max(4 - Math.ceil(ContestRunner.jamTime() / jamTickInterval), 0)));

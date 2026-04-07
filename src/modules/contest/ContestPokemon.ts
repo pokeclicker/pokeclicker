@@ -13,15 +13,15 @@ export default class ContestPokemon extends GymPokemon {
     constructor(
         name: PokemonNameType,
         nickname: string,
-        maxHealth = 5,
-        level = 10, // calculated by rank but still needed for GymPokemon
         contestTypes?: ContestType[],
         moves?: ContestType[],
         requirements?: Requirement | Requirement[],
         gender?: BattlePokemonGender, // only for visual differences, keeps the pokemon sprites consistent
         shiny = false, // also keep sprites consistent
+        maxRapport = 5, // hardcoded at 5 for health bar UI
+        level = 10, // not used but still needed for GymPokemon, exp gain is calculated through gameplay instead of level
     ) {
-        super(name, maxHealth, level, requirements, shiny);
+        super(name, maxRapport, level, requirements, shiny);
         this.nickname = nickname;
         this.contestTypes = contestTypes;
         this.moves = moves;

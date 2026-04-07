@@ -234,7 +234,7 @@ class PokemonFactory {
     }
 
     public static generateContestTrainerPokemon(trainer: ContestTrainer, partyIndex: number): ContestBattlePokemon {
-        const pokemon = trainer.getTeam()[partyIndex] as ContestPokemon;
+        const pokemon = trainer.getTeam()[partyIndex];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
         const nickname = pokemon.nickname;
         const contestTypes = pokemon.contestTypes ?? basePokemon.contestTypes;
@@ -249,9 +249,9 @@ class PokemonFactory {
         if (dance.length > 5) {
             dance = dance.slice(dance.length - 5);
         }
-        const moves = pokemon.moves ?? Rand.shuffleArray(contestTypes.concat(contestTypes).concat(contestTypes).concat(contestTypes)).slice(0,4);
+        const moves = pokemon.moves ?? Rand.shuffleArray(contestTypes.concat(contestTypes).concat(contestTypes).concat(contestTypes)).slice(0, 4);
         const shiny = pokemon.shiny ?? false;
-        const exp: number = pokemon.level; // standardize exp gain by rank
+        const exp: number = pokemon.level;
         const catchRate = 0;
         const money = new Amount(1, GameConstants.Currency.contestToken);
         const shadow = GameConstants.ShadowStatus.None;
@@ -415,14 +415,15 @@ class PokemonFactory {
         berry.wander.forEach((p, i) => {
             if (pokemonMap[p].nativeRegion <= player.highestRegion()) {
                 availablePokemon.push(p);
-                weights.push(mulch === MulchType.Gooey_Mulch && i >= Berry.baseWander.length ? 2 : 1);
+                weights.push(mulch === MulchType.Gooey_Mulch && i >= Berry.baseWander.length ? 3 : 1);
             }
         });
         const pokemon = Rand.fromWeightedArray(availablePokemon, weights);
         const pokemonData = pokemonMap[pokemon];
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);
         const catchChance = PokemonFactory.catchRateHelper(pokemonData.catchRate + 25, true);
-        const wanderer = new WandererPokemon(pokemon, berry.type, catchChance, shiny);
+        const gender = PokemonFactory.generateGenderById(pokemonData.id);
+        const wanderer = new WandererPokemon(pokemon, berry.type, catchChance, gender, shiny);
         return wanderer;
     }
 }

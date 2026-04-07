@@ -37,7 +37,7 @@ class ContestHall extends TownContent {
     }
     public areaStatus(): areaStatus[] {
         const states = [];
-        if (!this.rank.every(r => this.type.every(t => App.game.statistics.contestHighestRound[r][t]()))) {
+        if (!this.rank.every(r => this.type.every(t => App.game.statistics.contestsWon[r][t]()))) {
             states.push(areaStatus.incomplete);
         }
         return states;

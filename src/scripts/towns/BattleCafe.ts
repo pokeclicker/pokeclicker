@@ -96,8 +96,9 @@ class BattleCafeController {
     private static unlockAlcremie(clockwise: boolean, spinTime: number, sweet: GameConstants.AlcremieSweet): PokemonItem {
         let spin: GameConstants.AlcremieSpins;
         if (spinTime == 3600) {
-            (new PokemonItem('Milcery (Cheesy)', 0)).gain(1);
-            return;
+            const cheese = new PokemonItem('Milcery (Cheesy)');
+            cheese.gain(1);
+            return cheese;
         }
         if (DayCycle.currentDayCyclePart() === DayCyclePart.Dusk && !clockwise && spinTime > 10) {
             spin = GameConstants.AlcremieSpins.at5Above10;

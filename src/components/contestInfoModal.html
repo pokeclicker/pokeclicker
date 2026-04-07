@@ -5,218 +5,216 @@ style="cursor:default">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 data-bind="text: 'Contest Info - ' +  ContestHelper.getRankInfo(ContestRunner.contestRankObservable()[0]) +
-                `${ContestRunner.contestRankObservable()[0] < ContestRank.Spectacular ?  ' Ranks' :  ' Rank'}`">Contest Info</h4>
+                <h4 data-bind="text: 'Contest Info - ' +  ContestHelper.getRankInfo(ContestRunner.contestRankObservable()[0]) + ' Hall'">Contest Info</h4>
                 <button type="button" class="btn btn-danger" data-dismiss="modal" style="right:0; top:0; font-size: 18px; font-weight: 700;">×</button>
             </div>
 
-    <div class="modal-header p-0" style='justify-content: space-around;'>
-        <ul class="nav nav-tabs nav-fill w-100">
-            <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#contestInfo">Gameplay</a></li>
-            <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#contestTrainersAndRewards">Trainers & Rewards</a></li>
-        </ul>
-    </div>
-
-    <div id="contestInformation" class="modal-body sortable-disabled border-secondary mb-3 contest-hall no-select tab-content p-0">
-
-    <div id="contestTrainersAndRewards" class="modal-body tab-pane fade">
-
-        <div class="mb-3" data-bind="foreach: { data: ContestRunner.contestTypeObservable(), as: 'type' }">
-            <button class="btn btn-info"
-                data-bind="click: () => {
-                    if (!ContestRunner.running()) {
-                    ContestRunner.type(type);
-                    } else {
-                    Notifier.notify({
-                        title: 'Pokémon Contest',
-                        message: 'You can\'t change the contest type while you are competing!',
-                        type: NotificationConstants.NotificationOption.warning,
-                    })
-                    };
-                },
-                text: ContestType[type],
-                css: {
-                    active: ContestRunner.type() == type,
-                },
-                attr:{'aria-label': `${ContestType[type]}`}
-                ">
-            </button>
-        </div>
-        <div class="mb-3" data-bind="visible: ContestRunner.contestRankObservable().length > 1,
-            foreach: { data: ContestRunner.contestRankObservable().filter(r => r != ContestRank.Practice), as: 'rank' }">
-            <button class="btn btn-info"
-                data-bind="click: () => {
-                    if (!ContestRunner.running()) {
-                    ContestRunner.rank(rank);
-                    } else {
-                    Notifier.notify({
-                        title: 'Pokémon Contest',
-                        message: 'You can\'t change the contest rank while you are competing!',
-                        type: NotificationConstants.NotificationOption.warning,
-                    })
-                    };
-                },
-                text: ContestRank[rank],
-                css: {
-                    active: ContestRunner.rank() == rank,
-                },
-                attr:{'aria-label': `${ContestRank[rank]}`}
-                ">
-            </button>
-        </div>
-
-        <div class="p-0 modal-body">
-            <div class="justify-content-center" style="overflow-x:hidden; height:500px">
-        <table class="table table-striped table-hover table-sm show" style="justify-content: space-evenly;">
-            <thead class="sticky-top bg-secondary">
-                <tr>
-                    <th colspan="100%" class="p-0"><h4 class="my-1" data-bind="text: `${ContestRank[ContestRunner.rank()]} Rank Frenzy Rewards`">Rewards</h4></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="m-0">
-                    <td>Weight</td>
-                    <td>Berry</td>
-                </tr>
-                <!-- ko let: { berryRank: ContestRunner.rank() < ContestRank.Spectacular ? Math.max(0, ContestRunner.rank() - 1) % 4 + 1 : ContestRunner.rank() } -->
-                <!-- ko foreach: Array.from(new Set([...Object.entries(ContestRewards.berryRewards).filter(r => r[0] <= berryRank).flatMap(b => b[1]).flatMap(b => b.weight)].sort().reverse())) -->
-                <tr class="m-0">
-                    <td data-bind="text: $data"></td>
-                    <td data-bind="foreach: Object.entries(ContestRewards.berryRewards).filter(r => r[0] <= berryRank).flatMap(b=>b[1]).filter(b => b.weight === $data)">
-                        <img style="max-width: 24px;" data-bind="attr: {src: FarmController.getBerryImage($data.berry)},
-                        css: {
-                            'contest-inactive': ($data.requirement && !$data.requirement?.isCompleted()),
-                            'pokemon-not-seen': !(new BerryUnlockedRequirement($data.berry).isCompleted()),
-                        }">
-                    </td>
-                </tr>
-                <!-- /ko -->
-                <!-- /ko -->
-            </tbody>
-            <!-- ko let: { itemReward: ContestRewards.itemRewards().filter(i => i.displayRequirement?.isCompleted() ?? i.requirement?.isCompleted() ?? true) } -->
-            <!-- ko if: itemReward.length > 0 -->
-            <tbody>
-                <tr>
-                    <td>Chance</td>
-                    <td>Item</td>
-                </tr>
-                <!-- ko foreach: Array.from(new Set([...ContestRewards.itemRewards().filter(i => i.displayRequirement?.isCompleted() ?? i.requirement?.isCompleted() ?? true).flatMap(b => b.chance)].sort())) -->
-                <tr class="m-0">
-                    <td>
-                        <!-- ko if: $data -->
-                        <span data-bind="text: `1 / ${$data}`"></span>
-                        <!-- /ko -->
-                        <!-- ko if: $data === undefined -->
-                        <span>Guaranteed</span>
-                        <!-- /ko -->
-                    </td>
-                    <td>
-                        <!-- ko foreach: itemReward.filter(i => i.chance === $data) -->
-                        <img style="max-width: 24px;" data-bind="attr: {src: ItemList[$data.item].image}, css: {'contest-inactive': $data.requirement && !$data.requirement?.isCompleted()}">
-                        <!-- /ko -->
-                    </td>
-                </tr>
-                <!-- /ko -->
-            </tbody>
-            <!-- /ko -->
-            <!-- /ko -->
-        </table>
-            <div data-bind="foreach: { data: [ContestRunner.rank()], as: 'rank' }">
-                <div data-bind="template: {name: 'trainerInfoTable', data: ContestTrainerList.ContestOpponents[rank]}"></div>
+            <div class="modal-header p-0" style='justify-content: space-around;'>
+                <ul class="nav nav-tabs nav-fill w-100">
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#contestInfo">Gameplay</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#contestTrainersAndRewards">Trainers & Rewards</a></li>
+                </ul>
             </div>
-            <!-- ko if: ContestTrainerList.SpecialEventContestOpponents.some(trainer => trainer.options.requirement.isCompleted()) -->
-            <div class="justify-content-center mt-2">
-                <div data-bind="template: {name: 'trainerInfoTable', data: ContestTrainerList.SpecialEventContestOpponents.filter(trainer => trainer.options.requirement.isCompleted())}"></div>
-            </div>
-            <!-- /ko -->
-        </div>
-        </div>
-    </div>
 
-    <div id="contestInfo" class="tab-content tab-pane fade in active show modal-body text-center p-0">
-        <div class="modal-header p-0" style='justify-content: space-around;'>
-            <ul class="nav nav-tabs nav-fill w-100">
-                <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#contestInfoGen">General</a></li>
-                <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#contestInfoRank">Rank Gameplay</a></li>
-                <li class="nav-item"><a data-toggle='tab' class="nav-link" href="#contestInfoType">Contest Types</a></li>
-            </ul>
-        </div>
-        <div id="contestInfoGen" class="modal-body tab-pane fade in active show">
-            <h4><u>Audience Bar</u>></h4>
+            <div id="contestInformation" class="modal-body sortable-disabled border-secondary mb-3 no-select tab-content p-0">
 
-            <p>Successfully perform actions to increase the large bottom bar. The rate it increases by
-                will be calculated from the sum of your party's Appeal, but for testing purposes you can change it at will.
-                Max it out at least one time to win a contest and be awarded with a ribbon and contest tokens.
-            </p>
+                <div id="contestInfo" class="tab-content tab-pane fade in active show modal-body text-center p-0">
+                    <div class="modal-header p-0" style='justify-content: space-around;'>
+                        <ul class="nav nav-tabs nav-fill w-100">
+                            <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#contestInfoGen">General</a></li>
+                            <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#contestInfoRank"
+                                data-bind="text: ContestHelper.getRankInfo(ContestRunner.contestRankObservable()[0]) + ' Rank Gameplay'">Rank Gameplay</a>
+                            </li>
+                            <li class="nav-item"><a data-toggle='tab' class="nav-link" href="#contestInfoType">Contest Types</a></li>
+                        </ul>
+                    </div>
+                    <div id="contestInfoGen" class="modal-body tab-pane fade in active show">
+                        <h4><u>Audience Bar</u>></h4>
 
-            <p>The audience will call for an encore when you max out the bar. This slightly increases the audience bar. Encores act as point multipliers.</p>
+                        <p>Successfully perform actions to increase the large bottom bar. The rate it increases by
+                            will be calculated from the sum of your party's Appeal, but for testing purposes you can change it at will.
+                            Max it out at least one time to win a contest and be awarded with a ribbon and contest tokens.
+                        </p>
 
-            <h4><u>Gameplay gimmicks</u>></h4>
-            <p>The bars underneath the individual pokemon change depending on their status. Successfully performing an action makes the pokemon appeal to the audience (💖). If the action results in a failure, the pokemon is jammed (🖤).
-                There are three gameplay styles. Click on the "Rank Gameplay" tab for more information on this Hall's game style.</p>
+                        <p>The audience will call for an encore when you max out the bar. This slightly increases the audience bar. Encores act as point multipliers.</p>
 
-            <h4><u>Crowd Hype and Frenzy Mode</u>></h4>
-            <p>When all pokemon on stage have performed, their statuses are evaluated to generate Crowd Hype. A fully hyped crowd will induce Frenzy Mode. Hype will not go up if a Pokemon is jammed.</p>
-            <p>In Hoenn, jamming prevents Crowd Hype from being generated and reduces the amount of audience Appeal that is produced for a short while.</p>
-            <p>In Sinnoh, jammed Pokemon decrease the hype bar by 1 with no extra effects.</p>
+                        <h4><u>Gameplay gimmicks</u>></h4>
+                        <p>The bars underneath the individual pokemon change depending on their status. Successfully performing an action makes the pokemon appeal to the audience (💖). If the action results in a failure, the pokemon is jammed (🖤).
+                            There are three gameplay styles. Click on the "Rank Gameplay" tab for more information on this Hall's game style.</p>
 
-            <p>Gameplay is slightly altered during Frenzy Mode and chains cannot be broken for its duration. Your audience appeal dealt will also be buffed based on how many contests you've won.</p>
-            <p>Extra points and rewards can be rewarded during Frenzy Mode.</p>
+                        <h4><u>Crowd Hype and Frenzy Mode</u>></h4>
+                        <p>When all pokemon on stage have performed, their statuses are evaluated to generate Crowd Hype. A fully hyped crowd will induce Frenzy Mode. Hype will not go up if a Pokemon is jammed.</p>
+                        <p>In Hoenn, jamming prevents Crowd Hype from being generated and reduces the amount of audience Appeal that is produced for a short while.</p>
+                        <p>In Sinnoh, jammed Pokemon decrease the hype bar by 1 with no extra effects.</p>
 
-            <h4><u>Scoring</u>></h4>
-            <p>Successful actions increase the chain, add to your score, and can give a small bonus dealt audience appeal. Chains are broken when a poor action is performed.</p>
-            <p>The higher your score the more tokens you get upon completion.</p>
+                        <p>Gameplay is slightly altered during Frenzy Mode and chains cannot be broken for its duration. Your audience appeal dealt will also be buffed based on how many contests you've won.</p>
+                        <p>Extra points and rewards can be rewarded during Frenzy Mode.</p>
 
-        </div>
-        <div id="contestInfoType" class="modal-body tab-pane fade">
-            <h4>Contest types and matchups</h4>
-            <p>Different Contest Types (also known as Contest Conditions) make up the different contests.
-                <!-- The Audience Appeal of each Pokemon is affected by its types and what contest you partake in. -->
-                Gameplay mechanics within contests use these matchups as a basis for their effects, which are explained in further detail in the "Rank Gameplay" tab.
-            </p>
-            <!-- <p>Contest matchups are additive and cap at ×1, meaning a Pokemon with a Cool and Cute Contest type has the same effectiveness in a Beautiful contest as a Pokemon that has a Beautiful type.</p> -->
-            <table class="table table-bordered table-striped" data-bind="with: GameHelper.enumNumbers(ContestType)">
-                <thead><tr><th colspan="8">Contest Type Effectiveness</th></tr></thead>
-                <tr>
-                    <td></td>
-                    <td colspan="7">Defending Type</td>
-                </tr>
-                <tr>
-                    <td rowspan="8" class="text-center" style="width: 1px; vertical-align: middle;">
-                        <div class="d-flex align-items-center justify-content-center">
-                            <span style="writing-mode: sideways-lr;">Attacking Type</span>
+                        <h4><u>Scoring</u>></h4>
+                        <p>Successful actions increase the chain, add to your score, and can give a small bonus dealt audience appeal. Chains are broken when a poor action is performed.</p>
+                        <p>The higher your score the more tokens you get upon completion.</p>
+                    </div>
+                    <div id="contestInfoType" class="modal-body tab-pane fade">
+                        <h4>Contest matchups</h4>
+                        <p>Contests use 6 different Contest Conditions (Types) instead of the regular Pokémon Types. Contest matchups are additive and only deal zero, half, or full effectiveness.</p>
+                        <table class="table table-bordered table-striped" data-bind="with: GameHelper.enumNumbers(ContestType)">
+                            <thead><tr><th colspan="8">Contest Type Effectiveness</th></tr></thead>
+                            <tr>
+                                <td></td>
+                                <td colspan="7">Defending Type</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="8" class="text-center" style="width: 1px; vertical-align: middle;">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <span style="writing-mode: sideways-lr;">Attacking Type</span>
+                                    </div>
+                                </td>
+                                <td></td>
+                                <!-- ko foreach: $data -->
+                                <td data-bind="text: ContestType[$data]"></td>
+                                <!-- /ko -->
+                            </tr>
+                            <!-- ko foreach: $data -->
+                            <tr>
+                                <td data-bind="text: ContestType[$data]"></td>
+                                <!-- ko foreach: ContestTypeHelper.contestTypeMatrix[$data] -->
+                                <td data-bind="text: $data"></td>
+                                <!-- /ko -->
+                            </tr>
+                            <!-- /ko -->
+                        </table>
+                    </div>
+                    <div id="contestInfoRank" class="modal-body tab-pane fade tab-content">
+                        <div data-bind="template: {name: 'rankInfo' + ContestHelper.getRankInfo(ContestRunner.contestRankObservable()[0])}"></div>
+                    </div>
+                </div>
+
+                <div id="contestTrainersAndRewards" class="modal-body tab-pane fade">
+
+                    <div class="mb-3" data-bind="foreach: { data: ContestRunner.contestTypeObservable(), as: 'type' }">
+                        <button class="btn btn-info"
+                            data-bind="click: () => {
+                                if (!ContestRunner.running()) {
+                                ContestRunner.type(type);
+                                } else {
+                                Notifier.notify({
+                                    title: 'Pokémon Contest',
+                                    message: 'You can\'t change the contest type while you are competing!',
+                                    type: NotificationConstants.NotificationOption.warning,
+                                })
+                                };
+                            },
+                            text: ContestType[type],
+                            css: {
+                                active: ContestRunner.type() == type,
+                            },
+                            attr:{'aria-label': `${ContestType[type]}`}
+                            ">
+                        </button>
+                    </div>
+                    <div class="mb-3" data-bind="visible: ContestRunner.contestRankObservable().length > 1,
+                        foreach: { data: ContestRunner.contestRankObservable().filter(r => r != ContestRank.Practice), as: 'rank' }">
+                        <button class="btn btn-info"
+                            data-bind="click: () => {
+                                if (!ContestRunner.running()) {
+                                ContestRunner.rank(rank);
+                                } else {
+                                Notifier.notify({
+                                    title: 'Pokémon Contest',
+                                    message: 'You can\'t change the contest rank while you are competing!',
+                                    type: NotificationConstants.NotificationOption.warning,
+                                })
+                                };
+                            },
+                            text: ContestRank[rank],
+                            css: {
+                                active: ContestRunner.rank() == rank,
+                            },
+                            attr:{'aria-label': `${ContestRank[rank]}`}
+                            ">
+                        </button>
+                    </div>
+
+                    <div class="p-0 modal-body">
+                        <div class="justify-content-center" style="overflow-x: hidden; height: 500px;">
+                            <table class="table table-striped table-hover table-sm show" style="justify-content: space-evenly;">
+                                <thead class="sticky-top bg-secondary">
+                                    <tr>
+                                        <th colspan="100%" class="p-0"><h4 class="my-1" data-bind="text: `${ContestRank[ContestRunner.rank()]} Rank Frenzy Rewards`">Rewards</h4></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="m-0">
+                                        <td>Weight</td>
+                                        <td>Berry</td>
+                                    </tr>
+                                    <!-- ko let: { berryRank: ContestRunner.rank() < ContestRank.Spectacular ? Math.max(0, ContestRunner.rank() - 1) % 4 + 1 : ContestRunner.rank() } -->
+                                    <!-- ko foreach: Array.from(new Set([...Object.entries(ContestRewards.berryRewards).filter(r => r[0] <= berryRank).flatMap(b => b[1]).flatMap(b => b.weight)].sort().reverse())) -->
+                                    <tr class="m-0">
+                                        <td data-bind="text: $data"></td>
+                                        <td data-bind="foreach: Object.entries(ContestRewards.berryRewards).filter(r => r[0] <= berryRank).flatMap(b=>b[1]).filter(b => b.weight === $data)">
+                                            <img style="max-width: 24px;" data-bind="attr: {src: FarmController.getBerryImage($data.berry)},
+                                            css: {
+                                                'contest-inactive': ($data.requirement && !$data.requirement?.isCompleted()),
+                                                'pokemon-not-seen': !(new BerryUnlockedRequirement($data.berry).isCompleted()),
+                                            }">
+                                        </td>
+                                    </tr>
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </tbody>
+                                <!-- ko let: { itemReward: ContestRewards.itemRewards().filter(i => i.displayRequirement?.isCompleted() ?? i.requirement?.isCompleted() ?? true) } -->
+                                <!-- ko if: itemReward.length > 0 -->
+                                <tbody>
+                                    <tr>
+                                        <td>Chance</td>
+                                        <td>Item</td>
+                                    </tr>
+                                    <!-- ko foreach: Array.from(new Set([...ContestRewards.itemRewards().filter(i => i.displayRequirement?.isCompleted() ?? i.requirement?.isCompleted() ?? true).flatMap(b => b.chance)].sort())) -->
+                                    <tr class="m-0">
+                                        <td>
+                                            <!-- ko if: $data -->
+                                            <span data-bind="text: `1 / ${$data}`"></span>
+                                            <!-- /ko -->
+                                            <!-- ko if: $data === undefined -->
+                                            <span>Guaranteed</span>
+                                            <!-- /ko -->
+                                        </td>
+                                        <td>
+                                            <!-- ko foreach: itemReward.filter(i => i.chance === $data) -->
+                                            <img style="max-width: 24px;" data-bind="attr: {src: ItemList[$data.item].image}, css: {'contest-inactive': $data.requirement && !$data.requirement?.isCompleted()}">
+                                            <!-- /ko -->
+                                        </td>
+                                    </tr>
+                                    <!-- /ko -->
+                                </tbody>
+                                <!-- /ko -->
+                                <!-- /ko -->
+                            </table>
+                            <div data-bind="foreach: { data: [ContestRunner.rank()], as: 'rank' }">
+                                <div data-bind="template: {name: 'trainerInfoTable', data: ContestTrainerList.ContestOpponents[rank]}"></div>
+                            </div>
+                            <!-- ko if: ContestTrainerList.SpecialEventContestOpponents.some(trainer => trainer.options.requirement.isCompleted()) -->
+                            <div class="justify-content-center mt-2">
+                                <div data-bind="template: {name: 'trainerInfoTable', data: ContestTrainerList.SpecialEventContestOpponents.filter(trainer => trainer.options.requirement.isCompleted())}"></div>
+                            </div>
+                            <!-- /ko -->
                         </div>
-                    </td>
-                    <td></td>
-                    <!-- ko foreach: $data -->
-                    <td data-bind="text: ContestType[$data]"></td>
-                    <!-- /ko -->
-                </tr>
-                <!-- ko foreach: $data -->
-                <tr>
-                    <td data-bind="text: ContestType[$data]"></td>
-                    <!-- ko foreach: ContestTypeHelper.contestTypeMatrix[$data] -->
-                    <td data-bind="text: $data"></td>
-                    <!-- /ko -->
-                </tr>
-                <!-- /ko -->
-            </table>
-        </div>
-        <div id="contestInfoRank" class="modal-body tab-pane fade tab-content">
-            <div data-bind="template: {name: 'rankInfo' + ContestHelper.getRankInfo(ContestRunner.contestRankObservable()[0])}"></div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-
-</div>
-</div>
-</div>
 </div>
 
 <script type="text/html" id="trainerInfoTable">
-    <table class="table table-striped table-hover table-sm mb-1 p-0 show" style="justify-content: space-evenly;"">
+    <table class="table table-striped table-hover table-sm mb-1 p-0 show" style="justify-content: space-evenly;">
         <thead class="sticky-top bg-secondary">
             <tr>
-                <th colspan="100%" class="p-0"><h4 class="mt-1 p-0 mb-0" data-bind="text: `${ContestRank[$parent] != undefined ? `${ContestRank[$parent]} Rank` : 'Special Event'} Trainers`"></h4></th>
+                <th colspan="100%" class="p-0">
+                    <h4 class="mt-1 p-0 mb-0" data-bind="text: `${ContestRank[$parent] != undefined ? `${ContestRank[$parent]} Rank` : 'Special Event'} Trainers`"></h4>
+                </th>
             </tr>
             <tr>
                 <th colspan="2" class="pt-0">Trainer</th>
@@ -235,7 +233,7 @@ style="cursor:default">
                     <span data-bind="text: trainer.name"></span>
                 </td>
                 <td class="text-left" style="vertical-align: middle;">
-                    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center;">
+                    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
                     <!-- ko foreach: trainer.getTeam() -->
                         <img class="smallImage m-0" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data.name].id, $data.shiny ?? 0, $data.gender, 0) }, css: { 'pokemon-not-seen': trainer.options?.requirement && !trainer.options?.requirement?.isCompleted()}">
                         <span class="align-middle" data-bind="text: $data.nickname"></span>
