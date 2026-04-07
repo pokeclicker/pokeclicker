@@ -547,6 +547,7 @@ export default class GenericDeal {
                 ],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Pikachu (Libre)'], amount: 1 }],
                 tradeRequirement: new MaxRegionRequirement(Region.kalos),
+            }),
         ]);
     }
 }

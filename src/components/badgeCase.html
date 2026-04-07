@@ -79,7 +79,7 @@ aria-labelledby="badgeCaseModalLabel">
                                         width: rank < ContestRank.Spectacular ? '80px' : '',
                                     },
                                     css: {
-                                        'badge-not-acquired': App.game.statistics.contestHighestRound[rank][$data]() == 0,
+                                        'badge-not-acquired': App.game.statistics.contestsWon[rank][$data]() == 0,
                                         'pokemon-not-seen': !ContestHelper.contestIsUnlocked(rank, $data),
                                     },
                                     attr: {'contest-type': ContestType[$data]},
@@ -96,7 +96,7 @@ aria-labelledby="badgeCaseModalLabel">
                             <svg class="ribbon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1280" xmlns:v="https://vecta.io/nano"
                                 data-bind="
                                     css: {
-                                        'badge-not-acquired': App.game.statistics.contestHighestRound[rank][$data]() == 0,
+                                        'badge-not-acquired': App.game.statistics.contestsWon[rank][$data]() == 0,
                                         'pokemon-not-seen': !ContestHelper.contestIsUnlocked(rank, $data),
                                     },
                                     attr: {'contest-type': ContestType[$data]},

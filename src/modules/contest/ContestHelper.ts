@@ -198,7 +198,7 @@ export default class ContestHelper {
     public static maxSheen: PureComputed<number> = ko.pureComputed(() => {
         let capMultiplier = 0;
         GameHelper.enumNumbers(ContestRank).filter(r => r > ContestRank.Practice).forEach(r => GameHelper.enumNumbers(ContestType).forEach(ct => {
-            capMultiplier += Math.min(1, Number(App.game.statistics.contestHighestRound[r][ct]()));
+            capMultiplier += Math.min(1, Number(App.game.statistics.contestsWon[r][ct]()));
         }));
         return 80 + 35 * capMultiplier;
     });
