@@ -264,20 +264,6 @@ class ContestScarfHeldItem extends HeldItem {
             (pokemon) => pokemon.currentContestTypes.includes(contestType) || pokemon.currentContestTypes.includes(ContestType.Balanced) || pokemon.heldItem() instanceof ContestScarfHeldItem
         );
     }
-
-    public override isSameOrBetter(comparedItem: HeldItem): boolean {
-        if (comparedItem instanceof ExpGainedBonusHeldItem) {
-            return this.gainedBonus >= comparedItem.gainedBonus;
-        }
-        return false;
-    }
-
-    public override isInferior(comparedItem: HeldItem): boolean {
-        if (comparedItem instanceof ExpGainedBonusHeldItem) {
-            return this.gainedBonus < comparedItem.gainedBonus;
-        }
-        return false;
-    }
 }
 
 ItemList.Wonder_Chest = new ExpGainedBonusHeldItem('Wonder_Chest', 10000, GameConstants.Currency.money, undefined, 'Wonder Chest', 1.25, GameConstants.Region.johto);
