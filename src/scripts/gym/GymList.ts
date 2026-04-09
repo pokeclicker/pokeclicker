@@ -2149,11 +2149,11 @@ GymList['Florio Island Illumina Meganium'] = new Gym(
     [new GymPokemon('Illumina Meganium', 1426351903, 60)],
     BadgeEnums.Florio_Crystabloom,
     250000,
-    '<b><i>The Meganium fled from you. You should be able to find it again in the same area.</i></b>',
-    [new TemporaryBattleRequirement('Florio Island Illumina Pokémon 2')],
+    '<b><i>You followed the Meganium around Florio Island.</i></b>',
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 1)],
     undefined,
     undefined,
-    { imageName: 'specialNPCs/Transparent' }
+    { imageName: 'specialNPCs/Transparent', displayName: 'Florio Island Illumina Meganium' }
 );
 GymList['Belusylva Island Illumina Milotic'] = new Gym(
     'Illumina Milotic',
@@ -2161,11 +2161,11 @@ GymList['Belusylva Island Illumina Milotic'] = new Gym(
     [new GymPokemon('Illumina Milotic', 1431351903, 60)],
     BadgeEnums.Belusylva_Crystabloom,
     250000,
-    '<b><i>The Milotic fled from you. You should be able to find it again in the same area.</i></b>',
-    [new TemporaryBattleRequirement('Belusylva Island Illumina Pokémon 2')],
+    '<b><i>You followed the Milotic around Belusylva Island.</i></b>',
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 4)],
     undefined,
     undefined,
-    { imageName: 'specialNPCs/Transparent' }
+    { imageName: 'specialNPCs/Transparent', displayName: 'Belusylva Island Illumina Milotic' }
 );
 GymList['Maricopia Islands Illumina Wishiwashi'] = new Gym(
     'Illumina Wishiwashi',
@@ -2173,11 +2173,11 @@ GymList['Maricopia Islands Illumina Wishiwashi'] = new Gym(
     [new GymPokemon('Illumina Wishiwashi', 1436351903, 60)],
     BadgeEnums.Maricopia_Crystabloom,
     250000,
-    '<b><i>The Wishiwashi fled from you. You should be able to find it again in the same area.</i></b>',
-    [new TemporaryBattleRequirement('Maricopia Islands Illumina Pokémon 2')],
+    '<b><i>You followed the Wishiwashi around Maricopia Islands.</i></b>',
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 7)],
     undefined,
     undefined,
-    { imageName: 'specialNPCs/Transparent' }
+    { imageName: 'specialNPCs/Transparent', displayName: 'Maricopia Islands Illumina Wishiwashi' }
 );
 GymList['Voluca Island Illumina Volcarona'] = new Gym(
     'Illumina Volcarona',
@@ -2188,11 +2188,11 @@ GymList['Voluca Island Illumina Volcarona'] = new Gym(
     ],
     BadgeEnums.Voluca_Crystabloom,
     250000,
-    '<b><i>The Volcarona fled from you. You should be able to find it again in the same area.</i></b>',
-    [new TemporaryBattleRequirement('Voluca Island Illumina Pokémon 2')],
+    '<b><i>You followed the Volcarona around Voluca Island. But it seems to have escaped.</i></b>',
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 10)],
     undefined,
     undefined,
-    { imageName: 'specialNPCs/Transparent' }
+    { imageName: 'specialNPCs/Transparent', displayName: 'Voluca Island Illumina Volcarona' }
 );
 GymList['Durice Island Illumina Steelix'] = new Gym(
     'Illumina Steelix',
@@ -2200,11 +2200,11 @@ GymList['Durice Island Illumina Steelix'] = new Gym(
     [new GymPokemon('Illumina Steelix', 1446351903, 60)],
     BadgeEnums.Durice_Crystabloom,
     250000,
-    '<b><i>The Steelix fled from you. You should be able to find it again in the same area.</i></b>',
-    [new TemporaryBattleRequirement('Durice Island Illumina Pokémon 2')],
+    '<b><i>You followed the Steelix around Durice Island.</i></b>',
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 13)],
     undefined,
     undefined,
-    { imageName: 'specialNPCs/Transparent' }
+    { imageName: 'specialNPCs/Transparent', displayName: 'Durice Island Illumina Steelix' }
 );
 GymList['Aurus Island Illumina Xerneas'] = new Gym(
     'Illumina Xerneas',
@@ -2212,11 +2212,11 @@ GymList['Aurus Island Illumina Xerneas'] = new Gym(
     [new GymPokemon('Illumina Xerneas', 1471351903, 80)],
     BadgeEnums.Aurus_Crystabloom,
     250000,
-    '<b><i>The Xerneas fled from you. You should be able to find it again in the same area.</i></b>',
-    [new TemporaryBattleRequirement('Aurus Island Illumina Pokémon 2')],
+    '<b><i>You followed the Xerneas around Aurus Island.</i></b>',
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 16)],
     undefined,
     undefined,
-    { imageName: 'specialNPCs/Transparent' }
+    { imageName: 'specialNPCs/Transparent', displayName: 'Aurus Island Illumina Xerneas' }
 );
 
 // Hisui Gyms

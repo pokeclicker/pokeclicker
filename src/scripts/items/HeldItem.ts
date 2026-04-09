@@ -266,7 +266,7 @@ class CatchRateBonusHeldItem extends HeldItem {
         regionUnlocked: GameConstants.Region,
         pokemonDescription = 'the holding Pokémon species',
         canUse = (pokemon: PartyPokemon) => true) {
-        super(name, basePrice, currency, shopOptions, displayName, `A held item that increases catch rate for ${pokemonDescription} by ${(gainedBonus).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })}.`, regionUnlocked, canUse);
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that increases catch rate for ${pokemonDescription} by ${(gainedBonus).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}%.`, regionUnlocked, canUse);
     }
 }
 
