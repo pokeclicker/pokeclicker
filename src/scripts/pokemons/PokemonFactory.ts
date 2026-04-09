@@ -16,7 +16,7 @@ class PokemonFactory {
 
         const roaming = PokemonFactory.roamingEncounter(route, region, subRegion);
         if (roaming) {
-            name = PokemonFactory.generateRoamingEncounter(region, subRegion, route);
+            name = PokemonFactory.generateRoamingEncounter(region, subRegion);
         } else {
             name = Rand.fromArray(RouteHelper.getAvailablePokemonList(route, region));
         }
@@ -233,8 +233,8 @@ class PokemonFactory {
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, encounterType);
     }
 
-    private static generateRoamingEncounter(region: GameConstants.Region, subRegion: SubRegion, route: number): PokemonNameType {
-        const possible = RoamingPokemonList.getSubRegionalGroupRoamers(region, RoamingPokemonList.findGroup(region, subRegion.id), route);
+    private static generateRoamingEncounter(region: GameConstants.Region, subRegion: SubRegion): PokemonNameType {
+        const possible = RoamingPokemonList.getSubRegionalGroupRoamers(region, RoamingPokemonList.findGroup(region, subRegion.id));
 
         // Double the chance of encountering a roaming Pokemon you have not yet caught
         return Rand.fromWeightedArray(possible, possible.map(r => App.game.party.alreadyCaughtPokemonByName(r.pokemon.name) ? 1 : 2)).pokemon.name;
@@ -252,7 +252,7 @@ class PokemonFactory {
         }
 
         // There is likely to be a roamer available, so we can check this last
-        const roamingPokemon = RoamingPokemonList.getSubRegionalGroupRoamers(region, RoamingPokemonList.findGroup(region, subRegion.id), routeNum);
+        const roamingPokemon = RoamingPokemonList.getSubRegionalGroupRoamers(region, RoamingPokemonList.findGroup(region, subRegion.id));
         if (!routes || !routes.length || !roamingPokemon || !roamingPokemon.length) {
             return false;
         }
