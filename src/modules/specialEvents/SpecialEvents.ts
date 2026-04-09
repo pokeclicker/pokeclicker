@@ -85,6 +85,8 @@ export default class SpecialEvents implements Feature {
             Vivillon (Elegant) in Lost Hotel
             Vivillon (Icy Snow) in Frost Cavern
             Vivillon (Poké Ball) in Thrifty Megamart
+        RouteData.ts:
+            All of them found in Lental subregion
         TownList.ts:
             Vivillon Photobook in Santalune
         */

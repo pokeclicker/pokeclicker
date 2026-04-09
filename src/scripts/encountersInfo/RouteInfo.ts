@@ -31,7 +31,7 @@ class RouteInfo {
         }
 
         const roamerArray =
-            RoamingPokemonList.getSubRegionalGroupRoamers(player.region, RoamingPokemonList.findGroup(player.region, player.subregion), player.route)
+            RoamingPokemonList.getSubRegionalGroupRoamers(player.region, RoamingPokemonList.findGroup(player.region, player.subregion))
                 .map((roamer) => ({id: roamer.pokemon.id, name: roamer.pokemonName, type: 'roamer', requirement: roamer.unlockRequirement}))
                 .sort((a, b) => a.id - b.id);
 
