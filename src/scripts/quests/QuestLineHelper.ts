@@ -4119,7 +4119,8 @@ class QuestLineHelper {
         const snapFlorioIsland = new DefeatPokemonsQuest(GameConstants.ResearchLevel[1], 0, 56, GameConstants.Region.galar).withDescription('Explore Florio Island\'s Nature Park.');
         newPokemonSnapQuestLine.addQuest(snapFlorioIsland);
 
-        const snapFlorioIllumina = new DefeatGymQuest(1, 0, 'Florio Island Illumina Meganium').withDescription('Follow the Florio Island Illumina Pokémon.');
+        //const snapFlorioIllumina = new DefeatGymQuest(1, 0, 'Florio Island Illumina Meganium').withDescription('Follow the Florio Island Illumina Pokémon.');
+        const snapFlorioIllumina = new DefeatDungeonBossQuest('Florio Island Illumina Spot', 'Illumina Meganium').withDescription('Follow the Florio Island Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapFlorioIllumina);
 
         const talktoSnapMirror2 = new TalkToNPCQuest(SnapMirror2, 'Speak to Professor Mirror about the Illumina Meganium.');
@@ -4129,7 +4130,8 @@ class QuestLineHelper {
         const snapBelusylvaIsland = new DefeatPokemonsQuest(GameConstants.ResearchLevel[1], 0, 62, GameConstants.Region.galar).withDescription('Explore Belusylva Island\'s Elsewhere Forest.');
         newPokemonSnapQuestLine.addQuest(snapBelusylvaIsland);
 
-        const snapBelusylvaIllumina = new DefeatGymQuest(1, 0, 'Belusylva Island Illumina Milotic').withDescription('Follow the Belusylva Island Illumina Pokémon.');
+        //const snapBelusylvaIllumina = new DefeatGymQuest(1, 0, 'Belusylva Island Illumina Milotic').withDescription('Follow the Belusylva Island Illumina Pokémon.');
+        const snapBelusylvaIllumina = new DefeatDungeonBossQuest('Belusylva Island Illumina Spot', 'Illumina Milotic').withDescription('Follow the Belusylva Island Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapBelusylvaIllumina);
 
         const talktoSnapMirror3 = new TalkToNPCQuest(SnapMirror3, 'Speak to Professor Mirror about the Illumina Milotic.');
@@ -4139,7 +4141,8 @@ class QuestLineHelper {
         const snapMaricopiaIslands = new DefeatPokemonsQuest(GameConstants.ResearchLevel[3], 0, 64, GameConstants.Region.galar).withDescription('Explore Maricopia Islands\' Lental Seafloor.');
         newPokemonSnapQuestLine.addQuest(snapMaricopiaIslands);
 
-        const snapMaricopiaIllumina = new DefeatGymQuest(1, 0, 'Maricopia Islands Illumina Wishiwashi').withDescription('Follow the Maricopia Islands Illumina Pokémon.');
+        //const snapMaricopiaIllumina = new DefeatGymQuest(1, 0, 'Maricopia Islands Illumina Wishiwashi').withDescription('Follow the Maricopia Islands Illumina Pokémon.');
+        const snapMaricopiaIllumina = new DefeatDungeonBossQuest('Maricopia Islands Illumina Spot', 'Illumina Wishiwashi').withDescription('Follow the Maricopia Islands Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapMaricopiaIllumina);
 
         const talktoSnapMirror4 = new TalkToNPCQuest(SnapMirror4, 'Speak to Professor Mirror about the Illumina Wishiwashi.');
@@ -4149,7 +4152,8 @@ class QuestLineHelper {
         const snapVolucaIsland = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 61, GameConstants.Region.galar).withDescription('Explore Voluca Island\'s Fireflow Volcano.');
         newPokemonSnapQuestLine.addQuest(snapVolucaIsland);
 
-        const snapVolucaIllumina = new DefeatGymQuest(1, 0, 'Voluca Island Illumina Volcarona').withDescription('Follow the Voluca Island Illumina Pokémon.');
+        //const snapVolucaIllumina = new DefeatGymQuest(1, 0, 'Voluca Island Illumina Volcarona').withDescription('Follow the Voluca Island Illumina Pokémon.');
+        const snapVolucaIllumina = new DefeatDungeonBossQuest('Voluca Island Illumina Spot', 'Illumina Volcarona').withDescription('Follow the Voluca Island Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapVolucaIllumina);
 
         const talktoSnapMirror5 = new TalkToNPCQuest(SnapMirror5, 'Speak to Professor Mirror about the Illumina Volcarona.');
@@ -4159,7 +4163,8 @@ class QuestLineHelper {
         const snapDuriceIsland = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 67, GameConstants.Region.galar).withDescription('Explore Durice Island\'s Outaway Cave.');
         newPokemonSnapQuestLine.addQuest(snapDuriceIsland);
 
-        const snapDuriceIllumina = new DefeatGymQuest(1, 0, 'Durice Island Illumina Steelix').withDescription('Follow the Durice Island Illumina Pokémon.');
+        //const snapDuriceIllumina = new DefeatGymQuest(1, 0, 'Durice Island Illumina Steelix').withDescription('Follow the Durice Island Illumina Pokémon.');
+        const snapDuriceIllumina = new DefeatDungeonBossQuest('Durice Island Illumina Spot', 'Illumina Steelix').withDescription('Follow the Durice Island Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapDuriceIllumina);
 
         const talktoSnapMirror6 = new TalkToNPCQuest(SnapMirror6, 'Speak to Professor Mirror about the Illumina Steelix.');
@@ -4169,7 +4174,8 @@ class QuestLineHelper {
         const snapAurusIsland = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 68, GameConstants.Region.galar).withDescription('Explore Aurus Island\'s Ruins of Remembrance.');
         newPokemonSnapQuestLine.addQuest(snapAurusIsland);
 
-        const snapAurusIllumina = new DefeatGymQuest(1, 0, 'Aurus Island Illumina Xerneas').withDescription('Follow the Aurus Island Illumina Pokémon.');
+        //const snapAurusIllumina = new DefeatGymQuest(1, 0, 'Aurus Island Illumina Xerneas').withDescription('Follow the Aurus Island Illumina Pokémon.');
+        const snapAurusIllumina = new DefeatDungeonBossQuest('Aurus Island Illumina Spot', 'Illumina Xerneas').withDescription('Follow the Aurus Island Illumina Pokémon.');
         newPokemonSnapQuestLine.addQuest(snapAurusIllumina);
 
         const talktoSnapMirror7 = new TalkToNPCQuest(SnapMirror7, 'Speak to Professor Mirror about the Illumina Xerneas.');
@@ -4179,7 +4185,7 @@ class QuestLineHelper {
     }
 
     public static createPokemonSnap64QuestLine() {
-        const PokemonSnap64QuestLine = new QuestLine('Pokémon Snap 64', 'Todd would like your help locating rare Pokémon on Pokémon Island.', new QuestLineCompletedRequirement('New Pokémon Snap'), GameConstants.BulletinBoards.Galar);
+        const PokemonSnap64QuestLine = new QuestLine('Pokémon Snap 64', 'Todd would like your help locating rare Pokémon on Pokémon Island.', new QuestLineCompletedRequirement('New Pokémon Snap'));
 
         const talktoToddSnap1 = new TalkToNPCQuest(ToddSnap1, 'Speak to Todd Snap at Professor Mirror\'s Lab about the Pokémon he wants to see.');
         PokemonSnap64QuestLine.addQuest(talktoToddSnap1);

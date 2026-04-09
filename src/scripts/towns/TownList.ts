@@ -9233,7 +9233,7 @@ const MagearnaMysteryGift = new PokemonGiftNPC('Mystery Gift', [
 
 // Lental NPCs
 const RitaLentalRoamerNPC = new RoamerNPC('Rita', [
-    'There seems to be a lot of activity at {ROUTE_NAME}. If you\'ve explored the Lental Region enough, I\'m sure some rare Pokémon will come out to greet you!',
+    'Looking for the best spot ? Definitely {ROUTE_NAME}, you\'ll make the most unique shots right there !',
 ], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.Lental), 'assets/images/npcs/Rita.png');
 const SnapMirror1 = new NPC ('Prof. Mirror', [
     'Welcome to the Lental Region! I\'m Professor Mirror and this is my assistant, Rita.',
@@ -9286,17 +9286,26 @@ const SnapMirror6 = new NPC ('Prof. Mirror', [
 const SnapMirror7 = new NPC ('Prof. Mirror', [
     'Wow! You saw a Xerneas undergoing the Illumina Phenomenon! It\'s quite a beautiful experience, isn\'t it?',
     'I don\'t think there are any other Illumina Pokémon here in the Lental Region.',
-    'I am going to continue to research this phenomenon in order to discover the effects it may have on other Pokémon!',
+    'I am going to continue to research this phenomenon in order to discover the effects it may have on other Pokémon! I\'ll keep you up to date on the results.',
+    'As for you, feel free to explore any of the islands here.',
 ], {
     image: 'assets/images/npcs/Professor Mirror.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('New Pokémon Snap', 17), new QuestLineCompletedRequirement('New Pokémon Snap', GameConstants.AchievementOption.less)]),
 });
 const SnapMirrorResearchLevel = new NPC ('Prof. Mirror', [
-    'I am going to continue to research the Illumina Phenomenon in the Lental Region. Feel free to explore any of the islands here.',
-    'Some of the Pokémon in this region will only appear at night or during the day.',
+    'Some of the Pokémon in this region will only show up at night or during the day.',
     'I\'ve also found that if you explore an area enough, more Pokémon will appear.',
+    'When you befriend a Pokémon, giving it a Fluffruit will make its peers more likely to behave friendly.',
 ], {
     image: 'assets/images/npcs/Professor Mirror.png',
+    requirement: new QuestLineCompletedRequirement('New Pokémon Snap'),
+});
+const ToddSnapFloots = new NPC ('Todd Snap', [
+    'Have you encountered a wild Jigglypuff yet?',
+    'Yes? Nice! Then Did you try playing some flute notes around it?',
+    'Do so and it starts singing cheerfully like it\'s on stage! Truly spectacular.',
+], {
+    image: 'assets/images/npcs/Todd Snap (64).png',
     requirement: new QuestLineCompletedRequirement('New Pokémon Snap'),
 });
 const ToddSnap1 = new NPC ('Todd Snap', [
@@ -9367,14 +9376,6 @@ const ToddSnap8 = new NPC ('Todd Snap', [
 ], {
     image: 'assets/images/npcs/Todd Snap (New).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Pokémon Snap 64', 20), new QuestLineCompletedRequirement('Pokémon Snap 64', GameConstants.AchievementOption.less)]),
-});
-const ToddSnapFluffruit = new NPC ('Todd Snap', [
-    'Have you found any Fluffruit yet?',
-    'Having a Pokémon hold one will cause it to like you more.',
-    'This will increase the likelihood that another of the same species will join you when you try to catch it!',
-], {
-    image: 'assets/images/npcs/Todd Snap (New).png',
-    requirement: new QuestLineCompletedRequirement('Pokémon Snap 64'),
 });
 const ToddSnap64 = new NPC ('Todd Snap\'s Journal', [
     '<b><i>There is a picture of Todd Snap when he was younger marking a page in his journal.</i></b>',
@@ -9601,7 +9602,7 @@ TownList['Laboratory of Ecology and Natural Sciences'] = new Town(
     [new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
-        npcs: [SnapMirror1, SnapMirror2, SnapMirror3, SnapMirror4, SnapMirror5, SnapMirror6, SnapMirror7, SnapMirrorResearchLevel, RitaLentalRoamerNPC, ToddSnap1, ToddSnap2, ToddSnap3, ToddSnap4, ToddSnap5, ToddSnap6, ToddSnap7, ToddSnap8, ToddSnapFluffruit, ToddSnap64],
+        npcs: [SnapMirror1, SnapMirror2, SnapMirror3, SnapMirror4, SnapMirror5, SnapMirror6, SnapMirror7, SnapMirrorResearchLevel, RitaLentalRoamerNPC, ToddSnap1, ToddSnap2, ToddSnap3, ToddSnap4, ToddSnap5, ToddSnap6, ToddSnap7, ToddSnap8, ToddSnapFloots, ToddSnap64],
     }
 );
 TownList['Florio Island'] = new Town(
@@ -9610,7 +9611,7 @@ TownList['Florio Island'] = new Town(
     GameConstants.GalarSubRegions.Lental,
     [GymList['Florio Island Illumina Meganium'], new MoveToDungeon(dungeonList['Florio Island Illumina Spot'])],
     {
-        requirements: [new TemporaryBattleRequirement('Florio Island Illumina Pokémon 2')],
+        requirements: [new QuestLineStepCompletedRequirement('New Pokémon Snap', 1)],
     }
 );
 TownList['Belusylva Island'] = new Town(
@@ -9619,7 +9620,7 @@ TownList['Belusylva Island'] = new Town(
     GameConstants.GalarSubRegions.Lental,
     [GymList['Belusylva Island Illumina Milotic'], new MoveToDungeon(dungeonList['Belusylva Island Illumina Spot'])],
     {
-        requirements: [new TemporaryBattleRequirement('Belusylva Island Illumina Pokémon 2')],
+        requirements: [new QuestLineStepCompletedRequirement('New Pokémon Snap', 4)],
     }
 );
 TownList['Maricopia Islands'] = new Town(
@@ -9628,7 +9629,7 @@ TownList['Maricopia Islands'] = new Town(
     GameConstants.GalarSubRegions.Lental,
     [GymList['Maricopia Islands Illumina Wishiwashi'], new MoveToDungeon(dungeonList['Maricopia Islands Illumina Spot'])],
     {
-        requirements: [new TemporaryBattleRequirement('Maricopia Islands Illumina Pokémon 2')],
+        requirements: [new QuestLineStepCompletedRequirement('New Pokémon Snap', 7)],
     }
 );
 TownList['Voluca Island'] = new Town(
@@ -9637,7 +9638,7 @@ TownList['Voluca Island'] = new Town(
     GameConstants.GalarSubRegions.Lental,
     [GymList['Voluca Island Illumina Volcarona'], new MoveToDungeon(dungeonList['Voluca Island Illumina Spot'])],
     {
-        requirements: [new TemporaryBattleRequirement('Voluca Island Illumina Pokémon 2')],
+        requirements: [new QuestLineStepCompletedRequirement('New Pokémon Snap', 10)],
     }
 );
 TownList['Durice Island'] = new Town(
@@ -9646,7 +9647,7 @@ TownList['Durice Island'] = new Town(
     GameConstants.GalarSubRegions.Lental,
     [GymList['Durice Island Illumina Steelix'], new MoveToDungeon(dungeonList['Durice Island Illumina Spot'])],
     {
-        requirements: [new TemporaryBattleRequirement('Durice Island Illumina Pokémon 2')],
+        requirements: [new QuestLineStepCompletedRequirement('New Pokémon Snap', 13)],
     }
 );
 TownList['Aurus Island'] = new Town(
@@ -9655,7 +9656,7 @@ TownList['Aurus Island'] = new Town(
     GameConstants.GalarSubRegions.Lental,
     [GymList['Aurus Island Illumina Xerneas'], new MoveToDungeon(dungeonList['Aurus Island Illumina Spot'])],
     {
-        requirements: [new TemporaryBattleRequirement('Aurus Island Illumina Pokémon 2')],
+        requirements: [new QuestLineStepCompletedRequirement('New Pokémon Snap', 16)],
     }
 );
 
