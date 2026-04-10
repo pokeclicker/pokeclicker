@@ -8771,10 +8771,10 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 25,
         'base': {
             'hitpoints': 85,
-            'attack': 125,
+            'attack': 85,
             'specialAttack': 55,
-            'defense': 230,
-            'specialDefense': 95,
+            'defense': 200,
+            'specialDefense': 65,
             'speed': 20,
         },
         'gender': {

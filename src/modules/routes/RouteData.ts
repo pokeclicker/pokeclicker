@@ -3783,20 +3783,20 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Pichu', 'Emolga', 'Wurmple', 'Taillow', 'Florges (Red)', 'Florges (Yellow)', 'Florges (Orange)', 'Florges (Blue)', 'Florges (White)', 'Comfey'], new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])),
             new SpecialRoutePokemon(['Shroomish', 'Snorlax'], new MultiRequirement([new LentalRouteRequirement(60, 1), new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])])), // available after 'Side Path' during the day
 
-            new SpecialRoutePokemon(['Caterpie', 'Murkrow', 'Combee', 'Torterra', 'Pinsir'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])),
-            new SpecialRoutePokemon(['Scorbunny'], new MultiRequirement([new LentalRouteRequirement(56, 0, 3), new ObtainedPokemonRequirement('Scorbunny'), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
-            new SpecialRoutePokemon(['Vespiquen'], new MultiRequirement([new LentalRouteRequirement(56, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
-            new SpecialRoutePokemon(['Ducklett', 'Tangrowth'], new MultiRequirement([new LentalRouteRequirement(56, 0, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
-            new SpecialRoutePokemon(['Pidgeot'], new MultiRequirement([new LentalRouteRequirement(56, 0, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
-            new SpecialRoutePokemon(['Heracross'], new MultiRequirement([new LentalRouteRequirement(56, 2, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
-            new SpecialRoutePokemon(['Foongus', 'Pikachu', 'Eevee'], new MultiRequirement([new LentalRouteRequirement(60, 1), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])), // available after 'Side Path' during the night
+            new SpecialRoutePokemon(['Caterpie', 'Murkrow', 'Combee', 'Torterra', 'Pinsir'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])),
+            new SpecialRoutePokemon(['Scorbunny'], new MultiRequirement([new LentalRouteRequirement(56, 0, 3), new ObtainedPokemonRequirement('Scorbunny'), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
+            new SpecialRoutePokemon(['Vespiquen'], new MultiRequirement([new LentalRouteRequirement(56, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
+            new SpecialRoutePokemon(['Ducklett', 'Tangrowth'], new MultiRequirement([new LentalRouteRequirement(56, 0, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
+            new SpecialRoutePokemon(['Pidgeot'], new MultiRequirement([new LentalRouteRequirement(56, 0, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
+            new SpecialRoutePokemon(['Heracross'], new MultiRequirement([new LentalRouteRequirement(56, 2, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
+            new SpecialRoutePokemon(['Foongus', 'Pikachu', 'Eevee'], new MultiRequirement([new LentalRouteRequirement(60, 1), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])), // available after 'Side Path' during the night
 
             new SpecialRoutePokemon(['Grookey'], new ObtainedPokemonRequirement('Grookey')),
             new SpecialRoutePokemon(['Scorbunny'], new MultiRequirement([new ObtainedPokemonRequirement('Scorbunny'), new LentalRouteRequirement(56, 3)])),
             new SpecialRoutePokemon(['Ducklett', 'Tangrowth'], new LentalRouteRequirement(56, 2)),
             new SpecialRoutePokemon(['Pidgeot', 'Heracross'], new LentalRouteRequirement(56, 3)),
             new SpecialRoutePokemon(['Sylveon'], new OneFromManyRequirement([ // Basically XOR
-                new MultiRequirement([new LentalRouteRequirement(56, 2), new LentalRouteRequirement(60, 0, 1), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])]),
+                new MultiRequirement([new LentalRouteRequirement(56, 2), new LentalRouteRequirement(60, 0, 1), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])]),
                 new MultiRequirement([new LentalRouteRequirement(56, 0, 2), new LentalRouteRequirement(60, 1), new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])]),
             ])),
             new SpecialRoutePokemon(['Sylveon'], new MultiRequirement([new LentalRouteRequirement(56, 2), new LentalRouteRequirement(60, 1)])),
@@ -3821,17 +3821,17 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Venusaur'], new MultiRequirement([new LentalRouteRequirement(57, 3), new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])])),
             new SpecialRoutePokemon(['Sobble'], new MultiRequirement([new ObtainedPokemonRequirement('Sobble'), new LentalRouteRequirement(57, 3), new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])])),
 
-            new SpecialRoutePokemon(['Morelull', 'Ariados'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])),
+            new SpecialRoutePokemon(['Morelull', 'Ariados'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])),
             new SpecialRoutePokemon(['Toucannon'], new MultiRequirement([new LentalRouteRequirement(57, 0, 2), new DayCyclePartRequirement([DayCyclePart.Dusk, DayCyclePart.Dawn])])),
-            new SpecialRoutePokemon(['Swampert'], new MultiRequirement([new LentalRouteRequirement(57, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
-            new SpecialRoutePokemon(['Leafeon'], new MultiRequirement([new LentalRouteRequirement(57, 2, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
-            new SpecialRoutePokemon(['Ledian'], new MultiRequirement([new LentalRouteRequirement(57, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
+            new SpecialRoutePokemon(['Swampert'], new MultiRequirement([new LentalRouteRequirement(57, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
+            new SpecialRoutePokemon(['Leafeon'], new MultiRequirement([new LentalRouteRequirement(57, 2, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
+            new SpecialRoutePokemon(['Ledian'], new MultiRequirement([new LentalRouteRequirement(57, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
             
             new SpecialRoutePokemon(['Slaking', 'Metapod', 'Arbok', 'Toucannon'], new LentalRouteRequirement(57, 2)),
             new SpecialRoutePokemon(['Leafeon'], new LentalRouteRequirement(57, 3)),
 
             // Rare encounters when the feature is added
-            new SpecialRoutePokemon(['Mew'], new MultiRequirement([new ObtainedPokemonRequirement('Mew'), new LentalRouteRequirement(57, 2, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
+            new SpecialRoutePokemon(['Mew'], new MultiRequirement([new ObtainedPokemonRequirement('Mew'), new LentalRouteRequirement(57, 2, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
             new SpecialRoutePokemon(['Mew'], new MultiRequirement([new ObtainedPokemonRequirement('Mew'), new LentalRouteRequirement(57, 3)])),
         ],
     }),
@@ -3852,9 +3852,9 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Blastoise'], new MultiRequirement([new LentalRouteRequirement(58, 3), new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])])),
             new SpecialRoutePokemon(['Surfing Pikachu'], new MultiRequirement([new ObtainedPokemonRequirement('Surfing Pikachu'), new LentalRouteRequirement(58, 4), new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])])),
 
-            new SpecialRoutePokemon(['Zangoose', 'Drifblim', 'Seviper', 'Inkay', 'Magikarp', 'Clamperl', 'Sandygast'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])),
+            new SpecialRoutePokemon(['Zangoose', 'Drifblim', 'Seviper', 'Inkay', 'Magikarp', 'Clamperl', 'Sandygast'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])),
             new SpecialRoutePokemon(['Alolan Raichu', 'Corsola'], new MultiRequirement([new LentalRouteRequirement(58, 0, 2), new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])])),
-            new SpecialRoutePokemon(['Mareanie', 'Primarina'], new MultiRequirement([new LentalRouteRequirement(58, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
+            new SpecialRoutePokemon(['Mareanie', 'Primarina'], new MultiRequirement([new LentalRouteRequirement(58, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
 
             new SpecialRoutePokemon(['Bellossom', 'Pikachu', 'Alolan Raichu', 'Corsola'], new LentalRouteRequirement(58, 2)),
         ],
@@ -3873,8 +3873,8 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Heliolisk', 'Pinsir', 'Lycanroc (Midday)', 'Torchic'], new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])),
             new SpecialRoutePokemon(['Scorbunny'], new MultiRequirement([new ObtainedPokemonRequirement('Scorbunny'), new LentalRouteRequirement(59, 2), new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])])),
 
-            new SpecialRoutePokemon(['Sandshrew', 'Kangaskhan', 'Lycanroc (Midnight)', 'Minior (Red Core)', 'Minior (Blue Core)', 'Minior (Green Core)', 'Minior (Orange Core)', 'Minior (Indigo Core)', 'Minior (Violet Core)', 'Minior (Yellow Core)', 'Onix'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])),
-            new SpecialRoutePokemon(['Magikarp'], new MultiRequirement([new LentalRouteRequirement(59, 0, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
+            new SpecialRoutePokemon(['Sandshrew', 'Kangaskhan', 'Lycanroc (Midnight)', 'Minior (Red Core)', 'Minior (Blue Core)', 'Minior (Green Core)', 'Minior (Orange Core)', 'Minior (Indigo Core)', 'Minior (Violet Core)', 'Minior (Yellow Core)', 'Onix'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])),
+            new SpecialRoutePokemon(['Magikarp'], new MultiRequirement([new LentalRouteRequirement(59, 0, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
 
             new SpecialRoutePokemon(['Silicobra', 'Tyranitar', 'Flygon', 'Magikarp'], new LentalRouteRequirement(59, 2)),
         ],
@@ -3892,7 +3892,7 @@ Routes.add(new RegionRoute(
         [
             new SpecialRoutePokemon(['Wurmple', 'Dodrio', 'Comfey', 'Shroomish', 'Bidoof', 'Taillow', 'Emolga', 'Sylveon'], new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])),
 
-            new SpecialRoutePokemon(['Caterpie', 'Combee', 'Vespiquen', 'Foongus', 'Hoothoot', 'Murkrow', 'Pinsir', 'Tangrowth', 'Ducklett', 'Magikarp', 'Pikachu', 'Eevee'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])),
+            new SpecialRoutePokemon(['Caterpie', 'Combee', 'Vespiquen', 'Foongus', 'Hoothoot', 'Murkrow', 'Pinsir', 'Tangrowth', 'Ducklett', 'Magikarp', 'Pikachu', 'Eevee'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])),
 
             new SpecialRoutePokemon(['Scorbunny'], new ObtainedPokemonRequirement('Scorbunny')),
         ],
@@ -3949,15 +3949,15 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Wailmer'], new MultiRequirement([new LentalRouteRequirement(63, 3), new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])])),
             new SpecialRoutePokemon(['Surfing Pikachu'], new MultiRequirement([new ObtainedPokemonRequirement('Surfing Pikachu'), new LentalRouteRequirement(63, 4), new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])])),
 
-            new SpecialRoutePokemon(['Inkay', 'Alolan Raichu', 'Drifblim', 'Primarina', 'Clamperl', 'Vaporeon', 'Blastoise'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])),
-            new SpecialRoutePokemon(['Squirtle'], new MultiRequirement([new LentalRouteRequirement(63, 0, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
-            new SpecialRoutePokemon(['Lapras'], new MultiRequirement([new LentalRouteRequirement(63, 0, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
+            new SpecialRoutePokemon(['Inkay', 'Alolan Raichu', 'Drifblim', 'Primarina', 'Clamperl', 'Vaporeon', 'Blastoise'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])),
+            new SpecialRoutePokemon(['Squirtle'], new MultiRequirement([new LentalRouteRequirement(63, 0, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
+            new SpecialRoutePokemon(['Lapras'], new MultiRequirement([new LentalRouteRequirement(63, 0, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
 
             new SpecialRoutePokemon(['Squirtle'], new LentalRouteRequirement(63, 2)),
             new SpecialRoutePokemon(['Lapras'], new LentalRouteRequirement(63, 3)),
 
             // Rare encounters when the feature is added
-            new SpecialRoutePokemon(['Manaphy'], new MultiRequirement([new ObtainedPokemonRequirement('Manaphy'), new LentalRouteRequirement(63, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
+            new SpecialRoutePokemon(['Manaphy'], new MultiRequirement([new ObtainedPokemonRequirement('Manaphy'), new LentalRouteRequirement(63, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
         ],
     }),
     [new RouteKillRequirement(ResearchLevel[2], Region.galar, 58)], // Blushing Beach Research Level 2
@@ -4002,17 +4002,17 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Skarmory', 'Glalie'], new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])),
             new SpecialRoutePokemon(['Beartic', 'Cubchoo', 'Magikarp', 'Snom'], new MultiRequirement([new LentalRouteRequirement(66, 0, 2), new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])])),
 
-            new SpecialRoutePokemon(['Braviary', 'Delibird', 'Jynx'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])),
-            new SpecialRoutePokemon(['Aurorus'], new MultiRequirement([new LentalRouteRequirement(66, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
-            new SpecialRoutePokemon(['Alolan Sandslash', 'Abomasnow', 'Alolan Vulpix'], new MultiRequirement([new LentalRouteRequirement(66, 0, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
-            new SpecialRoutePokemon(['Mightyena', 'Vanilluxe'], new MultiRequirement([new LentalRouteRequirement(66, 0, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
-            new SpecialRoutePokemon(['Avalugg', 'Dewgong', 'Glaceon'], new MultiRequirement([new LentalRouteRequirement(66, 2, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
+            new SpecialRoutePokemon(['Braviary', 'Delibird', 'Jynx'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])),
+            new SpecialRoutePokemon(['Aurorus'], new MultiRequirement([new LentalRouteRequirement(66, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
+            new SpecialRoutePokemon(['Alolan Sandslash', 'Abomasnow', 'Alolan Vulpix'], new MultiRequirement([new LentalRouteRequirement(66, 0, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
+            new SpecialRoutePokemon(['Mightyena', 'Vanilluxe'], new MultiRequirement([new LentalRouteRequirement(66, 0, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
+            new SpecialRoutePokemon(['Avalugg', 'Dewgong', 'Glaceon'], new MultiRequirement([new LentalRouteRequirement(66, 2, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
 
             new SpecialRoutePokemon(['Beartic', 'Cubchoo', 'Magikarp', 'Snom', 'Froslass', 'Alolan Sandslash', 'Alolan Vulpix', 'Weavile', 'Abomasnow', 'Crabominable'], new LentalRouteRequirement(66, 2)),
             new SpecialRoutePokemon(['Mightyena', 'Glaceon', 'Vanilluxe', 'Dewgong', 'Avalugg'], new LentalRouteRequirement(66, 3)),
 
             // Rare encounters when the feature is added
-            new SpecialRoutePokemon(['Suicune'], new MultiRequirement([new ObtainedPokemonRequirement('Suicune'), new QuestLineCompletedRequirement('New Pokémon Snap'), new LentalRouteRequirement(66, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
+            new SpecialRoutePokemon(['Suicune'], new MultiRequirement([new ObtainedPokemonRequirement('Suicune'), new QuestLineCompletedRequirement('New Pokémon Snap'), new LentalRouteRequirement(66, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
         ],
     }),
     [new QuestLineStepCompletedRequirement('New Pokémon Snap', 12)], // 4 Illumina Pokemon encountered
@@ -4069,9 +4069,9 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Venusaur'], new MultiRequirement([new LentalRouteRequirement(69, 3), new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])])),
             new SpecialRoutePokemon(['Magikarp'], new MultiRequirement([new LentalRouteRequirement(69, 0, 2), new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])])),
 
-            new SpecialRoutePokemon(['Morelull', 'Ariados', 'Ledian'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])),
-            new SpecialRoutePokemon(['Wooper', 'Quagsire'], new MultiRequirement([new LentalRouteRequirement(69, 0, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
-            new SpecialRoutePokemon(['Ursaring', 'Drilbur', 'Cleffa'], new MultiRequirement([new LentalRouteRequirement(69, 2, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
+            new SpecialRoutePokemon(['Morelull', 'Ariados', 'Ledian'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])),
+            new SpecialRoutePokemon(['Wooper', 'Quagsire'], new MultiRequirement([new LentalRouteRequirement(69, 0, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
+            new SpecialRoutePokemon(['Ursaring', 'Drilbur', 'Cleffa'], new MultiRequirement([new LentalRouteRequirement(69, 2, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
 
             new SpecialRoutePokemon(['Magikarp', 'Wooper', 'Quagsire', 'Gyarados'], new LentalRouteRequirement(69, 2)),
             new SpecialRoutePokemon(['Ursaring', 'Drilbur', 'Cleffa'], new LentalRouteRequirement(69, 3)),
@@ -4088,18 +4088,18 @@ Routes.add(new RegionRoute(
         land: ['Tepig', 'Diglett', 'Mandibuzz', 'Swalot', 'Shinx', 'Torchic', 'Crustle'],
         special:
         [
-            new SpecialRoutePokemon(['Hippowdon', 'Silicobra', 'Koffing', 'Lycanroc (Midnight)', 'Onix'], new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])),
+            new SpecialRoutePokemon(['Hippowdon', 'Silicobra', 'Koffing', 'Lycanroc (Midday)', 'Onix'], new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])),
             new SpecialRoutePokemon(['Salazzle'], new MultiRequirement([new LentalRouteRequirement(70, 2), new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])])),
             new SpecialRoutePokemon(['Minior (Meteor)'], new MultiRequirement([new LentalRouteRequirement(70, 0, 2), new DayCyclePartRequirement([DayCyclePart.Day, DayCyclePart.Dusk])])),
 
-            new SpecialRoutePokemon(['Lycanroc (Midday)', 'Tyranitar'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])),
-            new SpecialRoutePokemon(['Magikarp', 'Gliscor', 'Sandshrew'], new MultiRequirement([new LentalRouteRequirement(70, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
-            new SpecialRoutePokemon(['Rockruff', 'Kangaskhan', 'Scolipede'], new MultiRequirement([new LentalRouteRequirement(70, 0, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
+            new SpecialRoutePokemon(['Lycanroc (Midnight)', 'Tyranitar'], new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])),
+            new SpecialRoutePokemon(['Magikarp', 'Gliscor', 'Sandshrew'], new MultiRequirement([new LentalRouteRequirement(70, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
+            new SpecialRoutePokemon(['Rockruff', 'Kangaskhan', 'Scolipede'], new MultiRequirement([new LentalRouteRequirement(70, 0, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
 
             new SpecialRoutePokemon(['Rockruff', 'Kangaskhan', 'Scolipede', 'Minior (Meteor)'], new LentalRouteRequirement(70, 2)),
 
             // Rare encounters when the feature is added
-            new SpecialRoutePokemon(['Zeraora'], new MultiRequirement([new ObtainedPokemonRequirement('Zeraora'), new LentalRouteRequirement(70, 2, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dusk])])),
+            new SpecialRoutePokemon(['Zeraora'], new MultiRequirement([new ObtainedPokemonRequirement('Zeraora'), new LentalRouteRequirement(70, 2, 3), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
             new SpecialRoutePokemon(['Zeraora'], new MultiRequirement([new ObtainedPokemonRequirement('Zeraora'), new LentalRouteRequirement(70, 3)])),
         ],
     }),
