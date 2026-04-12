@@ -1011,7 +1011,7 @@
          { name: "Kecleon"
         , x: 46, y: 3
         , width: 4, height: 4
-        , databind: "click: () => TemporaryBattleList['Kecleon 1'].protectedOnclick()"
+        , databind: "click: () => TemporaryBattleList['Kecleon 1'].protectedOnclick(), attr: { class: TemporaryBattleList['Kecleon 1'].isUnlocked() ? '' : 'locked' }"
         , visible:  "TemporaryBattleList['Kecleon 1'] && TemporaryBattleList['Kecleon 1'].isVisible()"
         , image: "assets/images/map/kecleonoverworld.png"
         })
@@ -1068,7 +1068,7 @@
 
     <%- include('templates/mapOverlay',
         { name: "Pokémon Trainer May"
-        , x: 28.5, y: 30
+        , x: 28.5, y: 27
         , width: 4, height: 4
         , databind: "click: () => TemporaryBattleList['May 3'].protectedOnclick()"
         , visible:  "TemporaryBattleList['May 3'] && TemporaryBattleList['May 3'].isVisible()"

@@ -46,7 +46,7 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
             route = 1, region = GameConstants.Region.kanto;
         }
         const tokens = PokemonFactory.routeDungeonTokens(route,region);
-        const routeKillsPerDungeon = dungeonList[dungeon].tokenCost / tokens;
+        const routeKillsPerDungeon = dungeonList[dungeon].baseTokenCost / tokens;
         const collectTokensReward = routeKillsPerDungeon * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * amount;
 
         const reward = Math.min(5000, Math.ceil(completeDungeonsReward + collectTokensReward));
