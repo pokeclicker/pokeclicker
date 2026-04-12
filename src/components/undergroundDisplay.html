@@ -138,8 +138,8 @@
                         </div>
                     </div>
 
-                    <div class="small">
-                        <knockout data-bind="text: Math.min(App.game.underground.battery.charges, App.game.underground.battery.maxCharges), css: { 'text-warning': App.game.underground.battery.charges < App.game.underground.battery.maxCharges }"></knockout> / <knockout data-bind="text: App.game.underground.battery.maxCharges"></knockout>
+                    <div class="small"  data-bind="css: { 'text-warning': App.game.underground.battery.charges < App.game.underground.battery.maxCharges }">
+                        <knockout data-bind="text: (App.game.underground.battery.charges / App.game.underground.battery.maxCharges).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })"></knockout>
                     </div>
                 </div>
             </div>
