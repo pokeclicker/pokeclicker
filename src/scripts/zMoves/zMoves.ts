@@ -56,8 +56,6 @@ class ZMoves implements Feature {
         return App.game.keyItems.hasKeyItem(KeyItemType['Z-Power_Ring']);
     }
 
-    update(delta: number): void {}  // This method intentionally left blank
-
     tick(): void {
         if (this.status() !== GameConstants.ZMoveStatus.inactive) {
             GameHelper.incrementObservable(this.time, -GameConstants.ZMOVE_TICK);

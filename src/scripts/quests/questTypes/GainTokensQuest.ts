@@ -11,10 +11,10 @@ class GainTokensQuest extends Quest implements QuestInterface {
         const highestRegion = player.highestRegion();
         const dungeonAmount = Object.values(dungeonList).reduce((max, dungeon) => {
             if (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeon.name)]()) {
-                return Math.max(max, dungeon.tokenCost);
+                return Math.max(max, dungeon.baseTokenCost);
             }
             return max;
-        }, 0) || dungeonList[GameConstants.KantoDungeons[0]].tokenCost;
+        }, 0) || dungeonList[GameConstants.KantoDungeons[0]].baseTokenCost;
         const baseAmount = dungeonAmount;
         const maxAmount = Math.ceil(baseAmount * (3 + highestRegion));
         const amount = SeededRand.intBetween(baseAmount, maxAmount);
