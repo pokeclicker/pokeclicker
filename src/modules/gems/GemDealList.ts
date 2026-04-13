@@ -90,6 +90,14 @@ const unovaFluteDeals = [
     ),
 ];
 
+const hoennBattleFrontierDeoxysDeal = [
+    new GemDeal(
+        [{ gemType: PokemonType.Psychic, amount: 3860 }],
+        ItemList['Deoxys (Clone)'],
+        1,
+    ),
+];
+
 const kalosFurfrouDeal = [
     new GemDeal(
         [
@@ -333,6 +341,7 @@ const alolaMagikarpJumpDeal = [
 const dealList = {
     [GemShops.HoennFluteMaster]: ko.observableArray(hoennFluteDeals),
     [GemShops.HoennStoneSalesman]: ko.observableArray(hoennStoneDeals),
+    [GemShops.hoennBattleFrontierDeoxysDeal]: ko.observableArray(hoennBattleFrontierDeoxysDeal),
     [GemShops.UnovaFluteMaster]: ko.observableArray(unovaFluteDeals),
     [GemShops.FurfrouGemTrader]: ko.observableArray(kalosFurfrouDeal),
     [GemShops.KalosStoneSalesman]: ko.observableArray(kalosStoneDeals),

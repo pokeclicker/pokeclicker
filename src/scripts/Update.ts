@@ -2941,6 +2941,31 @@ class Update implements Saveable {
                 const noneCategory = cats.splice(categoryNoneIndex, 1)[0];
                 saveData.categories.categories = [noneCategory, ...cats];
             }
+
+            // Mark new Pokemon Gifts as claimed if they are already owned
+            saveData.statistics.npcTalkedTo = saveData.statistics.npcTalkedTo || {};
+            const ownsFloetteEternal = saveData.party.caughtPokemon.find((p: PartyPokemon) => p.id === 670.05);
+            if (ownsFloetteEternal) {
+                saveData.statistics.npcTalkedTo[GameHelper.hash('eternalfloettegift')] = 1;
+            }
+            const ownsMagearnaOriginal = saveData.party.caughtPokemon.find((p: PartyPokemon) => p.id === 801.01);
+            if (ownsMagearnaOriginal) {
+                saveData.statistics.npcTalkedTo[GameHelper.hash('magearnamysterygift')] = 1;
+            }
+        },
+
+        '0.10.26': ({ playerData, saveData, settingsData }) => {
+            // Fix old saves missing Johto Rocket questline blocking them from entering the Mahogany Town hideout, hopefully for good
+            if (saveData.badgeCase[17]) {
+                Update.startQuestLine(saveData, 'Team Rocket Again');
+            }
+
+            saveData.farming?.plotList?.forEach(plot => {
+                if (plot.wanderer) {
+                    // Force genderless
+                    plot.wanderer.gender = 0;
+                }
+            });
         },
     };
 
@@ -3408,19 +3433,17 @@ class Update implements Saveable {
     }
 
     removeMissingNo(saveData) {
-        const idx = saveData.party.caughtPokemon.findIndex(p => p.id === 0);
-        if (idx === -1) {
-            return;
+        // remove from party
+        let idx;
+        while ((idx = saveData.party.caughtPokemon.findIndex(p => p.id === 0)) !== -1) {
+            saveData.party.caughtPokemon.splice(idx, 1);
         }
 
-        // remove from party
-        saveData.party.caughtPokemon.splice(idx, 1);
-
         // remove from breeding queue
-        saveData.breeding.queueList = saveData.breeding.queueList.filter(p => p !== 0);
+        saveData.breeding.queueList = saveData.breeding.queueList.filter(p => Array.isArray(p) || pokemonMap[p].id !== 0);
 
         // remove from egg slot
-        saveData.breeding.eggList = saveData.breeding.eggList.map(e => e.pokemon === 0 && e.type !== -1 ? null : e);
+        saveData.breeding.eggList = saveData.breeding.eggList.map(e => e === null || (pokemonMap[e.pokemon].id === 0 && e.type !== -1) ? null : e);
     }
 
     getPlayerData() {

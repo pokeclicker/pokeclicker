@@ -308,8 +308,13 @@ Settings.add(new Setting<number>('heldItemType2Filter', 'Type 2', [
     ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
     new SettingOption('None', PokemonType.None),
 ], -2, undefined, false));
-Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false, undefined, false));
-Settings.add(new BooleanSetting('heldItemHideHoldingThisItem', 'Hide Pokémon holding this item', false, undefined, false));
+Settings.add(new Setting('heldItemCurrentItemFilter', 'Held Item filter', [
+    new SettingOption('Show all Pokémon', 'none'),
+    new SettingOption('Hide Pokémon holding ANY item', 'HideHoldingAnyItem'),
+    new SettingOption('Hide Pokémon holding THIS item', 'HideHoldingThisItem'),
+    new SettingOption('Hide Pokémon holding EQUIVALENT or BETTER item', 'HideHoldingSameOrBetter'),
+    new SettingOption('Show only Pokémon holding INFERIOR item', 'OnlyShowWorse'),
+], 'none'));
 
 // Hatchery Filters
 export const breedingFilterSettingKeys = ['breedingNameFilter', 'breedingIDFilter', 'breedingRegionFilter', 'breedingType1Filter', 'breedingType2Filter',
@@ -483,7 +488,7 @@ Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'U'));
 Settings.add(new HotkeySetting('hotkey.shop', 'Poké Mart', 'E'));
 Settings.add(new HotkeySetting('hotkey.dailyQuests', 'Daily Quests', 'Q'));
 Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Poké Ball Selection', 'P', { suffix: ' + Number' }));
-Settings.add(new HotkeySetting('hotkey.castformApp', 'Castform App', 'W', {}, new ClearDungeonRequirement(250, getDungeonIndex('Weather Institute'))));
+Settings.add(new HotkeySetting('hotkey.castformApp', 'Castform App', 'C', {}, new ClearDungeonRequirement(250, getDungeonIndex('Weather Institute'))));
 Settings.add(new HotkeySetting('hotkey.purifyChamber', 'Purify Chamber', 'K', {}, new ShadowPokemonRequirement(1, ShadowStatus.Purified)));
 
 Settings.add(new HotkeySetting('hotkey.farm.toggleShovel', 'Toggle Shovel', 'S'));

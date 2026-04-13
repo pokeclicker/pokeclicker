@@ -17,24 +17,11 @@ class BattleCafe extends TownContent {
 
     public areaStatus(): areaStatus[] {
         const status = super.areaStatus();
-        const pokerusUnlocked = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked();
-        const alcremieList = Object.values(BattleCafeController.evolutions).flatMap(sweet => Object.values(sweet));
-        let incomplete = false;
-        if (alcremieList.some(a => a.getCaughtStatus() == CaughtStatus.NotCaught)) {
-            status.push(areaStatus.uncaughtPokemon);
-            incomplete = true;
+        if (status.includes(areaStatus.locked)) {
+            return [areaStatus.locked];
         }
-        if (alcremieList.some(a => a.getCaughtStatus() == CaughtStatus.Caught)) {
-            status.push(areaStatus.uncaughtShinyPokemon);
-            incomplete = true;
-        }
-        if (pokerusUnlocked && alcremieList.some(a => a.getPokerusStatus() < GameConstants.Pokerus.Resistant)) {
-            status.push(areaStatus.missingResistant);
-            incomplete = true;
-        }
-        if (incomplete && BattleCafeController.spinsLeft() > 0) {
-            status.push(areaStatus.incomplete);
-        }
+        const alcremieList = Object.values(BattleCafeController.evolutions).flatMap(sweet => Object.values(sweet)).map(pi => pi.type);
+        status.push(...MapHelper.getPokemonAreaStatus(alcremieList));
         return status;
     }
 }
@@ -63,7 +50,7 @@ class BattleCafeController {
     static isSpinning = ko.observable<boolean>(false);
     static clockwise = ko.observable<boolean>(false);
 
-    static spinsPerDay() : number {
+    static spinsPerDay(): number {
         // Give additional spins for each sweet type completed, shiny, and resistant
         let spins = this.baseDailySpins;
         const sweetStatus = GameHelper.enumStrings(GameConstants.AlcremieSweet)
@@ -80,6 +67,10 @@ class BattleCafeController {
         return spins;
     }
 
+    public static maxTotalSpins(): number {
+        return BattleCafeController.spinsPerDay() * 7;
+    }
+
     public static spin(clockwise: boolean) {
         if (!BattleCafeController.canSpin()) {
             return;
@@ -93,18 +84,21 @@ class BattleCafeController {
 
         setTimeout(() => {
             BattleCafeController.isSpinning(false);
-            BattleCafeController.unlockAlcremie(clockwise, spinTime, sweet);
-            BattleCafeController.spinsLeft(BattleCafeController.spinsLeft() - 1);
+            const isResistant = BattleCafeController.unlockAlcremie(clockwise, spinTime, sweet).getPokerusStatus() == GameConstants.Pokerus.Resistant;
+            if (!isResistant) {
+                BattleCafeController.spinsLeft(BattleCafeController.spinsLeft() - 1);
+            }
             BattleCafeController.getPrice(sweet).forEach(b => GameHelper.incrementObservable(App.game.farming.berryList[b.berry], b.amount * -1));
         },
         spinTime * 1000);
     }
 
-    private static unlockAlcremie(clockwise: boolean, spinTime: number, sweet: GameConstants.AlcremieSweet) {
+    private static unlockAlcremie(clockwise: boolean, spinTime: number, sweet: GameConstants.AlcremieSweet): PokemonItem {
         let spin: GameConstants.AlcremieSpins;
         if (spinTime == 3600) {
-            (new PokemonItem('Milcery (Cheesy)', 0)).gain(1);
-            return;
+            const cheese = new PokemonItem('Milcery (Cheesy)');
+            cheese.gain(1);
+            return cheese;
         }
         if (DayCycle.currentDayCyclePart() === DayCyclePart.Dusk && !clockwise && spinTime > 10) {
             spin = GameConstants.AlcremieSpins.at5Above10;
@@ -130,6 +124,7 @@ class BattleCafeController {
             }
         }
         BattleCafeController.evolutions[sweet][spin].gain(1);
+        return BattleCafeController.evolutions[sweet][spin];
     }
 
     private static canSpin() {
@@ -255,6 +250,12 @@ class BattleCafeController {
                 ];
 
         }
+    }
+    public static accumulateSpins() {
+        const current = BattleCafeController.spinsLeft();
+        const perDay = BattleCafeController.spinsPerDay();
+
+        BattleCafeController.spinsLeft(Math.min(current + perDay, BattleCafeController.maxTotalSpins()));
     }
 
     public static calcMaxSpins(sweet: GameConstants.AlcremieSweet): number {

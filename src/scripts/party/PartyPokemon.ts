@@ -52,7 +52,6 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     _attackBonusPercent: KnockoutObservable<number>;
     _attackBonusAmount: KnockoutObservable<number>;
     _category: KnockoutObservableArray<number>;
-    _translatedName: KnockoutObservable<string>;
     _nickname: KnockoutObservable<string>;
     _displayName: KnockoutComputed<string>;
     _pokerus: KnockoutObservable<GameConstants.Pokerus>;
@@ -83,7 +82,6 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
         this._category = ko.observableArray([0]);
-        this._translatedName = PokemonHelper.displayName(name);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
         this.evs = ko.pureComputed(() => {
@@ -113,7 +111,12 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this.defaultFemaleSprite = ko.observable(false);
         this.hideShinyImage = ko.observable(false);
         this._nickname = ko.observable();
-        this._displayName = ko.pureComputed(() => this._nickname() ? this._nickname() : this._translatedName());
+        this._nickname.subscribe((value) => {
+            if (value === PokemonHelper.displayName(this.name)) {
+                AchievementHandler.unlockAchievement('A cat named Cat');
+            }
+        });
+        this._displayName = ko.pureComputed(() => this._nickname() || PokemonHelper.displayName(this.name));
         this._shadow = ko.observable(shadow);
         this._showShadowImage = ko.observable(false);
         this._attack = ko.computed(() => this.calculateAttack());
@@ -337,10 +340,11 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     }
 
     public setVitaminAmount(vitamin: GameConstants.VitaminType, amount: number) {
-        if (this.breeding || isNaN(amount) || amount < 0) {
+        if (this.breeding || isNaN(amount)) {
             return;
         }
 
+        amount = Math.max(0, amount);
         const diff = Math.floor(amount) - this.vitaminsUsed[vitamin]();
         if (diff === 0) {
             return;
@@ -455,10 +459,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         // Check if search matches englishName or displayName
         const nameFilterSetting = Settings.getSetting('breedingNameFilter') as SearchSetting;
         if (nameFilterSetting.observableValue() != '') {
-            const nameFilter = nameFilterSetting.regex();
-            const displayName = PokemonHelper.displayName(this.name)();
-            const partyName = this.displayName;
-            if (!nameFilter.test(displayName) && !nameFilter.test(this.name) && !(partyName != undefined && nameFilter.test(partyName))) {
+            if (!PokemonHelper.matchPokemonByNames(nameFilterSetting.regex(), this.name, this)) {
                 return false;
             }
         }

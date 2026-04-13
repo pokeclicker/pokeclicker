@@ -285,10 +285,13 @@ class Game implements TmpGameType {
                 }
             }
         });
-        // Check for breeding pokemons not in queue
-        const breeding = [...App.game.breeding.eggList.map((l) => l().pokemon), ...App.game.breeding.queueList()];
+        // Check for breeding pokemons not in list or queue
+        const breeding = new Set([
+            ...App.game.breeding.eggList.map((l) => l().pokemon),
+            ...App.game.breeding.queueList().filter((q: HatcheryQueueEntry) => q[0] === EggType.Pokemon).map(q => q[1]),
+        ]);
         App.game.party.caughtPokemon.filter((p) => p.breeding).forEach((p) => {
-            if (!breeding.includes(p.id)) {
+            if (!breeding.has(p.id)) {
                 p.breeding = false;
             }
         });
@@ -488,7 +491,10 @@ class Game implements TmpGameType {
                     });
                 }
                 // Give the players more Battle Cafe spins
-                BattleCafeController.spinsLeft(BattleCafeController.spinsPerDay());
+                if (this.party.getPokemonByName('Milcery')) {
+                    BattleCafeController.accumulateSpins();
+                }
+
                 // Generate the weather forecast
                 WeatherApp.initialize();
                 // Refresh Friend Safari Pokemon List

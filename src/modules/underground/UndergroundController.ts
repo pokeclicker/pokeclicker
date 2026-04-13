@@ -268,6 +268,10 @@ export class UndergroundController {
             if (App.game.underground.mine.attemptCompleteLayer()) {
                 UndergroundController.notifyMineCompleted(helper);
 
+                if (App.game.underground.mine.grid.every((tile) => tile.layerDepth === 0)) {
+                    GameHelper.incrementObservable(App.game.statistics.undergroundLayersFullyMined);
+                }
+
                 if (helper) {
                     UndergroundController.addHiredHelperUndergroundExp(UNDERGROUND_EXPERIENCE_CLEAR_LAYER, true);
 
@@ -412,6 +416,16 @@ export class UndergroundController {
             message: 'Your Underground Battery has been fully charged and is ready to be discharged.',
             type: NotificationOption.info,
             setting: NotificationConstants.NotificationSetting.Underground.battery_full,
+            timeout: 10 * SECOND,
+        });
+    }
+
+    public static notifyMineFound() {
+        Notifier.notify({
+            title: 'Underground',
+            message: 'A new Underground Layer has been discovered.',
+            type: NotificationOption.info,
+            setting: NotificationConstants.NotificationSetting.Underground.underground_mine_found,
             timeout: 10 * SECOND,
         });
     }
