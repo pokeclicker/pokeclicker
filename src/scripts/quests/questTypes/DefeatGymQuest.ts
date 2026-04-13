@@ -23,20 +23,11 @@ class DefeatGymQuest extends Quest implements QuestInterface {
 
     public static generateData(): any[] {
         const amount = SeededRand.intBetween(5, 20);
-        let maxRegion = player.highestRegion();
-        // Check if first gym of highest region has been cleared. If not, pick one region lower than highest.
-        if (!App.game.badgeCase.hasBadge(GymList[GameConstants.RegionGyms[player.highestRegion()][0]].badgeReward)) {
-            maxRegion -= 1;
-        }
-        let region = SeededRand.intBetween(-1, maxRegion);
-        if (region == -1) {
-            region = SeededRand.intBetween(10, 12);
-            if (!App.game.badgeCase.hasBadge(GymList[GameConstants.RegionGyms[region][0]].badgeReward)) {
-                region = SeededRand.intBetween(0, maxRegion);
-            }
-        }
-        // Only use cleared gyms.
-        const possibleGyms = GameConstants.RegionGyms[region].filter(gymTown => GymList[gymTown].flags.quest && GymList[gymTown].clears());
+        // Make a list of all regions where at least one gym has been cleared.
+        const validRegionGyms = GameConstants.RegionGyms.filter(gyms => gyms.some(gym => App.game.badgeCase.hasBadge(GymList[gym].badgeReward)));
+        const chosenRegionGyms = SeededRand.fromArray(validRegionGyms);
+        // Only use cleared and unlocked gyms.
+        const possibleGyms = chosenRegionGyms.filter(gymTown => GymList[gymTown].flags.quest && GymList[gymTown].clears() && GymList[gymTown].isUnlocked());
         const gymTown = SeededRand.fromArray(possibleGyms);
         const reward = this.calcReward(amount, gymTown);
         return [amount, reward, gymTown];
