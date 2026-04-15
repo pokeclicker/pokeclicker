@@ -937,6 +937,8 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Zigzagoon', 'Linoone', 'Oddish', 'Tropius', 'Kecleon'],
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Carvanha'],
+        special:
+        [new SpecialRoutePokemon(['Feebas'], new ObtainedPokemonRequirement('Feebas'))],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 118)],
 ));
@@ -1132,6 +1134,8 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Hoothoot', 'Wurmple', 'Silcoon', 'Beautifly', 'Cascoon', 'Dustox', 'Bidoof', 'Kricketot', 'Budew', 'Buizel', 'Shellos (West)'],
         water: ['Psyduck', 'Golduck', 'Tentacool', 'Tentacruel', 'Shellder', 'Magikarp', 'Gyarados', 'Gastrodon (West)', 'Finneon', 'Lumineon', 'Barboach', 'Whiscash'],
+        special:
+        [new SpecialRoutePokemon(['Pachirisu'], new ObtainedPokemonRequirement('Pachirisu'))],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Valley Windworks'))],
 ));
