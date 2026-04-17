@@ -133,17 +133,7 @@ class PokemonFactory {
      */
     public static generateGymPokemon(gym: Gym, index: number): BattlePokemon {
         const pokemon = gym.getPokemonList()[index];
-        const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
-
-        const exp: number = basePokemon.exp;
-        const shiny = pokemon.shiny ? pokemon.shiny : this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
-        const shadow = pokemon.shadow;
-        const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
-        if (shiny && !pokemon.shiny) {
-            GameHelper.incrementObservable(App.game.statistics.totalShinyTrainerPokemonSeen);
-        }
-        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer);
+        return pokemon.getBattlePokemon();
     }
 
     public static generateDungeonPokemon(name: PokemonNameType, chestsOpened: number, baseHealth: number, level: number, mimic = false): BattlePokemon {
@@ -271,7 +261,7 @@ class PokemonFactory {
         return Rand.chance(roamingChance);
     }
 
-    private static catchRateHelper(baseCatchRate: number, noVariation = false): number {
+    public static catchRateHelper(baseCatchRate: number, noVariation = false): number {
         const catchVariation = noVariation ? 0 : Rand.intBetween(-3, 3);
         const catchRateRaw = Math.floor(Math.pow(baseCatchRate, 0.75)) + catchVariation;
         return GameConstants.clipNumber(catchRateRaw, 0, 100);

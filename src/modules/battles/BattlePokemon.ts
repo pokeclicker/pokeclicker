@@ -55,11 +55,13 @@ export default class BattlePokemon implements EnemyPokemonInterface {
         public encounterType: EncounterType,
         public heldItem?: BagItem,
         public ep: number = GameConstants.BASE_EP_YIELD,
+        displayName?: string,
+        private image?: string,
     ) {
         this.health = ko.observable(maxHealth);
         this.maxHealth = ko.observable(maxHealth);
         this.healthPercentage = ko.observable(100);
-        this._displayName = PokemonHelper.displayNameObservable(name);
+        this._displayName = PokemonHelper.displayNameObservable(displayName ?? name);
     }
     /* eslint-enable @typescript-eslint/default-param-last */
 
@@ -104,5 +106,11 @@ export default class BattlePokemon implements EnemyPokemonInterface {
 
     get displayName(): string {
         return this._displayName();
+    }
+
+    public getImage(): string {
+        return this.image
+            ? `assets/images/${this.image}.png`
+            : PokemonHelper.getImage(this.id, this.shiny, this.gender, this.shadow);
     }
 }
