@@ -866,6 +866,13 @@ class AchievementHandler {
             'One ball left, one chance to make it shine'
         );
 
+        AchievementHandler.addSecretAchievement(
+            'Alphabet Soup for Nurse Joy', // meh, could use a better name
+            'Have all Unown forms resistant to Pokérus.',
+            new PokerusStatusByFilterRequirement(unownDexFilter, unownAmount, GameConstants.Pokerus.Resistant),
+            'The quick brown Vulpix jumps over the lazy Fidough?!'
+        );
+
         // Special Furfrou forms resisted
         // TODO Uncomment when Furfrou (Heart) is obtainable
         /*const furfrouId = pokemonMap.Furfrou.id;
