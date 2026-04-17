@@ -271,6 +271,11 @@ class Party implements Feature, TmpPartyType {
             EPNum *= GameConstants.SHADOW_EP_MODIFIER;
         }
 
+        if (EPNum / GameConstants.EP_EV_RATIO >= 50) {
+            // What to do with Slow EV ? If accounted for, the challenge makes the achievement impossible.
+            AchievementHandler.unlockAchievement('One-Shot Vaccine');
+        }
+
         return Math.floor(EPNum);
     }
 

@@ -873,6 +873,13 @@ class AchievementHandler {
             'The quick brown Vulpix jumps over the lazy Fidough?!'
         );
 
+        AchievementHandler.addSecretAchievement(
+            'One-Shot Vaccine',
+            'Gain 50EV in a single catch.',
+            new DummyRequirement(),
+            'Enough Effort at Once'
+        );
+
         // Special Furfrou forms resisted
         // TODO Uncomment when Furfrou (Heart) is obtainable
         /*const furfrouId = pokemonMap.Furfrou.id;
