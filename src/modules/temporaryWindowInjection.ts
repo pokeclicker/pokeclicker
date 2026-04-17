@@ -15,6 +15,10 @@ import BerryType from './enums/BerryType';
 import SizeUnits from './enums/SizeUnits';
 import PokemonType from './enums/PokemonType';
 import CaughtStatus from './enums/CaughtStatus';
+import ContestType from './enums/ContestType';
+import ContestRank from './enums/ContestRank';
+import ContestOpponentStatus from './enums/ContestOpponentStatus';
+import Direction from './enums/Direction';
 import EvolutionType from './enums/EvolutionType';
 import FarmNotificationType from './enums/FarmNotificationType';
 import FlavorType from './enums/FlavorType';
@@ -31,6 +35,13 @@ import Battle from './battles/Battle';
 import BattlePokemon from './battles/BattlePokemon';
 import Trainer from './battles/Trainer';
 import GymPokemon from './gym/GymPokemon';
+import ContestBattle from './contest/ContestBattle';
+import ContestBattlePokemon from './contest/ContestBattlePokemon';
+import ContestHelper from './contest/ContestHelper';
+import ContestRunner from './contest/ContestRunner';
+import ContestRewards from './contest/ContestRewards';
+import ContestTrainerList from './contest/ContestTrainerList';
+import ContestScore from './contest/ContestScore';
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
@@ -75,6 +86,7 @@ import * as DisplayObservables from './utilities/DisplayObservables';
 import PokemonCategories from './party/Category';
 import Information from './utilities/Information';
 import TypeHelper from './types/TypeHelper';
+import ContestTypeHelper from './types/ContestTypeHelper';
 import Upgrade from './upgrades/Upgrade';
 import ExpUpgrade from './upgrades/ExpUpgrade';
 import OakItemType from './enums/OakItemType';
@@ -98,6 +110,7 @@ import AttackRequirement from './requirements/AttackRequirement';
 import BattleFrontierHighestStageRequirement from './requirements/BattleFrontierHighestStageRequirement';
 import BattleFrontierTotalStageRequirement from './requirements/BattleFrontierTotalStageRequirement';
 import BerriesUnlockedRequirement from './requirements/BerriesUnlockedRequirement';
+import BerryUnlockedRequirement from './requirements/BerryUnlockedRequirement';
 import CapturedRequirement from './requirements/CapturedRequirement';
 import CaughtPokemonRequirement from './requirements/CaughtPokemonRequirement';
 import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
@@ -113,6 +126,8 @@ import FarmPointsRequirement from './requirements/FarmPointsRequirement';
 import GymBadgeRequirement from './requirements/GymBadgeRequirement';
 import HatchRequirement from './requirements/HatchRequirement';
 import HatcheryHelperRequirement from './requirements/HatcheryHelperRequirement';
+import InContestRankRequirement from './requirements/InContestRankRequirement';
+import InContestTypeRequirement from './requirements/InContestTypeRequirement';
 import InRegionRequirement from './requirements/InRegionRequirement';
 import MoneyRequirement from './requirements/MoneyRequirement';
 import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
@@ -250,6 +265,10 @@ Object.assign(<any>window, {
     PokemonType,
     CaughtStatus,
     EvolutionType,
+    ContestType,
+    ContestRank,
+    ContestOpponentStatus,
+    Direction,
     FarmNotificationType,
     FlavorType,
     ItemType,
@@ -264,6 +283,13 @@ Object.assign(<any>window, {
     BattlePokemon,
     Trainer,
     GymPokemon,
+    ContestBattle,
+    ContestBattlePokemon,
+    ContestHelper,
+    ContestRunner,
+    ContestRewards,
+    ContestTrainerList,
+    ContestScore,
     BooleanSetting,
     RangeSetting,
     Setting,
@@ -315,6 +341,7 @@ Object.assign(<any>window, {
     PokemonCategories,
     Information,
     TypeHelper,
+    ContestTypeHelper,
     Upgrade,
     ExpUpgrade,
     OakItemType,
@@ -339,6 +366,7 @@ Object.assign(<any>window, {
     BattleFrontierHighestStageRequirement,
     BattleFrontierTotalStageRequirement,
     BerriesUnlockedRequirement,
+    BerryUnlockedRequirement,
     CapturedRequirement,
     CaughtPokemonRequirement,
     ClearDungeonRequirement,
@@ -355,6 +383,8 @@ Object.assign(<any>window, {
     HatchRequirement,
     HatcheryHelperRequirement,
     InRegionRequirement,
+    InContestRankRequirement,
+    InContestTypeRequirement,
     MoneyRequirement,
     MaxLevelOakItemRequirement,
     MaxRegionRequirement,

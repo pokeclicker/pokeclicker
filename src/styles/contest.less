@@ -1,0 +1,139 @@
+@import url("for");
+
+@ContestColors:
+  // taken from bulbapedia. "color-dark" is the modern regular color, except for Balanced, which has all modern
+  // ribbon svgs use colors as per the credited artwork (purple sample is taken from a battle ribbon)
+  // "type" color color-dark color-light color-ribbon,
+  "Cool" #F08030 #D42C04 #F5AC78 #bb0a34,
+  "Beautiful" #6890F0 #1E93C0 #9DB7F5 #1995c9,
+  "Cute" #F85888 #D2458D #FA92B2 #e2afd9,
+  "Smart" #78C850 #15A13F #A7DB8D #7fd244,
+  "Tough" #F8D030 #CCA100 #FAE078 #f2c43d,
+  "Balanced" #C08EEA #7D5C98 #D6B6F1 #a593d7; // from bulbapedia's default "Contest color" color
+
+#contestSelectButtons {
+  flex-wrap: wrap;
+
+  [contest-type="Balanced"] {
+    flex-basis: 100% !important;
+    order: 1; // default order is 0, this moves it to end of div in case it's not already
+  }
+
+  @media (max-width: 767px) { // phone
+    flex-direction: column;
+  }
+
+  // for fullWidth5 gameDisplayStyle setting
+  #middle-column.col-lg-4 &{
+    @media (min-width: 992px) {
+      @media (max-width: 1100px) {
+        flex-flow: column nowrap;
+        overflow-y: scroll;
+        max-height: 120px;
+      }
+    }
+  }
+}
+
+#contestControlButtons {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr 2fr;
+  grid-template-areas:
+    ". up . space"
+    "left down right space";
+
+  @media (max-width: 767px) { // phone
+    grid-template-columns: 1fr 1fr 1fr;
+    min-height: 200pt;
+    grid-template-areas:
+      "up up up"
+      "left space right"
+      "down down down";
+  }
+}
+
+#contestView{
+  .scaled-text-container {
+    white-space: nowrap;
+
+    .scaled-text {
+      text-align: center;
+      display: block;
+      transform-origin: 0 0;
+    }
+  }
+
+  .timer {
+    position: relative !important;
+    top: 1px !important;
+  }
+
+  .enemy {
+    margin-top: 20px;
+    position: relative;
+    min-height: unset !important;
+    max-width: 100%;
+  }
+
+  .lux & {
+    td, tr, tbody {
+      font-size: x-small;
+    }
+  }
+}
+
+.contest-inactive {
+  filter: brightness(0.5);
+}
+
+.contestSpotlight {
+  max-height: 90%;
+  position: absolute;
+  height: 109px;
+  bottom: 23%;
+}
+
+.contestTrainer {
+  position: absolute;
+  max-width: 100%;
+}
+
+#middle-column.col-lg-4 & {
+  @media (min-width: 992px) {
+    @media (max-width: 1300px) {
+      .crowdHypeCell {
+        display: none;
+      }
+
+      .crowdHypeRow {
+        display: block !important; // override d-none display
+      }
+    }
+  }
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors */
+.for(@ContestColors); .-each(@value) {
+  @type: extract(@value, 1);
+  @color: extract(@value, 2);
+  @color-dark: extract(@value, 3);
+  @color-light: extract(@value, 4);
+  @color-ribbon: extract(@value, 5);
+  &[contest-color='@{type}'] {
+    .brite &, .cerulean &, .flatly &, .lux &, .quartz &, .sandstone &, .simplex &, .spacelab &, .united &, .yeti & {
+      background-color: @color;
+    }
+
+    .cyborg &, .darkly &, .slate &, .superhero &, .solar &, .vapor & {
+      background-color: @color-dark;
+    }
+
+    .cosmo &, .journal &, .litera &, .lumen &, .materia &, .minty &, .morph &, .pulse &, .sketchy &, .zephyr & {
+      background-color: @color-light;
+    }
+  }
+  &[contest-ribbon='@{type}'] .ribbon-color {
+    fill: @color-ribbon;
+  }
+}

@@ -233,6 +233,21 @@ class PokemonFactory {
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, encounterType);
     }
 
+    public static generateContestTrainerPokemon(trainer: ContestTrainer, partyIndex: number): ContestBattlePokemon {
+        const pokemon = trainer.getTeam()[partyIndex] as ContestPokemon;
+        const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
+        const nickname = pokemon.nickname;
+        const contestTypes = pokemon.contestTypes ?? [0, 1, 2, 3, 4, 5]; // todo: `?? basePokemon.contestTypes;` when PokemonList has contest types
+        const gender = pokemon.gender ?? this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
+        const moves = pokemon.moves ?? Rand.shuffleArray(contestTypes.concat(contestTypes).concat(contestTypes).concat(contestTypes)).slice(0,4);
+        const shiny = pokemon.shiny ?? false;
+        const exp: number = pokemon.level;
+        const catchRate = 0;
+        const money = new Amount(1, GameConstants.Currency.money);
+        const shadow = GameConstants.ShadowStatus.None;
+        return new ContestBattlePokemon(contestTypes, nickname, moves, pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, money, shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer);
+    }
+
     private static generateRoamingEncounter(region: GameConstants.Region, subRegion: SubRegion): PokemonNameType {
         const possible = RoamingPokemonList.getSubRegionalGroupRoamers(region, RoamingPokemonList.findGroup(region, subRegion.id));
 

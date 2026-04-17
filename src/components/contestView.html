@@ -1,0 +1,179 @@
+<div id="contestView" class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.contest">
+  <div class="col no-gutters" style="height: 280px; display: block;">
+
+    <h2 class="pageItemTitle">
+      <div class="scaled-text-container">
+        <span class="scaled-text" style="line-height: unset;" data-bind="text: ContestBattle.getBattleViewTitle()"></span>
+      </div>
+      <div data-bind="visible: ContestRunner.running()" class="progress timer" style="z-index: 1;">
+        <div class="progress-bar" role="progressbar" style="animation-direction: reverse;"
+          data-bind="attr:{ style: 'width:' + ContestRunner.timeLeftPercentage() + '%' },
+          css: {
+            'bg-danger': !ContestRunner.frenzyMode() && ContestRunner.timeLeftSeconds() < 3,
+            'bg-primary': ContestRunner.timeLeftSeconds() >= 10,
+            'progress-bar-striped progress-bar-animated bg-warning': ContestRunner.frenzyMode(),
+          }"
+          aria-valuemin="0" aria-valuemax="100">
+          <span data-bind="text: ContestRunner.timeLeftSeconds() + 's'" style="font-size: 12px;"></span>
+        </div>
+      </div>
+    </h2>
+
+    <div data-bind="visible: !ContestRunner.running()">
+      <div style="margin-top: 60px;">
+        <button class="btn w-25 btn-success" onclick="ContestRunner.startContest()">Start Contest</button>
+        <!-- ko if: new DevelopmentRequirement().isCompleted() -->
+        <button class="btn w-25 btn-warning" onclick="ContestBattle.toggleTesting(!ContestBattle.toggleTesting())" data-bind="css: { active: ContestBattle.toggleTesting() }">Toggle Testing</button>
+        <!-- /ko -->
+      </div>
+      <div>
+          <div class="justify-content-center">
+            <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
+                <table width="100%">
+                  <tr>
+                    <th colspan="2" data-bind="text: `${ContestHelper.getContestEmoji(ContestRunner.type())}${ContestRank[ContestRunner.rank()]} Rank ${ContestType[ContestRunner.type()]} Contest Stats${ContestHelper.getContestEmoji(ContestRunner.type())}`"></th>
+                  </tr>
+                  <tr>
+                    <td colspan="2" data-bind="text: `Audience Appeal: ${ContestBattle.getActiveContestBattlePokemonAppeal().toLocaleString('en-US')}`"></td>
+                  </tr>
+                  <tr>
+                    <td data-bind="text: `Highest Score: ${App.game.statistics.contestHighestScore[ContestRunner.rank()][ContestRunner.type()]().toLocaleString('en-US') ?? 0}`"></td>
+                    <td data-bind="text: `Total Won: ${App.game.statistics.contestsWon[ContestRunner.rank()][ContestRunner.type()]().toLocaleString('en-US') ?? 0}`"></td>
+                  </tr>
+                </table>
+              </h2>
+          </div>
+      </div>
+    </div>
+
+    <div data-bind="if: ContestRunner.running()">
+      <div class="d-flex px-3" style="justify-content: space-evenly; overflow-x: hidden; height: 132px;" data-bind="foreach: ContestBattle.trainers()">
+        <div style="position: relative;" data-bind="if: ContestBattle.trainers().length > $index(),
+          css: { 'contest-inactive': !ContestBattle.getSpotlightStatus($index()) && !ContestBattle.prepareNextTrainerBatch() }">
+
+          <div class="mr-3">
+            <img class="contestTrainer" data-bind="attr:{ src: ContestBattle.trainers()[$index()].image }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <img class="contestSpotlight" src="assets/images/contest/contestSpotlight.png" data-bind="
+              visible: ContestBattle.getSpotlightStatus($index()),
+              style: { 'opacity': ($index() != ContestBattle.selectedEnemy()) ? '70%' : '' }"/>
+          </div>
+
+          <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': ContestBattle.pokemons()[$index()] } }">Pokémon sprite</knockout>
+
+          <div class="progress mx-1" style="bottom: 10px;">
+            <div class="progress-bar scaled-text-container" role="progressbar"
+                    data-bind="style: { 'width': ContestBattle.pokemons()[$index()].isRallied() ? '100%' : '0%' },
+                      attr: { 'contest-color': ContestType[ContestRunner.type()] }"
+                    aria-valuemin="0" aria-valuemax="100">
+                  <span class="scaled-text" style="font-size: 12px;" data-bind="text: ContestBattle.contestHealth(ContestBattle.pokemons()[$index()])"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="progress hitpoints" style="bottom: unset;">
+        <div class="progress-bar" role="progressbar"
+                data-bind="style: {
+                  'width': ContestRunner.audienceAppealPercentage() + '%',
+                  'animation-direction': 'reverse',
+                }, css: {
+                  'progress-bar-striped progress-bar-animated': ContestRunner.frenzyMode() || ContestRunner.jamTime() > 0,
+                  'bg-dark': ContestRunner.jamTime() > 0,
+                },
+                attr: { 'contest-color': ContestType[ContestRunner.type()] }"
+                aria-valuemin="0" aria-valuemax="100">
+            <span data-bind="html: ContestRunner.audienceStatus()" style="font-size: 12px;"></span>
+        </div>
+      </div>
+
+      <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
+        <btn class="btn btn-block btn-secondary p-1 crowdHypeRow d-none">
+          <span data-bind="text: `Crowd Hype: ${ContestRunner.crowdHypeComputable()}`"></span>
+        </btn>
+        <table width="100%" style="font-size: small;">
+          <tbody>
+            <tr>
+              <td data-bind="text: ContestBattle.trainerInfo(ContestBattle.selectedEnemy()),
+                attr: { colspan: ContestBattle.contestViewGimmickBar() === 'contestBeatTemplate' ? '3' : '2' }">Opponent name</td>
+              <td data-bind="text: `Score: ${Math.round(ContestScore.totalScore()).toLocaleString('en-US')}`, visible: ContestBattle.contestViewGimmickBar() === 'contestMovesTemplate'">
+                Score
+              </td>
+              <td class="crowdHypeCell" rowspan="3" width="30%">
+                <btn class="btn btn-block btn-secondary p-1">
+                    <span data-bind="text: 'Crowd Hype'"></span></br>
+                    <span data-bind="text: ContestRunner.crowdHypeComputable()"></span>
+                </btn>
+              </td>
+            </tr>
+
+            <!-- ko if: ContestBattle.contestViewGimmickBar() === 'contestBeatTemplate' -->
+              <tr>
+                <td class="tight" colspan="3" data-bind="foreach: GameHelper.enumNumbers(ContestType).filter(e => e != ContestType.Balanced)">
+                  <span class="badge text-light px-1" data-bind="
+                              style: {
+                                'border': ContestRunner.type() === $data ? 'thin solid whitesmoke' : '',
+                              },
+                              attr: { 'contest-color': ContestBattle.enemyTypes(ContestBattle.selectedEnemy()).includes($data) ? ContestType[$data] : '' }">
+                    <small>
+                      <strong data-bind="text: ContestType[$data].toUpperCase()" style="color: white;"></strong>
+                    </small>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td data-bind="text: `Round: ×${ContestScore.encoreBonus().toLocaleString('en-US')}`">
+                  Encore Round
+                </td>
+                <td data-bind="text: `Score: ${Math.round(ContestScore.totalScore()).toLocaleString('en-US')}`">
+                  Score
+                </td>
+                <td data-bind="text: `Chain: &plus;${ContestScore.activeChain().toLocaleString('en-US')}`">
+                  Combo Chain
+                </td>
+              </tr>
+            <!-- /ko -->
+
+            <!-- ko if: ContestBattle.contestViewGimmickBar() === 'contestMovesTemplate' -->
+              <tr>
+                <td data-bind="text: `Round: ×${ContestScore.encoreBonus().toLocaleString('en-US')}`">
+                  Encore Round
+                </td>
+                <!-- ko with: ContestBattle.pokemons()[ContestBattle.selectedEnemy()].usableMoves[Direction.Up] -->
+                <td class="tight" data-bind="attr: { 'contest-color': ContestType[$data.moveType] },
+                    style: {
+                      'opacity': $data.pp() ? '' : '50%',
+                }">
+                      <span class="text-light p-1">
+                        <strong data-bind="text: `${ContestHelper.getArrowEmoji(Direction.Up)} ${ContestType[$data.moveType].toUpperCase()}`" style="color: white;"></strong>
+                      </span>
+                  </td>
+                  <!-- /ko -->
+                  <td data-bind="text: `Chain: &plus;${ContestScore.activeChain().toLocaleString('en-US')}`">
+                    Combo Chain
+                  </td>
+              </tr>
+              <tr>
+                <!-- ko foreach: GameHelper.enumNumbers(Direction).filter(d => d != Direction.Up) -->
+                  <!-- ko with: ContestBattle.pokemons()[ContestBattle.selectedEnemy()].usableMoves[$data] -->
+                  <td class="tight" data-bind="attr: { 'contest-color': ContestType[$data.moveType] },
+                      style: {
+                        'opacity': $data.pp() ? '' : '50%',
+                    }">
+                      <span class="text-light p-1">
+                        <strong data-bind="text: `${ContestHelper.getArrowEmoji($parent)} ${ContestType[$data.moveType].toUpperCase()}`" style="color: white;"></strong>
+                      </span>
+                  </td>
+                  <!-- /ko -->
+                <!-- /ko -->
+              </tr>
+            <!-- /ko -->
+          </tbody>
+        </table>
+      </h2>
+    </div>
+
+  </div>
+</div>
