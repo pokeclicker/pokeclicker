@@ -27,20 +27,30 @@ export default class GymPokemon {
         this.shadow = shadow;
     }
 
-    public getBattlePokemon(): BattlePokemon {
+    public getBattlePokemon(
+        encounterType: EncounterType = EncounterType.trainer,
+        shinyChance: number = GameConstants.SHINY_CHANCE_BATTLE,
+        healthOverride?: number,
+        levelOverride?: number,
+        epOverride?: number,
+        gemsOverride: number = GameConstants.GYM_GEMS,
+    ): BattlePokemon {
         const basePokemon = PokemonHelper.getPokemonByName(this.name);
 
         const exp: number = basePokemon.exp;
-        const shiny = this.shiny ? this.shiny : PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        const shiny = this.shiny ? this.shiny : PokemonFactory.generateShiny(shinyChance);
         const gender = PokemonFactory.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
-        const shadow = this.shadow;
         const catchRate: number = PokemonFactory.catchRateHelper(basePokemon.catchRate);
-        if (shiny && !this.shiny) {
+
+        if (shiny && !this.shiny && encounterType === EncounterType.trainer) {
             GameHelper.incrementObservable(App.game.statistics.totalShinyTrainerPokemonSeen);
         }
 
+        const maxHealth = healthOverride ?? this.maxHealth;
+        const level = levelOverride ?? this.level;
+
         return new BattlePokemon(this.name, basePokemon.id, basePokemon.type1, basePokemon.type2,
-            this.maxHealth, this.level, catchRate, exp, new Amount(0, GameConstants.Currency.money),
-            shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer);
+            maxHealth, level, catchRate, exp, new Amount(0, GameConstants.Currency.money),
+            shiny, gemsOverride, gender, this.shadow, encounterType, undefined, epOverride);
     }
 }

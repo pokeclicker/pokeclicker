@@ -57,6 +57,7 @@ export default class BattlePokemon implements EnemyPokemonInterface {
         public ep: number = GameConstants.BASE_EP_YIELD,
         displayName?: string,
         private image?: string,
+        private incrementDefeatedStatistic = true,
     ) {
         this.health = ko.observable(maxHealth);
         this.maxHealth = ko.observable(maxHealth);
@@ -79,7 +80,9 @@ export default class BattlePokemon implements EnemyPokemonInterface {
     }
 
     public defeat(trainer = false): void {
-        PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.PokemonStatisticsType.Defeated, this.shiny, this.gender, this.shadow);
+        if (this.incrementDefeatedStatistic) {
+            PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.PokemonStatisticsType.Defeated, this.shiny, this.gender, this.shadow);
+        }
 
         if (this.reward.amount > 0) {
             App.game.wallet.addAmount(this.reward);
@@ -104,13 +107,13 @@ export default class BattlePokemon implements EnemyPokemonInterface {
         App.game.gems.gainGems(this.gemReward, this.type2);
     }
 
-    get displayName(): string {
-        return this._displayName();
-    }
-
     public getImage(): string {
         return this.image
-            ? `assets/images/${this.image}.png`
+            ? `assets/images/${this.image}`
             : PokemonHelper.getImage(this.id, this.shiny, this.gender, this.shadow);
+    }
+
+    get displayName(): string {
+        return this._displayName();
     }
 }
