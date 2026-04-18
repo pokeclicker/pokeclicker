@@ -31,7 +31,7 @@ export default class CustomGymPokemon extends GymPokemon {
         const type1 = this.type[0];
         const type2 = this.type[1] ?? PokemonType.None;
         const shiny = this.shiny ? this.shiny : PokemonFactory.generateShiny(shinyChance);
-        const gender = 0; // to do
+        const gender = GameConstants.BattlePokemonGender.NoGender;
 
         if (shiny && !this.shiny && encounterType === EncounterType.trainer) {
             GameHelper.incrementObservable(App.game.statistics.totalShinyTrainerPokemonSeen);
