@@ -877,7 +877,14 @@ class AchievementHandler {
             'One-Shot Vaccine',
             'Gain 50EV in a single catch.',
             new DummyRequirement(),
-            'Enough Effort at Once'
+            'Too Much Effort At Once'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Hatchery-Line Workers',
+            'Get 10 Hatchery Helpers to maximum bonus efficiency.',
+            new HatcheryHelperRequirement(10, 50),
+            'Egg-o-matic 5010'
         );
 
         // Special Furfrou forms resisted
