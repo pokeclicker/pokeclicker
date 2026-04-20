@@ -1,5 +1,5 @@
 enum AuraType {
-    Growth,
+    Ripen,
     Replant,
     Mutation,
     Harvest,
