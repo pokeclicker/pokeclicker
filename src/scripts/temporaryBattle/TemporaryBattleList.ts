@@ -2395,11 +2395,26 @@ TemporaryBattleList['Red Genesect 2'] = new TemporaryBattle(
         visibleRequirement: new QuestLineStepCompletedRequirement('The Legend Awakened', 4),
     }
 );
+TemporaryBattleList['DreamOrbs Tornadus'] = new TemporaryBattle(
+    'DreamOrbs Tornadus',
+    [new GymPokemon('Tornadus (Therian)', 125000000, 32)],
+    'The rare Tornadus flew away but it left something behind. A Dream Orb ? Let\'s ask Professor Burnet about this.</br><img src="assets/images/dreamOrbs/dream_orb_pink.png"/>',
+    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.dreamOrbController.lastOrbTime(GameConstants.DREAM_ORBS_ATTEMP_TIME * GameConstants.DREAM_ORBS_MAX_TIME - GameConstants.TICK_TIME / GameConstants.SECOND);
+            App.game.dreamOrbController.lastAttemptTime(GameConstants.DREAM_ORBS_ATTEMP_TIME - GameConstants.TICK_TIME / GameConstants.SECOND);
+        },
+        hideTrainer: true,
+        displayName: 'The Mystery Pokémon',
+    }
+);
 TemporaryBattleList['Dream Researcher'] = new TemporaryBattle(
     'Dream Researcher',
-    [new GymPokemon('Mega Audino', 125000000, 32)],
+    [new GymPokemon('Mega Audino', 225000000, 32)],
     'Wow! You have proven that you have total power over the realm of dreams! The location of this Audinite was revealed to me in a dream, you deserve to have it!</br><img src="assets/images/megaStone/Audinite.png"/>',
-    [new ObtainedPokemonRequirement('Landorus (Therian)'), new ObtainedPokemonRequirement('Audino'), new MaxRegionRequirement(GameConstants.Region.kalos)],
+    [new StatisticRequirement('dreamOrbsOpened', 444, 'Open 444 Dream Orbs.'), new ObtainedPokemonRequirement('Audino'), new MaxRegionRequirement(GameConstants.Region.kalos)],
     undefined,
     {
         imageName: 'Scientist (female)',

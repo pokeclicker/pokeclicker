@@ -6,7 +6,7 @@ aria-labelledby="dreamOrbsModalLabel">
             <h5 class="modal-title">Open Dream Orbs</h5>
         </div>
         <div class="modal-body">
-            <select id="dream-orbs-selector" class="custom-select" onchange="App.game.dreamOrbController.item(undefined)" style="margin-right: 8px"
+            <select id="dream-orbs-selector" class="custom-select" onchange="App.game.dreamOrbController.item(undefined)"
                     data-bind="options: App.game.dreamOrbController.orbs.filter((o) => !o.requirement ||o.requirement.isCompleted()),
                                optionsText: 'color',
                                value: App.game.dreamOrbController.selectedOrb"

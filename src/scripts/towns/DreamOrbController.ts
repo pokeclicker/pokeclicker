@@ -9,19 +9,35 @@ class DreamOrb {
     }
 }
 
-class DreamOrbController implements Saveable {
+class DreamOrbController implements Feature {
+    static requirements = [new TemporaryBattleRequirement('DreamOrbs Tornadus')];
+
+    saveKey = 'dream-orbs';
+    name = 'dream-orbs';
+    defaults: Record<string, any>;
+
     public selectedOrb: KnockoutObservable<DreamOrb>;
     public opening: KnockoutObservable<boolean>;
     public item: KnockoutObservable<DreamOrbLoot>;
     public amountSelected = ko.observable(1);
     public amountOpened = ko.observable(0);
     public itemsReceived = ko.observableArray();
+    public lastOrbTime = ko.observable(0);
+    public lastAttemptTime = ko.observable(0);
 
     constructor() {
         this.selectedOrb = ko.observable(this.orbs[0]);
         this.opening = ko.observable(false);
         this.item = ko.observable(undefined);
     }
+
+    initialize(): void { }
+
+    canAccess(): boolean {
+        return DreamOrbController.requirements.every(r => r.isCompleted());
+    }
+
+    public tick() { }
 
     public orbs = [
         new DreamOrb('Pink', undefined, [
@@ -35,7 +51,7 @@ class DreamOrbController implements Saveable {
             new DreamOrbLoot({type: ItemType.item, id: 'Revive'}, 0.125),
 
         ]),
-        new DreamOrb('Green', new ObtainedPokemonRequirement('Tornadus (Therian)'), [
+        new DreamOrb('Green', new StatisticRequirement('dreamOrbsOpened', 100, 'Open 100 Dream Orbs.'), [
             new DreamOrbLoot({type: ItemType.item, id: 'Drifloon'}, 0.15),
             new DreamOrbLoot({type: ItemType.item, id: 'Bronzor'}, 0.15),
             new DreamOrbLoot({type: ItemType.item, id: 'Sigilyph'}, 0.125),
@@ -45,7 +61,7 @@ class DreamOrbController implements Saveable {
             new DreamOrbLoot({type: ItemType.item, id: 'Yellow_shard'}, 0.125),
             new DreamOrbLoot({type: ItemType.item, id: 'Green_shard'}, 0.125),
         ]),
-        new DreamOrb('Orange', new ObtainedPokemonRequirement('Thundurus (Therian)'), [
+        new DreamOrb('Orange', new StatisticRequirement('dreamOrbsOpened', 400, 'Open 400 more Dream Orbs.'), [
             new DreamOrbLoot({type: ItemType.item, id: 'Staryu'}, 0.1),
             new DreamOrbLoot({type: ItemType.item, id: 'Ralts'}, 0.1),
             new DreamOrbLoot({type: ItemType.item, id: 'Rotom'}, 0.1),
@@ -56,7 +72,7 @@ class DreamOrbController implements Saveable {
             new DreamOrbLoot({type: ItemType.item, id: 'Carbos'}, 0.092),
             new DreamOrbLoot({type: ItemType.item, id: 'Rare_Candy'}, 0.15),
         ]),
-        new DreamOrb('Blue', new MultiRequirement([new ObtainedPokemonRequirement('Landorus (Therian)'), new ObtainedPokemonRequirement('Enamorus')]), [
+        new DreamOrb('Blue', new DevelopmentRequirement(new MultiRequirement([new StatisticRequirement('dreamOrbsOpened', 1000, 'Open 1000 more Dream Orbs.'), new GymBadgeRequirement(BadgeEnums.Azure)])), [
             new DreamOrbLoot({type: ItemType.item, id: 'Igglybuff'}, 0.2),
             new DreamOrbLoot({type: ItemType.item, id: 'Smoochum'}, 0.2),
             new DreamOrbLoot({type: ItemType.item, id: 'Enamorus (Therian)'}, 0.05),
@@ -66,7 +82,42 @@ class DreamOrbController implements Saveable {
             new DreamOrbLoot({type: ItemType.item, id: 'Heart_scale'}, 0.125),
             new DreamOrbLoot({type: ItemType.item, id: 'Max_revive'}, 0.1),
         ]),
-    ]
+    ];
+
+    public update(delta: number) {
+        let lastOrbTime = this.lastOrbTime();
+        let lastAttemptTime = this.lastAttemptTime() + delta;
+        let orbsObtained = 0;
+        const orbs = Object.fromEntries(this.orbs.reduce((r, _, i) => [...r, [i, 0]], []).filter(([index]) => this.orbs[index].requirement?.isCompleted() ?? true));
+        while (lastAttemptTime >= GameConstants.DREAM_ORBS_ATTEMP_TIME) {
+            lastAttemptTime -= GameConstants.DREAM_ORBS_ATTEMP_TIME;
+            const diff = Math.floor(lastOrbTime / GameConstants.DREAM_ORBS_ATTEMP_TIME);
+            const chance = 1 / (GameConstants.DREAM_ORBS_MAX_TIME - diff);
+            if (Rand.chance(chance)) {
+                lastOrbTime = 0;
+                const orbIndex = Rand.fromArray(Object.keys(orbs));
+                orbs[orbIndex]++;
+                orbsObtained++;
+            } else {
+                lastOrbTime += GameConstants.DREAM_ORBS_ATTEMP_TIME;
+            }
+        }
+        if (orbsObtained) {
+            Object.keys(orbs).forEach((index) => {
+                if (orbs[index]) {
+                    GameHelper.incrementObservable(this.orbs[index].amount, orbs[index]);
+                    Notifier.notify({
+                        message: `You collected ${orbs[index]} ${this.orbs[index].color} Dream Orb${orbs[index] > 1 ? 's' : ''}`,
+                        image: `assets/images/dreamOrbs/dream_orb_${this.orbs[index].color.toLowerCase()}.png`,
+                        timeout: GameConstants.SECOND * 20,
+                    });
+                }
+            });
+        }
+        const newLastOrbTime = lastOrbTime - (lastOrbTime % GameConstants.DREAM_ORBS_ATTEMP_TIME) + lastAttemptTime;
+        this.lastAttemptTime(lastAttemptTime);
+        this.lastOrbTime(newLastOrbTime);
+    }
 
     public open() {
         if (this.opening()) {
@@ -83,6 +134,7 @@ class DreamOrbController implements Saveable {
         const amountToOpen = Math.min(this.amountSelected(), selectedOrb.amount());
         this.opening(true);
         this.item(undefined);
+        GameHelper.incrementObservable(App.game.statistics.dreamOrbsOpened, amountToOpen);
         Notifier.notify({
             sound: NotificationConstants.NotificationSound.General.dream_orb,
         });
@@ -111,25 +163,24 @@ class DreamOrbController implements Saveable {
         }, 1800);
     }
 
-    saveKey = 'dream-orbs';
-    defaults: Record<string, any>;
     toJSON(): Record<string, any> {
         return {
             orbs: this.orbs.map((o) => ({ amount: o.amount(), color: o.color })),
+            lastOrbTime: this.lastOrbTime(),
         };
     }
     fromJSON(json: Record<string, any>): void {
         json?.orbs?.forEach((o) => this.orbs.find((o2) => o2.color == o.color)?.amount(o.amount));
+        const lastOrbTime = json?.lastOrbTime ?? 0;
+        this.lastOrbTime(lastOrbTime);
+        this.lastAttemptTime(lastOrbTime % GameConstants.DREAM_ORBS_ATTEMP_TIME);
+
     }
 }
 
 class DreamOrbTownContent extends TownContent {
     constructor() {
-        super([
-            new ObtainedPokemonRequirement('Tornadus'),
-            new ObtainedPokemonRequirement('Thundurus'),
-            new ObtainedPokemonRequirement('Landorus'),
-        ]);
+        super(DreamOrbController.requirements);
     }
     public cssClass(): string {
         return 'btn btn-info';

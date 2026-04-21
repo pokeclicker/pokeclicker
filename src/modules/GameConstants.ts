@@ -2283,6 +2283,8 @@ export const TemporaryBattles = [
     'Destiny Deoxys Rayquaza',
     'Destiny Deoxys Army',
     'Destiny Rayquaza',
+    'DreamOrbs Tornadus',
+    // Place new Battles right before this point
     'Volo 1',
     'Akari 1',
     'Warden Mai',
@@ -2684,3 +2686,5 @@ export const ZMOVE_ACTIVE_MULTIPLIER = 1.5;
 export const ZMOVE_COUNTERACTIVE_MULTIPLIER = 0.75;
 export const ZMOVE_ACTIVE_TIME = 1 * MINUTE;
 export const ZMOVE_COUNTERACTIVE_TIME = 4 * MINUTE;
+export const DREAM_ORBS_MAX_TIME = HOUR * 2 / MINUTE;
+export const DREAM_ORBS_ATTEMP_TIME = MINUTE / SECOND;
