@@ -9242,15 +9242,6 @@ TownList.Postwick = new Town(
         npcs: [PostwickMum, MagearnaMysteryGift],
     }
 );
-TownList['Slumbering Weald'] = new Town(
-    'Slumbering Weald',
-    GameConstants.Region.galar,
-    GameConstants.GalarSubRegions.SouthGalar,
-    [new MoveToDungeon(dungeonList['Slumbering Weald Shrine']), TemporaryBattleList.Mirages],
-    {
-        requirements: [new TemporaryBattleRequirement('Hop 1')],
-    }
-);
 TownList.Wedgehurst = new Town(
     'Wedgehurst',
     GameConstants.Region.galar,
@@ -9426,12 +9417,12 @@ TownList.Freezington = new Town(
 
 
 //Galar Dungeons
-TownList['Slumbering Weald Shrine'] = new DungeonTown(
-    'Slumbering Weald Shrine',
+TownList['Slumbering Weald'] = new DungeonTown(
+    'Slumbering Weald',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.SouthGalar,
-    [new QuestLineStepCompletedRequirement('The Darkest Day', 12)],
-    [TemporaryBattleList['Hop 8'], TemporaryBattleList['Sordward 1'], TemporaryBattleList['Shielbert 1']],
+    [new TemporaryBattleRequirement('Hop 1')],
+    [TemporaryBattleList.Mirages, TemporaryBattleList['Hop 8'], TemporaryBattleList['Sordward 1'], TemporaryBattleList['Shielbert 1']],
     {
         npcs: [SlumberingHop1, SlumberingHop2, SordwardShielbert1],
     }

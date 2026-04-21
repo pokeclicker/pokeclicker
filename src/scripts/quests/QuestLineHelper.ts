@@ -3562,10 +3562,10 @@ class QuestLineHelper {
         const talktoHop2 = new TalkToNPCQuest(WyndonHop, 'Talk to Hop in Wyndon Stadium.');
         darkestDayQuestLine.addQuest(talktoHop2);
 
-        const clearSlumberingWeald = new DefeatDungeonQuest(1, 0, 'Slumbering Weald Shrine').withDescription('Chairman Rose has interrupted your fight with Leon and brought about the Darkest Day. Clear Slumbering Weald Shrine.');
+        const clearSlumberingWeald = new DefeatDungeonQuest(1, 0, 'Slumbering Weald').withDescription('Chairman Rose has interrupted your fight with Leon and brought about the Darkest Day. Clear Slumbering Weald.');
         darkestDayQuestLine.addQuest(clearSlumberingWeald);
 
-        const talktoHop3 = new TalkToNPCQuest(SlumberingHop1, 'Talk to Hop in Slumbering Weald Shrine.');
+        const talktoHop3 = new TalkToNPCQuest(SlumberingHop1, 'Talk to Hop in the Slumbering Weald.');
         darkestDayQuestLine.addQuest(talktoHop3);
 
         const clearEnergyPlant = new DefeatDungeonQuest(1, 0, 'Energy Plant').withDescription('Unfortunately, all you found at the Slumbering Weald was a rusty sword and shield. Go to the Energy Plant in Hammerlocke to put an end to Chairman Rose\'s plans!');
@@ -3606,7 +3606,7 @@ class QuestLineHelper {
         const talktoHop4 = new TalkToNPCQuest(SlumberingHop2, 'Talk to Hop in the Slumbering Weald.');
         swordShieldQuestLine.addQuest(talktoHop4);
 
-        const clearHop8 = new DefeatTemporaryBattleQuest('Hop 8', 'Hop wants to fight you one more time at Slumbering Weald Shrine.');
+        const clearHop8 = new DefeatTemporaryBattleQuest('Hop 8', 'Hop wants to fight you one more time at Slumbering Weald.');
         swordShieldQuestLine.addQuest(clearHop8);
 
         const talktoSordwardShielbert1 = new TalkToNPCQuest(SordwardShielbert1, 'Talk to Sordward & Shielbert in the Slumbering Weald.');

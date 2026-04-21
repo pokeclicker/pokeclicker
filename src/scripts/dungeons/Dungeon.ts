@@ -12626,7 +12626,7 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
 
 //Galar Dungeons
 
-dungeonList['Slumbering Weald Shrine'] = new Dungeon('Slumbering Weald Shrine',
+dungeonList['Slumbering Weald'] = new Dungeon('Slumbering Weald',
     ['Galarian Stunfisk', 'Munna', 'Butterfree', 'Orbeetle', 'Whiscash', 'Barboach', 'Magikarp'],
     {
         common: [
@@ -12652,7 +12652,7 @@ dungeonList['Slumbering Weald Shrine'] = new Dungeon('Slumbering Weald Shrine',
         new DungeonBossPokemon('Zacian (Crowned Sword)', 169578810, 70, { weight: 0.5, hide: true, requirement: new ObtainedPokemonRequirement('Zacian (Crowned Sword)') }),
         new DungeonBossPokemon('Zamazenta (Crowned Shield)', 169578810, 70, { weight: 0.5, hide: true, requirement: new ObtainedPokemonRequirement('Zamazenta (Crowned Shield)') }),
     ],
-    2000000, 32);
+    2000000, 32, undefined, { requirement: new QuestLineStepCompletedRequirement('The Darkest Day', 12) });
 
 dungeonList['Galar Mine'] = new Dungeon('Galar Mine',
     [
