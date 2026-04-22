@@ -1964,6 +1964,7 @@ TemporaryBattleList['Team Plasma Grunt 7'] = new TemporaryBattle(
     {
         displayName: 'Team Plasma Grunt',
         imageName: 'Team Plasma Grunt (male)',
+        battleBackground: 'Ice',
     }
 );
 TemporaryBattleList['Team Plasma Grunt 8'] = new TemporaryBattle(
@@ -1978,6 +1979,7 @@ TemporaryBattleList['Team Plasma Grunt 8'] = new TemporaryBattle(
     {
         displayName: 'Team Plasma Grunt',
         imageName: 'Team Plasma Grunt (female)',
+        battleBackground: 'Ice',
     }
 );
 TemporaryBattleList['Team Plasma Grunt 9'] = new TemporaryBattle(
@@ -1992,6 +1994,7 @@ TemporaryBattleList['Team Plasma Grunt 9'] = new TemporaryBattle(
     {
         displayName: 'Team Plasma Grunt',
         imageName: 'Team Plasma Grunt (male)',
+        battleBackground: 'Ice',
     }
 );
 TemporaryBattleList['Zinzolin 2'] = new TemporaryBattle(
@@ -2011,6 +2014,7 @@ TemporaryBattleList['Zinzolin 2'] = new TemporaryBattle(
     {
         displayName: 'Zinzolin',
         imageName: 'Team Plasma (zinzolin)',
+        battleBackground: 'Ice',
     }
 );
 TemporaryBattleList['Plasma Shadow 1'] = new TemporaryBattle(
@@ -2026,6 +2030,7 @@ TemporaryBattleList['Plasma Shadow 1'] = new TemporaryBattle(
     {
         displayName: 'Plasma Shadow',
         imageName: 'Plasma Shadow',
+        battleBackground: 'Ice',
     }
 );
 TemporaryBattleList['Colress 3'] = new TemporaryBattle(
@@ -2062,6 +2067,7 @@ TemporaryBattleList['Plasma Shadow 2'] = new TemporaryBattle(
     {
         displayName: 'Plasma Shadow',
         imageName: 'Plasma Shadow',
+        battleBackground: 'Ice',
     }
 );
 TemporaryBattleList['Plasma Shadow 3'] = new TemporaryBattle(
@@ -2077,6 +2083,7 @@ TemporaryBattleList['Plasma Shadow 3'] = new TemporaryBattle(
     {
         displayName: 'Plasma Shadow',
         imageName: 'Plasma Shadow',
+        battleBackground: 'Ice',
     }
 );
 TemporaryBattleList['Plasma Shadow 4'] = new TemporaryBattle(
@@ -2092,6 +2099,7 @@ TemporaryBattleList['Plasma Shadow 4'] = new TemporaryBattle(
     {
         displayName: 'Plasma Shadow',
         imageName: 'Plasma Shadow',
+        battleBackground: 'Ice',
     }
 );
 TemporaryBattleList['Ghetsis 1'] = new TemporaryBattle(

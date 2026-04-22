@@ -8980,7 +8980,8 @@ dungeonList['Plasma Frigate'] = new Dungeon('Plasma Frigate',
                 new GymPokemon('Weavile', 13000000, 50),
             ], { weight: 1 }, 'Zinzolin', '(zinzolin)'),
     ],
-    257500, 20);
+    257500, 20, undefined,
+    { requirement: new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 14) });
 
 dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
     [

@@ -5394,20 +5394,6 @@ TownList['Castelia City'] = new Town(
         npcs: [CasteliaMusician, GenesectFight],
     }
 );
-TownList['A Perfectly Ordinary Frigate'] = new Town(
-    'A Perfectly Ordinary Frigate',
-    GameConstants.Region.unova,
-    GameConstants.UnovaSubRegions.Unova,
-    [],
-    {
-        requirements: [
-            new GymBadgeRequirement(BadgeEnums.Insect),
-            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 1),
-            new TemporaryBattleRequirement('Team Plasma Grunt 1'),
-        ],
-        npcs: [PlasmaGrunt1],
-    }
-);
 TownList['Nimbasa City'] = new Town(
     'Nimbasa City',
     GameConstants.Region.unova,
@@ -5434,19 +5420,6 @@ TownList['Driftveil City'] = new Town(
             new TemporaryBattleRequirement('Team Plasma Grunt 3'),
             new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4),
         ],
-    }
-);
-TownList['A Totally Unsuspicious Frigate'] = new Town(
-    'A Totally Unsuspicious Frigate',
-    GameConstants.Region.unova,
-    GameConstants.UnovaSubRegions.Unova,
-    [TemporaryBattleList['Team Plasma Grunt 4'], TemporaryBattleList['Team Plasma Grunt 5'], TemporaryBattleList['Team Plasma Grunts 1'], TemporaryBattleList['Team Plasma Grunts 2']],
-    {
-        requirements: [
-            new GymBadgeRequirement(BadgeEnums.Quake),
-            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4),
-        ],
-        npcs: [PlasmaGrunt2, DriftveilZinzolin],
     }
 );
 TownList['Mistralton City'] = new Town(
@@ -5500,19 +5473,6 @@ TownList['Opelucid City'] = new Town(
     [OpelucidCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Opelucid City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 11)],
-    }
-);
-TownList['Team Plasma Assault'] = new Town(
-    'Team Plasma Assault',
-    GameConstants.Region.unova,
-    GameConstants.UnovaSubRegions.Unova,
-    [TemporaryBattleList['Team Plasma Grunt 7'], TemporaryBattleList['Team Plasma Grunt 8'], TemporaryBattleList['Team Plasma Grunt 9'], TemporaryBattleList['Zinzolin 2'], TemporaryBattleList['Plasma Shadow 1']],
-    {
-        requirements: [
-            new GymBadgeRequirement(BadgeEnums.Legend),
-            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 11),
-        ],
-        npcs: [PlasmaGrunt3],
     }
 );
 TownList['Shopping Mall Nine'] = new Town(
@@ -5731,27 +5691,48 @@ TownList['Plasma Frigate'] = new DungeonTown(
     [
         new OneFromManyRequirement([
             new MultiRequirement([
-                new GymBadgeRequirement(BadgeEnums.Wave),
-                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 14),
+                new GymBadgeRequirement(BadgeEnums.Insect),
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5, GameConstants.AchievementOption.less),
+            ]),
+            new MultiRequirement([
+                new GymBadgeRequirement(BadgeEnums.Quake),
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 7, GameConstants.AchievementOption.less),
+            ]),
+            new MultiRequirement([
+                new GymBadgeRequirement(BadgeEnums.Legend),
                 new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15, GameConstants.AchievementOption.less),
             ]),
+            new MultiRequirement([
+                new GymBadgeRequirement(BadgeEnums.Wave),
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 16, GameConstants.AchievementOption.less),
+            ]),
             new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 16),
-            new QuestLineCompletedRequirement('Hollow Truth and Ideals'),
         ]),
     ],
-    [TemporaryBattleList['Colress 3'], TemporaryBattleList['Plasma Shadow 2'], TemporaryBattleList['Plasma Shadow 3'], TemporaryBattleList['Plasma Shadow 4']],
+    [
+        TemporaryBattleList['Team Plasma Grunts 1'],
+        TemporaryBattleList['Team Plasma Grunts 2'],
+        TemporaryBattleList['Team Plasma Grunt 4'],
+        TemporaryBattleList['Team Plasma Grunt 5'],
+        TemporaryBattleList['Team Plasma Grunt 7'],
+        TemporaryBattleList['Team Plasma Grunt 8'],
+        TemporaryBattleList['Team Plasma Grunt 9'],
+        TemporaryBattleList['Zinzolin 2'],
+        TemporaryBattleList['Plasma Shadow 1'],
+        TemporaryBattleList['Colress 3'],
+        TemporaryBattleList['Plasma Shadow 2'],
+        TemporaryBattleList['Plasma Shadow 3'],
+        TemporaryBattleList['Plasma Shadow 4'],
+    ],
     {
-        npcs: [GiantChasmColress, GiantChasmShadowTriad],
+        npcs: [PlasmaGrunt1, PlasmaGrunt2, DriftveilZinzolin, PlasmaGrunt3, GiantChasmColress, GiantChasmShadowTriad],
     }
 );
 TownList['Giant Chasm'] = new DungeonTown(
     'Giant Chasm',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate')),
-        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15),
-    ],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15)],
     [TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2'], TemporaryBattleList['Kyurem 2'], TemporaryBattleList['Kyurem 3'], TemporaryBattleList['Destiny Deoxys Rayquaza']],
     {
         npcs: [Cobalion6, Cobalion7, Terrakion2, Virizion3, destinyGem, destinyScientistChasm],

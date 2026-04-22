@@ -1383,7 +1383,7 @@ class QuestLineHelper {
         const clearOpelucidGym = new DefeatGymQuest(1, 0, 'Opelucid City').withDescription('Defeat the Opelucid City gym leader to obtain the DNA Splicers before Team Plasma does!');
         plasmaUnovaQuestLine.addQuest(clearOpelucidGym);
 
-        const clearOpelucidGrunts = new CustomQuest (3, 0, 'Team Plasma has stolen the DNA Splicers and is assaulting the city with an army of grunts and shadows! Defend against the Team Plasma Assault!', () =>
+        const clearOpelucidGrunts = new CustomQuest (3, 0, 'Team Plasma has stolen the DNA Splicers and is assaulting the city with an army of grunts and shadows! Defend against the Team Plasma assault!', () =>
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 7')]() +
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 8')]() +
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 9')]()
