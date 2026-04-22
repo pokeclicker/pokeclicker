@@ -3553,28 +3553,6 @@ TownList['Outskirt Stand'] = new Town(
     }
 );
 
-TownList['Phenac City'] = new Town(
-    'Phenac City',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [PhenacCityShop, new MoveToDungeon(dungeonList['Phenac City Battles']), new MoveToDungeon(dungeonList['Phenac Stadium']), TemporaryBattleList.Folly],
-    {
-        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
-        npcs: [PhenacRoller, Sack, EsCade1, Rui1, Trest],
-    }
-);
-
-TownList['Pyrite Town'] = new Town(
-    'Pyrite Town',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [GymList['Cipher Admin Miror B.'], new MoveToDungeon(dungeonList['Pyrite Town Battles']), new MoveToDungeon(dungeonList['Pyrite Colosseum']), new MoveToDungeon(dungeonList['The Under']), new MoveToDungeon(dungeonList['Deep Colosseum']), new MoveToDungeon(dungeonList['Under Colosseum'])],
-    {
-        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 6)],
-        npcs: [OrreRoamerNPC, Duking1],
-    }
-);
-
 TownList['Agate Village'] = new Town(
     'Agate Village',
     GameConstants.Region.hoenn,
@@ -3594,28 +3572,6 @@ TownList['Relic Stone'] = new Town(
     {
         requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 17)],
         npcs: [RelicSage, Eagun2],
-    }
-);
-
-TownList['Realgam Tower'] = new Town(
-    'Realgam Tower',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Realgam Tower Battles']), new MoveToDungeon(dungeonList['Realgam Colosseum'])],
-    {
-        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 22)],
-        npcs: [EsCade2],
-    }
-);
-
-TownList['Gateon Port'] = new Town(
-    'Gateon Port',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [GateonPortShop, new MoveToDungeon(dungeonList['Gateon Port Battles']), new DockTownContent()],
-    {
-        requirements: [new QuestLineStartedRequirement('Shadows in the Desert')],
-        npcs: [GateonSailor, Verich],
     }
 );
 
@@ -3846,21 +3802,25 @@ TownList['Near Space'] = new DungeonTown(
         new QuestLineCompletedRequirement('The Delta Episode'),
     ]
 );
-TownList['Phenac City Battles'] = new DungeonTown(
-    'Phenac City Battles',
+TownList['Phenac City'] = new DungeonTown(
+    'Phenac City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [
-        new QuestLineStepCompletedRequirement('Shadows in the Desert', 3),
-    ]
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
+    [PhenacCityShop, new MoveToDungeon(dungeonList['Phenac Stadium']), TemporaryBattleList.Folly],
+    {
+        npcs: [PhenacRoller, Sack, EsCade1, Rui1, Trest],
+    }
 );
-TownList['Pyrite Town Battles'] = new DungeonTown(
-    'Pyrite Town Battles',
+TownList['Pyrite Town'] = new DungeonTown(
+    'Pyrite Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [
-        new QuestLineStepCompletedRequirement('Shadows in the Desert', 6),
-    ]
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 6)],
+    [GymList['Cipher Admin Miror B.'], new MoveToDungeon(dungeonList['Pyrite Colosseum']), new MoveToDungeon(dungeonList['The Under']), new MoveToDungeon(dungeonList['Deep Colosseum']), new MoveToDungeon(dungeonList['Under Colosseum'])],
+    {
+        npcs: [OrreRoamerNPC, Duking1],
+    }
 );
 TownList['Pyrite Colosseum'] = new DungeonTown(
     'Pyrite Colosseum',
@@ -3946,13 +3906,15 @@ TownList['Cipher Lab'] = new DungeonTown(
         npcs: [Lovrina],
     }
 );
-TownList['Realgam Tower Battles'] = new DungeonTown(
-    'Realgam Tower Battles',
+TownList['Realgam Tower'] = new DungeonTown(
+    'Realgam Tower',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [
-        new QuestLineStepCompletedRequirement('Shadows in the Desert', 22),
-    ]
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 22)],
+    [new MoveToDungeon(dungeonList['Realgam Colosseum'])],
+    {
+        npcs: [EsCade2],
+    }
 );
 TownList['Realgam Colosseum'] = new DungeonTown(
     'Realgam Colosseum',
@@ -4002,11 +3964,15 @@ TownList['Under Colosseum'] = new DungeonTown(
         new QuestLineCompletedRequirement('Shadows in the Desert'),
     ]
 );
-TownList['Gateon Port Battles'] = new DungeonTown(
-    'Gateon Port Battles',
+TownList['Gateon Port'] = new DungeonTown(
+    'Gateon Port',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new QuestLineStepCompletedRequirement('Gale of Darkness', 1)]
+    [new QuestLineStartedRequirement('Shadows in the Desert')],
+    [GateonPortShop, new DockTownContent()],
+    {
+        npcs: [GateonSailor, Verich],
+    }
 );
 TownList['Cipher Key Lair'] = new DungeonTown(
     'Cipher Key Lair',

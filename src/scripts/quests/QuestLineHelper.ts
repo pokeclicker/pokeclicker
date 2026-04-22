@@ -1034,7 +1034,7 @@ class QuestLineHelper {
         const talkToRui1 = new TalkToNPCQuest(Rui1, 'Meet up with Rui again in Phenac City.'); // Step 6
         orreColosseumQuestLine.addQuest(talkToRui1);
 
-        const fightPyriteTown = new DefeatDungeonQuest(5, 0, 'Pyrite Town Battles').withDescription('Fight trainers in Pyrite Town to flush out the criminals.');
+        const fightPyriteTown = new DefeatDungeonQuest(5, 0, 'Pyrite Town').withDescription('Fight trainers in Pyrite Town to flush out the criminals.');
         orreColosseumQuestLine.addQuest(fightPyriteTown);
 
         const talkToDuking1 = new TalkToNPCQuest(Duking1, 'Talk to the distraught bodybuilder Duking in Pyrite Town.');
@@ -1106,7 +1106,7 @@ class QuestLineHelper {
             });
         orreColosseumQuestLine.addQuest(fightCipherLab);
 
-        const fightRealgamTower = new DefeatDungeonQuest(5, 0, 'Realgam Tower Battles').withDescription('Team Cipher has taken over Realgam Tower! Fight to kick them out!');
+        const fightRealgamTower = new DefeatDungeonQuest(5, 0, 'Realgam Tower').withDescription('Team Cipher has taken over Realgam Tower! Fight to kick them out!');
         orreColosseumQuestLine.addQuest(fightRealgamTower);
 
         const talkToEsCade2 = new TalkToNPCQuest(EsCade2, 'From the top of Realgam Tower, you see Mayor Es Cade. Go ask him for help.'); //Step 24
@@ -1341,7 +1341,7 @@ class QuestLineHelper {
         const clearCastliaSewers = new DefeatDungeonQuest(1, 0, 'Castelia Sewers').withDescription('Some Team Plasma Grunts were seen entering the Castelia Sewers. Clear Castelia Sewers.');
         plasmaUnovaQuestLine.addQuest(clearCastliaSewers);
 
-        const talktoPlasmaGrunt1 = new TalkToNPCQuest(PlasmaGrunt1, 'Investigate the Perfectly Ordinary Frigate.');
+        const talktoPlasmaGrunt1 = new TalkToNPCQuest(PlasmaGrunt1, 'Investigate the perfectly ordinary Frigate.');
         plasmaUnovaQuestLine.addQuest(talktoPlasmaGrunt1);
 
         const clearNimbasaGym = new DefeatGymQuest(1, 0, 'Nimbasa City').withDescription('Seems there\'s nothing suspicious going on in Castelia City. Time to continue your journey. Clear the Nimbasa Gym.');
@@ -1353,10 +1353,10 @@ class QuestLineHelper {
         );
         plasmaUnovaQuestLine.addQuest(clearNimbasaGrunts);
 
-        const talktoPlasmaGrunt2 = new TalkToNPCQuest(PlasmaGrunt2, 'They are definitely stealing Pokémon. Investigate the Totally Unsuspicious Frigate.');
+        const talktoPlasmaGrunt2 = new TalkToNPCQuest(PlasmaGrunt2, 'They are definitely stealing Pokémon. Investigate the totally unsuspicious Frigate.');
         plasmaUnovaQuestLine.addQuest(talktoPlasmaGrunt2);
 
-        const clearDriftveilGrunts = new CustomQuest (4, 0, 'Defeat the Team Plasma Grunts on the Totally Unsuspicious Frigate.', () =>
+        const clearDriftveilGrunts = new CustomQuest (4, 0, 'Defeat the Team Plasma Grunts on the Frigate.', () =>
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 4')]() +
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 5')]() +
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunts 1')]() +
@@ -1628,7 +1628,7 @@ class QuestLineHelper {
         const battleNaps = new DefeatTemporaryBattleQuest('Cipher Peon Naps', 'Fight the Cipher Peons attacking the Pokémon HQ Lab.');
         orreXDQuestLine.addQuest(battleNaps);
 
-        const clearGateonPort = new DefeatDungeonQuest(1, 0, 'Gateon Port Battles').withDescription('Clear Gateon Port to search for the Cipher Peons who kidnapped Professor Krane.')
+        const clearGateonPort = new DefeatDungeonQuest(1, 0, 'Gateon Port').withDescription('Clear Gateon Port to search for the Cipher Peons who kidnapped Professor Krane.')
             .withOptionalArgs({
                 clearedMessage: 'Cipher? Nah, I don\'t play with those punks. I\'m my own man, flying solo. No, I won\'t say where I got this Zangoose.',
                 npcDisplayName: 'Thug Zook',
@@ -1659,7 +1659,7 @@ class QuestLineHelper {
         const talkToLovrina = new TalkToNPCQuest(Lovrina, 'Talk to Cipher Admin Lovrina at the Cipher Lab.');
         orreXDQuestLine.addQuest(talkToLovrina);
 
-        const clearPyriteTown = new DefeatDungeonQuest(1, 0, 'Pyrite Town Battles').withDescription('Pyrite Town is in chaos! Battle your way through to get some answers.')
+        const clearPyriteTown = new DefeatDungeonQuest(1, 0, 'Pyrite Town').withDescription('Pyrite Town is in chaos! Battle your way through to get some answers.')
             .withOptionalArgs({
                 clearedMessage: 'This is Marcia live on the scene! Chaos in Pyrite Town as Team Cipher has returned! Rumors are swirling about an infamous dance machine making a scene!',
                 npcDisplayName: 'Marcia',
@@ -1676,7 +1676,7 @@ class QuestLineHelper {
         const talkToExol = new TalkToNPCQuest(Exol, 'Talk to Cipher Commander Exol at the Pyrite Building.');
         orreXDQuestLine.addQuest(talkToExol);
 
-        const fightPhenacCity = new DefeatDungeonQuest(10, 0, 'Phenac City Battles').withDescription('Battle through the new Cipher Peons in Phenac City.');
+        const fightPhenacCity = new DefeatDungeonQuest(10, 0, 'Phenac City').withDescription('Battle through the new Cipher Peons in Phenac City.');
         orreXDQuestLine.addQuest(fightPhenacCity);
 
         const defeatSnattle = new DefeatDungeonBossQuest('Phenac Stadium', 'Cipher Admin Snattle', 0).withDescription('Track down the new boss of the Phenac Stadium.');
