@@ -12081,7 +12081,7 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
     ],
     1080000, 17);
 
-dungeonList['Exeggutor Island Hill'] = new Dungeon('Exeggutor Island Hill',
+dungeonList['Exeggutor Island'] = new Dungeon('Exeggutor Island',
     [
         {pokemon: 'Alolan Exeggutor', options: { weight: 1, hide: true, requirement: new OneFromManyRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 2, GameConstants.AchievementOption.less), new SpecialEventRequirement('Hoopa Day')])}},
         {pokemon: 'Alolan Exeggutor', options: { weight: 1, hide: true, requirement: new OneFromManyRequirement([new QuestLineStepCompletedRequirement('Emissary of Light', 2, GameConstants.AchievementOption.less), new SpecialEventRequirement('Hoopa Day')])}},

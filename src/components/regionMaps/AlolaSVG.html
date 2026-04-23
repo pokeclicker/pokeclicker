@@ -4701,67 +4701,6 @@
             })
         %>
 
-        <!--Exeggutor Island-->
-        <%- include('templates/mapOverlay',
-            { name: "Exeggutor Island"
-            , x: 13, y: 44
-            , width: 4, height: 6
-            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
-            , connectedToTown: "Exeggutor Island"
-            })
-        %>
-        <!--Exeggutor Island extension-->
-        <%- include('templates/mapOverlay',
-            { name: "Exeggutor Island"
-            , x: 12, y: 45
-            , width: 1, height: 4
-            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
-            , isExtension: true
-            })
-        %>
-        <!--Exeggutor Island extension-->
-        <%- include('templates/mapOverlay',
-            { name: "Exeggutor Island"
-            , x: 17, y: 43
-            , width: 1, height: 6
-            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
-            , isExtension: true
-            })
-        %>
-        <!--Exeggutor Island extension-->
-        <%- include('templates/mapOverlay',
-            { name: "Exeggutor Island"
-            , x: 18, y: 44
-            , width: 1, height: 2
-            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
-            , isExtension: true
-            })
-        %>
-        <!--Exeggutor Island extension-->
-        <%- include('templates/mapOverlay',
-            { name: "Exeggutor Island"
-            , x: 19, y: 44
-            , width: 4, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
-            , isExtension: true
-            })
-        %>
-        <!--Exeggutor Island extension-->
-        <%- include('templates/mapOverlay',
-            { name: "Exeggutor Island"
-            , x: 13, y: 43
-            , width: 3, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
-            , isExtension: true
-            })
-        %>
-
         <!--Altar of the Sunne and Moone-->
         <%- include('templates/mapTown',
             { name: "Altar of the Sunne and Moone"
@@ -4878,96 +4817,66 @@
         <!-- DUNGEONS -->
         <!-- -------- -->
 
-        <!--Exeggutor Island Hill-->
-        <%- include('templates/mapOverlay',
-            { name: "Exeggutor Island Hill"
-            , x: 18, y: 39
-            , width: 6, height: 5
-            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
-            , connectedToTown: "Exeggutor Island Hill"
-            })
-        %>
-        <%- include('templates/mapOverlay',
-        { name: "Exeggutor Island Hill"
-            , x: 19, y: 38
-            , width: 4, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() === QuestLineState.ended"
-            , isExtension: true
-            })
-        %>
-
-        <!--Exeggutor Island Hill during Quest-->
-        <%- include('templates/mapOverlay',
+        <!--Exeggutor Island extension-->
+        <%- include('templates/mapDungeon',
             { name: "Exeggutor Island"
             , x: 18, y: 39
             , width: 6, height: 5
-            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
             , isExtension: true
             })
         %>
-        <%- include('templates/mapOverlay',
+        <!--Exeggutor Island extension-->
+        <%- include('templates/mapDungeon',
             { name: "Exeggutor Island"
             , x: 19, y: 38
             , width: 4, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
             , isExtension: true
             })
         %>
-        <%- include('templates/mapOverlay',
+        <!--Exeggutor Island-->
+        <%- include('templates/mapDungeon',
             { name: "Exeggutor Island"
             , x: 13, y: 44
             , width: 4, height: 6
-            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
-            , connectedToTown: "Exeggutor Island Hill"
             })
         %>
-        <%- include('templates/mapOverlay',
+        <!--Exeggutor Island extension-->
+        <%- include('templates/mapDungeon',
             { name: "Exeggutor Island"
             , x: 12, y: 45
             , width: 1, height: 4
-            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
             , isExtension: true
             })
         %>
-        <%- include('templates/mapOverlay',
+        <!--Exeggutor Island extension-->
+        <%- include('templates/mapDungeon',
             { name: "Exeggutor Island"
             , x: 17, y: 43
             , width: 1, height: 6
-            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
             , isExtension: true
             })
         %>
-        <%- include('templates/mapOverlay',
+        <!--Exeggutor Island extension-->
+        <%- include('templates/mapDungeon',
             { name: "Exeggutor Island"
             , x: 18, y: 44
             , width: 1, height: 2
-            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
             , isExtension: true
             })
         %>
-        <%- include('templates/mapOverlay',
+        <!--Exeggutor Island extension-->
+        <%- include('templates/mapDungeon',
             { name: "Exeggutor Island"
             , x: 19, y: 44
             , width: 4, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
             , isExtension: true
             })
         %>
-        <%- include('templates/mapOverlay',
+        <!--Exeggutor Island extension-->
+        <%- include('templates/mapDungeon',
             { name: "Exeggutor Island"
             , x: 13, y: 43
             , width: 3, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Exeggutor Island Hill')}, attr:{ class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }"
-            , visible:  "App.game.quests.getQuestLine('Emissary of Light').state() != QuestLineState.ended"
             , isExtension: true
             })
         %>

@@ -7477,7 +7477,7 @@ const SilvallyGladion2Hints = new NPC('Ask Gladion for help', [
     'A black and red-haired guy at the Wela Volcano Park,',
     'A child with orange hair in the Hokulani Observatory,',
     'A dark blue-haired guy that looks like a Veteran inside Mount Lanakila,',
-    'And a girl with a Mudsdale on Exeggutor Island Hill.',
+    'And a girl with a Mudsdale on Exeggutor Island.',
 ], {
     image: 'assets/images/npcs/Gladion.png',
     requirement: new  MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 16, GameConstants.AchievementOption.less)]),
@@ -7957,15 +7957,6 @@ TownList['Seafolk Village'] = new Town(
         npcs: [SeafolkCaptain, SeafolkCaptainMina, SilvallyMina, LillieSeafolkVillage],
     }
 );
-TownList['Exeggutor Island'] = new Town(
-    'Exeggutor Island',
-    GameConstants.Region.alola,
-    GameConstants.AlolaSubRegions.PoniIsland,
-    [ExeggutorIslandShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Exeggutor Island']), new MoveToTown('Exeggutor Island Hill', undefined, false)],
-    {
-        requirements: [new QuestLineCompletedRequirement('Emissary of Light')],
-    }
-);
 TownList['Altar of the Sunne and Moone'] = new Town(
     'Altar of the Sunne and Moone',
     GameConstants.Region.alola,
@@ -8283,12 +8274,12 @@ TownList['Aether Foundation'] = new DungeonTown(
         npcs: [HauAether, GladionAether, LillieAether, SilvallyGladion1, SilvallyGladion2, SilvallyGladion3, SilvallyGladion4, SilvallyGladion2Hints, SilvallyGladion3Hints],
     }
 );
-TownList['Exeggutor Island Hill'] = new DungeonTown(
-    'Exeggutor Island Hill',
+TownList['Exeggutor Island'] = new DungeonTown(
+    'Exeggutor Island',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
     [new QuestLineStepCompletedRequirement('Emissary of Light', 1)],
-    [ExeggutorIslandHillShop, TemporaryBattleList['Exeggutor Tree']],
+    [ExeggutorIslandShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Exeggutor Island']), ExeggutorIslandHillShop, TemporaryBattleList['Exeggutor Tree']],
     {npcs: [LillieExeggutorIsland, HapuSilvally1]}
 );
 TownList['Vast Poni Canyon'] = new DungeonTown(

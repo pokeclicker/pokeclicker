@@ -1741,7 +1741,7 @@ export const AlolaDungeons = [
     'Ula\'ula Meadow',
     'Po Town',
     'Aether Foundation',
-    'Exeggutor Island Hill',
+    'Exeggutor Island',
     'Vast Poni Canyon',
     'Mina\'s Houseboat',
     'Mount Lanakila',

@@ -2812,14 +2812,14 @@ class QuestLineHelper {
         const talkeToHapuHope = new TalkToNPCQuest(HapuHope, 'Talk to Hapu at the Ruins of Hope.');
         poniAlolaQuestLine.addQuest(talkeToHapuHope);
 
-        // 2 - Clear dungeon: Exeggutor Island Hill
-        const clearExeggutorIslandHill = new DefeatDungeonQuest(1, 0, 'Exeggutor Island Hill').withDescription('Hapu has permitted you to visit sacred ground. Find the other flute by clearing Exeggutor Island Hill.')
+        // 2 - Clear dungeon: Exeggutor Island
+        const clearExeggutorIsland = new DefeatDungeonQuest(1, 0, 'Exeggutor Island').withDescription('Hapu has permitted you to visit sacred ground. Find the other flute by clearing Exeggutor Island.')
             .withOptionalArgs({
                 clearedMessage: 'Now we have both the Sun Flute and the Moon Flute!</br><img src="assets/images/items/fluteItem/Sun_Flute.png"/><img src="assets/images/items/fluteItem/Moon_Flute.png"/>',
                 npcDisplayName: 'Lillie',
                 npcImageName: 'Lillie (z powered)',
             });
-        poniAlolaQuestLine.addQuest(clearExeggutorIslandHill);
+        poniAlolaQuestLine.addQuest(clearExeggutorIsland);
 
         // 3 - Temp Battle: Skull 6
         const battleSkullGrunts6 = new DefeatTemporaryBattleQuest('Skull 6', 'Team Skull are being annoying again. Settle the score with them near Vast Poni Canyon.')
