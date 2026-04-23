@@ -225,21 +225,12 @@ ItemList.Fighting_Memory_Silvally = new QuestItem('Fighting_Memory_Silvally', 'F
 ItemList.Rock_Memory_Silvally = new QuestItem('Rock_Memory_Silvally', 'Rock Memory', 'One of Silvally\'s memories, obtained from Kahuna Olivia in Konikoni City', 'Typing some Memories');
 ItemList.Dark_Memory_Silvally = new QuestItem('Dark_Memory_Silvally', 'Dark Memory', 'One of Silvally\'s memories, obtained from Kahuna Nanu in Malie City', 'Typing some Memories');
 ItemList.Fairy_Memory_Silvally = new QuestItem('Fairy_Memory_Silvally', 'Fairy Memory', 'One of Silvally\'s memories, obtained from Captain Mina in Seafolk Village', 'Typing some Memories');
-<<<<<<< dungeon-town-cleanup
-ItemList.Water_Memory_Silvally = new QuestItem('Water_Memory_Silvally', 'Water Memory', 'One of Silvally\'s memories, obtained from Captain Lana in Brooklet Hill', 'Typing some Memories', 'Typing some Memories', 125000000, Currency.dungeonToken);
-ItemList.Grass_Memory_Silvally = new QuestItem('Grass_Memory_Silvally', 'Grass Memory', 'One of Silvally\'s memories, obtained from Captain Mallow in Lush Jungle', 'Typing some Memories', 'Typing some Memories', 125000, Currency.questPoint);
-ItemList.Fire_Memory_Silvally = new QuestItem('Fire_Memory_Silvally', 'Fire Memory', 'One of Silvally\'s memories, obtained from Captain Kiawe in Wela Volcano Park', 'Typing some Memories', 'Typing some Memories', 75000, Currency.battlePoint);
-ItemList.Electric_Memory_Silvally = new QuestItem('Electric_Memory_Silvally', 'Electric Memory', 'One of Silvally\'s memories, obtained from Captain Sophocles in Hokulani Observatory', 'Typing some Memories', 'Typing some Memories', 500000000, Currency.money);
-ItemList.Ice_Memory_Silvally = new QuestItem('Ice_Memory_Silvally', 'Ice Memory', 'One of Silvally\'s memories, obtained from Veteran Aristo in Mt. Lanakila', 'Typing some Memories', 'Typing some Memories', 100000, Currency.diamond);
-ItemList.Ground_Memory_Silvally = new QuestItem('Ground_Memory_Silvally', 'Ground Memory', 'One of Silvally\'s memories, obtained from Kahuna Hapu on Exeggutor Island', 'Typing some Memories', 'Typing some Memories', 200000, Currency.farmPoint);
-=======
 ItemList.Water_Memory_Silvally = new QuestItem('Water_Memory_Silvally', 'Water Memory', 'One of Silvally\'s memories, obtained from Captain Lana in Brooklet Hill', 'Typing some Memories', 125000000, Currency.dungeonToken);
 ItemList.Grass_Memory_Silvally = new QuestItem('Grass_Memory_Silvally', 'Grass Memory', 'One of Silvally\'s memories, obtained from Captain Mallow in Lush Jungle', 'Typing some Memories', 125000, Currency.questPoint);
 ItemList.Fire_Memory_Silvally = new QuestItem('Fire_Memory_Silvally', 'Fire Memory', 'One of Silvally\'s memories, obtained from Captain Kiawe in Wela Volcano Park', 'Typing some Memories', 75000, Currency.battlePoint);
 ItemList.Electric_Memory_Silvally = new QuestItem('Electric_Memory_Silvally', 'Electric Memory', 'One of Silvally\'s memories, obtained from Captain Sophocles in Hokulani Observatory', 'Typing some Memories', 500000000, Currency.money);
 ItemList.Ice_Memory_Silvally = new QuestItem('Ice_Memory_Silvally', 'Ice Memory', 'One of Silvally\'s memories, obtained from Veteran Aristo in Mt. Lanakila', 'Typing some Memories', 100000, Currency.diamond);
-ItemList.Ground_Memory_Silvally = new QuestItem('Ground_Memory_Silvally', 'Ground Memory', 'One of Silvally\'s memories, obtained from Kahuna Hapu on Exeggutor Island Hill', 'Typing some Memories', 200000, Currency.farmPoint);
->>>>>>> develop
+ItemList.Ground_Memory_Silvally = new QuestItem('Ground_Memory_Silvally', 'Ground Memory', 'One of Silvally\'s memories, obtained from Kahuna Hapu on Exeggutor Island', 'Typing some Memories', 200000, Currency.farmPoint);
 ItemList.Bug_Memory_Silvally = new QuestItem('Bug_Memory_Silvally', 'Bug Memory', 'One of Silvally\'s memories, obtained from Guzma in Po Town', 'Typing some Memories');
 ItemList.Flying_Memory_Silvally = new QuestItem('Flying_Memory_Silvally', 'Flying Memory', 'One of Silvally\'s memories, obtained from Kahili on Ten Carat Hill', 'Typing some Memories');
 ItemList.Poison_Memory_Silvally = new QuestItem('Poison_Memory_Silvally', 'Poison Memory', 'One of Silvally\'s memories, obtained from Plumeria in Vast Poni Canyon', 'Typing some Memories');
