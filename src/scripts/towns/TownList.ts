@@ -5107,7 +5107,10 @@ const PlasmaGrunt1 = new NPC('Team Plasma Grunt', [
     'Why hello there. Nothing strange going on here. Please move along.',
     'Oh that business in the sewers? Yes, we should not have gone in there. Very unfortunate situation. A complete misunderstanding. We were just curious about what was down there.',
     'Bye now.',
-], {image: 'assets/images/npcs/Team Plasma Grunt (male).png'});
+], {
+    image: 'assets/images/npcs/Team Plasma Grunt (male).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 1), new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4, GameConstants.AchievementOption.less)]),
+});
 
 const RelicCastleRuinmaniac = new NPC('Ruin Maniac', [
     'I\'ve heard tell of a secret room in this ruin. A room that supposedly contains a very rare Pokémon.',
@@ -5124,7 +5127,7 @@ const PlasmaGrunt2 = new NPC('Team Plasma Grunt', [
     'If you won\'t leave, we\'ll have to remove you.',
 ], {
     image: 'assets/images/npcs/Team Plasma Grunt (male).png',
-    requirement: new OneFromManyRequirement([new TemporaryBattleRequirement('Team Plasma Grunt 4', 1, GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunt 5', 1, GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunts 1', 1, GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunts 2', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4), new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 7, GameConstants.AchievementOption.less)]),
 });
 
 const DriftveilZinzolin = new NPC('Zinzolin', [
@@ -5141,7 +5144,10 @@ const PlasmaGrunt3 = new NPC('Team Plasma Grunt', [
     'Remember when I told you that there was nothing suspicious about this frigate? I was lying, of course.',
     'But truth be told, I didn\'t know that this thing could fly. I was not prepared for this.',
     'I\'m gonna be sick...',
-], {image: 'assets/images/npcs/Team Plasma Grunt (male).png'});
+], {
+    image: 'assets/images/npcs/Team Plasma Grunt (male).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 11), new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 14, GameConstants.AchievementOption.less)]),
+});
 
 const GiantChasmColress = new NPC('Colress', [
     'Welcome! I was asked by an acquaintance to help with his research. What I desire is to bring out the entirety in Pokémon potential! If I can accomplish that, I don\'t care what it takes!',
@@ -5692,6 +5698,7 @@ TownList['Plasma Frigate'] = new DungeonTown(
         new OneFromManyRequirement([
             new MultiRequirement([
                 new GymBadgeRequirement(BadgeEnums.Insect),
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 1),
                 new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5, GameConstants.AchievementOption.less),
             ]),
             new MultiRequirement([

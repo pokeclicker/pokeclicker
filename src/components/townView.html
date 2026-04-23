@@ -44,7 +44,7 @@
                     <knockout data-bind="text: player.town.name">Town Name</knockout>
                 </div>
 
-                <div class="title-right" data-bind="if: isDungeon && QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">
+                <div class="title-right" data-bind="if: isDungeon && player.town.dungeon.isUnlocked()">
                     <div class="d-flex ml-auto">
                         <knockout class="h4 no-emoji-font mr-2 mb-0 align-self-center" data-bind="
                             visible: DungeonRunner.isDungeonDebuffed(player.town.dungeon),
