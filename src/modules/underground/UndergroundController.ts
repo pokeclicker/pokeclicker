@@ -420,6 +420,16 @@ export class UndergroundController {
         });
     }
 
+    public static notifyMineFound() {
+        Notifier.notify({
+            title: 'Underground',
+            message: 'A new Underground Layer has been discovered.',
+            type: NotificationOption.info,
+            setting: NotificationConstants.NotificationSetting.Underground.underground_mine_found,
+            timeout: 10 * SECOND,
+        });
+    }
+
     private static buildHelperNotificationTitle(helper: UndergroundHelper) {
         return [
             '<div class="d-inline-flex align-items-center justify-content-center position-relative mr-2">',
