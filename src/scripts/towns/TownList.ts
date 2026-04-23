@@ -5127,7 +5127,7 @@ const PlasmaGrunt2 = new NPC('Team Plasma Grunt', [
     'If you won\'t leave, we\'ll have to remove you.',
 ], {
     image: 'assets/images/npcs/Team Plasma Grunt (male).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4), new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 7, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4), new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 6, GameConstants.AchievementOption.less)]),
 });
 
 const DriftveilZinzolin = new NPC('Zinzolin', [
@@ -5698,8 +5698,7 @@ TownList['Plasma Frigate'] = new DungeonTown(
         new OneFromManyRequirement([
             new MultiRequirement([
                 new GymBadgeRequirement(BadgeEnums.Insect),
-                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 1),
-                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5, GameConstants.AchievementOption.less),
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4, GameConstants.AchievementOption.less),
             ]),
             new MultiRequirement([
                 new GymBadgeRequirement(BadgeEnums.Quake),
@@ -5707,11 +5706,11 @@ TownList['Plasma Frigate'] = new DungeonTown(
             ]),
             new MultiRequirement([
                 new GymBadgeRequirement(BadgeEnums.Legend),
-                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15, GameConstants.AchievementOption.less),
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 14, GameConstants.AchievementOption.less),
             ]),
             new MultiRequirement([
                 new GymBadgeRequirement(BadgeEnums.Wave),
-                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 16, GameConstants.AchievementOption.less),
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15, GameConstants.AchievementOption.less),
             ]),
             new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 16),
         ]),
