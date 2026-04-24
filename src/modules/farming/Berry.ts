@@ -1,15 +1,11 @@
-/// <reference path="../../declarations/enums/BerryType.d.ts"/>
-/// <reference path="../../declarations/enums/FlavorType.d.ts"/>
-/// <reference path="../../declarations/enums/BerryColor.d.ts"/>
-/// <reference path="../../declarations/enums/BerryFirmness.d.ts"/>
-/// <reference path="../../declarations/enums/SizeUnits.d.ts"/>
+import BerryColor from '../enums/BerryColor';
+import BerryFirmness from '../enums/BerryFirmness';
+import BerryType from '../enums/BerryType';
+import BerryFlavor from '../interfaces/BerryFlavor';
+import { PokemonNameType } from '../pokemons/PokemonNameType';
+import Aura from './Aura';
 
-interface BerryFlavor {
-    type: FlavorType,
-    value: number,
-}
-
-class Berry {
+export default class Berry {
     public flavors: BerryFlavor[];
     public wander: PokemonNameType[];
 
@@ -22,10 +18,6 @@ class Berry {
         'Cutiefly', 'Bounsweet',
         'Blipbug', 'Gossifleur',
     ];
-
-    public static isBaseWanderer(pokemon: PokemonNameType): boolean {
-        return this.baseWander.includes(pokemon);
-    }
 
     public static colorWander: Record<BerryColor, PokemonNameType[]> = {
         [BerryColor.Red]: ['Ledyba', 'Flabébé (Red)', 'Oricorio (Baile)'],
@@ -52,13 +44,17 @@ class Berry {
         public firmness: BerryFirmness,
         public description: string[],
         public aura?: Aura,
-        wander?: PokemonNameType[]
+        wander?: PokemonNameType[],
     ) {
         this.flavors = [];
         for (let i = 0; i < 5; i++) {
-            this.flavors.push({type: i, value: flavors[i]});
+            this.flavors.push({ type: i, value: flavors[i] });
         }
         this.wander = Berry.baseWander.concat(Berry.colorWander[this.color], wander ?? []);
+    }
+
+    public static isBaseWanderer(pokemon: PokemonNameType): boolean {
+        return this.baseWander.includes(pokemon);
     }
 
     get descriptionHTML(): string {
