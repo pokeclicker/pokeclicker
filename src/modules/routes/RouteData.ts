@@ -3835,7 +3835,7 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Mew'], new MultiRequirement([new ObtainedPokemonRequirement('Mew'), new LentalRouteRequirement(57, 3)])),
         ],
     }),
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 3)], // beat Florio Island Illumina Pokemon and talk to mirror
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 4)], // beat Florio Island Illumina Pokemon and talk to mirror
     undefined,
     GalarSubRegions.Lental,
     true, 13504752,
@@ -3988,7 +3988,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Stoutland', 'Meowth', 'Starly', 'Cutiefly', 'Bunnelby', 'Sudowoodo', 'Eevee', 'Trubbish', 'Pikachu', 'Audino', 'Rattata', 'Dedenne'],
     }),
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 9)], // 3 Illumina Pokemon encountered
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 17)], // 3 Illumina Pokemon encountered
     undefined,
     GalarSubRegions.Lental,
     true, 14764326,
@@ -4015,7 +4015,7 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Suicune'], new MultiRequirement([new ObtainedPokemonRequirement('Suicune'), new QuestLineCompletedRequirement('New Pokémon Snap'), new LentalRouteRequirement(66, 2), new DayCyclePartRequirement([DayCyclePart.Night, DayCyclePart.Dawn])])),
         ],
     }),
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 12)], // 4 Illumina Pokemon encountered
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 21)], // 4 Illumina Pokemon encountered
     undefined,
     GalarSubRegions.Lental,
     true, 14926567,
@@ -4051,7 +4051,7 @@ Routes.add(new RegionRoute(
             new SpecialRoutePokemon(['Jirachi'], new MultiRequirement([new ObtainedPokemonRequirement('Jirachi'), new QuestLineCompletedRequirement('New Pokémon Snap'), new LentalRouteRequirement(68, 2)])),
         ],
     }),
-    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 15)], // 5 Illumina Pokemon
+    [new QuestLineStepCompletedRequirement('New Pokémon Snap', 26)], // 5 Illumina Pokemon
     undefined,
     GalarSubRegions.Lental,
     true, 15254270,

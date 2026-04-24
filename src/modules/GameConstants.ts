@@ -2542,11 +2542,10 @@ export const MoonCycleValues: Record<MoonCyclePhase, number> = {
 export const ResearchLevel = [ // actual values haven't been determined yet, low values are used to make it easier to get through the quest
     0, // Unexplored
     100, // Research Level 1
-    1000, // Research Level 2
-    4000, // Research Level 3
+    200, // Research Level 2
+    400, // Research Level 3
     10000, // Research Level MAX
 ];
-export const SnapEggsHatched = 1000; // Number of times a legendary bird must be hatched to start roaming Pokemon Island
 
 export const MoonEvoPokemon = new Set<PokemonNameType>([
     'Nidoran(F)', // 29

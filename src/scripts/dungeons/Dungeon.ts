@@ -13509,7 +13509,8 @@ dungeonList['Florio Island Illumina Spot'] = new Dungeon('Florio Island Illumina
         new DungeonBossPokemon('Meganium', 135047520, 50, { weight: 3 }),
         new DungeonBossPokemon('Illumina Meganium', 144430560, 60),
     ],
-    1500000, 56 // after nature park
+    1500000, 56, undefined,
+    { requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 2) } // after nature park
 );
 dungeonList['Belusylva Island Illumina Spot'] = new Dungeon('Belusylva Island Illumina Spot',
     ['Magikarp', 'Lotad', 'Bulbasaur', 'Ninetales', 'Serperior', 'Trevenant', 'Espeon', 'Kecleon'],
@@ -13534,7 +13535,8 @@ dungeonList['Belusylva Island Illumina Spot'] = new Dungeon('Belusylva Island Il
         new DungeonBossPokemon('Milotic', 135047520, 50, { weight: 3 }),
         new DungeonBossPokemon('Illumina Milotic', 144430560, 60),
     ],
-    1600000, 62 // after elsewhere forest
+    1600000, 62, undefined,
+    { requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 9) } // after elsewhere forest
 );
 dungeonList['Maricopia Islands Illumina Spot'] = new Dungeon('Maricopia Islands Illumina Spot',
     ['Wailmer', 'Finneon', 'Luvdisc', 'Wailord'],
@@ -13558,7 +13560,8 @@ dungeonList['Maricopia Islands Illumina Spot'] = new Dungeon('Maricopia Islands 
         new DungeonBossPokemon('Wishiwashi (School)', 135047520, 50, { weight: 2 }),
         new DungeonBossPokemon('Illumina Wishiwashi', 144430560, 60),
     ],
-    1700000, 64 // after lental seafloor
+    1700000, 64, undefined,
+    { requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 15) } // after lental seafloor
 );
 dungeonList['Voluca Island Illumina Spot'] = new Dungeon('Voluca Island Illumina Spot',
     ['Monferno', 'Talonflame', 'Archeops'],
@@ -13584,7 +13587,8 @@ dungeonList['Voluca Island Illumina Spot'] = new Dungeon('Voluca Island Illumina
         new DungeonBossPokemon('Volcarona', 135047520, 60, { weight: 2 }), // evenly weighted because the illumina volcarona are a pair
         new DungeonBossPokemon('Illumina Volcarona', 144430560, 70, { weight: 2 }), // I also want the wiki to show a weight of 2 for them
     ],
-    1800000, 65 // after fireflow volcano... but thats unlocked much earlier so after the latest possible route unlocked, research camp
+    1800000, 65, undefined,
+    { requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 19) } // after fireflow volcano... but thats unlocked much earlier so after the latest possible route unlocked, research camp
 );
 dungeonList['Durice Island Illumina Spot'] = new Dungeon('Durice Island Illumina Spot',
     ['Noibat', 'Carbink', 'Sableye', 'Joltik', 'Crobat'],
@@ -13610,7 +13614,8 @@ dungeonList['Durice Island Illumina Spot'] = new Dungeon('Durice Island Illumina
         new DungeonBossPokemon('Steelix', 135047520, 50, { weight: 3 }),
         new DungeonBossPokemon('Illumina Steelix', 144430560, 60),
     ],
-    1900000, 67 // after outaway cave
+    1900000, 67, undefined,
+    { requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 24) } // after outaway cave
 );
 dungeonList['Aurus Island Illumina Spot'] = new Dungeon('Aurus Island Illumina Spot',
     ['Sigilyph', 'Woobat', 'Eldegoss', 'Chandelure', 'Houndoom', 'Absol', 'Noivern', 'Natu', 'Golurk'],
@@ -13635,7 +13640,8 @@ dungeonList['Aurus Island Illumina Spot'] = new Dungeon('Aurus Island Illumina S
         new DungeonBossPokemon('Xerneas (Active)', 144430560, 60, { hide: true, requirement: new ObtainedPokemonRequirement('Xerneas (Active)') }),
         new DungeonBossPokemon('Illumina Xerneas', 160924440, 70),
     ],
-    2000000, 68 // after ruins of remembrance
+    2000000, 68, undefined,
+    { requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 28) } // after ruins of remembrance
 );
 
 //Hisui Dungeons
