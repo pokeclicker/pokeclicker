@@ -14,4 +14,5 @@ export default interface EnemyPokemonInterface extends PokemonInterface {
 
     isAlive(): boolean;
     damage(damage: number): void;
+    getImage(): string;
 }
