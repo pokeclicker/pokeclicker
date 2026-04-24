@@ -282,8 +282,6 @@ export type TmpPokemonFactoryType = {
     routeDungeonTokens(route: number, region: GameConstants.Region): number;
     generateShiny(chance: number, skipBonus?: boolean): boolean;
     generateGenderById(id: number): GameConstants.BattlePokemonGender;
-    generateGender(chance: number, genderType: GameConstants.Genders): GameConstants.BattlePokemonGender;
-    catchRateHelper(baseCatchRate: number, noVariation?: boolean): number;
 };
 
 export type TmpPartyPokemonType = {
