@@ -4128,9 +4128,9 @@ class QuestLineHelper {
         newPokemonSnapQuestLine.addQuest(talktoSnapMirror2); // 3
 
         /* Belusylva Island */
-        const founjaJungleExploration = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 57, GameConstants.Region.galar).withDescription('Research Pokémon in Belusylva Island\'s Founja Jungle.');
-        const swelteringSandsExploration = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 59, GameConstants.Region.galar).withDescription('Research Pokémon in Voluca Island\'s Sweltering Sands.');
-        const fireflowVolcanoExploration = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 61, GameConstants.Region.galar).withDescription('Research Pokémon in Voluca Island\'s Fireflow Volcano.');
+        const founjaJungleExploration = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 57, GameConstants.Region.galar).withDescription('Research Pokémon in Belusylva Island\'s Founja Jungle.').withInitialValue(0);
+        const swelteringSandsExploration = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 59, GameConstants.Region.galar).withDescription('Research Pokémon in Voluca Island\'s Sweltering Sands.').withInitialValue(0);
+        const fireflowVolcanoExploration = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 61, GameConstants.Region.galar).withDescription('Research Pokémon in Voluca Island\'s Fireflow Volcano.').withInitialValue(0);
         newPokemonSnapQuestLine.addQuest(founjaJungleExploration);
         newPokemonSnapQuestLine.addQuest(swelteringSandsExploration);
         newPokemonSnapQuestLine.addQuest(fireflowVolcanoExploration);
@@ -4147,8 +4147,8 @@ class QuestLineHelper {
         newPokemonSnapQuestLine.addQuest(talktoSnapMirror3); // 6
 
         /* Maricopia Islands */
-        const blushingBeachExploration = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 58, GameConstants.Region.galar).withDescription('Research Pokémon in Maricopia Islands\' Blushing Beach.');
-        const maricopiaReefExploration = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 63, GameConstants.Region.galar).withDescription('Research Pokémon in Maricopia Islands\' Maricopia Reef.');
+        const blushingBeachExploration = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 58, GameConstants.Region.galar).withDescription('Research Pokémon in Maricopia Islands\' Blushing Beach.').withInitialValue(0);
+        const maricopiaReefExploration = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 63, GameConstants.Region.galar).withDescription('Research Pokémon in Maricopia Islands\' Maricopia Reef.').withInitialValue(0);
         newPokemonSnapQuestLine.addQuest(blushingBeachExploration);
         newPokemonSnapQuestLine.addQuest(maricopiaReefExploration);
 
@@ -4176,7 +4176,7 @@ class QuestLineHelper {
         newPokemonSnapQuestLine.addQuest(talktoSnapMirror5); // 12
 
         /* Durice Island */
-        const shiverSnowfieldsExploration = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 66, GameConstants.Region.galar).withDescription('Research Pokémon in Durice Island\'s Shiver Snowfields.');
+        const shiverSnowfieldsExploration = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 66, GameConstants.Region.galar).withDescription('Research Pokémon in Durice Island\'s Shiver Snowfields.').withInitialValue(0);
         newPokemonSnapQuestLine.addQuest(shiverSnowfieldsExploration);
 
         const outawayCaveIllumina = new DefeatPokemonsQuest(GameConstants.ResearchLevel[2], 0, 67, GameConstants.Region.galar).withDescription('Explore Durice Island\'s Outaway Cave.');
