@@ -2,6 +2,7 @@ import * as GameConstants from '../GameConstants';
 import Requirement from '../requirements/Requirement';
 import type { PokemonNameType } from '../pokemons/PokemonNameType';
 import { GymPokemonBaseData } from './GymPokemonBaseData';
+import { getPokemonByName } from '../pokemons/PokemonHelper';
 
 export default class GymPokemon {
     name: PokemonNameType;
@@ -25,7 +26,7 @@ export default class GymPokemon {
     }
 
     public getBaseData(): GymPokemonBaseData {
-        const basePokemon = PokemonHelper.getPokemonByName(this.name);
+        const basePokemon = getPokemonByName(this.name);
         return {
             id: basePokemon.id,
             type1: basePokemon.type1,

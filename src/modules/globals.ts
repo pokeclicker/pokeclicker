@@ -19,5 +19,4 @@ declare global {
     const TemporaryBattleList: TempTypes.TmpTemporaryBattleListType;
     const BagHandler: TempTypes.TmpBagHandlerType;
     const GymList: TempTypes.TmpGymListType;
-    const PokemonHelper: TempTypes.TmpPokemonHelperType;
 }
