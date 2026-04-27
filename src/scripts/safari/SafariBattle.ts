@@ -175,6 +175,7 @@ class SafariBattle {
 
     private static capturePokemon() {
         SafariBattle.text(`GOTCHA!<br>${SafariBattle.enemy.displayName} was caught!`);
+        App.game.oakItems.use(OakItemType.Magic_Ball);
         GameHelper.incrementObservable(App.game.statistics.safariPokemonCaptured, 1);
         if (SafariBattle.enemy.shiny) {
             GameHelper.incrementObservable(App.game.statistics.safariShinyPokemonCaptured, 1);
@@ -189,7 +190,7 @@ class SafariBattle {
         switch (player.region) {
             case (GameConstants.Region.johto):
                 const shinyModifier = SafariBattle.enemy.shiny ? GameConstants.BUG_SAFARI_SHINY_MODIFIER : 1;
-                const bugReward = Math.floor(partyPokemon.baseAttack / 5) * shinyModifier;
+                const bugReward = Math.round(partyPokemon.baseAttack ** .5 + 16) * shinyModifier;
                 App.game.wallet.gainContestTokens(bugReward);
                 Notifier.notify({
                     title: 'Bug Catching Contest',
