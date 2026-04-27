@@ -18,7 +18,7 @@ class PokemonFactory {
         if (roaming) {
             name = PokemonFactory.generateRoamingEncounter(region, subRegion);
         } else {
-            name = Rand.fromArray(RouteHelper.getAvailablePokemonList(route, region));
+            name = Rand.fromWeightedArray(RouteHelper.getAvailablePokemonList(route, region), RouteHelper.getAvailablePokemonWeightList(route, region));
         }
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
@@ -133,17 +133,7 @@ class PokemonFactory {
      */
     public static generateGymPokemon(gym: Gym, index: number): BattlePokemon {
         const pokemon = gym.getPokemonList()[index];
-        const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
-
-        const exp: number = basePokemon.exp;
-        const shiny = pokemon.shiny ? pokemon.shiny : this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
-        const shadow = pokemon.shadow;
-        const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
-        if (shiny && !pokemon.shiny) {
-            GameHelper.incrementObservable(App.game.statistics.totalShinyTrainerPokemonSeen);
-        }
-        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer);
+        return this.gymPokemonToBattlePokemon(pokemon);
     }
 
     public static generateDungeonPokemon(name: PokemonNameType, chestsOpened: number, baseHealth: number, level: number, mimic = false): BattlePokemon {
@@ -172,21 +162,9 @@ class PokemonFactory {
     }
 
     public static generateDungeonTrainerPokemon(pokemon: GymPokemon, chestsOpened: number, baseHealth: number, level: number, isBoss: boolean, trainerPokemon = 1): BattlePokemon {
-        const name = pokemon.name;
-        const basePokemon = PokemonHelper.getPokemonByName(name);
-        const maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)) / (isBoss ? 1 : trainerPokemon ** 0.75));
-        const exp: number = basePokemon.exp;
-        const shiny: boolean = pokemon.shiny ? pokemon.shiny : this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
-        const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
-        // Reward 2% or 5% (boss) of dungeon DT cost when the trainer mons are defeated
-        const money = 0;
-        const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
-        const shadow = pokemon.shadow;
+        const maxHealth = Math.floor(baseHealth * (1 + (chestsOpened / 5)) / (isBoss ? 1 : trainerPokemon ** 0.75));
         const ep = GameConstants.BASE_EP_YIELD * (isBoss ? GameConstants.DUNGEON_BOSS_EP_MODIFIER : GameConstants.DUNGEON_EP_MODIFIER);
-        if (shiny && !pokemon.shiny) {
-            GameHelper.incrementObservable(App.game.statistics.totalShinyTrainerPokemonSeen);
-        }
-        return new BattlePokemon(name, basePokemon.id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, gender, shadow, EncounterType.trainer, undefined, ep);
+        return this.gymPokemonToBattlePokemon(pokemon, EncounterType.trainer, GameConstants.SHINY_CHANCE_DUNGEON, maxHealth, level, ep, GameConstants.DUNGEON_GEMS);
     }
 
     public static generateDungeonBoss(bossPokemon: DungeonBossPokemon, chestsOpened: number): BattlePokemon {
@@ -215,22 +193,12 @@ class PokemonFactory {
 
     public static generateTemporaryBattlePokemon(battle: TemporaryBattle, index: number): BattlePokemon {
         const pokemon = battle.getPokemonList()[index];
-        const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
-        const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const encounterType = battle.optionalArgs.isTrainerBattle
             ? EncounterType.trainer
             : App.game.gameState === GameConstants.GameState.dungeon
                 ? EncounterType.dungeon
                 : EncounterType.route;
-
-        const exp: number = basePokemon.exp;
-        const shiny = pokemon.shiny ? pokemon.shiny : this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
-        const shadow = pokemon.shadow;
-        if (shiny && !pokemon.shiny && battle.optionalArgs.isTrainerBattle) {
-            GameHelper.incrementObservable(App.game.statistics.totalShinyTrainerPokemonSeen);
-        }
-        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender, shadow, encounterType);
+        return this.gymPokemonToBattlePokemon(pokemon, encounterType);
     }
 
     private static generateRoamingEncounter(region: GameConstants.Region, subRegion: SubRegion): PokemonNameType {
@@ -271,7 +239,7 @@ class PokemonFactory {
         return Rand.chance(roamingChance);
     }
 
-    private static catchRateHelper(baseCatchRate: number, noVariation = false): number {
+    public static catchRateHelper(baseCatchRate: number, noVariation = false): number {
         const catchVariation = noVariation ? 0 : Rand.intBetween(-3, 3);
         const catchRateRaw = Math.floor(Math.pow(baseCatchRate, 0.75)) + catchVariation;
         return GameConstants.clipNumber(catchRateRaw, 0, 100);
@@ -400,6 +368,54 @@ class PokemonFactory {
         const gender = PokemonFactory.generateGenderById(pokemonData.id);
         const wanderer = new WandererPokemon(pokemon, berry.type, catchChance, gender, shiny);
         return wanderer;
+    }
+
+    public static gymPokemonToBattlePokemon(
+        gymPokemon: GymPokemon,
+        encounterType: EncounterType = EncounterType.trainer,
+        shinyChance: number = GameConstants.SHINY_CHANCE_BATTLE,
+        healthOverride?: number,
+        levelOverride?: number,
+        epOverride?: number,
+        gemsOverride: number = GameConstants.GYM_GEMS
+    ): BattlePokemon {
+        const data = gymPokemon.getBaseData();
+
+        const shiny = gymPokemon.shiny ?? this.generateShiny(shinyChance);
+        const catchRate = data.catchRate ? this.catchRateHelper(data.catchRate) : 0;
+        const gender = data.genderData
+            ? this.generateGender(data.genderData.femaleRatio, data.genderData.type)
+            : GameConstants.BattlePokemonGender.NoGender;
+        const maxHealth = healthOverride ?? gymPokemon.maxHealth;
+        const level = levelOverride ?? gymPokemon.level;
+        const ep = epOverride ?? 0;
+        const imagePath = data.customImageName ? `${shiny ? 'shiny' : ''}custompokemon/${data.customImageName}` : undefined;
+
+        if (shiny && !gymPokemon.shiny && encounterType === EncounterType.trainer) {
+            GameHelper.incrementObservable(App.game.statistics.totalShinyTrainerPokemonSeen);
+        }
+
+        return new BattlePokemon(
+            gymPokemon.name,
+            data.id,
+            data.type1,
+            data.type2,
+            maxHealth,
+            level,
+            catchRate,
+            data.exp,
+            new Amount(0, GameConstants.Currency.money),
+            shiny,
+            gemsOverride,
+            gender,
+            gymPokemon.shadow,
+            encounterType,
+            undefined,
+            ep,
+            data.displayName,
+            imagePath,
+            data.incrementDefeatedStatistic
+        );
     }
 }
 

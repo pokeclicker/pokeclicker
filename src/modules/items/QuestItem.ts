@@ -1,30 +1,25 @@
-import QuestLineState from '../quests/QuestLineState';
 import { QuestLineNameType } from '../quests/QuestLineNameType';
-import Item from './Item';
 import { ShopOptions } from './types';
-import { Currency } from '../GameConstants';
+import { AchievementOption, Currency } from '../GameConstants';
+import CollectibleItem from './CollectibleItem';
+import QuestLineCompletedRequirement from '../requirements/QuestLineCompletedRequirement';
 
-export default class QuestItem extends Item {
+export default class QuestItem extends CollectibleItem {
     constructor(
         name: string,
         displayName : string,
         description : string,
-        private questlineName : QuestLineNameType,
-        private endQuestlineName = questlineName,
+        questlineName : QuestLineNameType,
         basePrice?: number,
         currency?: Currency,
         options?: ShopOptions,
     ) {
-        super(name, basePrice, currency, { maxAmount: 1, ...options }, displayName, description, 'quest');
-    }
-
-    public isActive() : boolean {
-        return App.game.quests.getQuestLine(this.questlineName).state() > QuestLineState.inactive &&
-            App.game.quests.getQuestLine(this.endQuestlineName).state() < QuestLineState.ended;
+        const req = new QuestLineCompletedRequirement(questlineName, AchievementOption.less);
+        super(name, displayName, description, req, basePrice, currency, { maxAmount: 1, ...options });
     }
 
     isSoldOut(): boolean {
-        return player.itemList[this.name]() > 0;
+        return player.itemList[this.name]() >= this.maxAmount;
     }
 
 }
