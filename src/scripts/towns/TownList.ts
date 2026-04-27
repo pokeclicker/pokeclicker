@@ -3,7 +3,7 @@
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/SpecialEventRequirement.d.ts"/>
-///<reference path="../../declarations/requirements/SpecificBerryUnlockedRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/BerryUnlockedRequirement.d.ts"/>
 ///<reference path="../quests/BulletinBoard.ts"/>
 ///<reference path="BattleCafe.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
@@ -4574,7 +4574,7 @@ const SnoverShopHint = new NPC('Icy Guy', [
     'Some of them are completely covered in berries, whereas others seem to be completely bare!',
     '...Come to think of it, only the ones going south were bare.',
     'I wonder what\'s happening to their berries then?',
-], {requirement: new SpecificBerryUnlockedRequirement(BerryType.Snover),
+], {requirement: new BerryUnlockedRequirement(BerryType.Snover),
 });
 
 const EvolutionAssistant = new AssistantNPC('Prof. Rowan\'s Assistant', [
