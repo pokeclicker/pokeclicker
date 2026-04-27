@@ -703,6 +703,7 @@ const PinkanOfficerJenny2 = new NPC ('Officer Jenny', [
     'Hang on, this island is strictly off limits! Pinkan is a protected Pokémon reserve. How did you get here?',
     'Well I suppose you did deal with that Team Rocket branch on Five Island, so I guess I\'ll let you stay, as thanks.',
     'And since you\'ve conquered the Orange League, I suppose it should be safe to let you into Pinkan Mountain. Just be careful.',
+    'Don\'t even think about taking any Pinkan berries off this island though! They\'re a heavily restricted item. If you want to get one, you\'ll simply have to grow it yourself.',
 ], {
     image: 'assets/images/npcs/Officer Jenny.png',
     requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion), new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Theme Park', 0, GameConstants.AchievementOption.less)]),
@@ -710,6 +711,7 @@ const PinkanOfficerJenny2 = new NPC ('Officer Jenny', [
 const PinkanOfficerJenny3 = new NPC ('Officer Jenny', [
     'Oh it\'s you again! Got some Pinkan Berries to trade?',
     'So long as you\'re not helping those Rocket clowns, we\'ll let you trade for some of those rare Pinkan Pokémon that have only just come to the island.',
+    '...Additionally, since you\'ve proven yourself a skilled farmer, feel free to pick up any loose Pinkan Berries you come across on the mountain.',
 ], {
     image: 'assets/images/npcs/Officer Jenny.png',
     requirement: new QuestLineCompletedRequirement('Team Rocket\'s Pinkan Theme Park'),
