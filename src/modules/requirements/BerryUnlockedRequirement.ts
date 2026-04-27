@@ -4,7 +4,7 @@ import BerryType from '../enums/BerryType';
 
 export default class BerryUnlockedRequirement extends AchievementRequirement {
     constructor(public berry: BerryType, unlocked = true) {
-        super(1, unlocked ? AchievementOption.more : AchievementOption.more);
+        super(1, unlocked ? AchievementOption.more : AchievementOption.less);
     }
 
     public getProgress() {
