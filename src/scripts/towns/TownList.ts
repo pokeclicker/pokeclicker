@@ -3,6 +3,7 @@
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/SpecialEventRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/BerryUnlockedRequirement.d.ts"/>
 ///<reference path="../quests/BulletinBoard.ts"/>
 ///<reference path="BattleCafe.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
@@ -310,6 +311,16 @@ const PewterScientist = new NPC('Gem Scientist', [
     requirement: new GymBadgeRequirement(BadgeEnums.Earth),
 });
 
+const Route3CenterHint = new NPC('Gentleman', [
+    'I say, the trek from here to Cerulean City can be a tiring one.',
+    'If it wasn\'t for the Pokémon Center outside Mt. Moon, I don\'t think I\'d ever make it!',
+    '...What\'s that? You\'ve never seen a Pokémon Center there?',
+    'Hmm, It is somewhat out of the way. Maybe if you look closer?',
+], {
+    image: 'assets/images/npcs/Gentleman.png',
+    requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Moon')),
+});
+
 const Route3ShadySalesman = new NPC('Shady Salesman', [
     'Have I got a deal just for you!',
     'I\'ll let you have a super secret Pokémon. For the right price! Buying this pokemon Takes No Effort, you should Value it.',
@@ -452,6 +463,12 @@ const BigSpender = new NPC('Big Spender', [
     'I love shopping! When I come in, the cashiers know I want tons of items.',
     'You can use the Shop Amount Button settings to make it easy for big purchases, too!',
 ], {image: 'assets/images/npcs/Beauty.png'});
+
+const RichBoy = new NPC('Rich Boy', [
+    'It\'s outrageous! I go through these dungeons over and over again, and the Trainers inside simply refuse to give me more money!',
+    'No matter what I do, they always give me the same amount of Pokédollars and Dungeon Tokens.',
+    'Be it Token Collectors, Lucky Incense, holding an Amulet Coin or even having a higher Achievement Bonus, it seems you simply cannot change what Dungeon Trainers will give you.',
+], {image: 'assets/images/npcs/Rich Boy.png'});
 
 const EggHuntErika = new NPC('Erika', [
     'Hello... Isn\'t the spring weather so relaxing? I adore how lovely the blooming flowers look during this time of year...',
@@ -925,7 +942,7 @@ TownList['Pewter City'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 2),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Viridian Forest')),
         ],
-        npcs: [PewterBattleItemRival, PewterScientist],
+        npcs: [PewterBattleItemRival, Route3CenterHint, PewterScientist],
     }
 );
 TownList['Route 4 Pokémon Center'] = new Town(
@@ -994,7 +1011,7 @@ TownList['Celadon City'] = new Town(
     [CeladonDepartmentStoreShop, CeladonCityShop, new MoveToDungeon(dungeonList['Rocket Game Corner'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
-        npcs: [BigSpender, CandyMan, EggHuntErika],
+        npcs: [BigSpender, RichBoy, CandyMan, EggHuntErika],
     }
 );
 TownList['Saffron City'] = new Town(
@@ -2442,6 +2459,15 @@ const FortreeRanger = new NPC('Pokémon Ranger Catherine', [
     'Please recycle your used Dowsing Machines.',
 ], {image: 'assets/images/npcs/Pokemon Ranger (female).png'});
 
+const WindChimeHint = new NPC('Guitarist', [
+    'Yo! What\'s up! I\'ve been wandering around here, trying to find the best atmosphere to practice.',
+    'Strangely, while I was out and about earlier, I heard a strange chiming noise. Completely threw me off my rhythm, I\'ll tell you what. Terrible sound quality!',
+    'If that\'s something that would interest you, then just keep an ear out for chimes, they must be happening for a reason.',
+    '...',
+    '...What\'s that? This game doesn\'t have music?',
+    'Right, I\'ll choose to pretend I know what you mean by that. In that case I think I was sitting under a small tree when I heard it. Sorry I can\'t give any more information.',
+], {image: 'assets/images/npcs/Guitarist (male).png'});
+
 const WindChimeShopShadySalesman = new NPC('Shady Salesman', [
     'Step right up! Get your Chimecho while they last! Chimecho, a very rare Pokémon indeed, with a voice that\'s both beautiful and powerful. Look closer! I see it bringing a smile to your face, just gazing into those loving eyes! They say these are the most gentle, healing eyes in the Pokémon kingdom.',
     'That\'s not all! Just look at the way Chimecho\'s tail swings and sways with the wind, like a weeping willow in a summer breeze. In really hot weather, it will act like a fan to help you cool off. And when it\'s cold outside, your Chimecho can wrap itself around your neck like a scarf, to keep you warm.',
@@ -3435,7 +3461,7 @@ TownList['Fortree City'] = new Town(
     [FortreeCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Fortree City'])],
     {
         requirements: [new TemporaryBattleRequirement('May 4')],
-        npcs: [FortreeWeatherman, FortreeRanger, Steven1, Steven2],
+        npcs: [FortreeWeatherman, FortreeRanger, WindChimeHint, Steven1, Steven2],
     }
 );
 TownList['Wind Chime Shop'] = new Town(
@@ -4543,6 +4569,14 @@ const GrotleAcornParty = new NPC('Grotle and Friends', [
     requirement: new ObtainedPokemonRequirement('Grotle (Acorn)'),
 });
 
+const SnoverShopHint = new NPC('Icy Guy', [
+    'I\'ve been seeing a lot of Snover near the north of Route 217 recently.',
+    'Some of them are completely covered in berries, whereas others seem to be completely bare!',
+    '...Come to think of it, only the ones going south were bare.',
+    'I wonder what\'s happening to their berries then?',
+], {requirement: new BerryUnlockedRequirement(BerryType.Snover),
+});
+
 const EvolutionAssistant = new AssistantNPC('Prof. Rowan\'s Assistant', [
     'Hey, $playername$! According to Prof. Rowan\'s research, 90% of all Pokémon are somehow tied to evolution! Yup, you can also see a Pokémon\'s evolution line in your Pokédex.',
 ], [
@@ -4708,7 +4742,7 @@ TownList['Snowpoint City'] = new Town(
     [SnowpointCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Snowpoint City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 217)],
-        npcs: [SnowpointYoungGirl, MindyFriend],
+        npcs: [SnowpointYoungGirl, MindyFriend, SnoverShopHint],
     }
 );
 TownList['Secret Berry Shop'] = new Town(
@@ -6126,6 +6160,29 @@ const TeamFlareGrunt1 = new NPC('Team Flare Grunt', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 6), new QuestLineStepCompletedRequirement('A Beautiful World', 8, GameConstants.AchievementOption.less)]),
 });
 
+const TwerpHint1 = new NPC('Old Lady', [
+    'I met just the nicest people the other day.',
+    'A young couple and their Pikachu set up a little shop to the west, and their customer service was just exquisite!',
+    '...Mind you, though. Their Pikachu looked a little unhealthy. When I asked them about it though, they just claimed he was Alolan.',
+    'I guess that makes sense, it would also explain why it was floating.',
+], {
+    image: 'assets/images/npcs/Old Lady.png',
+    requirement: new ObtainedPokemonRequirement('Alolan Raichu', true),
+});
+
+const TwerpHint2 = new NPC('Old Lady', [
+    'I met just the nicest people the other day.',
+    'A young couple and their Pikachu set up a little shop to the west, and their customer service was just exquisite!',
+    '...Mind you, though. Their Pikachu looked a little unhealthy. When I asked them about it though, they just claimed he was Alolan.',
+    'I guess that makes sense, it would also explain why it was floating.',
+    'What\'s that? Alolan Pikachu don\'t exist? Are you sure? Well, if you say so. I guess whatever that poor Pikachu has is serious then.',
+], {
+    image: 'assets/images/npcs/Old Lady.png',
+    requirement: new ObtainedPokemonRequirement('Alolan Raichu'),
+});
+
+
+
 const NotAsh = new NPC('Not Ash', [
     'Hey uh.... twerp. Would you happen to have any Dungeon Tokens? We\'ve, uh, run out.',
     'I\'ll give you that Pikachu costume my Inkay was wearing for some?',
@@ -6625,7 +6682,7 @@ TownList['Geosenge Town'] = new Town(
     [GeosengeTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Geosenge Town']), new MoveToDungeon(dungeonList['Team Flare Secret HQ']), TemporaryBattleList['Team Flare Grunt 2']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 10)],
-        npcs: [TeamFlareGrunt1],
+        npcs: [TeamFlareGrunt1, TwerpHint1, TwerpHint2],
     }
 );
 TownList['Shalour City'] = new Town(

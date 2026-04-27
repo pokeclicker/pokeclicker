@@ -18,7 +18,7 @@ class PokemonFactory {
         if (roaming) {
             name = PokemonFactory.generateRoamingEncounter(region, subRegion);
         } else {
-            name = Rand.fromArray(RouteHelper.getAvailablePokemonList(route, region));
+            name = Rand.fromWeightedArray(RouteHelper.getAvailablePokemonList(route, region), RouteHelper.getAvailablePokemonWeightList(route, region));
         }
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
