@@ -54,6 +54,7 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Roaming] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Roaming));
         this.externalAuras[AuraType.Ev] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Ev));
         this.externalAuras[AuraType.Xp] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Xp));
+        this.externalAuras[AuraType.DropRate] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.DropRate));
 
         const multiplierSource = 'Farm Aura';
         this.multiplier.addBonus('shiny', () => this.externalAuras[AuraType.Shiny](), multiplierSource);
@@ -61,6 +62,7 @@ class Farming implements Feature {
         this.multiplier.addBonus('roaming', () => this.externalAuras[AuraType.Roaming](), multiplierSource);
         this.multiplier.addBonus('ev', () => this.externalAuras[AuraType.Ev](), multiplierSource);
         this.multiplier.addBonus('exp', () => this.externalAuras[AuraType.Xp](), multiplierSource);
+        this.multiplier.addBonus('rareItemDropRate', () => this.externalAuras[AuraType.DropRate](), multiplierSource);
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
             for (let i = GameHelper.enumLength(BerryType) - 2; i >= 0; i--) {
@@ -728,9 +730,9 @@ class Farming implements Feature {
             BerryFirmness.Soft,
             [
                 'This Berry has a disagreeable "green" flavor and scent typical of vegetables. It is rich in health-promoting fiber.',
-                'It has a tendency to expand into nearby plots.',
+                'It has a tendency to expand into nearby plots, and attracts Pokémon that are holding items.',
             ],
-            undefined,
+            new Aura(AuraType.DropRate, [1.01, 1.02, 1.03]),
             ['Bulbasaur', 'Chikorita', 'Treecko', 'Turtwig', 'Snivy', 'Chespin', 'Rowlet', 'Grookey', 'Sprigatito']
         );
 
