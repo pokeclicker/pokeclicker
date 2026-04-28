@@ -1,6 +1,6 @@
 import BadgeEnums from '../enums/Badges';
 import {
-    Region, KantoSubRegions, getDungeonIndex, AlolaSubRegions, GalarSubRegions, HoennSubRegions, AchievementOption, DayOfWeek, ResearchLevel, FluteItemType,
+    Region, KantoSubRegions, getDungeonIndex, AlolaSubRegions, GalarSubRegions, HoennSubRegions, AchievementOption, DayOfWeek, ResearchLevel,
 } from '../GameConstants';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
@@ -32,8 +32,6 @@ import { getPokemonByName } from '../pokemons/PokemonHelper';
 import CustomRequirement from '../requirements/CustomRequirement';
 import SeededDateSelectNRequirement from '../requirements/SeededDateSelectNRequirement';
 import type { PokemonNameType } from '../pokemons/PokemonNameType';
-import GameHelper from '../GameHelper';
-import EffectEngineRunner from '../effectEngine/effectEngineRunner';
 import LentalRouteRequirement from '../requirements/LentalRouteRequirement';
 
 /*
@@ -3451,111 +3449,6 @@ Routes.add(new RegionRoute(
     32.15,
     GalarSubRegions.Lental,
     true, 15586288,
-));
-// Pokémon Island
-// In Pokemon Snap, there isn't a Research Level equivalent. I'm giving the encounters that need a bit of extra prompting a RL2 req (think gathering magnemites to evolve).
-Routes.add(new RegionRoute(
-    'Pokémon Island Beach', Region.galar, 71,
-    new RoutePokemon({
-        land: ['Butterfree', 'Pidgey', 'Pikachu', 'Meowth', 'Doduo', 'Kangaskhan', 'Scyther', 'Lapras', 'Eevee', 'Snorlax'],
-        water: ['Magikarp'],
-        special:
-        [
-            new SpecialRoutePokemon(['Chansey'], new RouteKillRequirement(ResearchLevel[2], Region.galar, 71)),
-            new SpecialRoutePokemon(['Surfing Pikachu'], new MultiRequirement([new ObtainedPokemonRequirement('Surfing Pikachu'), new RouteKillRequirement(ResearchLevel[4], Region.galar, 71)])),
-        ],
-    }),
-    [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 0)],
-    32.16,
-    GalarSubRegions.Lental,
-    true, 15753920,
-));
-Routes.add(new RegionRoute(
-    'Pokémon Island Tunnel', Region.galar, 72,
-    new RoutePokemon({
-        land: ['Kakuna', 'Pikachu', 'Zubat', 'Diglett', 'Magnemite', 'Haunter', 'Electrode', 'Electabuzz', 'Magikarp'],
-        water: ['Magikarp'],
-        special:
-        [
-            new SpecialRoutePokemon(['Dugtrio', 'Magneton'], new RouteKillRequirement(ResearchLevel[2], Region.galar, 72)),
-        ],
-    }),
-    [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 3)],
-    32.17,
-    GalarSubRegions.Lental,
-    true, 15922638,
-));
-Routes.add(new RegionRoute(
-    'Pokémon Island Volcano', Region.galar, 73,
-    new RoutePokemon({
-        land: ['Charmander', 'Vulpix', 'Growlithe', 'Arcanine', 'Rapidash', 'Magmar'],
-        water: ['Magikarp'],
-        special:
-        [
-            new SpecialRoutePokemon(['Charmeleon'], new RouteKillRequirement(ResearchLevel[2], Region.galar, 73)),
-            new SpecialRoutePokemon(['Charizard'], new RouteKillRequirement(ResearchLevel[3], Region.galar, 73)),
-        ],
-    }),
-    [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 6)],
-    32.18,
-    GalarSubRegions.Lental,
-    true, 16092444,
-));
-Routes.add(new RegionRoute(
-    'Pokémon Island River', Region.galar, 74,
-    new RoutePokemon({
-        land: ['Bulbasaur', 'Metapod', 'Pikachu', 'Vileplume', 'Psyduck', 'Poliwag', 'Slowpoke', 'Shellder', 'Cloyster'],
-        water: ['Magikarp'],
-        special:
-        [
-            new SpecialRoutePokemon(['Slowbro'], new RouteKillRequirement(ResearchLevel[2], Region.galar, 74)),
-            new SpecialRoutePokemon(['Porygon'], new RouteKillRequirement(ResearchLevel[3], Region.galar, 74)), // so you start to see it when you near the end of the Snap 64 quest
-            new SpecialRoutePokemon(['Porygon (Camo)'], new QuestLineCompletedRequirement('Pokémon Snap 64')),
-        ],
-    }),
-    [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 9)],
-    32.19,
-    GalarSubRegions.Lental,
-    true, 16263341,
-));
-
-const fluteRequirement = new CustomRequirement(ko.pureComputed(() => {
-    const id = Number(player.trainerId);
-    SeededRand.seed(id * 42 + 1e6);
-    // Specific flutes activated, the others deactivated
-    return SeededRand.shuffleArray(GameHelper.enumStrings(FluteItemType)).every((f: string, i: number) => EffectEngineRunner.isActive(f)() == (i < 2));
-}), true, 'Activate the exact two flutes based on player\'s ID.');
-Routes.add(new RegionRoute(
-    'Pokémon Island Cave', Region.galar, 75,
-    new RoutePokemon({
-        land: ['Bulbasaur', 'Pikachu', 'Jigglypuff', 'Zubat', 'Weepinbell', 'Grimer', 'Koffing', 'Jynx'],
-        water: ['Magikarp'],
-        special:
-        [
-            new SpecialRoutePokemon(['Victreebel', 'Muk', 'Ditto'], new RouteKillRequirement(ResearchLevel[2], Region.galar, 75)),
-            new SpecialRoutePokemon(['Jigglypuff (Singing)'], fluteRequirement),
-        ],
-    }),
-    [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 12)],
-    32.20,
-    GalarSubRegions.Lental,
-    true, 16435330,
-));
-Routes.add(new RegionRoute(
-    'Pokémon Island Valley', Region.galar, 76,
-    new RoutePokemon({
-        land: ['Sandshrew', 'Sandslash', 'Mankey', 'Geodude', 'Staryu'],
-        water: ['Goldeen', 'Magikarp', 'Dratini'],
-        special:
-        [
-            new SpecialRoutePokemon(['Squirtle', 'Graveler', 'Starmie', 'Gyarados'], new RouteKillRequirement(ResearchLevel[2], Region.galar, 76)),
-            new SpecialRoutePokemon(['Dragonite'], new RouteKillRequirement(ResearchLevel[3], Region.galar, 76)),
-        ],
-    }),
-    [new QuestLineStepCompletedRequirement('Pokémon Snap 64', 15)],
-    32.21,
-    GalarSubRegions.Lental,
-    true, 16608415,
 ));
 
 /*
