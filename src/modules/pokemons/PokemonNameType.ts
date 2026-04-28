@@ -1643,8 +1643,6 @@ export type PokemonNameType
     | 'Terapagos (Terastal)'
     | 'Terapagos (Stellar)'
     | 'Pecharunt'
-    | '???'
-    | 'You hateful little Trainer!'
     | 'Kingler Sign'
     | 'Pinsir Sign'
     | 'Koffing Sign'

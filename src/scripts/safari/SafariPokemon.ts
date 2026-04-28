@@ -126,4 +126,8 @@ class SafariPokemon implements PokemonInterface {
     public get displayName() {
         return this._displayName();
     }
+
+    public getImage(): string {
+        return PokemonHelper.getImage(this.id, this.shiny, this.gender, this.shadow);
+    }
 }
