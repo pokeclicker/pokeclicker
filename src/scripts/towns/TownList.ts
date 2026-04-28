@@ -9365,98 +9365,6 @@ const ToddSnapFloots = new NPC ('Todd Snap', [
     image: 'assets/images/npcs/Todd Snap (64).png',
     requirement: new QuestLineCompletedRequirement('New Pokémon Snap'),
 });
-const ToddSnap1 = new NPC ('Todd Snap', [
-    'Professor Mirror told me all about you!',
-    'A long time ago, I helped Professor Oak explore Pokémon Island. Now I want you to do the same!',
-    'I saw 3 great birds hatch from their eggs.',
-    'I saw a Jigglypuff that would sing while others danced to its music.',
-    'At the end of my journey, I even saw the mythical Pokémon Mew!',
-    'But there was one Pokémon that always seemed to elude me.',
-    'I didn\'t get a single picture of it, it was camouflaged into the environment!',
-    'You should start by exploring the shore of Pokémon Island to find it.',
-], {
-    image: 'assets/images/npcs/Todd Snap (New).png',
-    requirement: new MultiRequirement([new QuestLineStartedRequirement('Pokémon Snap 64'), new QuestLineStepCompletedRequirement('Pokémon Snap 64', 2, GameConstants.AchievementOption.less)]),
-});
-const ToddSnap2 = new NPC ('Todd Snap', [
-    'You only found a rock that was shaped like a Kingler on the beach? Make sure you\'re careful not to disturb real Pokémon too.',
-    'There is a Tunnel into the island, maybe that\'s where I saw it.',
-    'You should also check the beach again, just in case it went there after you.',
-], {
-    image: 'assets/images/npcs/Todd Snap (New).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Pokémon Snap 64', 2), new QuestLineStepCompletedRequirement('Pokémon Snap 64', 5, GameConstants.AchievementOption.less)]),
-});
-const ToddSnap3 = new NPC ('Todd Snap', [
-    'Some Kakuna attacked you while you were examining a shadow? At least they weren\'t Beedrill yet!',
-    'Maybe it was on the Volcano. Be careful near the magma though!',
-    'And don\'t forget to check back at the places you already were.',
-], {
-    image: 'assets/images/npcs/Todd Snap (New).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Pokémon Snap 64', 5), new QuestLineStepCompletedRequirement('Pokémon Snap 64', 8, GameConstants.AchievementOption.less)]),
-});
-const ToddSnap4 = new NPC ('Todd Snap', [
-    'You are pretty lucky that the poison gas wasn\'t hiding any Pokémon, the wild Pokémon would have attacked you again! You should be more careful.',
-    'Actually, I think I remember seeing it on the edge of the River. I bet it was there!',
-    'I could be remembering wrong though, so look back at the Tunnel and Volcano as well.',
-], {
-    image: 'assets/images/npcs/Todd Snap (New).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Pokémon Snap 64', 8), new QuestLineStepCompletedRequirement('Pokémon Snap 64', 11, GameConstants.AchievementOption.less)]),
-});
-const ToddSnap5 = new NPC ('Todd Snap', [
-    'It really wasn\'t by the River? You\'ll have to check again later.',
-    'It definitely could be hiding in the Cave right now though.',
-], {
-    image: 'assets/images/npcs/Todd Snap (New).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Pokémon Snap 64', 11), new QuestLineStepCompletedRequirement('Pokémon Snap 64', 14, GameConstants.AchievementOption.less)]),
-});
-const ToddSnap6 = new NPC ('Todd Snap', [
-    'There are a lot of Zubat in the Cave, I\'m not surprised you disturbed them.',
-    'There is only one more place left to check. It\'s got to be in the valley!',
-    'Make sure you check along the water too.',
-    'If it\'s not there, look back at all the places you\'ve been.',
-], {
-    image: 'assets/images/npcs/Todd Snap (New).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Pokémon Snap 64', 14), new QuestLineStepCompletedRequirement('Pokémon Snap 64', 17, GameConstants.AchievementOption.less)]),
-});
-const ToddSnap7 = new NPC ('Todd Snap', [
-    'You thought the mountain was a Dugtrio?! It does look like one, but it\'s much to big!',
-    'You still haven\'t been able to find it?',
-    'I am confident that I saw it near the River, make sure you check it again! And be more thorough!',
-], {
-    image: 'assets/images/npcs/Todd Snap (New).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Pokémon Snap 64', 17), new QuestLineStepCompletedRequirement('Pokémon Snap 64', 20, GameConstants.AchievementOption.less)]),
-});
-const ToddSnap8 = new NPC ('Todd Snap', [
-    'It was a Porygon all along?! I can\'t believe it blended in with the environment that well.',
-    'It looks like it would stand out on any surface!',
-    'Although, maybe I can just see clearer than I could back then.',
-], {
-    image: 'assets/images/npcs/Todd Snap (New).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Pokémon Snap 64', 20), new QuestLineCompletedRequirement('Pokémon Snap 64', GameConstants.AchievementOption.less)]),
-});
-const ToddSnap64 = new NPC ('Todd Snap\'s Journal', [
-    '<b><i>There is a picture of Todd Snap when he was younger marking a page in his journal.</i></b>',
-    '<i>Pokémon Island is a place with many rare Pokémon!</i>',
-    '<i>3 elemental birds will sometimes roam part of the island, but you have to hatch them from their eggs first!</i>',
-    '<i>After I explored the whole island, the mythical Pokémon Mew would float right up next to me. And then disappear for a long time!</i>',
-    '<i>Once I had visited the Cave enough times, some Jigglypuff would sing and dance while I was around. Their music always makes me tired though.</i>',
-    '<i>There are also some structures found all over the island that look like Pokemon! Professor Oak and I call them Pokémon Signs.</i>',
-    '<i>The first one I found was a group of rocks that looked like a giant Kingler.</i>',
-    '<img src="assets/images/pokemon/-99.01.png" style="max-width:100%; height:auto"/>',
-    '<i>In the Tunnel, I saw some scrap pieces that cast shadows in the shape of a Pinsir.</i>',
-    '<img src="assets/images/pokemon/-127.01.png" style="max-width:100%; height:auto"/>',
-    '<i>There was also some puffs of gas coming from the Volcano that formed a Koffing.</i>',
-    '<img src="assets/images/pokemon/-109.01.png" style="max-width:100%; height:auto"/>',
-    '<i>Along the River\'s edge, there was a tree shaped just like a cubone.</i>',
-    '<img src="assets/images/pokemon/-104.01.png" style="max-width:100%; height:auto"/>',
-    '<i>I later saw some crystals that lined up as if they were a Mewtwo!</i>',
-    '<img src="assets/images/pokemon/-150.01.png" style="max-width:100%; height:auto"/>',
-    '<i>The last sign I saw was a giant mountain dubbed Mt. Dugtrio.</i>',
-    '<img src="assets/images/pokemon/-51.01.png" style="max-width:100%; height:auto"/>',
-], {
-    image: 'assets/images/npcs/Todd Snap (64).png',
-    requirement: new QuestLineCompletedRequirement('Pokémon Snap 64'),
-});
 
 //Galar Towns
 TownList.Postwick = new Town(
@@ -9659,7 +9567,7 @@ TownList['Laboratory of Ecology and Natural Sciences'] = new Town(
     [new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
-        npcs: [SnapMirror1, SnapMirror2, SnapMirror3, SnapMirror4, SnapMirror5, SnapMirror6, SnapMirror7, SnapMirrorResearchLevel, RitaLentalRoamerNPC, ToddSnap1, ToddSnap2, ToddSnap3, ToddSnap4, ToddSnap5, ToddSnap6, ToddSnap7, ToddSnap8, ToddSnapFloots, ToddSnap64],
+        npcs: [SnapMirror1, SnapMirror2, SnapMirror3, SnapMirror4, SnapMirror5, SnapMirror6, SnapMirror7, SnapMirrorResearchLevel, RitaLentalRoamerNPC, ToddSnapFloots],
     }
 );
 
