@@ -12,7 +12,7 @@ enum AuraType {
     Ev,
     Decay,
     Xp,
-    DropRate,
+    Pickup,
 }
 
 export default AuraType;
