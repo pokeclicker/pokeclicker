@@ -162,17 +162,12 @@ RoamingPokemonList.add(Region.galar, 3, new RoamingPokemon('Galarian Articuno', 
 // Lental
 // Florio Island
 RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Porygon (Camo)', new QuestLineCompletedRequirement('New Pokémon Snap')));
-const fluteCheck = () => {
-    const id = Number(player.trainerId);
-    SeededRand.seed(id * 42 + 1e6);
-    // Specific flutes activated, the others deactivated
-    return +(GameHelper.enumStrings(FluteItemType).reduce((c: number, f: string) => c + +EffectEngineRunner.isActive(f)(), 0) == 3);
-};
+const fluteCheck = () => +(GameHelper.enumStrings(FluteItemType).reduce((c: number, f: string) => c + +EffectEngineRunner.isActive(f)(), 0) == 3);
 RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Jigglypuff (Singing)', new MultiRequirement([
-    new QuestLineCompletedRequirement('New Pokémon Snap'), new CustomRequirement(ko.pureComputed(fluteCheck), 1, 'Play exactly three notes with the flutes.'),
+    new QuestLineCompletedRequirement('New Pokémon Snap'), new CustomRequirement(ko.pureComputed(fluteCheck), 1, 'Have exactly three active flutes.'),
 ])));
 RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Jigglypuff', new MultiRequirement([
-    new QuestLineCompletedRequirement('New Pokémon Snap'), new CustomRequirement(ko.pureComputed(fluteCheck), 0, 'Don\'t play exactly three notes with the flutes.'),
+    new QuestLineCompletedRequirement('New Pokémon Snap'), new CustomRequirement(ko.pureComputed(fluteCheck), 0, 'Don\'t have exactly three active flutes.'),
 ])));
 
 // Hisui
