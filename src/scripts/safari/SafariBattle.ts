@@ -190,7 +190,7 @@ class SafariBattle {
         switch (player.region) {
             case (GameConstants.Region.johto):
                 const shinyModifier = SafariBattle.enemy.shiny ? GameConstants.BUG_SAFARI_SHINY_MODIFIER : 1;
-                const bugReward = Math.floor(partyPokemon.baseAttack / 5) * shinyModifier;
+                const bugReward = Math.round(partyPokemon.baseAttack ** .5 + 16) * shinyModifier;
                 App.game.wallet.gainContestTokens(bugReward);
                 Notifier.notify({
                     title: 'Bug Catching Contest',
