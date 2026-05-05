@@ -24,7 +24,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
     public static generateData(): any[] {
         const amount = SeededRand.intBetween(5, 20);
         // Make a list of all regions where at least one gym has been cleared.
-        const validRegionGyms = GameConstants.RegionGyms.filter(gyms => gyms.some(gym => App.game.badgeCase.hasBadge(GymList[gym].badgeReward)));
+        const validRegionGyms = GameConstants.RegionGyms.filter(gyms => gyms.some(gym => GymList[gym].flags.quest && GymList[gym].clears() && GymList[gym].isUnlocked()));
         const chosenRegionGyms = SeededRand.fromArray(validRegionGyms);
         // Only use cleared and unlocked gyms.
         const possibleGyms = chosenRegionGyms.filter(gymTown => GymList[gymTown].flags.quest && GymList[gymTown].clears() && GymList[gymTown].isUnlocked());
