@@ -28,6 +28,8 @@ import StatisticRequirement from '../requirements/StatisticRequirement';
 import PokemonLevelRequirement from '../requirements/PokemonLevelRequirement';
 import { getPokemonByName } from '../pokemons/PokemonHelper';
 import CustomRequirement from '../requirements/CustomRequirement';
+import SeededDateSelectNRequirement from '../requirements/SeededDateSelectNRequirement';
+import type { PokemonNameType } from '../pokemons/PokemonNameType';
 
 /*
 KANTO
@@ -541,7 +543,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Johto Route 30', Region.johto, 30,
     new RoutePokemon({
-        land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Hoothoot', 'Ledyba', 'Spinarak'],
+        land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Hoothoot', 'Ledyba', 'Spinarak'],
         water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
         headbutt: ['Exeggcute', 'Pineco'],
     }),
@@ -550,8 +552,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Johto Route 31', Region.johto, 31,
     new RoutePokemon({
-        land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Poliwag', 'Hoothoot', 'Ledyba', 'Spinarak', 'Bellsprout'],
-        water: ['Poliwhirl', 'Magikarp'],
+        land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Hoothoot', 'Ledyba', 'Spinarak', 'Bellsprout'],
+        water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
         headbutt: ['Spearow', 'Exeggcute', 'Aipom', 'Pineco', 'Heracross'],
     }),
     [new TemporaryBattleRequirement('Silver 1')],
@@ -935,6 +937,8 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Zigzagoon', 'Linoone', 'Oddish', 'Tropius', 'Kecleon'],
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Carvanha'],
+        special:
+        [new SpecialRoutePokemon(['Feebas'], new ObtainedPokemonRequirement('Feebas'))],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 118)],
 ));
@@ -1130,6 +1134,8 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Hoothoot', 'Wurmple', 'Silcoon', 'Beautifly', 'Cascoon', 'Dustox', 'Bidoof', 'Kricketot', 'Budew', 'Buizel', 'Shellos (West)'],
         water: ['Psyduck', 'Golduck', 'Tentacool', 'Tentacruel', 'Shellder', 'Magikarp', 'Gyarados', 'Gastrodon (West)', 'Finneon', 'Lumineon', 'Barboach', 'Whiscash'],
+        special:
+        [new SpecialRoutePokemon(['Pachirisu'], new ObtainedPokemonRequirement('Pachirisu'))],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Valley Windworks'))],
 ));
@@ -1206,13 +1212,33 @@ Routes.add(new RegionRoute(
     [new RouteKillRequirement(10, Region.sinnoh, 213)],
     210.4,
 ));
+const TrophyGardenList = ['Clefairy', 'Jigglypuff', 'Meowth', 'Chansey', 'Baby Kangaskhan', 'Mr. Mime', 'Jynx', 'Ditto', 'Eevee', 'Porygon', 'Cleffa', 'Igglybuff', 'Togepi', 'Marill', 'Tyrogue', 'Smoochum', 'Elekid', 'Magby', 'Azurill', 'Plusle', 'Minun', 'Castform', 'Budew', 'Chingling', 'Bonsly', 'Mime Jr.', 'Happiny', 'Handout Happiny', 'Munchlax', 'Riolu', 'Mantyke', 'Phione', 'Toxel'];
+
+Routes.add(new RegionRoute(
+    'Trophy Garden', Region.sinnoh, 231,
+    new RoutePokemon({
+        land: ['Pikachu', 'Pichu', 'Roselia', 'Staravia', 'Kricketune'],
+        special:
+        [
+            ...TrophyGardenList.map((pokemon: PokemonNameType, index) => {
+                const req = new MultiRequirement([
+                    new SeededDateSelectNRequirement(index, TrophyGardenList.length, 3),
+                    new ObtainedPokemonRequirement(pokemon),
+                ]);
+                return new SpecialRoutePokemon([pokemon], req);
+            }),
+        ],
+    }),
+    [new RouteKillRequirement(10, Region.sinnoh, 212)],
+    210.5,
+));
 Routes.add(new RegionRoute(
     'Sinnoh Route 211', Region.sinnoh, 211,
     new RoutePokemon({
         land: ['Zubat', 'Machop', 'Machoke', 'Graveler', 'Hoothoot', 'Noctowl', 'Meditite', 'Bidoof', 'Chingling', 'Bronzor'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Fen)],
-    210.5,
+    210.6,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 218', Region.sinnoh, 218,
@@ -1221,7 +1247,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Shellos (West)', 'Finneon', 'Lumineon'],
     }),
     [new TemporaryBattleRequirement('Galactic Boss Cyrus')],
-    210.6,
+    210.7,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 216', Region.sinnoh, 216,
@@ -1262,7 +1288,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 222', Region.sinnoh, 222,
     new RoutePokemon({
-        land: ['Magnemite', 'Magneton', 'Electabuzz', 'Wingull', 'Pelipper', 'Luxio', 'Floatzel', 'Gastrodon (East)', 'Glameow', 'Purugly', 'Chatot'],
+        land: ['Magnemite', 'Magneton', 'Electabuzz', 'Wingull', 'Pelipper', 'Luxio', 'Floatzel', 'Glameow', 'Purugly', 'Chatot'],
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Remoraid', 'Octillery', 'Sharpedo'],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Distortion World'))],
@@ -1277,7 +1303,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 224', Region.sinnoh, 224,
     new RoutePokemon({
-        land: ['Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Beautifly', 'Dustox', 'Roselia', 'Floatzel', 'Gastrodon (East)', 'Chatot'],
+        land: ['Oddish', 'Gloom', 'Bellsprout', 'Weepinbell', 'Beautifly', 'Dustox', 'Roselia', 'Floatzel', 'Gastrodon (East)'],
         water: ['Tentacruel', 'Magikarp', 'Gyarados', 'Remoraid', 'Octillery', 'Pelipper', 'Luvdisc'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
@@ -1621,7 +1647,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Caterpie', 'Weedle', 'Pidgey', 'Zigzagoon', 'Fletchling', 'Bunnelby', 'Scatterbug'],
     }),
-    [new RouteKillRequirement(10, Region.kalos, 1)],
+    [new TemporaryBattleRequirement('Shauna 1')],
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 3', Region.kalos, 3,
@@ -2208,7 +2234,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Heavy League Bridge', Region.alola, 33,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Calico (Orange, White)', 'Magikarp Orange Orca'],
+        water: ['Magikarp'],
+        special: [new SpecialRoutePokemon(['Magikarp Calico (Orange, White)', 'Magikarp Orange Orca'], undefined, 1 / 3)],
     }),
     [new GymBadgeRequirement(BadgeEnums.Quick_League)],
     undefined,
@@ -2219,7 +2246,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Great League Bridge', Region.alola, 34,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Orange Two-Tone', 'Magikarp Orange Dapples'],
+        water: ['Magikarp'],
+        special: [new SpecialRoutePokemon(['Magikarp Orange Two-Tone', 'Magikarp Orange Dapples'], undefined, 1 / 3)],
     }),
     [new GymBadgeRequirement(BadgeEnums.Heavy_League)],
     undefined,
@@ -2230,7 +2258,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Fast League Bridge', Region.alola, 35,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Calico (Orange, White, Black)', 'Magikarp Orange Two-Tone', 'Magikarp Calico (Orange, White)'],
+        water: ['Magikarp'],
+        special: [new SpecialRoutePokemon(['Magikarp Calico (Orange, White, Black)', 'Magikarp Orange Two-Tone', 'Magikarp Calico (Orange, White)'], undefined, 1 / 3)],
     }),
     [new GymBadgeRequirement(BadgeEnums.Great_League)],
     undefined,
@@ -2241,7 +2270,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Luxury League Bridge', Region.alola, 36,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Pink Two-Tone', 'Magikarp Calico (Orange, White, Black)', 'Magikarp Orange Dapples'],
+        water: ['Magikarp'],
+        special: [new SpecialRoutePokemon(['Magikarp Pink Two-Tone', 'Magikarp Calico (Orange, White, Black)', 'Magikarp Orange Dapples'], undefined, 1 / 3)],
     }),
     [new GymBadgeRequirement(BadgeEnums.Fast_League)],
     undefined,
@@ -2252,7 +2282,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Heal League Bridge', Region.alola, 37,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Grey Bubbles', 'Magikarp Grey Patches', 'Magikarp Orange Dapples'],
+        water: ['Magikarp'],
+        special: [new SpecialRoutePokemon(['Magikarp Grey Bubbles', 'Magikarp Grey Patches', 'Magikarp Orange Dapples'], undefined, 1 / 3)],
     }),
     [new GymBadgeRequirement(BadgeEnums.Luxury_League)],
     undefined,
@@ -2263,7 +2294,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Ultra League Bridge', Region.alola, 38,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Calico (Orange, White, Black)', 'Magikarp Orange Two-Tone', 'Magikarp Calico (Orange, White)', 'Magikarp Apricot Tiger', 'Magikarp Apricot Zebra', 'Magikarp Brown Zebra'],
+        water: ['Magikarp'],
+        special: [new SpecialRoutePokemon(['Magikarp Calico (Orange, White, Black)', 'Magikarp Orange Two-Tone', 'Magikarp Calico (Orange, White)', 'Magikarp Apricot Tiger', 'Magikarp Apricot Zebra', 'Magikarp Brown Zebra'], undefined, 1 / 3)],
     }),
     [new GymBadgeRequirement(BadgeEnums.Heal_League)],
     undefined,
@@ -2274,7 +2306,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Elite Four League Pier', Region.alola, 39,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Black Forehead', 'Magikarp Pink Orca', 'Magikarp Grey Patches'],
+        water: ['Magikarp'],
+        special: [new SpecialRoutePokemon(['Magikarp Black Forehead', 'Magikarp Pink Orca', 'Magikarp Grey Patches'], undefined, 1 / 3)],
     }),
     [new GymBadgeRequirement(BadgeEnums.Ultra_League)],
     undefined,
@@ -2285,7 +2318,8 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Master League Pier', Region.alola, 40,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Orange Mask', 'Magikarp Calico (Orange, Gold)', 'Magikarp Grey Bubbles'],
+        water: ['Magikarp'],
+        special: [new SpecialRoutePokemon(['Magikarp Orange Mask', 'Magikarp Calico (Orange, Gold)', 'Magikarp Grey Bubbles'], undefined, 1 / 3)],
     }),
     [new GymBadgeRequirement(BadgeEnums.E4_League)],
     undefined,
