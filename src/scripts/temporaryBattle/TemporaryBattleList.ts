@@ -2416,11 +2416,11 @@ TemporaryBattleList['Shauna 1'] = new TemporaryBattle(
         new GymPokemon('Fennekin', 24906504, 5, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
     ],
     'Hey! I wasn\'t done watching my cute Li\'l Pokémon yet!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 1)],
     undefined,
     {
         displayName: 'Pokémon Trainer Shauna',
-        returnTown: 'Vaniville Town',
+        returnTown: 'Aquacorde Town',
         imageName: 'Shauna',
     }
 );
@@ -2450,7 +2450,7 @@ TemporaryBattleList['Tierno 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Tierno',
-        returnTown: 'Camphrier Town',
+        returnTown: 'Lumiose City',
         imageName: 'Tierno',
     }
 );
@@ -4153,7 +4153,7 @@ TemporaryBattleList['Plumeria 1'] = new TemporaryBattle(
 );
 TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
-    [new GymPokemon('???', 508485861, 27)],
+    [new CustomGymPokemon('???', 508485861, 27, [PokemonType.Rock, PokemonType.Poison], 'QuestionMarks.png', undefined, false)],
     undefined, // custom quest message
     [new QuestLineStepCompletedRequirement('Symbiotic Relations', 8)],
     [new QuestLineCompletedRequirement('Symbiotic Relations')], // to work better with 10.20 story quests if already beaten
@@ -4331,13 +4331,13 @@ TemporaryBattleList.Lusamine = new TemporaryBattle(
         new GymPokemon('Mismagius', 109925182, 47),
         new GymPokemon('Milotic', 109925182, 47),
         new GymPokemon('Bewear', 109925182, 47),
-        new GymPokemon('You hateful little Trainer!', 183208637, 47),
+        new CustomGymPokemon('You hateful little Trainer!', 183208637, 47, [PokemonType.Rock, PokemonType.Poison], 'YouHatefulLittleTrainer.png', undefined, false),
     ],
     undefined,
     [new QuestLineStepCompletedRequirement('Emissary of Light', 6)],
     undefined,
     {
-        imageName: '../pokemon/-793.01',
+        imageName: '../custompokemon/YouHatefulLittleTrainer',
         finalPokemonImage: 'specialNPCs/Transparent',
     }
 );

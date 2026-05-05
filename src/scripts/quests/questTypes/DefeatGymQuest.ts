@@ -23,14 +23,11 @@ class DefeatGymQuest extends Quest implements QuestInterface {
 
     public static generateData(): any[] {
         const amount = SeededRand.intBetween(5, 20);
-        let maxRegion = player.highestRegion();
-        // Check if first gym of highest region has been cleared. If not, pick one region lower than highest.
-        if (!App.game.badgeCase.hasBadge(GymList[GameConstants.RegionGyms[player.highestRegion()][0]].badgeReward)) {
-            maxRegion -= 1;
-        }
-        const region = SeededRand.intBetween(0, maxRegion);
+        // Make a list of all regions where at least one gym has been cleared.
+        const validRegionGyms = GameConstants.RegionGyms.filter(gyms => gyms.some(gym => GymList[gym].flags.quest && GymList[gym].clears() && GymList[gym].isUnlocked()));
+        const chosenRegionGyms = SeededRand.fromArray(validRegionGyms);
         // Only use cleared and unlocked gyms.
-        const possibleGyms = GameConstants.RegionGyms[region].filter(gymTown => GymList[gymTown].flags.quest && GymList[gymTown].clears() && GymList[gymTown].isUnlocked());
+        const possibleGyms = chosenRegionGyms.filter(gymTown => GymList[gymTown].flags.quest && GymList[gymTown].clears() && GymList[gymTown].isUnlocked());
         const gymTown = SeededRand.fromArray(possibleGyms);
         const reward = this.calcReward(amount, gymTown);
         return [amount, reward, gymTown];
@@ -48,7 +45,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
     }
 
     get defaultDescription(): string {
-        const elite = this.gymTown.includes('Elite') || this.gymTown.includes('Champion');
+        const elite = this.gymTown.includes('Elite') || this.gymTown.includes('Champion') || this.gymTown.includes('Supreme') || this.gymTown.includes('Challenge');
         const displayName = GymList[this.gymTown]?.displayName;
         const leaderName = GymList[this.gymTown].leaderName.replace(/\d+/g, '').trim();
         const { region, subRegion } = GymList[this.gymTown].parent;
@@ -59,6 +56,8 @@ class DefeatGymQuest extends Quest implements QuestInterface {
             gymString = displayName;
             if (displayName.includes('Trial')) {
                 gymString += ` at ${this.gymTown}`;
+            } else if (displayName.includes('Challenge')) {
+                gymString = displayName.replace('Challenge ', '');
             }
         } else if (elite) {
             gymString = this.gymTown;
