@@ -84,7 +84,7 @@ GymList['Fuchsia City'] = new Gym(
     ],
     BadgeEnums.Soul,
     3500,
-    'Humph! You have proven your worth! Here! Take the Soul Badge!',
+    'Humph! You have proven your worth! Here! Take the SoulBadge!',
     [
         new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.kanto, 18),
@@ -125,7 +125,7 @@ GymList['Viridian City'] = new Gym(
     ],
     BadgeEnums.Earth,
     6000,
-    'Ha! That was a truly intense fight. You have won! As proof, here is the Earth Badge!',
+    'Ha! That was a truly intense fight. You have won! As proof, here is the EarthBadge!',
     [
         new GymBadgeRequirement(BadgeEnums.Thunder),
         new GymBadgeRequirement(BadgeEnums.Rainbow),
