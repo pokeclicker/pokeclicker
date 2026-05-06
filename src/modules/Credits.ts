@@ -617,6 +617,16 @@ export const SpriteCredits: Credit[] = [
         // Notes: Made specifically for PokéClicker.
     },
     {
+        name: 'Embri',
+        link: 'https://discord.com/users/1065211076611948545',
+        image: 'assets/images/profile/trainer-73.png',
+        resources: [
+            'Jigglypuff (Singing)',
+            'Porygon (Camo)',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'EmmaRoak',
         link: 'https://www.deviantart.com/emmaroak',
         image: 'https://a.deviantart.net/avatars-big/e/m/emmaroak.png',
@@ -632,6 +642,15 @@ export const SpriteCredits: Credit[] = [
             'Wartortle (clone)',
         ],
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
+    },
+    {
+        name: 'errorundercover',
+        link: 'https://discord.com/users/229565367993761792',
+        image: 'assets/images/profile/trainer-17.png',
+        resources: [
+            'Illumina Pokémon',
+        ],
+        // Notes: Made specifically for PokéClicker.
     },
     {
         name: 'Ezerart',
