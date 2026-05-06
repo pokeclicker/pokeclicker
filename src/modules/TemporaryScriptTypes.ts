@@ -92,6 +92,7 @@ export type TmpGemsType = any;
 export type TmpFarmingType = any;
 export type TmpRedeemableCodesType = any;
 export type TmpQuestsType = any;
+export type TmpQuestType = any;
 export type TmpDiscordType = any;
 export type TmpAchievementTrackerType = any;
 export type TmpBattleFrontierType = any;
@@ -100,7 +101,6 @@ export type TmpDreamOrbControllerType = any;
 export type TmpPurifyChamberType = any;
 export type TmpWeatherAppType = any;
 export type TmpZMovesType = any;
-export type TmpPokemonContestType = any;
 export type TmpHeldItemType = any;
 
 export type TmpGameType = {
@@ -138,7 +138,6 @@ export type TmpGameType = {
     purifyChamber: TmpPurifyChamberType;
     weatherApp: TmpWeatherAppType;
     zMoves: TmpZMovesType;
-    pokemonContest: TmpPokemonContestType;
 
     // functions
     load: () => void;
@@ -235,6 +234,13 @@ export type TmpGymRunnerType = {
     gymObservable: () => TmpGymType;
 };
 
+export type TmpGymListType = {
+    [gymName: string]: {
+        badgeReward: any;
+        buttonText: string;
+    }
+};
+
 export type TmpAchievementHandlerType = {
     achievementList: Achievement[];
     navigateIndex: KnockoutObservable<number>;
@@ -304,6 +310,7 @@ export type TmpPartyPokemonType = {
     addCategory(id: number): void;
     removeCategory(id: number): void;
     resetCategory(): void;
+    calculateEVAttackBonus(): number;
 };
 
 export type TmpPartyType = {
@@ -349,6 +356,7 @@ export type TmpPartyType = {
 export type TmpPartyControllerType = {
     getCaughtStatusByName: (name: PokemonNameType) => CaughtStatus;
     getPokerusStatusByName: (name: PokemonNameType) => GameConstants.Pokerus;
+    getEvsByName: (name: PokemonNameType) => number;
 };
 
 export type TmpBagHandlerType = {

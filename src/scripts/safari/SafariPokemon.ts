@@ -30,7 +30,7 @@ class SafariPokemon implements PokemonInterface {
         this.type1 = data.type1;
         this.type2 = data.type2;
         this.shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SAFARI);
-        this._displayName = PokemonHelper.displayName(name);
+        this._displayName = PokemonHelper.displayNameObservable(name);
         this.gender = PokemonFactory.generateGender(data.gender.femaleRatio, data.gender.type);
         PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.PokemonStatisticsType.Encountered, this.shiny, this.gender, GameConstants.ShadowStatus.None);
         // Shiny
@@ -57,10 +57,6 @@ class SafariPokemon implements PokemonInterface {
                 break;
             default : this.spriteID = PokemonHelper.getPokemonByName(sprite).id;
         }
-    }
-
-    public static calcPokemonWeight(pokemon): number {
-        return pokemon.weight * (App.game.party.alreadyCaughtPokemonByName(pokemon.name) ? 1 : 2);
     }
 
     public get catchFactor(): number {

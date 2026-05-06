@@ -1,4 +1,7 @@
 class QuestLine {
+    private cachedTranslatedName?: KnockoutComputed<string>;
+    private _description: string;
+    private cachedTranslatedDescription?: KnockoutComputed<string>;
     state: KnockoutObservable<QuestLineState> = ko.observable(QuestLineState.inactive).extend({ numeric: 0 });
     quests: KnockoutObservableArray<Quest>;
     curQuest: KnockoutComputed<number>;
@@ -11,13 +14,13 @@ class QuestLine {
 
     constructor(
         public name: QuestLineNameType,
-        public description: string,
+        description: string,
         public requirement?: Requirement,
         public bulletinBoard: GameConstants.BulletinBoards = GameConstants.BulletinBoards.None,
         private disablePausing = false // applies to bulletin board quests only
     ) {
         this.name = name;
-        this.description = description;
+        this._description = description;
         this.quests = ko.observableArray();
         this.totalQuests = 0;
         this.curQuest = ko.pureComputed(() => {
@@ -141,6 +144,28 @@ class QuestLine {
         return true;
     }
 
+    get displayName(): string {
+        if (!this.cachedTranslatedName) {
+            this.cachedTranslatedName = App.translation.getHashed(
+                `${this.name}.displayName`,
+                'questlines',
+                this.name
+            );
+        }
+        return this.cachedTranslatedName();
+    }
+
+    get description(): string {
+        if (!this.cachedTranslatedDescription) {
+            this.cachedTranslatedDescription = App.translation.getHashed(
+                `${this.name}.description`,
+                'questlines',
+                this._description
+            );
+        }
+        return this.cachedTranslatedDescription();
+    }
+
     get pauseTooltip(): string {
         if (this.disablePausing || this.bulletinBoard == GameConstants.BulletinBoards.None) {
             return 'This quest line cannot be paused. It is either a story, progression related, or otherwise required quest.';
@@ -163,6 +188,7 @@ class QuestLine {
         if (this.curQuestObject() instanceof MultipleQuestsQuest) {
             json.initial = this.curQuestObject().quests.map((q) => q.isCompleted() ? true : q.initial());
         }
+
         return json;
     }
 }

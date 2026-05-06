@@ -14,6 +14,10 @@ export class ShovelItem extends Item {
     gain(amt: number) {
         GameHelper.incrementObservable(App.game.farming.shovelAmt, amt);
     }
+
+    getBagAmount() {
+        return App.game.farming.shovelAmt();
+    }
 }
 
 export class MulchShovelItem extends Item {
@@ -23,5 +27,9 @@ export class MulchShovelItem extends Item {
 
     gain(amt: number) {
         GameHelper.incrementObservable(App.game.farming.mulchShovelAmt, amt);
+    }
+
+    getBagAmount() {
+        return App.game.farming.mulchShovelAmt();
     }
 }

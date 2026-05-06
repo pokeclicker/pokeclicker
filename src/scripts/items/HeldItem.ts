@@ -49,6 +49,15 @@ class HeldItem extends Item {
     public isUnlocked() {
         return player.highestRegion() >= this.regionUnlocked;
     }
+
+    // Note that it's possible for both of these to return false, e.g. when comparing different categories
+    public isSameOrBetter(comparedItem: HeldItem): boolean {
+        return this === comparedItem;
+    }
+
+    public isInferior(comparedItem: HeldItem): boolean {
+        return false;
+    }
 }
 
 class AttackBonusHeldItem extends HeldItem {
@@ -62,13 +71,37 @@ class AttackBonusHeldItem extends HeldItem {
         regionUnlocked: GameConstants.Region,
         pokemonDescription = 'the Pokémon',
         canUse = (pokemon: PartyPokemon) => true,
-        protected applyBonus = () => true,
+        protected applyCondition: () => boolean = null,
         additionDescription = '') {
         super(name, basePrice, currency, shopOptions, displayName, `A held item that ${_attackBonus > 1 ? 'raises' : 'lowers'} the attack of ${pokemonDescription} by ${(Math.abs(_attackBonus - 1)).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })}${additionDescription}.`, regionUnlocked, canUse);
     }
 
+    protected applyBonus(): boolean {
+        return (!this.applyCondition || this.applyCondition());
+    }
+
     get attackBonus(): number {
         return this.applyBonus() ? this._attackBonus : 1;
+    }
+
+    public override isSameOrBetter(comparedItem: HeldItem): boolean {
+        if (this.applyCondition) {
+            return this === comparedItem;
+        }
+        if (comparedItem instanceof AttackBonusHeldItem) {
+            return this._attackBonus >= comparedItem._attackBonus;
+        }
+        return false;
+    }
+
+    public override isInferior(comparedItem: HeldItem): boolean {
+        if (comparedItem instanceof AttackBonusHeldItem) {
+            if (comparedItem.applyCondition) {
+                return false;
+            }
+            return this._attackBonus < comparedItem._attackBonus;
+        }
+        return false;
     }
 }
 
@@ -105,6 +138,25 @@ class TypeRestrictedAttackBonusHeldItem extends AttackBonusHeldItem {
     }
 }
 
+class TypeRestrictedExceptionAttackBonusHeldItem extends TypeRestrictedAttackBonusHeldItem {
+    constructor(
+        name: string,
+        basePrice: number,
+        currency: GameConstants.Currency,
+        shopOptions : ShopOptions,
+        displayName: string,
+        _attackBonus: number,
+        type: PokemonType,
+        regionUnlocked: GameConstants.Region,
+        exceptions: Partial<Record<PokemonNameType, boolean>>) {
+        super(name, basePrice, currency, shopOptions, displayName, _attackBonus, type, regionUnlocked);
+        const canUse = this.canUse;
+        this.canUse = (pokemon: PartyPokemon) => {
+            return exceptions[pokemon.name] ?? canUse(pokemon);
+        };
+    }
+}
+
 class HybridAttackBonusHeldItem extends AttackBonusHeldItem {
     constructor(
         name: string,
@@ -116,14 +168,28 @@ class HybridAttackBonusHeldItem extends AttackBonusHeldItem {
         private _clickAttackBonus: number,
         regionUnlocked: GameConstants.Region,
         canUse = (pokemon: PartyPokemon) => true,
-        applyBonus = () => true
+        applyCondition: () => boolean = null
     ) {
-        super(name, basePrice, currency, shopOptions, displayName, attackBonus, regionUnlocked, undefined, canUse, applyBonus,
+        super(name, basePrice, currency, shopOptions, displayName, attackBonus, regionUnlocked, undefined, canUse, applyCondition,
             ` and ${_clickAttackBonus > 1 ? 'raises' : 'lowers'} its click attack contribution by ${(Math.abs(_clickAttackBonus - 1) * 100).toFixed(0)}%`);
     }
 
     get clickAttackBonus(): number {
         return this.applyBonus() ? this._clickAttackBonus : 1;
+    }
+
+    public override isSameOrBetter(comparedItem: HeldItem): boolean {
+        if (comparedItem instanceof HybridAttackBonusHeldItem) {
+            return this.attackBonus >= comparedItem.attackBonus && this.clickAttackBonus >= comparedItem.clickAttackBonus;
+        }
+        return false;
+    }
+
+    public override isInferior(comparedItem: HeldItem): boolean {
+        if (comparedItem instanceof HybridAttackBonusHeldItem) {
+            return this.attackBonus < comparedItem.attackBonus && this.clickAttackBonus < comparedItem.clickAttackBonus;
+        }
+        return false;
     }
 }
 
@@ -140,6 +206,20 @@ class EVsGainedBonusHeldItem extends HeldItem {
             return pokemon.pokerus > GameConstants.Pokerus.Uninfected;
         });
     }
+
+    public override isSameOrBetter(comparedItem: HeldItem): boolean {
+        if (comparedItem instanceof EVsGainedBonusHeldItem) {
+            return this.gainedBonus >= comparedItem.gainedBonus;
+        }
+        return false;
+    }
+
+    public override isInferior(comparedItem: HeldItem): boolean {
+        if (comparedItem instanceof EVsGainedBonusHeldItem) {
+            return this.gainedBonus < comparedItem.gainedBonus;
+        }
+        return false;
+    }
 }
 
 class ExpGainedBonusHeldItem extends HeldItem {
@@ -155,16 +235,30 @@ class ExpGainedBonusHeldItem extends HeldItem {
         canUse = (pokemon: PartyPokemon) => true) {
         super(name, basePrice, currency, shopOptions, displayName, `A held item that earns ${pokemonDescription} ${(gainedBonus - 1).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })} bonus Experience Points.`, regionUnlocked, canUse);
     }
+
+    public override isSameOrBetter(comparedItem: HeldItem): boolean {
+        if (comparedItem instanceof ExpGainedBonusHeldItem) {
+            return this.gainedBonus >= comparedItem.gainedBonus;
+        }
+        return false;
+    }
+
+    public override isInferior(comparedItem: HeldItem): boolean {
+        if (comparedItem instanceof ExpGainedBonusHeldItem) {
+            return this.gainedBonus < comparedItem.gainedBonus;
+        }
+        return false;
+    }
 }
 
 ItemList.Wonder_Chest = new ExpGainedBonusHeldItem('Wonder_Chest', 10000, GameConstants.Currency.money, undefined, 'Wonder Chest', 1.25, GameConstants.Region.johto);
 ItemList.Miracle_Chest = new ExpGainedBonusHeldItem('Miracle_Chest', 30000, GameConstants.Currency.money, { visible: new MaxRegionRequirement(GameConstants.Region.sinnoh) }, 'Miracle Chest', 1.5, GameConstants.Region.sinnoh);
-ItemList.Joy_Scent = new ExpGainedBonusHeldItem('Joy_Scent', 10000, GameConstants.Currency.money, undefined, 'Joy Scent', 1.75, GameConstants.Region.hoenn, ' the holding Shadow Pokémon',
-    (p) => p.shadow >= GameConstants.ShadowStatus.Shadow );
-ItemList.Excite_Scent = new ExpGainedBonusHeldItem('Excite_Scent', 10000, GameConstants.Currency.money, undefined, 'Excite Scent', 2, GameConstants.Region.hoenn, 'the holding Shadow Pokémon',
-    (p) => p.shadow >= GameConstants.ShadowStatus.Shadow   );
-ItemList.Vivid_Scent = new ExpGainedBonusHeldItem('Vivid_Scent', 10000, GameConstants.Currency.money, undefined, 'Vivid Scent', 2.5, GameConstants.Region.hoenn, 'the holding Shadow Pokémon',
-    (p) => p.shadow >= GameConstants.ShadowStatus.Shadow  );
+ItemList.Joy_Scent = new ExpGainedBonusHeldItem('Joy_Scent', 10000, GameConstants.Currency.money, undefined, 'Joy Scent', 1.75, GameConstants.Region.hoenn, 'the holding Shadow or Purified Pokémon',
+    (p) => p.shadow >= GameConstants.ShadowStatus.Shadow);
+ItemList.Excite_Scent = new ExpGainedBonusHeldItem('Excite_Scent', 10000, GameConstants.Currency.money, undefined, 'Excite Scent', 2, GameConstants.Region.hoenn, 'the holding Shadow or Purified  Pokémon',
+    (p) => p.shadow >= GameConstants.ShadowStatus.Shadow);
+ItemList.Vivid_Scent = new ExpGainedBonusHeldItem('Vivid_Scent', 10000, GameConstants.Currency.money, undefined, 'Vivid Scent', 2.5, GameConstants.Region.hoenn, 'the holding Shadow or Purified  Pokémon',
+    (p) => p.shadow >= GameConstants.ShadowStatus.Shadow);
 ItemList.Muscle_Band = new AttackBonusHeldItem('Muscle_Band', 1000, GameConstants.Currency.battlePoint, undefined, 'Muscle Band', 1.05, GameConstants.Region.hoenn);
 // Pokemon specific items
 ItemList.Light_Ball = new PokemonRestrictedAttackBonusHeldItem('Light_Ball', 10000, GameConstants.Currency.money, undefined, 'Light Ball', 1.3, GameConstants.Region.johto, 'Pikachu',
@@ -193,6 +287,8 @@ ItemList.Douse_Drive = new PokemonRestrictedAttackBonusHeldItem('Douse_Drive', 1
     (pokemon) => pokemon.id == 649 || pokemon.id == 649.03 || pokemon.id == 649.05 || pokemon.id == 649.08);
 ItemList.Shock_Drive = new PokemonRestrictedAttackBonusHeldItem('Shock_Drive', 10000, GameConstants.Currency.money, undefined, 'Shock Drive', 1.5, GameConstants.Region.unova, 'Genesect',
     (pokemon) => pokemon.id == 649 || pokemon.id == 649.04 || pokemon.id == 649.05 || pokemon.id == 649.09);
+ItemList.Great_Twisted_Spoon = new PokemonRestrictedAttackBonusHeldItem('Great_Twisted_Spoon', 10000, GameConstants.Currency.money, undefined, 'Great Twisted Spoon', 1.5, GameConstants.Region.kalos, 'Mewtwo',
+    (pokemon) => Math.floor(pokemon.id) == 150);
 ItemList.Leek = new PokemonRestrictedAttackBonusHeldItem('Leek', 10000, GameConstants.Currency.money, undefined, 'Leek', 1.3, GameConstants.Region.galar, 'Farfetch\'d or Sirfetch\'d',
     (pokemon) => Math.floor(pokemon.id) == 83 || Math.floor(pokemon.id) == 865);
 ItemList.Rusted_Sword = new PokemonRestrictedAttackBonusHeldItem('Rusted_Sword', 10000, GameConstants.Currency.money, undefined, 'Rusted Sword', 1.5, GameConstants.Region.galar, 'Zacian',
@@ -210,7 +306,8 @@ ItemList.Booster_Energy = new PokemonRestrictedAttackBonusHeldItem('Booster_Ener
 
 // Type specific items
 ItemList.Black_Belt = new TypeRestrictedAttackBonusHeldItem('Black_Belt', 10000, GameConstants.Currency.money, undefined, 'Black Belt', 1.2, PokemonType.Fighting, GameConstants.Region.johto);
-ItemList.Black_Glasses = new TypeRestrictedAttackBonusHeldItem('Black_Glasses', 10000, GameConstants.Currency.money, undefined, 'Black Glasses', 1.2, PokemonType.Dark, GameConstants.Region.johto);
+// Exceptions as Squirtle level evolves into Squad Leader Squirtle if it wears Black Glasses
+ItemList.Black_Glasses = new TypeRestrictedExceptionAttackBonusHeldItem('Black_Glasses', 10000, GameConstants.Currency.money, undefined, 'Black Glasses', 1.2, PokemonType.Dark, GameConstants.Region.johto, { Squirtle: true, 'Squad Leader Squirtle': false });
 ItemList.Charcoal = new TypeRestrictedAttackBonusHeldItem('Charcoal', 10000, GameConstants.Currency.money, undefined, 'Charcoal', 1.2, PokemonType.Fire, GameConstants.Region.johto);
 ItemList.Dragon_Fang = new TypeRestrictedAttackBonusHeldItem('Dragon_Fang', 10000, GameConstants.Currency.money, undefined, 'Dragon Fang', 1.2, PokemonType.Dragon, GameConstants.Region.johto);
 ItemList.Magnet = new TypeRestrictedAttackBonusHeldItem('Magnet', 10000, GameConstants.Currency.money, undefined, 'Magnet', 1.2, PokemonType.Electric, GameConstants.Region.johto);
@@ -227,11 +324,12 @@ ItemList.Silver_Powder = new TypeRestrictedAttackBonusHeldItem('Silver_Powder', 
 ItemList.Soft_Sand = new TypeRestrictedAttackBonusHeldItem('Soft_Sand', 10000, GameConstants.Currency.money, undefined, 'Soft Sand', 1.2, PokemonType.Ground, GameConstants.Region.johto);
 ItemList.Spell_Tag = new TypeRestrictedAttackBonusHeldItem('Spell_Tag', 10000, GameConstants.Currency.money, undefined, 'Spell Tag', 1.2, PokemonType.Ghost, GameConstants.Region.johto);
 ItemList.Twisted_Spoon = new TypeRestrictedAttackBonusHeldItem('Twisted_Spoon', 10000, GameConstants.Currency.money, undefined, 'Twisted Spoon', 1.2, PokemonType.Psychic, GameConstants.Region.johto);
+
 ItemList.Agile_Scroll = new HybridAttackBonusHeldItem('Agile_Scroll', 10000, GameConstants.Currency.money, undefined, 'Agile Scroll', 0.5, 2.0, GameConstants.Region.hisui);
 ItemList.Strong_Scroll = new HybridAttackBonusHeldItem('Strong_Scroll', 10000, GameConstants.Currency.money, undefined, 'Strong Scroll', 2.0, 0.5, GameConstants.Region.hisui);
 
-ItemList.Power_Herb = new AttackBonusHeldItem('Power_Herb', undefined, GameConstants.Currency.money, undefined, 'Power Herb', 1.5, GameConstants.Region.alola, undefined, (pokemon) => true,
-    () => App.game.gameState == GameConstants.GameState.dungeon && DungeonRunner.fightingBoss(), ' against Dungeon Bosses');
+ItemList.Power_Herb = new AttackBonusHeldItem('Power_Herb', 2500, GameConstants.Currency.battlePoint, undefined, 'Power Herb', 1.4, GameConstants.Region.hoenn, undefined, (pokemon) => true,
+    () => App.game.gameState == GameConstants.GameState.battleFrontier && BattleFrontierRunner.started(), ' in the Battle Frontier');
 
 ItemList.Macho_Brace = new EVsGainedBonusHeldItem('Macho_Brace', 1500, GameConstants.Currency.questPoint, undefined, 'Macho Brace', 1.5, GameConstants.Region.sinnoh);
 ItemList.Power_Bracer = new EVsGainedBonusHeldItem('Power_Bracer', 2000, GameConstants.Currency.questPoint, undefined, 'Power Bracer', 2, GameConstants.Region.alola);
@@ -249,4 +347,5 @@ ItemList.Everstone = new HeldItem('Everstone', 10000, GameConstants.Currency.mon
         // babies
         const baby = pokemonBabyPrevolutionMap[pokemon.name];
         return baby !== undefined && pokemon.name != baby;
-    });
+    }
+);

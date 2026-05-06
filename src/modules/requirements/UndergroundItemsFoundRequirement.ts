@@ -11,6 +11,7 @@ export default class UndergroundItemsFoundRequirement extends AchievementRequire
     }
 
     public hint(): string {
-        return `${this.requiredValue} items need to be found in the Underground.`;
+        const suffix = this.requiredValue > 1 ? 's' : '';
+        return `Collect ${this.requiredValue} item${suffix} from the Underground mines.`;
     }
 }

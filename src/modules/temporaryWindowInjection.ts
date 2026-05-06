@@ -144,6 +144,16 @@ import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersM
 import UndergroundHelperRequirement from './requirements/UndergroundHelperRequirement';
 import UndergroundLevelRequirement from './requirements/UndergroundLevelRequirement';
 import UndergroundUseToolRequirement from './requirements/UndergroundUseToolRequirement';
+import UndergroundLayersFullyMinedRequirement from './requirements/UndergroundLayersFullyMinedRequirement';
+import CaptureSpecificPokemonRequirement from './requirements/CaptureSpecificPokemonRequirement';
+import ClearAnyDungeonRequirement from './requirements/ClearAnyDungeonRequirement';
+import EVBonusRequirement from './requirements/EVBonusRequirement';
+import TimePlayedRequirement from './requirements/TimePlayedRequirement';
+import TotalSpecialEventsActiveRequirement from './requirements/TotalSpecialEventsActiveRequirement';
+import PokeballFilterCountRequirement from './requirements/PokeballFilterCountRequirement';
+import DefeatedPokemonTypeRequirement from './requirements/DefeatedPokemonTypeRequirement';
+import AllFlutesTimeActiveRequirement from './requirements/AllFlutesTimeActiveRequirement';
+import DummyRequirement from './requirements/DummyRequirement';
 import WeatherRequirement from './requirements/WeatherRequirement';
 import MegaEvolveRequirement from './requirements/MegaEvolveRequirement';
 import PokemonAttackRequirement from './requirements/PokemonAttackRequirement';
@@ -152,6 +162,7 @@ import KeyItemController from './keyItems/KeyItemController';
 import KeyItem from './keyItems/KeyItem';
 import KeyItems from './keyItems/KeyItems';
 import Achievement from './achievements/Achievement';
+import SecretAchievement from './achievements/SecretAchievement';
 import Gems from './gems/Gems';
 import GemDeals from './gems/GemDeals';
 import FluteEffectRunner from './gems/FluteEffectRunner';
@@ -163,7 +174,6 @@ import Translate from './translation/Translation';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
 import ClientRequirement from './requirements/ClientRequirement';
-import ContestWonRequirement from './requirements/ContestWonRequirement';
 import { lazyLoad, lazyLoadCallback } from './utilities/LazyLoader';
 import {
     beforeEvolve, EvoTrigger, LevelEvolution, StoneEvolution,
@@ -179,11 +189,11 @@ import EnergyRestore from './items/EnergyRestore';
 import EffectEngineRunner from './effectEngine/effectEngineRunner';
 import ItemHandler from './items/ItemHandler';
 import CaughtIndicatingItem from './items/CaughtIndicatingItem';
+import PokerusIndicatingItem from './items/PokerusIndicatingItem';
 import PokemonItem from './items/PokemonItem';
 import EggItem from './items/EggItem';
 import MegaStoneItem from './items/MegaStoneItem';
 import PokeballItem from './items/PokeballItem';
-import QuestItem from './items/QuestItem';
 import Vitamin from './items/Vitamin';
 import VitaminController from './items/VitaminController';
 import Consumable from './items/Consumable';
@@ -197,7 +207,7 @@ import PokeballFilters from './pokeballs/PokeballFilters';
 import TextMerger from './utilities/TextMerger';
 import { pokeballFilterOptions } from './pokeballs/PokeballFilterOptions';
 import { Mine } from './underground/mine/Mine';
-import { MineType } from './underground/mine/MineConfig';
+import { MineConfigs, MineType } from './underground/mine/MineConfig';
 import { ShardDeal } from './underground/ShardDeal';
 import { Underground } from './underground/Underground';
 import { UndergroundController } from './underground/UndergroundController';
@@ -218,6 +228,10 @@ import ChristmasPresent from './items/ChristmasPresent';
 import DamageCalculator from './types/DamageCalculator';
 import GameLoadState from './utilities/GameLoadState';
 import GenericDeal, { DealCostOrProfitType } from './deal/GenericDeal';
+import CollectibleItem from './items/CollectibleItem';
+import areaStatus from './enums/AreaStatus';
+import TranslationHelper from './translation/TranslationHelper';
+import * as DownloadUtil from './utilities/DownloadUtil';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -371,6 +385,16 @@ Object.assign(<any>window, {
     UndergroundHelperRequirement,
     UndergroundLevelRequirement,
     UndergroundUseToolRequirement,
+    UndergroundLayersFullyMinedRequirement,
+    CaptureSpecificPokemonRequirement,
+    ClearAnyDungeonRequirement,
+    EVBonusRequirement,
+    TimePlayedRequirement,
+    TotalSpecialEventsActiveRequirement,
+    PokeballFilterCountRequirement,
+    DefeatedPokemonTypeRequirement,
+    AllFlutesTimeActiveRequirement,
+    DummyRequirement,
     WeatherRequirement,
     MegaEvolveRequirement,
     PokemonAttackRequirement,
@@ -380,6 +404,7 @@ Object.assign(<any>window, {
     KeyItem,
     KeyItems,
     Achievement,
+    SecretAchievement,
     Gems,
     GemDeals,
     FluteEffectRunner,
@@ -393,7 +418,6 @@ Object.assign(<any>window, {
     DayOfWeekRequirement,
     SaveReminder,
     ClientRequirement,
-    ContestWonRequirement,
     lazyLoad,
     lazyLoadCallback,
     LevelEvolution,
@@ -412,11 +436,12 @@ Object.assign(<any>window, {
     EffectEngineRunner,
     ItemHandler,
     CaughtIndicatingItem,
+    PokerusIndicatingItem,
     PokemonItem,
     EggItem,
     MegaStoneItem,
     PokeballItem,
-    QuestItem,
+    CollectibleItem,
     Vitamin,
     VitaminController,
     Consumable,
@@ -431,6 +456,7 @@ Object.assign(<any>window, {
     pokeballFilterOptions,
     Mine,
     MineType,
+    MineConfigs,
     Underground,
     UndergroundController,
     UndergroundTrading,
@@ -450,4 +476,7 @@ Object.assign(<any>window, {
     ChristmasPresent,
     DamageCalculator,
     GameLoadState,
+    areaStatus,
+    TranslationHelper,
+    DownloadUtil,
 });

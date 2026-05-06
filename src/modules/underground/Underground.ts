@@ -87,7 +87,7 @@ export class Underground implements Feature {
     }
 
     get undergroundExp(): number {
-        return this._undergroundExp();
+        return Math.floor(this._undergroundExp());
     }
 
     get undergroundLevel(): number {

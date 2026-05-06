@@ -13,6 +13,7 @@ class Farming implements Feature {
 
     mutationCounter = 0;
     wanderCounter = 0;
+    mulchCounter = 0;
 
     defaults = {
         berryList: Array<number>(GameHelper.enumLength(BerryType) - 1).fill(0),
@@ -35,6 +36,7 @@ class Farming implements Feature {
     mulchShovelAmt: KnockoutObservable<number>;
 
     highestUnlockedBerry: KnockoutComputed<number>;
+    possiblePlotMutations: KnockoutComputed<Array<Array<string>>>;
 
     constructor(private multiplier: Multiplier) {
         this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
@@ -67,6 +69,23 @@ class Farming implements Feature {
                 }
             }
             return 0;
+        });
+
+        this.possiblePlotMutations = ko.pureComputed(() => {
+            const plotMutations = [...Array(GameConstants.FARM_PLOT_WIDTH * GameConstants.FARM_PLOT_HEIGHT)].map(() => []);
+            App.game.farming.mutations.forEach((mutation) => {
+                if (!mutation.unlocked) {
+                    return;
+                }
+                const isUnlocked = App.game.farming.unlockedBerries[mutation.mutatedBerry]();
+                mutation.getMutationPlots().forEach((plot) => {
+                    if (mutation.getTotalMutationChance(plot) > 0) {
+                        const berry = isUnlocked || mutation.hintSeen ? BerryType[mutation.mutatedBerry] : '???';
+                        plotMutations[plot].push(berry);
+                    }
+                });
+            });
+            return plotMutations;
         });
     }
 
@@ -1052,7 +1071,7 @@ class Farming implements Feature {
 
         this.berryData[BerryType.Jaboca] = new Berry(
             BerryType.Jaboca,
-            [4320, 8640, 16560, 33480, 66960],
+            [1875, 3750, 7500, 15000, 30000],
             1,
             0.05,
             2800,
@@ -1066,7 +1085,7 @@ class Farming implements Feature {
                 'The cluster of drupelets that make up this Berry pop rhythmically if the Berry is handled roughly.',
                 'The sound of these Berries attracts rare wild Pokémon.',
             ],
-            new Aura(AuraType.Roaming, [1.005, 1.01, 1.015])
+            new Aura(AuraType.Roaming, [1.01, 1.02, 1.03])
         );
 
         this.berryData[BerryType.Rowap] = new Berry(
@@ -1370,7 +1389,7 @@ class Farming implements Feature {
                 BerryType.Oran,
                 BerryType.Sitrus,
             ], {
-                hint: 'I\'ve heard that there\'s a legendary Berry that only appears when fully surrounded by unique ripe Berry plants!',
+                hint: 'I\'ve heard that there\'s a legendary Berry that only appears when fully surrounded by the 8 different Berries that wild Pokémon hold!',
             }));
 
         //#endregion
@@ -1435,7 +1454,10 @@ class Farming implements Feature {
         this.mutations.push(new EvolveNearBerryMutation(.0003, BerryType.Rabuta, BerryType.Aspear, [BerryType.Aguav]));
         // Nomel
         this.mutations.push(new GrowNearBerryMutation(.0003, BerryType.Nomel,
-            [BerryType.Pinap]));
+            [
+                BerryType.Wepear,
+                BerryType.Pinap,
+            ]));
         // Spelon
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Spelon, BerryType.Tamato,
             [[130, 160], [0, 80], [0, 80], [0, 80], [0, 80]], {
@@ -1740,9 +1762,11 @@ class Farming implements Feature {
     }
 
     getReplantMultiplier(): number {
-        let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprinklotad);
-        return multiplier;
+        return 1;
+    }
+
+    getMulchDurationMultiplier(): number {
+        return App.game.oakItems.calculateBonus(OakItemType.Sprinklotad);
     }
 
     getMutationMultiplier(): number {
@@ -1805,6 +1829,12 @@ class Farming implements Feature {
         }
 
         this.farmHands.tick();
+
+        this.mulchCounter += GameConstants.TICK_TIME;
+        if (this.mulchCounter >= GameConstants.MULCH_OAK_ITEM_TICK) {
+            App.game.oakItems.use(OakItemType.Sprinklotad, this.plotList.filter(value => value.isMulched()).length);
+            this.mulchCounter = 0;
+        }
     }
 
     handleNotification(farmNotiType: FarmNotificationType, wanderList?: WandererPokemon[]): void {
@@ -1855,7 +1885,7 @@ class Farming implements Feature {
                 // Only notify for one wanderer, randomly picked, shiny priorized; there will rarely be more than one
                 const shinyList = wanderList.filter(w => w.shiny);
                 const displayWanderer = shinyList.length ? Rand.fromArray(shinyList) : Rand.fromArray(wanderList);
-                message = `A wild ${displayWanderer.name} has wandered onto the farm!`;
+                message = `A wild ${(displayWanderer.shiny ? 'shiny ' : '')}${displayWanderer.name} has wandered onto the farm!`;
                 image = PokemonHelper.getImage(PokemonHelper.getPokemonByName(displayWanderer.name).id, displayWanderer.shiny, undefined, GameConstants.ShadowStatus.None);
                 type = displayWanderer.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
                 sound = displayWanderer.shiny ? NotificationConstants.NotificationSound.General.shiny_long : NotificationConstants.NotificationSound.Farming.wandering_pokemon;
@@ -2269,7 +2299,9 @@ class Farming implements Feature {
 
         const farmPoints = Math.floor(berry.farmValue / (4 + berry.growthTime[PlotStage.Bloom] / 1800));
         const shinyModifier = wanderer.shiny ? GameConstants.WANDER_SHINY_FP_MODIFIER : 1;
-        App.game.wallet.gainFarmPoints(farmPoints * shinyModifier);
+        const amount = App.game.wallet.gainFarmPoints(farmPoints * shinyModifier);
+        GameHelper.incrementObservable(App.game.statistics.farmWandererFarmPointsObtained, amount.amount);
+        player.lowerItemMultipliers(MultiplierDecreaser.Berry, berry.exp);
 
         const pokeball = App.game.pokeballs.calculatePokeballToUse(pokemonData.id, wanderer.shiny, false, EncounterType.wanderer);
         if (pokeball !== GameConstants.Pokeball.None) {
@@ -2294,7 +2326,7 @@ class Farming implements Feature {
             0, 100);
         if (Rand.chance(catchChance / 100)) { // Successfully caught
             App.game.oakItems.use(OakItemType.Magic_Ball);
-            App.game.party.gainPokemonByName(wanderer.name, wanderer.shiny);
+            App.game.party.gainPokemonByName(wanderer.name, wanderer.shiny, undefined, wanderer.gender);
 
             // EV
             const partyPokemon = App.game.party.getPokemonByName(wanderer.name);
@@ -2305,7 +2337,8 @@ class Farming implements Feature {
 
             // DT
             const fakedRoute = FarmController.wandererToRoute(wanderer.name);
-            Battle.gainTokens(fakedRoute.number, fakedRoute.region, wanderer.pokeball());
+            const amount = Battle.gainTokens(fakedRoute.number, fakedRoute.region, wanderer.pokeball());
+            GameHelper.incrementObservable(App.game.statistics.farmWandererDungeonTokensObtained, amount.amount);
 
             // Check for Starf berry generation
             if (wanderer.shiny) {
@@ -2346,5 +2379,4 @@ class Farming implements Feature {
             plot.wanderer = undefined;
         }, 250);
     }
-
 }
