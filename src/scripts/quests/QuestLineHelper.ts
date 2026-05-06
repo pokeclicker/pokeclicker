@@ -2558,8 +2558,7 @@ class QuestLineHelper {
         const pikaList = pokemonList.filter(p => Math.floor(p.id) == pokemonMap.Pikachu.id).map(p => p.id);
 
         const trainPikachusQuest = new CustomQuest(1500, 0, 'Train a few more Pikachu for the pika-roles.',
-            () => pikaList.reduce((sum, id) => sum + App.game.statistics.pokemonCaptured[id](), 0),
-        );
+            () => pikaList.reduce((sum, id) => sum + App.game.statistics.pokemonCaptured[id](), 0));
         lightsCameraPikaQuestLine.addQuest(trainPikachusQuest);
 
         const fightLibrePikachuQuest = new DefeatTemporaryBattleQuest('Pikachu Libre and its gang', 'Defeat Pikachu Libre and its gang!');
