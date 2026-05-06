@@ -2547,8 +2547,8 @@ export const MoonCycleValues: Record<MoonCyclePhase, number> = {
 export const ResearchLevel = [ // actual values haven't been determined yet, low values are used to make it easier to get through the quest
     0, // Unexplored
     100, // Research Level 1
-    200, // Research Level 2
-    400, // Research Level 3
+    1000, // Research Level 2
+    4000, // Research Level 3
     10000, // Research Level MAX
 ];
 
