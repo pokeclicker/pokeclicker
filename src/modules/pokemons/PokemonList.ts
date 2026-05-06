@@ -1868,7 +1868,7 @@ export const pokemonList = createPokemonArray(
         'id': 25.24,
         'name': 'Pikachu (Super)',
         'catchRate': 190,
-        'type': [PokemonType.Electric, PokemonType.Rock],
+        'type': [PokemonType.Electric, PokemonType.Fighting],
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
@@ -21569,7 +21569,7 @@ export const pokemonList = createPokemonArray(
         'heldItem': { type: ItemType.item, id: 'Kings_rock' },
     },
     {
-        'id': 701.01,
+        'id': 701.02,
         'name': 'Hawlucha (Stuntman)',
         'type': [PokemonType.Fighting, PokemonType.Flying],
         'eggCycles': 20,
