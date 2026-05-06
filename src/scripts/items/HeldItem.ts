@@ -356,7 +356,6 @@ ItemList.Macho_Brace = new EVsGainedBonusHeldItem('Macho_Brace', 1500, GameConst
 ItemList.Power_Bracer = new EVsGainedBonusHeldItem('Power_Bracer', 2000, GameConstants.Currency.questPoint, undefined, 'Power Bracer', 2, GameConstants.Region.alola);
 
 ItemList.Fluffruit = new CatchRateBonusHeldItem('Fluffruit', 10000, GameConstants.Currency.money, undefined, 'Fluffruit', 10, GameConstants.Region.galar);
-// ItemList.Fluffruit = new HeldItem('Fluffruit', 10000, GameConstants.Currency.money, undefined, 'Fluffruit', 'Raises the catch rate of the species of the holder by 10% (additive).', GameConstants.Region.galar, (pokemon) => true);
 
 ItemList.Everstone = new HeldItem('Everstone', 10000, GameConstants.Currency.money, undefined, 'Everstone', 'Stops the holder from evolving due to level or a stone being used. Also prevents new baby Pokémon from hatching.', GameConstants.Region.kanto,
     (pokemon) => {

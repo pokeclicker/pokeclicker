@@ -1280,7 +1280,6 @@ export const SpriteCredits: Credit[] = [
             'Gengar (Punk)',
             'Tangela (Pom-pom)',
             'Goldeen (Diva)',
-            'Illumina Overworld Sprites',
             'Lental Map',
         ],
         // NOTES: Made specifically for Pokeclicker.

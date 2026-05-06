@@ -676,14 +676,6 @@ class AchievementHandler {
         const illuminaAmount = pokemonList.reduce((count, p) => count + +(p.name.startsWith('Illumina ')), 0); // I doubt more will be added in the future, but just in case
         AchievementHandler.addAchievement('They Glow Now? They Glow Now!', 'Catch all unique Illumina Pokémon.', new CaughtUniquePokemonByFilterRequirement(illuminaDexFilter, 'Catch all unique Illumina Pokémon.', illuminaAmount), 1, GameConstants.ExtraAchievementCategories.lental);
         AchievementHandler.addAchievement('Radiant Radiance', 'Catch all unique Shiny Illumina Pokémon.', new CaughtUniquePokemonByFilterRequirement(illuminaDexFilter, 'Catch all unique Shiny Illumina Pokémon.', illuminaAmount, true), 2, GameConstants.ExtraAchievementCategories.lental);
-        /* AchievementHandler.addAchievement('Put all your eggs in one basket', 'Have the 4 roamers native to Pokémon Island roaming.', new CaughtUniquePokemonByFilterRequirement( // have to include mew as well so that the achievement isn't earned early
-            (p: PartyPokemon) => // this is a very weird way to do this, but I'm not sure of a simpler method
-                (p.id == 144 && App.game.statistics.pokemonHatched[144]() >= GameConstants.SnapEggsHatched) // Articuno
-                || (p.id == 145 && App.game.statistics.pokemonHatched[145]() >= GameConstants.SnapEggsHatched) // Zapdos
-                || (p.id == 146 && App.game.statistics.pokemonHatched[146]() >= GameConstants.SnapEggsHatched) // Moltred
-                || (p.id == 151 && App.game.quests.getQuestLine('Pokémon Snap 64').state() === QuestLineState.ended), // Mew
-            'Have the 4 roamers native to Pokémon Island roaming.', 4), 0.5, GameConstants.ExtraAchievementCategories.lental); // very optional, so low bonus
-        */
 
         // Secret achievements
         AchievementHandler.addSecretAchievement(
