@@ -6526,7 +6526,7 @@ const AnomalyMewtwo4 = new NPC('Anomaly Mewtwo', [
 });
 
 const DirectorFrank1 = new NPC('Frank', [
-    'I want to make a pika-sequal to my movie!',
+    'I want to make a pika-sequel to my movie!',
     'I want a pika-Pikachu, who makes my pika-movie shine!',
     'Your Pikachu has potential. Come back when it has more pika-experience.',
 ], {
@@ -6540,7 +6540,7 @@ const DirectorFrank2 = new NPC('Frank', [
     'I want the original star back in perfect pika-shape!',
 ], {
     image: 'assets/images/npcs/Director Frank.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 1), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 3, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 1), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 4, GameConstants.AchievementOption.less)]),
 });
 const DirectorFrank3 = new NPC('Frank', [
     'Our pika-star is back!',
@@ -6548,7 +6548,7 @@ const DirectorFrank3 = new NPC('Frank', [
     'Any chance you got a pika-Hawlucha ready for the role?',
 ], {
     image: 'assets/images/npcs/Director Frank.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 3), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 5, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 4), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 6, GameConstants.AchievementOption.less)]),
 });
 const DirectorFrank4 = new NPC('Frank', [
     'That scene was pika-perfect!',
@@ -6556,7 +6556,7 @@ const DirectorFrank4 = new NPC('Frank', [
     'I already have a bunch of extras ready, but the remake needs to be pika-bigger!',
 ], {
     image: 'assets/images/npcs/Director Frank.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 5), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 7, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 6), new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 8, GameConstants.AchievementOption.less)]),
 });
 const DirectorFrank5 = new NPC('Frank', [
     'I have finished the pika-movie!',
@@ -6565,7 +6565,7 @@ const DirectorFrank5 = new NPC('Frank', [
     'You can keep the pika-costumes, if you want.',
 ], {
     image: 'assets/images/npcs/Director Frank.png',
-    requirement: new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 8, GameConstants.AchievementOption.more),
+    requirement: new QuestLineStepCompletedRequirement('Lights! Camera! Pika!', 9, GameConstants.AchievementOption.more),
 });
 const JeanFranksGrandDaughter = new NPC('Jean', [
     'My grandfather can be found north west of here.',

@@ -2530,38 +2530,45 @@ class QuestLineHelper {
         const lightsCameraPikaQuestLine = new QuestLine('Lights! Camera! Pika!', 'Frank is making a new movie, and needs your help with finding his stars.', undefined, GameConstants.BulletinBoards.PikachuLand);
 
         const talkToFrankQuest1 = new TalkToNPCQuest(DirectorFrank1, 'Talk to Frank about his new movie idea');
-        lightsCameraPikaQuestLine.addQuest(talkToFrankQuest1);
+        lightsCameraPikaQuestLine.addQuest(talkToFrankQuest1); // 0
 
-        const trainPikachuQuest = new TrainSpecificPokemonQuest('Pikachu', 50000);
+        const trainPikachuQuest = new CaptureSpecificPokemonQuest('Pikachu', 250, true, 0).withDescription('Train your Pikachu 250 times for the role.');
         lightsCameraPikaQuestLine.addQuest(trainPikachuQuest);
 
         const talkToFrankQuest2 = new TalkToNPCQuest(DirectorFrank2, 'Return to Frank');
         lightsCameraPikaQuestLine.addQuest(talkToFrankQuest2);
 
-        const trainPikachuKalosQuest = new TrainSpecificPokemonQuest('Pikachu (Kalos Cap)', 50000);
+        const pickAShoeKalos = new CaptureSpecificPokemonQuest('Pikachu (Kalos Cap)', 1).withInitialValue(0).withDescription('Bring Pikachu (Kalos Cap) on board for the next film. He retired to the Pikachu Valley in Alola.');
+        lightsCameraPikaQuestLine.addQuest(pickAShoeKalos); // 3
+
+        const trainPikachuKalosQuest = new CaptureSpecificPokemonQuest('Pikachu (Kalos Cap)', 250, true, 0).withDescription('Train your Pikachu (Kalos Cap) 250 times for the starring role.');
         lightsCameraPikaQuestLine.addQuest(trainPikachuKalosQuest);
 
         const talkToFrankQuest3 = new TalkToNPCQuest(DirectorFrank3, 'Return to Frank');
         lightsCameraPikaQuestLine.addQuest(talkToFrankQuest3);
 
-        const trainHawluchaQuest = new TrainSpecificPokemonQuest('Hawlucha', 50000).withCustomReward(() => {
+        const trainHawluchaQuest = new CaptureSpecificPokemonQuest('Hawlucha', 150, true, 0).withDescription('Train your Hawlucha 150 times for the role.').withCustomReward(() => {
             App.game.party.gainPokemonByName('Hawlucha (Stuntman)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         });
-        lightsCameraPikaQuestLine.addQuest(trainHawluchaQuest);
+        lightsCameraPikaQuestLine.addQuest(trainHawluchaQuest); // 6
 
         const talkToFrankQuest4 = new TalkToNPCQuest(DirectorFrank4, 'Return to Frank');
         lightsCameraPikaQuestLine.addQuest(talkToFrankQuest4);
 
-        const trainPikachusQuest = new CustomQuest(15, undefined, 'Train 15 Pikachus to 25.000 attack',
-            () => App.game.party.caughtPokemon.filter(p => Math.floor(p.id) == 25 && p.attack >= 25000).length).withInitialValue(0);
+        const pikaList = pokemonList.filter(p => Math.floor(p.id) == pokemonMap.Pikachu.id).map(p => p.id);
+
+        const trainPikachusQuest = new CustomQuest(1500, 0, 'Train a few more Pikachu for the pika-roles.',
+            () => pikaList.reduce((sum, id) => sum + App.game.statistics.pokemonCaptured[id](), 0),
+        );
         lightsCameraPikaQuestLine.addQuest(trainPikachusQuest);
 
         const fightLibrePikachuQuest = new DefeatTemporaryBattleQuest('Pikachu Libre and its gang', 'Defeat Pikachu Libre and its gang!');
+        lightsCameraPikaQuestLine.addQuest(fightLibrePikachuQuest); // 9
 
         const talkToFrankQuest5 = new TalkToNPCQuest(DirectorFrank5, 'Return to Frank').withCustomReward(() => {
             App.game.party.gainPokemonByName('Pikachu (Super)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
         });
-        lightsCameraPikaQuestLine.addQuest(talkToFrankQuest5);
+        lightsCameraPikaQuestLine.addQuest(talkToFrankQuest5); // 10
 
         App.game.quests.questLines().push(lightsCameraPikaQuestLine);
     }
