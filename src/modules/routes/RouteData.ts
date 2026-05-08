@@ -1647,7 +1647,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Caterpie', 'Weedle', 'Pidgey', 'Zigzagoon', 'Fletchling', 'Bunnelby', 'Scatterbug'],
     }),
-    [new RouteKillRequirement(10, Region.kalos, 1)],
+    [new TemporaryBattleRequirement('Shauna 1')],
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 3', Region.kalos, 3,

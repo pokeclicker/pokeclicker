@@ -6,6 +6,7 @@
 ///<reference path="../../declarations/requirements/SeededDateRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/DayOfWeekRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/ObtainedPokemonRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/BerryUnlockedRequirement.d.ts"/>
 ///<reference path="../../declarations/utilities/SeededDateRand.d.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>
 
@@ -1082,7 +1083,7 @@ dungeonList['Pokémon Tower'] = new Dungeon('Pokémon Tower',
             hide: true,
         }),
     ],
-    750, 7);
+    750, 7, undefined, { requirement: new MultiRequirement([new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')), new TemporaryBattleRequirement('Blue 4')]) });
 
 dungeonList['Silph Co.'] = new Dungeon('Silph Co.',
     [
@@ -2025,7 +2026,10 @@ dungeonList['Pinkan Mountain'] = new Dungeon('Pinkan Mountain',
             {loot: 'Magost'},
             {loot: 'Watmel'},
         ],
-        legendary: [{loot: 'Fairy_Feather'}],
+        legendary: [
+            {loot: 'Fairy_Feather'},
+            {loot: 'Pinkan', ignoreDebuff: true, requirement: new BerryUnlockedRequirement(BerryType.Pinkan)},
+        ],
         mythic: [{loot: 'Heart Scale'}],
     },
     1503000,
