@@ -3199,7 +3199,7 @@ const RelicSage = new NPC('Relic Stone Sage', [
     'This stone has the power to cleanse and purify the spirits of Pokémon.',
     'If you train with your Pokémon, you will gain spiritual energy, or "Flow". You can use this Flow to purify your Pokémon.',
     'Purification will take more flow with each Pokémon you purify.',
-    'It\'s said that there is a Flute with a Time altering effect. Playing on it might help to purify your Pokémon a bit fast.',
+    'It\'s said that there is a Flute with a Time altering effect. Playing it might help purify your Pokémon a bit fast.',
     '<img src="./assets/images/status/shadow.svg" height="60px"/> <img src="./assets/images/arrow.svg" height="30px"/> <img src="./assets/images/status/purified.svg" height="60px"/>',
 ], {image: 'assets/images/npcs/Sage.png'});
 const GateonSailor = new NPC('Sailor', [
