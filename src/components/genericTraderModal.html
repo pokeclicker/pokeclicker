@@ -106,8 +106,26 @@
     <!-- /ko -->
 
     <!-- ko if: model.type === 'Item' -->
-    <div><img height="24px" data-bind="attr: {src: model.item.image }"/></div>
-    <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${model.item.displayName}`, css: { 'not-enough': tradeAmount * model.amount > player.itemList[model.item.name]() }"></div>
+    <div class="d-flex w-100 align-items-center" style="gap: 8px;">
+        <div><img height="24px" data-bind="attr: {src: model.item.image }"/></div>
+        <div class="flex-grow-1 d-flex w-100 align-items-center" style="gap: 4px;" data-bind="
+            css: { 'not-enough': tradeAmount * model.amount > player.itemList[model.item.name]() }">
+            <div data-bind="text: (tradeAmount * model.amount).toLocaleString('en-US')"></div>
+            <div>×</div>
+            <div class="text-left" style="text-wrap: wrap; line-height: 1;" data-bind="text: model.item.displayName"></div>
+        </div>
+        <div class="d-flex flex-column" style="gap: 3px;">
+            <div data-bind="if: model.item instanceof CaughtIndicatingItem" style="line-height: 0;">
+                <div style="width: 32px;" data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $parent.item.getCaughtStatus()}}"></div>
+            </div>
+            <div data-bind="if: model.item instanceof PokemonItem" style="line-height: 0;">
+                <span data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                    'pokerus': model.item.getPokerusStatus(), 'width': '32px',
+                    'evs': App.game.party.getPokemonByName(model.item.type)?.evs() }}">
+                </span>
+            </div>
+        </div>
+    </div>
     <!-- /ko -->
 
     <!-- ko if: model.type === 'Amount' -->
