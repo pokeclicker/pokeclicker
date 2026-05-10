@@ -130,8 +130,12 @@ class Dungeon {
         // Player may not meet the requirements to start the dungeon
         const dungeonTown = TownList[this.name];
         const dungeonRequirement = this.optionalParameters.requirement;
-        // Use dungeonRequirement if it exists, else default to dungeonTown status
-        if (dungeonRequirement ? !dungeonRequirement.isCompleted() : !dungeonTown.isUnlocked()) {
+        // Always lock dungeon if town is inaccessible
+        if (!dungeonTown.isUnlocked()) {
+            return false;
+        }
+        // Check dungeonRequirement if it exists
+        if (dungeonRequirement && !dungeonRequirement.isCompleted()) {
             return false;
         }
         return true;
