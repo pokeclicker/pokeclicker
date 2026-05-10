@@ -2970,6 +2970,7 @@ class Update implements Saveable {
             if (saveData.farming.berryList) {
                 const savedBerries = saveData.farming.berryList;
                 saveData.farming.berryInventory = savedBerries;
+                delete saveData.farming.berryList;
             }
         },
     };
