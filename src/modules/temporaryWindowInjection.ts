@@ -32,7 +32,7 @@ import BattlePokemon from './battles/BattlePokemon';
 import Trainer from './battles/Trainer';
 import GymPokemon from './gym/GymPokemon';
 import Berry from './farming/Berry';
-import BerryList from './farming/BerryList';
+import { BerryList } from './farming/BerryList';
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';

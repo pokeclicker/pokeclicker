@@ -90,8 +90,7 @@ class Farming implements Feature {
     }
 
     initialize(): void {
-        this.berryData = BerryList.berryData;
-
+        this.berryData = BerryList;
         //#region Mutations
 
         /**
