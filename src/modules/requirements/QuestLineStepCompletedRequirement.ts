@@ -28,6 +28,11 @@ export default class QuestLineStepCompletedRequirement extends Requirement {
     }
 
     public hint(): string {
-        return this.option !== AchievementOption.less ? `Progress further in questline ${this.quest.displayName}.` : `Questline ${this.quest.displayName} has progressed past this point.`;
+        if (typeof this.questIndex === 'function') {
+            return this.option !== AchievementOption.less ? `Progress further in questline ${this.quest.displayName}.` : `Questline ${this.quest.displayName} has progressed past this point.`;
+        } else {
+            const questStep = this.questIndex;
+            return this.option !== AchievementOption.less ? `Complete step ${questStep + 1} in the ${this.quest.displayName} quest line.` : `Must have not progressed beyond step ${questStep} in questline ${this.quest.displayName}.`;
+        }
     }
 }
