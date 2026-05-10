@@ -102,7 +102,7 @@
 
     <!-- ko if: model.type === 'Berry' -->
     <div><img height="24px" data-bind="attr: {src: FarmController.getBerryImage(model.berryType) }, css: {'berryLocked': !App.game.farming.unlockedBerries[model.berryType]() }"/></div>
-    <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${App.game.farming.unlockedBerries[model.berryType]() ? BerryType[model.berryType] : '???'}`, css: { 'not-enough': tradeAmount * model.amount > App.game.farming.berryList[model.berryType]() }"></div>
+    <div class="text-left" data-bind="text: `${(tradeAmount * model.amount).toLocaleString('en-US')} × ${App.game.farming.unlockedBerries[model.berryType]() ? BerryType[model.berryType] : '???'}`, css: { 'not-enough': tradeAmount * model.amount > App.game.farming.berryInventory[model.berryType]() }"></div>
     <!-- /ko -->
 
     <!-- ko if: model.type === 'Item' -->

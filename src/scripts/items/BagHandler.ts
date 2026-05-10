@@ -58,7 +58,7 @@ class BagHandler {
             case ItemType.underground:
                 return player.itemList[this.getUndergroundItem(item.id).itemName]();
             case ItemType.berry:
-                return App.game.farming.berryList[this.getBerry(item.id)];
+                return App.game.farming.berryInventory[this.getBerry(item.id)];
             case ItemType.gem:
                 return App.game.gems.gemWallet[this.getGem(item.id)];
         }

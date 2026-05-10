@@ -16,7 +16,7 @@ class Farming implements Feature {
     mulchCounter = 0;
 
     defaults = {
-        berryList: Array<number>(GameHelper.enumLength(BerryType) - 1).fill(0),
+        berryInventory: Array<number>(GameHelper.enumLength(BerryType) - 1).fill(0),
         unlockedBerries: Array<boolean>(GameHelper.enumLength(BerryType) - 1).fill(false),
         mulchList: Array<number>(GameHelper.enumLength(MulchType)).fill(0),
         plotList: new Array(GameConstants.FARM_PLOT_WIDTH * GameConstants.FARM_PLOT_HEIGHT).fill(null).map((value, index) => {
@@ -27,7 +27,7 @@ class Farming implements Feature {
         mulchShovelAmt: 0,
     };
 
-    berryList: KnockoutObservable<number>[];
+    berryInventory: KnockoutObservable<number>[];
     unlockedBerries: KnockoutObservable<boolean>[];
     mulchList: KnockoutObservable<number>[];
     plotList: Array<Plot>;
@@ -39,7 +39,7 @@ class Farming implements Feature {
     possiblePlotMutations: KnockoutComputed<Array<Array<string>>>;
 
     constructor(private multiplier: Multiplier) {
-        this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
+        this.berryInventory = this.defaults.berryInventory.map((v) => ko.observable<number>(v));
         this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
         this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
         this.plotList = this.defaults.plotList;
@@ -735,7 +735,7 @@ class Farming implements Feature {
         }
         if (this.canBuyPlot(index)) {
             const berryData = this.plotBerryCost(index);
-            GameHelper.incrementObservable(this.berryList[berryData.type], -berryData.amount);
+            GameHelper.incrementObservable(this.berryInventory[berryData.type], -berryData.amount);
             const cost = this.plotFPCost(index);
             App.game.wallet.loseAmount(new Amount(cost, GameConstants.Currency.farmPoint));
             this.plotList[index].isUnlocked = true;
@@ -749,7 +749,7 @@ class Farming implements Feature {
 
     canBuyPlot(index: number): boolean {
         const berryData = this.plotBerryCost(index);
-        if (App.game.farming.berryList[berryData.type]() < berryData.amount) {
+        if (App.game.farming.berryInventory[berryData.type]() < berryData.amount) {
             return false;
         }
         const cost = this.plotFPCost(index);
@@ -781,7 +781,7 @@ class Farming implements Feature {
             return;
         }
 
-        GameHelper.incrementObservable(this.berryList[berry], -1);
+        GameHelper.incrementObservable(this.berryInventory[berry], -1);
         plot.plant(berry);
     }
 
@@ -942,7 +942,7 @@ class Farming implements Feature {
     }
 
     gainBerry(berry: BerryType, amount = 1, farming = true) {
-        GameHelper.incrementObservable(this.berryList[berry], Math.floor(amount));
+        GameHelper.incrementObservable(this.berryInventory[berry], Math.floor(amount));
 
         if (amount > 0) {
             this.unlockBerry(berry);
@@ -956,7 +956,7 @@ class Farming implements Feature {
     }
 
     hasBerry(berry: BerryType) {
-        return this.berryList[berry]() > 0;
+        return this.berryInventory[berry]() > 0;
     }
 
     hasMulch(mulch: MulchType) {
@@ -994,7 +994,7 @@ class Farming implements Feature {
 
     toJSON(): Record<string, any> {
         return {
-            berryList: this.berryList.map(ko.unwrap),
+            berryInventory: this.berryInventory.map(ko.unwrap),
             unlockedBerries: this.unlockedBerries.map(ko.unwrap),
             mulchList: this.mulchList.map(ko.unwrap),
             plotList: this.plotList.map(plot => plot.toJSON()),
@@ -1010,12 +1010,12 @@ class Farming implements Feature {
             return;
         }
 
-        const savedBerries = json.berryList;
+        const savedBerries = json.berryInventory;
         if (savedBerries == null) {
-            this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
+            this.berryInventory = this.defaults.berryInventory.map((v) => ko.observable<number>(v));
         } else {
             (savedBerries as number[]).forEach((value: number, index: number) => {
-                this.berryList[index](value);
+                this.berryInventory[index](value);
             });
         }
 

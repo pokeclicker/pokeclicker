@@ -61,7 +61,7 @@
                                                 data-bind="attr:{ src: FarmController.getBerryImage($data) },
                                                 css: {'berryLocked': !App.game.farming.unlockedBerries[$data]() }">
                                             <span data-bind="text: App.game.farming.unlockedBerries[$data]() ? BerryType[$data] : '???'"></span>
-                                            <span class="flex-grow-1 text-right" data-bind="text: App.game.farming.berryList[$data]().toLocaleString('en-US')"></span>
+                                            <span class="flex-grow-1 text-right" data-bind="text: App.game.farming.berryInventory[$data]().toLocaleString('en-US')"></span>
                                         </li>
                                         <!-- /ko -->
                                     </ul>
@@ -318,7 +318,7 @@
                                             <tr>
                                                 <td class="text-left">Current Amount</td>
                                                 <td class="text-left tight">
-                                                    <code data-bind="text: App.game.farming.berryList[$data]().toLocaleString('en-US')">-</code>
+                                                    <code data-bind="text: App.game.farming.berryInventory[$data]().toLocaleString('en-US')">-</code>
                                                 </td>
                                             </tr>
                                             <!-- ko if: App.game.farming.berryData[$data].aura -->
