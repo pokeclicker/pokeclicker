@@ -8,6 +8,7 @@
 ///<reference path="PokemonGiftNPC.ts"/>
 ///<reference path="AssistantNPC.ts"/>
 ///<reference path="TownContent.ts"/>
+///<reference path="../gym/GymList.ts"/>
 
 type TownOptionalArgument = {
     requirements?: Requirement[],
@@ -64,6 +65,10 @@ class Town implements TmpTownType {
 
     public isUnlocked() {
         return this.requirements.every(requirement => requirement.isCompleted());
+    }
+
+    public getImage() {
+        return `url('assets/images/towns/${this.name.replace(/'/, `\\'`)}.png')`;
     }
 }
 
