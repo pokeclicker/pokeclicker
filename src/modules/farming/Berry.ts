@@ -30,6 +30,22 @@ export default class Berry {
         [BerryColor.Gold]: ['Flabébé (Orange)'],
     };
 
+    /**
+     * @param type The name as a `BerryType` enum
+     * @param growthTime The seconds it takes to reach each growth stage: `[Sprout, Taller, Bloom, Berry, Wither]`
+     * @param harvestAmount The amount of berries harvested from the Berry growth stage. Decimals are rounded down, and affected by the Harvest aura
+     * @param replantRate The chance of an automatic replant after withering. A value of `1` is 100%
+     * @param farmValue The amount of Farm Point currency obtained per harvest
+     * @param exp The amount by which the price of Farm Point shop items are reduced to their initial cost
+     * @param flavors The amount of each flavor within the berry `[Spicy, Dry, Sweet, Bitter, Sour]`. Used for mutations
+     * @param smoothness The smoothness of the berry as a whole number from 20 to 60
+     * @param color The color of the berry as a `BerryColor` enum. Used for wandering Pokémon
+     * @param size The size of the berry in cm
+     * @param firmness The firmness of the berry as a `BerryFirmness` enum
+     * @param description Text that appears in the Berrydex
+     * @param aura (Optional) An `AuraType` enum and modifiers during Taller, Bloom, and Berry stages as `new Aura()`
+     * @param wander (Optional) Specific Pokémon that are attracted to the plant during its Berry stage
+     */
     constructor(
         public type: BerryType,
         public growthTime: number[],
