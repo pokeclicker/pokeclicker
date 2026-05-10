@@ -122,7 +122,7 @@ class BagHandler {
 
     private static getBerry(id: string | number): BerryType {
         if (typeof id === 'string') {
-            id = App.game.farming.berryData.findIndex((_, idx) => BerryType[idx] === id);
+            id = BerryList.findIndex((_, idx) => BerryType[idx] === id);
         }
         return id;
     }

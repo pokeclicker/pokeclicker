@@ -5,7 +5,6 @@ class Farming implements Feature {
     name = 'Farming';
     saveKey = 'farming';
 
-    berryData: Berry[] = [];
     mutations: Mutation[] = [];
     farmHands = new FarmHands();
 
@@ -90,7 +89,6 @@ class Farming implements Feature {
     }
 
     initialize(): void {
-        this.berryData = BerryList;
         //#region Mutations
 
         /**
@@ -801,16 +799,16 @@ class Farming implements Feature {
             return;
         }
 
-        App.game.wallet.gainFarmPoints(this.berryData[plot.berry].farmValue);
+        App.game.wallet.gainFarmPoints(BerryList[plot.berry].farmValue);
 
         const amount = plot.harvestAmount();
 
         this.gainBerry(plot.berry, amount);
 
-        App.game.oakItems.use(OakItemType.Sprayduck, this.berryData[plot.berry].exp);
+        App.game.oakItems.use(OakItemType.Sprayduck, BerryList[plot.berry].exp);
         GameHelper.incrementObservable(App.game.statistics.totalManualHarvests, 1);
 
-        player.lowerItemMultipliers(MultiplierDecreaser.Berry, this.berryData[plot.berry].exp);
+        player.lowerItemMultipliers(MultiplierDecreaser.Berry, BerryList[plot.berry].exp);
 
         plot.die(true);
     }
@@ -1076,14 +1074,14 @@ class Farming implements Feature {
         const genBounds = Farming.genBounds;
         const minBound = genBounds[gen - 1] || 0;
         const maxBound = genBounds[gen] || Infinity;
-        return App.game.farming.berryData.filter(berry => berry.type >= minBound && berry.type < maxBound).map(berry => berry.type);
+        return BerryList.filter(berry => berry.type >= minBound && berry.type < maxBound).map(berry => berry.type);
     }
 
     public static getColor(color: BerryColor): BerryType[] {
-        return App.game.farming.berryData.filter(berry => berry.color === color).map(berry => berry.type);
+        return BerryList.filter(berry => berry.color === color).map(berry => berry.type);
     }
     public static getFirmness(firmness: BerryFirmness): BerryType[] {
-        return App.game.farming.berryData.filter(berry => berry.firmness === firmness).map(berry => berry.type);
+        return BerryList.filter(berry => berry.firmness === firmness).map(berry => berry.type);
     }
     public static sizeUnitConverter: Record<SizeUnits, ((num: number) => string)> = {
         [SizeUnits.cm]: (num) => `${num.toFixed(1)} cm`, // default is cm
@@ -1091,7 +1089,7 @@ class Farming implements Feature {
     };
 
     public auraDisplay(berry: BerryType, stage: number) {
-        return `×${App.game.farming.berryData[berry].aura.auraMultipliers[stage].toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 3 })}`;
+        return `×${BerryList[berry].aura.auraMultipliers[stage].toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 3 })}`;
     }
 
     public handleWanderer(plot: Plot) {
@@ -1100,7 +1098,7 @@ class Farming implements Feature {
         }
         const wanderer = plot.wanderer;
         const pokemonData = PokemonHelper.getPokemonByName(wanderer.name);
-        const berry = App.game.farming.berryData[plot.wanderer.berry];
+        const berry = BerryList[plot.wanderer.berry];
 
         const farmPoints = Math.floor(berry.farmValue / (4 + berry.growthTime[PlotStage.Bloom] / 1800));
         const shinyModifier = wanderer.shiny ? GameConstants.WANDER_SHINY_FP_MODIFIER : 1;
