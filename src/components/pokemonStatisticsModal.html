@@ -154,7 +154,7 @@
                 }">
                   <td class="text-left">Vitamins Applied</td>
                   <td class="text-left tight">
-                    <code data-bind="text: `${App.game.party.getPokemon($data).totalVitaminsUsed().toLocaleString('en-US')}/${((player.highestRegion() + 1) * 5).toLocaleString('en-US')}`">-</code>
+                    <code data-bind="text: `${App.game.party.getPokemon($data).totalVitaminsUsed().toLocaleString('en-US')}/${PartyPokemon.maxVitaminUsesAllowed().toLocaleString('en-US')}`">-</code>
                   </td>
                 </tr>
                 <!-- /ko -->
