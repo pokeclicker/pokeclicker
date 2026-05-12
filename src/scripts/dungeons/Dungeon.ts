@@ -6,6 +6,7 @@
 ///<reference path="../../declarations/requirements/SeededDateRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/DayOfWeekRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/ObtainedPokemonRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/BerryUnlockedRequirement.d.ts"/>
 ///<reference path="../../declarations/utilities/SeededDateRand.d.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>
 
@@ -100,14 +101,13 @@ const DungeonGainGymBadge = (gym: Gym) => {
 }
 class Dungeon {
     private mimicList: PokemonNameType[] = [];
-
     constructor(
         public name: string,
         public enemyList: Enemy[],
         public lootTable: LootTable,
         public baseHealth: number,
         public bossList: Boss[],
-        public tokenCost: number,
+        public baseTokenCost: number,
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
         public rewardFunction = () => {},
         private optionalParameters: optionalDungeonParameters = {}
@@ -189,6 +189,18 @@ class Dungeon {
         return this.availableBosses().map((boss) => {
             return boss.options?.weight ?? 1;
         });
+    }
+
+    get tokenCost(): number {
+        return Math.ceil(this.baseTokenCost * this.getDungeonSize(false) / this.getDungeonSize(true));
+    }
+
+    public getDungeonSize(ignoreReduction = true) {
+        let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + (this.difficulty);
+        if (!ignoreReduction) {
+            dungeonSize -= Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]().toString().length - 1);
+        }
+        return Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize);
     }
 
     /**
@@ -1071,7 +1083,7 @@ dungeonList['Pokémon Tower'] = new Dungeon('Pokémon Tower',
             hide: true,
         }),
     ],
-    750, 7);
+    750, 7, undefined, { requirement: new MultiRequirement([new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')), new TemporaryBattleRequirement('Blue 4')]) });
 
 dungeonList['Silph Co.'] = new Dungeon('Silph Co.',
     [
@@ -2014,7 +2026,10 @@ dungeonList['Pinkan Mountain'] = new Dungeon('Pinkan Mountain',
             {loot: 'Magost'},
             {loot: 'Watmel'},
         ],
-        legendary: [{loot: 'Fairy_Feather'}],
+        legendary: [
+            {loot: 'Fairy_Feather'},
+            {loot: 'Pinkan', ignoreDebuff: true, requirement: new BerryUnlockedRequirement(BerryType.Pinkan)},
+        ],
         mythic: [{loot: 'Heart Scale'}],
     },
     1503000,
@@ -3447,9 +3462,9 @@ dungeonList['Weather Institute'] = new Dungeon('Weather Institute',
                 new GymPokemon('Mightyena', 4500000, 58),
             ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 9)}, 'Shelly', '(shelly)'),
         new DungeonBossPokemon('Castform', 1820000, 20, {hide: true, requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))}),
-        new DungeonBossPokemon('Castform (Sunny)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Harsh_Sunlight])])}),
-        new DungeonBossPokemon('Castform (Rainy)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])])}),
-        new DungeonBossPokemon('Castform (Snowy)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform'), new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail])])}),
+        new DungeonBossPokemon('Castform (Sunny)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform (Sunny)'), new WeatherRequirement([WeatherType.Harsh_Sunlight])])}),
+        new DungeonBossPokemon('Castform (Rainy)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform (Rainy)'), new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])])}),
+        new DungeonBossPokemon('Castform (Snowy)', 1820000, 20, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Castform (Snowy)'), new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail])])}),
     ],
     26000, 101);
 
@@ -9093,10 +9108,6 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
         new DungeonBossPokemon('Kyurem', 35000000, 100, {requirement: new MultiRequirement([
             new QuestLineCompletedRequirement('Hollow Truth and Ideals'),
             new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
-            new OneFromManyRequirement([
-                new QuestLineCompletedRequirement('Swords of Justice'),
-                new QuestLineStartedRequirement('Swords of Justice', GameConstants.AchievementOption.less),
-            ]),
         ]),
         }),
         new DungeonBossPokemon('Genesect (High-Speed Chill)', 62000000, 100, {
@@ -12045,7 +12056,8 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
                 new GymPokemon('Claydol', 26032803, 44),
                 new GymPokemon('Bruxish', 26032803, 44),
                 new GymPokemon('Hypno', 26032803, 44),
-                new GymPokemon('You hateful little Trainer!', 26032803, 47, new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new SpecialEventRequirement('Hoopa Day')]), true),
+                new CustomGymPokemon('You hateful little Trainer!', 26032803, 47, [PokemonType.Rock, PokemonType.Poison], 'YouHatefulLittleTrainer.png',
+                    new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new SpecialEventRequirement('Hoopa Day')]), true),
             ],
             { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 9) }, 'Faba', '(faba)'),
         new DungeonTrainer('Team Skull Boss',
@@ -12054,7 +12066,8 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
                 new GymPokemon('Vikavolt', 19524602, 45),
                 new GymPokemon('Masquerain', 19524602, 45),
                 new GymPokemon('Pinsir', 19524602, 45),
-                new GymPokemon('You hateful little Trainer!', 19524602, 47, new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new SpecialEventRequirement('Hoopa Day')]), false),
+                new CustomGymPokemon('You hateful little Trainer!', 19524602, 47, [PokemonType.Rock, PokemonType.Poison], 'YouHatefulLittleTrainer.png',
+                    new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new SpecialEventRequirement('Hoopa Day')]), false),
             ],
             { weight: 2.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 10) }, 'Guzma', '(guzma)'),
         new DungeonTrainer('Aether President',
@@ -12262,12 +12275,13 @@ dungeonList['Mina\'s Houseboat'] = new Dungeon('Mina\'s Houseboat',
 
 dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
     [
-        {pokemon: 'Alolan Raticate', options: { weight: 8.67 }},
-        {pokemon: 'Alolan Sandshrew', options: { weight: 8.67 }},
-        {pokemon: 'Alolan Vulpix', options: { weight: 8.67 }},
-        {pokemon: 'Sneasel', options: { weight: 8.67 }},
-        {pokemon: 'Snorunt', options: { weight: 8.67 }},
-        {pokemon: 'Gumshoos', options: { weight: 8.67 }},
+        {pokemon: 'Alolan Raticate', options: { weight: 7.43 }},
+        {pokemon: 'Alolan Sandshrew', options: { weight: 7.43 }},
+        {pokemon: 'Alolan Vulpix', options: { weight: 7.43 }},
+        {pokemon: 'Sneasel', options: { weight: 7.43 }},
+        {pokemon: 'Snorunt', options: { weight: 7.43 }},
+        {pokemon: 'Gumshoos', options: { weight: 7.43 }},
+        {pokemon: 'Drampa', options: { weight: 7.43, hide: true, requirement: new ObtainedPokemonRequirement('Drampa') }},
         new DungeonTrainer('Ace Trainer',
             [
                 new GymPokemon('Scyther', 16212850, 51),
@@ -13373,7 +13387,7 @@ const maxLairQuestStepRandomIndex = (index: number) => {
     return SeededRand.shuffleArray([3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32])[index];
 };
 dungeonList['Max Lair'] = new Dungeon('Max Lair',
-    ['Ivysaur', 'Charmeleon', 'Wartortle', 'Grovyle', 'Sceptile', 'Combusken', 'Blaziken', 'Marshtomp', 'Swampert', 'Cradily', 'Cofagrigus', 'Fraxure', 'Toxtricity (Amped)', 'Toxtricity (Low Key)'],
+    ['Ivysaur', 'Charmeleon', 'Wartortle', 'Grovyle', 'Sceptile', 'Combusken', 'Blaziken', 'Marshtomp', 'Swampert', 'Cofagrigus', 'Fraxure', 'Toxtricity (Amped)', 'Toxtricity (Low Key)'],
     {
         common: [
             {loot: 'xAttack'},

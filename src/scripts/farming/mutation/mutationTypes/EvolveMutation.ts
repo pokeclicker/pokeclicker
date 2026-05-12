@@ -51,7 +51,7 @@ abstract class EvolveMutation extends Mutation {
         const currentStage = plot.stage();
         let newAge = 0;
         if (currentStage !== PlotStage.Seed) {
-            newAge = App.game.farming.berryData[this.mutatedBerry].growthTime[currentStage - 1] + 1;
+            newAge = BerryList[this.mutatedBerry].growthTime[currentStage - 1] + 1;
         }
         plot.berry = this.mutatedBerry;
         plot.age = newAge;
