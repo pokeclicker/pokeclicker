@@ -5476,9 +5476,25 @@ TownList['Opelucid City'] = new Town(
     'Opelucid City',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [OpelucidCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Opelucid City'])],
+    [
+        OpelucidCityShop,
+        new ShardTraderShop(GameConstants.ShardTraderLocations['Opelucid City']),
+        TemporaryBattleList['Team Plasma Grunt 7'],
+        TemporaryBattleList['Team Plasma Grunt 8'],
+        TemporaryBattleList['Team Plasma Grunt 9'],
+        TemporaryBattleList['Zinzolin 2'],
+        TemporaryBattleList['Plasma Shadow 1'],
+    ],
     {
+        npcs: [PlasmaGrunt3],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 11)],
+        dynamicImages: [
+            { requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 11),
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15, GameConstants.AchievementOption.less),
+            ]),
+            imageString: 'Opelucid City (frozen)' },
+        ],
     }
 );
 TownList['Shopping Mall Nine'] = new Town(
@@ -5705,10 +5721,6 @@ TownList['Plasma Frigate'] = new DungeonTown(
                 new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 7, GameConstants.AchievementOption.less),
             ]),
             new MultiRequirement([
-                new GymBadgeRequirement(BadgeEnums.Legend),
-                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 14, GameConstants.AchievementOption.less),
-            ]),
-            new MultiRequirement([
                 new GymBadgeRequirement(BadgeEnums.Wave),
                 new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15, GameConstants.AchievementOption.less),
             ]),
@@ -5720,18 +5732,21 @@ TownList['Plasma Frigate'] = new DungeonTown(
         TemporaryBattleList['Team Plasma Grunts 2'],
         TemporaryBattleList['Team Plasma Grunt 4'],
         TemporaryBattleList['Team Plasma Grunt 5'],
-        TemporaryBattleList['Team Plasma Grunt 7'],
-        TemporaryBattleList['Team Plasma Grunt 8'],
-        TemporaryBattleList['Team Plasma Grunt 9'],
-        TemporaryBattleList['Zinzolin 2'],
-        TemporaryBattleList['Plasma Shadow 1'],
         TemporaryBattleList['Colress 3'],
         TemporaryBattleList['Plasma Shadow 2'],
         TemporaryBattleList['Plasma Shadow 3'],
         TemporaryBattleList['Plasma Shadow 4'],
     ],
     {
-        npcs: [PlasmaGrunt1, PlasmaGrunt2, DriftveilZinzolin, PlasmaGrunt3, GiantChasmColress, GiantChasmShadowTriad],
+        npcs: [PlasmaGrunt1, PlasmaGrunt2, DriftveilZinzolin, GiantChasmColress, GiantChasmShadowTriad],
+        dynamicImages: [
+            { requirement:
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 12),
+                    new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 22, GameConstants.AchievementOption.less),
+                ]),
+            imageString: 'Plasma Frigate (activated)' },
+        ],
     }
 );
 TownList['Giant Chasm'] = new DungeonTown(
@@ -9369,6 +9384,9 @@ TownList['Slumbering Weald'] = new DungeonTown(
     [TemporaryBattleList.Mirages, TemporaryBattleList['Hop 8'], TemporaryBattleList['Sordward 1'], TemporaryBattleList['Shielbert 1']],
     {
         npcs: [SlumberingHop1, SlumberingHop2, SordwardShielbert1],
+        dynamicImages: [
+            { requirement: new QuestLineStepCompletedRequirement('The Darkest Day', 13, GameConstants.AchievementOption.less), imageString: 'Slumbering Weald Entrance' },
+        ],
     }
 );
 TownList['Galar Mine'] = new DungeonTown(

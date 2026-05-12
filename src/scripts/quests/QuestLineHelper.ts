@@ -1393,11 +1393,7 @@ class QuestLineHelper {
         const clearZinzolin2 = new DefeatTemporaryBattleQuest('Zinzolin 2', 'Defeat Zinzolin.');
         plasmaUnovaQuestLine.addQuest(clearZinzolin2);
 
-        const clearPlasmaShadow1Reward = () => {
-            MapHelper.moveToTown('Opelucid City');
-        };
-
-        const clearPlasmaShadow1 = new DefeatTemporaryBattleQuest('Plasma Shadow 1', 'Defeat the Plasma Shadow.').withCustomReward(clearPlasmaShadow1Reward);
+        const clearPlasmaShadow1 = new DefeatTemporaryBattleQuest('Plasma Shadow 1', 'Defeat the Plasma Shadow.');
         plasmaUnovaQuestLine.addQuest(clearPlasmaShadow1);
 
         const clearPlasmaFrigateReward = () => {

@@ -1959,7 +1959,7 @@ TemporaryBattleList['Team Plasma Grunt 7'] = new TemporaryBattle(
         new GymPokemon('Muk', 28298300, 44),
     ],
     'You little... You knocked out my stupid pawns!',
-    [new TemporaryBattleRequirement('Zinzolin 1')],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 11)],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
@@ -1974,7 +1974,7 @@ TemporaryBattleList['Team Plasma Grunt 8'] = new TemporaryBattle(
         new GymPokemon('Garbodor', 28298300, 44),
     ],
     'Argh! Lame! Stupid! Fool! Plasmaaaa!',
-    [new TemporaryBattleRequirement('Zinzolin 1')],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 11)],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
@@ -1989,7 +1989,7 @@ TemporaryBattleList['Team Plasma Grunt 9'] = new TemporaryBattle(
         new GymPokemon('Weezing', 28298300, 44),
     ],
     'Even if I lose, I will not give up on justice for Team Plasma! That\'s all!',
-    [new TemporaryBattleRequirement('Zinzolin 1')],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 11)],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
