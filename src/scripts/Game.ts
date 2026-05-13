@@ -506,6 +506,13 @@ class Game implements TmpGameType {
                         this.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(t.name)](0);
                     }
                 });
+
+                // Reset some npcs
+                Object.values(TownList).flatMap(n => n.npcs).filter(npc => npc instanceof GiftNPC).forEach(npc => {
+                    if (npc.options?.resetDaily && npc.options?.saveKey) {
+                        App.game.statistics.npcTalkedTo[GameHelper.hash(npc.options?.saveKey)](0);
+                    }
+                });
             }
 
             // Check if it's a new hour

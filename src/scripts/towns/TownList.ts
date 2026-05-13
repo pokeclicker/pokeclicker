@@ -5358,6 +5358,40 @@ const AncientBugHunter3 = new NPC('Ancient Bug Hunter', [
     image: 'assets/images/npcs/Super Nerd.png',
     requirement: new QuestLineCompletedRequirement('The Legend Awakened'),
 });
+
+const PlasmaGruntsHoopaDay1 = new GiftNPC('Team Plasma Grunts?', [
+    'Hehe... hee hee...',
+    'Oh! S\'cuse us! Would you like a couple of Ice gems?',
+    '<i>Eeheehee...</i>',
+], () => {
+    App.game.gems.gainGems(1, PokemonType.Ice);
+    Notifier.notify({
+        message: '<i>Whisper, whisper.. Hoohaheehehu!</i>',
+        image: 'assets/images/npcs/Team Plasma Grunts (male).png',
+    });
+    Notifier.notify({
+        message: 'You got two Ice gems...?',
+        image: 'assets/images/gems/Ice Gem.png',
+        type: NotificationConstants.NotificationOption.success,
+    });
+}, undefined, {
+    saveKey: 'PlasmaIceCubes',
+    resetDaily: true,
+    image: 'assets/images/npcs/Team Plasma Grunts (male).png',
+    requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion), new SpecialEventRequirement('Hoopa Day')]),
+});
+
+const PlasmaGruntsHoopaDay2 = new NPC('Plasma Pranksters', [
+    'AHAHA!',
+    'HAAAHHAAAHAAHAA!',
+    'You completely fell for it!',
+    'We said we\'d give you a <i>couple</i> of Ice gems, but we only gave you <i>one</i>!',
+    'Heeheehee! C\'mon let\'s get the mayor too!',
+], {
+    image: 'assets/images/npcs/Team Plasma Grunts (male).png',
+    requirement: new MultiRequirement([new StatisticRequirement(['npcTalkedTo', GameHelper.hash('PlasmaIceCubes')], 1, 'WHAT DID YOU DO TO MY GEMS!?'), new SpecialEventRequirement('Hoopa Day')]),
+});
+
 //Unova Towns
 TownList['Aspertia City'] = new Town(
     'Aspertia City',
@@ -5486,7 +5520,7 @@ TownList['Opelucid City'] = new Town(
         TemporaryBattleList['Plasma Shadow 1'],
     ],
     {
-        npcs: [PlasmaGrunt3],
+        npcs: [PlasmaGrunt3, PlasmaGruntsHoopaDay1, PlasmaGruntsHoopaDay2],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 11)],
         dynamicImages: [
             { requirement: new MultiRequirement([
@@ -5494,6 +5528,10 @@ TownList['Opelucid City'] = new Town(
                 new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15, GameConstants.AchievementOption.less),
             ]),
             imageString: 'Opelucid City (frozen)' },
+            { requirement: new MultiRequirement([
+                new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
+                new SpecialEventRequirement('Hoopa Day'),
+            ]), imageString: 'Opelucid City (frozen)' },
         ],
     }
 );
