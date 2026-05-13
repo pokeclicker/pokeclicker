@@ -207,7 +207,7 @@ class PokemonFactory {
         const nickname = pokemon.nickname;
         const contestTypes = pokemon.contestTypes ?? [0, 1, 2, 3, 4, 5]; // todo: `?? basePokemon.contestTypes;` when PokemonList has contest types
         const gender = pokemon.gender ?? this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
-        const moves = pokemon.moves ?? Rand.shuffleArray(contestTypes.concat(contestTypes).concat(contestTypes).concat(contestTypes)).slice(0,4);
+        const moves = pokemon.moves ?? Rand.shuffleArray(contestTypes.concat(contestTypes, contestTypes, contestTypes)).slice(0,4);
         const shiny = pokemon.shiny ?? false;
         const exp: number = pokemon.level;
         const catchRate = 0;

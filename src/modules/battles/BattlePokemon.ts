@@ -35,7 +35,6 @@ export default class BattlePokemon implements EnemyPokemonInterface {
      * @param gender Pokémon gender
      * @param [heldItem] item to possibly gain for defeating this Pokémon
      * @param shadow is shadow or purified
-     * @param maxRapport how much rapport the Pokémon needs for it to be rallied
      */
 
     /* eslint-disable @typescript-eslint/default-param-last */
