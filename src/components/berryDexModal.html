@@ -17,7 +17,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                      <td colspan="2"><span data-bind="html: App.game.farming.berryData[$data].descriptionHTML"></span></td>
+                      <td colspan="2"><span data-bind="html: BerryList[$data].descriptionHTML"></span></td>
                   </tbody>
                   <thead>
                     <tr class="text-light">
@@ -27,20 +27,20 @@
                     <tbody>
                     <tr>
                       <td class="text-left">Berry Color</td>
-                      <td class="text-left tight"><code data-bind="text: BerryColor[App.game.farming.berryData[$data].color]">-</code></td>
+                      <td class="text-left tight"><code data-bind="text: BerryColor[BerryList[$data].color]">-</code></td>
                     </tr>
                     <tr>
                       <td class="text-left">Size</td>
-                      <td class="text-left tight"><code data-bind="text: Farming.sizeUnitConverter[SizeUnits[Settings.getSetting('sizeUnits').observableValue()]](App.game.farming.berryData[$data].size)">-</code></td>
+                      <td class="text-left tight"><code data-bind="text: Farming.sizeUnitConverter[SizeUnits[Settings.getSetting('sizeUnits').observableValue()]](BerryList[$data].size)">-</code></td>
                     </tr>
                     <tr>
                       <td class="text-left">Firmness</td>
-                      <td class="text-left tight"><code data-bind="html: GameConstants.humanifyString(BerryFirmness[App.game.farming.berryData[$data].firmness])">-</code></td>
+                      <td class="text-left tight"><code data-bind="html: GameConstants.humanifyString(BerryFirmness[BerryList[$data].firmness])">-</code></td>
                     </tr>
-                    <!-- ko if: App.game.farming.berryData[$data].aura -->
+                    <!-- ko if: BerryList[$data].aura -->
                     <tr>
                       <td class="text-left">Aura</td>
-                      <td class="text-left tight"><code data-bind="text: `${AuraType[App.game.farming.berryData[$data].aura.auraType]}${App.game.farming.berryData[$data].aura.auraMultipliers[0] > 1 ? '+' : '-'}`"></code></td>
+                      <td class="text-left tight"><code data-bind="text: `${AuraType[BerryList[$data].aura.auraType]}${BerryList[$data].aura.auraMultipliers[0] > 1 ? '+' : '-'}`"></code></td>
                     </tr>
                     <!-- /ko -->
                     </tbody>
@@ -53,15 +53,15 @@
                   <tbody>
                     <tr>
                       <td class="text-left">Growth Duration</td>
-                      <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[3])">-</code></td>
+                      <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(BerryList[$data].growthTime[3])">-</code></td>
                     </tr>
                     <tr>
                       <td class="text-left">Berry Stage Duration</td>
-                      <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[4]-App.game.farming.berryData[$data].growthTime[3])">-</code></td>
+                      <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(BerryList[$data].growthTime[4]-BerryList[$data].growthTime[3])">-</code></td>
                     </tr>
                     <tr>
                       <td class="text-left">Total Life Span</td>
-                      <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[4])">-</code></td>
+                      <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(BerryList[$data].growthTime[4])">-</code></td>
                     </tr>
                     </tbody>
                     <thead>
@@ -73,15 +73,15 @@
                     <tbody>
                       <tr>
                         <td class="text-left">Harvest Amount</td>
-                        <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].harvestAmount.toLocaleString('en-US')">-</code></td>
+                        <td class="text-left tight"><code data-bind="text: BerryList[$data].harvestAmount.toLocaleString('en-US')">-</code></td>
                       </tr>
                       <tr>
                         <td class="text-left">Replant Rate</td>
-                        <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].replantRate.toLocaleString('en-US', { style: 'percent' })">-</code></td>
+                        <td class="text-left tight"><code data-bind="text: BerryList[$data].replantRate.toLocaleString('en-US', { style: 'percent' })">-</code></td>
                       </tr>
                       <tr>
                         <td class="text-left">Farm Points per Harvest</td>
-                        <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].farmValue.toLocaleString('en-US')">-</code></td>
+                        <td class="text-left tight"><code data-bind="text: BerryList[$data].farmValue.toLocaleString('en-US')">-</code></td>
                       </tr>
                     </tbody>
                     <thead>
@@ -93,7 +93,7 @@
                     <tbody>
                       <tr>
                         <td class="text-left">Current Amount</td>
-                        <td class="text-left tight"><code data-bind="text: App.game.farming.berryList[$data]().toLocaleString('en-US')"></span></td></code></td>
+                        <td class="text-left tight"><code data-bind="text: App.game.farming.berryInventory[$data]().toLocaleString('en-US')"></span></td></code></td>
                       </tr>
                       <tr>
                         <td class="text-left">Total Harvested</td>
@@ -117,11 +117,11 @@
                                   <td>Sour</td>
                               </tr>
                               <tr>
-                                <td data-bind="text: App.game.farming.berryData[$data].flavors[0].value">Spicy</td>
-                                <td data-bind="text: App.game.farming.berryData[$data].flavors[1].value">Dry</td>
-                                <td data-bind="text: App.game.farming.berryData[$data].flavors[2].value">Sweet</td>
-                                <td data-bind="text: App.game.farming.berryData[$data].flavors[3].value">Bitter</td>
-                                <td data-bind="text: App.game.farming.berryData[$data].flavors[4].value">Sour</td>
+                                <td data-bind="text: BerryList[$data].flavors[0].value">Spicy</td>
+                                <td data-bind="text: BerryList[$data].flavors[1].value">Dry</td>
+                                <td data-bind="text: BerryList[$data].flavors[2].value">Sweet</td>
+                                <td data-bind="text: BerryList[$data].flavors[3].value">Bitter</td>
+                                <td data-bind="text: BerryList[$data].flavors[4].value">Sour</td>
                             </tr>
                           </table>
                       </td>
@@ -148,12 +148,12 @@
                             <th colspan="4">Total Time until Stage</th>
                           </tr>
                           <tr>
-                            <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[0])">-</code></td>
-                            <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[1])">-</code></td>
-                            <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[2])">-</code></td>
-                            <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[3])">-</code></td>
+                            <td><code data-bind="html: GameConstants.formatSecondsToTime(BerryList[$data].growthTime[0])">-</code></td>
+                            <td><code data-bind="html: GameConstants.formatSecondsToTime(BerryList[$data].growthTime[1])">-</code></td>
+                            <td><code data-bind="html: GameConstants.formatSecondsToTime(BerryList[$data].growthTime[2])">-</code></td>
+                            <td><code data-bind="html: GameConstants.formatSecondsToTime(BerryList[$data].growthTime[3])">-</code></td>
                           </tr>
-                          <!-- ko if: App.game.farming.berryData[$data].aura -->
+                          <!-- ko if: BerryList[$data].aura -->
                           <tr>
                             <th colspan="4">Aura Effect at Stage</th>
                           </tr>
@@ -189,25 +189,25 @@
                               </td>
                             </tr>
                             <tr>
-                              <th colspan="2" data-bind="text: `Attracted to ${BerryColor[App.game.farming.berryData[$data].color]}-Colored Berries`">Color Wanderers</th>
+                              <th colspan="2" data-bind="text: `Attracted to ${BerryColor[BerryList[$data].color]}-Colored Berries`">Color Wanderers</th>
                             </tr>
                             <tr>
                               <td>
                                 <ul class="list-inline">
-                                <!-- ko foreach: Berry.colorWander[App.game.farming.berryData[$data].color].filter(w => pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
+                                <!-- ko foreach: Berry.colorWander[BerryList[$data].color].filter(w => pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
                                 <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
                                 <!-- /ko -->
                                 </ul>
                               </td>
                             </tr>
-                            <!-- ko if: App.game.farming.berryData[$data].wander.some((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
+                            <!-- ko if: BerryList[$data].wander.some((w) => ![...Berry.baseWander, ...Berry.colorWander[BerryList[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
                             <tr>
                               <th colspan="2" data-bind="text: `Attracted to ${BerryType[$data]} Berry`">Specific Wanderers</th>
                             </tr>
                             <tr>
                               <td>
                                 <ul class="list-inline">
-                                <!-- ko foreach: App.game.farming.berryData[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[App.game.farming.berryData[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
+                                <!-- ko foreach: BerryList[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[BerryList[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
                                   <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
                                 <!-- /ko -->
                                 </ul>

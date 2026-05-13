@@ -59,7 +59,7 @@ class BattleFrontierBattle extends Battle {
         const enemy = pokemonMap.randomRegion(player.highestRegion());
         // This needs to stay as none so the stage number isn't adjusted
         const health = PokemonFactory.routeHealth(BattleFrontierRunner.stage() + 10, GameConstants.Region.none);
-        const level = Math.min(100, BattleFrontierRunner.stage());
+        const level = BattleFrontierRunner.stage() > 100 ? Math.ceil((Math.log10(BattleFrontierRunner.stage()) - 1) * 100) : BattleFrontierRunner.stage();
         // Don't award money per pokemon defeated, award money at the end
         const money = 0;
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);

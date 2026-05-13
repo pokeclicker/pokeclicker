@@ -121,6 +121,7 @@ Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal',
         new SettingOption('Queue Slots Full', 'queue'),
     ],
     'queue'));
+Settings.add(new BooleanSetting('showHatcheryModalQueue', 'Show Hatchery Queue in Modal', false));
 Settings.add(new BooleanSetting('hideQuestsOnFull', 'Hide Quest Menu on full questslots', true));
 // Settings.add(new BooleanSetting('showFarmModule', 'Show Farm module on main screen', true));
 // Settings.add(new BooleanSetting('showFarmModuleControls', 'Show Farm module extended controls', true));
