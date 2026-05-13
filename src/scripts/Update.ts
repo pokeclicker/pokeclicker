@@ -2966,6 +2966,13 @@ class Update implements Saveable {
                     plot.wanderer.gender = 0;
                 }
             });
+
+            if (saveData.farming.berryList) {
+                const savedBerries = saveData.farming.berryList;
+                saveData.farming.berryInventory = savedBerries;
+                delete saveData.farming.berryList;
+            }
+
             // Towns renamed
             if (playerData._townName == 'Phenac City Battles') {
                 playerData._townName = 'Phenac City';
@@ -2979,8 +2986,11 @@ class Update implements Saveable {
             if (playerData._townName == 'Gateon Port Battles') {
                 playerData._townName = 'Gateon Port';
             }
-            if (playerData._townName == 'A Perfectly Ordinary Frigate' || playerData._townName == 'A Totally Unsuspicious Frigate' || playerData._townName == 'Team Plasma Assault') {
+            if (playerData._townName == 'A Perfectly Ordinary Frigate' || playerData._townName == 'A Totally Unsuspicious Frigate') {
                 playerData._townName = 'Plasma Frigate';
+            }
+            if (playerData._townName == 'Team Plasma Assault') {
+                playerData._townName = 'Opelucid City';
             }
             if (playerData._townName == 'Exeggutor Island Hill') {
                 playerData._townName = 'Exeggutor Island';

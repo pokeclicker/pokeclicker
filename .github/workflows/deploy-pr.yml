@@ -35,14 +35,14 @@ jobs:
           exit 0
 
       - name: Checkout PR
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           ref: ${{  github.event.pull_request.head.sha }}
 
       - name: Build PR
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 18.x
+          node-version-file: package.json
       - run: |
           npm ci
           echo "module.exports={DEVELOPMENT:true,DEV_BANNER:true};" >> config.js
