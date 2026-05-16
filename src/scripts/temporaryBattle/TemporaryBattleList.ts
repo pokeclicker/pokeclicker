@@ -84,7 +84,7 @@ TemporaryBattleList['Blue 4'] = new TemporaryBattle(
         new GymPokemon('Ivysaur', 33438, 25, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
     ],
     'What? You stinker! I took it easy on you, too!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rock Tunnel'))],
     undefined,
     {
         displayName: 'Rival Blue',
@@ -123,7 +123,7 @@ TemporaryBattleList['Snorlax route 12'] = new TemporaryBattle(
     undefined,
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 12),
-        new TemporaryBattleRequirement('Blue 4'),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower')),
     ],
     [new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement('Snorlax')],
     {
@@ -138,7 +138,7 @@ TemporaryBattleList['Snorlax route 16'] = new TemporaryBattle(
     'Snorlax route 16',
     [new GymPokemon('Snorlax', 189990, 30)],
     undefined,
-    [new TemporaryBattleRequirement('Blue 4')],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
     [new TemporaryBattleRequirement('Snorlax route 16'), new ObtainedPokemonRequirement('Snorlax')],
     {
         displayName: 'Snorlax',
@@ -432,7 +432,7 @@ TemporaryBattleList['Silver 2'] = new TemporaryBattle(
         new GymPokemon('Bayleef', 237772, 18, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Water)),
     ],
     '...Humph! Useless Pokémon! Listen, you. You only won because my Pokémon were weak.',
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 33)],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Slowpoke Well'))],
     undefined,
     {
         displayName: 'Rival Silver',
@@ -2416,11 +2416,11 @@ TemporaryBattleList['Shauna 1'] = new TemporaryBattle(
         new GymPokemon('Fennekin', 24906504, 5, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
     ],
     'Hey! I wasn\'t done watching my cute Li\'l Pokémon yet!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 1)],
     undefined,
     {
         displayName: 'Pokémon Trainer Shauna',
-        returnTown: 'Vaniville Town',
+        returnTown: 'Aquacorde Town',
         imageName: 'Shauna',
     }
 );
@@ -2450,7 +2450,7 @@ TemporaryBattleList['Tierno 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Tierno',
-        returnTown: 'Camphrier Town',
+        returnTown: 'Lumiose City',
         imageName: 'Tierno',
     }
 );
