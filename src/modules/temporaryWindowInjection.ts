@@ -47,6 +47,7 @@ import WeatherForecast from './weather/WeatherForecast';
 import Blending from './blending/Blending';
 import BlendingController from './blending/BlendingController';
 import BlendingRecipes from './blending/BlendingRecipes';
+import BlendingListController from './blending/BlendingListController';
 import DayCycle from './dayCycle/DayCycle';
 import DayCyclePart from './dayCycle/DayCyclePart';
 import DayCyclePartRequirement from './requirements/DayCyclePartRequirement';
@@ -289,6 +290,7 @@ Object.assign(<any>window, {
     Blending,
     BlendingController,
     BlendingRecipes,
+    BlendingListController,
     DayCycle,
     DayCyclePart,
     DayCyclePartRequirement,

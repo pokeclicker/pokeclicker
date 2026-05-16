@@ -1,10 +1,9 @@
-/// <reference path="../../declarations/blending/BlendingController.d.ts"/>
+import { PureComputed } from 'knockout';
+import BerryType from '../enums/BerryType';
+import { BerryList } from '../farming/BerryList';
+import BlendingController from './BlendingController';
 
-class BlendingListController {
-
-    // For the berry list in the blending modal
-    // Todo: move to module when FarmController available
-
+export default class BlendingListController {
     public static sortOption: KnockoutObservable<string> = ko.observable('None');
     public static sortFactor: KnockoutObservable<number> = ko.observable(1);
 
@@ -13,10 +12,18 @@ class BlendingListController {
             BlendingListController.sortOption('None');
             BlendingListController.sortFactor(1);
         } else if (BlendingListController.sortOption() === newSortOption) {
-            flavorButton ? BlendingListController.sortFactor() : BlendingListController.sortFactor(BlendingListController.sortFactor() / -1);
+            if (flavorButton) {
+                BlendingListController.sortFactor();
+            } else {
+                BlendingListController.sortFactor(BlendingListController.sortFactor() / -1);
+            }
         } else {
             BlendingListController.sortOption(newSortOption);
-            flavorButton ? BlendingListController.sortFactor(-1) : BlendingListController.sortFactor(1);
+            if (flavorButton) {
+                BlendingListController.sortFactor(-1);
+            } else {
+                BlendingListController.sortFactor(1);
+            }
         }
     }
 
@@ -27,7 +34,8 @@ class BlendingListController {
         return fls.reduce((partialSum, a) => partialSum + a, 0);
     }
 
-    public static sortedBlendingList: KnockoutComputed<Array<BerryType>> = ko.pureComputed(() => {
+    // eslint-disable-next-line @typescript-eslint/member-ordering
+    public static sortedBlendingList: PureComputed<Array<BerryType>> = ko.pureComputed(() => {
         const sortOption = BlendingListController.sortOption();
         const direction = BlendingListController.sortFactor();
         return FarmController.getUnlockedBerryList().sort((a: BerryType, b: BerryType) => {
@@ -47,7 +55,7 @@ class BlendingListController {
                     break;
                 case 'None':
                 default:
-                    a - b;
+                    result = a - b;
                     break;
             }
             if (result == 0) {

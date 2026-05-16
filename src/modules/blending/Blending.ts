@@ -245,7 +245,7 @@ export default class Blending implements Feature {
         if (!recipe || !recipe.isUnlocked()) {
             return false;
         } else {
-            return recipe.flavorPrice.every(f => App.game.blending.flavorBank[f.type]() >= f.value * amount);
+            return recipe.flavorPrice.every(f => this.flavorBank[f.type]() >= f.value * amount);
         }
     }
     public makeRecipe(r: BlendingRecipe, amount: number) {
