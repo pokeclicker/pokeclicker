@@ -129,7 +129,9 @@ export default class ContestRunner {
 
         // Timers
         // Regular timer, only count down if no frenzy
-        ContestRunner.timeLeft(ContestRunner.timeLeft() - (!ContestRunner.frenzyMode() ? CONTEST_TICK : 0));
+        if (!ContestRunner.frenzyMode()) {
+            ContestRunner.timeLeft(ContestRunner.timeLeft() - CONTEST_TICK);
+        } 
         // Percentage for html
         ContestRunner.timeLeftPercentage(Math.floor(!ContestRunner.frenzyMode() ?
             ContestRunner.timeLeft() / (CONTEST_TIME * ContestHelper.contestRankTimer(ContestRunner.rank())) * 100 :

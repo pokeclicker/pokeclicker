@@ -387,10 +387,10 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Allotment Gardener', 'Unlock 9 Plots in the Farm.', new FarmPlotsUnlockedRequirement(9), 0.15);
         AchievementHandler.addAchievement('Horticulture', 'Unlock all 25 Plots in the Farm.', new FarmPlotsUnlockedRequirement(25), 0.25);
 
-        AchievementHandler.addAchievement('Who Planted These Here?', 'Unlock 8 Berries.', new BerriesUnlockedRequirement(8), 0.1);
-        AchievementHandler.addAchievement('Farmer in Training', 'Unlock 18 Berries.', new BerriesUnlockedRequirement(18), 0.2);
-        AchievementHandler.addAchievement('Farming Apprentice', 'Unlock 36 Berries.', new BerriesUnlockedRequirement(36), 0.3);
-        AchievementHandler.addAchievement('Master Farmer', 'Unlock all 69 Berries.', new BerriesUnlockedRequirement(69), 0.4);
+        AchievementHandler.addAchievement('Who Planted These Here?', 'Unlock 8 Berries.', new TotalBerriesUnlockedRequirement(8), 0.1);
+        AchievementHandler.addAchievement('Farmer in Training', 'Unlock 18 Berries.', new TotalBerriesUnlockedRequirement(18), 0.2);
+        AchievementHandler.addAchievement('Farming Apprentice', 'Unlock 36 Berries.', new TotalBerriesUnlockedRequirement(36), 0.3);
+        AchievementHandler.addAchievement('Master Farmer', 'Unlock all 69 Berries.', new TotalBerriesUnlockedRequirement(69), 0.4);
 
         AchievementHandler.addAchievement('Getting Some Help at the Farm', 'Unlock 3 Farm Hands.', new FarmHandRequirement(3), 0.2);
         AchievementHandler.addAchievement('Starting a Farming Empire', 'Unlock 6 Farm Hands.', new FarmHandRequirement(6), 0.3);

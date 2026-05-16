@@ -35,6 +35,7 @@ import Battle from './battles/Battle';
 import BattlePokemon from './battles/BattlePokemon';
 import Trainer from './battles/Trainer';
 import GymPokemon from './gym/GymPokemon';
+import CustomGymPokemon from './gym/CustomGymPokemon';
 import ContestBattle from './contest/ContestBattle';
 import ContestBattlePokemon from './contest/ContestBattlePokemon';
 import ContestHelper from './contest/ContestHelper';
@@ -42,6 +43,8 @@ import ContestRunner from './contest/ContestRunner';
 import ContestRewards from './contest/ContestRewards';
 import ContestTrainerList from './contest/ContestTrainerList';
 import ContestScore from './contest/ContestScore';
+import Berry from './farming/Berry';
+import { BerryList } from './farming/BerryList';
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
@@ -109,7 +112,6 @@ import OneFromManyRequirement from './requirements/OneFromManyRequirement';
 import AttackRequirement from './requirements/AttackRequirement';
 import BattleFrontierHighestStageRequirement from './requirements/BattleFrontierHighestStageRequirement';
 import BattleFrontierTotalStageRequirement from './requirements/BattleFrontierTotalStageRequirement';
-import BerriesUnlockedRequirement from './requirements/BerriesUnlockedRequirement';
 import BerryUnlockedRequirement from './requirements/BerryUnlockedRequirement';
 import CapturedRequirement from './requirements/CapturedRequirement';
 import CaughtPokemonRequirement from './requirements/CaughtPokemonRequirement';
@@ -150,6 +152,7 @@ import StatisticRequirement from './requirements/StatisticRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import StarterRequirement from './requirements/StarterRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
+import TotalBerriesUnlockedRequirement from './requirements/TotalBerriesUnlockedRequirement';
 import TotalMegaStoneObtainedRequirement from './requirements/TotalMegaStoneObtainedRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
 import UndergroundItemValueType from './enums/UndergroundItemValueType';
@@ -210,7 +213,6 @@ import ContestPokemonItem from './items/ContestPokemonItem';
 import EggItem from './items/EggItem';
 import MegaStoneItem from './items/MegaStoneItem';
 import PokeballItem from './items/PokeballItem';
-import QuestItem from './items/QuestItem';
 import Vitamin from './items/Vitamin';
 import VitaminController from './items/VitaminController';
 import Consumable from './items/Consumable';
@@ -247,6 +249,7 @@ import ChristmasPresent from './items/ChristmasPresent';
 import DamageCalculator from './types/DamageCalculator';
 import GameLoadState from './utilities/GameLoadState';
 import GenericDeal, { DealCostOrProfitType } from './deal/GenericDeal';
+import CollectibleItem from './items/CollectibleItem';
 import areaStatus from './enums/AreaStatus';
 import TranslationHelper from './translation/TranslationHelper';
 import * as DownloadUtil from './utilities/DownloadUtil';
@@ -286,6 +289,7 @@ Object.assign(<any>window, {
     BattlePokemon,
     Trainer,
     GymPokemon,
+    CustomGymPokemon,
     ContestBattle,
     ContestBattlePokemon,
     ContestHelper,
@@ -293,6 +297,8 @@ Object.assign(<any>window, {
     ContestRewards,
     ContestTrainerList,
     ContestScore,
+    Berry,
+    BerryList,
     BooleanSetting,
     RangeSetting,
     Setting,
@@ -368,7 +374,6 @@ Object.assign(<any>window, {
     AttackRequirement,
     BattleFrontierHighestStageRequirement,
     BattleFrontierTotalStageRequirement,
-    BerriesUnlockedRequirement,
     BerryUnlockedRequirement,
     CapturedRequirement,
     CaughtPokemonRequirement,
@@ -409,6 +414,7 @@ Object.assign(<any>window, {
     SubregionRequirement,
     StarterRequirement,
     TokenRequirement,
+    TotalBerriesUnlockedRequirement,
     TotalMegaStoneObtainedRequirement,
     UndergroundItemsFoundRequirement,
     UndergroundItemValueType,
@@ -475,7 +481,7 @@ Object.assign(<any>window, {
     EggItem,
     MegaStoneItem,
     PokeballItem,
-    QuestItem,
+    CollectibleItem,
     Vitamin,
     VitaminController,
     Consumable,

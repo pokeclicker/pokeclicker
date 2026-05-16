@@ -2967,6 +2967,12 @@ class Update implements Saveable {
                 }
             });
 
+            if (saveData.farming.berryList) {
+                const savedBerries = saveData.farming.berryList;
+                saveData.farming.berryInventory = savedBerries;
+                delete saveData.farming.berryList;
+            }
+
             // Give Sudowoodo (Golden) its ContestPokemonItem stats
             setTimeout(async () => {
                 const goldowoodo = saveData.party.caughtPokemon.find((p: PartyPokemon) => p.id === 185.01);
