@@ -187,7 +187,7 @@ export default class GenericDeal {
             switch (cost.type) {
                 case DealCostOrProfitType.Item: player.loseItem(cost.item.name, cost.amount * tradeTimes); break;
                 case DealCostOrProfitType.Shard: player.loseItem(cost.shardItem.name, cost.amount * tradeTimes); break;
-                case DealCostOrProfitType.Berry: GameHelper.incrementObservable(App.game.farming.berryList[cost.berryType], -1 * cost.amount * tradeTimes); break;
+                case DealCostOrProfitType.Berry: GameHelper.incrementObservable(App.game.farming.berryInventory[cost.berryType], -1 * cost.amount * tradeTimes); break;
                 case DealCostOrProfitType.Gem: GameHelper.incrementObservable(App.game.gems.gemWallet[cost.gemType], -1 * cost.amount * tradeTimes); break;
                 case DealCostOrProfitType.Amount: App.game.wallet.loseAmount(new Amount(cost.currency.amount * cost.amount * tradeTimes, cost.currency.currency)); break;
             }
@@ -220,7 +220,7 @@ export default class GenericDeal {
                 case DealCostOrProfitType.Shard:
                     return Math.floor(player.itemList[cost.shardItem.name]() / cost.amount);
                 case DealCostOrProfitType.Berry:
-                    return Math.floor(App.game.farming.berryList[cost.berryType]() / cost.amount);
+                    return Math.floor(App.game.farming.berryInventory[cost.berryType]() / cost.amount);
                 case DealCostOrProfitType.Gem:
                     return Math.floor(App.game.gems.gemWallet[cost.gemType]() / cost.amount);
                 case DealCostOrProfitType.Amount:
@@ -233,7 +233,7 @@ export default class GenericDeal {
         switch (a.type) {
             case DealCostOrProfitType.Gem: return App.game.gems.gemWallet[a.gemType]();
             case DealCostOrProfitType.Shard: return player.itemList[a.shardItem.name]();
-            case DealCostOrProfitType.Berry: return App.game.farming.berryList[a.berryType]();
+            case DealCostOrProfitType.Berry: return App.game.farming.berryInventory[a.berryType]();
             case DealCostOrProfitType.Item: return player.itemList[a.item.name]();
             case DealCostOrProfitType.Amount: return App.game.wallet.currencies[a.currency.currency]();
             default: return 0;

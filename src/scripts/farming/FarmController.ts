@@ -240,7 +240,7 @@ class FarmController {
 
     public static getBackgroundColor(index: number) {
         if (App.game.farming.unlockedBerries[index]()) {
-            return GameConstants.BerryColor[App.game.farming.berryData[index].color];
+            return GameConstants.BerryColor[BerryList[index].color];
         } else if (FarmController.getHint(index, true) !== '') {
             return GameConstants.BerryColor[8];
         } else {

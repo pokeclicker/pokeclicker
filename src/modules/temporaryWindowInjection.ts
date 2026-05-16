@@ -32,6 +32,8 @@ import BattlePokemon from './battles/BattlePokemon';
 import Trainer from './battles/Trainer';
 import GymPokemon from './gym/GymPokemon';
 import CustomGymPokemon from './gym/CustomGymPokemon';
+import Berry from './farming/Berry';
+import { BerryList } from './farming/BerryList';
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
@@ -267,6 +269,8 @@ Object.assign(<any>window, {
     Trainer,
     GymPokemon,
     CustomGymPokemon,
+    Berry,
+    BerryList,
     BooleanSetting,
     RangeSetting,
     Setting,
