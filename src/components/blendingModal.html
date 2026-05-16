@@ -51,23 +51,23 @@
                                         ">
                                             <td class="p-0">
                                                 <button style="border-radius: 0;" data-bind="attr: { class: BlendingController.calculateTableBerryCss($data) }">
-                                                    <img height="30px" style="pointer-events: none;" data-bind="attr: { src: FarmController.getBerryImage(App.game.farming.berryData[$data].type) }, css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }"/>
+                                                    <img height="30px" style="pointer-events: none;" data-bind="attr: { src: FarmController.getBerryImage(BerryList[$data].type) }, css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }"/>
                                                     <span data-bind="text: App.game.farming.unlockedBerries[$data]() ? BerryType[$data] : '???'"></span>
                                                 </button>
                                             </td>
                                             <!-- ko if: App.game.farming.unlockedBerries[$data]() -->
-                                                <td class="align-middle" data-bind="text: App.game.farming.berryData[$data].flavors[0].value,
-                                                style:{background: `rgb(238, 129, 48, ${App.game.farming.berryData[$data].flavors[0].value/100})`}">Spicy</td>
-                                                <td class="align-middle" data-bind="text: App.game.farming.berryData[$data].flavors[1].value,
-                                                style:{background: `rgb(99, 144, 240, ${App.game.farming.berryData[$data].flavors[1].value/100})`}">Dry</td>
-                                                <td class="align-middle" data-bind="text: App.game.farming.berryData[$data].flavors[2].value,
-                                                style:{background: `rgb(214, 133, 173, ${App.game.farming.berryData[$data].flavors[2].value/100})`}">Sweet</td>
-                                                <td class="align-middle" data-bind="text: App.game.farming.berryData[$data].flavors[3].value,
-                                                style:{background: `rgb(122, 199, 76, ${App.game.farming.berryData[$data].flavors[3].value/100})`}">Bitter</td>
-                                                <td class="align-middle" data-bind="text: App.game.farming.berryData[$data].flavors[4].value,
-                                                style:{background: `rgb(247, 208, 44, ${App.game.farming.berryData[$data].flavors[4].value/100})`}">Sour</td>
-                                                <td class="align-middle" data-bind="text: App.game.farming.berryData[$data].smoothness"></td>
-                                                <td class="align-middle" data-bind="text: App.game.farming.berryList[$data]().toLocaleString('en-US')"></td>
+                                                <td class="align-middle" data-bind="text: BerryList[$data].flavors[0].value,
+                                                style:{background: `rgb(238, 129, 48, ${BerryList[$data].flavors[0].value/100})`}">Spicy</td>
+                                                <td class="align-middle" data-bind="text: BerryList[$data].flavors[1].value,
+                                                style:{background: `rgb(99, 144, 240, ${BerryList[$data].flavors[1].value/100})`}">Dry</td>
+                                                <td class="align-middle" data-bind="text: BerryList[$data].flavors[2].value,
+                                                style:{background: `rgb(214, 133, 173, ${BerryList[$data].flavors[2].value/100})`}">Sweet</td>
+                                                <td class="align-middle" data-bind="text: BerryList[$data].flavors[3].value,
+                                                style:{background: `rgb(122, 199, 76, ${BerryList[$data].flavors[3].value/100})`}">Bitter</td>
+                                                <td class="align-middle" data-bind="text: BerryList[$data].flavors[4].value,
+                                                style:{background: `rgb(247, 208, 44, ${BerryList[$data].flavors[4].value/100})`}">Sour</td>
+                                                <td class="align-middle" data-bind="text: BerryList[$data].smoothness"></td>
+                                                <td class="align-middle" data-bind="text: App.game.farming.berryInventory[$data]().toLocaleString('en-US')"></td>
                                             <!-- /ko -->
                                             <!-- ko if: !App.game.farming.unlockedBerries[$data]() -->
                                                 <td colspan="6">???</td>

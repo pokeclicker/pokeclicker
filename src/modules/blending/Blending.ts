@@ -15,6 +15,7 @@ import NotificationOption from '../notifications/NotificationOption';
 import BerryFlavor from '../interfaces/BerryFlavor';
 import BlendingController from './BlendingController';
 import BlendingRecipes from './BlendingRecipes';
+import { BerryList } from '../farming/BerryList';
 
 export default class Blending implements Feature {
     name = 'Blending';
@@ -66,7 +67,7 @@ export default class Blending implements Feature {
                     total += 1;
                 }
             }));
-            return App.game.farming.berryList[berry]() > total;
+            return App.game.farming.berryInventory[berry]() > total;
         } else {
             return true;
         }
@@ -114,7 +115,7 @@ export default class Blending implements Feature {
     public rpm(index: number) {
         let smoothness = 0;
         this.machines[index].blendSlots.filter(slot => !slot.isEmpty()).forEach(slot => {
-            smoothness += (App.game.farming.berryData[slot.berry].smoothness * 10);
+            smoothness += (BerryList[slot.berry].smoothness * 10);
         });
 
         const totalBerries = this.machines[index].blendSlots.filter(slot => !slot.isEmpty()).length;
@@ -157,7 +158,7 @@ export default class Blending implements Feature {
         GameHelper.enumNumbers(FlavorType).forEach(flavorType => sharedFlavors.push({ type: flavorType, value: 0 }));
 
         filledSlots.forEach(slot => {
-            App.game.farming.berryData[slot.berry].flavors.forEach(f => {
+            BerryList[slot.berry].flavors.forEach(f => {
                 if (f.value > 0) {
                     sharedFlavors[f.type].value += 1;
                 }
@@ -202,7 +203,7 @@ export default class Blending implements Feature {
         GameHelper.enumNumbers(FlavorType).forEach(flavorType => incomingFlavors.push({ type: flavorType, value: 0 }));
 
         filledSlots.forEach(slot => {
-            App.game.farming.berryData[slot.berry].flavors.forEach(f => {
+            BerryList[slot.berry].flavors.forEach(f => {
                 incomingFlavors[f.type].value += f.value;
             });
         });
@@ -215,7 +216,7 @@ export default class Blending implements Feature {
     }
 
     public gainFlavorByBerry(berry: BerryType) {
-        const b = App.game.farming.berryData[berry];
+        const b = BerryList[berry];
         return b.flavors.forEach((flavor) => this.gainFlavor(flavor.value, flavor.type));
     }
 

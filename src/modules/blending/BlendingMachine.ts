@@ -42,7 +42,7 @@ export default class BlendingMachine implements Saveable {
 
             if (this.timer >= 60) {
                 this.blendSlots.filter(slot => !slot.isEmpty()).forEach(slot => {
-                    GameHelper.incrementObservable(App.game.farming.berryList[slot.berry], -1);
+                    GameHelper.incrementObservable(App.game.farming.berryInventory[slot.berry], -1);
                     App.game.blending.gainFlavorByBerry(slot.berry);
                     return;
                 });
@@ -57,7 +57,7 @@ export default class BlendingMachine implements Saveable {
                         Notifier.notify({
                             message: `You are done blending ${BerryType[slot.berry]} berries!</br>
                                 <i>All ${BerryType[slot.berry]} berries have been removed from your Berry Blenders</br>
-                                Remaining ${BerryType[slot.berry]} berries: ${App.game.farming.berryList[slot.berry]().toLocaleString('en-US')}</i>`,
+                                Remaining ${BerryType[slot.berry]} berries: ${App.game.farming.berryInventory[slot.berry]().toLocaleString('en-US')}</i>`,
                             type: NotificationOption.danger,
                             title: 'Berry Blender',
                             image: `assets/images/items/berry/${BerryType[slot.berry]}.png`,

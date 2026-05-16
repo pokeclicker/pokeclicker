@@ -23,7 +23,7 @@ class BlendingListController {
     public static getFlavorSum(b: BerryType) {
         const fls: number[] = [];
         const flts = BlendingController.blendingListFlavorFilters().length ? BlendingController.blendingListFlavorFilters() : [0, 1, 2, 3, 4];
-        App.game.farming.berryData[b].flavors.filter(flavor => flts.includes(flavor.type)).forEach(flavor => fls.push(flavor.value));
+        BerryList[b].flavors.filter(flavor => flts.includes(flavor.type)).forEach(flavor => fls.push(flavor.value));
         return fls.reduce((partialSum, a) => partialSum + a, 0);
     }
 
@@ -34,16 +34,16 @@ class BlendingListController {
             let result = 0;
             switch (sortOption) {
                 case 'Berry':
-                    result = App.game.farming.berryData[a].type > App.game.farming.berryData[b].type ? direction : -direction;
+                    result = BerryList[a].type > BerryList[b].type ? direction : -direction;
                     break;
                 case 'Amount':
-                    result = (App.game.farming.berryList[a]() - App.game.farming.berryList[b]()) * direction;
+                    result = (App.game.farming.berryInventory[a]() - App.game.farming.berryInventory[b]()) * direction;
                     break;
                 case 'Flavor':
                     result = (BlendingListController.getFlavorSum(a) - BlendingListController.getFlavorSum(b)) * direction;
                     break;
                 case 'Smooth':
-                    result = App.game.farming.berryData[a].smoothness > App.game.farming.berryData[b].smoothness ? direction : -direction;
+                    result = BerryList[a].smoothness > BerryList[b].smoothness ? direction : -direction;
                     break;
                 case 'None':
                 default:

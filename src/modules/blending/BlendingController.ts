@@ -12,6 +12,7 @@ import Rand from '../utilities/Rand';
 import Notifier from '../notifications/Notifier';
 import NotificationOption from '../notifications/NotificationOption';
 import { SECOND } from '../GameConstants';
+import { BerryList } from '../farming/BerryList';
 
 export default class BlendingController {
     public static shortcutVisible: Computed<boolean> = ko.pureComputed(() => {
@@ -126,18 +127,18 @@ export default class BlendingController {
     public static berrySpin() {
         let berryImages = document.getElementsByClassName('blender' + `${BlendingController.selectedBerry()}`) as HTMLCollectionOf<HTMLElement>;
         Array.from(berryImages).forEach(berryImage => {
-            berryImage.style.animation = `spin ${25 / App.game.farming.berryData[BlendingController.selectedBerry()].smoothness}s linear`;
+            berryImage.style.animation = `spin ${25 / BerryList[BlendingController.selectedBerry()].smoothness}s linear`;
             berryImage.addEventListener('animationend', function () {
                 berryImage.style.removeProperty('animation');
             });
         });
         if (Rand.chance(2)) {
             Notifier.notify({
-                message: 'Wh' + `${('e').repeat(85 / App.game.farming.berryData[BlendingController.selectedBerry()].smoothness * 2)}` + '!',
+                message: 'Wh' + `${('e').repeat(85 / BerryList[BlendingController.selectedBerry()].smoothness * 2)}` + '!',
                 type: NotificationOption.primary,
                 title: `${BerryType[BlendingController.selectedBerry()]} ${berryImages.length > 1 ? 'Berries' : 'Berry'}`,
                 image: `assets/images/items/berry/${BerryType[BlendingController.selectedBerry()]}.png`,
-                timeout: (25 / App.game.farming.berryData[BlendingController.selectedBerry()].smoothness) * SECOND,
+                timeout: (25 / BerryList[BlendingController.selectedBerry()].smoothness) * SECOND,
             });
         }
     }
