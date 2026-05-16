@@ -4,10 +4,12 @@ enum MultiplierType {
     exp,
     money,
     dungeonToken,
+    rareItemDropRate,
     shiny,
     eggStep,
     roaming,
     ev,
+    undergroundCharge,
 }
 
 export default MultiplierType;

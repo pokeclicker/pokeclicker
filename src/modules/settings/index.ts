@@ -121,6 +121,7 @@ Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal',
         new SettingOption('Queue Slots Full', 'queue'),
     ],
     'queue'));
+Settings.add(new BooleanSetting('showHatcheryModalQueue', 'Show Hatchery Queue in Modal', false));
 Settings.add(new BooleanSetting('hideQuestsOnFull', 'Hide Quest Menu on full questslots', true));
 // Settings.add(new BooleanSetting('showFarmModule', 'Show Farm module on main screen', true));
 // Settings.add(new BooleanSetting('showFarmModuleControls', 'Show Farm module extended controls', true));
@@ -312,6 +313,8 @@ Settings.add(new Setting('heldItemCurrentItemFilter', 'Held Item filter', [
     new SettingOption('Show all Pokémon', 'none'),
     new SettingOption('Hide Pokémon holding ANY item', 'HideHoldingAnyItem'),
     new SettingOption('Hide Pokémon holding THIS item', 'HideHoldingThisItem'),
+    new SettingOption('Hide Pokémon holding EQUIVALENT or BETTER item', 'HideHoldingSameOrBetter'),
+    new SettingOption('Show only Pokémon holding INFERIOR item', 'OnlyShowWorse'),
 ], 'none'));
 
 // Hatchery Filters

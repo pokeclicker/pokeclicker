@@ -58,7 +58,7 @@ class BagHandler {
             case ItemType.underground:
                 return player.itemList[this.getUndergroundItem(item.id).itemName]();
             case ItemType.berry:
-                return App.game.farming.berryList[this.getBerry(item.id)];
+                return App.game.farming.berryInventory[this.getBerry(item.id)];
             case ItemType.gem:
                 return App.game.gems.gemWallet[this.getGem(item.id)];
         }
@@ -122,7 +122,7 @@ class BagHandler {
 
     private static getBerry(id: string | number): BerryType {
         if (typeof id === 'string') {
-            id = App.game.farming.berryData.findIndex((_, idx) => BerryType[idx] === id);
+            id = BerryList.findIndex((_, idx) => BerryType[idx] === id);
         }
         return id;
     }
