@@ -19,6 +19,7 @@ export default class Item {
     multiplier: number;
     multiplierDecrease: boolean;
     multiplierDecreaser: MultiplierDecreaser;
+    badgeMult: boolean;
 
     maxAmount: number;
     _description?: string;
@@ -36,6 +37,7 @@ export default class Item {
             multiplier = ITEM_PRICE_MULTIPLIER,
             multiplierDecrease = true,
             multiplierDecreaser = MultiplierDecreaser.Battle,
+            badgeMult = false,
             visible = undefined,
         } : ShopOptions = {},
         displayName?: string,
@@ -55,6 +57,7 @@ export default class Item {
         this.multiplier = Math.max(1, multiplier || ITEM_PRICE_MULTIPLIER);
         this.multiplierDecrease = this.multiplier > 1 ? multiplierDecrease : false;
         this.multiplierDecreaser = multiplierDecreaser || MultiplierDecreaser.Battle;
+        this.badgeMult = badgeMult;
         this.visible = visible;
 
         this._displayName = displayName;
@@ -65,8 +68,12 @@ export default class Item {
     totalPrice(amount: number): number {
         const targetAmount = Math.min(amount, this.maxAmount);
 
-        if (this.multiplier === 1) {
+        if (this.multiplier === 1 && !this.badgeMult) {
             return Math.max(0, this.basePrice * targetAmount);
+        }
+
+        if (this.multiplier === 1) {
+            return Math.max(0, this.basePrice * targetAmount * ( App.game.badgeCase.badgeCount() + 1 ) );
         }
 
         // multiplier should be capped at 100, so work out how many to buy at increasing price and how many at max
@@ -82,7 +89,13 @@ export default class Item {
         const maxCost = (this.basePrice * 100 * (targetAmount - incAmount));
         const total = incCost + maxCost;
 
-        return Math.max(0, Math.round(total));
+        if (!this.badgeMult) {
+            return Math.max(0, Math.round(total));
+        }
+
+        const badgeMultTotal = ( total * ( App.game.badgeCase.badgeCount() + 1 ) );
+
+        return Math.max(0, Math.round(badgeMultTotal));
     }
 
     buy(amt: number) {

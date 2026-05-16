@@ -17,5 +17,6 @@ export interface ShopOptions {
     multiplier?: number,
     multiplierDecrease?: boolean,
     multiplierDecreaser?: MultiplierDecreaser,
+    badgeMult?: boolean;
     visible?: Requirement,
 }
