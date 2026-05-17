@@ -2959,6 +2959,19 @@ class Update implements Saveable {
             if (saveData.badgeCase[17]) {
                 Update.startQuestLine(saveData, 'Team Rocket Again');
             }
+
+            saveData.farming?.plotList?.forEach(plot => {
+                if (plot.wanderer) {
+                    // Force genderless
+                    plot.wanderer.gender = 0;
+                }
+            });
+
+            if (saveData.farming.berryList) {
+                const savedBerries = saveData.farming.berryList;
+                saveData.farming.berryInventory = savedBerries;
+                delete saveData.farming.berryList;
+            }
         },
     };
 

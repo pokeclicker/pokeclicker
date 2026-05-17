@@ -13,7 +13,7 @@ class BerryDeal {
     }
 
     public calculateMaxTrades(): number {
-        return Math.min(...this.berries.map(b => Math.floor(App.game.farming.berryList[b.berryType]() / b.amount)));
+        return Math.min(...this.berries.map(b => Math.floor(App.game.farming.berryInventory[b.berryType]() / b.amount)));
     }
 
     public static getDeals(town: GameConstants.BerryTraderLocations) {
@@ -427,7 +427,7 @@ class BerryDeal {
         if (!deal) {
             return false;
         } else {
-            return deal.berries.every((value) => App.game.farming.berryList[value.berryType]() >= value.amount);
+            return deal.berries.every((value) => App.game.farming.berryInventory[value.berryType]() >= value.amount);
         }
     }
 
@@ -435,12 +435,12 @@ class BerryDeal {
         const deal = BerryDeal.list[town]?.peek()[i];
         if (BerryDeal.canUse(town, i)) {
             const trades = deal.berries.map(berry => {
-                const amt = App.game.farming.berryList[berry.berryType]();
+                const amt = App.game.farming.berryInventory[berry.berryType]();
                 const maxTrades = Math.floor(amt / berry.amount);
                 return maxTrades;
             });
             const maxTrades = trades.reduce((a,b) => Math.min(a,b), tradeTimes);
-            deal.berries.forEach((value) => GameHelper.incrementObservable(App.game.farming.berryList[value.berryType], -value.amount * maxTrades));
+            deal.berries.forEach((value) => GameHelper.incrementObservable(App.game.farming.berryInventory[value.berryType], -value.amount * maxTrades));
             if (deal.item.itemType instanceof UndergroundItem) {
                 UndergroundController.gainMineItem(deal.item.itemType.id, deal.item.amount * maxTrades);
             } else {
