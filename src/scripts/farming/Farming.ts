@@ -53,6 +53,7 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Roaming] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Roaming));
         this.externalAuras[AuraType.Ev] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Ev));
         this.externalAuras[AuraType.Xp] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Xp));
+        this.externalAuras[AuraType.Pickup] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Pickup));
 
         const multiplierSource = 'Farm Aura';
         this.multiplier.addBonus('shiny', () => this.externalAuras[AuraType.Shiny](), multiplierSource);
@@ -60,6 +61,7 @@ class Farming implements Feature {
         this.multiplier.addBonus('roaming', () => this.externalAuras[AuraType.Roaming](), multiplierSource);
         this.multiplier.addBonus('ev', () => this.externalAuras[AuraType.Ev](), multiplierSource);
         this.multiplier.addBonus('exp', () => this.externalAuras[AuraType.Xp](), multiplierSource);
+        this.multiplier.addBonus('rareItemDropRate', () => this.externalAuras[AuraType.Pickup](), multiplierSource);
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
             for (let i = GameHelper.enumLength(BerryType) - 2; i >= 0; i--) {

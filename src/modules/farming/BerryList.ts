@@ -642,9 +642,9 @@ export const BerryList: Berry[] = [
         BerryFirmness.Soft,
         [
             'This Berry has a disagreeable "green" flavor and scent typical of vegetables. It is rich in health-promoting fiber.',
-            'It has a tendency to expand into nearby plots.',
+            'It has a tendency to expand into nearby plots, but attracts Pokémon that are holding items.',
         ],
-        undefined,
+        new Aura(AuraType.Pickup, [1.005, 1.01, 1.015]),
         ['Bulbasaur', 'Chikorita', 'Treecko', 'Turtwig', 'Snivy', 'Chespin', 'Rowlet', 'Grookey', 'Sprigatito'],
     ),
 
