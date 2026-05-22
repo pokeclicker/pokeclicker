@@ -49,9 +49,8 @@ jobs:
           echo "module.exports={DEVELOPMENT:true,DEV_BANNER:true};" >> config.js
           npm run build
           rm -rf build/assets
-          ln -s ../../assets build/assets
           rm -rf build/libs
-          ln -s ../../libs build/libs
+          perl -0pi -e 's|</title>|</title>\n<script>\nif("serviceWorker" in navigator){\nnavigator.serviceWorker.register("/sw.js",{scope:"/"}).then(reg=>{if(reg.waiting)reg.waiting.postMessage({type:"SKIP_WAITING"});});\nnavigator.serviceWorker.addEventListener("controllerchange",()=>{if(window._reloading)return;window._reloading=true;window.location.reload();});\n}\n</script>|s' build/index.html
       
       - name: Deploy to GH-Pages
         uses: mvk/pr-preview-action@5ce80c4514b76075e126b7dbcd7674a7ff4183dd
