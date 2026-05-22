@@ -62,7 +62,7 @@ jobs:
           pages-base-url: 'dev.pokeclicker.com'
           deploy-repository: 'RedSparr0w/pokeclicker'
           token: ${{ secrets.DEV_PAGE }}
-          pages-base-oath: 'docs/'
+          pages-base-path: 'docs/'
           qr-code: false
 
       - name: Preview URL
