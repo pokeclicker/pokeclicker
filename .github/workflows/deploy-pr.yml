@@ -38,6 +38,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           ref: ${{  github.event.pull_request.head.sha }}
+          persist-credentials: false
 
       - name: Build PR
         uses: actions/setup-node@v6
