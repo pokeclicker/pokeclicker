@@ -389,7 +389,7 @@ class PokemonLocations {
         Berry.baseWander.forEach(pokemon => {
             cacheLine[pokemon] = ['Always'];
         });
-        App.game.farming.berryData.forEach((berry) => {
+        BerryList.forEach((berry) => {
             berry.wander.forEach(pokemon => {
                 if (cacheLine[pokemon][0] !== 'Always') {
                     cacheLine[pokemon].push(BerryType[berry.type]);

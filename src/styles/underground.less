@@ -389,6 +389,16 @@
     box-shadow: inset 0 0 6px 2px var(--danger);
 }
 
+@media (min-width: 992px) {
+  #underground-treasure-filter-container {
+    align-self: flex-start;
+    position: sticky;
+    top: 1rem;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+  }
+}
+
 @container (max-width: 100px) {
     .treasure-item {
         .treasure-item-name {

@@ -303,9 +303,7 @@ class PokemonFactory {
 
         chance /= modifier;
 
-        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Dowsing_machine)()) {
-            chance /= 1.5;
-        }
+        chance /= App.game.multiplier.getBonus('rareItemDropRate');
 
         if (Rand.chance(chance)) {
             return item;
