@@ -896,7 +896,7 @@ class AchievementHandler {
             'Dog Breeder',
             'Have all special Furfrou forms resistant to Pokérus.',
             new PokerusStatusByFilterRequirement(furfrouDexFilter, furfrouAmount, GameConstants.Pokerus.Resistant),
-            '' // need hint
+            'Got that dog in you'
         );*/
 
         // load filters
