@@ -418,7 +418,7 @@ class GameController {
                     break;
                 case Settings.getSetting('hotkey.shop').value:
                     // Open the Poke Mart
-                    if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Lance')]() >= 1 && !$shopModal.data('disable-toggle')) {
+                    if (ShopHandler.shortcutVisible() && !$shopModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
                         ShopHandler.showShop(pokeMartShop);
                         $shopModal.modal('toggle');

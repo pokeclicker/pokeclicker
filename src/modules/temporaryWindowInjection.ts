@@ -198,6 +198,8 @@ import PokemonItem from './items/PokemonItem';
 import EggItem from './items/EggItem';
 import MegaStoneItem from './items/MegaStoneItem';
 import PokeballItem from './items/PokeballItem';
+import MulchItem from './items/MulchItem';
+import { ShovelItem, MulchShovelItem } from './items/ShovelItem';
 import Vitamin from './items/Vitamin';
 import VitaminController from './items/VitaminController';
 import Consumable from './items/Consumable';
@@ -449,6 +451,9 @@ Object.assign(<any>window, {
     EggItem,
     MegaStoneItem,
     PokeballItem,
+    MulchItem,
+    ShovelItem,
+    MulchShovelItem,
     CollectibleItem,
     Vitamin,
     VitaminController,

@@ -3,6 +3,7 @@
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/SpecialEventRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/CustomRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/BerryUnlockedRequirement.d.ts"/>
 ///<reference path="../quests/BulletinBoard.ts"/>
 ///<reference path="BattleCafe.ts"/>
@@ -26,6 +27,14 @@ const pokeMartShop = new Shop([
     ItemList.SmallRestore,
     ItemList.MediumRestore,
     ItemList.LargeRestore,
+    new MulchItem(MulchType.Boost_Mulch, 50, 'Boost Mulch', 'Increases Berry growth rate.', { visible: new CustomRequirement(ShopHandler.farmShortcutVisible, true, undefined, GameConstants.AchievementOption.equal)}),
+    new MulchItem(MulchType.Rich_Mulch, 100, 'Rich Mulch', 'Increases Berry harvest rate and replant chances.', { visible: new CustomRequirement(ShopHandler.farmShortcutVisible, true, undefined, GameConstants.AchievementOption.equal)}),
+    new MulchItem(MulchType.Surprise_Mulch, 150, 'Surprise Mulch', 'Increases Berry mutation rate.', { visible: new CustomRequirement(ShopHandler.farmShortcutVisible, true, undefined, GameConstants.AchievementOption.equal)}),
+    new MulchItem(MulchType.Amaze_Mulch, 200, 'Amaze Mulch', 'A weaker combination of Boost, Rich and Surprise mulch.', { visible: new CustomRequirement(ShopHandler.farmShortcutVisible, true, undefined, GameConstants.AchievementOption.equal)}),
+    new MulchItem(MulchType.Freeze_Mulch, 350, 'Freeze Mulch', 'Stops Berry growth and auras. Mutations will still occur while berries are frozen.', { visible: new CustomRequirement(ShopHandler.farmShortcutVisible, true, undefined, GameConstants.AchievementOption.equal)}),
+    new MulchItem(MulchType.Gooey_Mulch, 100, 'Gooey Mulch', 'Helps attract rarer species. Gooed Pokémon are more likely to be caught.', { visible: new MultiRequirement([new CustomRequirement(ShopHandler.farmShortcutVisible, true, undefined, GameConstants.AchievementOption.equal), new MaxRegionRequirement(GameConstants.Region.unova)])}),
+    new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.', { visible: new CustomRequirement(ShopHandler.farmShortcutVisible, true, undefined, GameConstants.AchievementOption.equal)}),
+    new MulchShovelItem(300, 'Mulch Shovel', 'Removes Mulch from a plot in the Farm.', { visible: new CustomRequirement(ShopHandler.farmShortcutVisible, true, undefined, GameConstants.AchievementOption.equal)}),
 ], 'Explorers Poké Mart');
 
 const DepartmentStoreShop = new Shop([
