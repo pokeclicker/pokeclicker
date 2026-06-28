@@ -5786,21 +5786,24 @@ TownList['Plasma Frigate'] = new DungeonTown(
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
     [
-        new OneFromManyRequirement([
-            new MultiRequirement([
-                new GymBadgeRequirement(BadgeEnums.Insect),
-                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4, GameConstants.AchievementOption.less),
-            ]),
-            new MultiRequirement([
-                new GymBadgeRequirement(BadgeEnums.Quake),
-                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 7, GameConstants.AchievementOption.less),
-            ]),
-            new MultiRequirement([
-                new GymBadgeRequirement(BadgeEnums.Wave),
-                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15, GameConstants.AchievementOption.less),
-            ]),
-            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 16),
-        ]),
+        new CustomRequirement(
+            ko.pureComputed(() => new OneFromManyRequirement([
+                new MultiRequirement([
+                    new GymBadgeRequirement(BadgeEnums.Insect),
+                    new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new GymBadgeRequirement(BadgeEnums.Quake),
+                    new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 7, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new GymBadgeRequirement(BadgeEnums.Wave),
+                    new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15, GameConstants.AchievementOption.less),
+                ]),
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 16),
+            ]).isCompleted()),
+            true,
+            'Progress further in questline Hollow Truth and Ideals and gain more Gym badges.'),
     ],
     [
         TemporaryBattleList['Team Plasma Grunts 1'],
