@@ -2973,31 +2973,30 @@ class Update implements Saveable {
                 delete saveData.farming.berryList;
             }
 
-            // Towns renamed
-            if (playerData._townName == 'Phenac City Battles') {
-                playerData._townName = 'Phenac City';
-            }
-            if (playerData._townName == 'Pyrite Town Battles') {
-                playerData._townName = 'Pyrite Town';
-            }
-            if (playerData._townName == 'Realgam Tower Battles') {
-                playerData._townName = 'Realgam Tower';
-            }
-            if (playerData._townName == 'Gateon Port Battles') {
-                playerData._townName = 'Gateon Port';
-            }
-            if (playerData._townName == 'A Perfectly Ordinary Frigate' || playerData._townName == 'A Totally Unsuspicious Frigate') {
-                playerData._townName = 'Plasma Frigate';
-            }
-            if (playerData._townName == 'Team Plasma Assault') {
-                playerData._townName = 'Opelucid City';
-            }
-            if (playerData._townName == 'Exeggutor Island Hill') {
-                playerData._townName = 'Exeggutor Island';
-            }
-            if (playerData._townName == 'Slumbering Weald Shrine') {
-                playerData._townName = 'Slumbering Weald';
-            }
+            // Update DefeatDungeonQuest for renamed Dungeons
+            saveData.quests.questList = saveData.quests.questList?.map(q => {
+                if (q.name === 'DefeatDungeonQuest') {
+                    if (q.data[2] == 'Phenac City Battles') {
+                        q.data[2] = 'Phenac City';
+                    }
+                    if (q.data[2] == 'Pyrite Town Battles') {
+                        q.data[2] = 'Pyrite Town';
+                    }
+                    if (q.data[2] == 'Realgam Tower Battles') {
+                        q.data[2] = 'Realgam Tower';
+                    }
+                    if (q.data[2] == 'Gateon Port Battles') {
+                        q.data[2] = 'Gateon Port';
+                    }
+                    if (q.data[2] == 'Exeggutor Island Hill') {
+                        q.data[2] = 'Exeggutor Island';
+                    }
+                    if (q.data[2] == 'Slumbering Weald Shrine') {
+                        q.data[2] = 'Slumbering Weald';
+                    }
+                }
+                return q;
+            }) || [];
         },
     };
 
