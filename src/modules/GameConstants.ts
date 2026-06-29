@@ -656,6 +656,10 @@ export function formatNumber(input: number): string {
     let num = Number(input); // Temporary cast until everything is in modules
     if (Number.isNaN(+num)) { return '0'; }
 
+    if (input > 1e21) {
+        return 'N/A';
+    }
+
     if (num >= 1e12) {
         num = Math.floor(num / 1e11);
         num = num < 100 ? num / 10 : Math.floor(num / 10);

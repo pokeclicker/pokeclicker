@@ -17,5 +17,6 @@ export interface ShopOptions {
     multiplier?: number,
     multiplierDecrease?: boolean,
     multiplierDecreaser?: MultiplierDecreaser,
+    maxMultiplier?: number,
     visible?: Requirement,
 }
