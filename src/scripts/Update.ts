@@ -2966,6 +2966,12 @@ class Update implements Saveable {
                     plot.wanderer.gender = 0;
                 }
             });
+
+            if (saveData.farming.berryList) {
+                const savedBerries = saveData.farming.berryList;
+                saveData.farming.berryInventory = savedBerries;
+                delete saveData.farming.berryList;
+            }
         },
     };
 

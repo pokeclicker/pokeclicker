@@ -3,12 +3,12 @@
 import { Currency } from '../GameConstants';
 import GameHelper from '../GameHelper';
 import Item from './Item';
-import { MultiplierDecreaser } from './types';
+import { MultiplierDecreaser, ShopOptions } from './types';
 
 // TODO: merge these classes somehow, maybe make Farming have a (shovels: Record<ItemName, number>) property
 export class ShovelItem extends Item {
-    constructor(basePrice: number, displayName: string, description: string) {
-        super('Berry_Shovel', basePrice, Currency.farmPoint, { multiplierDecreaser: MultiplierDecreaser.Berry }, displayName, description, 'farm');
+    constructor(basePrice: number, displayName: string, description: string, options?: ShopOptions) {
+        super('Berry_Shovel', basePrice, Currency.farmPoint, { multiplierDecreaser: MultiplierDecreaser.Berry, ...options }, displayName, description, 'farm');
     }
 
     gain(amt: number) {
@@ -21,8 +21,8 @@ export class ShovelItem extends Item {
 }
 
 export class MulchShovelItem extends Item {
-    constructor(basePrice: number, displayName: string, description: string) {
-        super('Mulch_Shovel', basePrice, Currency.farmPoint, { multiplierDecreaser: MultiplierDecreaser.Berry }, displayName, description, 'farm');
+    constructor(basePrice: number, displayName: string, description: string, options?: ShopOptions) {
+        super('Mulch_Shovel', basePrice, Currency.farmPoint, { multiplierDecreaser: MultiplierDecreaser.Berry, ...options }, displayName, description, 'farm');
     }
 
     gain(amt: number) {
