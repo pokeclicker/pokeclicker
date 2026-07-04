@@ -50,6 +50,7 @@ export default class Profile implements Saveable {
         this.name = ko.observable(name);
         this.trainer = ko.observable(trainer).extend({ numeric: 0 });
         this.trainer.subscribe((t) => document.documentElement.style.setProperty('--trainer-image', `url('../assets/images/profile/trainer-${t}.png')`));
+        document.documentElement.style.setProperty('--trainer-image', `url('../assets/images/profile/trainer-${trainer}.png')`);
         this.pokemon = ko.observable(pokemon).extend({ numeric: 2 });
         this.pokemonShiny = ko.observable(false).extend({ boolean: null });
         this.pokemonShadow = ko.observable(false).extend({ boolean: null });

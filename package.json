@@ -35,6 +35,12 @@
     "url": "https://github.com/pokeclicker/pokeclicker/issues"
   },
   "homepage": "https://github.com/pokeclicker/pokeclicker#readme",
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.0.0"
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",

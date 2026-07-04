@@ -35,34 +35,35 @@ jobs:
           exit 0
 
       - name: Checkout PR
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           ref: ${{  github.event.pull_request.head.sha }}
+          persist-credentials: false
 
       - name: Build PR
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 18.x
+          node-version-file: package.json
       - run: |
           npm ci
           echo "module.exports={DEVELOPMENT:true,DEV_BANNER:true};" >> config.js
           npm run build
           rm -rf build/assets
-          ln -s ../../assets build/assets
           rm -rf build/libs
-          ln -s ../../libs build/libs
+          perl -0pi -e 's|</title>|</title>\n<script>\nif("serviceWorker" in navigator){\nnavigator.serviceWorker.register("/sw.js",{scope:"/"}).then(reg=>{if(reg.waiting)reg.waiting.postMessage({type:"SKIP_WAITING"});});\nnavigator.serviceWorker.addEventListener("controllerchange",()=>{if(window._reloading)return;window._reloading=true;window.location.reload();});\n}\n</script>|s' build/index.html
       
       - name: Deploy to GH-Pages
-        uses: redsparr0w/pr-preview-action@e42785b6369079700cfd810f51d14da466ea5cce
+        uses: mvk/pr-preview-action@5ce80c4514b76075e126b7dbcd7674a7ff4183dd
         id: preview_step
         with:
           source-dir: 'build'
           preview-branch: 'master'
           umbrella-dir: 'docs/preview'
-          custom-url: 'dev.pokeclicker.com'
+          pages-base-url: 'dev.pokeclicker.com'
           deploy-repository: 'RedSparr0w/pokeclicker'
           token: ${{ secrets.DEV_PAGE }}
-          pages-base-dir: 'docs/'
+          pages-base-path: 'docs/'
+          qr-code: false
 
       - name: Preview URL
         run: echo "url => ${{ steps.preview_step.outputs.deployment-url }}"
