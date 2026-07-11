@@ -843,4 +843,9 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     set showShadowImage(value: boolean) {
         this._showShadowImage(value);
     }
+
+    // todo: separate this for sort options
+    get contestAppeal() : number {
+        return Object.values(this.contestStats).map(c => c()).reduce((a, b) => a + b);
+    }
 }

@@ -102,12 +102,12 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     },
 
     [SortOptions.contestAppeal]: {
-        text: 'Contest Appeal',
+        text: 'Total Contest Appeal',
         getValue: (p) => p.contestAppeal || 0,
     },
 
     [SortOptions.contestSheen]: {
         text: 'Contest Sheen',
-        getValue: (p) => p.contestExp || 0,
+        getValue: (p) => p.contestSheen() || 0,
     },
 };
