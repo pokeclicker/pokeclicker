@@ -125,7 +125,7 @@ export default class ContestBattle extends Battle {
 
     public static getActiveContestBattlePokemonAppeal(): number {
         return !ContestBattle.toggleTesting() ?
-            ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]) : ContestBattle.testAppeal();
+            ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type()) : ContestBattle.testAppeal();
     }
 
     public static getPassiveContestBattlePokemonAppeal() {
@@ -442,8 +442,7 @@ export default class ContestBattle extends Battle {
             return;
         }
         const b = ContestRewards.getContestBerryReward(rank ?? ContestRunner.rank(), fromSpecifiedRank);
-        const fullReward = ContestHelper.hasSheenForContest(ContestRunner.rank(), ContestRunner.type()) || ContestBattle.toggleTesting();
-        const amount = fullReward ? Math.ceil(b.amount() * multiplier) : 1;
+        const amount = Math.ceil(b.amount() * multiplier);
         // give the berry
         App.game.farming.gainBerry(b.berry, amount, false);
         Notifier.notify({

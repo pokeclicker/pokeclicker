@@ -2977,8 +2977,7 @@ class Update implements Saveable {
             setTimeout(async () => {
                 const goldowoodo = saveData.party.caughtPokemon.find((p: PartyPokemon) => p.id === 185.01);
                 if (goldowoodo) {
-                    App.game.party.caughtPokemon.find((p: PartyPokemon) => p.id === 185.01).currentContestTypes = [ContestType.Balanced];
-                    App.game.party.caughtPokemon.find((p: PartyPokemon) => p.id === 185.01).contestAppeal = ContestHelper.rankAppeal[ContestRank.Master];
+                    App.game.party.caughtPokemon.find((p: PartyPokemon) => p.id === 185.01).contestStats[ContestType.Balanced](ContestHelper.rankAppeal[ContestRank.Master]);
                 }
             }, GameConstants.SECOND);
         },

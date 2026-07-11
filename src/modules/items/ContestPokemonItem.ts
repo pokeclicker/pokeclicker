@@ -35,16 +35,16 @@ export default class ContestPokemonItem extends PokemonItem {
         const pokemonName = this.type;
         const pokemonID = PokemonHelper.getPokemonByName(pokemonName).id;
         const partyPokemon = App.game.party.getPokemon(pokemonID);
-        const pConTypes = partyPokemon.currentContestTypes;
-        partyPokemon.currentContestTypes = pConTypes.concat(this.contestTypes);
-        const pAppeal = partyPokemon.contestAppeal;
-        partyPokemon.contestAppeal = Math.max(pAppeal, this.contestAppeal);
+        this.contestTypes.forEach(ct => {
+            const pAppeal = partyPokemon.contestStats[ct]();
+            partyPokemon.contestStats[ct](Math.max(pAppeal, this.contestAppeal));
+        });
     }
 
     // eslint-disable-next-line class-methods-use-this
     isSoldOut(): boolean {
-        if (this.maxAmount === 1) {
-            return App.game.party.caughtPokemon.find(p => p.name === this.type).contestAppeal >= ContestHelper.rankAppeal[this.giftedContestAppealByRank];
+        if (this.maxAmount) {
+            return this.contestTypes.every(ct => App.game.party.caughtPokemon.find(p => p.name === this.type).contestStats[ct]() >= ContestHelper.rankAppeal[this.giftedContestAppealByRank]);
         }
         return false;
     }

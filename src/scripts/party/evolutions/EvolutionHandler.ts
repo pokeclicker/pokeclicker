@@ -60,8 +60,9 @@ class EvolutionHandler {
             if (basePartyPokemon.heldItem()?.canUse(evolvedPartyPokemon)) {
                 evolvedPartyPokemon.heldItem(basePartyPokemon.heldItem());
             }
-            evolvedPartyPokemon.contestSaveData = basePartyPokemon.contestSaveData;
-            evolvedPartyPokemon.contestExp = basePartyPokemon.contestExp;
+            evolvedPartyPokemon.contestStats = basePartyPokemon.contestStats;
+            evolvedPartyPokemon.contestSheen = basePartyPokemon.contestSheen;
+            evolvedPartyPokemon.pokeblockFullness = basePartyPokemon.pokeblockFullness;
             App.game.party.removePokemonByName(data.basePokemon);
         }
 

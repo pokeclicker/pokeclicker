@@ -31,13 +31,8 @@
             <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
                 <table width="100%">
                   <tr>
-                    <th colspan="100%" class="bg-warning" data-bind="visible: !ContestHelper.hasSheenForContest(ContestRunner.rank(), ContestRunner.type()) && !ContestBattle.toggleTesting()">
-                      Your Pokemon have no Sheen for this contest. Berry rewards are limited to 1 per combo.
-                    </th>
-                  </tr>
-                  <tr>
-                    <th colspan="100%" class="bg-danger" data-bind="visible: !ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()]) && !ContestBattle.toggleTesting()">
-                      You have no eligible Pokemon for this contest. The audience bar will not increase.
+                    <th colspan="100%" class="bg-danger" data-bind="visible: !ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type()) && !ContestBattle.toggleTesting()">
+                      Your Pokemon have no appeal for this contest. The audience bar will not increase.
                     </th>
                   </tr>
                   <tr>

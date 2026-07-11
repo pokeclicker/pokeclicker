@@ -21,78 +21,52 @@ import { PureComputed } from 'knockout';
 export default class ContestHelper {
     // Pokemon
     // Audience appeal
-    public static calculatePokemonContestAppeal(conRank: ContestRank, conType: ContestType, types: ContestType[], pokemons?: TmpPartyPokemonType[], includeBreeding = false): number {
+    public static calculatePokemonContestAppeal(conRank: ContestRank, conType: ContestType, pokemons?: TmpPartyPokemonType[], includeBreeding = false): number {
         let appeal = 0;
-        const pks = pokemons ? pokemons : ContestHelper.getPartyPokemonByContestTypeRank(conType, conRank);
+        const pks = pokemons;
+        const isSpectacularRank = conRank >= ContestRank.Spectacular;
         for (const pokemon of pks) {
-            appeal += ContestHelper.calculateOnePokemonContestAppeal(pokemon, types, includeBreeding) * 10;
+            appeal += ContestHelper.calculateOnePokemonContestAppeal(pokemon, conType, isSpectacularRank, includeBreeding);
         }
 
-        return Math.round(appeal / 10);
+        return Math.round(appeal);
     }
 
-    public static calculateOnePokemonContestAppeal(pokemon: TmpPartyPokemonType, types: ContestType[], includeBreeding = false): number {
-        let appeal = 0;
-        const pAppeal = pokemon.contestAppeal * 10;
-        const pType = pokemon.currentContestTypes;
+    public static calculateOnePokemonContestAppeal(pokemon: TmpPartyPokemonType, contestEntered: ContestType, pureTypeOnly = false, includeBreeding = false) {
+        const stats = Object.entries(pokemon.contestStats).map(([type, appeal]) => {
+            return {
+                contestType: ContestType[type] as ContestType,
+                appeal: appeal() as number,
+            };
+        });
 
-        // Check if the Pokemon is currently breeding (no appeal)
-        if (includeBreeding || !pokemon.breeding) {
-            appeal = pAppeal * ContestTypeHelper.getAppealModifier(pType, types);
-        }
+        const appealSum = stats.reduce((accumulator, contestStat) => {
+            const effectiveness = ContestTypeHelper.getAppealModifier([contestStat.contestType], [contestEntered]);
+            if (effectiveness > 0 && (includeBreeding || !pokemon.breeding)) {
+                if (pureTypeOnly && contestStat.contestType != contestEntered) {
+                    return;
+                }
+                return accumulator + Math.round(contestStat.appeal * (1 + pokemon.contestSheen()) * effectiveness);
+            } else {
+                return;
+            }
+        }, 0);
 
-        appeal *= Math.max(1, pokemon.contestSheen() / 100);
-
-        return appeal / 10;
+        return appealSum;
     }
 
-    public static reduceSheenPerSecond(conRank: ContestRank, conType: ContestType, timerValue: number, pokemons?: TmpPartyPokemonType[]) {
+    public static reducePokeblockFullnessPerSecond(conRank: ContestRank, conType: ContestType, timerValue: number, pokemons?: TmpPartyPokemonType[]) {
         const isWholeNumber = (timerValue / SECOND) === Math.floor(timerValue / SECOND);
         if (!isWholeNumber) {
             return;
         }
-        const pks = pokemons ? pokemons : ContestHelper.getPartyPokemonByContestTypeRank(conType, conRank);
-        let ranOutOfSheenPokemon = 0;
+        const pks = pokemons;
 
         for (const pokemon of pks) {
-            if (pokemon.contestExp > 0 && !pokemon.breeding) {
-                pokemon.contestExp -= 1;
-                pokemon.contestExp = Math.max(0, pokemon.contestExp);
-
-                // Reset contest types when sheen/exp has run out
-                if (pokemon.contestExp <= 0) {
-                    let appliedContestTypes = [];
-                    const scarves = ['Red_Scarf', 'Blue_Scarf', 'Pink_Scarf', 'Green_Scarf', 'Yellow_Scarf'];
-                    // Scarves restore their equivalent type
-                    if (scarves.includes(pokemon.heldItem().name)) {
-                        appliedContestTypes = [(scarves.indexOf(pokemon.heldItem().name) as ContestType)];
-                    }
-                    // Special contest pokemon are exempt
-                    if (ContestHelper.isSpecialContestPokemon(pokemon.name)) {
-                        appliedContestTypes = appliedContestTypes.concat(pokemonMap[pokemon.name].contestTypes);
-                    }
-                    pokemon.currentContestTypes = appliedContestTypes;
-                    ranOutOfSheenPokemon += 1;
-                }
-                if (!ContestHelper.hasSheenForContest(conRank, conType)) {
-                    Notifier.notify({
-                        title: 'Pokémon Contest',
-                        message: 'All of your Pokemon ran out of Sheen! Berry rewards are limited to 1 per combo!',
-                        type: NotificationConstants.NotificationOption.danger,
-                        // TODO: setting to turn off contest notifications
-                    });
-                    return;
-                }
+            if (pokemon.pokeblockFullness() > 0 && !pokemon.breeding) {
+                const reductionValue = pokemon.pokeblockFullness() - Math.floor(1 + 0.75 * (conRank + ContestTypeHelper.getAppealModifier(pokemonMap[pokemon.name].contestTypes, [conType])));
+                pokemon.pokeblockFullness(Math.max(0, reductionValue));
             }
-        }
-
-        if (ranOutOfSheenPokemon > 0) {
-            Notifier.notify({
-                title: 'Pokémon Contest',
-                message: `${ranOutOfSheenPokemon} of your Pokemon ran out of Sheen!`,
-                type: NotificationConstants.NotificationOption.warning,
-                // TODO: setting to turn off contest notifications
-            });
         }
 
         return;
@@ -103,43 +77,6 @@ export default class ContestHelper {
         const contestPikachu = ['Pikachu (Rock Star)', 'Pikachu (Belle)', 'Pikachu (Pop Star)', 'Pikachu (Ph. D.)', 'Pikachu (Libre)'];
         const contestPokemon = shopPokemon.concat(contestPikachu);
         return contestPokemon.includes(pk);
-    }
-
-    // Contest eligibility
-    public static hasSheenForContest(rank: ContestRank, type: ContestType): boolean {
-        return ContestHelper.getPartyPokemonByContestTypeRank(type, rank).some((p) => p.contestSheen() > 0);
-    }
-
-    public static getPartyPokemonByContestType(type: ContestType): TmpPartyPokemonType[] {
-        return App.game.party.caughtPokemon.filter((p) => {
-            const pk = p.currentContestTypes;
-            return pk.some(c => c === type);
-        });
-    }
-
-    public static getPartyPokemonByContestTypeRank(type: ContestType, rank: ContestRank): readonly TmpPartyPokemonType[] {
-        switch (rank) {
-            // Practice
-            case ContestRank.Practice:
-            // Hoenn
-            case ContestRank.Normal:
-            case ContestRank.Super:
-            case ContestRank.Hyper:
-            case ContestRank.Master:
-            // Sinnoh
-            case ContestRank['Super Normal']:
-            case ContestRank['Super Great']:
-            case ContestRank['Super Ultra']:
-            case ContestRank['Super Master']:
-                return App.game.party.caughtPokemon.filter((p) => ContestTypeHelper.getAppealModifier(p.currentContestTypes, [type]) > 0);
-            // Kalos (in Hoenn)
-            case ContestRank.Spectacular:
-                return ContestHelper.getPartyPokemonByContestType(type);
-            // Galar (in Sinnoh)
-            case ContestRank['Brilliant Shining']:
-                // not coded yet, may have a different requirement
-                return ContestHelper.getPartyPokemonByContestType(type);
-        }
     }
 
     // Rank Mechanics
@@ -193,9 +130,9 @@ export default class ContestHelper {
         return App.game.party.getPokemon(p) ? App.game.party.getPokemon(p).currentContestTypes : pokemonMap[p];
     }
 
-    // Sheen
+    // Pokeblock Fullness
     // eslint-disable-next-line @typescript-eslint/member-ordering
-    public static maxSheen: PureComputed<number> = ko.pureComputed(() => {
+    public static maxPokeblockFullness: PureComputed<number> = ko.pureComputed(() => {
         let capMultiplier = 0;
         GameHelper.enumNumbers(ContestRank).filter(r => r > ContestRank.Practice).forEach(r => GameHelper.enumNumbers(ContestType).forEach(ct => {
             capMultiplier += Math.min(1, Number(App.game.statistics.contestsWon[r][ct]()));

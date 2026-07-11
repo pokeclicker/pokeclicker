@@ -18,8 +18,9 @@ enum PartyPokemonSaveKeys {
     nickname,
     shadow,
     showShadowImage,
-    contestExp,
-    contestSaveData,
+    contestStats,
+    contestSheen,
+    pokeblockFullness,
 }
 
 class PartyPokemon implements Saveable, TmpPartyPokemonType {
@@ -32,7 +33,9 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     defaults = {
         attackBonusPercent: 0,
         attackBonusAmount: 0,
-        vitaminsUsed: {},
+        vitaminsUsed: Object.fromEntries(GameHelper.enumNumbers(GameConstants.VitaminType).map((vitamin) => {
+            return [vitamin, 0];
+        })),
         exp: 0,
         breeding: false,
         shiny: false,
@@ -45,8 +48,11 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         nickname: '',
         shadow: GameConstants.ShadowStatus.None,
         showShadowImage: false,
-        contestExp: 0,
-        contestSaveData: {},
+        contestStats: Object.fromEntries(GameHelper.enumNumbers(ContestType).map((type) => {
+            return [type, 0];
+        })),
+        contestSheen: 0,
+        pokeblockFullness: 0,
     };
 
     // Saveable observables
@@ -67,8 +73,9 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     hideShinyImage: KnockoutObservable<boolean>;
     _shadow: KnockoutObservable<GameConstants.ShadowStatus>;
     _showShadowImage: KnockoutObservable<boolean>;
-    _contestExp: KnockoutObservable<number>;
-    contestSaveData: Record<ContestType, [KnockoutObservable<boolean>, KnockoutObservable<number>]>;
+    contestStats: Record<ContestType, KnockoutObservable<number>>;
+    contestSheen: KnockoutObservable<number>;
+    pokeblockFullness: KnockoutObservable<number>;
 
     constructor(
         public id: number,
@@ -88,10 +95,6 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this._level = ko.observable(1).extend({ numeric: 0 });
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
-        this.contestSaveData = Object.fromEntries(GameHelper.enumNumbers(ContestType).map((contestType) => {
-            return [contestType, [ko.observable(false), ko.observable(0).extend({ numeric: 0 })]];
-        })) as Record<ContestType, [KnockoutObservable<boolean>, KnockoutObservable<number>]>;
-        this._contestExp = ko.observable(0).extend({ numeric: 0 });
         this._category = ko.observableArray([0]);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
@@ -144,6 +147,11 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
                 this.removeCategory(0); // remove None category
             }
         });
+        this.contestStats = Object.fromEntries(GameHelper.enumNumbers(ContestType).map((type) => {
+            return [type, ko.observable(0).extend({ numeric: 0 })];
+        })) as Record<ContestType, KnockoutObservable<number>>;
+        this.contestSheen = ko.observable(0).extend({ numeric: 0 });
+        this.pokeblockFullness = ko.observable(0).extend({ numeric: 0 });
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -648,12 +656,8 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
             .map(([_, index]) => index);
     }
 
-    contestSheen = ko.pureComputed((): number => {
-        return Math.floor(this.contestExp * 10000 / ContestHelper.maxSheen()) / 100;
-    });
-
-    public maxSheenTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
-        return `${this.contestExp} / ${ContestHelper.maxSheen()}`;
+    public maxPokeblockFullnessTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
+        return `${this.pokeblockFullness()} / ${ContestHelper.maxPokeblockFullness()}`;
     });
 
     public fromJSON(json: Record<string, any>): void {
@@ -685,13 +689,13 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this._nickname(json[PartyPokemonSaveKeys.nickname] || this.defaults.nickname);
         this.shadow = json[PartyPokemonSaveKeys.shadow] ?? this.defaults.shadow;
         this._showShadowImage(json[PartyPokemonSaveKeys.showShadowImage] ?? this.defaults.showShadowImage);
-        if (json[PartyPokemonSaveKeys.contestSaveData]) {
-            Object.entries(json[PartyPokemonSaveKeys.contestSaveData]).forEach(([t, b]) => {
-                this.contestSaveData[t][0](b[0] ?? 0);
-                this.contestSaveData[t][1](b[1] ?? 0);
+        if (json[PartyPokemonSaveKeys.contestStats]) {
+            Object.entries(json[PartyPokemonSaveKeys.contestStats]).forEach(([type, appeal]) => {
+                this.contestStats[type](appeal ?? 0);
             });
         }
-        this.contestExp = json[PartyPokemonSaveKeys.contestExp] ?? this.defaults.contestExp;
+        this.contestSheen = json[PartyPokemonSaveKeys.contestSheen] ?? this.defaults.contestSheen;
+        this.pokeblockFullness = json[PartyPokemonSaveKeys.pokeblockFullness] ?? this.defaults.pokeblockFullness;
     }
 
     public toJSON() {
@@ -712,14 +716,25 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
             [PartyPokemonSaveKeys.nickname]: this.nickname || undefined,
             [PartyPokemonSaveKeys.shadow]: this.shadow,
             [PartyPokemonSaveKeys.showShadowImage]: this._showShadowImage(),
-            [PartyPokemonSaveKeys.contestSaveData]: ko.toJS(this.contestSaveData),
-            [PartyPokemonSaveKeys.contestExp]: this.contestExp,
+            [PartyPokemonSaveKeys.contestStats]: ko.toJS(this.contestStats),
+            [PartyPokemonSaveKeys.contestSheen]: this.contestSheen,
+            [PartyPokemonSaveKeys.pokeblockFullness]: this.pokeblockFullness,
         };
 
         // Don't save anything that is the default option
         Object.entries(output).forEach(([key, value]) => {
             const defaultValue = this.defaults[PartyPokemonSaveKeys[key]];
-            if (Array.isArray(value) && Array.isArray(defaultValue)) {
+            // Check objects
+            if (jQuery.isPlainObject(value)) {
+                Object.entries(value).forEach(([objectKey, objectValue]) => {
+                    if (objectValue === defaultValue[key][objectKey]) {
+                        delete value[objectKey];
+                    }
+                });
+                if (jQuery.isEmptyObject(value)) {
+                    delete value[key];
+                }
+            } else if (Array.isArray(value) && Array.isArray(defaultValue)) {
                 // Compare array contents
                 if (value.length === defaultValue.length && value.every((v, i) => v === defaultValue[i])) {
                     delete output[key];
@@ -767,41 +782,6 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
 
     set breeding(bool: boolean) {
         this._breeding(bool);
-    }
-
-    get contestAppeal(): number {
-        return Math.max(...Object.values(this.contestSaveData).flatMap(t => t[1]()));
-    }
-
-    set contestAppeal(amount: number) {
-        Object.entries(this.contestSaveData).forEach(([t]) => {
-            if (this.contestSaveData[t][0]()) {
-                this.contestSaveData[t][1](amount);
-            }
-        });
-    }
-
-    get currentContestTypes(): ContestType[] {
-        return [...Object.entries(this.contestSaveData).filter(([t]) => this.contestSaveData[t][0]()).flatMap(t => Number(t[0]))];
-    }
-
-    set currentContestTypes(contestTypes: ContestType[]) {
-        Object.entries(this.contestSaveData).forEach(([t]) => {
-            if (contestTypes.includes(Number(t))) {
-                this.contestSaveData[t][0](true);
-                this.contestSaveData[t][1](this.contestAppeal);
-            } else {
-                this.contestSaveData[t][0](false);
-            }
-        });
-    }
-
-    get contestExp(): number {
-        return this._contestExp();
-    }
-
-    set contestExp(contestExp: number) {
-        this._contestExp(contestExp);
     }
 
     get pokerus(): GameConstants.Pokerus {

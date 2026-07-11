@@ -305,10 +305,6 @@ export type TmpPartyPokemonType = {
     displayName: string,
     shadow: GameConstants.ShadowStatus,
     showShadowImage: boolean,
-    contestAppeal: number;
-    currentContestTypes: ContestType[];
-    contestExp: number;
-    contestSaveData: Record<ContestType, [KnockoutObservable<boolean>, KnockoutObservable<number>]>;
     vitaminsUsed: Record<GameConstants.VitaminType, KnockoutObservable<number>>;
     heldItem: KnockoutObservable<TmpHeldItemType>;
     defaultFemaleSprite: KnockoutObservable<boolean>;
@@ -318,8 +314,11 @@ export type TmpPartyPokemonType = {
     removeCategory(id: number): void;
     resetCategory(): void;
     calculateEVAttackBonus(): number;
-    contestSheen(): number;
-    maxSheenTooltip(): string;
+    /* eslint-disable @typescript-eslint/member-ordering */
+    contestStats: Record<ContestType, KnockoutObservable<number>>;
+    contestSheen: KnockoutObservable<number>;
+    pokeblockFullness: KnockoutObservable<number>;
+    maxPokeblockFullnessTooltip(): string;
 };
 
 export type TmpPartyType = {
