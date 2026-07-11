@@ -111,8 +111,6 @@ export default class ContestRunner {
             return;
         }
 
-        ContestBattle.pokemonAppeal(true);
-
         if (!ContestRunner.frenzyMode() && ContestRunner.timeLeftPercentage() < 100 && !ContestBattle.toggleTesting()) {
             ContestHelper.reducePokeblockFullnessPerSecond(ContestRunner.rank(), ContestRunner.type(), ContestRunner.timeLeft());
         }

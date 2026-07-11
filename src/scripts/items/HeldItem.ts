@@ -259,9 +259,8 @@ class ContestScarfHeldItem extends HeldItem {
             currency,
             shopOptions,
             displayName,
-            `A held item for ${ContestType[contestType]} and Balanced Pokémon that lets them passively Appeal in Contests.`,
+            `A held item that boosts the ${ContestType[contestType]} Contest Appeal of a Pokémon by 20%.`,
             regionUnlocked,
-            (pokemon) => pokemon.currentContestTypes.includes(contestType) || pokemon.currentContestTypes.includes(ContestType.Balanced) || pokemon.heldItem() instanceof ContestScarfHeldItem
         );
     }
 }

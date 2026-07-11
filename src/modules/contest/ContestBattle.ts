@@ -123,18 +123,12 @@ export default class ContestBattle extends Battle {
         }
     }
 
-    public static getActiveContestBattlePokemonAppeal(): number {
+    public static getContestBattlePokemonAppeal(): number {
         return !ContestBattle.toggleTesting() ?
             ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type()) : ContestBattle.testAppeal();
     }
 
-    public static getPassiveContestBattlePokemonAppeal() {
-        const scarves = ['Red_Scarf', 'Blue_Scarf', 'Pink_Scarf', 'Green_Scarf', 'Yellow_Scarf'];
-        const scarfedPkm = ContestHelper.getPartyPokemonByContestTypeRank(ContestRunner.rank(), ContestRunner.type()).filter(p => scarves.includes(p.heldItem().name));
-        return ContestHelper.calculatePokemonContestAppeal(ContestRunner.rank(), ContestRunner.type(), [ContestRunner.type()], scarfedPkm) / 10;
-    }
-
-    public static pokemonAppeal(idle = false) {
+    public static pokemonAppeal() {
         if (!ContestRunner.running()) {
             throw new Error('ContestRunner must be running');
         }
@@ -155,8 +149,7 @@ export default class ContestBattle extends Battle {
         multiplier /= 100;
 
         // deal it
-        const rallyAppeal = !idle ? ContestBattle.getActiveContestBattlePokemonAppeal() : ContestBattle.getPassiveContestBattlePokemonAppeal();
-        ContestRunner.rally(rallyAppeal * multiplier);
+        ContestRunner.rally(ContestBattle.getContestBattlePokemonAppeal() * multiplier);
     }
 
     /**

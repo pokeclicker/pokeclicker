@@ -46,7 +46,12 @@ export default class ContestHelper {
                 if (pureTypeOnly && contestStat.contestType != contestEntered) {
                     return;
                 }
-                return accumulator + Math.round(contestStat.appeal * (1 + pokemon.contestSheen()) * effectiveness);
+                let scarfBonus = 1;
+                const scarves = ['Red_Scarf', 'Blue_Scarf', 'Pink_Scarf', 'Green_Scarf', 'Yellow_Scarf'];
+                if (scarves.includes(pokemon.heldItem().name) && scarves.indexOf(pokemon.heldItem().name) == contestStat.contestType) {
+                    scarfBonus = 1.2;
+                }
+                return accumulator + Math.round(contestStat.appeal * scarfBonus * (1 + pokemon.contestSheen()) * effectiveness);
             } else {
                 return;
             }
