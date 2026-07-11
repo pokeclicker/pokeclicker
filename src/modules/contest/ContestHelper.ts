@@ -59,7 +59,7 @@ export default class ContestHelper {
         return appealSum;
     }
 
-    public calculateContestSheenBonus (p: TmpPartyPokemonType) {
+    public calculateContestSheenBonus(p: TmpPartyPokemonType) {
         // Based off of LevelType equations (Experience Type on Bulbapedia)
         // Formulas are multiplied by 10, except for Medium Slow which was by 8
         // Erratic and Fluctuating limits are scaled from 100 to 10. Erratic's values of 7, 8, and 9 were taken from extending the neighboring curves instead of the third formula

@@ -261,6 +261,7 @@ class ContestScarfHeldItem extends HeldItem {
             displayName,
             `A held item that boosts the ${ContestType[contestType]} Contest Appeal of a Pokémon by 20%.`,
             regionUnlocked,
+            () => true
         );
     }
 }
