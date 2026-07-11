@@ -1,7 +1,6 @@
 import { PokeBlockColor, Currency } from '../GameConstants';
 import { TmpPartyPokemonType } from '../TemporaryScriptTypes';
 import ContestType from '../enums/ContestType';
-import { pokemonMap } from '../pokemons/PokemonList';
 import Item from './Item';
 
 export default class PokeBlock extends Item {
@@ -33,8 +32,16 @@ export default class PokeBlock extends Item {
         this.ignoreDebuff = ignoreDebuff;
     }
 
+    // eslint-disable-next-line class-methods-use-this
+    use(): boolean {
+        return true;
+    }
+
     canUse(pokemon: TmpPartyPokemonType): boolean {
-        const hasBlockType = this.contestType?.some(ct => pokemon.currentContestTypes.includes(ct) || pokemonMap[pokemon.name].contestTypes.includes(ct));
-        return this._canUse?.(pokemon) ?? hasBlockType ?? true;
+        if (pokemon.breeding) {
+            return false;
+        }
+        return true;
+        // todo: check fullness for poffins
     }
 }

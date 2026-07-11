@@ -11,12 +11,13 @@ import { getImage as getPokemonImage } from '../pokemons/PokemonHelper';
 import ContestType from '../enums/ContestType';
 import GameHelper from '../GameHelper';
 import ContestRank from '../enums/ContestRank';
-import Settings from '../settings';
+// import Settings from '../settings';
+import ContestTypeHelper from '../types/ContestTypeHelper';
 
 export default class PokeBlockController {
     public static currentlySelected = ko.observable(0).extend({ numeric: 0 });
     public static currentlySelectedName = ko.computed(() => `PokeBlock_${PokeBlockColor[PokeBlockController.currentlySelected()]}`);
-    public static multiplier = ['×1', '×5', '×10', '×50', '×100', '×200', '×500', 'Max'];
+    public static multiplier = ['×1', '×5', '×10', '×50', '×100', 'Max'];
     public static multiplierIndex = ko.observable(0);
 
     public static incrementMultiplier() {
@@ -46,34 +47,17 @@ export default class PokeBlockController {
             });
         }
 
-        // Add types
-        let blockType = pokeblock.contestType ?? [];
-        if (type === PokeBlockColor.White) {
-            if (pokemon.currentContestTypes.length < 1 && pokemonMap[pokemon.name].contestTypes.includes(ContestType.Balanced)) {
-                blockType = [ContestType.Balanced];
-            }
-        }
-        if (type === PokeBlockColor.Rainbow) {
-            blockType = pokemonMap[pokemon.name].contestTypes;
-        }
-        const addedTypes = blockType.filter(t => !pokemon.currentContestTypes.includes(t));
-
-        if (addedTypes.length) {
-            // Apply the new contest types in order
-            const newTypes = pokemon.currentContestTypes.concat(blockType);
-            pokemon.currentContestTypes = newTypes.sort();
-            Notifier.notify({
-                message : `${pokemon.displayName} became ${addedTypes.map(t => ContestType[t]).join(' and ')}!`,
-                type : NotificationConstants.NotificationOption.success,
-                pokemonImage : getPokemonImage(pokemon.id),
-            });
-        }
+        const pokemonImage = document.getElementById('pokeblockMon-' + `${pokemon.id}`);
+        pokemonImage.style.animation = 'bounce 1s ease';
+        pokemonImage.addEventListener('animationend', function () {
+            pokemonImage.style.removeProperty('animation');
+        });
 
         // Increase stats
         amount = Math.min(amount, player.itemList[itemName]());
-        if (type === PokeBlockColor.Black || (Settings.getSetting('stopPokeblockAtMaxAppeal').observableValue() && pokeblock.exp > 0)) {
-            amount = Math.min(amount, Math.ceil((ContestHelper.maxSheen() - pokemon.contestExp) / pokeblock.exp));
-        }
+        // if (Settings.getSetting('stopPokeblockAtMaxAppeal').observableValue() && pokeblock.exp > 0) {
+        //     amount = Math.min(amount, Math.ceil((ContestHelper.maxPokeblockFullness() - pokemon.pokeblockFullness) / pokeblock.exp));
+        // }
         PokeBlockController.increasePartyPokemonContestStats(pokemon, pokeblock, amount);
 
         GameHelper.incrementObservable(player.itemList[itemName], -amount);
@@ -85,28 +69,68 @@ export default class PokeBlockController {
     }
 
     public static increasePartyPokemonContestStats(pokemon: TmpPartyPokemonType, pokeblock: PokeBlock, amount: number) {
-        const initialAppeal = pokemon.contestAppeal;
-        const initialExp = pokemon.contestExp;
+        const defaultPokemonConditions = pokemonMap[pokemon.name].contestTypes;
+        const primaryConditions = [ContestType.Cool, ContestType.Beautiful, ContestType.Cute, ContestType.Smart, ContestType.Tough];
+        
+        let boostedConditions = pokeblock.contestType ?? defaultPokemonConditions;
+        if (pokeblock.type === PokeBlockColor.White || pokeblock.type === PokeBlockColor.Rainbow) {
+            // we concat it with the pokemon to give Balanced appeal to those who have it as a default type
+            boostedConditions = [...new Set(primaryConditions.concat(defaultPokemonConditions))];
+        }
+        // gray boosts more conditions than black
+        if (pokeblock.type === PokeBlockColor.Gray) {
+            boostedConditions = GameHelper.enumNumbers(ContestType).filter(ct => ContestTypeHelper.getAppealModifier(defaultPokemonConditions, [ct]) > 0);
+        }
 
-        // Appeal
-        pokemon.contestAppeal = PokeBlockController.increaseAppeal(pokemon.contestAppeal, pokemon.contestExp, pokeblock.value, pokeblock.exp, amount, pokeblock.ignoreDebuff);
+        // reverse the array for notifications to be in order from top to bottom
+        boostedConditions.reverse().forEach(ct => {
+            const initialAppeal = pokemon.contestStats[ct]();
+
+            let effectiveness = ContestTypeHelper.getAppealModifier([ct], defaultPokemonConditions);
+            // emulate striped pokeblock "flavors"
+            if (pokeblock.type >= PokeBlockColor.Purple && pokeblock.type <= PokeBlockColor.Orange) {
+                effectiveness = ContestTypeHelper.getAppealModifier(boostedConditions, defaultPokemonConditions);
+            }
+            // rainbow gives better boost than white
+            if (pokeblock.type === PokeBlockColor.Rainbow) {
+                effectiveness = ContestTypeHelper.getAppealModifier(defaultPokemonConditions, [ct]);
+            }
+            // typed pokeblocks have constant values
+            if (pokeblock.type >= PokeBlockColor.Cool && pokeblock.type <= PokeBlockColor.Balanced) {
+                effectiveness = 0.5;
+            }
+            const appealBonus = Math.ceil(pokeblock.value * (75 + 50 * effectiveness) / 100);
+
+            // Appeal
+            const addedAppeal = PokeBlockController.increaseAppeal(initialAppeal, pokemon.contestStats[ct][1](), appealBonus, pokeblock.exp, amount, pokeblock.ignoreDebuff);
+            GameHelper.incrementObservable(pokemon.contestStats[ct], addedAppeal);
+
+            Notifier.notify({
+                message : `+${(addedAppeal - initialAppeal)} ${ContestType[ct]}`,
+                type : NotificationConstants.NotificationOption.info,
+                image : pokeblock.image,
+            });
+        });
 
         Notifier.notify({
-            message : `${pokemon.displayName} gained ${(pokemon.contestAppeal - initialAppeal)} appeal point(s)`,
+            message : `${pokemon.displayName}\'s appeal went up!`,
             type : NotificationConstants.NotificationOption.success,
             pokemonImage : getPokemonImage(pokemon.id),
         });
 
-        // Sheen
-        pokemon.contestExp = Math.min(ContestHelper.maxSheen(), pokemon.contestExp + pokeblock.exp * amount);
+        // Pokeblock fullness
+        const initialExp = pokemon.pokeblockFullness();
+        pokemon.pokeblockFullness(Math.min(ContestHelper.maxPokeblockFullness(), initialExp + pokeblock.exp * amount));
 
-        if (initialExp < ContestHelper.maxSheen() && pokemon.contestExp >= ContestHelper.maxSheen()) {
+        if (initialExp < ContestHelper.maxPokeblockFullness() && pokemon.pokeblockFullness() >= ContestHelper.maxPokeblockFullness()) {
             Notifier.notify({
-                message : `${pokemon.displayName}\'s Sheen is maxed out! Pokéblocks will only add half the usual Appeal point until its reduced.`,
+                message : `${pokemon.displayName} is full! Pokéblocks will only add half the Appeal until its fullness is reduced.`,
                 type : NotificationConstants.NotificationOption.warning,
                 pokemonImage : getPokemonImage(pokemon.id),
             });
         }
+
+        // todo: add sheen, which will be based off of fullness. poffins will give extra sheen
 
         return;
     }
@@ -127,7 +151,7 @@ export default class PokeBlockController {
                     // Step 1: Organize sheen debuffs
                     const oldExp = exp;
                     const newExpTotal = exp + pokeblockExp * amountUsed;
-                    const newExpCapped = Math.min(ContestHelper.maxSheen(), newExpTotal);
+                    const newExpCapped = Math.min(ContestHelper.maxPokeblockFullness(), newExpTotal);
 
                     const nonDebuffedDiff = Math.max(newExpCapped - oldExp, 0);
                     let nonDebuffedBlocks = Math.ceil(nonDebuffedDiff / pokeblockExp);
@@ -158,17 +182,25 @@ export default class PokeBlockController {
 
                     // Step 3: Update variables
                     appeal += totalAddedAppeal;
-                    exp = Math.min(ContestHelper.maxSheen(), exp + pokeblockExp * blocksUsed);
+                    exp = Math.min(ContestHelper.maxPokeblockFullness(), exp + pokeblockExp * blocksUsed);
                     amountUsed -= blocksUsed;
                 } else {
                     // no debuffs
                     appeal += pokeblockApp * amountUsed;
-                    exp = Math.min(ContestHelper.maxSheen(), exp + pokeblockExp * amountUsed);
+                    exp = Math.min(ContestHelper.maxPokeblockFullness(), exp + pokeblockExp * amountUsed);
                     amountUsed = 0;
                 }
             }
         }
 
         return appeal;
+    }
+
+    public static pokeblockJiggle(id: number) {
+        const img = document.getElementById('pokeblock-' + `${id}`);
+        img.style.animation = 'gelatine 0.5s';
+        img.addEventListener('animationend', function () {
+            img.style.removeProperty('animation');
+        });
     }
 }

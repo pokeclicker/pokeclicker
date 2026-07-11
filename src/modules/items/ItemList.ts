@@ -110,28 +110,29 @@ ItemList.Berry_Shovel   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Pla
 ItemList.Mulch_Shovel = new MulchShovelItem(300, 'Mulch Shovel', 'Removes Mulch from a plot in the Farm.');
 
 // Pokeblocks
-ItemList.PokeBlock_Red       = new PokeBlock(PokeBlockColor.Red, 10, 1, [ContestType.Cool], 'A Spicy Pokéblock that boosts the Appeal of Cool Pokémon by a bit.');
-ItemList.PokeBlock_Blue      = new PokeBlock(PokeBlockColor.Blue, 10, 1, [ContestType.Beautiful], 'A Dry Pokéblock that boosts the Appeal of Beautiful Pokémon by a bit.');
-ItemList.PokeBlock_Pink      = new PokeBlock(PokeBlockColor.Pink, 10, 1, [ContestType.Cute], 'A Sweet Pokéblock that boosts the Appeal of Cute Pokémon by a bit.');
-ItemList.PokeBlock_Green     = new PokeBlock(PokeBlockColor.Green, 10, 1, [ContestType.Smart], 'A Bitter Pokéblock that boosts the Appeal of Smart Pokémon by a bit.');
-ItemList.PokeBlock_Yellow    = new PokeBlock(PokeBlockColor.Yellow, 10, 1, [ContestType.Tough], 'A Sour Pokéblock that boosts the Appeal of Tough Pokémon by a bit.');
-ItemList.PokeBlock_White     = new PokeBlock(PokeBlockColor.White, 20, 1, undefined, 'A Mild Pokéblock that boosts the Appeal of any Pokémon by some.');
-ItemList.PokeBlock_Black     = new PokeBlock(PokeBlockColor.Black, 0, 5, undefined, 'A bland Pokéblock that slightly increases the Sheen of any Pokémon.', (pokemon) =>  pokemon.contestSheen() < 100);
-ItemList.PokeBlock_Gray      = new PokeBlock(PokeBlockColor.Gray, 25, 1, undefined, 'A plain Pokéblock that greatly boosts the Appeal of any Pokémon.');
-ItemList.PokeBlock_Purple    = new PokeBlock(PokeBlockColor.Purple, 40, 2, [ContestType.Cool, ContestType.Beautiful], 'A Spicy-Dry Pokéblock that boosts the Appeal of a Cool or Beautiful Pokémon by some.');
-ItemList.PokeBlock_Indigo    = new PokeBlock(PokeBlockColor.Indigo, 40, 2, [ContestType.Beautiful, ContestType.Cute], 'A Dry-Sweet Pokéblock that boosts the Appeal of a Beautiful or Cute Pokémon by some.');
-ItemList.PokeBlock_Brown     = new PokeBlock(PokeBlockColor.Brown, 40, 2, [ContestType.Cute, ContestType.Smart], 'A Sweet-Bitter Pokéblock that boosts the Appeal of a Cute to Smart Pokémon by some.');
-ItemList.PokeBlock_Olive     = new PokeBlock(PokeBlockColor.Olive, 40, 2, [ContestType.Smart, ContestType.Tough], 'A Bitter-Sour Pokéblock that boosts the Appeal of a Smart to Tough Pokémon by some.');
-ItemList.PokeBlock_Orange    = new PokeBlock(PokeBlockColor.Orange, 40, 2, [ContestType.Cool, ContestType.Tough], 'A Sour-Spicy Pokéblock that boosts the Appeal of a Tough to Cool Pokémon by some.');
-ItemList.PokeBlock_Rainbow   = new PokeBlock(PokeBlockColor.Rainbow, 65, 2, undefined, 'A flavorful Pokéblock that significantly boosts the Appeal of any Pokémon and activates all its default contest types.');
-ItemList.PokeBlock_Cool      = new PokeBlock(PokeBlockColor.Cool, 85, 3, [ContestType.Cool], 'A super Spicy Pokéblock that substantially boosts Appeal and adds the Cool Contest Type.', () => true);
-ItemList.PokeBlock_Beautiful = new PokeBlock(PokeBlockColor.Beautiful, 85, 3, [ContestType.Beautiful], 'A super Dry Pokéblock that substantially boosts Appeal and adds the Beautiful Contest Type.', () => true);
-ItemList.PokeBlock_Cute      = new PokeBlock(PokeBlockColor.Cute, 85, 3, [ContestType.Cute], 'A super Sweet Pokéblock that substantially boosts Appeal and the Cute Contest Type.', () => true);
-ItemList.PokeBlock_Smart     = new PokeBlock(PokeBlockColor.Smart, 85, 3, [ContestType.Smart], 'A super Bitter Pokéblock that substantially boosts Appeal and adds the Smart Contest Type.', () => true);
-ItemList.PokeBlock_Tough     = new PokeBlock(PokeBlockColor.Tough, 85, 3, [ContestType.Tough], 'A super Sour Pokéblock that substantially boosts Appeal and adds the Tough Contest Type.', () => true);
-ItemList.PokeBlock_Balanced  = new PokeBlock(PokeBlockColor.Balanced, 180, 5, [ContestType.Balanced], 'A super flavorful Pokéblock that immensely boosts Appeal adds the Balanced Contest Type.', () => true);
-ItemList.PokeBlock_Silver    = new PokeBlock(PokeBlockColor.Silver, 15, 1, undefined, 'A tender Pokéblock that boosts Appeal by 15.', undefined, true);
-ItemList.PokeBlock_Gold      = new PokeBlock(PokeBlockColor.Gold, 30, 0, undefined, 'A smooth Pokéblock that boosts Appeal by 30 without adding Sheen.', undefined, true);
+ItemList.PokeBlock_Black     = new PokeBlock(PokeBlockColor.Black, 5, 5, undefined, 'A bland Pokéblock that slightly increases a Pokémon\'s natural Appeal.');
+ItemList.PokeBlock_Red       = new PokeBlock(PokeBlockColor.Red, 10, 1, [ContestType.Cool], 'A Spicy Pokéblock that increases a Pokémon\'s Cool Appeal by a bit.');
+ItemList.PokeBlock_Blue      = new PokeBlock(PokeBlockColor.Blue, 10, 1, [ContestType.Beautiful], 'A Dry Pokéblock that increases a Pokémon\'s Beautiful Appeal by a bit.');
+ItemList.PokeBlock_Pink      = new PokeBlock(PokeBlockColor.Pink, 10, 1, [ContestType.Cute], 'A Sweet Pokéblock that increases a Pokémon\'s Cute Appeal by a bit.');
+ItemList.PokeBlock_Green     = new PokeBlock(PokeBlockColor.Green, 10, 1, [ContestType.Smart], 'A Bitter Pokéblock that increases a Pokémon\'s Smart Appeal by a bit.');
+ItemList.PokeBlock_Yellow    = new PokeBlock(PokeBlockColor.Yellow, 10, 1, [ContestType.Tough], 'A Sour Pokéblock that increases a Pokémon\'s Tough Appeal by a bit.');
+ItemList.PokeBlock_White     = new PokeBlock(PokeBlockColor.White, 20, 1, undefined, 'A mild Pokéblock that increases a Pokémon\'s overall Appeal by some.');
+ItemList.PokeBlock_Gray      = new PokeBlock(PokeBlockColor.Gray, 25, 1, undefined, 'A plain Pokéblock that increases a Pokémon\'s natural and supporting Appeal by some.');
+ItemList.PokeBlock_Purple    = new PokeBlock(PokeBlockColor.Purple, 50, 2, [ContestType.Cool, ContestType.Beautiful], 'A Spicy-Dry Pokéblock that greatly increases a Pokémon\'s Cool and Beautiful Appeal.');
+ItemList.PokeBlock_Indigo    = new PokeBlock(PokeBlockColor.Indigo, 50, 2, [ContestType.Beautiful, ContestType.Cute], 'A Dry-Sweet Pokéblock that greatly increases a Pokémon\'s Beautiful and Cute Appeal.');
+ItemList.PokeBlock_Brown     = new PokeBlock(PokeBlockColor.Brown, 50, 2, [ContestType.Cute, ContestType.Smart], 'A Sweet-Bitter Pokéblock that greatly increases a Pokémon\'s Cute and Smart Appeal.');
+ItemList.PokeBlock_Olive     = new PokeBlock(PokeBlockColor.Olive, 50, 2, [ContestType.Smart, ContestType.Tough], 'A Bitter-Sour Pokéblock that greatly increases a Pokémon\'s Smart and Tough Appeal.');
+ItemList.PokeBlock_Orange    = new PokeBlock(PokeBlockColor.Orange, 50, 2, [ContestType.Cool, ContestType.Tough], 'A Sour-Spicy Pokéblock that greatly increases a Pokémon\'s Tough and Cool Appeal.');
+ItemList.PokeBlock_Rainbow   = new PokeBlock(PokeBlockColor.Rainbow, 65, 2, undefined, 'A flavorful Pokéblock that greatly boosts a Pokémon\'s overall Appeal.');
+ItemList.PokeBlock_Cool      = new PokeBlock(PokeBlockColor.Cool, 140, 3, [ContestType.Cool], 'A super Spicy Pokéblock that significantly boosts a Pokémon\'s Cool Appeal.');
+ItemList.PokeBlock_Beautiful = new PokeBlock(PokeBlockColor.Beautiful, 140, 3, [ContestType.Beautiful], 'A super Dry Pokéblock that significantly boosts a Pokémon\'s Beautiful Appeal.');
+ItemList.PokeBlock_Cute      = new PokeBlock(PokeBlockColor.Cute, 140, 3, [ContestType.Cute], 'A super Sweet Pokéblock that significantly boosts a Pokémon\'s Cute Appeal.');
+ItemList.PokeBlock_Smart     = new PokeBlock(PokeBlockColor.Smart, 140, 3, [ContestType.Smart], 'A super Bitter Pokéblock that significantly boosts a Pokémon\'s Smart Appeal.');
+ItemList.PokeBlock_Tough     = new PokeBlock(PokeBlockColor.Tough, 140, 3, [ContestType.Tough], 'A super Sour Pokéblock that significantly boosts a Pokémon\'s Tough Appeal.');
+ItemList.PokeBlock_Balanced  = new PokeBlock(PokeBlockColor.Balanced, 280, 5, [ContestType.Balanced], 'A super flavorful Pokéblock that significantly boosts a Pokémon\'s Balanced Appeal.');
+ItemList.PokeBlock_Silver    = new PokeBlock(PokeBlockColor.Silver, 20, 0, undefined, 'A tender Pokéblock that boosts Pokémon\'s overall Appeal by 15.', undefined, true);
+ItemList.PokeBlock_Gold      = new PokeBlock(PokeBlockColor.Gold, 30, 0, undefined, 'A smooth Pokéblock that boosts a Pokémon\'s Appeal by 30 without adding Fullness.', undefined, true);
+// Poffins give boost depending on fullness left, plus a little bonus depending on leveltype stuff
 
 // Mega Stones
 ItemList.Abomasite          = new MegaStoneItem(MegaStoneType.Abomasite, 'Abomasnow', 10000);

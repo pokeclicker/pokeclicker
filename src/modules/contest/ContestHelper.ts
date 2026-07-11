@@ -132,7 +132,7 @@ export default class ContestHelper {
 
     // Pokeblocks
     public static getPokemonContestTypes(p: any) {
-        return App.game.party.getPokemon(p) ? App.game.party.getPokemon(p).currentContestTypes : pokemonMap[p];
+        return pokemonMap[p].contestTypes;
     }
 
     // Pokeblock Fullness

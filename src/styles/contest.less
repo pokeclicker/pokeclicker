@@ -119,6 +119,36 @@
   }
 }
 
+// https://css-tricks.com/restart-css-animation/
+// https://codepen.io/nelledejones/pen/gOOPWrK
+
+@keyframes gelatine {
+  0%, 100% { transform: scale(1, 1); }
+  25% { transform: scale(0.8, 1.2); }
+  50% { transform: scale(1.2, 0.8); }
+  75% { transform: scale(0.9, 1.1); }
+}
+
+@keyframes bounce {
+  0% { transform:translateY(0%); }
+  10% { transform:translateY(-7%); }
+  20% { transform:translateY(0%); }
+  30% { transform:translateY(-15%); }
+  40% { transform:translateY(0%); }
+}
+
+@keyframes bounce2 {
+  0% { transform:translateY(0%); }
+  15% { transform:translateY(-10%); }
+  30% { transform:translateY(0%); }
+}
+
+@keyframes shake {
+	0%, 50% {transform: translateX(0);}
+	10%, 30% {transform: translateX(-5px);}
+	20%, 40% {transform: translateX(5px);}
+}
+
 /* stylelint-disable-next-line no-duplicate-selectors */
 .for(@ContestColors); .-each(@value) {
   @type: extract(@value, 1);
