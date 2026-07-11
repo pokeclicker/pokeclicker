@@ -3,8 +3,7 @@ import ContestType from '../enums/ContestType';
 import Direction from '../enums/Direction';
 import { ContestColor, Region, SECOND } from '../GameConstants';
 import GameHelper from '../GameHelper';
-import NotificationConstants from '../notifications/NotificationConstants';
-import Notifier from '../notifications/Notifier';
+import LevelType from '../party/LevelType';
 import { pokemonMap } from '../pokemons/PokemonList';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
 import ContestWonRequirement from '../requirements/ContestWonRequirement';
@@ -58,6 +57,44 @@ export default class ContestHelper {
         }, 0);
 
         return appealSum;
+    }
+
+    public calculateContestSheenBonus (p: TmpPartyPokemonType) {
+        // Based off of LevelType equations (Experience Type on Bulbapedia)
+        // Formulas are multiplied by 10, except for Medium Slow which was by 8
+        // Erratic and Fluctuating limits are scaled from 100 to 10. Erratic's values of 7, 8, and 9 were taken from extending the neighboring curves instead of the third formula
+        // Medium Slow's constant term of -140 was removed
+        const sheenValues = [
+            [0, 20, 157, 524, 1229, 2375, 3110, 4905, 7782, 11008, 15000],
+            [0, 8, 64, 216, 512, 1000, 1728, 2744, 4096, 5832, 8000],
+            [0, 10, 80, 270, 640, 1250, 2160, 3430, 5120, 7290, 10000],
+            [0, 690, 1197, 1579, 1894, 2200, 2554, 3013, 3635, 4478, 5600],
+            [0, 13, 100, 338, 800, 1563, 2700, 4288, 6400, 9113, 12500],
+            [0, 5, 26, 92, 435, 850, 1512, 2401, 3686, 5249, 7200],
+        ];
+        const levelType = pokemonMap[p.name].levelType;
+
+        const maxSheenValues = sheenValues.map(s => s[10]);
+        const maxSheenBonusFromLevelType = GameHelper.enumNumbers(LevelType).sort((a, b) => maxSheenValues[a] - maxSheenValues[b]).indexOf(levelType) + 1;
+
+        const sheenLevels = sheenValues[levelType];
+        let sheenLevelBonus = 0;
+        // if (hasArtistRibbon) {
+        //     sheenLevelBonus = 10;
+        // } else { for loop below
+        for (let i = 0; i < sheenLevels.length - 1; i++) {
+            if (Math.floor(sheenLevels[i]) >= p.contestSheen()) {
+                sheenLevelBonus = i;
+            }
+        }
+
+        let totalSheenBonus = 100;
+        totalSheenBonus += maxSheenBonusFromLevelType * sheenLevelBonus;
+        if (ContestHelper.isSpecialContestPokemon(p.name)) {
+            totalSheenBonus += 50;
+        }
+
+        return totalSheenBonus / 100;
     }
 
     public static reducePokeblockFullnessPerSecond(conRank: ContestRank, conType: ContestType, timerValue: number, pokemons?: TmpPartyPokemonType[]) {
