@@ -849,8 +849,8 @@ export default class GenericDeal {
         ]);
         GenericDeal.list.SootopolisCityShardTrader = ko.observableArray([
             new GenericDeal({
-                costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
-                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_egg, amount: 1 }],
+                costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 40 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_stone, amount: 1 }],
 
             }),
         ]);
