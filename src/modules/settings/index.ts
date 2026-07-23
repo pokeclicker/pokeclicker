@@ -189,6 +189,12 @@ Settings.add(new Setting<string>('gameDisplayStyle', 'Game display style',
     ],
     'standard3'));
 Settings.add(new BooleanSetting('showMuteButton', 'Show mute/unmute button', true));
+Settings.add(new Setting<string>('playerSafariSprite', 'Player safari sprite',
+    [
+        new SettingOption('Male', 'male'),
+        new SettingOption('Female', 'female'),
+    ],
+    'male'));
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
