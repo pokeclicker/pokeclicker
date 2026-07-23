@@ -576,6 +576,13 @@ Settings.getSetting('backgroundImage').observableValue.subscribe((newValue) => {
     newValue === 'background-dynamic' ? DynamicBackground.startScene() : DynamicBackground.stopScene();
 });
 
+Settings.getSetting('playerSafariSprite').observableValue.subscribe((newValue) => {
+    const sprite = document.getElementById('sprite');
+    if (sprite) {
+        sprite.dataset.gender = newValue;
+    }
+});
+
 // Translation
 Settings.add(new Setting<Language>('translation.language', 'Language (beta)', Settings.enumToSettingOptionArray(Language, () => true, LanguageNames) as unknown as SettingOption<Language>[], Language.en));
 

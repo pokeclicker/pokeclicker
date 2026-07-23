@@ -316,10 +316,6 @@ class Safari {
         return [Math.floor((Safari.sizeX() - 1) / 2), Safari.sizeY() - 1];
     }
 
-    private static getPlayerGender() {
-        return Settings.getSetting('playerSafariSprite').observableValue() === 'female' ? 'female' : '';
-    }
-
     // Called by knockout once map is done rendering
     private static addPlayer() {
         const [i, j] = Safari.getPlayerStartCoords();
@@ -329,7 +325,9 @@ class Safari {
             left: 32 * i + topLeft.left - 12,
         };
 
-        document.getElementById('sprite').classList.value = `walk${Safari.lastDirection} ${Safari.getPlayerGender()}`;
+        const sprite = document.getElementById('sprite');
+        sprite.classList.value = `walk${Safari.lastDirection}`;
+        sprite.dataset.gender = Settings.getSetting('playerSafariSprite').value;
 
         $('#sprite').offset( offset );
         Safari.playerXY.x = i;
@@ -385,7 +383,7 @@ class Safari {
                 left: `+=${directionOffset.x * 32}`,
             };
 
-            document.getElementById('sprite').classList.value = `walk${direction} moving ${Safari.getPlayerGender()}`;
+            document.getElementById('sprite').classList.value = `walk${direction} moving`;
             $('#sprite').addClass(`${envClass}`);
             Safari.playerXY.x = newPos.x;
             Safari.playerXY.y = newPos.y;
@@ -400,11 +398,11 @@ class Safari {
                     if (!Safari.checkBattle() && Safari.queue[0]) {
                         Safari.step(Safari.queue[0]);
                     } else {
-                        document.getElementById('sprite').classList.value = `walk${direction} ${Safari.getPlayerGender()}`;
+                        document.getElementById('sprite').classList.value = `walk${direction}`;
                         $('#sprite').addClass(`${envClass}`);
                     }
                 } else {
-                    document.getElementById('sprite').classList.value = `walk${direction} ${Safari.getPlayerGender()}`;
+                    document.getElementById('sprite').classList.value = `walk${direction}`;
                     $('#sprite').addClass(`${envClass}`);
                 }
             });
@@ -412,7 +410,7 @@ class Safari {
             Safari.spawnPokemonCheck();
             Safari.despawnPokemonCheck();
         } else {
-            document.getElementById('sprite').classList.value = `walk${direction} ${Safari.getPlayerGender()}`;
+            document.getElementById('sprite').classList.value = `walk${direction}`;
             $('#sprite').addClass(`${envClass}`);
             setTimeout(() => {
                 Safari.walking = false;
