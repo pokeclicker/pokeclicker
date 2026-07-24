@@ -606,8 +606,8 @@ class AchievementHandler {
 
 
         // Battle Café pokédex for Galar, highly optional as this is End Game farming, so no high bonus
-        const alcremieDexFilter = (p: PartyPokemon) => p.name === 'Milcery (Cheesy)' || p.name.startsWith('Alcremie');
-        const alcremieAmount = pokemonList.reduce((count, p) => count + +(p.name === 'Milcery (Cheesy)' || p.name.startsWith('Alcremie')), 0);
+        const alcremieDexFilter = (p: PartyPokemon) => p.name === 'Milcery (Cheesy)' || p.name.startsWith('Alcremie') && p.name != 'Alcremie (Flavorless)';
+        const alcremieAmount = pokemonList.reduce((count, p) => count + +(p.name === 'Milcery (Cheesy)' || p.name.startsWith('Alcremie') && p.name != 'Alcremie (Flavorless)'), 0);
         AchievementHandler.addAchievement('Moomoo Milk Served Right', 'Catch 32 unique Battle Café flavors.', new CaughtUniquePokemonByFilterRequirement(alcremieDexFilter, 'Catch 32 unique Alcremie flavors.', 32), 0.5, GameConstants.Region.galar);
         AchievementHandler.addAchievement('Gotta Taste \'Em All!', 'Catch all unique Battle Café flavors.', new CaughtUniquePokemonByFilterRequirement(alcremieDexFilter, 'Catch all unique Alcremie flavors.', alcremieAmount), 1, GameConstants.Region.galar);
         AchievementHandler.addAchievement('Yoshida\'s Coffees Enjoyer', 'Catch 32 unique Shiny Battle Café flavors.', new CaughtUniquePokemonByFilterRequirement(alcremieDexFilter, 'Catch 32 unique Shiny Alcremie flavors.', 32, true), 0.75, GameConstants.Region.galar);
