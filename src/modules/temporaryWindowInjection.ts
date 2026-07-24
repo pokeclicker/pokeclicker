@@ -15,6 +15,10 @@ import BerryType from './enums/BerryType';
 import SizeUnits from './enums/SizeUnits';
 import PokemonType from './enums/PokemonType';
 import CaughtStatus from './enums/CaughtStatus';
+import ContestType from './enums/ContestType';
+import ContestRank from './enums/ContestRank';
+import ContestOpponentStatus from './enums/ContestOpponentStatus';
+import Direction from './enums/Direction';
 import EvolutionType from './enums/EvolutionType';
 import FarmNotificationType from './enums/FarmNotificationType';
 import FlavorType from './enums/FlavorType';
@@ -32,6 +36,12 @@ import BattlePokemon from './battles/BattlePokemon';
 import Trainer from './battles/Trainer';
 import GymPokemon from './gym/GymPokemon';
 import CustomGymPokemon from './gym/CustomGymPokemon';
+import ContestBattle from './contest/ContestBattle';
+import ContestBattlePokemon from './contest/ContestBattlePokemon';
+import ContestHelper from './contest/ContestHelper';
+import ContestRunner from './contest/ContestRunner';
+import ContestTrainerList from './contest/ContestTrainerList';
+import ContestScore from './contest/ContestScore';
 import Berry from './farming/Berry';
 import { BerryList } from './farming/BerryList';
 import BooleanSetting from './settings/BooleanSetting';
@@ -78,6 +88,7 @@ import * as DisplayObservables from './utilities/DisplayObservables';
 import PokemonCategories from './party/Category';
 import Information from './utilities/Information';
 import TypeHelper from './types/TypeHelper';
+import ContestTypeHelper from './types/ContestTypeHelper';
 import Upgrade from './upgrades/Upgrade';
 import ExpUpgrade from './upgrades/ExpUpgrade';
 import OakItemType from './enums/OakItemType';
@@ -256,6 +267,10 @@ Object.assign(<any>window, {
     PokemonType,
     CaughtStatus,
     EvolutionType,
+    ContestType,
+    ContestRank,
+    ContestOpponentStatus,
+    Direction,
     FarmNotificationType,
     FlavorType,
     ItemType,
@@ -271,6 +286,12 @@ Object.assign(<any>window, {
     Trainer,
     GymPokemon,
     CustomGymPokemon,
+    ContestBattle,
+    ContestBattlePokemon,
+    ContestHelper,
+    ContestRunner,
+    ContestTrainerList,
+    ContestScore,
     Berry,
     BerryList,
     BooleanSetting,
@@ -324,6 +345,7 @@ Object.assign(<any>window, {
     PokemonCategories,
     Information,
     TypeHelper,
+    ContestTypeHelper,
     Upgrade,
     ExpUpgrade,
     OakItemType,
