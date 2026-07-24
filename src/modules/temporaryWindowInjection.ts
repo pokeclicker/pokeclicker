@@ -238,6 +238,7 @@ import CollectibleItem from './items/CollectibleItem';
 import areaStatus from './enums/AreaStatus';
 import TranslationHelper from './translation/TranslationHelper';
 import * as DownloadUtil from './utilities/DownloadUtil';
+import LocationNavigatorOption from './locationNavigator/LocationNavigatorOption';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -492,4 +493,5 @@ Object.assign(<any>window, {
     areaStatus,
     TranslationHelper,
     DownloadUtil,
+    LocationNavigatorOption,
 });

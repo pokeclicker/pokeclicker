@@ -260,6 +260,9 @@ class MapHelper {
             player.subregion = town.subRegion;
             player.town = town;
             Battle.enemyPokemon(null);
+            if (town.secret) {
+                App.game.statistics.secretTownsVisited[townName](1);
+            }
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;
         } else {
@@ -397,6 +400,17 @@ class MapHelper {
         return statuses;
     }
 
+    public static mapVisible = ko.pureComputed(() => {
+        const states = [
+            GameConstants.GameState.fighting,
+            GameConstants.GameState.gym,
+            GameConstants.GameState.town,
+            GameConstants.GameState.shop,
+            GameConstants.GameState.temporaryBattle,
+            GameConstants.GameState.paused,
+        ];
+        return App.game.keyItems.hasKeyItem(KeyItemType.Town_map) && states.includes(App.game.gameState);
+    });
 }
 
 MapHelper satisfies TmpMapHelperType;

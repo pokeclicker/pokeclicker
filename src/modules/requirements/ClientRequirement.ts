@@ -14,6 +14,6 @@ export default class ClientRequirement extends Requirement {
     }
 
     public hint(): string {
-        return this.usingClient ? 'Use the client' : 'Use the browser version';
+        return this.usingClient ? 'Accessible when using the official Desktop Client' : 'Accessible when playing the browser version';
     }
 }

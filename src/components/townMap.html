@@ -22,6 +22,33 @@
                     <i>NOTE: Colors and priority can be customized in the settings menu</i>
                 </div>
             </div>`}">ⓘ</button>
+
+        <div id="locationNavigator" class="dropdown">
+            <button class="btn btn-sm p-1 border-0 dropdown-toggle" data-toggle="dropdown">
+                Nav
+            </button>
+            <div class="dropdown-menu m-0 p-1">
+                <div id="locationNavigatorContainer">
+                    <div id="locationNavigatorTabs" data-bind="click: () => { event.stopPropagation(); }">
+                        <ul class="nav nav-pills border-bottom border-secondary small" data-bind="foreach: GameHelper.enumNumbers(LocationNavigatorOption)">
+                            <button class="text-sm-center nav-link rounded-0 px-2 py-1" style="flex: 1;" data-bind="text: LocationNavigatorOption[$data],
+                                click: () => LocationNavigator.selectedType($data), css: { active: LocationNavigator.selectedType() == $data }"></button>
+                        </ul>
+                    </div>
+                    <div class="bg-danger py-1" data-bind="hidden: MapHelper.mapVisible">
+                        <p class="small m-0">Map is not available in current location</p>
+                    </div>
+                    <div class="text-left small" id="locationNavigatorItems">
+                        <div class="list-group list-group-flush" data-bind="template: { name: 'location-navigator-template',
+                            foreach: LocationNavigator.activeLocationList() }"></div>
+                    </div>
+                    <div data-bind="ifnot: LocationNavigator.activeLocationList().length">
+                        <p class="text-muted text-center small mt-2 mb-1">No Locations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <button class='btn btn-sm' style="position: absolute; right: 96px; top: 0px; width: auto; height: 41px; cursor: default;"
         data-bind='style: { background: DayCycle.color() },
             tooltip: {

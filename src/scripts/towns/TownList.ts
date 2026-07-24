@@ -967,6 +967,7 @@ TownList['Route 4 Pokémon Center'] = new Town(
         ],
         npcs: [Route3ShadySalesman],
         ignoreAreaStatus: true,
+        secret: true,
     }
 );
 TownList['Cerulean City'] = new Town(
@@ -3464,6 +3465,7 @@ TownList['Fish Shop'] = new Town(
         ],
         npcs: [RoadsideStandShadySalesman],
         ignoreAreaStatus: true,
+        secret: true,
     }
 );
 TownList['Fortree City'] = new Town(
@@ -3485,6 +3487,7 @@ TownList['Wind Chime Shop'] = new Town(
         requirements: [new TemporaryBattleRequirement('May 4')],
         npcs: [WindChimeShopShadySalesman],
         ignoreAreaStatus: true,
+        secret: true,
     }
 );
 TownList['Lilycove City'] = new Town(
@@ -4768,6 +4771,7 @@ TownList['Secret Berry Shop'] = new Town(
         ],
         npcs: [SnoverBreeder, GrotleAcornParty],
         ignoreAreaStatus: true,
+        secret: true,
     }
 );
 TownList['Sunyshore City'] = new Town(
@@ -5483,9 +5487,11 @@ TownList['A Perfectly Ordinary Frigate'] = new Town(
         requirements: [
             new GymBadgeRequirement(BadgeEnums.Insect),
             new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 1),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 3, GameConstants.AchievementOption.less),
             new TemporaryBattleRequirement('Team Plasma Grunt 1'),
         ],
         npcs: [PlasmaGrunt1],
+        hideFromLocationNavigatorWhenLocked: true,
     }
 );
 TownList['Nimbasa City'] = new Town(
@@ -5525,8 +5531,10 @@ TownList['A Totally Unsuspicious Frigate'] = new Town(
         requirements: [
             new GymBadgeRequirement(BadgeEnums.Quake),
             new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 8, GameConstants.AchievementOption.less),
         ],
         npcs: [PlasmaGrunt2, DriftveilZinzolin],
+        hideFromLocationNavigatorWhenLocked: true,
     }
 );
 TownList['Mistralton City'] = new Town(
@@ -5591,8 +5599,10 @@ TownList['Team Plasma Assault'] = new Town(
         requirements: [
             new GymBadgeRequirement(BadgeEnums.Legend),
             new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 11),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15, GameConstants.AchievementOption.less),
         ],
         npcs: [PlasmaGrunt3],
+        hideFromLocationNavigatorWhenLocked: true,
     }
 );
 TownList['Shopping Mall Nine'] = new Town(
@@ -6685,6 +6695,7 @@ TownList['Disguised Shop'] = new Town(
         ],
         npcs: [NotAsh],
         ignoreAreaStatus: true,
+        secret: true,
     }
 );
 TownList['Geosenge Town'] = new Town(
@@ -8241,6 +8252,7 @@ TownList['Magikarp\'s Eye'] = new Town(
         requirements: [new GymBadgeRequirement(BadgeEnums.Master_League)],
         npcs: [MagikarpEyeShadySalesman],
         ignoreAreaStatus: true,
+        secret: true,
     }
 );
 

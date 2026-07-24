@@ -12,7 +12,9 @@
 type TownOptionalArgument = {
     requirements?: Requirement[],
     npcs?: NPC[],
-    ignoreAreaStatus?: boolean
+    ignoreAreaStatus?: boolean,
+    secret?: boolean,
+    hideFromLocationNavigatorWhenLocked?: boolean,
 };
 
 class Town implements TmpTownType {
@@ -25,6 +27,8 @@ class Town implements TmpTownType {
     public content: TownContent[];
     public subRegion: GameConstants.SubRegions;
     public ignoreAreaStatus: boolean;
+    public secret: boolean;
+    public hideFromLocationNavigatorWhenLocked: boolean;
 
     constructor(
         name: string,
@@ -43,6 +47,8 @@ class Town implements TmpTownType {
         this.content = content;
         this.subRegion = subRegion;
         this.ignoreAreaStatus = optional.ignoreAreaStatus ?? false;
+        this.secret = optional.secret ?? false;
+        this.hideFromLocationNavigatorWhenLocked = optional.hideFromLocationNavigatorWhenLocked ?? false;
 
         if (GymList[name]) {
             const gym = GymList[name];
