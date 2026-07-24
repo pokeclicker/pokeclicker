@@ -2,8 +2,10 @@ name: 🔂 PR Preview
 
 on:
   pull_request_target:
-    # when using teardown: 'true', add default event types + closed event type
-    types: [opened, synchronize, reopened, closed]
+    types:
+      - labeled
+      - synchronize
+      - closed
     paths:
       - 'src/**/*.ts'
       - 'src/**/*.html'
@@ -12,49 +14,72 @@ on:
 
 jobs:
   preview:
-    environment: pokeclicker-development # link to the environment
+    if: |
+      (
+        github.event.action == 'labeled' &&
+        github.event.label.name == 'deploy-preview'
+      ) ||
+      (
+        github.event.action == 'synchronize' &&
+        contains(github.event.pull_request.labels.*.name, 'deploy-preview')
+      ) ||
+      (
+        github.event.action == 'closed' &&
+        contains(github.event.pull_request.labels.*.name, 'preview-deployed')
+      )
+
+    environment: pokeclicker-development
     runs-on: ubuntu-latest
+
     permissions:
-      pull-requests: write # allow to create/update PR comments
+      contents: read
+      pull-requests: write
+
     steps:
       - name: Get User Permission
         id: checkAccess
+        if: github.event.action != 'closed'
         uses: actions-cool/check-user-permission@v2
         with:
           require: write
-          username: ${{ github.triggering_actor }}
+          username: ${{ github.actor }}
 
-      # if the user does not have the required permission, we should return exit code 1 to stop the workflow
-      # or add a condition to skip the next steps instead (if we don't want this to deploy to preview PR for everyone)
       - name: Check User Permission
-        if: steps.checkAccess.outputs.require-result == 'false'
+        if: |
+          github.event.action != 'closed' &&
+          steps.checkAccess.outputs.require-result == 'false'
         run: |
-          echo "${{ github.triggering_actor }} does not have permissions on this repo."
+          echo "${{ github.actor }} does not have permissions on this repo."
           echo "Current permission level is ${{ steps.checkAccess.outputs.user-permission }}"
-          echo "Job originally triggered by ${{ github.actor }}"
-          exit 0
+          exit 1
 
       - name: Checkout PR
+        if: github.event.action != 'closed'
         uses: actions/checkout@v6
         with:
-          ref: ${{  github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
+          allow-unsafe-pr-checkout: true
 
       - name: Build PR
+        if: github.event.action != 'closed'
         uses: actions/setup-node@v6
         with:
           node-version-file: package.json
-      - run: |
+
+      - name: Build
+        if: github.event.action != 'closed'
+        run: |
           npm ci
           echo "module.exports={DEVELOPMENT:true,DEV_BANNER:true};" >> config.js
           npm run build
           rm -rf build/assets
           rm -rf build/libs
           perl -0pi -e 's|</title>|</title>\n<script>\nif("serviceWorker" in navigator){\nnavigator.serviceWorker.register("/sw.js",{scope:"/"}).then(reg=>{if(reg.waiting)reg.waiting.postMessage({type:"SKIP_WAITING"});});\nnavigator.serviceWorker.addEventListener("controllerchange",()=>{if(window._reloading)return;window._reloading=true;window.location.reload();});\n}\n</script>|s' build/index.html
-      
+
       - name: Deploy to GH-Pages
-        uses: mvk/pr-preview-action@5ce80c4514b76075e126b7dbcd7674a7ff4183dd
         id: preview_step
+        uses: RedSparr0w/pr-preview-action@c4c6b7dcdc30f38974dbf0ba9ad06bb2cef2cd99
         with:
           source-dir: 'build'
           preview-branch: 'master'
@@ -66,4 +91,19 @@ jobs:
           qr-code: false
 
       - name: Preview URL
+        if: github.event.action != 'closed'
         run: echo "url => ${{ steps.preview_step.outputs.deployment-url }}"
+
+      - name: Replace deploy label with deployed label
+        if: |
+          github.event.action == 'labeled' &&
+          success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['preview-deployed']
+            });
