@@ -232,7 +232,8 @@ class ExpGainedBonusHeldItem extends HeldItem {
         public gainedBonus: number,
         regionUnlocked: GameConstants.Region,
         pokemonDescription = 'the holding Pokémon',
-        canUse = (pokemon: PartyPokemon) => true) {
+        canUse = (pokemon: PartyPokemon) => true
+    ) {
         super(name, basePrice, currency, shopOptions, displayName, `A held item that earns ${pokemonDescription} ${(gainedBonus - 1).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 0 })} bonus Experience Points.`, regionUnlocked, canUse);
     }
 

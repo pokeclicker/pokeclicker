@@ -12,6 +12,7 @@ import BadgeEnums from './enums/Badges';
 import BerryColor from './enums/BerryColor';
 import BerryFirmness from './enums/BerryFirmness';
 import BerryType from './enums/BerryType';
+import BlendingRecipeType from './enums/BlendingRecipeType';
 import SizeUnits from './enums/SizeUnits';
 import PokemonType from './enums/PokemonType';
 import CaughtStatus from './enums/CaughtStatus';
@@ -43,6 +44,10 @@ import Weather from './weather/Weather';
 import WeatherApp from './weather/WeatherApp';
 import RegionalForecast from './weather/RegionalForecast';
 import WeatherForecast from './weather/WeatherForecast';
+import Blending from './blending/Blending';
+import BlendingController from './blending/BlendingController';
+import BlendingRecipes from './blending/BlendingRecipes';
+import BlendingListController from './blending/BlendingListController';
 import DayCycle from './dayCycle/DayCycle';
 import DayCyclePart from './dayCycle/DayCyclePart';
 import DayCyclePartRequirement from './requirements/DayCyclePartRequirement';
@@ -100,7 +105,7 @@ import OneFromManyRequirement from './requirements/OneFromManyRequirement';
 import AttackRequirement from './requirements/AttackRequirement';
 import BattleFrontierHighestStageRequirement from './requirements/BattleFrontierHighestStageRequirement';
 import BattleFrontierTotalStageRequirement from './requirements/BattleFrontierTotalStageRequirement';
-import TotalBerriesUnlockedRequirement from './requirements/TotalBerriesUnlockedRequirement';
+import BerryUnlockedRequirement from './requirements/BerryUnlockedRequirement';
 import CapturedRequirement from './requirements/CapturedRequirement';
 import CaughtPokemonRequirement from './requirements/CaughtPokemonRequirement';
 import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
@@ -134,11 +139,11 @@ import PokemonDefeatedSelectNRequirement from './requirements/PokemonDefeatedSel
 import SeviiCaughtRequirement from './requirements/SeviiCaughtRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
 import ShadowPokemonRequirement from './requirements/ShadowPokemonRequirement';
-import BerryUnlockedRequirement from './requirements/BerryUnlockedRequirement';
 import StatisticRequirement from './requirements/StatisticRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import StarterRequirement from './requirements/StarterRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
+import TotalBerriesUnlockedRequirement from './requirements/TotalBerriesUnlockedRequirement';
 import TotalMegaStoneObtainedRequirement from './requirements/TotalMegaStoneObtainedRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
 import UndergroundItemValueType from './enums/UndergroundItemValueType';
@@ -204,6 +209,7 @@ import Vitamin from './items/Vitamin';
 import VitaminController from './items/VitaminController';
 import Consumable from './items/Consumable';
 import ConsumableController from './items/ConsumableController';
+import PokeBlock from './items/PokeBlock';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
@@ -252,6 +258,7 @@ Object.assign(<any>window, {
     BerryColor,
     BerryFirmness,
     BerryType,
+    BlendingRecipeType,
     SizeUnits,
     PokemonType,
     CaughtStatus,
@@ -282,6 +289,10 @@ Object.assign(<any>window, {
     WeatherApp,
     RegionalForecast,
     WeatherForecast,
+    Blending,
+    BlendingController,
+    BlendingRecipes,
+    BlendingListController,
     DayCycle,
     DayCyclePart,
     DayCyclePartRequirement,
@@ -347,7 +358,7 @@ Object.assign(<any>window, {
     AttackRequirement,
     BattleFrontierHighestStageRequirement,
     BattleFrontierTotalStageRequirement,
-    TotalBerriesUnlockedRequirement,
+    BerryUnlockedRequirement,
     CapturedRequirement,
     CaughtPokemonRequirement,
     ClearDungeonRequirement,
@@ -381,11 +392,11 @@ Object.assign(<any>window, {
     SeviiCaughtRequirement,
     ShinyPokemonRequirement,
     ShadowPokemonRequirement,
-    BerryUnlockedRequirement,
     StatisticRequirement,
     SubregionRequirement,
     StarterRequirement,
     TokenRequirement,
+    TotalBerriesUnlockedRequirement,
     TotalMegaStoneObtainedRequirement,
     UndergroundItemsFoundRequirement,
     UndergroundItemValueType,
@@ -459,6 +470,7 @@ Object.assign(<any>window, {
     VitaminController,
     Consumable,
     ConsumableController,
+    PokeBlock,
     RoamingPokemonList,
     DataPokemon,
     RoamingPokemon,

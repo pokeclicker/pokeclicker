@@ -22,12 +22,12 @@ import {
     FluteItemType,
     MegaStoneType,
     Pokeball,
-    PokeBlockColor,
     Region,
     VitaminType,
 } from '../GameConstants';
 import { MulchShovelItem, ShovelItem } from './ShovelItem';
 import PokeBlock from './PokeBlock';
+import PokeBlockColor from '../enums/PokeBlockColor';
 import MegaStoneItem from './MegaStoneItem';
 import Vitamin from './Vitamin';
 import EggItem from './EggItem';
@@ -105,21 +105,28 @@ ItemList.Moonball = new PokeballItem(Pokeball.Moonball, Infinity, Currency.farmP
 ItemList.Berry_Shovel   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.');
 ItemList.Mulch_Shovel = new MulchShovelItem(300, 'Mulch Shovel', 'Removes Mulch from a plot in the Farm.');
 
-ItemList.PokeBlock_Black  = new PokeBlock(PokeBlockColor.Black, Infinity);
-ItemList.PokeBlock_Red    = new PokeBlock(PokeBlockColor.Red, Infinity);
-ItemList.PokeBlock_Blue = new PokeBlock(PokeBlockColor.Blue, Infinity);
-ItemList.PokeBlock_Pink = new PokeBlock(PokeBlockColor.Pink, Infinity);
-ItemList.PokeBlock_Green = new PokeBlock(PokeBlockColor.Green, Infinity);
-ItemList.PokeBlock_Yellow = new PokeBlock(PokeBlockColor.Yellow, Infinity);
-ItemList.PokeBlock_Gold   = new PokeBlock(PokeBlockColor.Gold, Infinity);
-ItemList.PokeBlock_Purple = new PokeBlock(PokeBlockColor.Purple, Infinity);
-ItemList.PokeBlock_Indigo = new PokeBlock(PokeBlockColor.Indigo, Infinity);
-ItemList.PokeBlock_Brown = new PokeBlock(PokeBlockColor.Brown, Infinity);
-ItemList.PokeBlock_Light_Blue = new PokeBlock(PokeBlockColor.Light_Blue, Infinity);
-ItemList.PokeBlock_Olive = new PokeBlock(PokeBlockColor.Olive, Infinity);
-ItemList.PokeBlock_Beige = new PokeBlock(PokeBlockColor.Beige, Infinity);
-ItemList.PokeBlock_Gray   = new PokeBlock(PokeBlockColor.Gray, Infinity);
-ItemList.PokeBlock_White  = new PokeBlock(PokeBlockColor.White, Infinity);
+ItemList.PokeBlock_Red       = new PokeBlock(PokeBlockColor.Red, Infinity);
+ItemList.PokeBlock_Blue      = new PokeBlock(PokeBlockColor.Blue, Infinity);
+ItemList.PokeBlock_Pink      = new PokeBlock(PokeBlockColor.Pink, Infinity);
+ItemList.PokeBlock_Green     = new PokeBlock(PokeBlockColor.Green, Infinity);
+ItemList.PokeBlock_Yellow    = new PokeBlock(PokeBlockColor.Yellow, Infinity);
+ItemList.PokeBlock_White     = new PokeBlock(PokeBlockColor.White, Infinity);
+ItemList.PokeBlock_Black     = new PokeBlock(PokeBlockColor.Black, Infinity);
+ItemList.PokeBlock_Gray      = new PokeBlock(PokeBlockColor.Gray, Infinity);
+ItemList.PokeBlock_Purple    = new PokeBlock(PokeBlockColor.Purple, Infinity);
+ItemList.PokeBlock_Indigo    = new PokeBlock(PokeBlockColor.Indigo, Infinity);
+ItemList.PokeBlock_Brown     = new PokeBlock(PokeBlockColor.Brown, Infinity);
+ItemList.PokeBlock_Olive     = new PokeBlock(PokeBlockColor.Olive, Infinity);
+ItemList.PokeBlock_Orange    = new PokeBlock(PokeBlockColor.Orange, Infinity);
+ItemList.PokeBlock_Rainbow   = new PokeBlock(PokeBlockColor.Rainbow, Infinity);
+ItemList.PokeBlock_Cool      = new PokeBlock(PokeBlockColor.Cool, Infinity);
+ItemList.PokeBlock_Beautiful = new PokeBlock(PokeBlockColor.Beautiful, Infinity);
+ItemList.PokeBlock_Cute      = new PokeBlock(PokeBlockColor.Cute, Infinity);
+ItemList.PokeBlock_Smart     = new PokeBlock(PokeBlockColor.Smart, Infinity);
+ItemList.PokeBlock_Tough     = new PokeBlock(PokeBlockColor.Tough, Infinity);
+ItemList.PokeBlock_Balanced  = new PokeBlock(PokeBlockColor.Balanced, Infinity);
+ItemList.PokeBlock_Silver    = new PokeBlock(PokeBlockColor.Silver, Infinity);
+ItemList.PokeBlock_Gold      = new PokeBlock(PokeBlockColor.Gold, Infinity);
 
 // Mega Stones
 ItemList.Abomasite          = new MegaStoneItem(MegaStoneType.Abomasite, 'Abomasnow', 10000);

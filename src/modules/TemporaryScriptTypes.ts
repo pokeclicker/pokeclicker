@@ -34,6 +34,7 @@ import type WeatherType from './weather/WeatherType';
 import type { MultiplierDecreaser } from './items/types';
 import type BagItem from './interfaces/BagItem';
 import type BattlePokemon from './battles/BattlePokemon';
+import BerryType from './enums/BerryType';
 
 /*
     These types are only temporary while we are converting things to modules. As things are converted,
@@ -101,6 +102,7 @@ export type TmpDreamOrbControllerType = any;
 export type TmpPurifyChamberType = any;
 export type TmpWeatherAppType = any;
 export type TmpZMovesType = any;
+export type TmpBlendingType = any;
 export type TmpHeldItemType = any;
 
 export type TmpGameType = {
@@ -138,6 +140,7 @@ export type TmpGameType = {
     purifyChamber: TmpPurifyChamberType;
     weatherApp: TmpWeatherAppType;
     zMoves: TmpZMovesType;
+    blending: TmpBlendingType;
 
     // functions
     load: () => void;
@@ -378,4 +381,8 @@ export type TmpTemporaryBattleType = {
 
 export type TmpTownType = {
     name: string;
+};
+
+export type TmpFarmControllerType = {
+    getUnlockedBerryList: () => BerryType[];
 };

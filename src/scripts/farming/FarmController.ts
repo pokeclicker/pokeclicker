@@ -335,3 +335,5 @@ class FarmController {
         return App.game.farming.canAccess() && Settings.getSetting('showFarmModule').observableValue() === 'never';
     });
 }
+
+FarmController satisfies TmpFarmControllerType;

@@ -1,0 +1,79 @@
+#blendingModal {
+  .modal-lg{
+    max-width: 1000px !important;
+  }
+
+  .sticky-top {
+    z-index: 100;
+  }
+
+  .nav-tabs {
+    overflow: auto hidden;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 767px) { // computer and tablet
+  .blendingColumn {
+    max-height: calc(98vh - 205px);
+  }
+}
+
+@media (max-width: 767px) { // phone
+  #blendBerryList, #blendersList {
+    max-height: calc(65vh - 255px);
+  }
+
+  #blendRecipesList {
+    max-height: calc(50vh - 205px);
+  }
+
+  #blendRecipeCards {
+    max-height: calc(78vh - 205px);
+  }
+
+  @media (max-height: 600px) {
+    #blendRecipesList, #blendRecipeCards {
+      max-height: calc(45vh - 70px);
+    }
+
+    #blendBerryList, #blendersList {
+      max-height: calc(60vh - 194px);
+    }
+  }
+
+  #blendersList {
+    margin-top: inherit;
+  }
+
+  #blenderAndList, #recipeCardContent {
+    flex-direction:column-reverse;
+  }
+}
+
+.blenderBody{
+  width: 40px;
+}
+
+.blenderTop {
+  position: absolute;
+  width: 40px;
+}
+
+#blendSlots {
+  margin: 5px;
+  width: 40px;
+  height: 40px;
+  border-color: #67e7ff;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 0.3rcap;
+}
+
+.blendSlotsAnimated {
+  border-style: outset !important;
+  pointer-events: none;
+  position: absolute;
+  animation: spin 1s linear infinite;
+ }

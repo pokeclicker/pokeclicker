@@ -489,6 +489,7 @@ Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'U'));
 Settings.add(new HotkeySetting('hotkey.shop', 'Poké Mart', 'E'));
 Settings.add(new HotkeySetting('hotkey.dailyQuests', 'Daily Quests', 'Q'));
 Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Poké Ball Selection', 'P', { suffix: ' + Number' }));
+Settings.add(new HotkeySetting('hotkey.blending', 'Berry Blending', 'B'));
 Settings.add(new HotkeySetting('hotkey.castformApp', 'Castform App', 'C', {}, new ClearDungeonRequirement(250, getDungeonIndex('Weather Institute'))));
 Settings.add(new HotkeySetting('hotkey.purifyChamber', 'Purify Chamber', 'K', {}, new ShadowPokemonRequirement(1, ShadowStatus.Purified)));
 
