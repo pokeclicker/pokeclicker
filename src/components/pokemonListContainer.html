@@ -72,6 +72,7 @@
                                         <sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
                                         <img class="shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
                                         <img class="shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
+                                        <span data-bind="class: `${GameConstants.Pokerus[App.game.party.getPokemon($data.id)?.pokerus]}-icon`, visible: $data.pokerus"/>
                                         <!-- ko foreach: PokemonHelper.getMegaStones($data.name).filter(s => player.hasMegaStone(s.megaStone)) -->
                                         <img width="20px" data-bind="attr: { src: $data.image },
                                             tooltip: {
