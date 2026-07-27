@@ -121,6 +121,7 @@ Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal',
         new SettingOption('Queue Slots Full', 'queue'),
     ],
     'queue'));
+Settings.add(new BooleanSetting('typeMultiplierHatcheryDisplay', 'Include selected type modifiers in display value', true));
 Settings.add(new BooleanSetting('showHatcheryModalQueue', 'Show Hatchery Queue in Modal', false));
 Settings.add(new BooleanSetting('hideQuestsOnFull', 'Hide Quest Menu on full questslots', true));
 // Settings.add(new BooleanSetting('showFarmModule', 'Show Farm module on main screen', true));
@@ -319,7 +320,7 @@ Settings.add(new Setting('heldItemCurrentItemFilter', 'Held Item filter', [
 
 // Hatchery Filters
 export const breedingFilterSettingKeys = ['breedingNameFilter', 'breedingIDFilter', 'breedingRegionFilter', 'breedingType1Filter', 'breedingType2Filter',
-    'breedingShinyFilter', 'breedingPokerusFilter', 'breedingCategoryFilter', 'breedingUniqueTransformationFilter', 'breedingHideAltFilter'];
+    'breedingShinyFilter', 'breedingPokerusFilter', 'breedingCategoryFilter', 'breedingUniqueTransformationFilter', 'breedingHideAltFilter', 'breedingType1Attack', 'breedingType2Attack'];
 
 Settings.add(new SearchSetting('breedingNameFilter', 'Search', '', undefined, false));
 Settings.add(new Setting<number>('breedingIDFilter', 'Search ID', [], -1, undefined, false));
@@ -365,6 +366,18 @@ Settings.add(new Setting<string>('breedingUniqueTransformationFilter', 'Unique T
     ],
     'all', new MaxRegionRequirement(Region.kalos), false));
 Settings.add(new BooleanSetting('breedingHideAltFilter', 'Hide alternate forms', false));
+Settings.add(new Setting<PokemonType>('breedingType1Attack', 'Type 1',
+    [
+        new SettingOption('None', PokemonType.None),
+        ...Settings.enumToNumberSettingOptionArray(PokemonType).filter((opt) => opt.text !== 'None'),
+    ],
+    PokemonType.None, undefined, false));
+Settings.add(new Setting<PokemonType>('breedingType2Attack', 'Type 2',
+    [
+        new SettingOption('None', PokemonType.None),
+        ...Settings.enumToNumberSettingOptionArray(PokemonType).filter((opt) => opt.text !== 'None'),
+    ],
+    PokemonType.None, undefined, false));
 
 // Hatchery display settings
 Settings.add(new Setting<string>('breedingDisplayTextSetting', 'Display Value',

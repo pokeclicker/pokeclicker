@@ -54,6 +54,7 @@
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('breedingDisplay')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('eggAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('hideHatchery')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('typeMultiplierHatcheryDisplay')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showHatcheryModalQueue')}"></tr>
                             </tbody>
                             <thead>
@@ -127,7 +128,7 @@
                                             mapAreaStateOrder.set(mapAreaStateOrder.defaultValue);
                                         }">Reset Order</button>
                                         <button type="button" class="btn btn-primary" data-bind="click: () => {
-                                            Settings.getSetting('mapAreaStateOrder').value.map(status => 
+                                            Settings.getSetting('mapAreaStateOrder').value.map(status =>
                                                 Settings.getSetting(`--${areaStatus[status]}`)
                                             ).forEach(setting => setting.set(setting.defaultValue));
                                         }">Reset Colors</button>
