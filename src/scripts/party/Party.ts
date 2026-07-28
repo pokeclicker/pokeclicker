@@ -339,7 +339,7 @@ class Party implements Feature, TmpPartyType {
             xClickModifier: EffectEngineRunner.isActive(ItemList.xClick.name)() ? (ItemList.xClick as BattleItem).multiplyBy : 1,
             blackFluteModifier: FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Black_Flute),
             rockyHelmetModifier: App.game.oakItems.calculateBonus(OakItemType.Rocky_Helmet),
-            baseClickAttack: Math.floor(App.game.party.calculateBaseClickAttack() * (1 + AchievementHandler.achievementBonus())),
+            baseClickAttack: Number(App.game.party.calculateBaseClickAttack().toFixed(4)),
         };
     });
 
@@ -368,10 +368,6 @@ class Party implements Feature, TmpPartyType {
         return {
             caughtPokemon: this._caughtPokemon().map(x => x.toJSON()),
         };
-    }
-
-    update(delta: number): void {
-        // This method intentionally left blank
     }
 
     get caughtPokemon(): ReadonlyArray<PartyPokemon> {

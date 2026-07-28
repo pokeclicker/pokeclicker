@@ -17,9 +17,9 @@
             <button class="dropdown-item d-flex small px-3" type="button"
                 data-bind="click: () => FarmController.selectedBerry($data), css: { 'active': FarmController.selectedBerry() === $data }">
                 <knockout class="flex-grow-1" data-bind="text: BerryType[$data]"></knockout>
-                <knockout data-bind="text: App.game.farming.berryList[$data]() >= 1e6
-                    ? GameConstants.formatNumber(App.game.farming.berryList[$data]())
-                    : App.game.farming.berryList[$data]().toLocaleString('en-US')"></knockout>
+                <knockout data-bind="text: App.game.farming.berryInventory[$data]() >= 1e6
+                    ? GameConstants.formatNumber(App.game.farming.berryInventory[$data]())
+                    : App.game.farming.berryInventory[$data]().toLocaleString('en-US')"></knockout>
             </button>
         </div>
     </div>
@@ -42,9 +42,9 @@
                         data-bind="click: () => { FarmController.selectedBerry($data); FarmController.selectedFarmModuleTool(FarmingTool.Berry) },
                             css: { active: FarmController.selectedBerry() === $data }">
                         <knockout class="flex-grow-1" data-bind="text: BerryType[$data]"></knockout>
-                        <knockout data-bind="text: App.game.farming.berryList[$data]() >= 1e6
-                            ? GameConstants.formatNumber(App.game.farming.berryList[$data]())
-                            : App.game.farming.berryList[$data]().toLocaleString('en-US')"></knockout>
+                        <knockout data-bind="text: App.game.farming.berryInventory[$data]() >= 1e6
+                            ? GameConstants.formatNumber(App.game.farming.berryInventory[$data]())
+                            : App.game.farming.berryInventory[$data]().toLocaleString('en-US')"></knockout>
                     </button>
                 </div>
             </div>

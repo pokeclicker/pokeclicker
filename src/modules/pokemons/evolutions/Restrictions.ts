@@ -17,6 +17,8 @@ import { EvoData, restrict } from './Base';
 import DayCyclePart from '../../dayCycle/DayCyclePart';
 import MoonCyclePhase from '../../moonCycle/MoonCyclePhase';
 import PokemonAttackRequirement from '../../requirements/PokemonAttackRequirement';
+import { SpecialEventTitleType } from '../../specialEvents/SpecialEventTitleType';
+import SpecialEventRequirement from '../../requirements/SpecialEventRequirement';
 
 export type EvoFn = (...args: unknown[]) => EvoData;
 
@@ -130,13 +132,21 @@ export const megaEvolveRestrict = <T extends EvoFn>(evo: T) => (
 };
 
 export const attackRestrict = <T extends EvoFn>(evo: T) => (
-    attackMultiplier: number,
+    attackValue: number,
+    isMultiplier: boolean,
     ...rest: Parameters<T>
 ) => {
     const data = evo(...rest);
     return restrict(
         data,
-        new PokemonAttackRequirement(data.basePokemon, attackMultiplier, AchievementOption.more),
+        new PokemonAttackRequirement(data.basePokemon, attackValue, isMultiplier, AchievementOption.more),
     );
 
+};
+
+export const eventRestrict = <T extends EvoFn>(evo: T) => (
+    eventName: SpecialEventTitleType,
+    ...rest: Parameters<T>
+) => {
+    return restrict(evo(...rest), new SpecialEventRequirement(eventName));
 };

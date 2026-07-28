@@ -430,7 +430,10 @@ class Safari {
     public static spawnItemCheck() {
         const baseChance = 0.4;
         const itemLevelModifier = (Safari.safariLevel() - 1) / 100;
-        if (Rand.chance(baseChance + itemLevelModifier)) {
+        if (Rand.chance((baseChance + itemLevelModifier))) {
+            Safari.spawnRandomItem();
+        }
+        if (SafariBattle.enemy.eatingBait == BaitType.Pinap && Rand.chance((baseChance + itemLevelModifier))) {
             Safari.spawnRandomItem();
         }
     }

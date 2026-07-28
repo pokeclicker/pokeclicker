@@ -84,7 +84,7 @@ TemporaryBattleList['Blue 4'] = new TemporaryBattle(
         new GymPokemon('Ivysaur', 33438, 25, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
     ],
     'What? You stinker! I took it easy on you, too!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rock Tunnel'))],
     undefined,
     {
         displayName: 'Rival Blue',
@@ -123,7 +123,7 @@ TemporaryBattleList['Snorlax route 12'] = new TemporaryBattle(
     undefined,
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 12),
-        new TemporaryBattleRequirement('Blue 4'),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower')),
     ],
     [new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement('Snorlax')],
     {
@@ -138,7 +138,7 @@ TemporaryBattleList['Snorlax route 16'] = new TemporaryBattle(
     'Snorlax route 16',
     [new GymPokemon('Snorlax', 189990, 30)],
     undefined,
-    [new TemporaryBattleRequirement('Blue 4')],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
     [new TemporaryBattleRequirement('Snorlax route 16'), new ObtainedPokemonRequirement('Snorlax')],
     {
         displayName: 'Snorlax',
@@ -432,7 +432,7 @@ TemporaryBattleList['Silver 2'] = new TemporaryBattle(
         new GymPokemon('Bayleef', 237772, 18, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Water)),
     ],
     '...Humph! Useless Pokémon! Listen, you. You only won because my Pokémon were weak.',
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 33)],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Slowpoke Well'))],
     undefined,
     {
         displayName: 'Rival Silver',
@@ -491,6 +491,7 @@ TemporaryBattleList['Silver 4'] = new TemporaryBattle(
     {
         displayName: 'Rival Silver',
         imageName: 'Silver',
+        visibleRequirement: new QuestLineStepCompletedRequirement('Team Rocket Again', 1),
     }
 );
 TemporaryBattleList['Silver 5'] = new TemporaryBattle(
@@ -2131,6 +2132,52 @@ TemporaryBattleList['Ghetsis 2'] = new TemporaryBattle(
         imageName: 'Ghetsis',
     }
 );
+TemporaryBattleList['Destiny Deoxys Rayquaza'] = new TemporaryBattle(
+    'Destiny Deoxys Rayquaza',
+    [
+        new GymPokemon('Deoxys', 47276622, 70),
+        new GymPokemon('Rayquaza', 57782538, 70),
+    ],
+    '<i>Rayquaza and Deoxys fled seperate ways.</i>',
+    [new QuestLineStepCompletedRequirement('Destiny Deoxys', 1)],
+    undefined,
+    {
+        displayName: 'Deoxys & Rayquaza',
+        imageName: 'specialNPCs/Transparent',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Destiny Deoxys Army'] = new TemporaryBattle(
+    'Destiny Deoxys Army',
+    [
+        new GymPokemon('Deoxys (Clone)', 11766624, 70),
+        new GymPokemon('Deoxys (Clone)', 11766624, 70),
+        new GymPokemon('Deoxys (Clone)', 11766624, 70),
+        new GymPokemon('Deoxys (Clone)', 11766624, 70),
+        new GymPokemon('Deoxys (Clone)', 11766624, 70),
+        new GymPokemon('Deoxys', 58833120, 70),
+    ],
+    '<i>The Deoxys are scattering.</i>',
+    [new QuestLineStepCompletedRequirement('Destiny Deoxys', 4)],
+    undefined,
+    {
+        displayName: 'Deoxys Army',
+        imageName: '../pokemon/386',
+        finalPokemonImage: 'specialNPCs/Transparent',
+    }
+);
+TemporaryBattleList['Destiny Rayquaza'] = new TemporaryBattle(
+    'Destiny Rayquaza',
+    [new GymPokemon('Rayquaza', 127079520, 70)],
+    '<i>Rayquaza calmed down.</i>',
+    [new QuestLineStepCompletedRequirement('Destiny Deoxys', 7)],
+    undefined,
+    {
+        displayName: 'Rayquaza',
+        imageName: '../pokemon/384',
+        hideTrainer: true,
+    }
+);
 TemporaryBattleList['Hugh 5'] = new TemporaryBattle(
     'Hugh 5',
     [
@@ -2370,7 +2417,7 @@ TemporaryBattleList['Shauna 1'] = new TemporaryBattle(
         new GymPokemon('Fennekin', 24906504, 5, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
     ],
     'Hey! I wasn\'t done watching my cute Li\'l Pokémon yet!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 1)],
     undefined,
     {
         displayName: 'Pokémon Trainer Shauna',
@@ -2404,7 +2451,7 @@ TemporaryBattleList['Tierno 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Tierno',
-        returnTown: 'Camphrier Town',
+        returnTown: 'Lumiose City',
         imageName: 'Tierno',
     }
 );
@@ -3416,8 +3463,8 @@ TemporaryBattleList['Calem 5'] = new TemporaryBattle(
         imageName: 'Calem',
     }
 );
-TemporaryBattleList['Storyline AZ'] = new TemporaryBattle(
-    'Storyline AZ',
+TemporaryBattleList.AZ = new TemporaryBattle(
+    'AZ',
     [
         new GymPokemon('Torkoal', 153757520, 60),
         new GymPokemon('Golurk', 153757520, 60),
@@ -3428,24 +3475,6 @@ TemporaryBattleList['Storyline AZ'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer AZ',
-        imageName: 'AZ',
-    }
-);
-TemporaryBattleList.AZ = new TemporaryBattle(
-    'AZ',
-    [
-        new GymPokemon('Torkoal', 161445396, 80),
-        new GymPokemon('Golurk', 161445396, 80),
-        new GymPokemon('Sigilyph', 161445396, 80),
-    ],
-    'Floette... It\'s been 3,000 years...',
-    [new QuestLineCompletedRequirement('A Beautiful World')],
-    undefined,
-    {
-        displayName: 'Pokémon Trainer AZ',
-        firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Floette (Eternal)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD));
-        },
     }
 );
 TemporaryBattleList['Ash Ketchum Kanto'] = new TemporaryBattle(
@@ -4125,7 +4154,7 @@ TemporaryBattleList['Plumeria 1'] = new TemporaryBattle(
 );
 TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
-    [new GymPokemon('???', 508485861, 27)],
+    [new CustomGymPokemon('???', 508485861, 27, [PokemonType.Rock, PokemonType.Poison], 'QuestionMarks.png', undefined, false)],
     undefined, // custom quest message
     [new QuestLineStepCompletedRequirement('Symbiotic Relations', 8)],
     [new QuestLineCompletedRequirement('Symbiotic Relations')], // to work better with 10.20 story quests if already beaten
@@ -4303,13 +4332,13 @@ TemporaryBattleList.Lusamine = new TemporaryBattle(
         new GymPokemon('Mismagius', 109925182, 47),
         new GymPokemon('Milotic', 109925182, 47),
         new GymPokemon('Bewear', 109925182, 47),
-        new GymPokemon('You hateful little Trainer!', 183208637, 47),
+        new CustomGymPokemon('You hateful little Trainer!', 183208637, 47, [PokemonType.Rock, PokemonType.Poison], 'YouHatefulLittleTrainer.png', undefined, false),
     ],
     undefined,
     [new QuestLineStepCompletedRequirement('Emissary of Light', 6)],
     undefined,
     {
-        imageName: '../pokemon/-793.01',
+        imageName: '../custompokemon/YouHatefulLittleTrainer',
         finalPokemonImage: 'specialNPCs/Transparent',
     }
 );

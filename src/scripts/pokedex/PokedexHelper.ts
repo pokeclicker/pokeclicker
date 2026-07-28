@@ -116,10 +116,7 @@ class PokedexHelper {
 
             const nameFilterSetting = Settings.getSetting('pokedexNameFilter') as SearchSetting;
             if (nameFilterSetting.observableValue() != '') {
-                const nameFilter = nameFilterSetting.regex();
-                const displayName = PokemonHelper.displayName(pokemon.name)();
-                const partyName = App.game.party.getPokemonByName(pokemon.name)?.displayName;
-                if (!nameFilter.test(displayName) && !nameFilter.test(pokemon.name) && !(partyName != undefined && nameFilter.test(partyName))) {
+                if (!PokemonHelper.matchPokemonByNames(nameFilterSetting.regex(), pokemon.name)) {
                     return false;
                 }
             }
@@ -257,6 +254,14 @@ class PokedexHelper {
 
     private static isPureType(pokemon: PokemonListData, type: (PokemonType | null)): boolean {
         return (pokemon.type.length === 1 && (type == null || pokemon.type[0] === type));
+    }
+
+    public static resetFilters() {
+        for (const key of pokedexFilterSettingKeys) {
+            const setting = Settings.getSetting(key);
+            Settings.setSettingByName(key, setting.defaultValue);
+        }
+        (document.getElementById('pokedex-filter-nameID') as HTMLInputElement).value = '';
     }
 
     // Flag for the LazyLoader

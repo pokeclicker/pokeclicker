@@ -6,6 +6,7 @@ import { SortSaves } from './Sortable';
 import Settings from './settings/index';
 import GameHelper from './GameHelper';
 import GameLoadState from './utilities/GameLoadState';
+import * as DownloadUtil from './utilities/DownloadUtil';
 
 export default class SaveSelector {
     static MAX_SAVES = 9;
@@ -164,7 +165,7 @@ export default class SaveSelector {
             };
 
             // Create a download element
-            const element = SaveSelector.createDownloadElement(data);
+            const element = SaveSelector.createDownloadElement(data, data.save.update.version);
             element.style.display = 'none';
             document.body.appendChild(element);
 
@@ -182,13 +183,11 @@ export default class SaveSelector {
         }
     }
 
-    static createDownloadElement(data, versionNumber = data.save.update.version, isBackup = false) {
-        const element = document.createElement('a');
-        element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(SaveSelector.btoa(JSON.stringify(data)))}`);
+    static createDownloadElement(data, versionNumber, isBackup = false) {
         const filename = data.settings.saveFilename || Settings.getSetting('saveFilename').defaultValue;
         const datestr = formatDate(new Date());
         const profile = data.save.profile?.name ?? 'Trainer';
-        element.setAttribute('download', GameHelper.saveFileName(filename, { '{date}': datestr, '{version}': versionNumber, '{name}': profile }, isBackup));
-        return element;
+        const downloadFileName = GameHelper.saveFileName(filename, { '{date}': datestr, '{version}': versionNumber, '{name}': profile }, isBackup);
+        return DownloadUtil.createDownloadElement(SaveSelector.btoa(JSON.stringify(data)), downloadFileName);
     }
 }

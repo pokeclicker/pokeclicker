@@ -2,6 +2,7 @@
 /// <reference path="../../declarations/breeding/EggType.d.ts" />
 /// <reference path="../../declarations/utilities/DisplayObservables.d.ts" />
 /// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/koExtenders.d.ts" />
 /// <reference path="../party/PartyController.ts" />
 
 class BreedingController {
@@ -65,6 +66,15 @@ class BreedingController {
         SeededRand.seed(seed);
         SeededRand.seed(SeededRand.intBetween(0, 1000));
         return SeededRand.fromArray(EggSpots.spotTypes);
+    }
+
+    public static getQueueImage([type, id]: HatcheryQueueEntry) {
+        if (type == EggType.Pokemon) {
+            return PokemonHelper.getImage(id);
+        } else if (type == EggType.EggItem) {
+            return `assets/images/breeding/${GameConstants.EggItemType[id]}.png`;
+        }
+        return '';
     }
 
     public static getEggPokemonName(egg: Egg): string | null {
@@ -159,6 +169,14 @@ class BreedingController {
         const odds = 1 / Math.pow(2, regionDiff);
         // odds of pokemon in this region pool
         return odds / regionPoolCount;
+    }
+
+    public static resetFilters() {
+        for (const key of breedingFilterSettingKeys) {
+            const setting = Settings.getSetting(key);
+            Settings.setSettingByName(key, setting.defaultValue);
+        }
+        (document.getElementById('breeding-filter-nameID') as HTMLInputElement).value = '';
     }
 
     // Queue size limit setting

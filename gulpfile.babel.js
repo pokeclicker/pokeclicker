@@ -46,26 +46,34 @@ const escapeRegExp = (string) => {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 };
 
-const htmlImportIf = (html_str, is_true) => {
-    // Allow import if
-    if (is_true) {
-        // replace with standard import
-        return replace(`@importif ${html_str}`, '@import');
-    } else {
-        // remove the line
-        const replaceRegex = new RegExp(`\\s*@importif ${escapeRegExp(html_str)}.*\\n?`, 'g');
-        return replace(replaceRegex, '');
-    }
-};
-
 /* Adapted from https://github.com/jrainlau/gulp-html-import */
 const importHTML = (componentsUrl) => {
-    const fileReg = /(?<=^\s*)@import\s"([^"\n]*)"/gim;
+    const fileReg = /(?<=^\s*)(@import|@importif\s\$[\w.]+)\s"([^"\n]*)"/gim;
 
     const recursiveImport = (data, importPaths) => {
         const curPath = importPaths.at(-1);
         const curDirectory = curPath.startsWith(path.normalize(componentsUrl)) ? path.parse(curPath).dir : componentsUrl;
-        return data.replace(fileReg, (match, componentName) => {
+        return data.replace(fileReg, (match, importType, componentName) => {
+            if (importType.startsWith('@importif')) {
+                // Handle conditional imports
+                const configSetting = importType.match(/@importif \$(.+)/)[1];
+                let configVal;
+                try {
+                    configVal = configSetting.split('.').reduce((object, property) => object[property], config);
+                    if (configVal === undefined) {
+                        throw new Error();
+                    }
+                } catch (e) {
+                    console.error(`HTML importer could not find config '$${configSetting}' for conditional import in file ${curPath}`);
+                    return '' // import failed, remove this line
+                }
+                if (!configVal) {
+                    // Conditional import not met, remove this line
+                    console.log(`[skipped] ${match} --> condition not met`);
+                    return '';
+                }
+            }
+
             const matchPath = path.join(curDirectory, componentName);
             const importPathsNew = [...importPaths, matchPath];
             console.log(`${match} --> ${matchPath}`);
@@ -192,7 +200,6 @@ gulp.task('compile-html', (done) => {
     const stream = gulp.src('./src/index.html');
 
     stream.pipe(plumber())
-        .pipe(htmlImportIf('$DEV_BANNER', config.DEV_BANNER)) // If we want the development banner displayed
         .pipe(importHTML('./src/components/'))
         .pipe(replace('$VERSION', version))
         .pipe(replace('$DEVELOPMENT', !!config.DEVELOPMENT))

@@ -26,7 +26,7 @@ export default class PokemonItem extends PokerusIndicatingItem {
     ) {
         super(name, basePrice, currency, options, undefined, `Add ${pokemon} to your party.`, 'pokemonItem');
         this.type = pokemon;
-        this._translatedOrDisplayName = ko.pureComputed(() => displayName ?? PokemonHelper.displayName(pokemon)());
+        this._translatedOrDisplayName = ko.pureComputed(() => displayName ?? PokemonHelper.displayName(pokemon));
     }
 
     gain(amt: number) {
@@ -86,6 +86,10 @@ export default class PokemonItem extends PokerusIndicatingItem {
     getPokerusProgress(): string {
         const evs = PartyController.getEvsByName(this.type);
         return evs >= 50 ? 'Already resistant!' : `EVs: ${evs.toLocaleString('en-US')} / 50`;
+    }
+
+    showBagAmount() {
+        return false;
     }
 
     get image() {

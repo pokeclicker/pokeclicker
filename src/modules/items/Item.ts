@@ -17,6 +17,7 @@ export default class Item {
     // Shop Details
     price: Observable<number>;
     multiplier: number;
+    maxMultiplier: number;
     multiplierDecrease: boolean;
     multiplierDecreaser: MultiplierDecreaser;
 
@@ -37,6 +38,7 @@ export default class Item {
             multiplierDecrease = true,
             multiplierDecreaser = MultiplierDecreaser.Battle,
             visible = undefined,
+            maxMultiplier = 100,
         } : ShopOptions = {},
         displayName?: string,
         description?: string,
@@ -55,6 +57,7 @@ export default class Item {
         this.multiplier = Math.max(1, multiplier || ITEM_PRICE_MULTIPLIER);
         this.multiplierDecrease = this.multiplier > 1 ? multiplierDecrease : false;
         this.multiplierDecreaser = multiplierDecreaser || MultiplierDecreaser.Battle;
+        this.maxMultiplier = maxMultiplier;
         this.visible = visible;
 
         this._displayName = displayName;
@@ -69,17 +72,17 @@ export default class Item {
             return Math.max(0, this.basePrice * targetAmount);
         }
 
-        // multiplier should be capped at 100, so work out how many to buy at increasing price and how many at max
-        //    (m_start) * (m^k) = 100
-        // => k = (2 - log(m_start)) / log(m)
+        // work out how many to buy at increasing price and how many at max
+        //    (m_start) * (m^k) = maxMultiplier
+        // => k = (log(maxMultiplier) - log(m_start)) / log(m)
         const mStart = Math.max(player.itemMultipliers[this.saveName] || 1, 1);
-        const k = (mStart < 100)
-            ? Math.ceil((2 - Math.log10(mStart)) / Math.log10(this.multiplier))
+        const k = (mStart < this.maxMultiplier)
+            ? Math.ceil((Math.log10(this.maxMultiplier) - Math.log10(mStart)) / Math.log10(this.multiplier))
             : 0;
         const incAmount = Math.min(k, targetAmount);
 
         const incCost = (this.price() * (1 - (this.multiplier ** incAmount))) / (1 - this.multiplier);
-        const maxCost = (this.basePrice * 100 * (targetAmount - incAmount));
+        const maxCost = this.maxMultiplier != Infinity ? (this.basePrice * this.maxMultiplier * (targetAmount - incAmount)) : 0;
         const total = incCost + maxCost;
 
         return Math.max(0, Math.round(total));
@@ -174,7 +177,7 @@ export default class Item {
     }
 
     increasePriceMultiplier(amount = 1) {
-        player.itemMultipliers[this.saveName] = Math.min(100, (player.itemMultipliers[this.saveName] || 1) * (this.multiplier ** amount));
+        player.itemMultipliers[this.saveName] = Math.min(this.maxMultiplier, (player.itemMultipliers[this.saveName] || 1) * (this.multiplier ** amount));
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.saveName]));
     }
 
@@ -187,6 +190,14 @@ export default class Item {
         }
         player.itemMultipliers[this.saveName] = Math.max(1, (player.itemMultipliers[this.saveName] || 1) / (this.multiplier ** amount));
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.saveName]));
+    }
+
+    showBagAmount() {
+        return this.maxAmount > 1;
+    }
+
+    getBagAmount() {
+        return player.amountOfItem(this.name);
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -205,5 +216,20 @@ export default class Item {
     get image() {
         const subDirectory = this.imageDirectory ? `${this.imageDirectory}/` : '';
         return `assets/images/items/${subDirectory}${this.name}.png`;
+    }
+
+    get shopTooltip() {
+        if (!this.description && !this.showBagAmount()) {
+            return '';
+        }
+
+        let tooltip = `<u>${this.displayName}:</u>`;
+        if (this.description) {
+            tooltip += `<br/>${this.description}`;
+        }
+        if (this.showBagAmount()) {
+            tooltip += `<br/><br/>In Bag: ${this.getBagAmount().toLocaleString('en-US')}`;
+        }
+        return tooltip;
     }
 }

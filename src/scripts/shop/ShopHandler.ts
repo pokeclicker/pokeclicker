@@ -84,4 +84,8 @@ class ShopHandler {
     public static shortcutVisible: KnockoutComputed<boolean> = ko.pureComputed(() => {
         return App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Lance')]() > 0;
     });
+
+    public static farmShortcutVisible: KnockoutComputed<boolean> = ko.pureComputed(() => {
+        return App.game.farming.unlockedPlotCount() >= 25 && App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Cynthia')]() > 0;
+    });
 }

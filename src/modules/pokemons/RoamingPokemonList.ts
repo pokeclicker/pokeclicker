@@ -1,7 +1,7 @@
 import { Observable } from 'knockout';
 import BadgeEnums from '../enums/Badges';
 import {
-    KantoSubRegions, JohtoSubRegions, HoennSubRegions, SinnohSubRegions, UnovaSubRegions, KalosSubRegions, AlolaSubRegions, GalarSubRegions, HisuiSubRegions, PaldeaSubRegions, Region,
+    KantoSubRegions, JohtoSubRegions, HoennSubRegions, SinnohSubRegions, UnovaSubRegions, KalosSubRegions, AlolaSubRegions, GalarSubRegions, HisuiSubRegions, PaldeaSubRegions, SubRegions, Region,
     getDungeonIndex, Starter,
 } from '../GameConstants';
 import GameHelper from '../GameHelper';
@@ -22,6 +22,9 @@ import RoamingGroup from './RoamingGroup';
 import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
 import MoonCyclePhaseRequirement from '../requirements/MoonCyclePhaseRequirement';
 import MoonCyclePhase from '../moonCycle/MoonCyclePhase';
+import StatisticRequirement from '../requirements/StatisticRequirement';
+import { getPokemonByName } from './PokemonHelper';
+import OneFromManyRequirement from '../requirements/OneFromManyRequirement';
 
 export default class RoamingPokemonList {
     public static roamerGroups: RoamingGroup[][] = [
@@ -72,6 +75,10 @@ export default class RoamingPokemonList {
         return RoamingPokemonList.increasedChanceRoute[region]?.[subRegionGroup];
     }
 
+    public static getGroupSubRegions(region: Region, subRegionGroup: number): SubRegions[] {
+        return [...RoamingPokemonList.roamerGroups[region][subRegionGroup].subRegions];
+    }
+
     public static generateIncreasedChanceRoutes(date = new Date()) {
         // Seed the random runmber generator
         SeededRand.seedWithDateHour(date, this.period);
@@ -86,7 +93,7 @@ export default class RoamingPokemonList {
         });
     }
 
-    public static findGroup(region: Region, subRegion: number) {
+    public static findGroup(region: Region, subRegion: number): number {
         return this.roamerGroups[region].findIndex((g) => g.subRegions.includes(subRegion));
     }
 }
@@ -106,8 +113,8 @@ RoamingPokemonList.add(Region.johto, 0, new RoamingPokemon('Raikou', new QuestLi
 RoamingPokemonList.add(Region.johto, 0, new RoamingPokemon('Entei', new QuestLineStepCompletedRequirement('The Legendary Beasts', 3)));
 
 // Hoenn
-RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latios', new QuestLineStepCompletedRequirement('The Eon Duo', 3)));
-RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latias', new QuestLineStepCompletedRequirement('The Eon Duo', 3)));
+RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latios', new OneFromManyRequirement([new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 3), new ObtainedPokemonRequirement('Latias')]), new QuestLineCompletedRequirement('The Eon Duo')])));
+RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latias', new OneFromManyRequirement([new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 3), new ObtainedPokemonRequirement('Latios')]), new QuestLineCompletedRequirement('The Eon Duo')])));
 RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Jirachi', new QuestLineStepCompletedRequirement('Wish Maker', 8)));
 // Orre
 RoamingPokemonList.add(Region.hoenn, 1, new RoamingPokemon('Ho-Oh', new QuestLineCompletedRequirement('Shadows in the Desert')));
@@ -136,6 +143,7 @@ RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Ash-Greninja', new T
 RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Magearna', new GymBadgeRequirement(BadgeEnums.Champion_Stamp)));
 RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Marshadow', new GymBadgeRequirement(BadgeEnums.Champion_Stamp)));
 RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Zeraora', new GymBadgeRequirement(BadgeEnums.Champion_Stamp)));
+RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Mimikyu (Busted)', new StatisticRequirement(['shinyPokemonDefeated', getPokemonByName('Mimikyu').id], 5, 'Defeat 5 shiny Mimikyu')));
 // Magikarp Jump
 RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Purple Diamonds', new GymBadgeRequirement(BadgeEnums.Luxury_League)));
 RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Apricot Stripes', new GymBadgeRequirement(BadgeEnums.Heal_League)));

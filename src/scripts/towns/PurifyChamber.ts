@@ -17,10 +17,11 @@ class PurifyChamberTownContent extends TownContent {
     }
 
     public areaStatus(): areaStatus[] {
-        const states = super.areaStatus();
+        if (!this.isUnlocked()) {
+            return [areaStatus.locked];
+        }
         const canPurify = App.game.purifyChamber.currentFlow() >= App.game.purifyChamber.flowNeeded() && App.game.party.caughtPokemon.some(p => p.shadow == GameConstants.ShadowStatus.Shadow);
-        states.push(canPurify ? areaStatus.uncaughtPokemon : areaStatus.completed);
-        return states;
+        return [canPurify ? areaStatus.incomplete : areaStatus.completed];
     }
 
 }
@@ -79,7 +80,7 @@ class PurifyChamber implements Saveable {
         if (!PurifyChamber.requirements.isCompleted() || !App.game.party.hasShadowPokemon()) {
             return;
         }
-        const newFlow = Math.round(this.currentFlow() + exp / 1000);
+        const newFlow = Math.round(this.currentFlow() + exp * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute) / 1000);
         this.currentFlow(Math.min(newFlow, this.flowNeeded()));
 
         if (!this.notified && this.currentFlow() >= this.flowNeeded()) {
@@ -118,7 +119,7 @@ class PurifyChamber implements Saveable {
         if (json) {
             if (json.selectedPokemon) {
                 let selectedPokemon = App.game.party.getPokemon(json.selectedPokemon);
-                if (selectedPokemon.shadow != GameConstants.ShadowStatus.Shadow) {
+                if (!selectedPokemon || selectedPokemon.shadow != GameConstants.ShadowStatus.Shadow) {
                     selectedPokemon = undefined;
                 }
                 this.selectedPokemon(selectedPokemon);

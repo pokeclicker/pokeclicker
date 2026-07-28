@@ -7,7 +7,7 @@ class AchievementHandler {
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     public static achievementListFiltered: KnockoutObservableArray<Achievement> = ko.observableArray([]);
     public static numberOfTabs: KnockoutObservable<number> = ko.observable(0);
-    public static _cachedAchievementBonus: KnockoutObservable<number> = ko.observable(0);
+    public static _cachedAchievementBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 4 });
 
     public static setNavigateIndex(index: number): void {
         if (index < 0 || index >= AchievementHandler.numberOfTabs()) {
@@ -74,7 +74,8 @@ class AchievementHandler {
             a.achievable() &&
             (this.filter.status() == -2 || a.unlocked() === !!this.filter.status()) &&
             (this.filter.type()   == -2 || a.property.achievementType === this.filter.type()) &&
-            (this.filter.category() == 'all' || a.category.name === this.filter.category())
+            (this.filter.category() == 'all' || a.category.name === this.filter.category()) &&
+            (a.category.name != 'secret' || this.filter.category() == 'secret')
         )));
         this.calculateNumberOfTabs();
         if (!retainPage) {
@@ -137,8 +138,8 @@ class AchievementHandler {
     }
 
     public static toJSON(): string[] {
-        // Saves only achievements which have already been completed but currently don't have their requirements met
-        const storage = AchievementHandler.achievementList.filter(a => a.unlocked() && !a.property.isCompleted()).map(a => a.name);
+        // Saves only achievements which have already been completed but currently don't have their requirements met, or that have the persist flag set
+        const storage = AchievementHandler.achievementList.filter(a => a.unlocked() && (a.persist || !a.property.isCompleted())).map(a => a.name);
         return storage;
     }
 
@@ -148,7 +149,14 @@ class AchievementHandler {
         });
     }
 
-    public static addAchievement(name: string, description: string, property: AchievementRequirement, bonus: number, category: GameConstants.Region | GameConstants.ExtraAchievementCategories = GameConstants.ExtraAchievementCategories.global, achievableFunction: () => boolean | null = null) {
+    public static addAchievement(
+        name: string,
+        description: string,
+        property: AchievementRequirement,
+        bonus: number,
+        category: GameConstants.Region | GameConstants.ExtraAchievementCategories = GameConstants.ExtraAchievementCategories.global,
+        achievableFunction: () => boolean | null = null
+    ) {
         let categoryObj : AchievementCategory;
         // ExtraAchievementCategory always starts at finals index
         if (category >= GameConstants.Region.final) {
@@ -160,12 +168,27 @@ class AchievementHandler {
         AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, categoryObj, achievableFunction));
     }
 
+    public static addSecretAchievement(
+        name: string,
+        description: string,
+        property: AchievementRequirement,
+        hint: string,
+        persist = false
+    ) {
+        AchievementHandler.achievementList.push(new SecretAchievement(name, description, property, hint, persist));
+    }
+
     public static calculateBonus(): void {
         AchievementHandler.achievementList.forEach((achievement) => {
             if (!achievement.achievable()) {
                 return 0;
             }
-            achievement.bonus = (achievement.bonusWeight / achievement.category.totalWeight) * achievement.category.achievementBonus;
+
+            if (achievement.category.achievementBonus == 0) {
+                achievement.bonus = 0;
+            } else {
+                achievement.bonus = (achievement.bonusWeight / achievement.category.totalWeight) * achievement.category.achievementBonus;
+            }
         });
     }
 
@@ -209,9 +232,15 @@ class AchievementHandler {
         }
         const categories = GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && r != 'final').map(r => new AchievementCategory(r, 100, () => player.highestRegion() >= GameConstants.Region[r]));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.global], 150, () => true));
+        categories.push(new AchievementCategory(
+            GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.secret],
+            0,
+            () => AchievementHandler.achievementList.some(a => a.category.name == GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.secret] && a.unlocked())
+        ));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.sevii], 50, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii123)));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.orre], 75, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre)));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.magikarpJump], 25, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump)));
+        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.events], 25, () => true));
 
         AchievementHandler._achievementCategories = categories;
         return categories;
@@ -359,10 +388,10 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Allotment Gardener', 'Unlock 9 Plots in the Farm.', new FarmPlotsUnlockedRequirement(9), 0.15);
         AchievementHandler.addAchievement('Horticulture', 'Unlock all 25 Plots in the Farm.', new FarmPlotsUnlockedRequirement(25), 0.25);
 
-        AchievementHandler.addAchievement('Who Planted These Here?', 'Unlock 8 Berries.', new BerriesUnlockedRequirement(8), 0.1);
-        AchievementHandler.addAchievement('Farmer in Training', 'Unlock 18 Berries.', new BerriesUnlockedRequirement(18), 0.2);
-        AchievementHandler.addAchievement('Farming Apprentice', 'Unlock 36 Berries.', new BerriesUnlockedRequirement(36), 0.3);
-        AchievementHandler.addAchievement('Master Farmer', 'Unlock all 69 Berries.', new BerriesUnlockedRequirement(69), 0.4);
+        AchievementHandler.addAchievement('Who Planted These Here?', 'Unlock 8 Berries.', new TotalBerriesUnlockedRequirement(8), 0.1);
+        AchievementHandler.addAchievement('Farmer in Training', 'Unlock 18 Berries.', new TotalBerriesUnlockedRequirement(18), 0.2);
+        AchievementHandler.addAchievement('Farming Apprentice', 'Unlock 36 Berries.', new TotalBerriesUnlockedRequirement(36), 0.3);
+        AchievementHandler.addAchievement('Master Farmer', 'Unlock all 69 Berries.', new TotalBerriesUnlockedRequirement(69), 0.4);
 
         AchievementHandler.addAchievement('Getting Some Help at the Farm', 'Unlock 3 Farm Hands.', new FarmHandRequirement(3), 0.2);
         AchievementHandler.addAchievement('Starting a Farming Empire', 'Unlock 6 Farm Hands.', new FarmHandRequirement(6), 0.3);
@@ -389,10 +418,10 @@ class AchievementHandler {
         AchievementHandler.addAchievement('To infinity and beyond', 'Reach Underground Level 20.', new UndergroundLevelRequirement(20), 0.5);
         AchievementHandler.addAchievement('Just one more thing', 'Reach Underground Level 50.', new UndergroundLevelRequirement(50), 1);
 
-        AchievementHandler.addAchievement('Just pick one', 'Get at least 1 Underground Helper to level 25.', new UndergroundHelperRequirement(1, 25), 0.3);
-        AchievementHandler.addAchievement('It\'s an honest days work', 'Get all 5 Underground Helpers to level 25.', new UndergroundHelperRequirement(5, 25), 0.6);
-        AchievementHandler.addAchievement('Got a favorite?', 'Get at least 1 Underground Helper to level 50.', new UndergroundHelperRequirement(1, 50), 0.6);
-        AchievementHandler.addAchievement('They\'re all my favorites', 'Get all 5 Underground Helpers to level 50.', new UndergroundHelperRequirement(5, 50), 1.2);
+        AchievementHandler.addAchievement('Just pick one', 'Get at least 1 Underground Expert to level 25.', new UndergroundHelperRequirement(1, 25), 0.3);
+        AchievementHandler.addAchievement('It\'s an honest days work', 'Get all 5 Underground Experts to level 25.', new UndergroundHelperRequirement(5, 25), 0.6);
+        AchievementHandler.addAchievement('Got a favorite?', 'Get at least 1 Underground Expert to level 50.', new UndergroundHelperRequirement(1, 50), 0.6);
+        AchievementHandler.addAchievement('They\'re all my favorites', 'Get all 5 Underground Experts to level 50.', new UndergroundHelperRequirement(5, 50), 1.2);
 
         AchievementHandler.addAchievement('Everyday I\'m chiseling', 'Use the Chisel Tool 1,000 times.', new UndergroundUseToolRequirement(UndergroundToolType.Chisel, 1000), 0.25);
         AchievementHandler.addAchievement('U Can\'t Touch This', 'Use the Hammer Tool 2,000 times.', new UndergroundUseToolRequirement(UndergroundToolType.Hammer, 2000), 0.25);
@@ -536,7 +565,7 @@ class AchievementHandler {
             }
             // Dungeons
             GameConstants.RegionDungeons[region]?.forEach(dungeon => {
-                if (TownList[dungeon].requirements.some((req) => req instanceof DevelopmentRequirement)) {
+                if (TownList[dungeon].requirements.some((req) => req instanceof DevelopmentRequirement) || dungeonList[dungeon].optionalParameters.achievement === false) {
                     return;
                 }
                 let category = region;
@@ -571,14 +600,14 @@ class AchievementHandler {
 
         // Unown pokédex for Johto
         const unownID = pokemonMap['Unown (A)'].id;
-        const unownDexFilter = (p: PartyPokemon) => Math.floor(p.id) === unownID;
+        const unownDexFilter = (p: PokemonListData) => Math.floor(p.id) === unownID;
         const unownAmount = pokemonList.reduce((count, p) => count + +(Math.floor(p.id) === unownID), 0);
         AchievementHandler.addAchievement('Alphabet Soup for Ruin Maniac', 'Catch all unique Unown forms.', new CaughtUniquePokemonByFilterRequirement(unownDexFilter, 'Catch all unique Unown forms.', unownAmount), 2, GameConstants.Region.johto);
         AchievementHandler.addAchievement('"I am the Alpha and the Omega"', 'Catch all unique Shiny Unown forms.', new CaughtUniquePokemonByFilterRequirement(unownDexFilter, 'Catch all unique Unown forms.', unownAmount, true), 3, GameConstants.Region.johto);
 
 
         // Battle Café pokédex for Galar, highly optional as this is End Game farming, so no high bonus
-        const alcremieDexFilter = (p: PartyPokemon) => p.name === 'Milcery (Cheesy)' || p.name.startsWith('Alcremie');
+        const alcremieDexFilter = (p: PokemonListData) => p.name === 'Milcery (Cheesy)' || p.name.startsWith('Alcremie');
         const alcremieAmount = pokemonList.reduce((count, p) => count + +(p.name === 'Milcery (Cheesy)' || p.name.startsWith('Alcremie')), 0);
         AchievementHandler.addAchievement('Moomoo Milk Served Right', 'Catch 32 unique Battle Café flavors.', new CaughtUniquePokemonByFilterRequirement(alcremieDexFilter, 'Catch 32 unique Alcremie flavors.', 32), 0.5, GameConstants.Region.galar);
         AchievementHandler.addAchievement('Gotta Taste \'Em All!', 'Catch all unique Battle Café flavors.', new CaughtUniquePokemonByFilterRequirement(alcremieDexFilter, 'Catch all unique Alcremie flavors.', alcremieAmount), 1, GameConstants.Region.galar);
@@ -586,7 +615,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('All These Flavors And You Choose To Be Cheesy', 'Catch all unique Shiny Battle Café flavors.', new CaughtUniquePokemonByFilterRequirement(alcremieDexFilter, 'Catch all unique Shiny Alcremie flavors.', alcremieAmount, true), 1.5, GameConstants.Region.galar);
 
         // Gigantamax pokédex for Galar
-        const gigaDexFilter = (p: PartyPokemon) => p.name.startsWith('Gigantamax') || p.name.startsWith('Eternamax');
+        const gigaDexFilter = (p: PokemonListData) => p.name.startsWith('Gigantamax') || p.name.startsWith('Eternamax');
         const gigaAmount = pokemonList.reduce((count, p) => count + +(p.name.startsWith('Gigantamax') || p.name.startsWith('Eternamax')), 0);
         AchievementHandler.addAchievement('Way Too Many Bosses', 'Catch all Gigantamax Pokémon.', new CaughtUniquePokemonByFilterRequirement(gigaDexFilter, 'Catch all Gigantamax Pokémon.', gigaAmount), 2, GameConstants.Region.galar);
         AchievementHandler.addAchievement('Really Big Sparkle', 'Catch all Shiny Gigantamax Pokémon.', new CaughtUniquePokemonByFilterRequirement(gigaDexFilter, 'Catch all Shiny Gigantamax Pokémon.', gigaAmount, true), 3, GameConstants.Region.galar);
@@ -603,12 +632,279 @@ class AchievementHandler {
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 1], GameConstants.ExtraAchievementCategories.magikarpJump, 'Magikarp Jump');
         // Magikarp pokédex, highly optional as some forms are End Game farming, so no high bonus
         const magikarpID = pokemonMap.Magikarp.id;
-        const karpDexFilter = (p: PartyPokemon) => Math.floor(p.id) === magikarpID;
+        const karpDexFilter = (p: PokemonListData) => Math.floor(p.id) === magikarpID;
         const karpAmount = pokemonList.reduce((count, p) => count + +(Math.floor(p.id) === magikarpID), 0);
         AchievementHandler.addAchievement('Do You Even Splash?', 'Catch all unique Magikarp forms.', new CaughtUniquePokemonByFilterRequirement(karpDexFilter, 'Catch all unique Magikarp forms.', karpAmount), 1, GameConstants.ExtraAchievementCategories.magikarpJump);
         AchievementHandler.addAchievement('Twenty Thousands Karps Under the Seas', 'Catch all unique Shiny Magikarp forms.', new CaughtUniquePokemonByFilterRequirement(karpDexFilter, 'Catch all unique Shiny Magikarp forms.', karpAmount, true), 1.5, GameConstants.ExtraAchievementCategories.magikarpJump);
 
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 2], GameConstants.ExtraAchievementCategories.orre, 'Orre');
+
+
+        /*
+         * EVENTS
+         */
+        const addEventPokemonAchievements = (header: string, dexName: string, filter: ((p: PokemonListData) => boolean)) => {
+            const dexAmount = pokemonList.filter(filter).length;
+            const bonus = dexAmount <= 6 ? dexAmount : (dexAmount / 6) ** 0.5 * 6;
+            AchievementHandler.addAchievement(`${header} Master`, `Complete the ${dexName} Pokédex`, new CaughtUniquePokemonByFilterRequirement(filter, '/', dexAmount), bonus, GameConstants.ExtraAchievementCategories.events);
+            AchievementHandler.addAchievement(`${header} Shiny Master`, `Complete the ${dexName} Shiny Pokédex`, new CaughtUniquePokemonByFilterRequirement(filter, '/', dexAmount, true), bonus, GameConstants.ExtraAchievementCategories.events);
+            AchievementHandler.addAchievement(`${header} Doctor`, `Have all ${dexName} Pokémon resistant to Pokérus`, new PokerusStatusByFilterRequirement(filter, dexAmount, GameConstants.Pokerus.Resistant), bonus, GameConstants.ExtraAchievementCategories.events);
+
+        };
+        AchievementHandler.addAchievement('New Island Explorer', 'Clear New Island 10 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex('New Island')), 0.8, GameConstants.ExtraAchievementCategories.events);
+        AchievementHandler.addAchievement('New Island Expert', 'Clear New Island 100 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex('New Island')), 1.2, GameConstants.ExtraAchievementCategories.events);
+        AchievementHandler.addAchievement('New Island Hermit', 'Clear New Island 250 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], GameConstants.getDungeonIndex('New Island')), 1.6, GameConstants.ExtraAchievementCategories.events);
+        AchievementHandler.addAchievement('New Island Dweller', 'Clear New Island 500 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[3], GameConstants.getDungeonIndex('New Island')), 2.4, GameConstants.ExtraAchievementCategories.events);
+        addEventPokemonAchievements('Clone', '\'Mewtwo strikes back!\'', (p: PokemonListData) => p.name.endsWith('(Clone)') && p.name !== 'Deoxys (Clone)' || p.name == 'Armored Mewtwo');
+        addEventPokemonAchievements('Spooky', 'Halloween', (p: PokemonListData) => p.name.startsWith('Spooky ') || p.name == 'Pikachu (Gengar)');
+        addEventPokemonAchievements('Partner', '\'Let\'s GO!\'', (p: PokemonListData) => p.name.startsWith('Let\'s Go '));
+        addEventPokemonAchievements('Christmas', 'Christmas', (p: PokemonListData) => p.name.startsWith('Santa ') || ['Snorlax (Snowman)', 'Reindeer Stantler', 'Grinch Celebi', 'Elf Munchlax'].includes(p.name));
+        AchievementHandler.addAchievement('On The Nice List', 'Collect Christmas Presents up to the maximum once', new ItemOwnedRequirement('Christmas_present', 150), 1, GameConstants.ExtraAchievementCategories.events);
+        addEventPokemonAchievements('Pattern', 'Vivillon', (p: PokemonListData) => p.name.startsWith('Vivillon '));
+        AchievementHandler.addAchievement('Rumor Master', 'Complete the \'Hoopa Day\' Pokédex', new QuestLineCompletedRequirement('How blu mouse?'), 1, GameConstants.ExtraAchievementCategories.events);
+        addEventPokemonAchievements('Egghunt', 'Easter', (p: PokemonListData) => ['Pikachu (Easter)', 'Togepi (Flowering Crown)', 'Torchic (Egg)'].includes(p.name));
+        addEventPokemonAchievements('Blossom', '\'Golden Week\'', (p: PokemonListData) => p.name.endsWith('(Rose)'));
+        addEventPokemonAchievements('Party', '\'Flying Pikachu\'', (p: PokemonListData) => p.name == 'Flying Pikachu' || p.name == 'Red Spearow');
+
+        // Secret achievements
+        AchievementHandler.addSecretAchievement(
+            'The Kids Yearn for the Mines',
+            'Fully mine an Underground layer.',
+            new UndergroundLayersFullyMinedRequirement(1),
+            'Thorough miner'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Take Out The Trash',
+            'Capture a total of 1,000 wild Trubbish and Garbodor.',
+            new CaptureSpecificPokemonRequirement(['Trubbish', 'Garbodor'], 1000, false),
+            'Clean up the streets'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Rats!',
+            'Defeated Youngster Joey.',
+            new TemporaryBattleRequirement('Youngster Joey'),
+            'Take on the ultimate challenge'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Karpal Tunnel',
+            'Reach 1,000,000 attack with Magikarp.',
+            new PokemonAttackRequirement('Magikarp', 1e6),
+            'The Strongest Fish'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'You Can Stop Now',
+            'Acquire 1,000 Wishing Pieces.',
+            new ItemOwnedRequirement('Wishing_Piece', 1000),
+            'You wish'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'You are my best friend',
+            'Have a total of 100 Light Balls.',
+            new ItemOwnedRequirement('Light_Ball', 100),
+            'Red is my favorite color'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Smell Ya Later!',
+            'Defeat Champion Blue 123,456 times.',
+            new ClearGymRequirement(123456, GameConstants.getGymIndex('Champion Blue')),
+            'Blue is my favorite color'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Aren\'t Dungeons Fun?',
+            'Clear any dungeon 10,000 times.',
+            new ClearAnyDungeonRequirement(10000),
+            'Shrink me baby one more time'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Super Spreader',
+            'Reach a 2x EV bonus with any Pokémon.',
+            new EVBonusRequirement(2),
+            'Some Effort required'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Error: Pokémon storage full',
+            'Reach a 3x EV bonus with any Pokémon.',
+            new EVBonusRequirement(3),
+            'Too much Effort'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Ready For The Next Region',
+            'Have 1,000,000,000 Attack.',
+            new AttackRequirement(1e9),
+            'Breed more'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Touch Grass',
+            'Have the game open for an entire year.',
+            new TimePlayedRequirement(GameConstants.DAY * 365 / 1000),
+            'You\'ll get it eventually'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Park Ranger',
+            'Reach the max Safari level.',
+            new SafariLevelRequirement(40),
+            'The most eggciting grind'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'How did we get here?',
+            'Have 9 Special Events active simultaneously.',
+            new TotalSpecialEventsActiveRequirement(9),
+            'Fully booked',
+            true
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Ready for every encounter',
+            'Have at least 20 Pokéball Filters at one time.',
+            new PokeballFilterCountRequirement(20),
+            'Ready for every encounter.'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'I can do this all day',
+            'Complete stage 10,000 in the Battle Frontier.',
+            new BattleFrontierHighestStageRequirement(10000),
+            'A million paycheck' // stage 10k awards 1m BP
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'All I see is rock',
+            'Get at least 1 Underground Helper to level 100.',
+            new UndergroundHelperRequirement(1, 100),
+            'You are my favorite for sure'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Have you tried lemongrass?',
+            'Defeat 1,000,000 pure Bug-type Pokémon.',
+            new DefeatedPokemonTypeRequirement(PokemonType.Bug, 1e6, true),
+            'Pest control'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'There is no bottle',
+            'Catch 111 Hoopa.',
+            new CaptureSpecificPokemonRequirement(['Hoopa'], 111, false),
+            'You said a ton, right?' // Reference to the Catch 100 Hoopa quest step, 111 Hoopa weigh 999kg total, ~ 1 ton
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'One-person band',
+            'Have all 6 Flutes active for 60 minutes.',
+            new AllFlutesTimeActiveRequirement(60),
+            '6-4-60',
+            true
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'A cat named Cat',
+            'Give a Pokémon a very unoriginal nickname.',
+            new DummyRequirement(),
+            'Breakfast at Tiffany\'s', // This movie has a cat named "Cat"
+            true
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Picky Quester',
+            'Refresh the Quest List without completing any quests.',
+            new DummyRequirement(),
+            'I don\'t want to do any of these',
+            true
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Lucky Loot',
+            'Obtain Mythic-tier loot from a debuffed dungeon. Loot that ignores debuff does not count.',
+            new DummyRequirement(),
+            'Debuffed? I didn\'t notice.',
+            true
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Wandering Wallets',
+            'Earn 1,000,000,000 Dungeon Tokens from catching Farm Wanderers.',
+            new StatisticRequirement('farmWandererDungeonTokensObtained', 1e9),
+            'Money does not grow on trees'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Ultimate Baker',
+            'Have all Battle Café flavors resistant to Pokérus.',
+            new PokerusStatusByFilterRequirement(alcremieDexFilter, alcremieAmount, GameConstants.Pokerus.Resistant),
+            'The cake is not a lie'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'One column to rule them all',
+            'Have all movable UI modules in one column.',
+            new CustomRequirement(ko.pureComputed((): boolean => {
+                const columnGroups: Array<Array<string>> = [['middle-top-sort-column', 'middle-bottom-sort-column']];
+                if (Settings.getSetting('gameDisplayStyle').observableValue() === 'fullWidth5') {
+                    columnGroups.push(
+                        ['left-column'],
+                        ['left-column-2'],
+                        ['right-column'],
+                        ['right-column-2']
+                    );
+                } else {
+                    columnGroups.push(
+                        ['left-column', 'left-column-2'],
+                        ['right-column', 'right-column-2']
+                    );
+                }
+
+                // Setting value is unreliable on new saves but we still need them as dependencies
+                columnGroups.flat().forEach((column) => Settings.getSetting(`modules.${column}`).observableValue());
+
+                const usedColumns = columnGroups.filter((columns) => {
+                    const modules = columns.flatMap((column) => [...Array.from(document.querySelectorAll(`#${column} > .sortable`))]);
+                    return modules.some((module) => $(module).is(':visible'));
+                });
+
+                return usedColumns.length === 1;
+            }), true, ''),
+            'There can be only one',
+            true
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'Window Shopping',
+            'Encounter 1,000 shiny Trainer Pokémon.',
+            new StatisticRequirement('totalShinyTrainerPokemonSeen', 1000),
+            'Glowing with envy'
+        );
+
+        AchievementHandler.addSecretAchievement(
+            'A Glimmer of Luck',
+            'Catch a shiny Pokémon in a Safari Zone with your last ball.',
+            new DummyRequirement(),
+            'One ball left, one chance to make it shine'
+        );
+
+        // Special Furfrou forms resisted
+        // TODO Uncomment when Furfrou (Heart) is obtainable
+        /*const furfrouId = pokemonMap.Furfrou.id;
+        const furfrouDexFilter = (p: PokemonListData) => Math.floor(p.id) === furfrouId && p.id > furfrouId;
+        const furfrouAmount = pokemonList.reduce((count, p) => count + +(Math.floor(p.id) === furfrouId && p.id > furfrouId), 0);
+        AchievementHandler.addSecretAchievement(
+            'Dog Breeder',
+            'Have all special Furfrou forms resistant to Pokérus.',
+            new PokerusStatusByFilterRequirement(furfrouDexFilter, furfrouAmount, GameConstants.Pokerus.Resistant),
+            '' // need hint
+        );*/
 
         // load filters
         this.load();
@@ -621,6 +917,20 @@ class AchievementHandler {
         multiplier.addBonus('money', () => 1 + this.achievementBonus(), multiplierSource);
         multiplier.addBonus('dungeonToken', () => 1 + this.achievementBonus(), multiplierSource);
         multiplier.addBonus('clickAttack', () => 1 + this.achievementBonus(), multiplierSource);
+    }
+
+    static unlockAchievement(achievementName: string) {
+        const achievement = AchievementHandler.findByName(achievementName);
+        if (!achievement) {
+            console.warn(`Achievement not found: ${achievementName}`);
+            return;
+        }
+
+        if (!achievement.unlocked()) {
+            achievement.unlocked(true);
+            achievement.notifyUnlocked();
+            AchievementHandler.updateAchievementBonus();
+        }
     }
 
     static load() {

@@ -7,9 +7,10 @@ import * as GameConstants from '../GameConstants';
 import Notifier from '../notifications/Notifier';
 import Rand from '../utilities/Rand';
 import GameHelper from '../GameHelper';
+import * as PokemonHelper from '../pokemons/PokemonHelper';
 
 export default class Profile implements Saveable {
-    public static MAX_TRAINER = 160;
+    public static MAX_TRAINER = 163;
     public static MAX_BACKGROUND = 40;
 
     saveKey = 'profile';
@@ -34,7 +35,7 @@ export default class Profile implements Saveable {
         } else if (this.pokemonSearch() != '') {
             // Search by name
             const regex = GameHelper.safelyBuildRegex(this.pokemonSearch());
-            caughtPokemon = caughtPokemon.filter((pokemon) => regex.test(pokemon.name) || regex.test(pokemon.displayName));
+            caughtPokemon = caughtPokemon.filter((pokemon) => PokemonHelper.matchPokemonByNames(regex, pokemon.name, pokemon));
         }
         return caughtPokemon;
     });
@@ -49,6 +50,7 @@ export default class Profile implements Saveable {
         this.name = ko.observable(name);
         this.trainer = ko.observable(trainer).extend({ numeric: 0 });
         this.trainer.subscribe((t) => document.documentElement.style.setProperty('--trainer-image', `url('../assets/images/profile/trainer-${t}.png')`));
+        document.documentElement.style.setProperty('--trainer-image', `url('../assets/images/profile/trainer-${trainer}.png')`);
         this.pokemon = ko.observable(pokemon).extend({ numeric: 2 });
         this.pokemonShiny = ko.observable(false).extend({ boolean: null });
         this.pokemonShadow = ko.observable(false).extend({ boolean: null });
