@@ -90,7 +90,7 @@ class GymRunner {
         if (GymRunner.running()) {
             GymRunner.running(false);
             Notifier.notify({
-                message: `It appears you are not strong enough to defeat ${GymBattle.gym.leaderName.replace(/\d/g, '')}.`,
+                message: `It appears you are not strong enough to defeat ${GymBattle.gym.leaderName.replace(/\s?\d/g, '')}.`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             App.game.gameState = GameConstants.GameState.town;
@@ -101,7 +101,7 @@ class GymRunner {
         if (GymRunner.running()) {
             GymRunner.running(false);
             Notifier.notify({
-                message: `Congratulations, you defeated ${GymBattle.gym.leaderName.replace(/\d/g, '')}!`,
+                message: `Congratulations, you defeated ${GymBattle.gym.leaderName.replace(/\s?\d/g, '')}!`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.gym_won,
             });
