@@ -13,8 +13,7 @@ class HatcheryHelperItem extends Item {
     get description(): string {
         const hatcheryHelper = this.hatcheryHelper;
         return `Cost: <img src="assets/images/currency/${GameConstants.Currency[hatcheryHelper?.cost?.currency]}.svg" width="20px">&nbsp;${(hatcheryHelper?.cost?.amount ?? 0).toLocaleString('en-US')}/hatch<br/>
-        Step Efficiency: ${(hatcheryHelper?.stepEfficiencyBase ?? 0).toLocaleString('en-US')}%<br/>
-        Attack Efficiency: ${(hatcheryHelper?.attackEfficiencyBase ?? 0).toLocaleString('en-US')}%`;
+        Efficiency: ${(hatcheryHelper?.efficiencyBase ?? 0).toLocaleString('en-US')}%`;
     }
 
     isAvailable(): boolean {

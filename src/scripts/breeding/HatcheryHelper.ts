@@ -1,27 +1,5 @@
-const HatcheryHelperSkills = [
-    'energy',
-    'efficiency',
-    'accuracy',
-    'cost',
-];
-
-const HatcheryHelperCalcHatchBonus = (hatched) => Math.min(50, Math.floor(Math.sqrt(hatched / 50) * 10) / 10);
-
-const HatcheryHelperMinBonusMap: Record<number, number> = {};
-// Generate our bonus amounts map
-(() => {
-    let bonus = -1;
-    for (let hatched = 0; bonus < 50; hatched++) {
-        const b = HatcheryHelperCalcHatchBonus(hatched);
-        if (b > bonus) {
-            HatcheryHelperMinBonusMap[b] = hatched;
-            bonus = b;
-        }
-    }
-})();
-
-
 class HatcheryHelper {
+    public static MAX_LEVEL = 50;
     public trainerSprite = 0;
     public hired: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
     public tooltip: KnockoutComputed<string>;
@@ -29,50 +7,44 @@ class HatcheryHelper {
     public sortOption: KnockoutObservable<SortOptions> = ko.observable(SortOptions.id).extend({ numeric: 0 });
     public sortDirection: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
     public hatched: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
-    public hatchBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
-    public stepEfficiency: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
-    public attackEfficiency: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
-    public prevBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
-    public nextBonus: KnockoutObservable<number> = ko.observable(1).extend({ numeric: 0 });
     public categories: KnockoutObservableArray<number> = ko.observableArray([]);
     public useHatcheryFilters: KnockoutObservable<boolean> = ko.observable(true);
-    // public level: number;
     // public experience: number;
 
     constructor(
         public name: string,
         public cost: Amount,
-        public stepEfficiencyBase: number, // 1 - 200
-        public attackEfficiencyBase: number,
+        public efficiencyBase: number,
+        public levelBonus: number,
         public unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement
     ) {
         SeededRand.seed(parseInt(this.name, 36));
         this.trainerSprite = SeededRand.intBetween(0, 118);
 
-        this.tooltip = ko.pureComputed(() => `<strong>${this.name}</strong><br/>
+        this.tooltip = ko.pureComputed(() => `<strong>${this.name} Lv.${this.level()}</strong><br/>
             Cost: <img src="assets/images/currency/${GameConstants.Currency[this.cost.currency]}.svg" width="20px">&nbsp;${(this.cost.amount).toLocaleString('en-US')}/hatch<br/>
-            Step Efficiency: ${this.stepEfficiency()}%<br/>
-            Attack Efficiency: ${this.attackEfficiency()}%<br/>
+            Efficiency: ${this.efficiency()}%<br/>
             Hatched: ${this.hatched().toLocaleString('en-US')}<br/>`
         );
-
-        // Update our bonus values
-        this.updateBonus();
-        // Update our bonus values whenever our hatched amount changes
-        this.hatched.subscribe((hatched) => {
-            if (hatched >= this.nextBonus() || hatched <= this.prevBonus()) {
-                this.updateBonus();
-            }
-        });
     }
 
-    updateBonus(): void {
-        this.hatchBonus(HatcheryHelperCalcHatchBonus(this.hatched()));
-        this.stepEfficiency(this.stepEfficiencyBase + this.hatchBonus());
-        this.attackEfficiency(this.attackEfficiencyBase + this.hatchBonus());
-        this.prevBonus(HatcheryHelperMinBonusMap[this.hatchBonus()] || 0);
-        this.nextBonus(HatcheryHelperMinBonusMap[((this.hatchBonus() * 10) + 1) / 10] || 1);
+    private hatchedToLevel(hatched: number): number {
+        return Math.floor(Math.min(HatcheryHelper.MAX_LEVEL, Math.sqrt(hatched * 2) / 10));
     }
+
+    private levelToHatched(level: number): number {
+        return (level * 10) ** 2 / 2;
+    }
+
+    private levelToLevelBonus(level: number): number {
+        return this.levelBonus * level;
+    }
+
+    public level = ko.pureComputed(() => this.hatchedToLevel(this.hatched()));
+    public bonusEfficiency = ko.pureComputed(() => this.levelToLevelBonus(this.level()));
+    public efficiency = ko.pureComputed(() => this.efficiencyBase + this.bonusEfficiency());
+    public currentLevelHatched = ko.pureComputed(() => this.levelToHatched(this.level()));
+    public nextLevelHatched = ko.pureComputed(() => this.level() < HatcheryHelper.MAX_LEVEL ? this.levelToHatched(this.level() + 1) : Infinity);
 
     isUnlocked(): boolean {
         return this.unlockRequirement?.isCompleted() ?? true;
@@ -196,15 +168,14 @@ class HatcheryHelpers {
         // Add steps and attack based on efficiency
         this.hired().forEach((helper, index) => {
             // Calculate how many steps should be applied
-            const steps = Math.max(1, Math.round(amount * (helper.stepEfficiency() / 100)));
 
             // Add steps to the egg we are managing
             let egg = this.hatchery.eggList[index]();
-            egg.addSteps(steps, multiplier, true);
+            egg.addSteps(amount, multiplier, true);
 
             // Check if the egg is ready to hatch
             if (egg.canHatch()) {
-                const hatched = egg.hatch(helper.attackEfficiency(), true);
+                const hatched = egg.hatch(helper.efficiency(), true);
                 if (hatched) {
                     // Reset egg
                     this.hatchery.eggList[index](new Egg());
@@ -266,15 +237,15 @@ class HatcheryHelpers {
 }
 
 // Note: Mostly Gender-neutral names used as the trainer sprite is (seeded) randomly generated, or check the sprite
-HatcheryHelpers.add(new HatcheryHelper('Sam', new Amount(1000, GameConstants.Currency.money), 10, 10, new HatchRequirement(100)));
-HatcheryHelpers.add(new HatcheryHelper('Blake', new Amount(10000, GameConstants.Currency.money), 10, 20, new HatchRequirement(500)));
-HatcheryHelpers.add(new HatcheryHelper('Jasmine', new Amount(50000, GameConstants.Currency.money), 15, 50, new UniqueItemOwnedRequirement('HatcheryHelperJasmine', 'purchase', 'Purchased in the Hoenn region.')));
-HatcheryHelpers.add(new HatcheryHelper('Leslie', new Amount(777777, GameConstants.Currency.money), 150, 50, new UniqueItemOwnedRequirement('HatcheryHelperLeslie', 'purchase', 'Obtain and redeem a code from the PokéClicker Discord server.')));
-HatcheryHelpers.add(new HatcheryHelper('Parker', new Amount(1000, GameConstants.Currency.dungeonToken), 15, 25, new HatchRequirement(1000)));
-HatcheryHelpers.add(new HatcheryHelper('Dakota', new Amount(10000, GameConstants.Currency.dungeonToken), 50, 50, new UniqueItemOwnedRequirement('HatcheryHelperDakota', 'purchase', 'Purchased in the Johto region.')));
-HatcheryHelpers.add(new HatcheryHelper('Cameron', new Amount(75, GameConstants.Currency.farmPoint), 75, 75, new UniqueItemOwnedRequirement('HatcheryHelperCameron', 'purchase', 'Purchased in the Hoenn region.')));
-HatcheryHelpers.add(new HatcheryHelper('Justice', new Amount(10, GameConstants.Currency.questPoint), 100, 50, new QuestRequirement(200)));
-HatcheryHelpers.add(new HatcheryHelper('Carey', new Amount(20, GameConstants.Currency.questPoint), 50, 125, new UniqueItemOwnedRequirement('HatcheryHelperCarey', 'purchase', 'Purchased in the Johto region.')));
-HatcheryHelpers.add(new HatcheryHelper('Aiden', new Amount(20, GameConstants.Currency.diamond), 100, 100, new UndergroundLayersMinedRequirement(100)));
-HatcheryHelpers.add(new HatcheryHelper('Kris', new Amount(40, GameConstants.Currency.diamond), 100, 150, new UniqueItemOwnedRequirement('HatcheryHelperKris', 'purchase', 'Purchased in the Kanto region.')));
-HatcheryHelpers.add(new HatcheryHelper('Noel', new Amount(25, GameConstants.Currency.battlePoint), 100, 200, new UniqueItemOwnedRequirement('HatcheryHelperNoel', 'purchase', 'Purchased in the Hoenn region.')));
+HatcheryHelpers.add(new HatcheryHelper('Sam', new Amount(3000, GameConstants.Currency.money), 10, 0.2, new HatchRequirement(100)));
+HatcheryHelpers.add(new HatcheryHelper('Blake', new Amount(20000, GameConstants.Currency.money), 20, 0.4, new HatchRequirement(500)));
+HatcheryHelpers.add(new HatcheryHelper('Jasmine', new Amount(50000, GameConstants.Currency.money), 35, 0.6, new UniqueItemOwnedRequirement('HatcheryHelperJasmine', 'purchase', 'Purchased in the Hoenn region.')));
+HatcheryHelpers.add(new HatcheryHelper('Leslie', new Amount(1571751, GameConstants.Currency.money), 75, 2.5, new UniqueItemOwnedRequirement('HatcheryHelperLeslie', 'purchase', 'Obtain and redeem a code from the PokéClicker Discord server.')));
+HatcheryHelpers.add(new HatcheryHelper('Parker', new Amount(3000, GameConstants.Currency.dungeonToken), 25, 0.5, new HatchRequirement(1000)));
+HatcheryHelpers.add(new HatcheryHelper('Dakota', new Amount(10000, GameConstants.Currency.dungeonToken), 50, 1, new UniqueItemOwnedRequirement('HatcheryHelperDakota', 'purchase', 'Purchased in the Johto region.')));
+HatcheryHelpers.add(new HatcheryHelper('Cameron', new Amount(100, GameConstants.Currency.farmPoint), 55, 2, new UniqueItemOwnedRequirement('HatcheryHelperCameron', 'purchase', 'Purchased in the Hoenn region.')));
+HatcheryHelpers.add(new HatcheryHelper('Justice', new Amount(10, GameConstants.Currency.questPoint), 100, 2.5, new QuestRequirement(200)));
+HatcheryHelpers.add(new HatcheryHelper('Carey', new Amount(20, GameConstants.Currency.questPoint), 150, 3, new UniqueItemOwnedRequirement('HatcheryHelperCarey', 'purchase', 'Purchased in the Johto region.')));
+HatcheryHelpers.add(new HatcheryHelper('Aiden', new Amount(30, GameConstants.Currency.diamond), 50, 2, new UndergroundLayersMinedRequirement(100)));
+HatcheryHelpers.add(new HatcheryHelper('Kris', new Amount(60, GameConstants.Currency.diamond), 75, 2, new UniqueItemOwnedRequirement('HatcheryHelperKris', 'purchase', 'Purchased in the Kanto region.')));
+HatcheryHelpers.add(new HatcheryHelper('Noel', new Amount(25, GameConstants.Currency.battlePoint), 200, 3.5, new UniqueItemOwnedRequirement('HatcheryHelperNoel', 'purchase', 'Purchased in the Hoenn region.')));

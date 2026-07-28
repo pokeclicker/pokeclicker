@@ -379,10 +379,10 @@ class AchievementHandler {
 
         AchievementHandler.addAchievement('Some Nice Help for the Day Care', 'Unlock 5 Hatchery Helpers.', new HatcheryHelperRequirement(5, 0), 0.1);
         AchievementHandler.addAchievement('Why Do They Have To Work in Shifts?', 'Unlock 11 Hatchery Helpers.', new HatcheryHelperRequirement(11, 0), 0.3);
-        AchievementHandler.addAchievement('My Loyal Helpers', 'Get 3 Hatchery Helpers to 10% bonus efficiency.', new HatcheryHelperRequirement(3, 10), 0.4);
-        AchievementHandler.addAchievement('Let\'s Try Some Other Helpers Too?', 'Get 5 Hatchery Helpers to 10% bonus efficiency.', new HatcheryHelperRequirement(5, 10), 0.5);
-        AchievementHandler.addAchievement('Sam Just Wants To Help', 'Get 10 Hatchery Helpers to 10% bonus efficiency.', new HatcheryHelperRequirement(10, 10), 1);
-        AchievementHandler.addAchievement('When Are You Going to Breed Yourself?', 'Get 10 Hatchery Helpers to 25% bonus efficiency.', new HatcheryHelperRequirement(10, 25), 1.3);
+        AchievementHandler.addAchievement('My Loyal Helpers', 'Get 3 Hatchery Helpers to level 10.', new HatcheryHelperRequirement(3, 10), 0.4);
+        AchievementHandler.addAchievement('Let\'s Try Some Other Helpers Too?', 'Get 5 Hatchery Helpers to level 10.', new HatcheryHelperRequirement(5, 10), 0.5);
+        AchievementHandler.addAchievement('Sam Just Wants To Help', 'Get 10 Hatchery Helpers to level 10.', new HatcheryHelperRequirement(10, 10), 1);
+        AchievementHandler.addAchievement('When Are You Going to Breed Yourself?', 'Get 10 Hatchery Helpers to level 25.', new HatcheryHelperRequirement(10, 25), 1.3);
 
         AchievementHandler.addAchievement('My New Dirty Hobby', 'Unlock 3 Plots in the Farm.', new FarmPlotsUnlockedRequirement(3), 0.05);
         AchievementHandler.addAchievement('Allotment Gardener', 'Unlock 9 Plots in the Farm.', new FarmPlotsUnlockedRequirement(9), 0.15);

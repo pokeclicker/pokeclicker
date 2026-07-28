@@ -545,15 +545,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <td class="text-right" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.cost.amount, 'currency': $data.cost.currency, 'reducedThreshold': 1e10}}"></td>
                                             </tr>
                                             <tr>
-                                                <td class="text-left">Step Efficiency:</td>
+                                                <td class="text-left">Efficiency:</td>
                                                 <td class="text-right">
-                                                    <knockout data-bind="text: `${$data.stepEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
+                                                    <knockout data-bind="text: `${$data.efficiency().toLocaleString('en-US')}%`">100%</knockout>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-left text-nowrap">Attack Efficiency:</td>
+                                                <td class="text-left text-nowrap">Bonus per Level:</td>
                                                 <td class="text-right">
-                                                    <knockout data-bind="text: `${$data.attackEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
+                                                    <knockout data-bind="text: `${$data.levelBonus.toLocaleString('en-US')}%`">100%</knockout>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -563,26 +563,26 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-left text-nowrap">Bonus to Efficiency:</td>
+                                                <td class="text-left text-nowrap">Level:</td>
                                                 <td class="text-right">
-                                                    <knockout data-bind="text: `+ ${$data.hatchBonus().toLocaleString('en-US')}%`">0%</knockout>
+                                                    <knockout data-bind="text: $data.level().toLocaleString('en-US')">0</knockout>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" class="p-0">
                                                     <div class="progress">
-                                                        <!-- ko if: $data.hatchBonus() < 50 -->
-                                                        <div class="progress-bar bg-primary" role="progressbar"
-                                                            data-bind="attr:{ style: 'width:' + (($data.hatched() - $data.prevBonus()) / ($data.nextBonus() - $data.prevBonus())) * 100 + '%' }"
+                                                        <!-- ko if: $data.level() < HatcheryHelper.MAX_LEVEL -->
+                                                        <div class="progress-bar bg-info" role="progressbar"
+                                                            data-bind="attr:{ style: 'width:' + (($data.hatched() - $data.currentLevelHatched()) / ($data.nextLevelHatched() - $data.currentLevelHatched())) * 100 + '%' }"
                                                             aria-valuemin="0" aria-valuemax="100">
-                                                            <span data-bind="text: `${$data.hatchBonus()}%`" class="text-left pl-1">0%</span>
-                                                            <span data-bind="text: ($data.hatched() - $data.prevBonus()) + ' / ' + ($data.nextBonus() - $data.prevBonus()) + ' hatches'"></span>
-                                                            <span data-bind="text: `${($data.hatchBonus() + 0.1).toFixed(1)}%`" class="text-right pr-1">0.1%</span>
+                                                            <span data-bind="text: `+${$data.bonusEfficiency().toFixed(1)}%`" class="text-left pl-1">0%</span>
+                                                            <span data-bind="text: ($data.hatched() - $data.currentLevelHatched()) + ' / ' + ($data.nextLevelHatched() - $data.currentLevelHatched()) + ' hatches'"></span>
+                                                            <span data-bind="text: `+${$data.levelToLevelBonus($data.level() + 1).toFixed(1)}%`" class="text-right pr-1">0.1%</span>
                                                         </div>
                                                         <!-- /ko -->
-                                                        <!-- ko if: $data.hatchBonus() >= 50 -->
-                                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 100%">
-                                                            <span>MAX BONUS!</span>
+                                                        <!-- ko if: $data.level() == HatcheryHelper.MAX_LEVEL -->
+                                                        <div class="progress-bar bg-info" role="progressbar" style="width: 100%">
+                                                            <span>MAX LEVEL!</span>
                                                         </div>
                                                         <!-- /ko -->
                                                     </div>
@@ -679,15 +679,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                     <td class="text-right" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.cost.amount, 'currency': $data.cost.currency, 'reducedThreshold': 1e10}}"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-left">Step Efficiency:</td>
+                                                    <td class="text-left">Efficiency:</td>
                                                     <td class="text-right">
-                                                        <knockout data-bind="text: `${$data.stepEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
+                                                        <knockout data-bind="text: `${$data.efficiency().toLocaleString('en-US')}%`">100%</knockout>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-left text-nowrap">Attack Efficiency:</td>
+                                                    <td class="text-left text-nowrap">Bonus per Level:</td>
                                                     <td class="text-right">
-                                                        <knockout data-bind="text: `${$data.attackEfficiencyBase.toLocaleString('en-US')}%`">100%</knockout>
+                                                        <knockout data-bind="text: `${$data.levelBonus.toLocaleString('en-US')}%`">100%</knockout>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -729,11 +729,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         <p><i>(unlocked after hatching 100 total Pokémon)</i></p>
                         <p>Hatchery Helpers will help out by automatically breeding your Pokémon for you.</p>
                         <p>The cost displayed is how much you will be charged per hatch.</p>
-                        <p>They will only breed Pokémon based on your current Hatchery filters.</p>
-                        <p>All of the Helpers have different step efficiencies and will hatch eggs faster or slower depending on their value.</p>
-                        <p>They each also have different attack efficiencies, which will determine how much attack you gain compared to manually hatching the Pokémon yourself.</p>
-                        <p>These efficiencies will gain a bonus based on how many times you've used the helper to hatch eggs.</p>
-                        <p><i>More Hatchery Helpers can be unlocked through shops and hatching more Pokémon</i></p>
+                        <p>As a default, they will breed Pokémon based on your current Hatchery filters.</p>
+                        <p>Or you can tell a Hatchery Helper to breed Pokémon from specific categories, only or in addition to your filters.</p>
+                        <p>All of the Helpers have different efficiencies, which will determine how much attack you gain compared to manually hatching the Pokémon yourself.</p>
+                        <p>They also gain levels based on the number of eggs hatched. Each level increases the efficiency according to their specific bonus.</p>
+                        <p><i>More Hatchery Helpers can be unlocked through shops or from progressing through the game</i></p>
                     </div>
 
                 </div>
