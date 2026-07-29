@@ -24,6 +24,7 @@ import {
     Pokeball,
     PokeBlockColor,
     Region,
+    VeteranUnlock,
     VitaminType,
 } from '../GameConstants';
 import { MulchShovelItem, ShovelItem } from './ShovelItem';
@@ -43,6 +44,9 @@ import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
 import { pokemonMap } from '../pokemons/PokemonList';
 import AttackGainConsumable from './AttackGainConsumable';
+import CollectibleItem from './CollectibleItem';
+import NullRequirement from '../requirements/NullRequirement';
+import VeteranUnlockRequirement from '../requirements/VeteranUnlockRequirement';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -245,6 +249,11 @@ ItemList.Wishing_Piece = new QuestItem('Wishing_Piece', 'Wishing Piece', 'Attrac
 
 // Other Collectible Items
 ItemList.Christmas_present = new ChristmasPresent();
+ItemList.CeruleanBerryShopPermit = new CollectibleItem('CeruleanBerryShopPermit', 'Berry Shop Permit',
+    'A permit granting access to the exclusive Berry Shop in Cerulean City.', new NullRequirement(), 10000, Currency.farmPoint, {
+        maxAmount: 1,
+        visible: new VeteranUnlockRequirement(VeteranUnlock.CeruleanBerryShopPermit),
+    });
 
 // Vitamins
 ItemList.Protein   = new Vitamin(VitaminType.Protein, 1e4, Currency.money, {

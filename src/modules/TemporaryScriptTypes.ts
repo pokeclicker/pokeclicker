@@ -379,3 +379,8 @@ export type TmpTemporaryBattleType = {
 export type TmpTownType = {
     name: string;
 };
+
+export type TmpVeteranShopType = {
+    list: Record<GameConstants.VeteranUnlock, any>;
+    isUnlockAvailable: (unlock: GameConstants.VeteranUnlock) => boolean;
+};

@@ -240,6 +240,7 @@ class AchievementHandler {
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.sevii], 50, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii123)));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.orre], 75, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre)));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.magikarpJump], 25, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump)));
+        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.events], 25, () => true));
 
         AchievementHandler._achievementCategories = categories;
         return categories;
@@ -564,7 +565,7 @@ class AchievementHandler {
             }
             // Dungeons
             GameConstants.RegionDungeons[region]?.forEach(dungeon => {
-                if (TownList[dungeon].requirements.some((req) => req instanceof DevelopmentRequirement)) {
+                if (TownList[dungeon].requirements.some((req) => req instanceof DevelopmentRequirement) || dungeonList[dungeon].optionalParameters.achievement === false) {
                     return;
                 }
                 let category = region;
@@ -599,14 +600,14 @@ class AchievementHandler {
 
         // Unown pokédex for Johto
         const unownID = pokemonMap['Unown (A)'].id;
-        const unownDexFilter = (p: PartyPokemon) => Math.floor(p.id) === unownID;
+        const unownDexFilter = (p: PokemonListData) => Math.floor(p.id) === unownID;
         const unownAmount = pokemonList.reduce((count, p) => count + +(Math.floor(p.id) === unownID), 0);
         AchievementHandler.addAchievement('Alphabet Soup for Ruin Maniac', 'Catch all unique Unown forms.', new CaughtUniquePokemonByFilterRequirement(unownDexFilter, 'Catch all unique Unown forms.', unownAmount), 2, GameConstants.Region.johto);
         AchievementHandler.addAchievement('"I am the Alpha and the Omega"', 'Catch all unique Shiny Unown forms.', new CaughtUniquePokemonByFilterRequirement(unownDexFilter, 'Catch all unique Unown forms.', unownAmount, true), 3, GameConstants.Region.johto);
 
 
         // Battle Café pokédex for Galar, highly optional as this is End Game farming, so no high bonus
-        const alcremieDexFilter = (p: PartyPokemon) => p.name === 'Milcery (Cheesy)' || p.name.startsWith('Alcremie');
+        const alcremieDexFilter = (p: PokemonListData) => p.name === 'Milcery (Cheesy)' || p.name.startsWith('Alcremie');
         const alcremieAmount = pokemonList.reduce((count, p) => count + +(p.name === 'Milcery (Cheesy)' || p.name.startsWith('Alcremie')), 0);
         AchievementHandler.addAchievement('Moomoo Milk Served Right', 'Catch 32 unique Battle Café flavors.', new CaughtUniquePokemonByFilterRequirement(alcremieDexFilter, 'Catch 32 unique Alcremie flavors.', 32), 0.5, GameConstants.Region.galar);
         AchievementHandler.addAchievement('Gotta Taste \'Em All!', 'Catch all unique Battle Café flavors.', new CaughtUniquePokemonByFilterRequirement(alcremieDexFilter, 'Catch all unique Alcremie flavors.', alcremieAmount), 1, GameConstants.Region.galar);
@@ -614,7 +615,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('All These Flavors And You Choose To Be Cheesy', 'Catch all unique Shiny Battle Café flavors.', new CaughtUniquePokemonByFilterRequirement(alcremieDexFilter, 'Catch all unique Shiny Alcremie flavors.', alcremieAmount, true), 1.5, GameConstants.Region.galar);
 
         // Gigantamax pokédex for Galar
-        const gigaDexFilter = (p: PartyPokemon) => p.name.startsWith('Gigantamax') || p.name.startsWith('Eternamax');
+        const gigaDexFilter = (p: PokemonListData) => p.name.startsWith('Gigantamax') || p.name.startsWith('Eternamax');
         const gigaAmount = pokemonList.reduce((count, p) => count + +(p.name.startsWith('Gigantamax') || p.name.startsWith('Eternamax')), 0);
         AchievementHandler.addAchievement('Way Too Many Bosses', 'Catch all Gigantamax Pokémon.', new CaughtUniquePokemonByFilterRequirement(gigaDexFilter, 'Catch all Gigantamax Pokémon.', gigaAmount), 2, GameConstants.Region.galar);
         AchievementHandler.addAchievement('Really Big Sparkle', 'Catch all Shiny Gigantamax Pokémon.', new CaughtUniquePokemonByFilterRequirement(gigaDexFilter, 'Catch all Shiny Gigantamax Pokémon.', gigaAmount, true), 3, GameConstants.Region.galar);
@@ -631,12 +632,39 @@ class AchievementHandler {
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 1], GameConstants.ExtraAchievementCategories.magikarpJump, 'Magikarp Jump');
         // Magikarp pokédex, highly optional as some forms are End Game farming, so no high bonus
         const magikarpID = pokemonMap.Magikarp.id;
-        const karpDexFilter = (p: PartyPokemon) => Math.floor(p.id) === magikarpID;
+        const karpDexFilter = (p: PokemonListData) => Math.floor(p.id) === magikarpID;
         const karpAmount = pokemonList.reduce((count, p) => count + +(Math.floor(p.id) === magikarpID), 0);
         AchievementHandler.addAchievement('Do You Even Splash?', 'Catch all unique Magikarp forms.', new CaughtUniquePokemonByFilterRequirement(karpDexFilter, 'Catch all unique Magikarp forms.', karpAmount), 1, GameConstants.ExtraAchievementCategories.magikarpJump);
         AchievementHandler.addAchievement('Twenty Thousands Karps Under the Seas', 'Catch all unique Shiny Magikarp forms.', new CaughtUniquePokemonByFilterRequirement(karpDexFilter, 'Catch all unique Shiny Magikarp forms.', karpAmount, true), 1.5, GameConstants.ExtraAchievementCategories.magikarpJump);
 
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 2], GameConstants.ExtraAchievementCategories.orre, 'Orre');
+
+
+        /*
+         * EVENTS
+         */
+        const addEventPokemonAchievements = (header: string, dexName: string, filter: ((p: PokemonListData) => boolean)) => {
+            const dexAmount = pokemonList.filter(filter).length;
+            const bonus = dexAmount <= 6 ? dexAmount : (dexAmount / 6) ** 0.5 * 6;
+            AchievementHandler.addAchievement(`${header} Master`, `Complete the ${dexName} Pokédex`, new CaughtUniquePokemonByFilterRequirement(filter, '/', dexAmount), bonus, GameConstants.ExtraAchievementCategories.events);
+            AchievementHandler.addAchievement(`${header} Shiny Master`, `Complete the ${dexName} Shiny Pokédex`, new CaughtUniquePokemonByFilterRequirement(filter, '/', dexAmount, true), bonus, GameConstants.ExtraAchievementCategories.events);
+            AchievementHandler.addAchievement(`${header} Doctor`, `Have all ${dexName} Pokémon resistant to Pokérus`, new PokerusStatusByFilterRequirement(filter, dexAmount, GameConstants.Pokerus.Resistant), bonus, GameConstants.ExtraAchievementCategories.events);
+
+        };
+        AchievementHandler.addAchievement('New Island Explorer', 'Clear New Island 10 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex('New Island')), 0.8, GameConstants.ExtraAchievementCategories.events);
+        AchievementHandler.addAchievement('New Island Expert', 'Clear New Island 100 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex('New Island')), 1.2, GameConstants.ExtraAchievementCategories.events);
+        AchievementHandler.addAchievement('New Island Hermit', 'Clear New Island 250 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], GameConstants.getDungeonIndex('New Island')), 1.6, GameConstants.ExtraAchievementCategories.events);
+        AchievementHandler.addAchievement('New Island Dweller', 'Clear New Island 500 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[3], GameConstants.getDungeonIndex('New Island')), 2.4, GameConstants.ExtraAchievementCategories.events);
+        addEventPokemonAchievements('Clone', '\'Mewtwo strikes back!\'', (p: PokemonListData) => p.name.endsWith('(Clone)') && p.name !== 'Deoxys (Clone)' || p.name == 'Armored Mewtwo');
+        addEventPokemonAchievements('Spooky', 'Halloween', (p: PokemonListData) => p.name.startsWith('Spooky ') || p.name == 'Pikachu (Gengar)');
+        addEventPokemonAchievements('Partner', '\'Let\'s GO!\'', (p: PokemonListData) => p.name.startsWith('Let\'s Go '));
+        addEventPokemonAchievements('Christmas', 'Christmas', (p: PokemonListData) => p.name.startsWith('Santa ') || ['Snorlax (Snowman)', 'Reindeer Stantler', 'Grinch Celebi', 'Elf Munchlax'].includes(p.name));
+        AchievementHandler.addAchievement('On The Nice List', 'Collect Christmas Presents up to the maximum once', new ItemOwnedRequirement('Christmas_present', 150), 1, GameConstants.ExtraAchievementCategories.events);
+        addEventPokemonAchievements('Pattern', 'Vivillon', (p: PokemonListData) => p.name.startsWith('Vivillon '));
+        AchievementHandler.addAchievement('Rumor Master', 'Complete the \'Hoopa Day\' Pokédex', new QuestLineCompletedRequirement('How blu mouse?'), 1, GameConstants.ExtraAchievementCategories.events);
+        addEventPokemonAchievements('Egghunt', 'Easter', (p: PokemonListData) => ['Pikachu (Easter)', 'Togepi (Flowering Crown)', 'Torchic (Egg)'].includes(p.name));
+        addEventPokemonAchievements('Blossom', '\'Golden Week\'', (p: PokemonListData) => p.name.endsWith('(Rose)'));
+        addEventPokemonAchievements('Party', '\'Flying Pikachu\'', (p: PokemonListData) => p.name == 'Flying Pikachu' || p.name == 'Red Spearow');
 
         // Secret achievements
         AchievementHandler.addSecretAchievement(
@@ -869,7 +897,7 @@ class AchievementHandler {
         // Special Furfrou forms resisted
         // TODO Uncomment when Furfrou (Heart) is obtainable
         /*const furfrouId = pokemonMap.Furfrou.id;
-        const furfrouDexFilter = (p: PartyPokemon) => Math.floor(p.id) === furfrouId && p.id > furfrouId;
+        const furfrouDexFilter = (p: PokemonListData) => Math.floor(p.id) === furfrouId && p.id > furfrouId;
         const furfrouAmount = pokemonList.reduce((count, p) => count + +(Math.floor(p.id) === furfrouId && p.id > furfrouId), 0);
         AchievementHandler.addSecretAchievement(
             'Dog Breeder',

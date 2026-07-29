@@ -165,7 +165,7 @@ aria-labelledby="pokedexModalLabel">
 
                                     <!--Rare Hold Item-->
                                     <div class="col-12">
-                                        <div class="form-group my-2">
+                                        <div class="form-group">
                                             <!-- ko let: { pokedexHeldItemFilter: Settings.getSetting('pokedexHeldItemFilter') } -->
                                             <label for="pokedex-filter-held-item" data-bind="text: pokedexHeldItemFilter.displayName">Rare Held Item</label>
                                             <span class="mx-1"
@@ -187,7 +187,7 @@ aria-labelledby="pokedexModalLabel">
 
                                     <!--Hide alternate forms-->
                                     <div class="col-12">
-                                        <div class="form-group my-2">
+                                        <div class="form-group mb-0">
                                             <!-- ko let: { pokedexHideAltFilter: Settings.getSetting('pokedexHideAltFilter') } -->
                                             <label for="pokedex-filter-hide-alternate" data-bind="text: pokedexHideAltFilter.displayName">Hide alternate forms</label>
                                             <label class="form-check-label toggler-wrapper style-1 float-right">
@@ -199,6 +199,12 @@ aria-labelledby="pokedexModalLabel">
                                             </label>
                                             <!-- /ko -->
                                         </div>
+                                    </div>
+
+                                    <div class="col-12 mt-1">
+                                        <button class="btn btn-primary btn-block btn-sm" data-bind="click: () => PokedexHelper.resetFilters()">
+                                            Reset All Filters
+                                        </button>
                                     </div>
 
                                     <div class="col-12">
