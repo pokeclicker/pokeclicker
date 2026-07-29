@@ -1,21 +1,46 @@
 <div class="modal fade noselect" id="badgeCaseModal" tabindex="-1" role="dialog"
 aria-labelledby="badgeCaseModalLabel">
 <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-   <div class="modal-content">
-       <div class="modal-header">
-           <h5 class="modal-title">Badge Case</h5>
-               <button type="button" class="btn mr-auto"
-                    data-bind="tooltip: {
-                        title: App.game.badgeCase.badgeCaseTooltip(),
-                        trigger: 'hover',
-                        placement:'top',
-                        html: true,
-                    }">ⓘ</button>
-           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-           </button>
-       </div>
-       <div class="modal-body">
+   <div class="modal-content tab-content">
+        <div class="modal-header p-0" style='justify-content: space-around;'>
+            <ul class="nav nav-tabs nav-fill w-100">
+                <li class="nav-item">
+                    <a data-toggle='tab' class='nav-link active' href="#badgeCase">
+                        <div class="row" style="justify-content: center;">
+                            <h5 class="modal-title">Badge Case</h5>
+                            <button type="button" class="btn py-0"
+                                data-bind="tooltip: {
+                                    title: App.game.badgeCase.badgeCaseTooltip(),
+                                    trigger: 'hover',
+                                    placement:'top',
+                                    html: true,
+                                }">ⓘ</button>
+                        </div>
+                    </a>
+                </li>
+                <!-- ko if: GameHelper.enumNumbers(ContestRank).some(r => ContestHelper.getContestHallRequirements(r).some(req => req.isCompleted())) -->
+                <li class="nav-item">
+                    <a data-toggle='tab' class="nav-link" href="#ribbonCase">
+                        <div class="row" style="justify-content: center;">
+                            <h5 class="modal-title">Ribbon Case</h5>
+                            <button type="button" class="btn py-0"
+                                data-bind="tooltip: {
+                                    title: `Contest Ribbons increase your Appeal during frenzy. Your current ribbon bonus is ${'+' + ContestBattle.contestClearedMultiplier()}%`,
+                                    trigger: 'hover',
+                                    placement:'top',
+                                    html: true,
+                                }">ⓘ</button>
+                        </div>
+                    </a>
+                </li>
+                <!-- /ko -->
+                <button type="button" class="close mr-auto" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </ul>
+        </div>
+
+        <div id="badgeCase" class="modal-body tab-pane fade in active show">
             <div data-bind="foreach: Object.entries(BadgeCaseController.getDisplayableBadges())">
                 <div>
                     <h4 data-bind="text: $data[0]"></h4>
@@ -29,6 +54,57 @@ aria-labelledby="badgeCaseModalLabel">
                             <p style="bottom: 0;"
                                 data-bind="text: $data.replace(/_/g, ' ')">name</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="ribbonCase" class="modal-body tab-pane fade">
+            <div data-bind="foreach: { data: GameHelper.enumNumbers(ContestRank).filter(r => r > ContestRank.Practice && ContestHelper.getContestHallRequirements(r).every(req => req.isCompleted())), as: 'rank'}">
+                <h4 data-bind="text: `${ContestRank[rank]} Rank`"></h4>
+                <div class="row no-gutters justify-content-center">
+                    <div class="row w-100 justify-content-center">
+                        <!-- ko foreach: ContestHelper.getAvailableRibbons()[ContestRank[rank]].filter(r => r < ContestType.Balanced) -->
+                        <div class="col-2 p-0" style="align-content:center">
+                            <p class="m-0" data-bind="text: ContestHelper.getRibbonImageDescription(rank, $data)"></p>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <div class="row w-100 justify-content-center">
+                        <!-- ko foreach: ContestHelper.getAvailableRibbons()[ContestRank[rank]].filter(r => r < ContestType.Balanced) -->
+                        <div class="col-2 p-0" style="align-content:center">
+                            <svg class="ribbon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1280" xmlns:v="https://vecta.io/nano"
+                                data-bind="
+                                    style: {
+                                        width: rank < ContestRank.Spectacular ? '80px' : '',
+                                    },
+                                    css: {
+                                        'badge-not-acquired': App.game.statistics.contestsWon[rank][$data]() == 0,
+                                        'pokemon-not-seen': !ContestHelper.contestIsUnlocked(rank, $data),
+                                    },
+                                    attr: {'contest-type': ContestType[$data]},
+                                    ">
+                                <g data-bind="html: ContestHelper.getRibbonImage(rank, $data)"></g>
+                            </svg>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <div class="row w-100 justify-content-center">
+                        <!-- ko foreach: ContestHelper.getAvailableRibbons()[ContestRank[rank]].filter(r => r >= ContestType.Balanced) -->
+                        <div class="" style="align-content:center">
+                            <p class="m-0" data-bind="text: ContestHelper.getRibbonImageDescription(rank, $data)"></p>
+                            <svg class="ribbon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1280" xmlns:v="https://vecta.io/nano"
+                                data-bind="
+                                    css: {
+                                        'badge-not-acquired': App.game.statistics.contestsWon[rank][$data]() == 0,
+                                        'pokemon-not-seen': !ContestHelper.contestIsUnlocked(rank, $data),
+                                    },
+                                    attr: {'contest-type': ContestType[$data]},
+                                    ">
+                                <g data-bind="html: ContestHelper.getRibbonImage(rank, $data)"></g>
+                            </svg>
+                        </div>
+                        <!-- /ko -->
                     </div>
                 </div>
             </div>

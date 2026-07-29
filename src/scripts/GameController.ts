@@ -361,6 +361,31 @@ class GameController {
                     }
                 }
 
+                // Contests
+                if (App.game.gameState === GameConstants.GameState.contest) {
+                    switch (key) {
+                        case 'ArrowUp':
+                        case Settings.getSetting('hotkey.dungeon.up').value:
+                            ContestBattle.contestMove(Direction.Up);
+                            return e.preventDefault();
+                        case 'ArrowLeft':
+                        case Settings.getSetting('hotkey.dungeon.left').value:
+                            ContestBattle.contestMove(Direction.Left);
+                            return e.preventDefault();
+                        case 'ArrowDown':
+                        case Settings.getSetting('hotkey.dungeon.down').value:
+                            ContestBattle.contestMove(Direction.Down);
+                            return e.preventDefault();
+                        case 'ArrowRight':
+                        case Settings.getSetting('hotkey.dungeon.right').value:
+                            ContestBattle.contestMove(Direction.Right);
+                            return e.preventDefault();
+                        case Settings.getSetting('hotkey.contest.action').value:
+                            ContestBattle.contestAction();
+                            return e.preventDefault();
+                    }
+                }
+
                 // Within towns
                 if (App.game.gameState === GameConstants.GameState.town) {
                     if (key === Settings.getSetting('hotkey.town.start').value) {

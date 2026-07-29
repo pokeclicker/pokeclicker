@@ -4,9 +4,10 @@ import BerryType from '../enums/BerryType';
 import Item from '../items/Item';
 import { ItemList } from '../items/ItemList';
 import GameHelper from '../GameHelper';
-import { Currency } from '../GameConstants';
+import { Currency, Region } from '../GameConstants';
 import Requirement from '../requirements/Requirement';
 import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
+import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 
 export type GenericTraderShopIdentifier =
     'Palaeontologist' |
@@ -17,7 +18,9 @@ export type GenericTraderShopIdentifier =
     'FossilNacreneMuseum' |
     'FossilAmbretteFossilLab' |
     'FossilMasterGalarRoute6' |
-    'ScentTrader';
+    'ScentTrader' |
+    'ContestCosplayShop' |
+    'ContestCosplayShopPikachu';
 
 /* eslint-disable @typescript-eslint/no-shadow */
 export enum DealCostOrProfitType {
@@ -427,6 +430,8 @@ export default class GenericDeal {
                 tradeButtonOverride: 'Revive',
             }),
         ]);
+
+        
         GenericDeal.list.ScentTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Joy_Scent, amount: 12 }],
@@ -437,6 +442,111 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Excite_Scent, amount: 12 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Vivid_Scent, amount: 1 }],
                 tradeButtonOverride: 'Refine',
+            }),
+        ]);
+
+        GenericDeal.list.ContestCosplayShop = ko.observableArray([
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Red, amount: 375 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Green, amount: 375 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(2500, Currency.contestToken), amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Dugtrio (Punk)'], amount: 1 }],
+                tradeRequirement: new ObtainedPokemonRequirement('Dugtrio'),
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Red, amount: 375 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Green, amount: 375 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(3600, Currency.contestToken), amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Gengar (Punk)'], amount: 1 }],
+                tradeRequirement: new ObtainedPokemonRequirement('Gengar'),
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Blue, amount: 375 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Yellow, amount: 375 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(1500, Currency.contestToken), amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Goldeen (Diva)'], amount: 1 }],
+                tradeRequirement: new ObtainedPokemonRequirement('Goldeen'),
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Pink, amount: 375 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Yellow, amount: 375 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(1200, Currency.contestToken), amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Onix (Rocker)'], amount: 1 }],
+                tradeRequirement: new ObtainedPokemonRequirement('Onix'),
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Red, amount: 375 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Pink, amount: 375 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(1400, Currency.contestToken), amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Tangela (Pom-pom)'], amount: 1 }],
+                tradeRequirement: new ObtainedPokemonRequirement('Tangela'),
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Blue, amount: 375 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Green, amount: 375 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(1700, Currency.contestToken), amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Weepinbell (Fancy)'], amount: 1 }],
+                tradeRequirement: new ObtainedPokemonRequirement('Weepinbell'),
+            }),
+        ]);
+
+        GenericDeal.list.ContestCosplayShopPikachu = ko.observableArray([
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Cool, amount: 25 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Balanced, amount: 1 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(25000, Currency.contestToken), amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Pikachu (Rock Star)'], amount: 1 }],
+                tradeRequirement: new MaxRegionRequirement(Region.kalos),
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Beautiful, amount: 25 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Balanced, amount: 1 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(25000, Currency.contestToken), amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Pikachu (Belle)'], amount: 1 }],
+                tradeRequirement: new MaxRegionRequirement(Region.kalos),
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Cute, amount: 25 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Balanced, amount: 1 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(25000, Currency.contestToken), amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Pikachu (Pop Star)'], amount: 1 }],
+                tradeRequirement: new MaxRegionRequirement(Region.kalos),
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Smart, amount: 25 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Balanced, amount: 1 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(25000, Currency.contestToken), amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Pikachu (Ph. D.)'], amount: 1 }],
+                tradeRequirement: new MaxRegionRequirement(Region.kalos),
+            }),
+            new GenericDeal({
+                costs: [
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Tough, amount: 25 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.PokeBlock_Balanced, amount: 1 },
+                    { type: DealCostOrProfitType.Amount, currency: new Amount(25000, Currency.contestToken), amount: 1 },
+                ],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Pikachu (Libre)'], amount: 1 }],
+                tradeRequirement: new MaxRegionRequirement(Region.kalos),
             }),
         ]);
     }

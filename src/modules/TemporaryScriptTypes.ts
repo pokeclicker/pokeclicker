@@ -34,6 +34,9 @@ import type WeatherType from './weather/WeatherType';
 import type { MultiplierDecreaser } from './items/types';
 import type BagItem from './interfaces/BagItem';
 import type BattlePokemon from './battles/BattlePokemon';
+import ContestType from './enums/ContestType';
+import ContestBattlePokemon from './contest/ContestBattlePokemon';
+import ContestTrainer from './contest/ContestTrainer';
 
 /*
     These types are only temporary while we are converting things to modules. As things are converted,
@@ -101,7 +104,6 @@ export type TmpDreamOrbControllerType = any;
 export type TmpPurifyChamberType = any;
 export type TmpWeatherAppType = any;
 export type TmpZMovesType = any;
-export type TmpHeldItemType = any;
 
 export type TmpGameType = {
     gameState: GameConstants.GameState;
@@ -281,6 +283,7 @@ export type TmpPokemonFactoryType = {
     routeDungeonTokens(route: number, region: GameConstants.Region): number;
     generateShiny(chance: number, skipBonus?: boolean): boolean;
     generateGenderById(id: number): GameConstants.BattlePokemonGender;
+    generateContestTrainerPokemon(trainer: ContestTrainer, partyIndex: number): ContestBattlePokemon;
 };
 
 export type TmpPartyPokemonType = {
@@ -302,6 +305,10 @@ export type TmpPartyPokemonType = {
     displayName: string,
     shadow: GameConstants.ShadowStatus,
     showShadowImage: boolean,
+    contestAppeal: number;
+    currentContestTypes: ContestType[];
+    contestExp: number;
+    contestSaveData: Record<ContestType, [KnockoutObservable<boolean>, KnockoutObservable<number>]>;
     vitaminsUsed: Record<GameConstants.VitaminType, KnockoutObservable<number>>;
     heldItem: KnockoutObservable<TmpHeldItemType>;
     defaultFemaleSprite: KnockoutObservable<boolean>;
@@ -311,6 +318,8 @@ export type TmpPartyPokemonType = {
     removeCategory(id: number): void;
     resetCategory(): void;
     calculateEVAttackBonus(): number;
+    contestSheen(): number;
+    maxSheenTooltip(): string;
 };
 
 export type TmpPartyType = {
@@ -378,4 +387,8 @@ export type TmpTemporaryBattleType = {
 
 export type TmpTownType = {
     name: string;
+};
+
+export type TmpHeldItemType = {
+    name: string,
 };

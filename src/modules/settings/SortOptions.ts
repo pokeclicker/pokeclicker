@@ -13,6 +13,8 @@ export enum SortOptions {
     category = 11,
     vitaminsUsed = 12,
     evs = 13,
+    contestAppeal = 14,
+    contestSheen = 15,
 }
 
 export type SortOptionConfig = {
@@ -97,5 +99,15 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     [SortOptions.evs]: {
         text: 'EVs',
         getValue: (p) => p.evs() || 0,
+    },
+
+    [SortOptions.contestAppeal]: {
+        text: 'Contest Appeal',
+        getValue: (p) => p.contestAppeal || 0,
+    },
+
+    [SortOptions.contestSheen]: {
+        text: 'Contest Sheen',
+        getValue: (p) => p.contestExp || 0,
     },
 };

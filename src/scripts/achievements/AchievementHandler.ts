@@ -896,6 +896,7 @@ class AchievementHandler {
 
         // Special Furfrou forms resisted
         // TODO Uncomment when Furfrou (Heart) is obtainable
+        //      so probably now then
         /*const furfrouId = pokemonMap.Furfrou.id;
         const furfrouDexFilter = (p: PokemonListData) => Math.floor(p.id) === furfrouId && p.id > furfrouId;
         const furfrouAmount = pokemonList.reduce((count, p) => count + +(Math.floor(p.id) === furfrouId && p.id > furfrouId), 0);

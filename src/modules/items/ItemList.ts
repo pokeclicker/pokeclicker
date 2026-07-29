@@ -43,6 +43,9 @@ import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
 import { pokemonMap } from '../pokemons/PokemonList';
 import AttackGainConsumable from './AttackGainConsumable';
+import ContestType from '../enums/ContestType';
+import ContestPokemonItem from './ContestPokemonItem';
+import ContestRank from '../enums/ContestRank';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -65,6 +68,7 @@ ItemList.LargeRestore    = new EnergyRestore(EnergyRestoreSize.LargeRestore, 200
 ItemList.Dungeon_ticket = new BuyKeyItem(KeyItemType.Dungeon_ticket, 100, undefined, undefined, 'Dungeon Ticket');
 ItemList.Explorer_kit = new BuyKeyItem(KeyItemType.Explorer_kit, 5000, undefined, undefined, 'Explorer Kit');
 ItemList.Event_calendar = new BuyKeyItem(KeyItemType.Event_calendar, 100000, undefined, undefined, 'Event Calendar');
+ItemList.Pokeblock_kit = new BuyKeyItem(KeyItemType.Pokeblock_kit, 500, undefined, undefined, 'Pokéblock Kit');
 
 ItemList.Squirtbottle = new BuyOakItem(OakItemType.Squirtbottle, 5000, Currency.farmPoint);
 ItemList.Sprinklotad = new BuyOakItem(OakItemType.Sprinklotad, 10000, Currency.farmPoint);
@@ -105,21 +109,29 @@ ItemList.Moonball = new PokeballItem(Pokeball.Moonball, Infinity, Currency.farmP
 ItemList.Berry_Shovel   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.');
 ItemList.Mulch_Shovel = new MulchShovelItem(300, 'Mulch Shovel', 'Removes Mulch from a plot in the Farm.');
 
-ItemList.PokeBlock_Black  = new PokeBlock(PokeBlockColor.Black, Infinity);
-ItemList.PokeBlock_Red    = new PokeBlock(PokeBlockColor.Red, Infinity);
-ItemList.PokeBlock_Blue = new PokeBlock(PokeBlockColor.Blue, Infinity);
-ItemList.PokeBlock_Pink = new PokeBlock(PokeBlockColor.Pink, Infinity);
-ItemList.PokeBlock_Green = new PokeBlock(PokeBlockColor.Green, Infinity);
-ItemList.PokeBlock_Yellow = new PokeBlock(PokeBlockColor.Yellow, Infinity);
-ItemList.PokeBlock_Gold   = new PokeBlock(PokeBlockColor.Gold, Infinity);
-ItemList.PokeBlock_Purple = new PokeBlock(PokeBlockColor.Purple, Infinity);
-ItemList.PokeBlock_Indigo = new PokeBlock(PokeBlockColor.Indigo, Infinity);
-ItemList.PokeBlock_Brown = new PokeBlock(PokeBlockColor.Brown, Infinity);
-ItemList.PokeBlock_Light_Blue = new PokeBlock(PokeBlockColor.Light_Blue, Infinity);
-ItemList.PokeBlock_Olive = new PokeBlock(PokeBlockColor.Olive, Infinity);
-ItemList.PokeBlock_Beige = new PokeBlock(PokeBlockColor.Beige, Infinity);
-ItemList.PokeBlock_Gray   = new PokeBlock(PokeBlockColor.Gray, Infinity);
-ItemList.PokeBlock_White  = new PokeBlock(PokeBlockColor.White, Infinity);
+// Pokeblocks
+ItemList.PokeBlock_Red       = new PokeBlock(PokeBlockColor.Red, 10, 1, [ContestType.Cool], 'A Spicy Pokéblock that boosts the Appeal of Cool Pokémon by a bit.');
+ItemList.PokeBlock_Blue      = new PokeBlock(PokeBlockColor.Blue, 10, 1, [ContestType.Beautiful], 'A Dry Pokéblock that boosts the Appeal of Beautiful Pokémon by a bit.');
+ItemList.PokeBlock_Pink      = new PokeBlock(PokeBlockColor.Pink, 10, 1, [ContestType.Cute], 'A Sweet Pokéblock that boosts the Appeal of Cute Pokémon by a bit.');
+ItemList.PokeBlock_Green     = new PokeBlock(PokeBlockColor.Green, 10, 1, [ContestType.Smart], 'A Bitter Pokéblock that boosts the Appeal of Smart Pokémon by a bit.');
+ItemList.PokeBlock_Yellow    = new PokeBlock(PokeBlockColor.Yellow, 10, 1, [ContestType.Tough], 'A Sour Pokéblock that boosts the Appeal of Tough Pokémon by a bit.');
+ItemList.PokeBlock_White     = new PokeBlock(PokeBlockColor.White, 20, 1, undefined, 'A Mild Pokéblock that boosts the Appeal of any Pokémon by some.');
+ItemList.PokeBlock_Black     = new PokeBlock(PokeBlockColor.Black, 0, 5, undefined, 'A bland Pokéblock that slightly increases the Sheen of any Pokémon.', (pokemon) =>  pokemon.contestSheen() < 100);
+ItemList.PokeBlock_Gray      = new PokeBlock(PokeBlockColor.Gray, 25, 1, undefined, 'A plain Pokéblock that greatly boosts the Appeal of any Pokémon.');
+ItemList.PokeBlock_Purple    = new PokeBlock(PokeBlockColor.Purple, 40, 2, [ContestType.Cool, ContestType.Beautiful], 'A Spicy-Dry Pokéblock that boosts the Appeal of a Cool or Beautiful Pokémon by some.');
+ItemList.PokeBlock_Indigo    = new PokeBlock(PokeBlockColor.Indigo, 40, 2, [ContestType.Beautiful, ContestType.Cute], 'A Dry-Sweet Pokéblock that boosts the Appeal of a Beautiful or Cute Pokémon by some.');
+ItemList.PokeBlock_Brown     = new PokeBlock(PokeBlockColor.Brown, 40, 2, [ContestType.Cute, ContestType.Smart], 'A Sweet-Bitter Pokéblock that boosts the Appeal of a Cute to Smart Pokémon by some.');
+ItemList.PokeBlock_Olive     = new PokeBlock(PokeBlockColor.Olive, 40, 2, [ContestType.Smart, ContestType.Tough], 'A Bitter-Sour Pokéblock that boosts the Appeal of a Smart to Tough Pokémon by some.');
+ItemList.PokeBlock_Orange    = new PokeBlock(PokeBlockColor.Orange, 40, 2, [ContestType.Cool, ContestType.Tough], 'A Sour-Spicy Pokéblock that boosts the Appeal of a Tough to Cool Pokémon by some.');
+ItemList.PokeBlock_Rainbow   = new PokeBlock(PokeBlockColor.Rainbow, 65, 2, undefined, 'A flavorful Pokéblock that significantly boosts the Appeal of any Pokémon and activates all its default contest types.');
+ItemList.PokeBlock_Cool      = new PokeBlock(PokeBlockColor.Cool, 85, 3, [ContestType.Cool], 'A super Spicy Pokéblock that substantially boosts Appeal and adds the Cool Contest Type.', () => true);
+ItemList.PokeBlock_Beautiful = new PokeBlock(PokeBlockColor.Beautiful, 85, 3, [ContestType.Beautiful], 'A super Dry Pokéblock that substantially boosts Appeal and adds the Beautiful Contest Type.', () => true);
+ItemList.PokeBlock_Cute      = new PokeBlock(PokeBlockColor.Cute, 85, 3, [ContestType.Cute], 'A super Sweet Pokéblock that substantially boosts Appeal and the Cute Contest Type.', () => true);
+ItemList.PokeBlock_Smart     = new PokeBlock(PokeBlockColor.Smart, 85, 3, [ContestType.Smart], 'A super Bitter Pokéblock that substantially boosts Appeal and adds the Smart Contest Type.', () => true);
+ItemList.PokeBlock_Tough     = new PokeBlock(PokeBlockColor.Tough, 85, 3, [ContestType.Tough], 'A super Sour Pokéblock that substantially boosts Appeal and adds the Tough Contest Type.', () => true);
+ItemList.PokeBlock_Balanced  = new PokeBlock(PokeBlockColor.Balanced, 180, 5, [ContestType.Balanced], 'A super flavorful Pokéblock that immensely boosts Appeal adds the Balanced Contest Type.', () => true);
+ItemList.PokeBlock_Silver    = new PokeBlock(PokeBlockColor.Silver, 15, 1, undefined, 'A tender Pokéblock that boosts Appeal by 15.', undefined, true);
+ItemList.PokeBlock_Gold      = new PokeBlock(PokeBlockColor.Gold, 30, 0, undefined, 'A smooth Pokéblock that boosts Appeal by 30 without adding Sheen.', undefined, true);
 
 // Mega Stones
 ItemList.Abomasite          = new MegaStoneItem(MegaStoneType.Abomasite, 'Abomasnow', 10000);
@@ -127,7 +139,7 @@ ItemList.Absolite           = new MegaStoneItem(MegaStoneType.Absolite, 'Absol',
 ItemList.Aerodactylite      = new MegaStoneItem(MegaStoneType.Aerodactylite, 'Aerodactyl', 10000);
 ItemList.Aggronite          = new MegaStoneItem(MegaStoneType.Aggronite, 'Aggron', 10000);
 ItemList.Alakazite          = new MegaStoneItem(MegaStoneType.Alakazite, 'Alakazam', 10000);
-//ItemList.Altarianite        = new MegaStoneItem(MegaStoneType.Altarianite, 'Altaria', 10000);
+ItemList.Altarianite        = new MegaStoneItem(MegaStoneType.Altarianite, 'Altaria', 10000);
 ItemList.Ampharosite        = new MegaStoneItem(MegaStoneType.Ampharosite, 'Ampharos', 10000);
 ItemList.Audinite           = new MegaStoneItem(MegaStoneType.Audinite, 'Audino', 10000);
 ItemList.Banettite          = new MegaStoneItem(MegaStoneType.Banettite, 'Banette', 10000);
@@ -368,6 +380,11 @@ ItemList.Togepi               = new PokemonItem('Togepi', 15000);
 ItemList['Pikachu (Palaeontologist)'] = new PokemonItem('Pikachu (Palaeontologist)');
 
 // Hoenn
+ItemList.Treecko = new PokemonItem('Treecko');
+ItemList.Torchic = new PokemonItem('Torchic');
+ItemList.Mudkip = new PokemonItem('Mudkip');
+ItemList.Plusle = new PokemonItem('Plusle');
+ItemList.Minun = new PokemonItem('Minun');
 ItemList['Probably Chimecho']  = new PokemonItem('Hoppip (Chimecho)', 35800, Currency.diamond, false, 'Probably Chimecho');
 ItemList.Beldum               = new PokemonItem('Beldum', 22500);
 ItemList['Deoxys (Clone)'] = new PokemonItem('Deoxys (Clone)', 100);
@@ -389,7 +406,7 @@ ItemList['Furfrou (Kabuki)']     = new PokemonItem('Furfrou (Kabuki)', 75000, Cu
 ItemList['Furfrou (Pharaoh)']    = new PokemonItem('Furfrou (Pharaoh)', 300000000, Currency.dungeonToken);
 ItemList['Furfrou (Star)']    = new PokemonItem('Furfrou (Star)', 10000);
 ItemList['Furfrou (La Reine)']    = new PokemonItem('Furfrou (La Reine)');
-ItemList['Furfrou (Heart)']    = new PokemonItem('Furfrou (Heart)', 15000, Currency.contestToken);
+ItemList['Furfrou (Heart)']    = new PokemonItem('Furfrou (Heart)', 50000, Currency.contestToken);
 ItemList['Probably Not Pikachu']   = new PokemonItem('Inkay (Pikachu)', 100000000, Currency.dungeonToken, false, 'Probably Not Pikachu');
 // Alola
 ItemList['Type: Null']           = new PokemonItem('Type: Null', 114000);
@@ -486,18 +503,38 @@ ItemList['Tornadus (Therian)']  = new PokemonItem('Tornadus (Therian)');
 ItemList['Thundurus (Therian)']  = new PokemonItem('Thundurus (Therian)');
 ItemList['Landorus (Therian)']  = new PokemonItem('Landorus (Therian)');
 // Contest
-ItemList['Dugtrio (Punk)'] = new PokemonItem('Dugtrio (Punk)', 1500, Currency.contestToken);
-ItemList['Gengar (Punk)'] = new PokemonItem('Gengar (Punk)', 3000, Currency.contestToken);
-ItemList['Goldeen (Diva)'] = new PokemonItem('Goldeen (Diva)', 500, Currency.contestToken);
-ItemList['Onix (Rocker)'] = new PokemonItem('Onix (Rocker)', 1000, Currency.contestToken);
-ItemList['Tangela (Pom-pom)'] = new PokemonItem('Tangela (Pom-pom)', 400, Currency.contestToken);
-ItemList['Weepinbell (Fancy)'] = new PokemonItem('Weepinbell (Fancy)', 700, Currency.contestToken);
-ItemList['Sudowoodo (Golden)'] = new PokemonItem('Sudowoodo (Golden)', 2000, Currency.contestToken);
-ItemList['Pikachu (Rock Star)'] = new PokemonItem('Pikachu (Rock Star)', 1000, Currency.contestToken);
-ItemList['Pikachu (Belle)'] = new PokemonItem('Pikachu (Belle)', 1000, Currency.contestToken);
-ItemList['Pikachu (Pop Star)'] = new PokemonItem('Pikachu (Pop Star)', 1000, Currency.contestToken);
-ItemList['Pikachu (Ph. D.)'] = new PokemonItem('Pikachu (Ph. D.)', 1000, Currency.contestToken);
-ItemList['Pikachu (Libre)'] = new PokemonItem('Pikachu (Libre)', 1000, Currency.contestToken);
+ItemList.Normal_Rank_Treecko = new ContestPokemonItem('Treecko', 20, undefined, ContestRank.Normal, true, undefined, undefined, { maxAmount: 1 });
+ItemList.Normal_Rank_Torchic = new ContestPokemonItem('Torchic', 20, undefined, ContestRank.Normal, true, undefined, undefined, { maxAmount: 1 });
+ItemList.Normal_Rank_Mudkip = new ContestPokemonItem('Mudkip', 20, undefined, ContestRank.Normal, true, undefined, undefined, { maxAmount: 1 });
+ItemList.Normal_Rank_Plusle = new ContestPokemonItem('Plusle', 50, undefined, ContestRank.Normal, true, undefined, undefined, { maxAmount: 1 });
+ItemList.Normal_Rank_Minun = new ContestPokemonItem('Minun', 50, undefined, ContestRank.Normal, true, undefined, undefined, { maxAmount: 1 });
+ItemList.Super_Rank_Treecko = new ContestPokemonItem('Treecko', 100, [ContestType.Cool], ContestRank.Super, true, 'Super Cool Treecko', undefined, { maxAmount: 1 });
+ItemList.Super_Rank_Torchic = new ContestPokemonItem('Torchic', 100, [ContestType.Beautiful], ContestRank.Super, true, 'Super Beautiful Torchic', undefined, { maxAmount: 1 });
+ItemList.Super_Rank_Mudkip = new ContestPokemonItem('Mudkip', 100, [ContestType.Tough], ContestRank.Super, true, 'Super Tough Mudkip', undefined, { maxAmount: 1 });
+ItemList.Super_Rank_Plusle = new ContestPokemonItem('Plusle', 100, [ContestType.Cute], ContestRank.Super, true, 'Super Cute Plusle', undefined, { maxAmount: 1 });
+ItemList.Super_Rank_Minun = new ContestPokemonItem('Minun', 100, [ContestType.Smart], ContestRank.Super, true, 'Super Smart Minun', undefined, { maxAmount: 1 });
+ItemList.Hyper_Rank_Treecko = new ContestPokemonItem('Treecko', 250, [ContestType.Cool], ContestRank.Hyper, true, 'Hyper Cool Treecko');
+ItemList.Hyper_Rank_Torchic = new ContestPokemonItem('Torchic', 250, [ContestType.Beautiful], ContestRank.Hyper, true, 'Hyper Beautiful Torchic');
+ItemList.Hyper_Rank_Mudkip = new ContestPokemonItem('Mudkip', 250, [ContestType.Tough], ContestRank.Hyper, true, 'Hyper Tough Mudkip');
+ItemList.Hyper_Rank_Plusle = new ContestPokemonItem('Plusle', 250, [ContestType.Cute], ContestRank.Hyper, true, 'Hyper Cute Plusle');
+ItemList.Hyper_Rank_Minun = new ContestPokemonItem('Minun', 250, [ContestType.Smart], ContestRank.Hyper, true, 'Hyper Smart Minun');
+ItemList.Master_Rank_Treecko = new ContestPokemonItem('Treecko', 500, [ContestType.Cool], undefined, undefined, 'Master Cool Treecko');
+ItemList.Master_Rank_Torchic = new ContestPokemonItem('Torchic', 500, [ContestType.Beautiful], undefined, undefined, 'Master Beautiful Torchic');
+ItemList.Master_Rank_Mudkip = new ContestPokemonItem('Mudkip', 500, [ContestType.Tough], undefined, undefined, 'Master Tough Mudkip');
+ItemList.Master_Rank_Plusle = new ContestPokemonItem('Plusle', 500, [ContestType.Cute], undefined, undefined, 'Master Cute Plusle');
+ItemList.Master_Rank_Minun = new ContestPokemonItem('Minun', 500, [ContestType.Smart], undefined, undefined, 'Master Smart Minun');
+ItemList['Dugtrio (Punk)'] = new ContestPokemonItem('Dugtrio (Punk)');
+ItemList['Gengar (Punk)'] = new ContestPokemonItem('Gengar (Punk)');
+ItemList['Goldeen (Diva)'] = new ContestPokemonItem('Goldeen (Diva)');
+ItemList['Onix (Rocker)'] = new ContestPokemonItem('Onix (Rocker)');
+ItemList['Tangela (Pom-pom)'] = new ContestPokemonItem('Tangela (Pom-pom)');
+ItemList['Weepinbell (Fancy)'] = new ContestPokemonItem('Weepinbell (Fancy)');
+ItemList['Sudowoodo (Golden)'] = new ContestPokemonItem('Sudowoodo (Golden)', 2000);
+ItemList['Pikachu (Rock Star)'] = new ContestPokemonItem('Pikachu (Rock Star)', ContestRank.Spectacular);
+ItemList['Pikachu (Belle)'] = new ContestPokemonItem('Pikachu (Belle)', ContestRank.Spectacular);
+ItemList['Pikachu (Pop Star)'] = new ContestPokemonItem('Pikachu (Pop Star)', ContestRank.Spectacular);
+ItemList['Pikachu (Ph. D.)'] = new ContestPokemonItem('Pikachu (Ph. D.)', ContestRank.Spectacular);
+ItemList['Pikachu (Libre)'] = new ContestPokemonItem('Pikachu (Libre)', ContestRank.Spectacular);
 // Event
 ItemList['Elf Munchlax'] = new PokemonItem('Elf Munchlax', 3108, Currency.questPoint, undefined, undefined,
     { visible: new MultiRequirement([new SpecialEventRequirement('Merry Christmas!'), new ObtainedPokemonRequirement('Santa Snorlax')]) });

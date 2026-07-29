@@ -2972,6 +2972,15 @@ class Update implements Saveable {
                 saveData.farming.berryInventory = savedBerries;
                 delete saveData.farming.berryList;
             }
+
+            // Give Sudowoodo (Golden) its ContestPokemonItem stats
+            setTimeout(async () => {
+                const goldowoodo = saveData.party.caughtPokemon.find((p: PartyPokemon) => p.id === 185.01);
+                if (goldowoodo) {
+                    App.game.party.caughtPokemon.find((p: PartyPokemon) => p.id === 185.01).currentContestTypes = [ContestType.Balanced];
+                    App.game.party.caughtPokemon.find((p: PartyPokemon) => p.id === 185.01).contestAppeal = ContestHelper.rankAppeal[ContestRank.Master];
+                }
+            }, GameConstants.SECOND);
         },
     };
 

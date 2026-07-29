@@ -37,6 +37,7 @@ import PokemonCategories from '../party/Category';
 import ShadowPokemonRequirement from '../requirements/ShadowPokemonRequirement';
 import OrderSetting from './OrderSetting';
 import areaStatus from '../enums/AreaStatus';
+import ContestType from '../enums/ContestType';
 
 export default Settings;
 
@@ -263,7 +264,7 @@ Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
 // Hatchery Sorting
 const hatcherySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
-)).filter((opt) => ![SortOptions.level, SortOptions.attack].includes(opt.value));
+)).filter((opt) => ![SortOptions.level, SortOptions.attack, SortOptions.contestAppeal, SortOptions.contestSheen].includes(opt.value));
 Settings.add(new Setting<number>('hatcherySort', 'Sort', hatcherySortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('hatcherySortDirection', 'reverse', false));
 
@@ -289,6 +290,18 @@ Settings.add(new BooleanSetting('consumableHideShinyPokemon', 'Hide shiny Pokém
 Settings.add(new SearchSetting('consumableSearchFilter', 'Search', '', undefined, false));
 Settings.add(new Setting<number>('consumableRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptionsNoneLast], -2, undefined, false));
 Settings.add(new Setting<number>('consumableTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2, undefined, false));
+
+// Pokeblock Sorting
+const pokeblockOptions = [SortOptions.id, SortOptions.name, SortOptions.category, SortOptions.contestAppeal, SortOptions.contestSheen];
+const pokeblockSortSettings = Object.keys(SortOptionConfigs).filter(o => pokeblockOptions.includes(Number(o))).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('pokeblockSort', 'Sort', pokeblockSortSettings, SortOptions.id));
+Settings.add(new BooleanSetting('pokeblockSortDirection', 'reverse', false));
+Settings.add(new SearchSetting('pokeblockSearchFilter', 'Search', ''));
+Settings.add(new Setting<number>('pokeblockRegionFilter', 'Region', [new SettingOption('All', -2), ...regionOptionsNoneLast], -2));
+Settings.add(new Setting<number>('pokeblockTypeFilter', 'Contest Type', [new SettingOption('All', -1), ...Settings.enumToNumberSettingOptionArray(ContestType, (t) => t !== 'None')], -1));
+Settings.add(new BooleanSetting('stopPokeblockAtMaxAppeal', 'Stop feeding Pokéblocks at max Appeal', false, undefined, false));
 
 // Held Item Sorting
 const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
@@ -521,6 +534,8 @@ Settings.add(new HotkeySetting('hotkey.safari.ball', 'Throw Ball', 'C'));
 Settings.add(new HotkeySetting('hotkey.safari.bait', 'Throw Bait', 'B'));
 Settings.add(new HotkeySetting('hotkey.safari.rock', 'Throw Rock', 'R'));
 Settings.add(new HotkeySetting('hotkey.safari.run', 'Run', 'F'));
+
+Settings.add(new HotkeySetting('hotkey.contest.action', 'Clap', 'Space'));
 
 // Discord
 Settings.add(new BooleanSetting('discord-rp.enabled', 'Discord RP enabled', true));

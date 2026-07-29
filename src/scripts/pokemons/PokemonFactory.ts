@@ -201,6 +201,31 @@ class PokemonFactory {
         return this.gymPokemonToBattlePokemon(pokemon, encounterType);
     }
 
+    public static generateContestTrainerPokemon(trainer: ContestTrainer, partyIndex: number): ContestBattlePokemon {
+        const pokemon = trainer.getTeam()[partyIndex];
+        const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
+        const nickname = pokemon.nickname;
+        const contestTypes = pokemon.contestTypes ?? basePokemon.contestTypes;
+        const gender = pokemon.gender ?? this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
+        let dance = basePokemon.id.toString().split('').filter(n => !isNaN(Number(n))).map(v => Number(v) % 4);
+        if (Math.floor(dance.length) < 2) {
+            dance.unshift(0, 0);
+        }
+        if (Math.floor(dance.length) < 3) {
+            dance.unshift(0);
+        }
+        if (dance.length > 5) {
+            dance = dance.slice(dance.length - 5);
+        }
+        const moves = pokemon.moves ?? Rand.shuffleArray(contestTypes.concat(contestTypes, contestTypes, contestTypes)).slice(0, 4);
+        const shiny = pokemon.shiny ?? false;
+        const exp: number = pokemon.level;
+        const catchRate = 0;
+        const money = new Amount(1, GameConstants.Currency.contestToken);
+        const shadow = GameConstants.ShadowStatus.None;
+        return new ContestBattlePokemon(contestTypes, nickname, dance, moves, pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, money, shiny, GameConstants.GYM_GEMS, gender, shadow, EncounterType.trainer);
+    }
+
     private static generateRoamingEncounter(routeNum: number, region: GameConstants.Region): false | PokemonNameType {
         // Map to the route numbers
         const route = Routes.getRoute(region, routeNum);

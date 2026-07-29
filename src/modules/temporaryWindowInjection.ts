@@ -15,6 +15,10 @@ import BerryType from './enums/BerryType';
 import SizeUnits from './enums/SizeUnits';
 import PokemonType from './enums/PokemonType';
 import CaughtStatus from './enums/CaughtStatus';
+import ContestType from './enums/ContestType';
+import ContestRank from './enums/ContestRank';
+import ContestOpponentStatus from './enums/ContestOpponentStatus';
+import Direction from './enums/Direction';
 import EvolutionType from './enums/EvolutionType';
 import FarmNotificationType from './enums/FarmNotificationType';
 import FlavorType from './enums/FlavorType';
@@ -32,6 +36,13 @@ import BattlePokemon from './battles/BattlePokemon';
 import Trainer from './battles/Trainer';
 import GymPokemon from './gym/GymPokemon';
 import CustomGymPokemon from './gym/CustomGymPokemon';
+import ContestBattle from './contest/ContestBattle';
+import ContestBattlePokemon from './contest/ContestBattlePokemon';
+import ContestHelper from './contest/ContestHelper';
+import ContestRunner from './contest/ContestRunner';
+import ContestRewards from './contest/ContestRewards';
+import ContestTrainerList from './contest/ContestTrainerList';
+import ContestScore from './contest/ContestScore';
 import Berry from './farming/Berry';
 import { BerryList } from './farming/BerryList';
 import BooleanSetting from './settings/BooleanSetting';
@@ -78,6 +89,7 @@ import * as DisplayObservables from './utilities/DisplayObservables';
 import PokemonCategories from './party/Category';
 import Information from './utilities/Information';
 import TypeHelper from './types/TypeHelper';
+import ContestTypeHelper from './types/ContestTypeHelper';
 import Upgrade from './upgrades/Upgrade';
 import ExpUpgrade from './upgrades/ExpUpgrade';
 import OakItemType from './enums/OakItemType';
@@ -100,7 +112,7 @@ import OneFromManyRequirement from './requirements/OneFromManyRequirement';
 import AttackRequirement from './requirements/AttackRequirement';
 import BattleFrontierHighestStageRequirement from './requirements/BattleFrontierHighestStageRequirement';
 import BattleFrontierTotalStageRequirement from './requirements/BattleFrontierTotalStageRequirement';
-import TotalBerriesUnlockedRequirement from './requirements/TotalBerriesUnlockedRequirement';
+import BerryUnlockedRequirement from './requirements/BerryUnlockedRequirement';
 import CapturedRequirement from './requirements/CapturedRequirement';
 import CaughtPokemonRequirement from './requirements/CaughtPokemonRequirement';
 import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
@@ -116,6 +128,8 @@ import FarmPointsRequirement from './requirements/FarmPointsRequirement';
 import GymBadgeRequirement from './requirements/GymBadgeRequirement';
 import HatchRequirement from './requirements/HatchRequirement';
 import HatcheryHelperRequirement from './requirements/HatcheryHelperRequirement';
+import InContestRankRequirement from './requirements/InContestRankRequirement';
+import InContestTypeRequirement from './requirements/InContestTypeRequirement';
 import InRegionRequirement from './requirements/InRegionRequirement';
 import MoneyRequirement from './requirements/MoneyRequirement';
 import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
@@ -134,11 +148,11 @@ import PokemonDefeatedSelectNRequirement from './requirements/PokemonDefeatedSel
 import SeviiCaughtRequirement from './requirements/SeviiCaughtRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
 import ShadowPokemonRequirement from './requirements/ShadowPokemonRequirement';
-import BerryUnlockedRequirement from './requirements/BerryUnlockedRequirement';
 import StatisticRequirement from './requirements/StatisticRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import StarterRequirement from './requirements/StarterRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
+import TotalBerriesUnlockedRequirement from './requirements/TotalBerriesUnlockedRequirement';
 import TotalMegaStoneObtainedRequirement from './requirements/TotalMegaStoneObtainedRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
 import UndergroundItemValueType from './enums/UndergroundItemValueType';
@@ -195,6 +209,7 @@ import ItemHandler from './items/ItemHandler';
 import CaughtIndicatingItem from './items/CaughtIndicatingItem';
 import PokerusIndicatingItem from './items/PokerusIndicatingItem';
 import PokemonItem from './items/PokemonItem';
+import ContestPokemonItem from './items/ContestPokemonItem';
 import EggItem from './items/EggItem';
 import MegaStoneItem from './items/MegaStoneItem';
 import PokeballItem from './items/PokeballItem';
@@ -204,6 +219,8 @@ import Vitamin from './items/Vitamin';
 import VitaminController from './items/VitaminController';
 import Consumable from './items/Consumable';
 import ConsumableController from './items/ConsumableController';
+import PokeBlock from './items/PokeBlock';
+import PokeBlockController from './items/PokeBlockController';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
@@ -256,6 +273,10 @@ Object.assign(<any>window, {
     PokemonType,
     CaughtStatus,
     EvolutionType,
+    ContestType,
+    ContestRank,
+    ContestOpponentStatus,
+    Direction,
     FarmNotificationType,
     FlavorType,
     ItemType,
@@ -271,6 +292,13 @@ Object.assign(<any>window, {
     Trainer,
     GymPokemon,
     CustomGymPokemon,
+    ContestBattle,
+    ContestBattlePokemon,
+    ContestHelper,
+    ContestRunner,
+    ContestRewards,
+    ContestTrainerList,
+    ContestScore,
     Berry,
     BerryList,
     BooleanSetting,
@@ -324,6 +352,7 @@ Object.assign(<any>window, {
     PokemonCategories,
     Information,
     TypeHelper,
+    ContestTypeHelper,
     Upgrade,
     ExpUpgrade,
     OakItemType,
@@ -347,7 +376,7 @@ Object.assign(<any>window, {
     AttackRequirement,
     BattleFrontierHighestStageRequirement,
     BattleFrontierTotalStageRequirement,
-    TotalBerriesUnlockedRequirement,
+    BerryUnlockedRequirement,
     CapturedRequirement,
     CaughtPokemonRequirement,
     ClearDungeonRequirement,
@@ -364,6 +393,8 @@ Object.assign(<any>window, {
     HatchRequirement,
     HatcheryHelperRequirement,
     InRegionRequirement,
+    InContestRankRequirement,
+    InContestTypeRequirement,
     MoneyRequirement,
     MaxLevelOakItemRequirement,
     MaxRegionRequirement,
@@ -381,11 +412,11 @@ Object.assign(<any>window, {
     SeviiCaughtRequirement,
     ShinyPokemonRequirement,
     ShadowPokemonRequirement,
-    BerryUnlockedRequirement,
     StatisticRequirement,
     SubregionRequirement,
     StarterRequirement,
     TokenRequirement,
+    TotalBerriesUnlockedRequirement,
     TotalMegaStoneObtainedRequirement,
     UndergroundItemsFoundRequirement,
     UndergroundItemValueType,
@@ -448,6 +479,7 @@ Object.assign(<any>window, {
     CaughtIndicatingItem,
     PokerusIndicatingItem,
     PokemonItem,
+    ContestPokemonItem,
     EggItem,
     MegaStoneItem,
     PokeballItem,
@@ -459,6 +491,8 @@ Object.assign(<any>window, {
     VitaminController,
     Consumable,
     ConsumableController,
+    PokeBlock,
+    PokeBlockController,
     RoamingPokemonList,
     DataPokemon,
     RoamingPokemon,

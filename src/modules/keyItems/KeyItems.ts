@@ -47,8 +47,8 @@ export default class KeyItems implements Feature {
             new KeyItem(KeyItemType.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City.', undefined, undefined, undefined, 'Safari Ticket'),
             new KeyItem(KeyItemType.Wailmer_pail, 'This is a tool for watering Berries to allow you to operate the farm.',
                 () => MapHelper.accessToRoute(11, Region.kanto), undefined, undefined, 'Wailmer Pail'),
-
             new KeyItem(KeyItemType.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground.', undefined, undefined, undefined, 'Explorer Kit'),
+            new KeyItem(KeyItemType.Pokeblock_kit, 'A case for PokeBlocks that are used for contests. They come in an variety of different flavors!', undefined, undefined, undefined, 'Pokéblock Case'),
             new KeyItem(KeyItemType.Eon_ticket, 'A limited edition ticket for a cruise to the Southern Island.', undefined, undefined, undefined, 'Eon Ticket'),
             new KeyItem(KeyItemType.Event_calendar, 'This calendar will keep you up to date on the latest events and let you start events early.', undefined, undefined, undefined, 'Event Calendar'),
             new KeyItem(KeyItemType.Gem_case, 'A case specifically designed for holding gems.', undefined, undefined, undefined, 'Gem Case'),

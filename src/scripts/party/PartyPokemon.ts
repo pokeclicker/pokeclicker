@@ -1,4 +1,5 @@
 /// <reference path="../../declarations/party/LevelType.d.ts" />
+/// <reference path="../../declarations/contest/ContestHelper.d.ts" />
 
 enum PartyPokemonSaveKeys {
     attackBonusPercent = 0,
@@ -17,6 +18,8 @@ enum PartyPokemonSaveKeys {
     nickname,
     shadow,
     showShadowImage,
+    contestExp,
+    contestSaveData,
 }
 
 class PartyPokemon implements Saveable, TmpPartyPokemonType {
@@ -42,6 +45,8 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         nickname: '',
         shadow: GameConstants.ShadowStatus.None,
         showShadowImage: false,
+        contestExp: 0,
+        contestSaveData: {},
     };
 
     // Saveable observables
@@ -62,6 +67,8 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     hideShinyImage: KnockoutObservable<boolean>;
     _shadow: KnockoutObservable<GameConstants.ShadowStatus>;
     _showShadowImage: KnockoutObservable<boolean>;
+    _contestExp: KnockoutObservable<number>;
+    contestSaveData: Record<ContestType, [KnockoutObservable<boolean>, KnockoutObservable<number>]>;
 
     constructor(
         public id: number,
@@ -81,6 +88,10 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this._level = ko.observable(1).extend({ numeric: 0 });
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
+        this.contestSaveData = Object.fromEntries(GameHelper.enumNumbers(ContestType).map((contestType) => {
+            return [contestType, [ko.observable(false), ko.observable(0).extend({ numeric: 0 })]];
+        })) as Record<ContestType, [KnockoutObservable<boolean>, KnockoutObservable<number>]>;
+        this._contestExp = ko.observable(0).extend({ numeric: 0 });
         this._category = ko.observableArray([0]);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
@@ -637,6 +648,14 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
             .map(([_, index]) => index);
     }
 
+    contestSheen = ko.pureComputed((): number => {
+        return Math.floor(this.contestExp * 10000 / ContestHelper.maxSheen()) / 100;
+    });
+
+    public maxSheenTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
+        return `${this.contestExp} / ${ContestHelper.maxSheen()}`;
+    });
+
     public fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
@@ -666,6 +685,13 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this._nickname(json[PartyPokemonSaveKeys.nickname] || this.defaults.nickname);
         this.shadow = json[PartyPokemonSaveKeys.shadow] ?? this.defaults.shadow;
         this._showShadowImage(json[PartyPokemonSaveKeys.showShadowImage] ?? this.defaults.showShadowImage);
+        if (json[PartyPokemonSaveKeys.contestSaveData]) {
+            Object.entries(json[PartyPokemonSaveKeys.contestSaveData]).forEach(([t, b]) => {
+                this.contestSaveData[t][0](b[0] ?? 0);
+                this.contestSaveData[t][1](b[1] ?? 0);
+            });
+        }
+        this.contestExp = json[PartyPokemonSaveKeys.contestExp] ?? this.defaults.contestExp;
     }
 
     public toJSON() {
@@ -686,6 +712,8 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
             [PartyPokemonSaveKeys.nickname]: this.nickname || undefined,
             [PartyPokemonSaveKeys.shadow]: this.shadow,
             [PartyPokemonSaveKeys.showShadowImage]: this._showShadowImage(),
+            [PartyPokemonSaveKeys.contestSaveData]: ko.toJS(this.contestSaveData),
+            [PartyPokemonSaveKeys.contestExp]: this.contestExp,
         };
 
         // Don't save anything that is the default option
@@ -739,6 +767,41 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
 
     set breeding(bool: boolean) {
         this._breeding(bool);
+    }
+
+    get contestAppeal(): number {
+        return Math.max(...Object.values(this.contestSaveData).flatMap(t => t[1]()));
+    }
+
+    set contestAppeal(amount: number) {
+        Object.entries(this.contestSaveData).forEach(([t]) => {
+            if (this.contestSaveData[t][0]()) {
+                this.contestSaveData[t][1](amount);
+            }
+        });
+    }
+
+    get currentContestTypes(): ContestType[] {
+        return [...Object.entries(this.contestSaveData).filter(([t]) => this.contestSaveData[t][0]()).flatMap(t => Number(t[0]))];
+    }
+
+    set currentContestTypes(contestTypes: ContestType[]) {
+        Object.entries(this.contestSaveData).forEach(([t]) => {
+            if (contestTypes.includes(Number(t))) {
+                this.contestSaveData[t][0](true);
+                this.contestSaveData[t][1](this.contestAppeal);
+            } else {
+                this.contestSaveData[t][0](false);
+            }
+        });
+    }
+
+    get contestExp(): number {
+        return this._contestExp();
+    }
+
+    set contestExp(contestExp: number) {
+        this._contestExp(contestExp);
     }
 
     get pokerus(): GameConstants.Pokerus {

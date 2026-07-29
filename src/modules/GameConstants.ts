@@ -31,6 +31,8 @@ export const TEMP_BATTLE_TIME = 60 * SECOND;
 export const TEMP_BATTLE_TICK = 0.1 * SECOND;
 export const SPECIAL_EVENT_TICK = 1 * SECOND;
 export const ZMOVE_TICK = 1 * SECOND;
+export const CONTEST_TIME = 10 * SECOND;
+export const CONTEST_TICK = 0.1 * SECOND;
 
 // Update the requirement for "Final Region Town" in TownList, when adding new regions.
 // Else the professor NPC won't work.
@@ -469,6 +471,7 @@ export enum GameState {
     shop = 7,
     battleFrontier = 8,
     temporaryBattle = 9,
+    contest = 10,
 }
 
 export enum Pokeball {
@@ -721,6 +724,15 @@ export const TypeColor = [
     '#705746', // Dark
     '#B7B7CE', // Steel
     '#D685AD', // Fairy
+];
+
+export const ContestColor = [
+    '#F5AC78', // Cool
+    '#9DB7F5', // Beautiful
+    '#FA92B2', // Cute
+    '#A7DB8D', // Smart
+    '#FAE078', // Tough
+    '#EBB7C6', // Balanced
 ];
 
 export const ROUTE_KILLS_NEEDED = 10;
@@ -1224,15 +1236,22 @@ export enum PokeBlockColor {
     Pink,
     Green,
     Yellow,
-    Gold,
+    White,
+    Gray,
     Purple,
     Indigo,
     Brown,
-    Light_Blue,
     Olive,
-    Beige,
-    Gray,
-    White,
+    Orange,
+    Rainbow,
+    Cool,
+    Beautiful,
+    Cute,
+    Smart,
+    Tough,
+    Balanced,
+    Silver,
+    Gold,
 }
 
 export enum VitaminType {

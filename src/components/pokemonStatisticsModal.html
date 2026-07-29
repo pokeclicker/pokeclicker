@@ -278,6 +278,65 @@
                 </tr>
               </tbody>
             </table>
+
+            <!-- ko if : App.game.party.getPokemon($data) && App.game.keyItems.hasKeyItem(KeyItemType.Pokeblock_kit) -->
+            <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
+              <thead>
+                <tr class="bg-secondary">
+                  <th colspan="2">Contest Stats</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="2" class="text-center">
+                    <span>Contest Condition</span>
+                    <span data-bind="visible: pokemonMap[$data].contestTypes.length != App.game.party.getPokemon($data).currentContestTypes.length || !App.game.party.getPokemon($data).currentContestTypes.every(ct => pokemonMap[$data].contestTypes.includes(ct)),
+                    tooltip: {
+                      title: `<u>Default Contest Types:</u><br/>${Object.values(pokemonMap[$data].contestTypes)
+                          .map((v) => `${ContestType[v]}`).join('<br/>')}`,
+                      trigger: 'hover',
+                      placement:'top',
+                      html: true,
+                    }">ⓘ</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="text-center tight" style="line-height: normal;">
+                    <!-- ko foreach: GameHelper.enumNumbers(ContestType) -->
+                    <!-- ko if: $data == ContestType.Balanced -->
+                      <br />
+                    <!-- /ko -->
+                    <span class="badge text-light px-1" data-bind="
+                                style: {
+                                  'background-color': GameConstants.ContestColor[$data],
+                                  'text-shadow': ContestHelper.getPokemonContestTypes($parent).includes($data) ? '0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black' : '',
+                                  'opacity': ContestHelper.getPokemonContestTypes($parent).includes($data) ? '1' : '0.2',
+                                }">
+                      <small><strong
+                        data-bind="text: ContestType[$data].toUpperCase()" style="color: white"></strong></small>
+                    </span>
+                    <!-- /ko -->
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-left">Contest Appeal</td>
+                  <td class="text-left tight"><code
+                    data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).contestAppeal : 0).toLocaleString('en-US')">-</code>
+                  </td>
+                </tr>
+                <tr data-bind="
+                  tooltip: {
+                    title: App.game.party.getPokemon($data).maxSheenTooltip,
+                    trigger: 'hover',
+                  }">
+                  <td class="text-left">Contest Sheen</td>
+                  <td class="text-left tight" data-bind="if: App.game.party.getPokemon(pokemonMap[$data].id)"><code
+                    data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).contestSheen() : 0) + '%'">-</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /ko -->
           </div>
         </div>
       </div>

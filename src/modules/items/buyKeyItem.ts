@@ -33,6 +33,6 @@ export default class BuyKeyItem extends Item {
     }
 
     get description() {
-        return App.game.keyItems.itemList[this.item].description;
+        return App.game.keyItems.itemList.find(i => i.id === this.item).description;
     }
 }

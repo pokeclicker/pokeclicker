@@ -1,3 +1,4 @@
+import ContestType from '../enums/ContestType';
 import type PokemonType from '../enums/PokemonType';
 import type BagItem from '../interfaces/BagItem';
 import type PokemonInterface from '../interfaces/Pokemon';
@@ -22,6 +23,7 @@ export default class DataPokemon implements PokemonInterface {
         public eggCycles: number,
         public heldItem: BagItem | null,
         public gender,
+        public contestTypes: ContestType[],
     ) {
         this.shiny = false;
     }
