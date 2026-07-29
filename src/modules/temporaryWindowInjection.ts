@@ -161,6 +161,7 @@ import DummyRequirement from './requirements/DummyRequirement';
 import WeatherRequirement from './requirements/WeatherRequirement';
 import MegaEvolveRequirement from './requirements/MegaEvolveRequirement';
 import PokemonAttackRequirement from './requirements/PokemonAttackRequirement';
+import VeteranUnlockRequirement from './requirements/VeteranUnlockRequirement';
 import { SortModules, SortSaves } from './Sortable';
 import KeyItemController from './keyItems/KeyItemController';
 import KeyItem from './keyItems/KeyItem';
@@ -204,6 +205,7 @@ import Vitamin from './items/Vitamin';
 import VitaminController from './items/VitaminController';
 import Consumable from './items/Consumable';
 import ConsumableController from './items/ConsumableController';
+import BuyKeyItem from './items/buyKeyItem';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
@@ -408,6 +410,7 @@ Object.assign(<any>window, {
     WeatherRequirement,
     MegaEvolveRequirement,
     PokemonAttackRequirement,
+    VeteranUnlockRequirement,
     SortModules,
     SortSaves,
     KeyItemController,
@@ -459,6 +462,7 @@ Object.assign(<any>window, {
     VitaminController,
     Consumable,
     ConsumableController,
+    BuyKeyItem,
     RoamingPokemonList,
     DataPokemon,
     RoamingPokemon,

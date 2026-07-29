@@ -105,6 +105,16 @@
       color: whitesmoke;
     }
   }
+
+  #pokemonListBody {
+    .pokemon-row {
+        border-color: #444 !important;
+
+        .text-muted {
+            color: #888 !important;
+        }
+    }
+  }
 }
 
 .darkly {
@@ -115,6 +125,16 @@
   #FAQModal {
     .border-bottom.border-dark {
         border-color: var(--secondary) !important;
+    }
+  }
+
+  #pokemonListBody {
+    .pokemon-row {
+        border-color: #444 !important;
+
+        .text-muted {
+            color: #b8b8b8 !important;
+        }
     }
   }
 }
@@ -435,5 +455,13 @@
     .dropdown-item.active:hover,
     .btn-group .dropdown-toggle.btn-primary ~ .dropdown-menu .dropdown-item:hover {
         color: #222;
+    }
+
+    #pokemonListBody {
+        .pokemon-row {
+            .text-muted {
+                color: #666 !important;
+            }
+        }
     }
 }
