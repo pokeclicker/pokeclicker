@@ -33,8 +33,10 @@ class VeteranShop extends Shop {
         VeteranShop.addUnlock(GameConstants.VeteranUnlock.EventCalendar,
             (playerData, saveData) => saveData?.keyItems?.Event_calendar === true);
 
-        VeteranShop.addUnlock(GameConstants.VeteranUnlock.ExplorerKit,
-            (playerData, saveData) => saveData?.keyItems?.Explorer_kit === true);
+        VeteranShop.addUnlock(GameConstants.VeteranUnlock.ExplorerKit, (playerData, saveData) => {
+            const exp = saveData?.underground?.undergroundExp ?? 0;
+            return Underground.convertExperienceToLevel(exp) >= 50;
+        });
 
         VeteranShop.addUnlock(GameConstants.VeteranUnlock.HoloCaster,
             (playerData, saveData) => saveData?.keyItems?.Holo_caster === true);
