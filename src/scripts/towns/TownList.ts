@@ -272,19 +272,19 @@ const veteranShop = new VeteranShop([
     new BuyKeyItem(KeyItemType.Event_calendar, 10000, GameConstants.Currency.questPoint, {
         visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.EventCalendar),
     }, 'Event Calendar', true),
-    new BuyKeyItem(KeyItemType.Explorer_kit, 1, GameConstants.Currency.questPoint, {
+    new BuyKeyItem(KeyItemType.Explorer_kit, 5000, GameConstants.Currency.money, {
         visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.ExplorerKit),
     }, 'Explorer Kit', true),
-    new BuyKeyItem(KeyItemType.Holo_caster, 1, GameConstants.Currency.dungeonToken, {
+    new BuyKeyItem(KeyItemType.Holo_caster, 100, GameConstants.Currency.dungeonToken, {
         visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.HoloCaster),
     }, 'Holo Caster', true),
-    new BuyKeyItem(KeyItemType.Wailmer_pail, 1, GameConstants.Currency.money, {
+    new BuyKeyItem(KeyItemType.Wailmer_pail, 5000, GameConstants.Currency.money, {
         visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.WailmerPail),
     }, 'Wailmer Pail', true),
-    new BuyKeyItem(KeyItemType.Gem_case, 1, GameConstants.Currency.money, {
+    new BuyKeyItem(KeyItemType.Gem_case, 5000, GameConstants.Currency.money, {
         visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.GemCase),
     }, 'Gem Case', true),
-    new BuyKeyItem(KeyItemType.Super_rod, 1, GameConstants.Currency.money, {
+    new BuyKeyItem(KeyItemType.Super_rod, 5000, GameConstants.Currency.money, {
         visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.SuperRod),
     }, 'Super Rod', true),
     ItemList.CeruleanBerryShopPermit,
