@@ -19,6 +19,8 @@ import {
     DayTimedMegaEvolution,
     NightTimedMegaEvolution,
     AttackEvolution,
+    EventStoneEvolution,
+    EventLevelEvolution,
 } from './evolutions/Methods';
 import BerryType from '../enums/BerryType';
 import ItemType from '../enums/ItemType';
@@ -142,7 +144,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Bulbasaur (Clone)', 'Ivysaur (Clone)', 16)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Bulbasaur (Clone)', 'Ivysaur (Clone)', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -163,7 +165,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Spooky Bulbasaur', 'Spooky Ivysaur', 16)],
+        'evolutions': [EventLevelEvolution('Halloween!', 'Spooky Bulbasaur', 'Spooky Ivysaur', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -185,7 +187,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Bulbasaur (Rose)', 'Ivysaur (Rose)', 16)],
+        'evolutions': [EventLevelEvolution('Golden Week', 'Bulbasaur (Rose)', 'Ivysaur (Rose)', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -230,7 +232,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Ivysaur (Clone)', 'Venusaur (Clone)', 32)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Ivysaur (Clone)', 'Venusaur (Clone)', 32)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -251,7 +253,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Spooky Ivysaur', 'Spooky Venusaur', 32)],
+        'evolutions': [EventLevelEvolution('Halloween!', 'Spooky Ivysaur', 'Spooky Venusaur', 32)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -272,7 +274,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Ivysaur (Rose)', 'Venusaur (Rose)', 32)],
+        'evolutions': [EventLevelEvolution('Golden Week', 'Ivysaur (Rose)', 'Venusaur (Rose)', 32)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -437,7 +439,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Charmander (Clone)', 'Charmeleon (Clone)', 16)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Charmander (Clone)', 'Charmeleon (Clone)', 16)],
         'base': {
             'hitpoints': 39,
             'attack': 52,
@@ -482,7 +484,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Charmeleon (Clone)', 'Charizard (Clone)', 36)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Charmeleon (Clone)', 'Charizard (Clone)', 36)],
         'base': {
             'hitpoints': 58,
             'attack': 64,
@@ -631,7 +633,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Squirtle (Clone)', 'Wartortle (Clone)', 16)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Squirtle (Clone)', 'Wartortle (Clone)', 16)],
         'base': {
             'hitpoints': 44,
             'attack': 48,
@@ -696,7 +698,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Wartortle (Clone)', 'Blastoise (Clone)', 36)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Wartortle (Clone)', 'Blastoise (Clone)', 36)],
         'base': {
             'hitpoints': 59,
             'attack': 63,
@@ -7339,7 +7341,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 49,
         'eggCycles': 10,
-        'evolutions': [StoneEvolution('Spooky Togepi', 'Spooky Togetic', StoneType.Soothe_bell)],
+        'evolutions': [EventStoneEvolution('Halloween!', 'Spooky Togepi', 'Spooky Togetic', StoneType.Soothe_bell)],
         'baby': true,
         'base': {
             'hitpoints': 35,
@@ -7403,7 +7405,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 142,
         'eggCycles': 10,
-        'evolutions': [StoneEvolution('Spooky Togetic', 'Spooky Togekiss', StoneType.Dusk_stone)],
+        'evolutions': [EventStoneEvolution('Halloween!', 'Spooky Togetic', 'Spooky Togekiss', StoneType.Dusk_stone)],
         'base': {
             'hitpoints': 55,
             'attack': 40,
@@ -14478,7 +14480,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 78,
         'catchRate': 50,
-        'evolutions': [StoneEvolution('Elf Munchlax', 'Santa Snorlax', StoneType.Soothe_bell, true)],
+        'evolutions': [EventStoneEvolution('Merry Christmas!', 'Elf Munchlax', 'Santa Snorlax', StoneType.Soothe_bell, true)],
         'base': {
             'hitpoints': 135,
             'attack': 85,
