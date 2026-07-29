@@ -55,8 +55,7 @@ class HatcheryHelper {
             Step Efficiency: ${this.stepEfficiency()}%<br/>
             Attack Efficiency: ${this.attackEfficiency()}%<br/>
             Hatched: ${this.hatched().toLocaleString('en-US')}<br/><br/>
-            <strong>Next Pokémon</strong><br/>
-            ${this.nextPokemon().join('<br/>')}`
+            ${this.nextPokemonTooltip()}`
         );
 
         // Update our bonus values
@@ -190,6 +189,11 @@ class HatcheryHelper {
         }
 
         return top;
+    }
+
+    public nextPokemonTooltip(): string {
+        const nextPokemon = this.nextPokemon();
+        return `<strong><u>Next Pokémon</u></strong><br/>${nextPokemon.length ? nextPokemon.join('<br/>') : 'None! Check filters & settings.'}`;
     }
 
     toJSON(): Record<string, any> {
