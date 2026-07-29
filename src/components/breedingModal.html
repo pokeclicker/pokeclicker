@@ -202,6 +202,12 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <!-- /ko -->
                                             </div>
 
+                                            <div class="col-12 mt-1">
+                                                <button class="btn btn-primary btn-block btn-sm" data-bind="click: () => BreedingController.resetFilters()">
+                                                    Reset All Filters
+                                                </button>
+                                            </div>
+
                                             <div class="col-12">
                                                 <hr style="border-color:grey;">
                                             </div>
@@ -230,7 +236,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <!-- /ko -->
                                             </div>
                                             <!-- /ko -->
-                                            <div class="form-group col-lg-12 col-12" style="max-width: 100%; flex-grow: 1">
+                                            <div class="form-group col-lg-12 col-12 mb-0" style="max-width: 100%; flex-grow: 1">
                                                 <!-- ko let: { hatcherySort: Settings.getSetting('hatcherySort') } -->
                                                 <label for="hatchery-setting-sort" data-bind="text: hatcherySort.displayName">Sort</label>
                                                 <div class="input-group">
