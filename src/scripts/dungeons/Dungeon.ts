@@ -93,11 +93,12 @@ const DungeonGainGymBadge = (gym: Gym) => {
 };
 
 /**
- * Gym class.
+ * Dungeon class.
  */
  interface optionalDungeonParameters {
     dungeonRegionalDifficulty?: GameConstants.Region,
     requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
+    achievement?: boolean,
 }
 class Dungeon {
     private mimicList: PokemonNameType[] = [];
@@ -110,7 +111,7 @@ class Dungeon {
         public baseTokenCost: number,
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
         public rewardFunction = () => {},
-        private optionalParameters: optionalDungeonParameters = {}
+        public optionalParameters: optionalDungeonParameters = {}
     ) {
         // Keep a list of mimics to use with getCaughtMimics()
         Object.entries(this.lootTable).forEach(([_, itemList]) => {
@@ -433,7 +434,7 @@ class Dungeon {
             pkrsImage: pokerus > GameConstants.Pokerus.Uninfected ? `assets/images/breeding/pokerus/${GameConstants.Pokerus[pokerus]}.png` : '',
             EVs: pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${partyPokemon.evs().toLocaleString('en-US')}` : '',
             shiny: shinyCaught,
-            hide: hideEncounter,
+            hide: mimicData ? !!mimicData.lockedMessage : hideEncounter,
             uncaught: !caught,
             lock: !!mimicData?.lockedMessage,
             lockMessage: mimicData?.lockedMessage ?? '',
@@ -459,14 +460,21 @@ class Dungeon {
             if (typeof enemy === 'string' || enemy.hasOwnProperty('pokemon')) {
                 let pokemonName: PokemonNameType;
                 let hideEncounter = false;
+                let lock = false;
+                let lockMessage = '';
                 if (enemy.hasOwnProperty('pokemon')) {
                     const pokemon = <DetailedPokemon>enemy;
                     pokemonName = pokemon.pokemon;
                     hideEncounter = pokemon.options?.hide ? (pokemon.options?.requirement ? !pokemon.options?.requirement.isCompleted() : pokemon.options?.hide) : false;
+                    lock = !(pokemon.options?.requirement?.isCompleted() ?? true);
+                    lockMessage = pokemon.options?.requirement?.hint() ?? '';
                 } else {
                     pokemonName = <PokemonNameType>enemy;
                 }
-                encounterInfo.push(this.getEncounterInfo(pokemonName, null, hideEncounter));
+                const encounterData = this.getEncounterInfo(pokemonName, null, hideEncounter);
+                encounterData.lock = lock;
+                encounterData.lockMessage = lockMessage;
+                encounterInfo.push(encounterData);
             // Handling Trainers (only those with shadow Pokemon)
             } else if (enemy instanceof DungeonTrainer) {
                 const hideEncounter = (enemy.options?.requirement && !enemy.options.requirement.isCompleted());
@@ -1501,15 +1509,55 @@ dungeonList['New Island'] = new Dungeon('New Island',
                 new GymPokemon('Nidoqueen', 18500, 40),
                 new GymPokemon('Ninetales', 18500, 40),
             ], { weight: 1 }, ''),
+
+        // If caught final evo and 50+ clears, catchable, otherwise Armored Mewtwo trainer
+        // Grass
+        {pokemon: 'Ivysaur (Clone)', options: { hide: true, requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement('Venusaur (Clone)'),
+            new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('New Island')),
+        ]) }},
+        {pokemon: 'Venusaur (Clone)', options: { hide: true, requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement('Venusaur (Clone)'),
+            new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('New Island')),
+        ]) }},
+        new DungeonTrainer('Armored Mewtwo',
+            [new GymPokemon('Venusaur (Clone)', 20000, 50)],
+            { weight: 2, requirement:  new OneFromManyRequirement([
+                new ObtainedPokemonRequirement('Venusaur (Clone)', true),
+                new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('New Island'), GameConstants.AchievementOption.less),
+            ])}, ''),
+        // Fire
+        {pokemon: 'Charmeleon (Clone)', options: { hide: true, requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement('Charizard (Clone)'),
+            new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('New Island')),
+        ]) }},
+        {pokemon: 'Charizard (Clone)', options: { hide: true, requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement('Charizard (Clone)'),
+            new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('New Island')),
+        ]) }},
+        new DungeonTrainer('Armored Mewtwo',
+            [new GymPokemon('Charizard (Clone)', 20000, 50)],
+            { weight: 2, requirement:  new OneFromManyRequirement([
+                new ObtainedPokemonRequirement('Charizard (Clone)', true),
+                new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('New Island'), GameConstants.AchievementOption.less),
+            ])}, ''),
+
+        // Water
+        {pokemon: 'Wartortle (Clone)', options: { hide: true, requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement('Blastoise (Clone)'),
+            new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('New Island')),
+        ]) }},
+        {pokemon: 'Blastoise (Clone)', options: { hide: true, requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement('Blastoise (Clone)'),
+            new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('New Island')),
+        ]) }},
         new DungeonTrainer('Armored Mewtwo',
             [new GymPokemon('Blastoise (Clone)', 20000, 50)],
-            { weight: 2 }, ''),
-        new DungeonTrainer('Armored Mewtwo',
-            [new GymPokemon('Venusaur (Clone)', 20000, 50)]
-            , { weight: 2 }, ''),
-        new DungeonTrainer('Armored Mewtwo',
-            [new GymPokemon('Charmander (Clone)', 20000, 50)],
-            { weight: 2 }, ''),
+            { weight: 2, requirement:  new OneFromManyRequirement([
+                new ObtainedPokemonRequirement('Blastoise (Clone)', true),
+                new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('New Island'), GameConstants.AchievementOption.less),
+            ])}, ''),
+
         new DungeonTrainer('Armored Mewtwo',
             [
                 new GymPokemon('Vulpix', 18500, 40),
@@ -1534,7 +1582,7 @@ dungeonList['New Island'] = new Dungeon('New Island',
     },
     18500,
     [new DungeonBossPokemon('Armored Mewtwo', 131500, 70)],
-    1800, 40);
+    1800, 40 , undefined, {achievement : false});
 
 dungeonList['Victory Road'] = new Dungeon('Victory Road',
     [
