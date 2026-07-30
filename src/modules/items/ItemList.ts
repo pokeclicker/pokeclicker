@@ -24,6 +24,7 @@ import {
     Pokeball,
     PokeBlockColor,
     Region,
+    VeteranUnlock,
     VitaminType,
 } from '../GameConstants';
 import { MulchShovelItem, ShovelItem } from './ShovelItem';
@@ -43,6 +44,9 @@ import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
 import { pokemonMap } from '../pokemons/PokemonList';
 import AttackGainConsumable from './AttackGainConsumable';
+import CollectibleItem from './CollectibleItem';
+import NullRequirement from '../requirements/NullRequirement';
+import VeteranUnlockRequirement from '../requirements/VeteranUnlockRequirement';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -50,7 +54,7 @@ ItemList.xAttack         = new BattleItem(BattleItemType.xAttack, '+50% Bonus to
 ItemList.xClick          = new BattleItem(BattleItemType.xClick, '+50% Bonus to click attack for 30 seconds', 400, undefined, 'X Click', 'clickAttack', 1.5);
 ItemList.Lucky_egg       = new BattleItem(BattleItemType.Lucky_egg, '+50% Bonus to experience gained for 30 seconds', 800, undefined, 'Lucky Egg', 'exp', 1.5);
 ItemList.Token_collector = new BattleItem(BattleItemType.Token_collector, '+50% Bonus to Dungeon Tokens gained for 30 seconds', 1000, undefined, 'Token Collector', 'dungeonToken', 1.5);
-ItemList.Dowsing_machine = new BattleItem(BattleItemType.Dowsing_machine, 'Increases chance for Pokémon to drop rare hold items and chance to multiply loot from dungeon chests, for 30 seconds.', 1500, undefined, 'Dowsing Machine');
+ItemList.Dowsing_machine = new BattleItem(BattleItemType.Dowsing_machine, 'Increases chance for Pokémon to drop rare hold items and chance to multiply loot from dungeon chests, for 30 seconds.', 1500, undefined, 'Dowsing Machine', 'rareItemDropRate', 1.5);
 ItemList.Lucky_incense   = new BattleItem(BattleItemType.Lucky_incense, '+50% Bonus to Pokédollars gained for 30 seconds', 2000, undefined, 'Lucky Incense', 'money', 1.5);
 
 ItemList.ChopleBerry     = new BerryItem(BerryType.Chople, 10000, Currency.farmPoint, BerryType.Spelon);
@@ -73,7 +77,7 @@ ItemList.Treasure_Scanner = new BuyOakItem(OakItemType.Treasure_Scanner, 10000, 
 
 ItemList.Yellow_Flute = new FluteItem(FluteItemType.Yellow_Flute, 'Pokémon Attack', ['Grass', 'Flying', 'Electric'], 'pokemonAttack', 1.02);
 ItemList.Black_Flute  = new FluteItem(FluteItemType.Black_Flute, 'Click Attack', ['Dark', 'Psychic', 'Fighting'], 'clickAttack', 1.02);
-ItemList.Time_Flute   = new FluteItem(FluteItemType.Time_Flute, 'Gym and Dungeon Timers', ['Ground', 'Poison', 'Steel'], undefined, 1.02);
+ItemList.Time_Flute   = new FluteItem(FluteItemType.Time_Flute, 'Battle Timers and Flow Gained', ['Ground', 'Poison', 'Steel'], undefined, 1.02);
 ItemList.Red_Flute    = new FluteItem(FluteItemType.Red_Flute, 'Egg Steps', ['Fire', 'Rock', 'Dragon'], 'eggStep', 1.02);
 ItemList.White_Flute  = new FluteItem(FluteItemType.White_Flute, 'Shiny Chance', ['Normal', 'Fairy', 'Ice'], 'shiny', 1.02);
 ItemList.Blue_Flute   = new FluteItem(FluteItemType.Blue_Flute, 'EV Yield', ['Water', 'Bug', 'Ghost'], 'ev', 1.02);
@@ -245,6 +249,11 @@ ItemList.Wishing_Piece = new QuestItem('Wishing_Piece', 'Wishing Piece', 'Attrac
 
 // Other Collectible Items
 ItemList.Christmas_present = new ChristmasPresent();
+ItemList.CeruleanBerryShopPermit = new CollectibleItem('CeruleanBerryShopPermit', 'Berry Shop Permit',
+    'A permit granting access to the exclusive Berry Shop in Cerulean City.', new NullRequirement(), 10000, Currency.farmPoint, {
+        maxAmount: 1,
+        visible: new VeteranUnlockRequirement(VeteranUnlock.CeruleanBerryShopPermit),
+    });
 
 // Vitamins
 ItemList.Protein   = new Vitamin(VitaminType.Protein, 1e4, Currency.money, {

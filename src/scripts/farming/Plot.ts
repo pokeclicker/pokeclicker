@@ -647,7 +647,7 @@ class Plot implements Saveable {
     }
 
     get berryData(): Berry {
-        return App.game.farming.berryData[this.berry];
+        return BerryList[this.berry];
     }
 
     // Knockout getters

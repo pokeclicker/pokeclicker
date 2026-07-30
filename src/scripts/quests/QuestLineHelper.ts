@@ -4318,5 +4318,10 @@ class QuestLineHelper {
         if (numQuestLines != [...new Set(App.game.quests.questLines().map(ql => ql.name))].length) {
             throw new Error('QuestLineHelper: Duplicate QuestLine names detected');
         }
+
+        // Quest lines are pushed onto the underlying array, bypassing the observable;
+        // notify it once so computeds evaluated before this ran (e.g. achievements built
+        // in AchievementHandler.initialize) don't keep a stale cached value
+        App.game.quests.questLines.valueHasMutated();
     }
 }

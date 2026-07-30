@@ -402,9 +402,13 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         return Object.values(this.vitaminsUsed).reduce((sum, obs) => sum + obs(), 0);
     });
 
-    vitaminUsesRemaining = ko.pureComputed((): number => {
+    public static maxVitaminUsesAllowed() {
         // Allow 5 for every region visited (including Kanto)
-        return (player.highestRegion() + 1) * 5 - this.totalVitaminsUsed();
+        return (player.highestRegion() + 1) * 5;
+    }
+
+    vitaminUsesRemaining = ko.pureComputed((): number => {
+        return PartyPokemon.maxVitaminUsesAllowed() - this.totalVitaminsUsed();
     });
 
     calculateEVAttackBonus = ko.pureComputed((): number => {
