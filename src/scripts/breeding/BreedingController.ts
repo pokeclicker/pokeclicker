@@ -171,6 +171,14 @@ class BreedingController {
         return odds / regionPoolCount;
     }
 
+    public static resetFilters() {
+        for (const key of breedingFilterSettingKeys) {
+            const setting = Settings.getSetting(key);
+            Settings.setSettingByName(key, setting.defaultValue);
+        }
+        (document.getElementById('breeding-filter-nameID') as HTMLInputElement).value = '';
+    }
+
     // Queue size limit setting
     public static queueSizeLimit = ko.observable(-1);
 

@@ -7,7 +7,7 @@ class DungeonInfo {
         const rawTable = player.town.dungeon?.lootTable || {};
         const displayTable = {};
         Object.entries(rawTable).forEach(([tier, loots]) => {
-            const filteredLoots = (loots as Loot[]).filter(l => ItemList[l.loot] || pokemonMap[l.loot].name == 'MissingNo.');
+            const filteredLoots = (loots as Loot[]);
             if (filteredLoots.length) {
                 displayTable[tier] = filteredLoots;
             }
@@ -37,6 +37,9 @@ class DungeonInfo {
                 return FarmController.getBerryImage(BerryType[GameConstants.humanifyString(input)]);
             case UndergroundItems.getByName(input) instanceof UndergroundItem:
                 return UndergroundItems.getByName(input).image;
+            case pokemonMap[input].name == input:
+                const caught = App.game.party.alreadyCaughtPokemonByName(input);
+                return caught ? `assets/images/pokemon/${pokemonMap[input].id}.png` : 'assets/images/encountersInfo/unknownMimic.png';
             default:
                 return ItemList[input].image;
         }
@@ -48,6 +51,9 @@ class DungeonInfo {
                 return ItemList[input]?.displayName;
             case typeof BerryType[input] == 'number':
                 return `${input} Berry`;
+            case pokemonMap[input].name == input:
+                const caught = App.game.party.alreadyCaughtPokemonByName(input);
+                return caught ? input : 'Unknown Mimic';
             default:
                 return GameConstants.camelCaseToString(GameConstants.humanifyString(input.toLowerCase()));
         }

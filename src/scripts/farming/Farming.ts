@@ -5,7 +5,6 @@ class Farming implements Feature {
     name = 'Farming';
     saveKey = 'farming';
 
-    berryData: Berry[] = [];
     mutations: Mutation[] = [];
     farmHands = new FarmHands();
 
@@ -16,7 +15,7 @@ class Farming implements Feature {
     mulchCounter = 0;
 
     defaults = {
-        berryList: Array<number>(GameHelper.enumLength(BerryType) - 1).fill(0),
+        berryInventory: Array<number>(GameHelper.enumLength(BerryType) - 1).fill(0),
         unlockedBerries: Array<boolean>(GameHelper.enumLength(BerryType) - 1).fill(false),
         mulchList: Array<number>(GameHelper.enumLength(MulchType)).fill(0),
         plotList: new Array(GameConstants.FARM_PLOT_WIDTH * GameConstants.FARM_PLOT_HEIGHT).fill(null).map((value, index) => {
@@ -27,7 +26,7 @@ class Farming implements Feature {
         mulchShovelAmt: 0,
     };
 
-    berryList: KnockoutObservable<number>[];
+    berryInventory: KnockoutObservable<number>[];
     unlockedBerries: KnockoutObservable<boolean>[];
     mulchList: KnockoutObservable<number>[];
     plotList: Array<Plot>;
@@ -39,7 +38,7 @@ class Farming implements Feature {
     possiblePlotMutations: KnockoutComputed<Array<Array<string>>>;
 
     constructor(private multiplier: Multiplier) {
-        this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
+        this.berryInventory = this.defaults.berryInventory.map((v) => ko.observable<number>(v));
         this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
         this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
         this.plotList = this.defaults.plotList;
@@ -54,6 +53,7 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Roaming] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Roaming));
         this.externalAuras[AuraType.Ev] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Ev));
         this.externalAuras[AuraType.Xp] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Xp));
+        this.externalAuras[AuraType.Pickup] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Pickup));
 
         const multiplierSource = 'Farm Aura';
         this.multiplier.addBonus('shiny', () => this.externalAuras[AuraType.Shiny](), multiplierSource);
@@ -61,6 +61,7 @@ class Farming implements Feature {
         this.multiplier.addBonus('roaming', () => this.externalAuras[AuraType.Roaming](), multiplierSource);
         this.multiplier.addBonus('ev', () => this.externalAuras[AuraType.Ev](), multiplierSource);
         this.multiplier.addBonus('exp', () => this.externalAuras[AuraType.Xp](), multiplierSource);
+        this.multiplier.addBonus('rareItemDropRate', () => this.externalAuras[AuraType.Pickup](), multiplierSource);
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
             for (let i = GameHelper.enumLength(BerryType) - 2; i >= 0; i--) {
@@ -1930,7 +1931,7 @@ class Farming implements Feature {
         }
         if (this.canBuyPlot(index)) {
             const berryData = this.plotBerryCost(index);
-            GameHelper.incrementObservable(this.berryList[berryData.type], -berryData.amount);
+            GameHelper.incrementObservable(this.berryInventory[berryData.type], -berryData.amount);
             const cost = this.plotFPCost(index);
             App.game.wallet.loseAmount(new Amount(cost, GameConstants.Currency.farmPoint));
             this.plotList[index].isUnlocked = true;
@@ -1944,7 +1945,7 @@ class Farming implements Feature {
 
     canBuyPlot(index: number): boolean {
         const berryData = this.plotBerryCost(index);
-        if (App.game.farming.berryList[berryData.type]() < berryData.amount) {
+        if (App.game.farming.berryInventory[berryData.type]() < berryData.amount) {
             return false;
         }
         const cost = this.plotFPCost(index);
@@ -1976,7 +1977,7 @@ class Farming implements Feature {
             return;
         }
 
-        GameHelper.incrementObservable(this.berryList[berry], -1);
+        GameHelper.incrementObservable(this.berryInventory[berry], -1);
         plot.plant(berry);
     }
 
@@ -1996,16 +1997,16 @@ class Farming implements Feature {
             return;
         }
 
-        App.game.wallet.gainFarmPoints(this.berryData[plot.berry].farmValue);
+        App.game.wallet.gainFarmPoints(BerryList[plot.berry].farmValue);
 
         const amount = plot.harvestAmount();
 
         this.gainBerry(plot.berry, amount);
 
-        App.game.oakItems.use(OakItemType.Sprayduck, this.berryData[plot.berry].exp);
+        App.game.oakItems.use(OakItemType.Sprayduck, BerryList[plot.berry].exp);
         GameHelper.incrementObservable(App.game.statistics.totalManualHarvests, 1);
 
-        player.lowerItemMultipliers(MultiplierDecreaser.Berry, this.berryData[plot.berry].exp);
+        player.lowerItemMultipliers(MultiplierDecreaser.Berry, BerryList[plot.berry].exp);
 
         plot.die(true);
     }
@@ -2137,7 +2138,7 @@ class Farming implements Feature {
     }
 
     gainBerry(berry: BerryType, amount = 1, farming = true) {
-        GameHelper.incrementObservable(this.berryList[berry], Math.floor(amount));
+        GameHelper.incrementObservable(this.berryInventory[berry], Math.floor(amount));
 
         if (amount > 0) {
             this.unlockBerry(berry);
@@ -2151,7 +2152,7 @@ class Farming implements Feature {
     }
 
     hasBerry(berry: BerryType) {
-        return this.berryList[berry]() > 0;
+        return this.berryInventory[berry]() > 0;
     }
 
     hasMulch(mulch: MulchType) {
@@ -2189,7 +2190,7 @@ class Farming implements Feature {
 
     toJSON(): Record<string, any> {
         return {
-            berryList: this.berryList.map(ko.unwrap),
+            berryInventory: this.berryInventory.map(ko.unwrap),
             unlockedBerries: this.unlockedBerries.map(ko.unwrap),
             mulchList: this.mulchList.map(ko.unwrap),
             plotList: this.plotList.map(plot => plot.toJSON()),
@@ -2205,12 +2206,12 @@ class Farming implements Feature {
             return;
         }
 
-        const savedBerries = json.berryList;
+        const savedBerries = json.berryInventory;
         if (savedBerries == null) {
-            this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
+            this.berryInventory = this.defaults.berryInventory.map((v) => ko.observable<number>(v));
         } else {
             (savedBerries as number[]).forEach((value: number, index: number) => {
-                this.berryList[index](value);
+                this.berryInventory[index](value);
             });
         }
 
@@ -2271,14 +2272,14 @@ class Farming implements Feature {
         const genBounds = Farming.genBounds;
         const minBound = genBounds[gen - 1] || 0;
         const maxBound = genBounds[gen] || Infinity;
-        return App.game.farming.berryData.filter(berry => berry.type >= minBound && berry.type < maxBound).map(berry => berry.type);
+        return BerryList.filter(berry => berry.type >= minBound && berry.type < maxBound).map(berry => berry.type);
     }
 
     public static getColor(color: BerryColor): BerryType[] {
-        return App.game.farming.berryData.filter(berry => berry.color === color).map(berry => berry.type);
+        return BerryList.filter(berry => berry.color === color).map(berry => berry.type);
     }
     public static getFirmness(firmness: BerryFirmness): BerryType[] {
-        return App.game.farming.berryData.filter(berry => berry.firmness === firmness).map(berry => berry.type);
+        return BerryList.filter(berry => berry.firmness === firmness).map(berry => berry.type);
     }
     public static sizeUnitConverter: Record<SizeUnits, ((num: number) => string)> = {
         [SizeUnits.cm]: (num) => `${num.toFixed(1)} cm`, // default is cm
@@ -2286,7 +2287,7 @@ class Farming implements Feature {
     };
 
     public auraDisplay(berry: BerryType, stage: number) {
-        return `×${App.game.farming.berryData[berry].aura.auraMultipliers[stage].toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 3 })}`;
+        return `×${BerryList[berry].aura.auraMultipliers[stage].toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 3 })}`;
     }
 
     public handleWanderer(plot: Plot) {
@@ -2295,7 +2296,7 @@ class Farming implements Feature {
         }
         const wanderer = plot.wanderer;
         const pokemonData = PokemonHelper.getPokemonByName(wanderer.name);
-        const berry = App.game.farming.berryData[plot.wanderer.berry];
+        const berry = BerryList[plot.wanderer.berry];
 
         const farmPoints = Math.floor(berry.farmValue / (4 + berry.growthTime[PlotStage.Bloom] / 1800));
         const shinyModifier = wanderer.shiny ? GameConstants.WANDER_SHINY_FP_MODIFIER : 1;

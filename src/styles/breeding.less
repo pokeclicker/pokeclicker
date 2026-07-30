@@ -321,6 +321,10 @@
 .scrolling-div-breeding-list,
 .scrolling-div-breeding-filters {
     overflow-y: auto;
+
+    .form-group {
+        margin-bottom: 0.75rem;
+    }
 }
 
 @media (min-width: 992px) {
@@ -328,14 +332,26 @@
       height: calc(100vh - 190px);
   }
 
+  .scrolling-div-breeding-list-queue {
+      height: calc(100vh - 295px);
+  }
+
   .scrolling-div-breeding-filters {
       height: calc(100vh - 234px);
+  }
+
+  .scrolling-div-breeding-filters-queue {
+      height: calc(100vh - 339px)
   }
 }
 
 @media (max-width: 992px) {
   .scrolling-div-breeding-list {
       height: calc(100vh - 300px);
+  }
+
+  .scrolling-div-breeding-list-queue {
+      height: calc(100vh - 350px);
   }
 
   .scrolling-div-breeding-filters {
