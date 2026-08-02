@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                            onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Special)">
                     </div>`);
             }
-            if (StartSequenceRunner.noStarterCount == 20) {
+            if (StartSequenceRunner.noStarterCount == 20 && !App.game.challenges.list.disableClickAttack.active()) {
                 $('#pickStarterTutorialModal .modal-body').append(`<div class="custom-control custom-switch">
                         <input type="checkbox" class="custom-control-input" id="toggleCaptureStarter" onchange="App.game.pokeballFilters.toggleAllFiltersEnabled(this.checked)" checked>
                         <label class="custom-control-label" for="toggleCaptureStarter">Capture Starter</label>
