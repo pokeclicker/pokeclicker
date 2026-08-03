@@ -4415,6 +4415,16 @@ const SurvivalAreaSinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
     'I spotted a bunch of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.sinnoh, RoamingPokemonList.findGroup(GameConstants.Region.sinnoh, GameConstants.SinnohSubRegions.Sinnoh), 'assets/images/npcs/Hiker.png');
 
+const ResortAreaGoh = new NPC('Goh', [
+    'Oh! Hi there!',
+    'I\'m Goh! I\'m searching for a very special Magikarp that only appears around here... but no matter how long I look, I just can\'t seem to find it.',
+    'You know, this reminds me of something I learned during my travels. Back in the Alola region, there were these Magikarp Biscuits. Pokémon absolutely loved them! If I had one right now, I\'m sure it\'d make that special Magikarp show up much faster.',
+    '<img src="assets/images/items/consumable/Magikarp_Biscuit.png">',
+    'I\'m planning to train this Magikarp into the strongest Magikarp ever! I think 10,000 Attack should be enough to make it truly unbeatable... well, for a Magikarp, anyway!',
+], {
+    image: 'assets/images/npcs/Goh.png',
+});
+
 const SendoffSpringLakeTrio = new NPC('Lake Trio', [
     '<i>You are finally here.</i>',
     '<i>We have been able to create a key to the Distortion World using the materials you collected, but it is unable to work in its current state.</i>',
@@ -4853,6 +4863,7 @@ TownList['Resort Area'] = new Town(
     [ResortAreaShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Resort Area'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 229)],
+        npcs: [ResortAreaGoh],
     }
 );
 TownList['Pokémon League Sinnoh'] = new Town(

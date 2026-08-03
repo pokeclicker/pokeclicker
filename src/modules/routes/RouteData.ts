@@ -1346,6 +1346,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Pidgey', 'Ledian', 'Ariados', 'Beautifly', 'Dustox', 'Volbeat', 'Illumise', 'Roselia', 'Purugly'],
         water: ['Surskit', 'Masquerain', 'Goldeen', 'Seaking', 'Magikarp', 'Gyarados'],
+        special: [new SpecialRoutePokemon(['Magikarp (Overweight)'], new ItemOwnedRequirement('Magikarp_Biscuit'))],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 228)],
 ));
@@ -2320,7 +2321,10 @@ Routes.add(new RegionRoute(
     'Master League Pier', Region.alola, 40,
     new RoutePokemon({
         water: ['Magikarp'],
-        special: [new SpecialRoutePokemon(['Magikarp Orange Mask', 'Magikarp Calico (Orange, Gold)', 'Magikarp Grey Bubbles'], undefined, 1 / 3)],
+        special: [
+            new SpecialRoutePokemon(['Magikarp Orange Mask', 'Magikarp Calico (Orange, Gold)', 'Magikarp Grey Bubbles'], undefined, 1 / 3),
+            new SpecialRoutePokemon(['Magikarp (Jacked)'], new ObtainedPokemonRequirement('Magikarp (Jacked)'), 1 / 3),
+        ],
     }),
     [new GymBadgeRequirement(BadgeEnums.E4_League)],
     undefined,

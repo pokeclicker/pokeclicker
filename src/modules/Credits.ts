@@ -932,6 +932,16 @@ export const SpriteCredits: Credit[] = [
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
     },
     {
+        name: 'Mel',
+        link: 'https://discordapp.com/users/49898798012436480/',
+        image: 'assets/images/profile/trainer-115.png',
+        resources: [
+            'Magikarp (Overweight)',
+            'Magikarp (Jacked)',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'mid117',
         link: 'https://www.deviantart.com/mid117',
         image: 'https://a.deviantart.net/avatars-big/m/i/mid117.jpg',
@@ -1111,6 +1121,15 @@ export const SpriteCredits: Credit[] = [
         image: 'https://a.deviantart.net/avatars-big/r/e/rekiemlock.jpg',
         resources: [
             'Team Skull overworld sprite',
+        ],
+        // Notes: Permission given if credited
+    },
+    {
+        name: 'RHcks',
+        link: 'https://www.deviantart.com/rhcks',
+        image: 'https://a.deviantart.net/avatars-big/r/h/rhcks.png',
+        resources: [
+            'Goh',
         ],
         // Notes: Permission given if credited
     },

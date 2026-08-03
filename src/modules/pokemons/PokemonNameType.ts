@@ -320,6 +320,8 @@ export type PokemonNameType
     | 'Magikarp Violet Raindrops'
     | 'Magikarp Saucy Violet'
     | 'Magikarp (Feebas)'
+    | 'Magikarp (Overweight)'
+    | 'Magikarp (Jacked)'
     | 'Gyarados'
     | 'Mega Gyarados'
     | 'Lapras'
