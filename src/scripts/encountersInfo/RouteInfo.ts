@@ -3,6 +3,16 @@ class RouteInfo {
         return RouteInfo.getPokemonList();
     });
 
+    public static isBoosted = ko.pureComputed((): boolean => {
+        const route = Routes.getRoute(player.region, player.route);
+        if (!route) {
+            return false;
+        }
+        const curSubRegionGroup = RoamingPokemonList.findGroup(route.region, route.subRegion || 0);
+        const boostedRoute = RoamingPokemonList.getIncreasedChanceRouteBySubRegionGroup(route.region, curSubRegionGroup)();
+        return boostedRoute === route;
+    });
+
     public static getPokemonList() {
         const pokemonList = Routes.getRoute(player.region, player.route)?.pokemon;
         const pokemonArray = [];

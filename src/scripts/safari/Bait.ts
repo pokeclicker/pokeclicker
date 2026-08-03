@@ -1,6 +1,7 @@
 enum BaitType {
     Bait = 0,
     Razz,
+    Pinap,
     Nanab
 }
 
@@ -34,17 +35,25 @@ BaitList.Bait = new Bait(BaitType.Bait, 'Bait', 'some bait', 'assets/images/safa
 
     });
 BaitList.Razz = new Bait(BaitType.Razz, 'Razz Berry', 'a Razz Berry', FarmController.getBerryImage(BerryType.Razz),
-    () => App.game.farming.berryList[BerryType.Razz](),
+    () => App.game.farming.berryInventory[BerryType.Razz](),
     (pokemon: SafariPokemon) => {
-        GameHelper.incrementObservable(App.game.farming.berryList[BerryType.Razz], -1);
+        GameHelper.incrementObservable(App.game.farming.berryInventory[BerryType.Razz], -1);
         pokemon.eatingBait = BaitType.Razz;
         pokemon.eating = Math.max(pokemon.eating, Rand.intBetween(2, 7));
         pokemon.angry = 0;
     });
-BaitList.Nanab = new Bait(BaitType.Nanab, 'Nanab Berry', 'a Nanab Berry', FarmController.getBerryImage(BerryType.Nanab),
-    () => App.game.farming.berryList[BerryType.Nanab](),
+BaitList.Pinap = new Bait(BaitType.Pinap, 'Pinap Berry', 'a Pinap Berry', FarmController.getBerryImage(BerryType.Pinap),
+    () => App.game.farming.berryInventory[BerryType.Pinap](),
     (pokemon: SafariPokemon) => {
-        GameHelper.incrementObservable(App.game.farming.berryList[BerryType.Nanab], -1);
+        GameHelper.incrementObservable(App.game.farming.berryInventory[BerryType.Pinap], -1);
+        pokemon.eatingBait = BaitType.Pinap;
+        pokemon.eating = Math.max(pokemon.eating, Rand.intBetween(2, 7));
+        pokemon.angry = 0;
+    });
+BaitList.Nanab = new Bait(BaitType.Nanab, 'Nanab Berry', 'a Nanab Berry', FarmController.getBerryImage(BerryType.Nanab),
+    () => App.game.farming.berryInventory[BerryType.Nanab](),
+    (pokemon: SafariPokemon) => {
+        GameHelper.incrementObservable(App.game.farming.berryInventory[BerryType.Nanab], -1);
         pokemon.eatingBait = BaitType.Nanab;
         pokemon.eating = Math.max(pokemon.eating, Rand.intBetween(2, 7));
         pokemon.angry = 0;

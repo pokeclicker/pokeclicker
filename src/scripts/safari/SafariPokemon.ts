@@ -68,7 +68,7 @@ class SafariPokemon implements PokemonInterface {
         if (this.angry > 0) {
             catchF *= 2 + this.levelModifier;
         }
-        if (this.eatingBait === BaitType.Nanab) {
+        if (this.eatingBait === BaitType.Razz) {
             catchF *= 1.5 + this.levelModifier;
         }
 
@@ -83,7 +83,7 @@ class SafariPokemon implements PokemonInterface {
         if (this.angry > 0) {
             escapeF *= 2 - this.levelModifier;
         }
-        if (this.eatingBait === BaitType.Razz) {
+        if (this.eatingBait === BaitType.Nanab) {
             escapeF /= 1.5 + this.levelModifier;
         }
 

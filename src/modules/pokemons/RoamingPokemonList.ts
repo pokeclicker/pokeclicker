@@ -1,7 +1,7 @@
 import { Observable } from 'knockout';
 import BadgeEnums from '../enums/Badges';
 import {
-    KantoSubRegions, JohtoSubRegions, HoennSubRegions, SinnohSubRegions, UnovaSubRegions, KalosSubRegions, AlolaSubRegions, GalarSubRegions, HisuiSubRegions, PaldeaSubRegions, Region,
+    KantoSubRegions, JohtoSubRegions, HoennSubRegions, SinnohSubRegions, UnovaSubRegions, KalosSubRegions, AlolaSubRegions, GalarSubRegions, HisuiSubRegions, PaldeaSubRegions, SubRegions, Region,
     getDungeonIndex, Starter, FluteItemType,
 } from '../GameConstants';
 import GameHelper from '../GameHelper';
@@ -77,6 +77,10 @@ export default class RoamingPokemonList {
         return RoamingPokemonList.increasedChanceRoute[region]?.[subRegionGroup];
     }
 
+    public static getGroupSubRegions(region: Region, subRegionGroup: number): SubRegions[] {
+        return [...RoamingPokemonList.roamerGroups[region][subRegionGroup].subRegions];
+    }
+
     public static generateIncreasedChanceRoutes(date = new Date()) {
         // Seed the random runmber generator
         SeededRand.seedWithDateHour(date, this.period);
@@ -91,7 +95,7 @@ export default class RoamingPokemonList {
         });
     }
 
-    public static findGroup(region: Region, subRegion: number) {
+    public static findGroup(region: Region, subRegion: number): number {
         return this.roamerGroups[region].findIndex((g) => g.subRegions.includes(subRegion));
     }
 }
