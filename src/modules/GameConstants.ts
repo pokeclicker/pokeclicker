@@ -2549,7 +2549,7 @@ export const MoonCycleValues: Record<MoonCyclePhase, number> = {
 };
 
 // Research Level - used for route encounters in Lental
-export const ResearchLevel = [ // actual values haven't been determined yet, low values are used to make it easier to get through the quest
+export const ResearchLevel = [
     0, // Unexplored
     100, // Research Level 1
     1000, // Research Level 2
