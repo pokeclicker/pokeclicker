@@ -757,9 +757,13 @@
         { name: "Kanto Route 22"
         , width: 4, height: 3
         , x: 96, y: 26
-        , databind: `attr: { class: MapHelper.accessToRoute(22, GameConstants.Region.johto) ? 'unlockedRoute' : 'lockedRoute' },
+        , databind: `attr: { class: MapHelper.accessToRoute(26, GameConstants.Region.johto) ? 'unlockedRoute' : 'lockedRoute' },
         click: () => {
-            Notifier.notify({message: 'Seems like this path leads to another region. You can travel there using the dock in Olivine City.'});
+                if (MapHelper.accessToRoute(26, GameConstants.Region.johto)) {
+                    MapHelper.moveToRoute(22, GameConstants.Region.kanto);
+                }else{
+                    Notifier.notify({message: 'Seems like this path leads to another region. You can travel there using the dock in Olivine City.'});
+                }
             }`
         })
      %>
