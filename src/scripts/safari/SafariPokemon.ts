@@ -30,7 +30,7 @@ class SafariPokemon implements PokemonInterface {
         this.type1 = data.type1;
         this.type2 = data.type2;
         this.shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SAFARI);
-        this._displayName = PokemonHelper.displayName(name);
+        this._displayName = PokemonHelper.displayNameObservable(name);
         this.gender = PokemonFactory.generateGender(data.gender.femaleRatio, data.gender.type);
         PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.PokemonStatisticsType.Encountered, this.shiny, this.gender, GameConstants.ShadowStatus.None);
         // Shiny
@@ -59,10 +59,6 @@ class SafariPokemon implements PokemonInterface {
         }
     }
 
-    public static calcPokemonWeight(pokemon): number {
-        return pokemon.weight * (App.game.party.alreadyCaughtPokemonByName(pokemon.name) ? 1 : 2);
-    }
-
     public get catchFactor(): number {
         const oakBonus = App.game.oakItems.calculateBonus(OakItemType.Magic_Ball);
         let catchF = this.baseCatchFactor + oakBonus + (this.levelModifier * 10);
@@ -72,7 +68,7 @@ class SafariPokemon implements PokemonInterface {
         if (this.angry > 0) {
             catchF *= 2 + this.levelModifier;
         }
-        if (this.eatingBait === BaitType.Nanab) {
+        if (this.eatingBait === BaitType.Razz) {
             catchF *= 1.5 + this.levelModifier;
         }
 
@@ -87,7 +83,7 @@ class SafariPokemon implements PokemonInterface {
         if (this.angry > 0) {
             escapeF *= 2 - this.levelModifier;
         }
-        if (this.eatingBait === BaitType.Razz) {
+        if (this.eatingBait === BaitType.Nanab) {
             escapeF /= 1.5 + this.levelModifier;
         }
 
@@ -129,5 +125,9 @@ class SafariPokemon implements PokemonInterface {
 
     public get displayName() {
         return this._displayName();
+    }
+
+    public getImage(): string {
+        return PokemonHelper.getImage(this.id, this.shiny, this.gender, this.shadow);
     }
 }

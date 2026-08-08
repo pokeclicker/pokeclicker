@@ -256,6 +256,14 @@ class PokedexHelper {
         return (pokemon.type.length === 1 && (type == null || pokemon.type[0] === type));
     }
 
+    public static resetFilters() {
+        for (const key of pokedexFilterSettingKeys) {
+            const setting = Settings.getSetting(key);
+            Settings.setSettingByName(key, setting.defaultValue);
+        }
+        (document.getElementById('pokedex-filter-nameID') as HTMLInputElement).value = '';
+    }
+
     // Flag for the LazyLoader
     public static resetPokedexFlag = ko.computed(() => DisplayObservables.modalState.pokedexModal === 'hidden');
 

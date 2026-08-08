@@ -324,7 +324,11 @@ class Safari {
             top: 32 * j + topLeft.top - 24,
             left: 32 * i + topLeft.left - 12,
         };
-        document.getElementById('sprite').classList.value = `walk${Safari.lastDirection}`;
+
+        const sprite = document.getElementById('sprite');
+        sprite.classList.value = `walk${Safari.lastDirection}`;
+        sprite.dataset.gender = Settings.getSetting('playerSafariSprite').value;
+
         $('#sprite').offset( offset );
         Safari.playerXY.x = i;
         Safari.playerXY.y = j;
@@ -358,7 +362,6 @@ class Safari {
         if (!Safari.inProgress()) {
             return;
         }
-
         Safari.lastDirection = direction;
         const directionOffset = Safari.directionToXY(direction);
 
@@ -430,7 +433,10 @@ class Safari {
     public static spawnItemCheck() {
         const baseChance = 0.4;
         const itemLevelModifier = (Safari.safariLevel() - 1) / 100;
-        if (Rand.chance(baseChance + itemLevelModifier)) {
+        if (Rand.chance((baseChance + itemLevelModifier))) {
+            Safari.spawnRandomItem();
+        }
+        if (SafariBattle.enemy.eatingBait == BaitType.Pinap && Rand.chance((baseChance + itemLevelModifier))) {
             Safari.spawnRandomItem();
         }
     }

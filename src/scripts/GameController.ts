@@ -100,6 +100,10 @@ class GameController {
         $purifyChamberModal.on('hidden.bs.modal shown.bs.modal', _ => $purifyChamberModal.data('disable-toggle', false));
         // Ship
         const $shipModal = $('#ShipModal');
+        // Route Info
+        const $routeInfoModal = $('#routeInfoModal');
+        // Dungeon Info
+        const $dungeonInfoModal = $('#dungeonInfoModal');
         // Modal Collapse
         $(GameConstants.ModalCollapseList).map(function() {
             const id = `#${this}`;
@@ -296,10 +300,9 @@ class GameController {
                 }
             }
 
-            // Only run if no modals are open
-            if (visibleModals === 0) {
-                // Route Battles
-                if (App.game.gameState === GameConstants.GameState.fighting && !GameController.keyHeld.Control?.()) {
+            // Route Battles
+            if (App.game.gameState === GameConstants.GameState.fighting && !GameController.keyHeld.Control?.()) {
+                if (visibleModals === 0 || $routeInfoModal.data('bs.modal')?._isShown) {
                     const cycle = Routes.getRoutesByRegion(player.region).filter(r => r.isUnlocked()).map(r => r.number);
                     if (cycle.length > 1) {
                         const idx = cycle.findIndex(r => r == player.route);
@@ -313,7 +316,25 @@ class GameController {
                         }
                     }
                 }
+            }
 
+            // Dungeon Navigation
+            if (App.game.gameState === GameConstants.GameState.town && player.town instanceof DungeonTown && !GameController.keyHeld.Control?.()) {
+                if (visibleModals === 0 || $dungeonInfoModal.data('bs.modal')?._isShown) {
+                    const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
+                    const idx = cycle.findIndex(d => d.name == player.town.name);
+                    switch (key) {
+                        case '=' :
+                        case '+' : MapHelper.moveToTown(cycle[(idx + 1) % cycle.length].name);
+                            return e.preventDefault();
+                        case '-' : MapHelper.moveToTown(cycle[(idx + cycle.length - 1) % cycle.length].name);
+                            return e.preventDefault();
+                    }
+                }
+            }
+
+            // Only run if no modals are open
+            if (visibleModals === 0) {
                 // Dungeons
                 if (App.game.gameState === GameConstants.GameState.dungeon) {
                     switch (key) {
@@ -359,16 +380,6 @@ class GameController {
                             NPCController.openDialog(filteredNPCs[numberKey - filteredContent.length]);
                         }
                         return e.preventDefault();
-                    } else if (player.town instanceof DungeonTown && !GameController.keyHeld.Control?.()) {
-                        const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
-                        const idx = cycle.findIndex(d => d.name == player.town.name);
-                        switch (key) {
-                            case '=' :
-                            case '+' : MapHelper.moveToTown(cycle[(idx + 1) % cycle.length].name);
-                                return e.preventDefault();
-                            case '-' : MapHelper.moveToTown(cycle[(idx + cycle.length - 1) % cycle.length].name);
-                                return e.preventDefault();
-                        }
                     }
                 }
             }
@@ -395,6 +406,7 @@ class GameController {
                     // Open the achievmeents tracker
                     if (achievements.canAccess() && !$achievementsModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
+                        AchievementHandler.filterAchievementList(true);
                         $achievementsModal.modal('toggle');
                         return e.preventDefault();
                     }
@@ -417,7 +429,7 @@ class GameController {
                     break;
                 case Settings.getSetting('hotkey.shop').value:
                     // Open the Poke Mart
-                    if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Lance')]() >= 1 && !$shopModal.data('disable-toggle')) {
+                    if (ShopHandler.shortcutVisible() && !$shopModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
                         ShopHandler.showShop(pokeMartShop);
                         $shopModal.modal('toggle');
@@ -426,8 +438,7 @@ class GameController {
                     break;
                 case Settings.getSetting('hotkey.forceSave').value:
                     if (GameController.keyHeld.Shift()) {
-                        Save.store(player);
-                        Notifier.notify({ message: 'Game Saved!'});
+                        Save.store(player, true);
                         return e.preventDefault();
                     }
                     break;

@@ -19,6 +19,8 @@ import {
     DayTimedMegaEvolution,
     NightTimedMegaEvolution,
     AttackEvolution,
+    EventStoneEvolution,
+    EventLevelEvolution,
 } from './evolutions/Methods';
 import BerryType from '../enums/BerryType';
 import ItemType from '../enums/ItemType';
@@ -142,7 +144,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Bulbasaur (Clone)', 'Ivysaur (Clone)', 16)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Bulbasaur (Clone)', 'Ivysaur (Clone)', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -163,7 +165,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Spooky Bulbasaur', 'Spooky Ivysaur', 16)],
+        'evolutions': [EventLevelEvolution('Halloween!', 'Spooky Bulbasaur', 'Spooky Ivysaur', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -175,6 +177,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 1.03,
@@ -184,7 +187,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Bulbasaur (Rose)', 'Ivysaur (Rose)', 16)],
+        'evolutions': [EventLevelEvolution('Golden Week', 'Bulbasaur (Rose)', 'Ivysaur (Rose)', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -229,7 +232,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Ivysaur (Clone)', 'Venusaur (Clone)', 32)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Ivysaur (Clone)', 'Venusaur (Clone)', 32)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -250,7 +253,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Spooky Ivysaur', 'Spooky Venusaur', 32)],
+        'evolutions': [EventLevelEvolution('Halloween!', 'Spooky Ivysaur', 'Spooky Venusaur', 32)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -271,7 +274,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Ivysaur (Rose)', 'Venusaur (Rose)', 32)],
+        'evolutions': [EventLevelEvolution('Golden Week', 'Ivysaur (Rose)', 'Venusaur (Rose)', 32)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -436,7 +439,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Charmander (Clone)', 'Charmeleon (Clone)', 16)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Charmander (Clone)', 'Charmeleon (Clone)', 16)],
         'base': {
             'hitpoints': 39,
             'attack': 52,
@@ -481,7 +484,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Charmeleon (Clone)', 'Charizard (Clone)', 36)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Charmeleon (Clone)', 'Charizard (Clone)', 36)],
         'base': {
             'hitpoints': 58,
             'attack': 64,
@@ -630,7 +633,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Squirtle (Clone)', 'Wartortle (Clone)', 16)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Squirtle (Clone)', 'Wartortle (Clone)', 16)],
         'base': {
             'hitpoints': 44,
             'attack': 48,
@@ -695,7 +698,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Wartortle (Clone)', 'Blastoise (Clone)', 36)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Wartortle (Clone)', 'Blastoise (Clone)', 36)],
         'base': {
             'hitpoints': 59,
             'attack': 63,
@@ -1640,6 +1643,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 25.13,
@@ -7337,7 +7341,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 49,
         'eggCycles': 10,
-        'evolutions': [StoneEvolution('Spooky Togepi', 'Spooky Togetic', StoneType.Soothe_bell)],
+        'evolutions': [EventStoneEvolution('Halloween!', 'Spooky Togepi', 'Spooky Togetic', StoneType.Soothe_bell)],
         'baby': true,
         'base': {
             'hitpoints': 35,
@@ -7350,6 +7354,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 175.02,
@@ -7400,7 +7405,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 142,
         'eggCycles': 10,
-        'evolutions': [StoneEvolution('Spooky Togetic', 'Spooky Togekiss', StoneType.Dusk_stone)],
+        'evolutions': [EventStoneEvolution('Halloween!', 'Spooky Togetic', 'Spooky Togekiss', StoneType.Dusk_stone)],
         'base': {
             'hitpoints': 55,
             'attack': 40,
@@ -11954,6 +11959,11 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 147,
         'catchRate': 45,
+        'evolutions': [
+            WeatherRestrictedLevelEvolution([WeatherType.Harsh_Sunlight], 'Castform', 'Castform (Sunny)', 1, true),
+            WeatherRestrictedLevelEvolution([WeatherType.Rain, WeatherType.Thunderstorm], 'Castform', 'Castform (Rainy)', 1, true),
+            WeatherRestrictedLevelEvolution([WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard], 'Castform', 'Castform (Snowy)', 1, true),
+        ],
         'base': {
             'hitpoints': 70,
             'attack': 70,
@@ -14470,7 +14480,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 78,
         'catchRate': 50,
-        'evolutions': [StoneEvolution('Elf Munchlax', 'Santa Snorlax', StoneType.Soothe_bell, true)],
+        'evolutions': [EventStoneEvolution('Merry Christmas!', 'Elf Munchlax', 'Santa Snorlax', StoneType.Soothe_bell, true)],
         'base': {
             'hitpoints': 135,
             'attack': 85,
@@ -23937,6 +23947,23 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 778.02,
+        'name': 'Mimikyu (Busted)',
+        'type': [PokemonType.Ghost, PokemonType.Fairy],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 167,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 55,
+            'attack': 90,
+            'specialAttack': 50,
+            'defense': 80,
+            'specialDefense': 105,
+            'speed': 96,
+        },
+    },
+    {
         'id': 779,
         'name': 'Bruxish',
         'type': [PokemonType.Water, PokemonType.Psychic],
@@ -24174,8 +24201,8 @@ export const pokemonList = createPokemonArray(
         'exp': 140,
         'catchRate': 45,
         'evolutions': [
-            LevelEvolution('Cosmoem', 'Solgaleo', 53),
-            LevelEvolution('Cosmoem', 'Lunala', 53),
+            DayTimedLevelEvolution('Cosmoem', 'Solgaleo', 53),
+            NightTimedLevelEvolution('Cosmoem', 'Lunala', 53),
         ],
         'base': {
             'hitpoints': 43,
@@ -31558,50 +31585,6 @@ export const pokemonList = createPokemonArray(
         },
     },
 
-    // ???
-    {
-        'id': -793,
-        'name': '???',
-        'nativeRegion': Region.alola,
-        'type': [PokemonType.Rock, PokemonType.Poison],
-        'eggCycles': 120,
-        'levelType': LevelType.slow,
-        'exp': 257,
-        'catchRate': 45,
-        'base': {
-            'hitpoints': 109,
-            'attack': 53,
-            'specialAttack': 127,
-            'defense': 47,
-            'specialDefense': 131,
-            'speed': 103,
-        },
-        'gender': {
-            'type': Genders.Genderless,
-        },
-    },
-    // Fusion Lusamine
-    {
-        'id': -793.01,
-        'name': 'You hateful little Trainer!',
-        'nativeRegion': Region.alola,
-        'type': [PokemonType.Rock, PokemonType.Poison],
-        'eggCycles': 120,
-        'levelType': LevelType.slow,
-        'exp': 257,
-        'catchRate': 45,
-        'base': {
-            'hitpoints': 109,
-            'attack': 53,
-            'specialAttack': 127,
-            'defense': 47,
-            'specialDefense': 131,
-            'speed': 103,
-        },
-        'gender': {
-            'type': Genders.Genderless,
-        },
-    },
     // Starmobiles (Revavroom)
     {
         'id': -966.01,

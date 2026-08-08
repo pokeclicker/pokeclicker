@@ -121,6 +121,7 @@ Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal',
         new SettingOption('Queue Slots Full', 'queue'),
     ],
     'queue'));
+Settings.add(new BooleanSetting('showHatcheryModalQueue', 'Show Hatchery Queue in Modal', false));
 Settings.add(new BooleanSetting('hideQuestsOnFull', 'Hide Quest Menu on full questslots', true));
 // Settings.add(new BooleanSetting('showFarmModule', 'Show Farm module on main screen', true));
 // Settings.add(new BooleanSetting('showFarmModuleControls', 'Show Farm module extended controls', true));
@@ -188,6 +189,12 @@ Settings.add(new Setting<string>('gameDisplayStyle', 'Game display style',
     ],
     'standard3'));
 Settings.add(new BooleanSetting('showMuteButton', 'Show mute/unmute button', true));
+Settings.add(new Setting<string>('playerSafariSprite', 'Player safari sprite',
+    [
+        new SettingOption('Male', 'male'),
+        new SettingOption('Female', 'female'),
+    ],
+    'male'));
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
@@ -308,8 +315,13 @@ Settings.add(new Setting<number>('heldItemType2Filter', 'Type 2', [
     ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
     new SettingOption('None', PokemonType.None),
 ], -2, undefined, false));
-Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false, undefined, false));
-Settings.add(new BooleanSetting('heldItemHideHoldingThisItem', 'Hide Pokémon holding this item', false, undefined, false));
+Settings.add(new Setting('heldItemCurrentItemFilter', 'Held Item filter', [
+    new SettingOption('Show all Pokémon', 'none'),
+    new SettingOption('Hide Pokémon holding ANY item', 'HideHoldingAnyItem'),
+    new SettingOption('Hide Pokémon holding THIS item', 'HideHoldingThisItem'),
+    new SettingOption('Hide Pokémon holding EQUIVALENT or BETTER item', 'HideHoldingSameOrBetter'),
+    new SettingOption('Show only Pokémon holding INFERIOR item', 'OnlyShowWorse'),
+], 'none'));
 
 // Hatchery Filters
 export const breedingFilterSettingKeys = ['breedingNameFilter', 'breedingIDFilter', 'breedingRegionFilter', 'breedingType1Filter', 'breedingType2Filter',
@@ -570,6 +582,13 @@ Settings.add(new Setting('discord-rp.small-image', 'Discord small image',
 Settings.getSetting('backgroundImage').observableValue.subscribe((newValue) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     newValue === 'background-dynamic' ? DynamicBackground.startScene() : DynamicBackground.stopScene();
+});
+
+Settings.getSetting('playerSafariSprite').observableValue.subscribe((newValue) => {
+    const sprite = document.getElementById('sprite');
+    if (sprite) {
+        sprite.dataset.gender = newValue;
+    }
 });
 
 // Translation

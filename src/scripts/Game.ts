@@ -153,6 +153,7 @@ class Game implements TmpGameType {
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
         WeatherApp.initialize();
         DamageCalculator.initialize();
+        VeteranShop.initialize();
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
             this.computeOfflineEarnings();
@@ -491,7 +492,10 @@ class Game implements TmpGameType {
                     });
                 }
                 // Give the players more Battle Cafe spins
-                BattleCafeController.spinsLeft(BattleCafeController.spinsPerDay());
+                if (this.party.getPokemonByName('Milcery')) {
+                    BattleCafeController.accumulateSpins();
+                }
+
                 // Generate the weather forecast
                 WeatherApp.initialize();
                 // Refresh Friend Safari Pokemon List

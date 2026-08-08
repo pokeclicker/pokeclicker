@@ -234,6 +234,13 @@ export type TmpGymRunnerType = {
     gymObservable: () => TmpGymType;
 };
 
+export type TmpGymListType = {
+    [gymName: string]: {
+        badgeReward: any;
+        buttonText: string;
+    }
+};
+
 export type TmpAchievementHandlerType = {
     achievementList: Achievement[];
     navigateIndex: KnockoutObservable<number>;
@@ -371,4 +378,9 @@ export type TmpTemporaryBattleType = {
 
 export type TmpTownType = {
     name: string;
+};
+
+export type TmpVeteranShopType = {
+    list: Record<GameConstants.VeteranUnlock, any>;
+    isUnlockAvailable: (unlock: GameConstants.VeteranUnlock) => boolean;
 };

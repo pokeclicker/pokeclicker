@@ -2,18 +2,18 @@
 aria-labelledby="questStepClearedModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable" role="document">
    <div class="modal-content">
-    <!-- ko if: Quest.questObservable()?.optionalArgs -->
+    <!-- ko if: QuestLineController.questStepObservable()?.optionalArgs -->
        <div class="modal-header">
            <div style="width: 100%;">
             <img src="" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png'"
-                data-bind="attr:{ src: Quest.questObservable().getNpcImage()}">
+                data-bind="attr:{ src: QuestLineController.questStepObservable().getNpcImage()}">
             <h5 class="modal-title" id="questStepClearedModalLabel"
-                data-bind="text: Quest.questObservable().getNpcDisplayName()">Modal title</h5>
+                data-bind="text: QuestLineController.questStepObservable().getNpcDisplayName()">Modal title</h5>
 
            </div>
         </div>
         <div class="modal-body">
-            <p data-bind="html: TextMerger.mergeText(Quest.questObservable()?.getClearedMessage())"></p>
+            <p data-bind="html: TextMerger.mergeText(QuestLineController.questStepObservable()?.getClearedMessage())"></p>
 
         </div>
         <div class="modal-footer">

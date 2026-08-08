@@ -95,13 +95,11 @@ class SafariPokemonList {
             new SafariEncounter('Beautifly', 1, [SafariEnvironments.Grass], true),
             new SafariEncounter('Cascoon', 2, [SafariEnvironments.Grass], true),
             new SafariEncounter('Dustox', 1, [SafariEnvironments.Grass], true),
-            new SafariEncounter('Masquerain', 1, [SafariEnvironments.Grass], true),
             new SafariEncounter('Nincada', 2, [SafariEnvironments.Grass], true),
             new SafariEncounter('Kricketot', 2, [SafariEnvironments.Grass], true),
             new SafariEncounter('Kricketune', 1, [SafariEnvironments.Grass], true),
             new SafariEncounter('Combee', 2, [SafariEnvironments.Grass], true),
             new SafariEncounter('Vespiquen', 1, [SafariEnvironments.Grass], true),
-            new SafariEncounter('Yanmega', 1, [SafariEnvironments.Grass], true),
             new SafariEncounter('Sewaddle', 5, [SafariEnvironments.Grass], true),
             new SafariEncounter('Swadloon', 2, [SafariEnvironments.Grass], true),
             new SafariEncounter('Leavanny', 1, [SafariEnvironments.Grass], true),
@@ -125,6 +123,8 @@ class SafariPokemonList {
             // Water
             new SafariEncounter('Yanma', 1, [SafariEnvironments.Water]),
             new SafariEncounter('Surskit', 5, [SafariEnvironments.Water], true),
+            new SafariEncounter('Masquerain', 1, [SafariEnvironments.Water], true),
+            new SafariEncounter('Yanmega', 1, [SafariEnvironments.Water], true),
             new SafariEncounter('Dewpider', 5, [SafariEnvironments.Water], true),
             new SafariEncounter('Araquanid', 1, [SafariEnvironments.Water], true),
             new SafariEncounter('Wimpod', 1, [SafariEnvironments.Water], true),
@@ -225,7 +225,7 @@ class SafariPokemonList {
             new SafariEncounter('Magikarp Saucy Blue', 2, [SafariEnvironments.Water], new QuestLineCompletedRequirement('Dr. Splash\'s Research Project'), false, 'self'),
             // Both, meme encounter
             new SafariEncounter('Ditto (Magikarp)', 0.3, [SafariEnvironments.Water, SafariEnvironments.Grass],
-                new CaughtUniquePokemonByFilterRequirement((p: PartyPokemon) => Math.floor(p.id) === pokemonMap.Magikarp.id, 'Catch more Magikarp species.', 6),
+                new CaughtUniquePokemonByFilterRequirement((p: PokemonListData) => Math.floor(p.id) === pokemonMap.Magikarp.id, 'Catch more Magikarp species.', 6),
                 false,
                 'Magikarp'
             ),

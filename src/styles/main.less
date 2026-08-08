@@ -193,6 +193,10 @@ div.progress {
   color: whitesmoke;
 }
 
+button {
+  cursor: pointer;
+}
+
 body:hover {
   cursor: default;
 }
@@ -427,6 +431,16 @@ img {
 
   &.graveyard {
       background-image: url("../assets/images/battleBackground/graveyard.png");
+      background-position: center;
+  }
+
+  &.battlefield {
+      background-image: url("../assets/images/battleBackground/battlefield.png");
+      background-position: bottom;
+  }
+
+  &.space {
+      background-image: url("../assets/images/battleBackground/space.png");
       background-position: center;
   }
 
@@ -855,3 +869,30 @@ button.btn-circle {
         margin: 0;
     }
 }
+
+#pokemonListBody {
+    container-name: pokemon-list;
+    container-type: inline-size;
+
+    .pokemon-row {
+        gap: 8px;
+        line-height: 1.3;
+
+        .shadow-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        &:hover {
+            backdrop-filter: brightness(0.92) contrast(1.02);
+        }
+    }
+
+    @container pokemon-list (max-width: 250px) {
+        .attack-label {
+            display: none;
+        }
+    }
+}
+
+
