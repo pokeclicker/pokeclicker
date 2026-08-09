@@ -9,7 +9,7 @@ import EventCollectibleItem from './EventCollectibleItem';
 import QuestItem from './QuestItem';
 
 export default class ItemHandler {
-    public static stoneSelected: Observable<string> = ko.observable(StoneType[0]);
+    public static stoneSelected: Observable<keyof typeof StoneType> = ko.observable(StoneType[0] as keyof typeof StoneType);
     public static pokemonSelected: Observable<PokemonNameType> = ko.observable('Gloom'); // TODO: import {} when PartyController module, ko.observable(getPokemonsWithEvolution(0)[0].name);
     public static amountSelected: Observable<number> = ko.observable(1);
     static amount: Observable<number> = ko.observable(1);

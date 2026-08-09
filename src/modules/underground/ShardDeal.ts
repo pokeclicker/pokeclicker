@@ -6,6 +6,7 @@ import Notifier from '../notifications/Notifier';
 import Amount from '../wallet/Amount';
 import UndergroundItem from './UndergroundItem';
 import UndergroundItems from './UndergroundItems';
+import type { ObservableArray } from 'knockout';
 
 type ShardCost = {
     shardTypeString: string,
@@ -18,7 +19,7 @@ export class ShardDeal {
     public item: { itemType: Item, amount: number };
     public questPointCost: number;
     public currencyType: Currency;
-    public static list: Partial<Record<ShardTraderLocations, KnockoutObservableArray<ShardDeal>>> = {};
+    public static list: Partial<Record<ShardTraderLocations, ObservableArray<ShardDeal>>> = {};
 
     constructor(shardCosts: ShardCost[], item: Item, itemAmount: number) {
         this.shards = shardCosts;

@@ -1,3 +1,5 @@
+import type { Observable } from 'knockout';
+
 enum LoadingStates {
     none = -1,
     initialized = 0,
@@ -5,7 +7,7 @@ enum LoadingStates {
     running = 2,
 }
 
-const currentState: KnockoutObservable<LoadingStates> = ko.observable(LoadingStates.none);
+const currentState: Observable<LoadingStates> = ko.observable(LoadingStates.none);
 
 export default class GameLoadState {
     static readonly states = LoadingStates;

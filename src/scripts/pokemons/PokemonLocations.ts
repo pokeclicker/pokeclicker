@@ -370,8 +370,8 @@ class PokemonLocations {
         const cacheLine = this.initCacheLine(cache, Array<number>);
         pokemonList.forEach(p => cacheLine[p.name] = []);
         BattleFrontierMilestones.milestoneRewards.filter(m => m instanceof BattleFrontierMilestonePokemon).forEach(milestone => {
-            if (this.pokemonNames.includes(milestone._description)) {
-                cacheLine[milestone._description].push(milestone.stage);
+            if (this.pokemonNames.includes(milestone.pokemonName)) {
+                cacheLine[milestone.pokemonName].push(milestone.stage);
             }
         });
         return cacheLine[pokemonName];

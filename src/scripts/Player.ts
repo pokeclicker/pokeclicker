@@ -233,7 +233,7 @@ class Player implements TmpPlayerType {
             '_createdTime',
         ];
         const plainJS = ko.toJS(this);
-        Object.entries(plainJS._itemMultipliers).forEach(([key, value]) => {
+        Object.entries(plainJS._itemMultipliers as Record<string, number>).forEach(([key, value]) => {
             if (value <= 1) {
                 delete plainJS._itemMultipliers[key];
             }

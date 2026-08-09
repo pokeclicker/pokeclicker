@@ -206,7 +206,7 @@ class SafariBattle {
         if (Safari.inBattle() && !SafariBattle.busy()) {
             SafariBattle.busy(true);
             const bait = SafariBattle.selectedBait();
-            if (bait.amount() <= 0) {
+            if (Number(bait.amount()) <= 0) {
                 SafariBattle.text(`You don't have enough ${bait.name}`);
                 SafariBattle.delay(SafariBattle.Speed.turnLength, false)
                     .then(() => {

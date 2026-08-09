@@ -20,5 +20,7 @@ jobs:
     - run: npm ci
     - run: gulp scripts
     - run: npm run eslint
+      if: ${{ !cancelled() }}
     - run: npm run stylelint
+      if: ${{ !cancelled() }}
     - run: npm run vitest
