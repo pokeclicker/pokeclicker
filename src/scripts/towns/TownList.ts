@@ -3637,28 +3637,6 @@ TownList['Outskirt Stand'] = new Town(
     }
 );
 
-TownList['Phenac City'] = new Town(
-    'Phenac City',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [PhenacCityShop, new MoveToDungeon(dungeonList['Phenac City Battles']), new MoveToDungeon(dungeonList['Phenac Stadium']), TemporaryBattleList.Folly],
-    {
-        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
-        npcs: [PhenacRoller, Sack, EsCade1, Rui1, Trest],
-    }
-);
-
-TownList['Pyrite Town'] = new Town(
-    'Pyrite Town',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [GymList['Cipher Admin Miror B.'], new MoveToDungeon(dungeonList['Pyrite Town Battles']), new MoveToDungeon(dungeonList['Pyrite Colosseum']), new MoveToDungeon(dungeonList['The Under']), new MoveToDungeon(dungeonList['Deep Colosseum']), new MoveToDungeon(dungeonList['Under Colosseum'])],
-    {
-        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 6)],
-        npcs: [OrreRoamerNPC, Duking1],
-    }
-);
-
 TownList['Agate Village'] = new Town(
     'Agate Village',
     GameConstants.Region.hoenn,
@@ -3678,28 +3656,6 @@ TownList['Relic Stone'] = new Town(
     {
         requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 17)],
         npcs: [RelicSage, Eagun2],
-    }
-);
-
-TownList['Realgam Tower'] = new Town(
-    'Realgam Tower',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Realgam Tower Battles']), new MoveToDungeon(dungeonList['Realgam Colosseum'])],
-    {
-        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 22)],
-        npcs: [EsCade2],
-    }
-);
-
-TownList['Gateon Port'] = new Town(
-    'Gateon Port',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [GateonPortShop, new MoveToDungeon(dungeonList['Gateon Port Battles']), new DockTownContent()],
-    {
-        requirements: [new QuestLineStartedRequirement('Shadows in the Desert')],
-        npcs: [GateonSailor, Verich],
     }
 );
 
@@ -3930,21 +3886,25 @@ TownList['Near Space'] = new DungeonTown(
         new QuestLineCompletedRequirement('The Delta Episode'),
     ]
 );
-TownList['Phenac City Battles'] = new DungeonTown(
-    'Phenac City Battles',
+TownList['Phenac City'] = new DungeonTown(
+    'Phenac City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [
-        new QuestLineStepCompletedRequirement('Shadows in the Desert', 3),
-    ]
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
+    [PhenacCityShop, new MoveToDungeon(dungeonList['Phenac Stadium']), TemporaryBattleList.Folly],
+    {
+        npcs: [PhenacRoller, Sack, EsCade1, Rui1, Trest],
+    }
 );
-TownList['Pyrite Town Battles'] = new DungeonTown(
-    'Pyrite Town Battles',
+TownList['Pyrite Town'] = new DungeonTown(
+    'Pyrite Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [
-        new QuestLineStepCompletedRequirement('Shadows in the Desert', 6),
-    ]
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 6)],
+    [GymList['Cipher Admin Miror B.'], new MoveToDungeon(dungeonList['Pyrite Colosseum']), new MoveToDungeon(dungeonList['The Under']), new MoveToDungeon(dungeonList['Deep Colosseum']), new MoveToDungeon(dungeonList['Under Colosseum'])],
+    {
+        npcs: [OrreRoamerNPC, Duking1],
+    }
 );
 TownList['Pyrite Colosseum'] = new DungeonTown(
     'Pyrite Colosseum',
@@ -4030,13 +3990,15 @@ TownList['Cipher Lab'] = new DungeonTown(
         npcs: [Lovrina],
     }
 );
-TownList['Realgam Tower Battles'] = new DungeonTown(
-    'Realgam Tower Battles',
+TownList['Realgam Tower'] = new DungeonTown(
+    'Realgam Tower',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [
-        new QuestLineStepCompletedRequirement('Shadows in the Desert', 22),
-    ]
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 22)],
+    [new MoveToDungeon(dungeonList['Realgam Colosseum'])],
+    {
+        npcs: [EsCade2],
+    }
 );
 TownList['Realgam Colosseum'] = new DungeonTown(
     'Realgam Colosseum',
@@ -4086,11 +4048,15 @@ TownList['Under Colosseum'] = new DungeonTown(
         new QuestLineCompletedRequirement('Shadows in the Desert'),
     ]
 );
-TownList['Gateon Port Battles'] = new DungeonTown(
-    'Gateon Port Battles',
+TownList['Gateon Port'] = new DungeonTown(
+    'Gateon Port',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new QuestLineStepCompletedRequirement('Gale of Darkness', 1)]
+    [new QuestLineStartedRequirement('Shadows in the Desert')],
+    [GateonPortShop, new DockTownContent()],
+    {
+        npcs: [GateonSailor, Verich],
+    }
 );
 TownList['Cipher Key Lair'] = new DungeonTown(
     'Cipher Key Lair',
@@ -5233,7 +5199,10 @@ const PlasmaGrunt1 = new NPC('Team Plasma Grunt', [
     'Why hello there. Nothing strange going on here. Please move along.',
     'Oh that business in the sewers? Yes, we should not have gone in there. Very unfortunate situation. A complete misunderstanding. We were just curious about what was down there.',
     'Bye now.',
-], {image: 'assets/images/npcs/Team Plasma Grunt (male).png'});
+], {
+    image: 'assets/images/npcs/Team Plasma Grunt (male).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 1), new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4, GameConstants.AchievementOption.less)]),
+});
 
 const RelicCastleRuinmaniac = new NPC('Ruin Maniac', [
     'I\'ve heard tell of a secret room in this ruin. A room that supposedly contains a very rare Pokémon.',
@@ -5250,7 +5219,7 @@ const PlasmaGrunt2 = new NPC('Team Plasma Grunt', [
     'If you won\'t leave, we\'ll have to remove you.',
 ], {
     image: 'assets/images/npcs/Team Plasma Grunt (male).png',
-    requirement: new OneFromManyRequirement([new TemporaryBattleRequirement('Team Plasma Grunt 4', 1, GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunt 5', 1, GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunts 1', 1, GameConstants.AchievementOption.less), new TemporaryBattleRequirement('Team Plasma Grunts 2', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4), new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 6, GameConstants.AchievementOption.less)]),
 });
 
 const DriftveilZinzolin = new NPC('Zinzolin', [
@@ -5267,7 +5236,10 @@ const PlasmaGrunt3 = new NPC('Team Plasma Grunt', [
     'Remember when I told you that there was nothing suspicious about this frigate? I was lying, of course.',
     'But truth be told, I didn\'t know that this thing could fly. I was not prepared for this.',
     'I\'m gonna be sick...',
-], {image: 'assets/images/npcs/Team Plasma Grunt (male).png'});
+], {
+    image: 'assets/images/npcs/Team Plasma Grunt (male).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 11), new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 14, GameConstants.AchievementOption.less)]),
+});
 
 const GiantChasmColress = new NPC('Colress', [
     'Welcome! I was asked by an acquaintance to help with his research. What I desire is to bring out the entirety in Pokémon potential! If I can accomplish that, I don\'t care what it takes!',
@@ -5478,6 +5450,40 @@ const AncientBugHunter3 = new NPC('Ancient Bug Hunter', [
     image: 'assets/images/npcs/Super Nerd.png',
     requirement: new QuestLineCompletedRequirement('The Legend Awakened'),
 });
+
+const PlasmaGruntsHoopaDay1 = new GiftNPC('Team Plasma Grunts?', [
+    'Hehe... hee hee...',
+    'Oh! S\'cuse us! Would you like a couple of Ice gems?',
+    '<i>Eeheehee...</i>',
+], () => {
+    App.game.gems.gainGems(1, PokemonType.Ice);
+    Notifier.notify({
+        message: '<i>Whisper, whisper.. Hoohaheehehu!</i>',
+        image: 'assets/images/npcs/Team Plasma Grunts (male).png',
+    });
+    Notifier.notify({
+        message: 'You got two Ice gems...?',
+        image: 'assets/images/gems/Ice Gem.png',
+        type: NotificationConstants.NotificationOption.success,
+    });
+}, undefined, {
+    saveKey: 'PlasmaIceCubes',
+    resetDaily: true,
+    image: 'assets/images/npcs/Team Plasma Grunts (male).png',
+    requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion), new SpecialEventRequirement('Hoopa Day')]),
+});
+
+const PlasmaGruntsHoopaDay2 = new NPC('Plasma Pranksters', [
+    'AHAHA!',
+    'HAAAHHAAAHAAHAA!',
+    'You completely fell for it!',
+    'We said we\'d give you a <i>couple</i> of Ice gems, but we only gave you <i>one</i>!',
+    'Heeheehee! C\'mon let\'s get the mayor too!',
+], {
+    image: 'assets/images/npcs/Team Plasma Grunts (male).png',
+    requirement: new MultiRequirement([new StatisticRequirement(['npcTalkedTo', GameHelper.hash('PlasmaIceCubes')], 1, 'WHAT DID YOU DO TO MY GEMS!?'), new SpecialEventRequirement('Hoopa Day')]),
+});
+
 //Unova Towns
 TownList['Aspertia City'] = new Town(
     'Aspertia City',
@@ -5520,20 +5526,6 @@ TownList['Castelia City'] = new Town(
         npcs: [CasteliaMusician, GenesectFight],
     }
 );
-TownList['A Perfectly Ordinary Frigate'] = new Town(
-    'A Perfectly Ordinary Frigate',
-    GameConstants.Region.unova,
-    GameConstants.UnovaSubRegions.Unova,
-    [],
-    {
-        requirements: [
-            new GymBadgeRequirement(BadgeEnums.Insect),
-            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 1),
-            new TemporaryBattleRequirement('Team Plasma Grunt 1'),
-        ],
-        npcs: [PlasmaGrunt1],
-    }
-);
 TownList['Nimbasa City'] = new Town(
     'Nimbasa City',
     GameConstants.Region.unova,
@@ -5560,19 +5552,6 @@ TownList['Driftveil City'] = new Town(
             new TemporaryBattleRequirement('Team Plasma Grunt 3'),
             new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4),
         ],
-    }
-);
-TownList['A Totally Unsuspicious Frigate'] = new Town(
-    'A Totally Unsuspicious Frigate',
-    GameConstants.Region.unova,
-    GameConstants.UnovaSubRegions.Unova,
-    [TemporaryBattleList['Team Plasma Grunt 4'], TemporaryBattleList['Team Plasma Grunt 5'], TemporaryBattleList['Team Plasma Grunts 1'], TemporaryBattleList['Team Plasma Grunts 2']],
-    {
-        requirements: [
-            new GymBadgeRequirement(BadgeEnums.Quake),
-            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4),
-        ],
-        npcs: [PlasmaGrunt2, DriftveilZinzolin],
     }
 );
 TownList['Mistralton City'] = new Town(
@@ -5623,22 +5602,29 @@ TownList['Opelucid City'] = new Town(
     'Opelucid City',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [OpelucidCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Opelucid City'])],
+    [
+        OpelucidCityShop,
+        new ShardTraderShop(GameConstants.ShardTraderLocations['Opelucid City']),
+        TemporaryBattleList['Team Plasma Grunt 7'],
+        TemporaryBattleList['Team Plasma Grunt 8'],
+        TemporaryBattleList['Team Plasma Grunt 9'],
+        TemporaryBattleList['Zinzolin 2'],
+        TemporaryBattleList['Plasma Shadow 1'],
+    ],
     {
+        npcs: [PlasmaGrunt3, PlasmaGruntsHoopaDay1, PlasmaGruntsHoopaDay2],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 11)],
-    }
-);
-TownList['Team Plasma Assault'] = new Town(
-    'Team Plasma Assault',
-    GameConstants.Region.unova,
-    GameConstants.UnovaSubRegions.Unova,
-    [TemporaryBattleList['Team Plasma Grunt 7'], TemporaryBattleList['Team Plasma Grunt 8'], TemporaryBattleList['Team Plasma Grunt 9'], TemporaryBattleList['Zinzolin 2'], TemporaryBattleList['Plasma Shadow 1']],
-    {
-        requirements: [
-            new GymBadgeRequirement(BadgeEnums.Legend),
-            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 11),
+        dynamicImages: [
+            { requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 11),
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15, GameConstants.AchievementOption.less),
+            ]),
+            imageString: 'Opelucid City (frozen)' },
+            { requirement: new MultiRequirement([
+                new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
+                new SpecialEventRequirement('Hoopa Day'),
+            ]), imageString: 'Opelucid City (frozen)' },
         ],
-        npcs: [PlasmaGrunt3],
     }
 );
 TownList['Shopping Mall Nine'] = new Town(
@@ -5855,29 +5841,52 @@ TownList['Plasma Frigate'] = new DungeonTown(
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
     [
-        new OneFromManyRequirement([
-            new MultiRequirement([
-                new GymBadgeRequirement(BadgeEnums.Wave),
-                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 14),
-                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15, GameConstants.AchievementOption.less),
-            ]),
-            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 16),
-            new QuestLineCompletedRequirement('Hollow Truth and Ideals'),
-        ]),
+        new CustomRequirement(
+            ko.pureComputed(() => new OneFromManyRequirement([
+                new MultiRequirement([
+                    new GymBadgeRequirement(BadgeEnums.Insect),
+                    new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new GymBadgeRequirement(BadgeEnums.Quake),
+                    new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 7, GameConstants.AchievementOption.less),
+                ]),
+                new MultiRequirement([
+                    new GymBadgeRequirement(BadgeEnums.Wave),
+                    new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15, GameConstants.AchievementOption.less),
+                ]),
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 16),
+            ]).isCompleted()),
+            true,
+            'Progress further in questline Hollow Truth and Ideals and gain more Gym badges.'),
     ],
-    [TemporaryBattleList['Colress 3'], TemporaryBattleList['Plasma Shadow 2'], TemporaryBattleList['Plasma Shadow 3'], TemporaryBattleList['Plasma Shadow 4']],
+    [
+        TemporaryBattleList['Team Plasma Grunts 1'],
+        TemporaryBattleList['Team Plasma Grunts 2'],
+        TemporaryBattleList['Team Plasma Grunt 4'],
+        TemporaryBattleList['Team Plasma Grunt 5'],
+        TemporaryBattleList['Colress 3'],
+        TemporaryBattleList['Plasma Shadow 2'],
+        TemporaryBattleList['Plasma Shadow 3'],
+        TemporaryBattleList['Plasma Shadow 4'],
+    ],
     {
-        npcs: [GiantChasmColress, GiantChasmShadowTriad],
+        npcs: [PlasmaGrunt1, PlasmaGrunt2, DriftveilZinzolin, GiantChasmColress, GiantChasmShadowTriad],
+        dynamicImages: [
+            { requirement:
+                new MultiRequirement([
+                    new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 12),
+                    new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 22, GameConstants.AchievementOption.less),
+                ]),
+            imageString: 'Plasma Frigate (activated)' },
+        ],
     }
 );
 TownList['Giant Chasm'] = new DungeonTown(
     'Giant Chasm',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate')),
-        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15),
-    ],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15)],
     [TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2'], TemporaryBattleList['Kyurem 2'], TemporaryBattleList['Kyurem 3'], TemporaryBattleList['Destiny Deoxys Rayquaza']],
     {
         npcs: [Cobalion6, Cobalion7, Terrakion2, Virizion3, destinyGem, destinyScientistChasm],
@@ -7645,7 +7654,7 @@ const SilvallyGladion2Hints = new NPC('Ask Gladion for help', [
     'A black and red-haired guy at the Wela Volcano Park,',
     'A child with orange hair in the Hokulani Observatory,',
     'A dark blue-haired guy that looks like a Veteran inside Mount Lanakila,',
-    'And a girl with a Mudsdale on Exeggutor Island Hill.',
+    'And a girl with a Mudsdale on Exeggutor Island.',
 ], {
     image: 'assets/images/npcs/Gladion.png',
     requirement: new  MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 16, GameConstants.AchievementOption.less)]),
@@ -8125,15 +8134,6 @@ TownList['Seafolk Village'] = new Town(
         npcs: [SeafolkCaptain, SeafolkCaptainMina, SilvallyMina, LillieSeafolkVillage],
     }
 );
-TownList['Exeggutor Island'] = new Town(
-    'Exeggutor Island',
-    GameConstants.Region.alola,
-    GameConstants.AlolaSubRegions.PoniIsland,
-    [ExeggutorIslandShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Exeggutor Island']), new MoveToTown('Exeggutor Island Hill', undefined, false)],
-    {
-        requirements: [new QuestLineCompletedRequirement('Emissary of Light')],
-    }
-);
 TownList['Altar of the Sunne and Moone'] = new Town(
     'Altar of the Sunne and Moone',
     GameConstants.Region.alola,
@@ -8451,12 +8451,12 @@ TownList['Aether Foundation'] = new DungeonTown(
         npcs: [HauAether, GladionAether, LillieAether, SilvallyGladion1, SilvallyGladion2, SilvallyGladion3, SilvallyGladion4, SilvallyGladion2Hints, SilvallyGladion3Hints],
     }
 );
-TownList['Exeggutor Island Hill'] = new DungeonTown(
-    'Exeggutor Island Hill',
+TownList['Exeggutor Island'] = new DungeonTown(
+    'Exeggutor Island',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
     [new QuestLineStepCompletedRequirement('Emissary of Light', 1)],
-    [ExeggutorIslandHillShop, TemporaryBattleList['Exeggutor Tree']],
+    [ExeggutorIslandShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Exeggutor Island']), ExeggutorIslandHillShop, TemporaryBattleList['Exeggutor Tree']],
     {npcs: [LillieExeggutorIsland, HapuSilvally1]}
 );
 TownList['Vast Poni Canyon'] = new DungeonTown(
@@ -9357,15 +9357,6 @@ TownList.Postwick = new Town(
         npcs: [PostwickMum, MagearnaMysteryGift],
     }
 );
-TownList['Slumbering Weald'] = new Town(
-    'Slumbering Weald',
-    GameConstants.Region.galar,
-    GameConstants.GalarSubRegions.SouthGalar,
-    [new MoveToDungeon(dungeonList['Slumbering Weald Shrine']), TemporaryBattleList.Mirages],
-    {
-        requirements: [new TemporaryBattleRequirement('Hop 1')],
-    }
-);
 TownList.Wedgehurst = new Town(
     'Wedgehurst',
     GameConstants.Region.galar,
@@ -9541,14 +9532,17 @@ TownList.Freezington = new Town(
 
 
 //Galar Dungeons
-TownList['Slumbering Weald Shrine'] = new DungeonTown(
-    'Slumbering Weald Shrine',
+TownList['Slumbering Weald'] = new DungeonTown(
+    'Slumbering Weald',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.SouthGalar,
-    [new QuestLineStepCompletedRequirement('The Darkest Day', 12)],
-    [TemporaryBattleList['Hop 8'], TemporaryBattleList['Sordward 1'], TemporaryBattleList['Shielbert 1']],
+    [new TemporaryBattleRequirement('Hop 1')],
+    [TemporaryBattleList.Mirages, TemporaryBattleList['Hop 8'], TemporaryBattleList['Sordward 1'], TemporaryBattleList['Shielbert 1']],
     {
         npcs: [SlumberingHop1, SlumberingHop2, SordwardShielbert1],
+        dynamicImages: [
+            { requirement: new QuestLineStepCompletedRequirement('The Darkest Day', 13, GameConstants.AchievementOption.less), imageString: 'Slumbering Weald Entrance' },
+        ],
     }
 );
 TownList['Galar Mine'] = new DungeonTown(

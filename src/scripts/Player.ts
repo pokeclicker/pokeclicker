@@ -55,7 +55,12 @@ class Player implements TmpPlayerType {
             this.route = GameConstants.StartingRoutes[this.region];
         }
         // Return player to last town or starter town if their town no longer exist for whatever reason
-        this._townName = TownList[savedPlayer._townName] ? savedPlayer._townName : GameConstants.StartingTowns[this.region];
+        if (TownList[savedPlayer._townName]) {
+            this._townName = savedPlayer._townName;
+        } else {
+            this._townName = GameConstants.StartingTowns[this.region];
+            this._subregion = ko.observable(TownList[this._townName].subRegion);
+        }
         this._town = ko.observable(TownList[this._townName]);
         this._town.subscribe(value => this._townName = value.name);
 

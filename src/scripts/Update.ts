@@ -2972,6 +2972,31 @@ class Update implements Saveable {
                 saveData.farming.berryInventory = savedBerries;
                 delete saveData.farming.berryList;
             }
+
+            // Update DefeatDungeonQuest for renamed Dungeons
+            saveData.quests.questList = saveData.quests.questList?.map(q => {
+                if (q.name === 'DefeatDungeonQuest') {
+                    if (q.data[2] == 'Phenac City Battles') {
+                        q.data[2] = 'Phenac City';
+                    }
+                    if (q.data[2] == 'Pyrite Town Battles') {
+                        q.data[2] = 'Pyrite Town';
+                    }
+                    if (q.data[2] == 'Realgam Tower Battles') {
+                        q.data[2] = 'Realgam Tower';
+                    }
+                    if (q.data[2] == 'Gateon Port Battles') {
+                        q.data[2] = 'Gateon Port';
+                    }
+                    if (q.data[2] == 'Exeggutor Island Hill') {
+                        q.data[2] = 'Exeggutor Island';
+                    }
+                    if (q.data[2] == 'Slumbering Weald Shrine') {
+                        q.data[2] = 'Slumbering Weald';
+                    }
+                }
+                return q;
+            }) || [];
         },
     };
 
