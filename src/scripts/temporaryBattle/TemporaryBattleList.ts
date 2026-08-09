@@ -6626,7 +6626,6 @@ TemporaryBattleList['Eternamax Eternatus'] = new TemporaryBattle(
     }
 );
 
-
 // Hisui Temporary Battles
 TemporaryBattleList['Volo 1'] = new TemporaryBattle(
     'Volo 1',

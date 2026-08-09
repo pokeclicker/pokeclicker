@@ -10,7 +10,7 @@ import GameHelper from '../GameHelper';
 import * as PokemonHelper from '../pokemons/PokemonHelper';
 
 export default class Profile implements Saveable {
-    public static MAX_TRAINER = 163;
+    public static MAX_TRAINER = 165;
     public static MAX_BACKGROUND = 40;
 
     saveKey = 'profile';

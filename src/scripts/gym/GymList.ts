@@ -2211,6 +2211,83 @@ GymList['Elite Trainer Peony'] = new Gym(
     { imageName: 'Peony Elite' }
 );
 
+// Lental Gyms
+GymList['Florio Island Illumina Meganium'] = new Gym(
+    'Illumina Meganium',
+    'Florio Island Illumina Meganium',
+    [new GymPokemon('Illumina Meganium', 1426351903, 60)],
+    BadgeEnums.Florio_Crystabloom,
+    42500,
+    '<b><i>You followed the Meganium deep inside the Florio Island Illumina Spot.</i></b>',
+    [],
+    undefined,
+    undefined,
+    { imageName: 'specialNPCs/Transparent', displayName: 'Illumina Meganium' }
+);
+GymList['Belusylva Island Illumina Milotic'] = new Gym(
+    'Illumina Milotic',
+    'Belusylva Island Illumina Milotic',
+    [new GymPokemon('Illumina Milotic', 1431351903, 60)],
+    BadgeEnums.Belusylva_Crystabloom,
+    43500,
+    '<b><i>You followed the Milotic deep inside the Belusylva Island Illumina Spot.</i></b>',
+    [],
+    undefined,
+    undefined,
+    { imageName: 'specialNPCs/Transparent', displayName: 'Illumina Milotic' }
+);
+GymList['Maricopia Islands Illumina Wishiwashi'] = new Gym(
+    'Illumina Wishiwashi',
+    'Maricopia Islands Illumina Wishiwashi',
+    [new GymPokemon('Illumina Wishiwashi', 1436351903, 60)],
+    BadgeEnums.Maricopia_Crystabloom,
+    44500,
+    '<b><i>You followed the Wishiwashi deep inside the Maricopia Islands Illumina Spot.</i></b>',
+    [],
+    undefined,
+    undefined,
+    { imageName: 'specialNPCs/Transparent', displayName: 'Illumina Wishiwashi' }
+);
+GymList['Voluca Island Illumina Volcarona'] = new Gym(
+    'Illumina Volcarona',
+    'Voluca Island Illumina Volcarona',
+    [
+        new GymPokemon('Illumina Volcarona', 720675951, 70),
+        new GymPokemon('Illumina Volcarona', 720675951, 70),
+    ],
+    BadgeEnums.Voluca_Crystabloom,
+    91000,
+    '<b><i>You followed the Volcarona deep inside the Voluca Island Illumina Spot.</i></b>',
+    [],
+    undefined,
+    undefined,
+    { imageName: 'specialNPCs/Transparent', displayName: 'Illumina Volcarona' }
+);
+GymList['Durice Island Illumina Steelix'] = new Gym(
+    'Illumina Steelix',
+    'Durice Island Illumina Steelix',
+    [new GymPokemon('Illumina Steelix', 1446351903, 60)],
+    BadgeEnums.Durice_Crystabloom,
+    46500,
+    '<b><i>You followed the Steelix deep inside the Durice Island Illumina Spot.</i></b>',
+    [],
+    undefined,
+    undefined,
+    { imageName: 'specialNPCs/Transparent', displayName: 'Illumina Steelix' }
+);
+GymList['Aurus Island Illumina Xerneas'] = new Gym(
+    'Illumina Xerneas',
+    'Aurus Island Illumina Xerneas',
+    [new GymPokemon('Illumina Xerneas', 1471351903, 80)],
+    BadgeEnums.Aurus_Crystabloom,
+    47500,
+    '<b><i>You followed the Xerneas deep inside the Aurus Island Illumina Spot.</i></b>',
+    [],
+    undefined,
+    undefined,
+    { imageName: 'specialNPCs/Transparent', displayName: 'Illumina Xerneas' }
+);
+
 // Hisui Gyms
 
 GymList['Grandtree Arena'] = new Gym(

@@ -3,6 +3,7 @@ import {
     AchievementType,
     Region,
     ROUTE_KILLS_NEEDED,
+    GalarSubRegions,
 } from '../GameConstants';
 import Routes from '../routes/Routes';
 import AchievementRequirement from './AchievementRequirement';
@@ -23,8 +24,9 @@ export default class RouteKillRequirement extends AchievementRequirement {
     }
 
     public hint(): string {
+        const route = Routes.getRoute(this.region, this.route);
         if (this.requiredValue !== ROUTE_KILLS_NEEDED) {
-            return `${this.requiredValue} Pokémon need to be defeated on ${Routes.getName(this.route, this.region, true)}.`;
+            return `${this.requiredValue} Pokémon need to be ${route.region != Region.galar || route.subRegion != GalarSubRegions.Lental ? 'defeated' : 'snapped'} on ${route.routeName}.`;
         }
 
         return `${Routes.getName(this.route, this.region, true)} still needs to be completed.`;

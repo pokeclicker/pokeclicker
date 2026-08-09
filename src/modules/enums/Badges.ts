@@ -143,6 +143,13 @@ enum BadgeEnums {
     'Elite_ArmorChampion',
     // Crown
     'Elite_CrownChampion',
+    // Lental
+    'Florio_Crystabloom',
+    'Belusylva_Crystabloom',
+    'Maricopia_Crystabloom',
+    'Voluca_Crystabloom',
+    'Durice_Crystabloom',
+    'Aurus_Crystabloom',
     // Hisui
     'Noble_Kleavor',
     'Noble_Lilligant',

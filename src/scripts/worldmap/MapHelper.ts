@@ -159,7 +159,8 @@ class MapHelper {
         if (!MapHelper.accessToRoute(route, region)) {
             states.add(areaStatus.locked);
         }
-        if (App.game.statistics.routeKills[region][route]() < GameConstants.ROUTE_KILLS_NEEDED) {
+        if (App.game.statistics.routeKills[region][route]() < GameConstants.ROUTE_KILLS_NEEDED
+            || region == GameConstants.Region.galar && Routes.getRoute(region, route).subRegion == GameConstants.GalarSubRegions.Lental && App.game.statistics.routeKills[region][route]() < GameConstants.ResearchLevel[2]) {
             states.add(areaStatus.incomplete);
         }
         if (RouteHelper.isThereQuestAtLocation(route, region)) {

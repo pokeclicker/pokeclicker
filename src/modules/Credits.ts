@@ -617,6 +617,16 @@ export const SpriteCredits: Credit[] = [
         // Notes: Made specifically for PokéClicker.
     },
     {
+        name: 'Embri',
+        link: 'https://discord.com/users/1065211076611948545',
+        image: 'assets/images/profile/trainer-73.png',
+        resources: [
+            'Jigglypuff (Singing)',
+            'Porygon (Camo)',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'EmmaRoak',
         link: 'https://www.deviantart.com/emmaroak',
         image: 'https://a.deviantart.net/avatars-big/e/m/emmaroak.png',
@@ -632,6 +642,15 @@ export const SpriteCredits: Credit[] = [
             'Wartortle (clone)',
         ],
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
+    },
+    {
+        name: 'errorundercover',
+        link: 'https://discord.com/users/229565367993761792',
+        image: 'assets/images/profile/trainer-17.png',
+        resources: [
+            'Illumina Pokémon',
+        ],
+        // Notes: Made specifically for PokéClicker.
     },
     {
         name: 'Ezerart',
@@ -865,6 +884,12 @@ export const SpriteCredits: Credit[] = [
             'Turo',
             'Tyme',
             'Worker (female)',
+            'Professor Mirror',
+            'Rita',
+            'Todd Snap (64 and New)',
+            'Phil',
+            'Captain Vince',
+            'Snap Protagonist (male and female)',
         ],
         // Notes: Permission given on image page if credited.
     },
@@ -1255,6 +1280,7 @@ export const SpriteCredits: Credit[] = [
             'Gengar (Punk)',
             'Tangela (Pom-pom)',
             'Goldeen (Diva)',
+            'Lental Map',
         ],
         // NOTES: Made specifically for Pokeclicker.
     },
@@ -1305,6 +1331,15 @@ export const SpriteCredits: Credit[] = [
             'Glacia revamp',
         ],
         // Notes: Permission if credited.
+    },
+    {
+        name: 'Wergan',
+        link: 'https://www.deviantart.com/wergan',
+        image: 'https://a.deviantart.net/avatars-big/w/e/wergan.png?14',
+        resources: [
+            'New Pokemon Snap player character overworlds',
+        ],
+        // Notes: Permission given on image page if credited.
     },
     {
         name: 'Wolfang62',

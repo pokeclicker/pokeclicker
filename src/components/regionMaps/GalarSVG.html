@@ -3472,4 +3472,217 @@
             })
         %>
     </g>
+    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Lental').id">
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/galar-lental.png?v=$VERSION',
+            href:'assets/images/galar-lental.png?v=$VERSION'
+        }"></image>
+
+        <!-- ------ -->
+        <!-- ROUTES -->
+        <!-- ------ -->
+
+        <!--Nature Park-->
+        <%- include('templates/mapRoute',
+            { route: 56, region: 7
+            , width: 5, height: 5
+            , x: 2, y: 29, name: "NP"
+            })
+        %>
+
+        <!--Founja Jungle-->
+        <%- include('templates/mapRoute',
+            { route: 57, region: 7
+            , width: 5, height: 5
+            , x: 17, y: 29, name: "FJ"
+            })
+        %>
+
+        <!--Blushing Beach-->
+        <%- include('templates/mapRoute',
+            { route: 58, region: 7
+            , width: 5, height: 5
+            , x: 32, y: 29, name: "BB"
+            })
+        %>
+
+        <!--Sweltering Sands-->
+        <%- include('templates/mapRoute',
+            { route: 59, region: 7
+            , width: 5, height: 5
+            , x: 47, y: 29, name: "SS"
+            })
+        %>
+
+        <!--Side Path-->
+        <%- include('templates/mapRoute',
+            { route: 60, region: 7
+            , width: 5, height: 5
+            , x: 2, y: 34, name: "SP"
+            })
+        %>
+
+        <!--Fireflow Volcano-->
+        <%- include('templates/mapRoute',
+            { route: 61, region: 7
+            , width: 5, height: 5
+            , x: 47, y: 34, name: "FV"
+            })
+        %>
+
+        <!--Elsewhere Forest-->
+        <%- include('templates/mapRoute',
+            { route: 62, region: 7
+            , width: 5, height: 5
+            , x: 17, y: 34, name: "EF"
+            })
+        %>
+
+        <!--Maricopia Reef-->
+        <%- include('templates/mapRoute',
+            { route: 63, region: 7
+            , width: 5, height: 5
+            , x: 32, y: 34, name: "MR"
+            })
+        %>
+
+        <!--Lental Seafloor-->
+        <%- include('templates/mapRoute',
+            { route: 64, region: 7
+            , width: 5, height: 5
+            , x: 32, y: 39, name: "LS"
+            })
+        %>
+
+        <!--Research Camp-->
+        <%- include('templates/mapRoute',
+            { route: 65, region: 7
+            , width: 5, height: 5
+            , x: 2, y: 39, name: "RC"
+            })
+        %>
+
+        <!--Shiver Snowfields-->
+        <%- include('templates/mapRoute',
+            { route: 66, region: 7
+            , width: 5, height: 5
+            , x: 62, y: 29, name: "SS"
+            })
+        %>
+
+        <!--Outaway Cave-->
+        <%- include('templates/mapRoute',
+            { route: 67, region: 7
+            , width: 5, height: 5
+            , x: 62, y: 34, name: "OC"
+            })
+        %>
+
+        <!--Ruins of Remembrance-->
+        <%- include('templates/mapRoute',
+            { route: 68, region: 7
+            , width: 5, height: 5
+            , x: 77, y: 29, name: "RoR"
+            })
+        %>
+
+        <!--Mightywide River-->
+        <%- include('templates/mapRoute',
+            { route: 69, region: 7
+            , width: 5, height: 5
+            , x: 17, y: 39, name: "MR"
+            })
+        %>
+
+        <!--Barren Badlands-->
+        <%- include('templates/mapRoute',
+            { route: 70, region: 7
+            , width: 5, height: 5
+            , x: 47, y: 39, name: "BB"
+            })
+        %>
+
+        <!-- ----- -->
+        <!-- TOWNS -->
+        <!-- ----- -->
+
+        <!--Laboratory of Ecology and Natural Sciences-->
+        <%- include('templates/mapTown',
+            { name: "Laboratory of Ecology and Natural Sciences"
+            , x: 0, y: 50
+            , width: 100, height: 10
+            })
+        %>
+
+        <!-- -------- -->
+        <!-- DUNGEONS -->
+        <!-- -------- -->
+
+        <!--Florio Island Illumina Spot-->
+        <%- include('templates/mapDungeon',
+            { name: "Florio Island Illumina Spot"
+            , x: 0, y: 20
+            , width: 9, height: 9
+            })
+        %>
+
+        <!--Belusylva Island Illumina Spot-->
+        <%- include('templates/mapDungeon',
+            { name: "Belusylva Island Illumina Spot"
+            , x: 15, y: 20
+            , width: 9, height: 9
+            })
+        %>
+
+        <!--Maricopia Islands Illumina Spot-->
+        <%- include('templates/mapDungeon',
+            { name: "Maricopia Islands Illumina Spot"
+            , x: 30, y: 20
+            , width: 9, height: 9
+            })
+        %>
+
+        <!--Voluca Island Illumina Spot-->
+        <%- include('templates/mapDungeon',
+            { name: "Voluca Island Illumina Spot"
+            , x: 45, y: 20
+            , width: 9, height: 9
+            })
+        %>
+
+        <!--Durice Island Illumina Spot-->
+        <%- include('templates/mapDungeon',
+            { name: "Durice Island Illumina Spot"
+            , x: 60, y: 20
+            , width: 9, height: 9
+            })
+        %>
+
+        <!--Aurus Island Illumina Spot-->
+        <%- include('templates/mapDungeon',
+            { name: "Aurus Island Illumina Spot"
+            , x: 75, y: 20
+            , width: 9, height: 9
+            })
+        %>
+
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+        <%- include('templates/mapPOI',
+            { name: "Dock"
+            , x: 26, y: 15
+            , width: 3, height: 2
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Laboratory of Ecology and Natural Sciences') }"
+            })
+        %>
+
+        <%- include('templates/mapPOI',
+            { name: "S. S. Anne"
+            , x: 21, y: 12
+            , width: 8, height: 3
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Laboratory of Ecology and Natural Sciences') }"
+            })
+        %>
+    </g>
 </g>

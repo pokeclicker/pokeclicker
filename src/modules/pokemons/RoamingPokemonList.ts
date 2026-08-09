@@ -2,7 +2,7 @@ import { Observable } from 'knockout';
 import BadgeEnums from '../enums/Badges';
 import {
     KantoSubRegions, JohtoSubRegions, HoennSubRegions, SinnohSubRegions, UnovaSubRegions, KalosSubRegions, AlolaSubRegions, GalarSubRegions, HisuiSubRegions, PaldeaSubRegions, SubRegions, Region,
-    getDungeonIndex, Starter,
+    getDungeonIndex, Starter, FluteItemType,
 } from '../GameConstants';
 import GameHelper from '../GameHelper';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
@@ -25,6 +25,8 @@ import MoonCyclePhase from '../moonCycle/MoonCyclePhase';
 import StatisticRequirement from '../requirements/StatisticRequirement';
 import { getPokemonByName } from './PokemonHelper';
 import OneFromManyRequirement from '../requirements/OneFromManyRequirement';
+import CustomRequirement from '../requirements/CustomRequirement';
+import EffectEngineRunner from '../effectEngine/effectEngineRunner';
 
 export default class RoamingPokemonList {
     public static roamerGroups: RoamingGroup[][] = [
@@ -35,7 +37,7 @@ export default class RoamingPokemonList {
         [new RoamingGroup('Unova', [UnovaSubRegions.Unova])],
         [new RoamingGroup('Kalos', [KalosSubRegions.Kalos])],
         [new RoamingGroup('Alola', [AlolaSubRegions.MelemeleIsland, AlolaSubRegions.AkalaIsland, AlolaSubRegions.UlaulaIsland, AlolaSubRegions.PoniIsland]), new RoamingGroup('Alola - Magikarp Jump', [AlolaSubRegions.MagikarpJump])],
-        [new RoamingGroup('Galar - South', [GalarSubRegions.SouthGalar]), new RoamingGroup('Galar - North', [GalarSubRegions.NorthGalar]), new RoamingGroup('Galar - Isle of Armor', [GalarSubRegions.IsleofArmor]), new RoamingGroup('Galar - Crown Tundra', [GalarSubRegions.CrownTundra])],
+        [new RoamingGroup('Galar - South', [GalarSubRegions.SouthGalar]), new RoamingGroup('Galar - North', [GalarSubRegions.NorthGalar]), new RoamingGroup('Galar - Isle of Armor', [GalarSubRegions.IsleofArmor]), new RoamingGroup('Galar - Crown Tundra', [GalarSubRegions.CrownTundra]), new RoamingGroup('Galar - Lental', [GalarSubRegions.Lental])],
         [new RoamingGroup('Hisui', [HisuiSubRegions.Hisui])],
         [new RoamingGroup('Paldea', [PaldeaSubRegions.Paldea]), new RoamingGroup('Paldea - Kitakami', [PaldeaSubRegions.Kitakami]), new RoamingGroup('Paldea - Blueberry Academy', [PaldeaSubRegions.BlueberryAcademy])],
     ];
@@ -160,6 +162,17 @@ RoamingPokemonList.add(Region.galar, 2, new RoamingPokemon('Galarian Moltres', n
 RoamingPokemonList.add(Region.galar, 3, new RoamingPokemon('Spectrier', new QuestLineStepCompletedRequirement('The Crown of Galar', 6)));
 RoamingPokemonList.add(Region.galar, 3, new RoamingPokemon('Glastrier', new QuestLineStepCompletedRequirement('The Crown of Galar', 6)));
 RoamingPokemonList.add(Region.galar, 3, new RoamingPokemon('Galarian Articuno', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 5)));
+
+// Lental
+// Florio Island
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Porygon (Camo)', new QuestLineCompletedRequirement('New Pokémon Snap')));
+const fluteCheck = () => +(GameHelper.enumStrings(FluteItemType).reduce((c: number, f: string) => c + +EffectEngineRunner.isActive(f)(), 0) == 3);
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Jigglypuff (Singing)', new MultiRequirement([
+    new QuestLineCompletedRequirement('New Pokémon Snap'), new CustomRequirement(ko.pureComputed(fluteCheck), 1, 'Have exactly three active flutes.'),
+])));
+RoamingPokemonList.add(Region.galar, 4, new RoamingPokemon('Jigglypuff', new MultiRequirement([
+    new QuestLineCompletedRequirement('New Pokémon Snap'), new CustomRequirement(ko.pureComputed(fluteCheck), 0, 'Don\'t have exactly three active flutes.'),
+])));
 
 // Hisui
 RoamingPokemonList.add(Region.hisui, 0, new RoamingPokemon('Tornadus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1)));

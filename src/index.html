@@ -250,7 +250,12 @@
                                     <td width="50%">
                                       <knockout data-bind="using: App.game.statistics.routeKills[player.region][player.route]()">
                                           <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
+                                          <!-- ko if: player.region !== GameConstants.Region.galar || player.subregion !== GameConstants.GalarSubRegions.Lental -->
                                           <knockout data-bind="visible: $data < GameConstants.ROUTE_KILLS_NEEDED">/ 10</knockout>
+                                          <!-- /ko -->
+                                          <!-- ko if: player.region == GameConstants.Region.galar && player.subregion == GameConstants.GalarSubRegions.Lental -->
+                                          <knockout data-bind="visible: $data < GameConstants.ResearchLevel[2], text: `/&nbsp;${GameConstants.ResearchLevel[2]}`">/ 1000</knockout>
+                                          <!-- /ko -->
                                           &nbsp;Pokémon defeated
                                       </knockout>
                                     </td>

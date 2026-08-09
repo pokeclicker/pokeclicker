@@ -43,7 +43,7 @@ class SafariPokemon implements PokemonInterface {
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
             });
         }
-        this.baseCatchFactor = data.catchRate * 1 / 6;
+        this.baseCatchFactor = data.catchRate * 1 / 6 + App.game.party.calculateCatchRateBonus(App.game.party.getPokemonByName(name));
         this.baseEscapeFactor = 30;
         this._angry = ko.observable(0);
         this._eating = ko.observable(0);

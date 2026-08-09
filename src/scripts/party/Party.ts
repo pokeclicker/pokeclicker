@@ -274,6 +274,13 @@ class Party implements Feature, TmpPartyType {
         return Math.floor(EPNum);
     }
 
+    public calculateCatchRateBonus(pokemon: PartyPokemon | undefined): number {
+        if (!pokemon) { // in case pokemon isn't caught yet
+            return 0;
+        }
+        return (pokemon.heldItem() && pokemon.heldItem() instanceof CatchRateBonusHeldItem) ? (pokemon.heldItem() as CatchRateBonusHeldItem).gainedBonus : 0;
+    }
+
     public pokemonAttackObservable: KnockoutComputed<number> = ko.pureComputed(() => {
         return App.game.party.calculatePokemonAttack();
     }).extend({rateLimit: 1000});

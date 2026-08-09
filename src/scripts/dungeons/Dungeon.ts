@@ -13532,6 +13532,169 @@ dungeonList['Max Lair'] = new Dungeon('Max Lair',
     ],
     2500000, 46);
 
+//Lental Dungeons
+
+dungeonList['Florio Island Illumina Spot'] = new Dungeon('Florio Island Illumina Spot',
+    ['Eevee', 'Sylveon', 'Comfey', 'Combee', 'Hoothoot', 'Pikachu', 'Emolga'],
+    {
+        common: [
+            {loot: 'Pecha'},
+            {loot: 'Leppa'},
+            {loot: 'Oran'},
+            {loot: 'Sitrus'},
+            {loot: 'Persim'},
+        ],
+        rare: [
+            {loot: 'Green Shard'},
+            {loot: 'Lime Shard'},
+        ],
+        epic: [{loot: 'Meadow Plate'}],
+        legendary: [
+            {loot: 'Fluffruit'},
+            {loot: 'Shaymin (Land)', requirement: new ObtainedPokemonRequirement('Shaymin (Land)')},
+        ],
+        mythic: [{loot: 'Illumina_Orb'}],
+    },
+    26704124,
+    [
+        new DungeonBossPokemon('Meganium', 135047520, 50, { weight: 3 }),
+        new DungeonBossPokemon('Illumina Meganium', 144430560, 60),
+    ],
+    1800000, 56, undefined,
+    { requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 2) } // after nature park
+);
+dungeonList['Belusylva Island Illumina Spot'] = new Dungeon('Belusylva Island Illumina Spot',
+    ['Magikarp', 'Lotad', 'Bulbasaur', 'Ninetales', 'Serperior', 'Trevenant', 'Espeon', 'Kecleon'],
+    {
+        common: [
+            {loot: 'Cheri'},
+            {loot: 'Chesto'},
+            {loot: 'Rawst'},
+            {loot: 'Aspear'},
+            {loot: 'Razz'},
+        ],
+        rare: [
+            {loot: 'White Shard'},
+            {loot: 'Pink Shard'},
+        ],
+        epic: [{loot: 'Splash Plate'}],
+        legendary: [{loot: 'Fluffruit'}],
+        mythic: [{loot: 'Illumina_Orb'}],
+    },
+    26704124,
+    [
+        new DungeonBossPokemon('Milotic', 135047520, 50, { weight: 3 }),
+        new DungeonBossPokemon('Illumina Milotic', 144430560, 60),
+    ],
+    1840000, 62, undefined,
+    { requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 9) } // after elsewhere forest
+);
+dungeonList['Maricopia Islands Illumina Spot'] = new Dungeon('Maricopia Islands Illumina Spot',
+    ['Wailmer', 'Finneon', 'Luvdisc', 'Wailord'],
+    {
+        common: [
+            {loot: 'Wishiwashi (Solo)', weight: 4},
+            {loot: 'Luvdisc', weight: 1},
+            {loot: 'Finneon', weight: 1},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Cyan Shard'},
+        ],
+        epic: [{loot: 'Splash Plate'}],
+        legendary: [{loot: 'Fluffruit'}],
+        mythic: [{loot: 'Illumina_Orb'}],
+    },
+    26704124,
+    [
+        new DungeonBossPokemon('Wishiwashi (Solo)', 105047520, 40),
+        new DungeonBossPokemon('Wishiwashi (School)', 135047520, 50, { weight: 2 }),
+        new DungeonBossPokemon('Illumina Wishiwashi', 144430560, 60),
+    ],
+    1880000, 64, undefined,
+    { requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 15) } // after lental seafloor
+);
+dungeonList['Voluca Island Illumina Spot'] = new Dungeon('Voluca Island Illumina Spot',
+    ['Monferno', 'Talonflame', 'Archeops'],
+    {
+        common: [
+            {loot: 'Bluk'},
+            {loot: 'Nanab'},
+            {loot: 'Wepear'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Crimson Shard'},
+        ],
+        epic: [
+            {loot: 'Insect Plate'},
+            {loot: 'Flame Plate'},
+        ],
+        legendary: [{loot: 'Fluffruit'}],
+        mythic: [{loot: 'Illumina_Orb'}],
+    },
+    26704124,
+    [
+        new DungeonBossPokemon('Volcarona', 135047520, 60, { weight: 2 }), // evenly weighted because the illumina volcarona are a pair
+        new DungeonBossPokemon('Illumina Volcarona', 144430560, 70, { weight: 2 }), // I also want the wiki to show a weight of 2 for them
+    ],
+    1920000, 65, undefined,
+    { requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 19) } // after fireflow volcano... but thats unlocked much earlier so after the latest possible route unlocked, research camp
+);
+dungeonList['Durice Island Illumina Spot'] = new Dungeon('Durice Island Illumina Spot',
+    ['Noibat', 'Carbink', 'Sableye', 'Joltik', 'Crobat'],
+    {
+        common: [
+            {loot: 'Pinap'},
+            {loot: 'Figy'},
+            {loot: 'Wiki'},
+        ],
+        rare: [
+            {loot: 'Grey Shard'},
+            {loot: 'Brown Shard'},
+        ],
+        epic: [
+            {loot: 'Iron Plate'},
+            {loot: 'Stone Plate'},
+        ],
+        legendary: [{loot: 'Fluffruit'}],
+        mythic: [{loot: 'Illumina_Orb'}],
+    },
+    26704124,
+    [
+        new DungeonBossPokemon('Steelix', 135047520, 50, { weight: 3 }),
+        new DungeonBossPokemon('Illumina Steelix', 144430560, 60),
+    ],
+    1960000, 67, undefined,
+    { requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 24) } // after outaway cave
+);
+dungeonList['Aurus Island Illumina Spot'] = new Dungeon('Aurus Island Illumina Spot',
+    ['Sigilyph', 'Woobat', 'Eldegoss', 'Chandelure', 'Houndoom', 'Absol', 'Noivern', 'Natu', 'Golurk'],
+    {
+        common: [
+            {loot: 'Mago'},
+            {loot: 'Aguav'},
+            {loot: 'Iapapa'},
+        ],
+        rare: [
+            {loot: 'Rose Shard'},
+            {loot: 'Black Shard'},
+        ],
+        epic: [{loot: 'Pixie Plate'}],
+        legendary: [{loot: 'Fluffruit'}],
+        mythic: [{loot: 'Illumina_Orb'}],
+    },
+    28886112,
+    [
+        new DungeonBossPokemon('Xerneas', 144430560, 60, { hide: true, requirement: new ObtainedPokemonRequirement('Xerneas (Active)', true), weight: 3 }), // 3 + 1 when only Normal + Illumina
+        new DungeonBossPokemon('Xerneas', 144430560, 60, { hide: true, requirement: new ObtainedPokemonRequirement('Xerneas (Active)'), weight: 2 }), // 2 + 1 + 1 when Normal + Active + Illumina
+        new DungeonBossPokemon('Xerneas (Active)', 144430560, 60, { hide: true, requirement: new ObtainedPokemonRequirement('Xerneas (Active)') }), // 2 + 1 + 1 when Normal + Active + Illumina
+        new DungeonBossPokemon('Illumina Xerneas', 160924440, 70),
+    ],
+    2000000, 68, undefined,
+    { requirement: new QuestLineStepCompletedRequirement('New Pokémon Snap', 28) } // after ruins of remembrance
+);
+
 //Hisui Dungeons
 
 dungeonList['Floaro Gardens'] = new Dungeon('Floaro Gardens',

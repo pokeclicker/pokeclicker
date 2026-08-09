@@ -240,6 +240,7 @@ class AchievementHandler {
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.sevii], 50, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii123)));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.orre], 75, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre)));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.magikarpJump], 25, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump)));
+        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.lental], 50, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.galar, GameConstants.GalarSubRegions.Lental)));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.events], 25, () => true));
 
         AchievementHandler._achievementCategories = categories;
@@ -512,6 +513,22 @@ class AchievementHandler {
                 if (GymList[gym].requirements.some((req) => req instanceof DevelopmentRequirement)) {
                     return;
                 }
+                if (category == GameConstants.ExtraAchievementCategories.lental) {
+                    const gymTitle = GymList[gym].leaderName;
+                    AchievementHandler.addAchievement(
+                        `${gymTitle} Research Level 1`,
+                        `Defeat ${gymTitle} in ${subregion} ${GameConstants.ResearchLevel[1] / 10} times.`, new ClearGymRequirement(GameConstants.ResearchLevel[1] / 10, GameConstants.getGymIndex(gym)), 0.75, category);
+                    AchievementHandler.addAchievement(
+                        `${gymTitle} Research Level 2`,
+                        `Defeat ${gymTitle} in ${subregion} ${GameConstants.ResearchLevel[2] / 10} times.`, new ClearGymRequirement(GameConstants.ResearchLevel[2] / 10, GameConstants.getGymIndex(gym)), 1.25, category);
+                    AchievementHandler.addAchievement(
+                        `${gymTitle} Research Level 3`,
+                        `Defeat ${gymTitle} in ${subregion} ${GameConstants.ResearchLevel[3] / 10} times.`, new ClearGymRequirement(GameConstants.ResearchLevel[3] / 10, GameConstants.getGymIndex(gym)), 1.75, category);
+                    AchievementHandler.addAchievement(
+                        `${gymTitle} Research Level Max`,
+                        `Defeat ${gymTitle} in ${subregion} ${GameConstants.ResearchLevel[4] / 10} times.`, new ClearGymRequirement(GameConstants.ResearchLevel[4] / 10, GameConstants.getGymIndex(gym)), 2.25, category);
+                    return;
+                }
                 const elite = gym.includes('Elite') || gym.includes('Champion') || gym.includes('Supreme');
                 const displayName = GymList[gym]?.displayName;
 
@@ -544,6 +561,7 @@ class AchievementHandler {
                 }
 
                 let category = region;
+                const routeName = Routes.getName(route.number, region, true);
                 // Split bigger subregions into their own achievement pool
                 if (region == GameConstants.Region.kanto && (route.subRegion == GameConstants.KantoSubRegions.Sevii123 || route.subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
                     category = GameConstants.ExtraAchievementCategories.sevii;
@@ -554,10 +572,17 @@ class AchievementHandler {
                 if (region == GameConstants.Region.alola && route.subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
                     category = GameConstants.ExtraAchievementCategories.magikarpJump;
                 }
-                const routeName = Routes.getName(route.number, region, true);
-                AchievementHandler.addAchievement(`${route.routeName} Traveler`, `Defeat 100 Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[0], region, route.number), 1, category);
-                AchievementHandler.addAchievement(`${route.routeName} Explorer`, `Defeat 1,000 Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[1], region, route.number), 2, category);
-                AchievementHandler.addAchievement(`${route.routeName} Conqueror`, `Defeat 10,000 Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[2], region, route.number), 3, category);
+                if (region == GameConstants.Region.galar && route.subRegion == GameConstants.GalarSubRegions.Lental) {
+                    category = GameConstants.ExtraAchievementCategories.lental;
+                    AchievementHandler.addAchievement(`${route.routeName} Research Level 1`, `Snap ${GameConstants.ResearchLevel[1].toLocaleString('en-US')} Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ResearchLevel[1], region, route.number), 0.75, category);
+                    AchievementHandler.addAchievement(`${route.routeName} Research Level 2`, `Snap ${GameConstants.ResearchLevel[2].toLocaleString('en-US')} Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ResearchLevel[2], region, route.number), 1.25, category);
+                    AchievementHandler.addAchievement(`${route.routeName} Research Level 3`, `Snap ${GameConstants.ResearchLevel[3].toLocaleString('en-US')} Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ResearchLevel[3], region, route.number), 1.75, category);
+                    AchievementHandler.addAchievement(`${route.routeName} Research Level Max`, `Snap ${GameConstants.ResearchLevel[4].toLocaleString('en-US')} Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ResearchLevel[4], region, route.number), 2.25, category);
+                } else {
+                    AchievementHandler.addAchievement(`${route.routeName} Traveler`, `Defeat 100 Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[0], region, route.number), 1, category);
+                    AchievementHandler.addAchievement(`${route.routeName} Explorer`, `Defeat 1,000 Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[1], region, route.number), 2, category);
+                    AchievementHandler.addAchievement(`${route.routeName} Conqueror`, `Defeat 10,000 Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[2], region, route.number), 3, category);
+                }
             });
             // Gyms
             if (GameConstants.RegionGyms[region]) {
@@ -579,10 +604,18 @@ class AchievementHandler {
                 if (region == GameConstants.Region.alola && TownList[dungeon].subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
                     category = GameConstants.ExtraAchievementCategories.magikarpJump;
                 }
-                AchievementHandler.addAchievement(`${dungeon} Explorer`, `Clear ${dungeon} 10 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex(dungeon)), 0.8, category);
-                AchievementHandler.addAchievement(`${dungeon} Expert`, `Clear ${dungeon} 100 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex(dungeon)), 1.2, category);
-                AchievementHandler.addAchievement(`${dungeon} Hermit`, `Clear ${dungeon} 250 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], GameConstants.getDungeonIndex(dungeon)), 1.6, category);
-                AchievementHandler.addAchievement(`${dungeon} Dweller`, `Clear ${dungeon} 500 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[3], GameConstants.getDungeonIndex(dungeon)), 2.4, category);
+                if (region == GameConstants.Region.galar && TownList[dungeon].subRegion == GameConstants.GalarSubRegions.Lental) {
+                    category = GameConstants.ExtraAchievementCategories.lental;
+                    AchievementHandler.addAchievement(`${dungeon} Research Level 1`, `Clear ${dungeon} 10 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex(dungeon)), 0.8, category);
+                    AchievementHandler.addAchievement(`${dungeon} Research Level 2`, `Clear ${dungeon} 100 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex(dungeon)), 1.2, category);
+                    AchievementHandler.addAchievement(`${dungeon} Research Level 3`, `Clear ${dungeon} 250 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], GameConstants.getDungeonIndex(dungeon)), 1.6, category);
+                    AchievementHandler.addAchievement(`${dungeon} Research Level Max`, `Clear ${dungeon} 500 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[3], GameConstants.getDungeonIndex(dungeon)), 2.4, category);
+                } else {
+                    AchievementHandler.addAchievement(`${dungeon} Explorer`, `Clear ${dungeon} 10 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex(dungeon)), 0.8, category);
+                    AchievementHandler.addAchievement(`${dungeon} Expert`, `Clear ${dungeon} 100 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex(dungeon)), 1.2, category);
+                    AchievementHandler.addAchievement(`${dungeon} Hermit`, `Clear ${dungeon} 250 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], GameConstants.getDungeonIndex(dungeon)), 1.6, category);
+                    AchievementHandler.addAchievement(`${dungeon} Dweller`, `Clear ${dungeon} 500 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[3], GameConstants.getDungeonIndex(dungeon)), 2.4, category);
+                }
             });
             // Unique Pokémon
             const amt10 = Math.floor(PokemonHelper.calcUniquePokemonsByRegion(region) * .1);
@@ -639,6 +672,11 @@ class AchievementHandler {
 
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 2], GameConstants.ExtraAchievementCategories.orre, 'Orre');
 
+        addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 3], GameConstants.ExtraAchievementCategories.lental, 'Lental');
+        const illuminaDexFilter = (p: PokemonListData) => p.name.startsWith('Illumina');
+        const illuminaAmount = pokemonList.reduce((count, p) => count + +(p.name.startsWith('Illumina ')), 0); // I doubt more will be added in the future, but just in case
+        AchievementHandler.addAchievement('They Glow Now? They Glow Now!', 'Catch all unique Illumina Pokémon.', new CaughtUniquePokemonByFilterRequirement(illuminaDexFilter, 'Catch all unique Illumina Pokémon.', illuminaAmount), 1, GameConstants.ExtraAchievementCategories.lental);
+        AchievementHandler.addAchievement('Radiant Radiance', 'Catch all unique Shiny Illumina Pokémon.', new CaughtUniquePokemonByFilterRequirement(illuminaDexFilter, 'Catch all unique Shiny Illumina Pokémon.', illuminaAmount, true), 2, GameConstants.ExtraAchievementCategories.lental);
 
         /*
          * EVENTS
