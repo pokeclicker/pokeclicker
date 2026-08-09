@@ -82,7 +82,16 @@ export const pokeballFilterOptions = {
             isCaughtShiny ? 'already ' : 'not yet '
         }caught`,
     ),
-
+    fished: new PokeballFilterOption<boolean>(
+        (bool = true) => new BooleanSetting(
+            'pokeballFilterFished',
+            'Fished',
+            bool,
+        ),
+        (isFished) => `Are ${
+            isFished ? '' : 'not '
+        }fished up`,
+    ),
     caughtShadow: new PokeballFilterOption<boolean>(
         (bool = true) => new BooleanSetting(
             'pokeballFilterCaughtShadow',

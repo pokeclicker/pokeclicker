@@ -16,6 +16,7 @@ import MegaEvolveRequirement from '../requirements/MegaEvolveRequirement';
 import type MegaStoneItem from '../items/MegaStoneItem';
 import { ItemList } from '../items/ItemList';
 import Settings from '../settings/Settings';
+import * as EvoHelper from './EvoHelpers';
 import type { TmpPartyPokemonType } from '../TemporaryScriptTypes';
 
 // TODO remove when Dungeon is ported to modules
@@ -132,6 +133,10 @@ export function displayNameObservable(englishName: string): PureComputed<string>
     return App.translation.get(englishName, 'pokemon');
 }
 
+export function getEvolutionDepth(englishName: string): number {
+    return EvoHelper.getEvolutionDepth(this.getPokemonByName(englishName).id);
+}
+
 export function matchPokemonByNames(pattern: RegExp, pokemonName: PokemonNameType, pokemon?: TmpPartyPokemonType) {
     const partyName = (pokemon || App.game.party.getPokemonByName(pokemonName))?.displayName;
     return pattern.test(displayName(pokemonName)) || pattern.test(pokemonName) || (partyName && pattern.test(partyName));
@@ -174,6 +179,9 @@ export function isGigantamaxForm(pokemonName: PokemonNameType): boolean {
 export const getAllShadowPokemon = ko.pureComputed((): Set<PokemonNameType> => {
     return new Set(Object.values(dungeonList).flatMap(d => d.allShadowPokemon()));
 });
+
+
+
 
 // To have encounter/caught/defeat/hatch statistics in a single place
 export function incrementPokemonStatistics(pokemonId: number, statistic: PokemonStatisticsType, shiny: boolean, gender: BattlePokemonGender, shadow: ShadowStatus) {

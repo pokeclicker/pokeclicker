@@ -105,6 +105,14 @@ class PokemonFactory {
         return tokens;
     }
 
+    public static isPokemonFished(route: number, region: GameConstants.Region, pokemon: PokemonNameType): boolean {
+        const regionRoute = Routes.getRoute(region, route);
+        const hasLandPokemon = regionRoute.pokemon.land.length > 0;
+        const isWaterPokemon = regionRoute.pokemon.water.includes(pokemon);
+
+        return hasLandPokemon && isWaterPokemon;
+    }
+
     /**
      * Calculate if a shiny has spawned.
      * @param chance Base chance, should be from GameConstants.SHINY_CHANCE.*

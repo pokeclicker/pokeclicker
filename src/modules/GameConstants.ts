@@ -488,6 +488,7 @@ export enum Pokeball {
     'Repeatball',
     'Beastball',
     'Moonball',
+    'Netball',
 }
 
 export enum Currency {
