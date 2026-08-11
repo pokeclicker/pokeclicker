@@ -50,12 +50,12 @@ import NullRequirement from '../requirements/NullRequirement';
 import VeteranUnlockRequirement from '../requirements/VeteranUnlockRequirement';
 export const ItemList: { [name: string]: Item } = {};
 
-ItemList.xAttack         = new BattleItem(BattleItemType.xAttack, '+50% Bonus to Pokémon attack for 30 seconds', 600, undefined, 'X Attack', 'pokemonAttack', 1.5);
-ItemList.xClick          = new BattleItem(BattleItemType.xClick, '+50% Bonus to click attack for 30 seconds', 400, undefined, 'X Click', 'clickAttack', 1.5);
-ItemList.Lucky_egg       = new BattleItem(BattleItemType.Lucky_egg, '+50% Bonus to experience gained for 30 seconds', 800, undefined, 'Lucky Egg', 'exp', 1.5);
-ItemList.Token_collector = new BattleItem(BattleItemType.Token_collector, '+50% Bonus to Dungeon Tokens gained for 30 seconds', 1000, undefined, 'Token Collector', 'dungeonToken', 1.5);
-ItemList.Dowsing_machine = new BattleItem(BattleItemType.Dowsing_machine, 'Increases chance for Pokémon to drop rare hold items and chance to multiply loot from dungeon chests, for 30 seconds.', 1500, undefined, 'Dowsing Machine', 'rareItemDropRate', 1.5);
-ItemList.Lucky_incense   = new BattleItem(BattleItemType.Lucky_incense, '+50% Bonus to Pokédollars gained for 30 seconds', 2000, undefined, 'Lucky Incense', 'money', 1.5);
+ItemList.xAttack         = new BattleItem(BattleItemType.xAttack, '$bonus$ Bonus to Pokémon attack for $duration$ seconds', 600, undefined, 'X Attack', 'pokemonAttack', 1.5);
+ItemList.xClick          = new BattleItem(BattleItemType.xClick, '$bonus$ Bonus to click attack for $duration$ seconds', 400, undefined, 'X Click', 'clickAttack', 1.5);
+ItemList.Lucky_egg       = new BattleItem(BattleItemType.Lucky_egg, '$bonus$ Bonus to experience gained for $duration$ seconds', 800, undefined, 'Lucky Egg', 'exp', 1.5);
+ItemList.Token_collector = new BattleItem(BattleItemType.Token_collector, '$bonus$ Bonus to Dungeon Tokens gained for $duration$ seconds', 1000, undefined, 'Token Collector', 'dungeonToken', 1.5);
+ItemList.Dowsing_machine = new BattleItem(BattleItemType.Dowsing_machine, '$bonus$ chance for Pokémon to drop rare hold items and chance to multiply loots from dungeon chests, for $duration$ seconds.', 1500, undefined, 'Dowsing Machine', 'rareItemDropRate', 1.5);
+ItemList.Lucky_incense   = new BattleItem(BattleItemType.Lucky_incense, '+$bonus$ Bonus to Pokédollars gained for $duration$ seconds', 2000, undefined, 'Lucky Incense', 'money', 1.5);
 
 ItemList.ChopleBerry     = new BerryItem(BerryType.Chople, 10000, Currency.farmPoint, BerryType.Spelon);
 ItemList.KebiaBerry      = new BerryItem(BerryType.Kebia, 10000, Currency.farmPoint, BerryType.Pamtre);
@@ -69,6 +69,7 @@ ItemList.LargeRestore    = new EnergyRestore(EnergyRestoreSize.LargeRestore, 200
 ItemList.Dungeon_ticket = new BuyKeyItem(KeyItemType.Dungeon_ticket, 100, undefined, undefined, 'Dungeon Ticket');
 ItemList.Explorer_kit = new BuyKeyItem(KeyItemType.Explorer_kit, 5000, undefined, undefined, 'Explorer Kit');
 ItemList.Event_calendar = new BuyKeyItem(KeyItemType.Event_calendar, 100000, undefined, undefined, 'Event Calendar');
+ItemList.Wonder_Launcher = new BuyKeyItem(KeyItemType.Wonder_Launcher, 100000, Currency.diamond, undefined, 'Wonder Launcher');
 
 ItemList.Squirtbottle = new BuyOakItem(OakItemType.Squirtbottle, 5000, Currency.farmPoint);
 ItemList.Sprinklotad = new BuyOakItem(OakItemType.Sprinklotad, 10000, Currency.farmPoint);

@@ -16,6 +16,7 @@ enum KeyItemType {
     'DNA_splicers',
     'Reins_of_unity',
     'Pokerus_virus',
+    'Wonder_Launcher',
     'Z-Power_Ring',
 }
 

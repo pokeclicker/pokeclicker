@@ -188,6 +188,7 @@ export type TmpPlayerType = {
     _lastSeen: number;
     effectList: Record<string, KnockoutObservable<number>>;
     effectTimer: Record<string, KnockoutObservable<string>>;
+    effectSpeedIndex: number;
     highestRegion: KnockoutObservable<GameConstants.Region>;
     highestSubRegion: KnockoutObservable<number>;
     amountOfItem: (itemName: string) => number;

@@ -28,6 +28,7 @@ class Player implements TmpPlayerType {
     public subregionObject: KnockoutObservable<SubRegion>;
     public trainerId: string;
     private _createdTime: number;
+    private _effectSpeedIndex: KnockoutObservable<number>;
 
     constructor(savedPlayer?) {
         const saved: boolean = (savedPlayer != null);
@@ -86,6 +87,7 @@ class Player implements TmpPlayerType {
 
         this.trainerId = savedPlayer.trainerId || Rand.intBetween(0, 999999).toString().padStart(6, '0');
         this._createdTime = savedPlayer._createdTime ?? Date.now();
+        this._effectSpeedIndex = ko.observable(savedPlayer._effectSpeedIndex || 0);
     }
 
     private _itemList: { [name: string]: KnockoutObservable<number> };
@@ -214,6 +216,14 @@ class Player implements TmpPlayerType {
         return this._createdTime;
     }
 
+    get effectSpeedIndex(): number {
+        return this._effectSpeedIndex();
+    }
+
+    set effectSpeedIndex(index: number) {
+        this._effectSpeedIndex(index);
+    }
+
     public toJSON() {
         const keep = [
             '_route',
@@ -231,6 +241,7 @@ class Player implements TmpPlayerType {
             'regionStarters',
             'trainerId',
             '_createdTime',
+            '_effectSpeedIndex',
         ];
         const plainJS = ko.toJS(this);
         Object.entries(plainJS._itemMultipliers).forEach(([key, value]) => {

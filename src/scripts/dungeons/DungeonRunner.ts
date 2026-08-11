@@ -173,10 +173,8 @@ class DungeonRunner {
         }[tier];
 
         // Decreasing chance for rarer items (41.7% → 8.3%), ×150% with Dowsing Machine on
-        let moreItemsChance = 0.5 / (4 / (tierWeight + 1)) / 1.5;
-        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Dowsing_machine)()) {
-            moreItemsChance *= 1.5;
-        }
+        let moreItemsChance = 0.5 / (4 / (tierWeight + 1));
+        moreItemsChance = moreItemsChance / (ItemList.Dowsing_machine as BattleItem).multiplyBy * EffectEngineRunner.getExtraLootChanceMultiplier();
         if (Rand.chance(moreItemsChance)) {
             // Gain more items in higher regions
             const region = DungeonRunner.dungeon.difficulty;

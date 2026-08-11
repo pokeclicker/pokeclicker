@@ -4,6 +4,18 @@
       <span>Battle Items</span>
     </div>
     <button type="button" class="btn btn-sm btn-primary"
+            style="position: absolute; left: 0px; top: 0px; width: 41px; height: 41px;"
+            data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Wonder_Launcher)"
+            onclick="EffectEngineRunner.incrementEffectSpeed()"
+            oncontextmenu="EffectEngineRunner.decrementEffectSpeed(); return false"
+            title="Controls"
+            data-toggle="popover"
+            data-content="Left/right click to cycle speed<br/>Trade duration for greater bonuses"
+            data-html="true"
+            data-placement="right"
+            data-trigger="hover"><img src="" data-bind="attr: { src: `assets/images/items/Wonder_Speed${EffectEngineRunner.getItemSpeedCost()}.png` }">
+    </button>
+    <button type="button" class="btn btn-sm btn-primary"
             style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
             data-bind="text: EffectEngineRunner.multipliers[EffectEngineRunner.multIndex()]"
             onclick="EffectEngineRunner.incrementMultiplier()"
@@ -31,15 +43,15 @@
                                 disabled: !player.itemList[$data]()
                             },
                             css: {
-                                'bg-primary': EffectEngineRunner.getEffect($data) > 5,
-                                'bg-warning': EffectEngineRunner.getEffect($data) <= 5 && EffectEngineRunner.getEffect($data) > 0,
+                                'bg-primary': !EffectEngineRunner.getEffectRunningOut($data),
+                                'bg-warning': EffectEngineRunner.isActive($data)() && EffectEngineRunner.getEffectRunningOut($data),
                                 'bg-secondary': !EffectEngineRunner.isActive($data)()
                             },
                             event: {
                                 click: function(){ItemHandler.useItem($data, EffectEngineRunner.amountToUse())}
                             },
                             tooltip: {
-                              title: '<strong>' + ItemList[$data].displayName + '</strong>' + '<br/>' + ItemList[$data].description,
+                              title: '<strong>' + ItemList[$data].displayName + '</strong>' + '<br/>' + EffectEngineRunner.getDescription($data),
                               trigger: 'hover',
                               animation: false,
                               placement: $(window).innerWidth() < 768 ? 'bottom' : 'left',
@@ -52,7 +64,7 @@
             <tr data-bind="foreach: $data">
                 <td class="text-light p-0">
               <!-- ko if: EffectEngineRunner.getEffect($data) > 0 -->
-                <code data-bind="text: player.effectTimer[$data](),tooltip: {title:GameConstants.formatSecondsToTime(player.effectList[$data]()),trigger:'hover',animation:false,placement:'bottom',html:true}"></code>
+                <code data-bind="text: player.effectTimer[$data](), tooltip: { title: EffectEngineRunner.getEffectFullTime($data), trigger: 'hover', animation: false , placement: 'bottom', html: true }"></code>
               <!-- /ko -->
                 </td>
             </tr>

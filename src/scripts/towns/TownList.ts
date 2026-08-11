@@ -5090,6 +5090,7 @@ const FloccesyTownShop = new Shop([
     ItemList.Mystery_egg,
     ItemList.Wonder_Chest,
     ItemList.Miracle_Chest,
+    ItemList.Wonder_Launcher,
 ]);
 const VirbankCityShop = new Shop([
     ItemList.Pokeball,
