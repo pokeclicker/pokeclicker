@@ -4387,7 +4387,7 @@ const SnowpointYoungGirl = new NPC('Young Girl', [
 
 const MindyFriend = new NPC('Mindy\'s Friend', [
     'I recently traded with my friend Mindy expecting to get a Gengar. Instead, her Haunter came with this useless rock! I can\'t believe she would do this to me!',
-    'Here, you can have MINDY\'S-GIFT for all I care! I pity whoever decides to trade with her in the future.',
+    'Here, you can have <b>MINDY\'S-GIFT</b> for all I care! I pity whoever decides to trade with her in the future.',
 ]);
 
 const AcuityUxie = new NPC('Uxie', [
