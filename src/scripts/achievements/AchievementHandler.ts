@@ -632,8 +632,9 @@ class AchievementHandler {
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 1], GameConstants.ExtraAchievementCategories.magikarpJump, 'Magikarp Jump');
         // Magikarp pokédex, highly optional as some forms are End Game farming, so no high bonus
         const magikarpID = pokemonMap.Magikarp.id;
-        const karpDexFilter = (p: PokemonListData) => Math.floor(p.id) === magikarpID;
-        const karpAmount = pokemonList.reduce((count, p) => count + +(Math.floor(p.id) === magikarpID), 0);
+        const piratekarpID = pokemonMap['Magikarp (Pirate)'].id;
+        const karpDexFilter = (p: PokemonListData) => Math.floor(p.id) === magikarpID && p.id !== piratekarpID;
+        const karpAmount = pokemonList.reduce((count, p) => count + +(Math.floor(p.id) === magikarpID && p.id !== piratekarpID), 0);
         AchievementHandler.addAchievement('Do You Even Splash?', 'Catch all unique Magikarp forms.', new CaughtUniquePokemonByFilterRequirement(karpDexFilter, 'Catch all unique Magikarp forms.', karpAmount), 1, GameConstants.ExtraAchievementCategories.magikarpJump);
         AchievementHandler.addAchievement('Twenty Thousands Karps Under the Seas', 'Catch all unique Shiny Magikarp forms.', new CaughtUniquePokemonByFilterRequirement(karpDexFilter, 'Catch all unique Shiny Magikarp forms.', karpAmount, true), 1.5, GameConstants.ExtraAchievementCategories.magikarpJump);
 
@@ -655,6 +656,10 @@ class AchievementHandler {
         AchievementHandler.addAchievement('New Island Expert', 'Clear New Island 100 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex('New Island')), 1.2, GameConstants.ExtraAchievementCategories.events);
         AchievementHandler.addAchievement('New Island Hermit', 'Clear New Island 250 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], GameConstants.getDungeonIndex('New Island')), 1.6, GameConstants.ExtraAchievementCategories.events);
         AchievementHandler.addAchievement('New Island Dweller', 'Clear New Island 500 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[3], GameConstants.getDungeonIndex('New Island')), 2.4, GameConstants.ExtraAchievementCategories.events);
+        AchievementHandler.addAchievement('Pirate Island Explorer', 'Clear Pirate Island 10 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex('Pirate Island')), 0.8, GameConstants.ExtraAchievementCategories.events);
+        AchievementHandler.addAchievement('Pirate Island Expert', 'Clear Pirate Island 100 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex('Pirate Island')), 1.2, GameConstants.ExtraAchievementCategories.events);
+        AchievementHandler.addAchievement('Pirate Island Hermit', 'Clear Pirate Island 250 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], GameConstants.getDungeonIndex('Pirate Island')), 1.6, GameConstants.ExtraAchievementCategories.events);
+        AchievementHandler.addAchievement('Pirate Island Dweller', 'Clear Pirate Island 500 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[3], GameConstants.getDungeonIndex('Pirate Island')), 2.4, GameConstants.ExtraAchievementCategories.events);
         addEventPokemonAchievements('Clone', '\'Mewtwo strikes back!\'', (p: PokemonListData) => p.name.endsWith('(Clone)') && p.name !== 'Deoxys (Clone)' || p.name == 'Armored Mewtwo');
         addEventPokemonAchievements('Spooky', 'Halloween', (p: PokemonListData) => p.name.startsWith('Spooky ') || p.name == 'Pikachu (Gengar)');
         addEventPokemonAchievements('Partner', '\'Let\'s GO!\'', (p: PokemonListData) => p.name.startsWith('Let\'s Go '));
@@ -665,6 +670,8 @@ class AchievementHandler {
         addEventPokemonAchievements('Egghunt', 'Easter', (p: PokemonListData) => ['Pikachu (Easter)', 'Togepi (Flowering Crown)', 'Torchic (Egg)'].includes(p.name));
         addEventPokemonAchievements('Blossom', '\'Golden Week\'', (p: PokemonListData) => p.name.endsWith('(Rose)'));
         addEventPokemonAchievements('Party', '\'Flying Pikachu\'', (p: PokemonListData) => p.name == 'Flying Pikachu' || p.name == 'Red Spearow');
+        addEventPokemonAchievements('Pirate', '\'A Pirate\'s Life\'', (p: PokemonListData) => p.name.includes('Pirate') || p.name.includes('Captain'));
+        AchievementHandler.addAchievement('The Pirate King', 'Collect one Pirate Receipt', new ItemOwnedRequirement('Pirate_receipt', 1), 2, GameConstants.ExtraAchievementCategories.events);
 
         // Secret achievements
         AchievementHandler.addSecretAchievement(

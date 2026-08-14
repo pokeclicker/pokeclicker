@@ -107,7 +107,7 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            BagHandler.gainItem({type: ItemType.item, id: 'Fighting_egg'}, 1);
+            BagHandler.gainItem({ type: ItemType.item, id: 'Fighting_egg' }, 1);
             Notifier.notify({
                 message: 'You were awarded a Fighting Egg for defeating the Fighting Dojo!',
                 type: NotificationConstants.NotificationOption.success,
@@ -251,7 +251,7 @@ TemporaryBattleList['Bill\'s Grandpa'] = new TemporaryBattle(
     'Hahaha, that was one of the best battles I\'ve ever had.',
     [new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 10)],
     undefined,
-    {imageName: 'Bill\'s Grandpa with Eevee'}
+    { imageName: 'Bill\'s Grandpa with Eevee' }
 );
 TemporaryBattleList['Blue 6'] = new TemporaryBattle(
     'Blue 6',
@@ -405,6 +405,29 @@ TemporaryBattleList['Santa Jynx 4'] = new TemporaryBattle(
     }
 );
 
+TemporaryBattleList['Gyarados Crew'] = new TemporaryBattle(
+    'Gyarados Crew',
+    [
+        new GymPokemon('Magikarp (Pirate)', 5511, 1),
+        new GymPokemon('Magikarp (Pirate)', 27555, 5),
+        new GymPokemon('Magikarp (Pirate)', 55110, 10),
+        new GymPokemon('Magikarp (Pirate)', 82665, 15),
+        new GymPokemon('Magikarp (Pirate)', 110220, 20),
+        new GymPokemon('Gyarados (Captain)', 275550, 50),
+    ],
+    'You have beaten us... as promised you can have this Treasure Map.',
+    [new SpecialEventRequirement('A Pirate\'s Life')],
+    undefined,
+    {
+        rewardFunction: () => {
+            QuestLineHelper.rebuildTreasureMapQuestLine().beginQuest();
+        },
+        resetDaily: true,
+        returnTown: 'Gyarados Galleon',
+        finalPokemonImage: 'specialNPCs/Transparent',
+        imageName: '../pokemon/130.02',
+    }
+);
 //Johto Temporary Battles
 TemporaryBattleList['Silver 1'] = new TemporaryBattle(
     'Silver 1',
@@ -714,7 +737,7 @@ TemporaryBattleList['Silver 7'] = new TemporaryBattle(
         displayName: 'Rival Silver',
         imageName: 'Silver',
         rewardFunction: () =>
-            Notifier.notify({message: 'Congratulations on beating Silver at his best! Come back to fight him again at any time.'}),
+            Notifier.notify({ message: 'Congratulations on beating Silver at his best! Come back to fight him again at any time.' }),
     }
 );
 
@@ -733,7 +756,7 @@ TemporaryBattleList.Red = new TemporaryBattle(
     undefined,
     {
         rewardFunction: () => {
-            BagHandler.gainItem({type: ItemType.item, id: 'Light_Ball'}, 1);
+            BagHandler.gainItem({ type: ItemType.item, id: 'Light_Ball' }, 1);
             Notifier.notify({
                 message: 'You were awarded a Light Ball for defeating Red.',
                 type: NotificationConstants.NotificationOption.success,
@@ -937,7 +960,7 @@ TemporaryBattleList['Wally 2'] = new TemporaryBattle(
         displayName: 'Pokémon Trainer Wally',
         imageName: 'Wally',
         rewardFunction: () =>
-            Notifier.notify({message: 'Congratulations on beating Wally at his best! Come back to fight him again at any time.'}),
+            Notifier.notify({ message: 'Congratulations on beating Wally at his best! Come back to fight him again at any time.' }),
     }
 );
 TemporaryBattleList['Clown Jessie & James'] = new TemporaryBattle(
@@ -1144,7 +1167,7 @@ TemporaryBattleList['Miror B. 1'] = new TemporaryBattle(
         imageName: 'Cipher Admin Miror B',
         returnTown: 'Pyrite Town',
         firstTimeRewardFunction: () => {
-            BagHandler.gainItem({type: ItemType.item, id: 'Magnet'}, 1);
+            BagHandler.gainItem({ type: ItemType.item, id: 'Magnet' }, 1);
             Notifier.notify({
                 message: 'You snagged a Magnet from Miror B\'s Voltorb!',
                 type: NotificationConstants.NotificationOption.success,
@@ -1458,7 +1481,7 @@ TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
     'Impressive. Your prowess is notable.',
     [new QuestLineStepCompletedRequirement('A New World', 2)],
     undefined,
-    {imageName: 'Galactic Boss (cyrus)'}
+    { imageName: 'Galactic Boss (cyrus)' }
 );
 TemporaryBattleList['Barry 5'] = new TemporaryBattle(
     'Barry 5',
@@ -1537,7 +1560,7 @@ TemporaryBattleList['Barry 7'] = new TemporaryBattle(
         displayName: 'Pokémon Trainer Barry',
         imageName: 'Barry',
         rewardFunction: () =>
-            Notifier.notify({message: 'Congratulations on beating Barry at his best! Come back to fight him again at any time.'}),
+            Notifier.notify({ message: 'Congratulations on beating Barry at his best! Come back to fight him again at any time.' }),
     }
 );
 
@@ -2242,7 +2265,7 @@ TemporaryBattleList['Hugh 7'] = new TemporaryBattle(
         displayName: 'Pokémon Trainer Hugh',
         imageName: 'Hugh',
         rewardFunction: () =>
-            Notifier.notify({message: 'Congratulations on beating Hugh at his best! Come back to fight him again at any time.'}),
+            Notifier.notify({ message: 'Congratulations on beating Hugh at his best! Come back to fight him again at any time.' }),
     }
 );
 TemporaryBattleList['Terrakion 1'] = new TemporaryBattle(
@@ -2651,7 +2674,7 @@ TemporaryBattleList['Delta Wallace'] = new TemporaryBattle(
         displayName: 'Wallace',
         imageName: 'Wallace',
         firstTimeRewardFunction: () => {
-            BagHandler.gainItem({type: ItemType.item, id: 'Key_stone'}, 1);
+            BagHandler.gainItem({ type: ItemType.item, id: 'Key_stone' }, 1);
             Notifier.notify({
                 message: 'You were awarded a Key Stone from Wallace!',
                 type: NotificationConstants.NotificationOption.success,
@@ -2904,7 +2927,7 @@ TemporaryBattleList['Hoenn Stone Salesman'] = new TemporaryBattle(
                     setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
                 });
             } else {
-                BagHandler.gainItem({type: ItemType.item, id: 'Key_stone'}, 1);
+                BagHandler.gainItem({ type: ItemType.item, id: 'Key_stone' }, 1);
                 Notifier.notify({
                     message: 'You were awarded a Key Stone!',
                     type: NotificationConstants.NotificationOption.success,
@@ -2950,7 +2973,7 @@ TemporaryBattleList['Kalos Stone Salesman'] = new TemporaryBattle(
                     setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
                 });
             } else {
-                BagHandler.gainItem({type: ItemType.item, id: 'Key_stone'}, 1);
+                BagHandler.gainItem({ type: ItemType.item, id: 'Key_stone' }, 1);
                 Notifier.notify({
                     message: 'You were awarded a Key Stone!',
                     type: NotificationConstants.NotificationOption.success,
@@ -3068,7 +3091,7 @@ TemporaryBattleList['Underground Fighting Ring'] = new TemporaryBattle(
     'OK, OK! I get my R from a guy at Clifford Industries, in Goldenrod City.',
     [new QuestLineStepCompletedRequirement('Detective Pikachu', 5)],
     undefined,
-    {imageName: 'Veteran (male)'}
+    { imageName: 'Veteran (male)' }
 );
 TemporaryBattleList['Lab Ambush'] = new TemporaryBattle(
     'Lab Ambush',
@@ -3631,7 +3654,7 @@ TemporaryBattleList['Calem 6'] = new TemporaryBattle(
         imageName: 'Calem',
         firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Absolite),
         rewardFunction: () =>
-            Notifier.notify({message: 'Congratulations on beating Calem at his best! Come back to fight him again at any time.'}),
+            Notifier.notify({ message: 'Congratulations on beating Calem at his best! Come back to fight him again at any time.' }),
     }
 );
 
@@ -4134,7 +4157,7 @@ TemporaryBattleList['Battle Royal'] = new TemporaryBattle(
     'The battle is over!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 6)],
     undefined,
-    {imageName: 'specialNPCs/Battle Royal'}
+    { imageName: 'specialNPCs/Battle Royal' }
 );
 TemporaryBattleList['Plumeria 1'] = new TemporaryBattle(
     'Plumeria 1',
@@ -4157,7 +4180,7 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     undefined, // custom quest message
     [new QuestLineStepCompletedRequirement('Symbiotic Relations', 8)],
     [new QuestLineCompletedRequirement('Symbiotic Relations')], // to work better with 10.20 story quests if already beaten
-    {imageName: 'specialNPCs/Wormhole'}
+    { imageName: 'specialNPCs/Wormhole' }
 );
 TemporaryBattleList['Hau 5'] = new TemporaryBattle(
     'Hau 5',
@@ -4378,7 +4401,7 @@ TemporaryBattleList['Captain Mina'] = new TemporaryBattle(
     'Woah! I\'m shocked at your strength! But you\'ve only just begun my real trial. Now you have to go around to all the captains in Alola!',
     [new DevelopmentRequirement(new QuestLineCompletedRequirement('Island Challenge'))],
     undefined,
-    {imageName: 'Mina'}
+    { imageName: 'Mina' }
 );
 TemporaryBattleList['Captain Ilima'] = new TemporaryBattle(
     'Captain Ilima',
@@ -4390,7 +4413,7 @@ TemporaryBattleList['Captain Ilima'] = new TemporaryBattle(
     'Yes! You have emerged victorious! You and your Pokémon have become quite a delightful team! Off to Lush Jungle? It\'s been a while since I last visited Akala.',
     [new TemporaryBattleRequirement('Captain Mina')],
     undefined,
-    {imageName: 'Ilima'}
+    { imageName: 'Ilima' }
 );
 TemporaryBattleList['Captain Mallow'] = new TemporaryBattle(
     'Captain Mallow',
@@ -4402,7 +4425,7 @@ TemporaryBattleList['Captain Mallow'] = new TemporaryBattle(
     'Sure enough, when it comes to you and Pokémon, the quality of the ingredients shines forth! Once you defeat Lana do you want to go to Wela Volcano Park with two pretty pals like us?',
     [new TemporaryBattleRequirement('Captain Ilima')],
     undefined,
-    {imageName: 'Mallow'}
+    { imageName: 'Mallow' }
 );
 TemporaryBattleList['Captain Lana'] = new TemporaryBattle(
     'Captain Lana',
@@ -4414,7 +4437,7 @@ TemporaryBattleList['Captain Lana'] = new TemporaryBattle(
     'Well! Once again, you certainly reeled me in. Please have a good time with Kiawe.',
     [new TemporaryBattleRequirement('Captain Mallow')],
     undefined,
-    {imageName: 'Lana'}
+    { imageName: 'Lana' }
 );
 TemporaryBattleList['Captain Kiawe'] = new TemporaryBattle(
     'Captain Kiawe',
@@ -4426,7 +4449,7 @@ TemporaryBattleList['Captain Kiawe'] = new TemporaryBattle(
     'Not enough dancing! If you\'re hoping to complete Mina\'s trial, you should make for Hokulani Observatory next. Ula\'Ula is only a stone\'s throw away when Charizard is one of your Ride Pokémon!',
     [new TemporaryBattleRequirement('Captain Lana')],
     undefined,
-    {imageName: 'Kiawe'}
+    { imageName: 'Kiawe' }
 );
 TemporaryBattleList['Captain Sophocles'] = new TemporaryBattle(
     'Captain Sophocles',
@@ -4438,7 +4461,7 @@ TemporaryBattleList['Captain Sophocles'] = new TemporaryBattle(
     'I couldn\'t get it done. Don\'t worry about it, my precious Pokémon... You\'ve gotta finish Mina\'s trial, right? Are you going to Aether House?',
     [new TemporaryBattleRequirement('Captain Kiawe')],
     undefined,
-    {imageName: 'Sophocles'}
+    { imageName: 'Sophocles' }
 );
 TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
     'Kahuna Nanu',
@@ -4450,7 +4473,7 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
     'Heh... You got me good, kid. Hope I don\'t get in trouble with the girl for this. You should go tell that young filly Mina that you\'re done with what she asked you to do.',
     [new TemporaryBattleRequirement('Captain Sophocles')],
     undefined,
-    {imageName: 'Nanu'}
+    { imageName: 'Nanu' }
 );
 TemporaryBattleList['Gladion 3'] = new TemporaryBattle(
     'Gladion 3',
@@ -4681,7 +4704,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 1'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 0, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 0, GameConstants.AchievementOption.less),
     ],
     undefined,
     {
@@ -4700,7 +4723,7 @@ TemporaryBattleList['Rainbow Rocket Grunt 2'] = new TemporaryBattle(
     'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
     [
         new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
-        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 0, GameConstants.AchievementOption.less ),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 0, GameConstants.AchievementOption.less),
     ],
     undefined,
     {
@@ -4827,6 +4850,35 @@ TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 5)]
 );
 
+TemporaryBattleList['Tsareena Crew'] = new TemporaryBattle(
+    'Tsareena Crew',
+    [
+        new GymPokemon('Bounsweet (Pirate)', 91233520, 20),
+        new GymPokemon('Bounsweet (Pirate)', 91233520, 20),
+        new GymPokemon('Steenee (Pirate)', 114041900, 25),
+        new GymPokemon('Steenee (Pirate)', 114041900, 25),
+        new GymPokemon('Steenee (Pirate)', 114041900, 25),
+        new GymPokemon('Tsareena (Captain)', 228083800, 50),
+    ],
+    'You beat us fair and square. Take this reward.',
+    [new SpecialEventRequirement('A Pirate\'s Life')],
+    undefined,
+    {
+        rewardFunction: () => {
+
+            player.gainItem('Pirate_Compass', 1);
+            Notifier.notify({
+                message: 'You were awarded a Pirate Compass!',
+                type: NotificationConstants.NotificationOption.success,
+                image: ItemList.Pirate_Compass.image,
+            });
+        },
+        resetDaily: true,
+        returnTown: 'Tsareena Sloop',
+        finalPokemonImage: 'specialNPCs/Transparent',
+        imageName: '../pokemon/763.01',
+    }
+);
 
 // Magikarp Jump Temp Battles
 TemporaryBattleList['Magikarp Jump Koylee'] = new TemporaryBattle(
@@ -5645,7 +5697,7 @@ TemporaryBattleList['Gym Leader Bede'] = new TemporaryBattle(
     'Thank you for the battle. I can now accept you as the Champion. It\'s painful to admit, but I\'ve come to realise a few of my weaknesses. But I\'ll keep getting stronger. I\'ll reach the pinnacle of what Fairy types can do.',
     [new QuestLineStepCompletedRequirement('Sword and Shield', 9)],
     undefined,
-    {imageName: 'Gym Leader Bede'}
+    { imageName: 'Gym Leader Bede' }
 );
 TemporaryBattleList['Rampaging Gigalith'] = new TemporaryBattle(
     'Rampaging Gigalith',

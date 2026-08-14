@@ -2959,6 +2959,8 @@ class Update implements Saveable {
             if (saveData.badgeCase[17]) {
                 Update.startQuestLine(saveData, 'Team Rocket Again');
             }
+            // Pirate Event dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 138);
 
             saveData.farming?.plotList?.forEach(plot => {
                 if (plot.wanderer) {

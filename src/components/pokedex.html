@@ -253,6 +253,39 @@ aria-labelledby="pokedexModalLabel">
                                         <hr style="border-color:grey;">
                                     </div>
 
+                                    <div class="form-group col-lg-12 col-12 mb-0" style="max-width: 100%; flex-grow: 1">
+                                        <!-- ko let: { pokedexSort: Settings.getSetting('pokedexSort') } -->
+                                        <label for="pokedex-setting-sort" data-bind="text: pokedexSort.displayName">Sort</label>
+                                        <div class="input-group">
+                                            <select id="pokedex-setting-sort" autocomplete="off" class="custom-select"
+                                                data-bind="options: pokedexSort.options,
+                                                    optionsValue: 'value',
+                                                    optionsText: 'text',
+                                                    value: pokedexSort.observableValue">
+                                            </select>
+                                            <div class="input-group-append bg-primary text-light">
+                                                <!-- ko let: { pokedexSortDirection: Settings.getSetting('pokedexSortDirection') } -->
+                                                <label for="pokedex-setting-sort-direction" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;"
+                                                    data-bind="text: pokedexSortDirection.observableValue() ? '⥄' : '⥂',
+                                                        tooltip: {
+                                                            title: pokedexSortDirection.observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)',
+                                                            trigger: 'hover',
+                                                            placement:'top'
+                                                        }">
+                                                    ⥂
+                                                </label>
+                                                <input id="pokedex-setting-sort-direction" style="vertical-align: middle" class="hidden" type='checkbox'
+                                                    data-bind="checked: pokedexSortDirection.observableValue"/>
+                                                <!-- /ko -->
+                                            </div>
+                                        </div>
+                                        <!-- /ko -->
+                                    </div>
+
+                                    <div class="col-12">
+                                        <hr style="border-color:grey;">
+                                    </div>
+
                                     <!-- Category Mode -->
                                     <div class="col-12">
                                         <div class="form-group">

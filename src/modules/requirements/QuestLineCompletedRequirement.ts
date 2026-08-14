@@ -1,17 +1,11 @@
 import { AchievementOption, AchievementType } from '../GameConstants';
 import QuestLineState from '../quests/QuestLineState';
 import { QuestLineNameType } from '../quests/QuestLineNameType';
-import type { TmpQuestType } from '../TemporaryScriptTypes';
-
 import AchievementRequirement from './AchievementRequirement';
 
 export default class QuestLineCompletedRequirement extends AchievementRequirement {
-    cachedQuest: TmpQuestType;
     get quest() {
-        if (!this.cachedQuest) {
-            this.cachedQuest = App.game.quests.getQuestLine(this.questLineName);
-        }
-        return this.cachedQuest;
+        return App.game.quests.getQuestLine(this.questLineName);
     }
 
     constructor(private questLineName: QuestLineNameType, option = AchievementOption.equal) {

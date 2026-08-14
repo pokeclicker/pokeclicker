@@ -11104,6 +11104,74 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
     ],
     750500, 21);
 
+dungeonList['Pirate Island'] = new Dungeon('Pirate Island',
+    [
+
+        {pokemon: 'Magikarp (Pirate)', options: { weight: 0.25 }},
+        new DungeonTrainer('Gyarados (Captain)',
+            [
+                new GymPokemon('Magikarp (Pirate)', 2333333, 10),
+                new GymPokemon('Magikarp (Pirate)', 3500000, 15),
+                new GymPokemon('Magikarp (Pirate)', 4666666, 20),
+            ],
+            { weight: 1 }, ''),
+        new DungeonTrainer('Captain Charizard',
+            [new GymPokemon('Captain Charizard', 5845000, 56)],
+            { weight: 1, hideTrainer: true, hide: true}, ''),
+        new DungeonTrainer('Captain Lucario',
+            [new GymPokemon('Captain Lucario', 5845000, 56)],
+
+            { weight: 1, hideTrainer: true, hide:true}, ''),
+        new DungeonTrainer('Tsareena (Captain)',
+            [
+                new GymPokemon('Bounsweet (Pirate)', 13707428, 20),
+                new GymPokemon('Steenee (Pirate)', 17134285, 25),
+                new GymPokemon('Steenee (Pirate)', 17134285, 25),
+            ],
+            { weight: 1, hide:true, requirement: new MaxRegionRequirement(GameConstants.Region.alola) }, ''),
+        new DungeonTrainer('Cinderace (Captain)',
+            [
+                new GymPokemon('Scorbunny (Pirate)', 22889228, 20),
+                new GymPokemon('Raboot (Pirate)', 28611535, 25),
+                new GymPokemon('Raboot (Pirate)', 28611535, 25),
+            ],
+            { weight: 1, hide:true, requirement: new MaxRegionRequirement(GameConstants.Region.galar)}, ''),
+    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'xClick'},
+            {loot: 'Lucky_egg'},
+            {loot: 'Relic_copper'},
+        ],
+        rare: [
+            {loot: 'Blue_shard'},
+            {loot: 'Black_shard'},
+        ],
+        epic: [
+            {loot: 'Relic_silver', ignoreDebuff: true},
+            {loot: 'Diveball'},
+            {loot: 'Duskball'},
+        ],
+        legendary: [
+            {loot: 'Pirate_Compass', ignoreDebuff: true, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Pirate Island'))},
+            {loot: 'Mystic_Water'},
+            {loot: 'Black_Glasses'},
+        ],
+        mythic: [
+            {loot: 'Captain Hoopa', ignoreDebuff: true},
+            {loot: 'Relic_gold', weight: 2, ignoreDebuff: true},
+        ],
+    },
+    9003000,
+    [
+        new DungeonBossPokemon('Gyarados (Captain)', 79960220, 50),
+        new DungeonBossPokemon('Tsareena (Captain)', 98531680, 50, { hide: true, requirement: new ObtainedPokemonRequirement('Tsareena (Captain)') }),
+        new DungeonBossPokemon('Cinderace (Captain)', 120168558, 50, { hide: true, requirement: new ObtainedPokemonRequirement('Cinderace (Captain)') }),
+        new DungeonBossPokemon('Captain Zacian', 144141988, 50, { hide: true, requirement: new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.galar), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Pirate Island'))])}),
+    ],
+    555000, 21, undefined, { achievement: false});
+
 //Unknown Dungeon? Contains Mewtwo.
 
 // Alola Dungeons
