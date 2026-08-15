@@ -19,4 +19,8 @@ export default class CollectibleItem extends Item {
     isActive(): boolean {
         return this.activeRequirement?.isCompleted() ?? true;
     }
+
+    isSoldOut(): boolean {
+        return player.itemList[this.name]() >= this.maxAmount;
+    }
 }

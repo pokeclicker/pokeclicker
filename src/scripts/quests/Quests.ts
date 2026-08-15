@@ -18,6 +18,7 @@ class Quests implements Saveable {
     public freeRefresh = ko.observable(false);
     public questList: KnockoutObservableArray<Quest> = ko.observableArray();
     public questLines: KnockoutObservableArray<QuestLine> = ko.observableArray();
+    private questLineMap: Map<QuestLineNameType, QuestLine> = new Map();
     public level: KnockoutComputed<number> = ko.pureComputed((): number => {
         return this.xpToLevel(this.xp());
     });
@@ -74,7 +75,22 @@ class Quests implements Saveable {
      * @param name The quest line name
      */
     getQuestLine(name: QuestLineNameType) {
-        return this.questLines().find(ql => ql.name.toLowerCase() == name.toLowerCase());
+        // Map did not work as a pureComputed due to deferUpdates = true, so build it here
+        if (this.questLineMap.size !== this.questLines().length) {
+            this.questLineMap.clear();
+            this.questLines().forEach(ql => this.questLineMap.set(ql.name, ql));
+        }
+        return this.questLineMap.get(name);
+    }
+
+    replaceQuestLine(questLine: QuestLine) {
+        const oldQuestLine = this.getQuestLine(questLine.name);
+        if (!oldQuestLine) {
+            return;
+        }
+        oldQuestLine.dispose();
+        this.questLines.replace(oldQuestLine, questLine);
+        this.questLineMap.set(questLine.name, questLine);
     }
 
     public beginQuest(index: number) {
@@ -366,7 +382,7 @@ class Quests implements Saveable {
 
     fromJSON(json: any) {
         // Generate the questLines (statistics not yet loaded when constructing)
-        QuestLineHelper.loadQuestLines();
+        QuestLineHelper.loadQuestLines(json?.questLines);
 
         if (!json) {
             // Generate the questList
