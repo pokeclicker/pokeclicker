@@ -189,6 +189,12 @@ Settings.add(new Setting<string>('gameDisplayStyle', 'Game display style',
     ],
     'standard3'));
 Settings.add(new BooleanSetting('showMuteButton', 'Show mute/unmute button', true));
+Settings.add(new Setting<string>('playerSafariSprite', 'Player safari sprite',
+    [
+        new SettingOption('Male', 'male'),
+        new SettingOption('Female', 'female'),
+    ],
+    'male'));
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
@@ -385,6 +391,14 @@ Settings.add(new Setting<Region>('breedingRegionalAttackDebuffSetting', 'Regiona
     regionOptionsNoneFirst,
     Region.none, undefined, false));
 
+// Pokedex Sorting
+const pokedexSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+)).filter((opt) => ![SortOptions.level, SortOptions.attack].includes(opt.value));
+
+Settings.add(new Setting<number>('pokedexSort', 'Sort', pokedexSortSettings, SortOptions.id));
+Settings.add(new BooleanSetting('pokedexSortDirection', 'reverse', false));
+
 // Pokedex Filters
 export const pokedexFilterSettingKeys = ['pokedexNameFilter', 'pokedexIDFilter', 'pokedexRegionFilter', 'pokedexType1Filter', 'pokedexType2Filter', 'pokedexCaughtFilter',
     'pokedexPokerusFilter', 'pokedexCategoryFilter', 'pokedexUniqueTransformationFilter', 'pokedexHeldItemFilter', 'pokedexHideAltFilter'];
@@ -568,6 +582,13 @@ Settings.add(new Setting('discord-rp.small-image', 'Discord small image',
 Settings.getSetting('backgroundImage').observableValue.subscribe((newValue) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     newValue === 'background-dynamic' ? DynamicBackground.startScene() : DynamicBackground.stopScene();
+});
+
+Settings.getSetting('playerSafariSprite').observableValue.subscribe((newValue) => {
+    const sprite = document.getElementById('sprite');
+    if (sprite) {
+        sprite.dataset.gender = newValue;
+    }
 });
 
 // Translation

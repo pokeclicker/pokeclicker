@@ -11,6 +11,7 @@
 ///<reference path="../safari/SafariTownContent.ts"/>
 ///<reference path="PurifyChamber.ts"/>
 ///<reference path="../shop/GenericTraderShop.ts"/>
+///<reference path="../shop/VeteranShop.ts"/>
 
 const TownList: { [name: string]: Town } = {};
 
@@ -53,11 +54,11 @@ const DepartmentStoreShop = new Shop([
 ], 'Department Store');
 
 const pokeLeagueShop = () => new Shop([
-    new PokeballItem(GameConstants.Pokeball.Masterball, 10000000, GameConstants.Currency.money       , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.money]}` }, 'Master Ball'),
-    new PokeballItem(GameConstants.Pokeball.Masterball, 75000   , GameConstants.Currency.dungeonToken, { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.dungeonToken]}` }, 'Master Ball'),
-    new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.questPoint  , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.questPoint]}` }, 'Master Ball'),
-    new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.farmPoint   , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.farmPoint]}` }, 'Master Ball'),
-    new PokeballItem(GameConstants.Pokeball.Masterball, 250      , GameConstants.Currency.diamond     , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.diamond]}` }, 'Master Ball'),
+    new PokeballItem(GameConstants.Pokeball.Masterball, 10000000, GameConstants.Currency.money       , { multiplier: 1.35, maxMultiplier: Infinity, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.money]}` }, 'Master Ball'),
+    new PokeballItem(GameConstants.Pokeball.Masterball, 75000   , GameConstants.Currency.dungeonToken, { multiplier: 1.35, maxMultiplier: Infinity, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.dungeonToken]}` }, 'Master Ball'),
+    new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.questPoint  , { multiplier: 1.35, maxMultiplier: Infinity, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.questPoint]}` }, 'Master Ball'),
+    new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.farmPoint   , { multiplier: 1.35, maxMultiplier: Infinity, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.farmPoint]}` }, 'Master Ball'),
+    new PokeballItem(GameConstants.Pokeball.Masterball, 250      , GameConstants.Currency.diamond    , { multiplier: 1.35, maxMultiplier: Infinity, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.diamond]}` }, 'Master Ball'),
     ItemList.Protein,
     ItemList.Calcium,
     ItemList.Carbos,
@@ -70,6 +71,7 @@ const ViridianCityShop = new Shop([
     ItemList.xClick,
     ItemList.Dungeon_ticket,
 ]);
+
 const PewterCityShop = new Shop([
     ItemList.Pokeball,
     ItemList.Token_collector,
@@ -243,6 +245,51 @@ const PinkanBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
     ItemList.Mulch_Shovel,
     ItemList.Gooey_Mulch,
 ], 'Officer Jenny\'s Pinkan Trade Shop', [new QuestLineCompletedRequirement('Team Rocket\'s Pinkan Theme Park')]);
+
+const KantoExclusiveBerryShop = new Shop([
+    ItemList.Boost_Mulch,
+    ItemList.Rich_Mulch,
+    ItemList.Surprise_Mulch,
+    ItemList.Amaze_Mulch,
+    ItemList.Freeze_Mulch,
+    ItemList.Berry_Shovel,
+    ItemList.Mulch_Shovel,
+    ItemList.Squirtbottle,
+    ItemList.FarmHandBailey,
+    ItemList.ChopleBerry,
+    ItemList.KebiaBerry,
+    ItemList.ShucaBerry,
+    ItemList.ChartiBerry,
+], 'Exclusive Berry Shop', [new ItemOwnedRequirement('CeruleanBerryShopPermit')], true);
+
+// To avoid polluting ItemList & item requirements, instantiate as new items where it makes sense
+const veteranShop = new VeteranShop([
+    new BuyKeyItem(KeyItemType.Pokerus_virus, 2000, GameConstants.Currency.dungeonToken, {
+        visible: new MultiRequirement([
+            new VeteranUnlockRequirement(GameConstants.VeteranUnlock.PokerusVirus),
+            new CaughtPokemonRequirement(1),
+        ]),
+    }, 'Pokérus Virus', true),
+    new BuyKeyItem(KeyItemType.Event_calendar, 10000, GameConstants.Currency.questPoint, {
+        visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.EventCalendar),
+    }, 'Event Calendar', true),
+    new BuyKeyItem(KeyItemType.Explorer_kit, 5000, GameConstants.Currency.money, {
+        visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.ExplorerKit),
+    }, 'Explorer Kit', true),
+    new BuyKeyItem(KeyItemType.Holo_caster, 100, GameConstants.Currency.dungeonToken, {
+        visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.HoloCaster),
+    }, 'Holo Caster', true),
+    new BuyKeyItem(KeyItemType.Wailmer_pail, 5000, GameConstants.Currency.money, {
+        visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.WailmerPail),
+    }, 'Wailmer Pail', true),
+    new BuyKeyItem(KeyItemType.Gem_case, 5000, GameConstants.Currency.money, {
+        visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.GemCase),
+    }, 'Gem Case', true),
+    new BuyKeyItem(KeyItemType.Super_rod, 5000, GameConstants.Currency.money, {
+        visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.SuperRod),
+    }, 'Super Rod', true),
+    ItemList.CeruleanBerryShopPermit,
+]);
 
 // Kanto NPCs
 
@@ -831,6 +878,14 @@ const NewIslandAsh2 = new NPC('Ash Ketchum',
     }
 );
 
+const CaptainGyarados = new NPC('Captain Gyarados', [
+    'Pirate crew battles are part of our everyday life out here. According to the old pirate code, I must hand over a reward if you manage to defeat us…',
+    'But be warned: if you triumph over my crew, even stronger pirates may start roaming in this area.',
+], {
+    image: 'assets/images/pokemon/130.02.png',
+}
+);
+
 const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
     'I heard there was a stone hidden in the Safari Zone that makes Pinsir stronger!',
     'But... I don\'t have a high enough Safari Level to find it.',
@@ -928,7 +983,7 @@ TownList['Pallet Town'] = new Town(
     'Pallet Town',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [new BulletinBoard(GameConstants.BulletinBoards.Kanto)],
+    [new BulletinBoard(GameConstants.BulletinBoards.Kanto), veteranShop],
     {
         npcs: [PalletProfOak, PalletCelebiProfOak1, PalletCelebiProfOak2, PalletMom1, PalletMom2],
     }
@@ -973,7 +1028,7 @@ TownList['Cerulean City'] = new Town(
     'Cerulean City',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [CeruleanCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cerulean City']), new MoveToDungeon(dungeonList['Cerulean Cave'])],
+    [CeruleanCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cerulean City']), KantoExclusiveBerryShop, new MoveToDungeon(dungeonList['Cerulean Cave'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
         npcs: [CeruleanKantoBerryMaster, CeruleanFarmApprentice, CeruleanSuperNerd, Mewtwo1, Mewtwo2, DetectiveRaichu],
@@ -1145,6 +1200,16 @@ TownList['Client Island'] = new Town(
     {
         requirements: [new ClientRequirement(), new GymBadgeRequirement(BadgeEnums.Volcano)],
         npcs: [ClientSignpost, RedSpearow],
+    }
+);
+TownList['Gyarados Galleon'] = new Town(
+    'Gyarados Galleon',
+    GameConstants.Region.kanto,
+    GameConstants.KantoSubRegions.Kanto,
+    [TemporaryBattleList['Gyarados Crew'], new GenericTraderShop('CoinChanger', 'Pirate Coin Changer'), new GenericTraderShop('PirateFence', 'Shady Fence')],
+    {
+        requirements: [new SpecialEventRequirement('A Pirate\'s Life')],
+        npcs: [CaptainGyarados],
     }
 );
 TownList['Four Island'] = new Town(
@@ -2335,7 +2400,7 @@ const EverGrandeCityShop = new Shop([
 ]);
 const BattleFrontierShop = new Shop([
     new PokeballItem(GameConstants.Pokeball.Ultraball, 1, GameConstants.Currency.battlePoint, undefined, 'Ultra Ball'),
-    new PokeballItem(GameConstants.Pokeball.Masterball, 500, GameConstants.Currency.battlePoint , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.battlePoint]}` }, 'Master Ball'),
+    new PokeballItem(GameConstants.Pokeball.Masterball, 500, GameConstants.Currency.battlePoint , { multiplier: 1.35, maxMultiplier: Infinity, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.battlePoint]}` }, 'Master Ball'),
     new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 10, GameConstants.Currency.battlePoint, 'Small Restore'),
     new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 20, GameConstants.Currency.battlePoint, 'Medium Restore'),
     new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 40, GameConstants.Currency.battlePoint, 'Large Restore'),
@@ -3550,7 +3615,7 @@ TownList['Battle Frontier'] = new Town(
     'Battle Frontier',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [BattleFrontierShop, new BattleFrontierTownContent(), TemporaryBattleList['Destiny Deoxys Rayquaza'], TemporaryBattleList['Destiny Deoxys Army'], TemporaryBattleList['Destiny Rayquaza'], new GemMasterShop(GameConstants.GemShops.hoennBattleFrontierDeoxysDeal, 'Deoxys Replica', [new QuestLineCompletedRequirement('Destiny Deoxys')], true)],
+    [BattleFrontierShop, new BattleFrontierTownContent(), TemporaryBattleList['Destiny Deoxys Army'], TemporaryBattleList['Destiny Rayquaza'], new GemMasterShop(GameConstants.GemShops.hoennBattleFrontierDeoxysDeal, 'Deoxys Replica', [new QuestLineCompletedRequirement('Destiny Deoxys')], true)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
         npcs: [CoolTrainerDillan, destinyScientistBF, destinyDeoxysReunion],
@@ -4322,7 +4387,7 @@ const SnowpointYoungGirl = new NPC('Young Girl', [
 
 const MindyFriend = new NPC('Mindy\'s Friend', [
     'I recently traded with my friend Mindy expecting to get a Gengar. Instead, her Haunter came with this useless rock! I can\'t believe she would do this to me!',
-    'Here, you can have MINDY\'S-GIFT for all I care! I pity whoever decides to trade with her in the future.',
+    'Here, you can have <b>MINDY\'S-GIFT</b> for all I care! I pity whoever decides to trade with her in the future.',
 ]);
 
 const AcuityUxie = new NPC('Uxie', [
@@ -6445,7 +6510,7 @@ const Spelunker = new NPC('Spelunker', [
     'That would be big news, sure to be reported on local bulletin boards!',
 ]);
 
-const ExamineAegislash = new PokemonGiftNPC('Millis and Argus Steels\' Aeglislash', [
+const ExamineAegislash = new PokemonGiftNPC('Millis and Argus Steels\' Aegislash', [
     '<i>Aegislash wants to join you on your adventure.</i>',
 ], 'Aegislash (Blade)', 'assets/images/pokemon/681.01.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Aegislash (Blade)', true)]) });
 
@@ -6641,6 +6706,13 @@ const JeanFranksGrandDaughter = new NPC('Jean', [
     'He\'s a bit unusual. But his love for Pikachu is stronger than anyone else I\'ve ever met!',
     'And that\'s why I really want to help make my grandfather\'s dream come true.',
 ]);
+const WorkingPirate = new NPC('Working Pirate', [
+    'Welcome to Pirate Island! This lawless haven only comes alive once a year, when every marauder, buccaneer, and filibuster gathers for the Pirate Summit.',
+    'The tougher the challengers, the fiercer the pirates that appear. I’ve heard that those who’ve proven themselves in battle at least a hundred times earn the title of the strongest among us.',
+    'As for me? I make my living hauling treasure and shuffling chests around for the others. Though... sometimes it feels like a trickster\'s messing with them.',
+], {
+    image: 'assets/images/npcs/Pirate.png',
+});
 
 //Kalos Towns
 
@@ -6968,6 +7040,18 @@ TownList['Victory Road Kalos'] = new DungeonTown(
             new RouteKillRequirement(10, GameConstants.Region.kalos, 22),
         ]),
     ]
+);
+TownList['Pirate Island'] = new DungeonTown(
+    'Pirate Island',
+    GameConstants.Region.kalos,
+    GameConstants.KalosSubRegions.Kalos,
+    [new SpecialEventRequirement('A Pirate\'s Life')],
+    [new GenericTraderShop('CoinChanger', 'Pirate Coin Changer'), new GenericTraderShop('PirateFence', 'Shady Fence')],
+    {
+        npcs: [WorkingPirate],
+
+    }
+
 );
 //Unknown Cave?
 
@@ -8040,6 +8124,16 @@ TownList['Roadside Motel'] = new Town(
     {
         requirements: [new QuestLineStartedRequirement('Ultra Beast Hunt')],
         npcs: [RoadsideMotelLooker1, RoadsideMotelAnabel1, RoadsideMotelLooker2, RoadsideMotelAnabel2, RoadsideMotelAnabel3, RoadsideMotelMina, RoadsideMotelNanu1, RoadsideMotelNanu2, RoadsideMotelAnabel4, RoadsideMotelAnabel5],
+    }
+);
+TownList['Tsareena Sloop'] = new Town(
+    'Tsareena Sloop',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MelemeleIsland,
+    [TemporaryBattleList['Tsareena Crew'], new GenericTraderShop('CoinChanger', 'Pirate Coin Changer'), new GenericTraderShop('PirateFence', 'Shady Fence')],
+    {
+        requirements: [new SpecialEventRequirement('A Pirate\'s Life')],
+        npcs: [],
     }
 );
 TownList['Heahea City'] = new Town(
