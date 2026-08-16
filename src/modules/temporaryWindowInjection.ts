@@ -217,7 +217,6 @@ import TextMerger from './utilities/TextMerger';
 import { pokeballFilterOptions } from './pokeballs/PokeballFilterOptions';
 import { Mine } from './underground/mine/Mine';
 import { MineConfigs, MineType } from './underground/mine/MineConfig';
-import { ShardDeal } from './underground/ShardDeal';
 import { Underground } from './underground/Underground';
 import { UndergroundController } from './underground/UndergroundController';
 import { UndergroundTrading } from './underground/UndergroundTrading';
@@ -489,7 +488,6 @@ Object.assign(<any>window, {
     UndergroundTrading,
     UndergroundHelper,
     UndergroundToolType,
-    ShardDeal,
     GenericDeal,
     DealHelper,
     DealCostOrProfitType,

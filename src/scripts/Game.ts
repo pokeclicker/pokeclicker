@@ -147,7 +147,6 @@ class Game implements TmpGameType {
         BerryDeal.generateDeals(now);
         Weather.generateWeather(now);
         GemDeals.generateDeals();
-        ShardDeal.generateDeals();
         GenericDeal.generateDeals(now);
         SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
