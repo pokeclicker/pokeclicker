@@ -246,7 +246,7 @@ const PinkanBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
     ItemList.Gooey_Mulch,
 ], 'Officer Jenny\'s Pinkan Trade Shop', [new QuestLineCompletedRequirement('Team Rocket\'s Pinkan Theme Park')]);
 
-const KantoExclusiveBerryShop = new Shop([
+const kantoJohtoBerryShopItems = [
     ItemList.Boost_Mulch,
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,
@@ -256,11 +256,9 @@ const KantoExclusiveBerryShop = new Shop([
     ItemList.Mulch_Shovel,
     ItemList.Squirtbottle,
     ItemList.FarmHandBailey,
-    ItemList.ChopleBerry,
-    ItemList.KebiaBerry,
-    ItemList.ShucaBerry,
-    ItemList.ChartiBerry,
-], 'Exclusive Berry Shop', [new ItemOwnedRequirement('CeruleanBerryShopPermit')], true);
+];
+
+const KantoExclusiveBerryShop = new Shop(kantoJohtoBerryShopItems, 'Exclusive Berry Shop', [new ItemOwnedRequirement('CeruleanBerryShopPermit')], true);
 
 // To avoid polluting ItemList & item requirements, instantiate as new items where it makes sense
 const veteranShop = new VeteranShop([
@@ -1616,21 +1614,7 @@ const BlackthornCityShop = new Shop([
     ItemList.Dragon_egg,
     ItemList.Dragon_scale,
 ]);
-const JohtoBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Goldenrod City'], [
-    ItemList.Boost_Mulch,
-    ItemList.Rich_Mulch,
-    ItemList.Surprise_Mulch,
-    ItemList.Amaze_Mulch,
-    ItemList.Freeze_Mulch,
-    ItemList.Berry_Shovel,
-    ItemList.Mulch_Shovel,
-    ItemList.Squirtbottle,
-    ItemList.FarmHandBailey,
-    ItemList.ChopleBerry,
-    ItemList.KebiaBerry,
-    ItemList.ShucaBerry,
-    ItemList.ChartiBerry,
-], 'Johto Berry Master');
+const JohtoBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Goldenrod City'], kantoJohtoBerryShopItems, 'Johto Berry Master');
 
 //Johto Contest Shop
 const JohtoContestShop = new Shop([
