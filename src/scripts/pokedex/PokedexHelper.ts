@@ -49,7 +49,7 @@ class PokedexHelper {
             return PokedexHelper.cachedFilteredList;
         }
 
-        PokedexHelper.cachedFilteredList = PokedexHelper.getList();
+        PokedexHelper.cachedFilteredList = PokedexHelper.getList().sort(PokedexHelper.compareBy(Settings.getSetting('pokedexSort').observableValue(), Settings.getSetting('pokedexSortDirection').observableValue()));
         return PokedexHelper.cachedFilteredList;
     })
 
@@ -273,5 +273,61 @@ class PokedexHelper {
 
     public static filteredListPartyPokemon(): Array<PartyPokemon> {
         return PokedexHelper.filteredList().map((p) => App.game.party.getPokemon(p.id)).filter((p) => p !== undefined);
+    }
+
+
+
+    /* Sorts Pokedex data using base pokemon data and party pokemon data. Uncaught pokemon can be sorted by id, name, times hatched, base attack; in all other cases, sort by id, prioritized after party pokemon */
+    public static compareBy(option: SortOptions, direction: boolean) {
+        return (a, b) => {
+            const aParty = App.game.party.getPokemon(a.id);
+            const bParty = App.game.party.getPokemon(b.id);
+            const config = SortOptionConfigs[option]; //getValue handles party pokemon sorting only
+
+            let res, dir = direction ? -1 : 1;
+            let aValue, bValue;
+
+            //ID, name, base attack, times hatched sort: sort all pokemon
+            if (option == SortOptions.id) {
+                aValue = aParty ? config.getValue(aParty) : a.id;
+                bValue = bParty ? config.getValue(bParty) : b.id;
+            } else if (option == SortOptions.name) {
+                aValue = aParty ? config.getValue(aParty) : a.name;
+                bValue = bParty ? config.getValue(bParty) : b.name;
+            } else if (option == SortOptions.baseAttack) {
+                aValue = aParty ? config.getValue(aParty) : a.attack;
+                bValue = bParty ? config.getValue(bParty) : b.attack;
+            } else if (option == SortOptions.timesHatched) {
+                aValue = App.game.statistics.pokemonHatched[a.id]() || 0;
+                bValue = App.game.statistics.pokemonHatched[b.id]() || 0;
+            } else if (aParty && bParty) { //all other sort options: sort only party pokemon, sort party pokemon ahead of uncaught pokemon regardless of sort direction
+                aValue = config.getValue(aParty);
+                bValue = config.getValue(bParty);
+            } else if (!aParty && bParty) {
+                return 1;
+            } else if (aParty && !bParty) {
+                return -1;
+            } else {
+                return a.id - b.id;
+            }
+
+            if (aValue == bValue) {
+                //If they are equal according to provided property, sort by id
+                return a.id - b.id;
+            } else if (aValue < bValue) {
+                res = -1;
+            } else if (aValue > bValue) {
+                res = 1;
+            } else {
+                res = 0;
+            }
+
+            if (config.invert) {
+                dir *= -1;
+            }
+
+            return res * dir;
+
+        };
     }
 }

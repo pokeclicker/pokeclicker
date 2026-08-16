@@ -19,6 +19,8 @@ import {
     DayTimedMegaEvolution,
     NightTimedMegaEvolution,
     AttackEvolution,
+    EventStoneEvolution,
+    EventLevelEvolution,
 } from './evolutions/Methods';
 import BerryType from '../enums/BerryType';
 import ItemType from '../enums/ItemType';
@@ -142,7 +144,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Bulbasaur (Clone)', 'Ivysaur (Clone)', 16)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Bulbasaur (Clone)', 'Ivysaur (Clone)', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -163,7 +165,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Spooky Bulbasaur', 'Spooky Ivysaur', 16)],
+        'evolutions': [EventLevelEvolution('Halloween!', 'Spooky Bulbasaur', 'Spooky Ivysaur', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -185,7 +187,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Bulbasaur (Rose)', 'Ivysaur (Rose)', 16)],
+        'evolutions': [EventLevelEvolution('Golden Week', 'Bulbasaur (Rose)', 'Ivysaur (Rose)', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -230,7 +232,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Ivysaur (Clone)', 'Venusaur (Clone)', 32)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Ivysaur (Clone)', 'Venusaur (Clone)', 32)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -251,7 +253,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Spooky Ivysaur', 'Spooky Venusaur', 32)],
+        'evolutions': [EventLevelEvolution('Halloween!', 'Spooky Ivysaur', 'Spooky Venusaur', 32)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -272,7 +274,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Ivysaur (Rose)', 'Venusaur (Rose)', 32)],
+        'evolutions': [EventLevelEvolution('Golden Week', 'Ivysaur (Rose)', 'Venusaur (Rose)', 32)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -437,7 +439,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Charmander (Clone)', 'Charmeleon (Clone)', 16)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Charmander (Clone)', 'Charmeleon (Clone)', 16)],
         'base': {
             'hitpoints': 39,
             'attack': 52,
@@ -461,6 +463,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Charmeleon', 'Charizard', 36),
             DummyEvolution('Charmeleon', 'Gigantamax Charizard'),
+            DummyEvolution('Charmeleon', 'Captain Charizard'),
         ],
         'base': {
             'hitpoints': 58,
@@ -482,7 +485,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Charmeleon (Clone)', 'Charizard (Clone)', 36)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Charmeleon (Clone)', 'Charizard (Clone)', 36)],
         'base': {
             'hitpoints': 58,
             'attack': 64,
@@ -600,6 +603,27 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 6.05,
+        'name': 'Captain Charizard',
+        'catchRate': 45,
+        'type': [PokemonType.Fire, PokemonType.Dark],
+        'levelType': LevelType.mediumslow,
+        'exp': 240,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 78,
+            'attack': 84,
+            'specialAttack': 109,
+            'defense': 78,
+            'specialDefense': 85,
+            'speed': 100,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+        'heldItem': { type: ItemType.item, id: 'Relic_silver' },
+    },
+    {
         'id': 7,
         'name': 'Squirtle',
         'catchRate': 45,
@@ -631,7 +655,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Squirtle (Clone)', 'Wartortle (Clone)', 16)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Squirtle (Clone)', 'Wartortle (Clone)', 16)],
         'base': {
             'hitpoints': 44,
             'attack': 48,
@@ -696,7 +720,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Wartortle (Clone)', 'Blastoise (Clone)', 36)],
+        'evolutions': [EventLevelEvolution('Mewtwo strikes back!', 'Wartortle (Clone)', 'Blastoise (Clone)', 36)],
         'base': {
             'hitpoints': 59,
             'attack': 63,
@@ -6062,6 +6086,28 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 129.33,
+        'name': 'Magikarp (Pirate)',
+        'catchRate': 255,
+        'type': [PokemonType.Water],
+        'levelType': LevelType.slow,
+        'exp': 40,
+        'eggCycles': 5,
+        'evolutions': [LevelEvolution('Magikarp (Pirate)', 'Gyarados (Captain)', 20)],
+        'base': {
+            'hitpoints': 20,
+            'attack': 10,
+            'specialAttack': 15,
+            'defense': 55,
+            'specialDefense': 20,
+            'speed': 80,
+        },
+        'gender': {
+            'visualDifference': true,
+        },
+        'heldItem': { type: ItemType.item, id: 'Relic_copper' },
+    },
+    {
         'id': 130,
         'name': 'Gyarados',
         'catchRate': 45,
@@ -6098,6 +6144,27 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 130,
             'speed': 81,
         },
+    },
+    {
+        'id': 130.02,
+        'name': 'Gyarados (Captain)',
+        'catchRate': 45,
+        'type': [PokemonType.Water, PokemonType.Ghost],
+        'levelType': LevelType.slow,
+        'exp': 189,
+        'eggCycles': 5,
+        'base': {
+            'hitpoints': 95,
+            'attack': 125,
+            'specialAttack': 60,
+            'defense': 79,
+            'specialDefense': 100,
+            'speed': 81,
+        },
+        'gender': {
+            'visualDifference': true,
+        },
+        'heldItem': { type: ItemType.item, id: 'Relic_copper' },
     },
     {
         'id': 131,
@@ -7339,7 +7406,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 49,
         'eggCycles': 10,
-        'evolutions': [StoneEvolution('Spooky Togepi', 'Spooky Togetic', StoneType.Soothe_bell)],
+        'evolutions': [EventStoneEvolution('Halloween!', 'Spooky Togepi', 'Spooky Togetic', StoneType.Soothe_bell)],
         'baby': true,
         'base': {
             'hitpoints': 35,
@@ -7403,7 +7470,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 142,
         'eggCycles': 10,
-        'evolutions': [StoneEvolution('Spooky Togetic', 'Spooky Togekiss', StoneType.Dusk_stone)],
+        'evolutions': [EventStoneEvolution('Halloween!', 'Spooky Togetic', 'Spooky Togekiss', StoneType.Dusk_stone)],
         'base': {
             'hitpoints': 55,
             'attack': 40,
@@ -14478,7 +14545,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 78,
         'catchRate': 50,
-        'evolutions': [StoneEvolution('Elf Munchlax', 'Santa Snorlax', StoneType.Soothe_bell, true)],
+        'evolutions': [EventStoneEvolution('Merry Christmas!', 'Elf Munchlax', 'Santa Snorlax', StoneType.Soothe_bell, true)],
         'base': {
             'hitpoints': 135,
             'attack': 85,
@@ -14499,7 +14566,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 57,
         'catchRate': 75,
-        'evolutions': [DayTimedStoneEvolution('Riolu', 'Lucario', StoneType.Soothe_bell)],
+        'evolutions': [
+            DayTimedStoneEvolution('Riolu', 'Lucario', StoneType.Soothe_bell),
+            DummyEvolution('Riolu', 'Captain Lucario'),
+        ],
         'baby': true,
         'base': {
             'hitpoints': 40,
@@ -14553,6 +14623,27 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
         },
+    },
+    {
+        'id': 448.02,
+        'name': 'Captain Lucario',
+        'type': [PokemonType.Fighting, PokemonType.Water],
+        'eggCycles': 25,
+        'levelType': LevelType.mediumslow,
+        'exp': 184,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 70,
+            'attack': 110,
+            'specialAttack': 115,
+            'defense': 70,
+            'specialDefense': 70,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+        'heldItem': { type: ItemType.item, id: 'Relic_silver' },
     },
     {
         'id': 449,
@@ -17775,6 +17866,27 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
         },
+    },
+    {
+        'id': 570.02,
+        'name': 'Zorua (Pirate)',
+        'type': [PokemonType.Dark, PokemonType.Poison],
+        'eggCycles': 25,
+        'levelType': LevelType.mediumslow,
+        'exp': 66,
+        'catchRate': 75,
+        'base': {
+            'hitpoints': 40,
+            'attack': 65,
+            'specialAttack': 80,
+            'defense': 40,
+            'specialDefense': 40,
+            'speed': 65,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+        'heldItem': { type: ItemType.item, id: 'Relic_copper' },
     },
     {
         'id': 571,
@@ -22143,6 +22255,27 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 720.02,
+        'name': 'Captain Hoopa',
+        'type': [PokemonType.Water, PokemonType.Ghost],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 80,
+            'attack': 110,
+            'specialAttack': 150,
+            'defense': 60,
+            'specialDefense': 130,
+            'speed': 70,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+        'heldItem': { type: ItemType.item, id: 'Relic_gold' },
+    },
+    {
         'id': 721,
         'name': 'Volcanion',
         'type': [PokemonType.Fire, PokemonType.Water],
@@ -23170,6 +23303,28 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 761.01,
+        'name': 'Bounsweet (Pirate)',
+        'type': [PokemonType.Grass, PokemonType.Dark],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumslow,
+        'exp': 42,
+        'catchRate': 235,
+        'evolutions': [LevelEvolution('Bounsweet (Pirate)', 'Steenee (Pirate)', 18)],
+        'base': {
+            'hitpoints': 42,
+            'attack': 30,
+            'specialAttack': 30,
+            'defense': 38,
+            'specialDefense': 38,
+            'speed': 32,
+        },
+        'gender': {
+            'femaleRatio': 1,
+        },
+        'heldItem': { type: ItemType.item, id: 'Relic_silver' },
+    },
+    {
         'id': 762,
         'name': 'Steenee',
         'type': [PokemonType.Grass],
@@ -23191,6 +23346,28 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 762.01,
+        'name': 'Steenee (Pirate)',
+        'type': [PokemonType.Grass, PokemonType.Dark],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumslow,
+        'exp': 102,
+        'catchRate': 120,
+        'evolutions': [LevelEvolution('Steenee (Pirate)', 'Tsareena (Captain)', 29)],
+        'base': {
+            'hitpoints': 52,
+            'attack': 40,
+            'specialAttack': 40,
+            'defense': 48,
+            'specialDefense': 48,
+            'speed': 62,
+        },
+        'gender': {
+            'femaleRatio': 1,
+        },
+        'heldItem': { type: ItemType.item, id: 'Relic_silver' },
+    },
+    {
         'id': 763,
         'name': 'Tsareena',
         'type': [PokemonType.Grass],
@@ -23209,6 +23386,27 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
+    },
+    {
+        'id': 763.01,
+        'name': 'Tsareena (Captain)',
+        'type': [PokemonType.Grass, PokemonType.Dark],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumslow,
+        'exp': 230,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 72,
+            'attack': 120,
+            'specialAttack': 50,
+            'defense': 98,
+            'specialDefense': 98,
+            'speed': 72,
+        },
+        'gender': {
+            'femaleRatio': 1,
+        },
+        'heldItem': { type: ItemType.item, id: 'Relic_silver' },
     },
     {
         'id': 764,
@@ -24885,6 +25083,28 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 813.01,
+        'name': 'Scorbunny (Pirate)',
+        'type': [PokemonType.Fire, PokemonType.Water],
+        'base': {
+            'hitpoints': 50,
+            'attack': 71,
+            'specialAttack': 40,
+            'defense': 40,
+            'specialDefense': 40,
+            'speed': 69,
+        },
+        'eggCycles': 20,
+        'levelType': LevelType.mediumslow,
+        'exp': 62,
+        'catchRate': 45,
+        'evolutions': [LevelEvolution('Scorbunny (Pirate)', 'Raboot (Pirate)', 16)],
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+        'heldItem': { type: ItemType.item, id: 'Relic_gold' },
+    },
+    {
         'id': 814,
         'name': 'Raboot',
         'type': [PokemonType.Fire],
@@ -24909,6 +25129,30 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 814.01,
+        'name': 'Raboot (Pirate)',
+        'type': [PokemonType.Fire, PokemonType.Water],
+        'base': {
+            'hitpoints': 65,
+            'attack': 86,
+            'specialAttack': 55,
+            'defense': 60,
+            'specialDefense': 60,
+            'speed': 94,
+        },
+        'eggCycles': 20,
+        'levelType': LevelType.mediumslow,
+        'exp': 147,
+        'catchRate': 45,
+        'evolutions': [
+            LevelEvolution('Raboot (Pirate)', 'Cinderace (Captain)', 35),
+        ],
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+        'heldItem': { type: ItemType.item, id: 'Relic_gold' },
+    },
+    {
         'id': 815,
         'name': 'Cinderace',
         'type': [PokemonType.Fire],
@@ -24927,6 +25171,27 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
         },
+    },
+    {
+        'id': 815.02,
+        'name': 'Cinderace (Captain)',
+        'type': [PokemonType.Fire, PokemonType.Water],
+        'base': {
+            'hitpoints': 80,
+            'attack': 116,
+            'specialAttack': 65,
+            'defense': 75,
+            'specialDefense': 75,
+            'speed': 119,
+        },
+        'eggCycles': 20,
+        'levelType': LevelType.mediumslow,
+        'exp': 265,
+        'catchRate': 45,
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+        'heldItem': { type: ItemType.item, id: 'Relic_gold' },
     },
     {
         'id': 815.01,
@@ -28209,6 +28474,27 @@ export const pokemonList = createPokemonArray(
         'exp': 335,
         'catchRate': 10,
         'heldItem': { type: ItemType.item, id: 'Rusted_Sword' },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 888.02,
+        'name': 'Captain Zacian',
+        'type': [PokemonType.Dark, PokemonType.Steel],
+        'base': {
+            'hitpoints': 92,
+            'attack': 150,
+            'specialAttack': 80,
+            'defense': 115,
+            'specialDefense': 115,
+            'speed': 148,
+        },
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 335,
+        'catchRate': 10,
+        'heldItem': { type: ItemType.item, id: 'Relic_gold' },
         'gender': {
             'type': Genders.Genderless,
         },

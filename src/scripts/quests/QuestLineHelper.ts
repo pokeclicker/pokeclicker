@@ -4241,11 +4241,21 @@ class QuestLineHelper {
         App.game.quests.questLines().push(easterQuestLine);
     }
 
+    public static createTreasureMapQuestLine(saved?: { dungeon?: string, amount?: number }) {
+        App.game.quests.questLines().push(new TreasureMapQuestLine(saved));
+    }
+
+    public static rebuildTreasureMapQuestLine(): QuestLine {
+        const questLine = new TreasureMapQuestLine();
+        App.game.quests.replaceQuestLine(questLine);
+        return questLine;
+    }
+
     public static isQuestLineCompleted(name: QuestLineNameType) {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
 
-    public static loadQuestLines() {
+    public static loadQuestLines(savedQuestLines?: any[]) {
         this.createTutorial();
         this.createRocketKantoQuestLine();
         this.createBillsGrandpaQuestLine();
@@ -4313,10 +4323,16 @@ class QuestLineHelper {
         this.createDrSplashQuestLine();
         this.createMeltanQuestLine();
         this.createRainbowRocketQuestLine();
+        this.createTreasureMapQuestLine(savedQuestLines?.find(ql => ql.name === 'Pirate Treasure Map'));
         // Enforce unique questline names
         const numQuestLines = App.game.quests.questLines().length;
         if (numQuestLines != [...new Set(App.game.quests.questLines().map(ql => ql.name))].length) {
             throw new Error('QuestLineHelper: Duplicate QuestLine names detected');
         }
+
+        // Quest lines are pushed onto the underlying array, bypassing the observable;
+        // notify it once so computeds evaluated before this ran (e.g. achievements built
+        // in AchievementHandler.initialize) don't keep a stale cached value
+        App.game.quests.questLines.valueHasMutated();
     }
 }

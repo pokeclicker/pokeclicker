@@ -651,7 +651,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         <tfoot>
                                             <tr>
                                                 <td colspan="2">
-                                                    <button class="btn btn-block" data-bind="attr: { disabled: !$data.hired() && !App.game.breeding.hatcheryHelpers.canHire() }, css: { 'btn-success': !$data.hired(), 'btn-danger': $data.hired() }, click: () => !$data.hired() ? $data.hire() : $data.fire(), text: !$data.hired() ? 'Hire!' : 'Fire!'">Hire!</button>
+                                                    <div class="d-flex" style="gap: 4px;">
+                                                        <button class="btn btn-primary no-emoji-font p-1" data-bind="tooltip: {
+                                                            html: true,
+                                                            title: $data.nextPokemonTooltip(),
+                                                            trigger: 'hover',
+                                                        }">🥚</button>
+                                                        <button class="btn btn-block" data-bind="attr: { disabled: !$data.hired() && !App.game.breeding.hatcheryHelpers.canHire() }, css: { 'btn-success': !$data.hired(), 'btn-danger': $data.hired() }, click: () => !$data.hired() ? $data.hire() : $data.fire(), text: !$data.hired() ? 'Hire!' : 'Fire!'">Hire!</button>
+                                                    </div>
+
                                                 </td>
                                             </tr>
                                         </tfoot>
