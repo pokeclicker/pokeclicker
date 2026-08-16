@@ -6,6 +6,7 @@
 ///<reference path="../../declarations/requirements/SeededDateRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/DayOfWeekRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/ObtainedPokemonRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/BerryUnlockedRequirement.d.ts"/>
 ///<reference path="../../declarations/utilities/SeededDateRand.d.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>
 
@@ -1082,7 +1083,7 @@ dungeonList['Pokémon Tower'] = new Dungeon('Pokémon Tower',
             hide: true,
         }),
     ],
-    750, 7);
+    750, 7, undefined, { requirement: new MultiRequirement([new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')), new TemporaryBattleRequirement('Blue 4')]) });
 
 dungeonList['Silph Co.'] = new Dungeon('Silph Co.',
     [
@@ -2025,7 +2026,10 @@ dungeonList['Pinkan Mountain'] = new Dungeon('Pinkan Mountain',
             {loot: 'Magost'},
             {loot: 'Watmel'},
         ],
-        legendary: [{loot: 'Fairy_Feather'}],
+        legendary: [
+            {loot: 'Fairy_Feather'},
+            {loot: 'Pinkan', ignoreDebuff: true, requirement: new BerryUnlockedRequirement(BerryType.Pinkan)},
+        ],
         mythic: [{loot: 'Heart Scale'}],
     },
     1503000,
@@ -9104,10 +9108,6 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
         new DungeonBossPokemon('Kyurem', 35000000, 100, {requirement: new MultiRequirement([
             new QuestLineCompletedRequirement('Hollow Truth and Ideals'),
             new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
-            new OneFromManyRequirement([
-                new QuestLineCompletedRequirement('Swords of Justice'),
-                new QuestLineStartedRequirement('Swords of Justice', GameConstants.AchievementOption.less),
-            ]),
         ]),
         }),
         new DungeonBossPokemon('Genesect (High-Speed Chill)', 62000000, 100, {
@@ -12056,7 +12056,8 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
                 new GymPokemon('Claydol', 26032803, 44),
                 new GymPokemon('Bruxish', 26032803, 44),
                 new GymPokemon('Hypno', 26032803, 44),
-                new GymPokemon('You hateful little Trainer!', 26032803, 47, new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new SpecialEventRequirement('Hoopa Day')]), true),
+                new CustomGymPokemon('You hateful little Trainer!', 26032803, 47, [PokemonType.Rock, PokemonType.Poison], 'YouHatefulLittleTrainer.png',
+                    new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new SpecialEventRequirement('Hoopa Day')]), true),
             ],
             { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 9) }, 'Faba', '(faba)'),
         new DungeonTrainer('Team Skull Boss',
@@ -12065,7 +12066,8 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
                 new GymPokemon('Vikavolt', 19524602, 45),
                 new GymPokemon('Masquerain', 19524602, 45),
                 new GymPokemon('Pinsir', 19524602, 45),
-                new GymPokemon('You hateful little Trainer!', 19524602, 47, new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new SpecialEventRequirement('Hoopa Day')]), false),
+                new CustomGymPokemon('You hateful little Trainer!', 19524602, 47, [PokemonType.Rock, PokemonType.Poison], 'YouHatefulLittleTrainer.png',
+                    new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new SpecialEventRequirement('Hoopa Day')]), false),
             ],
             { weight: 2.5, hide: true, requirement: new QuestLineStepCompletedRequirement('Child of the Stars', 10) }, 'Guzma', '(guzma)'),
         new DungeonTrainer('Aether President',

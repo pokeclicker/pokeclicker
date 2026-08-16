@@ -35,11 +35,11 @@
                             <tbody data-bind="let: { tradeAmount: ko.observable(1) }">
                                 <!-- ko foreach: berries -->
                                 <tr>
-                                    <td class="align-middle" data-bind="text: App.game.farming.berryList[$data.berryType]().toLocaleString('en-US')"></td>
+                                    <td class="align-middle" data-bind="text: App.game.farming.berryInventory[$data.berryType]().toLocaleString('en-US')"></td>
                                     <td class="align-middle"><img height="28px" data-bind="attr: {src: FarmController.getBerryImage($data.berryType) }, css: {'berryLocked': !App.game.farming.unlockedBerries[$data.berryType]() }"></img></td>
                                     <td class="align-middle">
                                         <span data-bind="text: amount.toLocaleString('en-US') + ' '"></span>
-                                        <span data-bind="text: '(' + (amount * tradeAmount()).toLocaleString('en-US') + ')', css: { 'text-danger': amount * tradeAmount() > App.game.farming.berryList[$data.berryType]() }"></span>
+                                        <span data-bind="text: '(' + (amount * tradeAmount()).toLocaleString('en-US') + ')', css: { 'text-danger': amount * tradeAmount() > App.game.farming.berryInventory[$data.berryType]() }"></span>
                                         <span data-bind="text: ' x ' + (App.game.farming.unlockedBerries[$data.berryType]() ? BerryType[$data.berryType] : '???')"></span>
                                     </td>
                                     <!-- ko if: $index() === 0 -->

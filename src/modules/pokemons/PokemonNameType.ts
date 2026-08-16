@@ -1637,8 +1637,6 @@ export type PokemonNameType
     | 'Terapagos (Terastal)'
     | 'Terapagos (Stellar)'
     | 'Pecharunt'
-    | '???'
-    | 'You hateful little Trainer!'
     | 'Segin Starmobile'
     | 'Schedar Starmobile'
     | 'Navi Starmobile'

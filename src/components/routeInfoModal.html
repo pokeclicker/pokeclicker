@@ -1,6 +1,6 @@
 <div class="modal fade noselect" id="routeInfoModal" tabindex="-1" role="dialog" aria-labelledby="routeInfoModalLabel">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-        <div class="modal-content">
+        <div class="modal-content" data-bind="if: DisplayObservables.modalState.routeInfoModal !== 'hidden'">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h4 class="modal-title" data-bind="text: RouteInfo.getFullName()">name</h4>
                 <button type="button" class="btn btn-danger position-absolute" data-dismiss="modal" style="right:0; top:0; font-size: 18px; font-weight: 700;">×</button>
@@ -8,7 +8,23 @@
             <div class="modal-body pt-0" style="background-color: inherit;">
                 <!-- ko foreach: { data: Object.entries(RouteInfo.pokemonList()), as: 'pokemons' } -->
                 <div class="bg-primary text-left rounded px-3 py-2 mt-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#route-${pokemons[0]}` }">
-                    <h5 class="my-0 mx-1 text-light d-inline-block" data-bind="text: (pokemons[0] == 'roamers' ? 'Roamers' : 'Encounters')">Roamer Status</h5>
+                    <h5 class="my-0 mx-1 text-light d-inline-block flex-grow-1" data-bind="text: (pokemons[0] == 'roamers' ? 'Roaming' : 'Encounters')">Roamer Status</h5>
+                    <!-- ko if: pokemons[0] == 'roamers' -->
+                    <div class="text-light" onclick="event.stopPropagation()" style="cursor: default;" data-bind="let: {
+                        chance: Math.floor(PokemonFactory.roamingRate(Routes.getRoute(player.region, player.route))),
+                        isBoosted: RouteInfo.isBoosted()
+                    }">
+                        <div data-bind="tooltip: {
+                            html: true,
+                            title: `Chance of finding a Roaming Pokémon on this route.${(isBoosted ? '<br/><br/>⇈ This route is currently boosted! Roaming Pokémon are 3× more likely to appear.' : '')}`,
+                            trigger: 'hover',
+                            placement: 'top',
+                        }">
+                            <span class="small" data-bind="text: `1 / ${chance.toLocaleString('en-US')} (${(1 / chance).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 3 })})`"></span>
+                            <span data-bind="visible: isBoosted">⇈</span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
                 </div>
                 <div class="collapse show" data-bind="attr: { 'id': `route-${pokemons[0]}` }">
                     <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: pokemons[1]">
