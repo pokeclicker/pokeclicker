@@ -576,31 +576,26 @@ export default class GenericDeal {
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.VermilionCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Electric_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Thunder_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.LavenderTownShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Grass_egg, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.SaffronCityShardTrader = ko.observableArray([
@@ -608,18 +603,15 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 10 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 10 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fighting_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Leaf_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Moon_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.FuchsiaCityShardTrader = ko.observableArray([
@@ -629,25 +621,21 @@ export default class GenericDeal {
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 5 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 5 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Linking_cord, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.CinnabarIslandShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_stone, amount: 1 }],
-
             }),
         ]);
         //Johto Shard Traders
@@ -655,64 +643,53 @@ export default class GenericDeal {
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Grass_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Leaf_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Kings_rock, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.EcruteakCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Soothe_bell, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.OlivineCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Electric_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Thunder_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Metal_coat, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.CianwoodCityShardTrader = ko.observableArray([
@@ -720,19 +697,16 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 10 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 10 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fighting_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Moon_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Sun_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.MahoganyTownShardTrader = ko.observableArray([
@@ -740,13 +714,11 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Linking_cord, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Purple_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Upgrade, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.BlackthornCityShardTrader = ko.observableArray([
@@ -756,13 +728,11 @@ export default class GenericDeal {
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 5 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 5 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Purple_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_scale, amount: 1 }],
-
             }),
         ]);
         //Hoenn Shard Traders
@@ -771,7 +741,6 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Kings_rock, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.DewfordTownShardTrader = ko.observableArray([
@@ -779,68 +748,57 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 10 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 10 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fighting_egg, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.SlateportCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Linking_cord, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.MauvilleCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Electric_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Thunder_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Metal_coat, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.VerdanturfTownShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Grass_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Thunder_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Soothe_bell, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.LavaridgeTownShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.FallarborTownShardTrader = ko.observableArray([
@@ -848,20 +806,17 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Moon_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Sun_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.FortreeCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Leaf_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.MossdeepCityShardTrader = ko.observableArray([
@@ -869,13 +824,11 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Purple_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Upgrade, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Prism_scale, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.PacifidlogTownShardTrader = ko.observableArray([
@@ -883,20 +836,17 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Deepsea_tooth, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Deepsea_scale, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.SootopolisCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.EverGrandeCityShardTrader = ko.observableArray([
@@ -906,161 +856,134 @@ export default class GenericDeal {
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 5 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 5 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Purple_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_scale, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.PokémonHQLabShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Leaf_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Thunder_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Kings_rock, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Soothe_bell, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Metal_coat, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Moon_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Sun_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Linking_cord, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Purple_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Upgrade, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Purple_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_scale, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Prism_scale, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Deepsea_tooth, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Deepsea_scale, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Shiny_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dusk_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dawn_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Lime_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Razor_claw, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Lime_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Razor_fang, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.White_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Electirizer, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.White_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Magmarizer, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Protector, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dubious_disc, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Reaper_cloth, amount: 1 }],
-
             }),
         ]);
         //Sinnoh Shard Traders
@@ -1076,13 +999,11 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Moon_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Sun_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.FloaromaTownShardTrader = ko.observableArray([
@@ -1090,43 +1011,36 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Linking_cord, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Kings_rock, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.EternaCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Grass_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Leaf_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.HearthomeCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Soothe_bell, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.HallowedTower = ko.observableArray([
@@ -1142,37 +1056,31 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Shiny_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dusk_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dawn_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.PastoriaCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Prism_scale, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.CelesticTownShardTrader = ko.observableArray([
@@ -1182,13 +1090,11 @@ export default class GenericDeal {
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 5 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 5 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Purple_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_scale, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.PalParkShardTrader = ko.observableArray([
@@ -1196,13 +1102,11 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Lime_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Razor_claw, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Lime_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Razor_fang, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.CanalaveCityShardTrader = ko.observableArray([
@@ -1210,13 +1114,11 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 10 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 10 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fighting_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Metal_coat, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.SnowpointCityShardTrader = ko.observableArray([
@@ -1224,31 +1126,26 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Purple_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Upgrade, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.SunyshoreCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Electric_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Thunder_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Deepsea_tooth, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Deepsea_scale, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.SurvivalAreaShardTrader = ko.observableArray([
@@ -1256,13 +1153,11 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.White_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Electirizer, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.White_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Magmarizer, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.ResortAreaShardTrader = ko.observableArray([
@@ -1270,19 +1165,16 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Protector, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dubious_disc, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Reaper_cloth, amount: 1 }],
-
             }),
         ]);
         //Unova Shard Traders
@@ -1290,37 +1182,31 @@ export default class GenericDeal {
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Linking_cord, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Kings_rock, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.NimbasaCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Grass_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Electric_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Metal_coat, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.DriftveilCityShardTrader = ko.observableArray([
@@ -1328,33 +1214,28 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Lime_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Razor_claw, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Lime_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Razor_fang, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.MistraltonCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Thunder_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Purple_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Upgrade, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.LentimasTownShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_egg, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.UndellaTownShardTrader = ko.observableArray([
@@ -1362,13 +1243,11 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Deepsea_tooth, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Deepsea_scale, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.LacunosaTownShardTrader = ko.observableArray([
@@ -1376,7 +1255,6 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 10 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 10 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fighting_egg, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.OpelucidCityShardTrader = ko.observableArray([
@@ -1386,13 +1264,11 @@ export default class GenericDeal {
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 5 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 5 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Purple_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_scale, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.HumilauCityShardTrader = ko.observableArray([
@@ -1400,7 +1276,6 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Prism_scale, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.IcirrusCityShardTrader = ko.observableArray([
@@ -1408,19 +1283,16 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Protector, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dubious_disc, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Reaper_cloth, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.BlackandWhiteParkShardTrader = ko.observableArray([
@@ -1428,13 +1300,11 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Moon_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Sun_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.NacreneCityShardTrader = ko.observableArray([
@@ -1442,24 +1312,20 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Soothe_bell, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.StriatonCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Leaf_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.AccumulaTownShardTrader = ko.observableArray([
@@ -1467,19 +1333,16 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Shiny_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dusk_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dawn_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.NuvemaTownShardTrader = ko.observableArray([
@@ -1487,13 +1350,11 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.White_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Electirizer, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.White_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Magmarizer, amount: 1 }],
-
             }),
         ]);
         //Kalos Shard Traders
@@ -1501,12 +1362,10 @@ export default class GenericDeal {
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Electric_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Thunder_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.FurfrouShardTrader = ko.observableArray([
@@ -1530,12 +1389,10 @@ export default class GenericDeal {
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.CyllageCityShardTrader = ko.observableArray([
@@ -1543,31 +1400,26 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Purple_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Upgrade, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Prism_scale, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.GeosengeTownShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Kings_rock, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.ShalourCityShardTrader = ko.observableArray([
@@ -1575,43 +1427,36 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 10 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 10 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fighting_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Linking_cord, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Metal_coat, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.CoumarineCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Grass_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Leaf_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.White_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Electirizer, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.White_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Magmarizer, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.LaverreCityShardTrader = ko.observableArray([
@@ -1619,30 +1464,25 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Deepsea_tooth, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Deepsea_scale, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Pink_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Sachet, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Pink_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Whipped_dream, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Pink_shard, amount: 1000 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Alakazite, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.DendemilleTownShardTrader = ko.observableArray([
@@ -1650,19 +1490,16 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Shiny_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dusk_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dawn_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.AnistarCityShardTrader = ko.observableArray([
@@ -1670,25 +1507,21 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Moon_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Sun_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Lime_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Razor_claw, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Lime_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Razor_fang, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.CouriwayTownShardTrader = ko.observableArray([
@@ -1698,13 +1531,11 @@ export default class GenericDeal {
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 5 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 5 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Purple_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_scale, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.SnowbelleCityShardTrader = ko.observableArray([
@@ -1712,19 +1543,16 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Protector, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dubious_disc, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Reaper_cloth, amount: 1 }],
-
             }),
         ]);
         //Alola Shard Traders
@@ -1733,74 +1561,62 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Shiny_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dusk_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dawn_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.HeaheaCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Kings_rock, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Metal_coat, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.PaniolaTownShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Grass_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_egg, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.KonikoniCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Linking_cord, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Soothe_bell, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.AetherParadiseShardTrader = ko.observableArray([
@@ -1808,31 +1624,26 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Purple_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Upgrade, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.MalieCityShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Electric_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Thunder_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.White_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Electirizer, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.White_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Magmarizer, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.TapuVillageShardTrader = ko.observableArray([
@@ -1840,19 +1651,16 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Lime_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Razor_claw, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Lime_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Razor_fang, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Cyan_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Ice_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.SeafolkVillageShardTrader = ko.observableArray([
@@ -1860,37 +1668,31 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 10 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 10 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fighting_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Deepsea_tooth, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Deepsea_scale, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Prism_scale, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Pink_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Sachet, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Pink_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Whipped_dream, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.ExeggutorIslandShardTrader = ko.observableArray([
@@ -1900,36 +1702,30 @@ export default class GenericDeal {
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 5 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 5 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Leaf_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Purple_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_scale, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Protector, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dubious_disc, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Reaper_cloth, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.AltaroftheSunneandMooneShardTrader = ko.observableArray([
@@ -1937,13 +1733,11 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Moon_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Sun_stone, amount: 1 }],
-
             }),
         ]);
         //Galar Shard Traders
@@ -1951,90 +1745,75 @@ export default class GenericDeal {
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Linking_cord, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.White_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Magmarizer, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.TurffieldShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Grass_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Rose_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Sweet_apple, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Rose_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Tart_apple, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Leaf_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Sun_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.HulburyShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Kings_rock, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Prism_scale, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Deepsea_tooth, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Ochre_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Deepsea_scale, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.StowonSideShardTrader = ko.observableArray([
@@ -2042,31 +1821,26 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 10 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 10 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fighting_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Soothe_bell, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dawn_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dubious_disc, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Reaper_cloth, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.BallonleaShardTrader = ko.observableArray([
@@ -2074,31 +1848,26 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Brown_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Cracked_pot, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Moon_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Shiny_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Pink_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Sachet, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Pink_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Whipped_dream, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.HammerlockeShardTrader = ko.observableArray([
@@ -2108,25 +1877,21 @@ export default class GenericDeal {
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 5 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 5 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Grey_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Metal_coat, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Purple_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Upgrade, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Purple_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_scale, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.CirchesterShardTrader = ko.observableArray([
@@ -2134,49 +1899,41 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Lime_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Razor_claw, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Lime_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Razor_fang, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Black_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Protector, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Cyan_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Ice_stone, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.SpikemuthShardTrader = ko.observableArray([
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Electric_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 40 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Thunder_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Crimson_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dusk_stone, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.White_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Electirizer, amount: 1 }],
-
             }),
         ]);
         GenericDeal.list.MasterDojoShardTrader = ko.observableArray([
@@ -2184,13 +1941,11 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Brown_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Galarica_cuff, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Brown_shard, amount: 30 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Galarica_wreath, amount: 1 }],
-
             }),
         ]);
         //Hisui Shard Traders TEST
@@ -2199,27 +1954,22 @@ export default class GenericDeal {
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 10 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 10 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fighting_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Electric_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Grass_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_egg, amount: 1 }],
-
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 5 },
@@ -2227,7 +1977,6 @@ export default class GenericDeal {
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 5 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 5 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_egg, amount: 1 }],
-
             }),
         ]);
     }

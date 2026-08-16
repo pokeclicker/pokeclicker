@@ -222,7 +222,7 @@ export default class SpecialEvents implements Feature {
             Snorlax (Snowman) in Seafoam Islands
         RouteData.ts:
             Santa Jynx
-        ShardDeal.ts:
+        GenericDeal.ts:
             Elf Munchlax
         */
         this.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions and Reindeer Stantler in Johto, discover the mystical creatures of Ilex Forest, Seafoam Islands and Sandgem Town or party at Bill\'s House.',
