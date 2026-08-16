@@ -371,7 +371,7 @@ export default class GenericDeal {
             }),
         ]);
 
-        GenericDeal.list.PirateFence = ko.observableArray(this.generatePirateDeals(date));        
+        GenericDeal.list.PirateFence = ko.observableArray(this.generatePirateDeals(date));
 
         GenericDeal.list.Palaeontologist = ko.observableArray([
             new GenericDeal({
@@ -629,13 +629,13 @@ export default class GenericDeal {
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Green_shard, amount: 5 },
                     { type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 5 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Dragon_egg, amount: 1 }],
-                
+
             }),
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 20 },
-                    { type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 10 }],
+                    { type: DealCostOrProfitType.Shard, shardItem: ItemList.Yellow_shard, amount: 20 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Linking_cord, amount: 1 }],
-                
+
             }),
         ]);
         GenericDeal.list.CinnabarIslandShardTrader = ko.observableArray([
@@ -1786,8 +1786,8 @@ export default class GenericDeal {
         ]);
         GenericDeal.list.KonikoniCityShardTrader = ko.observableArray([
             new GenericDeal({
-                costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Blue_shard, amount: 40 }],
-                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Water_stone, amount: 1 }],
+                costs: [{ type: DealCostOrProfitType.Shard, shardItem: ItemList.Red_shard, amount: 40 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Fire_stone, amount: 1 }],
 
             }),
             new GenericDeal({
@@ -2234,7 +2234,7 @@ export default class GenericDeal {
 
     public static generatePirateDeals(date: Date) {
         SeededRand.seedWithDate(date);
-        
+
         const list = [];
         list.push(
             new GenericDeal({
