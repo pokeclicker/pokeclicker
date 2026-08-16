@@ -4,11 +4,18 @@ import BerryType from '../enums/BerryType';
 import Item from '../items/Item';
 import { ItemList } from '../items/ItemList';
 import GameHelper from '../GameHelper';
-import { Currency } from '../GameConstants';
+import { Currency, Region } from '../GameConstants';
 import Requirement from '../requirements/Requirement';
 import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
+import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
+import SeededRand from '../utilities/SeededRand';
+import DealHelper from './DealHelper';
+import { PokemonRestrictedAttackBonusHeldItem, TypeRestrictedAttackBonusHeldItem } from '../items/HeldItem';
+import CustomRequirement from '../requirements/CustomRequirement';
 
 export type GenericTraderShopIdentifier =
+    'CoinChanger' |
+    'PirateFence' |
     'Palaeontologist' |
     'EverstoneDealer' |
     'FossilCinnabarLab' |
@@ -79,6 +86,7 @@ type GenericDealParams = {
     tradeRequirement?: Requirement;
     visibleRequirement?: Requirement;
     tradeButtonOverride?: string;
+    onTrade?: (tradeTimes: number) => void;
 };
 
 export default class GenericDeal {
@@ -87,6 +95,8 @@ export default class GenericDeal {
     private readonly _tradeRequirement?: Requirement;
     private readonly _visibleRequirement?: Requirement;
     private readonly _tradeButtonOverride?: string;
+    private readonly _maxTrades?: number;
+    private readonly _onTrade?: (tradeTimes: number) => void;
 
     get costs(): DealCost[] {
         return this._costs;
@@ -113,6 +123,7 @@ export default class GenericDeal {
             tradeRequirement = undefined,
             visibleRequirement = undefined,
             tradeButtonOverride = undefined,
+            onTrade = undefined,
         } = params;
 
         this._costs = costs;
@@ -120,6 +131,7 @@ export default class GenericDeal {
         this._tradeRequirement = tradeRequirement;
         this._visibleRequirement = visibleRequirement;
         this._tradeButtonOverride = tradeButtonOverride;
+        this._onTrade = onTrade;
     }
 
     public isVisible(): boolean {
@@ -174,7 +186,6 @@ export default class GenericDeal {
         if (!deal) {
             return false;
         }
-
         // Cap the amount of trades we want to do
         tradeTimes = Math.min(tradeTimes, this.maxTrades(deal));
 
@@ -200,6 +211,8 @@ export default class GenericDeal {
                 case DealCostOrProfitType.Amount: App.game.wallet.addAmount(new Amount(profit.currency.amount * profit.amount * tradeTimes, profit.currency.currency), true); break;
             }
         });
+
+        deal._onTrade?.(tradeTimes);
     }
 
     public static anySoldOut(deal: GenericDeal) {
@@ -240,7 +253,39 @@ export default class GenericDeal {
         }
     }
 
-    public static generateDeals() {
+    public static generateDeals(date: Date) {
+
+        SeededRand.seedWithDate(date);
+
+        GenericDeal.list.CoinChanger = ko.observableArray([
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_copper, amount: 10 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_silver, amount: 1 }],
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_copper, amount: 100 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 1 }],
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_silver, amount: 10 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 1 }],
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_silver, amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_copper, amount: 10 }],
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_silver, amount: 10 }],
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_copper, amount: 100 }],
+            }),
+        ]);
+
+        GenericDeal.list.PirateFence = ko.observableArray(this.generatePirateDeals(date));        
+
         GenericDeal.list.Palaeontologist = ko.observableArray([
             new GenericDeal({
                 costs: [ { type: DealCostOrProfitType.Item, item: ItemList.Palaeontologist_token, amount: 1 } ],
@@ -439,5 +484,76 @@ export default class GenericDeal {
                 tradeButtonOverride: 'Refine',
             }),
         ]);
+    }
+
+    public static generatePirateDeals(date: Date) {
+        SeededRand.seedWithDate(date);
+        
+        const list = [];
+        list.push(
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_copper, amount: 1 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Ultraball, amount: 5, hidePlayerInventory: true }],
+            }));
+
+        for (let i = 0; i < 2; i++) {
+            list.push(new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_silver, amount: 13 + SeededRand.intBetween(-2, 2) }],
+                profits: [{ type: DealCostOrProfitType.Item, item: DealHelper.randomEvoItem(), amount: 1 }],
+            }));
+        }
+        list.push(new GenericDeal({
+            costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 2 }],
+            profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Rare_Candy, amount: 1 }],
+        }));
+
+        const typeBoostItems = SeededRand.shuffleArray(
+            Object.values(ItemList).filter((i) => i instanceof TypeRestrictedAttackBonusHeldItem),
+        ).slice(0, 3);
+        typeBoostItems.forEach((item) => {
+            list.push(new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_silver, amount: 18 + SeededRand.intBetween(-3, 3) }],
+                profits: [{ type: DealCostOrProfitType.Item, item, amount: 1 }],
+                visibleRequirement: new MaxRegionRequirement(Region.johto),
+            }));
+        });
+
+        const pokeballItems = SeededRand.shuffleArray(
+            Object.values(ItemList).filter((i) => i.constructor.name === 'PokeballItem' && !['Pokeball', 'Greatball', 'Ultraball', 'Masterball'].includes(i.name)),
+        ).slice(0, 2);
+        pokeballItems.forEach((item) => {
+            list.push(new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 10 }],
+                profits: [{ type: DealCostOrProfitType.Item, item, amount: 5, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.sinnoh),
+            }));
+        });
+
+        list.push(new GenericDeal({
+            costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 1 }],
+            profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Zorua (Pirate)'], amount: 1, hidePlayerInventory: true }],
+            visibleRequirement: new MaxRegionRequirement(Region.unova),
+        }));
+        list.push(new GenericDeal({
+            costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 8 }],
+            profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Power_Bracer, amount: 1 }],
+            visibleRequirement: new MaxRegionRequirement(Region.alola),
+        }));
+
+        const pokemonBoostItem = SeededRand.fromArray(
+            Object.values(ItemList).filter((i) => i instanceof PokemonRestrictedAttackBonusHeldItem && (i as PokemonRestrictedAttackBonusHeldItem).regionUnlocked <= player.highestRegion()),
+        );
+        if (pokemonBoostItem) {
+            list.push(new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 300 + SeededRand.intBetween(-30, 30) }],
+                profits: [
+                    { type: DealCostOrProfitType.Item, item: pokemonBoostItem, amount: 1 },
+                    { type: DealCostOrProfitType.Item, item: ItemList.Pirate_receipt, amount: 1, hidePlayerInventory: true }],
+                visibleRequirement: new MaxRegionRequirement(Region.galar),
+                tradeRequirement: new CustomRequirement(player.itemList.Pirate_receipt, 0, 'You already traded for this item today.'),
+            }));
+        }
+
+        return list;
     }
 }
