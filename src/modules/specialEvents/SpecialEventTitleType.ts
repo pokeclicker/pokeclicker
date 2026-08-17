@@ -14,6 +14,7 @@ export type SpecialEventTitleType
     | 'Golden Week'
     | 'Flying Pikachu'
     | 'Mewtwo strikes back!'
+    | 'A Pirate\'s Life'
     | 'Halloween!'
     | 'Let\'s GO!'
     | 'Merry Christmas!';

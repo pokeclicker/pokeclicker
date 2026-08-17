@@ -154,7 +154,7 @@ export default class GameHelper {
         return res;
     }
 
-    public static saveFileName(nameFormat : string, changes : Record<string, string>, isBackup = false) {
+    public static saveFileName(nameFormat: string, changes: Record<string, string>, isBackup = false) {
         return `${Object.entries(changes).reduce((filename, [format, value]) => filename.replace(format, value), nameFormat)}${isBackup ? ' Backup' : ''}.txt`;
     }
 

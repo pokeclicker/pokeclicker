@@ -20,24 +20,6 @@ class BerryDeal {
         return BerryDeal.list[town];
     }
 
-    private static randomBerry(berryList: BerryType[]): BerryType {
-        return SeededRand.fromArray(berryList);
-    }
-
-    private static randomBattleItem(): Item {
-        const battleItem = SeededRand.fromArray(GameHelper.enumStrings(GameConstants.BattleItemType));
-        return ItemList[battleItem];
-    }
-
-    private static randomEvoItem(): Item {
-        const evoItem = SeededRand.fromArray(GameHelper.enumStrings(GameConstants.StoneType).filter(name => !(['None', 'Black_DNA', 'White_DNA', 'Solar_light', 'Key_stone', 'Lunar_light', 'Pure_light', 'Crystallized_shadow', 'Black_mane_hair', 'White_mane_hair']).includes(name)));
-        return ItemList[evoItem];
-    }
-
-    private static randomUndergroundItem(): Item {
-        return ItemList[SeededRand.fromArray(UndergroundItems.list.filter(item => item.valueType !== UndergroundItemValueType.MegaStone && item.valueType !== UndergroundItemValueType.Special)).itemName];
-    }
-
     private static randomPokeballDeal(): BerryDeal {
         const firstGen = Farming.getGeneration(0);
         const secondGen = Farming.getGeneration(1);
@@ -46,8 +28,8 @@ class BerryDeal {
         return SeededRand.fromArray([
             new BerryDeal(
                 [
-                    this.randomBerry(firstGen),
-                    this.randomBerry(secondGen),
+                    DealHelper.randomBerry(firstGen),
+                    DealHelper.randomBerry(secondGen),
                 ],
                 [
                     SeededRand.intBetween(20, 40),
@@ -58,8 +40,8 @@ class BerryDeal {
             ),
             new BerryDeal(
                 [
-                    this.randomBerry(firstGen),
-                    this.randomBerry(secondGen),
+                    DealHelper.randomBerry(firstGen),
+                    DealHelper.randomBerry(secondGen),
                 ],
                 [
                     SeededRand.intBetween(20, 40),
@@ -70,8 +52,8 @@ class BerryDeal {
             ),
             new BerryDeal(
                 [
-                    this.randomBerry(firstGen),
-                    this.randomBerry(secondGen),
+                    DealHelper.randomBerry(firstGen),
+                    DealHelper.randomBerry(secondGen),
                 ],
                 [
                     SeededRand.intBetween(20, 40),
@@ -82,8 +64,8 @@ class BerryDeal {
             ),
             new BerryDeal(
                 [
-                    this.randomBerry(firstGen),
-                    this.randomBerry(secondGen),
+                    DealHelper.randomBerry(firstGen),
+                    DealHelper.randomBerry(secondGen),
                 ],
                 [
                     SeededRand.intBetween(20, 40),
@@ -94,8 +76,8 @@ class BerryDeal {
             ),
             new BerryDeal(
                 [
-                    this.randomBerry(firstGen),
-                    this.randomBerry(secondGen),
+                    DealHelper.randomBerry(firstGen),
+                    DealHelper.randomBerry(secondGen),
                 ],
                 [
                     SeededRand.intBetween(20, 40),
@@ -106,9 +88,9 @@ class BerryDeal {
             ),
             new BerryDeal(
                 [
-                    this.randomBerry(firstGen),
-                    this.randomBerry(secondGen),
-                    this.randomBerry(thirdGen),
+                    DealHelper.randomBerry(firstGen),
+                    DealHelper.randomBerry(secondGen),
+                    DealHelper.randomBerry(thirdGen),
                 ],
                 [
                     SeededRand.intBetween(20, 40),
@@ -151,29 +133,29 @@ class BerryDeal {
 
         list.push(new BerryDeal(
             [
-                this.randomBerry(firstGen),
-                this.randomBerry(secondGen),
+                DealHelper.randomBerry(firstGen),
+                DealHelper.randomBerry(secondGen),
             ],
             [
                 SeededRand.intBetween(30, 70),
                 SeededRand.intBetween(10, 30),
             ],
-            this.randomBattleItem(),
+            DealHelper.randomBattleItem(),
             SeededRand.intBetween(3, 7)
         ));
 
         list.push(new BerryDeal(
             [
-                this.randomBerry(firstGen),
-                this.randomBerry(secondGen),
-                this.randomBerry(thirdGen),
+                DealHelper.randomBerry(firstGen),
+                DealHelper.randomBerry(secondGen),
+                DealHelper.randomBerry(thirdGen),
             ],
             [
                 SeededRand.intBetween(70, 130),
                 SeededRand.intBetween(30, 70),
                 SeededRand.intBetween(10, 30),
             ],
-            this.randomEvoItem(),
+            DealHelper.randomEvoItem(),
             SeededRand.intBetween(1, 3)
         ));
 
@@ -192,14 +174,14 @@ class BerryDeal {
         while (i < maxTries && temp.length < 3) {
             const deal = new BerryDeal(
                 [
-                    this.randomBerry(thirdGen),
-                    this.randomBerry(fourthGen),
+                    DealHelper.randomBerry(thirdGen),
+                    DealHelper.randomBerry(fourthGen),
                 ],
                 [
                     SeededRand.intBetween(30, 70),
                     SeededRand.intBetween(10, 30),
                 ],
-                this.randomUndergroundItem(),
+                DealHelper.randomUndergroundItem(),
                 SeededRand.intBetween(1, 3)
             );
             if (temp.every(madeDeal => madeDeal.item.name !== deal.item.itemType.name)) {
@@ -228,11 +210,11 @@ class BerryDeal {
 
         list.push(new BerryDeal(
             [
-                this.randomBerry(firstGen),
-                this.randomBerry(secondGen),
-                this.randomBerry(thirdGen),
-                this.randomBerry(fourthGen),
-                this.randomBerry(fifthGen),
+                DealHelper.randomBerry(firstGen),
+                DealHelper.randomBerry(secondGen),
+                DealHelper.randomBerry(thirdGen),
+                DealHelper.randomBerry(fourthGen),
+                DealHelper.randomBerry(fifthGen),
             ],
             [
                 SeededRand.intBetween(500, 1000),
@@ -246,14 +228,14 @@ class BerryDeal {
         ));
 
         list.push(new BerryDeal(
-            [this.randomBerry(fourthGen)],
+            [DealHelper.randomBerry(fourthGen)],
             [SeededRand.intBetween(50, 100)],
             ItemList.Protein,
             1
         ));
 
         list.push(new BerryDeal(
-            [this.randomBerry(fifthGen)],
+            [DealHelper.randomBerry(fifthGen)],
             [SeededRand.intBetween(10, 50)],
             ItemList.Calcium,
             1
@@ -339,9 +321,9 @@ class BerryDeal {
         const pokeballList = [
             new BerryDeal(
                 [
-                    this.randomBerry(firstGen),
-                    this.randomBerry(secondGen),
-                    this.randomBerry(thirdGen),
+                    DealHelper.randomBerry(firstGen),
+                    DealHelper.randomBerry(secondGen),
+                    DealHelper.randomBerry(thirdGen),
                 ],
                 [
                     SeededRand.intBetween(20, 40),
@@ -353,9 +335,9 @@ class BerryDeal {
             ),
             new BerryDeal(
                 [
-                    this.randomBerry(firstGen),
-                    this.randomBerry(secondGen),
-                    this.randomBerry(thirdGen),
+                    DealHelper.randomBerry(firstGen),
+                    DealHelper.randomBerry(secondGen),
+                    DealHelper.randomBerry(thirdGen),
                 ],
                 [
                     SeededRand.intBetween(20, 40),
@@ -367,9 +349,9 @@ class BerryDeal {
             ),
             new BerryDeal(
                 [
-                    this.randomBerry(firstGen),
-                    this.randomBerry(secondGen),
-                    this.randomBerry(thirdGen),
+                    DealHelper.randomBerry(firstGen),
+                    DealHelper.randomBerry(secondGen),
+                    DealHelper.randomBerry(thirdGen),
                 ],
                 [
                     SeededRand.intBetween(20, 40),
@@ -381,9 +363,9 @@ class BerryDeal {
             ),
             new BerryDeal(
                 [
-                    this.randomBerry(firstGen),
-                    this.randomBerry(secondGen),
-                    this.randomBerry(thirdGen),
+                    DealHelper.randomBerry(firstGen),
+                    DealHelper.randomBerry(secondGen),
+                    DealHelper.randomBerry(thirdGen),
                 ],
                 [
                     SeededRand.intBetween(20, 40),
@@ -397,19 +379,19 @@ class BerryDeal {
 
         const vitaminList = [
             new BerryDeal(
-                [this.randomBerry(fourthGen)],
+                [DealHelper.randomBerry(fourthGen)],
                 [SeededRand.intBetween(50, 100)],
                 ItemList.Protein,
                 1
             ),
             new BerryDeal(
-                [this.randomBerry(fifthGen)],
+                [DealHelper.randomBerry(fifthGen)],
                 [SeededRand.intBetween(10, 50)],
                 ItemList.Calcium,
                 1
             ),
             new BerryDeal(
-                [this.randomBerry(fifthGen)],
+                [DealHelper.randomBerry(fifthGen)],
                 [SeededRand.intBetween(10, 50)],
                 ItemList.Carbos,
                 1

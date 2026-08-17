@@ -34,64 +34,57 @@
         <span>Pokémon List</span>
     </div>
     <div id="pokemonListBody" class="card-body p-0 show">
-        <div class="table-responsive d-flex flex-column"  data-bind="resizable: { setting: 'pokemonList' }">
-            <div class="flex-grow-1 flex-shrink-1" style="overflow: auto;">
+        <div class="table-responsive d-flex flex-column" data-bind="resizable: { setting: 'pokemonList' }">
+            <div class="flex-grow-1 flex-shrink-1 text-left" style="overflow: auto;">
                 <div data-bind="template: { name: 'PartySortSettingTemplate', data: Settings.getSetting('partySort')}"></div>
-                <table id="pokemonList" class="table table-striped table-hover table-sm m-0">
-                    <thead>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <div>
-                                    <div class="pokemonName">
-                                        <span>Name</span>
-                                    </div>
-                                    <div class="pokemonAttack">Attack</div>
-                                    <div class="pokemonLevel">Level</div>
-                                </div>
-                            </td>
-                        </tr>
-                    </thead>
-
-                    <tbody data-bind="let: { lazyPokemonList: lazyLoad('lazyPokemonList', $element, PartyController.getSortedList, { pageSize: 20, reset: () => (DisplayObservables.collapseState.pokemonListBody === 'hidden'), pause: () => DisplayObservables.collapseState.pokemonListBody !== 'show' }) }">
+                <div data-bind="let: {
+                    lazyPokemonList: lazyLoad('lazyPokemonList', $element, PartyController.getSortedList, { pageSize: 20, reset: () => (DisplayObservables.collapseState.pokemonListBody === 'hidden'), pause: () => DisplayObservables.collapseState.pokemonListBody !== 'show' }),
+                    showAtkLabel: player.highestRegion() == GameConstants.Region.kanto,
+                }">
                     <!-- ko if: DisplayObservables.collapseState.pokemonListBody !== 'hidden' -->
                         <!-- ko foreach: lazyPokemonList, childrenComplete: () => { lazyLoadCallback('lazyPokemonList'); } -->
-                        <tr data-toggle="modal" class="clickable" href="#pokemonStatisticsModal" data-bind="hidden: $data.breeding, click: () => { App.game.statistics.selectedPokemonID($data.id) }">
-                            <td>
-                                <img
-                                    class="smallImage"
-                                    data-bind="attr: { src: PokemonHelper.getImage($data.id) }"
-                                    src=""
-                                    alt=""
-                                />
-                            </td>
-                            <td>
-                                <div>
-                                    <div class="pokemonName">
-                                        <span data-bind="text: displayName">Name</span>
-                                        <sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
-                                        <img class="shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
-                                        <img class="shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
-                                        <!-- ko foreach: PokemonHelper.getMegaStones($data.name).filter(s => player.hasMegaStone(s.megaStone)) -->
-                                        <img width="20px" data-bind="attr: { src: $data.image },
-                                            tooltip: {
-                                                title: pokemonMap[$parent.name].evolutions.flatMap(e => e.restrictions)
-                                                    .find(r => r instanceof MegaEvolveRequirement && r.megaStone == $data.megaStone)?.hint() ?? '',
-                                                trigger: 'hover',
-                                                placement: 'bottom'
-                                        }"/>
-                                        <!-- /ko -->
+                            <div class="d-flex align-items-center small px-1 border-bottom pokemon-row clickable" href="#pokemonStatisticsModal" data-toggle="modal"
+                                data-bind="hidden: $data.breeding, click: () => { App.game.statistics.selectedPokemonID($data.id) }">
+                                <img data-bind="attr: { src: PokemonHelper.getImage($data.id) }" style="max-height: 52px;" src="" alt="" />
+                                <div class="flex-grow-1">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <knockout data-bind="text: displayName"></knockout>
+                                            <sup data-bind="visible: $data.shiny">✨</sup>
+                                        </div>
+
+                                        <div class="ml-auto text-right text-nowrap">
+                                            <knockout class="text-muted small">Lv</knockout>
+                                            <knockout data-bind="text: level"></knockout>
+                                        </div>
                                     </div>
-                                    <div class="pokemonAttack" data-bind="text: attack.toLocaleString('en-US')"></div>
-                                    <div class="pokemonLevel" data-bind="text: level"></div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="text-muted">
+                                            <small class="attack-label" data-bind="visible: showAtkLabel">Atk</small>
+                                            <knockout title="Attack Power" data-bind="text: attack.toLocaleString('en-US')"></knockout>
+                                        </div>
+                                        <div class="ml-auto text-right d-flex align-items-center">
+                                            <!-- ko foreach: PokemonHelper.getMegaStones($data.name).filter(s => player.hasMegaStone(s.megaStone)) -->
+                                            <img width="18" data-bind="attr: { src: $data.image },
+                                                tooltip: {
+                                                    title: pokemonMap[$parent.name].evolutions.flatMap(e => e.restrictions)
+                                                        .find(r => r instanceof MegaEvolveRequirement && r.megaStone == $data.megaStone)?.hint() ?? '',
+                                                    trigger: 'hover',
+                                                    placement: 'bottom'
+                                            }"/>
+                                            <!-- /ko -->
+                                            <img class="shadow-icon" src="assets/images/status/shadow.svg" title="Shadow" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
+                                            <img class="shadow-icon" src="assets/images/status/purified.svg" title="Purified" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
+                                            <img class="ml-1" width="28" data-bind="visible: $data.pokerus, attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[$data.pokerus]}.png`}" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </td>
-                        </tr>
+                            </div>
                         <!-- /ko -->
                     <!-- /ko -->
-                    </tbody>
-                </table>
+                </div>
             </div>
+
             <!-- Reserved space for resize drag handle -->
             <div class="card-footer py-2"></div>
         </div>

@@ -58,11 +58,11 @@ class ExternalHelper {
             if (r instanceof DevelopmentRequirement) {
                 containsDevRequirement = true;
             } else if (r instanceof QuestLineCompletedRequirement) {
-                containsDevRequirement = ExternalHelper.isInLiveVersion(r.cachedQuest);
+                containsDevRequirement = ExternalHelper.isInLiveVersion(r.quest);
             } else if (r instanceof QuestLineStartedRequirement) {
-                containsDevRequirement = ExternalHelper.isInLiveVersion(r.cachedQuest);
+                containsDevRequirement = ExternalHelper.isInLiveVersion(r.quest);
             } else if (r instanceof QuestLineStepCompletedRequirement) {
-                containsDevRequirement = ExternalHelper.isInLiveVersion(r.cachedQuest);
+                containsDevRequirement = ExternalHelper.isInLiveVersion(r.quest);
             } else if (r instanceof TemporaryBattleRequirement) {
                 containsDevRequirement = ExternalHelper.isInLiveVersion(TemporaryBattleList[r.battleName]);
             } else if (r instanceof RouteKillRequirement) {

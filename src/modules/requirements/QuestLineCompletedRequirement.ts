@@ -1,21 +1,15 @@
-import { AchievementOption } from '../GameConstants';
+import { AchievementOption, AchievementType } from '../GameConstants';
 import QuestLineState from '../quests/QuestLineState';
 import { QuestLineNameType } from '../quests/QuestLineNameType';
-import type { TmpQuestType } from '../TemporaryScriptTypes';
+import AchievementRequirement from './AchievementRequirement';
 
-import Requirement from './Requirement';
-
-export default class QuestLineCompletedRequirement extends Requirement {
-    cachedQuest: TmpQuestType;
+export default class QuestLineCompletedRequirement extends AchievementRequirement {
     get quest() {
-        if (!this.cachedQuest) {
-            this.cachedQuest = App.game.quests.getQuestLine(this.questLineName);
-        }
-        return this.cachedQuest;
+        return App.game.quests.getQuestLine(this.questLineName);
     }
 
     constructor(private questLineName: QuestLineNameType, option = AchievementOption.equal) {
-        super(1, option);
+        super(1, option, AchievementType.Quest);
     }
 
     public getProgress(): number {

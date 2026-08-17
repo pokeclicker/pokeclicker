@@ -47,18 +47,14 @@ class Save {
         }
     }
 
-    public static download() {
+    public static async download() {
         const backupSaveData = {player, save: this.getSaveObject(), settings: Settings.toJSON()};
         try {
-            const element = SaveSelector.createDownloadElement(backupSaveData, App.game.update.version);
-            element.style.display = 'none';
-            document.body.appendChild(element);
+            const downloaded = await SaveSelector.downloadSaveData(backupSaveData, App.game.update.version);
 
-            element.click();
-
-            document.body.removeChild(element);
-
-            App.game.saveReminder.lastDownloaded(App.game.statistics.secondsPlayed());
+            if (downloaded) {
+                App.game.saveReminder.lastDownloaded(App.game.statistics.secondsPlayed());
+            }
         } catch (err) {
             console.error('Error trying to download save', err);
             Notifier.notify({
@@ -73,14 +69,36 @@ class Save {
         }
     }
 
-    public static copySaveToClipboard() {
-        const backupSaveData = {player, save: this.getSaveObject(), settings: Settings.toJSON()};
-        navigator.clipboard.writeText(SaveSelector.btoa(JSON.stringify(backupSaveData)));
-        Notifier.notify({
-            title: 'Save copied',
-            message: 'Please paste the clipboard contents into a new \'.txt\' file.',
-            type: NotificationConstants.NotificationOption.info,
-        });
+    public static async copySaveToClipboard() {
+        const getSaveString = () => SaveSelector.btoa(JSON.stringify({player, save: this.getSaveObject(), settings: Settings.toJSON()}));
+        try {
+            if (typeof ClipboardItem !== 'undefined' && navigator.clipboard?.write) {
+                // Serialializing a large save can outlast the user-gesture window on slow
+                // devices, so hand the clipboard a promise and serialize after write() starts
+                const saveData = Promise.resolve().then(() => new Blob([getSaveString()], { type: 'text/plain' }));
+                try {
+                    await navigator.clipboard.write([new ClipboardItem({ 'text/plain': saveData })]);
+                } catch (err) {
+                    // Some browsers don't accept promise-based ClipboardItem data
+                    await navigator.clipboard.writeText(getSaveString());
+                }
+            } else {
+                await navigator.clipboard.writeText(getSaveString());
+            }
+            Notifier.notify({
+                title: 'Save copied',
+                message: 'Please paste the clipboard contents into a new \'.txt\' file.',
+                type: NotificationConstants.NotificationOption.info,
+            });
+        } catch (err) {
+            console.error('Error trying to copy save', err);
+            Notifier.notify({
+                title: 'Failed to copy save data',
+                message: 'Please try the Download Save button instead.',
+                type: NotificationConstants.NotificationOption.danger,
+                timeout: 6e4,
+            });
+        }
     }
 
     public static async delete(): Promise<void> {
