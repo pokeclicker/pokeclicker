@@ -146,7 +146,7 @@ export default class SaveSelector {
         }
     }
 
-    static Download(key: string): void {
+    static async Download(key: string): Promise<void> {
         try {
             // Load save data
             const saveData = JSON.parse(localStorage[`save${key}`]);
@@ -164,14 +164,7 @@ export default class SaveSelector {
                 settings: settingsData,
             };
 
-            // Create a download element
-            const element = SaveSelector.createDownloadElement(data, data.save.update.version);
-            element.style.display = 'none';
-            document.body.appendChild(element);
-
-            element.click();
-
-            document.body.removeChild(element);
+            await SaveSelector.downloadSaveData(data, data.save.update.version);
         } catch (err) {
             console.error('Error trying to download save', err);
             Notifier.notify({
@@ -183,11 +176,21 @@ export default class SaveSelector {
         }
     }
 
-    static createDownloadElement(data, versionNumber, isBackup = false) {
+    private static getDownloadFileName(data, versionNumber, isBackup: boolean): string {
         const filename = data.settings.saveFilename || Settings.getSetting('saveFilename').defaultValue;
         const datestr = formatDate(new Date());
         const profile = data.save.profile?.name ?? 'Trainer';
-        const downloadFileName = GameHelper.saveFileName(filename, { '{date}': datestr, '{version}': versionNumber, '{name}': profile }, isBackup);
+        return GameHelper.saveFileName(filename, { '{date}': datestr, '{version}': versionNumber, '{name}': profile }, isBackup);
+    }
+
+    static createDownloadElement(data, versionNumber, isBackup = false) {
+        const downloadFileName = SaveSelector.getDownloadFileName(data, versionNumber, isBackup);
         return DownloadUtil.createDownloadElement(SaveSelector.btoa(JSON.stringify(data)), downloadFileName);
+    }
+
+    // Resolves true once the file has been handed to the browser, false if the user cancelled
+    static downloadSaveData(data, versionNumber, isBackup = false): Promise<boolean> {
+        const downloadFileName = SaveSelector.getDownloadFileName(data, versionNumber, isBackup);
+        return DownloadUtil.downloadTextFile(SaveSelector.btoa(JSON.stringify(data)), downloadFileName);
     }
 }

@@ -145,7 +145,7 @@ class QuestLineHelper {
         const pewter = new DefeatGymQuest(1, 0, 'Pewter City').withDescription('Defeat Pewter City Gym. Click the town on the map to move there, then click the Gym button to start the battle.').withInitialValue(0).withCustomReward(pewterReward);
         tutorial.addQuest(pewter);
 
-        App.game.quests.questLines().push(tutorial);
+        App.game.quests.questLines.push(tutorial);
     }
 
     // Available upon talking with Bill's Grandpa.
@@ -243,7 +243,7 @@ class QuestLineHelper {
         const talkToBillsGrandpa7 = new TalkToNPCQuest(BillsGrandpa7, 'Talk to Bill\'s Grandpa one last time.').withCustomReward(EeveeReward);
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa7);
 
-        App.game.quests.questLines().push(BillsGrandpaQuestLine);
+        App.game.quests.questLines.push(BillsGrandpaQuestLine);
     }
 
     // Started upon defeating Cerulean City's gym.
@@ -290,7 +290,7 @@ class QuestLineHelper {
         const clearViridianGym = new DefeatGymQuest(1, 0, 'Viridian City').withCustomReward(ViridianGymReward).withDescription('If you take down Team Rocket\'s leader one more time they will surely never come back from this! Clear Viridian City Gym.');
         rocketKantoQuestLine.addQuest(clearViridianGym);
 
-        App.game.quests.questLines().push(rocketKantoQuestLine);
+        App.game.quests.questLines.push(rocketKantoQuestLine);
     }
 
     // Started upon defeating Fuchsia City's gym.
@@ -315,7 +315,7 @@ class QuestLineHelper {
         const mineLayers = new MineLayersQuest(5, 0).withDescription('Collect all buried treasure 5 times in the Underground mines.').withCustomReward(oldAmberReward);
         undergroundQuestLine.addQuest(mineLayers);
 
-        App.game.quests.questLines().push(undergroundQuestLine);
+        App.game.quests.questLines.push(undergroundQuestLine);
     }
 
     // Started upon defeating Cinnabar Island's gym.
@@ -357,7 +357,7 @@ class QuestLineHelper {
         const talktoCelio2 = new TalkToNPCQuest(OneIslandCelio2, 'Deliver the meteorite to Celio on One Island.').withCustomReward(BillsErrandReward);
         billSeviiQuestLine.addQuest(talktoCelio2);
 
-        App.game.quests.questLines().push(billSeviiQuestLine);
+        App.game.quests.questLines.push(billSeviiQuestLine);
     }
 
     // Started upon defeating Viridian City's gym.
@@ -370,7 +370,7 @@ class QuestLineHelper {
         const talktoGemScientist = new TalkToNPCQuest(PewterScientist, 'Talk to the Gem Scientist in Pewter City.', 250);
         personsofInterestQuestLine.addQuest(talktoGemScientist);
 
-        App.game.quests.questLines().push(personsofInterestQuestLine);
+        App.game.quests.questLines.push(personsofInterestQuestLine);
     }
 
     /* Johto QuestLines */
@@ -400,7 +400,7 @@ class QuestLineHelper {
         const talkToJasmine2 = new TalkToNPCQuest(OlivineLighthouseJasmine2, 'Talk to Jasmine in the Olivine Lighthouse.');
         sickAmpharosQuestLine.addQuest(talkToJasmine2);
 
-        App.game.quests.questLines().push(sickAmpharosQuestLine);
+        App.game.quests.questLines.push(sickAmpharosQuestLine);
     }
 
     // Started upon defeating Ecruteak City's gym.
@@ -426,7 +426,7 @@ class QuestLineHelper {
         const clearRadioTower = new DefeatDungeonQuest(1, 0, 'Radio Tower').withDescription('Clear the Radio Tower dungeon in Goldenrod City').withCustomReward(radioTowerReward);
         rocketJohtoQuestLine.addQuest(clearRadioTower);
 
-        App.game.quests.questLines().push(rocketJohtoQuestLine);
+        App.game.quests.questLines.push(rocketJohtoQuestLine);
     }
 
     // Available upon clearing Route 37
@@ -458,7 +458,7 @@ class QuestLineHelper {
                 catchSuicune,
             ], 'Catch the Legendary Beasts.'));
 
-        App.game.quests.questLines().push(johtoBeastsQuestLine);
+        App.game.quests.questLines.push(johtoBeastsQuestLine);
     }
     public static createJohtoSuicuneQuestLine() {
         const johtoSuicuneQuestLine = new QuestLine('Eusine\'s Chase', 'Eusine is looking for Suicune.');
@@ -500,7 +500,7 @@ class QuestLineHelper {
 
         johtoSuicuneQuestLine.addQuest(catchRoute25Suicune);
 
-        App.game.quests.questLines().push(johtoSuicuneQuestLine);
+        App.game.quests.questLines.push(johtoSuicuneQuestLine);
     }
 
     // Lugia Quest - Available upon clearing Rocket Johto questline
@@ -550,7 +550,7 @@ class QuestLineHelper {
         const LugiaCatch = new CaptureSpecificPokemonQuest('Lugia').withDescription('Catch Lugia in the Whirl Islands.');
         lugiaJohtoQuestLine.addQuest(LugiaCatch);
 
-        App.game.quests.questLines().push(lugiaJohtoQuestLine);
+        App.game.quests.questLines.push(lugiaJohtoQuestLine);
     }
 
     // Ho-Oh Quest - Available upon clearing Lugia questline
@@ -566,7 +566,7 @@ class QuestLineHelper {
         const HoohCatch = new CaptureSpecificPokemonQuest('Ho-Oh').withDescription('Catch Ho-Oh in the Tin Tower.');
         hoohJohtoQuestLine.addQuest(HoohCatch);
 
-        App.game.quests.questLines().push(hoohJohtoQuestLine);
+        App.game.quests.questLines.push(hoohJohtoQuestLine);
     }
 
     // Available upon completing Bill's Errand
@@ -619,7 +619,7 @@ class QuestLineHelper {
         const talktoProfOak6 = new TalkToNPCQuest(AzaleaCelebiOak5, 'Talk to Professor Oak in Azalea Town.');
         celebiJohtoQuestLine.addQuest(talktoProfOak6);
 
-        App.game.quests.questLines().push(celebiJohtoQuestLine);
+        App.game.quests.questLines.push(celebiJohtoQuestLine);
     }
 
     /* Hoenn QuestLines */
@@ -653,7 +653,7 @@ class QuestLineHelper {
         const clearSeafloorCavern = new DefeatDungeonQuest(1, 0, 'Seafloor Cavern').withDescription('Team Aqua\'s leader Archie escaped from their hideout. Find him in the Seafloor Cavern and put a stop to this once and for all!').withCustomReward(seafloorCavernReward);
         aquaMagmaHoennQuestLine.addQuest(clearSeafloorCavern);
 
-        App.game.quests.questLines().push(aquaMagmaHoennQuestLine);
+        App.game.quests.questLines.push(aquaMagmaHoennQuestLine);
     }
 
     // Weather Trio - Available upon clearing Aqua/Magma questline
@@ -692,7 +692,7 @@ class QuestLineHelper {
             ], 'Catch the Weather Trio.'));
 
 
-        App.game.quests.questLines().push(weatherTrioQuestLine);
+        App.game.quests.questLines.push(weatherTrioQuestLine);
     }
 
     // Deoxys - Available post-E4
@@ -743,7 +743,7 @@ class QuestLineHelper {
         const reachStage100 = new CustomQuest(1, 0, 'Enter the Battle Frontier and defeat stage 100.', () => +deoxysMilestone.obtained()).withInitialValue(0).withCustomReward(reachStage100Reward);
         deoxysQuestLine.addQuest(reachStage100);
 
-        App.game.quests.questLines().push(deoxysQuestLine);
+        App.game.quests.questLines.push(deoxysQuestLine);
     }
     // Eon Duo - Available post-E4
     public static createEonDuoQuestLine() {
@@ -771,7 +771,7 @@ class QuestLineHelper {
                 catchLatios,
             ], 'Catch the Eon Duo.'));
 
-        App.game.quests.questLines().push(eonDuoQuestLine);
+        App.game.quests.questLines.push(eonDuoQuestLine);
     }
 
     // Ruby/Sapphire - Available post-E4
@@ -827,7 +827,7 @@ class QuestLineHelper {
         const talktoCelio5 = new TalkToNPCQuest(OneIslandCelio6, 'Return the Sapphire to Celio on One Island');
         rubySapphireSeviiQuestLine.addQuest(talktoCelio5);
 
-        App.game.quests.questLines().push(rubySapphireSeviiQuestLine);
+        App.game.quests.questLines.push(rubySapphireSeviiQuestLine);
     }
 
     // Rocket Pinkan - Available post-Orange
@@ -863,7 +863,7 @@ class QuestLineHelper {
         const clearPinkanOfficerJenny = new DefeatTemporaryBattleQuest('Pinkan Officer Jenny', 'Oh no! Officer Jenny has showed up. She\'s not happy! No time to plead your case, it\'s time to battle!');
         pinkanThemeparkQuestLine.addQuest(clearPinkanOfficerJenny);
 
-        App.game.quests.questLines().push(pinkanThemeparkQuestLine);
+        App.game.quests.questLines.push(pinkanThemeparkQuestLine);
     }
 
     // Regi Trio Quest - Available upon clearing Mossdeep City's Gym
@@ -920,7 +920,7 @@ class QuestLineHelper {
                 catchRegisteel,
             ], 'Catch the Regi Trio.'));
 
-        App.game.quests.questLines().push(regiTrioQuestLine);
+        App.game.quests.questLines.push(regiTrioQuestLine);
     }
 
     // Jirachi Quest - Available post-E4
@@ -958,7 +958,7 @@ class QuestLineHelper {
 
         jirachiQuestLine.addQuest(catchJirachi);
 
-        App.game.quests.questLines().push(jirachiQuestLine);
+        App.game.quests.questLines.push(jirachiQuestLine);
     }
 
     // Meta Groudon Quest - Available post-Jirachi, must have obtained Groudon
@@ -990,7 +990,7 @@ class QuestLineHelper {
         const catchMetaGroudon = new CaptureSpecificPokemonQuest('Meta Groudon').withDescription('Butler has revived Meta Groudon at Mt. Chimney Crater. Catch Meta Groudon.');
         metaGroudonQuestLine.addQuest(catchMetaGroudon);
 
-        App.game.quests.questLines().push(metaGroudonQuestLine);
+        App.game.quests.questLines.push(metaGroudonQuestLine);
     }
 
     // Orre Questlines - Available post-Hoenn-E4
@@ -1118,7 +1118,7 @@ class QuestLineHelper {
         const watchEviceEscape = new TalkToNPCQuest(EviceEscape, 'Just when you have him cornered, Evice calls in a helicopter. Watch him escape the Realgam Colosseum.'); // Step 26
         orreColosseumQuestLine.addQuest(watchEviceEscape);
 
-        App.game.quests.questLines().push(orreColosseumQuestLine);
+        App.game.quests.questLines.push(orreColosseumQuestLine);
     }
 
     /* Sinnoh QuestLines */
@@ -1173,7 +1173,7 @@ class QuestLineHelper {
             .withCustomReward(DistortionWorldReward);
         galacticSinnohQuestLine.addQuest(clearDistortionWorld);
 
-        App.game.quests.questLines().push(galacticSinnohQuestLine);
+        App.game.quests.questLines.push(galacticSinnohQuestLine);
     }
 
     // Manaphy Quest - Available upon defeating Eterna City's Gym
@@ -1267,7 +1267,7 @@ class QuestLineHelper {
 
         manaphyQuestLine.addQuest(talkHastings4);
 
-        App.game.quests.questLines().push(manaphyQuestLine);
+        App.game.quests.questLines.push(manaphyQuestLine);
     }
 
     // Giratina quest - Available post-E4, must have obtained Azelf, Mesprit, and Uxie
@@ -1326,7 +1326,7 @@ class QuestLineHelper {
         const talktoZero4 = new TalkToNPCQuest(SendoffSpringZero2, 'Talk to Zero in Sendoff Spring.');
         giratinaQuestLine.addQuest(talktoZero4);
 
-        App.game.quests.questLines().push(giratinaQuestLine);
+        App.game.quests.questLines.push(giratinaQuestLine);
     }
 
     /* Unova QuestLines */
@@ -1448,7 +1448,7 @@ class QuestLineHelper {
         const clearGhetsis2 = new DefeatTemporaryBattleQuest('Ghetsis 2', 'Defeat Ghetsis one final time!').withCustomReward(ghetsisReward);
         plasmaUnovaQuestLine.addQuest(clearGhetsis2);
 
-        App.game.quests.questLines().push(plasmaUnovaQuestLine);
+        App.game.quests.questLines.push(plasmaUnovaQuestLine);
     }
 
     // Destiny Deoxys Quest
@@ -1490,7 +1490,7 @@ class QuestLineHelper {
         const talkToDeoxys = new TalkToNPCQuest(destinyDeoxysReunion, 'Rayquaza realized that the Deoxys are no threat. Reunite the Purple and Green Gemmed Deoxys.');
         destinyDeoxysQuest.addQuest(talkToDeoxys);
 
-        App.game.quests.questLines().push(destinyDeoxysQuest);
+        App.game.quests.questLines.push(destinyDeoxysQuest);
     }
 
     // Swords of Justice quest
@@ -1576,7 +1576,7 @@ class QuestLineHelper {
             'The Swords of Justice all depart for their homes to wait for your arrival. Go catch your new friends and add them to your team!'
         ));
 
-        App.game.quests.questLines().push(swordsofJusticeQuest);
+        App.game.quests.questLines.push(swordsofJusticeQuest);
     }
 
     // Genesect quest - Available after clearing P2 lab
@@ -1615,7 +1615,7 @@ class QuestLineHelper {
         const catchGenesect = new CaptureSpecificPokemonQuest('Genesect').withDescription('Catch Genesect in P2 Lab.');
         genesectQuestLine.addQuest(catchGenesect);
 
-        App.game.quests.questLines().push(genesectQuestLine);
+        App.game.quests.questLines.push(genesectQuestLine);
     }
 
     // XD Questline, available after Unova E4
@@ -1749,7 +1749,7 @@ class QuestLineHelper {
         const fightCitadarkIsleDome = new DefeatDungeonQuest(1, 0, 'Citadark Isle Dome').withDescription('Defeat Grand Master Greevil and XD001 in the Citadark Isle Dome.');
         orreXDQuestLine.addQuest(fightCitadarkIsleDome);
 
-        App.game.quests.questLines().push(orreXDQuestLine);
+        App.game.quests.questLines.push(orreXDQuestLine);
     }
 
     /* Kalos QuestLines */
@@ -1946,7 +1946,7 @@ class QuestLineHelper {
         const battleAZ1 = new DefeatTemporaryBattleQuest('AZ', 'What an amazing trainer! You became Kalos Champion! There is a parade in your honor in Lumiose City. But wait, AZ is there asking you for a battle. Show him what being a Pokémon Trainer is like!').withCustomReward(this.itemReward('Key_stone', 1));
         flareKalosQuestLine.addQuest(battleAZ1);
 
-        App.game.quests.questLines().push(flareKalosQuestLine);
+        App.game.quests.questLines.push(flareKalosQuestLine);
     }
 
     // Delta Episode - Available upon defeating Shalour City's gym
@@ -2096,7 +2096,7 @@ class QuestLineHelper {
         const talkToCozmo4 = new TalkToNPCQuest(Cozmo4, 'Talk to Dr. Cozmo at the Mossdeep Space Center.');
         deltaEpisodeQuestLine.addQuest(talkToCozmo4);
 
-        App.game.quests.questLines().push(deltaEpisodeQuestLine);
+        App.game.quests.questLines.push(deltaEpisodeQuestLine);
     }
 
     // Available after Delta step 28, must have obtained Groudon and Kyogre
@@ -2190,7 +2190,7 @@ class QuestLineHelper {
         const talkToMrStone2 = new TalkToNPCQuest(MrStone2, 'Talk to Mr. Stone in Slateport City.');
         primalReversionQuestLine.addQuest(talkToMrStone2);
 
-        App.game.quests.questLines().push(primalReversionQuestLine);
+        App.game.quests.questLines.push(primalReversionQuestLine);
     }
 
     // Available after defeating Santalune City's Gym
@@ -2261,7 +2261,7 @@ class QuestLineHelper {
         const searchForClues11 = new TalkToNPCQuest(DetectiveRaichu, 'Talk to Detective Raichu').withCustomReward(DetectiveRaichuReward);
         detectivePikachuQuestLine.addQuest(searchForClues11);
 
-        App.game.quests.questLines().push(detectivePikachuQuestLine);
+        App.game.quests.questLines.push(detectivePikachuQuestLine);
     }
 
     // Available after defeating Snowbelle City's Gym
@@ -2333,7 +2333,7 @@ class QuestLineHelper {
         vivillonQuestLine.addQuest(catchBall);
 
         // Add quest to quest line
-        App.game.quests.questLines().push(vivillonQuestLine);
+        App.game.quests.questLines.push(vivillonQuestLine);
     }
 
     // Available post-E4, must have captured Doublade
@@ -2371,7 +2371,7 @@ class QuestLineHelper {
         const fightYveltal = new DefeatTemporaryBattleQuest('Rampaging Yveltal', 'A rampaging Yveltal is threatening the Diamond Domain! Help Diancie defeat it!');
         princessDiancieQuestLine.addQuest(fightYveltal);
 
-        App.game.quests.questLines().push(princessDiancieQuestLine);
+        App.game.quests.questLines.push(princessDiancieQuestLine);
     }
 
     public static createClashOfAgesQuestLine() {
@@ -2422,7 +2422,7 @@ class QuestLineHelper {
         const clearHoopa6 = new DefeatTemporaryBattleQuest('Hoopa 6', 'Defeat the Unbound Hoopa near Kiloude City, this time for real.');
         clashOfAgesQuestLine.addQuest(clearHoopa6);
 
-        App.game.quests.questLines().push(clashOfAgesQuestLine);
+        App.game.quests.questLines.push(clashOfAgesQuestLine);
     }
 
     public static createUnrivaledPowerQuestLine() {
@@ -2523,7 +2523,7 @@ class QuestLineHelper {
         const talkToAnomalyMewtwo4 = new TalkToNPCQuest(AnomalyMewtwo4, 'Talk to Anomaly Mewtwo in Pokémon Village.').withCustomReward(MewtwoniteYReward);
         unrivaledPowerQuestLine.addQuest(talkToAnomalyMewtwo4);
 
-        App.game.quests.questLines().push(unrivaledPowerQuestLine);
+        App.game.quests.questLines.push(unrivaledPowerQuestLine);
     }
 
     /* Alola QuestLines */
@@ -2615,7 +2615,7 @@ class QuestLineHelper {
         // end - Clear dungeon boss: Ten Carat Hill, Flyinium Z Trial
         this.createZCrystalTrial(PokemonType.Flying, 'Ten Carat Hill', 'Kahili', 'Hello there. There\'s a wonderful breeze blowing out here today. The glistening Flyinium Z... It\'s yours now. Use it well.', melemeleAlolaQuestLine, true, 'There is one more Z Crystal on Ten Carat Hill. Find the Trial Site and claim it!', 'Trial Site of Ten Carat Hill');
 
-        App.game.quests.questLines().push(melemeleAlolaQuestLine);
+        App.game.quests.questLines.push(melemeleAlolaQuestLine);
     }
 
     // Akala Island guide - Started upon deafting Sina and Dexio
@@ -2678,7 +2678,7 @@ class QuestLineHelper {
             });
         akalaAlolaQuestLine.addQuest(clearUltraWormhole);
 
-        App.game.quests.questLines().push(akalaAlolaQuestLine);
+        App.game.quests.questLines.push(akalaAlolaQuestLine);
     }
 
     // Ula'ula Island guide - Started upon defeating Hau in Malie
@@ -2793,7 +2793,7 @@ class QuestLineHelper {
         const getSteeliumZ = new DefeatTemporaryBattleQuest('Molayne', 'Get the Steelium Z. Defeat Molayne in Hokulani Observatory.').withInitialValue(0);
         ulaulaAlolaQuestLine.addQuest(getSteeliumZ);
 
-        App.game.quests.questLines().push(ulaulaAlolaQuestLine);
+        App.game.quests.questLines.push(ulaulaAlolaQuestLine);
     }
 
     // Poni Island guide - Started upon finishing Child of the Stars (Ula'ula quest)
@@ -2870,7 +2870,7 @@ class QuestLineHelper {
         const talkToLillie7 = new TalkToNPCQuest(Lillie7, 'Everyone is finally safe. Talk to Lillie.').withCustomReward(EaterOfLightReward);
         poniAlolaQuestLine.addQuest(talkToLillie7);
 
-        App.game.quests.questLines().push(poniAlolaQuestLine);
+        App.game.quests.questLines.push(poniAlolaQuestLine);
     }
 
     // Alola Story conclusion - Started upon finishing Emissary of Light (Poni quest)
@@ -2912,7 +2912,7 @@ class QuestLineHelper {
         // end - Clear dungeon boss: Mount Lanakila, Icium Z Trial
         this.createZCrystalTrial(PokemonType.Ice, 'Mount Lanakila', 'Trial Site', 'Congratulations! You\'ve claimed the Icium Z! Onwards to the Pokémon League now!', ultraNecrozmaAlolaQuestLine, true, 'You were so distracted by Necrozma you forgot about the Z Crystal! Find the Trial Site in the Mount Lanakila dungeon.', 'Trial Site of Mount Lanakila');
 
-        App.game.quests.questLines().push(ultraNecrozmaAlolaQuestLine);
+        App.game.quests.questLines.push(ultraNecrozmaAlolaQuestLine);
     }
 
     // "Z Crystal" Quest
@@ -2955,7 +2955,7 @@ class QuestLineHelper {
         minasTrialAlolaQuestLine.addQuest(clearKahunaNanu);
         */
 
-        App.game.quests.questLines().push(islandChallengeQuestLine);
+        App.game.quests.questLines.push(islandChallengeQuestLine);
     }
 
     // Silvally Typings Questline - Available post-E4
@@ -3108,7 +3108,7 @@ class QuestLineHelper {
         const talkToGladion4 = new TalkToNPCQuest(SilvallyGladion4, 'Go talk to Gladion in the Aether Foundation and tell him you\'ve recovered all the Silvally Memories!');
         SilvallyTypesQuestLine.addQuest(talkToGladion4);
 
-        App.game.quests.questLines().push(SilvallyTypesQuestLine);
+        App.game.quests.questLines.push(SilvallyTypesQuestLine);
 
     }
 
@@ -3208,7 +3208,7 @@ class QuestLineHelper {
 
         UltraBeastQuestLine.addQuest(GuzzlordCatch);
 
-        App.game.quests.questLines().push(UltraBeastQuestLine);
+        App.game.quests.questLines.push(UltraBeastQuestLine);
     }
 
     // Available post-E4
@@ -3346,7 +3346,7 @@ class QuestLineHelper {
             meltanRainbowRocket,
         ],'Let\'s Go, Meltan!').withCustomReward(meltanGetMelmetal));
 
-        App.game.quests.questLines().push(meltanQuestLine);
+        App.game.quests.questLines.push(meltanQuestLine);
 
     }
 
@@ -3383,7 +3383,7 @@ class QuestLineHelper {
         const rainbowGiovanni = new DefeatTemporaryBattleQuest('Team Rainbow Leader Giovanni', 'Defeat Team Rainbow Leader Giovanni.');
         rainbowQuestLine.addQuest(rainbowGiovanni);
 
-        App.game.quests.questLines().push(rainbowQuestLine);
+        App.game.quests.questLines.push(rainbowQuestLine);
 
     }
 
@@ -3396,7 +3396,7 @@ class QuestLineHelper {
         const talkToMayor = new TalkToNPCQuest(MayorKarp, 'Use the subregion travel to talk to Mayor Karp in Hoppy Town.');
         magikarpJumpQuestLine.addQuest(talkToMayor);
 
-        App.game.quests.questLines().push(magikarpJumpQuestLine);
+        App.game.quests.questLines.push(magikarpJumpQuestLine);
     }
 
     // Available upon clearing the Great League
@@ -3501,7 +3501,7 @@ class QuestLineHelper {
         const talkToDrSplash5 = new TalkToNPCQuest(DrSplash5, 'Wrap up your research project by talking to Dr. Splash in Hoppy Town.').withCustomReward(SaucyBlueReward);
         drSplashQuestLine.addQuest(talkToDrSplash5);
 
-        App.game.quests.questLines().push(drSplashQuestLine);
+        App.game.quests.questLines.push(drSplashQuestLine);
 
     }
 
@@ -3596,7 +3596,7 @@ class QuestLineHelper {
         const clearLeon = new DefeatGymQuest(1, 0, 'Champion Leon').withDescription('Defeat Leon to become the Champion of Galar!');
         darkestDayQuestLine.addQuest(clearLeon);
 
-        App.game.quests.questLines().push(darkestDayQuestLine);
+        App.game.quests.questLines.push(darkestDayQuestLine);
     }
 
     // Available post-E4
@@ -3693,7 +3693,7 @@ class QuestLineHelper {
                 catchZamazenta,
             ], 'Now that they have calmed down, Zacian and Zamazenta seem to be willing to let you try to catch them!'));
 
-        App.game.quests.questLines().push(swordShieldQuestLine);
+        App.game.quests.questLines.push(swordShieldQuestLine);
     }
 
     // Available post-E4
@@ -3799,7 +3799,7 @@ class QuestLineHelper {
         const talktoMustard10 = new TalkToNPCQuest(Mustard10, 'Talk to Mustard at one of the Towers of Two Fists.');
         dojoArmorQuestLine.addQuest(talktoMustard10);
 
-        App.game.quests.questLines().push(dojoArmorQuestLine);
+        App.game.quests.questLines.push(dojoArmorQuestLine);
     }
 
     // Available after defeating Ash Ketchum Alola
@@ -3854,7 +3854,7 @@ class QuestLineHelper {
         const talktoJungleKoko6 = new TalkToNPCQuest(JungleKoko6, 'Talk to Koko in Glimwood Tangle.');
         jungleSecretsQuestLine.addQuest(talktoJungleKoko6);
 
-        App.game.quests.questLines().push(jungleSecretsQuestLine);
+        App.game.quests.questLines.push(jungleSecretsQuestLine);
     }
 
     // Available post-E4
@@ -3921,7 +3921,7 @@ class QuestLineHelper {
         const talktoCrownPeony2 = new TalkToNPCQuest(CrownPeony2, 'Now that you have captured Calyrex, go report back to Peony!');
         galarCrownQuestLine.addQuest(talktoCrownPeony2);
 
-        App.game.quests.questLines().push(galarCrownQuestLine);
+        App.game.quests.questLines.push(galarCrownQuestLine);
     }
 
     /* Crown QuestLines */
@@ -3980,7 +3980,7 @@ class QuestLineHelper {
         const talktoBirdPeony4 = new TalkToNPCQuest(BirdPeony4, 'Now that you have captured Galarian Articuno, Zapdos, and Moltres, go report back to Peony!');
         dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony4);
 
-        App.game.quests.questLines().push(dynaTreeBirdsQuestLine);
+        App.game.quests.questLines.push(dynaTreeBirdsQuestLine);
     }
 
     // Available post-E4
@@ -4044,7 +4044,7 @@ class QuestLineHelper {
         const talktoGolemPeony6 = new TalkToNPCQuest(GolemPeony6, 'You finally captured Regieleki and Regidrago. Go report back to Peony!');
         ancientGolemsQuestLine.addQuest(talktoGolemPeony6);
 
-        App.game.quests.questLines().push(ancientGolemsQuestLine);
+        App.game.quests.questLines.push(ancientGolemsQuestLine);
     }
 
 
@@ -4106,7 +4106,7 @@ class QuestLineHelper {
         const talktoPeonia4 = new TalkToNPCQuest(Peonia4, 'Go back to the Max Lair to tell Peonia what happened.');
         gigantamaxQuestLine.addQuest(talktoPeonia4);
 
-        App.game.quests.questLines().push(gigantamaxQuestLine);
+        App.game.quests.questLines.push(gigantamaxQuestLine);
     }
 
     /* Hisui QuestLines */
@@ -4161,13 +4161,13 @@ class QuestLineHelper {
         const talktoForcesCogita3 = new TalkToNPCQuest(ForcesCogita3, 'Speak to Cogita at Ancient Retreat.');
         hisuiForcesQuestLine.addQuest(talktoForcesCogita3);
 
-        App.game.quests.questLines().push(hisuiForcesQuestLine);
+        App.game.quests.questLines.push(hisuiForcesQuestLine);
     }
 
     public static createHisuiArceusQuestLine() {
         const hisuiArceusQuestLine = new QuestLine('Arceus: The Deified Pokémon', 'Discover the truth of the Pokémon deity, Arceus.', new DevelopmentRequirement(), GameConstants.BulletinBoards.Hisui);
 
-        App.game.quests.questLines().push(hisuiArceusQuestLine);
+        App.game.quests.questLines.push(hisuiArceusQuestLine);
     }
 
     // Paldea Questlines
@@ -4178,7 +4178,7 @@ class QuestLineHelper {
         const clearTrainerArven = new DefeatGymQuest(1, 0, 'Pokémon Trainer Arven').withDescription('Arven wants to test you and himself. Defeat him at Poco Path Lighthouse');
         paldeaLegendsQuestLine.addQuest(clearTrainerArven);
 
-        App.game.quests.questLines().push(paldeaLegendsQuestLine);
+        App.game.quests.questLines.push(paldeaLegendsQuestLine);
     }
 
     public static createPaldeaVictoryQuestLine() {
@@ -4187,7 +4187,7 @@ class QuestLineHelper {
         const clearChampionNemona = new DefeatGymQuest(1, 0, 'Champion Nemona').withDescription('Finally, it\'s time to fight Nemona as equals! Defeat Champion Nemona in Mesagoza.');
         paldeaVictoryQuestLine.addQuest(clearChampionNemona);
 
-        App.game.quests.questLines().push(paldeaVictoryQuestLine);
+        App.game.quests.questLines.push(paldeaVictoryQuestLine);
     }
 
     public static createPaldeaStarfallQuestLine() {
@@ -4196,7 +4196,7 @@ class QuestLineHelper {
         const clearCassiopeia = new DefeatGymQuest(1, 0, 'Penny of Team Star').withDescription('Penny has revealed herself to be Cassiopeia. Defeat her at Naranjuva Academy.');
         paldeaStarfallQuestLine.addQuest(clearCassiopeia);
 
-        App.game.quests.questLines().push(paldeaStarfallQuestLine);
+        App.game.quests.questLines.push(paldeaStarfallQuestLine);
     }
 
     public static createPaldeaWayHomeQuestLine() {
@@ -4206,7 +4206,7 @@ class QuestLineHelper {
             new QuestLineCompletedRequirement('Starfall Street'),
         ]), GameConstants.BulletinBoards.Paldea);
 
-        App.game.quests.questLines().push(paldeaWayHomeQuestLine);
+        App.game.quests.questLines.push(paldeaWayHomeQuestLine);
     }
 
     /* Event QuestLines */
@@ -4219,7 +4219,7 @@ class QuestLineHelper {
 
         hoopaDayPikabluQuestLine.addQuest(PikabluCatch);
 
-        App.game.quests.questLines().push(hoopaDayPikabluQuestLine);
+        App.game.quests.questLines.push(hoopaDayPikabluQuestLine);
     }
 
     // From any bulletin board between April 8-29 (Easter).
@@ -4238,7 +4238,7 @@ class QuestLineHelper {
         const talkToEggHunter = new TalkToNPCQuest(EasterEggHunter, 'The eggs ran away! Talk to the egg hunter in Petalburg Woods.');
         easterQuestLine.addQuest(talkToEggHunter);
 
-        App.game.quests.questLines().push(easterQuestLine);
+        App.game.quests.questLines.push(easterQuestLine);
     }
 
     public static createTreasureMapQuestLine(saved?: { dungeon?: string, amount?: number }) {
@@ -4329,10 +4329,5 @@ class QuestLineHelper {
         if (numQuestLines != [...new Set(App.game.quests.questLines().map(ql => ql.name))].length) {
             throw new Error('QuestLineHelper: Duplicate QuestLine names detected');
         }
-
-        // Quest lines are pushed onto the underlying array, bypassing the observable;
-        // notify it once so computeds evaluated before this ran (e.g. achievements built
-        // in AchievementHandler.initialize) don't keep a stale cached value
-        App.game.quests.questLines.valueHasMutated();
     }
 }

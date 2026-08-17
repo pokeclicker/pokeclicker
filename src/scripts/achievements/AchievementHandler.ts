@@ -192,6 +192,7 @@ class AchievementHandler {
         });
     }
 
+    // Causes achievement requirements to be evaulated, avoid calling before save data is loaded.
     public static calculateMaxBonus(): void {
         AchievementHandler.getAchievementCategories().forEach(category => {
             category.totalWeight = AchievementHandler.achievementList.filter(a => a.category == category && a.achievable()).reduce((sum, a) => sum + a.bonusWeight, 0);
@@ -941,7 +942,6 @@ class AchievementHandler {
     }
 
     static load() {
-        AchievementHandler.calculateMaxBonus();
         AchievementHandler.navigateIndex(Settings.getSetting('achievementsPage').value);
         AchievementHandler.filter.status(Settings.getSetting('achievementsStatus').value);
         AchievementHandler.filter.type(Settings.getSetting('achievementsType').value);

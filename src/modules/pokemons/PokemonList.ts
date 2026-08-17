@@ -41,6 +41,7 @@ import { PokemonNameType } from './PokemonNameType';
 import { setPokemonMap } from './mapProvider';
 import DayCyclePart from '../dayCycle/DayCyclePart';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
+import BerryMutationPossibleRequirement from '../requirements/BerryMutationPossibleRequirement';
 
 export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
@@ -14859,6 +14860,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 40,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Snover, requirement: new BerryMutationPossibleRequirement(BerryType.Snover, false) },
         'gender': {
             'visualDifference': true,
         },
@@ -14879,10 +14881,10 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 40,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Snover },
         'gender': {
             'femaleRatio': 0,
         },
-        'heldItem': { type: ItemType.berry, id: BerryType.Snover },
     },
     {
         'id': 460,

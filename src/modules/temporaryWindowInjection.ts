@@ -120,6 +120,7 @@ import InRegionRequirement from './requirements/InRegionRequirement';
 import MoneyRequirement from './requirements/MoneyRequirement';
 import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
 import MaxRegionRequirement from './requirements/MaxRegionRequirement';
+import BerryMutationPossibleRequirement from './requirements/BerryMutationPossibleRequirement';
 import ObtainedPokemonRequirement from './requirements/ObtainedPokemonRequirement';
 import PokeballRequirement from './requirements/PokeballRequirement';
 import PokemonLevelRequirement from './requirements/PokemonLevelRequirement';
@@ -371,6 +372,7 @@ Object.assign(<any>window, {
     MoneyRequirement,
     MaxLevelOakItemRequirement,
     MaxRegionRequirement,
+    BerryMutationPossibleRequirement,
     ObtainedPokemonRequirement,
     PokeballRequirement,
     PokemonLevelRequirement,
