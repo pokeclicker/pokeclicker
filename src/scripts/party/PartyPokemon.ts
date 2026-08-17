@@ -1,8 +1,7 @@
 /// <reference path="../../declarations/party/LevelType.d.ts" />
 
 enum PartyPokemonSaveKeys {
-    attackBonusPercent = 0,
-    attackBonusAmount,
+    attackBonus = 0,
     vitaminsUsed,
     exp,
     breeding,
@@ -27,8 +26,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     private _canUseHeldItem: KnockoutComputed<boolean>;
 
     defaults = {
-        attackBonusPercent: 0,
-        attackBonusAmount: 0,
+        attackBonus: 0,
         vitaminsUsed: {},
         exp: 0,
         breeding: false,
@@ -49,8 +47,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     _breeding: KnockoutObservable<boolean>;
     _shiny: KnockoutObservable<boolean>;
     _level: KnockoutObservable<number>;
-    _attackBonusPercent: KnockoutObservable<number>;
-    _attackBonusAmount: KnockoutObservable<number>;
+    _attackBonus: KnockoutObservable<number>;
     _category: KnockoutObservableArray<number>;
     _nickname: KnockoutObservable<string>;
     _displayName: KnockoutComputed<string>;
@@ -79,8 +76,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this._breeding = ko.observable(false).extend({ boolean: null });
         this._shiny = ko.observable(shiny).extend({ boolean: null });
         this._level = ko.observable(1).extend({ numeric: 0 });
-        this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
-        this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
+        this._attackBonus = ko.observable(0).extend({ numeric: 3 });
         this._category = ko.observableArray([0]);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
@@ -136,12 +132,11 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     }
 
     public calculateAttack(ignoreLevel = false): number {
-        const attackBonusMultiplier = 1 + (this.attackBonusPercent / 100);
         const levelMultiplier = ignoreLevel ? 1 : this.level / 100;
         const evsMultiplier = this.calculateEVAttackBonus();
         const heldItemMultiplier = this.heldItemAttackBonus();
         const shadowMultiplier = this.shadowAttackBonus();
-        return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier * heldItemMultiplier * shadowMultiplier));
+        return Math.max(1, Math.floor((this.baseAttack + this.attackBonus) * levelMultiplier * evsMultiplier * heldItemMultiplier * shadowMultiplier));
     }
 
     public clickAttackBonus = ko.pureComputed((): number => {
@@ -376,7 +371,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
                 }
                 const curAttack = this.calculateAttack(true);
                 const bonus = GameConstants.BREEDING_ATTACK_BONUS * ((ItemList[itemName] as AttackGainConsumable).bonusMultiplier ?? 1);
-                GameHelper.incrementObservable(this._attackBonusPercent, bonus * amount);
+                GameHelper.incrementObservable(this._attackBonus, this.baseAttack * bonus / 100 * amount);
                 Notifier.notify({
                     message : `${this.displayName} gained ${this.calculateAttack(true) - curAttack} attack points`,
                     type : NotificationConstants.NotificationOption.success,
@@ -646,8 +641,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
             return;
         }
 
-        this.attackBonusPercent = json[PartyPokemonSaveKeys.attackBonusPercent] ?? this.defaults.attackBonusPercent;
-        this.attackBonusAmount = json[PartyPokemonSaveKeys.attackBonusAmount] ?? this.defaults.attackBonusAmount;
+        this.attackBonus = json[PartyPokemonSaveKeys.attackBonus] ?? this.defaults.attackBonus;
         if (json[PartyPokemonSaveKeys.vitaminsUsed]) {
             Object.entries(json[PartyPokemonSaveKeys.vitaminsUsed]).forEach(([i, v]) => {
                 this.vitaminsUsed[i](v ?? 0);
@@ -671,8 +665,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     public toJSON() {
         const output = {
             id: this.id,
-            [PartyPokemonSaveKeys.attackBonusPercent]: this.attackBonusPercent,
-            [PartyPokemonSaveKeys.attackBonusAmount]: this.attackBonusAmount,
+            [PartyPokemonSaveKeys.attackBonus]: this.attackBonus,
             [PartyPokemonSaveKeys.vitaminsUsed]: ko.toJS(this.vitaminsUsed),
             [PartyPokemonSaveKeys.exp]: this.exp,
             [PartyPokemonSaveKeys.breeding]: this.breeding,
@@ -717,20 +710,12 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         return this._attack();
     }
 
-    get attackBonusAmount(): number {
-        return this._attackBonusAmount();
+    get attackBonus(): number {
+        return this._attackBonus();
     }
 
-    set attackBonusAmount(attackBonusAmount: number) {
-        this._attackBonusAmount(attackBonusAmount);
-    }
-
-    get attackBonusPercent(): number {
-        return this._attackBonusPercent();
-    }
-
-    set attackBonusPercent(attackBonusPercent: number) {
-        this._attackBonusPercent(attackBonusPercent);
+    set attackBonus(attackBonusAmount: number) {
+        this._attackBonus(attackBonusAmount);
     }
 
     get breeding(): boolean {

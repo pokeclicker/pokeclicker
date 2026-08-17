@@ -132,8 +132,9 @@ class Egg implements Saveable {
         if (partyPokemon) {
             // Increase attack
             const shinyMultiplier = shiny ? GameConstants.BREEDING_SHINY_ATTACK_MULTIPLIER : 1;
-            partyPokemon.attackBonusPercent += Math.max(1, Math.round((GameConstants.BREEDING_ATTACK_BONUS + partyPokemon.vitaminsUsed[GameConstants.VitaminType.Calcium]()) * (efficiency / 100)) * shinyMultiplier);
-            partyPokemon.attackBonusAmount += Math.max(0, Math.round(partyPokemon.vitaminsUsed[GameConstants.VitaminType.Protein]() * (efficiency / 100)) * shinyMultiplier);
+            const protein = partyPokemon.vitaminsUsed[GameConstants.VitaminType.Protein]();
+            const calcium = partyPokemon.vitaminsUsed[GameConstants.VitaminType.Calcium]();
+            partyPokemon.attackBonus += ((GameConstants.BREEDING_ATTACK_BONUS + calcium) / 100 * partyPokemon.baseAttack + protein) * shinyMultiplier * efficiency / 100;
 
             // If breeding (not store egg), reset level, reset evolution check
             if (partyPokemon.breeding) {

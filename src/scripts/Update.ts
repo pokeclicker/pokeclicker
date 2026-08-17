@@ -2974,6 +2974,23 @@ class Update implements Saveable {
                 saveData.farming.berryInventory = savedBerries;
                 delete saveData.farming.berryList;
             }
+
+            // Merge attack bonus stats into one
+            saveData.party?.caughtPokemon.forEach(partPoke => {
+                const p = pokemonMap[partPoke.id];
+                const baseAttack = Math.max(10, Math.floor(
+                    2 * Math.round((p.base.attack * p.base.specialAttack) ** 0.5 + p.base.speed ** 0.5) / 250
+                    * (2 * p.base.hitpoints * 2 * Math.round((p.base.defense * p.base.specialDefense) ** 0.5 + p.base.speed ** 0.5)) ** 0.5
+                ));
+                const mult = partPoke[0] ?? 0, flat = partPoke[1] ?? 0;
+                Object.keys(partPoke).forEach(k => {
+                    if (k !== 'id') {
+                        partPoke[Number(k) - 1] = partPoke[k];
+                        delete partPoke[k];
+                    }
+                });
+                partPoke[0] = baseAttack * mult / 100 + flat;
+            });
         },
     };
 
