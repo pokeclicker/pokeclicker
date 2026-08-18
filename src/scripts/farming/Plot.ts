@@ -339,7 +339,7 @@ class Plot implements Saveable {
                 change = true;
             }
 
-            if (!this._hasWarnedAboutToWither && this.stage() == PlotStage.Berry && this.age + GameConstants.WITHER_WARNING_TIME >= this.berryData.growthTime[4]) {
+            if (!this._hasWarnedAboutToWither && this.stage() == PlotStage.Berry && this.age + GameConstants.WITHER_WARNING_TIME >= this.berryData.growthTime[PlotStage.Berry]) {
                 this.notifications.push(FarmNotificationType.AboutToWither);
                 this._hasWarnedAboutToWither = true;
             }
