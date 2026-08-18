@@ -2974,6 +2974,43 @@ class Update implements Saveable {
                 saveData.farming.berryInventory = savedBerries;
                 delete saveData.farming.berryList;
             }
+
+            const regionMaskToArray = (mask, highestRegion) => {
+                if (Array.isArray(mask)) {
+                    return mask;
+                }
+                if (mask === (2 << highestRegion) - 1) { // All
+                    return [];
+                }
+                if (mask === 0) { // None
+                    return [-1];
+                }
+                const regions = [];
+                for (let region = 0; region <= highestRegion; region += 1) {
+                    if (mask & (1 << region)) {
+                        regions.push(region);
+                    }
+                }
+                return regions;
+            };
+
+            ['breedingType1Filter', 'breedingType2Filter', 'pokedexType1Filter', 'pokedexType2Filter', 'pokedexRegionFilter'].forEach((key) => {
+                if (settingsData[key] !== undefined) {
+                    const value = settingsData[key];
+                    settingsData[key] = value == null ? [] : [value];
+                }
+            });
+
+            if (settingsData.breedingRegionFilter !== undefined) {
+                settingsData.breedingRegionFilter = regionMaskToArray(settingsData.breedingRegionFilter, playerData.highestRegion);
+            }
+
+            ['breedingCategoryFilter', 'pokedexCategoryFilter'].forEach((key) => {
+                if (settingsData[key] !== undefined) {
+                    const value = settingsData[key];
+                    settingsData[key] = [-1, -2].includes(value) ? [] : [value];
+                }
+            });
         },
     };
 

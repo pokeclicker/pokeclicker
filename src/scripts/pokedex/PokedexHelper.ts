@@ -99,9 +99,11 @@ class PokedexHelper {
             }
 
             // If not showing this region
-            const region: (GameConstants.Region | null) = Settings.getSetting('pokedexRegionFilter').observableValue();
-            if (region != null && region != nativeRegion) {
-                return false;
+            const selectedRegions = Settings.getSetting('pokedexRegionFilter').observableValue() as GameConstants.Region[];
+            if (selectedRegions.length > 0) {
+                if (!selectedRegions.includes(nativeRegion)) {
+                    return false;
+                }
             }
 
             // Event Pokemon
@@ -128,16 +130,17 @@ class PokedexHelper {
             }
 
             // Check if either of the types match
-            const type1: (PokemonType | null) = Settings.getSetting('pokedexType1Filter').observableValue();
-            const type2: (PokemonType | null) = Settings.getSetting('pokedexType2Filter').observableValue();
-            if ([type1, type2].includes(PokemonType.None)) {
-                const type = (type1 == PokemonType.None) ? type2 : type1;
-                if (!PokedexHelper.isPureType(pokemon, type)) {
+            const selectedType1 = Settings.getSetting('pokedexType1Filter').observableValue() as PokemonType[];
+            const selectedType2 = Settings.getSetting('pokedexType2Filter').observableValue() as PokemonType[];
+
+            if (selectedType1.length > 0 || selectedType2.length > 0) {
+                const types = (pokemon as PokemonListData).type;
+                if (!PokemonHelper.matchesTypeFilter(types, selectedType1)
+                    || !PokemonHelper.matchesTypeFilter(types, selectedType2)) {
                     return false;
                 }
-            } else if ((type1 != null && !(pokemon as PokemonListData).type.includes(type1)) || (type2 != null && !(pokemon as PokemonListData).type.includes(type2))) {
-                return false;
             }
+
             const hasBaseFormInSameRegion = () => pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion);
             // Alternate forms that we haven't caught yet
             if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id) && hasBaseFormInSameRegion()) {
@@ -206,18 +209,13 @@ class PokedexHelper {
             }
 
             // Only pokemon with selected category
-            const categoryFilter = Settings.getSetting('pokedexCategoryFilter').observableValue();
-            if (categoryFilter != -1) {
+            const categoryFilter = Settings.getSetting('pokedexCategoryFilter').observableValue() as number[];
+            if (categoryFilter.length > 0) {
                 if (!alreadyCaught) {
                     return false;
                 }
                 const partyPokemon = App.game.party.getPokemon(pokemon.id);
-                // Categorized only
-                if (categoryFilter == -2 && partyPokemon.isUncategorized()) {
-                    return false;
-                }
-                // Selected category
-                if (categoryFilter >= 0 && !partyPokemon.category.includes(categoryFilter)) {
+                if (!categoryFilter.some((category) => partyPokemon.category.includes(category))) {
                     return false;
                 }
             }

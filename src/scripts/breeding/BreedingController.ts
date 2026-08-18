@@ -99,23 +99,6 @@ class BreedingController {
         return id == -1 ? name : id;
     }
 
-    public static getRegionFilterString() {
-        const unlockedRegionsMask = (2 << player.highestRegion()) - 1;
-        const showRegions = Settings.getSetting('breedingRegionFilter').observableValue() & unlockedRegionsMask;
-        if (showRegions == unlockedRegionsMask) {
-            return 'All';
-        } else if (showRegions > 0) {
-            const highestBit = Math.floor(Math.log2(showRegions));
-            let txt = GameConstants.camelCaseToString(GameConstants.Region[highestBit]);
-            if (showRegions > (1 << highestBit)) {
-                txt += ' & more';
-            }
-            return txt;
-        } else {
-            return 'None';
-        }
-    }
-
     public static isPureType(pokemon: PartyPokemon, type: (PokemonType | null)): boolean {
         const pokemonData = pokemonMap[pokemon.name];
         return ((type == null || pokemonData.type[0] === type) && (pokemonData.type[1] == undefined || pokemonData.type[1] == PokemonType.None));

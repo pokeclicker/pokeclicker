@@ -55,73 +55,144 @@ aria-labelledby="pokedexModalLabel">
                                     </div>
 
                                     <!--Types-->
-                                    <div class="form-group col-lg-6 col-6">
-                                        <!-- ko let: { pokedexType1Filter: Settings.getSetting('pokedexType1Filter') } -->
+
+                                    <div class="form-group col-lg-6 col-6" data-bind="let: { pokedexType1Filter: Settings.getSetting('pokedexType1Filter') }">
                                         <label>Types</label>
-                                        <select id="pokedex-filter-type1" class="custom-select" style="margin-right: 8px"
-                                                data-bind="options: pokedexType1Filter.options,
-                                                        optionsValue: 'value',
-                                                        optionsText: 'text',
-                                                        value: pokedexType1Filter.observableValue">
-                                        </select>
-                                        <!-- /ko -->
+                                        <knockout data-bind="template: { name: 'multiSelectDropdownTemplate',
+                                            data: {
+                                                id: 'pokedex-filter-type1',
+                                                options: pokedexType1Filter.getValidOptions(),
+                                                optionsText: 'text',
+                                                optionsValue: 'value',
+                                                bindingField: pokedexType1Filter.observableValue,
+                                                buttonText: () => {
+                                                    const selected = pokedexType1Filter.observableValue();
+                                                    return selected.length === 0
+                                                        ? 'All' : selected.length === 1
+                                                            ? PokemonType[selected[0]] : `${selected.length} selected`;
+                                                },
+                                                itemLabel: {
+                                                    class: 'small',
+                                                    style: (item) => ({
+                                                        'background-color': GameConstants.TypeColor[item.value],
+                                                        color: item.value === PokemonType.None ? '' : GameHelper.isColorLight(GameConstants.TypeColor[item.value]) ? 'black' : 'white'
+                                                    })
+                                                },
+                                                topButtons: [
+                                                    {
+                                                        label: 'All',
+                                                        class: 'btn-primary btn-sm',
+                                                        onClick: () => pokedexType1Filter.set([]),
+                                                    },
+                                                ],
+                                            }}">
+                                        </knockout>
                                     </div>
-                                    <div class="form-group col-lg-6 col-6">
-                                        <!-- ko let: { pokedexType2Filter: Settings.getSetting('pokedexType2Filter') } -->
+
+                                    <div class="form-group col-lg-6 col-6" data-bind="let: { pokedexType2Filter: Settings.getSetting('pokedexType2Filter') }">
                                         <label> </label>
-                                        <select id="pokedex-filter-type2" class="custom-select"
-                                                data-bind="options: pokedexType2Filter.options,
-                                                        optionsValue: 'value',
-                                                        optionsText: 'text',
-                                                        value: pokedexType2Filter.observableValue">
-                                        </select>
-                                        <!-- /ko -->
+                                        <knockout data-bind="template: { name: 'multiSelectDropdownTemplate',
+                                            data: {
+                                                id: 'pokedex-filter-type2',
+                                                options: pokedexType2Filter.getValidOptions(),
+                                                optionsText: 'text',
+                                                optionsValue: 'value',
+                                                bindingField: pokedexType2Filter.observableValue,
+                                                buttonText: () => {
+                                                    const selected = pokedexType2Filter.observableValue();
+                                                    return selected.length === 0
+                                                        ? 'All' : selected.length === 1
+                                                            ? PokemonType[selected[0]] : `${selected.length} selected`;
+                                                },
+                                                itemLabel: {
+                                                    class: 'small',
+                                                    style: (item) => ({
+                                                        'background-color': GameConstants.TypeColor[item.value],
+                                                        color: item.value === PokemonType.None ? '' : GameHelper.isColorLight(GameConstants.TypeColor[item.value]) ? 'black' : 'white'
+                                                    })
+                                                },
+                                                topButtons: [
+                                                    {
+                                                        label: 'All',
+                                                        class: 'btn-primary btn-sm',
+                                                        onClick: () => pokedexType2Filter.set([]),
+                                                    },
+                                                ],
+                                            }}">
+                                        </knockout>
                                     </div>
 
                                     <!--Region-->
-                                    <div class="form-group col-lg-6 col-6">
-                                        <!-- ko let: { pokedexRegionFilter: Settings.getSetting('pokedexRegionFilter') } -->
-                                        <label for="pokedex-filter-region" data-bind="text: pokedexRegionFilter.displayName">Region</label>
-                                        <select id="pokedex-filter-region" class="custom-select" style="margin-right: 8px"
-                                                data-bind="options: pokedexRegionFilter.getValidOptions(),
-                                                        optionsValue: 'value',
-                                                        optionsText: 'text',
-                                                        value: pokedexRegionFilter.observableValue">
-                                        </select>
-                                        <!-- /ko -->
+
+                                    <div class="form-group col-lg-6 col-6" data-bind="let: { pokedexRegionFilter: Settings.getSetting('pokedexRegionFilter') }">
+                                        <label data-bind="text: pokedexRegionFilter.displayName">Region(s)</label>
+                                        <knockout data-bind="template: { name: 'multiSelectDropdownTemplate',
+                                            data: {
+                                                id: 'pokedex-filter-region',
+                                                options: pokedexRegionFilter.getValidOptions(),
+                                                optionsText: 'text',
+                                                optionsValue: 'value',
+                                                bindingField: pokedexRegionFilter.observableValue,
+                                                buttonText: () => {
+                                                    const selected = pokedexRegionFilter.observableValue();
+                                                    return selected.length === 0
+                                                        ? 'All' : selected.length === 1
+                                                            ? GameConstants.camelCaseToString(GameConstants.Region[selected[0]]) : `${selected.length} selected`;
+                                                },
+                                                itemLabel: {
+                                                    class: 'small',
+                                                },
+                                                topButtons: [
+                                                    {
+                                                        label: 'All',
+                                                        class: 'btn-primary btn-sm',
+                                                        onClick: () => pokedexRegionFilter.set([]),
+                                                    },
+                                                ],
+                                            }}">
+                                        </knockout>
                                     </div>
 
                                     <!-- Category -->
-                                    <div class="form-group col-lg-6 col-6">
-                                        <!-- ko let: { pokedexCategoryFilter: Settings.getSetting('pokedexCategoryFilter') } -->
-                                        <label for="pokedex-filter-category" data-bind="text: pokedexCategoryFilter.displayName">Category</label>
-                                        <div class="dropdown show">
-                                            <button id="pokedex-filter-category" type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                data-bind="text: pokedexCategoryFilter.observableValue() == -1 ? 'All'
-                                                    : pokedexCategoryFilter.observableValue() == -2 ? 'Categorized'
-                                                    : PokemonCategories.categories().find(c => c.id == pokedexCategoryFilter.observableValue()).name()">
-                                                Categories
-                                            </button>
-                                            <div class="border-secondary dropdown-menu col-12 category-dropdown">
-                                                <div class="dropdown-item dropdown-text" data-bind="click : function() { pokedexCategoryFilter.set(-1) }">
-                                                    All
-                                                </div>
-                                                <div class="dropdown-item dropdown-text" data-bind="click : function(){ Settings.setSettingByName('pokedexCategoryFilter', -2) }">
-                                                    Categorized
-                                                </div>
-                                                <div class="dropdown-divider"></div>
-                                                <!-- ko foreach : PokemonCategories.categories -->
-                                                <div class="dropdown-item" data-bind="text : $data.name(), style: { color: GameHelper.isColorLight($data.color()) ? 'black' : 'white', background: $data.color() },
-                                                    click : function() { pokedexCategoryFilter.set($data.id) }">
-                                                </div>
-                                                <!-- /ko-->
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
-                                                    <i>Edit categories</i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <!-- /ko -->
+                                    <div class="form-group col-lg-6 col-6" data-bind="let: { pokedexCategoryFilter: Settings.getSetting('pokedexCategoryFilter') }">
+                                        <label data-bind="text: pokedexCategoryFilter.displayName">Category</label>
+                                        <knockout data-bind="template: { name: 'multiSelectDropdownTemplate',
+                                            data: {
+                                                id: 'pokedex-filter-category',
+                                                //options: pokedexCategoryFilter.getValidOptions(),
+                                                options: PokemonCategories.categories,
+                                                optionsText: 'name',
+                                                optionsValue: 'id',
+                                                bindingField: pokedexCategoryFilter.observableValue,
+                                                buttonText: () => {
+                                                    const selected = pokedexCategoryFilter.observableValue();
+                                                    return selected.length === 0
+                                                        ? 'All' : selected.length === 1
+                                                            ? PokemonCategories.getCategoryById(selected[0])?.name() : `${selected.length} selected`;
+                                                },
+                                                itemLabel: {
+                                                    class: 'small',
+                                                    style: (item) => ({
+                                                        'background-color': item.color(),
+                                                        color: GameHelper.isColorLight(item.color()) ? 'black' : 'white',
+                                                    })
+                                                },
+                                                topButtons: [
+                                                    {
+                                                        label: 'All',
+                                                        class: 'btn-primary btn-sm',
+                                                        onClick: () => pokedexCategoryFilter.set([]),
+                                                    },
+                                                ],
+                                                bottomButtons: [
+                                                    {
+                                                        label: 'Edit Categories',
+                                                        class: 'btn-primary btn-sm',
+                                                        onClick: () => $('#categoryModal').modal('show'),
+                                                    },
+                                                ],
+                                            }}">
+                                        </knockout>
                                     </div>
 
                                     <div class="form-group col-lg-6 col-6">

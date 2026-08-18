@@ -267,6 +267,7 @@ const veteranShop = new VeteranShop([
             new VeteranUnlockRequirement(GameConstants.VeteranUnlock.PokerusVirus),
             new CaughtPokemonRequirement(1),
         ]),
+        maxAmount: 10000,
     }, 'Pokérus Virus', true),
     new BuyKeyItem(KeyItemType.Event_calendar, 10000, GameConstants.Currency.questPoint, {
         visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.EventCalendar),
