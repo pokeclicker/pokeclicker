@@ -13,15 +13,22 @@ export default class KeyItem {
     public unlockReq: KnockoutComputed<boolean>;
     public unlocker: KnockoutSubscription;
     public isUnlocked: KnockoutObservable<boolean>;
+    public allowMultipleUnlocks: boolean;
 
-    constructor(id: KeyItemType, description: string, unlockReq?: () => boolean, isUnlocked = false,
+    constructor(id: KeyItemType,
+        description: string,
+        unlockReq?: () => boolean,
+        isUnlocked = false,
         public unlockRewardOnClose = () => {},
         displayName?: string,
-        public unlockRewardOnUnlock = () => {}) {
+        public unlockRewardOnUnlock = () => {},
+        allowMultipleUnlocks = false,
+    ) {
         this.id = id;
         this.displayName = displayName ?? GameConstants.humanifyString(KeyItemType[this.id]);
         this.description = description;
         this.isUnlocked = ko.observable(isUnlocked ?? false);
+        this.allowMultipleUnlocks = allowMultipleUnlocks;
 
         if (this.isUnlocked() || typeof unlockReq !== 'function') {
             this.unlockReq = null;
