@@ -4,7 +4,7 @@ import Information from '../utilities/Information';
 import KeyItemController from './KeyItemController';
 import { Feature } from '../DataStore/common/Feature';
 import {
-    getDungeonIndex, Region, RegionalStarters, ROUTE_KILLS_NEEDED, Pokerus,
+    getDungeonIndex, Region, ROUTE_KILLS_NEEDED,
 } from '../GameConstants';
 
 export default class KeyItems implements Feature {
@@ -71,12 +71,9 @@ export default class KeyItems implements Feature {
                     });
                 },
                 'Pokérus Virus',
-                () => {
-                    const patientZero = App.game.party.getPokemon(
-                        RegionalStarters[Region.kanto][player.regionStarters[Region.kanto]()],
-                    ) || App.game.party.caughtPokemon[0];
-                    patientZero.pokerus = Pokerus.Contagious;
-                }),
+                () => App.game.party.infectFirstUninfectedPokemon(),
+                true,
+            ),
             /*new KeyItem(KeyItemType['Z-Power_Ring'],
                 // Using a Z-Crystal boosts the power of all your Pokémon of a shared type for a short while, after which some time is needed to recharge.'
                 'A gift from Melemele\'s kahuna that enables the use of Z-Crystals. What they do is still under development.',
@@ -93,8 +90,8 @@ export default class KeyItems implements Feature {
     }
 
     gainKeyItem(item: KeyItemType, silent = false): void {
-        if (!this.hasKeyItem(item)) {
-            const keyItem = this.itemList.find(k => k.id === item);
+        const keyItem = this.itemList.find(k => k.id === item);
+        if (keyItem && (!this.hasKeyItem(item) || keyItem.allowMultipleUnlocks)) {
             keyItem.unlock();
             keyItem.unlockRewardOnUnlock();
             if (!silent) {
@@ -103,7 +100,6 @@ export default class KeyItems implements Feature {
         }
     }
 
-    // eslint-disable-next-line class-methods-use-this
     canAccess(): boolean {
         return true;
     }

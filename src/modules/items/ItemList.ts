@@ -40,6 +40,7 @@ import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
 import MultiRequirement from '../requirements/MultiRequirement';
 import QuestItem from './QuestItem';
 import ChristmasPresent from './ChristmasPresent';
+import EventCollectibleItem from './EventCollectibleItem';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
 import { pokemonMap } from '../pokemons/PokemonList';
@@ -47,7 +48,6 @@ import AttackGainConsumable from './AttackGainConsumable';
 import CollectibleItem from './CollectibleItem';
 import NullRequirement from '../requirements/NullRequirement';
 import VeteranUnlockRequirement from '../requirements/VeteranUnlockRequirement';
-// eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
 ItemList.xAttack         = new BattleItem(BattleItemType.xAttack, '+50% Bonus to Pokémon attack for 30 seconds', 600, undefined, 'X Attack', 'pokemonAttack', 1.5);
@@ -246,9 +246,6 @@ ItemList.Max_Mushroom_IoA = new QuestItem('Max_Mushroom_IoA', 'Max Mushroom', 'A
 ItemList.Shaderoot_Carrot_Calyrex = new QuestItem('Shaderoot_Carrot_Calyrex', 'Shaderoot Carrot', 'Carrot that the King of Bountiful Harvest\'s beloved steed likes to eat. It grew in a gloomy field.', 'The Crown of Galar');
 ItemList.Iceroot_Carrot_Calyrex = new QuestItem('Iceroot_Carrot_Calyrex', 'Iceroot Carrot', 'Carrot that the King of Bountiful Harvest\'s beloved steed likes to eat. It grew in a field covered in snow.', 'The Crown of Galar');
 ItemList.Wishing_Piece = new QuestItem('Wishing_Piece', 'Wishing Piece', 'Attracts Gigantamax Pokémon to the Max Lair', 'The Lair of Giants');
-
-// Other Collectible Items
-ItemList.Christmas_present = new ChristmasPresent();
 ItemList.CeruleanBerryShopPermit = new CollectibleItem('CeruleanBerryShopPermit', 'Berry Shop Permit',
     'A permit granting access to the exclusive Berry Shop in Cerulean City.', new NullRequirement(), 10000, Currency.farmPoint, {
         maxAmount: 1,
@@ -277,6 +274,13 @@ ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
 // Consumables
 ItemList.Rare_Candy = new AttackGainConsumable(ConsumableType.Rare_Candy, Infinity, undefined, undefined, 'Rare Candy', 'Raises the level of a Pokémon and permanently increases its attack');
 ItemList.Magikarp_Biscuit = new AttackGainConsumable(ConsumableType.Magikarp_Biscuit, Infinity, undefined, undefined, undefined, 'Strengthen your Magikarp', 6, (pokemon) => Math.floor(pokemon.id) === pokemonMap.Magikarp.id);
+
+// Miscellaneous
+ItemList.Christmas_present = new ChristmasPresent();
+ItemList.Relic_copper = new EventCollectibleItem('Relic_copper', 'Copper Coin', 'A copper coin used by pirates.', 'A Pirate\'s Life');
+ItemList.Relic_silver = new EventCollectibleItem('Relic_silver', 'Silver Coin', 'A silver coin used by pirates.', 'A Pirate\'s Life');
+ItemList.Relic_gold = new EventCollectibleItem('Relic_gold', 'Gold Coin', 'A gold coin used by pirates.', 'A Pirate\'s Life');
+ItemList.Pirate_receipt = new EventCollectibleItem('Pirate_receipt', 'Pirate Receipt', 'A proof you\'ve bought the most expensive Pirate Goods today.', 'A Pirate\'s Life');
 
 // Underground Items
 // Sellable (Diamonds)
@@ -389,6 +393,7 @@ ItemList.Spiritomb            = new PokemonItem('Spiritomb', 20000, Currency.dia
 // Unova
 ItemList.Zorua                = new PokemonItem('Zorua', 50625);
 ItemList['Meloetta (Pirouette)'] = new PokemonItem('Meloetta (Pirouette)', 200000);
+ItemList['Zorua (Pirate)']     = new PokemonItem('Zorua (Pirate)');
 // Kalos
 ItemList['Furfrou (Debutante)']  = new PokemonItem('Furfrou (Debutante)', 5000000000, Currency.money);
 ItemList['Furfrou (Diamond)']    = new PokemonItem('Furfrou (Diamond)', 300000, Currency.diamond);

@@ -24,6 +24,7 @@ class Plot implements Saveable {
 
     formattedStageTimeLeft: KnockoutComputed<string>;
     formattedTimeLeft: KnockoutComputed<string>;
+    calcTimeLeft: (includeGrowthMultiplier: boolean) => number;
     calcFormattedStageTimeLeft: (includeGrowthMultiplier: boolean) => string;
     calcFormattedTimeLeft: (includeGrowthMultiplier: boolean) => string;
     formattedBaseStageTimeLeft: KnockoutComputed<string>;
@@ -99,10 +100,7 @@ class Plot implements Saveable {
             return this.calcFormattedStageTimeLeft(false);
         });
 
-        this.calcFormattedTimeLeft = ((includeGrowthMultiplier: boolean) => {
-            if (this.berry === BerryType.None) {
-                return '';
-            }
+        this.calcTimeLeft = ((includeGrowthMultiplier: boolean) => {
             let timeLeft = 0;
             if (this.age < this.berryData.growthTime[3]) {
                 timeLeft = this.berryData.growthTime[3] - this.age;
@@ -112,7 +110,15 @@ class Plot implements Saveable {
             const growthMultiplier = includeGrowthMultiplier
                 ? App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier()
                 : 1;
-            return GameConstants.formatTime(Math.ceil(timeLeft / growthMultiplier));
+            return Math.ceil(timeLeft / growthMultiplier);
+        });
+
+        this.calcFormattedTimeLeft = ((includeGrowthMultiplier: boolean) => {
+            if (this.berry === BerryType.None) {
+                return '';
+            }
+            const timeLeft = this.calcTimeLeft(includeGrowthMultiplier);
+            return GameConstants.formatTime(timeLeft);
         });
 
         this.formattedTimeLeft = ko.pureComputed(() => {
@@ -333,7 +339,7 @@ class Plot implements Saveable {
                 change = true;
             }
 
-            if (!this._hasWarnedAboutToWither && this.age + 15 >= this.berryData.growthTime[4]) {
+            if (!this._hasWarnedAboutToWither && this.stage() == PlotStage.Berry && this.age + GameConstants.WITHER_WARNING_TIME >= this.berryData.growthTime[PlotStage.Berry]) {
                 this.notifications.push(FarmNotificationType.AboutToWither);
                 this._hasWarnedAboutToWither = true;
             }

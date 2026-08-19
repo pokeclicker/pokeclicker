@@ -20,7 +20,7 @@ class Shop extends TownContent {
     public tooltip = 'Visit shops to buy items.';
     constructor(
         public items: Item[],
-        public name = undefined,
+        public name: string | undefined = undefined,
         requirements: (Requirement | OneFromManyRequirement)[] = [],
         private hideBeforeUnlocked = false
     ) {

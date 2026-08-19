@@ -81,6 +81,7 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showGymGoAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showMuteButton')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('playerSafariSprite')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideCompletedQuestLineTasks')}"></tr>
                                 <tr>
                                     <td colspan="2">
                                         <button type="button" class="btn btn-primary" data-bind="click: () => {
@@ -128,7 +129,7 @@
                                             mapAreaStateOrder.set(mapAreaStateOrder.defaultValue);
                                         }">Reset Order</button>
                                         <button type="button" class="btn btn-primary" data-bind="click: () => {
-                                            Settings.getSetting('mapAreaStateOrder').value.map(status => 
+                                            Settings.getSetting('mapAreaStateOrder').value.map(status =>
                                                 Settings.getSetting(`--${areaStatus[status]}`)
                                             ).forEach(setting => setting.set(setting.defaultValue));
                                         }">Reset Colors</button>

@@ -4260,6 +4260,35 @@ Routes.add(new RegionRoute(
     [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
 ));
 
+// Pirate Event
+SeededRand.seed(new Date().getFullYear());
+Routes.getRoutesByRegion(Region.kanto).filter(r => r.pokemon.water.length).forEach((route) => {
+    route.pokemon.special.push(
+        new SpecialRoutePokemon(['Magikarp (Pirate)'], new SpecialEventRandomRequirement('A Pirate\'s Life')),
+    );
+});
+Routes.getRoutesByRegion(Region.sinnoh).filter(r => r.pokemon.water.length).forEach((route) => {
+    route.pokemon.special.push(
+        new SpecialRoutePokemon(['Captain Lucario'], new SpecialEventRandomRequirement('A Pirate\'s Life')),
+    );
+});
+Routes.getRoutesByRegion(Region.alola).filter(r => r.pokemon.water.length).forEach((route) => {
+    if (route.subRegion == AlolaSubRegions.MagikarpJump) {
+        return;
+    }
+
+    route.pokemon.special.push(
+        new SpecialRoutePokemon(['Bounsweet (Pirate)'], new SpecialEventRandomRequirement('A Pirate\'s Life')),
+        new SpecialRoutePokemon(['Steenee (Pirate)'], new SpecialEventRandomRequirement('A Pirate\'s Life')),
+    );
+});
+Routes.getRoutesByRegion(Region.galar).filter(r => r.pokemon.water.length).forEach((route) => {
+    route.pokemon.special.push(
+        new SpecialRoutePokemon(['Scorbunny (Pirate)'], new SpecialEventRandomRequirement('A Pirate\'s Life')),
+        new SpecialRoutePokemon(['Raboot (Pirate)'], new SpecialEventRandomRequirement('A Pirate\'s Life')),
+    );
+});
+
 // Halloween Event
 SeededRand.seed(new Date().getFullYear());
 Routes.getRoutesByRegion(Region.kanto).forEach((route) => {
