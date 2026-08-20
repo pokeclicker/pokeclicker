@@ -49,7 +49,7 @@ class PokedexHelper {
             return PokedexHelper.cachedFilteredList;
         }
 
-        PokedexHelper.cachedFilteredList = PokedexHelper.getList();
+        PokedexHelper.cachedFilteredList = PokedexHelper.getList().sort(PokedexHelper.compareBy(Settings.getSetting('pokedexSort').observableValue(), Settings.getSetting('pokedexSortDirection').observableValue()));
         return PokedexHelper.cachedFilteredList;
     })
 
@@ -99,9 +99,11 @@ class PokedexHelper {
             }
 
             // If not showing this region
-            const region: (GameConstants.Region | null) = Settings.getSetting('pokedexRegionFilter').observableValue();
-            if (region != null && region != nativeRegion) {
-                return false;
+            const selectedRegions = Settings.getSetting('pokedexRegionFilter').observableValue() as GameConstants.Region[];
+            if (selectedRegions.length > 0) {
+                if (!selectedRegions.includes(nativeRegion)) {
+                    return false;
+                }
             }
 
             // Event Pokemon
@@ -128,16 +130,17 @@ class PokedexHelper {
             }
 
             // Check if either of the types match
-            const type1: (PokemonType | null) = Settings.getSetting('pokedexType1Filter').observableValue();
-            const type2: (PokemonType | null) = Settings.getSetting('pokedexType2Filter').observableValue();
-            if ([type1, type2].includes(PokemonType.None)) {
-                const type = (type1 == PokemonType.None) ? type2 : type1;
-                if (!PokedexHelper.isPureType(pokemon, type)) {
+            const selectedType1 = Settings.getSetting('pokedexType1Filter').observableValue() as PokemonType[];
+            const selectedType2 = Settings.getSetting('pokedexType2Filter').observableValue() as PokemonType[];
+
+            if (selectedType1.length > 0 || selectedType2.length > 0) {
+                const types = (pokemon as PokemonListData).type;
+                if (!PokemonHelper.matchesTypeFilter(types, selectedType1)
+                    || !PokemonHelper.matchesTypeFilter(types, selectedType2)) {
                     return false;
                 }
-            } else if ((type1 != null && !(pokemon as PokemonListData).type.includes(type1)) || (type2 != null && !(pokemon as PokemonListData).type.includes(type2))) {
-                return false;
             }
+
             const hasBaseFormInSameRegion = () => pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion);
             // Alternate forms that we haven't caught yet
             if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id) && hasBaseFormInSameRegion()) {
@@ -206,18 +209,13 @@ class PokedexHelper {
             }
 
             // Only pokemon with selected category
-            const categoryFilter = Settings.getSetting('pokedexCategoryFilter').observableValue();
-            if (categoryFilter != -1) {
+            const categoryFilter = Settings.getSetting('pokedexCategoryFilter').observableValue() as number[];
+            if (categoryFilter.length > 0) {
                 if (!alreadyCaught) {
                     return false;
                 }
                 const partyPokemon = App.game.party.getPokemon(pokemon.id);
-                // Categorized only
-                if (categoryFilter == -2 && partyPokemon.isUncategorized()) {
-                    return false;
-                }
-                // Selected category
-                if (categoryFilter >= 0 && !partyPokemon.category.includes(categoryFilter)) {
+                if (!categoryFilter.some((category) => partyPokemon.category.includes(category))) {
                     return false;
                 }
             }
@@ -256,6 +254,14 @@ class PokedexHelper {
         return (pokemon.type.length === 1 && (type == null || pokemon.type[0] === type));
     }
 
+    public static resetFilters() {
+        for (const key of pokedexFilterSettingKeys) {
+            const setting = Settings.getSetting(key);
+            Settings.setSettingByName(key, setting.defaultValue);
+        }
+        (document.getElementById('pokedex-filter-nameID') as HTMLInputElement).value = '';
+    }
+
     // Flag for the LazyLoader
     public static resetPokedexFlag = ko.computed(() => DisplayObservables.modalState.pokedexModal === 'hidden');
 
@@ -265,5 +271,61 @@ class PokedexHelper {
 
     public static filteredListPartyPokemon(): Array<PartyPokemon> {
         return PokedexHelper.filteredList().map((p) => App.game.party.getPokemon(p.id)).filter((p) => p !== undefined);
+    }
+
+
+
+    /* Sorts Pokedex data using base pokemon data and party pokemon data. Uncaught pokemon can be sorted by id, name, times hatched, base attack; in all other cases, sort by id, prioritized after party pokemon */
+    public static compareBy(option: SortOptions, direction: boolean) {
+        return (a, b) => {
+            const aParty = App.game.party.getPokemon(a.id);
+            const bParty = App.game.party.getPokemon(b.id);
+            const config = SortOptionConfigs[option]; //getValue handles party pokemon sorting only
+
+            let res, dir = direction ? -1 : 1;
+            let aValue, bValue;
+
+            //ID, name, base attack, times hatched sort: sort all pokemon
+            if (option == SortOptions.id) {
+                aValue = aParty ? config.getValue(aParty) : a.id;
+                bValue = bParty ? config.getValue(bParty) : b.id;
+            } else if (option == SortOptions.name) {
+                aValue = aParty ? config.getValue(aParty) : a.name;
+                bValue = bParty ? config.getValue(bParty) : b.name;
+            } else if (option == SortOptions.baseAttack) {
+                aValue = aParty ? config.getValue(aParty) : a.attack;
+                bValue = bParty ? config.getValue(bParty) : b.attack;
+            } else if (option == SortOptions.timesHatched) {
+                aValue = App.game.statistics.pokemonHatched[a.id]() || 0;
+                bValue = App.game.statistics.pokemonHatched[b.id]() || 0;
+            } else if (aParty && bParty) { //all other sort options: sort only party pokemon, sort party pokemon ahead of uncaught pokemon regardless of sort direction
+                aValue = config.getValue(aParty);
+                bValue = config.getValue(bParty);
+            } else if (!aParty && bParty) {
+                return 1;
+            } else if (aParty && !bParty) {
+                return -1;
+            } else {
+                return a.id - b.id;
+            }
+
+            if (aValue == bValue) {
+                //If they are equal according to provided property, sort by id
+                return a.id - b.id;
+            } else if (aValue < bValue) {
+                res = -1;
+            } else if (aValue > bValue) {
+                res = 1;
+            } else {
+                res = 0;
+            }
+
+            if (config.invert) {
+                dir *= -1;
+            }
+
+            return res * dir;
+
+        };
     }
 }

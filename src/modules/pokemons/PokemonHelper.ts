@@ -1,4 +1,4 @@
-import type { Computed } from 'knockout';
+import type { PureComputed } from 'knockout';
 import {
     MaxIDPerRegion,
     Region,
@@ -124,13 +124,17 @@ export function getPokeballImage(pokemonName: PokemonNameType): string {
     return src;
 }
 
-export function displayName(englishName: string): Computed<string> {
+export function displayName(englishName: string): string {
+    return App.translation.get(englishName, 'pokemon')();
+}
+
+export function displayNameObservable(englishName: string): PureComputed<string> {
     return App.translation.get(englishName, 'pokemon');
 }
 
 export function matchPokemonByNames(pattern: RegExp, pokemonName: PokemonNameType, pokemon?: TmpPartyPokemonType) {
     const partyName = (pokemon || App.game.party.getPokemonByName(pokemonName))?.displayName;
-    return pattern.test(displayName(pokemonName)()) || pattern.test(pokemonName) || (partyName && pattern.test(partyName));
+    return pattern.test(displayName(pokemonName)) || pattern.test(pokemonName) || (partyName && pattern.test(partyName));
 }
 
 export function hasMegaEvolution(pokemonName: PokemonNameType): boolean {
@@ -170,6 +174,21 @@ export function isGigantamaxForm(pokemonName: PokemonNameType): boolean {
 export const getAllShadowPokemon = ko.pureComputed((): Set<PokemonNameType> => {
     return new Set(Object.values(dungeonList).flatMap(d => d.allShadowPokemon()));
 });
+
+export function matchesTypeFilter(types: PokemonType[], selected: PokemonType[]): boolean {
+    if (selected.length === 0) {
+        return true;
+    }
+    if (types.length === 1 && selected.includes(PokemonType.None)) {
+        return true;
+    }
+    for (let i = 0; i < types.length; i += 1) {
+        if (selected.includes(types[i])) {
+            return true;
+        }
+    }
+    return false;
+}
 
 // To have encounter/caught/defeat/hatch statistics in a single place
 export function incrementPokemonStatistics(pokemonId: number, statistic: PokemonStatisticsType, shiny: boolean, gender: BattlePokemonGender, shadow: ShadowStatus) {

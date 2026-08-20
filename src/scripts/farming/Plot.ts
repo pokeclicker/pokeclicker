@@ -24,6 +24,7 @@ class Plot implements Saveable {
 
     formattedStageTimeLeft: KnockoutComputed<string>;
     formattedTimeLeft: KnockoutComputed<string>;
+    calcTimeLeft: (includeGrowthMultiplier: boolean) => number;
     calcFormattedStageTimeLeft: (includeGrowthMultiplier: boolean) => string;
     calcFormattedTimeLeft: (includeGrowthMultiplier: boolean) => string;
     formattedBaseStageTimeLeft: KnockoutComputed<string>;
@@ -55,7 +56,7 @@ class Plot implements Saveable {
         this._isSafeLocked = ko.observable(false);
         this._berry = ko.observable(berry).extend({ numeric: 0 });
         this._lastPlanted = ko.observable(berry).extend({ numeric: 0 });
-        this._age = ko.observable(age);
+        this._age = ko.observable(age).extend({ numeric: 5 });
         this._mulch = ko.observable(mulch).extend({ numeric: 0 });
         this._mulchTimeLeft = ko.observable(mulchTimeLeft).extend({ numeric: 3 });
         this._wanderer = ko.observable(undefined);
@@ -75,7 +76,7 @@ class Plot implements Saveable {
 
                 const boost = this.auraBoost();
                 const value = this.berryData.aura.getAuraValue(this.stage());
-                return value > 1 || this.berry === BerryType.Micle ? value * boost : value / boost;
+                return value > 1 ? value * boost : value / boost;
             }).extend({ rateLimit: 50 }),
         };
 
@@ -99,10 +100,7 @@ class Plot implements Saveable {
             return this.calcFormattedStageTimeLeft(false);
         });
 
-        this.calcFormattedTimeLeft = ((includeGrowthMultiplier: boolean) => {
-            if (this.berry === BerryType.None) {
-                return '';
-            }
+        this.calcTimeLeft = ((includeGrowthMultiplier: boolean) => {
             let timeLeft = 0;
             if (this.age < this.berryData.growthTime[3]) {
                 timeLeft = this.berryData.growthTime[3] - this.age;
@@ -112,7 +110,15 @@ class Plot implements Saveable {
             const growthMultiplier = includeGrowthMultiplier
                 ? App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier()
                 : 1;
-            return GameConstants.formatTime(Math.ceil(timeLeft / growthMultiplier));
+            return Math.ceil(timeLeft / growthMultiplier);
+        });
+
+        this.calcFormattedTimeLeft = ((includeGrowthMultiplier: boolean) => {
+            if (this.berry === BerryType.None) {
+                return '';
+            }
+            const timeLeft = this.calcTimeLeft(includeGrowthMultiplier);
+            return GameConstants.formatTime(timeLeft);
         });
 
         this.formattedTimeLeft = ko.pureComputed(() => {
@@ -194,7 +200,7 @@ class Plot implements Saveable {
             if (this.berry === BerryType.None) {
                 return PlotStage.Seed;
             }
-            return this.berryData.growthTime.findIndex(t => this.age <= t);
+            return this.berryData.growthTime.findIndex(t => this.age < t);
         });
 
         this.tooltip = ko.pureComputed(() => {
@@ -286,7 +292,7 @@ class Plot implements Saveable {
 
             // Wanderer
             if (this.wanderer) {
-                tooltip.push(`A wild <strong>${PokemonHelper.displayName(this.wanderer.name)()}</strong> is wandering around`);
+                tooltip.push(`A wild <strong>${PokemonHelper.displayName(this.wanderer.name)}</strong> is wandering around`);
             }
 
             // Mutation
@@ -319,7 +325,7 @@ class Plot implements Saveable {
 
             // Checking for Petaya Berries
             if (App.game.farming.berryInFarm(BerryType.Petaya, PlotStage.Berry, true) && this.berry !== BerryType.Petaya) {
-                this.age = Math.min(this.age, this.berryData.growthTime[3] + 1);
+                this.age = Math.min(this.age, this.berryData.growthTime[3]);
             }
 
             const updatedStage = this.stageUpdated(oldAge, this.age);
@@ -333,12 +339,12 @@ class Plot implements Saveable {
                 change = true;
             }
 
-            if (!this._hasWarnedAboutToWither && this.age + 15 > this.berryData.growthTime[4]) {
+            if (!this._hasWarnedAboutToWither && this.stage() == PlotStage.Berry && this.age + GameConstants.WITHER_WARNING_TIME >= this.berryData.growthTime[PlotStage.Berry]) {
                 this.notifications.push(FarmNotificationType.AboutToWither);
                 this._hasWarnedAboutToWither = true;
             }
 
-            if (this.age > this.berryData.growthTime[4]) {
+            if (this.age >= this.berryData.growthTime[4]) {
                 this.die();
                 change = true;
             }
@@ -469,7 +475,8 @@ class Plot implements Saveable {
                     createLogContent.wildWander({ pokemon : wanderer.name })
                 );
             }
-
+            const pokemon = PokemonHelper.getPokemonByName(wanderer.name);
+            PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatisticsType.Encountered, wanderer.shiny, wanderer.gender, GameConstants.ShadowStatus.None);
             return wanderer;
         }
         return undefined;
@@ -646,7 +653,7 @@ class Plot implements Saveable {
     }
 
     get berryData(): Berry {
-        return App.game.farming.berryData[this.berry];
+        return BerryList[this.berry];
     }
 
     // Knockout getters

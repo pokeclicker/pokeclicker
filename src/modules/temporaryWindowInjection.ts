@@ -31,6 +31,9 @@ import Battle from './battles/Battle';
 import BattlePokemon from './battles/BattlePokemon';
 import Trainer from './battles/Trainer';
 import GymPokemon from './gym/GymPokemon';
+import CustomGymPokemon from './gym/CustomGymPokemon';
+import Berry from './farming/Berry';
+import { BerryList } from './farming/BerryList';
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
@@ -97,7 +100,7 @@ import OneFromManyRequirement from './requirements/OneFromManyRequirement';
 import AttackRequirement from './requirements/AttackRequirement';
 import BattleFrontierHighestStageRequirement from './requirements/BattleFrontierHighestStageRequirement';
 import BattleFrontierTotalStageRequirement from './requirements/BattleFrontierTotalStageRequirement';
-import BerriesUnlockedRequirement from './requirements/BerriesUnlockedRequirement';
+import TotalBerriesUnlockedRequirement from './requirements/TotalBerriesUnlockedRequirement';
 import CapturedRequirement from './requirements/CapturedRequirement';
 import CaughtPokemonRequirement from './requirements/CaughtPokemonRequirement';
 import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
@@ -117,6 +120,7 @@ import InRegionRequirement from './requirements/InRegionRequirement';
 import MoneyRequirement from './requirements/MoneyRequirement';
 import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
 import MaxRegionRequirement from './requirements/MaxRegionRequirement';
+import BerryMutationPossibleRequirement from './requirements/BerryMutationPossibleRequirement';
 import ObtainedPokemonRequirement from './requirements/ObtainedPokemonRequirement';
 import PokeballRequirement from './requirements/PokeballRequirement';
 import PokemonLevelRequirement from './requirements/PokemonLevelRequirement';
@@ -131,6 +135,7 @@ import PokemonDefeatedSelectNRequirement from './requirements/PokemonDefeatedSel
 import SeviiCaughtRequirement from './requirements/SeviiCaughtRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
 import ShadowPokemonRequirement from './requirements/ShadowPokemonRequirement';
+import BerryUnlockedRequirement from './requirements/BerryUnlockedRequirement';
 import StatisticRequirement from './requirements/StatisticRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import StarterRequirement from './requirements/StarterRequirement';
@@ -157,6 +162,7 @@ import DummyRequirement from './requirements/DummyRequirement';
 import WeatherRequirement from './requirements/WeatherRequirement';
 import MegaEvolveRequirement from './requirements/MegaEvolveRequirement';
 import PokemonAttackRequirement from './requirements/PokemonAttackRequirement';
+import VeteranUnlockRequirement from './requirements/VeteranUnlockRequirement';
 import { SortModules, SortSaves } from './Sortable';
 import KeyItemController from './keyItems/KeyItemController';
 import KeyItem from './keyItems/KeyItem';
@@ -194,11 +200,14 @@ import PokemonItem from './items/PokemonItem';
 import EggItem from './items/EggItem';
 import MegaStoneItem from './items/MegaStoneItem';
 import PokeballItem from './items/PokeballItem';
-import QuestItem from './items/QuestItem';
+import { HeldItem, AttackBonusHeldItem, PokemonRestrictedAttackBonusHeldItem, TypeRestrictedAttackBonusHeldItem, TypeRestrictedExceptionAttackBonusHeldItem, HybridAttackBonusHeldItem, EVsGainedBonusHeldItem, ExpGainedBonusHeldItem  } from './items/HeldItem';
+import MulchItem from './items/MulchItem';
+import { ShovelItem, MulchShovelItem } from './items/ShovelItem';
 import Vitamin from './items/Vitamin';
 import VitaminController from './items/VitaminController';
 import Consumable from './items/Consumable';
 import ConsumableController from './items/ConsumableController';
+import BuyKeyItem from './items/buyKeyItem';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
@@ -229,6 +238,8 @@ import ChristmasPresent from './items/ChristmasPresent';
 import DamageCalculator from './types/DamageCalculator';
 import GameLoadState from './utilities/GameLoadState';
 import GenericDeal, { DealCostOrProfitType } from './deal/GenericDeal';
+import DealHelper from './deal/DealHelper';
+import CollectibleItem from './items/CollectibleItem';
 import areaStatus from './enums/AreaStatus';
 import TranslationHelper from './translation/TranslationHelper';
 import * as DownloadUtil from './utilities/DownloadUtil';
@@ -264,6 +275,9 @@ Object.assign(<any>window, {
     BattlePokemon,
     Trainer,
     GymPokemon,
+    CustomGymPokemon,
+    Berry,
+    BerryList,
     BooleanSetting,
     RangeSetting,
     Setting,
@@ -338,7 +352,7 @@ Object.assign(<any>window, {
     AttackRequirement,
     BattleFrontierHighestStageRequirement,
     BattleFrontierTotalStageRequirement,
-    BerriesUnlockedRequirement,
+    TotalBerriesUnlockedRequirement,
     CapturedRequirement,
     CaughtPokemonRequirement,
     ClearDungeonRequirement,
@@ -358,6 +372,7 @@ Object.assign(<any>window, {
     MoneyRequirement,
     MaxLevelOakItemRequirement,
     MaxRegionRequirement,
+    BerryMutationPossibleRequirement,
     ObtainedPokemonRequirement,
     PokeballRequirement,
     PokemonLevelRequirement,
@@ -372,6 +387,7 @@ Object.assign(<any>window, {
     SeviiCaughtRequirement,
     ShinyPokemonRequirement,
     ShadowPokemonRequirement,
+    BerryUnlockedRequirement,
     StatisticRequirement,
     SubregionRequirement,
     StarterRequirement,
@@ -398,6 +414,7 @@ Object.assign(<any>window, {
     WeatherRequirement,
     MegaEvolveRequirement,
     PokemonAttackRequirement,
+    VeteranUnlockRequirement,
     SortModules,
     SortSaves,
     KeyItemController,
@@ -441,11 +458,23 @@ Object.assign(<any>window, {
     EggItem,
     MegaStoneItem,
     PokeballItem,
-    QuestItem,
+    HeldItem,
+    AttackBonusHeldItem,
+    PokemonRestrictedAttackBonusHeldItem,
+    TypeRestrictedAttackBonusHeldItem,
+    TypeRestrictedExceptionAttackBonusHeldItem,
+    HybridAttackBonusHeldItem,
+    EVsGainedBonusHeldItem,
+    ExpGainedBonusHeldItem,
+    MulchItem,
+    ShovelItem,
+    MulchShovelItem,
+    CollectibleItem,
     Vitamin,
     VitaminController,
     Consumable,
     ConsumableController,
+    BuyKeyItem,
     RoamingPokemonList,
     DataPokemon,
     RoamingPokemon,
@@ -464,6 +493,7 @@ Object.assign(<any>window, {
     UndergroundToolType,
     ShardDeal,
     GenericDeal,
+    DealHelper,
     DealCostOrProfitType,
     EncounterType,
     SafariBaitRequirement,

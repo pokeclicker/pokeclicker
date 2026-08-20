@@ -50,9 +50,6 @@ export default class SpecialEvents implements Feature {
         return true;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    update(delta: number): void {}  // This method intentionally left blank
-
     getEvent(eventName: SpecialEventTitleType) {
         return this.events.find((e) => e.title == eventName);
     }
@@ -166,8 +163,36 @@ export default class SpecialEvents implements Feature {
             new Date(new Date().getFullYear(), 6, 24, 23), () => {
             },
         );
+        /* Pokemon the first movie release date
+        RoamingPokemonList.ts:
+            Captain Charizard
+        RouteData.ts:
+            Magikarp (Pirate)
+            Captain Lucario
+            Bounsweet (Pirate)
+            Steenee (Pirate)
+            Scorbunny (Pirate)
+            Raboot (Pirate)
+        Dungeon.ts:
+            Pirate Island as a dungeon
+            Captain Hoopa
+            Gyarados (Captain)
+            Tsareena (Captain)
+            Cinderace (Captain)
+            Captain Zacian
+        GenericDeal.ts
+            Zorua (Pirate)
+        */
+        this.newEvent('A Pirate\'s Life', 'Pirates are causing trouble all over the Seven Seas.',
+            // Start
+            new Date(new Date().getFullYear(), 7, 29, 1), () => {
+            },
+            // End
+            new Date(new Date().getFullYear(), 8, 19, 23), () => {
+            },
+        );
         // Halloween
-        this.newEvent('Halloween!', 'Encounter Spooky Pokémon for a limited time around Kanto, Johto and Hoenn.',
+        this.newEvent('Halloween!', 'Spooky Pokémon are trick-or-treating for a limited time around Kanto, Johto and Hoenn.',
             // Start
             new Date(new Date().getFullYear(), 9, 30, 1), () => {
             },

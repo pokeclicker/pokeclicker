@@ -52,7 +52,6 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     _attackBonusPercent: KnockoutObservable<number>;
     _attackBonusAmount: KnockoutObservable<number>;
     _category: KnockoutObservableArray<number>;
-    _translatedName: KnockoutObservable<string>;
     _nickname: KnockoutObservable<string>;
     _displayName: KnockoutComputed<string>;
     _pokerus: KnockoutObservable<GameConstants.Pokerus>;
@@ -83,7 +82,6 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
         this._category = ko.observableArray([0]);
-        this._translatedName = PokemonHelper.displayName(name);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
         this.evs = ko.pureComputed(() => {
@@ -114,11 +112,11 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this.hideShinyImage = ko.observable(false);
         this._nickname = ko.observable();
         this._nickname.subscribe((value) => {
-            if (value === this._translatedName()) {
+            if (value === PokemonHelper.displayName(this.name)) {
                 AchievementHandler.unlockAchievement('A cat named Cat');
             }
         });
-        this._displayName = ko.pureComputed(() => this._nickname() ? this._nickname() : this._translatedName());
+        this._displayName = ko.pureComputed(() => this._nickname() || PokemonHelper.displayName(this.name));
         this._shadow = ko.observable(shadow);
         this._showShadowImage = ko.observable(false);
         this._attack = ko.computed(() => this.calculateAttack());
@@ -404,9 +402,13 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         return Object.values(this.vitaminsUsed).reduce((sum, obs) => sum + obs(), 0);
     });
 
-    vitaminUsesRemaining = ko.pureComputed((): number => {
+    public static maxVitaminUsesAllowed() {
         // Allow 5 for every region visited (including Kanto)
-        return (player.highestRegion() + 1) * 5 - this.totalVitaminsUsed();
+        return (player.highestRegion() + 1) * 5;
+    }
+
+    vitaminUsesRemaining = ko.pureComputed((): number => {
+        return PartyPokemon.maxVitaminUsesAllowed() - this.totalVitaminsUsed();
     });
 
     calculateEVAttackBonus = ko.pureComputed((): number => {
@@ -473,14 +475,11 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         }
 
         // Check based on categories
-        const categoryFilter = Settings.getSetting('breedingCategoryFilter').observableValue();
-        // Categorized only
-        if (categoryFilter == -2 && this.isUncategorized()) {
-            return false;
-        }
-        // Selected category
-        if (categoryFilter >= 0 && !this.category.includes(categoryFilter)) {
-            return false;
+        const categoryFilter = Settings.getSetting('breedingCategoryFilter').observableValue() as number[];
+        if (categoryFilter.length > 0) {
+            if (!categoryFilter.some((category) => this.category.includes(category))) {
+                return false;
+            }
         }
 
         // Check based on shiny status
@@ -490,15 +489,10 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         }
 
         // Check based on native region
-        const unlockedRegionsMask = (2 << player.highestRegion()) - 1;
-        const regionFilterMask = Settings.getSetting('breedingRegionFilter').observableValue() & unlockedRegionsMask;
-        if (regionFilterMask !== unlockedRegionsMask) {
+        const selectedRegions = Settings.getSetting('breedingRegionFilter').observableValue() as GameConstants.Region[];
+        if (selectedRegions.length > 0) {
             const nativeRegion = PokemonHelper.calcNativeRegion(this.name);
-            // With the region filter active, regionless pokemon should be shown only if no regions are selected
-            const nativeRegionInFilter = nativeRegion !== GameConstants.Region.none ?
-                (1 << nativeRegion) & regionFilterMask :
-                regionFilterMask === 0;
-            if (!nativeRegionInFilter) {
+            if (!selectedRegions.includes(nativeRegion)) {
                 return false;
             }
         }
@@ -536,16 +530,12 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         }
 
         // Check if either of the types match
-        const type1: (PokemonType | null) = Settings.getSetting('breedingType1Filter').observableValue();
-        const type2: (PokemonType | null) = Settings.getSetting('breedingType2Filter').observableValue();
-        if (type1 !== null || type2 !== null) {
+        const selectedType1 = Settings.getSetting('breedingType1Filter').observableValue() as PokemonType[];
+        const selectedType2 = Settings.getSetting('breedingType2Filter').observableValue() as PokemonType[];
+        if (selectedType1.length > 0 || selectedType2.length > 0) {
             const { type: types } = pokemonMap[this.name];
-            if ([type1, type2].includes(PokemonType.None)) {
-                const type = (type1 == PokemonType.None) ? type2 : type1;
-                if (!BreedingController.isPureType(this, type)) {
-                    return false;
-                }
-            } else if ((type1 !== null && !types.includes(type1)) || (type2 !== null && !types.includes(type2))) {
+            if (!PokemonHelper.matchesTypeFilter(types, selectedType1)
+                || !PokemonHelper.matchesTypeFilter(types, selectedType2)) {
                 return false;
             }
         }

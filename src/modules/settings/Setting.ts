@@ -6,11 +6,10 @@ import SettingOption from './SettingOption';
 import Requirement from '../requirements/Requirement';
 import GameLoadState from '../utilities/GameLoadState';
 
-export default class Setting<T> {
-    private _value: T;
-    private readonly _observable: KnockoutObservable<T>;
+export default class Setting<T, TOption = T> {
+    protected readonly _observable: KnockoutObservable<T>;
     public readonly observableValue: KnockoutComputed<T>;
-    private computedOptions: KnockoutComputed<SettingOption<T>[]>;
+    private computedOptions: KnockoutComputed<SettingOption<TOption>[]>;
 
     // We can't set this up in the constructor because App.translation doesn't exist yet
     private cachedTranslatedName: KnockoutComputed<string>;
@@ -19,12 +18,12 @@ export default class Setting<T> {
     constructor(
         public name: string,
         private _defaultDisplayName: string,
-        private _options: SettingOption<T>[] | (() => SettingOption<T>[]),
+        private _options: SettingOption<TOption>[] | (() => SettingOption<TOption>[]),
         public defaultValue: T,
         public requirement: Requirement = undefined,
         public saveAsDefault: boolean = true,
     ) {
-        this._observable = ko.observable(this.defaultValue);
+        this._observable = this.createObservable(this.defaultValue);
         this.set(defaultValue);
 
         // Redirects writes to the observable to this.set()
@@ -41,21 +40,24 @@ export default class Setting<T> {
         }
     }
 
+    protected createObservable(initial: T): KnockoutObservable<T> {
+        return ko.observable(initial);
+    }
+
     get value() {
-        return this._value;
+        return this._observable.peek();
     }
 
     set value(value: T) {
         this.set(value);
     }
 
-    get options() {
-        return this.computedOptions?.() || this._options as SettingOption<T>[];
+    get options(): SettingOption<TOption>[] {
+        return this.computedOptions?.() || this._options as SettingOption<TOption>[];
     }
 
     set(value: T): void {
         if (this.validValue(value)) {
-            this._value = value;
             this._observable(value);
         } else {
             let stringified = typeof value === 'string' ? `\"${value}\"` : value.toString();
@@ -72,7 +74,9 @@ export default class Setting<T> {
             return true;
         }
         for (let i = 0; i < this.options.length; i += 1) {
-            if (this.options[i].value === value) {
+            // Not a fan of `as unknown` however we don't actually need to worry about
+            // type checking here since TOption and T are the same type
+            if ((this.options[i].value as unknown) === value) {
                 return this.options[i].isUnlocked();
             }
         }
@@ -98,7 +102,7 @@ export default class Setting<T> {
         return this.requirement ? this.requirement.isCompleted() : true;
     }
 
-    getValidOptions() {
+    getValidOptions(): SettingOption<TOption>[] {
         return this.options.filter((opt) => opt.isUnlocked());
     }
 

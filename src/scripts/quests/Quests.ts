@@ -18,12 +18,13 @@ class Quests implements Saveable {
     public freeRefresh = ko.observable(false);
     public questList: KnockoutObservableArray<Quest> = ko.observableArray();
     public questLines: KnockoutObservableArray<QuestLine> = ko.observableArray();
+    private questLineMap: Map<QuestLineNameType, QuestLine> = new Map();
     public level: KnockoutComputed<number> = ko.pureComputed((): number => {
         return this.xpToLevel(this.xp());
     });
     public questSlots: KnockoutComputed<number> = ko.pureComputed((): number => {
         // Minimum of 1, Maximum of 4
-        return Math.min(4, Math.max(1, Math.floor((this.level() + 5) / 5)));
+        return Math.min(GameConstants.MAX_QUEST_SLOTS, Math.max(1, Math.floor((this.level() + 5) / 5)));
     });
 
     // Get current quests by status
@@ -41,7 +42,7 @@ class Quests implements Saveable {
         return list.sort(Quests.questCompareBy);
     });
 
-    constructor() {}
+    constructor() { }
 
     static questCompareBy(quest1, quest2): number {
         if (Quests.getQuestSortStatus(quest1) < Quests.getQuestSortStatus(quest2)) {
@@ -74,11 +75,26 @@ class Quests implements Saveable {
      * @param name The quest line name
      */
     getQuestLine(name: QuestLineNameType) {
-        return this.questLines().find(ql => ql.name.toLowerCase() == name.toLowerCase());
+        // Map did not work as a pureComputed due to deferUpdates = true, so build it here
+        if (this.questLineMap.size !== this.questLines().length) {
+            this.questLineMap.clear();
+            this.questLines().forEach(ql => this.questLineMap.set(ql.name, ql));
+        }
+        return this.questLineMap.get(name);
+    }
+
+    replaceQuestLine(questLine: QuestLine) {
+        const oldQuestLine = this.getQuestLine(questLine.name);
+        if (!oldQuestLine) {
+            return;
+        }
+        oldQuestLine.dispose();
+        this.questLines.replace(oldQuestLine, questLine);
+        this.questLineMap.set(questLine.name, questLine);
     }
 
     public beginQuest(index: number) {
-        const quest  = this.questList()[index];
+        const quest = this.questList()[index];
         // Check if we can start a new quest, and the requested quest isn't started or completed
         if (this.canStartNewQuest() && quest && !quest.inProgress() && !quest.isCompleted()) {
             quest.begin();
@@ -95,7 +111,7 @@ class Quests implements Saveable {
 
     public quitQuest(index: number, shouldConfirm = false) {
         // Check if we can quit this quest
-        const quest  = this.questList()[index];
+        const quest = this.questList()[index];
         if (quest && quest.inProgress()) {
             quest.quit(shouldConfirm);
         } else {
@@ -108,11 +124,11 @@ class Quests implements Saveable {
 
     public claimQuest(index: number) {
         // Check if we can claim this quest
-        const quest  = this.questList()[index];
+        const quest = this.questList()[index];
         if (quest && quest.isCompleted() && !quest.claimed()) {
             quest.claim();
             if (player.highestRegion() >= GameConstants.Region.kalos && App.game.party.alreadyCaughtPokemonByName('Medicham') && !player.hasMegaStone(GameConstants.MegaStoneType.Medichamite)) {
-                if (Rand.chance(Math.max(0, (App.game.quests.level() - 15) / 8192))) {
+                if (Rand.chance(Math.max(0, (App.game.quests.level() - 15) / 4096))) {
                     player.gainMegaStone(GameConstants.MegaStoneType.Medichamite);
                 }
             }
@@ -293,7 +309,7 @@ class Quests implements Saveable {
     public questProgressTooltip() {
         const level = this.level();
         const xp = this.xp();
-        return {title : `${(xp - this.levelToXP(level)).toLocaleString('en-US')} / ${(this.levelToXP(level + 1) - this.levelToXP(level)).toLocaleString('en-US')}`, trigger : 'hover' };
+        return { title: `${(xp - this.levelToXP(level)).toLocaleString('en-US')} / ${(this.levelToXP(level + 1) - this.levelToXP(level)).toLocaleString('en-US')}`, trigger: 'hover' };
     }
 
     public isDailyQuestsUnlocked() {
@@ -366,7 +382,7 @@ class Quests implements Saveable {
 
     fromJSON(json: any) {
         // Generate the questLines (statistics not yet loaded when constructing)
-        QuestLineHelper.loadQuestLines();
+        QuestLineHelper.loadQuestLines(json?.questLines);
 
         if (!json) {
             // Generate the questList

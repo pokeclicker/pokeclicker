@@ -178,6 +178,14 @@ class QuestLine {
         return 'Pausing this quest line will remove it from your quest list and prevent any progress.<br /><br />It can be resumed from the current step at the Bulletin Board it was originally accepted.';
     }
 
+    dispose() {
+        this.autoBegin.dispose();
+        this.quests().forEach(q => {
+            q.deleteAutoCompleter();
+            q.deleteFocusSub(true);
+        });
+    }
+
     toJSON() {
         const json = {
             state: this.state(),
@@ -188,6 +196,7 @@ class QuestLine {
         if (this.curQuestObject() instanceof MultipleQuestsQuest) {
             json.initial = this.curQuestObject().quests.map((q) => q.isCompleted() ? true : q.initial());
         }
+
         return json;
     }
 }
