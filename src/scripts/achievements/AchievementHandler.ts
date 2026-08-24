@@ -253,6 +253,34 @@ class AchievementHandler {
         return AchievementHandler.getAchievementCategories().find(c => c.name == GameConstants.ExtraAchievementCategories[category]);
     }
 
+    private static calculateFilteredBonus(): string {
+        return AchievementHandler.achievementListFiltered().filter(x => x.isCompleted()).reduce((a, b) => {
+            return a + b.bonus;
+        }, 0).toFixed(2);
+    }
+
+    private static calculateFilteredMaxBonus(): string {
+        return AchievementHandler.achievementListFiltered().reduce((a, b) => {
+            return a + b.bonus;
+        }, 0).toFixed(2);
+    }
+
+    public static getFilteredBonusHint(): string {
+        if (this.filter.status() == -2 && this.filter.type() == -2 && this.filter.category() == 'all') {
+            return '';
+        }
+
+        if (this.filter.category() == 'secret') {
+            return '';
+        }
+
+        if (!AchievementHandler.achievementListFiltered().length) {
+            return '';
+        }
+
+        return `Filtered Achievements ${AchievementHandler.calculateFilteredBonus()}%/${AchievementHandler.calculateFilteredMaxBonus()}%`;
+    }
+
     public static initialize(multiplier: Multiplier, challenges: Challenges) {
 
         /*
