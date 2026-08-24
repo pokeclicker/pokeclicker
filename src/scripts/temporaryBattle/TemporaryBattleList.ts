@@ -2160,7 +2160,7 @@ TemporaryBattleList['Destiny Deoxys Rayquaza'] = new TemporaryBattle(
         new GymPokemon('Deoxys', 47276622, 70),
         new GymPokemon('Rayquaza', 57782538, 70),
     ],
-    '<i>Rayquaza and Deoxys fled seperate ways.</i>',
+    '<i>Rayquaza and Deoxys fled separate ways.</i>',
     [new QuestLineStepCompletedRequirement('Destiny Deoxys', 1)],
     undefined,
     {
