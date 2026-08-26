@@ -154,6 +154,10 @@ class BreedingController {
         return odds / regionPoolCount;
     }
 
+    public static filtersActive: KnockoutComputed<boolean> = ko.pureComputed(() => {
+        return breedingFilterSettingKeys.some((key) => !Settings.getSetting(key).isDefault());
+    });
+
     public static resetFilters() {
         for (const key of breedingFilterSettingKeys) {
             const setting = Settings.getSetting(key);

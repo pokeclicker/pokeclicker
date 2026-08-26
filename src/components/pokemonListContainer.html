@@ -65,7 +65,7 @@
                                         </div>
                                         <div class="ml-auto text-right d-flex align-items-center">
                                             <!-- ko foreach: PokemonHelper.getMegaStones($data.name).filter(s => player.hasMegaStone(s.megaStone)) -->
-                                            <img width="18" data-bind="attr: { src: $data.image },
+                                            <img width="20" data-bind="attr: { src: $data.image },
                                                 tooltip: {
                                                     title: pokemonMap[$parent.name].evolutions.flatMap(e => e.restrictions)
                                                         .find(r => r instanceof MegaEvolveRequirement && r.megaStone == $data.megaStone)?.hint() ?? '',
@@ -73,9 +73,14 @@
                                                     placement: 'bottom'
                                             }"/>
                                             <!-- /ko -->
-                                            <img class="shadow-icon" src="assets/images/status/shadow.svg" title="Shadow" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
-                                            <img class="shadow-icon" src="assets/images/status/purified.svg" title="Purified" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
-                                            <img class="ml-1" width="28" data-bind="visible: $data.pokerus, attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[$data.pokerus]}.png`}" />
+                                            <img class="shadow-icon ml-1" src="assets/images/status/shadow.svg" title="Shadow" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
+                                            <img class="shadow-icon ml-1" src="assets/images/status/purified.svg" title="Purified" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
+                                            <img class="ml-1" data-bind="visible: $data.pokerus, attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[$data.pokerus]}.png`},
+                                                tooltip: {
+                                                    title:  `EVs: ${$data.evs().toLocaleString('en-US')}`,
+                                                    trigger: 'hover',
+                                                    placement: 'bottom',
+                                            }"/>
                                         </div>
                                     </div>
                                 </div>

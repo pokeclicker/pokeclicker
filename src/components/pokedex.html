@@ -273,9 +273,11 @@ aria-labelledby="pokedexModalLabel">
                                     </div>
 
                                     <div class="col-12 mt-1">
-                                        <button class="btn btn-primary btn-block btn-sm" data-bind="click: () => PokedexHelper.resetFilters()">
-                                            Reset All Filters
-                                        </button>
+                                        <button class="btn btn-block btn-sm" data-bind="
+                                            click: () => PokedexHelper.resetFilters(),
+                                            css: PokedexHelper.filtersActive() ? 'btn-primary' : 'btn-secondary disabled',
+                                            enable: PokedexHelper.filtersActive
+                                        ">Reset All Filters</button>
                                     </div>
 
                                     <div class="col-12">

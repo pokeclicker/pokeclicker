@@ -260,9 +260,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             </div>
 
                                             <div class="col-12 mt-1">
-                                                <button class="btn btn-primary btn-block btn-sm" data-bind="click: () => BreedingController.resetFilters()">
-                                                    Reset All Filters
-                                                </button>
+                                                <button class="btn btn-block btn-sm" data-bind="
+                                                    click: () => BreedingController.resetFilters(),
+                                                    css: BreedingController.filtersActive() ? 'btn-primary' : 'btn-secondary disabled',
+                                                    enable: BreedingController.filtersActive
+                                                ">Reset All Filters</button>
                                             </div>
 
                                             <div class="col-12">

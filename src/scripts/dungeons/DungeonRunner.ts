@@ -236,10 +236,10 @@ class DungeonRunner {
 
         if (typeof BerryType[input] == 'number') {
             message = `Found ${Math.floor(amount)} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} ${GameConstants.pluralizeString('Berry', amount)} in a dungeon chest.`;
-        } if (ItemList[input] instanceof PokeballItem) {
-            message = `Found ${amount} × <img src="${image}" height ="24px"/> ${GameConstants.pluralizeString(ItemList[input].displayName, amount)} in a dungeon chest.`;
         } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
             message = `Encountered ${GameHelper.anOrA(input)} <img src="${image}" height="40px"/> ${GameConstants.humanifyString(input)} in a dungeon chest.`;
+        } else if (ItemList[input] instanceof Item) {
+            message = `Found ${amount} × <img src="${image}" height="24px"/> ${GameConstants.pluralizeString(ItemList[input].displayName, amount)} in a dungeon chest.`;
         }
 
         if (weight <= 2) {

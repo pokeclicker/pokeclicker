@@ -230,7 +230,7 @@ export class ExpGainedBonusHeldItem extends HeldItem {
 
 ItemList.Wonder_Chest = new ExpGainedBonusHeldItem('Wonder_Chest', 10000, Currency.money, undefined, 'Wonder Chest', 1.25, Region.johto);
 ItemList.Miracle_Chest = new ExpGainedBonusHeldItem('Miracle_Chest', 30000, Currency.money, { visible: new MaxRegionRequirement(Region.sinnoh) }, 'Miracle Chest', 1.5, Region.sinnoh);
-ItemList.Joy_Scent = new ExpGainedBonusHeldItem('Joy_Scent', 10000, Currency.money, undefined, 'Joy Scent', 1.75, Region.hoenn, ' the holding Shadow or Purified Pokémon',
+ItemList.Joy_Scent = new ExpGainedBonusHeldItem('Joy_Scent', 10000, Currency.money, undefined, 'Joy Scent', 1.75, Region.hoenn, 'the holding Shadow or Purified Pokémon',
     (p) => p.shadow >= ShadowStatus.Shadow);
 ItemList.Excite_Scent = new ExpGainedBonusHeldItem('Excite_Scent', 10000, Currency.money, undefined, 'Excite Scent', 2, Region.hoenn, 'the holding Shadow or Purified Pokémon',
     (p) => p.shadow >= ShadowStatus.Shadow);
