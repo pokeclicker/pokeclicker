@@ -124,6 +124,12 @@
                     'evs': App.game.party.getPokemonByName(model.item.type)?.evs() }}">
                 </span>
             </div>
+            <div data-bind="if: model.item instanceof EvolutionStone" style="line-height: 0;">
+                <span data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                    'pokerus': model.item.getPokerusStatus(), 'width': '32px',
+                    'evsProgress': model.item.getPokerusProgress() }}">
+                </span>
+            </div>
         </div>
     </div>
     <!-- /ko -->
