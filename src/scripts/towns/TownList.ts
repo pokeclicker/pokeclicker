@@ -11,6 +11,7 @@
 ///<reference path="../safari/SafariTownContent.ts"/>
 ///<reference path="PurifyChamber.ts"/>
 ///<reference path="../shop/GenericTraderShop.ts"/>
+///<reference path="../shop/VeteranShop.ts"/>
 
 const TownList: { [name: string]: Town } = {};
 
@@ -70,6 +71,7 @@ const ViridianCityShop = new Shop([
     ItemList.xClick,
     ItemList.Dungeon_ticket,
 ]);
+
 const PewterCityShop = new Shop([
     ItemList.Pokeball,
     ItemList.Token_collector,
@@ -244,6 +246,50 @@ const PinkanBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
     ItemList.Gooey_Mulch,
 ], 'Officer Jenny\'s Pinkan Trade Shop', [new QuestLineCompletedRequirement('Team Rocket\'s Pinkan Theme Park')]);
 
+const kantoJohtoBerryShopItems = [
+    ItemList.Boost_Mulch,
+    ItemList.Rich_Mulch,
+    ItemList.Surprise_Mulch,
+    ItemList.Amaze_Mulch,
+    ItemList.Freeze_Mulch,
+    ItemList.Berry_Shovel,
+    ItemList.Mulch_Shovel,
+    ItemList.Squirtbottle,
+    ItemList.FarmHandBailey,
+];
+
+const KantoExclusiveBerryShop = new Shop(kantoJohtoBerryShopItems, 'Exclusive Berry Shop', [new ItemOwnedRequirement('CeruleanBerryShopPermit')], true);
+
+// To avoid polluting ItemList & item requirements, instantiate as new items where it makes sense
+const veteranShop = new VeteranShop([
+    new BuyKeyItem(KeyItemType.Pokerus_virus, 2000, GameConstants.Currency.dungeonToken, {
+        visible: new MultiRequirement([
+            new VeteranUnlockRequirement(GameConstants.VeteranUnlock.PokerusVirus),
+            new CaughtPokemonRequirement(1),
+        ]),
+        maxAmount: 10000,
+    }, 'Pokérus Virus', true),
+    new BuyKeyItem(KeyItemType.Event_calendar, 10000, GameConstants.Currency.questPoint, {
+        visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.EventCalendar),
+    }, 'Event Calendar', true),
+    new BuyKeyItem(KeyItemType.Explorer_kit, 5000, GameConstants.Currency.money, {
+        visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.ExplorerKit),
+    }, 'Explorer Kit', true),
+    new BuyKeyItem(KeyItemType.Holo_caster, 100, GameConstants.Currency.dungeonToken, {
+        visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.HoloCaster),
+    }, 'Holo Caster', true),
+    new BuyKeyItem(KeyItemType.Wailmer_pail, 5000, GameConstants.Currency.money, {
+        visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.WailmerPail),
+    }, 'Wailmer Pail', true),
+    new BuyKeyItem(KeyItemType.Gem_case, 5000, GameConstants.Currency.money, {
+        visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.GemCase),
+    }, 'Gem Case', true),
+    new BuyKeyItem(KeyItemType.Super_rod, 5000, GameConstants.Currency.money, {
+        visible: new VeteranUnlockRequirement(GameConstants.VeteranUnlock.SuperRod),
+    }, 'Super Rod', true),
+    ItemList.CeruleanBerryShopPermit,
+]);
+
 // Kanto NPCs
 
 const PalletProfOak = new ProfNPC('Prof. Oak',
@@ -324,7 +370,7 @@ const Route3CenterHint = new NPC('Gentleman', [
     'I say, the trek from here to Cerulean City can be a tiring one.',
     'If it wasn\'t for the Pokémon Center outside Mt. Moon, I don\'t think I\'d ever make it!',
     '...What\'s that? You\'ve never seen a Pokémon Center there?',
-    'Hmm, It is somewhat out of the way. Maybe if you look closer?',
+    'Hmm, it is somewhat out of the way. Maybe if you look closer?',
 ], {
     image: 'assets/images/npcs/Gentleman.png',
     requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Moon')),
@@ -465,7 +511,7 @@ const LavenderChanneler = new NPC('Channeler Karina', [
 
 const LavenderShopper = new NPC('Shopper', [
     'I always seem to run out of Great Balls. Luckly this shop always have them in stock!',
-    'They even have an offer today! They give you free Great Balls if you give them the code <b>THE-GREATEST-POKEBALL</b>',
+    'They even have an offer today! They give you free Great Balls if you give them the code <code class="text-nowrap">THE-GREATEST-POKEBALL</code>',
 ]);
 
 const BigSpender = new NPC('Big Spender', [
@@ -831,6 +877,14 @@ const NewIslandAsh2 = new NPC('Ash Ketchum',
     }
 );
 
+const CaptainGyarados = new NPC('Captain Gyarados', [
+    'Pirate crew battles are part of our everyday life out here. According to the old pirate code, I must hand over a reward if you manage to defeat us…',
+    'But be warned: if you triumph over my crew, even stronger pirates may start roaming in this area.',
+], {
+    image: 'assets/images/pokemon/130.02.png',
+}
+);
+
 const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
     'I heard there was a stone hidden in the Safari Zone that makes Pinsir stronger!',
     'But... I don\'t have a high enough Safari Level to find it.',
@@ -838,14 +892,13 @@ const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
 
 const CandyMan = new NPC('The Candy Man', [
     'I sure do love candy. The rarer, the better!',
-    'I\'ve got a real <b>SWEET-TOOTH</b>',
+    'I\'ve got a real <code class="text-nowrap">SWEET-TOOTH</code>',
 ]);
 
 const SpeedyRunner = new NPC('Speedy Runner', [
     'I don\'t have time to listen to people explain stuff I already know.',
-    'Some old man tried to teach me how to catch Pokémon earlier. I just shouted',
-    '<b>HOW-BLU-COIN?</b>',
-    'at him and left.',
+    'Some old man tried to teach me how to catch Pokémon earlier.',
+    'I just shouted <code class="text-nowrap">HOW-BLU-COIN?</code> at him and left.',
 ], {image: 'assets/images/npcs/Jogger.png'});
 
 const UnrivaledBlue = new NPC('Blue', [
@@ -928,7 +981,7 @@ TownList['Pallet Town'] = new Town(
     'Pallet Town',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [new BulletinBoard(GameConstants.BulletinBoards.Kanto)],
+    [new BulletinBoard(GameConstants.BulletinBoards.Kanto), veteranShop],
     {
         npcs: [PalletProfOak, PalletCelebiProfOak1, PalletCelebiProfOak2, PalletMom1, PalletMom2],
     }
@@ -973,7 +1026,7 @@ TownList['Cerulean City'] = new Town(
     'Cerulean City',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [CeruleanCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cerulean City']), new MoveToDungeon(dungeonList['Cerulean Cave'])],
+    [CeruleanCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cerulean City']), KantoExclusiveBerryShop, new MoveToDungeon(dungeonList['Cerulean Cave'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
         npcs: [CeruleanKantoBerryMaster, CeruleanFarmApprentice, CeruleanSuperNerd, Mewtwo1, Mewtwo2, DetectiveRaichu],
@@ -1145,6 +1198,16 @@ TownList['Client Island'] = new Town(
     {
         requirements: [new ClientRequirement(), new GymBadgeRequirement(BadgeEnums.Volcano)],
         npcs: [ClientSignpost, RedSpearow],
+    }
+);
+TownList['Gyarados Galleon'] = new Town(
+    'Gyarados Galleon',
+    GameConstants.Region.kanto,
+    GameConstants.KantoSubRegions.Kanto,
+    [TemporaryBattleList['Gyarados Crew'], new GenericTraderShop('CoinChanger', 'Pirate Coin Changer'), new GenericTraderShop('PirateFence', 'Shady Fence')],
+    {
+        requirements: [new SpecialEventRequirement('A Pirate\'s Life')],
+        npcs: [CaptainGyarados],
     }
 );
 TownList['Four Island'] = new Town(
@@ -1551,21 +1614,7 @@ const BlackthornCityShop = new Shop([
     ItemList.Dragon_egg,
     ItemList.Dragon_scale,
 ]);
-const JohtoBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Goldenrod City'], [
-    ItemList.Boost_Mulch,
-    ItemList.Rich_Mulch,
-    ItemList.Surprise_Mulch,
-    ItemList.Amaze_Mulch,
-    ItemList.Freeze_Mulch,
-    ItemList.Berry_Shovel,
-    ItemList.Mulch_Shovel,
-    ItemList.Squirtbottle,
-    ItemList.FarmHandBailey,
-    ItemList.ChopleBerry,
-    ItemList.KebiaBerry,
-    ItemList.ShucaBerry,
-    ItemList.ChartiBerry,
-], 'Johto Berry Master');
+const JohtoBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Goldenrod City'], kantoJohtoBerryShopItems, 'Johto Berry Master');
 
 //Johto Contest Shop
 const JohtoContestShop = new Shop([
@@ -1591,7 +1640,7 @@ const VioletPrimo = new NPC('Primo', [
     'Once you have obtained a Held Item, visit your Item Bag. They are most often found in Dungeons, but some, like the Wonder Chest, are for sale!',
     'From there, go into your Held Items pocket and once an item is selected, you can use it by choosing from the list of available Pokémon to hold it.',
     'Choose who you select carefully! Once you remove a Held Item from your Pokémon, the item will break!',
-    'All righty, be seeing you and your <b>NEW‑COLLECTION</b>!',
+    'All righty, be seeing you and your <code class="text-nowrap">NEW-COLLECTION</code>!',
 ]);
 
 
@@ -2705,7 +2754,7 @@ const Television2 = new NPC('Watch More Television', [
 const TicketClaim = new NPC('Contest Attendant', [
     'Thank you for reserving your Eon Ticket!',
     'To claim the ticket, all you have to do is go to your Start Menu, select "Save / Enter Code", and enter the following code in the "Enter Code..." box:',
-    'EON-TICKET',
+    '<code class="text-nowrap">EON-TICKET</code>',
 ],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 1), new QuestLineStepCompletedRequirement('The Eon Duo', 3, GameConstants.AchievementOption.less)]),
 });
 
@@ -3208,7 +3257,7 @@ const RelicSage = new NPC('Relic Stone Sage', [
     'This stone has the power to cleanse and purify the spirits of Pokémon.',
     'If you train with your Pokémon, you will gain spiritual energy, or "Flow". You can use this Flow to purify your Pokémon.',
     'Purification will take more flow with each Pokémon you purify.',
-    'It\'s said that there is a Flute with a Time altering effect. Playing it might help purify your Pokémon a bit fast.',
+    'It\'s said that there is a Flute with a time-altering effect. Playing it might help purify your Pokémon a bit faster.',
     '<img src="./assets/images/status/shadow.svg" height="60px"/> <img src="./assets/images/arrow.svg" height="30px"/> <img src="./assets/images/status/purified.svg" height="60px"/>',
 ], {image: 'assets/images/npcs/Sage.png'});
 const GateonSailor = new NPC('Sailor', [
@@ -3550,7 +3599,7 @@ TownList['Battle Frontier'] = new Town(
     'Battle Frontier',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [BattleFrontierShop, new BattleFrontierTownContent(), TemporaryBattleList['Destiny Deoxys Rayquaza'], TemporaryBattleList['Destiny Deoxys Army'], TemporaryBattleList['Destiny Rayquaza'], new GemMasterShop(GameConstants.GemShops.hoennBattleFrontierDeoxysDeal, 'Deoxys Replica', [new QuestLineCompletedRequirement('Destiny Deoxys')], true)],
+    [BattleFrontierShop, new BattleFrontierTownContent(), TemporaryBattleList['Destiny Deoxys Army'], TemporaryBattleList['Destiny Rayquaza'], new GemMasterShop(GameConstants.GemShops.hoennBattleFrontierDeoxysDeal, 'Deoxys Replica', [new QuestLineCompletedRequirement('Destiny Deoxys')], true)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
         npcs: [CoolTrainerDillan, destinyScientistBF, destinyDeoxysReunion],
@@ -4260,7 +4309,7 @@ const HearthomeContestFan = new NPC('Contest Fan', [
 const HearthomeTrophyGardenOwner = new NPC('Mr. Backlot', [
     'Greetings trainer! I own the Trophy Garden down south!',
     'Every day I bring in different Pokémon for trainers to catch. Some of them are extremely rare! I just love watching trainers catching Pokémon in my garden.',
-    'I make sure the experience is perfectly trailored to each individual trainer. I only ever bring in Pokémon that the trainer already owns. Hunting familiar prey, as it were. Oh it\'s so exciting!',
+    'I make sure the experience is perfectly tailored to each individual trainer. I only ever bring in Pokémon that the trainer already owns. Hunting familiar prey, as it were. Oh it\'s so exciting!',
     'Hm? You want to know what the point of that is? Well, some trainers really like to catch the same Pokémon over and over again. Maybe, some day, you\'ll find a reason to want to do that too.',
 ], {image: 'assets/images/npcs/Gentleman (Gen 4).png'});
 
@@ -4322,7 +4371,7 @@ const SnowpointYoungGirl = new NPC('Young Girl', [
 
 const MindyFriend = new NPC('Mindy\'s Friend', [
     'I recently traded with my friend Mindy expecting to get a Gengar. Instead, her Haunter came with this useless rock! I can\'t believe she would do this to me!',
-    'Here, you can have MINDY\'S-GIFT for all I care! I pity whoever decides to trade with her in the future.',
+    'Here, you can have <code class="text-nowrap">MINDY\'S-GIFT</code> for all I care! I pity whoever decides to trade with her in the future.',
 ]);
 
 const AcuityUxie = new NPC('Uxie', [
@@ -5294,7 +5343,7 @@ const DreamResearcher2 = new NPC('Dream Researcher', [
 const VitaminRefundCode = new NPC('Pokémon Breeder', [
     'I used to have my Pokémon maxed out on Protein, but then I found out about the new Vitamins!',
     'I swapped out some of my Proteins for the new Vitamins, but then I was left with a bunch of extra Protein I couldn\'t use.',
-    'Luckily I was able to use the code REFUND-VITAMINS to get my money back! Too bad it only has one use though...',
+    'Luckily I was able to use the code <code class="text-nowrap">REFUND-VITAMINS</code> to get my money back! Too bad it only has one use though...',
     'It will also only refund Vitamins you bought after hitting the price cap.',
 ]);
 
@@ -6223,7 +6272,7 @@ const CoumarineBirdwatcher = new NPC('Birdwatcher', [
 const CoumarineElectricTrainer = new NPC('Electric Trainer', [
     'My Ampharos has gotten a boost since a friendly soul gave me an Ampharosite!',
     'Luckily my Ampharos was already strong enough to use it!',
-    'If you find that fella, tell him the code <b>DO-MAGEARNA-DREAM-OF-MAREEP?</b> and he might help you too!',
+    'If you find that fella, tell him the code <code class="text-nowrap">DO-MAGEARNA-DREAM-OF-MAREEP?</code> and he might help you too!',
 ]);
 
 const Diantha1 = new NPC('Diantha', [
@@ -6445,7 +6494,7 @@ const Spelunker = new NPC('Spelunker', [
     'That would be big news, sure to be reported on local bulletin boards!',
 ]);
 
-const ExamineAegislash = new PokemonGiftNPC('Millis and Argus Steels\' Aeglislash', [
+const ExamineAegislash = new PokemonGiftNPC('Millis and Argus Steels\' Aegislash', [
     '<i>Aegislash wants to join you on your adventure.</i>',
 ], 'Aegislash (Blade)', 'assets/images/pokemon/681.01.png', { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4, GameConstants.AchievementOption.more), new ObtainedPokemonRequirement('Aegislash (Blade)', true)]) });
 
@@ -6592,6 +6641,14 @@ const AnomalyMewtwo4 = new NPC('Anomaly Mewtwo', [
 ], {
     image: 'assets/images/pokemon/150.02.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 17), new QuestLineCompletedRequirement('An Unrivaled Power', GameConstants.AchievementOption.less)]),
+});
+
+const WorkingPirate = new NPC('Working Pirate', [
+    'Welcome to Pirate Island! This lawless haven only comes alive once a year, when every marauder, buccaneer, and filibuster gathers for the Pirate Summit.',
+    'The tougher the challengers, the fiercer the pirates that appear. I’ve heard that those who’ve proven themselves in battle at least a hundred times earn the title of the strongest among us.',
+    'As for me? I make my living hauling treasure and shuffling chests around for the others. Though... sometimes it feels like a trickster\'s messing with them.',
+], {
+    image: 'assets/images/npcs/Pirate.png',
 });
 
 //Kalos Towns
@@ -6909,6 +6966,18 @@ TownList['Victory Road Kalos'] = new DungeonTown(
             new RouteKillRequirement(10, GameConstants.Region.kalos, 22),
         ]),
     ]
+);
+TownList['Pirate Island'] = new DungeonTown(
+    'Pirate Island',
+    GameConstants.Region.kalos,
+    GameConstants.KalosSubRegions.Kalos,
+    [new SpecialEventRequirement('A Pirate\'s Life')],
+    [new GenericTraderShop('CoinChanger', 'Pirate Coin Changer'), new GenericTraderShop('PirateFence', 'Shady Fence')],
+    {
+        npcs: [WorkingPirate],
+
+    }
+
 );
 //Unknown Cave?
 
@@ -7831,8 +7900,8 @@ const BattleTreeBlue = new NPC('Blue', [
     'We just planted this sapling here. Maybe it will grow into something great some day.',
 ], {image: 'assets/images/npcs/Blue-masters.png'});
 const MimikyuTrainer = new NPC('Mimikyu trainer', [
-    'Mimikyu really cares about it\'s costume.',
-    'The costume often gets busted on battles. It will then spend all night patching it. Poor guy...',
+    'Mimikyu really cares about its costume.',
+    'The costume often gets busted in battles. It will then spend all night patching it. Poor thing...',
     'If you defeat enough Mimikyu, you might find one with a busted costume roaming around.',
     'But please leave it alone! It has been through too much already!',
 ]);
@@ -7981,6 +8050,16 @@ TownList['Roadside Motel'] = new Town(
     {
         requirements: [new QuestLineStartedRequirement('Ultra Beast Hunt')],
         npcs: [RoadsideMotelLooker1, RoadsideMotelAnabel1, RoadsideMotelLooker2, RoadsideMotelAnabel2, RoadsideMotelAnabel3, RoadsideMotelMina, RoadsideMotelNanu1, RoadsideMotelNanu2, RoadsideMotelAnabel4, RoadsideMotelAnabel5],
+    }
+);
+TownList['Tsareena Sloop'] = new Town(
+    'Tsareena Sloop',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MelemeleIsland,
+    [TemporaryBattleList['Tsareena Crew'], new GenericTraderShop('CoinChanger', 'Pirate Coin Changer'), new GenericTraderShop('PirateFence', 'Shady Fence')],
+    {
+        requirements: [new SpecialEventRequirement('A Pirate\'s Life')],
+        npcs: [],
     }
 );
 TownList['Heahea City'] = new Town(

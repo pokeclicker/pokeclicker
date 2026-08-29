@@ -320,6 +320,7 @@ export const SpriteCredits: Credit[] = [
             'Grotle (Acorn)',
             'Grotle (Acorn) Shop Icon',
             'Grotle and Friends',
+            'Gyarados (Captain)',
             'Honey',
             'Hopo berry image and trees',
             'Hoppip (Chimecho)',
@@ -351,6 +352,7 @@ export const SpriteCredits: Credit[] = [
             'Magikarp Blue Raindrops Shop Icon',
             'Magikarp Saucy Violet Shop Icon',
             'Magikarp (Feebas)',
+            'Magikarp (Pirate)',
             'Magikarp alt OverWorld sprites',
             'Magma Admin Courtney',
             'Magma Stone',
@@ -389,9 +391,11 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Scyther Shuffle + Overworld',
             'Pinkan Weedle',
             'Pinkan Weezing',
+            'Pirate',
             'Professor Burnet',
             'Profile Characters: Kris, Green (LGFR and LGPE), Firefarmer, Ghetsis',
             'Purify Icon',
+            'Raboot (Pirate)',
             'Robo Groudon',
             'Roddy Tackle',
             'Rudy',
@@ -413,6 +417,7 @@ export const SpriteCredits: Credit[] = [
             'Sacred Stone Plate',
             'Sacred Toxic Plate',
             'Sacred Zap Plate',
+            'Scorbunny (Pirate)',
             'Sea Mauville',
             'Shadow Absol',
             'Shadow Arbok',
@@ -547,6 +552,7 @@ export const SpriteCredits: Credit[] = [
             'White mane hair icon',
             'Zarude (Dada) shop image',
             'Zero',
+            'Zorua (Pirate) shop image',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -597,6 +603,8 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/736029608587296819',
         image: 'assets/images/profile/trainer-119.png',
         resources: [
+            'Captain Charizard',
+            'Captain Lucario',
             'Ditto (Magikarp)',
             'Dugtrio (Punk)',
             'Genesect (High-Speed) and Drive Forms',
@@ -613,6 +621,7 @@ export const SpriteCredits: Credit[] = [
             'Reindeer Stantler',
             'Spooky Ivysaur',
             'Spooky Venusaur',
+            'Zorua (Pirate)',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -744,6 +753,7 @@ export const SpriteCredits: Credit[] = [
             'Trial Site',
             'Willie',
             'XD001',
+            'Captain Zacian',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -1267,6 +1277,19 @@ export const SpriteCredits: Credit[] = [
             'Calem overworld',
         ],
         // Notes: Permission given on image page if credited.
+    },
+    {
+        name: 'The Boy',
+        link: 'https://discordapp.com/users/305776563801030657',
+        image: 'assets/images/profile/trainer-96.png',
+        resources: [
+            'Bounsweet (Pirate)',
+            'Steenee (Pirate)',
+            'Tsareena (Captain)',
+            'Captain Hoopa',
+            'Cinderace (Captain)',
+        ],
+        // Notes: Made specifically for PokéClicker.
     },
     {
         name: 'TintjeMadelintje101',
