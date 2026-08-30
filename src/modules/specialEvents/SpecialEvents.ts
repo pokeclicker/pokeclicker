@@ -20,10 +20,19 @@ export default class SpecialEvents implements Feature {
         });
     }
 
-    public newEvent(title: SpecialEventTitleType, description: string, startTime: Date, startFunction: EventCallback, endTime: Date, endFunction: EventCallback, hideFromEventCalendar = false) {
+    public newEvent(
+        title: SpecialEventTitleType,
+        description: string,
+        startTime: Date,
+        startFunction: EventCallback,
+        endTime: Date,
+        endFunction: EventCallback,
+        hideFromEventCalendar = false,
+        eventBattleBackground?: string,
+    ) {
         // Check if the event exist before adding it again
         if (!this.events.find(event => event.title == title)) {
-            this.events.push(new SpecialEvent(title, description, startTime, startFunction, endTime, endFunction, hideFromEventCalendar));
+            this.events.push(new SpecialEvent(title, description, startTime, startFunction, endTime, endFunction, hideFromEventCalendar, eventBattleBackground));
         }
     }
 
@@ -232,6 +241,8 @@ export default class SpecialEvents implements Feature {
             // End
             new Date(new Date().getFullYear(), 11, 31, 23), () => {
             },
+            undefined,
+            'christmas',
         );
     }
 }

@@ -148,8 +148,16 @@ class MapHelper {
         return (img as GameConstants.BattleBackground);
     }
 
+    public static getEventBattleBackground(): string {
+        const events = [''];
+        App.game.specialEvents.events.filter(e =>
+            App.game.specialEvents.getEvent(e.title).isActive() && App.game.specialEvents.getEvent(e.title)?.eventBattleBackground
+        ).forEach(e => events.push(e?.eventBattleBackground));
+        return events.join(' ');
+    }
+
     public static calculateBattleCssClass(): string {
-        return GameConstants.BattleBackgroundImage[this.getBattleBackground()];
+        return `${GameConstants.BattleBackgroundImage[this.getBattleBackground()] ?? 'default'} ${this.getEventBattleBackground()}`;
     }
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
