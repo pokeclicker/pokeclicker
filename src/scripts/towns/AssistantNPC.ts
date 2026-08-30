@@ -28,8 +28,18 @@ class AssistantNPC extends NPC {
                         player.highestRegion() >= pokemonMap[e.evolvedPokemon].nativeRegion &&
                         Math.floor(pokemonMap[e.basePokemon].id) != Math.floor(pokemonMap[e.evolvedPokemon].id)
                     )).sort((a,b) => a.id - b.id);
+                case 'environmentEvolution':
+                    let environment = this.name.replace(' ', '');
+                    if (environment.includes('Magnetic')) {
+                        environment = 'MagneticField';
+                    }
+                    return App.game.party.caughtPokemon.filter(p => p.evolutions?.some(e =>
+                        e.restrictions.some(r => (r instanceof InEnvironmentRequirement) && r?.environment === environment) &&
+                        !App.game.party.caughtPokemon.some(p => p.name === e.evolvedPokemon) &&
+                        player.highestRegion() >= pokemonMap[e.evolvedPokemon].nativeRegion
+                    )).sort((a,b) => a.id - b.id);
                 default:
-                    return ['Pikachu'];
+                    return [pokemonMap[0]];
             }
         };
 
