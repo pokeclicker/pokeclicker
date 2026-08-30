@@ -48,6 +48,9 @@ class App {
             App.game.start();
             GameLoadState.updateLoadState(GameLoadState.states.running);
 
+            // Add stable scrollbar gutter class to prevent layout shaking
+            document.documentElement.classList.add('stable-scrollbar-gutter');
+
             // Check if Mobile and deliver a warning around mobile compatability / performance issues
             const isMobile: boolean = /Mobile/.test(navigator.userAgent);
             const isTouchDevice: boolean = 'ontouchstart' in document.documentElement;
