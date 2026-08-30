@@ -1,0 +1,40 @@
+<script type="text/html" id="caughtAllStatusTemplate">
+    <knockout style="display: inline;">
+        <!-- ko if: $data.status == CaughtStatus.NotCaught -->
+        <img data-bind="tooltip: {trigger: 'hover', title: `You have not captured all the Pokémon ${$data.area} yet!`, placement: 'top'}"
+             class="pokeball-smallest"
+             src="assets/images/pokeball/None.svg"
+        />
+        <!-- /ko -->
+        <!-- ko if: $data.status == CaughtStatus.Caught -->
+        <img data-bind="tooltip: {trigger: 'hover', title: `You have captured all the Pokémon ${$data.area}!`, placement: 'top'}"
+             class="pokeball-smallest"
+             src="assets/images/pokeball/Pokeball.svg"
+        />
+        <!-- /ko -->
+        <!-- ko if: $data.status == CaughtStatus.CaughtShiny -->
+        <img data-bind="tooltip: {trigger: 'hover', title: `You have captured all the shiny Pokémon ${$data.area}!`, placement: 'top'}"
+             class="pokeball-smallest"
+             src="assets/images/pokeball/Pokeball-shiny.svg"
+        />
+        <!-- /ko -->
+        <!-- ko if: $data.locked -->
+        <img class="lock" src="assets/images/breeding/lock.svg" data-bind="
+            tooltip: {
+                title: $data.lockHint,
+                html: true,
+                placement: 'top',
+                trigger: 'hover'
+            }">
+        <!-- /ko -->
+    </knockout>
+</script>
+
+<!-- Example usage -->
+<!-- <span data-bind="template: {
+ name: 'caughtAllStatusTemplate',
+ data: {
+    'status': PartyController.getCaughtStatusAll(PokemonNameType[]),
+    'area': 'in the list',
+    }
+}"></span> -->
