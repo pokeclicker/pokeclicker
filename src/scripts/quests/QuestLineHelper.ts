@@ -1269,7 +1269,25 @@ class QuestLineHelper {
 
         App.game.quests.questLines.push(manaphyQuestLine);
     }
+     // Pokerus NPC - Available post-A New World
+       
+     public static AnIncurableDisease() {
+        const AnIncurableDisease = new QuestLine('An Incurable Disease?', 'Your Pokemon have a new disease but is it all that bad?', new MultiRequirement([new QuestLineCompletedRequirement('A New World'), new PokerusStatusRequirement(1, GameConstants.Pokerus.Contagious)]), GameConstants.BulletinBoards.Sinnoh);
+    
+        const talktoJulia = new TalkToNPCQuest(SunyshoreRibbonerJulia, 'There\'s a woman in Sunyshore city who seems to know a lot about this new Pokevirus. Talk to her to learn more');
+        AnIncurableDisease.addQuest(talktoJulia);
+    
+        const learntoinfect = new CustomQuest(3, 0, 'Infect three pokemon by putting your contagious Kanto starter in the hatchery with three pokemon that share at least 1 type with it then wait for them to hatch', new PokerusStatusRequirement(3, GameConstants.Pokerus.Contagious));
+        AnIncurableDisease.addQuest(learntoinfect);
 
+        const talktoDoctor = new TalkToNPCQuest(SunyshoreDoctor, "A doctor found out you're spreading diseases to your Pokemon and seems upset. Talk some sense into them in Sunyshore City")
+        AnIncurableDisease.addQuest(talktoDoctor);
+
+        const learntoresist = new CustomQuest(1, 0, 'Try to resist Pokerus on one of your contagious Pokemon by catching it repeatedly and obtaining 50 EVs', new PokerusStatusRequirement(1, GameConstants.Pokerus.resistant));
+        AnIncurableDisease.addQuest(learntoresist)
+
+        App.game.quests.questLines().push(AnIncurableDisease);
+        }
     // Giratina quest - Available post-E4, must have obtained Azelf, Mesprit, and Uxie
     public static createGiratinaQuestLine() {
         const giratinaQuestLine = new QuestLine('Zero\'s Ambition', 'Help Zero find an entrance to the Distortion World.', new MultiRequirement([new ObtainedPokemonRequirement('Uxie'), new ObtainedPokemonRequirement('Mesprit'), new ObtainedPokemonRequirement('Azelf'), new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]), GameConstants.BulletinBoards.Sinnoh);

@@ -32,6 +32,7 @@ export type QuestLineNameType
     | 'A Meta Discovery'
     | 'Shadows in the Desert'
     | 'A New World'
+    | 'An Incurable Disease?'
     | 'Recover the Precious Egg!'
     | 'Zero\'s Ambition'
     | 'Hollow Truth and Ideals'
