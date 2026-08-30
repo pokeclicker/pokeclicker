@@ -298,12 +298,12 @@
                     <div class="card-header p-0">
                         <div style="position: absolute; left: 2px" data-bind="tooltip: { trigger: 'hover', title: 'Chests opened in current dungeon' }">
                             <img src="assets/images/dungeons/chest.png" height="25px" />
-                            <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.totalChests()}`"></span>
+                            <span data-bind="text: DungeonRunner.chestInfo()"></span>
                         </div>
 
                         <div style="position: absolute; right: 4px" data-bind="tooltip: { trigger: 'hover', title: 'Encounters won in current dungeon' }">
                             <img src="assets/images/dungeons/encounter.png" height="25px" />
-                            <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.totalFights()}`"></span>
+                            <span data-bind="text: DungeonRunner.encounterInfo()"></span>
                         </div>
                         <span data-bind="text: `${DungeonRunner.dungeon.name}`"></span>
                         <!-- ko if: DungeonGuides.hired() -->

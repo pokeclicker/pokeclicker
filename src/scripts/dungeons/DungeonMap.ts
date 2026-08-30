@@ -2,8 +2,10 @@ class DungeonMap {
     board: KnockoutObservable<DungeonTile[][][]>;
     playerPosition: KnockoutObservable<Point>;
     playerMoved: KnockoutObservable<boolean>;
-    totalFights: KnockoutObservable<number>;
-    totalChests: KnockoutObservable<number>;
+    chestsPerLevel: number[];
+    fightsPerLevel: number[];
+    totalChests: number;
+    totalFights: number;
     floorSizes: number[];
 
     constructor(
@@ -25,8 +27,10 @@ class DungeonMap {
         this.currentTile().hasPlayer = true;
         this.flash?.apply(this.board(), this.playerPosition());
 
-        this.totalFights = ko.observable(this.board().flat().flat().filter((t) => t.type() == GameConstants.DungeonTileType.enemy).length);
-        this.totalChests = ko.observable(this.board().flat().flat().filter((t) => t.type() == GameConstants.DungeonTileType.chest).length);
+        this.chestsPerLevel = this.board().map(m => m.flat().filter((t) => t.type() == GameConstants.DungeonTileType.chest).length);
+        this.fightsPerLevel = this.board().map(m => m.flat().filter((t) => t.type() == GameConstants.DungeonTileType.enemy).length);
+        this.totalChests = this.chestsPerLevel.reduce((a, b) => a + b);
+        this.totalFights = this.fightsPerLevel.reduce((a, b) => a + b);
     }
 
     public moveToCoordinates(x: number, y: number, floor = undefined) {
