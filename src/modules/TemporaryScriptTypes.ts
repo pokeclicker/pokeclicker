@@ -35,6 +35,7 @@ import type { MultiplierDecreaser } from './items/types';
 import type BagItem from './interfaces/BagItem';
 import type BattlePokemon from './battles/BattlePokemon';
 import type { HeldItem } from './items/HeldItem';
+import BadgeEnums from './enums/Badges';
 
 /*
     These types are only temporary while we are converting things to modules. As things are converted,
@@ -102,6 +103,8 @@ export type TmpPurifyChamberType = any;
 export type TmpWeatherAppType = any;
 export type TmpZMovesType = any;
 //export type TmpHeldItemType = any;
+export type TmpGoalTrackerType = any;
+export type TmpEvolutionStoneType = any;
 
 export type TmpGameType = {
     gameState: GameConstants.GameState;
@@ -138,6 +141,7 @@ export type TmpGameType = {
     purifyChamber: TmpPurifyChamberType;
     weatherApp: TmpWeatherAppType;
     zMoves: TmpZMovesType;
+    goalTracker: TmpGoalTrackerType;
 
     // functions
     load: () => void;
@@ -229,6 +233,10 @@ export type TmpDungeonRunnerType = {
 
 export type TmpGymType = {
     town: string;
+    parent?: TmpTownType;
+    leaderName: string;
+    badgeReward: BadgeEnums;
+    buttonText: string;
 };
 
 export type TmpGymRunnerType = {
@@ -236,10 +244,7 @@ export type TmpGymRunnerType = {
 };
 
 export type TmpGymListType = {
-    [gymName: string]: {
-        badgeReward: any;
-        buttonText: string;
-    }
+    [gymName: string]: TmpGymType;
 };
 
 export type TmpAchievementHandlerType = {
@@ -380,6 +385,24 @@ export type TmpTemporaryBattleType = {
 
 export type TmpTownType = {
     name: string;
+    region: GameConstants.Region;
+    subRegion: GameConstants.SubRegions;
+};
+
+export type TmpDungeonListType = {
+    [dungeonName: string]: TmpDungeonType
+};
+
+export type TmpDungeonType = {
+    name: string;
+};
+
+export type TmpTownListType = {
+    [name: string]: TmpTownType;
+};
+
+export type TmpDisplayObservablesType = {
+    modalState: Record<string, any>;
 };
 
 export type TmpVeteranShopType = {

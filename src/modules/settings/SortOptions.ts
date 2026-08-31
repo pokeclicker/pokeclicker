@@ -13,6 +13,7 @@ export enum SortOptions {
     category = 11,
     vitaminsUsed = 12,
     evs = 13,
+    evBonus = 14,
 }
 
 export type SortOptionConfig = {
@@ -97,5 +98,10 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     [SortOptions.evs]: {
         text: 'EVs',
         getValue: (p) => p.evs() || 0,
+    },
+
+    [SortOptions.evBonus]: {
+        text: 'EV Bonus',
+        getValue: (p) => p.calculateEVAttackBonus() || 0,
     },
 };

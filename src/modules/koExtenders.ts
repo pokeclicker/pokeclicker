@@ -64,7 +64,7 @@ const numericExtender = (target: MaybeWritable, precision: number) => {
                     valueToWrite = roundedValue;
                 }
             }
-            
+
             // only write if it changed
             if (valueToWrite !== current) {
                 target(valueToWrite);
@@ -180,11 +180,28 @@ const skippableRateLimitExtender = (target: Subscribable, delay: number): typeof
     return target.extend({ rateLimit: { timeout: delay, method: skippableLimiter } }) as typeof target & SkippableRateLimit;
 };
 
+const clearDependentExtender = (target: Observable, dependentObservable: Observable | Observable[]) => {
+    let previousValue = target.peek();
+    target.subscribe((newValue) => {
+        if (previousValue !== undefined && previousValue !== newValue) {
+            if (Array.isArray(dependentObservable)) {
+                dependentObservable.forEach(obs => obs(undefined));
+            } else {
+                dependentObservable(undefined);
+            }
+        }
+        previousValue = newValue;
+    });
+
+    return target;
+};
+
 Object.assign(ko.extenders, {
     numeric: numericExtender,
     boolean: booleanExtender,
     arrayEquals: arrayEqualsExtender,
     skippableRateLimit: skippableRateLimitExtender,
+    clearDependent: clearDependentExtender,
 });
 
 declare module 'knockout' {
@@ -193,6 +210,7 @@ declare module 'knockout' {
         boolean: true;
         arrayEquals: true;
         skippableRateLimit: number;
+        clearDependent: Observable | Observable[];
     }
 }
 

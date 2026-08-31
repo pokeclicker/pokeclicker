@@ -78,6 +78,9 @@
                             </thead>
                             <tbody>
                                 <tr data-bind="visible: Object.values(App.game.challenges.list).filter(c => c.active()).length > 0, template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideChallengeRelatedModules')}"></tr>
+                                <!-- ko if: Settings.getSetting('showGoalTrackerModule').isUnlocked() -->
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showGoalTrackerModule')}"></tr>
+                                <!-- /ko -->
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showGymGoAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showMuteButton')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('playerSafariSprite')}"></tr>
