@@ -52,7 +52,7 @@ export const dungeonClearObjectiveOption: ObjectiveOption<DungeonClearObjectiveC
     getProgress: (config: DungeonClearObjectiveConfig): number => {
         const dungeonName = config.dungeonName?.();
         if (!dungeonName) return 0;
-        return App.game.statistics.dungeonsCleared[getDungeonIndex(dungeonName)]();
+        return App.game.statistics.dungeonsCleared[getDungeonIndex(dungeonName)]?.() ?? 0;
     },
     createConfig: (): DungeonClearObjectiveConfig => {
         const dungeonName = ko.observable();

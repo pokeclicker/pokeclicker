@@ -44,7 +44,7 @@ export const gymClearObjectiveOption: ObjectiveOption<GymClearObjectiveConfig> =
     getProgress: (config: GymClearObjectiveConfig): number => {
         const gymTown = config.gymTown?.();
         if (!gymTown) return 0;
-        return App.game.statistics.gymsDefeated[getGymIndex(gymTown)]();
+        return App.game.statistics.gymsDefeated[getGymIndex(gymTown)]?.() ?? 0;
     },
     createConfig: (): GymClearObjectiveConfig => {
         const gymTown = ko.observable();

@@ -9,9 +9,9 @@ import { TrackingMode } from './TrackingMode';
 export default class Objective {
     private _type = ko.observable<ObjectiveType | undefined>(undefined);
     private _config = ko.observable<ObjectiveConfig | undefined>(undefined);
-    private _targetAmount = ko.observable(0).extend({ numeric: 0 });
+    private _targetAmount = ko.observable(0).extend({ numeric: 2 });
     private _trackingMode = ko.observable<TrackingMode>(TrackingMode.Total);
-    private _accumulatedProgress = ko.observable<number>(0).extend({ numeric: 0 });
+    private _accumulatedProgress = ko.observable<number>(0);
     private _resetCount = ko.observable<number>(0);
     private _lastSourceKey: string = '';
     private _lastGoalKey: string = '';
@@ -228,7 +228,7 @@ export default class Objective {
         this._lastRawValue = json.lastRawValue ?? 0;
         this._notifiedComplete = json.notifiedComplete ?? false;
         this._trackingMode(json.trackingMode ?? TrackingMode.Total);
-        this._accumulatedProgress(json.accumulatedProgress ?? 0);
+        this._accumulatedProgress(Number(json.accumulatedProgress) || 0);
         this._config(config);
         this._type(json.type);
         this._lastSourceKey = this.sourceKey();
