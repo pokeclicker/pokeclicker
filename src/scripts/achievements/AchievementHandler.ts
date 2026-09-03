@@ -505,6 +505,13 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Go, Go, Mega Force!', 'Obtain 25 Mega Stones.', new TotalMegaStoneObtainedRequirement(25), 7, GameConstants.Region.kalos);
         AchievementHandler.addAchievement('Y\'all got any more of them Mega Stones?', `Obtain all ${totalMegaStones} Mega Stones.`, new TotalMegaStoneObtainedRequirement(totalMegaStones), 10, GameConstants.Region.kalos);
 
+        const unownID = pokemonMap['Unown (A)'].id;
+        const unownDexFilter = (p: PokemonListData) => Math.floor(p.id) === unownID;
+        const unownAmount = pokemonList.reduce((count, p) => count + +(Math.floor(p.id) === unownID), 0);
+        AchievementHandler.addAchievement('Alphabet Soup for Ruin Maniac', 'Catch all unique Unown forms.', new CaughtUniquePokemonByFilterRequirement(unownDexFilter, 'Catch all unique Unown forms.', unownAmount), 0.25);
+        AchievementHandler.addAchievement('"I am the Alpha and the Omega"', 'Catch all unique Shiny Unown forms.', new CaughtUniquePokemonByFilterRequirement(unownDexFilter, 'Catch all unique Unown forms.', unownAmount, true), 0.5);
+
+
         /*
          * REGIONAL
          */
@@ -598,14 +605,6 @@ class AchievementHandler {
             AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Shiny Ace`, `Catch ${amt50} unique Shiny Pokémon native to the ${GameConstants.camelCaseToString(GameConstants.Region[region])} region.`, new CaughtUniqueShinyPokemonsByRegionRequirement(region, amt50), 6, region);
             AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Shiny Master`, `Complete the ${GameConstants.camelCaseToString(GameConstants.Region[region])} Shiny Pokédex!`, new CaughtUniqueShinyPokemonsByRegionRequirement(region, amtAll), 9, region);
         });
-
-        // Unown pokédex for Johto
-        const unownID = pokemonMap['Unown (A)'].id;
-        const unownDexFilter = (p: PokemonListData) => Math.floor(p.id) === unownID;
-        const unownAmount = pokemonList.reduce((count, p) => count + +(Math.floor(p.id) === unownID), 0);
-        AchievementHandler.addAchievement('Alphabet Soup for Ruin Maniac', 'Catch all unique Unown forms.', new CaughtUniquePokemonByFilterRequirement(unownDexFilter, 'Catch all unique Unown forms.', unownAmount), 2, GameConstants.Region.johto);
-        AchievementHandler.addAchievement('"I am the Alpha and the Omega"', 'Catch all unique Shiny Unown forms.', new CaughtUniquePokemonByFilterRequirement(unownDexFilter, 'Catch all unique Unown forms.', unownAmount, true), 3, GameConstants.Region.johto);
-
 
         // Battle Café pokédex for Galar, highly optional as this is End Game farming, so no high bonus
         const alcremieDexFilter = (p: PokemonListData) => p.name === 'Milcery (Cheesy)' || p.name.startsWith('Alcremie');
