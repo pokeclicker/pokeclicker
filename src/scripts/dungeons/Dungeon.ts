@@ -11155,9 +11155,9 @@ dungeonList['Pirate Island'] = new Dungeon('Pirate Island',
         ],
         legendary: [
             { loot: 'Pirate_Compass', ignoreDebuff: true },
-            { loot: 'Captain Hoopa', ignoreDebuff: true },
+            { loot: 'Captain Hoopa', ignoreDebuff: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)},
         ],
-        mythic: [{loot: 'Relic_gold', ignoreDebuff: true, amount: 100}],
+        mythic: [{loot: 'Relic_gold', ignoreDebuff: true, amount: 75}],
     },
     9003000,
     [
