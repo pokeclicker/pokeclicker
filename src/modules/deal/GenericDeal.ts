@@ -13,6 +13,7 @@ import DealHelper from './DealHelper';
 import { PokemonRestrictedAttackBonusHeldItem, TypeRestrictedAttackBonusHeldItem } from '../items/HeldItem';
 import ItemOwnedRequirement from '../requirements/ItemOwnedRequirement';
 import MultiRequirement from '../requirements/MultiRequirement';
+import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
 
 export type GenericTraderShopIdentifier =
     'PirateFence' |
@@ -467,6 +468,7 @@ export default class GenericDeal {
             new GenericDeal({
                 costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 1 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Ultraball, amount: 5, hidePlayerInventory: true }],
+                visibleRequirement: new SpecialEventRequirement('A Pirate\'s Life'),
             }));
 
         for (let i = 0; i < 2; i++) {
@@ -478,6 +480,7 @@ export default class GenericDeal {
         list.push(new GenericDeal({
             costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 200 }],
             profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Rare_Candy, amount: 1 }],
+            visibleRequirement: new SpecialEventRequirement('A Pirate\'s Life'),
         }));
 
         const typeBoostItems = SeededRand.shuffleArray(
@@ -506,18 +509,21 @@ export default class GenericDeal {
             costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 100 }],
             profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Zorua (Pirate)'], amount: 1, hidePlayerInventory: true }],
             tradeRequirement: new MaxRegionRequirement(Region.unova),
+            visibleRequirement: new SpecialEventRequirement('A Pirate\'s Life'),
         }));
 
         list.push(new GenericDeal({
             costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Pirate_Compass, amount: 1 }],
             profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 25 }],
             tradeRequirement: new MaxRegionRequirement(Region.kalos),
+            visibleRequirement: new SpecialEventRequirement('A Pirate\'s Life'),
         }));
 
         list.push(new GenericDeal({
             costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 800 }],
             profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Power_Bracer, amount: 1 }],
             tradeRequirement: new MaxRegionRequirement(Region.alola),
+            visibleRequirement: new SpecialEventRequirement('A Pirate\'s Life'),
         }));
 
         const pokemonBoostItem = SeededRand.fromArray(
