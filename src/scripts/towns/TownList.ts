@@ -1071,7 +1071,7 @@ TownList['Celadon City'] = new Town(
     'Celadon City',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [CeladonDepartmentStoreShop, CeladonCityShop, new MoveToDungeon(dungeonList['Rocket Game Corner'])],
+    [CeladonDepartmentStoreShop, CeladonCityShop, new GenericTraderShop('PirateFence', 'Shady Fence', undefined, [new ItemOwnedRequirement('Relic_gold', 1)]), new MoveToDungeon(dungeonList['Rocket Game Corner'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
         npcs: [BigSpender, RichBoy, CandyMan, EggHuntErika],
