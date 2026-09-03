@@ -11164,7 +11164,7 @@ dungeonList['Pirate Island'] = new Dungeon('Pirate Island',
         new DungeonBossPokemon('Gyarados (Captain)', 79960220, 50),
         new DungeonBossPokemon('Tsareena (Captain)', 98531680, 50, { hide: true, requirement: new ObtainedPokemonRequirement('Tsareena (Captain)') }),
         new DungeonBossPokemon('Cinderace (Captain)', 120168558, 50, { hide: true, requirement: new ObtainedPokemonRequirement('Cinderace (Captain)') }),
-        new DungeonBossPokemon('Captain Zacian', 144141988, 50, { hide: true, requirement: new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.galar), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Pirate Island'))])}),
+        new DungeonBossPokemon('Captain Zacian', 144141988, 50, { hide: true, requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Pirate Island'))])}),
     ],
     555000, 21, undefined, { achievement: false});
 
