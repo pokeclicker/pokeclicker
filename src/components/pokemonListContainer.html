@@ -43,7 +43,7 @@
                 }">
                     <!-- ko if: DisplayObservables.collapseState.pokemonListBody !== 'hidden' -->
                         <!-- ko foreach: lazyPokemonList, childrenComplete: () => { lazyLoadCallback('lazyPokemonList'); } -->
-                            <div class="d-flex align-items-center small px-1 border-bottom pokemon-row clickable" href="#pokemonStatisticsModal" data-toggle="modal"
+                            <div class="align-items-center small px-1 border-bottom pokemon-row clickable" href="#pokemonStatisticsModal" data-toggle="modal"
                                 data-bind="hidden: $data.breeding, click: () => { App.game.statistics.selectedPokemonID($data.id) }">
                                 <img data-bind="attr: { src: PokemonHelper.getImage($data.id) }" style="max-height: 52px;" src="" alt="" />
                                 <div class="flex-grow-1">
