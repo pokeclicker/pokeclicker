@@ -11978,6 +11978,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'visualDifference': true,
         },
+        'contestTypes': [ContestType.Beautiful, ContestType.Smart],
     },
     {
         'id': 351,
@@ -31897,7 +31898,7 @@ pokemonList.forEach((p) => {
     if ((p as PokemonListData).name.includes('(Clone)') || (p as PokemonListData).name.includes('Armored')) {
         con = [ContestType.Cool, ContestType.Smart, ContestType.Tough];
     }
-    if ((p as PokemonListData).name.includes('Mega ')) {
+    if ((p as PokemonListData).name.includes('Mega ') || (p as PokemonListData).name.includes('Gigantamax ') || (p as PokemonListData).name.includes('Eternamax ')) {
         con.push(ContestType.Balanced);
     }
     // Remove duplicate contest types and put them in order
