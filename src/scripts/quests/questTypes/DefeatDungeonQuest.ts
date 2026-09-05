@@ -29,8 +29,9 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
     }
 
     private static calcReward(amount: number, dungeon: string): number {
-        const playerDamage = App.game.party.calculateClickAttack() + (App.game.party.pokemonAttackObservable() / GameConstants.QUEST_CLICKS_PER_SECOND);
-        const attacksToDefeatPokemon = Math.ceil(Math.min(4, dungeonList[dungeon].baseHealth / playerDamage));
+        const town = TownList[dungeon];
+        const playerDamage = App.game.party.calculatePokemonAttack(undefined, undefined, undefined, town.region, true, undefined, Weather.regionalWeather[town.region](), true, false, town.subRegion)  / GameConstants.QUEST_CLICKS_PER_SECOND;
+        const attacksToDefeatPokemon = Math.ceil(dungeonList[dungeon].baseHealth / playerDamage);
         const averageTilesToBoss = 13;
         const attacksToCompleteDungeon = attacksToDefeatPokemon * averageTilesToBoss;
         const completeDungeonsReward = attacksToCompleteDungeon * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * GameConstants.ACTIVE_QUEST_MULTIPLIER * amount;
