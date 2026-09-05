@@ -125,10 +125,10 @@ export default class PokeBlockController {
         });
 
         // Pokeblock fullness
-        const initialExp = pokemon.pokeblockFullness();
-        pokemon.pokeblockFullness(Math.min(ContestHelper.maxPokeblockFullness(), initialExp + pokeblock.exp * amount));
+        const initialExp = pokemon.pokeblockFullness;
+        pokemon.pokeblockFullness = Math.min(ContestHelper.maxPokeblockFullness(), initialExp + pokeblock.exp * amount);
 
-        if (initialExp < ContestHelper.maxPokeblockFullness() && pokemon.pokeblockFullness() >= ContestHelper.maxPokeblockFullness()) {
+        if (initialExp < ContestHelper.maxPokeblockFullness() && pokemon.pokeblockFullness >= ContestHelper.maxPokeblockFullness()) {
             Notifier.notify({
                 message : `${pokemon.displayName} is full! Pokéblocks will only add half the Appeal until its fullness is reduced.`,
                 type : NotificationConstants.NotificationOption.warning,

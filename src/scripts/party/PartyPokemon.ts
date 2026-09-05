@@ -74,8 +74,8 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     _shadow: KnockoutObservable<GameConstants.ShadowStatus>;
     _showShadowImage: KnockoutObservable<boolean>;
     contestStats: Record<ContestType, KnockoutObservable<number>>;
-    contestSheen: KnockoutObservable<number>;
-    pokeblockFullness: KnockoutObservable<number>;
+    _contestSheen: KnockoutObservable<number>;
+    _pokeblockFullness: KnockoutObservable<number>;
 
     constructor(
         public id: number,
@@ -150,8 +150,8 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         this.contestStats = Object.fromEntries(GameHelper.enumNumbers(ContestType).map((type) => {
             return [type, ko.observable(0).extend({ numeric: 0 })];
         })) as Record<ContestType, KnockoutObservable<number>>;
-        this.contestSheen = ko.observable(0).extend({ numeric: 0 });
-        this.pokeblockFullness = ko.observable(0).extend({ numeric: 0 });
+        this._contestSheen = ko.observable(0).extend({ numeric: 0 });
+        this._pokeblockFullness = ko.observable(0).extend({ numeric: 0 });
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -657,7 +657,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     }
 
     public maxPokeblockFullnessTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
-        return `${this.pokeblockFullness()} / ${ContestHelper.maxPokeblockFullness()}`;
+        return `${this.pokeblockFullness} / ${ContestHelper.maxPokeblockFullness()}`;
     });
 
     public fromJSON(json: Record<string, any>): void {
@@ -842,6 +842,22 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
 
     set showShadowImage(value: boolean) {
         this._showShadowImage(value);
+    }
+
+    get contestSheen(): number {
+        return this._contestSheen();
+    }
+
+    set contestSheen(value: number) {
+        this._contestSheen(value);
+    }
+
+    get pokeblockFullness(): number {
+        return this._pokeblockFullness();
+    }
+
+    set pokeblockFullness(value: number) {
+        this._pokeblockFullness(value);
     }
 
     // todo: separate this for sort options

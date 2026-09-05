@@ -316,8 +316,8 @@ export type TmpPartyPokemonType = {
     calculateEVAttackBonus(): number;
     /* eslint-disable @typescript-eslint/member-ordering */
     contestStats: Record<ContestType, KnockoutObservable<number>>;
-    contestSheen: KnockoutObservable<number>;
-    pokeblockFullness: KnockoutObservable<number>;
+    contestSheen: number;
+    pokeblockFullness: number;
     maxPokeblockFullnessTooltip(): string;
 };
 

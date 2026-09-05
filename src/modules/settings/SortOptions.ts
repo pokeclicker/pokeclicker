@@ -108,6 +108,6 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.contestSheen]: {
         text: 'Contest Sheen',
-        getValue: (p) => p.contestSheen() || 0,
+        getValue: (p) => p.contestSheen || 0,
     },
 };

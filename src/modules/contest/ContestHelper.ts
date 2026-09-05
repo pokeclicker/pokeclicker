@@ -76,8 +76,8 @@ export default class ContestHelper {
         // if (hasArtistRibbon) {
         //     sheenLevelBonus = 10;
         // } else { for loop below
-        for (let i = 0; i < sheenLevels.length - 1; i++) {
-            if (Math.floor(sheenLevels[i]) >= p.contestSheen()) {
+        for (let i = 0; i < sheenLevels.length; i++) {
+            if (p.contestSheen >= sheenLevels[i]) {
                 sheenLevelBonus = i;
             }
         }
@@ -99,9 +99,9 @@ export default class ContestHelper {
         const pks = pokemons ?? App.game.party.caughtPokemon;
 
         for (const pokemon of pks) {
-            if (pokemon.pokeblockFullness() > 0 && !pokemon.breeding) {
-                const reductionValue = pokemon.pokeblockFullness() - Math.floor(1 + 0.75 * (conRank + ContestTypeHelper.getAppealModifier(pokemonMap[pokemon.name].contestTypes, [conType])));
-                pokemon.pokeblockFullness(Math.max(0, reductionValue));
+            if (pokemon.pokeblockFullness > 0 && !pokemon.breeding) {
+                const reductionValue = pokemon.pokeblockFullness - Math.floor(1 + 0.75 * (conRank + ContestTypeHelper.getAppealModifier(pokemonMap[pokemon.name].contestTypes, [conType])));
+                pokemon.pokeblockFullness = Math.max(0, reductionValue);
             }
         }
 

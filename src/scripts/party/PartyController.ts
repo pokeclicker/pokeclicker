@@ -313,10 +313,9 @@ class PartyController {
 
     static getPokeblockFilteredList(): Array<PartyPokemon> {
         return App.game.party.caughtPokemon.filter((pokemon) => {
-            const pokeblock = ItemList[`PokeBlock_${GameConstants.PokeBlockColor[PokeBlockController.currentlySelected()]}`] as PokeBlock;
-            // if (pokemon.contestStats[PokeBlockController.currentlySelected()][1]() && Settings.getSetting('pokeblockHideMaxedPokemon').observableValue()) {
-            //     return false;
-            // }
+            if (pokemon.pokeblockFullness >= ContestHelper.maxPokeblockFullness() && Settings.getSetting('pokeblockHideMaxedPokemon').observableValue()) {
+                return false;
+            }
             if (!(Settings.getSetting('pokeblockSearchFilter') as SearchSetting).regex().test(pokemon.displayName)) {
                 return false;
             }
@@ -325,15 +324,6 @@ class PartyController {
                     return false;
                 }
             }
-            // filter by type
-            // const type = Settings.getSetting('pokeblockTypeFilter').observableValue();
-            // if (type > -1 && !pokemon.currentContestTypes.includes(type)) {
-            //     return false;
-            // }
-            // return monotypes if they match the block's type
-            // if (pokeblock.contestType != undefined && pokeblock.contestType === type && pokemon.currentContestTypes.length > 1) {
-            //     return false;
-            // }
 
             return true;
         });
