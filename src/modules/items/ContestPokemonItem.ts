@@ -44,7 +44,10 @@ export default class ContestPokemonItem extends PokemonItem {
     // eslint-disable-next-line class-methods-use-this
     isSoldOut(): boolean {
         if (this.maxAmount) {
-            return this.contestTypes.every(ct => App.game.party.caughtPokemon.find(p => p.name === this.type).contestStats[ct]() >= ContestHelper.rankAppeal[this.giftedContestAppealByRank]);
+            if (App.game.party.caughtPokemon.find(p => p.name === this.type)) {
+                return this.contestTypes.every(ct => App.game.party.caughtPokemon.find(p => p.name === this.type).contestStats[ct]() >= ContestHelper.rankAppeal[this.giftedContestAppealByRank]);
+            }
+            return false;
         }
         return false;
     }
