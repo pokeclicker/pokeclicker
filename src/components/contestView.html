@@ -21,9 +21,12 @@
 
     <div data-bind="visible: !ContestRunner.running()">
       <div style="margin-top: 60px;">
-        <button class="btn w-25 btn-success" onclick="ContestRunner.startContest()">Start Contest</button>
+        <button class="btn btn-success" onclick="ContestRunner.startContest()" style="min-width: 25%;">Start Contest</button>
+      </div>
+      <div style="margin-top: 10px;">
+        <button class="btn btn-info" data-bind="click: () => { $('#pokeblockApplicationModal').modal('show'); }" style="min-width: 25%;">Use Pokeblocks</button>
         <!-- ko if: new DevelopmentRequirement().isCompleted() -->
-        <button class="btn w-25 btn-warning" onclick="ContestBattle.toggleTesting(!ContestBattle.toggleTesting())" data-bind="css: { active: ContestBattle.toggleTesting() }">Toggle Testing</button>
+        <button class="btn btn-warning" onclick="ContestBattle.toggleTesting(!ContestBattle.toggleTesting())" style="min-width: 25%;" data-bind="css: { active: ContestBattle.toggleTesting() }">Toggle Testing</button>
         <!-- /ko -->
       </div>
       <div>

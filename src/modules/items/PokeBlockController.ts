@@ -77,9 +77,11 @@ export default class PokeBlockController {
             // we concat it with the pokemon to give Balanced appeal to those who have it as a default type
             boostedConditions = [...new Set(primaryConditions.concat(defaultPokemonConditions))];
         }
-        // gray boosts more conditions than black
         if (pokeblock.type === PokeBlockColor.Gray) {
             boostedConditions = GameHelper.enumNumbers(ContestType).filter(ct => ContestTypeHelper.getAppealModifier(defaultPokemonConditions, [ct]) > 0);
+        }
+        if (pokeblock.type === PokeBlockColor.Silver || pokeblock.type === PokeBlockColor.Gold) {
+            boostedConditions = GameHelper.enumNumbers(ContestType);
         }
 
         // reverse the array for notifications to be in order from top to bottom
@@ -87,13 +89,17 @@ export default class PokeBlockController {
             const initialAppeal = pokemon.contestStats[ct]();
 
             let effectiveness = ContestTypeHelper.getAppealModifier([ct], defaultPokemonConditions);
+            // black gives constant value
+            if (pokeblock.type === PokeBlockColor.Black) {
+                effectiveness = 0.5;
+            }
             // emulate striped pokeblock "flavors"
             if (pokeblock.type >= PokeBlockColor.Purple && pokeblock.type <= PokeBlockColor.Orange) {
                 effectiveness = ContestTypeHelper.getAppealModifier(boostedConditions, defaultPokemonConditions);
             }
             // rainbow gives better boost than white
             if (pokeblock.type === PokeBlockColor.Rainbow) {
-                effectiveness = ContestTypeHelper.getAppealModifier(defaultPokemonConditions, [ct]);
+                effectiveness = Math.max(ContestTypeHelper.getAppealModifier(defaultPokemonConditions, [ct]), +defaultPokemonConditions.includes(ContestType.Balanced));
             }
             // typed pokeblocks have constant values
             if (pokeblock.type >= PokeBlockColor.Cool && pokeblock.type <= PokeBlockColor.Balanced) {
@@ -102,8 +108,8 @@ export default class PokeBlockController {
             const appealBonus = Math.ceil(pokeblock.value * (75 + 50 * effectiveness) / 100);
 
             // Appeal
-            const addedAppeal = PokeBlockController.increaseAppeal(initialAppeal, pokemon.contestStats[ct][1](), appealBonus, pokeblock.exp, amount, pokeblock.ignoreDebuff);
-            GameHelper.incrementObservable(pokemon.contestStats[ct], addedAppeal);
+            const addedAppeal = PokeBlockController.increaseAppeal(initialAppeal, pokemon.pokeblockFullness, appealBonus, pokeblock.exp, amount, pokeblock.ignoreDebuff);
+            pokemon.contestStats[ct](addedAppeal);
 
             Notifier.notify({
                 message : `+${(addedAppeal - initialAppeal)} ${ContestType[ct]}`,

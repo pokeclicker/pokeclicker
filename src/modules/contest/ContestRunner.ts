@@ -111,7 +111,7 @@ export default class ContestRunner {
             return;
         }
 
-        if (!ContestRunner.frenzyMode() && ContestRunner.timeLeftPercentage() < 100 && !ContestBattle.toggleTesting()) {
+        if (!ContestRunner.frenzyMode() && ContestRunner.timeLeftPercentage() < 100) {
             ContestHelper.reducePokeblockFullnessPerSecond(ContestRunner.rank(), ContestRunner.type(), ContestRunner.timeLeft());
         }
         // Assess completion

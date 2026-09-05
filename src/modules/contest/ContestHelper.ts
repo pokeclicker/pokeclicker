@@ -20,9 +20,9 @@ import { PureComputed } from 'knockout';
 export default class ContestHelper {
     // Pokemon
     // Audience appeal
-    public static calculatePokemonContestAppeal(conRank: ContestRank, conType: ContestType, pokemons?: TmpPartyPokemonType[], includeBreeding = false): number {
+    public static calculatePokemonContestAppeal(conRank: ContestRank, conType: ContestType, pokemons?: TmpPartyPokemonType[], includeBreeding = false) {
         let appeal = 0;
-        const pks = pokemons;
+        const pks = pokemons ?? App.game.party.caughtPokemon;
         const isSpectacularRank = conRank >= ContestRank.Spectacular;
         for (const pokemon of pks) {
             appeal += ContestHelper.calculateOnePokemonContestAppeal(pokemon, conType, isSpectacularRank, includeBreeding);
@@ -32,27 +32,21 @@ export default class ContestHelper {
     }
 
     public static calculateOnePokemonContestAppeal(pokemon: TmpPartyPokemonType, contestEntered: ContestType, pureTypeOnly = false, includeBreeding = false) {
-        const stats = Object.entries(pokemon.contestStats).map(([type, appeal]) => {
-            return {
-                contestType: ContestType[type] as ContestType,
-                appeal: appeal() as number,
-            };
-        });
-
-        const appealSum = stats.reduce((accumulator, contestStat) => {
-            const effectiveness = ContestTypeHelper.getAppealModifier([contestStat.contestType], [contestEntered]);
-            if (effectiveness > 0 && (includeBreeding || !pokemon.breeding)) {
-                if (pureTypeOnly && contestStat.contestType != contestEntered) {
-                    return;
+        const appealSum = GameHelper.enumNumbers(ContestType).reduce((acc, curType) => {
+            let effectiveness = ContestTypeHelper.getAppealModifier([curType], [contestEntered]);
+            if (includeBreeding || !pokemon.breeding) {
+                if (pureTypeOnly && curType != contestEntered) {
+                    effectiveness = 0;
                 }
                 let scarfBonus = 1;
                 const scarves = ['Red_Scarf', 'Blue_Scarf', 'Pink_Scarf', 'Green_Scarf', 'Yellow_Scarf'];
-                if (scarves.includes(pokemon.heldItem().name) && scarves.indexOf(pokemon.heldItem().name) == contestStat.contestType) {
+                if (scarves.includes(pokemon.heldItem().name) && scarves.indexOf(pokemon.heldItem().name) == curType) {
                     scarfBonus = 1.2;
                 }
-                return accumulator + Math.round(contestStat.appeal * scarfBonus * (1 + pokemon.contestSheen()) * effectiveness);
+                const sheenBonus = 0; //pokemon.contestSheen();
+                return acc + Math.round(pokemon.contestStats[curType]() * scarfBonus * (1 + sheenBonus) * effectiveness);
             } else {
-                return;
+                return acc;
             }
         }, 0);
 
@@ -102,7 +96,7 @@ export default class ContestHelper {
         if (!isWholeNumber) {
             return;
         }
-        const pks = pokemons;
+        const pks = pokemons ?? App.game.party.caughtPokemon;
 
         for (const pokemon of pks) {
             if (pokemon.pokeblockFullness() > 0 && !pokemon.breeding) {

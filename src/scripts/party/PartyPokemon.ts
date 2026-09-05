@@ -727,7 +727,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
             // Check objects
             if (jQuery.isPlainObject(value)) {
                 Object.entries(value).forEach(([objectKey, objectValue]) => {
-                    if (objectValue === defaultValue[key][objectKey]) {
+                    if (objectValue === key[objectKey]) {
                         delete value[objectKey];
                     }
                 });
