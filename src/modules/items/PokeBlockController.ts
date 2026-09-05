@@ -17,7 +17,7 @@ import ContestTypeHelper from '../types/ContestTypeHelper';
 export default class PokeBlockController {
     public static currentlySelected = ko.observable(0).extend({ numeric: 0 });
     public static currentlySelectedName = ko.computed(() => `PokeBlock_${PokeBlockColor[PokeBlockController.currentlySelected()]}`);
-    public static multiplier = ['×1', '×5', '×10', '×50', '×100', 'Max'];
+    public static multiplier = ['×1', '×5', '×10', '×50', '×100'];
     public static multiplierIndex = ko.observable(0);
 
     public static incrementMultiplier() {
@@ -35,6 +35,26 @@ export default class PokeBlockController {
     public static getImage(blockColor) {
         const color = PokeBlockColor[blockColor ?? PokeBlockController.currentlySelected()];
         return `assets/images/items/pokeblock/PokeBlock_${color}.png`;
+    }
+
+    public static resetAmount(p: TmpPartyPokemonType) {
+        $(`#pokeblockAmount-${p.id}`).val(PokeBlockController.getMultiplier()).trigger("change");
+    }
+
+    public static increaseAmount(p: TmpPartyPokemonType, n: number) {
+        const curVal = parseInt($(`#pokeblockAmount-${p.id}`).val().toString(), 10);
+        const newVal = (curVal || 0) + n;
+        $(`#pokeblockAmount-${p.id}`).val(newVal > 1 ? newVal : PokeBlockController.getMultiplier()).trigger("change");
+    }
+
+    public static decreaseAmount(p: TmpPartyPokemonType, n: number) {
+        const curVal = parseInt($(`#pokeblockAmount-${p.id}`).val().toString(), 10);
+        const newVal = (curVal || 0) - n;
+        $(`#pokeblockAmount-${p.id}`).val(newVal > 1 ? newVal : 1).trigger("change");
+    }
+
+    public static maxAmount(p: TmpPartyPokemonType) {
+        $(`#pokeblockAmount-${p.id}`).val(Math.min(player.itemList[PokeBlockController.currentlySelectedName()](), Number.MAX_SAFE_INTEGER)).change();
     }
 
     public static usePokeblock(pokemon: TmpPartyPokemonType, type: PokeBlockColor, amount: number): void {
