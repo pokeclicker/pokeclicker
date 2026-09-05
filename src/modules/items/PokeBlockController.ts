@@ -67,8 +67,14 @@ export default class PokeBlockController {
             });
         }
 
-        const pokemonImage = document.getElementById('pokeblockMon-' + `${pokemon.id}`);
-        pokemonImage.style.animation = 'bounce 1s ease';
+        const defealtPokemonContestTypes = pokemonMap[pokemon.name].contestTypes;
+        let effectiveness = ContestTypeHelper.getAppealModifier(pokeblock.contestType ?? defealtPokemonContestTypes, defealtPokemonContestTypes);
+        if (pokeblock.type >= PokeBlockColor.Cool && pokeblock.type <= PokeBlockColor.Balanced) {
+            effectiveness = 0.5;
+        }
+        const animation = ['shake', 'bounce2', 'bounce'][effectiveness * 2];
+        const pokemonImage = document.getElementById('pokeblock-pokemon-' + `${pokemon.id}`);
+        pokemonImage.style.animation = `${animation} 1s ease`;
         pokemonImage.addEventListener('animationend', function () {
             pokemonImage.style.removeProperty('animation');
         });
@@ -161,6 +167,14 @@ export default class PokeBlockController {
         return;
     }
 
+
+    public static pokeblockInfoEffectivenesses(pokeblock: PokeBlock) {
+        if (pokeblock.type === PokeBlockColor.Black || pokeblock.type >= PokeBlockColor.Cool && pokeblock.type <= PokeBlockColor.Balanced) {
+            return [1];
+        }
+        return [0.75, 1, 1.25];
+    }
+
     public static increaseAppeal(initialAppeal: number, initialExp: number, pokeblockApp: number, pokeblockExp: number, amount: number, ignoreDebuff = false) {
         // Determine start of `for` loop
         const rankBracket = 10 - Object.values(ContestHelper.rankAppeal).reverse().findIndex(i => i <= Math.min(initialAppeal, ContestHelper.rankAppeal[ContestRank['Brilliant Shining']]));
@@ -222,11 +236,71 @@ export default class PokeBlockController {
         return appeal;
     }
 
-    public static pokeblockJiggle(id: number) {
-        const img = document.getElementById('pokeblock-' + `${id}`);
+    public static pokeblockJiggle(id: number, mobile = false) {
+        const img = document.getElementById(!mobile ? 'pokeblock-' + `${id}` : 'pokeblock-' + `${id}` + '-mobile');
         img.style.animation = 'gelatine 0.5s';
         img.addEventListener('animationend', function () {
             img.style.removeProperty('animation');
+        });
+    }
+
+    public static getPartyPokemonAppealLevel(appeal: number) {
+        const level = (10 - Object.values(ContestHelper.rankAppeal).reverse().findIndex(i => i <= appeal));
+        if (level === 10) {
+            return 'MAX';
+        }
+        return level.toLocaleString('en-US');
+    }
+
+    public static getPokeblockRowOpacity(pokeblockEnum: number, conType: number, pokemon: TmpPartyPokemonType) {
+        if ((ItemList[`PokeBlock_${PokeBlockColor[pokeblockEnum]}`] as PokeBlock).contestType?.length) {
+            if (!(ItemList[`PokeBlock_${PokeBlockColor[pokeblockEnum]}`] as PokeBlock).contestType?.includes(conType)) {
+                return '0.2'
+            }
+        }
+        if ((pokeblockEnum === PokeBlockColor.White || pokeblockEnum === PokeBlockColor.Rainbow) && conType === ContestType.Balanced && !pokemonMap[pokemon.name].contestTypes.includes(conType)) {
+            return '0.2';
+        }
+        if (pokeblockEnum === PokeBlockColor.Black && !pokemonMap[pokemon.name].contestTypes.includes(conType)) {
+            return '0.2';
+        }
+        if (pokeblockEnum === PokeBlockColor.Gray && ContestTypeHelper.getAppealModifier(pokemonMap[pokemon.name].contestTypes, [conType]) === 0) {
+            return '0.2';
+        }
+        return '1';
+    }
+
+    public static getPokeblockRowSymbol(ct: ContestType, pokemon: TmpPartyPokemonType) {
+        if (ct === ContestType.Balanced) {
+            return '✸';
+        }
+        if (ContestTypeHelper.getAppealModifier([ct], pokemonMap[pokemon.name].contestTypes) === 1) {
+            return '✦';
+        }
+        if (pokemonMap[pokemon.name].contestTypes.includes(ContestType.Balanced)) {
+            if (ContestTypeHelper.getAppealModifier([ct], pokemonMap[pokemon.name].contestTypes.filter(ct => ct != ContestType.Balanced)) === 0) {
+                return '🞄';
+            }
+        }
+        return '✧';
+    }
+
+    public static sheenSparkle(p: TmpPartyPokemonType) {
+        let sparkles = document.getElementsByClassName('sheen-' + `${p.id}`) as HTMLCollectionOf<HTMLElement>;
+        Array.from(sparkles).forEach((sparkle, index, array) => {
+            if (array.length >= 10) {
+                sparkle.style.animation = `sheensparkle1 1s ease-in-out ${250 * index}ms, sheensparkle2 2s ease-in-out 3s`;
+                sparkle.addEventListener('animationend', (event) => {
+                    if (event.animationName === 'sheensparkle2') {
+                        sparkle.style.removeProperty('animation');
+                    }
+                });
+            } else {
+                sparkle.style.animation = `sheensparkle1 1s ease-in-out ${250 * index}ms`;
+                sparkle.addEventListener('animationend', function() {
+                    sparkle.style.removeProperty('animation');
+                });
+            }
         });
     }
 }
