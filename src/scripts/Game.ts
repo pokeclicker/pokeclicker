@@ -503,7 +503,6 @@ class Game implements TmpGameType {
                 SafariPokemonList.generateKalosSafariList();
 
                 QuestLineHelper.rebuildTreasureMapQuestLine();
-                player.itemList.Pirate_receipt(0);
                 // Reset some temporary battles
                 Object.values(TemporaryBattleList).forEach(t => {
                     if (t.optionalArgs?.resetDaily) {
