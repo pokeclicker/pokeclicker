@@ -277,7 +277,14 @@
                                     <div class="col-6 col-lg-3 mb-2">
                                         <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px; image-rendering: pixelated;"
                                         data-bind="template: { name: 'otherItemTemplate', data: $data.name },
-                                        click: () => { PokeBlockController.currentlySelected($data.type); $('#pokeblockApplicationModal').modal('show'); }">
+                                        click: () => {
+                                            PokeBlockController.currentlySelected($data.type);
+                                            $('#pokeblockApplicationModal').modal('show');
+                                            setTimeout(() => {
+                                                document.getElementById(`pokeblock-${$data.type}-btn`).scrollIntoView({ behavior: 'smooth' });
+                                                document.getElementById(`pokeblock-${$data.type}-btn-mobile`).scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'start' });
+                                            }, 500);
+                                        }">
                                         </div>
                                     </div>
                                     <!-- /ko -->

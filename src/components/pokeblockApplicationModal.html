@@ -1,2 +1,333 @@
 <div class="modal noselect fade" id="pokeblockApplicationModal" tabindex="-1" role="dialog" aria-labelledby="pokeblockApplicationModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
+                <h5 class="modal-title text-light">Pokéblock Case</h5>&nbsp; <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body p-0">
+                <div class="bg-dark text-light pt-2">
+                    <div class="form-row m-0" id="pokeblock-filters">
+                        <div class="form-group col-4 m-0 p-0">
+                            <label for="pokeblock-search">Search</label>
+                            <input id="pokeblock-search" autocomplete="off" class="form-control" placeholder="Search here" data-bind="textInput: Settings.getSetting('pokeblockSearchFilter').observableValue" />
+                        </div>
+                        <div class="form-group col-2 m-0 p-0">
+                            <!-- ko let: { pokeblockRegionFilter: Settings.getSetting('pokeblockRegionFilter') } -->
+                            <label for="pokeblock-region-filter">Region</label>
+                            <select id="pokeblock-region-filter" autocomplete="off" class="custom-select"
+                                data-bind="options: pokeblockRegionFilter.getValidOptions(),
+                                    optionsValue: 'value',
+                                    optionsText: 'text',
+                                    value: pokeblockRegionFilter.observableValue">
+                            </select>
+                            <!-- /ko -->
+                        </div>
+                        <div class="form-group col-4 m-0 p-0">
+                            <label>Order</label>
+                            <div class="input-group">
+                                <!-- ko let: { pokeblockSort: Settings.getSetting('pokeblockSort') } -->
+                                <select id="pokeblock-sort" autocomplete="off" class="custom-select"
+                                    data-bind="options: pokeblockSort.options,
+                                        optionsValue: 'value',
+                                        optionsText: 'text',
+                                        value: pokeblockSort.observableValue">
+                                </select>
+                                <!-- /ko -->
+                                <!-- ko let: { pokeblockSortDirection: Settings.getSetting('pokeblockSortDirection') } -->
+                                <div class="input-group-append bg-primary text-light">
+                                    <label for="pokeblock-sort-direction" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
+                                    text: pokeblockSortDirection.observableValue() ? '⥄' : '⥂',
+                                    tooltip: {
+                                        title: pokeblockSortDirection.observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)',
+                                        trigger: 'hover',
+                                        placement:'top',
+                                    }">⥂</label>
+                                    <input id="pokeblock-sort-direction" style="vertical-align: middle" class="hidden" type="checkbox" data-bind="checked: pokeblockSortDirection.observableValue" />
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                        <div style="align-content: center" class="form-group col-2 text-lg-left m-0 pr-0">
+                            <div class="form-check form-check-inline align-middle">
+                                <input type="checkbox" id="pokeblock-hide-full-pokemon" class="form-check-input" data-bind="checked: Settings.getSetting('pokeblockHideMaxedPokemon').observableValue">
+                                <label style="font-size: smaller;" for="pokeblock-hide-full-pokemon" class="form-check-label">Hide Pokémon with max Fullness</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="pokeblock-list-mobile" class="d-lg-none" style="overflow-y: hidden;">
+                        <div class="d-flex">
+                            <!-- ko foreach: Object.values(ItemList).filter((i) => i instanceof PokeBlock) -->
+                                <button type="button" class="btn btn-secondary btn-sm m-1" data-bind="
+                                attr: { id: 'pokeblock-' + $data.type + '-btn-mobile' },
+                                event: { mouseenter: function(){PokeBlockController.pokeblockJiggle($data.type, true)} },
+                                click: () => { PokeBlockController.currentlySelected($data.type), PokeBlockController.pokeblockJiggle($data.type, true) },
+                                css: { active: PokeBlockController.currentlySelected() == $data.type },
+                                ">
+                                <span data-bind="text: $data.displayName"></span>
+                                <br/>
+                                <img data-bind="attr: { src: PokeBlockController.getImage($data.type), id: 'pokeblock-' + $data.type + '-mobile' }"/>
+                                <br/>
+                                <span class="font-weight-normal small" data-bind="text: `In Bag: ${player.itemList[$data.name]().toLocaleString('en-US')}`"></span>
+                                </button>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <div class="btn-group btn-group-toggle d-lg-none" style="display: flex;">
+                        <!-- ko foreach: PokeBlockController.multiplier -->
+                        <label class="btn btn-secondary" data-bind="css: { active: PokeBlockController.multiplierIndex() == $index() }">
+                            <input type="radio" name="pokeblockAmountMultiplierMobile"
+                                data-bind="value: $index(), checked: PokeBlockController.multiplierIndex()"
+                                onchange="PokeBlockController.multiplierIndex(+this.value)">
+                            <knockout data-bind="text: $data"></knockout>
+                        </label>
+                        <!-- /ko -->
+                        <!-- ko if: new DevelopmentRequirement().isCompleted() -->
+                        <button class="btn btn-sm btn-block btn-warning" style="font-size: smaller;" data-bind="
+                        click: () => {player.gainItem(PokeBlockController.currentlySelectedName(), PokeBlockController.getMultiplier())}">
+                        Gain Pokeblocks (Available in testing only)
+                        </button>
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+                <div>
+                    <div class="justify-content-center no-select my-2 d-flex flex-wrap">
+                        <div class="col-4 d-none d-lg-block">
+                            <div class="btn-group btn-group-toggle" style="display: flex;">
+                                <!-- ko foreach: PokeBlockController.multiplier -->
+                                <label class="btn btn-secondary" data-bind="css: { active: PokeBlockController.multiplierIndex() == $index() }">
+                                    <input type="radio" name="pokeblockAmountMultiplier"
+                                        data-bind="value: $index(), checked: PokeBlockController.multiplierIndex()"
+                                        onchange="PokeBlockController.multiplierIndex(+this.value)">
+                                    <knockout data-bind="text: $data"></knockout>
+                                </label>
+                                <!-- /ko -->
+                            </div>
+                            <!-- ko if: new DevelopmentRequirement().isCompleted() -->
+                                <button class="btn btn-sm btn-block btn-warning" data-bind="
+                                click: () => {player.gainItem(PokeBlockController.currentlySelectedName(), Math.min(PokeBlockController.getMultiplier(), 1000000))},
+                                tooltip: {
+                                    title: 'Available in testing only',
+                                    placement: 'bottom',
+                                    trigger: 'hover'
+                                }
+                                ">Gain Pokeblocks</button>
+                            <!-- /ko -->
+                            <div id="pokeblock-list" class="" style="overflow-y: auto; max-height: calc(98vh - 300px);">
+                                <!-- ko foreach: Object.values(ItemList).filter((i) => i instanceof PokeBlock) -->
+                                    <div class="btn-group btn-block p-1" data-bind="attr: { id: 'pokeblock-' + $data.type + '-btn' }">
+                                        <button type="button" class="btn btn-secondary btn-sm btn-block" data-bind="
+                                        event: { mouseenter: function(){PokeBlockController.pokeblockJiggle($data.type)} },
+                                        click: () => { PokeBlockController.currentlySelected($data.type) },
+                                        css: { active: PokeBlockController.currentlySelected() == $data.type },
+                                        ">
+                                        <span data-bind="text: $data.displayName"></span>
+                                        <br/>
+                                        <img data-bind="attr: { src: PokeBlockController.getImage($data.type), id: 'pokeblock-' + $data.type }"/>
+                                        <br/>
+                                        <span class="font-weight-normal small" data-bind="text: `In Bag: ${player.itemList[$data.name]().toLocaleString('en-US')}`"></span>
+                                        </button>
+                                        <!-- ko if: new DevelopmentRequirement().isCompleted() -->
+                                        <div class="btn-group">
+                                            <button class="btn btn-secondary dropdown-toggle" data-toggle="collapse" aria-expanded="false"
+                                            data-target="#"
+                                            data-bind="attr: { 'data-target': '#pokeblockTable-' + $data.type },
+                                            "></button>
+                                        </div>
+                                        <!-- /ko -->
+                                    </div>
+
+                                    <div class="collapse" data-bind="attr: { id: 'pokeblockTable-' + $data.type }">
+                                        <table class="table table-striped table-hover table-sm mb-0">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th class="text-center align-middle tight text-warning" colspan="100%"><i>Available in testing only</i></th>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center align-middle tight" colspan="100%" data-bind="text: 'Fullness: ' + $data.exp">Fullness</th>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center align-middle">Level</th>
+                                                    <!-- ko if: PokeBlockController.pokeblockInfoEffectivenesses($data).includes(0.75) -->
+                                                    <th class="text-center align-middle">Ineffective</th>
+                                                    <!-- /ko -->
+                                                    <th class="text-center align-middle" data-bind="text: PokeBlockController.pokeblockInfoEffectivenesses($data).length > 1 ? 'Neutral' : 'Appeal'">Neutral</th>
+                                                    <!-- ko if: PokeBlockController.pokeblockInfoEffectivenesses($data).includes(1.25) -->
+                                                    <th class="text-center align-middle">Effective</th>
+                                                    <!-- /ko -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- ko foreach: Object.keys(ContestHelper.rankAppeal) -->
+                                                <tr>
+                                                    <td class="text-center align-middle tight" data-bind="text: $data"></td>
+                                                    <!-- ko if: PokeBlockController.pokeblockInfoEffectivenesses($parent).includes(0.75) -->
+                                                    <td class="text-center align-middle tight" data-bind="text: !$parent.ignoreDebuff ? '+' + Math.ceil($parent.value * Math.max(10 - [$data], 1) * 0.75 / 10) : '+' + Math.ceil($parent.value * 0.75)"></td>
+                                                    <!-- /ko -->
+                                                    <td class="text-center align-middle tight" data-bind="text: !$parent.ignoreDebuff ? '+' + Math.ceil($parent.value * Math.max(10 - [$data], 1) / 10) : '+' + Math.ceil($parent.value)"></td>
+                                                    <!-- ko if: PokeBlockController.pokeblockInfoEffectivenesses($parent).includes(1.25) -->
+                                                    <td class="text-center align-middle tight" data-bind="text: !$parent.ignoreDebuff ? '+' + Math.ceil($parent.value * Math.max(10 - [$data], 1) * 1.25 / 10) : '+' + Math.ceil($parent.value * 1.25)"></td>
+                                                    <!-- /ko -->
+                                                </tr>
+                                                <!-- /ko -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+
+                        <div class="justify-content-center no-select col-lg-8">
+                            <div style="overflow-y: auto; max-height: calc(98vh - 250px);">
+
+                                <div data-bind="foreach: lazyLoad('lazyPokeBlockList', $element, PartyController.getPokeblockSortedList, { reset: () => (DisplayObservables.modalState.pokeblockApplicationModal === 'hidden') }), childrenComplete: () => { lazyLoadCallback('lazyPokeBlockList'); }">
+                                    <div class="pt-2 p-1">
+                                        <div class="input-group" style="display: block;">
+                                            <div id="pokeblock-pokemons" class="row no-gutters input-group-prepend">
+                                                <div class="card-header d-flex pb-0 px-0" style="justify-content: space-between; flex-direction: column; border: none; width: 215px;">
+                                                    <h5 class="px-2" data-bind="class: ContestHelper.truncatePokeblockNickname($data)">
+                                                        <knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup>
+                                                    </h5>
+                                                    <div data-bind="attr: { id: 'pokeblock-pokemon-' + $data.id }">
+                                                        <img data-bind="attr:{ src: PokemonHelper.getImage($data.id) }">
+                                                    </div>
+                                                    <div class="my-2 px-4">
+                                                        <div class="progress" data-bind="tooltip: {
+                                                            title: 'Pokeblocks are half as effective when a Pokemon is Full. Compete in Contests to lower Fullness.',
+                                                            placement: 'bottom',
+                                                            trigger: 'hover'
+                                                        }">
+                                                            <div class="progress-bar bg-primary" role="progressbar"
+                                                                    data-bind="style: { 'width': 100 * $data.pokeblockFullness / ContestHelper.maxPokeblockFullness() + '%' }"
+                                                                    aria-valuemin="0" aria-valuemax="100">
+                                                                <span data-bind="text: $data.maxPokeblockFullnessTooltip()" style="font-size: 12px;"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="input-group m-0 p-0" style="justify-content: center;">
+                                                        <div class="input-group-prepend p-0">
+                                                            <btn type="button" class="btn btn-warning smallButton smallFont p-1" style="border: wheat solid thin;" data-bind="click: () => {PokeBlockController.sheenSparkle($data)},
+                                                                tooltip: {
+                                                                    title: `Appeal Bonus: ×${ContestHelper.calculateContestSheenBonus($data)}`,
+                                                                    placement: 'bottom',
+                                                                    trigger: 'hover'
+                                                                }">
+                                                                Sheen
+                                                            </btn>
+                                                        </div>
+                                                        <div class="input-group-append px-1" style="border: wheat solid thin;">
+                                                            <!-- ko foreach: Array.from(ContestHelper.getSheenDisplaySparkles($data)) -->
+                                                            <div class="py-1" style="color:goldenrod;">
+                                                                <div style="position:relative;">
+                                                                    <div class="d-flex justify-content-center">
+                                                                        <div data-bind="text: $data, style: { 'opacity': $data != '✧' ? '' : '0.5' }"></div>
+                                                                        <div style="position:absolute; transform: scale(0);" data-bind="class: $data != '✧' ? 'sheen-' + `${$parent.id}` : '', style: { 'opacity': $data != '✧' ? '0.8' : '0' }">✶</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /ko -->
+                                                        </div>
+                                                        <div class="input-group-append">
+                                                            <btn class="btn btn-warning p-0 pr-1" style="border: wheat solid thin; pointer-events: none;">
+                                                            </btn>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex" style="flex-grow: 1;">                                                         
+                                                    <table class="table table-striped table-hover table-sm mb-0" style="height: 100%;">
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <th class="text-center align-middle p-1" colspan="2">Condition</th>
+                                                                <th class="text-center align-middle p-1">Appeal</th>
+                                                                <th class="text-center align-middle p-1" data-bind="tooltip: {
+                                                                    title: 'Increases with the amount of appeal. Higher levels make Pokeblocks less effective.',
+                                                                    placement: 'bottom',
+                                                                    trigger: 'hover'
+                                                                }">Level ⓘ</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <!-- ko foreach: Object.entries($data.contestStats) -->
+                                                            <tr data-bind="
+                                                                class: ItemList[`PokeBlock_${GameConstants.PokeBlockColor[PokeBlockController.currentlySelected()]}`].canUse($parent) ? '' : 'pokemon-seen-but-not-caught',
+                                                                style: { 'opacity': PokeBlockController.getPokeblockRowOpacity(PokeBlockController.currentlySelected(), Number($data[0]), $parent) },
+                                                                ">
+                                                                <td class="text-center tight align-middle p-1" style="line-height: normal; color: goldenrod;"
+                                                                    data-bind="style: { 'opacity': +(ContestTypeHelper.getAppealModifier(pokemonMap[$parent.name].contestTypes, [Number($data[0])]) > 0) },
+                                                                    text: PokeBlockController.getPokeblockRowSymbol(Number($data[0]), $parent)">
+                                                                </td>
+                                                                <td class="text-center tight align-middle p-1" style="line-height: normal;">
+                                                                    <span class="badge text-light px-1" data-bind="
+                                                                        style: {
+                                                                        'background-color': GameConstants.ContestColor[$data[0]],
+                                                                        'text-shadow': '0px 0px 1px black, 0px 0px 1px black, 0px 0px 1px black, 0px 0px 2px black, 0px 0px 2px black, 0px 0px 3px black',
+                                                                        'opacity': '1',
+                                                                        }">
+                                                                    <small><strong
+                                                                        data-bind="text: ContestType[$data[0]].toUpperCase()" style="color: white">Condition</strong></small>
+                                                                    </span>
+                                                                </td>
+                                                                <td class="text-center tight align-middle p-1" data-bind="text: $data[1]().toLocaleString('en-US')">Appeal</td>
+                                                                <td class="text-center tight align-middle p-1" data-bind="text: PokeBlockController.getPartyPokemonAppealLevel($data[1]())">Level</td>
+                                                            </tr>
+                                                            <!-- /ko -->
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer" style="border: none;">
+                                                <div class="row" style="justify-content: space-evenly;">
+                                                    <button class="btn col-3" data-bind="
+                                                    class: ItemList[`PokeBlock_${GameConstants.PokeBlockColor[PokeBlockController.currentlySelected()]}`].canUse($data) ? 'btn-success' : 'btn-secondary',
+                                                    attr: {disabled: $(`#pokeblockAmount-${$data.id}`).val() > player.itemList[`PokeBlock_${GameConstants.PokeBlockColor[PokeBlockController.currentlySelected()]}`]() || !player.itemList[`PokeBlock_${GameConstants.PokeBlockColor[PokeBlockController.currentlySelected()]}`]() || !ItemList[`PokeBlock_${GameConstants.PokeBlockColor[PokeBlockController.currentlySelected()]}`].canUse($data)},
+                                                    click: () => { PokeBlockController.usePokeblock($data, PokeBlockController.currentlySelected(), PokeBlockController.getMultiplier()) }">Use</button>
+                                                    <div class="input-group m-0 col-8 p-0" style="width:auto">
+                                                        <div class="input-group-prepend">
+                                                            <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => PokeBlockController.resetAmount($data)">
+                                                                Reset
+                                                            </button>
+                                                        </div>
+                                                        <input type="number" class="outline-dark form-control form-control-number" min="0"
+                                                            data-bind="attr: { id: 'pokeblockAmount-' + $data.id, name: 'pokeblockAmount-' + $data.id, value: PokeBlockController.getMultiplier() }, textInput: ko.observable(PokeBlockController.getMultiplier())">
+                                                        <div class="d-none d-lg-flex input-group-append">
+                                                                <button class="btn btn-primary smallButton smallFont" type="button" data-bind="text: '-' + PokeBlockController.getMultiplier(), click: () => PokeBlockController.increaseAmount($data, -PokeBlockController.getMultiplier())"></button>
+                                                                <button class="btn btn-primary smallButton smallFont" type="button" data-bind="text: '+' + PokeBlockController.getMultiplier(), click: () => PokeBlockController.increaseAmount($data, PokeBlockController.getMultiplier())"></button>
+                                                        </div>
+                                                        <div class="d-lg-none input-group-append">
+                                                            <button class="btn btn-primary smallButton smallFont dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add</button>
+                                                            <div class="dropdown-menu p-0 m-0">
+                                                                    <button class="dropdown-item" type="button" data-bind="text: '-' + PokeBlockController.getMultiplier(), click: () => PokeBlockController.increaseAmount($data, -PokeBlockController.getMultiplier())">
+                                                                        -
+                                                                    </button>
+                                                                    <button class="dropdown-item" type="button" data-bind="text: '+' + PokeBlockController.getMultiplier(), click: () => PokeBlockController.increaseAmount($data, PokeBlockController.getMultiplier())">
+                                                                        +
+                                                                    </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-primary smallButton smallFont" type="button" data-bind="click: () => PokeBlockController.maxAmount($data)">
+                                                                Max
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
