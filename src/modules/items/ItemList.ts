@@ -130,9 +130,8 @@ ItemList.PokeBlock_Cute      = new PokeBlock(PokeBlockColor.Cute, 140, 3, [Conte
 ItemList.PokeBlock_Smart     = new PokeBlock(PokeBlockColor.Smart, 140, 3, [ContestType.Smart], 'A super Bitter Pokéblock that significantly boosts a Pokémon\'s Smart Appeal.');
 ItemList.PokeBlock_Tough     = new PokeBlock(PokeBlockColor.Tough, 140, 3, [ContestType.Tough], 'A super Sour Pokéblock that significantly boosts a Pokémon\'s Tough Appeal.');
 ItemList.PokeBlock_Balanced  = new PokeBlock(PokeBlockColor.Balanced, 280, 5, [ContestType.Balanced], 'A super flavorful Pokéblock that significantly boosts a Pokémon\'s Balanced Appeal.');
-ItemList.PokeBlock_Silver    = new PokeBlock(PokeBlockColor.Silver, 20, 0, undefined, 'A tender Pokéblock that boosts Pokémon\'s overall Appeal by 15.', undefined, true);
-ItemList.PokeBlock_Gold      = new PokeBlock(PokeBlockColor.Gold, 30, 0, undefined, 'A smooth Pokéblock that boosts a Pokémon\'s Appeal by 30 without adding Fullness.', undefined, true);
-// Poffins give boost depending on fullness left, plus a little bonus depending on leveltype stuff
+ItemList.PokeBlock_Silver    = new PokeBlock(PokeBlockColor.Silver, 20, 0, undefined, 'A tender Pokéblock that boosts Pokémon\'s overall Appeal by a constant amount.', undefined, true);
+ItemList.PokeBlock_Gold      = new PokeBlock(PokeBlockColor.Gold, 30, 0, undefined, 'A smooth Pokéblock that greatly boosts a Pokémon\'s Appeal by a constant amount.', undefined, true);
 
 // Mega Stones
 ItemList.Abomasite          = new MegaStoneItem(MegaStoneType.Abomasite, 'Abomasnow', 10000);
