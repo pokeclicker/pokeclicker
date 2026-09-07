@@ -2216,74 +2216,152 @@ GymList['Elite Trainer Peony'] = new Gym(
 GymList['Grandtree Arena'] = new Gym(
     'Lord of the Woods: Kleavor',
     'Grandtree Arena',
-    [new GymPokemon('Noble Kleavor', 76658268, 70)],
+    [new GymPokemon('Noble Kleavor', 1625705974, 18)],
     BadgeEnums.Noble_Kleavor,
     128000,
-    'You defeated Lord Kleavor once again!',
-    [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Lord Kleavor', imageName: '../pokemon/900.01' }
+    'The golden light was dispelled from Kleavor, calming it.',
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 22)],
+    undefined, undefined, { displayName: 'Lord Kleavor', imageName: '../pokemon/900.01', hideTrainer: true }
 );
 GymList['Brava Arena'] = new Gym(
     'Lady of the Ridge: Lilligant',
     'Brava Arena',
-    [new GymPokemon('Noble Lilligant', 76658268, 70)],
+    [new GymPokemon('Noble Lilligant', 2182547756, 30)],
     BadgeEnums.Noble_Lilligant,
     128000,
-    'You defeated Lady Lilligant once again!',
-    [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Lady Lilligant', imageName: '../pokemon/549.02' }
+    'The golden light was dispelled from Lilligant, calming it.',
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 36)],
+    undefined, undefined, { displayName: 'Lady Lilligant', imageName: '../pokemon/549.02', hideTrainer: true }
 );
 GymList['Molten Arena'] = new Gym(
     'Lord of the Isles: Arcanine',
     'Molten Arena',
-    [new GymPokemon('Noble Arcanine', 76658268, 70)],
+    [new GymPokemon('Noble Arcanine', 2656576245, 36)],
     BadgeEnums.Noble_Arcanine,
     128000,
-    'You defeated Lord Arcanine once again!',
-    [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Lord Arcanine', imageName: '../pokemon/59.02' }
+    'The golden light was dispelled from Arcanine, calming it.',
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 48)],
+    undefined, undefined, { displayName: 'Lord Arcanine', imageName: '../pokemon/59.02', hideTrainer: true }
 );
 GymList['Moonview Arena'] = new Gym(
     'Lord of the Hollow: Electrode',
     'Moonview Arena',
-    [new GymPokemon('Noble Electrode', 76658268, 70)],
+    [new GymPokemon('Noble Electrode', 2575373935, 46)],
     BadgeEnums.Noble_Electrode,
     128000,
-    'You defeated Lord Electrode once again!',
-    [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Lord Electrode', imageName: '../pokemon/101.02' }
+    'The golden light was dispelled from Electrode, calming it.',
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 56)],
+    undefined, undefined, { displayName: 'Lord Electrode', imageName: '../pokemon/101.02', hideTrainer: true }
 );
 GymList['Icepeak Arena'] = new Gym(
     'Lord of the Tundra: Avalugg',
     'Icepeak Arena',
-    [new GymPokemon('Noble Avalugg', 76658268, 70)],
+    [new GymPokemon('Noble Avalugg', 3660538392, 56)],
     BadgeEnums.Noble_Avalugg,
     128000,
-    'You defeated Lord Avalugg once again!',
-    [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Lord Avalugg', imageName: '../pokemon/713.02' }
+    'The golden light was dispelled from Avalugg, calming it.',
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 66)],
+    undefined, undefined, { displayName: 'Lord Avalugg', imageName: '../pokemon/713.02', hideTrainer: true }
+);
+GymList['Prelude Beach'] = new Gym(
+    'Kamado',
+    'Prelude Beach',
+    [
+        new GymPokemon('Golem', 883074653, 65),
+        new GymPokemon('Clefable', 710711137, 65),
+        new GymPokemon('Hisuian Braviary', 720926788, 65),
+        new GymPokemon('Heracross', 803342176, 65),
+        new GymPokemon('Snorlax', 693130782, 66),
+    ],
+    BadgeEnums.Elite_Kamado,
+    128000,
+    'Even frightful creatures like Pokémon can become powerful allies...',
+    [new QuestLineStepCompletedRequirement('Volo\'s Dream', 11)],
+    undefined, undefined, { displayName: 'The Galaxy Team\'s Kamado', imageName: 'The Galaxy Team\'s Kamado' }
 );
 GymList['Temple of Sinnoh'] = new Gym(
     'Volo',
     'Temple of Sinnoh',
     [
-        new GymPokemon('Spiritomb', 348526193, 68),
-        new GymPokemon('Roserade', 348526193, 68),
-        new GymPokemon('Togekiss', 348526193, 68),
-        new GymPokemon('Hisuian Arcanine', 348526193, 68),
-        new GymPokemon('Lucario', 348526193, 68),
-        new GymPokemon('Garchomp', 348526193, 68),
-        new GymPokemon('Giratina (Altered)', 348526193, 70, new TemporaryBattleRequirement('Volo 3')),
-        new GymPokemon('Giratina (Origin)', 348526193, 70, new TemporaryBattleRequirement('Volo 3')),
+        new GymPokemon('Spiritomb', 556960743, 68),
+        new GymPokemon('Roserade', 650605921, 68),
+        new GymPokemon('Togekiss', 629064938, 68),
+        new GymPokemon('Hisuian Arcanine', 777615712, 68),
+        new GymPokemon('Lucario', 607077046, 68),
+        new GymPokemon('Garchomp', 626149830, 68),
+        new GymPokemon('Giratina (Altered)', 570725877, 70, new TemporaryBattleRequirement('Volo 3')),
+        new GymPokemon('Giratina (Origin)', 570725877, 70, new TemporaryBattleRequirement('Volo 3')),
     ],
     BadgeEnums.Azure,
     128000,
     'Why? Why you?! Why do you have the blessing of Arceus?!',
-    [new DevelopmentRequirement()],
-    () => {},
+    [new QuestLineStepCompletedRequirement('Volo\'s Dream', 14)],
+    () => { },
     { champion: true },
     { displayName: 'Pokémon Wielder Volo' }
 );
+GymList['Ancient Lake Valor'] = new Gym(
+    'Adaman',
+    'Ancient Lake Valor',
+    [
+        new GymPokemon('Umbreon', 1486285657, 32),
+        new GymPokemon('Vaporeon', 1321057084, 32),
+        new GymPokemon('Leafeon', 1869601723, 64),
+    ],
+    BadgeEnums.Elite_Adaman,
+    128000,
+    'You\'re really something...and I\'m a man of my word. So, here\'s that treasure.',
+    [new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 1)],
+    () => {
+        Notifier.notify({
+            message: 'You obtained an Adamant Crystal!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Adamant_crystal.image,
+        });
+        player.gainItem('Adamant_crystal', 1);
+    },
+    undefined, { displayName: 'Clan Leader Adaman' }
+);
+GymList['Pearl Settlement'] = new Gym(
+    'Irida',
+    'Pearl Settlement',
+    [
+        new GymPokemon('Espeon', 1581490646, 32),
+        new GymPokemon('Flareon', 1576870497, 32),
+        new GymPokemon('Glaceon', 1814405432, 64),
+    ],
+    BadgeEnums.Elite_Irida,
+    128000,
+    'I wonder... Are there people even stronger than you out in the world, with Pokémon stronger than yours? I\'ll just have to find out for myself I suppose! Here! The treasure I promised you.',
+    [new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 3)],
+    () => {
+        Notifier.notify({
+            message: 'You obtained an Lustrous Globe!',
+            type: NotificationConstants.NotificationOption.success,
+            image: ItemList.Lustrous_globe.image,
+        });
+        player.gainItem('Lustrous_globe', 1);
+    },
+    undefined, { displayName: 'Clan Leader Irida' }
+);
+GymList['Jubilife Village'] = new Gym(
+    'Ingo',
+    'Jubilife Village',
+    [
+        new GymPokemon('Alakazam', 852423445, 67),
+        new GymPokemon('Tangrowth', 945420171, 67),
+        new GymPokemon('Probopass', 833610040, 67),
+        new GymPokemon('Machamp', 927030299, 67),
+        new GymPokemon('Magnezone', 581257578, 67),
+        new GymPokemon('Gliscor', 922443859, 68),
+    ],
+    BadgeEnums.Elite_Ingo,
+    128000,
+    'Sometimes I find myself saying things without knowing where the words come from... yet those words seem to fill me with power. But returning to the matter at hand: I hope you\'ll challenge me again sometime.',
+    [new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 12)],
+    undefined, undefined, { displayName: 'Warden Ingo' }
+);
+
 
 // Paldea Gyms
 GymList.Cortondo = new Gym(
