@@ -23,6 +23,7 @@ export default class DealHelper {
                 'None', 'Black_DNA', 'White_DNA', 'Solar_light', 'Key_stone',
                 'Lunar_light', 'Pure_light', 'Crystallized_shadow',
                 'Black_mane_hair', 'White_mane_hair',
+                'Adamant_crystal', 'Lustrous_globe',
             ]).includes(name)),
         );
         return ItemList[evoItem];

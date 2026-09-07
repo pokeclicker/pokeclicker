@@ -50,7 +50,7 @@ export enum Region {
     final = 10,
 }
 
-export const MAX_AVAILABLE_REGION = Region.galar;
+export const MAX_AVAILABLE_REGION = Region.hisui;
 
 export const MaxIDPerRegion = [
     151, // 151 - Kanto
@@ -1106,6 +1106,8 @@ export enum StoneType {
     'White_mane_hair',
     'Black_augurite',
     'Peat_block',
+    'Adamant_crystal',
+    'Lustrous_globe',
     'Auspicious_armor',
     'Malicious_armor',
     'Leaders_crest',
@@ -1468,6 +1470,10 @@ export const HisuiGyms = [
     'Molten Arena',
     'Moonview Arena',
     'Icepeak Arena',
+    'Prelude Beach',
+    'Ancient Lake Valor',
+    'Pearl Settlement',
+    'Jubilife Village',
     'Temple of Sinnoh',
 ];
 
@@ -1810,7 +1816,8 @@ export const HisuiDungeons = [
     'Ancient Lake Valor',
     'Ancient Lake Acuity',
     'Temple of Sinnoh',
-    'Turnback Cave', // 213
+    'Turnback Cave',
+    'Eternal Battle Reverie', // 213
 ];
 
 export const PaldeaDungeons = [
@@ -2292,6 +2299,7 @@ export const TemporaryBattles = [
     'Destiny Deoxys Army',
     'Destiny Rayquaza',
     'Gyarados Crew',
+    'Rowlet, Cyndaquil and Oshawott',
     'Volo 1',
     'Akari 1',
     'Warden Mai',
@@ -2305,26 +2313,25 @@ export const TemporaryBattles = [
     'Ursaluna',
     'Lady of the Ridge: Lilligant',
     'Irida 2',
+    'Dusclops',
     'Clover',
     'Coin 2',
     'Charm 1',
-    'Lord of the Isles: Arcanine',
-    'Adaman 1',
+    'Adaman',
     'Melli 1',
     'Warden Ingo',
     'Melli 2',
-    'Lord of the Hollow: Electrode',
+    'Akari 3',
     'Warden Gaeric',
     'Warden Sabi',
     'Hisuian Braviary',
-    'Lord of the Tundra: Avalugg',
     'Beni',
+    'Space-Time Rift',
     'Charm 2',
     'Dialga (Origin)',
     'Palkia (Origin)',
-    'The Galaxy Team\'s Kamado',
-    'Adaman 2',
-    'Irida 3',
+    'Alpha Vespiquen',
+    'Cresselia',
     'Volo 3',
     'Tornadus 1',
     'Tornadus 2',
