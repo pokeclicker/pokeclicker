@@ -185,12 +185,12 @@
                             <div class="pageItemTitle d-flex justify-content-center">
                                 <div class="title-left"></div>
                                 <div class="d-flex align-items-center px-2">
-                                    <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': Battle.enemyPokemon() } }" style="font-size: 1.6rem;">Pokémon name</knockout>
-                                    <knockout class="ml-2" data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id)}}"></knockout>
+                                    <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': Battle.firstEnemyPokemon() } }" style="font-size: 1.6rem;">Pokémon name</knockout>
+                                    <knockout class="ml-2" data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.firstEnemyPokemon().id)}}"></knockout>
                                     <knockout class="ml-2" style="position: relative;"
                                         data-bind="template: { name: 'pokerusStatusTemplate', data: {
-                                            'pokerus': PartyController.getPokerusStatus(Battle.enemyPokemon().id),
-                                            'evs': App.game.party.getPokemon(Battle.enemyPokemon().id)?.evs() }}">
+                                            'pokerus': PartyController.getPokerusStatus(Battle.firstEnemyPokemon().id),
+                                            'evs': App.game.party.getPokemon(Battle.firstEnemyPokemon().id)?.evs() }}">
                                     </knockout>
                                 </div>
                                 <div class="title-right">
@@ -203,7 +203,7 @@
                             </div>
                             <div>
                                 <div data-bind="visible: !Battle.catching()">
-                                    <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': Battle.enemyPokemon() } }">Pokémon sprite</knockout>
+                                    <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': Battle.firstEnemyPokemon() } }">Pokémon sprite</knockout>
                                 </div>
                                 <div data-bind="visible: Battle.catching()" class="catchChance">
                                     <img class="pokeball-animated"
@@ -216,9 +216,9 @@
                             </div>
                             <div class="progress hitpoints" style="height: 20px;">
                                 <div class="progress-bar bg-danger" role="progressbar"
-                                     data-bind="attr:{ style: 'width:' + Battle.enemyPokemon().healthPercentage() + '%' }"
+                                     data-bind="attr:{ style: 'width:' + Battle.firstEnemyPokemon().healthPercentage() + '%' }"
                                      aria-valuemin="0" aria-valuemax="100">
-                                     <span data-bind="text: Battle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + Battle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
+                                     <span data-bind="text: Battle.firstEnemyPokemon().health().toLocaleString('en-US') + ' / ' + Battle.firstEnemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
                                 </div>
                             </div>
 
@@ -258,7 +258,7 @@
                                   </tr>
                                   <tr>
                                     <td width="50%">
-                                        <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
+                                        <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.firstEnemyPokemon(), 'battle': Battle } }"></knockout>
                                     </td>
                                     <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
                                         <span style="display: inline;" data-bind="tooltip: {

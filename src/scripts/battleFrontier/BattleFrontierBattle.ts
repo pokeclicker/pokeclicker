@@ -21,20 +21,17 @@ class BattleFrontierBattle extends Battle {
             return;
         }
         this.lastPokemonAttack = now;
-        if (!this.enemyPokemon()?.isAlive()) {
-            return;
-        }
-        this.enemyPokemon().damage(App.game.party.calculatePokemonAttack(this.enemyPokemon().type1, this.enemyPokemon().type2, true, GameConstants.Region.none, false, false, WeatherType.Clear));
-        if (!this.enemyPokemon().isAlive()) {
-            this.defeatPokemon();
-        }
+        this.attackActivePokemon((enemyPokemon) => App.game.party.calculatePokemonAttack(enemyPokemon.type1, enemyPokemon.type2, true, GameConstants.Region.none, false, false, WeatherType.Clear));
     }
 
     /**
      * Award the player with exp, gems and go to the next pokemon
      */
-    public static defeatPokemon() {
-        this.enemyPokemon().defeat(true);
+    public static defeatPokemon(enemyPokemon = this.firstEnemyPokemon()) {
+        if (!enemyPokemon) {
+            return;
+        }
+        enemyPokemon.defeat(true);
         // This needs to stay as none so the stage number isn't adjusted
         App.game.breeding.progressEggsBattle(BattleFrontierRunner.stage(), GameConstants.Region.none);
         // Next pokemon
@@ -51,7 +48,7 @@ class BattleFrontierBattle extends Battle {
             // Create the next Pokemon to fight
             this.generateNewEnemy();
         } else {
-            this.enemyPokemon(null);
+            this.clearEnemyPokemon();
         }
     }
 
@@ -72,6 +69,6 @@ class BattleFrontierBattle extends Battle {
         }
 
         const enemyPokemon = new BattlePokemon(enemy.name, enemy.id, enemy.type[0], enemy.type[1], health, level, 0, enemy.exp, new Amount(money, GameConstants.Currency.money), shiny, gems, gender, GameConstants.ShadowStatus.None, EncounterType.trainer);
-        this.enemyPokemon(enemyPokemon);
+        this.setEnemyPokemon(enemyPokemon);
     }
 }

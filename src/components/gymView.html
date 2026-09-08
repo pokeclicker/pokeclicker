@@ -1,9 +1,17 @@
 
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.gym">
-    <div class="col no-gutters clickable" data-bind="click: function() {GymBattle.clickAttack()}" style="height: 280px; display: block;">
+    <div class="col no-gutters" data-bind="css: { clickable: !GymBattle.gym.optionalArgs.isDoubleBattle, 'multi-battle': GymBattle.gym.optionalArgs.isDoubleBattle }, click: function() { if (!GymBattle.gym.optionalArgs.isDoubleBattle) { GymBattle.clickAttack(); } }" style="height: 280px; display: block;">
         <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
-            <knockout>
-                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': GymBattle.enemyPokemon() } }">Pokémon name</knockout>
+            <knockout data-bind="ifnot: GymBattle.gym.optionalArgs.isDoubleBattle">
+                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': GymBattle.firstEnemyPokemon() } }">Pokémon name</knockout>
+            </knockout>
+            <knockout data-bind="if: GymBattle.gym.optionalArgs.isDoubleBattle">
+                <span class="multi-battle-title" data-bind="foreach: GymBattle.enemyPokemonView">
+                    <knockout data-bind="if: $data">
+                        <span data-bind="if: $index() > 0">&nbsp;&&nbsp;</span>
+                        <span data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': $data } }">Pokémon name</span>
+                    </knockout>
+                </span>
             </knockout>
 
             <knockout class="right">
@@ -37,17 +45,45 @@
             <img data-bind="attr:{ src: GymBattle.gym.imagePath }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
         </div>
 
-        <div>
-            <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': GymBattle.enemyPokemon() } }">Pokémon sprite</knockout>
-        </div>
-
-        <div class="progress hitpoints trainerhitpoints">
-            <div class="progress-bar bg-danger" role="progressbar"
-                    data-bind="attr:{ style: 'width:' + GymBattle.enemyPokemon().healthPercentage() + '%' }"
-                    aria-valuemin="0" aria-valuemax="100">
-                <span data-bind="text: GymBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + GymBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
+        <!-- ko ifnot: GymBattle.gym.optionalArgs.isDoubleBattle -->
+            <div>
+                <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': GymBattle.firstEnemyPokemon() } }">Pokémon sprite</knockout>
             </div>
-        </div>
+
+            <div class="progress hitpoints trainerhitpoints">
+                <div class="progress-bar bg-danger" role="progressbar"
+                        data-bind="attr:{ style: 'width:' + GymBattle.firstEnemyPokemon().healthPercentage() + '%' }"
+                        aria-valuemin="0" aria-valuemax="100">
+                    <span data-bind="text: GymBattle.firstEnemyPokemon().health().toLocaleString('en-US') + ' / ' + GymBattle.firstEnemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
+                </div>
+            </div>
+        <!-- /ko -->
+
+        <!-- ko if: GymBattle.gym.optionalArgs.isDoubleBattle -->
+            <div class="multi-battle-pokemon-list" data-bind="foreach: GymBattle.enemyPokemonView">
+                <div class="multi-battle-pokemon-slot" data-bind="css: { clickable: $data }, click: function() { if ($data) { GymBattle.clickAttack($data); } }, clickBubble: false">
+                    <knockout data-bind="if: $data">
+                        <div class="multi-battle-pokemon-sprite">
+                            <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': $data } }">Pokémon sprite</knockout>
+                        </div>
+                    </knockout>
+                </div>
+            </div>
+
+            <div class="multi-battle-hitpoints-list" data-bind="foreach: GymBattle.enemyPokemonView">
+                <div class="multi-battle-hitpoints-slot">
+                    <knockout data-bind="if: $data">
+                        <div class="progress multi-battle-hitpoints">
+                            <div class="progress-bar bg-danger" role="progressbar"
+                                    data-bind="attr:{ style: 'width:' + $data.healthPercentage() + '%' }"
+                                    aria-valuemin="0" aria-valuemax="100">
+                                <span data-bind="text: $data.health().toLocaleString('en-US') + ' / ' + $data.maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
+                            </div>
+                        </div>
+                    </knockout>
+                </div>
+            </div>
+        <!-- /ko -->
 
         <button class="btn btn-sm btn-danger stop-auto" data-bind="visible: GymRunner.autoRestart()"
                 onclick="GymRunner.autoRestart(false)">
@@ -65,7 +101,7 @@
               </tr>
               <tr>
                 <td width="50%">
-                    <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
+                    <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': GymBattle.firstEnemyPokemon(), 'battle': GymBattle } }"></knockout>
                 </td>
                 <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
                     <span style="display: inline;">Click Attack:

@@ -20,6 +20,7 @@ interface optionalGymArgs {
     battleBackground?: GameConstants.BattleBackground,
     hideUntilUnlocked?: boolean,
     visibleRequirement?: Requirement,
+    isDoubleBattle?: boolean,
 }
 
 /**

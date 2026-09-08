@@ -1,8 +1,8 @@
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState == GameConstants.GameState.battleFrontier">
-    <div class="col no-gutters" data-bind="if: BattleFrontierBattle.enemyPokemon" style="height: 280px; display: block;">
+    <div class="col no-gutters" data-bind="if: BattleFrontierBattle.firstEnemyPokemon()" style="height: 280px; display: block;">
         <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
             <knockout>
-                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': BattleFrontierBattle.enemyPokemon() } }">Pokémon name</knockout>
+                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': BattleFrontierBattle.firstEnemyPokemon() } }">Pokémon name</knockout>
             </knockout>
 
             <knockout class="right" data-bind="html: BattleFrontierRunner.pokemonLeftImages">
@@ -20,13 +20,13 @@
         </h2>
 
         <div>
-            <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': BattleFrontierBattle.enemyPokemon() } }">Pokémon sprite</knockout>
+            <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': BattleFrontierBattle.firstEnemyPokemon() } }">Pokémon sprite</knockout>
         </div>
         <div class="progress hitpoints trainerhitpoints">
             <div class="progress-bar bg-danger" role="progressbar"
-                    data-bind="attr:{ style: 'width:' + BattleFrontierBattle.enemyPokemon().healthPercentage() + '%' }"
+                    data-bind="attr:{ style: 'width:' + BattleFrontierBattle.firstEnemyPokemon().healthPercentage() + '%' }"
                     aria-valuemin="0" aria-valuemax="100">
-                    <span data-bind="text: BattleFrontierBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + BattleFrontierBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
+                    <span data-bind="text: BattleFrontierBattle.firstEnemyPokemon().health().toLocaleString('en-US') + ' / ' + BattleFrontierBattle.firstEnemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
             </div>
         </div>
         <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
@@ -45,21 +45,12 @@
                                 true,
                                 GameConstants.Region.none,
                                 false,
-                                false, 
+                                false,
                                 WeatherType.Clear,
                             ).toLocaleString('en-US'),
                             tooltip: {
-                                title: Battle.enemyPokemon()
-                                    ? `${App.game.party.calculatePokemonAttack(
-                                        Battle.enemyPokemon().type1,
-                                        Battle.enemyPokemon().type2,
-                                        true,
-                                        GameConstants.Region.none,
-                                        false,
-                                        false, 
-                                        WeatherType.Clear,
-                                    ).toLocaleString('en-US')} against ${pokemonMap[Battle.enemyPokemon().name].type.map(t => PokemonType[t]).join('&nbsp;/&nbsp;')}`
-                                    : '',
+                                html: true,
+                                title: Battle.pokemonAttackTooltip(BattleFrontierBattle),
                                 trigger: 'hover'}">
                             </span>
                         </span>

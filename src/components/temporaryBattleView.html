@@ -1,8 +1,16 @@
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.temporaryBattle">
-    <div class="col no-gutters clickable" data-bind="click: function() {TemporaryBattleBattle.clickAttack()}" style="height: 280px; display: block;">
+    <div class="col no-gutters" data-bind="css: { clickable: !TemporaryBattleBattle.isDoubleBattle(), 'multi-battle': TemporaryBattleBattle.isDoubleBattle() }, click: function() { if (!TemporaryBattleBattle.isDoubleBattle()) { TemporaryBattleBattle.clickAttack(); } }" style="height: 280px; display: block;">
         <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
-            <knockout>
-                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': TemporaryBattleBattle.enemyPokemon() } }">Pokémon name</knockout>
+            <knockout data-bind="ifnot: TemporaryBattleBattle.isDoubleBattle()">
+                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': TemporaryBattleBattle.firstEnemyPokemon() } }">PokÃƒÂ©mon name</knockout>
+            </knockout>
+            <knockout data-bind="if: TemporaryBattleBattle.isDoubleBattle()">
+                <span class="multi-battle-title" data-bind="foreach: TemporaryBattleBattle.enemyPokemonView">
+                    <knockout data-bind="if: $data">
+                        <span data-bind="if: $index() > 0">&nbsp;&&nbsp;</span>
+                        <span data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': $data } }">PokÃƒÂ©mon name</span>
+                    </knockout>
+                </span>
             </knockout>
 
             <knockout class="right">
@@ -36,26 +44,66 @@
             <img data-bind="attr:{ src: TemporaryBattleRunner.battleObservable().getImage() }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
         </div>
 
-        <div data-bind="ifnot: TemporaryBattleBattle.catching">
-            <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': TemporaryBattleBattle.enemyPokemon() } }">Pokémon sprite</knockout>
-        </div>
-
-        <div data-bind="if: TemporaryBattleBattle.catching" class="catchChance">
-            <img class="pokeball-animated"
-                 data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[TemporaryBattleBattle.pokeball()] + '.svg' }"
-                 src=""/>
-            <br>
-            Catch Chance:
-            <knockout data-bind="text: Math.floor(TemporaryBattleBattle.catchRateActual()) + '%'">Catch Rate</knockout>
-        </div>
-
-        <div class="progress hitpoints trainerhitpoints">
-            <div class="progress-bar bg-danger" role="progressbar"
-                    data-bind="attr:{ style: 'width:' + TemporaryBattleBattle.enemyPokemon().healthPercentage() + '%' }"
-                    aria-valuemin="0" aria-valuemax="100">
-                <span data-bind="text: TemporaryBattleBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + TemporaryBattleBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
+        <!-- ko ifnot: TemporaryBattleBattle.isDoubleBattle() -->
+            <div data-bind="ifnot: TemporaryBattleBattle.catching">
+                <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': TemporaryBattleBattle.firstEnemyPokemon() } }">PokÃƒÂ©mon sprite</knockout>
             </div>
-        </div>
+
+            <div data-bind="if: TemporaryBattleBattle.catching" class="catchChance">
+                <img class="pokeball-animated"
+                     data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[TemporaryBattleBattle.pokeball()] + '.svg' }"
+                     src=""/>
+                <br>
+                Catch Chance:
+                <knockout data-bind="text: Math.floor(TemporaryBattleBattle.catchRateActual()) + '%'">Catch Rate</knockout>
+            </div>
+
+            <div class="progress hitpoints trainerhitpoints">
+                <div class="progress-bar bg-danger" role="progressbar"
+                        data-bind="attr:{ style: 'width:' + TemporaryBattleBattle.firstEnemyPokemon().healthPercentage() + '%' }"
+                        aria-valuemin="0" aria-valuemax="100">
+                    <span data-bind="text: TemporaryBattleBattle.firstEnemyPokemon().health().toLocaleString('en-US') + ' / ' + TemporaryBattleBattle.firstEnemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
+                </div>
+            </div>
+        <!-- /ko -->
+
+        <!-- ko if: TemporaryBattleBattle.isDoubleBattle() -->
+            <div class="multi-battle-pokemon-list" data-bind="foreach: TemporaryBattleBattle.enemyPokemonView">
+                <div class="multi-battle-pokemon-slot" data-bind="css: { clickable: $data && $data.isAlive() && !TemporaryBattleBattle.isCatchingPokemon($data) }, click: function() { if ($data && $data.isAlive() && !TemporaryBattleBattle.isCatchingPokemon($data)) { TemporaryBattleBattle.clickAttack($data); } }, clickBubble: false">
+                    <knockout data-bind="if: $data">
+                        <knockout data-bind="if: TemporaryBattleBattle.isCatchingPokemon($data)">
+                            <div class="catchChance" data-bind="with: TemporaryBattleBattle.getCatchState($data)">
+                                <img class="pokeball-animated"
+                                     data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.pokeball] + '.svg' }"
+                                     src=""/>
+                                <br>
+                                Catch Chance:
+                                <knockout data-bind="text: Math.floor($data.catchRateActual) + '%'">Catch Rate</knockout>
+                            </div>
+                        </knockout>
+                        <knockout data-bind="ifnot: TemporaryBattleBattle.isCatchingPokemon($data)">
+                            <div class="multi-battle-pokemon-sprite">
+                                <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': $data } }">PokÃƒÂ©mon sprite</knockout>
+                            </div>
+                        </knockout>
+                    </knockout>
+                </div>
+            </div>
+
+            <div class="multi-battle-hitpoints-list" data-bind="foreach: TemporaryBattleBattle.enemyPokemonView">
+                <div class="multi-battle-hitpoints-slot">
+                    <knockout data-bind="if: $data">
+                        <div class="progress multi-battle-hitpoints">
+                            <div class="progress-bar bg-danger" role="progressbar"
+                                    data-bind="attr:{ style: 'width:' + $data.healthPercentage() + '%' }"
+                                    aria-valuemin="0" aria-valuemax="100">
+                                <span data-bind="text: $data.health().toLocaleString('en-US') + ' / ' + $data.maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
+                            </div>
+                        </div>
+                    </knockout>
+                </div>
+            </div>
+        <!-- /ko -->
         <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
             <knockout>
                 <knockout data-bind="text: TemporaryBattleBattle.battle.getDisplayName()"></knockout>
@@ -63,7 +111,7 @@
             <table width="100%">
                 <tr>
                     <td width="50%">
-                        <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
+                        <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': TemporaryBattleBattle.firstEnemyPokemon(), 'battle': TemporaryBattleBattle } }"></knockout>
                     </td>
                     <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
                         <span style="display: inline;">Click Attack:

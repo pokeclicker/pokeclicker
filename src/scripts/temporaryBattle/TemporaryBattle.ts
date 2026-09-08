@@ -10,6 +10,7 @@ type TemporaryBattleOptionalArgument = {
     environment?: GameConstants.Environment[],
     battleBackground?: GameConstants.BattleBackground,
     resetDaily?: boolean,
+    isDoubleBattle?: boolean,
     finalPokemonImage?: string // trainer image when on final pokemon
 };
 
