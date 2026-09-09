@@ -75,6 +75,7 @@ class SafariPokemon implements PokemonInterface {
         if (this.eatingBait === BaitType.Nanab) {
             catchF *= 1.5 + this.levelModifier;
         }
+        catchF *= 10;
 
         return Math.min(100, catchF);
     }

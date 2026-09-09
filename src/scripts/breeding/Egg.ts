@@ -77,7 +77,8 @@ class Egg implements Saveable {
     }
 
     updateShinyChance(steps: number, multiplier) {
-        const stepsChance = GameConstants.SHINY_CHANCE_BREEDING / multiplier.getBonus('shiny');
+        //const stepsChance = GameConstants.SHINY_CHANCE_BREEDING / multiplier.getBonus('shiny');
+        const stepsChance = 256 / multiplier.getBonus('shiny');
         const newChance = ((this.shinyChance * this.steps()) + (stepsChance * steps)) / (this.steps() + steps);
 
         this.shinyChance = newChance;

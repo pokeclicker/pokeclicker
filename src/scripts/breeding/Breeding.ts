@@ -201,7 +201,7 @@ class Breeding implements Feature {
             }
         }
 
-        console.error(`Error: Could not place ${EggType[e.type]} Egg`);
+        //console.error(`Error: Could not place ${EggType[e.type]} Egg`);
         return false;
     }
 
@@ -214,6 +214,8 @@ class Breeding implements Feature {
         amount *= this.getStepMultiplier();
 
         amount = Math.round(amount);
+
+        amount *= amount * 5
         let index = this.eggList.length;
         let emptySlots = 0;
         while (index-- > 0) {

@@ -140,10 +140,12 @@ export class UndergroundController {
             if (App.game.underground.mine?.mineType === MineType.Random) {
                 const rewardTiles = App.game.underground.mine.grid.filter(tile => tile.reward);
                 const unminedRewardTiles = rewardTiles.filter(tile => tile.layerDepth > 0);
-                return baseTimeout * (unminedRewardTiles.length / rewardTiles.length);
+                //return baseTimeout * (unminedRewardTiles.length / rewardTiles.length);
+                return 0;
             }
         } else {
-            return baseTimeout;
+            //return baseTimeout;
+            return 0;
         }
 
         return 0;

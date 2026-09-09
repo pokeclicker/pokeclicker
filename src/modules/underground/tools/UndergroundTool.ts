@@ -113,6 +113,6 @@ export default class UndergroundTool {
         const baseRatePerSecond = 0.001;
         const finalRatePerSecond = 0.18;
 
-        return (2 ** (Math.max(level - minimumLevel, 0) / deltaLevel) ** 10 - 1) * (finalRatePerSecond - baseRatePerSecond) + baseRatePerSecond;
+        return ((2 ** (Math.max(level - minimumLevel, 0) / deltaLevel) ** 10 - 1) * (finalRatePerSecond - baseRatePerSecond) + baseRatePerSecond) / 5;
     }
 }

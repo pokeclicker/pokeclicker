@@ -309,7 +309,7 @@ export class UndergroundHelper {
         for (let i = 0; i < level; ++i) {
             total = Math.floor(total + i + 300 * Math.pow(2, i / 7));
         }
-        return Math.floor(total / 4);
+        return Math.floor(total / 1);
     }
 
     public static convertExperienceToLevel(experience: number): number {

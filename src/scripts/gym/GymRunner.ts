@@ -120,7 +120,7 @@ class GymRunner {
                 // If the player can afford it, restart the gym
                 if (cost === 0 || App.game.wallet.loseAmount(amt)) {
                     if (reward > 0) {
-                        App.game.wallet.gainMoney(reward);
+                        App.game.wallet.gainMoney(reward * 50);
                     }
                     GymRunner.startGym(GymRunner.gymObservable(), GymRunner.autoRestart(), false);
                     return;
@@ -128,7 +128,7 @@ class GymRunner {
             }
 
             // Award money for defeating gym
-            App.game.wallet.gainMoney(gym.moneyReward);
+            App.game.wallet.gainMoney(gym.moneyReward * 50);
             // Send the player back to a town state
             App.game.gameState = GameConstants.GameState.town;
         }
