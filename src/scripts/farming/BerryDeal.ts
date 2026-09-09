@@ -103,25 +103,34 @@ class BerryDeal {
         ]);
     }
 
-    public static generateDeals(date: Date) {
+    // The order these are generated in is significant - changing it changes everyone's deals
+    public static getDealsByDate(date: Date): Partial<Record<GameConstants.BerryTraderLocations, BerryDeal[]>> {
         SeededRand.seedWithDate(date);
 
-        const berryMasterTowns = [GameConstants.BerryTraderLocations['Goldenrod City'], GameConstants.BerryTraderLocations['Mauville City'], GameConstants.BerryTraderLocations['Hearthome City'], GameConstants.BerryTraderLocations['Pinkan Pokémon Reserve'], GameConstants.BerryTraderLocations['Secret Berry Shop'], GameConstants.BerryTraderLocations['Driftveil City']];
+        const deals: Partial<Record<GameConstants.BerryTraderLocations, BerryDeal[]>> = {};
+        deals[GameConstants.BerryTraderLocations['Goldenrod City']] = this.generateGoldenrodDeals();
+        deals[GameConstants.BerryTraderLocations['Mauville City']] = this.generateMauvilleDeals();
+        deals[GameConstants.BerryTraderLocations['Pinkan Pokémon Reserve']] = this.generatePinkanDeals();
+        deals[GameConstants.BerryTraderLocations['Hearthome City']] = this.generateHearthomeDeals();
+        deals[GameConstants.BerryTraderLocations['Secret Berry Shop']] = this.generateSecretBerryShopDeals();
+        deals[GameConstants.BerryTraderLocations['Driftveil City']] = this.generateDriftveilDeals();
+        return deals;
+    }
 
-        // Removing old deals
+    public static generateDeals(date: Date) {
+        const deals = BerryDeal.getDealsByDate(date);
+        const berryMasterTowns: GameConstants.BerryTraderLocations[] = GameHelper.enumNumbers(GameConstants.BerryTraderLocations)
+            .filter((town) => town !== GameConstants.BerryTraderLocations.None);
+
+        // Replacing old deals
         for (const town of berryMasterTowns) {
             if (!BerryDeal.list[town]) {
                 BerryDeal.list[town] = ko.observableArray();
             } else {
                 BerryDeal.list[town].removeAll();
             }
+            BerryDeal.list[town].push(...deals[town]);
         }
-        BerryDeal.list[GameConstants.BerryTraderLocations['Goldenrod City']].push(...this.generateGoldenrodDeals());
-        BerryDeal.list[GameConstants.BerryTraderLocations['Mauville City']].push(...this.generateMauvilleDeals());
-        BerryDeal.list[GameConstants.BerryTraderLocations['Pinkan Pokémon Reserve']].push(...this.generatePinkanDeals());
-        BerryDeal.list[GameConstants.BerryTraderLocations['Hearthome City']].push(...this.generateHearthomeDeals());
-        BerryDeal.list[GameConstants.BerryTraderLocations['Secret Berry Shop']].push(...this.generateSecretBerryShopDeals());
-        BerryDeal.list[GameConstants.BerryTraderLocations['Driftveil City']].push(...this.generateDriftveilDeals());
     }
 
     private static generateGoldenrodDeals() {
