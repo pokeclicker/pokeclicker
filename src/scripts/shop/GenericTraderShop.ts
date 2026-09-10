@@ -5,9 +5,10 @@ class GenericTraderShop extends Shop {
         public traderID: GenericTraderShopIdentifier,
         public traderName: string = 'Trader',
         public hidePlayerInventory: boolean = false,
-        requirements: (Requirement | OneFromManyRequirement)[] = []
+        requirements: (Requirement | OneFromManyRequirement)[] = [],
+        hideBeforeUnlocked = false
     ) {
-        super([], traderName, requirements);
+        super([], traderName, requirements, hideBeforeUnlocked);
     }
 
     public onclick() {
