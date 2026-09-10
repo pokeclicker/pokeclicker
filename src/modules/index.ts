@@ -1,3 +1,7 @@
+// Set this flag first thing so it will affect ALL observables
+// Observables inherit the global value only at the time they're created
+ko.options.deferUpdates = true;
+
 // Get our polyfills loaded first
 import './polyfill';
 
