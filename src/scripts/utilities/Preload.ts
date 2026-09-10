@@ -70,14 +70,11 @@ class Preload {
                     // Preload.loadUndergroundItems(),
                     // Preload.loadMap(),
                     // Preload.loadPokemon(),
-                    Preload.minimumTime(),
+                    new Promise<void>(resolve => setTimeout(resolve, 0)),
                 ]).then(() => {
                     clearTimeout(forceLoad);
                     console.log(`[${GameConstants.formatDate(new Date())}] %cPreloaded images`, 'color:#2ecc71;font-weight:900;');
-                    // Give the progress bar a little bit of time to finish the animation
-                    setTimeout(() => {
-                        resolve();
-                    }, 600);
+                    resolve();
                 }).catch((reason => {
                     console.log(`[${GameConstants.formatDate(new Date())}] %cPreload images failed..`, 'color:#c0392b;font-weight:900;');
                     console.error('Preload images failed:', reason);
@@ -161,14 +158,6 @@ class Preload {
             }));
         });
         return Promise.all(p);
-    }
-
-    private static minimumTime() {
-        return new Promise<void>(resolve => {
-            setTimeout(() => {
-                resolve();
-            }, GameConstants.MIN_LOAD_TIME);
-        });
     }
 
     private static loadMap() {
