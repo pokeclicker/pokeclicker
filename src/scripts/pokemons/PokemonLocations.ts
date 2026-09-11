@@ -377,22 +377,22 @@ class PokemonLocations {
         return cacheLine[pokemonName];
     }
 
-    public static getPokemonWandering(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
+    public static getPokemonWandering(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<object> {
         if (maxRegion !== GameConstants.Region.none && maxRegion < pokemonMap[pokemonName].nativeRegion) {
             return [];
         }
-        const cache = this.getCache<string[]>(this.getPokemonWandering.name);
+        const cache = this.getCache<object[]>(this.getPokemonWandering.name);
         if (cache[pokemonName]) {
             return cache[pokemonName];
         }
-        const cacheLine = this.initCacheLine(cache, Array<string>);
-        Berry.baseWander.forEach(pokemon => {
-            cacheLine[pokemon] = ['Always'];
+        const cacheLine = this.initCacheLine(cache, Array<object>);
+        Berry.baseWander.forEach(group => {
+            group.pokemon.forEach(pokemon => cacheLine[pokemon] = [{ berry: 'Always' }]);
         });
         BerryList.forEach((berry) => {
-            berry.wander.forEach(pokemon => {
-                if (cacheLine[pokemon][0] !== 'Always') {
-                    cacheLine[pokemon].push(BerryType[berry.type]);
+            new Set(berry.wander.flatMap(group => group.pokemon)).forEach((pokemon) => {
+                if (!Berry.isBaseWanderer(pokemon)) {
+                    cacheLine[pokemon].push({ berry: BerryType[berry.type], requirements: berry.getWandererRequirement(pokemon) });
                 }
             });
         });

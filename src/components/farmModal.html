@@ -354,7 +354,7 @@
                                         </tbody>
                                     </table>
                                     <!-- ko let: {
-                                        berrySpecificWanderers: BerryList[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[BerryList[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION)
+                                        berrySpecificWanderers: FarmController.getWandererPokemon(FarmController.getBerrySpecificWanderers($data, true)).sort((a, b) => pokemonMap[a].id - pokemonMap[b].id)
                                     } -->
                                         <!-- ko if: berrySpecificWanderers.length -->
                                         <table class="table table-striped table-hover table-bordered table-sm m-0">
@@ -367,7 +367,7 @@
                                                 <tr>
                                                     <td class="p-0">
                                                         <ul class="list-inline wanderPokemonList" data-bind="foreach: berrySpecificWanderers">
-                                                            <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
+                                                            <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: { pokemon: $data, berry: +$parent }}"></li>
                                                         </ul>
                                                     </td>
                                                 </tr>
