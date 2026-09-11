@@ -12,7 +12,7 @@ export default class ObtainedPokemonRequirement extends Requirement {
     }
 
     public hint(): string {
-		const name = App.translation.get(this.pokemon, 'pokemon')();
+        const name = App.translation.get(this.pokemon, 'pokemon')();
         return this.option === AchievementOption.more
             ? `${name} needs to be owned.`
             : `${name} cannot be owned yet.`;
