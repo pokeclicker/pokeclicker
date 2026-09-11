@@ -1,7 +1,6 @@
 import { AchievementOption } from '../GameConstants';
 import Requirement from './Requirement';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
-import { displayName } from '../pokemons/PokemonHelper';
 
 export default class ObtainedPokemonRequirement extends Requirement {
     constructor(public pokemon: PokemonNameType, uncaught = false) {
@@ -13,8 +12,9 @@ export default class ObtainedPokemonRequirement extends Requirement {
     }
 
     public hint(): string {
+		const name = App.translation.get(this.pokemon, 'pokemon')();
         return this.option === AchievementOption.more
-            ? `${displayName(this.pokemon)} needs to be owned.`
-            : `${displayName(this.pokemon)} cannot be owned yet.`;
+            ? `${name} needs to be owned.`
+            : `${name} cannot be owned yet.`;
     }
 }
