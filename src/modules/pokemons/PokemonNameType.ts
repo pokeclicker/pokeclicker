@@ -207,6 +207,7 @@ export type PokemonNameType
     | 'Galarian Slowbro'
     | 'Magnemite'
     | 'Magneton'
+    | 'Magneton (Incomplete)'
     | 'Farfetch\'d'
     | 'Galarian Farfetch\'d'
     | 'Doduo'
