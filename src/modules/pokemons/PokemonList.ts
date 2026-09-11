@@ -4347,7 +4347,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 66,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Voltorb', 'Electrode', 30)],
+        'evolutions': [
+            LevelEvolution('Voltorb', 'Electrode', 30),
+            DummyEvolution('Voltorb', 'Electrode (Melon)'),        
+        ],
         'base': {
             'hitpoints': 40,
             'attack': 30,
@@ -4427,6 +4430,26 @@ export const pokemonList = createPokemonArray(
         'id': 101.02,
         'name': 'Noble Electrode',
         'nativeRegion': Region.hisui,
+        'catchRate': 60,
+        'type': [PokemonType.Electric, PokemonType.Grass],
+        'levelType': LevelType.mediumfast,
+        'exp': 172,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 60,
+            'attack': 50,
+            'specialAttack': 80,
+            'defense': 70,
+            'specialDefense': 80,
+            'speed': 150,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 101.03,
+        'name': 'Electrode (Melon)',
         'catchRate': 60,
         'type': [PokemonType.Electric, PokemonType.Grass],
         'levelType': LevelType.mediumfast,

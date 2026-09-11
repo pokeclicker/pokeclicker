@@ -1145,6 +1145,7 @@ export enum PokemonItemType {
     'Pinkan Poliwhirl',
     'Pinkan Geodude',
     'Pinkan Dodrio',
+    'Electrode (Melon)',
     'Lickitung',
     'Pinkan Weezing',
     'Mr. Mime',

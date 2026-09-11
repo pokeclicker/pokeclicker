@@ -182,6 +182,14 @@ export const SpriteCredits: Credit[] = [
         // Notes: No notes about credit, have messaged asking for permission, awaiting confirmation
     },
     {
+        name: 'clownfrog',
+        link: 'https://discordapp.com/users/268550874089914368/',
+        resources: [
+            'Electrode (Melon)',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'CorgiOnNeptune',
         link: 'https://linktr.ee/CorgiOnNeptune',
         resources: [
@@ -305,6 +313,7 @@ export const SpriteCredits: Credit[] = [
             'Dungeon Chest Tiers',
             'Exeggcute (Single)',
             'Exposed Applin + Overworld',
+            'Electrode (Melon) shop image',
             'Flabébé Overworld (All but Red)',
             'Galar fossils items',
             'Galarian Articuno overworld image',
