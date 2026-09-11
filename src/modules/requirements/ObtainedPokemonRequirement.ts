@@ -12,8 +12,9 @@ export default class ObtainedPokemonRequirement extends Requirement {
     }
 
     public hint(): string {
+        const name = App.translation.get(this.pokemon, 'pokemon')();
         return this.option === AchievementOption.more
-            ? `${this.pokemon} needs to be owned.`
-            : `${this.pokemon} cannot be owned yet.`;
+            ? `${name} needs to be owned.`
+            : `${name} cannot be owned yet.`;
     }
 }
