@@ -1553,8 +1553,9 @@ export const RegionGyms = [
     OrreGyms,
 ];
 
+const gymIndexes = new Map<string, number>(RegionGyms.flat().map((g, index) => [g, index]));
 export function getGymIndex(gym: string): number {
-    return RegionGyms.flat().findIndex((g) => g === gym);
+    return gymIndexes.get(gym) ?? -1;
 }
 
 export function getGymRegion(gym: string): Region {
@@ -1837,8 +1838,9 @@ export const RegionDungeons = [
     PaldeaDungeons,
 ];
 
+const dungeonIndexes = new Map<string, number>(RegionDungeons.flat().map((d, index) => [d, index]));
 export function getDungeonIndex(dungeon: string): number {
-    return RegionDungeons.flat().findIndex((d) => d === dungeon);
+    return dungeonIndexes.get(dungeon) ?? -1;
 }
 
 export function getDungeonRegion(dungeon: string): Region {

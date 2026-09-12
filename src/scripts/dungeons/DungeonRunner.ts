@@ -359,10 +359,7 @@ class DungeonRunner {
     }
 
     public static isAchievementsComplete(dungeon: Dungeon) {
-        const dungeonIndex = GameConstants.getDungeonIndex(dungeon.name);
-        return AchievementHandler.achievementList.every(achievement => {
-            return !(achievement.property instanceof ClearDungeonRequirement && achievement.property.dungeonIndex === dungeonIndex && !achievement.isCompleted());
-        });
+        return AchievementHandler.getDungeonAchievements(GameConstants.getDungeonIndex(dungeon.name)).every(achievement => achievement.isCompleted());
     }
 
     public static canStartDungeon(dungeon: Dungeon = DungeonRunner.dungeon) {

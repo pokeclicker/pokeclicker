@@ -139,8 +139,7 @@ class AchievementHandler {
 
     public static toJSON(): string[] {
         // Saves only achievements which have already been completed but currently don't have their requirements met, or that have the persist flag set
-        const storage = AchievementHandler.achievementList.filter(a => a.unlocked() && (a.persist || !a.property.isCompleted())).map(a => a.name);
-        return storage;
+        return AchievementHandler.achievementList.filter(a => a.unlocked() && (a.persist || !a.property.isCompleted())).map(a => a.name);
     }
 
     public static fromJSON(unlockedAchievements: string[]) {
@@ -181,7 +180,7 @@ class AchievementHandler {
     public static calculateBonus(): void {
         AchievementHandler.achievementList.forEach((achievement) => {
             if (!achievement.achievable()) {
-                return 0;
+                return;
             }
 
             if (achievement.category.achievementBonus == 0) {
@@ -192,10 +191,21 @@ class AchievementHandler {
         });
     }
 
+    private static sumBonusWeightByCategory(include: (achievement: Achievement) => boolean): Map<AchievementCategory, number> {
+        const weights = new Map<AchievementCategory, number>();
+        AchievementHandler.achievementList.forEach(achievement => {
+            if (include(achievement)) {
+                weights.set(achievement.category, (weights.get(achievement.category) ?? 0) + achievement.bonusWeight);
+            }
+        });
+        return weights;
+    }
+
     // Causes achievement requirements to be evaulated, avoid calling before save data is loaded.
     public static calculateMaxBonus(): void {
+        const weights = AchievementHandler.sumBonusWeightByCategory(a => a.achievable());
         AchievementHandler.getAchievementCategories().forEach(category => {
-            category.totalWeight = AchievementHandler.achievementList.filter(a => a.category == category && a.achievable()).reduce((sum, a) => sum + a.bonusWeight, 0);
+            category.totalWeight = weights.get(category) ?? 0;
         });
         AchievementHandler.calculateBonus();
         AchievementHandler.updateAchievementBonus();
@@ -206,11 +216,10 @@ class AchievementHandler {
     }
 
     public static updateAchievementBonus() {
+        const weights = AchievementHandler.sumBonusWeightByCategory(a => a.isCompleted());
         let sum = 0;
         AchievementHandler.getAchievementCategories().forEach(category => {
-            const total = AchievementHandler.achievementList.filter(a => {
-                return a.category == category && a.isCompleted();
-            }).reduce((sum, a) => sum + a.bonusWeight, 0) / category.totalWeight * category.achievementBonus / 100;
+            const total = (weights.get(category) ?? 0) / category.totalWeight * category.achievementBonus / 100;
             if (!isNaN(total)) {
                 sum += total;
             }
@@ -222,8 +231,55 @@ class AchievementHandler {
         return `${AchievementHandler.achievementBonus().toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     }
 
+    private static _achievementsByName: Map<string, Achievement> = new Map();
+    private static _routeAchievements: Map<GameConstants.Region, Map<number, Achievement[]>> = new Map();
+    private static _gymAchievements: Map<number, Achievement[]> = new Map();
+    private static _dungeonAchievements: Map<number, Achievement[]> = new Map();
+
+    private static buildMaps() {
+        const addToBucket = <T>(map: Map<T, Achievement[]>, key: T, achievement: Achievement) => {
+            const bucket = map.get(key);
+            if (bucket) {
+                bucket.push(achievement);
+            } else {
+                map.set(key, [achievement]);
+            }
+        };
+
+        AchievementHandler.achievementList.forEach((achievement) => {
+            AchievementHandler._achievementsByName.set(achievement.name, achievement);
+
+            const { property } = achievement;
+            if (property instanceof RouteKillRequirement) {
+                let routes = AchievementHandler._routeAchievements.get(property.region);
+                if (!routes) {
+                    routes = new Map();
+                    AchievementHandler._routeAchievements.set(property.region, routes);
+                }
+                addToBucket(routes, property.route, achievement);
+            } else if (property instanceof ClearGymRequirement && !(achievement instanceof SecretAchievement)) {
+                addToBucket(AchievementHandler._gymAchievements, property.gymIndex, achievement);
+            } else if (property instanceof ClearDungeonRequirement) {
+                addToBucket(AchievementHandler._dungeonAchievements, property.dungeonIndex, achievement);
+            }
+        });
+    }
+
     public static findByName(name: string): Achievement {
-        return AchievementHandler.achievementList.find((achievement) => achievement.name === name && achievement.achievable());
+        const achievement = AchievementHandler._achievementsByName.get(name);
+        return achievement?.achievable() ? achievement : undefined;
+    }
+
+    public static getRouteAchievements(route: number, region: GameConstants.Region): Achievement[] {
+        return AchievementHandler._routeAchievements.get(region)?.get(route) ?? [];
+    }
+
+    public static getGymAchievements(gymIndex: number): Achievement[] {
+        return AchievementHandler._gymAchievements.get(gymIndex) ?? [];
+    }
+
+    public static getDungeonAchievements(dungeonIndex: number): Achievement[] {
+        return AchievementHandler._dungeonAchievements.get(dungeonIndex) ?? [];
     }
 
     private static _achievementCategories : AchievementCategory[]
@@ -537,6 +593,30 @@ class AchievementHandler {
             });
         };
 
+        const addDungeonAchievements = (dungeon: string, category: GameConstants.Region | GameConstants.ExtraAchievementCategories) => {
+            const dungeonIndex = GameConstants.getDungeonIndex(dungeon);
+            if (dungeonIndex === -1) {
+                throw new Error(`Invalid dungeon: ${dungeon}. Cannot add achievements.`);
+            }
+            AchievementHandler.addAchievement(`${dungeon} Explorer`, `Clear ${dungeon} 10 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], dungeonIndex), 0.8, category);
+            AchievementHandler.addAchievement(`${dungeon} Expert`, `Clear ${dungeon} 100 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], dungeonIndex), 1.2, category);
+            AchievementHandler.addAchievement(`${dungeon} Hermit`, `Clear ${dungeon} 250 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], dungeonIndex), 1.6, category);
+            AchievementHandler.addAchievement(`${dungeon} Dweller`, `Clear ${dungeon} 500 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[3], dungeonIndex), 2.4, category);
+        };
+
+        const getAchievementCategory = (region: GameConstants.Region, subRegion: number): GameConstants.Region | GameConstants.ExtraAchievementCategories => {
+            if (region === GameConstants.Region.kanto && (subRegion === GameConstants.KantoSubRegions.Sevii123 || subRegion === GameConstants.KantoSubRegions.Sevii4567)) {
+                return GameConstants.ExtraAchievementCategories.sevii;
+            }
+            if (region === GameConstants.Region.hoenn && subRegion === GameConstants.HoennSubRegions.Orre) {
+                return GameConstants.ExtraAchievementCategories.orre;
+            }
+            if (region === GameConstants.Region.alola && subRegion === GameConstants.AlolaSubRegions.MagikarpJump) {
+                return GameConstants.ExtraAchievementCategories.magikarpJump;
+            }
+            return region;
+        };
+
         GameHelper.enumNumbers(GameConstants.Region).filter(r => r != GameConstants.Region.none && r <= GameConstants.MAX_AVAILABLE_REGION).forEach(region => {
             // Routes
             Routes.getRoutesByRegion(region).forEach(route => {
@@ -544,59 +624,42 @@ class AchievementHandler {
                     return;
                 }
 
-                let category = region;
-                // Split bigger subregions into their own achievement pool
-                if (region == GameConstants.Region.kanto && (route.subRegion == GameConstants.KantoSubRegions.Sevii123 || route.subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
-                    category = GameConstants.ExtraAchievementCategories.sevii;
-                }
-                if (region == GameConstants.Region.hoenn && route.subRegion == GameConstants.HoennSubRegions.Orre) {
-                    category = GameConstants.ExtraAchievementCategories.orre;
-                }
-                if (region == GameConstants.Region.alola && route.subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
-                    category = GameConstants.ExtraAchievementCategories.magikarpJump;
-                }
+                const category = getAchievementCategory(region, route.subRegion);
                 const routeName = Routes.getName(route.number, region, true);
                 AchievementHandler.addAchievement(`${route.routeName} Traveler`, `Defeat 100 Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[0], region, route.number), 1, category);
                 AchievementHandler.addAchievement(`${route.routeName} Explorer`, `Defeat 1,000 Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[1], region, route.number), 2, category);
                 AchievementHandler.addAchievement(`${route.routeName} Conqueror`, `Defeat 10,000 Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[2], region, route.number), 3, category);
             });
+
             // Gyms
             if (GameConstants.RegionGyms[region]) {
                 addGymAchievements(GameConstants.RegionGyms[region], region);
             }
+
             // Dungeons
             GameConstants.RegionDungeons[region]?.forEach(dungeon => {
                 if (TownList[dungeon].requirements.some((req) => req instanceof DevelopmentRequirement) || dungeonList[dungeon].optionalParameters.achievement === false) {
                     return;
                 }
-                let category = region;
-                // Split bigger subregions into their own achievement pool
-                if (region == GameConstants.Region.kanto && (TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii123 || TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
-                    category = GameConstants.ExtraAchievementCategories.sevii;
-                }
-                if (region == GameConstants.Region.hoenn && TownList[dungeon].subRegion == GameConstants.HoennSubRegions.Orre) {
-                    category = GameConstants.ExtraAchievementCategories.orre;
-                }
-                if (region == GameConstants.Region.alola && TownList[dungeon].subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
-                    category = GameConstants.ExtraAchievementCategories.magikarpJump;
-                }
-                AchievementHandler.addAchievement(`${dungeon} Explorer`, `Clear ${dungeon} 10 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex(dungeon)), 0.8, category);
-                AchievementHandler.addAchievement(`${dungeon} Expert`, `Clear ${dungeon} 100 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex(dungeon)), 1.2, category);
-                AchievementHandler.addAchievement(`${dungeon} Hermit`, `Clear ${dungeon} 250 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], GameConstants.getDungeonIndex(dungeon)), 1.6, category);
-                AchievementHandler.addAchievement(`${dungeon} Dweller`, `Clear ${dungeon} 500 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[3], GameConstants.getDungeonIndex(dungeon)), 2.4, category);
+
+                addDungeonAchievements(dungeon, getAchievementCategory(region, TownList[dungeon].subRegion));
             });
+
             // Unique Pokémon
-            const amt10 = Math.floor(PokemonHelper.calcUniquePokemonsByRegion(region) * .1);
-            const amt50 = Math.floor(PokemonHelper.calcUniquePokemonsByRegion(region) * .5);
-            const amtAll = Math.floor(PokemonHelper.calcUniquePokemonsByRegion(region));
+            const regionName = GameConstants.camelCaseToString(GameConstants.Region[region]);
+            const amtAll = PokemonHelper.calcUniquePokemonsByRegion(region);
+            const amt10 = Math.floor(amtAll * .1);
+            const amt50 = Math.floor(amtAll * .5);
+
             // Caught unique pokemon
-            AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Trainer`, `Catch ${amt10} unique Pokémon native to the ${GameConstants.camelCaseToString(GameConstants.Region[region])} region.`, new CaughtUniquePokemonsByRegionRequirement(region, amt10), 2, region);
-            AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Ace`, `Catch ${amt50} unique Pokémon native to the ${GameConstants.camelCaseToString(GameConstants.Region[region])} region.`, new CaughtUniquePokemonsByRegionRequirement(region, amt50), 4, region);
-            AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Master`, `Complete the ${GameConstants.camelCaseToString(GameConstants.Region[region])} Pokédex!`, new CaughtUniquePokemonsByRegionRequirement(region, amtAll), 6, region);
+            AchievementHandler.addAchievement(`${regionName} Trainer`, `Catch ${amt10} unique Pokémon native to the ${regionName} region.`, new CaughtUniquePokemonsByRegionRequirement(region, amt10), 2, region);
+            AchievementHandler.addAchievement(`${regionName} Ace`, `Catch ${amt50} unique Pokémon native to the ${regionName} region.`, new CaughtUniquePokemonsByRegionRequirement(region, amt50), 4, region);
+            AchievementHandler.addAchievement(`${regionName} Master`, `Complete the ${regionName} Pokédex!`, new CaughtUniquePokemonsByRegionRequirement(region, amtAll), 6, region);
+
             // Caught unique shiny pokemon
-            AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Shiny Trainer`, `Catch ${amt10} unique Shiny Pokémon native to the ${GameConstants.camelCaseToString(GameConstants.Region[region])} region.`, new CaughtUniqueShinyPokemonsByRegionRequirement(region, amt10), 3, region);
-            AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Shiny Ace`, `Catch ${amt50} unique Shiny Pokémon native to the ${GameConstants.camelCaseToString(GameConstants.Region[region])} region.`, new CaughtUniqueShinyPokemonsByRegionRequirement(region, amt50), 6, region);
-            AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Shiny Master`, `Complete the ${GameConstants.camelCaseToString(GameConstants.Region[region])} Shiny Pokédex!`, new CaughtUniqueShinyPokemonsByRegionRequirement(region, amtAll), 9, region);
+            AchievementHandler.addAchievement(`${regionName} Shiny Trainer`, `Catch ${amt10} unique Shiny Pokémon native to the ${regionName} region.`, new CaughtUniqueShinyPokemonsByRegionRequirement(region, amt10), 3, region);
+            AchievementHandler.addAchievement(`${regionName} Shiny Ace`, `Catch ${amt50} unique Shiny Pokémon native to the ${regionName} region.`, new CaughtUniqueShinyPokemonsByRegionRequirement(region, amt50), 6, region);
+            AchievementHandler.addAchievement(`${regionName} Shiny Master`, `Complete the ${regionName} Shiny Pokédex!`, new CaughtUniqueShinyPokemonsByRegionRequirement(region, amtAll), 9, region);
         });
 
         // Unown pokédex for Johto
@@ -605,7 +668,6 @@ class AchievementHandler {
         const unownAmount = pokemonList.reduce((count, p) => count + +(Math.floor(p.id) === unownID), 0);
         AchievementHandler.addAchievement('Alphabet Soup for Ruin Maniac', 'Catch all unique Unown forms.', new CaughtUniquePokemonByFilterRequirement(unownDexFilter, 'Catch all unique Unown forms.', unownAmount), 2, GameConstants.Region.johto);
         AchievementHandler.addAchievement('"I am the Alpha and the Omega"', 'Catch all unique Shiny Unown forms.', new CaughtUniquePokemonByFilterRequirement(unownDexFilter, 'Catch all unique Unown forms.', unownAmount, true), 3, GameConstants.Region.johto);
-
 
         // Battle Café pokédex for Galar, highly optional as this is End Game farming, so no high bonus
         const alcremieDexFilter = (p: PokemonListData) => p.name === 'Milcery (Cheesy)' || p.name.startsWith('Alcremie');
@@ -641,7 +703,6 @@ class AchievementHandler {
 
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 2], GameConstants.ExtraAchievementCategories.orre, 'Orre');
 
-
         /*
          * EVENTS
          */
@@ -651,16 +712,11 @@ class AchievementHandler {
             AchievementHandler.addAchievement(`${header} Master`, `Complete the ${dexName} Pokédex`, new CaughtUniquePokemonByFilterRequirement(filter, '/', dexAmount), bonus, GameConstants.ExtraAchievementCategories.events);
             AchievementHandler.addAchievement(`${header} Shiny Master`, `Complete the ${dexName} Shiny Pokédex`, new CaughtUniquePokemonByFilterRequirement(filter, '/', dexAmount, true), bonus, GameConstants.ExtraAchievementCategories.events);
             AchievementHandler.addAchievement(`${header} Doctor`, `Have all ${dexName} Pokémon resistant to Pokérus`, new PokerusStatusByFilterRequirement(filter, dexAmount, GameConstants.Pokerus.Resistant), bonus, GameConstants.ExtraAchievementCategories.events);
-
         };
-        AchievementHandler.addAchievement('New Island Explorer', 'Clear New Island 10 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex('New Island')), 0.8, GameConstants.ExtraAchievementCategories.events);
-        AchievementHandler.addAchievement('New Island Expert', 'Clear New Island 100 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex('New Island')), 1.2, GameConstants.ExtraAchievementCategories.events);
-        AchievementHandler.addAchievement('New Island Hermit', 'Clear New Island 250 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], GameConstants.getDungeonIndex('New Island')), 1.6, GameConstants.ExtraAchievementCategories.events);
-        AchievementHandler.addAchievement('New Island Dweller', 'Clear New Island 500 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[3], GameConstants.getDungeonIndex('New Island')), 2.4, GameConstants.ExtraAchievementCategories.events);
-        AchievementHandler.addAchievement('Pirate Island Explorer', 'Clear Pirate Island 10 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex('Pirate Island')), 0.8, GameConstants.ExtraAchievementCategories.events);
-        AchievementHandler.addAchievement('Pirate Island Expert', 'Clear Pirate Island 100 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex('Pirate Island')), 1.2, GameConstants.ExtraAchievementCategories.events);
-        AchievementHandler.addAchievement('Pirate Island Hermit', 'Clear Pirate Island 250 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], GameConstants.getDungeonIndex('Pirate Island')), 1.6, GameConstants.ExtraAchievementCategories.events);
-        AchievementHandler.addAchievement('Pirate Island Dweller', 'Clear Pirate Island 500 times.', new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[3], GameConstants.getDungeonIndex('Pirate Island')), 2.4, GameConstants.ExtraAchievementCategories.events);
+
+        addDungeonAchievements('New Island', GameConstants.ExtraAchievementCategories.events);
+        addDungeonAchievements('Pirate Island', GameConstants.ExtraAchievementCategories.events);
+
         addEventPokemonAchievements('Clone', '\'Mewtwo strikes back!\'', (p: PokemonListData) => p.name.endsWith('(Clone)') && p.name !== 'Deoxys (Clone)' || p.name == 'Armored Mewtwo');
         addEventPokemonAchievements('Spooky', 'Halloween', (p: PokemonListData) => p.name.startsWith('Spooky ') || p.name == 'Pikachu (Gengar)');
         addEventPokemonAchievements('Partner', '\'Let\'s GO!\'', (p: PokemonListData) => p.name.startsWith('Let\'s Go '));
@@ -913,6 +969,8 @@ class AchievementHandler {
             new PokerusStatusByFilterRequirement(furfrouDexFilter, furfrouAmount, GameConstants.Pokerus.Resistant),
             '' // need hint
         );*/
+
+        AchievementHandler.buildMaps();
 
         // load filters
         this.load();
