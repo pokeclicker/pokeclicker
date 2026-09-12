@@ -232,9 +232,54 @@ class AchievementHandler {
     }
 
     private static _achievementsByName: Map<string, Achievement> = new Map();
+    private static _routeAchievements: Map<GameConstants.Region, Map<number, Achievement[]>> = new Map();
+    private static _gymAchievements: Map<number, Achievement[]> = new Map();
+    private static _dungeonAchievements: Map<number, Achievement[]> = new Map();
+
+    private static buildMaps() {
+        const addToBucket = <T>(map: Map<T, Achievement[]>, key: T, achievement: Achievement) => {
+            const bucket = map.get(key);
+            if (bucket) {
+                bucket.push(achievement);
+            } else {
+                map.set(key, [achievement]);
+            }
+        };
+
+        AchievementHandler.achievementList.forEach((achievement) => {
+            AchievementHandler._achievementsByName.set(achievement.name, achievement);
+
+            const { property } = achievement;
+            if (property instanceof RouteKillRequirement) {
+                let routes = AchievementHandler._routeAchievements.get(property.region);
+                if (!routes) {
+                    routes = new Map();
+                    AchievementHandler._routeAchievements.set(property.region, routes);
+                }
+                addToBucket(routes, property.route, achievement);
+            } else if (property instanceof ClearGymRequirement && !(achievement instanceof SecretAchievement)) {
+                addToBucket(AchievementHandler._gymAchievements, property.gymIndex, achievement);
+            } else if (property instanceof ClearDungeonRequirement) {
+                addToBucket(AchievementHandler._dungeonAchievements, property.dungeonIndex, achievement);
+            }
+        });
+    }
+
     public static findByName(name: string): Achievement {
         const achievement = AchievementHandler._achievementsByName.get(name);
         return achievement?.achievable() ? achievement : undefined;
+    }
+
+    public static getRouteAchievements(route: number, region: GameConstants.Region): Achievement[] {
+        return AchievementHandler._routeAchievements.get(region)?.get(route) ?? [];
+    }
+
+    public static getGymAchievements(gymIndex: number): Achievement[] {
+        return AchievementHandler._gymAchievements.get(gymIndex) ?? [];
+    }
+
+    public static getDungeonAchievements(dungeonIndex: number): Achievement[] {
+        return AchievementHandler._dungeonAchievements.get(dungeonIndex) ?? [];
     }
 
     private static _achievementCategories : AchievementCategory[]
@@ -925,7 +970,7 @@ class AchievementHandler {
             '' // need hint
         );*/
 
-        AchievementHandler._achievementsByName = new Map(AchievementHandler.achievementList.map((a) => [a.name, a]));
+        AchievementHandler.buildMaps();
 
         // load filters
         this.load();

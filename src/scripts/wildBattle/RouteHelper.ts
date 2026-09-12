@@ -140,9 +140,7 @@ class RouteHelper {
     }
 
     public static isAchievementsComplete(route: number, region: GameConstants.Region) {
-        return AchievementHandler.achievementList.every(achievement => {
-            return !(achievement.property instanceof RouteKillRequirement && achievement.property.region === region && achievement.property.route === route && !achievement.isCompleted());
-        });
+        return AchievementHandler.getRouteAchievements(route, region).every(achievement => achievement.isCompleted());
     }
 
     public static isThereQuestAtLocation(route: number, region: GameConstants.Region) {
