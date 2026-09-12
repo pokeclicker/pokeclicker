@@ -723,7 +723,7 @@ export const BerryList: Berry[] = [
         BerryFirmness.Soft,
         [
             'The sweetness-laden pulp has just the hint of a hard-edged and fragrant bite to it.',
-            'Growing these Berries will soften the ground around it, increasing the chances of replanting.',
+            'Growing this Berry will soften the ground around it, increasing the chances of replanting.',
         ],
         new Aura(AuraType.Replant, [1.01, 1.02, 1.03]),
         ['Sandshrew', 'Larvitar', 'Numel', 'Hippopotas'],

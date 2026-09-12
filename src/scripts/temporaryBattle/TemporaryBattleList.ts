@@ -2160,7 +2160,7 @@ TemporaryBattleList['Destiny Deoxys Rayquaza'] = new TemporaryBattle(
         new GymPokemon('Deoxys', 47276622, 70),
         new GymPokemon('Rayquaza', 57782538, 70),
     ],
-    '<i>Rayquaza and Deoxys fled seperate ways.</i>',
+    '<i>Rayquaza and Deoxys fled separate ways.</i>',
     [new QuestLineStepCompletedRequirement('Destiny Deoxys', 1)],
     undefined,
     {
@@ -4848,36 +4848,6 @@ TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
     ],
     'Ha! That was a truly intense fight!',
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 5)]
-);
-
-TemporaryBattleList['Tsareena Crew'] = new TemporaryBattle(
-    'Tsareena Crew',
-    [
-        new GymPokemon('Bounsweet (Pirate)', 91233520, 20),
-        new GymPokemon('Bounsweet (Pirate)', 91233520, 20),
-        new GymPokemon('Steenee (Pirate)', 114041900, 25),
-        new GymPokemon('Steenee (Pirate)', 114041900, 25),
-        new GymPokemon('Steenee (Pirate)', 114041900, 25),
-        new GymPokemon('Tsareena (Captain)', 228083800, 50),
-    ],
-    'You beat us fair and square. Take this reward.',
-    [new SpecialEventRequirement('A Pirate\'s Life')],
-    undefined,
-    {
-        rewardFunction: () => {
-
-            player.gainItem('Pirate_Compass', 1);
-            Notifier.notify({
-                message: 'You were awarded a Pirate Compass!',
-                type: NotificationConstants.NotificationOption.success,
-                image: ItemList.Pirate_Compass.image,
-            });
-        },
-        resetDaily: true,
-        returnTown: 'Tsareena Sloop',
-        finalPokemonImage: 'specialNPCs/Transparent',
-        imageName: '../pokemon/763.01',
-    }
 );
 
 // Magikarp Jump Temp Battles

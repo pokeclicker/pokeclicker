@@ -183,6 +183,11 @@ aria-labelledby="pokedexModalLabel">
                                                         class: 'btn-primary btn-sm',
                                                         onClick: () => pokedexCategoryFilter.set([]),
                                                     },
+                                                    {
+                                                        label: 'Categorized',
+                                                        class: 'btn-primary btn-sm',
+                                                        onClick: () => pokedexCategoryFilter.set(PokemonCategories.categories().filter(c => c.id > 0).map(c => c.id)),
+                                                    },
                                                 ],
                                                 bottomButtons: [
                                                     {
@@ -273,9 +278,11 @@ aria-labelledby="pokedexModalLabel">
                                     </div>
 
                                     <div class="col-12 mt-1">
-                                        <button class="btn btn-primary btn-block btn-sm" data-bind="click: () => PokedexHelper.resetFilters()">
-                                            Reset All Filters
-                                        </button>
+                                        <button class="btn btn-block btn-sm" data-bind="
+                                            click: () => PokedexHelper.resetFilters(),
+                                            css: PokedexHelper.filtersActive() ? 'btn-primary' : 'btn-secondary disabled',
+                                            enable: PokedexHelper.filtersActive
+                                        ">Reset All Filters</button>
                                     </div>
 
                                     <div class="col-12">
@@ -530,9 +537,9 @@ aria-labelledby="pokedexModalLabel">
                                                     </div>
                                                     <!-- /ko -->
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
-                                                        <i>Edit categories</i>
-                                                    </a>
+                                                    <button class="btn btn-primary btn-sm btn-block font-weight-bold" data-toggle="modal" data-target="#categoryModal">
+                                                        Edit Categories
+                                                    </button>
                                                 </div>
                                             </div>
                                             <!-- /ko -->

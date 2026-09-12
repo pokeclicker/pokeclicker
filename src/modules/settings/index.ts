@@ -36,6 +36,8 @@ import PokemonCategories from '../party/Category';
 import ShadowPokemonRequirement from '../requirements/ShadowPokemonRequirement';
 import OrderSetting from './OrderSetting';
 import areaStatus from '../enums/AreaStatus';
+import ObtainedKeyItemRequirement from '../requirements/ObtainedKeyItemRequirement';
+import KeyItemType from '../enums/KeyItemType';
 import MultiSelectSetting from './MultiSelectSetting';
 
 export default Settings;
@@ -206,7 +208,7 @@ Settings.add(new CssVariableSetting('uncaughtShadowPokemon', 'Uncaught Shadow Po
 Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokémon and Missing Achievement', [], '#c939fe'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokémon', [], '#ffee00'));
 Settings.add(new CssVariableSetting('missingAchievement', 'Missing Achievement', [], '#57e3ff'));
-Settings.add(new CssVariableSetting('missingResistant', 'Missing Resistant', [], '#ab1707', new ClearDungeonRequirement(1, getDungeonIndex('Distortion World'))));
+Settings.add(new CssVariableSetting('missingResistant', 'Missing Resistant', [], '#ab1707', new ObtainedKeyItemRequirement(KeyItemType.Pokerus_virus)));
 Settings.add(new CssVariableSetting('completed', 'None of the Above', [], '#ffffff'));
 Settings.add(new OrderSetting('mapAreaStateOrder', 'Map Area State Order', GameHelper.enumNumbers(areaStatus)));
 

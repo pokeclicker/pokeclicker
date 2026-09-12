@@ -168,7 +168,7 @@
                         <img width="100%" height="100%" src=""
                             style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
                             data-bind="attr: { src: FarmController.getImage($index()) },
-                                css: { 'wither-warning': $data.stage() == PlotStage.Berry && $data.calcTimeLeft() <= GameConstants.WITHER_WARNING_TIME }">
+                                css: { 'wither-warning': !$data.isAffectedByPetaya() && $data.stage() == PlotStage.Berry && $data.calcTimeLeft() <= GameConstants.WITHER_WARNING_TIME }">
                         </div>
                     <!-- /ko -->
                     <!-- ko if: $data.isSafeLocked -->

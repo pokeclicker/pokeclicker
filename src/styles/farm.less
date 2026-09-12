@@ -139,6 +139,23 @@
                 drop-shadow(0.2px -0.2px 0 black)
                 drop-shadow(-0.2px -0.2px 0 black);
       }
+
+      .wandererSprite, .wandererCapture {
+        height: 60%;
+        width: 60%;
+        position: absolute;
+        pointer-events: none;
+        top: -10%;
+        left: -10%;
+      }
+
+      .wandererSprite {
+        image-rendering: pixelated;
+      }
+
+      .wandererCapture {
+        padding: 10%;
+      }
   }
 
   .plotButton {
@@ -163,16 +180,6 @@
           height: 12px;
           width: 12px;
           filter: none;
-      }
-
-
-      .wandererSprite, .wandererCapture {
-        height: 60%;
-        width: 60%;
-        position: absolute;
-        pointer-events: none;
-        top: -10%;
-        left: -10%;
       }
   }
 }
@@ -251,19 +258,6 @@
   .list-inline-item:nth-child(n+6) {
     margin-top: 14px;
   }
-}
-
-.wandererSprite, .wandererCapture {
-  height: 80px;
-  width: 80px;
-  position: absolute;
-  pointer-events: none;
-  top: -16px;
-  left: -16px;
-}
-
-.wandererSprite {
-  image-rendering: pixelated;
 }
 
 @keyframes flash {

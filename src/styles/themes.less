@@ -58,6 +58,20 @@
   }
 }
 
+/* Fixes text-success on .bg-secondary being unreadable for theme specific colour themes */
+.flatly, .journal, .litera, .solar, .spacelab, .united {
+  .bg-secondary .text-success {
+    color: #1a6e2d !important;
+  }
+}
+
+/* Fixes unreadable text due to identical colors for .bg-secondary */
+.cosmo, .solar {
+  .bg-secondary {
+    color: #fff;
+  }
+}
+
 /* Individual themes */
 .cerulean {
   /* Evolution items */
@@ -318,9 +332,9 @@
     margin: 0 !important
   }
 
-  //Fixes save containers having a white table
-  .save-container table td {
-    background-color:unset !important;
+  //Fixes save containers/tooltips having a white table
+  .save-container table td, .tooltip-inner table td, .tooltip-inner table th {
+    background-color: unset !important;
   }
 
   .modal-header {
@@ -463,5 +477,28 @@
                 color: #666 !important;
             }
         }
+    }
+}
+
+/* Overrides for the .custom-select to make it look like native select */
+.btn-dropdown.custom-select {
+    .lumen & {
+        border-width: 1px;
+    }
+
+    .sketchy & {
+        font-weight: 700;
+    }
+
+    .journal &, .minty & {
+        font: inherit;
+    }
+
+    .lux &, .sandstone & {
+        font-size: 14px;
+    }
+
+    .slate & {
+        border: 1px solid #ced4da;
     }
 }
