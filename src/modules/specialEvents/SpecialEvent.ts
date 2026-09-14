@@ -24,11 +24,21 @@ export default class SpecialEvent {
     hideFromEventCalendar: boolean;
     eventCalendarTimeLeft: KnockoutObservable<number>;
     isActive: KnockoutObservable<boolean>;
+    eventBattleBackground: string;
 
     // TODO: only notify once initially until event about to start/end
     notified: SpecialEventNotifiedStatus;
 
-    constructor(title: SpecialEventTitleType, description: string, startTime: Date, startFunction: EventCallback, endTime: Date, endFunction: EventCallback, hideFromEventCalendar: boolean) {
+    constructor(
+        title: SpecialEventTitleType,
+        description: string,
+        startTime: Date,
+        startFunction: EventCallback,
+        endTime: Date,
+        endFunction: EventCallback,
+        hideFromEventCalendar: boolean,
+        eventBattleBackground?: string,
+    ) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;
@@ -40,6 +50,7 @@ export default class SpecialEvent {
         this.eventCalendarTimeLeft = ko.observable(0);
         this.eventCalendarTimeLeft.equalityComparer = () => false; // Forcefully update timeLeft
         this.isActive = ko.pureComputed<boolean>(() => this.status() == SpecialEventStatus.started || this.eventCalendarTimeLeft() > 0);
+        this.eventBattleBackground = eventBattleBackground;
     }
 
     initialize(): void {
@@ -173,7 +184,7 @@ export default class SpecialEvent {
         // Update event status
         this.status(SpecialEventStatus.started);
 
-        // We only wan't the notification displayed for 1 hour, or until the event is over
+        // We only want the notification displayed for 1 hour, or until the event is over
         const timeTillEventEnd = this.timeTillEnd();
         this.notify('on now!', Math.min(1 * HOUR, timeTillEventEnd), NotificationConstants.NotificationOption.success);
 
