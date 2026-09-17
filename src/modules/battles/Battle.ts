@@ -23,7 +23,6 @@ export default class Battle {
     static catching: KnockoutObservable<boolean> = ko.observable(false);
     static catchRateActual: KnockoutObservable<number | null> = ko.observable(0);
     static pokeball: KnockoutObservable<GameConstants.Pokeball> = ko.observable(GameConstants.Pokeball.Pokeball);
-    static lastPokemonAttack = Date.now();
     static lastClickAttack = Date.now();
     static route;
 
