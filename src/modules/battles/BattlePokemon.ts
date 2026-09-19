@@ -103,7 +103,7 @@ export default class BattlePokemon implements EnemyPokemonInterface {
             });
             App.game.logbook.newLog(
                 LogBookTypes.FOUND,
-                createLogContent.enemyDrop({ pokemon: this.name, item: name }),
+                createLogContent.enemyDrop({ pokemon: this.name, item: name, amount: amount.toLocaleString('en-US') }),
             );
         }
         App.game.party.gainExp(this.exp, this.level, trainer);
