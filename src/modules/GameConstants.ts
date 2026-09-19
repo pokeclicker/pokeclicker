@@ -145,6 +145,7 @@ export const ROAMING_INCREASED_CHANCE = 3;
 
 // Shinies
 export const SHINY_CHANCE_BATTLE = 8192;
+export const SHINY_CHANCE_ROAMER = 2048;
 export const SHINY_CHANCE_DUNGEON = 4096;
 export const SHINY_CHANCE_STONE = 2048;
 export const SHINY_CHANCE_SAFARI = 1024;
@@ -250,6 +251,7 @@ export enum AchievementType {
 
 // Held item chance
 export const ROUTE_HELD_ITEM_MODIFIER = 1;
+export const ROAMER_HELD_ITEM_MODIFIER = ROUTE_HELD_ITEM_MODIFIER * 8;
 export const DUNGEON_HELD_ITEM_MODIFIER = ROUTE_HELD_ITEM_MODIFIER * 4;
 export const DUNGEON_BOSS_HELD_ITEM_MODIFIER = DUNGEON_HELD_ITEM_MODIFIER * 1.5;
 export const HELD_ITEM_CHANCE = 512;
@@ -258,9 +260,9 @@ export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 export const GRISEOUS_ITEM_CHANCE = 50;
 export const DNA_ITEM_CHANCE = 45;
 export const LIGHT_ITEM_CHANCE = 75;
-export const SHADOW_ITEM_CHANCE = 8;
+export const SHADOW_ITEM_CHANCE = 64;
 export const RUST_ITEM_CHANCE = 90;
-export const MANE_ITEM_CHANCE = 10;
+export const MANE_ITEM_CHANCE = 80;
 export const CHRISTMAS_ITEM_CHANCE = 10;
 export const RELIC_GOLD_ITEM_CHANCE = 64;
 export const HELD_MAGIKARP_BISCUIT = 256;
