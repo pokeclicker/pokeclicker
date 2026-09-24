@@ -1,0 +1,37 @@
+<div id="goalTracker" class="card sortable border-secondary mb-3 pokeclicker-optional-module" data-bind="
+    visible: App.game.goalTracker.canAccess() && Settings.getSetting('showGoalTrackerModule').observableValue(),
+    if: App.game.goalTracker.canAccess() && Settings.getSetting('showGoalTrackerModule').observableValue()
+">
+    <div class="card-header p-0" data-toggle="collapse" href="#goalTrackerCard">
+        <span>Goal Tracker</span>
+    </div>
+    <img class="clickable" src="assets/images/fa-cog.svg"
+        style="position: absolute; right: 5px; top: 0px; width: auto; height: 41px; padding: 8px; padding-right: 4px;"
+        data-toggle="modal" href="#goalTrackerModal" />
+
+    <div id="goalTrackerCard" class="card-body p-0 show" data-bind="
+        with: App.game.goalTracker.goals().filter(goal => goal.objectives().some(obj => obj.isConfigured())),
+        as: 'goals'
+    ">
+        <div class="text-muted small p-2" data-bind="hidden: goals.length">
+            Create your own goals or hide this module in the settings.
+        </div>
+
+        <div class="small" data-bind="foreach: goals">
+            <div class="card-header rounded-0 py-1" style="margin-top: 1px;" data-toggle="collapse" data-bind="attr : {href : '#objectivecard_' + $data.uuid}">
+                <knockout data-bind="text: $data.name"></knockout>
+            </div>
+            <div class="card-body text-left px-2 py-0 show" data-bind="
+                attr : {id : 'objectivecard_' + $data.uuid},
+                foreach: $data.objectives().filter(obj => obj.isConfigured())
+            ">
+                <div class="my-2 border-secondary" data-bind="
+                    css: { 'border-top pt-2': $index() },
+                    event: { contextmenu: () => { App.game.goalTracker.selectedObjective($data); $('#goalTrackerObjectiveModal').modal('show'); } }
+                ">
+                    <knockout data-bind="template: { name: 'goalTrackerObjectiveTemplate', data: { objective: $data, showControls: false } }"></knockout>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

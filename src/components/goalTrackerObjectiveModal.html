@@ -1,0 +1,107 @@
+<div class="modal fade" id="goalTrackerObjectiveModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
+        <div class="modal-content" data-bind="with: App.game.goalTracker.selectedObjective">
+            <div class="modal-header">
+                <h5 class="modal-title">Configure Objective</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-left pb-0">
+                <div class="form-group">
+                    <label>Type</label>
+                    <select class="form-control" data-bind="
+                        options: GameHelper.enumSelectOption(ObjectiveType),
+                        value: $data.type,
+                        optionsText: (item) => GoalTracker.getObjectiveTypeLabel(item.value),
+                        optionsValue: 'value',
+                        optionsCaption: ''"></select>
+                </div>
+                <!-- ko with: $data.config, as: 'config' -->
+                <hr class="my-2 bg-secondary" />
+                <div data-bind="foreach: { data: $parent.getOptions, as: 'option' }">
+                    <!-- ko if: !option.type || option.type == 'dropdown' -->
+                    <div class="form-group" data-bind="with: option.values(config), as: 'values'">
+                        <div data-bind="visible: values.length">
+                            <label data-bind="text: option.label">Label</label>
+                            <!-- ko if: option.searchable -->
+                            <div data-bind="let: { searchValue: ko.observable('') }">
+                                <div class="dropdown" style="position: static;", data-bind="event: { 'hidden.bs.dropdown': () => searchValue('') }">
+                                    <button class="btn btn-dropdown custom-select text-left" type="button" data-toggle="dropdown">
+                                        <div class="text-truncate btn-text">
+                                            <span data-bind="text: values.find(o => o.value === config[option.key]?.())?.name"></span>
+                                        </div>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right w-75 px-2" style="max-height: 95%; overflow-y: auto;">
+                                        <input type="text" class="form-control form-control-sm" placeholder="Search" data-bind="textInput: searchValue" />
+                                        <div class="dropdown-divider"></div>
+                                        <div class="small" data-bind="foreach: values">
+                                            <button type="button" class="dropdown-item px-1" data-bind="click: () => { config[option.key]($data.value) },
+                                                visible: searchValue().length === 0 || $data.name.toLowerCase().includes(searchValue().toLowerCase())">
+                                                <span data-bind="text: $data.name"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko ifnot: option.searchable -->
+                            <select class="form-control" data-bind="
+                                options: values,
+                                value: config[option.key],
+                                optionsText: 'name',
+                                optionsValue: 'value',
+                                optionsCaption: ''"></select>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: option.type == 'number' -->
+                    <div class="form-group">
+                        <label data-bind="text: option.label">Label</label>
+                        <input type="number" class="form-control" data-bind="value: config[option.key]" />
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <div class="form-group" data-bind="visible: $parent.hasGoal">
+                    <label>Goal Amount</label>
+                    <input type="number" class="form-control" data-bind="value: $parent.targetAmount" />
+                </div>
+                <div class="form-group">
+                    <label>Tracking Mode</label>
+                    <!-- ko foreach: GameHelper.enumSelectOption(TrackingMode) -->
+                    <div class="custom-control custom-radio" data-bind="css: { 'mt-1': $index() }">
+                        <input type="radio" class="custom-control-input" name="trackingMode"
+                            data-bind="attr: { id: 'trackingMode_' + $data.value },
+                                checkedValue: $data.value, checked: $parents[1].trackingMode">
+                        <label class="custom-control-label"
+                            data-bind="attr: { for: 'trackingMode_' + $data.value },
+                                text: TrackingModeConfigs[$data.value].text"></label>
+                        <small class="form-text text-muted mt-0"
+                            data-bind="text: TrackingModeConfigs[$data.value].description"></small>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </div>
+            <div class="modal-footer">
+                <div class="card-body text-left small p-0">
+                    <knockout data-bind="template: { name: 'goalTrackerObjectiveTemplate', data: { objective: $data, showControls: false } }"></knockout>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-start">
+                <div data-bind="visible: trackingMode === TrackingMode.Gain">
+                    <button type="button" class="btn btn-danger btn-sm" data-bind="click: () => resetAccumulatedProgress(),
+                        tooltip: {
+                            title: 'Resets accumulated progress to zero when using the Gain tracking mode.',
+                            trigger: 'hover',
+                            position: 'top',
+                        }">Reset Progress</button>
+                </div>
+                <div class="flex-grow-1 text-right">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
