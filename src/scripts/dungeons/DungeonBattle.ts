@@ -35,7 +35,8 @@ class DungeonBattle extends Battle {
         if (DungeonRunner.fightingLootEnemy) {
             DungeonRunner.fightingLootEnemy = false;
         } else if (!DungeonRunner.fightingBoss()) {
-            GameHelper.incrementObservable(DungeonRunner.encountersWon);
+            ++DungeonRunner.encountersWonThisFloor;
+            DungeonRunner.updateEncounterInfo();
         }
 
         if (DungeonRunner.fightingBoss()) {
@@ -126,7 +127,8 @@ class DungeonBattle extends Battle {
             }
 
             DungeonRunner.fighting(false);
-            GameHelper.incrementObservable(DungeonRunner.encountersWon);
+            ++DungeonRunner.encountersWonThisFloor;
+            DungeonRunner.updateEncounterInfo();
             if (DungeonRunner.fightingBoss()) {
                 DungeonRunner.defeatedBoss(DungeonBattle.trainer().name);
             }
@@ -157,7 +159,7 @@ class DungeonBattle extends Battle {
         // Pokemon
         if (typeof enemy === 'string' || enemy.hasOwnProperty('pokemon')) {
             const pokemon = (typeof enemy === 'string') ? enemy : (<DetailedPokemon>enemy).pokemon;
-            const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon, DungeonRunner.chestsOpened(), DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeonLevel());
+            const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon, DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeonLevel());
             this.enemyPokemon(enemyPokemon);
 
             PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatisticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender, enemyPokemon.shadow);
@@ -200,7 +202,7 @@ class DungeonBattle extends Battle {
         this.catching(false);
         this.counter = 0;
         const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon
-            , DungeonRunner.chestsOpened(), DungeonRunner.dungeon.baseHealth * 2, DungeonRunner.dungeonLevel(), true);
+            , DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth * 2, DungeonRunner.dungeonLevel(), true);
         this.enemyPokemon(enemyPokemon);
         PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatisticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender, enemyPokemon.shadow);
         // Shiny
@@ -238,7 +240,7 @@ class DungeonBattle extends Battle {
         const pokemon = this.trainer().getTeam()[this.trainerPokemonIndex()];
         const baseHealth = DungeonRunner.fightingBoss() ? pokemon.maxHealth : DungeonRunner.dungeon.baseHealth;
         const level = DungeonRunner.fightingBoss() ? pokemon.level : DungeonRunner.dungeonLevel();
-        const enemyPokemon = PokemonFactory.generateDungeonTrainerPokemon(pokemon, DungeonRunner.chestsOpened(), baseHealth, level, DungeonRunner.fightingBoss(), this.trainer().getTeam().length);
+        const enemyPokemon = PokemonFactory.generateDungeonTrainerPokemon(pokemon, DungeonRunner.chestsOpened, baseHealth, level, DungeonRunner.fightingBoss(), this.trainer().getTeam().length);
 
         this.enemyPokemon(enemyPokemon);
     }
@@ -252,7 +254,7 @@ class DungeonBattle extends Battle {
         const enemy = Rand.fromWeightedArray(DungeonRunner.dungeon.availableBosses(), DungeonRunner.dungeon.bossWeightList);
         // Pokemon
         if (enemy instanceof DungeonBossPokemon) {
-            this.enemyPokemon(PokemonFactory.generateDungeonBoss(enemy, DungeonRunner.chestsOpened()));
+            this.enemyPokemon(PokemonFactory.generateDungeonBoss(enemy, DungeonRunner.chestsOpened));
             PokemonHelper.incrementPokemonStatistics(this.enemyPokemon().id, GameConstants.PokemonStatisticsType.Encountered, this.enemyPokemon().shiny, this.enemyPokemon().gender, this.enemyPokemon().shadow);
             // Shiny
             if (this.enemyPokemon().shiny) {
