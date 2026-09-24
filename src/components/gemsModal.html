@@ -42,7 +42,7 @@
                                 <div class="d-flex" style="gap: 0.25rem">
                                     <!-- ko foreach: Array(Gems.nEffects) -->
                                     <div class="flex-grow-1" style="height: 2px;" data-bind="
-                                        class: App.game.gems.isValidUpgrade($parentContext.$index(), $index()) ? (App.game.gems.hasMaxUpgrade($parentContext.$index(), $index()) ? 'bg-success' : 'bg-warning') : 'bg-success',
+                                        class: App.game.gems.getGemCaseClass($parentContext.$index(), $index()),
                                         style: { opacity: App.game.gems.isValidUpgrade($parentContext.$index(), $index()) ? 1 : 0.25 }
                                     "></div>
                                     <!-- /ko -->
