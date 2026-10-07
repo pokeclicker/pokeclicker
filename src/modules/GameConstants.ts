@@ -22,7 +22,6 @@ export const GYM_TIME = 30 * SECOND;
 export const GYM_COUNTDOWN = 1 * SECOND;
 export const GYM_TICK = 0.1 * SECOND;
 export const ACHIEVEMENT_TICK = 1 * SECOND;
-export const MIN_LOAD_TIME = 0.5 * SECOND;
 export const MAX_LOAD_TIME = 20 * SECOND;
 export const MUTATION_TICK = 1 * SECOND;
 export const WANDER_TICK = 1.5 * SECOND;
