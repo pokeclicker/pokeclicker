@@ -3012,6 +3012,15 @@ class Update implements Saveable {
                 }
             });
         },
+
+        '0.10.27': ({ playerData, saveData, settingsData }) => {
+            // Remove obsolete Petal quest items from inventory
+            Object.keys(playerData._itemList).forEach(item => {
+                if (item.includes('Petal_Mina')) {
+                    delete playerData._itemList[item];
+                }
+            });
+        },
     };
 
     constructor() {
