@@ -196,8 +196,6 @@ export const BerryColor = [
     '#1C1C1C', // Locked
 ];
 
-export const WITHER_WARNING_TIME = 300; // Seconds
-
 // Dungeons
 export const BASE_DUNGEON_SIZE = 5;
 export const MIN_DUNGEON_SIZE = 5;

@@ -153,6 +153,16 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
         new SettingOption('Centimeters', 'cm'),
     ],
     'cm'));
+Settings.add(new Setting<string>('farmBerryWitherWarningSeconds', 'How far in advance berry plants warn before withering', [
+    new SettingOption('15 seconds', '15'),
+    new SettingOption('30 seconds', '30'),
+    new SettingOption('1 minute', '60'),
+    new SettingOption('2 minutes', '120'),
+    new SettingOption('3 minutes', '180'),
+    new SettingOption('5 minutes', '300'),
+    new SettingOption('10 minutes', '600'),
+], '300'));
+Settings.add(new BooleanSetting('farmBerryWitherFlashing', 'Berry plants flash when they are close to withering', true));
 Settings.add(new BooleanSetting('autoRestartUndergroundMine', 'Auto restart selected mine', false));
 const undergroundTreasureDisplaySortSettings = Object.keys(UndergroundTreasureDisplaySortOptionConfigs)
     .map((option) => new SettingOption<number>(UndergroundTreasureDisplaySortOptionConfigs[option].text, parseInt(option, 10)));
