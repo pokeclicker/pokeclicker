@@ -141,6 +141,7 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
     ],
     'ripeDeath'));
 Settings.add(new BooleanSetting('farmBoostDisplay', 'Include base farm timer during altered berry growth times', false));
+Settings.add(new SearchSetting('farmBerrySearchFilter', 'Search', '', undefined, false));
 Settings.add(new Setting<string>('berryDexMode', 'Berrydex Display',
     [
         new SettingOption('Classic Mode', 'classic'),
