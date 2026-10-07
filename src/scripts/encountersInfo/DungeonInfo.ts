@@ -53,7 +53,7 @@ class DungeonInfo {
                 return `${input} Berry`;
             case pokemonMap[input].name == input:
                 const caught = App.game.party.alreadyCaughtPokemonByName(input);
-                return caught ? input : 'Unknown Mimic';
+                return caught ? PokemonHelper.displayName(input) : 'Unknown Mimic';
             default:
                 return GameConstants.camelCaseToString(GameConstants.humanifyString(input.toLowerCase()));
         }
