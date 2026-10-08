@@ -295,6 +295,7 @@ export type TmpPartyPokemonType = {
     attackBonusAmount: number,
     attackBonusPercent: number,
     breeding: boolean,
+    inQueue: boolean,
     pokerus: GameConstants.Pokerus,
     effortPoints: number,
     shiny: boolean,
@@ -307,6 +308,7 @@ export type TmpPartyPokemonType = {
     heldItem: KnockoutObservable<HeldItem>;
     defaultFemaleSprite: KnockoutObservable<boolean>;
     hideShinyImage: KnockoutObservable<boolean>;
+    isUnavailable(): boolean;
     canUseStone(stoneType: GameConstants.StoneType): boolean;
     addCategory(id: number): void;
     removeCategory(id: number): void;

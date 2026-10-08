@@ -259,7 +259,7 @@ class Breeding implements Feature {
     }
 
     public addPokemonToHatchery(pokemon: PartyPokemon): boolean {
-        if (pokemon.breeding) {
+        if (pokemon.isUnavailable()) {
             // Prevent putting multiple copies of a pokemon in the hatchery
             console.error(`Tried to add ${pokemon.name} to the hatchery while already being bred!`);
             return false;
@@ -321,7 +321,7 @@ class Breeding implements Feature {
     private addPokemonToQueue(pokemon: PartyPokemon): boolean {
         const success = this.addDataToQueue([EggType.Pokemon, pokemon.id]);
         if (success) {
-            pokemon.breeding = true;
+            pokemon.inQueue = true;
         }
         return success;
     }
@@ -340,7 +340,7 @@ class Breeding implements Feature {
         if (queueSize > index && index >= 0) {
             const queueData: HatcheryQueueEntry = this._queueList.splice(index, 1)[0];
             if (queueData[0] === EggType.Pokemon) {
-                App.game.party.getPokemon(queueData[1]).breeding = false;
+                App.game.party.getPokemon(queueData[1]).inQueue = false;
                 return true;
             } else if (queueData[0] === EggType.EggItem) {
                 player.gainItem(GameConstants.EggItemType[queueData[1]], 1);
@@ -415,7 +415,12 @@ class Breeding implements Feature {
         } else if (nextInQueue[0] === EggType.EggItem) {
             nextEgg = this.createItemEgg(nextInQueue[1]);
         }
-        this.gainEgg(nextEgg);
+        const success = this.gainEgg(nextEgg);
+        if (nextInQueue[0] === EggType.Pokemon) {
+            const pokemon = App.game.party.getPokemon(nextInQueue[1]);
+            pokemon.inQueue = false;
+            pokemon.breeding = success;
+        }
         if (!this._queueList().length) {
             Notifier.notify({
                 message: 'Hatchery queue is empty.',

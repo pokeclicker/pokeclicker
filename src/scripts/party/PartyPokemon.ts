@@ -17,6 +17,7 @@ enum PartyPokemonSaveKeys {
     nickname,
     shadow,
     showShadowImage,
+    inQueue,
 }
 
 class PartyPokemon implements Saveable, TmpPartyPokemonType {
@@ -32,6 +33,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         vitaminsUsed: {},
         exp: 0,
         breeding: false,
+        inQueue: false,
         shiny: false,
         category: [0],
         levelEvolutionTriggered: false,
@@ -47,6 +49,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     // Saveable observables
     // Consider the Real evolution challenge before adding stuff here
     _breeding: KnockoutObservable<boolean>;
+    _inQueue: KnockoutObservable<boolean>;
     _shiny: KnockoutObservable<boolean>;
     _level: KnockoutObservable<number>;
     _attackBonusPercent: KnockoutObservable<number>;
@@ -77,6 +80,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
             return [vitamin, ko.observable(0).extend({ numeric: 0 })];
         })) as Record<GameConstants.VitaminType, KnockoutObservable<number>>;
         this._breeding = ko.observable(false).extend({ boolean: null });
+        this._inQueue = ko.observable(false).extend({ boolean: null });
         this._shiny = ko.observable(shiny).extend({ boolean: null });
         this._level = ko.observable(1).extend({ numeric: 0 });
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
@@ -245,7 +249,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     }
 
     public checkForLevelEvolution() {
-        if (this.breeding || this.evolutions == null || this.evolutions.length == 0) {
+        if (this.isUnavailable() || this.evolutions == null || this.evolutions.length == 0) {
             return;
         }
 
@@ -289,7 +293,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
 
         if (this.breeding) {
             Notifier.notify({
-                message: 'Vitamins cannot be modified for Pokémon in the hatchery or queue.',
+                message: 'Vitamins cannot be modified for Pokémon in the hatchery.',
                 type: NotificationConstants.NotificationOption.warning,
             });
             return;
@@ -318,7 +322,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     public removeVitamin(vitamin: GameConstants.VitaminType, amount: number): void {
         if (this.breeding) {
             Notifier.notify({
-                message: 'Vitamins cannot be modified for Pokémon in the hatchery or queue.',
+                message: 'Vitamins cannot be modified for Pokémon in the hatchery.',
                 type: NotificationConstants.NotificationOption.warning,
             });
             return;
@@ -449,7 +453,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
     });
 
     public isHatchable = ko.pureComputed(() => {
-        return !(this.breeding || this.level < 100);
+        return !(this.isUnavailable() || this.level < 100);
     });
 
     public isHatchableFiltered = ko.pureComputed(() => {
@@ -643,6 +647,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
         }
         this.exp = json[PartyPokemonSaveKeys.exp] ?? this.defaults.exp;
         this.breeding = json[PartyPokemonSaveKeys.breeding] ?? this.defaults.breeding;
+        this.inQueue = json[PartyPokemonSaveKeys.inQueue] ?? this.defaults.inQueue;
         this.shiny = json[PartyPokemonSaveKeys.shiny] ?? this.defaults.shiny;
         this.category = json[PartyPokemonSaveKeys.category] ?? [...this.defaults.category];
         this.level = this.calculateLevelFromExp();
@@ -664,6 +669,7 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
             [PartyPokemonSaveKeys.vitaminsUsed]: ko.toJS(this.vitaminsUsed),
             [PartyPokemonSaveKeys.exp]: this.exp,
             [PartyPokemonSaveKeys.breeding]: this.breeding,
+            [PartyPokemonSaveKeys.inQueue]: this.inQueue,
             [PartyPokemonSaveKeys.shiny]: this.shiny,
             [PartyPokemonSaveKeys.category]: this.isUncategorized() ? undefined : this.category,
             [PartyPokemonSaveKeys.pokerus]: this.pokerus,
@@ -727,6 +733,18 @@ class PartyPokemon implements Saveable, TmpPartyPokemonType {
 
     set breeding(bool: boolean) {
         this._breeding(bool);
+    }
+
+    get inQueue(): boolean {
+        return this._inQueue();
+    }
+
+    set inQueue(bool: boolean) {
+        this._inQueue(bool);
+    }
+
+    public isUnavailable(): boolean {
+        return this._breeding() || this._inQueue();
     }
 
     get pokerus(): GameConstants.Pokerus {
