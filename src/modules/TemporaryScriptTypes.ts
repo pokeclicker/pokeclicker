@@ -215,7 +215,7 @@ export type TmpMapHelperType = {
     accessToTown: (townName: string) => boolean;
     moveToTown: (townName: string) => void;
     validRoute: (route: number, region: GameConstants.Region) => boolean;
-    openShipModal: () => void;
+    openShipModal: (dockTown?: string) => void;
     ableToTravel: () => boolean;
     travelToNextRegion: () => void;
 };

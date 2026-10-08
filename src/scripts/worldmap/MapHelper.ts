@@ -283,11 +283,11 @@ class MapHelper {
         return !!Routes.getRoute(region, route);
     }
 
-    public static openShipModal() {
+    public static openShipModal(dockTown = GameConstants.DockTowns[player.region]) {
         const openModal = () => {
             $('#ShipModal').modal('show');
         };
-        if (player.highestRegion() > 0 && (TownList[GameConstants.DockTowns[player.region]].isUnlocked())) {
+        if (player.highestRegion() > 0 && TownList[dockTown].isUnlocked()) {
             openModal();
         } else {
             Notifier.notify({
