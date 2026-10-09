@@ -14435,6 +14435,23 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 442.01,
+        'name': 'Spiritomb (Wisp)',
+        'type': [PokemonType.Ghost, PokemonType.Dark],
+        'eggCycles': 5,
+        'levelType': LevelType.mediumfast,
+        'exp': 170,
+        'catchRate': 255,
+        'base': {
+            'hitpoints': 1,
+            'attack': 1,
+            'specialAttack': 1,
+            'defense': 1,
+            'specialDefense': 1,
+            'speed': 1,
+        },
+    },
+    {
         'id': 443,
         'name': 'Gible',
         'type': [PokemonType.Dragon, PokemonType.Ground],
@@ -15534,6 +15551,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'evolutions': [StoneEvolution('Dialga', 'Dialga (Origin)', StoneType.Adamant_crystal)],
     },
     {
         'id': 483.01,
@@ -15574,6 +15592,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'evolutions': [StoneEvolution('Palkia', 'Palkia (Origin)', StoneType.Lustrous_globe)],
     },
     {
         'id': 484.01,

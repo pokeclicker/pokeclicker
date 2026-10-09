@@ -33,8 +33,8 @@
           </div>
         </div>
 
-        <div class="trainer">
-            <img data-bind="attr:{ src: GymBattle.gym.imagePath }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
+        <div class="trainer" data-bind="if: !GymRunner.gymObservable().optionalArgs.hideTrainer">
+            <img data-bind="attr:{ src: GymBattle.gym.imagePath }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';" />
         </div>
 
         <div>

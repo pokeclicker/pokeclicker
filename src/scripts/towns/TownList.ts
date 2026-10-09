@@ -9758,6 +9758,498 @@ const JubilifeVillageShop = new Shop([
 ]);
 
 // Hisui NPCs
+const Laventon1 = new NPC('Professor Laventon', [
+    'You gave me quite the shock, falling from the sky like that... But thank goodness, given that display of skill, you seem unharmed!',
+    'I had just caught up to these three runaway Pokémon when you tumbled out of the sky... It\'s almost as if they knew you\'d appear here! Ah, but do you even know what a Pokémon is?',
+    'My, that\'s a relief! Though you fell from the sky, it seems we have some common ground, eh? Yes, well, these three Pokémon belong to me, mysterious creatures that they are!',
+    'Oh, but I do apologize! I haven\'t even introduced myself! My name is Laventon. I am something of a Pokémon Professor.',
+    'But I must say, <player>, I was taken aback by how well you fought my Pokémon! How is it that you use Pokémon so ably when you\'ve only just arrived here? And such exceptionally strong Pokémon, too...',
+    'One can\'t help but think there\'s a reason you appeared here and now...',
+], {
+    image: 'assets/images/npcs/Laventon.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Frenzied Nobles of Hisui'), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const ArcPhone = new NPC('Arc Phone', [
+    'You found something that resembles a phone! It\'s probably your phone, but it\'s changed shape. You feel a strange power emanating from it...',
+    'A message appeared on the screen!',
+    '"I bestow upon thee this Arc Phone and thy mission: seek out all Pokémon."',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 2, GameConstants.AchievementOption.less)]),
+});
+const Laventon2 = new NPC('Professor Laventon', [
+    '"Seek out all Pokémon"...',
+    'That object is an "Arc Phone," you say...? What an odd device. Could it be...guiding you somehow?',
+    'If you\'ll indulge me for a moment, there\'s something I\'d like to share with you. You see, I have a dream—to compile this region\'s first complete record of its Pokémon!',
+    'We in the field call such a catalog a Pokédex. Yes, a proper Pokédex is a wonderful work of research, containing detailed records of all the Pokémon to be found in a region!',
+    'But...in order to properly document Pokémon, one must, of course, catch them. And therein lies the rub, I\'m afraid. Poké Balls have only just been invented, and not many have mastered the skill of using them.',
+    'Enter you—a person with a clear talent for catching Pokémon! After all, how else could you have obtained such powerful Pokémon?',
+    'Your goal is to seek out every Pokémon, and mine is to have all those Pokémon caught. A situation ripe for teamwork, don\'t you agree?',
+    'First things first—let\'s get these Pokémon back to the village! Then we\'ll sort out your lodgings and find you some proper clothes and a meal and all that.',
+    'Follow me, then! Onward to Jubilife Village!',
+], {
+    image: 'assets/images/npcs/Laventon.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 3, GameConstants.AchievementOption.less)]),
+});
+const Laventon3 = new NPC('Professor Laventon', [
+    'Jubilife Village! It\'s come a long way thanks to the fine people of the Galaxy Expedition Team! The village was built scarcely two years ago... There\'s much to do yet and not many to do it.',
+    'Now, that impressive building up ahead of us is Galaxy Hall—headquarters for this entire outfit!',
+    'I\'m going to go find someone who can get you sorted, wait here, will you?',
+], {
+    image: 'assets/images/npcs/Laventon.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 2), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 4, GameConstants.AchievementOption.less)]),
+});
+const Cyllene1 = new NPC('Captain Cyllene', [
+    'I am the captain of the Galaxy Team\'s Survey Corps. You may call me Cyllene. Professor Laventon has told me how you helped secure his Pokémon when they slipped his control. And now it seems he would like us to feed and house you in exchange for your ongoing labor.',
+    'Hmm. You look to be 15 or so. Quite old enough to work for your keep. But we can\'t simply take on a stranger who wanders in among us, without any idea of their skills or origins. Tomorrow we shall see if you can prove yourself worthy.',
+    'Let\'s hope Laventon\'s confidence in you is not misplaced. <player>, was it? For tonight, at least, we will provide you with a place to sleep. You may use our quarters there. But if you fail to pass the trial we put you to tomorrow, you must move on. You will be expelled from the village to meet your fate—and perhaps your death—in the wilds.',
+    'Meet me in the Galaxy Hall in the morning',
+], {
+    image: 'assets/images/npcs/Cyllene.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 3), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 5, GameConstants.AchievementOption.less)]),
+});
+const Cyllene2 = new NPC('Captain Cyllene', [
+    'You may enter.',
+    'Let us get straight to it. If you wish to join the Galaxy Expedition Team, prove yourself capable by going out into the wilds and catching three Pokémon.',
+    'You defeated 3 Pokémon yesterday, but if you intend to complete a Pokédex, you\'ll need to catch Pokémon as well',
+    'The Galaxy Team does not have the means to provide for those who only take without giving. If you wish to stay, you must prove yourself beyond any doubt that you\'ll be an asset to our cause',
+    'I have allowed you access to the Obsidian Fieldlands. You can catch the Pokémon wherever you wish, although I\'m unsure where else you would go.',
+    'You know what is expected of you. Now it is up to you to see things through.',
+], {
+    image: 'assets/images/npcs/Cyllene.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 4), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 6, GameConstants.AchievementOption.less)]),
+});
+const Volo1 = new NPC('Volo', [
+    'Oh? What a curious getup you have there. I can already tell you\'re quite the character! I\'m Volo of the Ginkgo Guild, the go-to choice for any of your mercantile needs here in Hisui!',
+    'I\'ve heard talk about you. Fell from the sky, didn\'t you? Now that\'s certainly a tale I\'d like to hear... Oh, you\'ve some Pokémon! You\'re certainly full of interesting surprises... Investigating the odd and novel is key to any good merchant\'s success! So what do you say? How about you and I see how our Pokémon stand up to one another in battle?',
+    'I\'ve also heard about this trial you\'re to attempt. Let\'s have a quick battle to get your blood pumping before you head out!',
+], {
+    image: 'assets/images/npcs/Volo (Ginkgo).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 5), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 7, GameConstants.AchievementOption.less)]),
+});
+const Akari1 = new NPC('Akari', [
+    'This is our base camp—the last safe haven before you reach the wilds.',
+    'Just out there is Aspiration Hill. It\'s a great place for catching Pokémon.',
+    'Now go, complete your trial!',
+], {
+    image: 'assets/images/npcs/Akari.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 7), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 9, GameConstants.AchievementOption.less)]),
+});
+const Cyllene3 = new NPC('Captain Cyllene', [
+    'It seems we won\'t have to leave you to die, after all. Congratulations. You\'ve passed your trial.',
+    'I must admit you\'ve impressed me. I set a high hurdle to judge whether a stranger like yourself could be worthy, but you cleared it. This is yours—the official uniform of the Survey Corps. Get changed in the room you used last night. Then you\'re to report at once to the third floor.',
+    'Present yourself in uniform to our commander. This is your first official order from your captain!',
+], {
+    image: 'assets/images/npcs/Cyllene.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 9), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 11, GameConstants.AchievementOption.less)]),
+});
+const Kamado1 = new NPC('Commander Kamado', [
+    'I have been waiting for you! I am Kamado, commander of the Galaxy Expedition Team! Hrrrm... So, you are <player>.',
+    'I\'ve been briefed on your situation—including how you fell from the rift in the sky. Now then... Let\'s see what you\'re made of! Face me in combat!',
+    'Hrrrm! You’ve got some fight in you! Your sumo needs work, but I do see some potential...',
+    'Don\'t expect a warm welcome from everyone! Naturally, some will be slow to trust an outsider who literally fell right out of the blue. The superstitious among us might see your arrival as a portent of disaster!',
+    'But you passed the trial that was put to you. No matter how odd you may seem, you\'re part of Jubilife Village now. Dedicate yourself to the work of the Galaxy Expedition Team',
+    'But I warn you, <player>... Pokémon are terrifying creatures. Keep your wits about you as you work!',
+], {
+    image: 'assets/images/npcs/Kamado.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 10), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 12, GameConstants.AchievementOption.less)]),
+});
+const Akari2 = new NPC('Akari', [
+    'I recently got a request from Mai of the Diamond Clan, but... I was thinking maybe you could handle it for me. I was told it would require a bit of skill with battling Pokémon, so...',
+    'Listen—do you have a bit of time after this?',
+    'You see, I\'ve got a partner of my own. We may not get along perfectly, but we\'ve got to work together to help complete the Pokédex!',
+    'When we were attacked by those Shinx, I got too scared to think straight, and...I couldn\'t handle battling as a team. Ever since then, my partner\'s refused to listen to anything I tell him...',
+    'So please! Have a battle with me. I want to learn how to fight effectively!',
+], {
+    image: 'assets/images/npcs/Akari.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 11), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 13, GameConstants.AchievementOption.less)]),
+});
+const Akari3 = new NPC('Akari', [
+    'Now I suppose it\'s time I went to meet Mai. You remember? I mentioned earlier that I could use your help with Mai\'s request.',
+    'I\'m to meet her at Fieldlands Camp. You should come as well!',
+], {
+    image: 'assets/images/npcs/Akari.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 13), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 15, GameConstants.AchievementOption.less)]),
+});
+const Mai1 = new NPC('Mai', [
+    'My, my... A new face in the village? Not that it matters to me if you\'re new. If you\'re here, I assume you\'re prepared to be of help.',
+    'I am one of the wardens of the Diamond Clan. You may call me Mai. I suppose you might not even know what a warden is, if you\'re new to Hisui... But such talk can wait. Right now, I\'d rather we get straight to the point. I have a problem that I need help solving. So the more important question is this...',
+    'Do you feel confident that you can lead your Pokémon in battle?',
+    'That\'s good to hear. This here is my partner, Munchlax. We were raised together like siblings. He battles at my side by choice, without needing any silly little balls like you use. Watch and learn.',
+], {
+    image: 'assets/images/npcs/Mai.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 14), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 16, GameConstants.AchievementOption.less)]),
+});
+const Mai2 = new NPC('Mai', [
+    'You and your Pokémon fought well together! You practically acted as one with them. Rather like the legendary hero of old... The one we tell stories of to our children.',
+    'I think you\'re indeed the one for the job. You see, I need someone to deal with an alpha Pokémon causing trouble upon Deertrack Camp. It is a large, fearsome foe—like any alpha—but you\'ll come, won\'t you?',
+    'Though... Before we continue, I must ask. Do you already know about almighty Sinnoh?',
+    'Almighty Sinnoh steers all time. It\'s said to have created the very universe using its power over time\'s flow, and this land of Hisui was born in the process. It\'s by the grace of almighty Sinnoh that Pokémon can live and thrive here.',
+    'We of the Diamond Clan are descendants of a people who crossed the sea and settled here in the Hisui region to venerate almighty Sinnoh. However, it stole away from the world long ago, hiding itself from our sight... Almighty Sinnoh has only rarely been seen by any human, if the old tales are to be trusted.',
+    'But there are still Pokémon here today in Hisui with a connection to almighty Sinnoh. And it is the duty of wardens like myself to attend to their needs. The Pokémon that graces Deertrack Heights is one of those honored few. It is directly descended from a Pokémon that was blessed with almighty Sinnoh\'s protection.',
+], {
+    image: 'assets/images/npcs/Mai.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 16), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 18, GameConstants.AchievementOption.less)]),
+});
+
+const AdamanIrida1 = new NPC('Adaman & Irida', [
+    'Look who\'s being punctual! Finally realized you\'re wasting almighty Sinnoh\'s precious time by bowing to a sham?',
+    '<i>There you go again, insisting on your false image of almighty Sinnoh as a ruler of time! My people follow the true almighty Sinnoh—the font of all creation and ruler of space!</i>',
+    'What do you intend to do about that Kleavor, Commander Kamado?! He may be descended from a warrior of almighty Sinnoh, but look at the mess he’s causing. We can’t sit back and let him rage on!',
+    '<i>Would the Diamond Clan have the Pearl Clan bring down one of its own honored nobles? We don\'t even know what drove Lord Kleavor into such a violent frenzy.</i>',
+    'Aha, <player>! I hear from Mai you earned Wyrdeer’s favor. I have a proposition. Why not send this one to study Kleavor before deciding what must be done?',
+    '<i>The Lord of the Woods—Kleavor—is descended from a Pokémon that was blessed with almighty Sinnoh’s own power. No other Pokémon you’ve yet encountered can compare to his strength. Be warned.</i>',
+    'You\'ll find Kleavor at Grandtree Arena. That\'s in the very heart of the Heartwood. His warden is a boy named Lian.',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 18), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 20, GameConstants.AchievementOption.less)]),
+});
+
+const AdamanMai1 = new NPC('Adaman & Mai', [
+    '<i>Wyeeer!</i>',
+    'I spoke to Wyrdeer about what\'s been going on. I told him how you\'ve been trekking all over the fieldlands seeking a way to quell Kleavor\'s frenzy. Wyrdeer\'s found you worthy, you see. Which means you\'ll need a flute like we have.',
+    'Mind demonstrating for them, Mai? This is very important, so listen well!',
+    '<i>Wyrdeer opened his heart and learned well the sound of your playing!</i>',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 20), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 22, GameConstants.AchievementOption.less)]),
+});
+
+const Kamado2 = new NPC('Commander Kamado', [
+    'I have already received the reports of your exploits. You successfully quelled Kleavor\'s frenzy, restoring peace of mind to Hisui\'s people.',
+    'You are a stranger to us—one who fell out of the very sky. Yet you have served the Galaxy Team admirably. I admit you have earned yourself some degree of recognition.',
+    'But things are not settled yet. I’ve received word that there are other Pokémon nobles falling prey to such frenzies elsewhere in Hisui.',
+    'So carry on with your research and survey duties, and prove that you truly are an asset to us!',
+], {
+    image: 'assets/images/npcs/Kamado.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 23), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 25, GameConstants.AchievementOption.less)]),
+});
+
+const Arezu1 = new NPC('Warden Arezu', [
+    'Oh, hey! You’re <player>, the person who quelled Kleavor, aren\'t you?',
+    'I\'m Arezu, by the way! I\'m a warden of the Diamond Clan. My special skill is giving haircuts. Real nice to meet you!',
+    'It\'s come to Ursaluna as well... even Pokémon that are not nobles can become frenzied... Adaman\'s got his hands full running our clan and all, and Ursaluna\'s warden, Calaba of the Pearl Clan, wouldn\'t even give me the time of day... she is the most narrow- minded— Ahem! Bound by tradition.',
+    'I order you to study Ursaluna in the Crimson Mirelands!',
+], {
+    image: 'assets/images/npcs/Arezu.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 24), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 26, GameConstants.AchievementOption.less)]),
+});
+
+const Calaba1 = new NPC('Warden Calaba', [
+    'I\'m Calaba of the Pearl Clan. Warden Calaba to you.',
+    'You must be the one they say fell out of the space-time rift. I\'ve already heard about you. That you quelled Kleavor in his frenzy.',
+    'What you did is hardly different from bullying a Pokémon into submission, after all. And you run about catching Pokémon up in those little balls you carry...',
+    'I don\'t need any help from your sort. Or the Diamond Clan, for that matter. That young lady, Arezu, offered to help, but associating with the Diamond Clan... It just won\'t do. Be on your way. There is much I must do, and I\'d prefer not to be distracted any further.',
+], {
+    image: 'assets/images/npcs/Calaba.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 26), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 28, GameConstants.AchievementOption.less)]),
+});
+
+const Volo2 = new NPC('Volo', [
+    'I think that settles it. I must ask your help in retrieving the stolen Wall Fragment. With your skill, it should be a cinch! Some bandits pillaged the Solaceon Ruins and made off with a fragment of the wall engravings!',
+    'Have you not heard of the notorious Miss Fortunes? They\'re a trio of bandits that have even hit us Ginkgo Guild merchants more than a few times! Not the kind of regulars I like to have, let me tell you!',
+    'I\'ll be happy to lend you a hand! Those sisters swiped my wares, too, and I\'m no Ginkgo Guild merchant if I take that lying down!',
+    'You know, I did see the remains of a campfire near the Mirelands Camp. Perhaps worth checking out?',
+], {
+    image: 'assets/images/npcs/Volo (Ginkgo).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 28), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 30, GameConstants.AchievementOption.less)]),
+});
+
+const Calaba2 = new NPC('Warden Calaba', [
+    'Oh, so you\'ve come to bother me again? Well, come as often as you\'d like, but it won\'t change my mind. This Wall Fragment... Those three bandits...',
+    'What? You went and retrieved the fragment from those bandits? Why go out of your way like that for a complete stranger like me? I guess you\'re that eager to calm Ursaluna, hmm?',
+    'Please lend me your strength, so that we may help Ursaluna. I could never bring myself to engage Pokémon in battle... But that\'s something I can rely on you for, am I right?',
+], {
+    image: 'assets/images/npcs/Calaba.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 30), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 32, GameConstants.AchievementOption.less)]),
+});
+
+const Calaba3 = new NPC('Warden Calaba', [
+    'Ursaluna, my poor darling. You must be exhausted from running around like that. Come. Let me make you all better.',
+    'I have here a special medicine of the Pearl Clan. It\'ll clear out any poison in a Pokémon\'s body. If poison\'s what\'s causing Ursaluna\'s rage, this is sure to calm him down. We call it...Toxi-Gone!',
+    '<i>Bleeeeeegh!</i>',
+    'Oh, but I almost forgot something important. Play your Celestica Flute for me, won\'t you?',
+    '<i>Ursaluna opened his heart and learned well the sound of your playing!</i>',
+], {
+    image: 'assets/images/npcs/Calaba.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 32), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 34, GameConstants.AchievementOption.less)]),
+});
+
+const Kamado3 = new NPC('Commander Kamado', [
+    'We have a situation here! Lilligant, Diamond Clan\'s Lady of the Ridge, is in a frenzy... And Arezu knowingly kept this from me!',
+    'If Arezu of the Diamond Clan was somehow involved in that situation with the raging Ursaluna of the Pearl Clan, it could lead to the two clans going at each other\'s throats again!',
+    'I\'d like to find out just what Arezu was thinking, but she\'s nowhere in Jubilife Village. Last I saw, she was at the Wallflower, polishing off a big ol\' plate of potato mochi. So Ursaluna and Warden Calaba found you worthy? That\'s perfect, then. Ursaluna should be able to sniff out Arezu, wherever she\'s gone.',
+    'If you are strong enough that Ursaluna deemed you worthy, then you should be ready to quell Lilligant\'s frenzy as well. You must quell any Pokémon that could cause harm to the people of Hisui. Always remember: we came here to make a new home where we could live without war or strife.',
+], {
+    image: 'assets/images/npcs/Kamado.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 33), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 35, GameConstants.AchievementOption.less)]),
+});
+
+const ArezuCalaba = new NPC('Arezu & Calaba', [
+    'Thanks a bunch, <player>. But...how\'d you find me all the way out here? Ursaluna  tracked me all the way here by the scent of those potato mochi I ate? He sure is something.',
+    '<i>Ahhh, there you are. Arezu, right? I owe you an apology. I treated you with disrespect, thinking you were just some whelp from the Diamond Clan. I\'m sorry for that. It\'s not your fault that Lilligant became frenzied nor that my Ursaluna was so enraged.</i>',
+    'It\'s OK... I didn\'t do a good job explaining myself, either. Ursaluna only started acting weird after he got too close to Lilligant and smelled her perfume. She was already frenzied by that point, so I\'m sure that\'s what caused it...',
+    'Don\'t you worry, Arezu. <player> will calm Lilligant, and that will be that. Things should settle down. Head to Brava Arena, <player>. That\'s where Lilligant\'s seat lies.',
+], {
+    image: 'assets/images/npcs/Calaba.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 35), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 36, GameConstants.AchievementOption.less)]),
+});
+
+const Kamado4 = new NPC('Commander Kamado', [
+    'So you successfully calmed Lilligant. Excellent... A stranger falls into our world from a rift in space-time... Then frenzies are induced by strange lightning, which likewise falls from that very same rift...',
+    'But you have no connection to the lightning. Isn\'t that right? We may need to investigate the rift itself to prove your motives are beyond impugning.',
+    'Your next orders are to begin the survey of the Cobalt Coastlands. I will let you know in advance—there are no Pokémon nobles in the Cobalt Coastlands. We did have a lord in the coastlands...until a few years ago. A tragedy took him from us.',
+    'Now, we\'ve had reports of people seeing strange, shadowy figures on the island the lord used to call his home. It seems some of their members were attacked by a ghost while out gathering materials around Firespit Island. Irida will meet you in the Cobalt Coastlands.',
+], {
+    image: 'assets/images/npcs/Kamado.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 37), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 39, GameConstants.AchievementOption.less)]),
+});
+
+const Palina = new NPC('Palina', [
+    'I\'m Palina of the Pearl Clan. And who might you be? Ah, so you\'re that child from the Galaxy Team. I heard how you aided Kleavor and Lilligant when none other could quell their frenzy.',
+    'So, what brings you to the Cobalt Coastlands? We have no lord here, much less a frenzied one for you to quell. Our previous lord...was swallowed by the waves. He was rescuing his young pup that had been swept out to sea and ended up giving his life to ensure the pup\'s safe return...',
+    'This quiet, skittish Growlithe is the child of the previous lord. I\'ve no doubt this little one has the potential to be a fine lord, but witnessing his father\'s demise has left deep scars in his heart...',
+    'A survey of Firespit Island? I see... There are rumors the place is haunted by strange shadows these days. You should speak to Iscan, a warden of the Diamond Clan. He should be able to help you.',
+], {
+    image: 'assets/images/npcs/Palina.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 40), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 42, GameConstants.AchievementOption.less)]),
+});
+
+const Iscan = new NPC('Warden Iscan', [
+    'I\'m Iscan of...of the Diamond Clan... A Galaxy Team member...with a Celestica Flute? O-oh. You must be <player>, right? H-have I done something to warrant your visit?',
+    'So you...you want to go to Firespit Island? W-well, if you insist...then you\'d probably need Basculegion\'s favorite snack. That should help help him warm up to you. But preparing his favorite... Oh... It\'s, um, more than a little difficult... More like an impossibly high hurdle...',
+    'I-I\'ll tell you... I have the right materials, but... It\'s D... D... Dus... Dusclops... Oooh, even saying its name fills me with dread... So...the materials for the food...have to be imbued with flavor by Dusclops\'s Dark Pulse...',
+    'Well, the Pokémon I need has only one eye and can be found wandering around Deadwood Haunt...',
+], {
+    image: 'assets/images/npcs/Iscan.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 41), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 43, GameConstants.AchievementOption.less)]),
+});
+
+const IscanPalina1 = new NPC('Iscan & Palina', [
+    'Oh, hello, <player>... I-I was just waiting for you... O-oh, Palina! I...I thought you said we shouldn\'t be seen together?',
+    '<i>Both I and the Growlithe pups were eager to meet with the great Basculegion again. </i>',
+    'I see... Well in that case, let me summon Basculegion.',
+    '<i>Basculegion opened his heart and learned well the sound of your playing!</i>',
+    'Now you can ride Basculegion across Tranquility Cove and head to Firespit Island.',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 43), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 45, GameConstants.AchievementOption.less)]),
+});
+
+const Kamado5 = new NPC('Commander Kamado', [
+    'You did well on your mission in the Cobalt Coastlands. Your efforts there aided not only the Galaxy Team but the Pearl Clan as well.',
+    '...I do hope your efforts will also have an impact on the space-time rift, somehow. If we are able to get rid of that rift, it should clear any lingering doubts about your origins. Though how we might actually close the rift, I haven\'t the slightest idea.',
+    'I have your next orders. You must go to the Coronet Highlands to quell another frenzied noble — Electrode, Lord of the Hollow. But first, to demonstrate what you\'re capable of, Battle Adaman from the Diamond Clan.',
+], {
+    image: 'assets/images/npcs/Kamado.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 49), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 51, GameConstants.AchievementOption.less)]),
+});
+
+const Ingo = new NPC('Warden Ingo', [
+    'I am the warden Ingo. I understand you\'ll need a hand from Sneasler in order to meet Electrode. Whether she\'ll see fit to help you, however, we can only find out by making the journey. Now, let\'s have a safe journey to Mount Coronet! All aboard!',
+], {
+    image: 'assets/images/npcs/Ingo.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 51), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 53, GameConstants.AchievementOption.less)]),
+});
+
+const Volo3 = new NPC('Volo', [
+    '<player>, do you remember what you saw before you fell out of that rift? Was there anything inside? You see, personally, I suspect that whatever is on the other side of that rift is causing the strange lightning that plagues us.',
+    'I did some digging and found records indicating that this same space-time rift also appeared in Hisui in the distant past. That\'s why we already had a name for it as it appeared, in fact. Now, what kind of world do you suppose stretches out on the other side of the rift?',
+    'But then that begs the question: Why has the space-time rift reopened, when it closed once so long ago? Oh, I am a mere admirer of ruins and little more! If something needs investigating, then I would entrust that task to <player>! Until next time, then!',
+], {
+    image: 'assets/images/npcs/Volo (Ginkgo).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 53), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 55, GameConstants.AchievementOption.less)]),
+});
+
+const Kamado6 = new NPC('Commander Kamado', [
+    'Whyever would this “almighty Sinnoh” drive the nobles to frenzy? Is it angered by something? Or does it seek to drive a wedge between people and Pokémon? Well, far be it from us humans to fathom the thoughts of Pokémon...',
+    'You handled the situation with Electrode well. You\'ve now quelled the frenzy of four nobles. When word of these frenzies arrived from all over Hisui, I feared what would become of us. But here we are, already preparing to quell the final noble.',
+    'Your mission is to quell Avalugg, the final lord! And perhaps in doing so, we may trigger some change in the space-time rift as well! Meet Adaman and Irida in the cold reaches of the Alabaster Icelands. Until then.',
+], {
+    image: 'assets/images/npcs/Kamado.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 57), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 58, GameConstants.AchievementOption.less)]),
+});
+
+const AdamanIrida2 = new NPC('Adaman & Irida', [
+    '<player>! Brisk out here, isn\'t it? I\'m practically sweating. If you think this is bad, just wait. This is nothing compared to where we\'re headed.',
+    '<i>You know, I\'m beginning to think the problem between us isn\'t a Diamond Clan thing or a Pearl Clan thing. It\'s just a you-and-me thing. We\'ll never see eye to eye on anything, will we?</i>',
+    'I don\'t see how we could, as long as you and your clan cling to your vision of an almighty Sinnoh that reigns over time. We\'re headed to see my teacher. And he\'s only ever found in one place.',
+    '<i>Which is? You\'re talking about that Gaeric fellow, right? Where do we find him?</i>',
+    'At Avalugg\'s Legacy, obviously! Where else but a great mass of ice could I have meant when I said we\'d be headed somewhere even colder?',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 59), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 61, GameConstants.AchievementOption.less)]),
+});
+
+const Gaeric = new NPC('Warden Gaeric', [
+    'I am Gaeric. I serve as one of the Pearl Clan\'s wardens. And you must be <player>, right? Of the Galaxy Team. Answer me this, would you? On what grounds do you come here seeking to quell Lord Avalugg? What is wrong with him being frenzied?',
+    'Setting aside any orders, what is it your heart tells you to do? Our mighty Lord of the Tundra, Avalugg, has done nothing to trouble any person or Pokémon! I must judge whether this child is up to the task!',
+    'My musculature is as hard and unyielding as ice! Think you can break through?!',
+], {
+    image: 'assets/images/npcs/Gaeric.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 60), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 62, GameConstants.AchievementOption.less)]),
+});
+
+const Sabi = new NPC('Warden Sabi', [
+    'My clairvoyance told me...that I\'d lead you on a chase! Think you can reach me? Hello, my name\'s Sabi! Nice to meet you, <player>!',
+    'I\'ve heard about you. You\'re super talented, right? I bet you\'re gonna be fun to play with! I know why you\'re here, too! You want Braviary\'s help so you can quell Avalugg\'s frenzy, don\'t you?',
+    'Snowpoint Temple! I\'ve opened the front door for you. Be warned! Those who cannot solve the temple\'s puzzles won\'t get very far within.',
+], {
+    image: 'assets/images/npcs/Sabi.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 62), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 64, GameConstants.AchievementOption.less), new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Avalugg\'s Legacy'))]),
+});
+
+const Kamado7 = new NPC('Commander Kamado', [
+    'Hrmmm... The way the sky has changed... It is ominous. Very ominous indeed. The first strike of that strange lightning, the one that drove Kleavor into a frenzy... It struck the night that <player> fell from the sky, did it not? It only seems natural to think that the two events might be linked in some way.',
+    'Did you think to gain our trust by quelling the frenzies you yourself brought about? And having gained our trust, what then? What is it you\'re really after here? Investigate this latest disaster... But not as a member of the Galaxy Team.',
+    'There are those in our village who cannot trust a stranger like you who fell from the sky. And so I must ask you to leave. You are no longer welcome in the Galaxy Team.',
+    'Consider yourself banished from this village until you can explain why these calamities keep befalling our good people... No—until you\'ve restored our world to its rightful state and proven your innocence beyond doubt!',
+], {
+    image: 'assets/images/npcs/Kamado.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 67), new QuestLineCompletedRequirement('The Frenzied Nobles of Hisui', GameConstants.AchievementOption.less)]),
+});
+
+const Lian = new NPC('Warden Lian', [
+    'Look at the size of that rift! If lightning starts pouring from it, all the Pokémon in Hisui could be thrown into a frenzy!',
+    'Help?! That\'s not exactly something I can do. It\'s not that I wouldn\'t like to help you...but it would put Irida in a difficult position.',
+    'I truly do wish that I could repay you for quelling Kleavor\'s frenzy as you did. You must know that. But there\'s nothing I alone can do for you.',
+    'Warden Mai might be able to help you, though. She\'s a caring woman, after all. You\'ll most likely find Mai at the Heights Camp.',
+], {
+    image: 'assets/images/npcs/Lian.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Origin of Sinnoh'), new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 1, GameConstants.AchievementOption.less)]),
+});
+
+const Mai3 = new NPC('Warden Mai', [
+    'My, my... What a frightful sky. Such a disturbing sight would be enough to put anyone ill at ease. You can\'t return to that village of yours, can you?',
+    'But I\'m afraid the Diamond Clan cannot be the ones to save you. The Diamond Clan could end up at war with the Galaxy Team if things went badly. I think you would regret that as much as anyone.',
+    'The great Wyrdeer took a liking to you. I want to offer you my support. But... Forgive me. I cannot help you in this.',
+], {
+    image: 'assets/images/npcs/Mai.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 0), new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 2, GameConstants.AchievementOption.less)]),
+});
+
+const Volo4 = new NPC('Volo', [
+    'Strange events seem to follow you wherever you go, don\'t they? I\'ve been looking all over for you, you know! What would I do if I were to lose one of my favorite customers?',
+    'Don\'t worry. I\'ve already heard what happened. A good merchant knows well the importance of staying abreast of all the latest news. There are still corners of the Hisui region where we can stash you away in secret.',
+    'I know, I know—it\'s no palace. But you know the saying about beggars and choosers.',
+], {
+    image: 'assets/images/npcs/Volo (Ginkgo).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 1), new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 3, GameConstants.AchievementOption.less)]),
+});
+
+const Cogita1 = new NPC('Cogita', [
+    'Shirking your work to come pester me again? Even beneath a bleeding sky, you never change, Volo. Ah, the poor wretch you spoke of. Lost in time and space.',
+    'It seems I\'ll be able to fulfill my duty at long last, thanks to you. I am to guide you, lost one. For the task of preventing great disaster falls to you. The rift in space-time must be mended, lest time and space themselves be thrown out of balance.',
+    'Now listen, lost one. Here is what you must do. Hisui holds three lakes of great importance— Lake Verity, Lake Valor, and Lake Acuity. Complete the trials each will set you, and bear their gifts to the Shrouded Ruins. There you may receive the Red Chain. With it, perhaps you can bind the world together.',
+], {
+    image: 'assets/images/npcs/Cogita.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 2), new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 4, GameConstants.AchievementOption.less)]),
+});
+
+const Cogita2 = new NPC('Cogita', [
+    'Seems I\'ve made it in time. With age comes wisdom, I guess. How do we make this Red Chain? We speak of a divine instrument—one said to be capable of binding the very world. Do you really imagine it can be forged by mortal hands?',
+    '<i>Kyouuuun! Kyauun! Kyuuun! </i>',
+    'Ah... The Pokémon of the lakes! So it was true... The pact our people have passed down for all these generations has been kept. At last, I can set this burden aside!',
+    'It seems that the commander is going to forgo waiting for our investigation to finish. He plans to climb Mount Coronet himself. What\'s he thinking?! Even if he makes it up there, what can he do against a giant rift in space-time?',
+    'Well, he doesn\'t yet know that you have managed to get the Red Chain, now, does he? Even the commander should see reason then and call off this foolhardy plan of his.',
+], {
+    image: 'assets/images/npcs/Cogita.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 4), new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 6, GameConstants.AchievementOption.less)]),
+});
+
+const Cyllene4 = new NPC('Captain Cyllene', [
+    'So you managed not to die. Just as I ordered. Well done. Before moving forward, I must ask... I assume that you are here again because you\'ve managed to learn something of use?',
+    '<i> You explain about the Red Chain you obtained. </i>',
+    'The Security Corps had been scouting the area near the space-time rift...and they reported sightings of something on the other side of it. The commander made the decision to take the Security Corps to the mountain so as to prepare to fend off any possible threat.',
+    'As the captain of the Survey Corps, I hereby order you to proceed as follows. <player>! Take that Red Chain to Mount Coronet, make your way to the peak, and put an end to all this. You are officially reinstated at your former rank.',
+], {
+    image: 'assets/images/npcs/Cyllene.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 5), new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 7, GameConstants.AchievementOption.less)]),
+});
+
+const Laventon4 = new NPC('Professor Laventon', [
+    'Such dreadful power... It\'s certainly beyond our current capabilities to survey such a creature. It seems likely that a buildup of this same energy was what caused the strange lightning that threw the noble Pokémon into their frenzied states...',
+    'I can\'t believe there really were TWO almighty Sinnoh, after all... Guess that means neither of our clans was really wrong, huh? Yeah—thank goodness you were here, huh? We\'d have had no chance getting through this disaster without you!',
+    'We\'re still not through it! The Red Chain has shattered! Relax. I\'ve got a plan...thanks to what mighty Dialga & Palkia told me!',
+    '<i>The stone of creation\'s beginning. The chain of red. The vessel of humankind\'s invention. Unite these three, and calm the chaos now pervading space and disturbing the flow of time.</i>',
+    '"The vessel of humankind\'s invention"... I daresay that might refer to a Poké Ball. We must search for stone—or rather ore, I suppose—that shares the same material properties as the Sacred Plates!',
+    'It\'s decided, then! Thus begins our search for the "stone of creation\'s beginning." Although the name is rather a mouthful, wouldn\'t you say? I propose we call it... "Origin Ore"! We make for the Primeval Grotto!',
+], {
+    image: 'assets/images/npcs/Laventon.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 9), new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 11, GameConstants.AchievementOption.less)]),
+});
+
+const Akari4 = new NPC('Akari', [
+    'It\'s all in pieces now, but this is what\'s left of the Red Chain. Next comes the stone of creation\'s beginning. This is my true battlefield, <player>. Even if it may be safe indoors.',
+    'This may take us some time. Perhaps you best wait outside while I work... We\'ve done it! It\'s complete! I dub it...the Origin Ball! Everything\'s ready now, <player>. Take the Origin Ball, and hurry back to the Temple of Sinnoh!',
+], {
+    image: 'assets/images/npcs/Akari.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 11), new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 13, GameConstants.AchievementOption.less)]),
+});
+
+const Volo5 = new NPC('Volo', [
+    '<player>! There you are! See these patterns modeled after Pokémon? I’ve come to think that they might be letters— rather like hieroglyphs, if you will. I’ve inspected ruins across the region and have concluded that they all seem to tell the same tale.',
+    'The tale of a brave soul who, together with the Pokémon at his side, went on a journey to search for the fragments of an all-encompassing deity. And its name is... Arceus. But that device you have—I was able to get a good look at it as we were visiting the lakes. You say it’s called an Arc Phone, correct? I could swear that it has some sort of tie to Arceus...',
+    'They must surely be the plates! Yes, the very plates you collected as you went about quelling all the frenzied nobles. I think we should try to gather all the plates! And I’ve got just the idea where to start our search...',
+    'According to my own investigations... This alpha Vespiqueen has the plate we are looking for! You’re stronger than any other in Hisui! Please, take care of that Vespiquen!',
+], {
+    image: 'assets/images/npcs/Volo (Ginkgo).png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Volo\'s Dream'), new QuestLineStepCompletedRequirement('Volo\'s Dream', 1, GameConstants.AchievementOption.less)]),
+});
+
+const Cogita3 = new NPC('Cogita', [
+    'Oh, lost one... It’s miraculous what you’ve done! It seems the Red Chain served its purpose well. But what brings you here? Have you yet need of me?',
+    'Ah, yes. A tale whose origins lie a millennium or two ago... Those were the days of the ancient Sinnoh people, from whom I am descended across many generations. These forbears of mine worshiped Arceus as the Pokémon that created the Hisui region. And I have heard of certain fragments—plates, as they are called—that were given to the ancestors of Pokémon such as Kleavor and Wyrdeer.',
+    'There are still other tremendous Pokémon in Hisui—other mysteries to be solved. Whether they are connected to Arceus, I cannot say for certain. But in searching them out, perhaps you’ll stumble upon the path you seek. Let me think... There are the Pokémon of the lakes, of course. And the temple giant. The crescent moon, the volcano... And perhaps you might even return to the very beginning...',
+], {
+    image: 'assets/images/npcs/Cogita.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Volo\'s Dream', 1), new QuestLineStepCompletedRequirement('Volo\'s Dream', 3, GameConstants.AchievementOption.less)]),
+});
+
+const Irida = new NPC('Irida & Iscan', [
+    'Hello, <player>. Thank you for coming so far out of your way. It seems something is once again very much amiss on Firespit Island. Might as well get this over with.',
+], {
+    image: 'assets/images/npcs/Irida.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Volo\'s Dream', 3), new QuestLineStepCompletedRequirement('Volo\'s Dream', 4, GameConstants.AchievementOption.less)]),
+});
+
+const Melli = new NPC('Warden Melli', [
+    'I don’t suppose a grunt like you would even know, but I guess it behooves me to ask... Do you know the Pokémon called Cresselia?',
+    'Cresselia is said to be the very embodiment of the crescent moon. Her feathers are called Lunar Feathers, and legend says that if you hold one as you fall asleep, you’ll be visited with wondrous dreams.',
+    'Well, I call her a nightmare, that pesky Cresselia! She’s descended upon Moonview Arena and caused my lord to hide itself away! I’m so worried about Electrode that I can’t even sleep, never mind dream!',
+    'Oh, do defeat that pesky flying croissant! Do it for my poor Electrode... Though I suppose Cresselia can’t be all bad, if she at least recognizes the perfection of the arena looked after with loving care by the great Melli!',
+], {
+    image: 'assets/images/npcs/Melli.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Volo\'s Dream', 5), new QuestLineStepCompletedRequirement('Volo\'s Dream', 6, GameConstants.AchievementOption.less)]),
+});
+
+const Adaman = new NPC('Adaman & Sabi', [
+    'Oh! Wouldn’t have expected to run into you up here, <player>. What are you up to? You’re here to try and find the secrets lurking in Snowpoint Temple, aren’t you?.',
+    'You do tend get mixed up in all kinds of strange goings-on, <player>. This door here—well, they say behind it sleeps a Pokémon so great it could tow around the entirety of the continents that lie to the south.',
+    '<i>The Stone Plate, Iron Plate, and Icicle Plate you’re carrying are reacting to the door!</i>',
+], {
+    image: 'assets/images/npcs/Adaman.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Volo\'s Dream', 7), new QuestLineStepCompletedRequirement('Volo\'s Dream', 8, GameConstants.AchievementOption.less)]),
+});
+
+const Kamado8 = new NPC('Commander Kamado', [
+    'Prelude Beach... Indeed a place of beginning. Now is not the time for words. Face me in battle!',
+], {
+    image: 'assets/images/npcs/The Galaxy Team\'s Kamado.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Volo\'s Dream', 10), new QuestLineStepCompletedRequirement('Volo\'s Dream', 12, GameConstants.AchievementOption.less)]),
+});
+
+const Cogita4 = new NPC('Cogita', [
+    'Here you are again. Have you collected all the plates?',
+    'If there’s yet more you want to know... Honest work earns honest pay. Here you are, <player> —a reward for the help you’ve brought Hisui.',
+    'Well, you’ve managed to collect quite a lot of plates by now... But I still don’t know what you’re to do with them, exactly. It’s just a hunch, but perhaps you should have a look around the Celestica Ruins? Volo will see you there.',
+], {
+    image: 'assets/images/npcs/Cogita.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Volo\'s Dream', 12), new QuestLineStepCompletedRequirement('Volo\'s Dream', 14, GameConstants.AchievementOption.less)]),
+});
+
+const Volo8 = new NPC('Pokémon Wielder Volo', [
+    'Now hand over the plates you gathered! I will be the one to bring them all together! My desire to meet Arceus cannot be contained any longer! I need to know what it is! I MUST know what it is!',
+    'If I can meet Arceus myself, then I may also be able to subjugate its power... And using that, I will attempt to create a new, better world! ',
+], {
+    image: 'assets/images/npcs/Pokémon Wielder Volo.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Volo\'s Dream', 13), new QuestLineStepCompletedRequirement('Volo\'s Dream', 15, GameConstants.AchievementOption.less)]),
+});
 
 const ForcesCogita1 = new NPC('Cogita', [
     'I\'ve just been told of the foul plan Volo had concocted. Well, think no more on that scoundrel. Just another tale of passion burning too bright and consuming its bearer. This is what happens, if you allow it to.',
@@ -9768,6 +10260,7 @@ const ForcesCogita1 = new NPC('Cogita', [
     'Lastly, Landorus, the Pokémon hailed as the Guardian of the Fields. It seems it can be glimpsed in the Obsidian Fieldlands. Perhaps you\'d be so good as to catch it for me?',
     'I know not why these three have chosen to show themselves. Perhaps the cause lies with the space-time rift...or simply within their own whims...',
 ], {
+    image: 'assets/images/npcs/Cogita.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Incarnate Forces of Hisui'), new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const ForcesCogita2 = new NPC('Cogita', [
@@ -9779,8 +10272,10 @@ const ForcesCogita2 = new NPC('Cogita', [
     'This is Enamorus, a Pokémon hailed as the Herald of Spring. Enamorus is not particularly given to ill behaviour. But I imagine you\'d like to document her for your Pokédex, wouldn\'t you?',
     'Catch her then, if you like. She always flits about in the Crimson Mirelands.',
 ], {
+    image: 'assets/images/npcs/Cogita.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1), new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 3, GameConstants.AchievementOption.less)]),
 });
+
 const ForcesCogita3 = new NPC('Cogita', [
     'Aha, you\'ve caught Enamorus as well. And you know so much about her.',
     'Enamorus arrives in Hisui once winter has passed. Hence the epithet Herald of Spring.',
@@ -9791,26 +10286,153 @@ const ForcesCogita3 = new NPC('Cogita', [
     '"Once there was a god of field, and once there was a god of spring. Upon Hisui\'s winds it wheeled, brought life to every growing thing..." Was that how that old verse went?',
     'I have passed on to you all there is to pass. Where history goes from here...I leave to you and your companions to see through.',
 ], {
+    image: 'assets/images/npcs/Cogita.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 4), new QuestLineCompletedRequirement('Incarnate Forces of Hisui', GameConstants.AchievementOption.less)]),
 });
+
+const azureFlute = new NPC('Investigate your Azure Flute',
+    [
+        'The Celestica Flute transformed...into the Azure Flute!',
+        'Seek out all the Pokémon there are to meet, then play your flute upon the dais in the Temple of Sinnoh.',
+    ], {
+        image: 'assets/images/items/fluteItem/Azure_Flute.png',
+        requirement: new MultiRequirement([new QuestLineStartedRequirement('Arceus: The Deified Pokémon'), new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 1, GameConstants.AchievementOption.less)]),
+    });
+
+const ArceusAdaman = new NPC('Adaman',
+    [
+        'Hey, if it isn’t <player>! Good timing. I found some treasure you’d be interested in.',
+        'But come to think of it, what I’ve found seems too valuable to just let you in on it for free. You’ll need to work a little!',
+        'Here’s the deal. I want you to show me what’s in your mind, your heart...your soul! In short: battle me!',
+    ], {
+        image: 'assets/images/npcs/Adaman.png',
+        requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 0), new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 2, GameConstants.AchievementOption.less)]),
+    });
+
+const ArceusIrida = new NPC('Irida',
+    [
+        'I was just about to go find you and tell you about this precious—incredibly precious—thing I found! Are you curious? Tantalized?',
+        'But anyway, before I show you... Can you guess what I want to do? Please, take the hint! I’m saying I want to have a battle with you!',
+        'My partners and I are going to get stronger and travel all across this wide world!',
+    ], {
+        image: 'assets/images/npcs/Irida.png',
+        requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 2), new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 4, GameConstants.AchievementOption.less)]),
+    });
+
+const ArceusLaventonGiratina = new NPC('Laventon',
+    [
+        'Have you heard? There’ve been reports that a huge shadow appeared in the Cobalt Coastlands and then just...vanished without a trace. You must tell me... You went to the Temple of Sinnoh with Volo, correct? What exactly happened...?',
+        '<i>... ... ... ... </i>',
+        'I see... In that case, the shadow in the Cobalt Coastlands may be none other than Giratina, the Pokémon said to have once been banished to the reverse side of our world. I do believe this calls for a survey...',
+    ], {
+        image: 'assets/images/npcs/Laventon.png',
+        requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 4), new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 6, GameConstants.AchievementOption.less)]),
+    });
+
+const ArceusLaventonShaymin = new NPC('Laventon',
+    [
+        'Giratina chose to protect the land of Hisui after discovering it was no match for you. Volo said that we should study it and add it to the Pokédex.',
+        'Here is someone who also needs your help. Their name is Medi from the Diamond Clan. When she was little, she got lost in the Obsidian Fieldlands.',
+        'That’s where she met it—a Pokémon I’d never seen before. And it led her back to a place she recognized. Thanks to that Pokémon, she made it home safely.',
+        'So I’d like you to help her! Here—this is the only clue I’ve got: She stumbled across a field of beautiful flowers. In the Obsidian Fieldlands only Floaro Gardens would fulfill this description.',
+    ], {
+        image: 'assets/images/npcs/Laventon.png',
+        requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 6), new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 8, GameConstants.AchievementOption.less)]),
+    });
+
+const ArceusMedi = new NPC('Medi',
+    [
+        'The Pokémon - It gave me a flower and then set off walking. It’s called a Gracidea flower.',
+        'I have long searched for those exact flowers but it seems like they\'re no way to be found in Hisui.',
+        'It came to me in a dream that in the distant future Hisui would be known as another name and in that new region Gracideas could be obtained where the Heart is at Home.',
+    ], {
+        image: 'assets/images/npcs/Medi.png',
+        requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 7), new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 8, GameConstants.AchievementOption.less)]),
+    });
+
+const ArceusCael = new NPC('Cael',
+    [
+        'You the one who accepted my request? Well then, let’s get right to business.',
+        'There’s an old tale that’s long been told in the Hisui region about a dark nightmare that visits people on lonely paths at night. I never put any stock in it myself...until I saw it. I saw a terrifying black Pokémon just like the one in the stories!',
+        'They say that people who are trapped in the nightmares it creates never wake again. We can’t wait for someone to fall victim to it. We’ve got to act before that can happen.',
+        'I saw it near the Clamberclaw Cliffs, partway up Mount Coronet... And it was when I was out walking alone at night, just like the old stories all say.',
+        'Be careful if you go in search of it... I wouldn’t want you to lose your life over this',
+    ], {
+        image: 'assets/images/npcs/Cael.png',
+        requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 10), new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 12, GameConstants.AchievementOption.less)]),
+    });
+
+const ArceusVessa = new NPC('Vessa',
+    [
+        'I’ve been waiting for you, <player>. My name’s Vessa. There’s something real important I need to tell you.',
+        'Hundreds of years ago, a being that brought calamity to this region was sealed away by someone using the power of a strange magic. But now, for some unknown reason, the magic has come undone and the seal is broken.',
+        'I hate to think what might happen at this rate... So please hear me out. I need you to restore the broken seal...',
+        'After the seal was broken, a whooole bunch of wisps scattered across the Shrouded Ruins...',
+        'I know it’s a huge task, but please...you just have to gather all the wisps for me!',
+    ], {
+        image: 'assets/images/npcs/Vessa.png',
+        requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 13), new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 15, GameConstants.AchievementOption.less)]),
+    });
+
+const PlayAzureFlute = new NPC('Play the Azure Flute',
+    [
+        '<i>You played the Azure Flute.</i>',
+        '<i>A glowing stairway appeared!</i>',
+    ], {
+        image: 'assets/images/items/fluteItem/Azure_Flute.png',
+        requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 15), new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 16, GameConstants.AchievementOption.less)]),
+    });
+
+const NobleKleavorGift = new GiftNPC('Warden Lian', [
+    'After fighting you so many times, it looks like Lord Kleavor has taken an interest in you.',
+    'Will you take it with you?',
+], () => {
+    App.game.party.gainPokemonByName('Noble Kleavor');
+}, 'assets/images/pokemon/900.01.png', { saveKey: 'kleavorgift', image: 'assets/images/npcs/Lian.png', requirement: new ClearGymRequirement(1/*000*/, GameConstants.getGymIndex('Grandtree Arena')) });
+const NobleLilligantGift = new GiftNPC('Warden Arezu', [
+    'After fighting you so many times, it looks like Lady Lilligant has taken an interest in you.',
+    'Will you take it with you?',
+], () => {
+    App.game.party.gainPokemonByName('Noble Lilligant');
+}, 'assets/images/pokemon/549.02.png', { saveKey: 'lilligantgift', image: 'assets/images/npcs/Arezu.png', requirement: new ClearGymRequirement(1/*000*/, GameConstants.getGymIndex('Brava Arena')) });
+const NobleArcanineGift = new GiftNPC('Warden Palina', [
+    'After fighting you so many times, it looks like Lord Arcanine has taken an interest in you.',
+    'Will you take it with you?',
+], () => {
+    App.game.party.gainPokemonByName('Noble Arcanine');
+}, 'assets/images/pokemon/59.02.png', { saveKey: 'arcaninegift', image: 'assets/images/npcs/Palina.png', requirement: new ClearGymRequirement(1/*000*/, GameConstants.getGymIndex('Molten Arena')) });
+const NobleElectrodeGift = new GiftNPC('Warden Melli', [
+    'After fighting you so many times, it looks like Lord Electrode has taken an interest in you.',
+    'Will you take it with you?',
+], () => {
+    App.game.party.gainPokemonByName('Noble Electrode');
+}, 'assets/images/pokemon/101.02.png', { saveKey: 'electrodegift', image: 'assets/images/npcs/Melli.png', requirement: new ClearGymRequirement(1/*000*/, GameConstants.getGymIndex('Moonview Arena')) });
+const NobleAvaluggGift = new GiftNPC('Warden Gaeric', [
+    'After fighting you so many times, it looks like Lord Avalugg has taken an interest in you.',
+    'Will you take it with you?',
+], () => {
+    App.game.party.gainPokemonByName('Noble Avalugg');
+}, 'assets/images/pokemon/713.02.png', { saveKey: 'avalugggift', image: 'assets/images/npcs/Gaeric.png', requirement: new ClearGymRequirement(1/*000*/, GameConstants.getGymIndex('Icepeak Arena')) });
 
 //Hisui Towns
 TownList['Prelude Beach'] = new Town(
     'Prelude Beach',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList['The Galaxy Team\'s Kamado']],
+    [TemporaryBattleList['Rowlet, Cyndaquil and Oshawott']],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+        npcs: [Laventon1, ArcPhone, Laventon2, Kamado8],
     }
 );
 TownList['Jubilife Village'] = new Town(
     'Jubilife Village',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [JubilifeVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Jubilife Village']), TemporaryBattleList['Volo 1'], TemporaryBattleList['Akari 1'], TemporaryBattleList['Akari 2'], TemporaryBattleList['Adaman 1']],
+    [JubilifeVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Jubilife Village']), TemporaryBattleList['Volo 1'], TemporaryBattleList['Akari 1'], TemporaryBattleList['Akari 2'], TemporaryBattleList.Adaman, TemporaryBattleList['Akari 3']],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 2)],
+        npcs: [Laventon3, Cyllene1, Volo1, Akari2, Akari3, Ingo, Akari4, ArceusLaventonGiratina, ArceusVessa],
     }
 );
 TownList['Galaxy Hall'] = new Town(
@@ -9819,8 +10441,8 @@ TownList['Galaxy Hall'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [new BulletinBoard(GameConstants.BulletinBoards.Hisui)],
     {
-        requirements: [new DevelopmentRequirement()],
-        npcs: [ForcesCogita1],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 4)],
+        npcs: [Cyllene2, Cyllene3, Kamado1, AdamanIrida1, Kamado2, Arezu1, Kamado3, Kamado4, Kamado5, Kamado6, Kamado7, Cyllene4, ForcesCogita1, ArceusCael],
     }
 );
 TownList['Fieldlands Camp'] = new Town(
@@ -9829,7 +10451,8 @@ TownList['Fieldlands Camp'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [TemporaryBattleList['Warden Mai']],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 7)],
+        npcs: [Akari1, Mai1, Mai2],
     }
 );
 TownList['Heights Camp'] = new Town(
@@ -9838,16 +10461,18 @@ TownList['Heights Camp'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [TemporaryBattleList['Alpha Kricketune']],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.hisui, 5)],
+        npcs: [AdamanMai1, Mai3, Volo4, Volo5],
     }
 );
 TownList['Grandtree Arena'] = new Town(
     'Grandtree Arena',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList['Warden Lian'], TemporaryBattleList['Irida 1'], TemporaryBattleList['Lord of the Woods: Kleavor']],
+    [TemporaryBattleList['Warden Lian'], TemporaryBattleList['Irida 1']],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Heartwood'))],
+        npcs: [NobleKleavorGift, Lian],
     }
 );
 TownList['Mirelands Camp'] = new Town(
@@ -9856,7 +10481,7 @@ TownList['Mirelands Camp'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [TemporaryBattleList['Coin 1']],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 26)],
     }
 );
 TownList['Bogbound Camp'] = new Town(
@@ -9865,7 +10490,7 @@ TownList['Bogbound Camp'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.hisui, 14)],
     }
 );
 TownList['Sludge Mound'] = new Town(
@@ -9874,7 +10499,8 @@ TownList['Sludge Mound'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [TemporaryBattleList.Ursaluna],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new OneFromManyRequirement([new RouteKillRequirement(10, GameConstants.Region.hisui, 14), new RouteKillRequirement(10, GameConstants.Region.hisui, 15)])],
+        npcs: [Calaba3],
     }
 );
 TownList['Diamond Settlement'] = new Town(
@@ -9883,16 +10509,17 @@ TownList['Diamond Settlement'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.hisui, 13)],
     }
 );
 TownList['Brava Arena'] = new Town(
     'Brava Arena',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList['Lady of the Ridge: Lilligant']],
+    [],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.hisui, 20)],
+        npcs: [ArezuCalaba, NobleLilligantGift],
     }
 );
 TownList['Beachside Camp'] = new Town(
@@ -9901,7 +10528,8 @@ TownList['Beachside Camp'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [TemporaryBattleList['Irida 2']],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 38)],
+        npcs: [ArceusLaventonShaymin],
     }
 );
 TownList['Coastlands Camp'] = new Town(
@@ -9910,7 +10538,8 @@ TownList['Coastlands Camp'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.hisui, 28)],
+        npcs: [IscanPalina1],
     }
 );
 TownList['Iscan\'s Cabin'] = new Town(
@@ -9919,16 +10548,18 @@ TownList['Iscan\'s Cabin'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 41), new RouteKillRequirement(10, GameConstants.Region.hisui, 25)])],
+        npcs: [Iscan, Irida],
     }
 );
 TownList['Molten Arena'] = new Town(
     'Molten Arena',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList.Clover, TemporaryBattleList['Coin 2'], TemporaryBattleList['Charm 1'], TemporaryBattleList['Lord of the Isles: Arcanine']],
+    [TemporaryBattleList.Clover, TemporaryBattleList['Coin 2'], TemporaryBattleList['Charm 1']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Firespit Island'))],
+        npcs: [NobleArcanineGift],
     }
 );
 TownList['Highlands Camp'] = new Town(
@@ -9937,7 +10568,8 @@ TownList['Highlands Camp'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 52)],
+        npcs: [Laventon4],
     }
 );
 TownList['Mountain Camp'] = new Town(
@@ -9946,7 +10578,7 @@ TownList['Mountain Camp'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.hisui, 41)],
     }
 );
 TownList['Summit Camp'] = new Town(
@@ -9955,16 +10587,17 @@ TownList['Summit Camp'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Sacred Plaza'))],
     }
 );
 TownList['Moonview Arena'] = new Town(
     'Moonview Arena',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList['Melli 2'], TemporaryBattleList['Lord of the Hollow: Electrode']],
+    [TemporaryBattleList['Melli 2'], TemporaryBattleList.Cresselia],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.hisui, 46)],
+        npcs: [NobleElectrodeGift, Melli],
     }
 );
 TownList['Snowfields Camp'] = new Town(
@@ -9973,7 +10606,8 @@ TownList['Snowfields Camp'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 59)],
+        npcs: [AdamanIrida2],
     }
 );
 TownList['Icepeak Camp'] = new Town(
@@ -9982,25 +10616,27 @@ TownList['Icepeak Camp'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Avalugg\'s Legacy'))],
     }
 );
 TownList['Pearl Settlement'] = new Town(
     'Pearl Settlement',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList['Irida 3']],
+    [],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Avalugg\'s Legacy'))],
+        npcs: [ArceusIrida],
     }
 );
 TownList['Icepeak Arena'] = new Town(
     'Icepeak Arena',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList['Lord of the Tundra: Avalugg']],
+    [],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.hisui, 50)],
+        npcs: [NobleAvaluggGift],
     }
 );
 TownList['Ancient Retreat'] = new Town(
@@ -10009,8 +10645,8 @@ TownList['Ancient Retreat'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [],
     {
-        requirements: [new DevelopmentRequirement()],
-        npcs: [ForcesCogita2, ForcesCogita3],
+        requirements: [new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 2)],
+        npcs: [Cogita1, Cogita3, Cogita4, ForcesCogita2, ForcesCogita3],
     }
 );
 TownList['Stone Portal'] = new Town(
@@ -10019,7 +10655,7 @@ TownList['Stone Portal'] = new Town(
     GameConstants.HisuiSubRegions.Hisui,
     [TemporaryBattleList.Beni],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 6)],
     }
 );
 
@@ -10028,19 +10664,28 @@ TownList['Floaro Gardens'] = new DungeonTown(
     'Floaro Gardens',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 11), new RouteKillRequirement(10, GameConstants.Region.hisui, 1)])],
+    undefined,
+    {
+        npcs: [ArceusMedi],
+    }
 );
 TownList['Oreburrow Tunnel'] = new DungeonTown(
     'Oreburrow Tunnel',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new RouteKillRequirement(10, GameConstants.Region.hisui, 9)]
 );
 TownList.Heartwood = new DungeonTown(
     'Heartwood',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()],
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 19),
+        new OneFromManyRequirement([
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Oreburrow Tunnel')),
+            new RouteKillRequirement(10, GameConstants.Region.hisui, 10),
+            new RouteKillRequirement(10, GameConstants.Region.hisui, 11),
+        ])])],
     undefined,
     {
         npcs: [MossRock],
@@ -10050,85 +10695,102 @@ TownList['Ancient Solaceon Ruins'] = new DungeonTown(
     'Ancient Solaceon Ruins',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()],
-    [TemporaryBattleList['Volo 2']]
+    [new RouteKillRequirement(10, GameConstants.Region.hisui, 13)],
+    [TemporaryBattleList['Volo 2']],
+    {
+        npcs: [Calaba1, Volo2, Calaba2],
+    }
 );
 TownList['Shrouded Ruins'] = new DungeonTown(
     'Shrouded Ruins',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new RouteKillRequirement(10, GameConstants.Region.hisui, 20)],
+    undefined,
+    {
+        npcs: [Cogita2],
+    }
 );
 TownList['Veilstone Cape'] = new DungeonTown(
     'Veilstone Cape',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new RouteKillRequirement(10, GameConstants.Region.hisui, 31)],
+    undefined,
+    {
+        npcs: [Palina],
+    }
 );
 TownList['Firespit Island'] = new DungeonTown(
     'Firespit Island',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()],
+    [new RouteKillRequirement(10, GameConstants.Region.hisui, 36)],
     [new MoveToTown('Molten Arena')]
 );
 TownList['Ancient Wayward Cave'] = new DungeonTown(
     'Ancient Wayward Cave',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()],
-    [TemporaryBattleList['Melli 1']]
+    [new RouteKillRequirement(10, GameConstants.Region.hisui, 38)]
 );
 TownList['Ancient Quarry'] = new DungeonTown(
     'Ancient Quarry',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new RouteKillRequirement(10, GameConstants.Region.hisui, 39)],
+    [TemporaryBattleList['Melli 1']],
+    {
+        npcs: [Volo3],
+    }
 );
 TownList['Primeval Grotto'] = new DungeonTown(
     'Primeval Grotto',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()],
+    [new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 10)],
     [TemporaryBattleList['Charm 2']]
 );
 TownList['Clamberclaw Cliffs'] = new DungeonTown(
     'Clamberclaw Cliffs',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()],
+    [new RouteKillRequirement(10, GameConstants.Region.hisui, 40)],
     [TemporaryBattleList['Warden Ingo']]
 );
 TownList['Celestica Ruins'] = new DungeonTown(
     'Celestica Ruins',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Clamberclaw Cliffs'))]
 );
 TownList['Sacred Plaza'] = new DungeonTown(
     'Sacred Plaza',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Celestica Ruins'))]
 );
 TownList['Avalugg\'s Legacy'] = new DungeonTown(
     'Avalugg\'s Legacy',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()],
-    [TemporaryBattleList['Warden Gaeric']]
+    [new RouteKillRequirement(10, GameConstants.Region.hisui, 48)],
+    [TemporaryBattleList['Warden Gaeric']],
+    {
+        npcs: [Gaeric, Sabi],
+    }
 );
 TownList['Ice Column Chamber'] = new DungeonTown(
     'Ice Column Chamber',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new RouteKillRequirement(10, GameConstants.Region.hisui, 50)]
 );
 TownList['Icepeak Cavern'] = new DungeonTown(
     'Icepeak Cavern',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()],
+    [new RouteKillRequirement(10, GameConstants.Region.hisui, 50)],
     undefined,
     {
         npcs: [IceRock],
@@ -10138,15 +10800,21 @@ TownList['Ancient Snowpoint Temple'] = new DungeonTown(
     'Ancient Snowpoint Temple',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()],
-    [TemporaryBattleList['Warden Sabi'], TemporaryBattleList['Hisuian Braviary']]
+    [new MultiRequirement([
+        new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 63),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Avalugg\'s Legacy')),
+    ])],
+    [TemporaryBattleList['Warden Sabi'], TemporaryBattleList['Hisuian Braviary']],
+    {
+        npcs: [Adaman],
+    }
 );
 TownList['Seaside Hollow'] = new DungeonTown(
     'Seaside Hollow',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
     [
-        new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 44),
         new ObtainedPokemonRequirement('Overqwil'),
     ]
 );
@@ -10154,33 +10822,53 @@ TownList['Ancient Lake Verity'] = new DungeonTown(
     'Ancient Lake Verity',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new MultiRequirement([
+        new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 3),
+        new RouteKillRequirement(10, GameConstants.Region.hisui, 3),
+    ])]
 );
 TownList['Ancient Lake Valor'] = new DungeonTown(
     'Ancient Lake Valor',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()],
-    [TemporaryBattleList['Adaman 2']]
+    [new MultiRequirement([
+        new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 3),
+        new RouteKillRequirement(10, GameConstants.Region.hisui, 16),
+    ])],
+    undefined,
+    {
+        npcs: [ArceusAdaman],
+    }
 );
 TownList['Ancient Lake Acuity'] = new DungeonTown(
     'Ancient Lake Acuity',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 3)]
 );
 TownList['Temple of Sinnoh'] = new DungeonTown(
     'Temple of Sinnoh',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()],
-    [TemporaryBattleList['Dialga (Origin)'], TemporaryBattleList['Palkia (Origin)'], TemporaryBattleList['Volo 3'], TemporaryBattleList.Arceus]
+    [new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 7)],
+    [new MoveToDungeon(dungeonList['Eternal Battle Reverie']), TemporaryBattleList['Space-Time Rift'], TemporaryBattleList['Dialga (Origin)'], TemporaryBattleList['Palkia (Origin)'], TemporaryBattleList['Volo 3']],
+    {
+        npcs: [Volo8, azureFlute, PlayAzureFlute],
+    }
 );
 TownList['Turnback Cave'] = new DungeonTown(
     'Turnback Cave',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 5)]
+);
+
+TownList['Eternal Battle Reverie'] = new DungeonTown(
+    'Eternal Battle Reverie',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 16)],
+    [TemporaryBattleList.Arceus, new GenericTraderShop('UnlockArceusPower', 'Unlock Arceus\' Power')]
 );
 
 //Paldea Shops
