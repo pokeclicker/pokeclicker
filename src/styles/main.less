@@ -197,6 +197,16 @@ button {
   cursor: pointer;
 }
 
+html.stable-scrollbar-gutter {
+    scrollbar-gutter: stable;
+}
+
+@supports not (scrollbar-gutter: stable) {
+    html.stable-scrollbar-gutter {
+        overflow-y: scroll;
+    }
+}
+
 body:hover {
   cursor: default;
 }
