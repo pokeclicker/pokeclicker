@@ -5460,7 +5460,7 @@ const GenesectFight = new NPC('Witness the battle', [
     '<i>The Red Genesect and a powerful Pokémon you don\'t recognize exchange energy blasts. The Red Genesect flees the battle, heading east.</i>',
 ], {
     image: 'assets/images/npcs/other/GenesectFight.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Legend Awakened', 4), new QuestLineStepCompletedRequirement('The Legend Awakened', 6, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Legend Awakened', 5), new QuestLineStepCompletedRequirement('The Legend Awakened', 6, GameConstants.AchievementOption.less)]),
 });
 
 const AncientBugHunter2 = new NPC('Ancient Bug Hunter', [
