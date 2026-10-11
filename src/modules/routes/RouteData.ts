@@ -46,7 +46,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 22', Region.kanto, 22,
     new RoutePokemon({
         land: ['Rattata', 'Spearow', 'Mankey'],
-        water: ['Psyduck', 'Poliwag', 'Slowpoke', 'Goldeen', 'Magikarp'],
+        water: ['Psyduck', 'Poliwag', 'Poliwhirl', 'Slowpoke', 'Goldeen', 'Magikarp', 'Gyarados'],
     }),
     [new RouteKillRequirement(10, Region.kanto, 1)],
     1.1,
@@ -77,7 +77,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 4', Region.kanto, 4,
     new RoutePokemon({
         land: ['Rattata', 'Spearow', 'Ekans', 'Sandshrew', 'Mankey'],
-        water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
+        water: ['Psyduck', 'Tentacool', 'Slowpoke', 'Krabby', 'Horsea', 'Magikarp', 'Gyarados'],
     }),
     [
         new RouteKillRequirement(10, Region.kanto, 3),
@@ -90,7 +90,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 24', Region.kanto, 24,
     new RoutePokemon({
         land: ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Pidgey', 'Oddish', 'Abra', 'Bellsprout'],
-        water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
+        water: ['Psyduck', 'Tentacool', 'Slowpoke', 'Krabby', 'Horsea', 'Magikarp', 'Gyarados'],
         special: [new SpecialRoutePokemon(['Sunkern'], new MultiRequirement([new ObtainedPokemonRequirement('Sunkern'), new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)]))],
     }),
     [new TemporaryBattleRequirement('Blue 2')],
@@ -101,7 +101,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 25', Region.kanto, 25,
     new RoutePokemon({
         land: ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Pidgey', 'Oddish', 'Abra', 'Bellsprout'],
-        water: ['Psyduck', 'Poliwag', 'Tentacool', 'Slowpoke', 'Goldeen', 'Magikarp'],
+        water: ['Psyduck', 'Poliwag', 'Poliwhirl', 'Tentacool', 'Slowpoke', 'Goldeen', 'Magikarp', 'Gyarados'],
     }),
     [new RouteKillRequirement(10, Region.kanto, 24)],
     4.2,
@@ -123,7 +123,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 6', Region.kanto, 6,
     new RoutePokemon({
         land: ['Pidgey', 'Meowth', 'Oddish', 'Bellsprout'],
-        water: ['Psyduck', 'Poliwag', 'Slowpoke', 'Goldeen', 'Magikarp'],
+        water: ['Psyduck', 'Poliwag', 'Poliwhirl', 'Slowpoke', 'Goldeen', 'Magikarp', 'Gyarados'],
     }),
     [new RouteKillRequirement(10, Region.kanto, 5)],
     undefined,
@@ -133,7 +133,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 11', Region.kanto, 11,
     new RoutePokemon({
         land: ['Spearow', 'Ekans', 'Sandshrew', 'Drowzee'],
-        water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
+        water: ['Psyduck', 'Tentacool', 'Slowpoke', 'Krabby', 'Horsea', 'Magikarp', 'Gyarados'],
         special: [new SpecialRoutePokemon(['Squad Leader Squirtle'], new ObtainedPokemonRequirement('Squad Leader Squirtle'))],
     }),
     [new RouteKillRequirement(10, Region.kanto, 6)],
@@ -156,7 +156,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 10', Region.kanto, 10,
     new RoutePokemon({
         land: ['Spearow', 'Ekans', 'Sandshrew', 'Voltorb'],
-        water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
+        water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp', 'Gyarados'],
     }),
     [new RouteKillRequirement(10, Region.kanto, 9)],
     undefined,
@@ -185,7 +185,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 12', Region.kanto, 12,
     new RoutePokemon({
         land: ['Pidgey', 'Oddish', 'Gloom', 'Venonat', 'Bellsprout', 'Weepinbell', 'Farfetch\'d'],
-        water: ['Poliwag', 'Slowpoke', 'Slowbro', 'Goldeen', 'Magikarp'],
+        water: ['Psyduck', 'Tentacool', 'Slowpoke', 'Krabby', 'Horsea', 'Magikarp', 'Gyarados'],
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Rock Tunnel'))],
     undefined,
@@ -196,7 +196,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 13', Region.kanto, 13,
     new RoutePokemon({
         land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Bellsprout', 'Weepinbell', 'Farfetch\'d', 'Ditto'],
-        water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
+        water: ['Psyduck', 'Tentacool', 'Slowpoke', 'Krabby', 'Horsea', 'Magikarp', 'Gyarados'],
     }),
     [
         new OneFromManyRequirement([
@@ -283,7 +283,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kanto Route 19', Region.kanto, 19,
     new RoutePokemon({
-        water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
+        water: ['Psyduck', 'Tentacool', 'Psyduck', 'Krabby', 'Kingler', 'Horsea', 'Seadra', 'Magikarp', 'Gyarados'],
         special: [new SpecialRoutePokemon(['Surfing Pikachu'], new ObtainedPokemonRequirement('Surfing Pikachu'))],
     }),
     [new GymBadgeRequirement(BadgeEnums.Soul)],
@@ -293,7 +293,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kanto Route 20', Region.kanto, 20,
     new RoutePokemon({
-        water: ['Tentacool', 'Krabby', 'Horsea', 'Shellder', 'Staryu', 'Magikarp'],
+        water: ['Psyduck', 'Tentacool', 'Slowpoke', 'Krabby', 'Kingler', 'Horsea', 'Seadra', 'Shellder', 'Staryu', 'Magikarp', 'Gyarados'],
     }),
     [
         new OneFromManyRequirement([
@@ -308,7 +308,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 21', Region.kanto, 21,
     new RoutePokemon({
         land: ['Tangela'],
-        water: ['Tentacool', 'Krabby', 'Horsea', 'Shellder', 'Staryu', 'Magikarp'],
+        water: ['Psyduck', 'Tentacool', 'Slowpoke', 'Krabby', 'Kingler', 'Horsea', 'Seadra', 'Shellder', 'Staryu', 'Magikarp', 'Gyarados'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Soul)],
     undefined,
@@ -318,7 +318,7 @@ Routes.add(new RegionRoute(
     'Treasure Beach', Region.kanto, 26,
     new RoutePokemon({
         land: ['Spearow', 'Fearow', 'Meowth', 'Persian', 'Psyduck', 'Slowpoke', 'Tangela'],
-        water: ['Tentacool', 'Tentacruel', 'Krabby', 'Horsea', 'Magikarp'],
+        water: ['Tentacool', 'Tentacruel', 'Krabby', 'Kingler', 'Horsea', 'Seadra', 'Magikarp', 'Gyarados'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Volcano)],
     21.1,
@@ -330,7 +330,7 @@ Routes.add(new RegionRoute(
     'Kindle Road', Region.kanto, 27,
     new RoutePokemon({
         land: ['Spearow', 'Fearow', 'Meowth', 'Persian', 'Psyduck', 'Geodude', 'Ponyta', 'Rapidash', 'Slowpoke'],
-        water: ['Tentacool', 'Tentacruel', 'Krabby', 'Horsea', 'Magikarp'],
+        water: ['Tentacool', 'Tentacruel', 'Krabby', 'Kingler', 'Horsea', 'Seadra', 'Magikarp', 'Gyarados'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Volcano)],
     21.2,
@@ -342,7 +342,7 @@ Routes.add(new RegionRoute(
     'Cape Brink', Region.kanto, 28,
     new RoutePokemon({
         land: ['Spearow', 'Fearow', 'Oddish', 'Gloom', 'Meowth', 'Persian', 'Psyduck', 'Golduck', 'Bellsprout', 'Weepinbell', 'Slowpoke', 'Slowbro'],
-        water: ['Poliwag', 'Goldeen', 'Magikarp'],
+        water: ['Poliwag', 'Poliwhirl', 'Goldeen', 'Magikarp', 'Gyarados'],
     }),
     [new QuestLineStepCompletedRequirement('Bill\'s Errand', 0)],
     21.3,
@@ -354,7 +354,7 @@ Routes.add(new RegionRoute(
     'Bond Bridge', Region.kanto, 29,
     new RoutePokemon({
         land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Meowth', 'Persian', 'Psyduck', 'Bellsprout', 'Weepinbell', 'Slowpoke'],
-        water: ['Tentacool', 'Tentacruel', 'Krabby', 'Horsea', 'Magikarp'],
+        water: ['Tentacool', 'Tentacruel', 'Krabby', 'Kingler', 'Horsea', 'Seadra', 'Magikarp', 'Gyarados'],
     }),
     [new QuestLineStepCompletedRequirement('Bill\'s Errand', 3)],
     21.4,
@@ -366,7 +366,7 @@ Routes.add(new RegionRoute(
     'Kanto Route 23', Region.kanto, 23,
     new RoutePokemon({
         land: ['Spearow', 'Fearow', 'Ekans', 'Arbok', 'Sandshrew', 'Sandslash', 'Mankey', 'Primeape'],
-        water: ['Psyduck', 'Poliwag', 'Slowpoke', 'Goldeen', 'Magikarp'],
+        water: ['Psyduck', 'Poliwag', 'Poliwhirl', 'Slowpoke', 'Goldeen', 'Magikarp', 'Gyarados'],
     }),
     [
         new RouteKillRequirement(10, Region.kanto, 22),
