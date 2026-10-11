@@ -3012,6 +3012,14 @@ class Update implements Saveable {
                 }
             });
         },
+
+        '0.10.27': ({ playerData, saveData }) => {
+            // Restore the permanent Pirate Receipt if it was removed by the old daily reset
+            if (saveData.achievements?.includes('The Pirate King')) {
+                playerData._itemList = playerData._itemList || {};
+                playerData._itemList.Pirate_receipt = Math.max(playerData._itemList.Pirate_receipt || 0, 1);
+            }
+        },
     };
 
     constructor() {
