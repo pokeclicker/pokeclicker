@@ -1387,6 +1387,10 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Sandile', 'Darumaka', 'Trubbish', 'Minccino', 'Scraggy'],
         water: ['Frillish'],
+        special: [
+            new SpecialRoutePokemon(['Braviary'], new DayOfWeekRequirement(DayOfWeek.Monday)),
+            new SpecialRoutePokemon(['Mandibuzz'], new DayOfWeekRequirement(DayOfWeek.Thursday)),
+        ],
     }),
     [
         new GymBadgeRequirement(BadgeEnums.Toxic),
