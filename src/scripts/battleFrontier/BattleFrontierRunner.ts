@@ -74,7 +74,7 @@ class BattleFrontierRunner {
     }
 
     public static end() {
-        BattleFrontierBattle.enemyPokemon(null);
+        BattleFrontierBattle.clearEnemyPokemon();
         this.stage(1);
         this.started(false);
     }

@@ -79,7 +79,7 @@ class Pokeballs implements Feature {
                 }
                 if (App.game.gameState == GameConstants.GameState.fighting && player.route) {
                     const hasLandPokemon = Routes.getRoute(player.region,player.route).pokemon.land.length > 0;
-                    const isWaterPokemon = Routes.getRoute(player.region,player.route).pokemon.water.includes(Battle.enemyPokemon().name);
+                    const isWaterPokemon = Routes.getRoute(player.region,player.route).pokemon.water.includes(Battle.firstEnemyPokemon()?.name);
 
                     // If route has Land Pokémon and the current pokémon is a Water Pokémon
                     if (hasLandPokemon && isWaterPokemon) {
@@ -226,8 +226,8 @@ class Pokeballs implements Feature {
 
     getCatchBonus(ball: GameConstants.Pokeball, options?: CatchOptions): number {
         const opts: CatchOptions = {
-            pokemon: Battle.enemyPokemon()?.name,
-            encounterType: Battle.enemyPokemon()?.encounterType,
+            pokemon: Battle.firstEnemyPokemon()?.name,
+            encounterType: Battle.firstEnemyPokemon()?.encounterType,
             ...options,
         };
         return this.pokeballs[ball].catchBonus(opts);

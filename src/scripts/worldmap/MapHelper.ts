@@ -259,7 +259,7 @@ class MapHelper {
             player.region = town.region;
             player.subregion = town.subRegion;
             player.town = town;
-            Battle.enemyPokemon(null);
+            Battle.clearEnemyPokemon();
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;
         } else {

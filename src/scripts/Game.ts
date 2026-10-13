@@ -137,7 +137,7 @@ class Game implements TmpGameType {
             Battle.generateNewEnemy();
         } else {
             const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender, GameConstants.ShadowStatus.None, EncounterType.route);
-            Battle.enemyPokemon(battlePokemon);
+            Battle.setEnemyPokemon(battlePokemon);
         }
         //Safari.load();
         AchievementHandler.calculateMaxBonus(); //recalculate bonus based on active challenges

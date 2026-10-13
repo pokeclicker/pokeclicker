@@ -56,7 +56,7 @@ class DungeonRunner {
         // Reset any trainers/pokemon if there was one previously
         DungeonBattle.trainer(null);
         DungeonBattle.trainerPokemonIndex(0);
-        DungeonBattle.enemyPokemon(null);
+        DungeonBattle.clearEnemyPokemon();
         DungeonRunner.timeBonus(FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
         DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME * DungeonRunner.timeBonus());
 
@@ -139,7 +139,9 @@ class DungeonRunner {
      */
     public static handleInteraction(source: GameConstants.DungeonInteractionSource = GameConstants.DungeonInteractionSource.Click) {
         if (DungeonRunner.fighting() && !DungeonBattle.catching() && source === GameConstants.DungeonInteractionSource.Click) {
-            DungeonBattle.clickAttack();
+            if (!DungeonBattle.isDoubleTrainerBattle()) {
+                DungeonBattle.clickAttack();
+            }
         } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.entrance && (source === GameConstants.DungeonInteractionSource.Click || source === GameConstants.DungeonInteractionSource.Keybind) && !DungeonGuides.hired()) {
             DungeonRunner.dungeonLeave();
         } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTileType.chest) {

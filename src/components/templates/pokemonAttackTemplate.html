@@ -1,16 +1,16 @@
 <script type="text/html" id="pokemonAttackTemplate">
-  <span style="display: inline;">
-      Pokémon Attack:
-      <span data-bind="
+    <span style="display: inline;">
+        Pokémon Attack:
+        <span data-bind="
          text: App.game.party.pokemonAttackObservable().toLocaleString('en-US'),
          tooltip: {
             html: true,
-            title: Battle.pokemonAttackTooltip,
+            title: Battle.pokemonAttackTooltip($data.battle ?? Battle),
             trigger: 'hover',
          }
          "></span>
-  </span>
+    </span>
 </script>
 
 <!-- Example usage -->
-<!-- <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }">Pokémon sprite</knockout> -->
+<!-- <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.firstEnemyPokemon(), 'battle': Battle } }">Pokémon sprite</knockout> -->
