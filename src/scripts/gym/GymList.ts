@@ -218,9 +218,21 @@ GymList['Champion Blue'] = new Gym(
     'Blue',
     'Champion Blue',
     [
-        new GymPokemon('Pidgeot', 52340, 59),
-        new GymPokemon('Alakazam', 56320, 57),
-        new GymPokemon('Rhydon', 58340, 59),
+        new GymPokemon('Pidgeot', 52340, 59, new OneFromManyRequirement([
+            new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass),
+            new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire),
+            new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water),
+        ])),
+        new GymPokemon('Alakazam', 56320, 57, new OneFromManyRequirement([
+            new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass),
+            new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire),
+            new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water),
+        ])),
+        new GymPokemon('Rhydon', 58340, 59, new OneFromManyRequirement([
+            new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass),
+            new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire),
+            new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water),
+        ])),
         new GymPokemon('Exeggutor', 57520, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
         new GymPokemon('Gyarados', 65340, 61, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
         new GymPokemon('Charizard', 70000, 63, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
@@ -230,9 +242,33 @@ GymList['Champion Blue'] = new Gym(
         new GymPokemon('Gyarados', 57520, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
         new GymPokemon('Arcanine', 65340, 61, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
         new GymPokemon('Venusaur', 70000, 63, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
-        new GymPokemon('Gyarados', 57520, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
-        new GymPokemon('Arcanine', 65340, 61, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
-        new GymPokemon('Venusaur', 70000, 63, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+        new GymPokemon('Sandslash', 52340, 61, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+        new GymPokemon('Alakazam', 56320, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+        new GymPokemon('Exeggutor', 58340, 61, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+        new GymPokemon('Ninetales', 57520, 61, new MultiRequirement([
+            new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
+            new TemporaryBattleRequirement('Blue 1'),
+        ])),
+        new GymPokemon('Cloyster', 57520, 63, new MultiRequirement([
+            new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
+            new TemporaryBattleRequirement('Blue 1'),
+        ])),
+        new GymPokemon('Jolteon', 65340, 65, new MultiRequirement([
+            new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
+            new TemporaryBattleRequirement('Blue 1'),
+        ])),
+        new GymPokemon('Cloyster', 65340, 61, new MultiRequirement([
+            new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
+            new TemporaryBattleRequirement('Blue 1', 1, GameConstants.AchievementOption.less),
+        ])),
+        new GymPokemon('Magneton', 70000, 63, new MultiRequirement([
+            new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
+            new TemporaryBattleRequirement('Blue 1', 1, GameConstants.AchievementOption.less),
+        ])),
+        new GymPokemon('Flareon', 70000, 65, new MultiRequirement([
+            new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special),
+            new TemporaryBattleRequirement('Blue 1', 1, GameConstants.AchievementOption.less),
+        ])),
     ],
     BadgeEnums.Elite_KantoChampion,
     10000,
