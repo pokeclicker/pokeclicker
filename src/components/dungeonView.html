@@ -118,7 +118,7 @@
                   <!--Pokérus image-->
                   <knockout data-bind="if: RouteHelper.minPokerusCheck(DungeonRunner.dungeon.allAvailablePokemon())">
                       <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(DungeonRunner.dungeon.allAvailablePokemon())] + '.png' },
-                      tooltip: { title: RouteHelper.dungeonPokerusEVs(DungeonRunner.dungeon), trigger: 'hover', placement: 'bottom', html: true }"
+                      tooltip: { title: Dungeon.dungeonPokerusEVs(DungeonRunner.dungeon), trigger: 'hover', placement: 'bottom', html: true }"
                     src=""/>
                   </knockout>
 

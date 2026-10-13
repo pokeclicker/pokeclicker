@@ -9,6 +9,7 @@
 ///<reference path="../../declarations/requirements/BerryUnlockedRequirement.d.ts"/>
 ///<reference path="../../declarations/utilities/SeededDateRand.d.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>
+///<reference path="../wildBattle/RouteHelper.ts"/>
 
 interface EnemyOptions {
     weight?: number,
@@ -279,6 +280,16 @@ class Dungeon {
 
     public getCaughtMimics(): PokemonNameType[] {
         return this.mimicList.filter(p => App.game.party.alreadyCaughtPokemonByName(p));
+    }
+
+    public static dungeonPokerusEVs(dungeon: Dungeon): string {
+        const possiblePokemon: PokemonNameType[] = [...new Set(dungeon.allAvailablePokemon())];
+        if (RouteHelper.minPokerus(possiblePokemon) == GameConstants.Pokerus.Resistant) {
+            return 'All Pokémon in this dungeon are resistant!';
+        }
+        const currentEVs = RouteHelper.getEvs(possiblePokemon);
+        return `EVs until all Pokémon are resistant in this dungeon: ${currentEVs}&nbsp;/&nbsp;${50 * possiblePokemon.length}.`;
+
     }
 
     public getRandomLootTier(clears: number, debuffed = false, onlyDebuffable = false): LootTier {

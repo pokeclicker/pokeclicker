@@ -75,17 +75,7 @@ class RouteHelper {
         return `EVs until all Pokémon are resistant on this route: ${currentEVs}&nbsp;/&nbsp;${50 * possiblePokemon.length}.`;
     }
 
-    public static dungeonPokerusEVs(dungeon: Dungeon): string {
-        const possiblePokemon: PokemonNameType[] = [...new Set(dungeon.allAvailablePokemon())];
-        if (this.minPokerus(possiblePokemon) == GameConstants.Pokerus.Resistant) {
-            return 'All Pokémon in this dungeon are resistant!';
-        }
-        const currentEVs = this.getEvs(possiblePokemon);
-        return `EVs until all Pokémon are resistant in this dungeon: ${currentEVs}&nbsp;/&nbsp;${50 * possiblePokemon.length}.`;
-
-    }
-
-    private static getEvs(possiblePokemon: PokemonNameType[]): number {
+    public static getEvs(possiblePokemon: PokemonNameType[]): number {
         let currentEVs = 0;
         possiblePokemon.forEach(pkmn => {
             const partyPokemon: PartyPokemon = App.game.party.getPokemonByName(pkmn);

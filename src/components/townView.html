@@ -18,7 +18,7 @@
                                 <img src="" data-bind="
                                 attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(player.town.dungeon.allAvailablePokemon())] + '.png'},
                                 tooltip: {
-                                    title: RouteHelper.dungeonPokerusEVs(player.town.dungeon),
+                                    title: Dungeon.dungeonPokerusEVs(player.town.dungeon),
                                     placement: 'bottom',
                                     trigger: 'hover',
                                     html: true
