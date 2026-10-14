@@ -116,6 +116,7 @@ import FarmPointsRequirement from './requirements/FarmPointsRequirement';
 import GymBadgeRequirement from './requirements/GymBadgeRequirement';
 import HatchRequirement from './requirements/HatchRequirement';
 import HatcheryHelperRequirement from './requirements/HatcheryHelperRequirement';
+import InEnvironmentRequirement from './requirements/InEnvironmentRequirement';
 import InRegionRequirement from './requirements/InRegionRequirement';
 import MoneyRequirement from './requirements/MoneyRequirement';
 import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
@@ -368,6 +369,7 @@ Object.assign(<any>window, {
     GymBadgeRequirement,
     HatchRequirement,
     HatcheryHelperRequirement,
+    InEnvironmentRequirement,
     InRegionRequirement,
     MoneyRequirement,
     MaxLevelOakItemRequirement,

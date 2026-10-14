@@ -361,6 +361,17 @@ class MapHelper {
 
     }
 
+    public static hasEnvironmentDeco(env: GameConstants.Environment): boolean {
+        switch (env) {
+            case 'MossRock':
+            case 'IceRock':
+            case 'MagneticField':
+                return player.highestRegion() >= GameConstants.Region.sinnoh;
+            default:
+                return false;
+        }
+    }
+
     public static getPokemonAreaStatus(pokemon: PokemonNameType[]): areaStatus[] {
         const statuses = [];
         const pokerusUnlocked = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked();
