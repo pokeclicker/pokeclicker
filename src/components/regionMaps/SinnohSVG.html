@@ -341,15 +341,6 @@
         , noText: true
         })
     %>
-    <!--Route 224 Extension (Flower Path)-->
-    <%- include('templates/mapRoute',
-        { route: 224, region: 3
-        , height: 3, width: 21
-        , x: 91, y: 3
-        , rotate: true
-        , noText: true
-        })
-    %>
 
     <!--Route 225-->
     <%- include('templates/mapRoute',
@@ -847,10 +838,14 @@
     %>
 
     <!--Flower Paradise-->
-    <%- include('templates/mapDungeon',
+    <%- include('templates/mapOverlay',
         { name: "Flower Paradise"
-        , x: 91, y: 0
-        , height: 3, width: 4
+        , x: 90, y: 0
+        , width: 5, height: 4
+        , databind: "click:function(){MapHelper.moveToTown('Flower Paradise')}, attr:{ class: MapHelper.calculateTownCssClass('Flower Paradise') }"
+        , visible:  "App.game.statistics.routeKills[GameConstants.Region.sinnoh][224]() >= 10"
+        , image: "assets/images/map/flowerparadise.png"
+        , connectedToTown: "Flower Paradise"
         })
     %>
 
@@ -1049,5 +1044,18 @@
          , image: "assets/images/map/mewtwoy.png"
          })
      %>
+
+    <!--Seabreak Path-->
+    <%- include('templates/mapOverlay',
+        { name: "Seabreak Path"
+        , x: 90, y: 4
+        , width: 5, height: 20
+        , databind: `click: () => {
+            Notifier.notify({message: 'The path to Flower Paradise'});
+            }`
+        , visible:  "App.game.statistics.routeKills[GameConstants.Region.sinnoh][224]() >= 10"
+        , image: "assets/images/map/seabreakpath.png"
+        })
+    %>
 
 </g>
