@@ -206,7 +206,7 @@ class MapHelper {
         // Is this location a dungeon
         if (dungeonList[townName] && dungeonList[townName].isUnlocked()) {
             const shadowPokemon = dungeonList[townName].allAvailableShadowPokemon();
-            const possiblePokemon = [...dungeonList[townName].allAvailablePokemon(), ...shadowPokemon];
+            const possiblePokemon = dungeonList[townName].allAvailablePokemon();
 
             if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(townName)]()) {
                 states.add(areaStatus.incomplete);
