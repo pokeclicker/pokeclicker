@@ -41,6 +41,7 @@ import { PokemonNameType } from './PokemonNameType';
 import { setPokemonMap } from './mapProvider';
 import DayCyclePart from '../dayCycle/DayCyclePart';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
+import BerryUnlockedRequirement from '../requirements/BerryUnlockedRequirement';
 import BerryMutationPossibleRequirement from '../requirements/BerryMutationPossibleRequirement';
 
 export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
@@ -1185,6 +1186,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 35,
             'speed': 72,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Chilan, requirement: new BerryUnlockedRequirement(BerryType.Chilan) },
         'gender': {
             'visualDifference': true,
         },
@@ -1244,6 +1246,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 97,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Chilan, requirement: new BerryUnlockedRequirement(BerryType.Chilan) },
         'gender': {
             'visualDifference': true,
         },
@@ -2946,6 +2949,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 70,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Payapa, requirement: new BerryUnlockedRequirement(BerryType.Payapa) },
     },
     {
         'id': 56.01,
@@ -2982,6 +2986,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 95,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Payapa, requirement: new BerryUnlockedRequirement(BerryType.Payapa) },
     },
     {
         'id': 57.01,
@@ -3637,6 +3642,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 90,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Shuca, requirement: new BerryUnlockedRequirement(BerryType.Shuca) },
     },
     {
         'id': 77.01,
@@ -3673,6 +3679,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 105,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Shuca, requirement: new BerryUnlockedRequirement(BerryType.Shuca) },
     },
     {
         'id': 78.01,
@@ -7815,6 +7822,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 30,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Coba, requirement: new BerryUnlockedRequirement(BerryType.Coba) },
     },
     {
         'id': 192,
@@ -8626,6 +8634,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 85,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Persim },
         'gender': {
             'visualDifference': true,
         },
@@ -9333,6 +9342,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 40,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Passho, requirement: new BerryUnlockedRequirement(BerryType.Passho) },
     },
     {
         'id': 232,
@@ -9350,6 +9360,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 50,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Passho, requirement: new BerryUnlockedRequirement(BerryType.Passho) },
         'gender': {
             'visualDifference': true,
         },
@@ -10468,6 +10479,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 85,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Charti, requirement: new BerryUnlockedRequirement(BerryType.Charti) },
     },
     {
         'id': 277,
@@ -10485,6 +10497,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 125,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Charti, requirement: new BerryUnlockedRequirement(BerryType.Charti) },
     },
     {
         'id': 278,
@@ -10647,6 +10660,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 35,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Kebia, requirement: new BerryUnlockedRequirement(BerryType.Kebia) },
     },
     {
         'id': 286,
@@ -10664,6 +10678,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 70,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Kebia, requirement: new BerryUnlockedRequirement(BerryType.Kebia) },
     },
     {
         'id': 287,
@@ -11531,6 +11546,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 60,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Tanga, requirement: new BerryUnlockedRequirement(BerryType.Tanga) },
     },
     {
         'id': 326,
@@ -11548,6 +11564,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 110,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Tanga, requirement: new BerryUnlockedRequirement(BerryType.Tanga) },
     },
     {
         'id': 327,
@@ -11743,6 +11760,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 65,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Persim },
     },
     {
         'id': 337,
@@ -12106,6 +12124,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 120,
             'speed': 40,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Persim },
     },
     {
         'id': 353,
@@ -12177,6 +12196,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 25,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Kasib, requirement: new BerryUnlockedRequirement(BerryType.Kasib) },
     },
     {
         'id': 356,
@@ -12195,6 +12215,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 130,
             'speed': 25,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Kasib, requirement: new BerryUnlockedRequirement(BerryType.Kasib) },
     },
     {
         'id': 357,
@@ -12229,6 +12250,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 65,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Colbur, requirement: new BerryUnlockedRequirement(BerryType.Colbur) },
     },
     {
         'id': 359,
@@ -12304,6 +12326,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 50,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Babiri, requirement: new BerryUnlockedRequirement(BerryType.Babiri) },
     },
     {
         'id': 362,
@@ -12322,6 +12345,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Babiri, requirement: new BerryUnlockedRequirement(BerryType.Babiri) },
     },
     {
         'id': 362.01,
@@ -13307,6 +13331,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 60,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Yache, requirement: new BerryUnlockedRequirement(BerryType.Yache) },
         'gender': {
             'visualDifference': true,
         },
@@ -13328,6 +13353,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 80,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Yache, requirement: new BerryUnlockedRequirement(BerryType.Yache) },
         'gender': {
             'visualDifference': true,
         },
@@ -13348,6 +13374,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 100,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Yache, requirement: new BerryUnlockedRequirement(BerryType.Yache) },
         'gender': {
             'visualDifference': true,
         },
@@ -13863,6 +13890,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 85,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Wacan, requirement: new BerryUnlockedRequirement(BerryType.Wacan) },
     },
     {
         'id': 419,
@@ -13880,6 +13908,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 115,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Wacan, requirement: new BerryUnlockedRequirement(BerryType.Wacan) },
     },
     {
         'id': 420,
@@ -14076,6 +14105,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 56,
             'speed': 85,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Chople, requirement: new BerryUnlockedRequirement(BerryType.Chople) },
     },
     {
         'id': 428,
@@ -14094,6 +14124,8 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 96,
             'speed': 105,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Chople, requirement: new BerryUnlockedRequirement(BerryType.Chople) },
+
     },
     {
         'id': 428.01,
@@ -14222,6 +14254,8 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 45,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Colbur, requirement: new BerryUnlockedRequirement(BerryType.Colbur) },
+
     },
     {
         'id': 434,
@@ -14451,6 +14485,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 42,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Haban, requirement: new BerryUnlockedRequirement(BerryType.Haban) },
         'gender': {
             'visualDifference': true,
         },
@@ -14472,6 +14507,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 82,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Haban, requirement: new BerryUnlockedRequirement(BerryType.Haban) },
         'gender': {
             'visualDifference': true,
         },
@@ -14493,6 +14529,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 85,
             'speed': 102,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Haban, requirement: new BerryUnlockedRequirement(BerryType.Haban) },
         'gender': {
             'visualDifference': true,
         },
@@ -14797,6 +14834,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 61,
             'speed': 66,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Rindo, requirement: new BerryUnlockedRequirement(BerryType.Rindo) },
         'gender': {
             'visualDifference': true,
         },
@@ -14817,6 +14855,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 86,
             'speed': 91,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Rindo, requirement: new BerryUnlockedRequirement(BerryType.Rindo) },
         'gender': {
             'visualDifference': true,
         },
@@ -15293,6 +15332,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 135,
             'speed': 45,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Kasib, requirement: new BerryUnlockedRequirement(BerryType.Kasib) },
     },
     {
         'id': 478,
@@ -15310,6 +15350,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 110,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Babiri, requirement: new BerryUnlockedRequirement(BerryType.Babiri) },
         'gender': {
             'femaleRatio': 1,
         },
@@ -16530,6 +16571,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 48,
             'speed': 64,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Occa, requirement: new BerryUnlockedRequirement(BerryType.Occa) },
         'gender': {
             'femaleRatio': 0.125,
         },
@@ -16550,6 +16592,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 63,
             'speed': 101,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Occa, requirement: new BerryUnlockedRequirement(BerryType.Occa) },
         'gender': {
             'femaleRatio': 0.125,
         },
@@ -16571,6 +16614,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 48,
             'speed': 64,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Passho, requirement: new BerryUnlockedRequirement(BerryType.Passho) },
         'gender': {
             'femaleRatio': 0.125,
         },
@@ -16591,6 +16635,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 63,
             'speed': 101,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Passho, requirement: new BerryUnlockedRequirement(BerryType.Passho) },
         'gender': {
             'femaleRatio': 0.125,
         },
@@ -16612,6 +16657,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 48,
             'speed': 64,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Rindo, requirement: new BerryUnlockedRequirement(BerryType.Rindo) },
         'gender': {
             'femaleRatio': 0.125,
         },
@@ -16632,6 +16678,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 63,
             'speed': 101,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Rindo, requirement: new BerryUnlockedRequirement(BerryType.Rindo) },
         'gender': {
             'femaleRatio': 0.125,
         },
@@ -17002,6 +17049,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 64,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Persim },
     },
     {
         'id': 536,
@@ -17020,6 +17068,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 69,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Persim },
     },
     {
         'id': 537,
@@ -17037,6 +17086,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 74,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Persim },
     },
     {
         'id': 538,
@@ -17989,6 +18039,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 45,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Persim },
         'gender': {
             'femaleRatio': 0.75,
         },
@@ -18010,6 +18061,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 85,
             'speed': 55,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Persim },
         'gender': {
             'femaleRatio': 0.75,
         },
@@ -18030,6 +18082,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 110,
             'speed': 65,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Persim },
         'gender': {
             'femaleRatio': 0.75,
         },
@@ -18051,6 +18104,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 20,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Persim },
     },
     {
         'id': 578,
@@ -18069,6 +18123,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 30,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Persim },
     },
     {
         'id': 579,
@@ -18086,6 +18141,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 85,
             'speed': 30,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Persim },
     },
     {
         'id': 580,
@@ -23030,6 +23086,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 45,
         },
+        'heldItem': { type: ItemType.underground, id: 'Light Clay' },
     },
     {
         'id': 750,
@@ -23047,6 +23104,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 85,
             'speed': 35,
         },
+        'heldItem': { type: ItemType.underground, id: 'Light Clay' },
     },
     {
         'id': 751,
@@ -23918,6 +23976,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 120,
         },
+        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
         'gender': {
             'type': Genders.Genderless,
         },
@@ -23938,6 +23997,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 120,
         },
+        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
         'gender': {
             'type': Genders.Genderless,
         },
@@ -23958,6 +24018,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 120,
         },
+        'heldItem': { type: ItemType.underground, id: 'Star Piece' },
         'gender': {
             'type': Genders.Genderless,
         },
@@ -23978,6 +24039,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 120,
         },
+        'heldItem': { type: ItemType.underground, id: 'Star Piece' },
         'gender': {
             'type': Genders.Genderless,
         },
@@ -23998,6 +24060,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 120,
         },
+        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
         'gender': {
             'type': Genders.Genderless,
         },
@@ -24018,6 +24081,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 120,
         },
+        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
         'gender': {
             'type': Genders.Genderless,
         },
@@ -24038,6 +24102,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 120,
         },
+        'heldItem': { type: ItemType.underground, id: 'Star Piece' },
         'gender': {
             'type': Genders.Genderless,
         },
@@ -24195,6 +24260,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 91,
             'speed': 36,
         },
+        'heldItem': { type: ItemType.berry, id: BerryType.Persim },
     },
     {
         'id': 781,
