@@ -2500,6 +2500,13 @@ const LavaridgeSootCollector = new NPC('Soot Collector', [
     'People say they have truly mystical powers, but that they require Gems of different types to use. Also, using more Flutes at the same time costs more Gems to use.',
 ]);
 
+
+const NewMauvilleWattson = new NPC('Wattson', [
+    'You look like you have a lot of zip! That\'s a good thing, wahahahaha!',
+    'Mauville City has an underground sector called New Maville and the generator has been running a bit haywire. It\'s getting unsafe.',
+    'The Magnemite are getting all fussed up by the created magnetic field!',
+], {image: 'assets/images/npcs/Wattson.png'});
+
 const RoadsideStandShadySalesman = new NPC('Shady Salesman', [
     'Have I got a deal just for you!',
     'I have spent weeks finding the perfect fishing spot for Feebas, and finally got some! For a special low price, I\'ll sell you one!',
@@ -3815,7 +3822,11 @@ TownList['New Mauville'] = new DungeonTown(
     'New Mauville',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new GymBadgeRequirement(BadgeEnums.Balance)]
+    [new GymBadgeRequirement(BadgeEnums.Balance)],
+    undefined,
+    {
+        npcs: [NewMauvilleWattson],
+    }
 );
 TownList['Weather Institute'] = new DungeonTown(
     'Weather Institute',

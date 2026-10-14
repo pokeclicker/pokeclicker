@@ -3798,7 +3798,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 65,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Magnemite', 'Magneton', 30)],
+        'evolutions': [
+            LevelEvolution('Magnemite', 'Magneton', 30),
+            DummyEvolution('Magnemite', 'Magneton (Incomplete)'),
+        ],
         'base': {
             'hitpoints': 25,
             'attack': 35,
@@ -3831,6 +3834,27 @@ export const pokemonList = createPokemonArray(
             'defense': 95,
             'specialDefense': 70,
             'speed': 70,
+        },
+        'heldItem': { type: ItemType.item, id: 'Metal_coat' },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 82.01,
+        'name': 'Magneton (Incomplete)',
+        'catchRate': 60,
+        'type': [PokemonType.Electric, PokemonType.Steel],
+        'levelType': LevelType.mediumfast,
+        'exp': 163,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 37,
+            'attack': 47,
+            'specialAttack': 107,
+            'defense': 82,
+            'specialDefense': 67,
+            'speed': 82,
         },
         'heldItem': { type: ItemType.item, id: 'Metal_coat' },
         'gender': {
