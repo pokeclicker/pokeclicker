@@ -1,14 +1,12 @@
 <div id="questDisplayContainer" class="card sortable border-secondary mb-3">
     <!-- ko if: App.game.quests.isDailyQuestsUnlocked() -->
-        <div class="card-header p-0" data-toggle="collapse" href="#dailyQuestDisplayBody">
-            <span data-bind='text: "Quests (" + App.game.quests.currentQuests().length + "/" + App.game.quests.questSlots() + ")"'></span>
-        </div>
-        <button class="btn btn-sm btn-primary" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
-                data-bind="click: function(){$('#QuestModal').modal('show')}">
-            List
-        </button>
-    <!-- /ko -->
-
+    <div class="card-header p-0" data-toggle="collapse" href="#dailyQuestDisplayBody">
+        <span data-bind='text: "Quests (" + App.game.quests.currentQuests().length + "/" + App.game.quests.questSlots() + ")"'></span>
+    </div>
+    <button class="btn btn-sm btn-primary" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
+            data-bind="click: function(){$('#QuestModal').modal('show')}">
+        List
+    </button>
     <div id="dailyQuestDisplayBody" class="card-body text-left p-0 show questDisplayBlock">
         <div class="mx-2 my-1" style="font-size: .825rem;">
             <!-- ko if: App.game.quests.currentQuests().length == 0 && App.game.quests.isDailyQuestsUnlocked() -->
@@ -16,8 +14,8 @@
             <!-- /ko -->
             <div data-bind="foreach: App.game.quests.currentQuests()">
                 <div class="mb-1" data-bind="text: $data.description"></div>
-                <div class="row no-gutters mb-1">
-                    <div class="col-10">
+                <div class="d-flex mb-1" style="gap: 2px;">
+                    <div class="flex-grow-1">
                         <div class="progress p-0">
                             <div class="progress-bar bg-primary" role="progressbar"
                                 data-bind="attr:{ style: 'width:' + ($data.progress() * 100) + '%'}"
@@ -26,7 +24,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="flex-shrink-0" style="width: 45px;">
                         <!-- ko ifnot: $data.isCompleted() -->
                         <button class="btn btn-danger btn-sm btn-block p-0" data-bind="click: () => { App.game.quests.quitQuest($data.index, $data.progress() > 0) }">
                             Quit
@@ -42,6 +40,8 @@
             </div>
         </div>
 	</div>
+    <!-- /ko -->
+
     <!-- List of quest line quests -->
 	<!-- ko let: {
         activeQuestLines: App.game.quests.questLines().filter((ql) => ql.state() == QuestLineState.started),
