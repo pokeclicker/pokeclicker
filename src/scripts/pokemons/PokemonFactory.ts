@@ -364,12 +364,18 @@ class PokemonFactory {
         const mulch = plot.mulch;
         const availablePokemon = [];
         const weights = [];
-        berry.wander.forEach((p, i) => {
-            if (pokemonMap[p].nativeRegion <= player.highestRegion()) {
-                availablePokemon.push(p);
-                weights.push(mulch === MulchType.Gooey_Mulch && i >= Berry.baseWander.length ? 3 : 1);
-            }
+        berry.wander.filter(wanderer => wanderer.isAvailable()).forEach(wanderer => {
+            wanderer.pokemon.forEach(p => {
+                if (pokemonMap[p].nativeRegion <= player.highestRegion()) {
+                    availablePokemon.push(p);
+                    const gooeyBonus = mulch === MulchType.Gooey_Mulch && !Berry.baseWander.includes(wanderer) ? 3 : 1;
+                    weights.push(wanderer.weight * gooeyBonus);
+                }
+            });
         });
+        if (!availablePokemon.length) {
+            return undefined;
+        }
         const pokemon = Rand.fromWeightedArray(availablePokemon, weights);
         const pokemonData = pokemonMap[pokemon];
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);

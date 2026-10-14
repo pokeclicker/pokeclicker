@@ -13806,6 +13806,26 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 415.01,
+        'name': 'Combee (Wall)',
+        'type': [PokemonType.Bug, PokemonType.Flying],
+        'eggCycles': 15,
+        'levelType': LevelType.mediumslow,
+        'exp': 49,
+        'catchRate': 120,
+        'base': {
+            'hitpoints': 60,
+            'attack': 30,
+            'specialAttack': 30,
+            'defense': 84,
+            'specialDefense': 84,
+            'speed': 35,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
         'id': 416,
         'name': 'Vespiquen',
         'type': [PokemonType.Bug, PokemonType.Flying],

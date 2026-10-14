@@ -243,6 +243,7 @@ import CollectibleItem from './items/CollectibleItem';
 import areaStatus from './enums/AreaStatus';
 import TranslationHelper from './translation/TranslationHelper';
 import * as DownloadUtil from './utilities/DownloadUtil';
+import WandererOnFarmRequirement from './requirements/WandererOnFarmRequirement';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -509,4 +510,5 @@ Object.assign(<any>window, {
     areaStatus,
     TranslationHelper,
     DownloadUtil,
+    WandererOnFarmRequirement,
 });
