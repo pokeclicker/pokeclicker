@@ -4388,6 +4388,15 @@ const SunyshoreRibbonerJulia = new NPC('Ribboner Julia', [
     'If you have a Pokémon with Pokérus, try catching more of that type of Pokémon. When he got back from his next trip, oddly enough Wailmer seemed stronger than ever!',
 ], {image: 'assets/images/npcs/Beauty.png'});
 
+const SunyshoreDoctor = new NPC('Sunyshore Doctor', [ 
+    'How irresponsible of you spreading disease without a proper medical license! We must treat your Pokemon immediately!',
+    'Once your Pokemon are contagious, I found Pokerus can be resisted by obtaining multiples of the same Pokemon which increases their EV\'s or Effort Values.',
+    'I suspect this repeated exposure and increasing their EV\'s could even make your Pokemon stronger - could you please test this for me?'
+], {image: 'assets/images/npcs/Doctor.png', 
+requirement: new QuestLineStepCompletedRequirement('An Incurable Disease?', 2)
+}
+); 
+
 const FightAreaAceTrainer = new NPC('Ace Trainer Quinn', [
     'Something amazing happened on top of Mt. Coronet. We could see it all the way from here. I\'m sure everyone in the entire region saw it.',
     'What? You were there? What happened? What was that purple thing?',
@@ -4825,7 +4834,7 @@ TownList['Sunyshore City'] = new Town(
     [SunyshoreCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Sunyshore City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 222)],
-        npcs: [SunyshoreRibbonerJulia],
+        npcs: [SunyshoreRibbonerJulia, SunyshoreDoctor],
     }
 );
 TownList['Fight Area'] = new Town(
