@@ -409,7 +409,7 @@ img {
       background-position: top;
   }
 
-  &.gem, &.cave-gem {
+  &.cave-gem {
       background-image: url("../assets/images/battleBackground/cave-gem.png");
       background-position: center;
   }
@@ -434,6 +434,11 @@ img {
       background-position: center;
   }
 
+  &.snow {
+    background-image: url("../assets/images/battleBackground/snow.png");
+    background-position: bottom;
+  }
+
   &.battlefield {
       background-image: url("../assets/images/battleBackground/battlefield.png");
       background-position: bottom;
@@ -442,6 +447,18 @@ img {
   &.space {
       background-image: url("../assets/images/battleBackground/space.png");
       background-position: center;
+  }
+
+  &.christmas {
+    &.default, &.forest {
+      background-image: url("../assets/images/battleBackground/snow.png");
+      background-position: bottom;
+    }
+
+    &.cave {
+      background-image: url("../assets/images/battleBackground/ice.png");
+      background-position: top;
+    }
   }
 
   h2 {
