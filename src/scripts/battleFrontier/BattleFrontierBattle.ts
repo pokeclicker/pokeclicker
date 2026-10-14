@@ -15,12 +15,6 @@ class BattleFrontierBattle extends Battle {
         if (this.alternateAttack && BattleFrontierRunner.stage() > App.game.statistics.battleFrontierHighestStageCompleted()) {
             return;
         }
-        // Limit pokemon attack speed, Only allow 1 attack per 450ms
-        const now = Date.now();
-        if (this.lastPokemonAttack > now - 450) {
-            return;
-        }
-        this.lastPokemonAttack = now;
         if (!this.enemyPokemon()?.isAlive()) {
             return;
         }

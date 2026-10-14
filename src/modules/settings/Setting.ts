@@ -61,7 +61,7 @@ export default class Setting<T, TOption = T> {
             // Copy array values to avoid aliasing
             this._observable(Array.isArray(value) ? [...value] as T : value);
         } else {
-            let stringified = typeof value === 'string' ? `\"${value}\"` : value.toString();
+            let stringified = typeof value === 'string' ? `\"${value}\"` : String(value);
             if (stringified == '[object Object]' && value.constructor?.name) {
                 stringified = `${value.constructor.name} object`;
             }
