@@ -37,6 +37,10 @@ export default class Routes {
         return this.regionRoutes.find((routeData) => routeData.number === route).region;
     }
 
+    public static getSubregionByRoute(region: GameConstants.Region, route: number): number {
+        return this.getRoute(region, route).subRegion;
+    }
+
     public static getName(route: number, region: number, alwaysIncludeRegionName = false, includeSubRegionName = false): string {
         const regionName = GameConstants.camelCaseToString(GameConstants.Region[region]);
         let resultRoute = this.regionRoutes.find((routeData) => routeData.region === region && routeData.number === route);

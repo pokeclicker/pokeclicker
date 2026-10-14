@@ -177,7 +177,9 @@ class Party implements Feature, TmpPartyType {
             attack += this.calculateOnePokemonAttack(p, type1, type2, region, ignoreRegionMultiplierOrMKJ, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeTempBonuses);
         }
 
-        const bonus = this.multiplier.getBonus('pokemonAttack');
+
+        const bonus = includeTempBonuses ? this.multiplier.getBonus('pokemonAttack') : 1;
+
         return Math.round(attack * bonus);
     }
 
