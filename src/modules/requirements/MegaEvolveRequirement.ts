@@ -4,7 +4,7 @@ import { PokemonNameType } from '../pokemons/PokemonNameType';
 import Requirement from './Requirement';
 
 export default class MegaEvolveRequirement extends Requirement {
-    constructor(private name: PokemonNameType, private megaStone: MegaStoneType) {
+    constructor(private name: PokemonNameType, public megaStone: MegaStoneType) {
         super(1, AchievementOption.equal);
     }
 

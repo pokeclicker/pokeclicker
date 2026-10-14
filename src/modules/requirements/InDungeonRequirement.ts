@@ -7,7 +7,7 @@ export default class InDungeonRequirement extends Requirement {
     }
 
     public getProgress() {
-        return Number(DungeonRunner.dungeon.name === this.dungeon);
+        return Number(DungeonRunner.dungeon?.name === this.dungeon);
     }
 
     public hint(): string {
