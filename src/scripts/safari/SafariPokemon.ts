@@ -50,13 +50,8 @@ class SafariPokemon implements PokemonInterface {
         this._eatingBait = ko.observable(BaitType.Bait);
         this.levelModifier = (Safari.safariLevel() - 1) / 50;
 
-        switch (sprite) {
-            case 'base' : this.spriteID = Math.floor(this.id);
-                break;
-            case 'self' : this.spriteID = this.id;
-                break;
-            default : this.spriteID = PokemonHelper.getPokemonByName(sprite).id;
-        }
+        this.spriteID = PokemonHelper.getPokemonByName(this.name).id;
+
     }
 
     public get catchFactor(): number {
