@@ -601,7 +601,7 @@
         title: 'Set to white for transparent',
         trigger: 'hover',
     }">
-        <label style="width:100%; min-height: 36px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: $data.observableValue"/></label>
+        <label style="width:100%; min-height: 36px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: $data.observableValue, valueUpdate: 'input'"/></label>
     </td>
 </script>
 
@@ -617,7 +617,7 @@
         title: 'Set to white for transparent',
         trigger: 'hover',
     }">
-        <label style="width:100%; min-height: 36px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: $data.setting.observableValue"/></label>
+        <label style="width:100%; min-height: 36px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: $data.setting.observableValue, valueUpdate: 'input'"/></label>
     </td>
 </script>
 
