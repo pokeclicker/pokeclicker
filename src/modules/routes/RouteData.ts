@@ -22,7 +22,6 @@ import Routes from './Routes';
 import SpecialRoutePokemon from './SpecialRoutePokemon';
 import SpecialEventRandomRequirement from '../requirements/SpecialEventRandomRequirement';
 import SeededRand from '../utilities/SeededRand';
-import ItemOwnedRequirement from '../requirements/ItemOwnedRequirement';
 import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
 import StatisticRequirement from '../requirements/StatisticRequirement';
 import PokemonLevelRequirement from '../requirements/PokemonLevelRequirement';
@@ -4312,30 +4311,12 @@ Routes.getRoutesByRegion(Region.hoenn).forEach(route => {
 });
 
 // Christmas Event
-const santaJynxReq = new OneFromManyRequirement([
-    new MultiRequirement([
-        new ItemOwnedRequirement('Christmas_present', 11, AchievementOption.less),
-        new TemporaryBattleRequirement('Santa Jynx 1'),
-    ]),
-    new MultiRequirement([
-        new ItemOwnedRequirement('Christmas_present', 27, AchievementOption.less),
-        new TemporaryBattleRequirement('Santa Jynx 2'),
-    ]),
-    new MultiRequirement([
-        new ItemOwnedRequirement('Christmas_present', 49, AchievementOption.less),
-        new TemporaryBattleRequirement('Santa Jynx 3'),
-    ]),
-    new MultiRequirement([
-        new ItemOwnedRequirement('Christmas_present', 150, AchievementOption.less),
-        new TemporaryBattleRequirement('Santa Jynx 4'),
-    ]),
-]);
 Routes.getRoutesByRegion(Region.kanto).forEach(route => {
     route.pokemon.special.push(
         new SpecialRoutePokemon(['Santa Jynx'], new MultiRequirement([
             new SpecialEventRequirement('Merry Christmas!'),
-            new CustomRequirement(ko.pureComputed(() => santaJynxReq.isCompleted()), true,
-                'Santa Jynx appears for the day after defeating its Band at Bill\'s House, and will remain until the maximum number of Christmas presents have been collected.'),
+            new QuestLineStepCompletedRequirement('Santa\'s Helper', 0),
+            new QuestLineStepCompletedRequirement('Santa\'s Helper', 1, AchievementOption.less),
         ]),
         ));
 });

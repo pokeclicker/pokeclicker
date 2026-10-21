@@ -503,6 +503,9 @@ class Game implements TmpGameType {
                 SafariPokemonList.generateKalosSafariList();
 
                 QuestLineHelper.rebuildTreasureMapQuestLine();
+                if (this.specialEvents.getEvent('Merry Christmas!').isActive()) {
+                    QuestLineHelper.ensureSantasHelperQuestLine();
+                }
                 player.itemList.Pirate_receipt(0);
                 // Reset some temporary battles
                 Object.values(TemporaryBattleList).forEach(t => {
@@ -565,6 +568,9 @@ class Game implements TmpGameType {
         this.specialEvents.counter += GameConstants.TICK_TIME;
         if (this.specialEvents.counter >= GameConstants.SPECIAL_EVENT_TICK) {
             this.specialEvents.tick();
+            if (this.specialEvents.getEvent('Merry Christmas!').isActive()) {
+                QuestLineHelper.ensureSantasHelperQuestLine();
+            }
         }
     }
 

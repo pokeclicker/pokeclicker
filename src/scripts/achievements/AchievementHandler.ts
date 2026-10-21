@@ -665,7 +665,7 @@ class AchievementHandler {
         addEventPokemonAchievements('Spooky', 'Halloween', (p: PokemonListData) => p.name.startsWith('Spooky ') || p.name == 'Pikachu (Gengar)');
         addEventPokemonAchievements('Partner', '\'Let\'s GO!\'', (p: PokemonListData) => p.name.startsWith('Let\'s Go '));
         addEventPokemonAchievements('Christmas', 'Christmas', (p: PokemonListData) => p.name.startsWith('Santa ') || ['Snorlax (Snowman)', 'Reindeer Stantler', 'Grinch Celebi', 'Elf Munchlax'].includes(p.name));
-        AchievementHandler.addAchievement('On The Nice List', 'Collect Christmas Presents up to the maximum once', new ItemOwnedRequirement('Christmas_present', 150), 1, GameConstants.ExtraAchievementCategories.events);
+        AchievementHandler.addAchievement('On The Nice List', 'Collect 150 Christmas Presents.', new ItemOwnedRequirement('Christmas_present', 150), 1, GameConstants.ExtraAchievementCategories.events);
         addEventPokemonAchievements('Pattern', 'Vivillon', (p: PokemonListData) => p.name.startsWith('Vivillon '));
         AchievementHandler.addAchievement('Rumor Master', 'Complete the \'Hoopa Day\' Pokédex', new QuestLineCompletedRequirement('How blu mouse?'), 1, GameConstants.ExtraAchievementCategories.events);
         addEventPokemonAchievements('Egghunt', 'Easter', (p: PokemonListData) => ['Pikachu (Easter)', 'Togepi (Flowering Crown)', 'Torchic (Egg)'].includes(p.name));

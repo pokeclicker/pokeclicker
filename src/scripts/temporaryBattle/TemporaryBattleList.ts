@@ -284,7 +284,7 @@ TemporaryBattleList['Blue 6'] = new TemporaryBattle(
         imageName: 'Blue2',
     }
 );
-// Kanto Christmas Temporary Battles, based on Blue 2
+// Kanto Christmas Temporary Battle, based on Blue 2
 TemporaryBattleList['Santa Jynx 1'] = new TemporaryBattle(
     'Santa Jynx 1',
     [
@@ -296,17 +296,12 @@ TemporaryBattleList['Santa Jynx 1'] = new TemporaryBattle(
     'Huh? They ran off and are trying to blend in with the local Pokémon population. Find those Santa Jynx and collect more Christmas presents!',
     [
         new SpecialEventRequirement('Merry Christmas!'),
-        new ItemOwnedRequirement('Christmas_present', 11, GameConstants.AchievementOption.less),
-        new TemporaryBattleRequirement('Santa Jynx 2', 1, GameConstants.AchievementOption.less),
-        new TemporaryBattleRequirement('Santa Jynx 3', 1, GameConstants.AchievementOption.less),
-        new TemporaryBattleRequirement('Santa Jynx 4', 1, GameConstants.AchievementOption.less),
+        new QuestLineStartedRequirement('Santa\'s Helper'),
+        new QuestLineStepCompletedRequirement('Santa\'s Helper', 0, GameConstants.AchievementOption.less),
     ],
     undefined,
     {
         displayName: 'Santa Jynx Band',
-        firstTimeRewardFunction: () => {
-            (ItemList.Christmas_present as ChristmasPresent).gain();
-        },
         resetDaily: true,
         hideTrainer: true,
         imageName: 'Bill\'s Grandpa without Eevee',

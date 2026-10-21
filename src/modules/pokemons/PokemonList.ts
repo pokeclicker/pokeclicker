@@ -42,6 +42,7 @@ import { setPokemonMap } from './mapProvider';
 import DayCyclePart from '../dayCycle/DayCyclePart';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import BerryMutationPossibleRequirement from '../requirements/BerryMutationPossibleRequirement';
+import StatisticRequirement from '../requirements/StatisticRequirement';
 
 export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
@@ -6574,6 +6575,12 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 110,
             'speed': 30,
         },
+        'heldItem': {
+            type: ItemType.item,
+            id: 'Christmas_present',
+            amount: 10,
+            requirement: new StatisticRequirement('christmasQuestsCompleted', 3, 'Complete Santa\'s Helper on 3 different days.'),
+        },
         'gender': {
             'femaleRatio': 0.125,
         },
@@ -9409,6 +9416,11 @@ export const pokemonList = createPokemonArray(
             'defense': 62,
             'specialDefense': 65,
             'speed': 85,
+        },
+        'heldItem': {
+            type: ItemType.item,
+            id: 'Christmas_present',
+            requirement: new StatisticRequirement('christmasQuestsCompleted', 1, 'Complete Santa\'s Helper once.'),
         },
     },
     {

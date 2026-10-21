@@ -3012,6 +3012,26 @@ class Update implements Saveable {
                 }
             });
         },
+
+        '0.10.27': ({ playerData, saveData }) => {
+            // Replace the four Christmas temporary battles with the repeatable Santa's Helper quest line.
+            const presents = playerData._itemList?.Christmas_present ?? 0;
+            saveData.statistics.christmasQuestsCompleted = presents >= 150
+                ? 4
+                : presents >= 49
+                    ? 3
+                    : presents >= 27
+                        ? 2
+                        : presents >= 11
+                            ? 1
+                            : 0;
+            saveData.statistics.christmasQuestLastGenerated = 0;
+
+            // All legacy Santa Jynx battles are retired; the remaining battle starts fresh.
+            for (let i = 15; i <= 18; i += 1) {
+                saveData.statistics.temporaryBattleDefeated[i] = 0;
+            }
+        },
     };
 
     constructor() {

@@ -25,6 +25,8 @@ export default class Statistics implements Saveable {
     secondsPlayed: KnockoutObservable<number>;
     clickAttacks: KnockoutObservable<number>;
     questsCompleted: KnockoutObservable<number>;
+    christmasQuestsCompleted: KnockoutObservable<number>;
+    christmasQuestLastGenerated: KnockoutObservable<number>;
     totalGemsGained: KnockoutObservable<number>;
     totalVitaminsPurchased: KnockoutObservable<number>;
     totalVitaminsObtained: KnockoutObservable<number>;
@@ -196,6 +198,8 @@ export default class Statistics implements Saveable {
     hiddenObservables = [
         'totalShinyTrainerPokemonSeen',
         'undergroundLayersFullyMined',
+        'christmasQuestsCompleted',
+        'christmasQuestLastGenerated',
     ];
 
     arrayObservables = [
