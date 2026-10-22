@@ -21,6 +21,7 @@ const NotificationConstants = {
             pokerus: new Sound('pokerus_resistant', 'Pokémon has become Resistant to Pokérus'),
             max_flow: new Sound('max_flow', 'Maximum Flow has accumulated at the Purify Chamber'),
             dungeon_guide_complete: new Sound('battle_frontier', 'Dungeon Guide has completed all dungeon attempts'),
+            goal_objective_complete: new Sound('achievement', 'Goal Tracker objective completed'),
         },
         Hatchery: {
             ready_to_hatch: new Sound('ready_to_hatch', 'Egg ready to hatch'),
@@ -54,6 +55,7 @@ const NotificationConstants = {
             new_catch: new NotificationSetting('notification.new_catch', 'New Pokémon/shiny captured', true, true),
             battle_frontier: new NotificationSetting('notification.battle_frontier', 'Battle Frontier', true, true),
             pokerus: new NotificationSetting('notification.pokerus', 'Pokémon has become Resistant to Pokérus', true),
+            goal_objective_complete: new NotificationSetting('notification.goal_objective_complete', 'Goal Tracker objective completed', true),
         },
         Hatchery: {
             ready_to_hatch: new NotificationSetting('notification.ready_to_hatch', 'Egg ready to hatch', true),

@@ -199,6 +199,7 @@ Settings.add(new Setting<string>('playerSafariSprite', 'Player safari sprite',
     ],
     'male'));
 Settings.add(new BooleanSetting('hideCompletedQuestLineTasks', 'Hide completed quest line step tasks', false));
+Settings.add(new BooleanSetting('showGoalTrackerModule', 'Show Goal Tracker module on main screen', true, new ClearDungeonRequirement(1, getDungeonIndex('Victory Road Johto'))));
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
@@ -381,6 +382,7 @@ Settings.add(new Setting<string>('breedingDisplayTextSetting', 'Display Value',
         new SettingOption('Pokémon ID #', 'dexId'),
         new SettingOption('Vitamins used', 'vitamins'),
         new SettingOption('EVs', 'evs'),
+        new SettingOption('EV Bonus', 'evBonus'),
     ],
     'attack'));
 Settings.add(new Setting<Region>('breedingRegionalAttackDebuffSetting', 'Regional Debuff',

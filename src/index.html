@@ -123,6 +123,7 @@
 @import "templates/multiSelectDropdownTemplate.html"
 @import "templates/currencyContainerCurrencyTemplate.html"
 @import "templates/wanderingPokemonDisplay.html"
+@import "templates/goalTrackerObjectiveTemplate.html"
 
 <div id="game" class="container loading" data-bind="css: {'container': Settings.getSetting('gameDisplayStyle').observableValue() === 'standard3', 'container-fluid': Settings.getSetting('gameDisplayStyle').observableValue() !== 'standard3'}">
     <div class="row justify-content-center">
@@ -155,6 +156,9 @@
 
                     <!-- Pokémon List container-->
                     @import "pokemonListContainer.html"
+
+                    <!-- Goal Tracker -->
+                    @import "goalTracker.html"
                 </div>
             </div>
         </div>
@@ -534,6 +538,10 @@
 
 <!-- Moon Phase Modal -->
 @import "moonPhaseModal.html"
+
+<!-- Goal Tracker Modals -->
+@import "goalTrackerModal.html"
+@import "goalTrackerObjectiveModal.html"
 
 <!-- QuestLine Details Modal -->
 @import "questLineDetailsModal.html"

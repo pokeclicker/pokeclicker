@@ -46,6 +46,7 @@ class Game implements TmpGameType {
     public purifyChamber: PurifyChamber;
     public weatherApp: WeatherApp;
     public zMoves: ZMoves;
+    public goalTracker: GoalTracker;
 
     constructor() {
         // Needs to be loaded first so save data can be updated (specifically "player" data)
@@ -85,6 +86,7 @@ class Game implements TmpGameType {
         this.purifyChamber = new PurifyChamber();
         this.weatherApp = new WeatherApp();
         this.zMoves = new ZMoves();
+        this.goalTracker = new GoalTracker();
 
         this._gameState = ko.observable(GameConstants.GameState.loading);
     }

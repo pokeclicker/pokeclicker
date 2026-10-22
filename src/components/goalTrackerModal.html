@@ -1,0 +1,82 @@
+<div class="modal fade" id="goalTrackerModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Goal Tracker</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <button class="btn btn-primary my-2 mr-2" onclick="App.game.goalTracker.createGoal()">
+                    Create New Goal
+                </button>
+                <button class="btn btn-primary my-2 mr-2" onclick="App.game.goalTracker.importGoal()">
+                    Import Goal
+                </button>
+
+                <div id="goalTrackerGoalList" class="px-3"
+                    data-bind="sortable: {
+                        foreach: App.game.goalTracker.goals,
+                        getDataId: (goal) => goal.uuid,
+                        options: {
+                            group: 'goalTrackerGoals',
+                            draggable: '.pokeballFilterWrapper',
+                            handle: '.pokeballFilterDragHandle',
+                            dataIdAttr: 'data-key',
+                        }
+                    }">
+                    <div class="pokeballFilterWrapper w-100">
+                        <div class="pokeballFilterDragHandle bg-dark text-white"></div>
+                        <div class="pokeballFilter w-100" style="border-right-width: 1px;">
+                            <div class="pokeballFilterHeader px-2">
+                                <div class="flex-grow-1 mr-1">
+                                    <input class="form-control form-control-sm" data-bind="textInput: $data.name">
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="min-width: 25px;"></button>
+                                    <div class="dropdown-menu">
+                                        <button type="button" class="dropdown-item small" data-bind="click: () => { $data.importObjective() }">
+                                            Import Objective
+                                        </button>
+                                        <button type="button" class="dropdown-item small" data-bind="click: () => App.game.goalTracker.exportGoal($data)">
+                                            Export Goal
+                                        </button>
+                                        <button type="button" class="dropdown-item small" data-bind="click: () => App.game.goalTracker.deleteGoal($data)">
+                                            Delete Goal
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-secondary small py-1">Objectives</div>
+                            <div class="small p-2">
+                                <div class="text-left" data-bind="sortable: {
+                                    foreach: $data.objectives,
+                                    getDataId: (objective) => objective.uuid,
+                                    options: {
+                                        group: `goalObjectives-${$data.uuid}`,
+                                        draggable: '.goalObjectiveWrapper',
+                                        handle: '.goalObjectiveWrapper',
+                                        dataIdAttr: 'data-key',
+                                    }
+                                }">
+                                    <div class="goalObjectiveWrapper" style="cursor: move;">
+                                        <div class="goalObjective">
+                                            <div class="border-bottom border-secondary mb-2 pb-1">
+                                                <knockout data-bind="template: { name: 'goalTrackerObjectiveTemplate', data: { objective: $data, goal: $parent, showControls: true } }"></knockout>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary btn-sm btn-block" data-bind="click: () => { $data.createObjective() }">Add Objective</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

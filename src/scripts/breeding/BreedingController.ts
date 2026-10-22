@@ -117,6 +117,7 @@ class BreedingController {
             case 'dexId': return `#${pokemon.id <= 0 ? '???' : Math.floor(pokemon.id).toString().padStart(3,'0')}`;
             case 'vitamins': return `Vitamins: ${pokemon.totalVitaminsUsed()}`;
             case 'evs': return `EVs: ${pokemon.evs().toLocaleString('en-US')}`;
+            case 'evBonus': return `EV Bonus: ${pokemon.calculateEVAttackBonus().toLocaleString('en-US')}`;
             case 'attack':
             default:
                 return `Attack: ${Math.floor(pokemon.attack * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;

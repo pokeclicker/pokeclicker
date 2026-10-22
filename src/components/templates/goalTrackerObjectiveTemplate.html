@@ -1,0 +1,48 @@
+<script type="text/html" id="goalTrackerObjectiveTemplate">
+    <!-- ko with: $data.objective -->
+    <div class="d-flex align-items-center" style="gap: 4px; min-height: 1.25rem;">
+        <div class="flex-grow-1 text-wrap" data-bind="text: displayName"></div>
+        <!-- ko if: isConfigured() && !hasGoal -->
+        <div class="text-nowrap" data-bind="text: progressText()"></div>
+        <!-- /ko -->
+        <!-- ko if: $parent.showControls -->
+        <button type="button" class="btn btn-primary btn-sm px-1 py-0 ml-2 mb-1 no-emoji-font" style="width: 25px;" title="Edit Objective" data-bind="click: () => {
+            App.game.goalTracker.selectedObjective($data);
+            $('#goalTrackerObjectiveModal').modal('show');
+        }">✎</button>
+        <div class="dropdown mb-1">
+            <button class="btn btn-primary btn-sm dropdown-toggle px-1 py-0" type="button" data-toggle="dropdown" style="width: 25px;"></button>
+            <div class="dropdown-menu">
+                <button type="button" class="dropdown-item small" data-bind="click: () => $parent.goal.duplicateObjective($data), visible: isConfigured">
+                    Clone Objective
+                </button>
+                <button type="button" class="dropdown-item small" data-bind="click: () => $parent.goal.exportObjective($data)">
+                    Export Objective
+                </button>
+                <button type="button" class="dropdown-item small" data-bind="click: () => $parent.goal.deleteObjective($data)">
+                    Delete Objective
+                </button>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- ko ifnot: isConfigured -->
+    <div class="text-danger">Not configured!</div>
+    <!-- /ko -->
+    <!-- ko if: isConfigured() && hasGoal -->
+    <div class="progress mt-1" style="height: 1.25rem;">
+        <div class="progress-bar text-left" role="progressbar"
+            data-bind="attr: { style: 'width:' + (Math.min(progressPercent(), 1) * 100) + '%'},
+                css: { 'bg-primary': progressPercent() < 1, 'bg-success': progressPercent() >= 1 }"
+            aria-valuemin="0" aria-valuemax="100">
+        </div>
+        <div class="position-absolute w-100 h-100 px-1">
+            <div class="d-flex h-100 w-100 align-items-center">
+                <div class="flex-grow-1" data-bind="text: progressText()"></div>
+                <div data-bind="text: progressPercent().toLocaleString('en-US', { style: 'percent' })"></div>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+</script>
