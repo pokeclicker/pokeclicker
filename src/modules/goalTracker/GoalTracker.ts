@@ -2,8 +2,8 @@ import { Feature } from '../DataStore/common/Feature';
 import { getDungeonIndex } from '../GameConstants';
 import NotificationOption from '../notifications/NotificationOption';
 import Notifier from '../notifications/Notifier';
-import SaveSelector from '../SaveSelector';
 import Goal from './Goal';
+import { exportCode, importCode } from './ImportExport';
 import Objective from './Objective';
 import { objectiveOptions } from './ObjectiveOptions';
 import { ObjectiveType } from './objectives/ObjectiveTypes';
@@ -42,46 +42,26 @@ export default class GoalTracker implements Feature {
         return objectiveOptions[type]?.label ?? ObjectiveType[type];
     }
 
-    exportGoal(goal: Goal) {
-        const json = JSON.stringify(goal.toJSON());
-        navigator.clipboard.writeText(SaveSelector.btoa(json));
-        Notifier.notify({
-            title: 'Goal exported',
-            message: 'The code for this goal has been saved to your clipboard.',
-            type: NotificationOption.info,
-        });
+    async exportGoal(goal: Goal) {
+        await exportCode('Goal', goal.toJSON());
     }
 
     async importGoal() {
-        const input = await Notifier.prompt({
-            title: 'Import Goal',
-            message: 'Enter the exported goal code below:',
-            type: NotificationOption.primary,
-            timeout: 0,
-        });
-
-        if (input?.trim().length) {
-            try {
-                const json = JSON.parse(SaveSelector.atob(input));
-                const goal = new Goal();
-                goal.fromJSON(json);
-                goal.objectives().forEach(obj => obj.resetAccumulatedProgress());
-                this.goals.unshift(goal);
-
-                Notifier.notify({
-                    title: 'Goal imported!',
-                    message: `The "<strong>${goal.name}</strong>" goal has been imported!`,
-                    type: NotificationOption.success,
-                });
-            } catch (e) {
-                console.error(e);
-                Notifier.notify({
-                    title: 'Import Error',
-                    message: 'Failed to import goal.',
-                    type: NotificationOption.danger,
-                });
-            }
+        const json = await importCode('Goal', (data) => Array.isArray(data?.objectives));
+        if (!json) {
+            return;
         }
+
+        const goal = new Goal();
+        goal.fromJSON(json);
+        goal.objectives().forEach(obj => obj.resetAccumulatedProgress());
+        this.goals.unshift(goal);
+
+        Notifier.notify({
+            title: 'Goal imported!',
+            message: `The "<strong>${goal.name}</strong>" goal has been imported!`,
+            type: NotificationOption.success,
+        });
     }
 
     toJSON(): Record<string, any> {

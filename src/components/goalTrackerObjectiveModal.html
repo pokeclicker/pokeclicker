@@ -25,8 +25,12 @@
                         <div data-bind="visible: values.length">
                             <label data-bind="text: option.label">Label</label>
                             <!-- ko if: option.searchable -->
-                            <div data-bind="let: { searchValue: ko.observable('') }">
-                                <div class="dropdown" style="position: static;", data-bind="event: { 'hidden.bs.dropdown': () => searchValue('') }">
+                            <div data-bind="let: { searchValue: ko.observable(''), dropdownOpen: ko.observable(false) }">
+                                <!-- show.bs.dropdown is cancelable, so the handler returns true to stop KO preventing it -->
+                                <div class="dropdown" style="position: static;" data-bind="event: {
+                                    'show.bs.dropdown': () => { dropdownOpen(true); return true; },
+                                    'hidden.bs.dropdown': () => { dropdownOpen(false); searchValue(''); }
+                                }">
                                     <button class="btn btn-dropdown custom-select text-left" type="button" data-toggle="dropdown">
                                         <div class="text-truncate btn-text">
                                             <span data-bind="text: values.find(o => o.value === config[option.key]?.())?.name"></span>
@@ -35,12 +39,13 @@
                                     <div class="dropdown-menu dropdown-menu-right w-75 px-2" style="max-height: 95%; overflow-y: auto;">
                                         <input type="text" class="form-control form-control-sm" placeholder="Search" data-bind="textInput: searchValue" />
                                         <div class="dropdown-divider"></div>
-                                        <div class="small" data-bind="foreach: values">
-                                            <button type="button" class="dropdown-item px-1" data-bind="click: () => { config[option.key]($data.value) },
-                                                visible: searchValue().length === 0 || $data.name.toLowerCase().includes(searchValue().toLowerCase())">
+                                        <!-- ko if: dropdownOpen -->
+                                        <div class="small" data-bind="foreach: searchValue() ? values.filter(o => o.name.toLowerCase().includes(searchValue().toLowerCase())) : values">
+                                            <button type="button" class="dropdown-item px-1" data-bind="click: () => { config[option.key]($data.value) }">
                                                 <span data-bind="text: $data.name"></span>
                                             </button>
                                         </div>
+                                        <!-- /ko -->
                                     </div>
                                 </div>
                             </div>

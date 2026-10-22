@@ -46,7 +46,7 @@ export default class Objective {
         if (!this.config) {
             return false;
         }
-        return Object.values(this.config).every(obs => obs() !== undefined);
+        return this.getOptions().every(opt => this.config[opt.key]() !== undefined);
     });
 
     private isComplete = ko.pureComputed(() => {
@@ -55,7 +55,7 @@ export default class Objective {
     });
 
     // Everything the objective needs to watch: what it tracks, what counts as done, and where it stands.
-    // Only Gain reads getRawProgress here, so the other modes leave it asleep
+    // Gain is the only mode needing raw here - Total reads it through isComplete, Display not at all
     private _tracker = ko.pureComputed(() => ({
         sourceKey: this.sourceKey(),
         goalKey: this.goalKey(),

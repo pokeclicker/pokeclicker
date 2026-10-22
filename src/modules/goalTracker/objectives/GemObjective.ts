@@ -2,7 +2,6 @@ import { Observable } from 'knockout';
 import { ObjectiveOption } from './ObjectiveTypes';
 import PokemonType from '../../enums/PokemonType';
 import GameHelper from '../../GameHelper';
-import { pluralizeString } from '../../GameConstants';
 
 export interface GemObjectiveConfig {
     gem: Observable<PokemonType>;
@@ -28,6 +27,6 @@ export const gemObjectiveOption: ObjectiveOption<GemObjectiveConfig> = {
     getDisplayName: (config: GemObjectiveConfig) => {
         const gem = config.gem();
         if (gem === undefined) return 'Unconfigured Objective';
-        return `${pluralizeString(PokemonType[gem], 2)} Gems`;
+        return `${PokemonType[gem]} Gems`;
     },
 };

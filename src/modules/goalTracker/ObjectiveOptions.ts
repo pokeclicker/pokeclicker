@@ -45,3 +45,7 @@ export const objectiveOptions: {
     [ObjectiveType.Gem]: gemObjectiveOption,
     [ObjectiveType.PartyAggregate]: partyAggregateObjectiveOption,
 };
+
+export const isKnownObjectiveType = (type: unknown): type is ObjectiveType => (
+    objectiveOptions[type as ObjectiveType] !== undefined
+);

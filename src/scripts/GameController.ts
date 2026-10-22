@@ -98,6 +98,8 @@ class GameController {
         const $purifyChamberModal = $('#purifyChamberModal');
         $purifyChamberModal.on('hide.bs.modal', _ => $purifyChamberModal.data('disable-toggle', true));
         $purifyChamberModal.on('hidden.bs.modal shown.bs.modal', _ => $purifyChamberModal.data('disable-toggle', false));
+        // Goal Tracker - let the objective config unbind while the modal is closed
+        $('#goalTrackerObjectiveModal').on('hidden.bs.modal', _ => App.game.goalTracker.selectedObjective(undefined));
         // Ship
         const $shipModal = $('#ShipModal');
         // Route Info

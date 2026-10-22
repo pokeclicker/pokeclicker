@@ -2,7 +2,8 @@ import Notifier from '../notifications/Notifier';
 import NotificationOption from '../notifications/NotificationOption';
 import Objective from './Objective';
 import GameHelper from '../GameHelper';
-import SaveSelector from '../SaveSelector';
+import { exportCode, importCode } from './ImportExport';
+import { isKnownObjectiveType } from './ObjectiveOptions';
 
 export default class Goal {
     private _name: KnockoutObservable<string>;
@@ -55,46 +56,26 @@ export default class Goal {
         }
     }
 
-    exportObjective(objective: Objective) {
-        const json = JSON.stringify(objective.toJSON());
-        navigator.clipboard.writeText(SaveSelector.btoa(json));
-        Notifier.notify({
-            title: 'Objective exported',
-            message: 'The code for this objective has been saved to your clipboard.',
-            type: NotificationOption.info,
-        });
+    async exportObjective(objective: Objective) {
+        await exportCode('Objective', objective.toJSON());
     }
 
     async importObjective() {
-        const input = await Notifier.prompt({
-            title: 'Import Objective',
-            message: 'Enter the exported objective code below:',
-            type: NotificationOption.primary,
-            timeout: 0,
-        });
-
-        if (input?.trim().length) {
-            try {
-                const json = JSON.parse(SaveSelector.atob(input));
-                const objective = new Objective();
-                objective.fromJSON(json);
-                objective.resetAccumulatedProgress();
-                this.objectives.push(objective);
-
-                Notifier.notify({
-                    title: 'Objective imported!',
-                    message: `The "<strong>${objective.displayName}</strong>" objective has been imported!`,
-                    type: NotificationOption.success,
-                });
-            } catch (e) {
-                console.error(e);
-                Notifier.notify({
-                    title: 'Import Error',
-                    message: 'Failed to import objective.',
-                    type: NotificationOption.danger,
-                });
-            }
+        const json = await importCode('Objective', (data) => isKnownObjectiveType(data?.type));
+        if (!json) {
+            return;
         }
+
+        const objective = new Objective();
+        objective.fromJSON(json);
+        objective.resetAccumulatedProgress();
+        this.objectives.push(objective);
+
+        Notifier.notify({
+            title: 'Objective imported!',
+            message: `The "<strong>${objective.displayName}</strong>" objective has been imported!`,
+            type: NotificationOption.success,
+        });
     }
 
     get name(): string {
@@ -113,10 +94,13 @@ export default class Goal {
     }
 
     fromJSON(json: Record<string, any>): void {
-        this.name = json.name;
+        this.name = json.name ?? 'New Goal';
         this.dispose();
         const objectives = [];
         json.objectives?.forEach((objectiveJson) => {
+            if (!isKnownObjectiveType(objectiveJson?.type)) {
+                return;
+            }
             try {
                 const objective = new Objective();
                 objective.fromJSON(objectiveJson);

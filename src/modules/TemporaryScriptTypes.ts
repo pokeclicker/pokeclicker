@@ -35,7 +35,7 @@ import type { MultiplierDecreaser } from './items/types';
 import type BagItem from './interfaces/BagItem';
 import type BattlePokemon from './battles/BattlePokemon';
 import type { HeldItem } from './items/HeldItem';
-import BadgeEnums from './enums/Badges';
+import type BadgeEnums from './enums/Badges';
 
 /*
     These types are only temporary while we are converting things to modules. As things are converted,
@@ -399,10 +399,6 @@ export type TmpDungeonType = {
 
 export type TmpTownListType = {
     [name: string]: TmpTownType;
-};
-
-export type TmpDisplayObservablesType = {
-    modalState: Record<string, any>;
 };
 
 export type TmpVeteranShopType = {
