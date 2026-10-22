@@ -58,12 +58,16 @@
                         <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split active" data-bind="text: '&nbsp;'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" data-bind="foreach: GameHelper.enumStrings(BaitType)">
-                            <button class="dropdown-item" type="button" data-bind="click: function(){SafariBattle.selectedBait(BaitList[$data])}, text: BaitList[$data].btnName,
-                                tooltip: {
-                                    title: BaitList[$data].description,
-                                    trigger: 'hover',
-                                    placement: 'left',
-                                }"></button>
+                            <div class="dropdown-item d-flex justify-content-between align-items-center">
+                                <button class="dropdown-item p-0" type="button" data-bind="click: function(){SafariBattle.selectedBait(BaitList[$data])}, text: BaitList[$data].btnName"></button>
+                                <span class="p-0 pl-2"
+                                    data-bind="click: function(bait, event){ event.stopPropagation(); },
+                                    tooltip: {
+                                        title: BaitList[$data].description,
+                                        trigger: 'hover',
+                                        placement: 'top',
+                                    }">ⓘ</span>
+                            </div>
                         </div>
                     </div>
                     <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.throwRock()" data-bind="disable: SafariBattle.busy()">
