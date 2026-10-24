@@ -324,7 +324,11 @@ class Safari {
             top: 32 * j + topLeft.top - 24,
             left: 32 * i + topLeft.left - 12,
         };
-        document.getElementById('sprite').classList.value = `walk${Safari.lastDirection}`;
+
+        const sprite = document.getElementById('sprite');
+        sprite.classList.value = `walk${Safari.lastDirection}`;
+        sprite.dataset.gender = Settings.getSetting('playerSafariSprite').value;
+
         $('#sprite').offset( offset );
         Safari.playerXY.x = i;
         Safari.playerXY.y = j;
@@ -358,7 +362,6 @@ class Safari {
         if (!Safari.inProgress()) {
             return;
         }
-
         Safari.lastDirection = direction;
         const directionOffset = Safari.directionToXY(direction);
 

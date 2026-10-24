@@ -175,6 +175,21 @@ export const getAllShadowPokemon = ko.pureComputed((): Set<PokemonNameType> => {
     return new Set(Object.values(dungeonList).flatMap(d => d.allShadowPokemon()));
 });
 
+export function matchesTypeFilter(types: PokemonType[], selected: PokemonType[]): boolean {
+    if (selected.length === 0) {
+        return true;
+    }
+    if (types.length === 1 && selected.includes(PokemonType.None)) {
+        return true;
+    }
+    for (let i = 0; i < types.length; i += 1) {
+        if (selected.includes(types[i])) {
+            return true;
+        }
+    }
+    return false;
+}
+
 // To have encounter/caught/defeat/hatch statistics in a single place
 export function incrementPokemonStatistics(pokemonId: number, statistic: PokemonStatisticsType, shiny: boolean, gender: BattlePokemonGender, shadow: ShadowStatus) {
     const pokemonStatistics = {

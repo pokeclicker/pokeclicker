@@ -35,20 +35,35 @@
 
   .card-header {
       position: relative;
-	  margin-top : 1px;
 
       .info {
         position: absolute;
-        top: 0;
         right: 5px;
+        font-weight: normal;
       }
+    }
+
+    .card-body {
+        font-size: .825rem;
+        border-bottom: 1px solid rgba(0,0,0,12.5%);
+
+        .task-list {
+            gap: 0;
+
+            &.multi {
+                padding-left: 12px;
+                border-left: 2px solid #4a4a4a;
+                margin-left: 4px;
+                margin-top: 8px;
+            }
+        }
     }
 
 	table {
 		margin-bottom : 4px;
 	}
+}
 
-	&:last-child table {
-		margin-bottom : 0;
-	}
+#dailyQuestDisplayBody {
+    border-bottom: 1px solid rgba(0,0,0,12.5%);
 }

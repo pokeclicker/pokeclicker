@@ -104,7 +104,7 @@
                   </td>
                 </tr>
                 <!-- /ko -->
-                <!-- ko if: BagHandler.displayName(pokemonMap[$data].heldItem) -->
+                <!-- ko with: pokemonMap[$data].heldItem -->
                 <tr>
                   <td class="text-left align-middle" data-bind="tooltip: {
                     title: 'Item this Pokémon has a chance to drop upon being defeated.',
@@ -112,10 +112,10 @@
                     trigger: 'hover'
                   }">Rare Hold Item</td>
                   <td class="text-left tight text-wrap">
-                    <code data-bind="text: BagHandler.displayName(pokemonMap[$data].heldItem)"></code>
-                    <!-- ko ifnot: pokemonMap[$data].heldItem.requirement?.isCompleted() ?? true -->
+                    <code data-bind="text: BagHandler.displayName($data) + (($data.amount ?? 1) > 1 ? ' ×' + $data.amount : '')"></code>
+                    <!-- ko ifnot: $data.requirement?.isCompleted() ?? true -->
                     <span class="small" data-bind="tooltip: {
-                        title: pokemonMap[$data].heldItem.requirement.hint(),
+                        title: $data.requirement.hint(),
                         placement: 'bottom',
                         trigger: 'hover'
                     }">🔒</span>

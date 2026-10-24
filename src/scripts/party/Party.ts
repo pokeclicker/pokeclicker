@@ -286,6 +286,35 @@ class Party implements Feature, TmpPartyType {
         return this._caughtPokemonLookup().get(pokemonMap[name].id);
     }
 
+    private _suppressPokerusNoEligibleNotify = false;
+
+    public infectFirstUninfectedPokemon(): void {
+        // Prioritise the kantoStarter before the first dex entry
+        const kantoStarter = App.game.party.getPokemon(GameConstants.RegionalStarters[GameConstants.Region.kanto][player.regionStarters[GameConstants.Region.kanto]()]);
+        const potentialPokemon = [...(kantoStarter ? [kantoStarter] : []), ...this.caughtPokemon];
+        const firstUninfected = potentialPokemon.find(p => p.pokerus === GameConstants.Pokerus.Uninfected);
+        if (firstUninfected) {
+            this._suppressPokerusNoEligibleNotify = false;
+            firstUninfected.pokerus = GameConstants.Pokerus.Contagious;
+            Notifier.notify({
+                message: `${firstUninfected.displayName} has been infected with Pokérus!`,
+                pokemonImage: PokemonHelper.getImage(firstUninfected.id),
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.General.pokerus,
+                setting: NotificationConstants.NotificationSetting.General.pokerus,
+            });
+        } else if (!this._suppressPokerusNoEligibleNotify) {
+            Notifier.notify({
+                message: 'No more Pokémon to infect.',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            this._suppressPokerusNoEligibleNotify = true;
+            setTimeout(() => {
+                this._suppressPokerusNoEligibleNotify = false;
+            }, 100);
+        }
+    }
+
     public partyPokemonActiveInSubRegion(region: GameConstants.Region, subregion: GameConstants.SubRegions): Array<PartyPokemon> {
         let caughtPokemon = this.caughtPokemon as Array<PartyPokemon>;
         if (region == GameConstants.Region.alola && subregion == GameConstants.AlolaSubRegions.MagikarpJump) {

@@ -90,8 +90,12 @@ export default class BattlePokemon implements EnemyPokemonInterface {
 
         if (this.heldItem) {
             const name = BagHandler.displayName(this.heldItem);
-            BagHandler.gainItem(this.heldItem);
-            const msg = `${this.displayName} dropped ${GameHelper.anOrA(name)} ${name}!`;
+            const amount = this.heldItem.amount ?? 1;
+            BagHandler.gainItem(this.heldItem, amount);
+            const itemDescription = amount > 1
+                ? `${amount.toLocaleString('en-US')} ${GameConstants.pluralizeString(name, amount)}`
+                : `${GameHelper.anOrA(name)} ${name}`;
+            const msg = `${this.displayName} dropped ${itemDescription}!`;
             Notifier.notify({
                 message: `The enemy ${msg} <img src="${BagHandler.image(this.heldItem)}" height="24px"/>`,
                 type: NotificationConstants.NotificationOption.success,

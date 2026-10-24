@@ -36,6 +36,7 @@ class HatcheryHelper {
     public nextBonus: KnockoutObservable<number> = ko.observable(1).extend({ numeric: 0 });
     public categories: KnockoutObservableArray<number> = ko.observableArray([]);
     public useHatcheryFilters: KnockoutObservable<boolean> = ko.observable(true);
+    public nextPokemon: KnockoutComputed<string[]>;
     // public level: number;
     // public experience: number;
 
@@ -53,7 +54,8 @@ class HatcheryHelper {
             Cost: <img src="assets/images/currency/${GameConstants.Currency[this.cost.currency]}.svg" width="20px">&nbsp;${(this.cost.amount).toLocaleString('en-US')}/hatch<br/>
             Step Efficiency: ${this.stepEfficiency()}%<br/>
             Attack Efficiency: ${this.attackEfficiency()}%<br/>
-            Hatched: ${this.hatched().toLocaleString('en-US')}<br/>`
+            Hatched: ${this.hatched().toLocaleString('en-US')}<br/><br/>
+            ${this.nextPokemonTooltip()}`
         );
 
         // Update our bonus values
@@ -64,6 +66,8 @@ class HatcheryHelper {
                 this.updateBonus();
             }
         });
+
+        this.nextPokemon = ko.pureComputed(() => this.getNextPokemon(5).map((p) => p.displayName)).extend({ rateLimit: 500 });
     }
 
     updateBonus(): void {
@@ -144,6 +148,54 @@ class HatcheryHelper {
         }
     }
 
+    public getNextPokemon(count = 1): PartyPokemon[] {
+        if (count <= 0) {
+            return [];
+        }
+
+        const regionalAttackDebuff = App.game.challenges.list.regionalAttackDebuff.active()
+            ? Settings.getSetting('breedingRegionalAttackDebuffSetting').value
+            : GameConstants.Region.none;
+        const compare = PartyController.compareBy(this.sortOption(), this.sortDirection(), regionalAttackDebuff);
+
+        const categories = this.categories();
+        const useHatcheryFilters = this.useHatcheryFilters();
+
+        const top: PartyPokemon[] = [];
+        for (const pokemon of App.game.party.caughtPokemon) {
+            if (categories.length && !categories.some((cat) => pokemon.category.includes(cat))) {
+                continue;
+            }
+            if (!pokemon.isHatchable()) {
+                continue;
+            }
+            if (useHatcheryFilters && !pokemon.isHatchableFiltered()) {
+                continue;
+            }
+
+            if (top.length === count && compare(top[top.length - 1], pokemon) <= 0) {
+                continue;
+            }
+
+            let i = top.length;
+            while (i > 0 && compare(top[i - 1], pokemon) > 0) {
+                i--;
+            }
+            top.splice(i, 0, pokemon);
+
+            if (top.length > count) {
+                top.pop();
+            }
+        }
+
+        return top;
+    }
+
+    public nextPokemonTooltip(): string {
+        const nextPokemon = this.nextPokemon();
+        return `<strong><u>Next Pokémon</u></strong><br/>${nextPokemon.length ? nextPokemon.join('<br/>') : 'None! Check filters & settings.'}`;
+    }
+
     toJSON(): Record<string, any> {
         return {
             name: this.name,
@@ -214,27 +266,7 @@ class HatcheryHelpers {
 
             // Check if egg slot empty
             if (egg.isNone()) {
-                // Check if there's a pokemon we can chuck into an egg
-                const regionalAttackDebuff = App.game.challenges.list.regionalAttackDebuff.active() ? Settings.getSetting('breedingRegionalAttackDebuffSetting').value : GameConstants.Region.none;
-                const compare = PartyController.compareBy(helper.sortOption(), helper.sortDirection(), regionalAttackDebuff);
-
-                const categories = helper.categories();
-                const useHatcheryFilters = helper.useHatcheryFilters();
-                const pokemon = App.game.party.caughtPokemon.reduce((best, pokemon) => {
-                    if (useHatcheryFilters && !pokemon.isHatchableFiltered()) {
-                        return best;
-                    }
-                    if (!pokemon.isHatchable()) {
-                        return best;
-                    }
-                    if (categories.length && !categories.some((cat) => pokemon.category.includes(cat))) {
-                        return best;
-                    }
-                    if (best === null) {
-                        return pokemon;
-                    }
-                    return compare(best, pokemon) <= 0 ? best : pokemon;
-                }, null);
+                const pokemon = helper.getNextPokemon()[0];
 
                 if (pokemon) {
                     this.hatchery.gainPokemonEgg(pokemon, index);

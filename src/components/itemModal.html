@@ -119,7 +119,7 @@
                                     <!-- ko foreach: Object.values(ItemList).filter((i) => i instanceof CollectibleItem && i.isActive() && player.itemList[i.name]()).sort(ItemHandler.collectibleSort) -->
                                     <div class="col-6 col-lg-3 mb-2">
                                         <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
-                                            data-bind="template: { name: 'otherItemTemplate', data: $data.name }">
+                                             data-bind="template: { name: 'otherItemTemplate', data: $data.name }">
                                         </div>
                                     </div>
                                     <!-- /ko -->
@@ -137,8 +137,9 @@
                                     <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
                                     <div class="col-6 col-lg-3 mb-2">
                                         <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
-                                            data-bind="template: { name: 'otherItemTemplate', data: GameConstants.VitaminType[$data]},
-                                                click: () => { VitaminController.currentlySelected($data); $('#pokemonVitaminExpandedModal').modal('show'); }">
+                                             data-bind="template: { name: 'otherItemTemplate', data: GameConstants.VitaminType[$data]},
+                                             click: ()=>
+                                            { VitaminController.currentlySelected($data); $('#pokemonVitaminExpandedModal').modal('show'); }">
                                         </div>
                                     </div>
                                     <!-- /ko -->
@@ -156,8 +157,9 @@
                                     <!-- ko foreach: GameHelper.enumStrings(GameConstants.ConsumableType).filter(type => player.itemList[type]()).map(type => ItemList[type]) -->
                                     <div class="col-6 col-lg-3 mb-2">
                                         <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
-                                            data-bind="template: { name: 'otherItemTemplate', data: $data.name },
-                                            click: () => { ConsumableController.currentlySelected($data.type); $('#consumableModal').modal('show'); }">
+                                             data-bind="template: { name: 'otherItemTemplate', data: $data.name },
+                                             click: ()=>
+                                            { ConsumableController.currentlySelected($data.type); $('#consumableModal').modal('show'); }">
                                         </div>
                                     </div>
                                     <!-- /ko -->
@@ -172,13 +174,14 @@
                         <div id="itemBag-heldItems" class="collapse show mt-1">
                             <div class="card-body pt-2 p-1">
                                 <div class="row justify-content-center">
-                                    <!-- ko foreach: Object.values(HeldItem.getSortedHeldItems()) -->
+                                    <!-- ko foreach: Object.values(BagHandler.getSortedHeldItems()) -->
                                     <h5 class="card-title col-12 mb-2" data-bind="text: $data.title, visible: $data.items.some(i => i.isUnlocked())"></h5>
                                     <!-- ko foreach: $data.items -->
                                     <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
                                         <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
-                                            data-bind="template: { name: 'otherItemTemplate', data: $data.name },
-                                                click: () => { HeldItem.heldItemSelected($data); $('#heldItemModal').modal('show'); }">
+                                             data-bind="template: { name: 'otherItemTemplate', data: $data.name },
+                                             click: ()=>
+                                            { HeldItem.heldItemSelected($data); $('#heldItemModal').modal('show'); }">
                                         </div>
                                     </div>
                                     <!-- /ko -->

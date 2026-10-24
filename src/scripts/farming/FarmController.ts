@@ -8,7 +8,7 @@ class FarmController {
     public static farmingModalTabSelected: KnockoutObservable<string> = ko.observable('berryFarmView');
 
     public static berryListEnd: KnockoutComputed<number>;
-    public static berryListSearch: KnockoutObservable<string> = ko.observable('');
+    public static berryListSearch: KnockoutComputed<string> = Settings.getSetting('farmBerrySearchFilter').observableValue;
 
     public static selectedBerry: KnockoutObservable<BerryType> = ko.observable(BerryType.Cheri);
     public static selectedMulch: KnockoutObservable<MulchType> = ko.observable(MulchType.Boost_Mulch);

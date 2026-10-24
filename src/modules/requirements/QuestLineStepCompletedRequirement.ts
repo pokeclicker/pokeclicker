@@ -1,17 +1,12 @@
 import { AchievementOption } from '../GameConstants';
 import QuestLineState from '../quests/QuestLineState';
 import { QuestLineNameType } from '../quests/QuestLineNameType';
-import type { TmpQuestType } from '../TemporaryScriptTypes';
 
 import Requirement from './Requirement';
 
 export default class QuestLineStepCompletedRequirement extends Requirement {
-    cachedQuest: TmpQuestType;
     get quest() {
-        if (!this.cachedQuest) {
-            this.cachedQuest = App.game.quests.getQuestLine(this.questLineName);
-        }
-        return this.cachedQuest;
+        return App.game.quests.getQuestLine(this.questLineName);
     }
 
     constructor(private questLineName: QuestLineNameType, private questIndex: (() => number) | number, option = AchievementOption.equal) {

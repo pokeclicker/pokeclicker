@@ -55,8 +55,8 @@ class MapHelper {
         return !!Routes.getRoute(region, route);
     }
 
-    public static normalizeRoute(route: number, region: GameConstants.Region, skipIgnoredRoutes = true): number {
-        return Routes.normalizedNumber(region, route, skipIgnoredRoutes);
+    public static normalizeRoute(route: number, region: GameConstants.Region): number {
+        return Routes.normalizedNumber(region, route);
     }
 
     public static accessToRoute = function (route: number, region: GameConstants.Region) {
@@ -318,13 +318,6 @@ class MapHelper {
             player.highestSubRegion(0);
             MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
             player.region = player.highestRegion();
-            // Update hatchery region filter to include new region if all previous regions selected
-            const previousRegionFullMask = (2 << (player.highestRegion() - 1)) - 1;
-            const regionFilterMask = Settings.getSetting('breedingRegionFilter').value & previousRegionFullMask;
-            if (regionFilterMask == previousRegionFullMask) {
-                const newRegionFullMask = (2 << player.highestRegion()) - 1;
-                Settings.setSettingByName('breedingRegionFilter', newRegionFullMask);
-            }
             $('#pickStarterModal').modal('show');
         }
     }

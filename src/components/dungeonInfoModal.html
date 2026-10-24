@@ -18,8 +18,13 @@
                             <div class="col-6 col-lg-4 mb-2">
                                 <div class="btn btn-secondary p-1 d-flex align-items-center text-left" style="cursor: default;">
                                     <img width="42px" data-bind="attr: { src: DungeonInfo.getLootImage(item.loot) }">
-                                    <div class="flex-grow-1 d-flex flex-column ml-2 small text-truncate">
-                                        <div class="text-truncate" data-bind="text: DungeonInfo.getLootName(item.loot)"></div>
+                                    <div class="flex-grow-1 d-flex flex-column ml-2 small text-truncate loot-details">
+                                        <div class="loot-title">
+                                            <span class="text-truncate" data-bind="text: DungeonInfo.getLootName(item.loot)"></span>
+                                            <!-- ko if: (item.amount ?? 1) > 1 -->
+                                            <span class="loot-amount" data-bind="text: `×${item.amount}`"></span>
+                                            <!-- /ko -->
+                                        </div>
                                         <!-- ko if: item.requirement?.isCompleted() ?? true -->
                                         <div class="small" data-bind="text: DungeonInfo.getLootChanceFormatted(item, lootEntries[0])"></div>
                                         <!-- /ko -->

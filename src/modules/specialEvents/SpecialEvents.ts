@@ -163,6 +163,34 @@ export default class SpecialEvents implements Feature {
             new Date(new Date().getFullYear(), 6, 24, 23), () => {
             },
         );
+        /* Pokemon the first movie release date
+        RoamingPokemonList.ts:
+            Captain Charizard
+        RouteData.ts:
+            Magikarp (Pirate)
+            Captain Lucario
+            Bounsweet (Pirate)
+            Steenee (Pirate)
+            Scorbunny (Pirate)
+            Raboot (Pirate)
+        Dungeon.ts:
+            Pirate Island as a dungeon
+            Captain Hoopa
+            Gyarados (Captain)
+            Tsareena (Captain)
+            Cinderace (Captain)
+            Captain Zacian
+        GenericDeal.ts
+            Zorua (Pirate)
+        */
+        this.newEvent('A Pirate\'s Life', 'Pirates are causing trouble all over the Seven Seas.',
+            // Start
+            new Date(new Date().getFullYear(), 7, 29, 1), () => {
+            },
+            // End
+            new Date(new Date().getFullYear(), 8, 19, 23), () => {
+            },
+        );
         // Halloween
         this.newEvent('Halloween!', 'Spooky Pokémon are trick-or-treating for a limited time around Kanto, Johto and Hoenn.',
             // Start

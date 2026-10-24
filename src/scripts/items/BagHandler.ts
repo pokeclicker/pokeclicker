@@ -106,6 +106,34 @@ class BagHandler {
         }
     }
 
+    public static getSortedHeldItems() {
+        const sortedHeldItems = Object.values(ItemList).filter(i => i instanceof HeldItem).sort((a: HeldItem, b: HeldItem) => {
+            return a.regionUnlocked - b.regionUnlocked;
+        });
+        return {
+            attack: {
+                title: 'Pokémon Restricted',
+                items: sortedHeldItems.filter(i => i instanceof PokemonRestrictedAttackBonusHeldItem),
+            },
+            typeRestricted: {
+                title: 'Type Restricted',
+                items: sortedHeldItems.filter(i => i instanceof TypeRestrictedAttackBonusHeldItem),
+            },
+            ev: {
+                title: 'EV Gain',
+                items: sortedHeldItems.filter(i => i instanceof EVsGainedBonusHeldItem),
+            },
+            exp: {
+                title: 'EXP Gain',
+                items: sortedHeldItems.filter(i => i instanceof ExpGainedBonusHeldItem),
+            },
+            other: {
+                title: 'Other',
+                items: sortedHeldItems.filter(i => i.constructor.name === 'AttackBonusHeldItem' || i.constructor.name === 'HeldItem'),
+            },
+        };
+    }
+
     //#region Item getters
 
     private static getItem(id: string | number): Item {

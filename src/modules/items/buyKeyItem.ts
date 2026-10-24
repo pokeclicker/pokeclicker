@@ -6,7 +6,7 @@ import { ShopOptions } from './types';
 export default class BuyKeyItem extends Item {
     item: KeyItemType;
 
-    constructor(item: KeyItemType, basePrice: number, currency: Currency = Currency.questPoint, options?: ShopOptions, displayName?: string) {
+    constructor(item: KeyItemType, basePrice: number, currency: Currency = Currency.questPoint, options?: ShopOptions, displayName?: string, private silent = false) {
         super(KeyItemType[item], basePrice, currency, { maxAmount: 1, ...options }, displayName);
         this.item = item;
     }
@@ -19,13 +19,18 @@ export default class BuyKeyItem extends Item {
         return this.basePrice * amt;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     gain(amt: number) {
-        App.game.keyItems.gainKeyItem(this.item);
+        for (let i = 0; i < amt; i++) {
+            App.game.keyItems.gainKeyItem(this.item, this.silent);
+        }
     }
 
     isSoldOut(): boolean {
-        return App.game.keyItems.hasKeyItem(this.item);
+        return App.game.keyItems.hasKeyItem(this.item) && !App.game.keyItems.itemList.find(k => k.id === this.item)?.allowMultipleUnlocks;
+    }
+
+    showBagAmount() {
+        return false;
     }
 
     get image(): string {

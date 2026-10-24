@@ -35,7 +35,7 @@ export class Underground implements Feature {
     public battery = new UndergroundBattery();
 
     canAccess(): boolean {
-        return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit);
+        return App.game.keyItems.hasKeyItem(KeyItemType.Explorer_kit);
     }
 
     initialize(): void {

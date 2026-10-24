@@ -7,14 +7,22 @@ export default class Routes {
 
     public static add(route: RegionRoute): void {
         this.regionRoutes.push(route);
-        // Sort the routes so we can normalize the route number
-        this.sortRegionRoutes();
+        this.checkRouteOrder();
     }
 
-    public static sortRegionRoutes(): void {
-        this.regionRoutes
-            .sort((routeA, routeB) => routeA.orderNumber - routeB.orderNumber)
-            .sort((routeA, routeB) => routeA.region - routeB.region);
+    // Replaces automated sorting: crash the game if routes aren't added in difficulty order
+    public static checkRouteOrder(): void {
+        let index = this.regionRoutes.length - 1;
+        const lastRoute = this.regionRoutes[index];
+        let previousRoute = undefined;
+        while (index-- && !previousRoute) {
+            if (lastRoute.region == this.regionRoutes[index].region) {
+                previousRoute = this.regionRoutes[index];
+            }
+        }
+        if (previousRoute && previousRoute.orderNumber > lastRoute.orderNumber) {
+            throw new Error(`Couldn't add ${lastRoute.routeName} : illegal route order`);
+        }
     }
 
     public static getRoute(region: GameConstants.Region, route: number): RegionRoute {
@@ -48,25 +56,18 @@ export default class Routes {
         return this.regionRoutes[normalizedRoute - 1].number;
     }
 
-    public static normalizedNumber(region: GameConstants.Region, route: number, skipIgnoredRoutes: boolean): number {
+    public static normalizedNumber(region: GameConstants.Region, route: number): number {
         if (region === GameConstants.Region.none) {
             return route;
         }
-        // For some numbers, like pokemon hp, we want to be able to add a new route, without changing the balance of the whole game
-        // For those numbers, skipIgnoredRoutes == true. If It's false, filteredRegionRoutes will just be all routes and the if will never happen
-        const filteredRegionRoutes = this.regionRoutes.filter((r) => !skipIgnoredRoutes || !r.ignoreRouteInCalculations);
-        // If this route is ignored, we will find the index of the route before this, which is not ignored
-        // This is done by looping backwards, and checking all routes
-        if (skipIgnoredRoutes && this.regionRoutes.find((routeData) => routeData.region === region && routeData.number === route)?.ignoreRouteInCalculations) {
-            for (let i = this.regionRoutes.findIndex((routeData) => routeData.region === region && routeData.number === route) - 1; i >= 0; i--) {
-                if (!this.regionRoutes[i].ignoreRouteInCalculations) {
-                    return i + 1;
-                }
-                if (i === 0) {
-                    throw new Error('Not implemented for ignoreRouteInCalculations = true on first region route');
-                }
+        let count = 0;
+        for (let routeData of this.regionRoutes) {
+            if (routeData.region === region && routeData.number === route) {
+                return count + 1;
             }
+            count += +!routeData.ignoreRouteInCalculations;
         }
-        return filteredRegionRoutes.findIndex((routeData) => routeData.region === region && routeData.number === route) + 1;
+        // Not meant to happen at all but just in case
+        return 0;
     }
 }

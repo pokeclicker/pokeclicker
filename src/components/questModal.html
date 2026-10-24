@@ -43,36 +43,38 @@
                             </div>
                         </div>
 
-                        <table class='table table-hover m-0'>
+                        <table class="table table-hover m-0">
                             <thead>
-                            <tr>
-                                <td class="align-middle"><h5 class="mb-0">Description</h5></td>
-                                <td class="align-middle"><h5 class="mb-0">Reward</h5></td>
-                                <td class="align-middle"><h5 class="mb-0">Status</h5></td>
-                            </tr>
+                                <tr>
+                                    <th class="align-middle text-left">Description</th>
+                                    <th class="align-middle">Reward</th>
+                                    <th class="align-middle">Progress</th>
+                                    <th class="align-middle"></th>
+                                </tr>
                             </thead>
                             <tbody data-bind="foreach: App.game.quests.sortedQuestList" >
-                            <tr>
-                                <td class="align-middle" style="text-align:left" data-bind='text: description'></td>
-                                <td class="align-middle text-center py-0" style="text-align:left">
-                                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount':  pointsReward, 'currency': GameConstants.Currency.questPoint}}"></span>
-                                </td>
-                                <td class="align-middle text-center py-0">
-                                    <button class='btn btn-primary btn-sm btn-block'
-                                        data-bind='visible: App.game.quests.canStartNewQuest() && !$data.inProgress() && !$data.isCompleted() && !$data.claimed(),
-                                        click: function(){
-                                            App.game.quests.beginQuest($data.index);
-                                        }'>
-                                        Start
-                                    </button>
-                                    <button class='btn btn-success btn-sm btn-block' data-bind='visible: !$data.claimed() && $data.isCompleted(),
-                                                                        click: () => { App.game.quests.claimQuest($data.index) }'>
-                                        Claim
-                                    </button>
-                                    <span data-bind='visible: $data.inProgress() && !$data.isCompleted(), text: Math.floor(progress()*100) + "%"'></span>
-                                    <button class='btn btn-secondary btn-sm btn-block' disabled data-bind='visible: $data.claimed()'>Completed</button>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td class="align-middle text-left" data-bind="text: description"></td>
+                                    <td class="align-middle text-center py-0">
+                                        <span data-bind="template: { name: 'currencyTemplate', data: {'amount':  pointsReward, 'currency': GameConstants.Currency.questPoint}}"></span>
+                                    </td>
+                                    <td class="align-middle text-center py-0">
+                                        <span data-bind="visible: $data.inProgress() && !$data.isCompleted(), text: `${Math.floor(progress()*100)}%`"></span>
+                                        <span data-bind="visible: !$data.inProgress() && !$data.isCompleted()">-</span>
+                                        <span class="text-muted" data-bind="visible: $data.isCompleted()">Completed</span>
+                                    </td>
+                                    <td class="align-middle text-center py-0">
+                                        <button class="btn btn-primary btn-sm btn-block mt-0"
+                                            data-bind="visible: App.game.quests.canStartNewQuest() && !$data.inProgress() && !$data.isCompleted() && !$data.claimed(),
+                                                click: () => App.game.quests.beginQuest($data.index)">Start</button>
+                                        <button class="btn btn-success btn-sm btn-block mt-0"
+                                            data-bind="visible: !$data.claimed() && $data.isCompleted(),
+                                                click: () => App.game.quests.claimQuest($data.index)">Claim</button>
+                                        <button class="btn btn-danger btn-sm btn-block mt-0"
+                                            data-bind="visible: $data.inProgress() && !$data.isCompleted(),
+                                                click: () => App.game.quests.quitQuest($data.index, $data.progress() > 0)">Quit</button>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

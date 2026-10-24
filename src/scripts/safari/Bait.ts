@@ -13,6 +13,7 @@ class Bait {
         public name: string,
         public useName: string,
         public image: string,
+        public description: string,
         public amount: () => string | number,
         public use: (pokemon: SafariPokemon) => void
     ) { }
@@ -27,6 +28,7 @@ class Bait {
 const BaitList: { [name: string]: Bait } = {};
 
 BaitList.Bait = new Bait(BaitType.Bait, 'Bait', 'some bait', 'assets/images/safari/bait.png',
+    'Makes the Pokémon eat, lowering its escape and catch chance',
     () => '∞',
     (pokemon: SafariPokemon) => {
         pokemon.eatingBait = BaitType.Bait;
@@ -35,6 +37,7 @@ BaitList.Bait = new Bait(BaitType.Bait, 'Bait', 'some bait', 'assets/images/safa
 
     });
 BaitList.Razz = new Bait(BaitType.Razz, 'Razz Berry', 'a Razz Berry', FarmController.getBerryImage(BerryType.Razz),
+    'Makes the Pokémon eat, and also increases its catch chance',
     () => App.game.farming.berryInventory[BerryType.Razz](),
     (pokemon: SafariPokemon) => {
         GameHelper.incrementObservable(App.game.farming.berryInventory[BerryType.Razz], -1);
@@ -43,6 +46,7 @@ BaitList.Razz = new Bait(BaitType.Razz, 'Razz Berry', 'a Razz Berry', FarmContro
         pokemon.angry = 0;
     });
 BaitList.Pinap = new Bait(BaitType.Pinap, 'Pinap Berry', 'a Pinap Berry', FarmController.getBerryImage(BerryType.Pinap),
+    'Makes the Pokémon eat, and also increases the chance it drops an item when caught',
     () => App.game.farming.berryInventory[BerryType.Pinap](),
     (pokemon: SafariPokemon) => {
         GameHelper.incrementObservable(App.game.farming.berryInventory[BerryType.Pinap], -1);
@@ -51,6 +55,7 @@ BaitList.Pinap = new Bait(BaitType.Pinap, 'Pinap Berry', 'a Pinap Berry', FarmCo
         pokemon.angry = 0;
     });
 BaitList.Nanab = new Bait(BaitType.Nanab, 'Nanab Berry', 'a Nanab Berry', FarmController.getBerryImage(BerryType.Nanab),
+    'Makes the Pokémon eat, and also lowers its escape chance',
     () => App.game.farming.berryInventory[BerryType.Nanab](),
     (pokemon: SafariPokemon) => {
         GameHelper.incrementObservable(App.game.farming.berryInventory[BerryType.Nanab], -1);
