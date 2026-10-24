@@ -8,11 +8,19 @@
 ///<reference path="PokemonGiftNPC.ts"/>
 ///<reference path="AssistantNPC.ts"/>
 ///<reference path="TownContent.ts"/>
+///<reference path="../gym/GymList.ts"/>
+///<reference path="../dungeons/Dungeon.ts"/>
 
 type TownOptionalArgument = {
     requirements?: Requirement[],
     npcs?: NPC[],
-    ignoreAreaStatus?: boolean
+    ignoreAreaStatus?: boolean,
+    dynamicImages?: DynamicTownImage[]
+};
+
+type DynamicTownImage = {
+    requirement: Requirement | MultiRequirement | OneFromManyRequirement,
+    imageString: string,
 };
 
 class Town implements TmpTownType {
@@ -25,6 +33,7 @@ class Town implements TmpTownType {
     public content: TownContent[];
     public subRegion: GameConstants.SubRegions;
     public ignoreAreaStatus: boolean;
+    public dynamicImages: DynamicTownImage[];
 
     constructor(
         name: string,
@@ -43,6 +52,7 @@ class Town implements TmpTownType {
         this.content = content;
         this.subRegion = subRegion;
         this.ignoreAreaStatus = optional.ignoreAreaStatus ?? false;
+        this.dynamicImages = optional.dynamicImages ?? [];
 
         if (GymList[name]) {
             const gym = GymList[name];
@@ -64,6 +74,18 @@ class Town implements TmpTownType {
 
     public isUnlocked() {
         return this.requirements.every(requirement => requirement.isCompleted());
+    }
+
+    public getImage() {
+        let imageName = this.name;
+        if (this.dynamicImages.length) {
+            const imageFound = this.dynamicImages.find(ir => ir.requirement.isCompleted());
+            if (imageFound) {
+                imageName = imageFound.imageString;
+            }
+        }
+        // eslint-disable-next-line quotes
+        return `url('assets/images/towns/${imageName.replace(/'/, `\\'`)}.png')`;
     }
 }
 

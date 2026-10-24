@@ -2,6 +2,7 @@ type NPCOptionalArgument = {
     requirement?: Requirement | MultiRequirement | OneFromManyRequirement,
     image?: string,
     saveKey?: string,
+    resetDaily?: boolean,
 };
 
 class NPC {
