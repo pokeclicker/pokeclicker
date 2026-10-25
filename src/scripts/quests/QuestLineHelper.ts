@@ -3271,8 +3271,8 @@ class QuestLineHelper {
 
         // Multi-step #5:
 
-        const meltanObtain10MB = new BuyPokeballsQuest(10, 0, GameConstants.Pokeball.Masterball);
-        meltanQuestLine.addQuest(new MultipleQuestsQuest([meltanObtain10MB],'Step 6 of Let\'s Go, Meltan!'));
+        const meltanObtain10kUB = new BuyPokeballsQuest(10000, 0, GameConstants.Pokeball.Ultraball);
+        meltanQuestLine.addQuest(new MultipleQuestsQuest([meltanObtain10kUB],'Step 6 of Let\'s Go, Meltan!'));
 
         // Multi-step #6:
 
