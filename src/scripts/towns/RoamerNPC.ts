@@ -4,7 +4,7 @@ class RoamerNPC extends NPC {
         public name: string,
         public dialog: string[],
         public region: GameConstants.Region,
-        public subRegionRoamerGroup: number,
+        public subregionRoamerGroup: number,
         image: string = undefined,
         requirement?: Requirement | MultiRequirement | OneFromManyRequirement
     ) {
@@ -12,12 +12,12 @@ class RoamerNPC extends NPC {
     }
 
     get dialogHTML(): string {
-        const route = RoamingPokemonList.getIncreasedChanceRouteBySubRegionGroup(this.region, this.subRegionRoamerGroup);
-        const roamers = RoamingPokemonList.getSubRegionalGroupRoamers(this.region, this.subRegionRoamerGroup);
+        const route = RoamingPokemonList.getIncreasedChanceRouteBySubregionGroup(this.region, this.subregionRoamerGroup);
+        const roamers = RoamingPokemonList.getSubregionalGroupRoamers(this.region, this.subregionRoamerGroup);
 
         // If no roaming Pokemon yet
         if (!roamers.length) {
-            const regionName = RoamingPokemonList.roamerGroups[this.region]?.[this.subRegionRoamerGroup]?.name
+            const regionName = RoamingPokemonList.roamerGroups[this.region]?.[this.subregionRoamerGroup]?.name
                 ?? GameConstants.camelCaseToString(GameConstants.Region[this.region]);
             return `There haven't been any reports of roaming Pokémon around ${regionName} lately.`;
         }

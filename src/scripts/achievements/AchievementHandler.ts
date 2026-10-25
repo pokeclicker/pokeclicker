@@ -238,9 +238,9 @@ class AchievementHandler {
             0,
             () => AchievementHandler.achievementList.some(a => a.category.name == GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.secret] && a.unlocked())
         ));
-        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.sevii], 50, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii123)));
-        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.orre], 75, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre)));
-        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.magikarpJump], 25, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump)));
+        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.sevii], 50, () => Subregions.isSubregionUnlocked(GameConstants.Region.kanto, GameConstants.KantoSubregions.Sevii123)));
+        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.orre], 75, () => Subregions.isSubregionUnlocked(GameConstants.Region.hoenn, GameConstants.HoennSubregions.Orre)));
+        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.magikarpJump], 25, () => Subregions.isSubregionUnlocked(GameConstants.Region.alola, GameConstants.AlolaSubregions.MagikarpJump)));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.events], 25, () => true));
 
         AchievementHandler._achievementCategories = categories;
@@ -540,19 +540,19 @@ class AchievementHandler {
         GameHelper.enumNumbers(GameConstants.Region).filter(r => r != GameConstants.Region.none && r <= GameConstants.MAX_AVAILABLE_REGION).forEach(region => {
             // Routes
             Routes.getRoutesByRegion(region).forEach(route => {
-                if (SubRegions.getSubRegionById(region, route.subRegion)?.requirement instanceof NullRequirement) {
+                if (Subregions.getSubregionById(region, route.subregion)?.requirement instanceof NullRequirement) {
                     return;
                 }
 
                 let category = region;
                 // Split bigger subregions into their own achievement pool
-                if (region == GameConstants.Region.kanto && (route.subRegion == GameConstants.KantoSubRegions.Sevii123 || route.subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
+                if (region == GameConstants.Region.kanto && (route.subregion == GameConstants.KantoSubregions.Sevii123 || route.subregion == GameConstants.KantoSubregions.Sevii4567)) {
                     category = GameConstants.ExtraAchievementCategories.sevii;
                 }
-                if (region == GameConstants.Region.hoenn && route.subRegion == GameConstants.HoennSubRegions.Orre) {
+                if (region == GameConstants.Region.hoenn && route.subregion == GameConstants.HoennSubregions.Orre) {
                     category = GameConstants.ExtraAchievementCategories.orre;
                 }
-                if (region == GameConstants.Region.alola && route.subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
+                if (region == GameConstants.Region.alola && route.subregion == GameConstants.AlolaSubregions.MagikarpJump) {
                     category = GameConstants.ExtraAchievementCategories.magikarpJump;
                 }
                 const routeName = Routes.getName(route.number, region, true);
@@ -571,13 +571,13 @@ class AchievementHandler {
                 }
                 let category = region;
                 // Split bigger subregions into their own achievement pool
-                if (region == GameConstants.Region.kanto && (TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii123 || TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
+                if (region == GameConstants.Region.kanto && (TownList[dungeon].subregion == GameConstants.KantoSubregions.Sevii123 || TownList[dungeon].subregion == GameConstants.KantoSubregions.Sevii4567)) {
                     category = GameConstants.ExtraAchievementCategories.sevii;
                 }
-                if (region == GameConstants.Region.hoenn && TownList[dungeon].subRegion == GameConstants.HoennSubRegions.Orre) {
+                if (region == GameConstants.Region.hoenn && TownList[dungeon].subregion == GameConstants.HoennSubregions.Orre) {
                     category = GameConstants.ExtraAchievementCategories.orre;
                 }
-                if (region == GameConstants.Region.alola && TownList[dungeon].subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
+                if (region == GameConstants.Region.alola && TownList[dungeon].subregion == GameConstants.AlolaSubregions.MagikarpJump) {
                     category = GameConstants.ExtraAchievementCategories.magikarpJump;
                 }
                 AchievementHandler.addAchievement(`${dungeon} Explorer`, `Clear ${dungeon} 10 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex(dungeon)), 0.8, category);

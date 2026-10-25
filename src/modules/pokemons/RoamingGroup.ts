@@ -1,11 +1,11 @@
-import { SubRegions } from '../GameConstants';
+import { Subregions } from '../GameConstants';
 
 export default class RoamingGroup {
-    public subRegions: SubRegions[];
+    public subregions: Subregions[];
     public name: string;
 
-    constructor(name: string, subRegions: SubRegions[]) {
+    constructor(name: string, subregions: Subregions[]) {
         this.name = name;
-        this.subRegions = subRegions;
+        this.subregions = subregions;
     }
 }

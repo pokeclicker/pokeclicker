@@ -65,34 +65,34 @@ export const MaxIDPerRegion = [
 ];
 
 // Subregions
-export enum KantoSubRegions {
+export enum KantoSubregions {
     Kanto = 0,
     Sevii123,
     Sevii4567,
 }
 
-export enum JohtoSubRegions {
+export enum JohtoSubregions {
     Johto = 0,
 }
 
-export enum HoennSubRegions {
+export enum HoennSubregions {
     Hoenn = 0,
     Orre,
 }
 
-export enum SinnohSubRegions {
+export enum SinnohSubregions {
     Sinnoh = 0,
 }
 
-export enum UnovaSubRegions {
+export enum UnovaSubregions {
     Unova = 0,
 }
 
-export enum KalosSubRegions {
+export enum KalosSubregions {
     Kalos = 0,
 }
 
-export enum AlolaSubRegions {
+export enum AlolaSubregions {
     MelemeleIsland = 0,
     AkalaIsland,
     UlaulaIsland,
@@ -100,39 +100,39 @@ export enum AlolaSubRegions {
     MagikarpJump,
 }
 
-export enum GalarSubRegions {
+export enum GalarSubregions {
     SouthGalar = 0,
     NorthGalar,
     IsleofArmor,
     CrownTundra,
 }
 
-export enum HisuiSubRegions {
+export enum HisuiSubregions {
     Hisui = 0,
 }
 
-export enum PaldeaSubRegions {
+export enum PaldeaSubregions {
     Paldea = 0,
     Kitakami,
     BlueberryAcademy,
 }
 
-export enum FinalSubRegions {
+export enum FinalSubregions {
     Final = 0,
 }
 
-export type SubRegions =
-    | KantoSubRegions
-    | JohtoSubRegions
-    | HoennSubRegions
-    | SinnohSubRegions
-    | UnovaSubRegions
-    | KalosSubRegions
-    | AlolaSubRegions
-    | GalarSubRegions
-    | HisuiSubRegions
-    | PaldeaSubRegions
-    | FinalSubRegions;
+export type Subregions =
+    | KantoSubregions
+    | JohtoSubregions
+    | HoennSubregions
+    | SinnohSubregions
+    | UnovaSubregions
+    | KalosSubregions
+    | AlolaSubregions
+    | GalarSubregions
+    | HisuiSubregions
+    | PaldeaSubregions
+    | FinalSubregions;
 
 // Battle Items
 export const ITEM_USE_TIME = 30;

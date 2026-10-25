@@ -1,50 +1,50 @@
 import BadgeEnums from '../enums/Badges';
 import {
     Region,
-    KantoSubRegions,
-    JohtoSubRegions,
-    HoennSubRegions,
-    SinnohSubRegions,
-    UnovaSubRegions,
-    KalosSubRegions,
-    AlolaSubRegions,
-    GalarSubRegions,
-    HisuiSubRegions,
-    PaldeaSubRegions,
+    KantoSubregions,
+    JohtoSubregions,
+    HoennSubregions,
+    SinnohSubregions,
+    UnovaSubregions,
+    KalosSubregions,
+    AlolaSubregions,
+    GalarSubregions,
+    HisuiSubregions,
+    PaldeaSubregions,
 } from '../GameConstants';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
 import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
 import RouteKillRequirement from '../requirements/RouteKillRequirement';
 import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepCompletedRequirement';
 import * as GameConstants from '../GameConstants';
-import SubRegion from './SubRegion';
+import Subregion from './Subregion';
 import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
 import LazyRequirementWrapper from '../requirements/LazyRequirementWrapper';
 
-export default class SubRegions {
-    public static list: Record<number, SubRegion[]> = {};
+export default class Subregions {
+    public static list: Record<number, Subregion[]> = {};
 
-    public static addSubRegion(region: Region, subregion: SubRegion): void {
+    public static addSubregion(region: Region, subregion: Subregion): void {
         if (!this.list[region]) {
             this.list[region] = [];
         }
         this.list[region].push(subregion);
     }
 
-    public static getSubRegions(region: Region): SubRegion[] {
+    public static getSubregions(region: Region): Subregion[] {
         return this.list[region]?.filter((s) => s.unlocked());
     }
 
-    public static getSubRegion(region: Region, subregion: string): SubRegion {
+    public static getSubregion(region: Region, subregion: string): Subregion {
         return this.list[region].find((s) => s.name === subregion);
     }
 
-    public static getSubRegionById(region: Region, subregionID: number): SubRegion {
+    public static getSubregionById(region: Region, subregionID: number): Subregion {
         return this.list[region].find((s) => s.id === subregionID);
     }
 
-    public static isSubRegionUnlocked(region: Region, subRegion: number): boolean {
-        return this.getSubRegionById(region, subRegion).unlocked();
+    public static isSubregionUnlocked(region: Region, subregion: number): boolean {
+        return this.getSubregionById(region, subregion).unlocked();
     }
 
     public static openModal() {
@@ -52,32 +52,32 @@ export default class SubRegions {
     }
 }
 
-SubRegions.addSubRegion(Region.kanto, new SubRegion('Kanto', KantoSubRegions.Kanto, undefined, 'Vermilion City', undefined));
-SubRegions.addSubRegion(Region.kanto, new SubRegion('Sevii Islands 123', KantoSubRegions.Sevii123, new GymBadgeRequirement(BadgeEnums.Volcano), 'One Island', undefined));
-SubRegions.addSubRegion(Region.kanto, new SubRegion('Sevii Islands 4567', KantoSubRegions.Sevii4567, new QuestLineStepCompletedRequirement('Celio\'s Errand', 5), 'Four Island', undefined));
+Subregions.addSubregion(Region.kanto, new Subregion('Kanto', KantoSubregions.Kanto, undefined, 'Vermilion City', undefined));
+Subregions.addSubregion(Region.kanto, new Subregion('Sevii Islands 123', KantoSubregions.Sevii123, new GymBadgeRequirement(BadgeEnums.Volcano), 'One Island', undefined));
+Subregions.addSubregion(Region.kanto, new Subregion('Sevii Islands 4567', KantoSubregions.Sevii4567, new QuestLineStepCompletedRequirement('Celio\'s Errand', 5), 'Four Island', undefined));
 
-SubRegions.addSubRegion(Region.johto, new SubRegion('Johto', JohtoSubRegions.Johto));
+Subregions.addSubregion(Region.johto, new Subregion('Johto', JohtoSubregions.Johto));
 
-SubRegions.addSubRegion(Region.hoenn, new SubRegion('Hoenn', HoennSubRegions.Hoenn, undefined, 'Slateport City'));
-SubRegions.addSubRegion(Region.hoenn, new SubRegion('Orre', HoennSubRegions.Orre, new QuestLineStartedRequirement('Shadows in the Desert'), 'Outskirt Stand', undefined));
+Subregions.addSubregion(Region.hoenn, new Subregion('Hoenn', HoennSubregions.Hoenn, undefined, 'Slateport City'));
+Subregions.addSubregion(Region.hoenn, new Subregion('Orre', HoennSubregions.Orre, new QuestLineStartedRequirement('Shadows in the Desert'), 'Outskirt Stand', undefined));
 
-SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Sinnoh', SinnohSubRegions.Sinnoh));
+Subregions.addSubregion(Region.sinnoh, new Subregion('Sinnoh', SinnohSubregions.Sinnoh));
 
-SubRegions.addSubRegion(Region.unova, new SubRegion('Unova', UnovaSubRegions.Unova));
+Subregions.addSubregion(Region.unova, new Subregion('Unova', UnovaSubregions.Unova));
 
-SubRegions.addSubRegion(Region.kalos, new SubRegion('Kalos', KalosSubRegions.Kalos));
+Subregions.addSubregion(Region.kalos, new Subregion('Kalos', KalosSubregions.Kalos));
 
-SubRegions.addSubRegion(Region.alola, new SubRegion('Melemele Island', AlolaSubRegions.MelemeleIsland, undefined, 'Hau\'oli City'));
-SubRegions.addSubRegion(Region.alola, new SubRegion('Akala Island', AlolaSubRegions.AkalaIsland, new GymBadgeRequirement(BadgeEnums.Melemele_Stamp), 'Heahea City'));
-SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula Island', AlolaSubRegions.UlaulaIsland, new TemporaryBattleRequirement('Ultra Wormhole'), 'Malie City'));
-SubRegions.addSubRegion(Region.alola, new SubRegion('Poni Island', AlolaSubRegions.PoniIsland, new QuestLineStartedRequirement('Emissary of Light'), 'Seafolk Village'));
-SubRegions.addSubRegion(Region.alola, new SubRegion('Magikarp Jump', AlolaSubRegions.MagikarpJump, new QuestLineStartedRequirement('Magikarp Jump'), 'Hoppy Town'));
+Subregions.addSubregion(Region.alola, new Subregion('Melemele Island', AlolaSubregions.MelemeleIsland, undefined, 'Hau\'oli City'));
+Subregions.addSubregion(Region.alola, new Subregion('Akala Island', AlolaSubregions.AkalaIsland, new GymBadgeRequirement(BadgeEnums.Melemele_Stamp), 'Heahea City'));
+Subregions.addSubregion(Region.alola, new Subregion('Ula\'ula Island', AlolaSubregions.UlaulaIsland, new TemporaryBattleRequirement('Ultra Wormhole'), 'Malie City'));
+Subregions.addSubregion(Region.alola, new Subregion('Poni Island', AlolaSubregions.PoniIsland, new QuestLineStartedRequirement('Emissary of Light'), 'Seafolk Village'));
+Subregions.addSubregion(Region.alola, new Subregion('Magikarp Jump', AlolaSubregions.MagikarpJump, new QuestLineStartedRequirement('Magikarp Jump'), 'Hoppy Town'));
 
-SubRegions.addSubRegion(Region.galar, new SubRegion('South Galar', GalarSubRegions.SouthGalar, undefined, 'Hulbury'));
-SubRegions.addSubRegion(Region.galar, new SubRegion('North Galar', GalarSubRegions.NorthGalar, new LazyRequirementWrapper(() => new RouteKillRequirement(10, GameConstants.Region.galar, 22)), 'Hammerlocke'));
-SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', GalarSubRegions.IsleofArmor, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Armor Station'));
-SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', GalarSubRegions.CrownTundra, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Crown Tundra Station'));
+Subregions.addSubregion(Region.galar, new Subregion('South Galar', GalarSubregions.SouthGalar, undefined, 'Hulbury'));
+Subregions.addSubregion(Region.galar, new Subregion('North Galar', GalarSubregions.NorthGalar, new LazyRequirementWrapper(() => new RouteKillRequirement(10, GameConstants.Region.galar, 22)), 'Hammerlocke'));
+Subregions.addSubregion(Region.galar, new Subregion('Isle of Armor', GalarSubregions.IsleofArmor, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Armor Station'));
+Subregions.addSubregion(Region.galar, new Subregion('Crown Tundra', GalarSubregions.CrownTundra, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Crown Tundra Station'));
 
-SubRegions.addSubRegion(Region.hisui, new SubRegion('Hisui', HisuiSubRegions.Hisui, undefined, 'Prelude Beach'));
+Subregions.addSubregion(Region.hisui, new Subregion('Hisui', HisuiSubregions.Hisui, undefined, 'Prelude Beach'));
 
-SubRegions.addSubRegion(Region.paldea, new SubRegion('Paldea', PaldeaSubRegions.Paldea));
+Subregions.addSubregion(Region.paldea, new Subregion('Paldea', PaldeaSubregions.Paldea));

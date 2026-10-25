@@ -1,5 +1,5 @@
 import { AchievementOption, camelCaseToString, Region } from '../GameConstants';
-import SubRegions from '../subRegion/SubRegions';
+import Subregions from '../subregion/Subregions';
 import Requirement from './Requirement';
 
 export default class SubregionRequirement extends Requirement {
@@ -12,7 +12,7 @@ export default class SubregionRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `You need to be in the ${SubRegions.getSubRegionById(this.region, this.subregion)} subregion of ${camelCaseToString(Region[this.region])}.`;
+        return `You need to be in the ${Subregions.getSubregionById(this.region, this.subregion)} subregion of ${camelCaseToString(Region[this.region])}.`;
     }
 
     public getProgressPercentage() {

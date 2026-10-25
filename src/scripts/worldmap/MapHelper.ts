@@ -22,7 +22,7 @@ class MapHelper {
             if (player.region != region) {
                 player.region = region;
             }
-            player.subregion = routeData.subRegion ?? 0;
+            player.subregion = routeData.subregion ?? 0;
             player.route = route;
             if (genNewEnemy && !Battle.catching()) {
                 Battle.generateNewEnemy();
@@ -257,7 +257,7 @@ class MapHelper {
             Battle.catching(false);
             const town = TownList[townName];
             player.region = town.region;
-            player.subregion = town.subRegion;
+            player.subregion = town.subregion;
             player.town = town;
             Battle.enemyPokemon(null);
             //this should happen last, so all the values all set beforehand
@@ -315,7 +315,7 @@ class MapHelper {
             // Gain queue slots based on highest region
             App.game.breeding.gainQueueSlot(App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion()));
             GameHelper.incrementObservable(player.highestRegion);
-            player.highestSubRegion(0);
+            player.highestSubregion(0);
             MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
             player.region = player.highestRegion();
             $('#pickStarterModal').modal('show');

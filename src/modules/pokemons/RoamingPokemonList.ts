@@ -1,7 +1,7 @@
 import { Observable } from 'knockout';
 import BadgeEnums from '../enums/Badges';
 import {
-    KantoSubRegions, JohtoSubRegions, HoennSubRegions, SinnohSubRegions, UnovaSubRegions, KalosSubRegions, AlolaSubRegions, GalarSubRegions, HisuiSubRegions, PaldeaSubRegions, SubRegions, Region,
+    KantoSubregions, JohtoSubregions, HoennSubregions, SinnohSubregions, UnovaSubregions, KalosSubregions, AlolaSubregions, GalarSubregions, HisuiSubregions, PaldeaSubregions, Subregions, Region,
     getDungeonIndex, Starter,
 } from '../GameConstants';
 import GameHelper from '../GameHelper';
@@ -28,16 +28,16 @@ import OneFromManyRequirement from '../requirements/OneFromManyRequirement';
 
 export default class RoamingPokemonList {
     public static roamerGroups: RoamingGroup[][] = [
-        [new RoamingGroup('Kanto', [KantoSubRegions.Kanto]), new RoamingGroup('Kanto - Sevii Islands', [KantoSubRegions.Sevii123, KantoSubRegions.Sevii4567])],
-        [new RoamingGroup('Johto', [JohtoSubRegions.Johto])],
-        [new RoamingGroup('Hoenn', [HoennSubRegions.Hoenn]), new RoamingGroup('Hoenn - Orre', [HoennSubRegions.Orre])],
-        [new RoamingGroup('Sinnoh', [SinnohSubRegions.Sinnoh])],
-        [new RoamingGroup('Unova', [UnovaSubRegions.Unova])],
-        [new RoamingGroup('Kalos', [KalosSubRegions.Kalos])],
-        [new RoamingGroup('Alola', [AlolaSubRegions.MelemeleIsland, AlolaSubRegions.AkalaIsland, AlolaSubRegions.UlaulaIsland, AlolaSubRegions.PoniIsland]), new RoamingGroup('Alola - Magikarp Jump', [AlolaSubRegions.MagikarpJump])],
-        [new RoamingGroup('Galar - South', [GalarSubRegions.SouthGalar]), new RoamingGroup('Galar - North', [GalarSubRegions.NorthGalar]), new RoamingGroup('Galar - Isle of Armor', [GalarSubRegions.IsleofArmor]), new RoamingGroup('Galar - Crown Tundra', [GalarSubRegions.CrownTundra])],
-        [new RoamingGroup('Hisui', [HisuiSubRegions.Hisui])],
-        [new RoamingGroup('Paldea', [PaldeaSubRegions.Paldea]), new RoamingGroup('Paldea - Kitakami', [PaldeaSubRegions.Kitakami]), new RoamingGroup('Paldea - Blueberry Academy', [PaldeaSubRegions.BlueberryAcademy])],
+        [new RoamingGroup('Kanto', [KantoSubregions.Kanto]), new RoamingGroup('Kanto - Sevii Islands', [KantoSubregions.Sevii123, KantoSubregions.Sevii4567])],
+        [new RoamingGroup('Johto', [JohtoSubregions.Johto])],
+        [new RoamingGroup('Hoenn', [HoennSubregions.Hoenn]), new RoamingGroup('Hoenn - Orre', [HoennSubregions.Orre])],
+        [new RoamingGroup('Sinnoh', [SinnohSubregions.Sinnoh])],
+        [new RoamingGroup('Unova', [UnovaSubregions.Unova])],
+        [new RoamingGroup('Kalos', [KalosSubregions.Kalos])],
+        [new RoamingGroup('Alola', [AlolaSubregions.MelemeleIsland, AlolaSubregions.AkalaIsland, AlolaSubregions.UlaulaIsland, AlolaSubregions.PoniIsland]), new RoamingGroup('Alola - Magikarp Jump', [AlolaSubregions.MagikarpJump])],
+        [new RoamingGroup('Galar - South', [GalarSubregions.SouthGalar]), new RoamingGroup('Galar - North', [GalarSubregions.NorthGalar]), new RoamingGroup('Galar - Isle of Armor', [GalarSubregions.IsleofArmor]), new RoamingGroup('Galar - Crown Tundra', [GalarSubregions.CrownTundra])],
+        [new RoamingGroup('Hisui', [HisuiSubregions.Hisui])],
+        [new RoamingGroup('Paldea', [PaldeaSubregions.Paldea]), new RoamingGroup('Paldea - Kitakami', [PaldeaSubregions.Kitakami]), new RoamingGroup('Paldea - Blueberry Academy', [PaldeaSubregions.BlueberryAcademy])],
     ];
 
     public static list: Partial<Record<Region, Array<Array<RoamingPokemon>>>> = {};
@@ -48,44 +48,44 @@ export default class RoamingPokemonList {
     // How many hours between when the roaming Pokemon change routes for increased chances
     private static period = 8;
 
-    public static add(region: Region, subRegionGroup: number, roamer: RoamingPokemon): void {
+    public static add(region: Region, subregionGroup: number, roamer: RoamingPokemon): void {
         if (!RoamingPokemonList.list[region]) {
             RoamingPokemonList.list[region] = [];
         }
-        if (!RoamingPokemonList.list[region][subRegionGroup]) {
-            RoamingPokemonList.list[region][subRegionGroup] = [];
+        if (!RoamingPokemonList.list[region][subregionGroup]) {
+            RoamingPokemonList.list[region][subregionGroup] = [];
         }
-        RoamingPokemonList.list[region][subRegionGroup].push(roamer);
+        RoamingPokemonList.list[region][subregionGroup].push(roamer);
     }
 
-    public static remove(region: Region, subRegionGroup: number, pokemonName: PokemonNameType): void {
-        const index = RoamingPokemonList.list[region][subRegionGroup].findIndex((r) => r.pokemon.name === pokemonName);
+    public static remove(region: Region, subregionGroup: number, pokemonName: PokemonNameType): void {
+        const index = RoamingPokemonList.list[region][subregionGroup].findIndex((r) => r.pokemon.name === pokemonName);
         if (index >= 0) {
-            RoamingPokemonList.list[region][subRegionGroup].splice(index, 1);
+            RoamingPokemonList.list[region][subregionGroup].splice(index, 1);
         }
     }
 
-    public static getSubRegionalGroupRoamers(region: Region, subRegionGroup: number): Array<RoamingPokemon> {
-        return RoamingPokemonList.list[region] && RoamingPokemonList.list[region][subRegionGroup]
-            ? RoamingPokemonList.list[region][subRegionGroup].filter((p) => p.isRoaming())
+    public static getSubregionalGroupRoamers(region: Region, subregionGroup: number): Array<RoamingPokemon> {
+        return RoamingPokemonList.list[region] && RoamingPokemonList.list[region][subregionGroup]
+            ? RoamingPokemonList.list[region][subregionGroup].filter((p) => p.isRoaming())
             : [];
     }
 
-    public static getIncreasedChanceRouteBySubRegionGroup(region: Region, subRegionGroup: number): Observable<RegionRoute> {
-        return RoamingPokemonList.increasedChanceRoute[region]?.[subRegionGroup];
+    public static getIncreasedChanceRouteBySubregionGroup(region: Region, subregionGroup: number): Observable<RegionRoute> {
+        return RoamingPokemonList.increasedChanceRoute[region]?.[subregionGroup];
     }
 
-    public static getGroupSubRegions(region: Region, subRegionGroup: number): SubRegions[] {
-        return [...RoamingPokemonList.roamerGroups[region][subRegionGroup].subRegions];
+    public static getGroupSubregions(region: Region, subregionGroup: number): Subregions[] {
+        return [...RoamingPokemonList.roamerGroups[region][subregionGroup].subregions];
     }
 
     public static generateIncreasedChanceRoutes(date = new Date()) {
         // Seed the random runmber generator
         SeededRand.seedWithDateHour(date, this.period);
 
-        RoamingPokemonList.increasedChanceRoute.forEach((subRegionGroups, region) => {
-            subRegionGroups.forEach((route, group) => {
-                const routes = Routes.getRoutesByRegion(region).filter((r) => this.findGroup(region, r.subRegion ?? 0) === group);
+        RoamingPokemonList.increasedChanceRoute.forEach((subregionGroups, region) => {
+            subregionGroups.forEach((route, group) => {
+                const routes = Routes.getRoutesByRegion(region).filter((r) => this.findGroup(region, r.subregion ?? 0) === group);
                 // Select a route
                 const selectedRoute = SeededRand.fromArray(routes);
                 route(selectedRoute);
@@ -93,8 +93,8 @@ export default class RoamingPokemonList {
         });
     }
 
-    public static findGroup(region: Region, subRegion: number): number {
-        return this.roamerGroups[region].findIndex((g) => g.subRegions.includes(subRegion));
+    public static findGroup(region: Region, subregion: number): number {
+        return this.roamerGroups[region].findIndex((g) => g.subregions.includes(subregion));
     }
 }
 
@@ -198,9 +198,9 @@ RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Let\'s Go Eevee', ne
 // Christmas (Dec 18 - Dec 31)
 // Add to every roaming group that has at least one roamer
 RoamingPokemonList.roamerGroups.forEach((regionGroups, region) => {
-    regionGroups.forEach((_, subRegionGroup) => {
-        if (RoamingPokemonList.list[region][subRegionGroup]?.length) {
-            RoamingPokemonList.add(region, subRegionGroup, new RoamingPokemon('Santa Snorlax', new SpecialEventRequirement('Merry Christmas!')));
+    regionGroups.forEach((_, subregionGroup) => {
+        if (RoamingPokemonList.list[region][subregionGroup]?.length) {
+            RoamingPokemonList.add(region, subregionGroup, new RoamingPokemon('Santa Snorlax', new SpecialEventRequirement('Merry Christmas!')));
         }
     });
 });

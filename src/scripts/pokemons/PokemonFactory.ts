@@ -8,7 +8,7 @@ class PokemonFactory {
      * @param region region that the player is in.
      * @returns {any}
      */
-    public static generateWildPokemon(route: number, region: GameConstants.Region, subRegion: SubRegion): BattlePokemon {
+    public static generateWildPokemon(route: number, region: GameConstants.Region, subregion: Subregion): BattlePokemon {
         if (!MapHelper.validRoute(route, region)) {
             return new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender, GameConstants.ShadowStatus.None, EncounterType.route);
         }
@@ -215,7 +215,7 @@ class PokemonFactory {
         }
 
         // There is likely to be a roamer available, so we can check this last
-        const roamingPokemon = RoamingPokemonList.getSubRegionalGroupRoamers(region, RoamingPokemonList.findGroup(region, route.subRegion || 0));
+        const roamingPokemon = RoamingPokemonList.getSubregionalGroupRoamers(region, RoamingPokemonList.findGroup(region, route.subregion || 0));
         if (!roamingPokemon?.length) {
             return false;
         }
@@ -225,14 +225,14 @@ class PokemonFactory {
     }
 
     private static roamingRate(curRoute: RegionRoute, max = GameConstants.ROAMING_MAX_CHANCE, min = GameConstants.ROAMING_MIN_CHANCE, skipBonus = false) : number {
-        const curSubRegionGroup = RoamingPokemonList.findGroup(curRoute.region, curRoute.subRegion || 0);
-        const groupSubRegions = RoamingPokemonList.getGroupSubRegions(curRoute.region, curSubRegionGroup);
-        const allRoutes = Routes.getRoutesByRegion(curRoute.region).filter(r => groupSubRegions.includes(r.subRegion || 0));
+        const curSubregionGroup = RoamingPokemonList.findGroup(curRoute.region, curRoute.subregion || 0);
+        const groupSubregions = RoamingPokemonList.getGroupSubregions(curRoute.region, curSubregionGroup);
+        const allRoutes = Routes.getRoutesByRegion(curRoute.region).filter(r => groupSubregions.includes(r.subregion || 0));
         const bonus = skipBonus ? 1 : App.game.multiplier.getBonus('roaming');
         const maxRoute = allRoutes.length - 1;
         const routeInd = allRoutes.indexOf(curRoute);
         // Check if we should have increased chances on this route (3 x rate)
-        const increasedChance = RoamingPokemonList.getIncreasedChanceRouteBySubRegionGroup(curRoute.region, curSubRegionGroup)()?.number == curRoute.number;
+        const increasedChance = RoamingPokemonList.getIncreasedChanceRouteBySubregionGroup(curRoute.region, curSubregionGroup)()?.number == curRoute.number;
         const roamingChance = (max + ((min - max) * (maxRoute - routeInd) / (maxRoute))) / ((increasedChance && !skipBonus ? GameConstants.ROAMING_INCREASED_CHANCE : 1) * bonus);
         return roamingChance;
     }

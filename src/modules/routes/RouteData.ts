@@ -1,6 +1,6 @@
 import BadgeEnums from '../enums/Badges';
 import {
-    Region, KantoSubRegions, getDungeonIndex, AlolaSubRegions, GalarSubRegions, HoennSubRegions, AchievementOption, DayOfWeek,
+    Region, KantoSubregions, getDungeonIndex, AlolaSubregions, GalarSubregions, HoennSubregions, AchievementOption, DayOfWeek,
 } from '../GameConstants';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
@@ -40,7 +40,7 @@ Routes.add(new RegionRoute(
         land: ['Pidgey', 'Rattata'],
     }),
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 22', Region.kanto, 22,
@@ -50,7 +50,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.kanto, 1)],
     1.1,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 2', Region.kanto, 2,
@@ -59,7 +59,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.kanto, 1)],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 3', Region.kanto, 3,
@@ -71,7 +71,7 @@ Routes.add(new RegionRoute(
         new GymBadgeRequirement(BadgeEnums.Boulder),
     ],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 4', Region.kanto, 4,
@@ -84,7 +84,7 @@ Routes.add(new RegionRoute(
         new ClearDungeonRequirement(1, getDungeonIndex('Mt. Moon')),
     ],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 24', Region.kanto, 24,
@@ -95,7 +95,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Blue 2')],
     4.1,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 25', Region.kanto, 25,
@@ -105,7 +105,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.kanto, 24)],
     4.2,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 5', Region.kanto, 5,
@@ -117,7 +117,7 @@ Routes.add(new RegionRoute(
         new RouteKillRequirement(10, Region.kanto, 25),
     ],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 6', Region.kanto, 6,
@@ -127,7 +127,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.kanto, 5)],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 11', Region.kanto, 11,
@@ -138,7 +138,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.kanto, 6)],
     6.1,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 9', Region.kanto, 9,
@@ -150,7 +150,7 @@ Routes.add(new RegionRoute(
         new GymBadgeRequirement(BadgeEnums.Cascade),
     ],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 10', Region.kanto, 10,
@@ -160,7 +160,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.kanto, 9)],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 8', Region.kanto, 8,
@@ -169,7 +169,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Rock Tunnel'))],
     10.1,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 7', Region.kanto, 7,
@@ -179,7 +179,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.kanto, 8)],
     10.2,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 12', Region.kanto, 12,
@@ -189,7 +189,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Rock Tunnel'))],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 
 ));
 Routes.add(new RegionRoute(
@@ -205,7 +205,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 14', Region.kanto, 14,
@@ -219,7 +219,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 15', Region.kanto, 15,
@@ -233,7 +233,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 16', Region.kanto, 16,
@@ -248,7 +248,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 17', Region.kanto, 17,
@@ -263,7 +263,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 18', Region.kanto, 18,
@@ -278,7 +278,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 19', Region.kanto, 19,
@@ -288,7 +288,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Soul)],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 20', Region.kanto, 20,
@@ -302,7 +302,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Kanto Route 21', Region.kanto, 21,
@@ -312,7 +312,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Soul)],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 Routes.add(new RegionRoute(
     'Treasure Beach', Region.kanto, 26,
@@ -322,7 +322,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Volcano)],
     21.1,
-    KantoSubRegions.Sevii123,
+    KantoSubregions.Sevii123,
     true,
     37487,
 ));
@@ -334,7 +334,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Volcano)],
     21.2,
-    KantoSubRegions.Sevii123,
+    KantoSubregions.Sevii123,
     true,
     37487,
 ));
@@ -346,7 +346,7 @@ Routes.add(new RegionRoute(
     }),
     [new QuestLineStepCompletedRequirement('Bill\'s Errand', 0)],
     21.3,
-    KantoSubRegions.Sevii123,
+    KantoSubregions.Sevii123,
     true,
     37487,
 ));
@@ -358,7 +358,7 @@ Routes.add(new RegionRoute(
     }),
     [new QuestLineStepCompletedRequirement('Bill\'s Errand', 3)],
     21.4,
-    KantoSubRegions.Sevii123,
+    KantoSubregions.Sevii123,
     true,
     37487,
 ));
@@ -373,7 +373,7 @@ Routes.add(new RegionRoute(
         new TemporaryBattleRequirement('Blue 6'),
     ],
     undefined,
-    KantoSubRegions.Kanto,
+    KantoSubregions.Kanto,
 ));
 // Sevii 4567 moved to after Hoenn
 
@@ -915,7 +915,7 @@ Routes.add(new RegionRoute(
     }),
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
     undefined,
-    KantoSubRegions.Sevii4567,
+    KantoSubregions.Sevii4567,
     true,
     1050000,
 ));
@@ -926,7 +926,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.kanto, 30)],
     undefined,
-    KantoSubRegions.Sevii4567,
+    KantoSubregions.Sevii4567,
     true,
     1050000,
 ));
@@ -937,7 +937,7 @@ Routes.add(new RegionRoute(
     }),
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
     undefined,
-    KantoSubRegions.Sevii4567,
+    KantoSubregions.Sevii4567,
     true,
     1050000,
 ));
@@ -948,7 +948,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.kanto, 32)],
     undefined,
-    KantoSubRegions.Sevii4567,
+    KantoSubregions.Sevii4567,
     true,
     1050000,
 ));
@@ -960,7 +960,7 @@ Routes.add(new RegionRoute(
     }),
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
     undefined,
-    KantoSubRegions.Sevii4567,
+    KantoSubregions.Sevii4567,
     true,
     1050000,
 ));
@@ -971,7 +971,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Pattern Bush'))],
     undefined,
-    KantoSubRegions.Sevii4567,
+    KantoSubregions.Sevii4567,
     true,
     1050000,
 ));
@@ -982,7 +982,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.kanto, 35)],
     undefined,
-    KantoSubRegions.Sevii4567,
+    KantoSubregions.Sevii4567,
     true,
     1050000,
 ));
@@ -994,7 +994,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.kanto, 34)],
     undefined,
-    KantoSubRegions.Sevii4567,
+    KantoSubregions.Sevii4567,
     true,
     1050000,
 ));
@@ -1005,7 +1005,7 @@ Routes.add(new RegionRoute(
     }),
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
     undefined,
-    KantoSubRegions.Sevii4567,
+    KantoSubregions.Sevii4567,
     true,
     1050000,
 ));
@@ -1017,7 +1017,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.kanto, 38)],
     undefined,
-    KantoSubRegions.Sevii4567,
+    KantoSubregions.Sevii4567,
     true,
     1050000,
 ));
@@ -1029,7 +1029,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Jade_Star)],
     undefined,
-    KantoSubRegions.Sevii4567,
+    KantoSubregions.Sevii4567,
     true,
     1250000,
 ));
@@ -1044,7 +1044,7 @@ Routes.add(new RegionRoute(
         new QuestLineCompletedRequirement('Celio\'s Errand'),
     ],
     undefined,
-    KantoSubRegions.Sevii4567,
+    KantoSubregions.Sevii4567,
     true,
     1250000,
 ));
@@ -1056,7 +1056,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.kanto, 41)],
     undefined,
-    KantoSubRegions.Sevii4567,
+    KantoSubregions.Sevii4567,
     true,
     1250000,
 ));
@@ -1067,7 +1067,7 @@ Routes.add(new RegionRoute(
     }),
     [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
     undefined,
-    HoennSubRegions.Orre,
+    HoennSubregions.Orre,
     true,
     1500000,
 ));
@@ -1078,7 +1078,7 @@ Routes.add(new RegionRoute(
     }),
     [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
     undefined,
-    HoennSubRegions.Orre,
+    HoennSubregions.Orre,
     true,
     1500000,
 ));
@@ -1089,7 +1089,7 @@ Routes.add(new RegionRoute(
     }),
     [new QuestLineStepCompletedRequirement('Shadows in the Desert', 17)],
     undefined,
-    HoennSubRegions.Orre,
+    HoennSubregions.Orre,
     true,
     1500000,
 ));
@@ -1829,7 +1829,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
     undefined,
-    AlolaSubRegions.MelemeleIsland,
+    AlolaSubregions.MelemeleIsland,
 ));
 Routes.add(new RegionRoute(
     'Route 1 Hau\'oli Outskirts', Region.alola, 18,
@@ -1840,7 +1840,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Hau 2')],
     1.1,
-    AlolaSubRegions.MelemeleIsland,
+    AlolaSubregions.MelemeleIsland,
 ));
 Routes.add(new RegionRoute(
     'Alola Route 2', Region.alola, 2,
@@ -1853,7 +1853,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Ilima')],
     undefined,
-    AlolaSubRegions.MelemeleIsland,
+    AlolaSubregions.MelemeleIsland,
 ));
 Routes.add(new RegionRoute(
     'Alola Route 3', Region.alola, 3,
@@ -1866,7 +1866,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Verdant Cavern'))],
     undefined,
-    AlolaSubRegions.MelemeleIsland,
+    AlolaSubregions.MelemeleIsland,
 ));
 Routes.add(new RegionRoute(
     'Alola Route 4', Region.alola, 4,
@@ -1879,7 +1879,7 @@ Routes.add(new RegionRoute(
     }),
     [new QuestLineStepCompletedRequirement('Symbiotic Relations', 0)],
     undefined,
-    AlolaSubRegions.AkalaIsland,
+    AlolaSubregions.AkalaIsland,
 ));
 Routes.add(new RegionRoute(
     'Alola Route 5', Region.alola, 5,
@@ -1892,7 +1892,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Paniola Ranch'))],
     undefined,
-    AlolaSubRegions.AkalaIsland,
+    AlolaSubregions.AkalaIsland,
 ));
 Routes.add(new RegionRoute(
     'Melemele Sea', Region.alola, 19,
@@ -1902,7 +1902,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Brooklet Hill'))],
     5.1,
-    AlolaSubRegions.MelemeleIsland,
+    AlolaSubregions.MelemeleIsland,
 ));
 Routes.add(new RegionRoute(
     'Kala\'e Bay', Region.alola, 20,
@@ -1920,7 +1920,7 @@ Routes.add(new RegionRoute(
         new ClearDungeonRequirement(1, getDungeonIndex('Brooklet Hill')),
     ],
     5.2,
-    AlolaSubRegions.MelemeleIsland,
+    AlolaSubregions.MelemeleIsland,
 ));
 Routes.add(new RegionRoute(
     'Alola Route 6', Region.alola, 6,
@@ -1933,7 +1933,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Recon Squad 2')],
     undefined,
-    AlolaSubRegions.AkalaIsland,
+    AlolaSubregions.AkalaIsland,
 ));
 Routes.add(new RegionRoute(
     'Alola Route 7', Region.alola, 7,
@@ -1946,7 +1946,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Battle Royal')],
     undefined,
-    AlolaSubRegions.AkalaIsland,
+    AlolaSubregions.AkalaIsland,
 ));
 Routes.add(new RegionRoute(
     'Alola Route 8', Region.alola, 8,
@@ -1963,7 +1963,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Wela Volcano Park'))],
     undefined,
-    AlolaSubRegions.AkalaIsland,
+    AlolaSubregions.AkalaIsland,
 ));
 Routes.add(new RegionRoute(
     'Alola Route 9', Region.alola, 9,
@@ -1973,7 +1973,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Diglett\'s Tunnel'))],
     undefined,
-    AlolaSubRegions.AkalaIsland,
+    AlolaSubregions.AkalaIsland,
 ));
 Routes.add(new RegionRoute(
     'Akala Outskirts', Region.alola, 21,
@@ -1987,7 +1987,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Memorial Hill'))],
     9.1,
-    AlolaSubRegions.AkalaIsland,
+    AlolaSubregions.AkalaIsland,
 ));
 Routes.add(new RegionRoute(
     'Alola Route 10', Region.alola, 10,
@@ -2000,7 +2000,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Hau 5')],
     undefined,
-    AlolaSubRegions.UlaulaIsland,
+    AlolaSubregions.UlaulaIsland,
 ));
 Routes.add(new RegionRoute(
     'Mount Hokulani', Region.alola, 22,
@@ -2016,7 +2016,7 @@ Routes.add(new RegionRoute(
         new TemporaryBattleRequirement('Skull 4'),
     ],
     10.1,
-    AlolaSubRegions.UlaulaIsland,
+    AlolaSubregions.UlaulaIsland,
 ));
 Routes.add(new RegionRoute(
     'Alola Route 11', Region.alola, 11,
@@ -2031,7 +2031,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Hau 5')],
     undefined,
-    AlolaSubRegions.UlaulaIsland,
+    AlolaSubregions.UlaulaIsland,
 ));
 Routes.add(new RegionRoute(
     'Alola Route 12', Region.alola, 12,
@@ -2044,7 +2044,7 @@ Routes.add(new RegionRoute(
         new ClearDungeonRequirement(1, getDungeonIndex('Hokulani Observatory')),
     ],
     undefined,
-    AlolaSubRegions.UlaulaIsland,
+    AlolaSubregions.UlaulaIsland,
 ));
 Routes.add(new RegionRoute(
     'Alola Route 13', Region.alola, 13,
@@ -2054,7 +2054,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.alola, 12)],
     undefined,
-    AlolaSubRegions.UlaulaIsland,
+    AlolaSubregions.UlaulaIsland,
 ));
 Routes.add(new RegionRoute(
     'Alola Route 14', Region.alola, 14,
@@ -2064,7 +2064,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.alola, 13)],
     undefined,
-    AlolaSubRegions.UlaulaIsland,
+    AlolaSubregions.UlaulaIsland,
 ));
 Routes.add(new RegionRoute(
     'Alola Route 15', Region.alola, 15,
@@ -2075,7 +2075,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.alola, 13)],
     undefined,
-    AlolaSubRegions.UlaulaIsland,
+    AlolaSubregions.UlaulaIsland,
 ));
 Routes.add(new RegionRoute(
     'Alola Route 16', Region.alola, 16,
@@ -2088,7 +2088,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Plumeria 2')],
     undefined,
-    AlolaSubRegions.UlaulaIsland,
+    AlolaSubregions.UlaulaIsland,
 ));
 Routes.add(new RegionRoute(
     'Alola Route 17', Region.alola, 17,
@@ -2101,7 +2101,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Ula\'ula Meadow'))],
     undefined,
-    AlolaSubRegions.UlaulaIsland,
+    AlolaSubregions.UlaulaIsland,
 ));
 Routes.add(new RegionRoute(
     'Haina Desert', Region.alola, 23,
@@ -2114,7 +2114,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Thrifty Megamart'))],
     undefined,
-    AlolaSubRegions.UlaulaIsland,
+    AlolaSubregions.UlaulaIsland,
 ));
 Routes.add(new RegionRoute(
     'Poni Wilds', Region.alola, 24,
@@ -2127,7 +2127,7 @@ Routes.add(new RegionRoute(
     }),
     [new QuestLineStartedRequirement('Emissary of Light')],
     undefined,
-    AlolaSubRegions.PoniIsland,
+    AlolaSubregions.PoniIsland,
 ));
 Routes.add(new RegionRoute(
     'Ancient Poni Path', Region.alola, 25,
@@ -2140,7 +2140,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.alola, 24)],
     undefined,
-    AlolaSubRegions.PoniIsland,
+    AlolaSubregions.PoniIsland,
 ));
 Routes.add(new RegionRoute(
     'Poni Breaker Coast', Region.alola, 26,
@@ -2153,7 +2153,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.alola, 25)],
     undefined,
-    AlolaSubRegions.PoniIsland,
+    AlolaSubregions.PoniIsland,
 ));
 Routes.add(new RegionRoute(
     'Poni Grove', Region.alola, 27,
@@ -2168,7 +2168,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)],
     undefined,
-    AlolaSubRegions.PoniIsland,
+    AlolaSubregions.PoniIsland,
 ));
 Routes.add(new RegionRoute(
     'Poni Plains', Region.alola, 28,
@@ -2182,7 +2182,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.alola, 27)],
     undefined,
-    AlolaSubRegions.PoniIsland,
+    AlolaSubregions.PoniIsland,
 ));
 Routes.add(new RegionRoute(
     'Poni Coast', Region.alola, 29,
@@ -2192,7 +2192,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.alola, 28)],
     undefined,
-    AlolaSubRegions.PoniIsland,
+    AlolaSubregions.PoniIsland,
 ));
 Routes.add(new RegionRoute(
     'Poni Gauntlet', Region.alola, 30,
@@ -2207,7 +2207,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.alola, 29)],
     undefined,
-    AlolaSubRegions.PoniIsland,
+    AlolaSubregions.PoniIsland,
 ));
 
 Routes.add(new RegionRoute(
@@ -2217,7 +2217,7 @@ Routes.add(new RegionRoute(
     }),
     [new QuestLineCompletedRequirement('Magikarp Jump')],
     undefined,
-    AlolaSubRegions.MagikarpJump,
+    AlolaSubregions.MagikarpJump,
     true,
     47250,
 ));
@@ -2228,7 +2228,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Friend_League)],
     undefined,
-    AlolaSubRegions.MagikarpJump,
+    AlolaSubregions.MagikarpJump,
     true,
     94500,
 ));
@@ -2240,7 +2240,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Quick_League)],
     undefined,
-    AlolaSubRegions.MagikarpJump,
+    AlolaSubregions.MagikarpJump,
     true,
     236250,
 ));
@@ -2252,7 +2252,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Heavy_League)],
     undefined,
-    AlolaSubRegions.MagikarpJump,
+    AlolaSubregions.MagikarpJump,
     true,
     378000,
 ));
@@ -2264,7 +2264,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Great_League)],
     undefined,
-    AlolaSubRegions.MagikarpJump,
+    AlolaSubregions.MagikarpJump,
     true,
     708750,
 ));
@@ -2276,7 +2276,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Fast_League)],
     undefined,
-    AlolaSubRegions.MagikarpJump,
+    AlolaSubregions.MagikarpJump,
     true,
     945000,
 ));
@@ -2288,7 +2288,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Luxury_League)],
     undefined,
-    AlolaSubRegions.MagikarpJump,
+    AlolaSubregions.MagikarpJump,
     true,
     1417500,
 ));
@@ -2300,7 +2300,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Heal_League)],
     undefined,
-    AlolaSubRegions.MagikarpJump,
+    AlolaSubregions.MagikarpJump,
     true,
     1890000,
 ));
@@ -2312,7 +2312,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Ultra_League)],
     undefined,
-    AlolaSubRegions.MagikarpJump,
+    AlolaSubregions.MagikarpJump,
     true,
     2835000,
 ));
@@ -2324,7 +2324,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.E4_League)],
     undefined,
-    AlolaSubRegions.MagikarpJump,
+    AlolaSubregions.MagikarpJump,
     true,
     3780000,
 ));
@@ -2339,7 +2339,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Champion_Stamp)],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Galar Route 2', Region.galar, 2,
@@ -2352,7 +2352,7 @@ Routes.add(new RegionRoute(
         new TemporaryBattleRequirement('Mirages'),
     ],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Rolling Fields', Region.galar, 3,
@@ -2381,7 +2381,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Hop 2')],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Dappled Grove', Region.galar, 4,
@@ -2411,7 +2411,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 3)],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'West Lake Axewell', Region.galar, 5,
@@ -2450,7 +2450,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 3)],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'East Lake Axewell', Region.galar, 6,
@@ -2482,7 +2482,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 3)],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Giant\'s Seat', Region.galar, 7,
@@ -2518,7 +2518,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'South Lake Miloch', Region.galar, 8,
@@ -2554,7 +2554,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 3)],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'North Lake Miloch', Region.galar, 9,
@@ -2599,7 +2599,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Axew\'s Eye', Region.galar, 10,
@@ -2636,7 +2636,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Watchtower Ruins', Region.galar, 11,
@@ -2672,7 +2672,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Galar Route 3', Region.galar, 12,
@@ -2682,7 +2682,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Hop 3')],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Galar Route 4', Region.galar, 13,
@@ -2693,7 +2693,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Bede 1')],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Galar Route 5', Region.galar, 14,
@@ -2704,7 +2704,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Galar_Grass)],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Motostoke Outskirts', Region.galar, 15,
@@ -2713,7 +2713,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Bede 2')],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Motostoke Riverbank', Region.galar, 16,
@@ -2753,7 +2753,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Bridge Field', Region.galar, 17,
@@ -2798,7 +2798,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 16)],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Stony Wilderness', Region.galar, 18,
@@ -2832,7 +2832,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 17)],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Giant\'s Mirror', Region.galar, 19,
@@ -2872,7 +2872,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Giant\'s Cap', Region.galar, 20,
@@ -2914,7 +2914,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Lake of Outrage', Region.galar, 21,
@@ -2957,7 +2957,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Hammerlocke Hills', Region.galar, 22,
@@ -2997,7 +2997,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Galar Route 6', Region.galar, 23,
@@ -3008,7 +3008,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Galar_Fire)],
     undefined,
-    GalarSubRegions.NorthGalar,
+    GalarSubregions.NorthGalar,
 ));
 Routes.add(new RegionRoute(
     'Galar Route 7', Region.galar, 24,
@@ -3019,7 +3019,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Hop 6')],
     undefined,
-    GalarSubRegions.NorthGalar,
+    GalarSubregions.NorthGalar,
 ));
 Routes.add(new RegionRoute(
     'Galar Route 8', Region.galar, 25,
@@ -3028,7 +3028,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 24)],
     undefined,
-    GalarSubRegions.NorthGalar,
+    GalarSubregions.NorthGalar,
 ));
 Routes.add(new RegionRoute(
     'Steamdrift Way', Region.galar, 26,
@@ -3037,7 +3037,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 25)],
     undefined,
-    GalarSubRegions.NorthGalar,
+    GalarSubregions.NorthGalar,
 ));
 Routes.add(new RegionRoute(
     'Galar Route 2 Lakeside', Region.galar, 27,
@@ -3047,7 +3047,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 25)],
     undefined,
-    GalarSubRegions.SouthGalar,
+    GalarSubregions.SouthGalar,
 ));
 Routes.add(new RegionRoute(
     'Galar Route 9', Region.galar, 28,
@@ -3064,7 +3064,7 @@ Routes.add(new RegionRoute(
     }),
     [new QuestLineStepCompletedRequirement('The Darkest Day', 5)],
     undefined,
-    GalarSubRegions.NorthGalar,
+    GalarSubregions.NorthGalar,
 ));
 Routes.add(new RegionRoute(
     'Circhester Bay', Region.galar, 29,
@@ -3083,7 +3083,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 28)],
     undefined,
-    GalarSubRegions.NorthGalar,
+    GalarSubregions.NorthGalar,
 ));
 Routes.add(new RegionRoute(
     'Outer Spikemuth', Region.galar, 30,
@@ -3094,7 +3094,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 29)],
     undefined,
-    GalarSubRegions.NorthGalar,
+    GalarSubregions.NorthGalar,
 ));
 Routes.add(new RegionRoute(
     'White Hill Station', Region.galar, 31,
@@ -3103,7 +3103,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Galar_Dragon)],
     undefined,
-    GalarSubRegions.NorthGalar,
+    GalarSubregions.NorthGalar,
 ));
 Routes.add(new RegionRoute(
     'Galar Route 10', Region.galar, 32,
@@ -3117,7 +3117,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 31)],
     undefined,
-    GalarSubRegions.NorthGalar,
+    GalarSubregions.NorthGalar,
 ));
 
 /*
@@ -3154,7 +3154,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor,
+    GalarSubregions.IsleofArmor,
 ));
 Routes.add(new RegionRoute(
     'Soothing Wetlands', Region.galar, 34,
@@ -3184,7 +3184,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 33)],
     undefined,
-    GalarSubRegions.IsleofArmor,
+    GalarSubregions.IsleofArmor,
 ));
 Routes.add(new RegionRoute(
     'Forest of Focus', Region.galar, 35,
@@ -3217,7 +3217,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor,
+    GalarSubregions.IsleofArmor,
 ));
 Routes.add(new RegionRoute(
     'Challenge Beach', Region.galar, 36,
@@ -3257,7 +3257,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor,
+    GalarSubregions.IsleofArmor,
 ));
 Routes.add(new RegionRoute(
     'Loop Lagoon', Region.galar, 37,
@@ -3290,7 +3290,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor,
+    GalarSubregions.IsleofArmor,
 ));
 Routes.add(new RegionRoute(
     'Training Lowlands', Region.galar, 38,
@@ -3326,7 +3326,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor,
+    GalarSubregions.IsleofArmor,
 ));
 Routes.add(new RegionRoute(
     'Potbottom Desert', Region.galar, 39,
@@ -3348,7 +3348,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Warm-Up Tunnel'))],
     undefined,
-    GalarSubRegions.IsleofArmor,
+    GalarSubregions.IsleofArmor,
 ));
 Routes.add(new RegionRoute(
     'Challenge Road', Region.galar, 40,
@@ -3374,7 +3374,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor,
+    GalarSubregions.IsleofArmor,
 ));
 Routes.add(new RegionRoute(
     'Workout Sea', Region.galar, 41,
@@ -3399,7 +3399,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 33)],
     undefined,
-    GalarSubRegions.IsleofArmor,
+    GalarSubregions.IsleofArmor,
 ));
 Routes.add(new RegionRoute(
     'Stepping-Stone Sea', Region.galar, 42,
@@ -3429,7 +3429,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor,
+    GalarSubregions.IsleofArmor,
 ));
 Routes.add(new RegionRoute(
     'Insular Sea', Region.galar, 43,
@@ -3457,7 +3457,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor,
+    GalarSubregions.IsleofArmor,
 ));
 Routes.add(new RegionRoute(
     'Honeycalm Sea', Region.galar, 44,
@@ -3484,7 +3484,7 @@ Routes.add(new RegionRoute(
         ]),
     ],
     undefined,
-    GalarSubRegions.IsleofArmor,
+    GalarSubregions.IsleofArmor,
 ));
 Routes.add(new RegionRoute(
     'Honeycalm Island', Region.galar, 45,
@@ -3506,7 +3506,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 44)],
     undefined,
-    GalarSubRegions.IsleofArmor,
+    GalarSubregions.IsleofArmor,
 ));
 
 // Crown Tundra
@@ -3534,7 +3534,7 @@ Routes.add(new RegionRoute(
     }),
     [new TemporaryBattleRequirement('Peony')],
     undefined,
-    GalarSubRegions.CrownTundra,
+    GalarSubregions.CrownTundra,
 ));
 Routes.add(new RegionRoute(
     'Frostpoint Field', Region.galar, 47,
@@ -3562,7 +3562,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 46)],
     undefined,
-    GalarSubRegions.CrownTundra,
+    GalarSubregions.CrownTundra,
 ));
 Routes.add(new RegionRoute(
     'Giant\'s Bed', Region.galar, 48,
@@ -3595,7 +3595,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 47)],
     undefined,
-    GalarSubRegions.CrownTundra,
+    GalarSubregions.CrownTundra,
 ));
 Routes.add(new RegionRoute(
     'Old Cemetery', Region.galar, 49,
@@ -3618,7 +3618,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 48)],
     undefined,
-    GalarSubRegions.CrownTundra,
+    GalarSubregions.CrownTundra,
 ));
 Routes.add(new RegionRoute(
     'Giant\'s Foot', Region.galar, 50,
@@ -3646,7 +3646,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 48)],
     undefined,
-    GalarSubRegions.CrownTundra,
+    GalarSubregions.CrownTundra,
 ));
 Routes.add(new RegionRoute(
     'Frigid Sea', Region.galar, 51,
@@ -3673,7 +3673,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Roaring-Sea Caves'))],
     undefined,
-    GalarSubRegions.CrownTundra,
+    GalarSubregions.CrownTundra,
 ));
 Routes.add(new RegionRoute(
     'Three-Point Pass', Region.galar, 52,
@@ -3695,7 +3695,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 51)],
     undefined,
-    GalarSubRegions.CrownTundra,
+    GalarSubregions.CrownTundra,
 ));
 Routes.add(new RegionRoute(
     'Ballimere Lake', Region.galar, 53,
@@ -3733,7 +3733,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 48)],
     undefined,
-    GalarSubRegions.CrownTundra,
+    GalarSubregions.CrownTundra,
 ));
 Routes.add(new RegionRoute(
     'Snowslide Slope', Region.galar, 54,
@@ -3760,7 +3760,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.galar, 48)],
     undefined,
-    GalarSubRegions.CrownTundra,
+    GalarSubregions.CrownTundra,
 ));
 Routes.add(new RegionRoute(
     'Path to the Peak', Region.galar, 55,
@@ -3778,7 +3778,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, getDungeonIndex('Tunnel to the Top'))],
     undefined,
-    GalarSubRegions.CrownTundra,
+    GalarSubregions.CrownTundra,
 ));
 
 /*
@@ -4273,7 +4273,7 @@ Routes.getRoutesByRegion(Region.sinnoh).filter(r => r.pokemon.water.length).forE
     );
 });
 Routes.getRoutesByRegion(Region.alola).filter(r => r.pokemon.water.length).forEach((route) => {
-    if (route.subRegion == AlolaSubRegions.MagikarpJump) {
+    if (route.subregion == AlolaSubregions.MagikarpJump) {
         return;
     }
 

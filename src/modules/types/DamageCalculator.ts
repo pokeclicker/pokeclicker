@@ -47,7 +47,7 @@ export default class DamageCalculator {
     public static getDamageByTypes(): number[] {
         const typedamage = new Array(GameHelper.enumLength(PokemonType) - 1).fill(0);
         const ignoreRegionMultiplier = DamageCalculator.region() == Region.none;
-        const activePokemon  = App.game.party.partyPokemonActiveInSubRegion(DamageCalculator.region(), DamageCalculator.subregion());
+        const activePokemon  = App.game.party.partyPokemonActiveInSubregion(DamageCalculator.region(), DamageCalculator.subregion());
 
         for (const pokemon of activePokemon) {
             const dataPokemon = getPokemonByName(pokemon.name);
@@ -92,7 +92,7 @@ export default class DamageCalculator {
     }
 
     public static getTypeDetail(): TypeDetail[] {
-        return App.game.party.partyPokemonActiveInSubRegion(DamageCalculator.region(), DamageCalculator.subregion()).filter(pokemon => {
+        return App.game.party.partyPokemonActiveInSubregion(DamageCalculator.region(), DamageCalculator.subregion()).filter(pokemon => {
             const dataPokemon = getPokemonByName(pokemon.name);
             return dataPokemon.type1 == DamageCalculator.detailType() || dataPokemon.type2 == DamageCalculator.detailType();
         }).reduce((details, pokemon) => {

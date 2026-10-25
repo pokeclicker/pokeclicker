@@ -38,7 +38,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                     <label>Subregion</label>
                     <!-- ko if: DamageCalculator.region() != GameConstants.Region.none -->
                     <select autocomplete="off" class="custom-select" data-bind="
-                        options: SubRegions.getSubRegions(DamageCalculator.region()),
+                        options: Subregions.getSubregions(DamageCalculator.region()),
                         optionsText: 'name',
                         optionsValue: 'id',
                         value: DamageCalculator.subregion"></select>
