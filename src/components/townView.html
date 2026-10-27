@@ -115,7 +115,7 @@
            <div class="list-group" data-bind="foreach: player.town.npcs">
                <!-- ko if: $data.isVisible() -->
                 <button class="btn btn-info"
-                        data-bind="text: $data.name, click: () => NPCController.openDialog($data)">
+                        data-bind="text: $data.displayName, click: () => NPCController.openDialog($data)">
                     NPC
                 </button>
                 <!-- /ko -->

@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-body text-center" data-bind="with: NPCController.selectedNPC">
-        <u><h5 class="npc-name" data-bind="text: $data.name"></h5></u>
+        <u><h5 class="npc-name" data-bind="text: $data.displayName"></h5></u>
         <img class="npc-image" data-bind="visible: $data.options.image, attr: { src: $data.options.image }" />
         <div class="npc-dialog" data-bind="html: $data.dialogHTML"></div>
         <!-- ko ifnot: $data.type == NPCType.Gift -->

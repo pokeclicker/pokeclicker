@@ -36,11 +36,16 @@ class AssistantNPC extends NPC {
         // If list, lead into it with dialogue
         let leadingDialogue = '';
         if (pokemonList?.().length) {
-            leadingDialogue = `<p>${this.listingDialogue.join('')}</p>`;
+            leadingDialogue = `<p>${this.listingDialogue.map(line => this.translate(line)).join('')}</p>`;
         }
 
         const imageListHTML = pokemonList?.().map(p => `<img width="72" src="assets/images/pokemon/${p.id}.png" />`).join('');
 
         return super.dialogHTML + leadingDialogue + imageListHTML;
+    }
+
+    public loadTranslations(): void {
+        super.loadTranslations();
+        this.listingDialogue.forEach(line => this.translate(line));
     }
 }

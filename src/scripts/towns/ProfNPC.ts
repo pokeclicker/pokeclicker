@@ -1,4 +1,8 @@
 class ProfNPC extends NPC {
+    private static championText = 'Hello, new Champion, you\'ve come a long way!';
+    private static eliteFourText = 'Come see me once you\'ve beat the Elite Four!';
+    private static requireCompleteDexText = 'To progress to the next region, you need to catch all Pokémon native to this region.';
+    private static remainingText = 'You still have {{amount}} left to catch in this region! You\'re almost there!';
 
     constructor(
         public name: string,
@@ -18,25 +22,37 @@ class ProfNPC extends NPC {
 
 
         if (!nextRegionUnlocked) {
-            return `<p>Hello, new Champion, you've come a long way!</p>
-                    <p>Come see me once you've beat the Elite Four!</p>`;
+            return `<p>${ProfNPC.translateCommon(ProfNPC.championText)}</p>
+                    <p>${ProfNPC.translateCommon(ProfNPC.eliteFourText)}</p>`;
         }
 
         let html = '';
 
         if (completeDexAchievement.isCompleted()) {
-            html += `<p>${this.pokedexCompleteText}</p>`;
+            html += `<p>${this.translate(this.pokedexCompleteText)}</p>`;
         } else {
             if (requiresCompleteDex) {
-                html += '<p>To progress to the next region, you need to catch all Pokémon native to this region.</p>';
+                html += `<p>${ProfNPC.translateCommon(ProfNPC.requireCompleteDexText)}</p>`;
             }
-            html += `<p>You still have ${completeDexAchievement.property.requiredValue - completeDexAchievement.getProgress()} left to catch in this region! You're almost there!</p>`;
+            html += `<p>${ProfNPC.translateCommon(ProfNPC.remainingText, { amount: completeDexAchievement.property.requiredValue - completeDexAchievement.getProgress() })}</p>`;
         }
 
         if (nextRegionUnlocked && (completeDexAchievement.isCompleted() || !requiresCompleteDex)) {
-            html += `<p>${this.nextRegionUnlockedText}</p>`;
+            html += `<p>${this.translate(this.nextRegionUnlockedText)}</p>`;
         }
 
         return html;
+    }
+
+    public loadTranslations(): void {
+        super.loadTranslations();
+        this.translate(this.pokedexCompleteText);
+        this.translate(this.nextRegionUnlockedText);
+        [ProfNPC.championText, ProfNPC.eliteFourText, ProfNPC.requireCompleteDexText, ProfNPC.remainingText].forEach(text => ProfNPC.translateCommon(text));
+    }
+
+    // Text shared by every professor
+    private static translateCommon(text: string, vars?: Record<string, string | number>): string {
+        return App.translation.getHashed('common.professor', 'npcs', text, vars)();
     }
 }

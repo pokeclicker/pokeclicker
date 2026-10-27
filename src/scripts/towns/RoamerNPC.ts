@@ -19,7 +19,7 @@ class RoamerNPC extends NPC {
         if (!roamers.length) {
             const regionName = RoamingPokemonList.roamerGroups[this.region]?.[this.subRegionRoamerGroup]?.name
                 ?? GameConstants.camelCaseToString(GameConstants.Region[this.region]);
-            return `There haven't been any reports of roaming Pokémon around ${regionName} lately.`;
+            return RoamerNPC.translateNoRoamers(regionName);
         }
 
         roamers.forEach((roamer) => {
@@ -31,5 +31,15 @@ class RoamerNPC extends NPC {
         const roamersHTML = roamers.map(r => `<img class="npc-roamer-image" src="assets/images/pokemon/${r.pokemon.id}.png" />`).join('');
 
         return super.dialogHTML.replace(/{ROUTE_NAME}/g, route()?.routeName) + roamersHTML;
+    }
+
+    public loadTranslations(): void {
+        super.loadTranslations();
+        RoamerNPC.translateNoRoamers('');
+    }
+
+    // Text shared by every roamer NPC
+    private static translateNoRoamers(regionName: string): string {
+        return App.translation.getHashed('common.roamer', 'npcs', 'There haven\'t been any reports of roaming Pokémon around {{regionName}} lately.', { regionName })();
     }
 }

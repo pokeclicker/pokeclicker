@@ -242,6 +242,12 @@ export type TmpGymListType = {
     }
 };
 
+export type TmpTownListType = {
+    [townName: string]: {
+        npcs?: { loadTranslations: () => void }[];
+    }
+};
+
 export type TmpAchievementHandlerType = {
     achievementList: Achievement[];
     navigateIndex: KnockoutObservable<number>;

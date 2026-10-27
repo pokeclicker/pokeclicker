@@ -4,6 +4,8 @@ import * as DownloadUtil from '../utilities/DownloadUtil';
 import GameHelper from '../GameHelper';
 
 export default class TranslationHelper {
+    private static pokemonNameRegexes: RegExp[];
+
     /**
      * Converts translation key/defaults to a tree as in the actual translation files.
      * @param replaceFunction - function to modify the default translation text, i.e. for replacing text with translation keys
@@ -66,6 +68,16 @@ export default class TranslationHelper {
         return exportTree;
     }
 
+    /**
+     * Replaces pokemon names in the default text with their translation keys, so they are translated automatically
+     */
+    private static replacePokemonNames(text: string): string {
+        // reversed to catch more-specific alt forms before the base name
+        // regex matches escaped pokemon name, if not adjacent to a word character (i.e. mid-string) and not already part of a translation key
+        TranslationHelper.pokemonNameRegexes ??= pokemonList.map(p => RegExp(String.raw`(?<!\w|\[\[pokemon::)(${p.name.replace(/([()-.?])/g, '\\$1')})(?!\w|]])`, 'g')).reverse();
+        return TranslationHelper.pokemonNameRegexes.reduce((t, regex) => t.replace(regex, '[[pokemon::$1]]'), text);
+    }
+
     public static exportQuestlineTranslationDefaults(): void {
         // Make sure all questline translatable text has been loaded by App.translation
         App.game.quests.questLines().forEach(ql => {
@@ -74,12 +86,7 @@ export default class TranslationHelper {
             ql.quests().forEach(q => q.description);
         });
         // get default text, replacing pokemon names with their translation keys
-        // reversed to catch more-specific alt forms before the base name
-        // regex matches escaped pokemon name, if not adjacent to a word character (i.e. mid-string) and not already part of a translation key
-        const pokemonNames = pokemonList.map(p => RegExp(String.raw`(?<!\w|\[\[pokemon::)(${p.name.replace(/([()-.?])/g, '\\$1')})(?!\w|]])`, 'g')).reverse();
-        const replaceNames = (text) => pokemonNames.reduce((t, regex) => t.replace(regex, '[[pokemon::$1]]'), text);
-
-        const defaultsTree = TranslationHelper.exportCachedTranslationDefaults('questlines', replaceNames);
+        const defaultsTree = TranslationHelper.exportCachedTranslationDefaults('questlines', TranslationHelper.replacePokemonNames);
         const questlineOrder = App.game.quests.questLines().map(ql => ql.name);
         const questlineNames = new Set(questlineOrder);
         // Use a sorted list of all keys as the sort order for stringify
@@ -101,5 +108,16 @@ export default class TranslationHelper {
         });
         const outputFile = JSON.stringify(defaultsTree, keyOrder, 2);
         DownloadUtil.downloadTextFile(outputFile, 'questlines.json');
+    }
+
+    public static exportNPCTranslationDefaults(): void {
+        if (App.translation.cachedTranslationDefaults?.npcs) {
+            // Clear the cache so the NPCs are exported in the same order as TownList
+            App.translation.cachedTranslationDefaults.npcs = {};
+        }
+        // Make sure all NPC translatable text has been loaded by App.translation
+        Object.values(TownList).forEach(town => town.npcs?.forEach(npc => npc.loadTranslations()));
+        const defaultsTree = TranslationHelper.exportCachedTranslationDefaults('npcs', TranslationHelper.replacePokemonNames);
+        DownloadUtil.downloadTextFile(JSON.stringify(defaultsTree, null, 2), 'npcs.json');
     }
 }
