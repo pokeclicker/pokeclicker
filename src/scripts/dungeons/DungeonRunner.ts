@@ -225,7 +225,7 @@ class DungeonRunner {
             return player.gainItem(ItemList[input].name, amount);
         } else {
             DungeonRunner.lootNotification(input, amount, weight, ItemList[input].image);
-            return player.gainItem(ItemList.xAttack, 1);
+            return player.gainItem(ItemList.xAttack.name, 1);
         }
     }
 

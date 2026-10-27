@@ -302,7 +302,7 @@ class Game implements TmpGameType {
         });
 
         // Kick player out of Client Island if they are not on the client
-        if (!App.isUsingClient && player._townName === 'Client Island') {
+        if (!App.isUsingClient && player.town?.name === 'Client Island') {
             MapHelper.moveToTown('One Island');
         }
     }
@@ -472,7 +472,7 @@ class Game implements TmpGameType {
                         type: NotificationConstants.NotificationOption.danger,
                         timeout: GameConstants.HOUR,
                     });
-                    player._timeTraveller = true;
+                    player.makeTimeTraveller();
                 }
 
                 GameHelper.updateDay();
