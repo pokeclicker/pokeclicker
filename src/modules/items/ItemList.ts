@@ -277,9 +277,7 @@ ItemList.Magikarp_Biscuit = new AttackGainConsumable(ConsumableType.Magikarp_Bis
 
 // Miscellaneous
 ItemList.Christmas_present = new ChristmasPresent();
-ItemList.Relic_copper = new EventCollectibleItem('Relic_copper', 'Copper Coin', 'A copper coin used by pirates.', 'A Pirate\'s Life');
-ItemList.Relic_silver = new EventCollectibleItem('Relic_silver', 'Silver Coin', 'A silver coin used by pirates.', 'A Pirate\'s Life');
-ItemList.Relic_gold = new EventCollectibleItem('Relic_gold', 'Gold Coin', 'A gold coin used by pirates.', 'A Pirate\'s Life');
+ItemList.Relic_gold = new EventCollectibleItem('Relic_gold', 'Pirate Coin', 'A gold coin used by pirates.', 'A Pirate\'s Life');
 ItemList.Pirate_receipt = new EventCollectibleItem('Pirate_receipt', 'Pirate Receipt', 'A proof you\'ve bought the most expensive Pirate Goods today.', 'A Pirate\'s Life');
 
 // Underground Items

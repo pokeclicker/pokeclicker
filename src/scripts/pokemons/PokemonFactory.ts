@@ -310,10 +310,6 @@ class PokemonFactory {
             case 'Christmas_present':
                 chance = GameConstants.CHRISTMAS_ITEM_CHANCE;
                 break;
-            case 'Relic_copper':
-            case 'Relic_silver':
-                chance = GameConstants.LESSER_RELIC_ITEM_CHANCE;
-                break;
             case 'Relic_gold':
                 chance = GameConstants.RELIC_GOLD_ITEM_CHANCE;
                 break;

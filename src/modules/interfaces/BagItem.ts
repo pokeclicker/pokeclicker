@@ -5,4 +5,5 @@ export default interface BagItem {
     type: ItemType,
     id: string | number,
     requirement?: Requirement,
+    amount?: number,
 }

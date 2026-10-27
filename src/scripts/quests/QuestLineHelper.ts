@@ -388,7 +388,7 @@ class QuestLineHelper {
         const talkToHerbalist1 = new TalkToNPCQuest(CianwoodCityPharmacist1, 'Talk to the Pharmacist in Cianwood City.');
         sickAmpharosQuestLine.addQuest(talkToHerbalist1);
 
-        const clearCianwoodCityGym = new DefeatGymQuest(1, 0, 'Cianwood City').withDescription('The Pharmacist said he needs some time to finish Amphys medicine. Clear the Cianwood City Gym in the meantime.');
+        const clearCianwoodCityGym = new DefeatGymQuest(1, 0, 'Cianwood City').withDescription('The Pharmacist said he needs some time to finish Amphy\'s medicine. Clear the Cianwood City Gym in the meantime.');
         sickAmpharosQuestLine.addQuest(clearCianwoodCityGym);
 
         const talkToHerbalist2 = new TalkToNPCQuest(CianwoodCityPharmacist2, 'Talk to the Pharmacist in Cianwood City.');

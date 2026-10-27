@@ -254,6 +254,10 @@ class PokedexHelper {
         return (pokemon.type.length === 1 && (type == null || pokemon.type[0] === type));
     }
 
+    public static filtersActive: KnockoutComputed<boolean> = ko.pureComputed(() => {
+        return pokedexFilterSettingKeys.some((key) => !Settings.getSetting(key).isDefault());
+    });
+
     public static resetFilters() {
         for (const key of pokedexFilterSettingKeys) {
             const setting = Settings.getSetting(key);

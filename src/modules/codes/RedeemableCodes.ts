@@ -92,7 +92,7 @@ export default class RedeemableCodes implements Saveable {
                 // Notify that the code was activated successfully
                 Notifier.notify({
                     title: 'Code activated!',
-                    message: 'You gained 3 random Held Items, that boosts a specific type!',
+                    message: 'You gained 3 random Held Items that each boost a specific type!',
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 1e4,
                 });

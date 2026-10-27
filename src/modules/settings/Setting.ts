@@ -58,7 +58,8 @@ export default class Setting<T, TOption = T> {
 
     set(value: T): void {
         if (this.validValue(value)) {
-            this._observable(value);
+            // Copy array values to avoid aliasing
+            this._observable(Array.isArray(value) ? [...value] as T : value);
         } else {
             let stringified = typeof value === 'string' ? `\"${value}\"` : value.toString();
             if (stringified == '[object Object]' && value.constructor?.name) {
@@ -87,6 +88,15 @@ export default class Setting<T, TOption = T> {
         }
 
         return false;
+    }
+
+    isDefault(): boolean {
+        const value: T = this.observableValue();
+        const defaultValue: T = this.defaultValue;
+        if (Array.isArray(value) && Array.isArray(defaultValue)) {
+            return value.length === defaultValue.length && value.every((v, i) => v === defaultValue[i]);
+        }
+        return value === defaultValue;
     }
 
     isSelected(value: T): KnockoutComputed<boolean> {

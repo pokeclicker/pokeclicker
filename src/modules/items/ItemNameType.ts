@@ -187,8 +187,6 @@ export type ItemNameType
     | 'Rare_Candy'
     | 'Magikarp_Biscuit'
     | 'Christmas_present'
-    | 'Relic_copper'
-    | 'Relic_silver'
     | 'Relic_gold'
     | 'Rare_bone'
     | 'Star_piece'

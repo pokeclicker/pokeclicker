@@ -213,7 +213,7 @@ class Plot implements Saveable {
 
                 const timeBoostType = Settings.getSetting('farmBoostDisplay').observableValue();
                 // Petaya Effect
-                if (App.game.farming.berryInFarm(BerryType.Petaya, PlotStage.Berry, true) && this.berry !== BerryType.Petaya && this.stage() == PlotStage.Berry) {
+                if (this.isAffectedByPetaya() && this.stage() == PlotStage.Berry) {
                     tooltip.push('∞ until death');
                     if (timeBoostType) {
                         tooltip.push(`(altered from ${this.formattedBaseStageTimeLeft()})`);
@@ -339,7 +339,7 @@ class Plot implements Saveable {
                 change = true;
             }
 
-            if (!this._hasWarnedAboutToWither && this.stage() == PlotStage.Berry && this.age + GameConstants.WITHER_WARNING_TIME >= this.berryData.growthTime[PlotStage.Berry]) {
+            if (!this._hasWarnedAboutToWither && !this.isAffectedByPetaya() && this.stage() == PlotStage.Berry && this.age + GameConstants.WITHER_WARNING_TIME >= this.berryData.growthTime[PlotStage.Berry]) {
                 this.notifications.push(FarmNotificationType.AboutToWither);
                 this._hasWarnedAboutToWither = true;
             }
@@ -573,6 +573,10 @@ class Plot implements Saveable {
             this.mulchTimeLeft = 0;
         }
         return wasMulched;
+    }
+
+    private isAffectedByPetaya(): boolean {
+        return App.game.farming.berryInFarm(BerryType.Petaya, PlotStage.Berry, true) && this.berry !== BerryType.Petaya;
     }
 
     fromJSON(json: Record<string, any>): void {

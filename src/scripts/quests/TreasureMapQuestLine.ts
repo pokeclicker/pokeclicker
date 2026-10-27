@@ -21,14 +21,11 @@ class TreasureMapQuestLine extends QuestLine {
         this.amount = amount;
 
         const rewardTotal = 90 + 6 * player.highestRegion();
-        const rewardSilver = Math.floor(rewardTotal / 10);
-        const rewardCopper = rewardTotal - rewardSilver * 10;
 
         this.addQuest(new DefeatDungeonQuest(amount, undefined, dungeon.name).withDescription(`The map you obtained says there is a treasure waiting in ${dungeon.name}. Go clear it out.`).withCustomReward(() => {
-            BagHandler.gainItem({ type: ItemType.item, id: 'Relic_silver' }, rewardSilver);
-            BagHandler.gainItem({ type: ItemType.item, id: 'Relic_copper' }, rewardCopper);
+            BagHandler.gainItem({ type: ItemType.item, id: 'Relic_gold' }, rewardTotal);
             Notifier.notify({
-                message: `You found the pirate treasure containing ${rewardSilver} Silver Coins and ${rewardCopper} Copper Coins!`,
+                message: `You found the pirate treasure containing ${rewardTotal} Pirate Coins!`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.dropped_item,
             });
