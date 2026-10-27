@@ -17,17 +17,17 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
     <div class="modal-content">
         <!-- ko if: DisplayObservables.modalState.damageCalculatorModal === 'show' -->
         <div class="modal-header">
-            <h5 class="modal-title" id="damageCalculatorModalLabel">Damage Calculator</h5>
+            <h5 class="modal-title" id="damageCalculatorModalLabel" data-bind="t: 'damageCalculator.title'">Damage Calculator</h5>
             <button type="button" class="btn btn-info"
             style="position: absolute; right: 0px; top: 0px; width: auto; height: 61px; padding: 10px;"
-            data-bind="tooltip: { title: `Check how much damage you are doing against a particular Pokémon type, and see a breakdown of where that damage is coming from by your Pokémon types.`, trigger: 'hover', placement:'left' }">
+            data-bind="tooltip: { title: App.translation.ui('damageCalculator.helpTooltip', 'Check how much damage you are doing against a particular Pokémon type, and see a breakdown of where that damage is coming from by your Pokémon types.'), trigger: 'hover', placement:'left' }">
             ?
             </button>
         </div>
         <div class="modal-body p-2">
             <div class="form-row m-0">
                 <div class="form-group col-4 col-lg">
-                    <label>Region</label>
+                    <label data-bind="t: 'common.region'">Region</label>
                     <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.region">
                         <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => GameConstants.Region[r] <= player.highestRegion()) -->
                         <option data-bind="value: GameConstants.Region[$data], text: GameConstants.camelCaseToString($data)">Region</option>
@@ -35,7 +35,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                     </select>
                 </div>
                 <div class="form-group col-4 col-lg">
-                    <label>Subregion</label>
+                    <label data-bind="t: 'damageCalculator.subregion'">Subregion</label>
                     <!-- ko if: DamageCalculator.region() != GameConstants.Region.none -->
                     <select autocomplete="off" class="custom-select" data-bind="
                         options: SubRegions.getSubRegions(DamageCalculator.region()),
@@ -45,12 +45,12 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                     <!-- /ko -->
                     <!-- ko if: DamageCalculator.region() == GameConstants.Region.none -->
                     <select autocomplete="off" class="custom-select">
-                        <option value="-1">None</option>
+                        <option value="-1" data-bind="t: 'damageCalculator.none'">None</option>
                     </select>
                     <!-- /ko -->
                 </div>
                 <div class="form-group col-4 col-lg">
-                    <label>Weather</label>
+                    <label data-bind="t: 'damageCalculator.weather'">Weather</label>
                     <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.weather">
                         <!-- ko foreach: GameHelper.enumStrings(WeatherType) -->
                         <option data-bind="attr: { value: WeatherType[$data] }, text: GameConstants.camelCaseToString($data)">Weather</option>
@@ -58,7 +58,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                     </select>
                 </div>
                 <div class="form-group col-4 col-lg">
-                    <label>Type 1</label>
+                    <label data-bind="t: 'damageCalculator.type1'">Type 1</label>
                     <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.type1">
                         <!-- ko foreach: GameHelper.enumStrings(PokemonType) -->
                         <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
@@ -66,7 +66,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                     </select>
                 </div>
                 <div class="form-group col-4 col-lg">
-                    <label>Type 2</label>
+                    <label data-bind="t: 'damageCalculator.type2'">Type 2</label>
                     <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.type2">
                         <!-- ko foreach: GameHelper.enumStrings(PokemonType) -->
                         <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
@@ -77,19 +77,19 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
             <div class="form-row justify-content-center m-0 mb-2">
                 <div class="form-check form-check-inline">
                     <input id="damage-calc-include-breeding" class="form-check-input" type="checkbox" autocomplete="off" data-bind="checked: DamageCalculator.includeBreeding"></input>
-                    <label for="damage-calc-include-breeding" class="form-check-label">Include Breeding</label>
+                    <label for="damage-calc-include-breeding" class="form-check-label" data-bind="t: 'damageCalculator.includeBreeding'">Include Breeding</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input id="damage-calc-ignore-level" class="form-check-input" type="checkbox" autocomplete="off" data-bind="checked: DamageCalculator.ignoreLevel"></input>
-                    <label for="damage-calc-ignore-level" class="form-check-label">Ignore Level</label>
+                    <label for="damage-calc-ignore-level" class="form-check-label" data-bind="t: 'damageCalculator.ignoreLevel'">Ignore Level</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input id="damage-calc-use-base" class="form-check-input" type="checkbox" autocomplete="off" data-bind="checked: DamageCalculator.baseAttackOnly"></input>
-                    <label for="damage-calc-use-base" class="form-check-label">Base Attack Only</label>
+                    <label for="damage-calc-use-base" class="form-check-label" data-bind="t: 'damageCalculator.baseAttackOnly'">Base Attack Only</label>
                 </div>
             </div>
             <hr />
-            <div data-bind="text: `Total Damage: ${Math.round(DamageCalculator.observableTotalDamage()).toLocaleString('en-US')}`"> </div>
+            <div data-bind="text: App.translation.ui('damageCalculator.totalDamage', 'Total Damage: {{damage}}', { damage: Math.round(DamageCalculator.observableTotalDamage()).toLocaleString('en-US') })"> </div>
             <div class="d-flex">
                 <!-- ko foreach: DamageCalculator.observableTypeDamageArray -->
                 <div class="type-damage-bar"
@@ -106,14 +106,14 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                 <!-- /ko -->
             </div>
             <div class="form-group text-left mt-3">
-                <label>Type Detail</label>
+                <label data-bind="t: 'damageCalculator.typeDetail'">Type Detail</label>
                 <select autocomplete="off" data-bind="value: DamageCalculator.detailType">
                     <!-- ko foreach: GameHelper.enumStrings(PokemonType) -->
                     <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
                     <!-- /ko -->
                 </select>
                 <!-- ko if: DamageCalculator.detailType() != PokemonType.None -->
-                <span class="float-right" data-bind="text: `${PokemonType[DamageCalculator.detailType()]} Damage: ${Math.round(DamageCalculator.observableTypeDamageArray()[DamageCalculator.detailType()]).toLocaleString('en-US')}`"></span>
+                <span class="float-right" data-bind="text: App.translation.ui('damageCalculator.typeDamage', '{{type}} Damage: {{damage}}', { type: PokemonType[DamageCalculator.detailType()], damage: Math.round(DamageCalculator.observableTypeDamageArray()[DamageCalculator.detailType()]).toLocaleString('en-US') })"></span>
                 <!-- /ko -->
             </div>
             <div data-bind="if: DamageCalculator.detailType() != PokemonType.None">
@@ -121,10 +121,10 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Name</th>
-                            <th>Damage</th>
-                            <th>Type 1</th>
-                            <th>Type 2</th>
+                            <th data-bind="t: 'common.name'">Name</th>
+                            <th data-bind="t: 'damageCalculator.damage'">Damage</th>
+                            <th data-bind="t: 'damageCalculator.type1'">Type 1</th>
+                            <th data-bind="t: 'damageCalculator.type2'">Type 2</th>
                         </tr>
                     </thead>
                     <tbody data-bind="template: { name: 'damageDetailTemplate', foreach: DamageCalculator.observableTypeDetails }">
@@ -133,7 +133,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
             </div>
        </div>
        <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
        </div>
        <!-- /ko -->
    </div>

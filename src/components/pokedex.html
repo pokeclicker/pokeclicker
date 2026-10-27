@@ -4,23 +4,23 @@ aria-labelledby="pokedexModalLabel">
         <div class="modal-content">
 
             <div class="modal-header p-lg-0 border-lg-0 position-relative">
-                <h4 class="d-lg-none d-block" style="margin-bottom: 0">Pokédex</h4>
+                <h4 class="d-lg-none d-block" style="margin-bottom: 0" data-bind="t: 'pokedex.title'">Pokédex</h4>
                 <div class="row w-100 m-0 py-1 d-lg-flex d-none">
                     <div class="col-3">
                         <div class="pokedex-border-bottom pt-2">
-                            <h4>Filters and Settings</h4>
+                            <h4 data-bind="t: 'pokedex.filtersAndSettings'">Filters and Settings</h4>
                         </div>
                     </div>
                     <div class="col-9">
                         <!-- ko if: PokedexHelper.filteredList().length == 0 -->
                         <div class="pokedex-border-bottom pt-2">
-                            <h4>No Pokémon found</h4>
+                            <h4 data-bind="t: 'pokedex.noPokemonFound'">No Pokémon found</h4>
                         </div>
                         <!-- /ko -->
 
                         <!-- ko if: PokedexHelper.filteredList().length != 0 -->
                         <div class="pokedex-border-bottom pt-2">
-                            <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length.toLocaleString('en-US')} Pokémon`"></h4>
+                            <h4 data-bind="text: App.translation.ui('pokedex.showing', 'Showing {{amount}} Pokémon', { amount: PokedexHelper.filteredList().length.toLocaleString('en-US') })"></h4>
                         </div>
                         <!-- /ko -->
                     </div>
@@ -33,31 +33,31 @@ aria-labelledby="pokedexModalLabel">
                 <div class="row">
                     <div class="col-12 d-lg-none d-block">
                         <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
-                                data-target="#pokedex-filter-container" aria-expanded="false" aria-controls="pokedex-filter-container">
+                                data-target="#pokedex-filter-container" aria-expanded="false" aria-controls="pokedex-filter-container" data-bind="t: 'pokedex.filtersAndSettings'">
                             Filters and Settings
                         </button>
                     </div>
                     <!-- Filters and Settings -->
                     <div class="col-lg-3 col-12 collapse dont-collapse-lg" id="pokedex-filter-container" style="background-color: inherit; top: 0; z-index: 100;">
                         <div class="pokedex-border-bottom pt-2 d-lg-none d-block">
-                            <h4>Filters and Settings</h4>
+                            <h4 data-bind="t: 'pokedex.filtersAndSettings'">Filters and Settings</h4>
                         </div>
                         <div class="scrolling-div-pokedex" style="margin-bottom: 0.5rem;">
                             <div class="container-fluid py-3">
                                 <div class="form-row text-left">
                                     <!--Name or ID-->
                                     <div class="form-group col-lg-12 col-12">
-                                        <label for="pokedex-filter-nameID">Name or ID</label>
+                                        <label for="pokedex-filter-nameID" data-bind="t: 'pokedex.nameOrId'">Name or ID</label>
                                         <input id="pokedex-filter-nameID" class="form-control"
                                             oninput="PokedexHelper.formatSearch(this.value)"
                                             data-bind="value: PokedexHelper.getSearchString(),
-                                                attr: { placeholder: `${PokemonHelper.displayName('Bulbasaur')} or 1` }">
+                                                attr: { placeholder: App.translation.ui('pokedex.nameOrIdPlaceholder', '{{pokemon}} or 1', { pokemon: PokemonHelper.displayName('Bulbasaur') }) }">
                                     </div>
 
                                     <!--Types-->
 
                                     <div class="form-group col-lg-6 col-6" data-bind="let: { pokedexType1Filter: Settings.getSetting('pokedexType1Filter') }">
-                                        <label>Types</label>
+                                        <label data-bind="t: 'pokedex.types'">Types</label>
                                         <knockout data-bind="template: { name: 'multiSelectDropdownTemplate',
                                             data: {
                                                 id: 'pokedex-filter-type1',
@@ -68,8 +68,8 @@ aria-labelledby="pokedexModalLabel">
                                                 buttonText: () => {
                                                     const selected = pokedexType1Filter.observableValue();
                                                     return selected.length === 0
-                                                        ? 'All' : selected.length === 1
-                                                            ? PokemonType[selected[0]] : `${selected.length} selected`;
+                                                        ? App.translation.ui('pokedex.all', 'All') : selected.length === 1
+                                                            ? PokemonType[selected[0]] : App.translation.ui('pokedex.selected', '{{amount}} selected', { amount: selected.length });
                                                 },
                                                 itemLabel: {
                                                     class: 'small',
@@ -80,7 +80,7 @@ aria-labelledby="pokedexModalLabel">
                                                 },
                                                 topButtons: [
                                                     {
-                                                        label: 'All',
+                                                        label: App.translation.ui('pokedex.all', 'All'),
                                                         class: 'btn-primary btn-sm',
                                                         onClick: () => pokedexType1Filter.set([]),
                                                     },
@@ -101,8 +101,8 @@ aria-labelledby="pokedexModalLabel">
                                                 buttonText: () => {
                                                     const selected = pokedexType2Filter.observableValue();
                                                     return selected.length === 0
-                                                        ? 'All' : selected.length === 1
-                                                            ? PokemonType[selected[0]] : `${selected.length} selected`;
+                                                        ? App.translation.ui('pokedex.all', 'All') : selected.length === 1
+                                                            ? PokemonType[selected[0]] : App.translation.ui('pokedex.selected', '{{amount}} selected', { amount: selected.length });
                                                 },
                                                 itemLabel: {
                                                     class: 'small',
@@ -113,7 +113,7 @@ aria-labelledby="pokedexModalLabel">
                                                 },
                                                 topButtons: [
                                                     {
-                                                        label: 'All',
+                                                        label: App.translation.ui('pokedex.all', 'All'),
                                                         class: 'btn-primary btn-sm',
                                                         onClick: () => pokedexType2Filter.set([]),
                                                     },
@@ -136,15 +136,15 @@ aria-labelledby="pokedexModalLabel">
                                                 buttonText: () => {
                                                     const selected = pokedexRegionFilter.observableValue();
                                                     return selected.length === 0
-                                                        ? 'All' : selected.length === 1
-                                                            ? GameConstants.camelCaseToString(GameConstants.Region[selected[0]]) : `${selected.length} selected`;
+                                                        ? App.translation.ui('pokedex.all', 'All') : selected.length === 1
+                                                            ? GameConstants.camelCaseToString(GameConstants.Region[selected[0]]) : App.translation.ui('pokedex.selected', '{{amount}} selected', { amount: selected.length });
                                                 },
                                                 itemLabel: {
                                                     class: 'small',
                                                 },
                                                 topButtons: [
                                                     {
-                                                        label: 'All',
+                                                        label: App.translation.ui('pokedex.all', 'All'),
                                                         class: 'btn-primary btn-sm',
                                                         onClick: () => pokedexRegionFilter.set([]),
                                                     },
@@ -167,8 +167,8 @@ aria-labelledby="pokedexModalLabel">
                                                 buttonText: () => {
                                                     const selected = pokedexCategoryFilter.observableValue();
                                                     return selected.length === 0
-                                                        ? 'All' : selected.length === 1
-                                                            ? PokemonCategories.getCategoryById(selected[0])?.name() : `${selected.length} selected`;
+                                                        ? App.translation.ui('pokedex.all', 'All') : selected.length === 1
+                                                            ? PokemonCategories.getCategoryById(selected[0])?.name() : App.translation.ui('pokedex.selected', '{{amount}} selected', { amount: selected.length });
                                                 },
                                                 itemLabel: {
                                                     class: 'small',
@@ -179,19 +179,19 @@ aria-labelledby="pokedexModalLabel">
                                                 },
                                                 topButtons: [
                                                     {
-                                                        label: 'All',
+                                                        label: App.translation.ui('pokedex.all', 'All'),
                                                         class: 'btn-primary btn-sm',
                                                         onClick: () => pokedexCategoryFilter.set([]),
                                                     },
                                                     {
-                                                        label: 'Categorized',
+                                                        label: App.translation.ui('pokedex.categorized', 'Categorized'),
                                                         class: 'btn-primary btn-sm',
                                                         onClick: () => pokedexCategoryFilter.set(PokemonCategories.categories().filter(c => c.id > 0).map(c => c.id)),
                                                     },
                                                 ],
                                                 bottomButtons: [
                                                     {
-                                                        label: 'Edit Categories',
+                                                        label: App.translation.ui('pokedex.editCategories', 'Edit Categories'),
                                                         class: 'btn-primary btn-sm',
                                                         onClick: () => $('#categoryModal').modal('show'),
                                                     },
@@ -246,7 +246,7 @@ aria-labelledby="pokedexModalLabel">
                                             <label for="pokedex-filter-held-item" data-bind="text: pokedexHeldItemFilter.displayName">Rare Held Item</label>
                                             <span class="mx-1"
                                                 data-bind="tooltip: {
-                                                    title: 'Shows Pokémon with a chance to drop an item',
+                                                    title: App.translation.ui('pokedex.heldItemTooltip', 'Shows Pokémon with a chance to drop an item'),
                                                     trigger: 'hover',
                                                     boundary: 'window'
                                                 }" data-original-title="" title="">ⓘ</span>
@@ -281,7 +281,8 @@ aria-labelledby="pokedexModalLabel">
                                         <button class="btn btn-block btn-sm" data-bind="
                                             click: () => PokedexHelper.resetFilters(),
                                             css: PokedexHelper.filtersActive() ? 'btn-primary' : 'btn-secondary disabled',
-                                            enable: PokedexHelper.filtersActive
+                                            enable: PokedexHelper.filtersActive,
+                                            t: 'pokedex.resetAllFilters'
                                         ">Reset All Filters</button>
                                     </div>
 
@@ -317,7 +318,7 @@ aria-labelledby="pokedexModalLabel">
                                                     onchange="Settings.setSettingByName('partyShowPurifiedShadowSprites', this.checked)">
                                                 <div class="toggler-slider" data-bind="tooltip: {
                                                     html: true,
-                                                    title: `Display all purified Pokémon with their shadow sprites.`,
+                                                    title: App.translation.ui('pokedex.showShadowSpritesTooltip', 'Display all purified Pokémon with their shadow sprites.'),
                                                     trigger: 'hover',
                                                 }">
                                                     <div class="toggler-knob"></div>
@@ -346,7 +347,7 @@ aria-labelledby="pokedexModalLabel">
                                                 <label for="pokedex-setting-sort-direction" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;"
                                                     data-bind="text: pokedexSortDirection.observableValue() ? '⥄' : '⥂',
                                                         tooltip: {
-                                                            title: pokedexSortDirection.observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)',
+                                                            title: pokedexSortDirection.observableValue() ? App.translation.ui('pokedex.sortDescending', 'Descending (highest value first)') : App.translation.ui('pokedex.sortAscending', 'Ascending (lowest value first)'),
                                                             trigger: 'hover',
                                                             placement:'top'
                                                         }">
@@ -369,9 +370,9 @@ aria-labelledby="pokedexModalLabel">
                                         <div class="form-group">
                                             <button type="button" class="btn btn-primary btn-block" data-bind="
                                                 click: () => categoryModeEnabled(!categoryModeEnabled()),
-                                                text: categoryModeEnabled() ? 'Disable Category Mode' : 'Enable Category Mode',
+                                                text: categoryModeEnabled() ? App.translation.ui('pokedex.disableCategoryMode', 'Disable Category Mode') : App.translation.ui('pokedex.enableCategoryMode', 'Enable Category Mode'),
                                                 tooltip: {
-                                                    title: 'Use Category Mode to quickly assign and remove Pokémon from categories. Select a category then click the desired Pokémon to add or remove.',
+                                                    title: App.translation.ui('pokedex.categoryModeTooltip', 'Use Category Mode to quickly assign and remove Pokémon from categories. Select a category then click the desired Pokémon to add or remove.'),
                                                     placement: 'top',
                                                     trigger: 'hover'
                                                 }">
@@ -382,7 +383,7 @@ aria-labelledby="pokedexModalLabel">
                                     <!-- ko if: categoryModeEnabled() -->
                                     <div class="col-12">
                                         <div class="form-group mb-1">
-                                            <label>Selected Category</label>
+                                            <label data-bind="t: 'pokedex.selectedCategory'">Selected Category</label>
                                             <div class="dropdown show">
                                                 <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                                     data-bind="text: PokemonCategories.categories().find(c => c.id == categoryModeSelected()).name()">
@@ -399,20 +400,22 @@ aria-labelledby="pokedexModalLabel">
                                     </div>
                                     <div class="form-group col-6">
                                         <button type="button" class="btn btn-success btn-block" data-bind="tooltip: {
-                                            title: 'Add all Pokémon matching the current filters to this category.',
+                                            title: App.translation.ui('pokedex.addAllTooltip', 'Add all Pokémon matching the current filters to this category.'),
                                             placement: 'bottom',
                                             trigger: 'hover'
                                         },
-                                        click: () => PartyController.addCategory(PokedexHelper.filteredListPartyPokemon(), categoryModeSelected())">Add All</button>
+                                        click: () => PartyController.addCategory(PokedexHelper.filteredListPartyPokemon(), categoryModeSelected()),
+                                        t: 'pokedex.addAll'">Add All</button>
                                     </div>
                                     <div class="form-group col-6">
                                         <button type="button" class="btn btn-danger btn-block" data-bind="tooltip: {
-                                            title: 'Remove all Pokémon matching the current filters from this category.',
+                                            title: App.translation.ui('pokedex.removeAllTooltip', 'Remove all Pokémon matching the current filters from this category.'),
                                             placement: 'bottom',
                                             trigger: 'hover'
                                         },
                                         disable: categoryModeSelected() === 0,
-                                        click: () => PartyController.removeCategory(PokedexHelper.filteredListPartyPokemon(), categoryModeSelected())">Remove All</button>
+                                        click: () => PartyController.removeCategory(PokedexHelper.filteredListPartyPokemon(), categoryModeSelected()),
+                                        t: 'pokedex.removeAll'">Remove All</button>
                                     </div>
                                     <!-- /ko -->
                                 </div>
@@ -424,19 +427,19 @@ aria-labelledby="pokedexModalLabel">
                     <div class="col-lg-9 col-12 pokemon-list" id="pokedex-pokemon-list-container">
                         <!-- ko if: PokedexHelper.filteredList().length == 0 -->
                         <div class="pokedex-border-bottom pt-2 d-lg-none d-block">
-                            <h4>No Pokémon found</h4>
+                            <h4 data-bind="t: 'pokedex.noPokemonFound'">No Pokémon found</h4>
                         </div>
                         <!-- /ko -->
 
                         <!-- ko if: PokedexHelper.filteredList().length != 0 -->
                         <div class="pokedex-border-bottom pt-2 d-lg-none d-block">
-                            <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length.toLocaleString('en-US')} Pokémon`"></h4>
+                            <h4 data-bind="text: App.translation.ui('pokedex.showing', 'Showing {{amount}} Pokémon', { amount: PokedexHelper.filteredList().length.toLocaleString('en-US') })"></h4>
                         </div>
                         <!-- /ko -->
                         <div class="scrolling-div-pokedex">
                             <!-- ko if: PokedexHelper.filteredList().length == 0 -->
                             <div class="mt-1">
-                                <span>Missing a Pokémon but don't see it here? Be sure to completely explore the region!</span>
+                                <span data-bind="t: 'pokedex.missingPokemon'">Missing a Pokémon but don't see it here? Be sure to completely explore the region!</span>
                             </div>
                             <!-- /ko -->
                             <knockout data-bind="let: { lazyPokedexList: lazyLoad('lazyPokedexList', $element, PokedexHelper.filteredList, { pageSize: 60, reset: PokedexHelper.resetPokedexFlag }) }">
@@ -474,13 +477,16 @@ aria-labelledby="pokedexModalLabel">
                                                 },
                                                 tooltip: {
                                                     html: true,
-                                                    title: categoryModeEnabled() ? '' : `<u>Information:</u>
-                                                        <br/>Base Attack: <strong>${$data.attack}</strong>
-                                                        <br/>Catch Rate: <strong>${PokemonFactory.catchRateHelper($data.catchRate, true)}%</strong>
-                                                        <br/>Hatch Steps: <strong>${App.game.party.getPokemon($data.id)?.getEggSteps().toLocaleString('en-US') || 'Unknown'}</strong>` +
+                                                    title: categoryModeEnabled() ? '' : App.translation.ui('pokedex.infoTooltip', '<u>Information:</u><br/>Base Attack: <strong>{{attack}}</strong><br/>Catch Rate: <strong>{{catchRate}}%</strong><br/>Hatch Steps: <strong>{{hatchSteps}}</strong>', {
+                                                            attack: $data.attack,
+                                                            catchRate: PokemonFactory.catchRateHelper($data.catchRate, true),
+                                                            hatchSteps: App.game.party.getPokemon($data.id)?.getEggSteps().toLocaleString('en-US') || App.translation.ui('pokedex.unknown', 'Unknown'),
+                                                        }) +
                                                         (App.game.party.getPokemon($data.id)?.pokerus >= GameConstants.Pokerus.Contagious ?
-                                                            `<br/>EVs: <strong>${App.game.party.getPokemon($data.id).evs().toLocaleString('en-US')}</strong>
-                                                            <br/>EV bonus: <strong>×${App.game.party.getPokemon($data.id).calculateEVAttackBonus().toLocaleString('en-US')}</strong>`
+                                                            App.translation.ui('pokedex.evTooltip', '<br/>EVs: <strong>{{evs}}</strong><br/>EV bonus: <strong>×{{bonus}}</strong>', {
+                                                                evs: App.game.party.getPokemon($data.id).evs().toLocaleString('en-US'),
+                                                                bonus: App.game.party.getPokemon($data.id).calculateEVAttackBonus().toLocaleString('en-US'),
+                                                            })
                                                             : '') +
                                                         (PokemonHelper.hasMegaEvolution($data.name) ?
                                                             pokemonMap[$data.name].evolutions.flatMap(e => e.restrictions).filter(r => r instanceof MegaEvolveRequirement && player.hasMegaStone(r.megaStone))
@@ -537,7 +543,7 @@ aria-labelledby="pokedexModalLabel">
                                                     </div>
                                                     <!-- /ko -->
                                                     <div class="dropdown-divider"></div>
-                                                    <button class="btn btn-primary btn-sm btn-block font-weight-bold" data-toggle="modal" data-target="#categoryModal">
+                                                    <button class="btn btn-primary btn-sm btn-block font-weight-bold" data-toggle="modal" data-target="#categoryModal" data-bind="t: 'pokedex.editCategories'">
                                                         Edit Categories
                                                     </button>
                                                 </div>

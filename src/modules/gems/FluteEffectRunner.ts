@@ -34,12 +34,12 @@ export default class FluteEffectRunner {
                 tooltip.push(`<i>${PokemonType[idx]}<i/>`);
             });
         } else {
-            tooltip.push('<i>All Types<i/>');
+            tooltip.push(`<i>${App.translation.ui('battleItems.allTypes', 'All Types')}<i/>`);
         }
 
         // Adding header when active
         if (tooltip.length) {
-            tooltip.unshift('+0.5% boost to:');
+            tooltip.unshift(App.translation.ui('battleItems.fluteBoostTo', '+0.5% boost to:'));
         }
 
         return tooltip.join('<br>');
@@ -147,7 +147,7 @@ export default class FluteEffectRunner {
 
     public static fluteTooltip(itemName: FluteItemType): string {
         const str = [];
-        str.push(`<strong>Time Remaining:</strong><br> ${formatSecondsToTime(this.fluteFormattedTime(itemName))}`);
+        str.push(`<strong>${App.translation.ui('battleItems.timeRemaining', 'Time Remaining:')}</strong><br> ${formatSecondsToTime(this.fluteFormattedTime(itemName))}`);
         return str.join('<br>');
     }
 
@@ -179,11 +179,11 @@ export default class FluteEffectRunner {
 
     public static fluteGemTooltip(item): string {
         let tooltipString = '';
-        tooltipString += '<div><strong>Consumes:</strong></div>';
+        tooltipString += `<div><strong>${App.translation.ui('battleItems.consumes', 'Consumes:')}</strong></div>`;
         tooltipString += '<table class="w-100">';
         for (const gem of item.gemTypes) {
             tooltipString += '<tr>';
-            tooltipString += `<td class="text-left" px-1">${gem} gems</td>`;
+            tooltipString += `<td class="text-left" px-1">${App.translation.ui('battleItems.typeGems', '{{type}} gems', { type: gem })}</td>`;
             tooltipString += '<td></td>';
             tooltipString += `<td class="text-right" px-1">(${App.game.gems.gemWallet[PokemonType[gem]]().toLocaleString('en-US')})</td>`;
             tooltipString += '</tr>';

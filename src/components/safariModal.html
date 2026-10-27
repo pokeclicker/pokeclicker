@@ -16,18 +16,18 @@
             </div>
             <div class="modal-header">
                 <h4 style='text-align:center' class="modal-title">
-                    Safari Zone
+                    <knockout data-bind="t: 'safari.title'">Safari Zone</knockout>
                     <span data-bind="if: Safari.completed(false, player.region)">
                         <img class="pokeball-smallest"
-                            data-bind='attr:{
-                                title:"You have captured all of the Safari Pokémon" + (Safari.completed(true, player.region) ? " shiny" : "") + "!",
-                                src:"assets/images/pokeball/Pokeball" + (Safari.completed(true, player.region) ? "-shiny" : "") + ".svg"
-                            }'
+                            data-bind="attr:{
+                                title: Safari.completed(true, player.region) ? App.translation.ui('safari.allCaughtShiny', 'You have captured all of the Safari Pokémon shiny!') : App.translation.ui('safari.allCaught', 'You have captured all of the Safari Pokémon!'),
+                                src: 'assets/images/pokeball/Pokeball' + (Safari.completed(true, player.region) ? '-shiny' : '') + '.svg'
+                            }"
                         />
                     </span>
                 </h4>
                 <div class='col-6' data-bind="tooltip : Safari.safariProgressTooltip()">
-                    <div>Lvl. <knockout data-bind='text: Safari.safariLevel()'></knockout></div>
+                    <div data-bind="t: 'safari.level', tVars: { level: Safari.safariLevel() }">Lvl. {{level}}</div>
                     <div class="progress" style='height: 5px'>
                         <div class="progress-bar bg-info" role="progressbar"
                              data-bind="attr:{ style: 'width:' + Safari.percentToNextSafariLevel() + '%' }"
@@ -35,17 +35,17 @@
                         </div>
                     </div>
                 </div>
-                <button class='btn btn-danger modalClose' onclick='Safari.closeModal()'>Leave</button>
+                <button class='btn btn-danger modalClose' onclick='Safari.closeModal()' data-bind="t: 'safari.leave'">Leave</button>
             </div>
 
             <div class="modal-body p-0">
                 <!-- Tab Titles -->
                 <ul style="width:100%" class="nav nav-tabs nav-fill">
                     <li class="nav-item">
-                        <a data-toggle='tab' class='nav-link active' href="#safariExplore">Explore</a>
+                        <a data-toggle='tab' class='nav-link active' href="#safariExplore" data-bind="t: 'safari.explore'">Explore</a>
                     </li>
                     <li class='nav-item'>
-                        <a class='nav-link' href="#safariHelp" data-bind="attr: {'data-toggle': Safari.inBattle() ? '' : 'tab'}">Help</a>
+                        <a class='nav-link' href="#safariHelp" data-bind="attr: {'data-toggle': Safari.inBattle() ? '' : 'tab'}, t: 'common.help'">Help</a>
                     </li>
                 </ul>
 
@@ -59,7 +59,7 @@
                             <div id="safariEntrance" data-bind="if: !Safari.inProgress()">
                                 <button id="paySafariButton" class="btn btn-block" onclick="Safari.payEntranceFee()"
                                     data-bind="class: Safari.canPay() ? 'btn-primary' : 'disabled btn-danger'">
-                                    Pay Entrance Fee <knockout id='safariEntranceCost' data-bind="template: { name: 'currencyTemplate', data: {'amount': Safari.cost().amount, 'currency': Safari.cost().currency}}"></knockout>
+                                    <knockout data-bind="t: 'safari.payEntranceFee'">Pay Entrance Fee</knockout> <knockout id='safariEntranceCost' data-bind="template: { name: 'currencyTemplate', data: {'amount': Safari.cost().amount, 'currency': Safari.cost().currency}}"></knockout>
                                 </button>
                                 <img class='fit-width' src="assets/images/safari/area1.png" />
                             </div>
@@ -98,43 +98,43 @@
                     <div  id="safariHelp" class="tab-pane fade">
                         <div class="modal-body" style="width: 80%;margin: auto;">
                             <div id="safariHelpText">
-                                <p>The Safari Zone uses a different method of encountering and capturing Pokémon, and it contains several unique Pokémon.</p>
-                                <p>After paying the entrance fee, you will be able to walk around in the Safari Zone. To encounter Pokémon, you must either walk in the tall grass or walk into Pokémon that randomly appear on the map.</p>
-                                <p>As you perform actions, you will gain Safari XP and increase your Safari Level. If you catch a Pokémon, there is a chance an item will appear on the map.</p>
+                                <p data-bind="t: 'safari.help.intro'">The Safari Zone uses a different method of encountering and capturing Pokémon, and it contains several unique Pokémon.</p>
+                                <p data-bind="t: 'safari.help.walk'">After paying the entrance fee, you will be able to walk around in the Safari Zone. To encounter Pokémon, you must either walk in the tall grass or walk into Pokémon that randomly appear on the map.</p>
+                                <p data-bind="t: 'safari.help.xp'">As you perform actions, you will gain Safari XP and increase your Safari Level. If you catch a Pokémon, there is a chance an item will appear on the map.</p>
                                 <p>
-                                    When you have encountered a Pokémon, you will be given 4 options:
+                                    <knockout data-bind="t: 'safari.help.options'">When you have encountered a Pokémon, you will be given 4 options:</knockout>
                                     <table class="table table-bordered table-sm" style="color: inherit;">
                                         <tr>
-                                            <td class="align-middle"><b>Ball</b></td>
-                                            <td>This will throw a Poké Ball and give you a chance of capturing the Pokémon. Provides 10 Safari XP.</td>
+                                            <td class="align-middle"><b data-bind="t: 'safari.help.ball'">Ball</b></td>
+                                            <td data-bind="t: 'safari.help.ballDesc'">This will throw a Poké Ball and give you a chance of capturing the Pokémon. Provides 10 Safari XP.</td>
                                         </tr>
                                         <tr>
-                                            <td class="align-middle"><b>Rock</b></td>
-                                            <td>Throwing a Rock will make the Pokémon angry, and more likely to flee, but easier to catch. Provides 10 Safari XP.</td>
+                                            <td class="align-middle"><b data-bind="t: 'safari.help.rock'">Rock</b></td>
+                                            <td data-bind="t: 'safari.help.rockDesc'">Throwing a Rock will make the Pokémon angry, and more likely to flee, but easier to catch. Provides 10 Safari XP.</td>
                                         </tr>
                                         <tr>
-                                            <td class="align-middle"><b>Bait</b></td>
-                                            <td>Throwing any kind of Bait will make the Pokémon eat, and less likely to flee, but harder to catch. Berry Baits change the base rates of the Pokémon, with Razz increasing catch rate, Pinap increasing the chance an Item is dropped, and Nanab lowering flee rate. Only one Berry effect can be present at a time. Provides 5 Safari XP.</td>
+                                            <td class="align-middle"><b data-bind="t: 'safari.help.bait'">Bait</b></td>
+                                            <td data-bind="t: 'safari.help.baitDesc'">Throwing any kind of Bait will make the Pokémon eat, and less likely to flee, but harder to catch. Berry Baits change the base rates of the Pokémon, with Razz increasing catch rate, Pinap increasing the chance an Item is dropped, and Nanab lowering flee rate. Only one Berry effect can be present at a time. Provides 5 Safari XP.</td>
                                         </tr>
                                         <tr>
-                                            <td class="align-middle"><b>Run</b></td>
-                                            <td>This will end the encounter.</td>
+                                            <td class="align-middle"><b data-bind="t: 'safari.help.run'">Run</b></td>
+                                            <td data-bind="t: 'safari.help.runDesc'">This will end the encounter.</td>
                                         </tr>
                                     </table>
                                 </p>
-                                <p>Catching a Pokémon will provide 50 Safari XP. Shiny is 5×</p>
-                                <p>Picking up an item will provide 10 Safari XP.</p>
-                                <p>After your turn of the encounter, if it did not result in the encounter ending, the wild Pokémon will have a chance of running away.</p>
-                                <p>Your safari exploration will end when you have run out of Poké Balls. You can freely leave and re-enter without having to pay the fee again as long as you still have Poké Balls remaining.</p>
-                                <p>Safari Level will increase the effectiveness of Rocks and Bait, the catch chance, the Egg Steps gained from walking, and the odds that an item will spawn when a Pokémon is caught.</p>
-                                <p>Some items are not available until a certain Safari Level is reached.</p>
+                                <p data-bind="t: 'safari.help.catchXp'">Catching a Pokémon will provide 50 Safari XP. Shiny is 5×</p>
+                                <p data-bind="t: 'safari.help.itemXp'">Picking up an item will provide 10 Safari XP.</p>
+                                <p data-bind="t: 'safari.help.flee'">After your turn of the encounter, if it did not result in the encounter ending, the wild Pokémon will have a chance of running away.</p>
+                                <p data-bind="t: 'safari.help.end'">Your safari exploration will end when you have run out of Poké Balls. You can freely leave and re-enter without having to pay the fee again as long as you still have Poké Balls remaining.</p>
+                                <p data-bind="t: 'safari.help.levelEffects'">Safari Level will increase the effectiveness of Rocks and Bait, the catch chance, the Egg Steps gained from walking, and the odds that an item will spawn when a Pokémon is caught.</p>
+                                <p data-bind="t: 'safari.help.levelItems'">Some items are not available until a certain Safari Level is reached.</p>
                                 <p>
-                                    Every 10 Safari Levels, the animation will speed up by the following values:
+                                    <knockout data-bind="t: 'safari.help.speedIntro'">Every 10 Safari Levels, the animation will speed up by the following values:</knockout>
                                     <ul style="list-style-type: none;">
-                                        <li><b>Level 10:</b> 11% faster.</li>
-                                        <li><b>Level 20:</b> 33% faster.</li>
-                                        <li><b>Level 30:</b> 75% faster.</li>
-                                        <li><b>Level 40:</b> 122% faster.</li>
+                                        <li data-bind="tHtml: 'safari.help.speedLevel', tVars: { level: 10, percent: 11 }"><b>Level {{level}}:</b> {{percent}}% faster.</li>
+                                        <li data-bind="tHtml: 'safari.help.speedLevel', tVars: { level: 20, percent: 33 }"><b>Level {{level}}:</b> {{percent}}% faster.</li>
+                                        <li data-bind="tHtml: 'safari.help.speedLevel', tVars: { level: 30, percent: 75 }"><b>Level {{level}}:</b> {{percent}}% faster.</li>
+                                        <li data-bind="tHtml: 'safari.help.speedLevel', tVars: { level: 40, percent: 122 }"><b>Level {{level}}:</b> {{percent}}% faster.</li>
                                     </ul>
                                 </p>
                             </div>

@@ -30,10 +30,10 @@
 
                       <h2 class="pageItemFooter" style="display: block;">
 
-                          <knockout class="left" data-bind="text: `Catch chance: ${SafariBattle.enemy.catchFactor.toFixed(2)} %`">
+                          <knockout class="left" data-bind="text: App.translation.ui('safari.catchChance', 'Catch chance: {{chance}} %', { chance: SafariBattle.enemy.catchFactor.toFixed(2) })">
                           </knockout>
                             &nbsp;
-                          <knockout class="right" data-bind="text: `Escape chance: ${SafariBattle.enemy.escapeFactor.toFixed(2)} %`">
+                          <knockout class="right" data-bind="text: App.translation.ui('safari.escapeChance', 'Escape chance: {{chance}} %', { chance: SafariBattle.enemy.escapeFactor.toFixed(2) })">
                           </knockout>
                       </h2>
                   </div>
@@ -46,7 +46,7 @@
                 <div class="row" style="width: 100%;">
                     <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.throwBall()" data-bind="disable: SafariBattle.busy()">
                         <span class="position-absolute small" style="left: 5px;" data-bind="text: `[${Settings.getSetting('hotkey.safari.ball').observableValue()}]`"></span>
-                        <knockout data-bind="text: `Ball (${Safari.balls()})`">Ball (30)</knockout>
+                        <knockout data-bind="text: App.translation.ui('safari.ballButton', 'Ball ({{amount}})', { amount: Safari.balls() })">Ball (30)</knockout>
                     </button>
                     <div class="btn-group btn-block col-6 m-0 dropup" style="padding:0px;">
                         <button type="button" class='btn btn-primary btn-block' onclick="this.blur();"
@@ -72,11 +72,11 @@
                     </div>
                     <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.throwRock()" data-bind="disable: SafariBattle.busy()">
                         <span class="position-absolute small" style="left: 5px;" data-bind="text: `[${Settings.getSetting('hotkey.safari.rock').observableValue()}]`"></span>
-                        Rock (∞)
+                        <knockout data-bind="t: 'safari.rockButton'">Rock (∞)</knockout>
                     </button>
                     <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.run()" data-bind="disable: SafariBattle.busy()">
                         <span class="position-absolute small" style="left: 5px;" data-bind="text: `[${Settings.getSetting('hotkey.safari.run').observableValue()}]`"></span>
-                        Run
+                        <knockout data-bind="t: 'safari.run'">Run</knockout>
                     </button>
                 </div>
            </div>

@@ -1,10 +1,10 @@
 <div id="questDisplayContainer" class="card sortable border-secondary mb-3">
     <!-- ko if: App.game.quests.isDailyQuestsUnlocked() -->
         <div class="card-header p-0" data-toggle="collapse" href="#dailyQuestDisplayBody">
-            <span data-bind='text: "Quests (" + App.game.quests.currentQuests().length + "/" + App.game.quests.questSlots() + ")"'></span>
+            <span data-bind="text: App.translation.ui('quests.titleCount', 'Quests ({{current}}/{{slots}})', { current: App.game.quests.currentQuests().length, slots: App.game.quests.questSlots() })"></span>
         </div>
         <button class="btn btn-sm btn-primary" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
-                data-bind="click: function(){$('#QuestModal').modal('show')}">
+                data-bind="click: function(){$('#QuestModal').modal('show')}, t: 'common.list'">
             List
         </button>
     <!-- /ko -->
@@ -12,7 +12,7 @@
     <div id="dailyQuestDisplayBody" class="card-body text-left p-0 show questDisplayBlock">
         <div class="mx-2 my-1" style="font-size: .825rem;">
             <!-- ko if: App.game.quests.currentQuests().length == 0 && App.game.quests.isDailyQuestsUnlocked() -->
-                <div class="pt-2 pb-2 text-center">Click "List" to start a new quest.</div>
+                <div class="pt-2 pb-2 text-center" data-bind="t: 'quests.clickListToStart'">Click "List" to start a new quest.</div>
             <!-- /ko -->
             <div data-bind="foreach: App.game.quests.currentQuests()">
                 <div class="mb-1" data-bind="text: $data.description"></div>
@@ -28,12 +28,12 @@
                     </div>
                     <div class="col-2">
                         <!-- ko ifnot: $data.isCompleted() -->
-                        <button class="btn btn-danger btn-sm btn-block p-0" data-bind="click: () => { App.game.quests.quitQuest($data.index, $data.progress() > 0) }">
+                        <button class="btn btn-danger btn-sm btn-block p-0" data-bind="click: () => { App.game.quests.quitQuest($data.index, $data.progress() > 0) }, t: 'quests.quit'">
                             Quit
                         </button>
                         <!-- /ko -->
                         <!-- ko if: $data.isCompleted() -->
-                        <button class="btn btn-success btn-sm btn-block p-0" data-bind="click: () => { App.game.quests.claimQuest($data.index) }">
+                        <button class="btn btn-success btn-sm btn-block p-0" data-bind="click: () => { App.game.quests.claimQuest($data.index) }, t: 'quests.claim'">
                             Claim
                         </button>
                         <!-- /ko -->
@@ -49,7 +49,7 @@
     } -->
         <!-- ko if: activeQuestLines.length -->
         <div class="card-header p-0" data-toggle="collapse" href="#questLineDisplayBody">
-            <span>Quest Lines</span>
+            <span data-bind="t: 'quests.questLines'">Quest Lines</span>
         </div>
         <!-- /ko -->
         <div id="questLineDisplayBody" class="card-body text-left p-0 show" data-bind="foreach: activeQuestLines">

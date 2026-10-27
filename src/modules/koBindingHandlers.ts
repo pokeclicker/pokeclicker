@@ -2,6 +2,7 @@
 
 import Sortable from 'sortablejs';
 import Settings from './settings/Settings';
+import type { TranslationVars } from './translation/Translation';
 
 const contentEditableHandler = {
     init: (element: HTMLElement, valueAccessor) => {
@@ -229,10 +230,79 @@ const tooltipHandler = {
     },
 };
 
+/**
+ * Translated interface text, from the 'ui' translation namespace.
+ * The English text already written in the HTML is used as the default translation.
+ *
+ * Syntax: t: 'key'                  replaces the text of the element
+ *         tHtml: 'key'              same, for text containing HTML markup
+ *         tVars: { name: value }    values for the {{name}} placeholders of t/tHtml
+ *         tAttr: { title: 'key' }   replaces attributes, i.e. title or placeholder
+ */
+const translationDefaults = new WeakMap<Element, Record<string, string>>();
+
+const getTranslationDefault = (element: Element, slot: string, read: () => string) => {
+    if (!translationDefaults.has(element)) {
+        translationDefaults.set(element, {});
+    }
+    const defaults = translationDefaults.get(element);
+    if (defaults[slot] === undefined) {
+        defaults[slot] = read().replace(/\s+/g, ' ').trim();
+    }
+    return defaults[slot];
+};
+
+const translateUI = (key: string, defaultValue: string, vars?: Record<string, unknown>): string => App.translation.ui(
+    key,
+    defaultValue,
+    ko.toJS(vars) as TranslationVars,
+);
+
+const translatedTextHandler = {
+    init: (element: HTMLElement) => {
+        getTranslationDefault(element, 'text', () => element.textContent);
+        return { controlsDescendantBindings: true };
+    },
+    update: (element: HTMLElement, valueAccessor, allBindings) => {
+        const defaultValue = getTranslationDefault(element, 'text', () => element.textContent);
+        element.textContent = translateUI(ko.unwrap(valueAccessor()), defaultValue, allBindings.get('tVars'));
+    },
+};
+
+const translatedHtmlHandler = {
+    init: (element: HTMLElement) => {
+        getTranslationDefault(element, 'html', () => element.innerHTML);
+        return { controlsDescendantBindings: true };
+    },
+    update: (element: HTMLElement, valueAccessor, allBindings) => {
+        const defaultValue = getTranslationDefault(element, 'html', () => element.innerHTML);
+        element.innerHTML = translateUI(ko.unwrap(valueAccessor()), defaultValue, allBindings.get('tVars'));
+    },
+};
+
+const translatedAttributesHandler = {
+    init: (element: HTMLElement, valueAccessor) => {
+        Object.keys(ko.unwrap(valueAccessor())).forEach((attr) => {
+            getTranslationDefault(element, `attr.${attr}`, () => element.getAttribute(attr) ?? '');
+        });
+    },
+    update: (element: HTMLElement, valueAccessor, allBindings) => {
+        Object.entries(ko.unwrap(valueAccessor()) as Record<string, string>).forEach(([attr, key]) => {
+            const defaultValue = getTranslationDefault(element, `attr.${attr}`, () => element.getAttribute(attr) ?? '');
+            element.setAttribute(attr, translateUI(key, defaultValue, allBindings.get('tVars')));
+        });
+    },
+};
+
 Object.assign(ko.bindingHandlers, {
     contentEditable: contentEditableHandler,
     playerSpriteMove: playerSpriteMoveHandler,
     sortable: sortableHandler,
     resizable: resizableHandler,
     tooltip: tooltipHandler,
+    t: translatedTextHandler,
+    tHtml: translatedHtmlHandler,
+    tAttr: translatedAttributesHandler,
+    // Only provides the values for t/tHtml/tAttr
+    tVars: {},
 });

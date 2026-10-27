@@ -6,14 +6,14 @@
         <img class="npc-image" data-bind="visible: $data.options.image, attr: { src: $data.options.image }" />
         <div class="npc-dialog" data-bind="html: $data.dialogHTML"></div>
         <!-- ko ifnot: $data.type == NPCType.Gift -->
-        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
         <!-- /ko -->
         <!-- ko if: $data.type == NPCType.Gift -->
         <img class="npc-gift-image mb-4" data-bind="visible: $data.giftImage, attr: { src: $data.giftImage }" />
         <div class="d-flex">
           <button type="button" class="btn btn-success col mr-1" data-dismiss="modal"
-            data-bind="click: () => $data.acceptGift()">Accept</button>
-          <button type="button" class="btn btn-primary col ml-1" data-dismiss="modal">Maybe Later</button>
+            data-bind="click: () => $data.acceptGift(), t: 'npc.accept'">Accept</button>
+          <button type="button" class="btn btn-primary col ml-1" data-dismiss="modal" data-bind="t: 'npc.maybeLater'">Maybe Later</button>
         </div>
         <!-- /ko -->
       </div>

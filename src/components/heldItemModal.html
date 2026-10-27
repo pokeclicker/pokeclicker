@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
-                <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
+                <h5 class="modal-title text-light" data-bind="t: 'items.selectPokemon'">Select a Pokémon</h5>&nbsp;
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -30,7 +30,7 @@
                           <label for="held-item-sort-direction" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
                               text: heldItemSortDirection.observableValue() ? '⥄' : '⥂',
                               tooltip: {
-                                  title: heldItemSortDirection.observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)',
+                                  title: heldItemSortDirection.observableValue() ? App.translation.ui('items.sortDescending', 'Descending (highest value first)') : App.translation.ui('items.sortAscending', 'Ascending (lowest value first)'),
                                   trigger: 'hover',
                                   placement: 'bottom',
                               }">⥂</label>
@@ -52,14 +52,14 @@
                         <!-- /ko -->
                     </div>
                     <input id="held-item-search" autocomplete="off" class="form-control" placeholder="Search"
-                        data-bind="textInput: Settings.getSetting('heldItemSearchFilter').observableValue" />
+                        data-bind="textInput: Settings.getSetting('heldItemSearchFilter').observableValue, tAttr: { placeholder: 'common.search' }" />
                   </div>
                   <div class="small px-1 pb-2 my-1" style="overflow-x: hidden;">
                     <!-- Region and Type selects -->
                     <div class="form-row px-1">
                         <div class="form-group col-4 m-0 px-1 py-0">
                             <!-- ko let: { heldItemRegionFilter: Settings.getSetting('heldItemRegionFilter') } -->
-                            <label class="mb-1" for="held-item-region-filter">Region</label>
+                            <label class="mb-1" for="held-item-region-filter" data-bind="t: 'common.region'">Region</label>
                             <select id="held-item-region-filter" autocomplete="off" class="custom-select custom-select-sm"
                                 data-bind="options: heldItemRegionFilter.getValidOptions(),
                                     optionsValue: 'value',
@@ -70,7 +70,7 @@
                         </div>
                         <div class="form-group col-4 m-0 px-1 py-0">
                             <!-- ko let: { heldItemTypeFilter: Settings.getSetting('heldItemTypeFilter') } -->
-                            <label class="mb-1" for="held-item-type-filter">Type</label>
+                            <label class="mb-1" for="held-item-type-filter" data-bind="t: 'common.type'">Type</label>
                             <select id="held-item-type-filter" name="heldItemTypeFilter" autocomplete="off" class="custom-select custom-select-sm"
                                 data-bind="options: heldItemTypeFilter.options,
                                     optionsValue: 'value',
@@ -81,7 +81,7 @@
                         </div>
                         <div class="form-group col-4 m-0 px-1 py-0">
                             <!-- ko let: { heldItemType2Filter: Settings.getSetting('heldItemType2Filter') } -->
-                            <label class="mb-1" for="held-item-type2-filter">Type 2</label>
+                            <label class="mb-1" for="held-item-type2-filter" data-bind="t: 'heldItem.type2'">Type 2</label>
                             <select id="held-item-type2-filter" name="heldItemType2Filter" autocomplete="off" class="custom-select custom-select-sm"
                                 data-bind="options: heldItemType2Filter.options,
                                     optionsValue: 'value',
@@ -110,8 +110,8 @@
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                   <thead>
                       <tr class="text-light">
-                          <th class="text-left bg-dark align-middle">Pokémon:</th>
-                          <th class="text-left bg-dark align-middle">Held item:</th>
+                          <th class="text-left bg-dark align-middle" data-bind="t: 'heldItem.pokemonColumn'">Pokémon:</th>
+                          <th class="text-left bg-dark align-middle" data-bind="t: 'heldItem.heldItemColumn'">Held item:</th>
                       </tr>
                   </thead>
                   <tbody data-bind="foreach: lazyLoad('lazyHeldItemList', $element, PartyController.getHeldItemSortedList, { reset: () => (DisplayObservables.modalState.heldItemModal === 'hidden') }), childrenComplete: () => { lazyLoadCallback('lazyHeldItemList'); }">

@@ -59,10 +59,10 @@ export class UndergroundController {
                     .filter(value => value.treasures.length > 0);
             case 'sellable':
                 return [{
-                    title: 'Can be sold',
+                    title: App.translation.ui('underground.treasures.canBeSold', 'Can be sold'),
                     treasures: list.filter(item => item.hasSellValue()),
                 }, {
-                    title: 'Cannot be sold',
+                    title: App.translation.ui('underground.treasures.cannotBeSold', 'Cannot be sold'),
                     treasures: list.filter(item => !item.hasSellValue()),
                 }];
             case 'region':
@@ -78,7 +78,7 @@ export class UndergroundController {
             case 'none':
             default:
                 return [{
-                    title: 'All',
+                    title: App.translation.ui('underground.treasures.all', 'All'),
                     treasures: list,
                 }];
         }

@@ -2,15 +2,15 @@
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
-                <h5 class="modal-title">Hire a Dungeon Guide (BETA)</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" data-bind="t: 'dungeonGuides.title'">Hire a Dungeon Guide (BETA)</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="tAttr: { 'aria-label': 'common.close' }">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body text-left p-0">
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a class="nav-link active" href="#dungeonGuidesModalHireTab" data-toggle="tab">Hire</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#dungeonGuidesModalHelpTab" data-toggle="tab">Help</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#dungeonGuidesModalHireTab" data-toggle="tab" data-bind="t: 'dungeonGuides.hireTab'">Hire</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#dungeonGuidesModalHelpTab" data-toggle="tab" data-bind="t: 'common.help'">Help</a></li>
                 </ul>
                 <div class="tab-content p-0">
                     <!-- Hiring Tab -->
@@ -29,35 +29,35 @@
                                                 <td colspan="2" class="align-middle h-100" data-bind="html: $data.description">Description</td>
                                             </tr>
                                             <tr>
-                                                <td class="w-50 table-secondary" style="height: 1px;">Movement Speed</td>
-                                                <td class="table-secondary">Cost / Run</td>
+                                                <td class="w-50 table-secondary" style="height: 1px;" data-bind="t: 'dungeonGuides.movementSpeed'">Movement Speed</td>
+                                                <td class="table-secondary" data-bind="t: 'dungeonGuides.costPerRun'">Cost / Run</td>
                                             </tr>
                                             <tr>
-                                                <td class="align-middle" data-bind="text: `${($data.interval / 1000).toLocaleString('en-US')} seconds`"></td>
+                                                <td class="align-middle" data-bind="text: App.translation.ui('dungeonGuides.seconds', '{{seconds}} seconds', { seconds: ($data.interval / 1000).toLocaleString('en-US') })"></td>
                                                 <td rowspan="3" class="align-middle" data-bind="foreach: $data.calcCost(1, player.town.dungeon.tokenCost, player.region)">
                                                     <knockout class="w-100 currency-template" data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}">cost</knockout><br/>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="table-secondary" style="height: 1px;">Statistics</td>
+                                                <td class="table-secondary" style="height: 1px;" data-bind="t: 'dungeonGuides.statistics'">Statistics</td>
                                             </tr>
                                             <tr>
                                                 <td class="align-middle">
-                                                    <knockout data-bind="text: `Total Attempts: ${App.game.statistics.dungeonGuideAttempts[$data.index]().toLocaleString()}`">Attempts</knockout><br/>
-                                                    <knockout data-bind="text: `Total Clears: ${App.game.statistics.dungeonGuideClears[$data.index]().toLocaleString()}`">Clears</knockout>
+                                                    <knockout data-bind="text: App.translation.ui('dungeonGuides.totalAttempts', 'Total Attempts: {{count}}', { count: App.game.statistics.dungeonGuideAttempts[$data.index]().toLocaleString() })">Attempts</knockout><br/>
+                                                    <knockout data-bind="text: App.translation.ui('dungeonGuides.totalClears', 'Total Clears: {{count}}', { count: App.game.statistics.dungeonGuideClears[$data.index]().toLocaleString() })">Clears</knockout>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="card-footer p-2">
-                                    <butto class="btn btn-block btn-sm btn-primary" href="#dungeonGuidesSubModal" data-toggle="modal" data-bind="click: () => DungeonGuides.selected($data.index)">Hire!</butto>
+                                    <butto class="btn btn-block btn-sm btn-primary" href="#dungeonGuidesSubModal" data-toggle="modal" data-bind="click: () => DungeonGuides.selected($data.index), t: 'dungeonGuides.hire'">Hire!</butto>
                                 </div>
                             </div>
                         </div>
                         <!-- ko if: DungeonGuides.list.some(g => !g.isUnlocked()) -->
                         <div class="px-2 mt-1 mb-2">
-                            <button class="btn btn-secondary btn-block" data-toggle="collapse" href="#lockedDungeonGuides">Show/Hide Locked Dungeon Guides</button>
+                            <button class="btn btn-secondary btn-block" data-toggle="collapse" href="#lockedDungeonGuides" data-bind="t: 'dungeonGuides.toggleLocked'">Show/Hide Locked Dungeon Guides</button>
                         </div>
                         <div class="collapse" id="lockedDungeonGuides">
                             <div class="row m-0 justify-content-center d-flex px-1" data-bind="foreach: DungeonGuides.list.filter(g => !g.isUnlocked())" style="max-width: 100%;">
@@ -73,17 +73,17 @@
                                                     <td colspan="2" class="align-middle h-100" data-bind="html: $data.description">Description</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="w-50 table-secondary" style="height: 1px;">Movement Speed</td>
-                                                    <td class="table-secondary">Currencies</td>
+                                                    <td class="w-50 table-secondary" style="height: 1px;" data-bind="t: 'dungeonGuides.movementSpeed'">Movement Speed</td>
+                                                    <td class="table-secondary" data-bind="t: 'dungeonGuides.currencies'">Currencies</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="align-middle" data-bind="text: `${($data.interval / 1000).toLocaleString('en-US')} seconds`"></td>
+                                                    <td class="align-middle" data-bind="text: App.translation.ui('dungeonGuides.seconds', '{{seconds}} seconds', { seconds: ($data.interval / 1000).toLocaleString('en-US') })"></td>
                                                     <td class="align-middle" data-bind="foreach: $data.calcCost(1, player.town.dungeon.tokenCost, player.region)">
                                                         <img width="24" src="" data-bind="attr: { src: `assets/images/currency/${GameConstants.Currency[$data.currency]}.svg` }"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2" class="table-secondary" style="height: 1px;">Unlock Requirement</td>
+                                                    <td colspan="2" class="table-secondary" style="height: 1px;" data-bind="t: 'dungeonGuides.unlockRequirement'">Unlock Requirement</td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2" class="align-middle" data-bind="text: $data.unlockRequirement?.hint()"></td>
@@ -100,12 +100,12 @@
 
                     <!-- Help Tab -->
                     <div id="dungeonGuidesModalHelpTab" class="tab-pane fade col-10 offset-1 text-center">
-                        <h4><u>Help</u></h4>
-                        <p>Dungeon guides will automatically guide you through the dungeon, opening any chest they come accross, go down ladders they find and start boss battles.</p>
-                        <p>You must pay an upfront cost for however many attempts you want to run of the dungeon <span class="text-danger">(non refundable)</span>, they will however give you a discount the more runs you purchase in one go.</p>
-                        <p>They do not guarantee a successful dungeon clear, and will charge regardless of the outcome.</p>
-                        <p>Each guide operates at their own speed, with some possessing a sense for specific dungeon tiles and others actively avoiding particular tiles whenever possible.</p>
-                        <p class="text-warning"><i>NOTE: This is a <strong>beta</strong> feature, so things are likely to change in future updates;<br/>feel free to post any feedback/bugs in the <a href="https://discord.gg/a6DFe4p" target="_blank">Discord</a>.</i></p>
+                        <h4><u data-bind="t: 'common.help'">Help</u></h4>
+                        <p data-bind="t: 'dungeonGuides.help.intro'">Dungeon guides will automatically guide you through the dungeon, opening any chest they come accross, go down ladders they find and start boss battles.</p>
+                        <p data-bind="tHtml: 'dungeonGuides.help.cost'">You must pay an upfront cost for however many attempts you want to run of the dungeon <span class="text-danger">(non refundable)</span>, they will however give you a discount the more runs you purchase in one go.</p>
+                        <p data-bind="t: 'dungeonGuides.help.noGuarantee'">They do not guarantee a successful dungeon clear, and will charge regardless of the outcome.</p>
+                        <p data-bind="t: 'dungeonGuides.help.speed'">Each guide operates at their own speed, with some possessing a sense for specific dungeon tiles and others actively avoiding particular tiles whenever possible.</p>
+                        <p class="text-warning"><i data-bind="tHtml: 'dungeonGuides.help.betaNote'">NOTE: This is a <strong>beta</strong> feature, so things are likely to change in future updates;<br/>feel free to post any feedback/bugs in the <a href="https://discord.gg/a6DFe4p" target="_blank">Discord</a>.</i></p>
                     </div>
                 </div>
             </div>
@@ -117,8 +117,8 @@
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
-                <h5 class="modal-title">Explore Dungeon</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" data-bind="t: 'dungeonGuides.exploreDungeon'">Explore Dungeon</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="tAttr: { 'aria-label': 'common.close' }">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -127,7 +127,7 @@
                 <table class="table m-0 text-center">
                     <tbody>
                         <tr>
-                            <td class="table-secondary border-top-0 p-2">Dungeon Attempts</td>
+                            <td class="table-secondary border-top-0 p-2" data-bind="t: 'dungeonGuides.dungeonAttempts'">Dungeon Attempts</td>
                         </tr>
                         <tr>
                             <td class="p-2">
@@ -135,7 +135,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="table-secondary p-2">Guide Cost</td>
+                            <td class="table-secondary p-2" data-bind="t: 'dungeonGuides.guideCost'">Guide Cost</td>
                         </tr>
                         <tr>
                             <td class="p-2" data-bind="foreach: DungeonGuides.calcCost()">
@@ -143,13 +143,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="table-secondary p-2">Dungeon Entry Cost</td>
+                            <td class="table-secondary p-2" data-bind="t: 'dungeonGuides.entryCost'">Dungeon Entry Cost</td>
                         </tr>
                         <tr class="p-2" data-bind="with: DungeonGuides.calcDungeonCost()">
                             <td data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></td>
                         </tr>
                         <tr>
-                            <td class="table-secondary p-2">Total Cost</td>
+                            <td class="table-secondary p-2" data-bind="t: 'dungeonGuides.totalCost'">Total Cost</td>
                         </tr>
                         <tr>
                             <td class="p-2" data-bind="foreach: DungeonGuides.calcCost(true)">
@@ -157,13 +157,13 @@
                             </td>
                         </tr>
                         <tr class="bg-danger">
-                            <td>ALL CHARGES NON REFUNDABLE</td>
+                            <td data-bind="t: 'dungeonGuides.nonRefundable'">ALL CHARGES NON REFUNDABLE</td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
                             <td>
-                                <button class="btn btn-block btn-primary" data-dismiss="modal" data-bind="click: () => DungeonGuides.hire()">Start!</button>
+                                <button class="btn btn-block btn-primary" data-dismiss="modal" data-bind="click: () => DungeonGuides.hire(), t: 'dungeonGuides.start'">Start!</button>
                             </td>
                         </tr>
                     </tfoot>
@@ -178,8 +178,8 @@
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
-                <h5 class="modal-title">Dungeon Guide</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" data-bind="t: 'dungeonGuides.dungeonGuide'">Dungeon Guide</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="tAttr: { 'aria-label': 'common.close' }">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -194,13 +194,13 @@
                             <table class="table table-striped table-hover table-bordered table-sm m-0" style="overflow: visible;">
                                 <tbody class="text-center">
                                     <tr>
-                                        <th>Description</th>
+                                        <th data-bind="t: 'common.description'">Description</th>
                                     </tr>
                                     <tr>
                                         <td data-bind="html: $data.description">Description</td>
                                     </tr>
                                     <tr>
-                                        <th>Cost / Run</th>
+                                        <th data-bind="t: 'dungeonGuides.costPerRun'">Cost / Run</th>
                                     </tr>
                                     <tr>
                                         <td data-bind="foreach: $data.calcCost(1, player.town.dungeon.tokenCost, player.region)">
@@ -208,22 +208,22 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Movement Speed</th>
+                                        <th data-bind="t: 'dungeonGuides.movementSpeed'">Movement Speed</th>
                                     </tr>
                                     <tr>
-                                        <td data-bind="text: `${($data.interval / 1000).toLocaleString('en-US')} seconds`">Speed</td>
+                                        <td data-bind="text: App.translation.ui('dungeonGuides.seconds', '{{seconds}} seconds', { seconds: ($data.interval / 1000).toLocaleString('en-US') })">Speed</td>
                                     </tr>
                                     <tr>
-                                        <th>Statistics</th>
+                                        <th data-bind="t: 'dungeonGuides.statistics'">Statistics</th>
                                     </tr>
                                     <tr>
-                                        <td data-bind="text: `Total Attempts: ${App.game.statistics.dungeonGuideAttempts[$data.index]().toLocaleString()}`">Attempts</td>
+                                        <td data-bind="text: App.translation.ui('dungeonGuides.totalAttempts', 'Total Attempts: {{count}}', { count: App.game.statistics.dungeonGuideAttempts[$data.index]().toLocaleString() })">Attempts</td>
                                     </tr>
                                     <tr>
-                                        <td data-bind="text: `Total Clears: ${App.game.statistics.dungeonGuideClears[$data.index]().toLocaleString()}`">Clears</td>
+                                        <td data-bind="text: App.translation.ui('dungeonGuides.totalClears', 'Total Clears: {{count}}', { count: App.game.statistics.dungeonGuideClears[$data.index]().toLocaleString() })">Clears</td>
                                     </tr>
                                     <tr>
-                                        <th>Attempts Remaining</th>
+                                        <th data-bind="t: 'dungeonGuides.attemptsRemaining'">Attempts Remaining</th>
                                     </tr>
                                     <tr>
                                         <td data-bind="text: DungeonGuides.clears()">Attempts</td>
@@ -232,7 +232,7 @@
                                 <tfoot>
                                     <tr>
                                         <td>
-                                            <button class="btn btn-block btn-danger" data-bind="click: () => $data.fire()" data-dismiss="modal" aria-label="fire">Fire!</button>
+                                            <button class="btn btn-block btn-danger" data-bind="click: () => $data.fire(), t: 'dungeonGuides.fire'" data-dismiss="modal" aria-label="fire">Fire!</button>
                                         </td>
                                     </tr>
                                 </tfoot>

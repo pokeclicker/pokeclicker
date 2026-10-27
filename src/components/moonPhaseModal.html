@@ -2,18 +2,18 @@
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Moon Phases</h5>
+                <h5 class="modal-title" data-bind="t: 'moonPhase.title'">Moon Phases</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p class="small">Moon Phases rotate daily and influence the catch rate of Moon Balls. Additionally, some Pokémon move around according to the current phase.</p>
+                <p class="small" data-bind="t: 'moonPhase.description'">Moon Phases rotate daily and influence the catch rate of Moon Balls. Additionally, some Pokémon move around according to the current phase.</p>
                 <table class="table table-bordered mb-0">
                     <thead>
                         <tr>
-                            <th class="align-middle text-left" colspan="2">Phase</th>
-                            <th class="align-middle">Moon Ball Bonus</th>
+                            <th class="align-middle text-left" colspan="2" data-bind="t: 'moonPhase.phase'">Phase</th>
+                            <th class="align-middle" data-bind="t: 'moonPhase.moonBallBonus'">Moon Ball Bonus</th>
                         </tr>
                     </thead>
                     <tbody data-bind="foreach: Object.values(MoonCycle.currentMoonPhases)">

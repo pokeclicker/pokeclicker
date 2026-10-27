@@ -8,7 +8,7 @@
             </div>
             <div>
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#shardTraderTrade">Trades</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#shardTraderTrade" data-bind="t: 'trader.trades'">Trades</a></li>
                 </ul>
             </div>
             <div class="modal-body tab-content">
@@ -17,12 +17,12 @@
                         <table class="table table-sm m-0 text-left">
                             <thead>
                                 <tr class="text-center">
-                                    <th class="text-center">Inv</th>
+                                    <th class="text-center" data-bind="t: 'trader.inv'">Inv</th>
                                     <th colspan="2" data-bind="text: ShopHandler.shopObservable().currencyName"></th>
-                                    <th colspan="2">Currency</th>
+                                    <th colspan="2" data-bind="t: 'trader.currency'">Currency</th>
                                     <th></th>
-                                    <th colspan="2">Item</th>
-                                    <th data-bind="attr: { hidden: ShopHandler.shopObservable().hidePlayerInventory }">Inv</th>
+                                    <th colspan="2" data-bind="t: 'trader.item'">Item</th>
+                                    <th data-bind="attr: { hidden: ShopHandler.shopObservable().hidePlayerInventory }, t: 'trader.inv'">Inv</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -52,7 +52,7 @@
                                         <td class="align-middle" data-bind="attr: { rowspan: $parent.shards.length }">
                                             <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
                                                 <button class='btn btn-success btn-block' data-bind='click: function(){ShardDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !ShardDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
-                                                    <knockout data-bind="text: !ItemList[$parent.item.itemType.name].isSoldOut() ? 'Trade' : 'Sold out'"></knockout>
+                                                    <knockout data-bind="text: !ItemList[$parent.item.itemType.name].isSoldOut() ? App.translation.ui('trader.trade', 'Trade') : App.translation.ui('trader.soldOut', 'Sold out')"></knockout>
                                                 </button>
                                                 <button type="button" data-bind="visible: ItemList[$parent.item.itemType.name].maxAmount > 1, text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 </button>
@@ -71,9 +71,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <span>Total Quest Points: <span data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US')">-</span></span>
+                <span data-bind="t: 'trader.totalQuestPoints', tVars: { amount: App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US') }">Total Quest Points: {{amount}}</span>
                    <img src='assets/images/currency/questPoint.svg' width="20px">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
             </div>
         </div>
     </div>

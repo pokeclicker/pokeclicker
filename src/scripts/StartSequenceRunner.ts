@@ -76,8 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#pickStarterTutorialModal').on('hidden.bs.modal', () => {
         if (StartSequenceRunner.starterPicked == GameConstants.Starter.None) {
             StartSequenceRunner.noStarterCount++;
-            const startersCount = StartSequenceRunner.noStarterCount >= 5 ? 'four' : 'three';
-            $('#pickStarterTutorialModalText').text(`I can't hold off all ${startersCount}! Please pick the Pokémon you want to fight!`);
+            const message = StartSequenceRunner.noStarterCount >= 5
+                ? App.translation.ui('starter.cantHoldOffFour', 'I can\'t hold off all four! Please pick the Pokémon you want to fight!')
+                : App.translation.ui('starter.cantHoldOffThree', 'I can\'t hold off all three! Please pick the Pokémon you want to fight!');
+            $('#pickStarterTutorialModalText').text(message);
             $('#pickStarterTutorialModal').modal('show');
             if (StartSequenceRunner.noStarterCount == 5) {
                 // Add Pikachu to the selections
@@ -90,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (StartSequenceRunner.noStarterCount == 20) {
                 $('#pickStarterTutorialModal .modal-body').append(`<div class="custom-control custom-switch">
                         <input type="checkbox" class="custom-control-input" id="toggleCaptureStarter" onchange="App.game.pokeballFilters.toggleAllFiltersEnabled(this.checked)" checked>
-                        <label class="custom-control-label" for="toggleCaptureStarter">Capture Starter</label>
+                        <label class="custom-control-label" for="toggleCaptureStarter">${App.translation.ui('starter.captureStarter', 'Capture Starter')}</label>
                     </div>`);
             }
         }

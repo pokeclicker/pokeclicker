@@ -3,7 +3,7 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document" data-bind="if: BulletinBoard.selectedBulletinBoard()">
     <div class="modal-content">
        <div class="modal-header justify-content-start align-items-center">
-            <h5 class="modal-title" id="bulletinBoardModalLabel">Bulletin Board</h5>
+            <h5 class="modal-title" id="bulletinBoardModalLabel" data-bind="t: 'bulletinBoard.title'">Bulletin Board</h5>
         </div>
         <div class="modal-body p-0">
             <table class="table m-0">
@@ -20,15 +20,15 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
                                     <p class="card-text flex-grow-1" data-bind="text: $data.description">Description</p>
                                     <!-- ko if: $data.state() == QuestLineState.suspended -->
                                     <div class="text-center text-muted small">
-                                        <p class="m-0">Previously Started</p>
-                                        <p class="m-0" data-bind="text: `Step: ${$data.curQuest() + 1} / ${$data.totalQuests}`"></p>
+                                        <p class="m-0" data-bind="t: 'bulletinBoard.previouslyStarted'">Previously Started</p>
+                                        <p class="m-0" data-bind="text: App.translation.ui('bulletinBoard.step', 'Step: {{current}} / {{total}}', { current: $data.curQuest() + 1, total: $data.totalQuests })"></p>
                                     </div>
                                     <!-- /ko -->
                                 </div>
                                 <div class="card-footer p-0">
-                                    <button class="btn btn-primary btn-block" data-bind="visible: !$data.state(), click: () => { $data.beginQuest(); }">Accept</button>
-                                    <button class="btn btn-primary btn-block" data-bind="visible: $data.state() == QuestLineState.started" disabled>Started</button>
-                                    <button class="btn btn-primary btn-block" data-bind="visible: $data.state() == QuestLineState.suspended, click: () => { $data.resumeSuspendedQuest() }">Resume</button>
+                                    <button class="btn btn-primary btn-block" data-bind="visible: !$data.state(), click: () => { $data.beginQuest(); }, t: 'bulletinBoard.accept'">Accept</button>
+                                    <button class="btn btn-primary btn-block" data-bind="visible: $data.state() == QuestLineState.started, t: 'bulletinBoard.started'" disabled>Started</button>
+                                    <button class="btn btn-primary btn-block" data-bind="visible: $data.state() == QuestLineState.suspended, click: () => { $data.resumeSuspendedQuest() }, t: 'bulletinBoard.resume'">Resume</button>
                                 </div>
                             </div>
                         </td>
@@ -43,14 +43,14 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
                     <!-- /ko -->
                     <!-- ko if: BulletinBoard.selectedBulletinBoard().getQuests().length == 0 -->
                     <tr>
-                        <td>No new quests available.</td>
+                        <td data-bind="t: 'bulletinBoard.noQuests'">No new quests available.</td>
                     </tr>
                     <!-- /ko -->
                 </tbody>
             </table>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
         </div>
     </div>
 </div>

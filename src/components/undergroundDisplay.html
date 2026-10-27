@@ -1,8 +1,8 @@
 <div id="undergroundDisplay" class="card sortable border-secondary mb-3 pokeclicker-optional-module" data-bind="visible: App.game.underground.canAccess() && Settings.getSetting('showUndergroundModule').observableValue(), if: Settings.getSetting('showUndergroundModule').observableValue()">
     <div class="card-header p-0" data-toggle="collapse" href="#undergroundCard">
-        <span>Underground</span>
+        <span data-bind="t: 'underground.display.title'">Underground</span>
     </div>
-    <button class="btn btn-sm btn-primary" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="UndergroundController.openUndergroundModal()">
+    <button class="btn btn-sm btn-primary" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="UndergroundController.openUndergroundModal()" data-bind="t: 'underground.display.view'">
         View
     </button>
 
@@ -11,7 +11,7 @@
             <div class="row p-1 d-flex justify-content-center flex-wrap" style="column-gap: 1rem; row-gap: 0.25rem">
                 <!-- ko if: App.game.underground.mine && App.game.underground.mine.timeUntilDiscovery > 0 -->
                 <div class="flex-grow-1">
-                    <div>Searching for mine</div>
+                    <div data-bind="t: 'underground.dig.searchingForMine'">Searching for mine</div>
                     <div class="progress" style='height: 5px; min-height: 5px'>
                         <div class="progress-bar bg-info" role="progressbar"
                              data-bind="attr:{ style: 'width:' + (1 - App.game.underground.mine.timeUntilDiscovery / App.game.underground.mine.initialTimeToDiscover).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }) }"
@@ -23,9 +23,9 @@
                 <!-- /ko -->
 
                 <!-- ko ifnot: App.game.underground.mine && App.game.underground.mine.timeUntilDiscovery > 0 -->
-                <div class="small" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsFound > 0 && App.game.underground.mine?.itemsFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsFound === App.game.underground.mine?.itemsBuried }">Collected • <knockout data-bind="text: App.game.underground.mine?.itemsFound"></knockout></div>
-                <div class="small" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsPartiallyFound > 0 && App.game.underground.mine?.itemsPartiallyFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsPartiallyFound === App.game.underground.mine?.itemsBuried }">Seen • <knockout data-bind="text: App.game.underground.mine?.itemsPartiallyFound"></knockout></div>
-                <div class="small">Buried • <knockout data-bind="text: App.game.underground.mine?.itemsBuried"></knockout></div>
+                <div class="small" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsFound > 0 && App.game.underground.mine?.itemsFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsFound === App.game.underground.mine?.itemsBuried }, t: 'underground.dig.collected', tVars: { number: App.game.underground.mine?.itemsFound ?? '' }">Collected • {{number}}</div>
+                <div class="small" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsPartiallyFound > 0 && App.game.underground.mine?.itemsPartiallyFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsPartiallyFound === App.game.underground.mine?.itemsBuried }, t: 'underground.dig.seen', tVars: { number: App.game.underground.mine?.itemsPartiallyFound ?? '' }">Seen • {{number}}</div>
+                <div class="small" data-bind="t: 'underground.dig.buried', tVars: { number: App.game.underground.mine?.itemsBuried ?? '' }">Buried • {{number}}</div>
                 <!-- /ko -->
             </div>
         </div>
@@ -65,9 +65,9 @@
     </div>
 
     <div class="card-header position-relative p-0" data-toggle="collapse" href="#undergroundDisplayHelpers">
-        <span>Expert</span>
+        <span data-bind="t: 'underground.display.expert'">Expert</span>
         <!-- ko if: App.game.underground.helpers.hired().length > 0 -->
-        <button class="btn btn-sm btn-danger" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="App.game.underground.helpers.hired().forEach(helper => helper.fire())">
+        <button class="btn btn-sm btn-danger" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" onclick="App.game.underground.helpers.hired().forEach(helper => helper.fire())" data-bind="t: 'underground.display.fire'">
             Fire
         </button>
         <!-- /ko -->
@@ -92,7 +92,7 @@
 
                         <div class="mx-2">
                             <div style="line-height: 1.2rem;" data-bind="text: $data.name"></div>
-                            <div style="font-size: 0.6rem; line-height: 0.5rem;" data-bind="text: `Level ${$data.level}`"></div>
+                            <div style="font-size: 0.6rem; line-height: 0.5rem;" data-bind="text: App.translation.ui('underground.experts.levelValue', 'Level {{level}}', { level: $data.level })"></div>
                         </div>
                     </div>
 
@@ -112,13 +112,13 @@
             </div>
             <!-- /ko -->
             <!-- ko ifnot: App.game.underground.helpers.hired().length > 0 -->
-            <div class="">No experts hired. You're on your own!</div>
+            <div class="" data-bind="t: 'underground.display.noExperts'">No experts hired. You're on your own!</div>
             <!-- /ko -->
         </div>
     </div>
 
     <div class="card-header position-relative p-0" data-toggle="collapse" href="#undergroundDisplayBattery">
-        <span>Battery</span>
+        <span data-bind="t: 'underground.display.battery'">Battery</span>
     </div>
 
     <div id="undergroundDisplayBattery" class="table-responsive p-1 show">

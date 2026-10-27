@@ -135,7 +135,7 @@ class DreamOrbTownContent extends TownContent {
         return 'btn btn-info';
     }
     public text(): string {
-        return 'Open Dream Orbs';
+        return App.translation.ui('town.openDreamOrbs', 'Open Dream Orbs');
     }
     public onclick(): void {
         $('#dreamOrbsModal').modal('show');

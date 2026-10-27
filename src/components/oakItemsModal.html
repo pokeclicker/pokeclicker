@@ -3,20 +3,20 @@
     <div class="modal-content">
       <div class="modal-header p-0">
         <ul class="nav nav-tabs">
-            <li class="nav-item"><a data-toggle='tab' class='p-2 nav-link active' href="#oakItemSelector">Selector</a></li>
-            <li class='nav-item'><a data-toggle='tab' class='p-2 nav-link' href="#oakItemLoadouts">Loadouts</a></li>
+            <li class="nav-item"><a data-toggle='tab' class='p-2 nav-link active' href="#oakItemSelector" data-bind="t: 'oakItems.selector'">Selector</a></li>
+            <li class='nav-item'><a data-toggle='tab' class='p-2 nav-link' href="#oakItemLoadouts" data-bind="t: 'oakItems.loadouts'">Loadouts</a></li>
         </ul>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div data-bind="visible: App.game.challenges.list.disableOakItems.active()" class="modal-body bg-danger my-0 py-0">
+      <div data-bind="visible: App.game.challenges.list.disableOakItems.active(), t: 'oakItems.disabled'" class="modal-body bg-danger my-0 py-0">
         Oak Items are disabled.
       </div>
       <div class="modal-body tab-content">
           <div id="oakItemSelector" class="tab-pane fade in active show">
             <div class="modal-header">
-              <h5 style="position: left" data-bind="text: 'Oak Items Equipped: ' + App.game.oakItems.activeCount() + '/' + App.game.oakItems.maxActiveCount()">Oak Items</h5>
+              <h5 style="position: left" data-bind="text: App.translation.ui('oakItems.equipped', 'Oak Items Equipped: {{active}}/{{max}}', { active: App.game.oakItems.activeCount(), max: App.game.oakItems.maxActiveCount() })">Oak Items</h5>
             </div>
             <ul class="row justify-content-center p-0 my-0"
               data-bind="foreach: App.game.oakItems.itemList"
@@ -54,8 +54,8 @@
             </div>
             <div class="form-row p-0" id="loadoutNameEdit">
                 <div class="form-group col-12">
-                    <label>Name</label>
-                    <input autocomplete="off" class="form-control" placeholder="name" data-bind="textInput: App.game.oakItemLoadouts.getSelectedLoadout().name"/>
+                    <label data-bind="t: 'common.name'">Name</label>
+                    <input autocomplete="off" class="form-control" placeholder="name" data-bind="textInput: App.game.oakItemLoadouts.getSelectedLoadout().name, tAttr: { placeholder: 'oakItems.namePlaceholder' }"/>
                 </div>
             </div>
             <ul class="row justify-content-center p-0 my-0"
@@ -110,30 +110,30 @@
                         <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].progressString" style="font-size: 15px;"></span>
                         <!-- /ko -->
                         <!-- ko if: App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() && !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
-                        <span class="clickable" data-bind="html: 'Upgrade (' + App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/' + GameConstants.Currency[App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().currency] + '.svg height=18px/>)',
+                        <span class="clickable" data-bind="html: App.translation.ui('oakItems.upgrade', 'Upgrade') + ' (' + App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/' + GameConstants.Currency[App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().currency] + '.svg height=18px/>)',
                           click: function(){ App.game.oakItems.itemList[OakItemController.inspectedItem].buy(); }" style="font-size: 15px;">
                           Upgrade
                         </span>
                         <!-- /ko -->
                         <!-- ko if: App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
-                        <span style="font-size: 15px;">MAX LEVEL!</span>
+                        <span style="font-size: 15px;" data-bind="t: 'oakItems.maxLevel'">MAX LEVEL!</span>
                         <!-- /ko -->
                     </div>
                 </div>
               </td>
             </tr>
             <tr>
-              <td class="table-dark" style="width: 50%">
-                Level: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].level"></span>
+              <td class="table-dark" style="width: 50%" data-bind="t: 'oakItems.level', tVars: { level: App.game.oakItems.itemList[OakItemController.inspectedItem].level }">
+                Level: {{level}}
               </td>
-              <td class="table-dark" style="width: 50%">
-                Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].bonusText"></span>
+              <td class="table-dark" style="width: 50%" data-bind="t: 'oakItems.bonus', tVars: { bonus: App.game.oakItems.itemList[OakItemController.inspectedItem].bonusText }">
+                Bonus: {{bonus}}
               </td>
             </tr>
             <!-- /ko -->
             <!-- ko ifnot: App.game.oakItems.isUnlocked(OakItemController.inspectedItem) -->
             <tr>
-              <td colspan="2">Locked!<br/><span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].hint()"></span></td>
+              <td colspan="2"><knockout data-bind="t: 'oakItems.locked'">Locked!</knockout><br/><span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].hint()"></span></td>
             </tr>
             <tr>
 

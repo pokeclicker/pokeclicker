@@ -1,8 +1,8 @@
 <div id="oakItemsContainer" class="card sortable border-secondary mb-3" data-bind="visible: App.game.oakItems.canAccess() && !(Settings.getSetting('hideChallengeRelatedModules').observableValue() && App.game.challenges.list.disableOakItems.active())">
     <div class="card-header p-0" data-toggle="collapse" href="#oakItemsBody">
-        <span style="text-align:center">Oak Items</span>
+        <span style="text-align:center" data-bind="t: 'oakItems.title'">Oak Items</span>
     </div>
-    <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" href="#oakItemsModal" data-toggle="modal">
+    <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" href="#oakItemsModal" data-toggle="modal" data-bind="t: 'common.list'">
         List
     </button>
     <div id="oakItemsBody" class="card-body show p-0">
@@ -34,13 +34,13 @@
                       <span data-bind="text: $data.progressString" style="font-size: 15px;"></span>
                       <!-- /ko -->
                       <!-- ko if: $data.hasEnoughExp() && !$data.isMaxLevel() -->
-                      <span class="clickable" data-bind="html: 'Upgrade (' + $data.calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/' + GameConstants.Currency[$data.calculateCost().currency] + '.svg height=18px/>)',
+                      <span class="clickable" data-bind="html: App.translation.ui('oakItems.upgrade', 'Upgrade') + ' (' + $data.calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/' + GameConstants.Currency[$data.calculateCost().currency] + '.svg height=18px/>)',
                         click: function(){ $data.buy(); }" style="font-size: 15px;">
                         Upgrade
                       </span>
                       <!-- /ko -->
                       <!-- ko if: $data.isMaxLevel() -->
-                      <span style="font-size: 15px;">MAX LEVEL!</span>
+                      <span style="font-size: 15px;" data-bind="t: 'oakItems.maxLevel'">MAX LEVEL!</span>
                       <!-- /ko -->
                   </div>
               </div>
@@ -50,7 +50,7 @@
         <!-- ko if: App.game.oakItems.hasAvailableSlot() && !App.game.challenges.list.disableOakItems.active() -->
         <tfoot>
           <tr>
-            <td class="clickable table-warning text-light" colspan="2" href="#oakItemsModal" data-toggle="modal">
+            <td class="clickable table-warning text-light" colspan="2" href="#oakItemsModal" data-toggle="modal" data-bind="t: 'oakItems.equipAnother'">
               Equip another Oak Item!
             </td>
           </tr>
@@ -59,7 +59,7 @@
         <!-- ko if: App.game.challenges.list.disableOakItems.active() -->
         <tfoot>
           <tr>
-            <td class="clickable table-danger text-light" colspan="2" href="#oakItemsModal" data-toggle="modal">
+            <td class="clickable table-danger text-light" colspan="2" href="#oakItemsModal" data-toggle="modal" data-bind="t: 'oakItems.disabled'">
               Oak Items are disabled.
             </td>
           </tr>

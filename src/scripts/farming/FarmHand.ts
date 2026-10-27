@@ -90,11 +90,13 @@ class FarmHand {
         // Calculate how often they work
         this.workTick = this.calcWorkTick(this.speed);
 
-        this.tooltip = ko.pureComputed(() => `<strong>${this.name}</strong><br/>
-            Energy: ${this.energy()}/${this.maxEnergy}<br/>
-            Work Cycle: ${GameConstants.formatTimeFullLetters((this.workTick - this.workTicks()) / GameConstants.SECOND)}<br/>
-            Next Payment: ${GameConstants.formatTimeFullLetters((this.costTick - this.costTicks()) / GameConstants.SECOND)}`
-        );
+        this.tooltip = ko.pureComputed(() => App.translation.ui('farm.hands.tooltip', '<strong>{{name}}</strong><br/>Energy: {{energy}}/{{maxEnergy}}<br/>Work Cycle: {{workCycle}}<br/>Next Payment: {{nextPayment}}', {
+            name: this.name,
+            energy: this.energy(),
+            maxEnergy: this.maxEnergy,
+            workCycle: GameConstants.formatTimeFullLetters((this.workTick - this.workTicks()) / GameConstants.SECOND),
+            nextPayment: GameConstants.formatTimeFullLetters((this.costTick - this.costTicks()) / GameConstants.SECOND),
+        }));
     }
 
     private calcWorkTick(speed: FarmHandSpeeds): number {

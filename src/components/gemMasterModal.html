@@ -3,12 +3,12 @@
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <h4>Gem Master</h4>
+                <h4 data-bind="t: 'gemMaster.title'">Gem Master</h4>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
             </div>
             <div>
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#gemMasterTrade">Trades</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#gemMasterTrade" data-bind="t: 'trader.trades'">Trades</a></li>
                 </ul>
             </div>
             <div class="modal-body tab-content">
@@ -17,12 +17,12 @@
                         <table class="table table-sm table-hover table-striped m-0 text-left">
                             <thead>
                                 <tr>
-                                    <th class="text-center">Inv</th>
+                                    <th class="text-center" data-bind="t: 'trader.inv'">Inv</th>
                                     <th></th>
-                                    <th>Gems</th>
+                                    <th data-bind="t: 'gemMaster.gems'">Gems</th>
                                     <th></th>
                                     <th></th>
-                                    <th>Item</th>
+                                    <th data-bind="t: 'trader.item'">Item</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -64,7 +64,7 @@
                                         <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">
                                             <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
                                                 <button class='btn btn-success btn-block' data-bind='click: function(){GemDeals.use(ShopHandler.shopObservable().shop, $parentContext.$index(), tradeAmount())}, css: { disabled: !GemDeals.canUse(ShopHandler.shopObservable().shop, $parentContext.$index()) }'>
-                                                    <knockout data-bind="text: !ItemList[$parent.item.itemType.name].isSoldOut() ? 'Trade' : 'Sold out'"></knockout>
+                                                    <knockout data-bind="text: !ItemList[$parent.item.itemType.name].isSoldOut() ? App.translation.ui('trader.trade', 'Trade') : App.translation.ui('trader.soldOut', 'Sold out')"></knockout>
                                                 </button>
                                                 <button type="button" data-bind="visible: ItemList[$parent.item.itemType.name].maxAmount > 1, text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"'>
                                                 </button>
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
             </div>
         </div>
     </div>

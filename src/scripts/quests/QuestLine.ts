@@ -168,14 +168,14 @@ class QuestLine {
 
     get pauseTooltip(): string {
         if (this.disablePausing || this.bulletinBoard == GameConstants.BulletinBoards.None) {
-            return 'This quest line cannot be paused. It is either a story, progression related, or otherwise required quest.';
+            return App.translation.ui('questLine.cannotPause', 'This quest line cannot be paused. It is either a story, progression related, or otherwise required quest.');
         }
 
         if (!this.pausableStates.includes(App.game.gameState)) {
-            return 'Quest Lines can only be paused while in a town or fighting on a route.';
+            return App.translation.ui('questLine.pauseOnlyInTown', 'Quest Lines can only be paused while in a town or fighting on a route.');
         }
 
-        return 'Pausing this quest line will remove it from your quest list and prevent any progress.<br /><br />It can be resumed from the current step at the Bulletin Board it was originally accepted.';
+        return App.translation.ui('questLine.pauseWarning', 'Pausing this quest line will remove it from your quest list and prevent any progress.<br /><br />It can be resumed from the current step at the Bulletin Board it was originally accepted.');
     }
 
     dispose() {

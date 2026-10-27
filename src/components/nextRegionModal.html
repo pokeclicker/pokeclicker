@@ -2,31 +2,31 @@
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
         <div class="modal-content">
            <div class="modal-header">
-               <h5 class="modal-title" data-bind="text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">Travel to next region</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <h5 class="modal-title" data-bind="text: App.translation.ui('nextRegion.title', 'Travel to {{region}}', { region: GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1]) })">Travel to next region</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="tAttr: { 'aria-label': 'common.close' }">
                    <span aria-hidden="true">&times;</span>
                </button>
            </div>
            <div class="modal-body">
                <p>
                    <!-- ko if: App.game.challenges.list.requireCompletePokedex.active() -->
-                   <strong>Congratulations on completing the <span data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion()])"></span> Pokédex!</strong><br />
+                   <strong data-bind="t: 'nextRegion.pokedexCompleted', tVars: { region: GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion()]) }">Congratulations on completing the {{region}} Pokédex!</strong><br />
                    <!-- /ko -->
-                   You can now travel on to <span data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])"></span>!<br />
+                   <knockout data-bind="t: 'nextRegion.canTravel', tVars: { region: GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1]) }">You can now travel on to {{region}}!</knockout><br />
                    <br />
-                   <strong>There are a few things you should know before you depart:</strong><br />
-                   You will gain <strong data-bind="text: App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion())"></strong> queue slots in the Hatchery.<br /><br />
+                   <strong data-bind="t: 'nextRegion.thingsToKnow'">There are a few things you should know before you depart:</strong><br />
+                   <knockout data-bind="tHtml: 'nextRegion.queueSlots', tVars: { slots: App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion()) }">You will gain <strong>{{slots}}</strong> queue slots in the Hatchery.</knockout><br /><br />
                    <!-- ko if: App.game.challenges.list.regionalAttackDebuff.active() -->
-                   When Pokémon are in a Region they're not native to, they will only retain <strong data-bind="text: App.game.party.getRegionAttackMultiplier(player.highestRegion() + 1).toLocaleString('en-US',{style: 'percent'})"></strong> of their total attack.<br /><br />
+                   <knockout data-bind="tHtml: 'nextRegion.attackDebuff', tVars: { percent: App.game.party.getRegionAttackMultiplier(player.highestRegion() + 1).toLocaleString('en-US',{style: 'percent'}) }">When Pokémon are in a Region they're not native to, they will only retain <strong>{{percent}}</strong> of their total attack.</knockout><br /><br />
                    <!-- /ko -->
                    <!-- ko if: player.highestRegion() - 2 >= GameConstants.Region.kanto -->
-                   Dungeons in the <strong data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() - 2])"></strong> Region will be significantly less likely to drop Epic, Legendary, and Mythic loot.<br /><br />
+                   <knockout data-bind="tHtml: 'nextRegion.dungeonLoot', tVars: { region: GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() - 2]) }">Dungeons in the <strong>{{region}}</strong> Region will be significantly less likely to drop Epic, Legendary, and Mythic loot.</knockout><br /><br />
                    <!-- /ko -->
-                   You will also have to progress to the Dock in <span data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])"></span> before you are able to travel between regions again.<br />
-                   It is recommended to download your save in case that you get stuck on your journey.
+                   <knockout data-bind="t: 'nextRegion.dockRequired', tVars: { region: GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1]) }">You will also have to progress to the Dock in {{region}} before you are able to travel between regions again.</knockout><br />
+                   <knockout data-bind="t: 'nextRegion.downloadAdvice'">It is recommended to download your save in case that you get stuck on your journey.</knockout>
                </p>
-               <button class="btn btn-block btn-secondary" onclick="Save.download()">Download Save</button>
-               <button class="btn btn-success btn-block" onclick="MapHelper.travelToNextRegion()" data-dismiss="modal">Let's Go!</button>
+               <button class="btn btn-block btn-secondary" onclick="Save.download()" data-bind="t: 'nextRegion.downloadSave'">Download Save</button>
+               <button class="btn btn-success btn-block" onclick="MapHelper.travelToNextRegion()" data-dismiss="modal" data-bind="t: 'nextRegion.letsGo'">Let's Go!</button>
            </div>
        </div>
     </div>

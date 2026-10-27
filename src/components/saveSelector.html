@@ -5,24 +5,24 @@
         </div>
         <div class="col-12 d-flex align-items-center justify-content-center my-3 flex-column flex-md-row">
             <a class="mb-1 mr-md-1" href="https://discord.gg/a6DFe4p" target="_blank">
-                <img alt="Join our Discord!" src="https://img.shields.io/discord/450412847017754644?color=7289DA&label=Discord&logo=discord&logoColor=7289DA&style=for-the-badge">
+                <img alt="Join our Discord!" data-bind="tAttr: { alt: 'saveSelector.discordAlt' }" src="https://img.shields.io/discord/450412847017754644?color=7289DA&label=Discord&logo=discord&logoColor=7289DA&style=for-the-badge">
             </a>
             <a class="mb-1 mr-md-1" href="https://github.com/pokeclicker/pokeclicker" target="_blank">
-                <img alt="Visit our GitHub!" src="https://img.shields.io/github/package-json/v/pokeclicker/pokeclicker/master?label=GitHub&logo=github&style=for-the-badge">
+                <img alt="Visit our GitHub!" data-bind="tAttr: { alt: 'saveSelector.githubAlt' }" src="https://img.shields.io/github/package-json/v/pokeclicker/pokeclicker/master?label=GitHub&logo=github&style=for-the-badge">
             </a>
             <a class="mb-1 mr-md-1" href="https://wiki.pokeclicker.com/" target="_blank">
-                <img alt="Check out the Wiki!" src="https://img.shields.io/badge/wiki-link-blue?logo=wikimedia-commons&style=for-the-badge">
+                <img alt="Check out the Wiki!" data-bind="tAttr: { alt: 'saveSelector.wikiAlt' }" src="https://img.shields.io/badge/wiki-link-blue?logo=wikimedia-commons&style=for-the-badge">
             </a>
         </div>
-        <div id="use-our-client-message" style="color: white; display: none; font-size: .875em;">
+        <div id="use-our-client-message" style="color: white; display: none; font-size: .875em;" data-bind="tHtml: 'saveSelector.useOurClient'">
             Play offline & improve performance by downloading our desktop client <b><a href="https://github.com/RedSparr0w/Pokeclicker-desktop/releases/latest" target="_blank">here</a></b>.
             You can even find a Pokémon exclusive to the client when you reach the Sevii Islands!<br/><br/>
         </div>
         <div class="save-container justify-content-center container row"></div>
 
         <div class="new-import-buttons justify-content-center container row">
-            <label class="btn btn-success col-md-4 col-xs-12 mx-1" onclick="Save.key = Rand.string(6); document.querySelector('#saveSelector').remove(); App.start();">New Save</label>
-            <label for="import-save" class="btn btn-warning col-md-4 col-xs-12 mx-1" onclick="Save.key = Rand.string(6);">Import Save</label>
+            <label class="btn btn-success col-md-4 col-xs-12 mx-1" onclick="Save.key = Rand.string(6); document.querySelector('#saveSelector').remove(); App.start();" data-bind="t: 'saveSelector.newSave'">New Save</label>
+            <label for="import-save" class="btn btn-warning col-md-4 col-xs-12 mx-1" onclick="Save.key = Rand.string(6);" data-bind="t: 'saveSelector.importSave'">Import Save</label>
         </div>
 
     </div>
@@ -47,15 +47,15 @@
                 <table class="table table-sm table-borderless col-8">
                     <tbody>
                         <tr>
-                            <td>Badges:</td>
+                            <td data-bind="t: 'saveSelector.badges'">Badges:</td>
                             <td class="trainer-badges text-right">0</td>
                         </tr>
                         <tr>
-                            <td>Pokédex:</td>
+                            <td data-bind="t: 'saveSelector.pokedex'">Pokédex:</td>
                             <td class="trainer-pokedex text-right">0</td>
                         </tr>
                         <tr>
-                            <td>Time:</td>
+                            <td data-bind="t: 'saveSelector.time'">Time:</td>
                             <td class="trainer-time text-right">0</td>
                         </tr>
                     </tbody>

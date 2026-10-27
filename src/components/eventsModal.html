@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
        <div class="modal-content">
            <div class="modal-header">
-               <h5>Events</h5>
+               <h5 data-bind="t: 'events.title'">Events</h5>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                    <span aria-hidden="true">&times;</span>
                </button>
@@ -12,12 +12,12 @@
                <table class="table table-striped table-hover table-bordered table-sm m-0">
                    <thead>
                      <tr>
-                       <th>Event</th>
-                       <th>Description</th>
-                       <th>Start Time</th>
-                       <th>End Time</th>
+                       <th data-bind="t: 'events.event'">Event</th>
+                       <th data-bind="t: 'common.description'">Description</th>
+                       <th data-bind="t: 'events.startTime'">Start Time</th>
+                       <th data-bind="t: 'events.endTime'">End Time</th>
                        <!-- ko if: App.game.keyItems.hasKeyItem(KeyItemType.Event_calendar) -->
-                       <th>Activate</th>
+                       <th data-bind="t: 'events.activate'">Activate</th>
                        <!-- /ko -->
                      </tr>
                    </thead>
@@ -30,10 +30,10 @@
                         <td class="text-left"><code data-bind="text: endTime.toLocaleString()">-</code></td>
                         <!-- /ko -->
                         <!-- ko if: isActive()-->
-                        <td class="text-left" colspan="2">Time left: <code data-bind="text: timeLeft()">-</code></td>
+                        <td class="text-left" colspan="2"><knockout data-bind="t: 'events.timeLeft'">Time left:</knockout> <code data-bind="text: timeLeft()">-</code></td>
                         <!-- /ko -->
                         <!-- ko if: App.game.keyItems.hasKeyItem(KeyItemType.Event_calendar) && !hideFromEventCalendar -->
-                        <td><button class="btn btn-primary" data-bind="enable: !isActive(), click: eventCalendarActivate">Activate</button></td>
+                        <td><button class="btn btn-primary" data-bind="enable: !isActive(), click: eventCalendarActivate, t: 'events.activate'">Activate</button></td>
                         <!-- /ko -->
                      </tr>
                    </tbody>
@@ -41,7 +41,7 @@
            </div>
 
            <div class="modal-footer">
-               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
            </div>
        </div>
     </div>

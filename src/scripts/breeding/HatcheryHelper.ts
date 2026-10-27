@@ -51,10 +51,10 @@ class HatcheryHelper {
         this.trainerSprite = SeededRand.intBetween(0, 118);
 
         this.tooltip = ko.pureComputed(() => `<strong>${this.name}</strong><br/>
-            Cost: <img src="assets/images/currency/${GameConstants.Currency[this.cost.currency]}.svg" width="20px">&nbsp;${(this.cost.amount).toLocaleString('en-US')}/hatch<br/>
-            Step Efficiency: ${this.stepEfficiency()}%<br/>
-            Attack Efficiency: ${this.attackEfficiency()}%<br/>
-            Hatched: ${this.hatched().toLocaleString('en-US')}<br/><br/>
+            ${App.translation.ui('breeding.helperTooltip.cost', 'Cost: {{currency}}&nbsp;{{amount}}/hatch', { currency: `<img src="assets/images/currency/${GameConstants.Currency[this.cost.currency]}.svg" width="20px">`, amount: (this.cost.amount).toLocaleString('en-US') })}<br/>
+            ${App.translation.ui('breeding.helperTooltip.stepEfficiency', 'Step Efficiency: {{value}}%', { value: this.stepEfficiency() })}<br/>
+            ${App.translation.ui('breeding.helperTooltip.attackEfficiency', 'Attack Efficiency: {{value}}%', { value: this.attackEfficiency() })}<br/>
+            ${App.translation.ui('breeding.helperTooltip.hatched', 'Hatched: {{value}}', { value: this.hatched().toLocaleString('en-US') })}<br/><br/>
             ${this.nextPokemonTooltip()}`
         );
 
@@ -193,7 +193,7 @@ class HatcheryHelper {
 
     public nextPokemonTooltip(): string {
         const nextPokemon = this.nextPokemon();
-        return `<strong><u>Next Pokémon</u></strong><br/>${nextPokemon.length ? nextPokemon.join('<br/>') : 'None! Check filters & settings.'}`;
+        return `<strong><u>${App.translation.ui('breeding.nextPokemon', 'Next Pokémon')}</u></strong><br/>${nextPokemon.length ? nextPokemon.join('<br/>') : App.translation.ui('breeding.noNextPokemon', 'None! Check filters & settings.')}`;
     }
 
     toJSON(): Record<string, any> {

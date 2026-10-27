@@ -1,7 +1,7 @@
 <div id="shortcutsContainer" class="card sortable border-secondary mb-3"
     data-bind="visible: UndergroundController.shortcutVisible() || FarmController.shortcutVisible() || ShopHandler.shortcutVisible()">
     <div class="card-header p-0" data-toggle="collapse" href="#shortcutsBody">
-        <span style="text-align:center">Shortcuts</span>
+        <span style="text-align:center" data-bind="t: 'shortcuts.title'">Shortcuts</span>
     </div>
     <div id="shortcutsBody" class="card-body show p-0">
       <table class="table table-sm m-0">
@@ -9,7 +9,7 @@
           <tr data-bind="visible: UndergroundController.shortcutVisible">
             <td class="p-0">
               <button class="btn btn-block btn-primary m-0" onclick="UndergroundController.openUndergroundModal()">
-                  Underground
+                  <knockout data-bind="t: 'shortcuts.underground'">Underground</knockout>
                   <knockout data-bind="text: `[${Settings.getSetting('hotkey.underground').observableValue()}]`,
                     visible: Settings.getSetting('hotkey.underground').observableValue() != 'None'"></knockout>
               </button>
@@ -18,7 +18,7 @@
           <tr data-bind="visible: FarmController.shortcutVisible">
             <td class="p-0">
               <button class="btn btn-block btn-primary m-0" onclick="FarmController.openFarmModal()">
-                  Farm
+                  <knockout data-bind="t: 'shortcuts.farm'">Farm</knockout>
                   <knockout data-bind="text: `[${Settings.getSetting('hotkey.farm').observableValue()}]`,
                     visible: Settings.getSetting('hotkey.farm').observableValue() != 'None'"></knockout>
               </button>
@@ -27,7 +27,7 @@
           <tr data-bind="visible: ShopHandler.shortcutVisible">
             <td class="p-0">
               <button class="btn btn-block btn-primary m-0" onclick="ShopHandler.showShop(pokeMartShop);" href="#shopModal" data-toggle="modal">
-                  Poké Mart
+                  <knockout data-bind="t: 'shop.pokeMart'">Poké Mart</knockout>
                   <knockout data-bind="text: `[${Settings.getSetting('hotkey.shop').observableValue()}]`,
                     visible: Settings.getSetting('hotkey.shop').observableValue() != 'None'"></knockout>
               </button>
@@ -36,7 +36,7 @@
           <tr data-bind="visible: WeatherApp.shortcutVisible">
             <td class="p-0">
               <button class="btn btn-block btn-primary m-0" onclick="WeatherApp.openWeatherAppModal()">
-                Castform App
+                <knockout data-bind="t: 'weather.castformApp'">Castform App</knockout>
                 <knockout data-bind="text: `[${Settings.getSetting('hotkey.castformApp').observableValue()}]`,
                     visible: Settings.getSetting('hotkey.castformApp').observableValue() != 'None'"></knockout>
               </button>
@@ -45,7 +45,7 @@
           <tr data-bind="visible: PurifyChamber.shortcutVisible">
             <td class="p-0">
               <button class="btn btn-block btn-primary m-0" onclick="PurifyChamber.openPurifyChamberModal()">
-                Purify Chamber
+                <knockout data-bind="t: 'purifyChamber.title'">Purify Chamber</knockout>
                 <knockout data-bind="text: `(${(Math.min(1, Math.trunc((App.game.purifyChamber.currentFlow() / App.game.purifyChamber.flowNeeded()) * 10 ** 4) / 10 ** 4)).toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 4 })})`"></knockout>
                 <knockout data-bind="text: `[${Settings.getSetting('hotkey.purifyChamber').observableValue()}]`,
                     visible: Settings.getSetting('hotkey.purifyChamber').observableValue() != 'None'"></knockout>

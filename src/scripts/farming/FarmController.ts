@@ -283,7 +283,7 @@ class FarmController {
 
         // Adding header if necessary
         if (tooltip.length) {
-            tooltip.unshift('<u>External Auras</u>');
+            tooltip.unshift(App.translation.ui('farm.externalAuras', '<u>External Auras</u>'));
         }
 
         return tooltip.join('<br>');

@@ -5,9 +5,9 @@
         <div class="modal-content" style="text-align: center">
             <div class="modal-header p-0" style='justify-content: space-around;'>
                 <ul class="nav nav-tabs nav-fill w-100">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#evoStones">Evolution Items</a></li>
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#itemBag">Item Bag</a></li>
-                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#keyItems">Key Items</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#evoStones" data-bind="t: 'items.evolutionItems'">Evolution Items</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#itemBag" data-bind="t: 'items.itemBag'">Item Bag</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#keyItems" data-bind="t: 'items.keyItems'">Key Items</a></li>
                 </ul>
             </div>
 
@@ -18,13 +18,13 @@
                         <div class="row">
                             <div class="col-12 d-lg-none d-block">
                                 <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
-                                        data-target="#evo-item-list" aria-expanded="false" aria-controls="evo-item-list">
+                                        data-target="#evo-item-list" aria-expanded="false" aria-controls="evo-item-list" data-bind="t: 'items.evolutionItem'">
                                     Evolution Item
                                 </button>
                             </div>
                             <!-- Evo items -->
                             <div class="col-lg-6 col-12 collapse dont-collapse-lg justify-content-center" id="evo-item-list">
-                                <h4>Evolution Items</h4>
+                                <h4 data-bind="t: 'items.evolutionItems'">Evolution Items</h4>
                                 <div class="scrolling-div" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
                                     <div class="col-12 evolutionListItem">
                                         <button class="btn btn-secondary smallButton list-group-item-action pl-2"
@@ -49,13 +49,13 @@
 
                             <div class="col-12 d-lg-none d-block">
                                 <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
-                                        data-target="#evo-pokemon-list" aria-expanded="false" aria-controls="evo-pokemon-list">
+                                        data-target="#evo-pokemon-list" aria-expanded="false" aria-controls="evo-pokemon-list" data-bind="t: 'common.pokemon'">
                                     Pokémon
                                 </button>
                             </div>
                             <!-- Pokemon list -->
                             <div class="col-lg-6 col-12 collapse dont-collapse-lg justify-content-center" id="evo-pokemon-list">
-                                <h4>Pokémon</h4>
+                                <h4 data-bind="t: 'common.pokemon'">Pokémon</h4>
                                 <div class="scrolling-div"
                                     data-bind="foreach: PartyController.getPokemonsWithEvolution(GameConstants.StoneType[ItemHandler.stoneSelected()])">
                                     <div class="col-12 evolutionListItem">
@@ -86,11 +86,12 @@
                                             <!-- ko using: PartyController.hasMultipleStoneEvolutionsAvailable(ItemHandler.pokemonSelected(), GameConstants.StoneType[ItemHandler.stoneSelected()]), as: 'multipleEvolution' -->
                                             <button class="btn btn-success btn-block" data-bind="click: function(){ItemHandler.useStones()},
                                                     tooltip: {
-                                                    title: 'If a shiny is found, the game will stop using evolution items.' + (multipleEvolution ? '<br/>If the requirements for more than one evolution is fulfilled, a random evolution will be selected.' : ''),
+                                                    title: App.translation.ui('items.useStonesTooltip', 'If a shiny is found, the game will stop using evolution items.') + (multipleEvolution ? '<br/>' + App.translation.ui('items.multipleEvolutionTooltip', 'If the requirements for more than one evolution is fulfilled, a random evolution will be selected.') : ''),
                                                     trigger: 'hover',
                                                     boundary: 'window',
                                                     html: true,
-                                                    }">
+                                                    },
+                                                    t: 'items.useEvolutionItems'">
                                                 Use evolution items!
                                             </button>
                                             <!-- /ko -->
@@ -111,7 +112,7 @@
 
                         <!-- ko if: Object.values(ItemList).some((i) => i instanceof CollectibleItem && i.isActive() && player.itemList[i.name]()) -->
                         <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-collectibleItems">
-                            <h5 class="m-0 text-light">Collectible Items</h5>
+                            <h5 class="m-0 text-light" data-bind="t: 'items.collectibleItems'">Collectible Items</h5>
                         </div>
                         <div id="itemBag-collectibleItems" class="collapse show">
                             <div class="card-body pt-2 p-1">
@@ -129,7 +130,7 @@
                         <!-- /ko -->
 
                         <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-vitamins">
-                            <h5 class="m-0 text-light">Vitamins</h5>
+                            <h5 class="m-0 text-light" data-bind="t: 'items.vitamins'">Vitamins</h5>
                         </div>
                         <div id="itemBag-vitamins" class="collapse show">
                             <div class="card-body pt-2 p-1">
@@ -149,7 +150,7 @@
 
                         <!-- ko if: GameHelper.enumStrings(GameConstants.ConsumableType).some(type => player.itemList[type]()) -->
                         <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-consumables">
-                            <h5 class="m-0 text-light">Consumables</h5>
+                            <h5 class="m-0 text-light" data-bind="t: 'items.consumables'">Consumables</h5>
                         </div>
                         <div id="itemBag-consumables" class="collapse show">
                             <div class="card-body pt-2 p-1">
@@ -169,7 +170,7 @@
                         <!-- /ko -->
 
                         <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-heldItems">
-                            <h5 class="m-0 text-light">Held Items</h5>
+                            <h5 class="m-0 text-light" data-bind="t: 'items.heldItems'">Held Items</h5>
                         </div>
                         <div id="itemBag-heldItems" class="collapse show mt-1">
                             <div class="card-body pt-2 p-1">
@@ -191,7 +192,7 @@
                         </div>
 
                         <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-underground-treasure">
-                            <h5 class="m-0 text-light">Underground Treasure</h5>
+                            <h5 class="m-0 text-light" data-bind="t: 'items.undergroundTreasure'">Underground Treasure</h5>
                         </div>
                         <div id="itemBag-underground-treasure" class="collapse show mt-1">
                             <div class="card-body pt-2 p-1">
@@ -208,7 +209,7 @@
                         </div>
 
                         <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-gem-plates">
-                            <h5 class="m-0 text-light">Gem Plates</h5>
+                            <h5 class="m-0 text-light" data-bind="t: 'items.gemPlates'">Gem Plates</h5>
                         </div>
                         <div id="itemBag-gem-plates" class="collapse show mt-1">
                             <div class="card-body pt-2 p-1">
@@ -225,12 +226,12 @@
                         </div>
 
                         <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-fossils">
-                            <h5 class="m-0 text-light">Fossils</h5>
+                            <h5 class="m-0 text-light" data-bind="t: 'items.fossils'">Fossils</h5>
                         </div>
                         <div id="itemBag-fossils" class="collapse show mt-1">
                             <div class="card-body pt-2 p-1">
                                 <div class="row justify-content-center">
-                                    <h5 class="card-title col-12 mb-2">Fossils</h5>
+                                    <h5 class="card-title col-12 mb-2" data-bind="t: 'items.fossils'">Fossils</h5>
                                     <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === UndergroundItemValueType.Fossil) -->
                                     <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
                                         <div class="btn btn-secondary text-left w-100 px-1" style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
@@ -239,7 +240,7 @@
                                     </div>
                                     <!-- /ko -->
 
-                                    <h5 class="card-title col-12 mb-2">Fossil Pieces</h5>
+                                    <h5 class="card-title col-12 mb-2" data-bind="t: 'items.fossilPieces'">Fossil Pieces</h5>
                                     <!-- ko foreach: UndergroundItems.list.filter(item => item.valueType === UndergroundItemValueType.FossilPiece) -->
                                     <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
                                         <div class="btn btn-secondary text-left w-100 px-1" style="cursor: default; padding-top: 1px; padding-bottom: 2px;"
@@ -252,7 +253,7 @@
                         </div>
 
                         <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-shards">
-                            <h5 class="m-0 text-light">Shards</h5>
+                            <h5 class="m-0 text-light" data-bind="t: 'items.shards'">Shards</h5>
                         </div>
                         <div id="itemBag-shards" class="collapse show mt-1">
                             <div class="card-body pt-2 p-1">
@@ -270,7 +271,7 @@
 
                         <!-- ko if: Object.values(ItemList).some((i) => i instanceof MegaStoneItem && player.itemList[i.name]()) -->
                         <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-megaStones">
-                            <h5 class="m-0 text-light">Mega Stones</h5>
+                            <h5 class="m-0 text-light" data-bind="t: 'items.megaStones'">Mega Stones</h5>
                         </div>
                         <div id="itemBag-megaStones" class="collapse show mt-1">
                             <div class="card-body pt-2 p-1">
@@ -332,7 +333,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@
             <div class="modal-body pt-0" style="background-color: inherit;">
                 <!-- ko foreach: { data: Object.entries(RouteInfo.pokemonList()), as: 'pokemons' } -->
                 <div class="bg-primary text-left rounded px-3 py-2 mt-1 d-flex align-items-center" data-toggle="collapse" data-bind="attr: { 'data-target': `#route-${pokemons[0]}` }">
-                    <h5 class="my-0 mx-1 text-light d-inline-block flex-grow-1" data-bind="text: (pokemons[0] == 'roamers' ? 'Roaming' : 'Encounters')">Roamer Status</h5>
+                    <h5 class="my-0 mx-1 text-light d-inline-block flex-grow-1" data-bind="text: (pokemons[0] == 'roamers' ? App.translation.ui('routeInfo.roaming', 'Roaming') : App.translation.ui('routeInfo.encounters', 'Encounters'))">Roamer Status</h5>
                     <!-- ko if: pokemons[0] == 'roamers' -->
                     <div class="text-light" onclick="event.stopPropagation()" style="cursor: default;" data-bind="let: {
                         chance: Math.floor(PokemonFactory.roamingRate(Routes.getRoute(player.region, player.route))),
@@ -16,7 +16,7 @@
                     }">
                         <div data-bind="tooltip: {
                             html: true,
-                            title: `Chance of finding a Roaming Pokémon on this route.${(isBoosted ? '<br/><br/>⇈ This route is currently boosted! Roaming Pokémon are 3× more likely to appear.' : '')}`,
+                            title: App.translation.ui('routeInfo.roamingChance', 'Chance of finding a Roaming Pokémon on this route.') + (isBoosted ? '<br/><br/>⇈ ' + App.translation.ui('routeInfo.roamingBoosted', 'This route is currently boosted! Roaming Pokémon are 3× more likely to appear.') : ''),
                             trigger: 'hover',
                             placement: 'top',
                         }">
@@ -45,7 +45,7 @@
                             <div data-bind="if: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top: -11px;">
                                 <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id)?.pokerus]}.png`},
                                 tooltip: {
-                                    title: App.game.party.getPokemon($data.id)?.pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${App.game.party.getPokemon($data.id)?.evs().toLocaleString('en-US')}` : '',
+                                    title: App.game.party.getPokemon($data.id)?.pokerus >= GameConstants.Pokerus.Contagious ? App.translation.ui('routeInfo.evs', 'EVs: {{evs}}', { evs: App.game.party.getPokemon($data.id)?.evs().toLocaleString('en-US') }) : '',
                                     placement: 'bottom',
                                     trigger: 'hover'
                                 }"/>

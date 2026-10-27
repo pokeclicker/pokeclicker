@@ -4,10 +4,10 @@
         <div class="modal-content">
             <div class="modal-header p-0">
                 <ul class="nav nav-tabs nav-fill w-100">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#dig">Dig</a></li>
-                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#treasures">Treasures</a></li>
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#undergroundHelpers">Experts</a></li>
-                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#dig" data-bind="t: 'underground.tabs.dig'">Dig</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#treasures" data-bind="t: 'underground.tabs.treasures'">Treasures</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#undergroundHelpers" data-bind="t: 'underground.tabs.experts'">Experts</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help" data-bind="t: 'common.help'">Help</a></li>
                     <li class="d-block"><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
                 </ul>
             </div>
@@ -16,17 +16,17 @@
                     <div class="container">
                         <div class="row p-2">
                             <div class="col-6 p-0 d-flex">
-                                <button class="btn btn-primary" data-bind="click: () => $('#findNewMineModal').modal('show');">Find mine</button>
+                                <button class="btn btn-primary" data-bind="click: () => $('#findNewMineModal').modal('show'), t: 'underground.dig.findMine'">Find mine</button>
 
                                 <!-- ko let: { autoRestartUndergroundMine: Settings.getSetting('autoRestartUndergroundMine') } -->
                                 <button class="btn btn-danger p-2" style="min-width: 36px;" data-bind="
-                                    text: `↻ ${autoRestartUndergroundMine.observableValue() ? 'On' : 'Off'}`,
+                                    text: `↻ ${autoRestartUndergroundMine.observableValue() ? App.translation.ui('underground.dig.on', 'On') : App.translation.ui('underground.dig.off', 'Off')}`,
                                     css: {
                                         'btn-danger': !autoRestartUndergroundMine.observableValue(),
                                         'btn-success': autoRestartUndergroundMine.observableValue()
                                     },
                                     tooltip: {
-                                        title: `${autoRestartUndergroundMine.displayName}: ${autoRestartUndergroundMine.observableValue() ? 'On' : 'Off'}`,
+                                        title: App.translation.ui('underground.dig.autoRestartTooltip', '{{setting}}: {{state}}', { setting: autoRestartUndergroundMine.displayName, state: autoRestartUndergroundMine.observableValue() ? App.translation.ui('underground.dig.on', 'On') : App.translation.ui('underground.dig.off', 'Off') }),
                                         trigger: 'hover',
                                         placement:'right'
                                     },
@@ -38,7 +38,7 @@
                                     title: `${(App.game.underground.undergroundExp - Underground.convertLevelToExperience(App.game.underground.undergroundLevel)).toLocaleString('en-US')} / ${(Underground.convertLevelToExperience(App.game.underground.undergroundLevel + 1) - Underground.convertLevelToExperience(App.game.underground.undergroundLevel)).toLocaleString('en-US')}`,
                                     trigger: 'hover'
                                 }">
-                                <div>Lvl. <knockout data-bind="text: App.game.underground.undergroundLevel"></knockout></div>
+                                <div data-bind="t: 'underground.dig.level', tVars: { level: App.game.underground.undergroundLevel }">Lvl. {{level}}</div>
                                 <div class="progress" style='height: 5px'>
                                     <div class="progress-bar bg-info" role="progressbar"
                                          data-bind="attr:{ style: 'width:' + App.game.underground.progressToNextLevel.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }) }"
@@ -55,20 +55,22 @@
                         <div class="card underground-mining-container__treasure-count">
                             <div class="card-body p-2 d-flex justify-content-center" style="gap: 1.5rem">
                                 <!-- ko if: !App.game.underground.mine || App.game.underground.mine.timeUntilDiscovery > 0 -->
-                                <div>Collected • ??</div>
-                                <div>Seen • ??</div>
-                                <div>Buried • ??</div>
+                                <div data-bind="t: 'underground.dig.collected', tVars: { number: '??' }">Collected • {{number}}</div>
+                                <div data-bind="t: 'underground.dig.seen', tVars: { number: '??' }">Seen • {{number}}</div>
+                                <div data-bind="t: 'underground.dig.buried', tVars: { number: '??' }">Buried • {{number}}</div>
                                 <!-- /ko -->
 
                                 <!-- ko ifnot: !App.game.underground.mine || App.game.underground.mine.timeUntilDiscovery > 0 -->
-                                <div class="" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsFound > 0 && App.game.underground.mine?.itemsFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsFound === App.game.underground.mine?.itemsBuried }">
-                                    Collected • <knockout data-bind="text: App.game.underground.mine?.itemsFound"></knockout>
+                                <div class="" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsFound > 0 && App.game.underground.mine?.itemsFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsFound === App.game.underground.mine?.itemsBuried },
+                                    t: 'underground.dig.collected', tVars: { number: App.game.underground.mine?.itemsFound }">
+                                    Collected • {{number}}
                                 </div>
-                                <div class="" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsPartiallyFound > 0 && App.game.underground.mine?.itemsPartiallyFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsPartiallyFound === App.game.underground.mine?.itemsBuried }">
-                                    Seen • <knockout data-bind="text: App.game.underground.mine?.itemsPartiallyFound"></knockout>
+                                <div class="" data-bind="css: { 'text-warning': App.game.underground.mine?.itemsPartiallyFound > 0 && App.game.underground.mine?.itemsPartiallyFound < App.game.underground.mine?.itemsBuried, 'text-success': App.game.underground.mine?.itemsPartiallyFound === App.game.underground.mine?.itemsBuried },
+                                    t: 'underground.dig.seen', tVars: { number: App.game.underground.mine?.itemsPartiallyFound }">
+                                    Seen • {{number}}
                                 </div>
-                                <div class="">
-                                    Buried • <knockout data-bind="text: App.game.underground.mine?.itemsBuried"></knockout>
+                                <div class="" data-bind="t: 'underground.dig.buried', tVars: { number: App.game.underground.mine?.itemsBuried }">
+                                    Buried • {{number}}
                                 </div>
                                 <!-- /ko -->
                             </div>
@@ -100,7 +102,7 @@
 
                                 <!-- ko if: App.game.underground.mine && App.game.underground.mine.timeUntilDiscovery > 0 -->
                                 <div style="position: absolute; inset: 20%; display: grid; align-content: center;">
-                                    <div>Searching for mine</div>
+                                    <div data-bind="t: 'underground.dig.searchingForMine'">Searching for mine</div>
                                     <div class="progress" style='height: 5px'>
                                         <div class="progress-bar bg-info" role="progressbar"
                                              data-bind="attr:{ style: 'width:' + (1 - App.game.underground.mine.timeUntilDiscovery / App.game.underground.mine.initialTimeToDiscover).toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }) }"
@@ -113,8 +115,8 @@
 
                                 <!-- ko if: App.game.underground.mine && App.game.underground.mine.completed -->
                                 <div style="position: absolute; inset: 20%; display: grid; gap: 1rem; align-content: center;">
-                                    <div>Collected all treasures</div>
-                                    <button class="btn btn-primary" data-bind="click: () => $('#findNewMineModal').modal('show');">Find mine</button>
+                                    <div data-bind="t: 'underground.dig.allTreasuresCollected'">Collected all treasures</div>
+                                    <button class="btn btn-primary" data-bind="click: () => $('#findNewMineModal').modal('show'), t: 'underground.dig.findMine'">Find mine</button>
                                 </div>
                                 <!-- /ko -->
                             </div>
@@ -169,7 +171,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="small" data-bind="">Click to Discharge (<knockout data-bind="text: Settings.getSetting('hotkey.underground.discharge')?.value"></knockout>)</div>
+                                            <div class="small" data-bind="t: 'underground.dig.clickToDischarge', tVars: { hotkey: Settings.getSetting('hotkey.underground.discharge')?.value }">Click to Discharge ({{hotkey}})</div>
                                         </div>
                                     </div>
                                 </div>
@@ -188,33 +190,33 @@
                                             <table class="table table-striped table-hover table-bordered table-sm m-0">
                                                 <thead>
                                                 <tr class="bg-secondary">
-                                                    <th colspan="2">Info</th>
+                                                    <th colspan="2" data-bind="t: 'underground.dig.info'">Info</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <!-- ko if: tool.durabilityPerUse > 0 -->
                                                 <tr>
-                                                    <td class="text-left">Next use</td>
+                                                    <td class="text-left" data-bind="t: 'underground.dig.nextUse'">Next use</td>
                                                     <td class="text-left tight"><code data-bind="text: GameConstants.formatTime(Math.max(tool.durabilityPerUse - tool.durability, 0) / tool.restoreRatePerSecond())"></code></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-left">Time until 100%</td>
+                                                    <td class="text-left" data-bind="t: 'underground.dig.timeUntilFull'">Time until 100%</td>
                                                     <td class="text-left tight"><code data-bind="text: GameConstants.formatTime((1 - tool.durability) / tool.restoreRatePerSecond())"></code></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-left">Durability per use</td>
-                                                    <td class="text-left tight"><code data-bind="text: tool.durabilityPerUse === 0 ? 'Free' : tool.durabilityPerUse.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 2 })"></code></td>
+                                                    <td class="text-left" data-bind="t: 'underground.dig.durabilityPerUse'">Durability per use</td>
+                                                    <td class="text-left tight"><code data-bind="text: tool.durabilityPerUse === 0 ? App.translation.ui('underground.dig.free', 'Free') : tool.durabilityPerUse.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 2 })"></code></td>
                                                 </tr>
                                                 <!-- /ko -->
 
                                                 <!-- ko ifnot: tool.durabilityPerUse > 0 -->
                                                 <tr>
-                                                    <td colspan="2" class="text-center">Your restore rate has grown so much that this tool has now become free to use.</td>
+                                                    <td colspan="2" class="text-center" data-bind="t: 'underground.dig.toolFree'">Your restore rate has grown so much that this tool has now become free to use.</td>
                                                 </tr>
                                                 <!-- /ko -->
 
                                                 <tr>
-                                                    <td class="text-left">Lifetime usage</td>
+                                                    <td class="text-left" data-bind="t: 'underground.dig.lifetimeUsage'">Lifetime usage</td>
                                                     <td class="text-left tight"><code data-bind="text: App.game.statistics.undergroundToolsUsed[tool.id]().toLocaleString('en-US')"></code></td>
                                                 </tr>
                                                 </tbody>
@@ -237,14 +239,14 @@
                     <div class="row">
                         <div class="col-12 d-lg-none d-block">
                             <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
-                            data-target="#underground-treasure-filter-container" aria-expanded="false" aria-controls="underground-treasure-filter-container">
+                            data-target="#underground-treasure-filter-container" aria-expanded="false" aria-controls="underground-treasure-filter-container" data-bind="t: 'underground.treasures.filtersAndSettings'">
                                 Filters and Settings
                             </button>
                         </div>
 
                         <div class="col-lg-3 col-12 collapse dont-collapse-lg" id="underground-treasure-filter-container">
                             <div class="d-none d-lg-block">
-                                <h4>Filters and Settings</h4>
+                                <h4 data-bind="t: 'underground.treasures.filtersAndSettings'">Filters and Settings</h4>
                             </div>
 
                             <hr>
@@ -254,11 +256,11 @@
                                         <div class="btn-group btn-group-toggle w-100">
                                             <label class="btn btn-secondary" data-bind="css: { active: Settings.getSetting('undergroundTreasureViewMode').observableValue() === 'list-view' }">
                                                 <input type="radio" name="treasure-view-mode" value="list-view" onchange="Settings.setSettingByName('undergroundTreasureViewMode', this.value)">
-                                                List
+                                                <knockout data-bind="t: 'common.list'">List</knockout>
                                             </label>
                                             <label class="btn btn-secondary" data-bind="css: { active: Settings.getSetting('undergroundTreasureViewMode').observableValue() === 'grid-view' }">
                                                 <input type="radio" name="treasure-view-mode" value="grid-view" onchange="Settings.setSettingByName('undergroundTreasureViewMode', this.value)">
-                                                Grid
+                                                <knockout data-bind="t: 'underground.treasures.grid'">Grid</knockout>
                                             </label>
                                         </div>
                                     </div>
@@ -290,7 +292,7 @@
                                                 <label for="underground-treasure-display-sorting-direction" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;"
                                                        data-bind="text: undergroundTreasureDisplaySortingDirection.observableValue() ? '⥄' : '⥂',
                                                                     tooltip: {
-                                                                        title: undergroundTreasureDisplaySortingDirection.observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)',
+                                                                        title: undergroundTreasureDisplaySortingDirection.observableValue() ? App.translation.ui('underground.treasures.sortDescending', 'Descending (highest value first)') : App.translation.ui('underground.treasures.sortAscending', 'Ascending (lowest value first)'),
                                                                         trigger: 'hover',
                                                                         placement:'top'
                                                                     }">
@@ -322,9 +324,9 @@
                                     <div class="form-group col-12">
                                         <button type="button" class="btn btn-primary btn-block" data-bind="
                                             click: () => UndergroundTrading.quickSellEnabled(!UndergroundTrading.quickSellEnabled()),
-                                            text: `${UndergroundTrading.quickSellEnabled() ? 'Disable' : 'Enable'} Quick-Sell Mode`,
+                                            text: UndergroundTrading.quickSellEnabled() ? App.translation.ui('underground.treasures.disableQuickSell', 'Disable Quick-Sell Mode') : App.translation.ui('underground.treasures.enableQuickSell', 'Enable Quick-Sell Mode'),
                                             tooltip: {
-                                                title: 'With Quick-Sell Mode enabled, clicking an item sells all of it instantly',
+                                                title: App.translation.ui('underground.treasures.quickSellTooltip', 'With Quick-Sell Mode enabled, clicking an item sells all of it instantly'),
                                                 placement: 'top',
                                                 trigger: 'hover',
                                             }
@@ -336,10 +338,10 @@
                         </div>
 
                         <div class="col-lg-9 col-12">
-                            <p data-bind="ifnot: UndergroundTrading.quickSellEnabled()">Click on your treasure to open up a detail view</p>
+                            <p data-bind="ifnot: UndergroundTrading.quickSellEnabled()"><knockout data-bind="t: 'underground.treasures.clickForDetails'">Click on your treasure to open up a detail view</knockout></p>
                             <p data-bind="if: UndergroundTrading.quickSellEnabled()">
-                                <label class="h3 text-danger font-weight-bold">Quick-Sell Mode enabled</label><br/>
-                                Clicking your treasure will sell your entire stash of that item.
+                                <label class="h3 text-danger font-weight-bold" data-bind="t: 'underground.treasures.quickSellEnabled'">Quick-Sell Mode enabled</label><br/>
+                                <knockout data-bind="t: 'underground.treasures.quickSellHint'">Clicking your treasure will sell your entire stash of that item.</knockout>
                             </p>
 
                             <!-- ko foreach: UndergroundController.organisedTreasuresList -->
@@ -396,12 +398,12 @@
                                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                                     <thead>
                                     <tr>
-                                        <th colspan="2" class="text-center text-light bg-dark"><h5 class="m-0">Information</h5></th>
+                                        <th colspan="2" class="text-center text-light bg-dark"><h5 class="m-0" data-bind="t: 'underground.experts.information'">Information</h5></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td class="text-left">Level</td>
+                                        <td class="text-left" data-bind="t: 'underground.experts.level'">Level</td>
                                         <td class="text-center tight" data-bind="text: $data.level.toLocaleString('en-US')"></td>
                                     </tr>
                                     <tr>
@@ -416,29 +418,29 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="text-left">Expertise</td>
+                                        <td class="text-left" data-bind="t: 'underground.experts.expertise'">Expertise</td>
                                         <td class="text-center tight" data-bind="text: UndergroundController.getMineConfig($data.favoriteMine).displayName"></td>
                                     </tr>
                                     <tr>
-                                        <td class="text-left">Discover chance</td>
+                                        <td class="text-left" data-bind="t: 'underground.experts.discoverChance'">Discover chance</td>
                                         <td class="text-center tight" data-bind="text: $data.favoriteMineChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
                                     </tr>
                                     <tr>
-                                        <td class="text-left">Use Expertise</td>
+                                        <td class="text-left" data-bind="t: 'underground.experts.useExpertise'">Use Expertise</td>
                                         <td class="text-center tight align-middle">
                                             <input class="clickable" type="checkbox" data-bind="checked: $data.shouldDiscoverFavorite"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="text-left">Smart tool use</td>
+                                        <td class="text-left" data-bind="t: 'underground.experts.smartToolUse'">Smart tool use</td>
                                         <td class="text-center tight" data-bind="text: $data.smartToolUsageChance.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
                                     </tr>
                                     <tr>
-                                        <td class="text-left">Reward retention</td>
+                                        <td class="text-left" data-bind="t: 'underground.experts.rewardRetention'">Reward retention</td>
                                         <td class="text-center tight" data-bind="text: $data.rewardRetention.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 })"></td>
                                     </tr>
                                     <tr>
-                                        <td class="text-left">Work cycle</td>
+                                        <td class="text-left" data-bind="t: 'underground.experts.workCycle'">Work cycle</td>
                                         <td class="text-center tight" data-bind="text: `${$data.workCycleTime.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}s`"></td>
                                     </tr>
                                     <tr>
@@ -460,7 +462,7 @@
                                 </table>
                             </div>
                             <div class="card-footer p-0">
-                                <button class="btn btn-block" data-bind="attr: { disabled: !$data.hired && !App.game.underground.helpers.canHire() }, css: { 'btn-success': !$data.hired, 'btn-danger': $data.hired }, click: () => !$data.hired ? $data.hire() : $data.fire(), text: !$data.hired ? 'Hire!' : 'Fire!'">Hire!</button>
+                                <button class="btn btn-block" data-bind="attr: { disabled: !$data.hired && !App.game.underground.helpers.canHire() }, css: { 'btn-success': !$data.hired, 'btn-danger': $data.hired }, click: () => !$data.hired ? $data.hire() : $data.fire(), text: !$data.hired ? App.translation.ui('underground.experts.hire', 'Hire!') : App.translation.ui('underground.experts.fire', 'Fire!')">Hire!</button>
                             </div>
                         </div>
                     </div>
@@ -469,89 +471,98 @@
                 <div id="help" class="tab-pane fade p-2 text-left">
                     <div class="card mb-2">
                         <div class="card-header d-flex align-items-center p-0">
-                            <span class="flex-grow-1 text-center font-weight-bold">Mines</span>
+                            <span class="flex-grow-1 text-center font-weight-bold" data-bind="t: 'underground.help.mines.title'">Mines</span>
                         </div>
 
                         <div class="card-body">
-                            <p>
+                            <p data-bind="t: 'underground.help.mines.intro'">
                                 There are six different types of mines you can search for in the Underground.
                                 Understanding their unique properties and the discovery times involved is crucial for efficient mining.
                                 The Underground Glossary can be found at the bottom of this page.
                             </p>
 
-                            <h4>Mine Types</h4>
+                            <h4 data-bind="t: 'underground.help.mines.typesTitle'">Mine Types</h4>
                             <ul>
-                                <li>
-                                    <strong><knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout>:</strong> Contains all possible treasures (except the treasure found in a <knockout data-bind="text: MineConfigs.find(MineType.Special).displayName"></knockout>)
+                                <li data-bind="tHtml: 'underground.help.mines.typeRandom', tVars: { mine: MineConfigs.find(MineType.Random).displayName, special: MineConfigs.find(MineType.Special).displayName }">
+                                    <strong>{{mine}}:</strong> Contains all possible treasures (except the treasure found in a {{special}})
                                 </li>
-                                <li>
-                                    <strong><knockout data-bind="text: MineConfigs.find(MineType.Diamond).displayName"></knockout>:</strong> Contains only treasures that can be sold for diamonds.
+                                <li data-bind="tHtml: 'underground.help.mines.typeDiamond', tVars: { mine: MineConfigs.find(MineType.Diamond).displayName }">
+                                    <strong>{{mine}}:</strong> Contains only treasures that can be sold for diamonds.
                                 </li>
-                                <li>
-                                    <strong><knockout data-bind="text: MineConfigs.find(MineType.GemPlate).displayName"></knockout>:</strong> Contains only gem plate treasures that can be sold for gems.
+                                <li data-bind="tHtml: 'underground.help.mines.typeGemPlate', tVars: { mine: MineConfigs.find(MineType.GemPlate).displayName }">
+                                    <strong>{{mine}}:</strong> Contains only gem plate treasures that can be sold for gems.
                                 </li>
-                                <li>
-                                    <strong><knockout data-bind="text: MineConfigs.find(MineType.Shard).displayName"></knockout>:</strong> Contains only shard treasures.
+                                <li data-bind="tHtml: 'underground.help.mines.typeShard', tVars: { mine: MineConfigs.find(MineType.Shard).displayName }">
+                                    <strong>{{mine}}:</strong> Contains only shard treasures.
                                 </li>
-                                <li>
-                                    <strong><knockout data-bind="text: MineConfigs.find(MineType.Fossil).displayName"></knockout>:</strong> Contains only fossils and fossil pieces.
+                                <li data-bind="tHtml: 'underground.help.mines.typeFossil', tVars: { mine: MineConfigs.find(MineType.Fossil).displayName }">
+                                    <strong>{{mine}}:</strong> Contains only fossils and fossil pieces.
                                 </li>
-                                <li>
-                                    <strong><knockout data-bind="text: MineConfigs.find(MineType.EvolutionItem).displayName"></knockout>:</strong> Contains only evolution items.
+                                <li data-bind="tHtml: 'underground.help.mines.typeEvolutionItem', tVars: { mine: MineConfigs.find(MineType.EvolutionItem).displayName }">
+                                    <strong>{{mine}}:</strong> Contains only evolution items.
                                 </li>
-                                <li>
-                                    <strong><knockout data-bind="text: MineConfigs.find(MineType.Special).displayName"></knockout>:</strong> Can only be found when special conditions are met (see below). Contains only special items.
+                                <li data-bind="tHtml: 'underground.help.mines.typeSpecial', tVars: { mine: MineConfigs.find(MineType.Special).displayName }">
+                                    <strong>{{mine}}:</strong> Can only be found when special conditions are met (see below). Contains only special items.
                                 </li>
                             </ul>
 
                             <h4><knockout data-bind="text: MineConfigs.find(MineType.Special).displayName"></knockout></h4>
-                            <p>
-                                When you (not your expert) are searching for a mine, there is a 4% chance for the mine to be a <knockout data-bind="text: MineConfigs.find(MineType.Special).displayName"></knockout>.
+                            <p data-bind="tHtml: 'underground.help.mines.special', tVars: { special: MineConfigs.find(MineType.Special).displayName }">
+                                When you (not your expert) are searching for a mine, there is a 4% chance for the mine to be a {{special}}.
                                 This mine only contains 1 treasure, which can be any of the mega stones (if eligible) or other special treasures.
                                 <br>
-                                <i>Note: The auto-restart triggered by the player digging up the last item <u>can</u> trigger a <knockout data-bind="text: MineConfigs.find(MineType.Special).displayName"></knockout>.</i>
+                                <i>Note: The auto-restart triggered by the player digging up the last item <u>can</u> trigger a {{special}}.</i>
                             </p>
 
-                            <h4>Finding a new mine</h4>
-                            <p>
+                            <h4 data-bind="t: 'underground.help.mines.findingTitle'">Finding a new mine</h4>
+                            <p data-bind="tHtml: 'underground.help.mines.finding'">
                                 A new mine can be manually found by clicking the Find mine button in the Dig tab.<br/>
                                 Automatically starting a new mine happens in the following cases:
                             </p>
                             <ul>
-                                <li>A <strong>player</strong> digs up the last treasure: When the 'Auto restart selected mine' toggle is enabled, the game will automatically try to find a new mine of your selected type.</li>
-                                <li>An <strong>expert</strong> digs up the last treasure: If your expert has the 'Use expertise' setting enabled, it will try to find a specific mine. If this setting is disabled it will find a <knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout>.</li>
+                                <li data-bind="tHtml: 'underground.help.mines.findingPlayer'">A <strong>player</strong> digs up the last treasure: When the 'Auto restart selected mine' toggle is enabled, the game will automatically try to find a new mine of your selected type.</li>
+                                <li data-bind="tHtml: 'underground.help.mines.findingExpert', tVars: { random: MineConfigs.find(MineType.Random).displayName }">An <strong>expert</strong> digs up the last treasure: If your expert has the 'Use expertise' setting enabled, it will try to find a specific mine. If this setting is disabled it will find a {{random}}.</li>
                             </ul>
                             <p>
-                                <i>Note: This step happens before calculating a potential discovery time</i>
+                                <i data-bind="t: 'underground.help.mines.findingNote'">Note: This step happens before calculating a potential discovery time</i>
                             </p>
 
-                            <h4>Discovery Time Calculation</h4>
-                            <p>The discovery time is calculated as follows:</p>
+                            <h4 data-bind="t: 'underground.help.discovery.title'">Discovery Time Calculation</h4>
+                            <p data-bind="t: 'underground.help.discovery.intro'">The discovery time is calculated as follows:</p>
                             <ul>
                                 <li>
                                     <strong><knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout></strong>
                                     <ul>
-                                        <li>Current mine is not a <knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout>: No discovery time</li>
-                                        <li>
-                                            Current mine is a <knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout>:<br/>
-                                            The discovery time starts at <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_BASE)"></knockout> and is reduced by <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL)"></knockout> for every level past level <knockout data-bind="text: GameConstants.DISCOVER_MINE_TIMEOUT_LEVEL_START"></knockout>. This is then further reduced as you discover treasures in your current mine.
+                                        <li data-bind="t: 'underground.help.discovery.notRandom', tVars: { random: MineConfigs.find(MineType.Random).displayName }">Current mine is not a {{random}}: No discovery time</li>
+                                        <li data-bind="tHtml: 'underground.help.discovery.random', tVars: {
+                                            random: MineConfigs.find(MineType.Random).displayName,
+                                            base: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_BASE),
+                                            reduction: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL),
+                                            level: GameConstants.DISCOVER_MINE_TIMEOUT_LEVEL_START
+                                        }">
+                                            Current mine is a {{random}}:<br/>
+                                            The discovery time starts at {{base}} and is reduced by {{reduction}} for every level past level {{level}}. This is then further reduced as you discover treasures in your current mine.
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <strong>Other Mine Type</strong>
-                                    <p>The discovery time starts at <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_BASE)"></knockout> and is reduced by <knockout data-bind="text: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL)"></knockout> for every level past level <knockout data-bind="text: GameConstants.DISCOVER_MINE_TIMEOUT_LEVEL_START"></knockout>.</p>
+                                    <strong data-bind="t: 'underground.help.discovery.otherTitle'">Other Mine Type</strong>
+                                    <p data-bind="t: 'underground.help.discovery.other', tVars: {
+                                        base: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_BASE),
+                                        reduction: GameConstants.formatTimeFullLetters(GameConstants.DISCOVER_MINE_TIMEOUT_REDUCTION_PER_LEVEL),
+                                        level: GameConstants.DISCOVER_MINE_TIMEOUT_LEVEL_START
+                                    }">The discovery time starts at {{base}} and is reduced by {{reduction}} for every level past level {{level}}.</p>
                                 </li>
                             </ul>
 
-                            <h4>Amount of Treasure</h4>
-                            <p>The amount of treasure a player can find is random, between the minimum (inclusive) and maximum (inclusive), and increases as their Underground Level increases:</p>
+                            <h4 data-bind="t: 'underground.help.amount.title'">Amount of Treasure</h4>
+                            <p data-bind="t: 'underground.help.amount.intro'">The amount of treasure a player can find is random, between the minimum (inclusive) and maximum (inclusive), and increases as their Underground Level increases:</p>
                             <table class="table table-sm table-striped text-center">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th scope="col">Level</th>
-                                    <th scope="col">Minimum</th>
-                                    <th scope="col">Maximum</th>
+                                    <th scope="col" data-bind="t: 'underground.help.amount.level'">Level</th>
+                                    <th scope="col" data-bind="t: 'underground.help.amount.minimum'">Minimum</th>
+                                    <th scope="col" data-bind="t: 'underground.help.amount.maximum'">Maximum</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -617,28 +628,28 @@
 
                     <div class="card mb-2">
                         <div class="card-header d-flex align-items-center p-0">
-                            <span class="flex-grow-1 text-center font-weight-bold">Tools</span>
+                            <span class="flex-grow-1 text-center font-weight-bold" data-bind="t: 'underground.help.tools.title'">Tools</span>
                         </div>
 
                         <div class="card-body">
-                            <p>The Underground offers <knockout data-bind="text: App.game.underground.tools.tools.length"></knockout> powerful tools to aid in your mining and exploration. Each tool has a unique function, and understanding how to use them effectively is crucial for maximizing your mining efficiency.</p>
+                            <p data-bind="t: 'underground.help.tools.intro', tVars: { number: App.game.underground.tools.tools.length }">The Underground offers {{number}} powerful tools to aid in your mining and exploration. Each tool has a unique function, and understanding how to use them effectively is crucial for maximizing your mining efficiency.</p>
 
-                            <h4>Durability</h4>
-                            <p>
+                            <h4 data-bind="t: 'underground.help.tools.durabilityTitle'">Durability</h4>
+                            <p data-bind="t: 'underground.help.tools.durability'">
                                 Using a tool is only possible when your tool is durable enough.
                                 When you use your tool successfully it will remove some of its durability, which will be restored over time.
                             </p>
-                            <p>
+                            <p data-bind="t: 'underground.help.tools.restoreRate'">
                                 The restore rate of your tools depends on your Underground level.
                             </p>
 
-                            <h4>Tools Overview</h4>
-                            <p>There are <knockout data-bind="text: App.game.underground.tools.tools.length"></knockout> different tools available, each with unique functions:</p>
+                            <h4 data-bind="t: 'underground.help.tools.overviewTitle'">Tools Overview</h4>
+                            <p data-bind="t: 'underground.help.tools.overview', tVars: { number: App.game.underground.tools.tools.length }">There are {{number}} different tools available, each with unique functions:</p>
                             <table class="table table-sm table-striped">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th colspan="2" class="text-center">Tool</th>
-                                    <th>Description</th>
+                                    <th colspan="2" class="text-center" data-bind="t: 'underground.help.tools.tool'">Tool</th>
+                                    <th data-bind="t: 'common.description'">Description</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -658,45 +669,45 @@
 
                     <div class="card mb-2">
                         <div class="card-header d-flex align-items-center p-0">
-                            <span class="flex-grow-1 text-center font-weight-bold">Oak Items</span>
+                            <span class="flex-grow-1 text-center font-weight-bold" data-bind="t: 'underground.help.oakItems.title'">Oak Items</span>
                         </div>
 
                         <div class="card-body">
                             <h4>Explosive Charge</h4>
                             <ul>
-                                <li><strong>Progress:</strong> Gains progress to level up when finding all treasures in a mine</li>
-                                <li><strong>Effect:</strong> Increases the number of tiles the Bomb tool will mine</li>
+                                <li data-bind="tHtml: 'underground.help.oakItems.explosiveChargeProgress'"><strong>Progress:</strong> Gains progress to level up when finding all treasures in a mine</li>
+                                <li data-bind="tHtml: 'underground.help.oakItems.explosiveChargeEffect'"><strong>Effect:</strong> Increases the number of tiles the Bomb tool will mine</li>
                             </ul>
 
                             <h4>Cell Battery</h4>
                             <ul>
-                                <li><strong>Progress:</strong> Gains progress to level up when the player uses discharge</li>
-                                <li><strong>Effect:</strong> Triggers a discharge which will clear tiles in a certain pattern, new patterns become available by levelling up Cell Battery</li>
+                                <li data-bind="tHtml: 'underground.help.oakItems.cellBatteryProgress'"><strong>Progress:</strong> Gains progress to level up when the player uses discharge</li>
+                                <li data-bind="tHtml: 'underground.help.oakItems.cellBatteryEffect'"><strong>Effect:</strong> Triggers a discharge which will clear tiles in a certain pattern, new patterns become available by levelling up Cell Battery</li>
                             </ul>
 
                             <h4>Treasure Scanner</h4>
                             <ul>
-                                <li><strong>Progress:</strong> Gains progress to level up when finding a treasure in a mine</li>
-                                <li><strong>Effect:</strong> Has a chance to duplicate a collected treasure. Keeps attempting to duplicate until it fails a chance</li>
+                                <li data-bind="tHtml: 'underground.help.oakItems.treasureScannerProgress'"><strong>Progress:</strong> Gains progress to level up when finding a treasure in a mine</li>
+                                <li data-bind="tHtml: 'underground.help.oakItems.treasureScannerEffect'"><strong>Effect:</strong> Has a chance to duplicate a collected treasure. Keeps attempting to duplicate until it fails a chance</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="card mb-2">
                         <div class="card-header d-flex align-items-center p-0">
-                            <span class="flex-grow-1 text-center font-weight-bold">Battery</span>
+                            <span class="flex-grow-1 text-center font-weight-bold" data-bind="t: 'underground.help.battery.title'">Battery</span>
                         </div>
 
                         <div class="card-body">
-                            <p>
+                            <p data-bind="t: 'underground.help.battery.intro'">
                                 The Battery is a system that charges up as you or your expert mines tiles.
                             </p>
-                            <p>
-                                Each successful mining attempt will add a charge, requiring <knockout data-bind="text: GameConstants.UNDERGROUND_BATTERY_MAX_CHARGES"></knockout> charges to be activated.
-                                You can only gain 1 charge per <knockout data-bind="text: GameConstants.UNDERGROUND_BATTERY_COOLDOWN_SECONDS"></knockout> second.
+                            <p data-bind="t: 'underground.help.battery.charges', tVars: { maxCharges: GameConstants.UNDERGROUND_BATTERY_MAX_CHARGES, cooldown: GameConstants.UNDERGROUND_BATTERY_COOLDOWN_SECONDS }">
+                                Each successful mining attempt will add a charge, requiring {{maxCharges}} charges to be activated.
+                                You can only gain 1 charge per {{cooldown}} second.
                                 Equipping your Cell Battery Oak Item will increase the amount of energy gained per charge.
                             </p>
-                            <p>
+                            <p data-bind="t: 'underground.help.battery.discharge'">
                                 When your battery is fully charged up, you can discharge it. This discharge will leave a pattern of cleared tiles behind.
                                 With higher level patterns, which damage more tiles, becoming available as you level up.
                             </p>
@@ -704,12 +715,12 @@
                             <table class="table table-sm table-striped">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th class="text-center">Tier</th>
+                                    <th class="text-center" data-bind="t: 'underground.help.battery.tier'">Tier</th>
                                     <th data-bind="css: { 'd-none': App.game.underground.battery.patterns.every(pattern => pattern.canAccess()) }"></th>
-                                    <th class="text-left">Name</th>
-                                    <th class="text-left" data-bind="css: { 'd-none': App.game.underground.battery.patterns.every(pattern => pattern.canAccess()) }">Requirements</th>
-                                    <th class="text-center">Chance</th>
-                                    <th class="text-center">Discharges</th>
+                                    <th class="text-left" data-bind="t: 'common.name'">Name</th>
+                                    <th class="text-left" data-bind="css: { 'd-none': App.game.underground.battery.patterns.every(pattern => pattern.canAccess()) }, t: 'underground.help.battery.requirements'">Requirements</th>
+                                    <th class="text-center" data-bind="t: 'underground.help.battery.chance'">Chance</th>
+                                    <th class="text-center" data-bind="t: 'underground.help.battery.discharges'">Discharges</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -737,51 +748,65 @@
 
                     <div class="card mb-2">
                         <div class="card-header d-flex align-items-center p-0">
-                            <span class="flex-grow-1 text-center font-weight-bold">Experts</span>
+                            <span class="flex-grow-1 text-center font-weight-bold" data-bind="t: 'underground.help.experts.title'">Experts</span>
                         </div>
 
                         <div class="card-body">
-                            <p>Experts are characters you can hire to assist with mining tasks. They perform actions at certain timing intervals and become more efficient as they level up. Each of them bring their own powerful tools, so their actions will not affect the durability of your tools.</p>
+                            <p data-bind="t: 'underground.help.experts.intro'">Experts are characters you can hire to assist with mining tasks. They perform actions at certain timing intervals and become more efficient as they level up. Each of them bring their own powerful tools, so their actions will not affect the durability of your tools.</p>
 
-                            <h4>Expert Mechanics</h4>
+                            <h4 data-bind="t: 'underground.help.experts.mechanicsTitle'">Expert Mechanics</h4>
                             <ul>
-                                <li><strong>Expertise:</strong> Each expert has an expertise, a specific mine they are more likely to find.
+                                <li><knockout data-bind="tHtml: 'underground.help.experts.expertise'"><strong>Expertise:</strong> Each expert has an expertise, a specific mine they are more likely to find.</knockout>
                                     <ul>
-                                        <li>Starts at <knockout data-bind="text: GameConstants.FAVORITE_MINE_CHANCE_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> chance to find their specific mine when searching.</li>
-                                        <li>Increases by <knockout data-bind="text: GameConstants.FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, up to a maximum of <knockout data-bind="text: GameConstants.FAVORITE_MINE_CHANCE_MAXIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.</li>
-                                        <li>If they don’t find their specific mine, they will find a <knockout data-bind="text: MineConfigs.find(MineType.Random).displayName"></knockout>.</li>
-                                        <li><i>Experts will never discover a <knockout data-bind="text: MineConfigs.find(MineType.Special).displayName"></knockout>.</i></li>
+                                        <li data-bind="t: 'underground.help.experts.expertiseBase', tVars: { chance: GameConstants.FAVORITE_MINE_CHANCE_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 }) }">Starts at {{chance}} chance to find their specific mine when searching.</li>
+                                        <li data-bind="t: 'underground.help.experts.expertiseIncrease', tVars: {
+                                            increase: GameConstants.FAVORITE_MINE_CHANCE_INCREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 }),
+                                            maximum: GameConstants.FAVORITE_MINE_CHANCE_MAXIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })
+                                        }">Increases by {{increase}} per level, up to a maximum of {{maximum}}.</li>
+                                        <li data-bind="t: 'underground.help.experts.expertiseFallback', tVars: { random: MineConfigs.find(MineType.Random).displayName }">If they don’t find their specific mine, they will find a {{random}}.</li>
+                                        <li><i data-bind="t: 'underground.help.experts.neverSpecial', tVars: { special: MineConfigs.find(MineType.Special).displayName }">Experts will never discover a {{special}}.</i></li>
                                     </ul>
                                 </li>
-                                <li><strong>Smart tool use:</strong> Experts start out inexperienced and will pick the most efficient tool <knockout data-bind="text: GameConstants.SMART_TOOL_CHANCE_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of the time.
+                                <li><knockout data-bind="tHtml: 'underground.help.experts.smartToolUse', tVars: { chance: GameConstants.SMART_TOOL_CHANCE_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 }) }"><strong>Smart tool use:</strong> Experts start out inexperienced and will pick the most efficient tool {{chance}} of the time.</knockout>
                                     <ul>
-                                        <li>Increases by <knockout data-bind="text: GameConstants.SMART_TOOL_CHANCE_INCREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, up to <knockout data-bind="text: GameConstants.SMART_TOOL_CHANCE_MAXIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.</li>
+                                        <li data-bind="t: 'underground.help.experts.smartToolUseIncrease', tVars: {
+                                            increase: GameConstants.SMART_TOOL_CHANCE_INCREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 }),
+                                            maximum: GameConstants.SMART_TOOL_CHANCE_MAXIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })
+                                        }">Increases by {{increase}} per level, up to {{maximum}}.</li>
                                         <li>
-                                            <strong>Actions</strong>
+                                            <strong data-bind="t: 'underground.help.experts.actions'">Actions</strong>
                                             <ul>
-                                                <li><strong>Bomb:</strong> When not all treasures have been seen.</li>
-                                                <li><strong>Hammer:</strong> When all treasures have been seen, and the spot that is being mined has at least 1 adjacent tile with a reward</li>
-                                                <li><strong>Chisel:</strong> When all treasures have been seen, and the spot that is being mined has no adjacent tiles with a reward</li>
+                                                <li data-bind="tHtml: 'underground.help.experts.actionBomb'"><strong>Bomb:</strong> When not all treasures have been seen.</li>
+                                                <li data-bind="tHtml: 'underground.help.experts.actionHammer'"><strong>Hammer:</strong> When all treasures have been seen, and the spot that is being mined has at least 1 adjacent tile with a reward</li>
+                                                <li data-bind="tHtml: 'underground.help.experts.actionChisel'"><strong>Chisel:</strong> When all treasures have been seen, and the spot that is being mined has no adjacent tiles with a reward</li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
-                                <li><strong>Reward retention:</strong> When an expert digs up a treasure (last click), there is a chance that they will keep the treasure for themselves.
+                                <li><knockout data-bind="tHtml: 'underground.help.experts.rewardRetention'"><strong>Reward retention:</strong> When an expert digs up a treasure (last click), there is a chance that they will keep the treasure for themselves.</knockout>
                                     <ul>
-                                        <li>
-                                            The chance starts at <knockout data-bind="text: GameConstants.REWARD_RETENTION_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> and decreases by <knockout data-bind="text: GameConstants.REWARD_RETENTION_DECREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> per level, down to <knockout data-bind="text: GameConstants.REWARD_RETENTION_MINIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout>.
+                                        <li data-bind="t: 'underground.help.experts.rewardRetentionChance', tVars: {
+                                            base: GameConstants.REWARD_RETENTION_BASE.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 }),
+                                            decrease: GameConstants.REWARD_RETENTION_DECREASE_PER_LEVEL.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 }),
+                                            minimum: GameConstants.REWARD_RETENTION_MINIMUM.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })
+                                        }">
+                                            The chance starts at {{base}} and decreases by {{decrease}} per level, down to {{minimum}}.
                                         </li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <strong>Work cycle:</strong> Starts at <knockout data-bind="text: GameConstants.WORKCYCLE_TIMEOUT_BASE"></knockout> seconds and decreases by <knockout data-bind="text: GameConstants.WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL"></knockout> second for every level, up to a minimum of <knockout data-bind="text: GameConstants.WORKCYCLE_TIMEOUT_MINIMUM"></knockout> seconds per action.
+                                <li data-bind="tHtml: 'underground.help.experts.workCycle', tVars: {
+                                    base: GameConstants.WORKCYCLE_TIMEOUT_BASE,
+                                    decrease: GameConstants.WORKCYCLE_TIMEOUT_DECREASE_PER_LEVEL,
+                                    minimum: GameConstants.WORKCYCLE_TIMEOUT_MINIMUM
+                                }">
+                                    <strong>Work cycle:</strong> Starts at {{base}} seconds and decreases by {{decrease}} second for every level, up to a minimum of {{minimum}} seconds per action.
                                 </li>
                                 <li>
-                                    <strong>Energy restore:</strong> An expert can use an energy potion to restore a portion of the time until they can perform their next action. When an expert is allowed to use multiple restores they will first use the best restore at their disposal.
+                                    <knockout data-bind="tHtml: 'underground.help.experts.energyRestore'"><strong>Energy restore:</strong> An expert can use an energy potion to restore a portion of the time until they can perform their next action. When an expert is allowed to use multiple restores they will first use the best restore at their disposal.</knockout>
                                     <ul>
-                                        <li><strong>Small restore:</strong> Restores 25% of the time until the next action can be performed</li>
-                                        <li><strong>Medium restore:</strong> Restores 50% of the time until the next action can be performed</li>
-                                        <li><strong>Large restore:</strong> Restores 75% of the time until the next action can be performed</li>
+                                        <li data-bind="tHtml: 'underground.help.experts.smallRestore'"><strong>Small restore:</strong> Restores 25% of the time until the next action can be performed</li>
+                                        <li data-bind="tHtml: 'underground.help.experts.mediumRestore'"><strong>Medium restore:</strong> Restores 50% of the time until the next action can be performed</li>
+                                        <li data-bind="tHtml: 'underground.help.experts.largeRestore'"><strong>Large restore:</strong> Restores 75% of the time until the next action can be performed</li>
                                     </ul>
                                 </li>
                             </ul>
@@ -790,66 +815,66 @@
 
                     <div class="card mb-2">
                         <div class="card-header d-flex align-items-center p-0">
-                            <span class="flex-grow-1 text-center font-weight-bold">Experience and Leveling</span>
+                            <span class="flex-grow-1 text-center font-weight-bold" data-bind="t: 'underground.help.experience.title'">Experience and Leveling</span>
                         </div>
 
                         <div class="card-body">
-                            <p>Using tools and experts not only helps you gather treasures but also grants experience that helps in leveling up.</p>
+                            <p data-bind="t: 'underground.help.experience.intro'">Using tools and experts not only helps you gather treasures but also grants experience that helps in leveling up.</p>
 
-                            <h4>Experience</h4>
+                            <h4 data-bind="t: 'underground.help.experience.experienceTitle'">Experience</h4>
                             <ul>
                                 <li>
-                                    <strong>Treasures:</strong>
+                                    <strong data-bind="t: 'underground.help.experience.treasures'">Treasures:</strong>
                                     <ul>
-                                        <li>Digging up any treasure: <knockout data-bind="text: GameConstants.UNDERGROUND_EXPERIENCE_DIG_UP_ITEM"></knockout> experience</li>
-                                        <li>Digging up all treasures: <knockout data-bind="text: GameConstants.UNDERGROUND_EXPERIENCE_CLEAR_LAYER"></knockout> experience</li>
+                                        <li data-bind="t: 'underground.help.experience.digUpItem', tVars: { experience: GameConstants.UNDERGROUND_EXPERIENCE_DIG_UP_ITEM }">Digging up any treasure: {{experience}} experience</li>
+                                        <li data-bind="t: 'underground.help.experience.clearLayer', tVars: { experience: GameConstants.UNDERGROUND_EXPERIENCE_CLEAR_LAYER }">Digging up all treasures: {{experience}} experience</li>
                                     </ul>
                                 </li>
                             </ul>
 
-                            <h4>Shared Experience</h4>
+                            <h4 data-bind="t: 'underground.help.experience.sharedTitle'">Shared Experience</h4>
                             <ul>
-                                <li><strong>Player Actions:</strong> When the player performs an action that gains experience, the active expert will also gain <knockout data-bind="text: GameConstants.PLAYER_EXPERIENCE_HELPER_FRACTION.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of that experience, rounded to the nearest tenth.</li>
-                                <li><strong>Expert Actions:</strong> When the expert performs an action that gains them experience, the player will also gain <knockout data-bind="text: GameConstants.HELPER_EXPERIENCE_PLAYER_FRACTION.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 })"></knockout> of that experience, rounded to the nearest tenth.</li>
+                                <li data-bind="tHtml: 'underground.help.experience.sharedPlayer', tVars: { fraction: GameConstants.PLAYER_EXPERIENCE_HELPER_FRACTION.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 }) }"><strong>Player Actions:</strong> When the player performs an action that gains experience, the active expert will also gain {{fraction}} of that experience, rounded to the nearest tenth.</li>
+                                <li data-bind="tHtml: 'underground.help.experience.sharedExpert', tVars: { fraction: GameConstants.HELPER_EXPERIENCE_PLAYER_FRACTION.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2 }) }"><strong>Expert Actions:</strong> When the expert performs an action that gains them experience, the player will also gain {{fraction}} of that experience, rounded to the nearest tenth.</li>
                             </ul>
 
-                            <h4>Underground Level</h4>
-                            <p>Your underground level will affect the following:</p>
+                            <h4 data-bind="t: 'underground.help.experience.levelTitle'">Underground Level</h4>
+                            <p data-bind="t: 'underground.help.experience.levelIntro'">Your underground level will affect the following:</p>
                             <ul>
-                                <li>Increases the minimum and maximum amount of treasures that can be found in a mine</li>
-                                <li>Increases the rate at which tools gain durability</li>
-                                <li>Reduces the discovery time of mines when applicable</li>
-                                <li>Reduces the Survey area</li>
+                                <li data-bind="t: 'underground.help.experience.levelTreasures'">Increases the minimum and maximum amount of treasures that can be found in a mine</li>
+                                <li data-bind="t: 'underground.help.experience.levelDurability'">Increases the rate at which tools gain durability</li>
+                                <li data-bind="t: 'underground.help.experience.levelDiscovery'">Reduces the discovery time of mines when applicable</li>
+                                <li data-bind="t: 'underground.help.experience.levelSurvey'">Reduces the Survey area</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="card mb-2">
                         <div class="card-header d-flex align-items-center p-0">
-                            <span class="flex-grow-1 text-center font-weight-bold">Trading</span>
+                            <span class="flex-grow-1 text-center font-weight-bold" data-bind="t: 'underground.help.trading.title'">Trading</span>
                         </div>
 
                         <div class="card-body">
-                            <p>Trading allows you to exchange treasures within the same category. Here’s how it works:</p>
+                            <p data-bind="t: 'underground.help.trading.intro'">Trading allows you to exchange treasures within the same category. Here’s how it works:</p>
                             <ul>
-                                <li><strong>Same Category Trading:</strong> Trades can only be made within the same category of treasures.</li>
-                                <li><strong>3 to 1 Trade:</strong> Trading always follows a 3 to 1 ratio (e.g., trade 3 treasures to receive 1 new treasure).</li>
-                                <li><strong>Exception:</strong> Diamond treasures cannot be traded for other items, only sold for diamonds.</li>
+                                <li data-bind="tHtml: 'underground.help.trading.sameCategory'"><strong>Same Category Trading:</strong> Trades can only be made within the same category of treasures.</li>
+                                <li data-bind="tHtml: 'underground.help.trading.ratio'"><strong>3 to 1 Trade:</strong> Trading always follows a 3 to 1 ratio (e.g., trade 3 treasures to receive 1 new treasure).</li>
+                                <li data-bind="tHtml: 'underground.help.trading.exception'"><strong>Exception:</strong> Diamond treasures cannot be traded for other items, only sold for diamonds.</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="card">
                         <div class="card-header d-flex align-items-center p-0">
-                            <span class="flex-grow-1 text-center font-weight-bold">Glossary</span>
+                            <span class="flex-grow-1 text-center font-weight-bold" data-bind="t: 'underground.help.glossary.title'">Glossary</span>
                         </div>
 
                         <div class="card-body">
                             <ul>
-                                <li><strong>Seen treasure:</strong> At least 1 part of the treasure is visible to the player</li>
-                                <li><strong>Collected treasure:</strong> All parts of the treasure are visible to the player, the treasure has been claimed</li>
-                                <li><strong>Completed Mine:</strong> All buried treasures have been collected</li>
-                                <li><strong>Successful Tool Use:</strong> A tool only counts as used if its action is successful, meaning it accomplishes its intended task (e.g., mining layers or indicating tiles)</li>
+                                <li data-bind="tHtml: 'underground.help.glossary.seen'"><strong>Seen treasure:</strong> At least 1 part of the treasure is visible to the player</li>
+                                <li data-bind="tHtml: 'underground.help.glossary.collected'"><strong>Collected treasure:</strong> All parts of the treasure are visible to the player, the treasure has been claimed</li>
+                                <li data-bind="tHtml: 'underground.help.glossary.completed'"><strong>Completed Mine:</strong> All buried treasures have been collected</li>
+                                <li data-bind="tHtml: 'underground.help.glossary.successfulToolUse'"><strong>Successful Tool Use:</strong> A tool only counts as used if its action is successful, meaning it accomplishes its intended task (e.g., mining layers or indicating tiles)</li>
                             </ul>
                         </div>
                     </div>
@@ -874,7 +899,7 @@
                                 <div class="d-flex flex-wrap align-items-center m-2">
                                     <div>
                                         <div style="line-height: 1.2rem;" data-bind="text: $data.name"></div>
-                                        <div style="font-size: 0.6rem; line-height: 0.5rem;" data-bind="text: `Level ${$data.level}`"></div>
+                                        <div style="font-size: 0.6rem; line-height: 0.5rem;" data-bind="text: App.translation.ui('underground.experts.levelValue', 'Level {{level}}', { level: $data.level })"></div>
                                     </div>
                                     <!-- ko ifnot: $data.selectedEnergyRestore() < 0 -->
                                     <img class="pixelated" data-bind="attr: { src: ItemList[GameConstants.EnergyRestoreSize[$data.selectedEnergyRestore()]].image }" src="" alt="" style="height: 26px;">
@@ -902,7 +927,7 @@
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <h4>Select a mine</h4>
+                <h4 data-bind="t: 'underground.findMine.selectMine'">Select a mine</h4>
                 <div class="search-mine-display mb-2">
                     <!-- ko foreach: [MineType.Random, MineType.Diamond, MineType.GemPlate, MineType.Shard, MineType.Fossil, MineType.EvolutionItem] -->
                     <div class="card clickable" data-bind="click: () => { App.game.underground.autoSearchMineType = $data; }">
@@ -918,11 +943,11 @@
                 <div class="card mb-2">
                     <div class="card-header d-flex flex-column align-items-center p-2 text-center">
                         <div class="font-weight-bold" data-bind="text: UndergroundController.getMineConfig(App.game.underground.autoSearchMineType).displayName"></div>
-                        <div class="small" data-bind="text: `${App.game.statistics.undergroundSpecificLayersMined[App.game.underground.autoSearchMineType]().toLocaleString('en-US')} clears`"></div>
+                        <div class="small" data-bind="text: App.translation.ui('underground.findMine.clears', '{{number}} clears', { number: App.game.statistics.undergroundSpecificLayersMined[App.game.underground.autoSearchMineType]().toLocaleString('en-US') })"></div>
                     </div>
 
                     <div class="card-body">
-                        <h6>Potential treasures</h6>
+                        <h6 data-bind="t: 'underground.findMine.potentialTreasures'">Potential treasures</h6>
                         <div>
                             <!-- ko foreach: UndergroundController.getMineConfig(App.game.underground.autoSearchMineType).getAvailableItems() -->
                             <img width="24px" height="24px" data-bind="tooltip: { title: $data.displayName, trigger: 'hover' }, attr: { src: $data.image }" />
@@ -932,10 +957,10 @@
 
                     <div class="card-footer">
                         <div class="small">
-                            Discovery time: <label data-bind="text: GameConstants.formatTime(Math.max(UndergroundController.calculateDiscoverMineTimeout(App.game.underground.autoSearchMineType), 0)), css: { 'text-warning': UndergroundController.calculateDiscoverMineTimeout(App.game.underground.autoSearchMineType) > 0 }"></label>
+                            <knockout data-bind="t: 'underground.findMine.discoveryTime'">Discovery time:</knockout> <label data-bind="text: GameConstants.formatTime(Math.max(UndergroundController.calculateDiscoverMineTimeout(App.game.underground.autoSearchMineType), 0)), css: { 'text-warning': UndergroundController.calculateDiscoverMineTimeout(App.game.underground.autoSearchMineType) > 0 }"></label>
                         </div>
 
-                        <button class="btn btn-primary" data-bind="click: () => App.game.underground.generateMine(App.game.underground.autoSearchMineType);" data-dismiss="modal">Search for mine</button>
+                        <button class="btn btn-primary" data-bind="click: () => App.game.underground.generateMine(App.game.underground.autoSearchMineType), t: 'underground.findMine.searchForMine'" data-dismiss="modal">Search for mine</button>
                     </div>
                 </div>
 
@@ -954,7 +979,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
             </div>
         </div>
 
@@ -978,7 +1003,7 @@
                 <!-- ko if: UndergroundTrading.selectedTradeFromItem?.hasSellValue() -->
                 <div class="card mb-2">
                     <div class="card-header d-flex align-items-center p-0">
-                        <span class="flex-grow-1 text-center font-weight-bold">Sell</span>
+                        <span class="flex-grow-1 text-center font-weight-bold" data-bind="t: 'common.sell'">Sell</span>
                     </div>
 
                     <div class="card-body">
@@ -992,11 +1017,11 @@
                                 →
                                 <!-- ko if: UndergroundTrading.selectedTradeFromItem.valueType === UndergroundItemValueType.Gem -->
                                 <img class='mineInventoryItem' data-bind='attr: { src: Gems.image(UndergroundTrading.selectedTradeFromItem.type) }'/>
-                                <label data-bind="text: `${UndergroundTrading.selectedTradeFromItem.value.toLocaleString('en-US')} × ${PokemonType[UndergroundTrading.selectedTradeFromItem.type]} Gems`"></label>
+                                <label data-bind="text: App.translation.ui('underground.treasureDetail.gemsValue', '{{amount}} × {{type}} Gems', { amount: UndergroundTrading.selectedTradeFromItem.value.toLocaleString('en-US'), type: PokemonType[UndergroundTrading.selectedTradeFromItem.type] })"></label>
                                 <!-- /ko -->
                                 <!-- ko if: UndergroundTrading.selectedTradeFromItem.valueType === UndergroundItemValueType.Diamond -->
                                 <img class='mineInventoryItem' src="assets/images/currency/diamond.svg"/>
-                                <label data-bind="text: `${UndergroundTrading.selectedTradeFromItem.value.toLocaleString('en-US')} × Diamonds`"></label>
+                                <label data-bind="text: App.translation.ui('underground.treasureDetail.diamondsValue', '{{amount}} × Diamonds', { amount: UndergroundTrading.selectedTradeFromItem.value.toLocaleString('en-US') })"></label>
                                 <!-- /ko -->
                             </div>
                             <div class="col-12 col-lg-3 font-weight-bold">
@@ -1009,7 +1034,7 @@
                         <div class="row">
                             <div class="col-12 col-lg-9 mb-2 mb-lg-0">
                                 <div class="input-group">
-                                    <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.sellAmount = 1">Reset</button>
+                                    <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.sellAmount = 1, t: 'common.reset'">Reset</button>
 
                                     <input type="number" min="0" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.sellAmount">
 
@@ -1040,7 +1065,7 @@
 
                                     <button class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                     <div class="dropdown-menu text-center p-0">
-                                        <p class="small py-2 m-0">Set Trade Amount</p>
+                                        <p class="small py-2 m-0" data-bind="t: 'underground.treasureDetail.setTradeAmount'">Set Trade Amount</p>
                                         <div class="dropdown-divider m-0"></div>
                                         <!-- ko foreach: [10, 100, 1000] -->
                                         <button class="dropdown-item small py-1" type="button" data-bind="
@@ -1062,7 +1087,8 @@
                             <div class="col-12 col-lg-3">
                                 <button class="btn btn-block btn-primary" data-bind="
                                     enable: UndergroundTrading.canSell,
-                                    click: () => UndergroundTrading.sell()
+                                    click: () => UndergroundTrading.sell(),
+                                    t: 'common.sell'
                                 ">Sell</button>
                             </div>
                         </div>
@@ -1073,7 +1099,7 @@
                 <!-- ko if: UndergroundTrading.tradeToItemList?.length > 0 -->
                 <div class="card mb-2">
                     <div class="card-header d-flex align-items-center p-0">
-                        <span class="flex-grow-1 text-center font-weight-bold">Trade</span>
+                        <span class="flex-grow-1 text-center font-weight-bold" data-bind="t: 'underground.treasureDetail.trade'">Trade</span>
                     </div>
 
                     <div class="card-body">
@@ -1113,7 +1139,7 @@
                         <div class="row">
                             <div class="col-12 col-lg-9 mb-2 mb-lg-0">
                                 <div class="input-group">
-                                    <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.tradeAmount = 1">Reset</button>
+                                    <button class="btn btn-warning btn-outline-dark smallButton smallFont" data-bind="click: () => UndergroundTrading.tradeAmount = 1, t: 'common.reset'">Reset</button>
 
                                     <input type="number" min="0" class="outline-dark form-control form-control-number" data-bind="textInput: UndergroundTrading.tradeAmount">
 
@@ -1144,7 +1170,7 @@
 
                                     <button class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                     <div class="dropdown-menu text-center p-0">
-                                        <p class="small py-2 m-0">Set Trade Amount</p>
+                                        <p class="small py-2 m-0" data-bind="t: 'underground.treasureDetail.setTradeAmount'">Set Trade Amount</p>
                                         <div class="dropdown-divider m-0"></div>
                                         <!-- ko foreach: [10, 100, 1000] -->
                                         <button class="dropdown-item small py-1" type="button" data-bind="
@@ -1166,7 +1192,8 @@
                             <div class="col-12 col-lg-3">
                                 <button class="btn btn-block btn-primary" data-bind="
                                     enable: UndergroundTrading.canTrade,
-                                    click: () => UndergroundTrading.trade()
+                                    click: () => UndergroundTrading.trade(),
+                                    t: 'underground.treasureDetail.trade'
                                 ">Trade</button>
                             </div>
                         </div>
@@ -1177,7 +1204,7 @@
                 <!-- ko if: UndergroundTrading.selectedTradeFromItem -->
                 <div class="card mb-2">
                     <div class="card-header d-flex align-items-center p-0">
-                        <span class="flex-grow-1 text-center font-weight-bold">Statistics</span>
+                        <span class="flex-grow-1 text-center font-weight-bold" data-bind="t: 'underground.treasureDetail.statistics'">Statistics</span>
                     </div>
 
                     <div class="card-body">
@@ -1186,16 +1213,16 @@
                                 <table class="table table-striped table-hover table-bordered table-sm m-0 mb-2">
                                     <thead>
                                     <tr class="bg-secondary">
-                                        <th colspan="2">Mining</th>
+                                        <th colspan="2" data-bind="t: 'underground.treasureDetail.mining'">Mining</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td class="text-left">Owned</td>
+                                        <td class="text-left" data-bind="t: 'underground.treasureDetail.owned'">Owned</td>
                                         <td class="text-left tight"><code data-bind="text: player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]().toLocaleString('en-US')"></code></td>
                                     </tr>
                                     <tr>
-                                        <td class="text-left">Mined</td>
+                                        <td class="text-left" data-bind="t: 'underground.treasureDetail.mined'">Mined</td>
                                         <td class="text-left tight"><code data-bind="text: App.game.statistics.undergroundSpecificItemsFound[UndergroundTrading.selectedTradeFromItem.id]().toLocaleString('en-US')"></code></td>
                                     </tr>
                                     </tbody>
@@ -1209,9 +1236,9 @@
 
             <div class="modal-footer justify-content-between">
                 <!-- ko if: UndergroundTrading.selectedTradeFromItem -->
-                <div>Owned: <knockout data-bind="text: player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]().toLocaleString('en-US')"></knockout></div>
+                <div data-bind="t: 'underground.treasureDetail.ownedAmount', tVars: { amount: player.itemList[UndergroundTrading.selectedTradeFromItem.itemName]().toLocaleString('en-US') }">Owned: {{amount}}</div>
                 <!-- /ko -->
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
             </div>
         </div>
     </div>

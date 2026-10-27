@@ -214,9 +214,9 @@ class Plot implements Saveable {
                 const timeBoostType = Settings.getSetting('farmBoostDisplay').observableValue();
                 // Petaya Effect
                 if (this.isAffectedByPetaya() && this.stage() == PlotStage.Berry) {
-                    tooltip.push('∞ until death');
+                    tooltip.push(App.translation.ui('farm.plot.infiniteUntilDeath', '∞ until death'));
                     if (timeBoostType) {
-                        tooltip.push(`(altered from ${this.formattedBaseStageTimeLeft()})`);
+                        tooltip.push(App.translation.ui('farm.plot.alteredFrom', '(altered from {{time}})', { time: this.formattedBaseStageTimeLeft() }));
                     }
                 // Normal Time
                 } else {
@@ -233,19 +233,19 @@ class Plot implements Saveable {
                         formattedBaseTime = this.formattedBaseStageTimeLeft();
                         switch (this.stage()) {
                             case PlotStage.Seed:
-                                timetip = `${formattedTime} until sprout`;
+                                timetip = App.translation.ui('farm.plot.untilSprout', '{{time}} until sprout', { time: formattedTime });
                                 break;
                             case PlotStage.Sprout:
-                                timetip = `${formattedTime} until grown`;
+                                timetip = App.translation.ui('farm.plot.untilGrown', '{{time}} until grown', { time: formattedTime });
                                 break;
                             case PlotStage.Taller:
-                                timetip = `${formattedTime} until bloom`;
+                                timetip = App.translation.ui('farm.plot.untilBloom', '{{time}} until bloom', { time: formattedTime });
                                 break;
                             case PlotStage.Bloom:
-                                timetip = `${formattedTime} until ripe`;
+                                timetip = App.translation.ui('farm.plot.untilRipe', '{{time}} until ripe', { time: formattedTime });
                                 break;
                             case PlotStage.Berry:
-                                timetip = `${formattedTime} until death`;
+                                timetip = App.translation.ui('farm.plot.untilDeath', '{{time}} until death', { time: formattedTime });
                                 break;
                         }
                     } else {
@@ -256,17 +256,17 @@ class Plot implements Saveable {
                             case PlotStage.Sprout:
                             case PlotStage.Taller:
                             case PlotStage.Bloom:
-                                timetip = `${formattedTime} until ripe`;
+                                timetip = App.translation.ui('farm.plot.untilRipe', '{{time}} until ripe', { time: formattedTime });
                                 break;
                             case PlotStage.Berry:
-                                timetip = `${formattedTime} until death`;
+                                timetip = App.translation.ui('farm.plot.untilDeath', '{{time}} until death', { time: formattedTime });
                                 break;
                         }
                     }
 
                     tooltip.push(timetip);
                     if (altered && timeBoostType) {
-                        tooltip.push(`(altered from ${formattedBaseTime})`);
+                        tooltip.push(App.translation.ui('farm.plot.alteredFrom', '(altered from {{time}})', { time: formattedBaseTime }));
                     }
                 }
             }
@@ -274,31 +274,31 @@ class Plot implements Saveable {
             // Aura
 
             if (this.emittingAura.type() !== null) {
-                tooltip.push('<u>Aura Emitted:</u>');
+                tooltip.push(App.translation.ui('farm.plot.auraEmitted', '<u>Aura Emitted:</u>'));
                 tooltip.push(`${AuraType[this.emittingAura.type()]}: ×${this.emittingAura.value().toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
             }
             const auraStr = this.formattedAuras();
             if (auraStr) {
-                tooltip.push('<u>Aura Received:</u>');
+                tooltip.push(App.translation.ui('farm.plot.auraReceived', '<u>Aura Received:</u>'));
                 tooltip.push(auraStr);
             }
 
             // Mulch
             if (this.mulch !== MulchType.None) {
                 const mulchTime = this.formattedMulchTimeLeft();
-                tooltip.push('<u>Mulch</u>');
+                tooltip.push(App.translation.ui('farm.plot.mulch', '<u>Mulch</u>'));
                 tooltip.push(`${MulchType[this.mulch].replace('_Mulch','')} : ${mulchTime}`);
             }
 
             // Wanderer
             if (this.wanderer) {
-                tooltip.push(`A wild <strong>${PokemonHelper.displayName(this.wanderer.name)}</strong> is wandering around`);
+                tooltip.push(App.translation.ui('farm.plot.wanderer', 'A wild <strong>{{pokemon}}</strong> is wandering around', { pokemon: PokemonHelper.displayName(this.wanderer.name) }));
             }
 
             // Mutation
             const possibleMutations = App.game.farming.possiblePlotMutations()[this.index];
             if (possibleMutations.length) {
-                tooltip.push('<u>Possible Mutations</u>');
+                tooltip.push(App.translation.ui('farm.plot.possibleMutations', '<u>Possible Mutations</u>'));
                 possibleMutations.forEach((mutation) => tooltip.push(mutation));
             }
 

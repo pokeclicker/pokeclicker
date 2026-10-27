@@ -10,7 +10,7 @@ import Language from './Language';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
 import Notifier from '../notifications/Notifier';
 
-export type TranslationNamespace = 'pokemon' | 'logbook' | 'settings' | 'questlines';
+export type TranslationNamespace = 'pokemon' | 'logbook' | 'settings' | 'questlines' | 'ui';
 export type TranslationVar = string | number | PokemonNameType;
 export type TranslationVars = Record<string, TranslationVar>;
 
@@ -45,7 +45,7 @@ export default class Translate {
     }), getTranslatedMemoResolver);
 
     constructor(languageSetting: Setting<Language>) {
-        const namespaces: TranslationNamespace[] = ['pokemon', 'logbook', 'settings', 'questlines'];
+        const namespaces: TranslationNamespace[] = ['pokemon', 'logbook', 'settings', 'questlines', 'ui'];
         this.languageUpdated = ko.observable(0);
 
         let translationsUrlOverride = new URLSearchParams(window.location.search).get('translations');
@@ -124,6 +124,14 @@ export default class Translate {
             this.cacheDefaultValue(hashedKey, namespace, defaultValue);
         }
         return this.get(hashedKey, namespace, { ...(otherOptions ?? {}), defaultValue });
+    }
+
+    /**
+     * Interface text from the 'ui' namespace, for text set from code or binding expressions.
+     * Text written in the HTML uses the t/tHtml/tAttr bindings instead.
+     */
+    public ui(key: string, defaultValue: string, vars?: TranslationVars): string {
+        return this.get(key, 'ui', { ...(vars ?? {}), defaultValue })();
     }
 
     private cacheDefaultValue(key: string, namespace: string, defaultValue: string) {

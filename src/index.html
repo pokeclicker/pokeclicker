@@ -195,7 +195,7 @@
                                 </div>
                                 <div class="title-right">
                                     <div class="d-flex align-items-center mr-1 ml-auto" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.name)]()">
-                                        <div class="px-1 clickable" data-bind="tooltip: { title: 'See the Pokémon available on this route.', trigger: 'hover' }, click: function() { $('#routeInfoModal').modal('show') }" data-original-title="" title="">
+                                        <div class="px-1 clickable" data-bind="tooltip: { title: App.translation.ui('battle.routeInfoTooltip', 'See the Pokémon available on this route.'), trigger: 'hover' }, click: function() { $('#routeInfoModal').modal('show') }" data-original-title="" title="">
                                             <img src="assets/images/encountersInfo/encountersInfo.png">
                                         </div>
                                     </div>
@@ -210,7 +210,7 @@
                                          data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.svg'}"
                                          src=""/>
                                     <br>
-                                    Catch Chance:
+                                    <knockout data-bind="t: 'battle.catchChance'">Catch Chance:</knockout>
                                     <knockout data-bind="text: Math.floor(Battle.catchRateActual()) + '%'">Catch Rate</knockout>
                                 </div>
                             </div>
@@ -235,7 +235,7 @@
                                             <img class="pokeball-smallest"
                                                  data-bind="attr: { src: `assets/images/pokeball/Pokeball${RouteHelper.routeCompleted(player.route, player.region, true) ? '-shiny' : ''}.svg`},
                                                  tooltip: {
-                                                trigger: 'hover', placement: 'bottom', title: `You have captured all Pokémon${RouteHelper.routeCompleted(player.route, player.region, true) ? ' shiny' : ''} on this route!`
+                                                trigger: 'hover', placement: 'bottom', title: RouteHelper.routeCompleted(player.route, player.region, true) ? App.translation.ui('battle.routeCompletedShiny', 'You have captured all Pokémon shiny on this route!') : App.translation.ui('battle.routeCompleted', 'You have captured all Pokémon on this route!')
                                               }"/>
                                         </knockout>
 
@@ -251,7 +251,7 @@
                                       <knockout data-bind="using: App.game.statistics.routeKills[player.region][player.route]()">
                                           <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
                                           <knockout data-bind="visible: $data < GameConstants.ROUTE_KILLS_NEEDED">/ 10</knockout>
-                                          &nbsp;Pokémon defeated
+                                          &nbsp;<knockout data-bind="t: 'battle.pokemonDefeated'">Pokémon defeated</knockout>
                                       </knockout>
                                     </td>
                                     <!-- /ko -->
@@ -262,11 +262,11 @@
                                     </td>
                                     <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
                                         <span style="display: inline;" data-bind="tooltip: {
-                                            title: 'See the Click Attack tab in the Start → Statistics menu for details.',
+                                            title: App.translation.ui('battle.clickAttackTooltip', 'See the Click Attack tab in the Start → Statistics menu for details.'),
                                             placement: 'bottom',
                                             trigger: 'hover'
                                         }">
-                                            Click Attack:
+                                            <knockout data-bind="t: 'battle.clickAttack'">Click Attack:</knockout>
                                             <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
                                         </span>
                                     </td>
@@ -296,19 +296,19 @@
             <!-- ko if: App.game.gameState === GameConstants.GameState.dungeon -->
                 <div id="dungeonMap" class="card sortable-disabled border-secondary mb-3 dungeon no-select">
                     <div class="card-header p-0">
-                        <div style="position: absolute; left: 2px" data-bind="tooltip: { trigger: 'hover', title: 'Chests opened in current dungeon' }">
+                        <div style="position: absolute; left: 2px" data-bind="tooltip: { trigger: 'hover', title: App.translation.ui('battle.dungeonChestsTooltip', 'Chests opened in current dungeon') }">
                             <img src="assets/images/dungeons/chest.png" height="25px" />
                             <span data-bind="text: `${DungeonRunner.chestsOpened()}/${DungeonRunner.map.totalChests()}`"></span>
                         </div>
 
-                        <div style="position: absolute; right: 4px" data-bind="tooltip: { trigger: 'hover', title: 'Encounters won in current dungeon' }">
+                        <div style="position: absolute; right: 4px" data-bind="tooltip: { trigger: 'hover', title: App.translation.ui('battle.dungeonEncountersTooltip', 'Encounters won in current dungeon') }">
                             <img src="assets/images/dungeons/encounter.png" height="25px" />
                             <span data-bind="text: `${DungeonRunner.encountersWon()}/${DungeonRunner.map.totalFights()}`"></span>
                         </div>
                         <span data-bind="text: `${DungeonRunner.dungeon.name}`"></span>
                         <!-- ko if: DungeonGuides.hired() -->
                         <a href="#dungeonGuidesDungeonModal" data-toggle="modal" data-bind="tooltip: {
-                            title: `Attempts remaining: ${DungeonGuides.clears()}`,
+                            title: App.translation.ui('battle.dungeonGuideAttempts', 'Attempts remaining: {{clears}}', { clears: DungeonGuides.clears() }),
                             placement: 'top',
                             trigger: 'hover'
                         }">

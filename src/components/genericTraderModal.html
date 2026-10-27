@@ -17,11 +17,11 @@
                         ">
                             <thead>
                             <tr>
-                                <th>Cost</th>
-                                <th class="cost-inventory">Inventory</th>
+                                <th data-bind="t: 'common.cost'">Cost</th>
+                                <th class="cost-inventory" data-bind="t: 'common.inventory'">Inventory</th>
                                 <th></th>
-                                <th>Profit</th>
-                                <th class="profit-inventory">Inventory</th>
+                                <th data-bind="t: 'trader.profit'">Profit</th>
+                                <th class="profit-inventory" data-bind="t: 'common.inventory'">Inventory</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -63,7 +63,7 @@
                                     <!-- ko ifnot: GenericDeal.isLocked(ShopHandler.shopObservable()?.traderID, $index()) -->
                                     <div class="btn-group btn-block pl-2">
                                         <button class='btn btn-success btn-block' data-bind='click: function(){GenericDeal.use(ShopHandler.shopObservable()?.traderID, $index(), tradeAmount())}, attr: { disabled: tradeAmount() > GenericDeal.maxTrades(deal) || !GenericDeal.canUse(ShopHandler.shopObservable()?.traderID, $index()) }'>
-                                            <knockout data-bind="text: !GenericDeal.anySoldOut(deal) ? (deal.tradeButtonOverride ?? 'Trade') : 'Sold out'"></knockout>
+                                            <knockout data-bind="text: !GenericDeal.anySoldOut(deal) ? (deal.tradeButtonOverride ?? App.translation.ui('trader.trade', 'Trade')) : App.translation.ui('trader.soldOut', 'Sold out')"></knockout>
                                         </button>
                                         <!-- ko if: GenericDeal.maxTrades(deal) > 1 || tradeAmount() > 1 -->
                                         <button type="button" data-bind="text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
             </div>
         </div>
     </div>

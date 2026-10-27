@@ -2,23 +2,23 @@
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
        <div class="modal-content">
             <div class="modal-header">
-                <h5 class="mb-0">Gems</h5>
+                <h5 class="mb-0" data-bind="t: 'gems.title'">Gems</h5>
 
                 <!-- ko if: App.game.challenges.list.disableGems.active() -->
-                <h5 class="mb-0 px-2 rounded bg-danger">
+                <h5 class="mb-0 px-2 rounded bg-danger" data-bind="t: 'gems.disabled'">
                     Gem Bonuses are disabled.
                 </h5>
                 <!-- /ko -->
             </div>
 
             <div class="modal-body">
-                <p>
+                <p data-bind="t: 'gems.description', tVars: { step: GameConstants.GEM_UPGRADE_STEP.toLocaleString('en-US', { style: 'percent', signDisplay: 'exceptZero' }) }">
                     Use gems to upgrade the type effectiveness of your Pokémon.
                     When you defeat a Pokémon, you get gems based on its type.
-                    Each upgrade increases your effectiveness by <knockout data-bind="text: GameConstants.GEM_UPGRADE_STEP.toLocaleString('en-US', { style: 'percent', signDisplay: 'exceptZero' })"></knockout>.
+                    Each upgrade increases your effectiveness by {{step}}.
                 </p>
 
-                <h4>Select a Gem</h4>
+                <h4 data-bind="t: 'gems.selectGem'">Select a Gem</h4>
 
                 <!-- ko let: { gemIndex: ko.observable(-1) } -->
                 <div class="container my-3">
@@ -72,14 +72,14 @@
                         <div class="card-deck">
                             <!-- ko foreach: Array(Gems.nEffects) -->
                                 <div class="card" data-bind="style: { opacity: App.game.gems.isValidUpgrade(gemIndex(), $index()) ? 1 : 0.25 }">
-                                    <div class="card-header" data-bind="text: GameConstants.camelCaseToString(GameConstants.TypeEffectiveness[$index()])"></div>
+                                    <div class="card-header" data-bind="text: [App.translation.ui('gems.immune', 'Immune'), App.translation.ui('gems.notVery', 'Not Very'), App.translation.ui('gems.neutral', 'Neutral'), App.translation.ui('gems.very', 'Very')][$index()] ?? GameConstants.camelCaseToString(GameConstants.TypeEffectiveness[$index()])"></div>
 
                                     <div class="card-body p-2">
                                         <!-- ko if: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
                                         <div class="font-weight-bold" data-bind="text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]]
                                             + (App.game.gems.getGemUpgrade(gemIndex(), $index()) * GameConstants.GEM_UPGRADE_STEP)).toLocaleString('en-US', { style: 'percent' })"></div>
 
-                                        <div class="text-center m-0 p-1 small">Versus</div>
+                                        <div class="text-center m-0 p-1 small" data-bind="t: 'gems.versus'">Versus</div>
 
                                         <div>
                                             <!-- ko foreach: TypeHelper.typeMatrix[gemIndex()].map((value, index) => value === TypeHelper.typeToValue($index()) ? index : -1).filter(value => value >= 0) -->
@@ -91,7 +91,7 @@
                                         <!-- /ko -->
 
                                         <!-- ko ifnot: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
-                                        <div>N / A</div>
+                                        <div data-bind="t: 'gems.notAvailable'">N / A</div>
                                         <!-- /ko -->
                                     </div>
 
@@ -109,21 +109,21 @@
                                     <div class="card-footer p-0">
                                         <!-- ko if: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
                                             <!-- ko if: App.game.gems.hasMaxUpgrade(gemIndex(), $index()) -->
-                                            <div class="btn btn-block no-click">MAXED</div>
+                                            <div class="btn btn-block no-click" data-bind="t: 'gems.maxed'">MAXED</div>
                                             <!-- /ko -->
 
                                             <!-- ko ifnot: App.game.gems.hasMaxUpgrade(gemIndex(), $index()) -->
                                             <button class="btn btn-block btn-primary" data-bind="
                                                 enable: App.game.gems.canBuyGemUpgrade(gemIndex(), $index()),
                                                 click: () => { App.game.gems.buyGemUpgrade(gemIndex(), $index()); }">
-                                                Buy (<knockout data-bind="text: App.game.gems.getGemUpgradeCost(gemIndex(), $index()).toLocaleString('en-US')"></knockout><img width="18px" height="18px" data-bind='attr: { src: Gems.image(gemIndex()) }'/>)
+                                                <knockout data-bind="t: 'common.buy'">Buy</knockout> (<knockout data-bind="text: App.game.gems.getGemUpgradeCost(gemIndex(), $index()).toLocaleString('en-US')"></knockout><img width="18px" height="18px" data-bind='attr: { src: Gems.image(gemIndex()) }'/>)
                                                 <!-- text: `Buy ()` -->
                                             </button>
                                             <!-- /ko -->
                                         <!-- /ko -->
 
                                         <!-- ko ifnot: App.game.gems.isValidUpgrade(gemIndex(), $index()) -->
-                                            <div class="btn btn-block no-click">N / A</div>
+                                            <div class="btn btn-block no-click" data-bind="t: 'gems.notAvailable'">N / A</div>
                                         <!-- /ko -->
                                     </div>
                                     <!-- /ko -->
@@ -137,7 +137,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
             </div>
         </div>
     </div>

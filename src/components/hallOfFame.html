@@ -5,54 +5,55 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
        <div class="modal-header">
            <div style="width: 100%;">
                <img src="assets/images/npcs/Professor Oak.png">
-               <h5 class="modal-title" id="hallOfFameModalLabel">Professor Oak</h5>
+               <h5 class="modal-title" id="hallOfFameModalLabel" data-bind="t: 'startSequence.professorOak'">Professor Oak</h5>
            </div>
        </div>
        <div class="modal-body">
            <p>
-                <p data-bind="visible: player.region == GameConstants.Region.kanto">
+                <p data-bind="visible: player.region == GameConstants.Region.kanto, tHtml: 'hallOfFame.kanto',
+                    tVars: { starter: PokemonHelper.displayName(PokemonHelper.getPokemonById(GameConstants.RegionalStarters[GameConstants.Region.kanto][player.regionStarters[GameConstants.Region.kanto]()]).name) }">
                     So, you won! Congratulations!<br/>
                     You are the new Pokémon League champion!<br/>
-                    You have grown up so much since you first left with <span data-bind="text: PokemonHelper.getPokemonById(GameConstants.RegionalStarters[GameConstants.Region.kanto][player.regionStarters[GameConstants.Region.kanto]()]).name">starter</span>!<br/>
+                    You have grown up so much since you first left with {{starter}}!<br/>
                     <br/>
                     There are many more regions to explore!
                 </p>
-                <p data-bind="visible: player.region == GameConstants.Region.johto">
+                <p data-bind="visible: player.region == GameConstants.Region.johto, tHtml: 'hallOfFame.johto'">
                     I heard from Professor Elm that you had just conquered the Johto Pokémon League! Congratulations!<br/>
                     You are the new Johto League champion!
                 </p>
-                <p data-bind="visible: player.region == GameConstants.Region.hoenn">
+                <p data-bind="visible: player.region == GameConstants.Region.hoenn, tHtml: 'hallOfFame.hoenn'">
                     Professor Birch told me that you just beat the Hoenn Pokémon League! Congratulations!<br/>
                     You are the new Hoenn League champion!
                 </p>
-                <p data-bind="visible: player.region == GameConstants.Region.sinnoh">
+                <p data-bind="visible: player.region == GameConstants.Region.sinnoh, tHtml: 'hallOfFame.sinnoh'">
                     I heard from Professor Rowan that you had just conquered the Sinnoh Pokémon League! Congratulations!<br/>
                     You are the new Sinnoh League champion!
                 </p>
-                <p data-bind="visible: player.region == GameConstants.Region.unova">
+                <p data-bind="visible: player.region == GameConstants.Region.unova, tHtml: 'hallOfFame.unova'">
                     Professor Juniper told me that you also beat the Unova Pokémon League! Congratulations!<br/>
                     You are the new Unova League champion!
                 </p>
-                <p data-bind="visible: player.region == GameConstants.Region.kalos">
+                <p data-bind="visible: player.region == GameConstants.Region.kalos, tHtml: 'hallOfFame.kalos'">
                     Professor Sycamore just told me. You are unstoppable! Congratulations!<br/>
                     You are the new Kalos League champion!
                 </p>
-                <p data-bind="visible: player.region == GameConstants.Region.alola">
+                <p data-bind="visible: player.region == GameConstants.Region.alola, tHtml: 'hallOfFame.alola'">
                     Professor Kukui told me that you just beat the Alola Pokémon League! Congratulations!<br/>
                     You are the new Alola League champion!
                 </p>
-                <p data-bind="visible: player.region == GameConstants.Region.galar">
+                <p data-bind="visible: player.region == GameConstants.Region.galar, tHtml: 'hallOfFame.galar'">
                     Professor Magnolia told me that you just beat the Galar Pokémon League! Congratulations!<br/>
                     You are the new Galar League champion!
                 </p>
 
-                <p data-bind="visible: App.game.challenges.list.requireCompletePokedex.active()">
+                <p data-bind="visible: App.game.challenges.list.requireCompletePokedex.active(), t: 'hallOfFame.completePokedex'">
                     In order to move on you will need to capture all available Pokémon from the current region!
                 </p>
            </p>
        </div>
        <div class="modal-footer">
-           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
        </div>
    </div>
 </div>

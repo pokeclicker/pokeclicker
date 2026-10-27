@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5>Categories</h5>
+                <h5 data-bind="t: 'categories.title'">Categories</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,8 +12,8 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th class="text-center" width="20%">Color</th>
-                            <th width="80%">Name</th>
+                            <th class="text-center" width="20%" data-bind="t: 'categories.color'">Color</th>
+                            <th width="80%" data-bind="t: 'common.name'">Name</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -40,9 +40,10 @@
                             <td>
                                 <div class="btn-group" data-bind="visible: PokemonCategories.categories().length > 1">
                                     <button type="button" class="btn btn-sm py-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false" title="Move Pokémon from this category to another category."></button>
+                                        aria-expanded="false" title="Move Pokémon from this category to another category."
+                                        data-bind="tAttr: { title: 'categories.moveTooltip' }"></button>
                                     <div class="dropdown-menu pt-0">
-                                        <p class="small text-center p-2 mb-0">Move Pokémon To:</p>
+                                        <p class="small text-center p-2 mb-0" data-bind="t: 'categories.movePokemonTo'">Move Pokémon To:</p>
                                         <div data-bind="foreach: PokemonCategories.categories">
                                             <!-- ko if: $data.id !== $parent.id -->
                                             <button class="dropdown-item small" type="button"
@@ -56,7 +57,7 @@
                             </td>
                             <td>
                                 <button type="button" class="close text-danger" title="Remove Category" style="opacity: 1;"
-                                    data-bind="visible: $data.id > 0, click: () => { PokemonCategories.removeCategory($data.id) }">
+                                    data-bind="visible: $data.id > 0, click: () => { PokemonCategories.removeCategory($data.id) }, tAttr: { title: 'categories.removeCategory' }">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </td>
@@ -65,14 +66,15 @@
                     <tbody>
                         <tr>
                             <td class="bg-primary clickable text-center" colspan="5"
-                                onclick="PokemonCategories.addCategory('New', '#333333')">+ New</td>
+                                onclick="PokemonCategories.addCategory('New', '#333333')" data-bind="t: 'categories.addNew'">+ New</td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger mr-auto"
-                        data-bind="click: async () => { if (await Notifier.confirm({ title: 'Reset Categories', message: 'Are you sure you want to reset all of your categories to defaults?', confirm: 'Reset' })) PokemonCategories.reset(); }">Reset</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        data-bind="click: async () => { if (await Notifier.confirm({ title: App.translation.ui('categories.resetTitle', 'Reset Categories'), message: App.translation.ui('categories.resetMessage', 'Are you sure you want to reset all of your categories to defaults?'), confirm: App.translation.ui('common.reset', 'Reset') })) PokemonCategories.reset(); },
+                            t: 'common.reset'">Reset</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
                 </div>
             </div>
         </div>

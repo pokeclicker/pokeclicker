@@ -5,11 +5,11 @@ aria-labelledby="startSequenceModalLabel" aria-hidden="true">
             <div class="modal-header">
                 <div style="width: 100%;">
                     <img src="assets/images/npcs/Professor Oak.png">
-                    <h5 class="modal-title" id="startSequenceModalLabel">Professor Oak</h5>
+                    <h5 class="modal-title" id="startSequenceModalLabel" data-bind="t: 'startSequence.professorOak'">Professor Oak</h5>
                 </div>
             </div>
             <div class="modal-body">
-                <p>
+                <p data-bind="tHtml: 'startSequence.intro'">
                 Hello, there! Welcome to the world of Pokémon!<br/>
                 My name is Oak. People affectionately refer to me as the Pokémon Professor.<br/>
                 This world is inhabited by creatures called Pokémon!<br/>
@@ -20,8 +20,8 @@ aria-labelledby="startSequenceModalLabel" aria-hidden="true">
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning mr-auto" href="#challengeModeModal" data-toggle="modal">Challenge Modes</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
+                <button type="button" class="btn btn-warning mr-auto" href="#challengeModeModal" data-toggle="modal" data-bind="t: 'startSequence.challengeModes'">Challenge Modes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.next'">Next</button>
             </div>
         </div>
     </div>

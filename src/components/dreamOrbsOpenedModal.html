@@ -2,10 +2,10 @@
 <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Dream Orbs Opened</h5>
+            <h5 class="modal-title" data-bind="t: 'dreamOrbs.openedTitle'">Dream Orbs Opened</h5>
         </div>
         <div class="modal-body">
-            <p data-bind="text: `You opened ${App.game.dreamOrbController.amountOpened().toLocaleString('en-US')} ${App.game.dreamOrbController.selectedOrb().color} Dream Orbs and received:`"></p>
+            <p data-bind="text: App.translation.ui('dreamOrbs.openedMessage', 'You opened {{amount}} {{color}} Dream Orbs and received:', { amount: App.game.dreamOrbController.amountOpened().toLocaleString('en-US'), color: App.game.dreamOrbController.selectedOrb().color })"></p>
             <div data-bind="foreach: App.game.dreamOrbController.itemsReceived">
                 <div>
                     <span data-bind="text: $data.amount.toLocaleString('en-US')"></span>
@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
         </div>
     </div>
 </div>

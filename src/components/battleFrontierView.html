@@ -30,14 +30,14 @@
             </div>
         </div>
         <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
-            <knockout>
-                Stage <knockout data-bind="text: BattleFrontierRunner.stage().toLocaleString('en-US')">0</knockout> / <knockout data-bind="text: BattleFrontierRunner.highest().toLocaleString('en-US')">0</knockout>
+            <knockout data-bind="t: 'battleFrontier.stage', tVars: { stage: BattleFrontierRunner.stage().toLocaleString('en-US'), highest: BattleFrontierRunner.highest().toLocaleString('en-US') }">
+                Stage {{stage}} / {{highest}}
             </knockout>
             <table width="100%">
                 <tr>
                     <td>
                         <span style="display: inline;">
-                            Pokémon Attack:
+                            <knockout data-bind="t: 'battleFrontier.pokemonAttack'">Pokémon Attack:</knockout>
                             <span data-bind="
                             text: App.game.party.calculatePokemonAttack(
                                 PokemonType.None,
@@ -50,15 +50,18 @@
                             ).toLocaleString('en-US'),
                             tooltip: {
                                 title: Battle.enemyPokemon()
-                                    ? `${App.game.party.calculatePokemonAttack(
-                                        Battle.enemyPokemon().type1,
-                                        Battle.enemyPokemon().type2,
-                                        true,
-                                        GameConstants.Region.none,
-                                        false,
-                                        false, 
-                                        WeatherType.Clear,
-                                    ).toLocaleString('en-US')} against ${pokemonMap[Battle.enemyPokemon().name].type.map(t => PokemonType[t]).join('&nbsp;/&nbsp;')}`
+                                    ? App.translation.ui('battleFrontier.attackAgainst', '{{attack}} against {{types}}', {
+                                        attack: App.game.party.calculatePokemonAttack(
+                                            Battle.enemyPokemon().type1,
+                                            Battle.enemyPokemon().type2,
+                                            true,
+                                            GameConstants.Region.none,
+                                            false,
+                                            false, 
+                                            WeatherType.Clear,
+                                        ).toLocaleString('en-US'),
+                                        types: pokemonMap[Battle.enemyPokemon().name].type.map(t => PokemonType[t]).join('&nbsp;/&nbsp;'),
+                                    })
                                     : '',
                                 trigger: 'hover'}">
                             </span>

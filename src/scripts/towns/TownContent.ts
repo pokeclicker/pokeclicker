@@ -68,7 +68,7 @@ class DockTownContent extends TownContent {
     }
 
     public text() {
-        return 'Dock';
+        return App.translation.ui('town.dock', 'Dock');
     }
 }
 
@@ -82,7 +82,7 @@ class BattleFrontierTownContent extends TownContent {
     }
 
     public text() {
-        return 'Enter Battle Frontier';
+        return App.translation.ui('town.enterBattleFrontier', 'Enter Battle Frontier');
     }
 }
 
@@ -100,7 +100,7 @@ class NextRegionTownContent extends TownContent {
     }
 
     public text() {
-        return `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`;
+        return App.translation.ui('town.travelTo', 'Travel to {{region}}', { region: GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1]) });
     }
 }
 
@@ -203,7 +203,7 @@ class WeatherAppTownContent extends TownContent {
     }
 
     public text() {
-        return 'Open the Castform App';
+        return App.translation.ui('town.openCastformApp', 'Open the Castform App');
     }
 }
 
@@ -225,6 +225,6 @@ class PickStarterContent extends TownContent {
     }
 
     public text() {
-        return 'Pick your Starter';
+        return App.translation.ui('town.pickStarter', 'Pick your Starter');
     }
 }

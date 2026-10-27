@@ -15,7 +15,7 @@
                     style="font-size: 22px;"
                     data-bind="
                         text: Settings.getSetting('partySortDirection').observableValue() ? '⥄' : '⥂',
-                        tooltip: { title: Settings.getSetting('partySortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top' }"
+                        tooltip: { title: Settings.getSetting('partySortDirection').observableValue() ? App.translation.ui('items.sortDescending', 'Descending (highest value first)') : App.translation.ui('items.sortAscending', 'Ascending (lowest value first)'), trigger: 'hover', placement:'top' }"
                 >⥂</label>
                 <input
                     id="partySortDirection"
@@ -31,7 +31,7 @@
 </script>
 <div id="pokemonListContainer" class="card sortable border-secondary mb-3" data-bind="visible: player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None">
     <div class="card-header p-0" data-toggle="collapse" href="#pokemonListBody">
-        <span>Pokémon List</span>
+        <span data-bind="t: 'pokemonList.title'">Pokémon List</span>
     </div>
     <div id="pokemonListBody" class="card-body p-0 show">
         <div class="table-responsive d-flex flex-column" data-bind="resizable: { setting: 'pokemonList' }">
@@ -54,14 +54,14 @@
                                         </div>
 
                                         <div class="ml-auto text-right text-nowrap">
-                                            <knockout class="text-muted small">Lv</knockout>
+                                            <knockout class="text-muted small" data-bind="t: 'pokemonList.lv'">Lv</knockout>
                                             <knockout data-bind="text: level"></knockout>
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <div class="text-muted">
-                                            <small class="attack-label" data-bind="visible: showAtkLabel">Atk</small>
-                                            <knockout title="Attack Power" data-bind="text: attack.toLocaleString('en-US')"></knockout>
+                                            <small class="attack-label" data-bind="visible: showAtkLabel, t: 'pokemonList.atk'">Atk</small>
+                                            <knockout title="Attack Power" data-bind="text: attack.toLocaleString('en-US'), tAttr: { title: 'pokemonList.attackPower' }"></knockout>
                                         </div>
                                         <div class="ml-auto text-right d-flex align-items-center">
                                             <!-- ko foreach: PokemonHelper.getMegaStones($data.name).filter(s => player.hasMegaStone(s.megaStone)) -->
@@ -73,11 +73,11 @@
                                                     placement: 'bottom'
                                             }"/>
                                             <!-- /ko -->
-                                            <img class="shadow-icon ml-1" src="assets/images/status/shadow.svg" title="Shadow" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
-                                            <img class="shadow-icon ml-1" src="assets/images/status/purified.svg" title="Purified" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
+                                            <img class="shadow-icon ml-1" src="assets/images/status/shadow.svg" title="Shadow" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow, tAttr: { title: 'pokemonList.shadow' }"/>
+                                            <img class="shadow-icon ml-1" src="assets/images/status/purified.svg" title="Purified" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified, tAttr: { title: 'pokemonList.purified' }"/>
                                             <img class="ml-1" data-bind="visible: $data.pokerus, attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[$data.pokerus]}.png`},
                                                 tooltip: {
-                                                    title:  `EVs: ${$data.evs().toLocaleString('en-US')}`,
+                                                    title: App.translation.ui('pokemonList.evs', 'EVs: {{evs}}', { evs: $data.evs().toLocaleString('en-US') }),
                                                     trigger: 'hover',
                                                     placement: 'bottom',
                                             }"/>

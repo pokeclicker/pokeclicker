@@ -24,14 +24,17 @@ export default class SaveSelector {
             newImportButton.style.display = 'none';
         }
 
+        // The save selector is shown before the game bindings are applied: bind it on its own for its translated texts (t/tHtml/tAttr)
+        ko.applyBindings({}, document.getElementById('saveSelector'));
+
         $('[data-toggle="tooltip"]').tooltip();
 
         const showContextMenu = (top: number, left: number, key: string) => {
             $('#saveSelectorContextMenu').html(`
-                <a class="dropdown-item bg-success" href="#" onclick="Save.key = '${key}'; SaveSelector.Download('${key}')">Download (backup)</a>
-                <a class="dropdown-item bg-info" href="#" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">Load</a>
-                <a class="dropdown-item bg-warning p-0 w-100" href="#"><label class="clickable my-0 px-4" style="padding:.75rem;" for="import-save" onclick="Save.key = '${key}';">Import (overwrite)</label></a>
-                <a class="dropdown-item bg-danger" href="#" onclick="Save.key = '${key}'; Save.delete();">Delete</a>
+                <a class="dropdown-item bg-success" href="#" onclick="Save.key = '${key}'; SaveSelector.Download('${key}')">${App.translation.ui('saveSelector.menu.download', 'Download (backup)')}</a>
+                <a class="dropdown-item bg-info" href="#" onclick="Save.key = '${key}'; document.querySelector('#saveSelector').remove(); App.start();">${App.translation.ui('saveSelector.menu.load', 'Load')}</a>
+                <a class="dropdown-item bg-warning p-0 w-100" href="#"><label class="clickable my-0 px-4" style="padding:.75rem;" for="import-save" onclick="Save.key = '${key}';">${App.translation.ui('saveSelector.menu.import', 'Import (overwrite)')}</label></a>
+                <a class="dropdown-item bg-danger" href="#" onclick="Save.key = '${key}'; Save.delete();">${App.translation.ui('saveSelector.menu.delete', 'Delete')}</a>
             `).css({
                 display: 'block',
                 position: 'absolute',

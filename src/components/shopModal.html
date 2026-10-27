@@ -15,7 +15,7 @@
                 <div class="row justify-content-center">
                     <div class="input-group m-0" style="margin-bottom: 6px; margin-top: 6px">
                         <div class="input-group-prepend">
-                            <button class="btn btn-warning btn-outline-dark smallButton smallFont" onclick="ShopHandler.resetAmount()">
+                            <button class="btn btn-warning btn-outline-dark smallButton smallFont" onclick="ShopHandler.resetAmount()" data-bind="t: 'common.reset'">
                                 Reset
                             </button>
                         </div>
@@ -48,10 +48,10 @@
                                     +1,000
                                 </button>
                             <!-- /ko -->
-                            <button class="btn btn-primary smallButton smallFont" type="button" onclick="ShopHandler.maxAmount()">
+                            <button class="btn btn-primary smallButton smallFont" type="button" onclick="ShopHandler.maxAmount()" data-bind="t: 'common.max'">
                                 Max
                             </button>
-                            <button class="btn-outline-dark" data-bind="attr: {class: ShopHandler.calculateButtonCss()}" onclick="ShopHandler.buyItem()">
+                            <button class="btn-outline-dark" data-bind="attr: {class: ShopHandler.calculateButtonCss()}, t: 'common.buy'" onclick="ShopHandler.buyItem()">
                                 Buy
                             </button>
                         </div>
@@ -108,7 +108,7 @@
                     <span data-bind="template: { name: 'currencyTemplate', data: {'amount': totalPrice(ShopHandler.amount()), 'currency': currency, 'reducedThreshold': 1e10}}"></span>
                 </div>
                 <div data-bind="if: !$data.isAvailable() || $data.isSoldOut()">
-                    <span>Sold Out</span>
+                    <span data-bind="t: 'shop.soldOut'">Sold Out</span>
                 </div>
             </button>
         </div>

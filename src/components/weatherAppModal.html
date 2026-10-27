@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-lg h-100" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Castform App</h4>
+                <h4 class="modal-title" data-bind="t: 'weather.castformApp'">Castform App</h4>
                 <div style="width: 100px;">
                     <!-- ko using: GameHelper.enumNumbers(GameConstants.Region).filter((r) => r >= 0 && r <= player.highestRegion()), as: 'regions' -->
                     <select class="custom-select" onchange="WeatherApp.selectedRegion(+this.value);">
@@ -19,7 +19,7 @@
                         <table class="w-100 h-100" border="1">
                             <thead>
                                 <tr>
-                                    <th style="height: 26px;">Time</th>
+                                    <th style="height: 26px;" data-bind="t: 'weather.time'">Time</th>
                                 </tr>
                             </thead>
                             <tbody data-bind="foreach: WeatherApp.generateHourList()">
@@ -34,7 +34,7 @@
                             <thead>
                                 <tr>
                                     <!-- ko foreach: WeatherApp.dateList() -->
-                                    <th style="height: 26px;" data-bind="text: GameConstants.DayOfWeek[$data.getDay()].slice(0, 3),
+                                    <th style="height: 26px;" data-bind="text: [App.translation.ui('weather.sun', 'Sun'), App.translation.ui('weather.mon', 'Mon'), App.translation.ui('weather.tue', 'Tue'), App.translation.ui('weather.wed', 'Wed'), App.translation.ui('weather.thu', 'Thu'), App.translation.ui('weather.fri', 'Fri'), App.translation.ui('weather.sat', 'Sat')][$data.getDay()],
                                         tooltip: {
                                             title: $data.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
                                             placement: 'bottom',
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
             </div>
         </div>
     </div>

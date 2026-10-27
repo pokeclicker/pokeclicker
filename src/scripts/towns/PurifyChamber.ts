@@ -6,7 +6,7 @@ class PurifyChamberTownContent extends TownContent {
         return 'btn btn-info';
     }
     public text(): string {
-        return 'Purify Chamber';
+        return App.translation.ui('town.purifyChamber', 'Purify Chamber');
     }
     public onclick(): void {
         PurifyChamber.openPurifyChamberModal();

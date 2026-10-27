@@ -4,7 +4,7 @@
   data-bind="visible: App.game.achievementTracker.canAccess()"
 >
   <div class="card-header p-0" data-toggle="collapse" href="#achievementTrackerBody">
-    <span style="text-align: center">Achievement Tracker</span>
+    <span style="text-align: center" data-bind="t: 'achievementTracker.title'">Achievement Tracker</span>
   </div>
   <button
     class="btn btn-sm btn-primary"
@@ -12,6 +12,7 @@
     data-toggle="modal"
     href="#achievementsModal"
     onclick="AchievementHandler.filterAchievementList(true);"
+    data-bind="t: 'common.list'"
   >
     List
   </button>
@@ -24,6 +25,7 @@
       class="clickable table-warning text-light p-2"
       href="#achievementsModal"
       data-toggle="modal"
+      data-bind="t: 'achievementTracker.selectAchievement'"
     >
       Select an achievement to track!
     </div>

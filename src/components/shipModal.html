@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
-                <h5 class="modal-title">Regional Travel</h5>
+                <h5 class="modal-title" data-bind="t: 'travel.regionalTravel'">Regional Travel</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -38,7 +38,7 @@
                             <div class="btn-group w-100 my-1">
                                 <button style="position: relative;" class='btn btn-block btn-success ship-modal-region-button'
                                         data-bind='attr: { disabled: true }'>
-                                    <knockout>Unexplored region</knockout>
+                                    <knockout data-bind="t: 'travel.unexploredRegion'">Unexplored region</knockout>
                                 </button>
                             </div>
                             <!-- /ko -->

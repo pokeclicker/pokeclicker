@@ -3,7 +3,7 @@ aria-labelledby="purifyChamberModalLabel">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Purify Chamber</h5>
+                <h5 class="modal-title" data-bind="t: 'purifyChamber.title'">Purify Chamber</h5>
             </div>
             <div class="modal-body">
                 <!-- ko if: App.game.party.caughtPokemon.some((p) => p.shadow == GameConstants.ShadowStatus.Shadow) -->
@@ -17,22 +17,22 @@ aria-labelledby="purifyChamberModalLabel">
                     <img data-bind="visible: App.game.purifyChamber.selectedPokemon(), attr: { src: App.game.purifyChamber.selectedPokemon() ? PokemonHelper.getImage(App.game.purifyChamber.selectedPokemon().id) : '' }"/>
                 </div>
                 <div>
-                    <h4>Flow needed for next purification:</h4>
+                    <h4 data-bind="t: 'purifyChamber.flowNeeded'">Flow needed for next purification:</h4>
                     <span data-bind="text: App.game.purifyChamber.currentFlow().toLocaleString('en-US')"></span>
                     <span> / </span>
                     <span data-bind="text: App.game.purifyChamber.flowNeeded().toLocaleString('en-US')"></span>
                 </div>
                 <div>
-                    <button data-bind="visible: App.game.purifyChamber.canPurify()" class="btn btn-primary" onclick="App.game.purifyChamber.purify()">Purify</button>
+                    <button data-bind="visible: App.game.purifyChamber.canPurify(), t: 'purifyChamber.purify'" class="btn btn-primary" onclick="App.game.purifyChamber.purify()">Purify</button>
                 </div>
                 <!-- /ko -->
 
                 <!-- ko ifnot: App.game.party.caughtPokemon.some((p) => p.shadow == GameConstants.ShadowStatus.Shadow) -->
-                <div>No Shadow Pokémon in the Party</div>
+                <div data-bind="t: 'purifyChamber.noShadowPokemon'">No Shadow Pokémon in the Party</div>
                 <!-- /ko -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
             </div>
         </div>
     </div>

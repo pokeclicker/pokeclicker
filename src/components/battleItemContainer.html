@@ -1,14 +1,15 @@
 <div id="battleItemContainer" class="card sortable border-secondary mb-3" data-bind="hidden: Settings.getSetting('hideChallengeRelatedModules').observableValue() && App.game.challenges.list.disableBattleItems.active() && !App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
   <div data-bind="hidden: Settings.getSetting('hideChallengeRelatedModules').observableValue() && App.game.challenges.list.disableBattleItems.active()">
     <div class="card-header p-0" data-toggle="collapse" href="#battleItemContainerBody">
-      <span>Battle Items</span>
+      <span data-bind="t: 'battleItems.title'">Battle Items</span>
     </div>
     <button type="button" class="btn btn-sm btn-primary"
             style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
-            data-bind="text: EffectEngineRunner.multipliers[EffectEngineRunner.multIndex()]"
+            data-bind="text: EffectEngineRunner.multipliers[EffectEngineRunner.multIndex()],
+              tAttr: { 'data-original-title': 'battleItems.controls', 'data-content': 'battleItems.controlsHelp' }"
             onclick="EffectEngineRunner.incrementMultiplier()"
             oncontextmenu="EffectEngineRunner.decrementMultiplier(); return false"
-            title="Controls"
+            data-original-title="Controls"
             data-toggle="popover"
             data-html="true"
             data-content="Left/right click to cycle amount<br/>Click on item image to use"
@@ -16,7 +17,7 @@
             data-trigger="hover">1
     </button>
     <div id="battleItemContainerBody" class="card-body p-0 show">
-      <p data-bind="visible: App.game.challenges.list.disableBattleItems.active()" class="bg-danger my-0">
+      <p data-bind="visible: App.game.challenges.list.disableBattleItems.active(), t: 'battleItems.disabled'" class="bg-danger my-0">
           Battle Items are disabled.
       </p>
       <!-- Battle Items -->
@@ -64,7 +65,7 @@
 
   <div class="position-relative" data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
     <div class="card-header p-0 position-relative" data-toggle="collapse" href="#fluteItemContainerBody">
-      <span>Flutes</span>
+      <span data-bind="t: 'battleItems.flutes'">Flutes</span>
       <button type="button" class="btn"
         style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px; padding: 4px;"
         data-bind="visible: FluteEffectRunner.additionalInfoTooltip().length !== 0,
@@ -79,7 +80,8 @@
       <button type="button" class="btn btn-sm btn-primary"
           style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
           onclick="App.game.gems.openGemModal()"
-          title="Controls"
+          data-bind="tAttr: { 'data-original-title': 'battleItems.controls', 'data-content': 'battleItems.flutesControlsHelp' }"
+          data-original-title="Controls"
           data-toggle="popover"
           data-html="true"
           data-content="Click to see your total gems<br/>Click on flutes to toggle effects"
@@ -154,10 +156,10 @@
 
   <div data-bind="hidden: !App.game.zMoves.canAccess() || (Settings.getSetting('hideChallengeRelatedModules').observableValue() && App.game.challenges.list.disableBattleItems.active())">
     <div class="card-header p-0" data-toggle="collapse" href="#zCrystalItemContainerBody">
-        <span>Z-Crystals</span>
+        <span data-bind="t: 'battleItems.zCrystals'">Z-Crystals</span>
       </div>
       <div id="zCrystalItemContainerBody" class="card-body p-0 show">
-        <p data-bind="visible: App.game.challenges.list.disableBattleItems.active()" class="bg-danger my-0">
+        <p data-bind="visible: App.game.challenges.list.disableBattleItems.active(), t: 'battleItems.zMovesDisabled'" class="bg-danger my-0">
           Z-Moves are disabled.
         </p>
         <table class="table table-bordered m-0" data-bind="visible: App.game.zMoves.canAccess()">
@@ -193,13 +195,13 @@
                   <img src="" data-bind="attr: { src: ItemList[GameConstants.zCrystalItemType[App.game.zMoves.type()]].image,  }">
                 </td>
                 <td class="p-0 bg-secondary" colspan="4" rowspan="2">
-                  <p class="mb-0" data-bind="text: `${App.game.zMoves.getMultiplier() < 1 ? '' : '+'}${(App.game.zMoves.getMultiplier() - 1).toLocaleString('en-US', { style: 'percent' })} Attack to all your ${PokemonType[App.game.zMoves.type()]}-type Pokémon`">bonus</p>
+                  <p class="mb-0" data-bind="text: App.translation.ui('battleItems.zMoveBonus', '{{bonus}} Attack to all your {{type}}-type Pokémon', { bonus: `${App.game.zMoves.getMultiplier() < 1 ? '' : '+'}${(App.game.zMoves.getMultiplier() - 1).toLocaleString('en-US', { style: 'percent' })}`, type: PokemonType[App.game.zMoves.type()] })">bonus</p>
                 </td>
               </tr>
               <tr></tr>
               <tr>
                 <td class="p-0" colspan="4" rowspan="1">
-                  <code data-bind="text: `${App.game.zMoves.formattedTime()} left`">00:00 left</code>
+                  <code data-bind="text: App.translation.ui('battleItems.timeLeft', '{{time}} left', { time: App.game.zMoves.formattedTime() })">00:00 left</code>
                 </td>
               </tr>
             </tbody>

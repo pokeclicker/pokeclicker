@@ -3,10 +3,10 @@
         <div class="modal-content">
             <div class="modal-header p-0">
                 <ul class="nav nav-tabs nav-fill w-100">
-                    <li class="nav-item" onclick="$('#refreshQuests').show()"><a class="nav-link active" href="#questsModalQuestsPane" data-toggle="tab">Quests</a></li>
+                    <li class="nav-item" onclick="$('#refreshQuests').show()"><a class="nav-link active" href="#questsModalQuestsPane" data-toggle="tab" data-bind="t: 'quests.tabQuests'">Quests</a></li>
                     <li class="nav-item" onclick="$('#refreshQuests').hide()">
                         <a class="nav-link position-relative" href="#questsModalQuestLinesPane" data-toggle="tab">
-                            Quest Lines
+                            <knockout data-bind="t: 'quests.questLines'">Quest Lines</knockout>
                             <span class="position-absolute rounded-circle bg-danger p-1"
                                 data-bind="visible: App.game.quests.questLines().some(q => q.state() === QuestLineState.inactive && q.bulletinBoard !== GameConstants.BulletinBoards.None && q.requirement?.isCompleted())"></span>
                         </a>
@@ -22,11 +22,11 @@
                             <div class="form-row mt-3 mb-2">
                                 <div class="col-3 align-self-center">
                                     <h5>
-                                        <span class='' data-bind='text: "Quests (" + App.game.quests.currentQuests().length + "/" + App.game.quests.questSlots() + ")"'></span>
+                                        <span class='' data-bind="text: App.translation.ui('quests.titleCount', 'Quests ({{current}}/{{slots}})', { current: App.game.quests.currentQuests().length, slots: App.game.quests.questSlots() })"></span>
                                     </h5>
                                 </div>
                                 <div class='col-6' data-bind="tooltip : App.game.quests.questProgressTooltip()">
-                                    <div>Lvl. <knockout data-bind='text: App.game.quests.level'></knockout></div>
+                                    <div data-bind="t: 'quests.level', tVars: { level: App.game.quests.level }">Lvl. {{level}}</div>
                                     <div class="progress" style='height: 5px'>
                                         <div class="progress-bar bg-info" role="progressbar"
                                                 data-bind="attr:{ style: 'width:' + App.game.quests.percentToNextQuestLevel() + '%' }"
@@ -39,16 +39,16 @@
                                 </div>
                             </div>
                             <div class="text-center mb-2" data-bind="visible: App.game.quests.questSlots() < GameConstants.MAX_QUEST_SLOTS">
-                                <div class="small">Unlock additional quest slots at levels 5, 10, and 15!</div>
+                                <div class="small" data-bind="t: 'quests.unlockSlots'">Unlock additional quest slots at levels 5, 10, and 15!</div>
                             </div>
                         </div>
 
                         <table class="table table-hover m-0">
                             <thead>
                                 <tr>
-                                    <th class="align-middle text-left">Description</th>
-                                    <th class="align-middle">Reward</th>
-                                    <th class="align-middle">Progress</th>
+                                    <th class="align-middle text-left" data-bind="t: 'common.description'">Description</th>
+                                    <th class="align-middle" data-bind="t: 'quests.reward'">Reward</th>
+                                    <th class="align-middle" data-bind="t: 'quests.progress'">Progress</th>
                                     <th class="align-middle"></th>
                                 </tr>
                             </thead>
@@ -61,18 +61,21 @@
                                     <td class="align-middle text-center py-0">
                                         <span data-bind="visible: $data.inProgress() && !$data.isCompleted(), text: `${Math.floor(progress()*100)}%`"></span>
                                         <span data-bind="visible: !$data.inProgress() && !$data.isCompleted()">-</span>
-                                        <span class="text-muted" data-bind="visible: $data.isCompleted()">Completed</span>
+                                        <span class="text-muted" data-bind="visible: $data.isCompleted(), t: 'quests.completed'">Completed</span>
                                     </td>
                                     <td class="align-middle text-center py-0">
                                         <button class="btn btn-primary btn-sm btn-block mt-0"
                                             data-bind="visible: App.game.quests.canStartNewQuest() && !$data.inProgress() && !$data.isCompleted() && !$data.claimed(),
-                                                click: () => App.game.quests.beginQuest($data.index)">Start</button>
+                                                click: () => App.game.quests.beginQuest($data.index),
+                                                t: 'quests.start'">Start</button>
                                         <button class="btn btn-success btn-sm btn-block mt-0"
                                             data-bind="visible: !$data.claimed() && $data.isCompleted(),
-                                                click: () => App.game.quests.claimQuest($data.index)">Claim</button>
+                                                click: () => App.game.quests.claimQuest($data.index),
+                                                t: 'quests.claim'">Claim</button>
                                         <button class="btn btn-danger btn-sm btn-block mt-0"
                                             data-bind="visible: $data.inProgress() && !$data.isCompleted(),
-                                                click: () => App.game.quests.quitQuest($data.index, $data.progress() > 0)">Quit</button>
+                                                click: () => App.game.quests.quitQuest($data.index, $data.progress() > 0),
+                                                t: 'quests.quit'">Quit</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -88,13 +91,13 @@
                         }">
                             <!-- ko if: $data.active.length -->
                             <div class="bg-primary p-2">
-                                <h6 class="m-0 text-light font-weight-bold">Active Quest Lines</h6>
+                                <h6 class="m-0 text-light font-weight-bold" data-bind="t: 'quests.activeQuestLines'">Active Quest Lines</h6>
                             </div>
                             <table class="table table-striped table-bordered table-hover table-sm">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th class="text-center">Step</th>
+                                        <th data-bind="t: 'common.name'">Name</th>
+                                        <th class="text-center" data-bind="t: 'quests.step'">Step</th>
                                         <th style="width: 1px;"></th>
                                     </tr>
                                 </thead>
@@ -114,7 +117,7 @@
                                                 placement: 'top',
                                                 html: true,
                                                 boundary: 'window'
-                                            }, css: { disabled: !$data.isPausable() }">Pause</button>
+                                            }, css: { disabled: !$data.isPausable() }, t: 'quests.pause'">Pause</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -123,13 +126,13 @@
 
                             <!-- ko if: $data.available.length -->
                             <div class="bg-primary p-2">
-                                <h6 class="m-0 text-light font-weight-bold">Available Quest Lines</h6>
+                                <h6 class="m-0 text-light font-weight-bold" data-bind="t: 'quests.availableQuestLines'">Available Quest Lines</h6>
                             </div>
                             <table class="table table-striped table-bordered table-hover table-sm">
                                 <thead>
                                     <tr>
-                                        <th class="align-middle">Name</th>
-                                        <th class="text-nowrap text-center">Bulletin Board</th>
+                                        <th class="align-middle" data-bind="t: 'common.name'">Name</th>
+                                        <th class="text-nowrap text-center" data-bind="t: 'bulletinBoard.title'">Bulletin Board</th>
                                     </tr>
                                 </thead>
                                 <tbody data-bind="foreach: $data.available">
@@ -146,7 +149,7 @@
 
                             <!-- ko if: $data.complete.length -->
                             <div class="bg-primary p-2">
-                                <h6 class="m-0 text-light font-weight-bold">Complete Quest Lines</h6>
+                                <h6 class="m-0 text-light font-weight-bold" data-bind="t: 'quests.completeQuestLines'">Complete Quest Lines</h6>
                             </div>
                             <table class="table table-striped table-bordered table-hover table-sm">
                                 <tbody data-bind="foreach: $data.complete">
@@ -168,25 +171,25 @@
                 <div id="refreshQuests">
                     <div class="d-flex flex-wrap align-items-center" style="gap: 8px;">
                         <!-- ko if: App.game.quests.isRefreshFree() -->
-                        <button class="btn btn-primary" onclick="App.game.quests.refreshQuests(true, true)">Free Refresh</button>
+                        <button class="btn btn-primary" onclick="App.game.quests.refreshQuests(true, true)" data-bind="t: 'quests.freeRefresh'">Free Refresh</button>
                         <!-- /ko -->
                         <!-- ko if: !App.game.quests.isRefreshFree() -->
                         <button class="btn btn-primary" onclick="App.game.quests.refreshQuests(false, true)"
                             data-bind="enable: App.game.quests.canAffordRefresh(),
                                 tooltip: {
-                                    title: App.game.quests.freeRefresh() ? '' : `Daily free refresh in: ${GameHelper.formattedLetterTimeUntilTomorrow()}`,
+                                    title: App.game.quests.freeRefresh() ? '' : App.translation.ui('quests.dailyFreeRefreshIn', 'Daily free refresh in: {{time}}', { time: GameHelper.formattedLetterTimeUntilTomorrow() }),
                                     trigger: 'hover', placement:'top'
                                 }">
-                            <span data-bind="template: { name: 'amountTemplate', data: App.game.quests.getRefreshCost() }"></span> - Refresh
+                            <span data-bind="template: { name: 'amountTemplate', data: App.game.quests.getRefreshCost() }"></span> <knockout data-bind="t: 'quests.refresh'">- Refresh</knockout>
                         </button>
                         <!-- /ko -->
                         <span>
-                            Or complete all quests for a bonus<knockout data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.quests.calcListBonus(), 'currency': GameConstants.Currency.questPoint}}"></knockout>
+                            <knockout data-bind="t: 'quests.completeAllBonus'">Or complete all quests for a bonus</knockout><knockout data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.quests.calcListBonus(), 'currency': GameConstants.Currency.questPoint}}"></knockout>
                         </span>
                     </div>
                 </div>
                 <div class="flex-grow-1 text-right">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
                 </div>
             </div>
         </div>

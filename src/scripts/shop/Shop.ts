@@ -5,7 +5,7 @@ class Shop extends TownContent {
         return 'btn btn-secondary';
     }
     public text(): string {
-        return this.name ?? 'Poké Mart';
+        return this.name ?? App.translation.ui('shop.pokeMart', 'Poké Mart');
     }
     public isVisible(): boolean {
         if (!super.isVisible()) {
@@ -42,9 +42,9 @@ class Shop extends TownContent {
             return this.name;
         }
         if (!this.parent) {
-            return 'Poké Mart';
+            return App.translation.ui('shop.pokeMart', 'Poké Mart');
         }
-        return `Poké Mart ${this.parent.name}`;
+        return App.translation.ui('shop.pokeMartOf', 'Poké Mart {{town}}', { town: this.parent.name });
     }
 
     public amountInput = () => $('#shopModal').find('input[name="amountOfItems"]');

@@ -8,8 +8,8 @@
             </div>
             <div>
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#berryMasterShop" data-bind="click: function(){shopVisible(true);}">Shop</a></li>
-                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#berryMasterTrade" data-bind="click: function(){shopVisible(false);}">Trades</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#berryMasterShop" data-bind="click: function(){shopVisible(true);}, t: 'berryMaster.shop'">Shop</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#berryMasterTrade" data-bind="click: function(){shopVisible(false);}, t: 'berryMaster.trades'">Trades</a></li>
                 </ul>
             </div>
             <div class="modal-body tab-content">
@@ -21,12 +21,12 @@
                         <table class="table table-sm table-striped m-0 text-left">
                             <thead>
                                 <tr>
-                                    <th class="text-center">Inv</th>
+                                    <th class="text-center" data-bind="t: 'berryMaster.inv'">Inv</th>
                                     <th></th>
-                                    <th>Berries</th>
+                                    <th data-bind="t: 'farm.berries'">Berries</th>
                                     <th></th>
                                     <th></th>
-                                    <th>Item</th>
+                                    <th data-bind="t: 'berryMaster.item'">Item</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -72,7 +72,7 @@
                                     <td class="align-middle" data-bind="attr: { rowspan: $parent.berries.length }">
                                         <div class="btn-group btn-block">
                                             <button class='btn btn-success btn-block' data-bind='attr:{ disabled: (tradeAmount() > $parent.calculateMaxTrades() || !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index())) }, click: function(){BerryDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: (tradeAmount() > $parent.calculateMaxTrades() || !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index())) }'>
-                                                Trade
+                                                <knockout data-bind="t: 'berryMaster.trade'">Trade</knockout>
                                             </button>
                                             <button type="button" data-bind="text: tradeAmount().toLocaleString('en-US') + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             </button>
@@ -95,7 +95,7 @@
                 <div class="row justify-content-center">
                     <div class="input-group m-0" style="margin-bottom: 6px; margin-top: 6px">
                         <div class="input-group-prepend">
-                            <button class="btn btn-warning btn-outline-dark smallButton smallFont" onclick="ShopHandler.resetAmount()">
+                            <button class="btn btn-warning btn-outline-dark smallButton smallFont" onclick="ShopHandler.resetAmount()" data-bind="t: 'common.reset'">
                                 Reset
                             </button>
                         </div>
@@ -128,10 +128,10 @@
                                     +1,000
                                 </button>
                             <!-- /ko -->
-                            <button class="btn btn-primary smallButton smallFont" type="button" onclick="ShopHandler.maxAmount()">
+                            <button class="btn btn-primary smallButton smallFont" type="button" onclick="ShopHandler.maxAmount()" data-bind="t: 'common.max'">
                                 Max
                             </button>
-                            <button class="btn-outline-dark" data-bind="attr: {class: ShopHandler.calculateButtonCss()}" onclick="ShopHandler.buyItem()">
+                            <button class="btn-outline-dark" data-bind="attr: {class: ShopHandler.calculateButtonCss()}, t: 'common.buy'" onclick="ShopHandler.buyItem()">
                                 Buy
                             </button>
                         </div>
@@ -139,7 +139,7 @@
                 </div>
                 <!-- /ko -->
                 <!-- ko if: !shopVisible() -->
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
                 <!-- /ko -->
             </div>
         </div>

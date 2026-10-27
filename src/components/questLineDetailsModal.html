@@ -14,10 +14,10 @@
                             </td>
                             <td class="vertical-middle">
                                 <div class="px-2 text-nowrap">
-                                    <span class="text-success" data-bind="if: questLine.state() === QuestLineState.ended || $index() < questLine.curQuest()">Completed</span>
-                                    <span class="text-danger" data-bind="if: questLine.state() === QuestLineState.inactive || (questLine.state() !== QuestLineState.ended && $index() > questLine.curQuest())">Locked</span>
-                                    <span data-bind="if: questLine.state() === QuestLineState.started && $index() === questLine.curQuest()">In progress</span>
-                                    <span data-bind="if: questLine.state() === QuestLineState.suspended && $index() === questLine.curQuest()">Paused</span>
+                                    <span class="text-success" data-bind="if: questLine.state() === QuestLineState.ended || $index() < questLine.curQuest()"><knockout data-bind="t: 'quests.completed'">Completed</knockout></span>
+                                    <span class="text-danger" data-bind="if: questLine.state() === QuestLineState.inactive || (questLine.state() !== QuestLineState.ended && $index() > questLine.curQuest())"><knockout data-bind="t: 'questLine.locked'">Locked</knockout></span>
+                                    <span data-bind="if: questLine.state() === QuestLineState.started && $index() === questLine.curQuest()"><knockout data-bind="t: 'questLine.inProgress'">In progress</knockout></span>
+                                    <span data-bind="if: questLine.state() === QuestLineState.suspended && $index() === questLine.curQuest()"><knockout data-bind="t: 'questLine.paused'">Paused</knockout></span>
                                 </div>
                             </td>
                         </tr>
@@ -25,7 +25,7 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
             </div>
         </div>
     </div>

@@ -4,7 +4,7 @@
             click: () => { Save.store(player, true); },
             tooltip: {
                 html: true,
-                title: `Save the game.<br/>Shortcut: ${Settings.getSetting('hotkey.forceSave').prefix}${Settings.getSetting('hotkey.forceSave').observableValue()}`,
+                title: App.translation.ui('menu.saveTooltip', 'Save the game.<br/>Shortcut: {{shortcut}}', { shortcut: `${Settings.getSetting('hotkey.forceSave').prefix}${Settings.getSetting('hotkey.forceSave').observableValue()}` }),
                 trigger: 'hover',
                 placement: 'bottom'
             }">
@@ -13,69 +13,70 @@
     <button class="btn btn-secondary mr-1 float-left"
         data-bind="visible: Settings.getSetting('showMuteButton').observableValue(),
             click: () => { Settings.getSetting('sound.muted').toggle() },
-            tooltip: { title: Settings.getSetting('sound.muted').observableValue() ? 'Click to unmute all sounds.' : 'Click to mute all sounds.', trigger: 'hover', placement: 'bottom' }">
+            tooltip: { title: Settings.getSetting('sound.muted').observableValue() ? App.translation.ui('menu.unmuteTooltip', 'Click to unmute all sounds.') : App.translation.ui('menu.muteTooltip', 'Click to mute all sounds.'), trigger: 'hover', placement: 'bottom' }">
         <img src="assets/images/volume-high.svg" height="20px" width="20px" style="margin-top: -3px;"
             data-bind="attr: { src: `assets/images/${Settings.getSetting('sound.muted').observableValue() ? 'volume-xmark' : 'volume-high'}.svg` }">
     </button>
     <button class="btn btn-secondary dropdown-toggle float-right" type="button" data-toggle="dropdown">
-        Start Menu
+        <knockout data-bind="t: 'menu.startMenu'">Start Menu</knockout>
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu dropdown-menu-right">
         <li>
-            <a class="dropdown-item" href="#pokedexModal" data-toggle="modal">Pokédex</a>
+            <a class="dropdown-item" href="#pokedexModal" data-toggle="modal" data-bind="t: 'menu.pokedex'">Pokédex</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#showItemsModal" data-toggle="modal">Items</a>
+            <a class="dropdown-item" href="#showItemsModal" data-toggle="modal" data-bind="t: 'menu.items'">Items</a>
         </li>
-        <li data-bind="attr: {  title: App.game.gems.canAccess() ? '' : 'Progress further to unlock...'}">
+        <li data-bind="attr: {  title: App.game.gems.canAccess() ? '' : App.translation.ui('menu.progressToUnlock', 'Progress further to unlock...')}">
             <a class="dropdown-item" href="#" data-bind="click:function(){App.game.gems.openGemModal()},
-            attr: {class: App.game.gems.canAccess() ? 'dropdown-item' : 'dropdown-item disabled all-pointers'}">Gems</a>
+            attr: {class: App.game.gems.canAccess() ? 'dropdown-item' : 'dropdown-item disabled all-pointers'},
+            t: 'menu.gems'">Gems</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#profileModal" data-toggle="modal">Profile</a>
+            <a class="dropdown-item" href="#profileModal" data-toggle="modal" data-bind="t: 'menu.profile'">Profile</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#badgeCaseModal" data-toggle="modal">Badge Case</a>
+            <a class="dropdown-item" href="#badgeCaseModal" data-toggle="modal" data-bind="t: 'menu.badgeCase'">Badge Case</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#saveModal" data-toggle="modal">Save / Enter Code</a>
+            <a class="dropdown-item" href="#saveModal" data-toggle="modal" data-bind="t: 'menu.save'">Save / Enter Code</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#settingsModal" data-toggle="modal">Settings</a>
+            <a class="dropdown-item" href="#settingsModal" data-toggle="modal" data-bind="t: 'menu.settings'">Settings</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#eventsModal" data-toggle="modal">Events</a>
+            <a class="dropdown-item" href="#eventsModal" data-toggle="modal" data-bind="t: 'menu.events'">Events</a>
         </li>
         <li>
-            <button class="dropdown-item" href="#statisticsModal" data-toggle="modal">Statistics</button>
+            <button class="dropdown-item" href="#statisticsModal" data-toggle="modal" data-bind="t: 'menu.statistics'">Statistics</button>
         </li>
         <li>
-            <a class="dropdown-item" href="#achievementsModal" data-toggle="modal" onclick="AchievementHandler.filterAchievementList(true);">Achievements</a>
+            <a class="dropdown-item" href="#achievementsModal" data-toggle="modal" onclick="AchievementHandler.filterAchievementList(true);" data-bind="t: 'menu.achievements'">Achievements</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#logBookModal" data-toggle="modal">Log Book</a>
+            <a class="dropdown-item" href="#logBookModal" data-toggle="modal" data-bind="t: 'menu.logBook'">Log Book</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#damageCalculatorModal" data-toggle="modal">Damage Calculator</a>
+            <a class="dropdown-item" href="#damageCalculatorModal" data-toggle="modal" data-bind="t: 'menu.damageCalculator'">Damage Calculator</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#challengeModeModal" data-toggle="modal">Challenge Modes</a>
+            <a class="dropdown-item" href="#challengeModeModal" data-toggle="modal" data-bind="t: 'menu.challengeModes'">Challenge Modes</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#changelogModal" data-toggle="modal">Changelog</a>
+            <a class="dropdown-item" href="#changelogModal" data-toggle="modal" data-bind="t: 'menu.changelog'">Changelog</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#FAQModal" data-toggle="modal">FAQ</a>
+            <a class="dropdown-item" href="#FAQModal" data-toggle="modal" data-bind="t: 'menu.faq'">FAQ</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#creditsModal" data-toggle="modal">Credits</a>
+            <a class="dropdown-item" href="#creditsModal" data-toggle="modal" data-bind="t: 'menu.credits'">Credits</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#externalLinksModal" data-toggle="modal">External Links</a>
+            <a class="dropdown-item" href="#externalLinksModal" data-toggle="modal" data-bind="t: 'menu.externalLinks'">External Links</a>
         </li>
         <li>
-            <a class="dropdown-item" href="https://github.com/pokeclicker/pokeclicker/issues" target="_blank">Report a bug</a>
+            <a class="dropdown-item" href="https://github.com/pokeclicker/pokeclicker/issues" target="_blank" data-bind="t: 'menu.reportBug'">Report a bug</a>
         </li>
 
     </ul>

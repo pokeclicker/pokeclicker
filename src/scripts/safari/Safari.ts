@@ -624,7 +624,7 @@ class Safari {
         const tooltip = { trigger : 'hover', title : '' };
         const level = Safari.safariLevel();
         if (level == Safari.maxSafariLevel) {
-            tooltip.title = 'Max level reached';
+            tooltip.title = App.translation.ui('safari.maxLevel', 'Max level reached');
         } else {
             tooltip.title = `${(Safari.safariExp() - Safari.expRequiredForLevel(level)).toLocaleString('en-US')} / ${(Safari.expRequiredForLevel(level + 1) - Safari.expRequiredForLevel(level)).toLocaleString('en-US')}`;
         }

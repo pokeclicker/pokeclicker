@@ -2,10 +2,10 @@
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Battle Café</h5>
+            <h5 class="modal-title" data-bind="t: 'battleCafe.title'">Battle Café</h5>
         </div>
         <div class="modal-body">
-                <h4>Select a Sweet</h4>
+                <h4 data-bind="t: 'battleCafe.selectSweet'">Select a Sweet</h4>
                 <div class="sweet-display my-3" data-bind="foreach: GameHelper.enumStrings(GameConstants.AlcremieSweet)">
                     <div class="mx-1 mb-1">
                         <div class="card clickable" data-bind="click: () => BattleCafeController.selectedSweet(GameConstants.AlcremieSweet[$data])">
@@ -45,8 +45,8 @@
                                 <table class="table table-sm mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="border-top-0 w-50">Cost Per Spin</th>
-                                            <th class="border-top-0 w-50">Owned</th>
+                                            <th class="border-top-0 w-50" data-bind="t: 'battleCafe.costPerSpin'">Cost Per Spin</th>
+                                            <th class="border-top-0 w-50" data-bind="t: 'battleCafe.owned'">Owned</th>
                                         </tr>
                                     </thead>
                                     <tbody data-bind="foreach: BattleCafeController.getPrice(GameConstants.AlcremieSweet[$data])">
@@ -61,7 +61,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td>Maximum Spins</td>
+                                            <td data-bind="t: 'battleCafe.maxSpins'">Maximum Spins</td>
                                             <td data-bind="text: BattleCafeController.calcMaxSpins(BattleCafeController.selectedSweet()).toLocaleString('en-US')"></td>
                                         </tr>
                                     </tfoot>
@@ -95,31 +95,31 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-header py-2 font-weight-bold">Spin!</div>
+                    <div class="card-header py-2 font-weight-bold" data-bind="t: 'battleCafe.spin'">Spin!</div>
                     <div class="card-body col-lg-6 align-self-center p-2">
-                        <div>Remaining Spin Attempts: <span data-bind="text: `${BattleCafeController.spinsLeft()} / ${BattleCafeController.maxTotalSpins()}`"></span></div>
+                        <div data-bind="t: 'battleCafe.remainingSpins', tVars: { spins: BattleCafeController.spinsLeft(), max: BattleCafeController.maxTotalSpins() }">Remaining Spin Attempts: {{spins}} / {{max}}</div>
                         <img style="width: 60px;" src="assets/images/profile/trainer-1.png" data-bind="
                             attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` },
                             class: BattleCafeController.isSpinning() ? 'player-animated' + (BattleCafeController.clockwise() ? '' : '-counter') : ''" />
                         <div class="input-group justify-content-center align-items-center mt-3">
-                            <label class="m-0 pr-1" for="battleCafeDuration">Spin Duration (seconds):</label>
+                            <label class="m-0 pr-1" for="battleCafeDuration" data-bind="t: 'battleCafe.spinDuration'">Spin Duration (seconds):</label>
                             <input style="max-width: 100px;" class="form-control col-4" id="battleCafeDuration" type="number" min="1" max="20" value="3"/>
                         </div>
                         <div class="d-flex mt-3">
                             <div class="col-6 px-1">
-                                <button class="btn btn-primary btn-block" onclick="BattleCafeController.spin(true);">Clockwise</button>
+                                <button class="btn btn-primary btn-block" onclick="BattleCafeController.spin(true);" data-bind="t: 'battleCafe.clockwise'">Clockwise</button>
                             </div>
                             <div class="col-6 px-1">
-                                <button class="btn btn-primary btn-block" onclick="BattleCafeController.spin(false);">Counter-Clockwise</button>
+                                <button class="btn btn-primary btn-block" onclick="BattleCafeController.spin(false);" data-bind="t: 'battleCafe.counterClockwise'">Counter-Clockwise</button>
                             </div>
                         </div>
-                        <div class="text-muted small mt-2">Spin Attempts Accumulate At Midnight</div>
+                        <div class="text-muted small mt-2" data-bind="t: 'battleCafe.spinsAccumulate'">Spin Attempts Accumulate At Midnight</div>
                     </div>
                 </div>
                 <!-- /ko -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="t: 'common.close'">Close</button>
             </div>
         </div>
     </div>

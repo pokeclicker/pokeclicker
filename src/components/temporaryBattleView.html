@@ -45,7 +45,7 @@
                  data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[TemporaryBattleBattle.pokeball()] + '.svg' }"
                  src=""/>
             <br>
-            Catch Chance:
+            <knockout data-bind="t: 'battle.catchChance'">Catch Chance:</knockout>
             <knockout data-bind="text: Math.floor(TemporaryBattleBattle.catchRateActual()) + '%'">Catch Rate</knockout>
         </div>
 
@@ -66,7 +66,7 @@
                         <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
                     </td>
                     <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
-                        <span style="display: inline;">Click Attack:
+                        <span style="display: inline;"><knockout data-bind="t: 'battle.clickAttack'">Click Attack:</knockout>
                             <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
                         </span>
                     </td>

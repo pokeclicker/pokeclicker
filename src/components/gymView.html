@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <button class="btn btn-sm btn-danger stop-auto" data-bind="visible: GymRunner.autoRestart()"
+        <button class="btn btn-sm btn-danger stop-auto" data-bind="visible: GymRunner.autoRestart(), t: 'gym.stopAuto'"
                 onclick="GymRunner.autoRestart(false)">
             Stop Auto
         </button>
@@ -60,7 +60,7 @@
                   <knockout data-bind="text: GymBattle.gym.leaderName.replace(/\d/g,'')"></knockout>
                 </td>
                 <td width="50%">
-                  <knockout data-bind="text: `${(GymRunner.gymObservable()?.clears() ?? 0).toLocaleString('en-US')} Clears`"></knockout>
+                  <knockout data-bind="text: App.translation.ui('gym.clears', '{{clears}} Clears', { clears: (GymRunner.gymObservable()?.clears() ?? 0).toLocaleString('en-US') })"></knockout>
                 </td>
               </tr>
               <tr>
@@ -68,7 +68,7 @@
                     <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
                 </td>
                 <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
-                    <span style="display: inline;">Click Attack:
+                    <span style="display: inline;"><knockout data-bind="t: 'battle.clickAttack'">Click Attack:</knockout>
                         <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
                     </span>
                 </td>

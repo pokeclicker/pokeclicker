@@ -5,5 +5,9 @@ export declare module 'knockout' {
         sortable;
         resizable;
         tooltip;
+        t;
+        tHtml;
+        tAttr;
+        tVars;
     }
 }

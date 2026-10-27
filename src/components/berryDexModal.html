@@ -4,7 +4,7 @@
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-muted" data-bind="text: `#${(Number($data) + 1).toString().padStart(2,0)}&nbsp;&nbsp;`"></h5>
                 <h5 class="modal-title text-light" data-bind="text: BerryType[$data]">Berry Statistics</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="tAttr: { 'aria-label': 'common.close' }">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -13,7 +13,7 @@
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                   <thead>
                     <tr class="text-light">
-                      <th class="bg-dark" colspan="2">Description</th>
+                      <th class="bg-dark" colspan="2" data-bind="t: 'common.description'">Description</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -21,85 +21,85 @@
                   </tbody>
                   <thead>
                     <tr class="text-light">
-                      <th class="bg-dark" colspan="2">Form</th>
+                      <th class="bg-dark" colspan="2" data-bind="t: 'berryDex.form'">Form</th>
                     </tr>
                   </thead>
                     <tbody>
                     <tr>
-                      <td class="text-left">Berry Color</td>
+                      <td class="text-left" data-bind="t: 'berryDex.berryColor'">Berry Color</td>
                       <td class="text-left tight"><code data-bind="text: BerryColor[BerryList[$data].color]">-</code></td>
                     </tr>
                     <tr>
-                      <td class="text-left">Size</td>
+                      <td class="text-left" data-bind="t: 'berryDex.size'">Size</td>
                       <td class="text-left tight"><code data-bind="text: Farming.sizeUnitConverter[SizeUnits[Settings.getSetting('sizeUnits').observableValue()]](BerryList[$data].size)">-</code></td>
                     </tr>
                     <tr>
-                      <td class="text-left">Firmness</td>
+                      <td class="text-left" data-bind="t: 'berryDex.firmness'">Firmness</td>
                       <td class="text-left tight"><code data-bind="html: GameConstants.humanifyString(BerryFirmness[BerryList[$data].firmness])">-</code></td>
                     </tr>
                     <!-- ko if: BerryList[$data].aura -->
                     <tr>
-                      <td class="text-left">Aura</td>
+                      <td class="text-left" data-bind="t: 'berryDex.aura'">Aura</td>
                       <td class="text-left tight"><code data-bind="text: `${AuraType[BerryList[$data].aura.auraType]}${BerryList[$data].aura.auraMultipliers[0] > 1 ? '+' : '-'}`"></code></td>
                     </tr>
                     <!-- /ko -->
                     </tbody>
                   <thead>
                     <tr class="text-light">
-                      <th class="text-left bg-dark">Time</th>
-                      <th class="text-left bg-dark">Length</th>
+                      <th class="text-left bg-dark" data-bind="t: 'berryDex.time'">Time</th>
+                      <th class="text-left bg-dark" data-bind="t: 'berryDex.length'">Length</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td class="text-left">Growth Duration</td>
+                      <td class="text-left" data-bind="t: 'berryDex.growthDuration'">Growth Duration</td>
                       <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(BerryList[$data].growthTime[3])">-</code></td>
                     </tr>
                     <tr>
-                      <td class="text-left">Berry Stage Duration</td>
+                      <td class="text-left" data-bind="t: 'berryDex.berryStageDuration'">Berry Stage Duration</td>
                       <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(BerryList[$data].growthTime[4]-BerryList[$data].growthTime[3])">-</code></td>
                     </tr>
                     <tr>
-                      <td class="text-left">Total Life Span</td>
+                      <td class="text-left" data-bind="t: 'berryDex.totalLifeSpan'">Total Life Span</td>
                       <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(BerryList[$data].growthTime[4])">-</code></td>
                     </tr>
                     </tbody>
                     <thead>
                       <tr class="text-light">
-                        <th class="text-left bg-dark">Farming Info</th>
-                        <th class="text-left bg-dark">Data</th>
+                        <th class="text-left bg-dark" data-bind="t: 'berryDex.farmingInfo'">Farming Info</th>
+                        <th class="text-left bg-dark" data-bind="t: 'berryDex.data'">Data</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="text-left">Harvest Amount</td>
+                        <td class="text-left" data-bind="t: 'berryDex.harvestAmount'">Harvest Amount</td>
                         <td class="text-left tight"><code data-bind="text: BerryList[$data].harvestAmount.toLocaleString('en-US')">-</code></td>
                       </tr>
                       <tr>
-                        <td class="text-left">Replant Rate</td>
+                        <td class="text-left" data-bind="t: 'berryDex.replantRate'">Replant Rate</td>
                         <td class="text-left tight"><code data-bind="text: BerryList[$data].replantRate.toLocaleString('en-US', { style: 'percent' })">-</code></td>
                       </tr>
                       <tr>
-                        <td class="text-left">Farm Points per Harvest</td>
+                        <td class="text-left" data-bind="t: 'berryDex.farmPointsPerHarvest'">Farm Points per Harvest</td>
                         <td class="text-left tight"><code data-bind="text: BerryList[$data].farmValue.toLocaleString('en-US')">-</code></td>
                       </tr>
                     </tbody>
                     <thead>
                       <tr class="text-light">
-                        <th class="text-left bg-dark">Statistic</th>
-                        <th class="text-left bg-dark">Amount</th>
+                        <th class="text-left bg-dark" data-bind="t: 'berryDex.statistic'">Statistic</th>
+                        <th class="text-left bg-dark" data-bind="t: 'common.amount'">Amount</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="text-left">Current Amount</td>
+                        <td class="text-left" data-bind="t: 'berryDex.currentAmount'">Current Amount</td>
                         <td class="text-left tight"><code data-bind="text: App.game.farming.berryInventory[$data]().toLocaleString('en-US')"></span></td></code></td>
                       </tr>
                       <tr>
-                        <td class="text-left">Total Harvested</td>
+                        <td class="text-left" data-bind="t: 'berryDex.totalHarvested'">Total Harvested</td>
                         <td class="text-left tight"><code data-bind="text: App.game.statistics.berriesHarvested[$data]().toLocaleString('en-US')">-</code></td>
                       </tr><tr>
-                        <td class="text-left">Total Obtained</td>
+                        <td class="text-left" data-bind="t: 'berryDex.totalObtained'">Total Obtained</td>
                         <td class="text-left tight"><code data-bind="text: App.game.statistics.berriesObtained[$data]().toLocaleString('en-US')">-</code></td>
                       </tr>
                     </tbody>
@@ -107,14 +107,14 @@
                       <td class="p-0" colspan="2">
                           <table style="width: 100%;">
                               <tr class="text-light">
-                                <th class="bg-dark" colspan="5">Flavor</th>
+                                <th class="bg-dark" colspan="5" data-bind="t: 'berryDex.flavor'">Flavor</th>
                               </tr>
                               <tr>
-                                  <td>Spicy</td>
-                                  <td>Dry</td>
-                                  <td>Sweet</td>
-                                  <td>Bitter</td>
-                                  <td>Sour</td>
+                                  <td data-bind="t: 'berryDex.spicy'">Spicy</td>
+                                  <td data-bind="t: 'berryDex.dry'">Dry</td>
+                                  <td data-bind="t: 'berryDex.sweet'">Sweet</td>
+                                  <td data-bind="t: 'berryDex.bitter'">Bitter</td>
+                                  <td data-bind="t: 'berryDex.sour'">Sour</td>
                               </tr>
                               <tr>
                                 <td data-bind="text: BerryList[$data].flavors[0].value">Spicy</td>
@@ -130,13 +130,13 @@
                       <td class="p-0" colspan="2">
                         <table class="table table-striped table-hover table-bordered table-sm m-0">
                           <tr class="text-light">
-                            <th class="bg-dark" colspan="4">Growth Stages</th>
+                            <th class="bg-dark" colspan="4" data-bind="t: 'berryDex.growthStages'">Growth Stages</th>
                           </tr>
                           <tr>
-                            <td>Sprout</td>
-                            <td>Taller</td>
-                            <td>Bloom</td>
-                            <td>Berry</td>
+                            <td data-bind="t: 'berryDex.stage.sprout'">Sprout</td>
+                            <td data-bind="t: 'berryDex.stage.taller'">Taller</td>
+                            <td data-bind="t: 'berryDex.stage.bloom'">Bloom</td>
+                            <td data-bind="t: 'berryDex.stage.berry'">Berry</td>
                           </tr>
                           <tr>
                             <td><img src="assets/images/farm/AllTreeSprout.png"/></td>
@@ -145,7 +145,7 @@
                             <td><img src="" data-bind="attr: { src: `assets/images/farm/${BerryType[$data]}Tree${PlotStage[PlotStage.Berry]}.png` }"/></td>
                           </tr>
                           <tr>
-                            <th colspan="4">Total Time until Stage</th>
+                            <th colspan="4" data-bind="t: 'berryDex.totalTimeUntilStage'">Total Time until Stage</th>
                           </tr>
                           <tr>
                             <td><code data-bind="html: GameConstants.formatSecondsToTime(BerryList[$data].growthTime[0])">-</code></td>
@@ -155,7 +155,7 @@
                           </tr>
                           <!-- ko if: BerryList[$data].aura -->
                           <tr>
-                            <th colspan="4">Aura Effect at Stage</th>
+                            <th colspan="4" data-bind="t: 'berryDex.auraEffectAtStage'">Aura Effect at Stage</th>
                           </tr>
                           <tr>
                             <td><code data-bind="html: GameConstants.formatSecondsToTime(1 - 1)">-</code></td>
@@ -172,10 +172,10 @@
                         <table class="table table-striped table-hover table-bordered table-sm m-0">
                           <thead>
                             <tr class="text-light">
-                              <th class="bg-dark">Wandering Pokémon</th>
+                              <th class="bg-dark" data-bind="t: 'berryDex.wanderingPokemon'">Wandering Pokémon</th>
                             </tr>
                             <tr>
-                              <th colspan="2" data-bind="text: 'Attracted by all Berries'">Base Wanderers</th>
+                              <th colspan="2" data-bind="text: App.translation.ui('berryDex.attractedByAll', 'Attracted by all Berries')">Base Wanderers</th>
                             </tr>
                           </thead>
                           <tbody class="wanderPokemonList">
@@ -189,7 +189,7 @@
                               </td>
                             </tr>
                             <tr>
-                              <th colspan="2" data-bind="text: `Attracted to ${BerryColor[BerryList[$data].color]}-Colored Berries`">Color Wanderers</th>
+                              <th colspan="2" data-bind="text: App.translation.ui('berryDex.attractedByColor', 'Attracted to {{color}}-Colored Berries', { color: BerryColor[BerryList[$data].color] })">Color Wanderers</th>
                             </tr>
                             <tr>
                               <td>
@@ -202,7 +202,7 @@
                             </tr>
                             <!-- ko if: BerryList[$data].wander.some((w) => ![...Berry.baseWander, ...Berry.colorWander[BerryList[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
                             <tr>
-                              <th colspan="2" data-bind="text: `Attracted to ${BerryType[$data]} Berry`">Specific Wanderers</th>
+                              <th colspan="2" data-bind="text: App.translation.ui('berryDex.attractedByBerry', 'Attracted to {{berry}} Berry', { berry: BerryType[$data] })">Specific Wanderers</th>
                             </tr>
                             <tr>
                               <td>
@@ -222,7 +222,7 @@
                   <!-- ko if: FarmController.getHint(+$data) !== ""-->
                   <thead>
                     <tr class="text-light">
-                      <th class="bg-dark" colspan="2">Hint</th>
+                      <th class="bg-dark" colspan="2" data-bind="t: 'berryDex.hint'">Hint</th>
                     </tr>
                   </thead>
                   <tbody>
