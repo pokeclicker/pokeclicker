@@ -104,7 +104,7 @@ class PartyController {
         });
         if (arePokemonInHatchery) {
             Notifier.notify({
-                message: `${GameConstants.VitaminType[vitamin]} couldn\'t be modified for Pokémon in Hatchery or Queue.`,
+                message: `${GameConstants.VitaminType[vitamin]} couldn\'t be modified for Pokémon in the Hatchery.`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -136,7 +136,7 @@ class PartyController {
         });
         if (arePokemonInHatchery) {
             Notifier.notify({
-                message: 'Vitamins couldn\'t be modified for Pokémon in Hatchery or Queue.',
+                message: 'Vitamins couldn\'t be modified for Pokémon in the Hatchery.',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }

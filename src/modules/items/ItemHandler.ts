@@ -55,7 +55,7 @@ export default class ItemHandler {
         }
 
         const partyPokemon = App.game.party.getPokemonByName(ItemHandler.pokemonSelected());
-        if (partyPokemon.breeding && App.game.challenges.list.realEvolutions.active()) {
+        if (partyPokemon.isUnavailable() && App.game.challenges.list.realEvolutions.active()) {
             // If the real evolution challenge is active, we prevent using stones on Pokémon in the hatchery to prevent exploits
             return Notifier.notify({
                 message: 'You can\'t use an evolution item on a Pokémon if it\'s in the hatchery...',
