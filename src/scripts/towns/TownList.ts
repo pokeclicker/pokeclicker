@@ -2488,6 +2488,12 @@ const SkepticalFisherman = new NPC('Skeptical Fisherman', [
     'I\'m a bit skeptical of his wares, especially since his shop isn\'t on any maps.',
 ], {image: 'assets/images/npcs/Fisherman.png'});
 
+const WatmelFarmer = new NPC('Watmel Farmer', [
+    'Hey there! I own a Watmel farm nearby and was having trouble keeping Pokémon away from my berries.',
+    'But luckily, there is a shop here in town that sells Electrodes painted like a melon to scare away Pokémon.',
+    'Although they don\'t look like any melon I have ever seen',
+], {image: 'assets/images/npcs/Pokémon Breeder (female).png'});
+
 const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'Oh! Welcome, welcome. Do you by any chance have any Meteorites? No? Ah well, I’m studying the Pokémon Deoxys and I’ve heard that a Meteorite can cause it to change forms!',
     'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms… but I’m not strong enough to find out...'],
@@ -3450,7 +3456,7 @@ TownList['Mauville City'] = new Town(
     [MauvilleCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Mauville City']), HoennBerryMaster],
     {
         requirements: [new TemporaryBattleRequirement('May 3')],
-        npcs: [SkepticalFisherman],
+        npcs: [SkepticalFisherman, WatmelFarmer],
     }
 );
 TownList['Sea Mauville'] = new Town(

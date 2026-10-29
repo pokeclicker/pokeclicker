@@ -361,6 +361,7 @@ ItemList['Pinkan Poliwhirl']  = new PokemonItem('Pinkan Poliwhirl');
 ItemList['Pinkan Geodude']  = new PokemonItem('Pinkan Geodude');
 ItemList['Pinkan Dodrio']  = new PokemonItem('Pinkan Dodrio', 50000);
 ItemList['Charity Chansey']   = new PokemonItem('Charity Chansey', 5000);
+ItemList['Electrode (Melon)']  = new PokemonItem('Electrode (Melon)', undefined);
 ItemList['Exeggcute (Single)'] = new PokemonItem('Exeggcute (Single)');
 ItemList.Lickitung            = new PokemonItem('Lickitung', 1000);
 ItemList['Pinkan Weezing']  = new PokemonItem('Pinkan Weezing');
