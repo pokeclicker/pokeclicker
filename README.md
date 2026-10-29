@@ -21,6 +21,8 @@ You can reach out on discord to discuss your ideas and how to implement them: ht
 - Pull Requests adding new translatable content should link to a Pull Request in the [translation repo](https://github.com/pokeclicker/pokeclicker-translations) adding your new strings. See the Developer instructions on that repo for more info.
 - Split Pull Requests into smaller Pull Requests when possible. It will make it easier for us to review, and easier for you if something's needs to be changed or is rejected.
 
+**A note on AI tools:** AI-assisted contributions are welcome, but "vibe-coded" PRs are not. If you use AI to help write code, you must understand it, review it, and test it before opening a pull request, and be able to explain and defend your changes during review. PRs that appear to be unreviewed AI output may be closed.
+
 ## Editor/IDE setup
 
 We have an [EditorConfig](https://editorconfig.org/) and linting configured, to help everyone write similar code. You will find our recommended plugins for VSCode below, however you should be able to find a plugin for other IDEs as well.
