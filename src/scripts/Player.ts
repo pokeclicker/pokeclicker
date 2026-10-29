@@ -214,6 +214,10 @@ class Player implements TmpPlayerType {
         return this._createdTime;
     }
 
+    public makeTimeTraveller(): void {
+        this._timeTraveller = true;
+    }
+
     public toJSON() {
         const keep = [
             '_route',

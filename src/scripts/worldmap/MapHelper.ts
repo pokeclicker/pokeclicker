@@ -137,8 +137,12 @@ class MapHelper {
             player.town?.name ||
             undefined;
 
+        if (area === undefined) {
+            return '';
+        }
+
         if (area in GameConstants.BattleBackgrounds) {
-            return area;
+            return (area as GameConstants.BattleBackground);
         }
 
         const [img] = Object.entries(GameConstants.BattleBackgrounds).find(

@@ -89,12 +89,32 @@ class DiscordRichPresence {
         },
         {
             key: 'current_route_stats',
-            value: () => player.route ? App.game.statistics.routeKills[player.region][player.route]() : player.town.dungeon ? App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.name)]() : player.town.gym ? App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town.name)]() : 0,
+            value: () => {
+                switch (App.game.gameState) {
+                    case GameConstants.GameState.fighting:
+                        return App.game.statistics.routeKills[player.region][player.route]();
+                    case GameConstants.GameState.dungeon:
+                        return App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.name)]();
+                    case GameConstants.GameState.gym:
+                        return GymBattle.gym.clears();
+                }
+                return 0;
+            },
             default: 0,
         },
         {
             key: 'current_area_stats',
-            value: () => player.route ? App.game.statistics.routeKills[player.region][player.route]() : player.town.dungeon ? App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.name)]() : player.town.gym ? App.game.statistics.gymsDefeated[GameConstants.getGymIndex(player.town.name)]() : 0,
+            value: () => {
+                switch (App.game.gameState) {
+                    case GameConstants.GameState.fighting:
+                        return App.game.statistics.routeKills[player.region][player.route]();
+                    case GameConstants.GameState.dungeon:
+                        return App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town.name)]();
+                    case GameConstants.GameState.gym:
+                        return GymBattle.gym.clears();
+                }
+                return 0;
+            },
             default: 0,
         },
         {
