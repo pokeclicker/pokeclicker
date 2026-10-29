@@ -13,9 +13,13 @@ aria-labelledby="purifyChamberModalLabel">
                                value: App.game.purifyChamber.selectedPokemon"
                 >
                 </select>
+                <!-- ko if: App.game.purifyChamber.selectedPokemon -->
                 <div>
-                    <img data-bind="visible: App.game.purifyChamber.selectedPokemon(), attr: { src: App.game.purifyChamber.selectedPokemon() ? PokemonHelper.getImage(App.game.purifyChamber.selectedPokemon().id) : '' }"/>
+                    <img data-bind="attr: { src: PokemonHelper.getImage(App.game.purifyChamber.selectedPokemon().id) }"/>
+                    <br>
+                    <span data-bind="text: `Attack: ${App.game.purifyChamber.selectedPokemon().calculateAttack(true).toLocaleString('en-US')}`"></span>
                 </div>
+                <!-- /ko -->
                 <div>
                     <h4>Flow needed for next purification:</h4>
                     <span data-bind="text: App.game.purifyChamber.currentFlow().toLocaleString('en-US')"></span>
