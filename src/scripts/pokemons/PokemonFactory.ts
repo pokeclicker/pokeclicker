@@ -22,19 +22,13 @@ class PokemonFactory {
         }
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
-        const routeAvgHp = (region, route) => {
-            const poke = [...new Set(Object.values(Routes.getRoute(region, route).pokemon).flat().map(p => p.pokemon ?? p).flat())];
-            const total = poke.map(p => pokemonMap[p].base.hitpoints).reduce((s, a) => s + a, 0);
-            return total / poke.length;
-        };
-
-        // TODO this monster formula needs to be improved. Preferably with graphs :D
-        // Health has a +/- 10% variable based on base health stat compared to the average of the route
-        const maxHealth: number = Math.round(PokemonFactory.routeHealth(route, region) * (0.9 + (basePokemon.hitpoints / routeAvgHp(region, route)) / 10));
+        const routeHealthScale = this.routeHealthScale(route, region);
+        const healthScale = routeHealthScale.variance === 0 ? 1 : 1 + ((basePokemon.hitpoints - routeHealthScale.min) / (routeHealthScale.max - routeHealthScale.min) - 0.5) * routeHealthScale.variance;
+        const maxHealth: number = Math.round(PokemonFactory.routeHealth(route, region) * healthScale);
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const level: number = this.routeLevel(route, region);
-        const money: number = this.routeMoney(route,region);
+        const money: number = this.routeMoney(route, region);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         const heldItem: BagItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROUTE_HELD_ITEM_MODIFIER, shiny);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
@@ -86,6 +80,40 @@ class PokemonFactory {
         route = MapHelper.normalizeRoute(route, region);
         const health: number = Math.max(20, Math.floor(Math.pow((100 * Math.pow(route, 2.2) / 12), 1.15) * (1 + region / 20))) || 20;
         return health;
+    }
+
+    public static routeHealthScaleCache: Map<string, {
+        min: number,
+        max: number,
+        variance: number,
+    }> = new Map();
+
+    public static routeHealthScale(route: number, region: GameConstants.Region): {
+        min: number,
+        max: number,
+        variance: number,
+    } {
+        const key = `${region}-${route}`;
+        if (!this.routeHealthScaleCache.has(key)) {
+            const allPokemon = [...new Set(Object.values(Routes.getRoute(region, route).pokemon).flat().map(p => p.pokemon ?? p).flat())];
+            const hpList = allPokemon.map(p => pokemonMap[p].base.hitpoints).sort((a,b) => a - b);
+            let variance = 0.2; // From min to max - 0.2 means 90% to 110%
+            if (hpList.length <= 1 || hpList[0] === hpList[hpList.length - 1]) {
+                variance = 0;
+            } else if (hpList.length === 2) {
+                variance = 0.1;
+            }
+            this.routeHealthScaleCache.set(key, {
+                min: hpList[0],
+                max: hpList[hpList.length - 1],
+                variance,
+            });
+        }
+        const ret = this.routeHealthScaleCache.get(key);
+        if (ret === undefined) {
+            throw new Error(`Cache error in routeHealthScale: ${key}`); // Should never happen, avoids TS confusion
+        }
+        return ret;
     }
 
     public static routeMoney(route: number, region: GameConstants.Region, useRandomDeviation = true): number {
