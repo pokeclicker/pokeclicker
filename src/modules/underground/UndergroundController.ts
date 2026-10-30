@@ -213,6 +213,11 @@ export class UndergroundController {
     }
 
     public static clickModalMineSquare(index: number) {
+        const coordinates = App.game.underground.mine.getCoordinateForGridIndex(index);
+        this.clickMineTool(App.game.underground.tools.selectedToolType, coordinates.x, coordinates.y);
+    }
+
+    public static clickMineTool(toolType: UndergroundToolType, x: number, y: number) {
         const now = Date.now();
 
         if (this.lastMineClick > now - (1000 / UNDERGROUND_MAX_CLICKS_PER_SECOND)) {
@@ -220,8 +225,7 @@ export class UndergroundController {
         }
         this.lastMineClick = now;
 
-        const coordinates = App.game.underground.mine.getCoordinateForGridIndex(index);
-        App.game.underground.tools.useTool(App.game.underground.tools.selectedToolType, coordinates.x, coordinates.y);
+        App.game.underground.tools.useTool(toolType, x, y);
     }
 
     public static handleCoordinatesMined(coordinates: Coordinate[], toolType: UndergroundToolType | null, helper: UndergroundHelper = undefined) {

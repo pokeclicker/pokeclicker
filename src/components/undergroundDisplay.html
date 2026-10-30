@@ -37,7 +37,7 @@
                 css: { 'clickable': [UndergroundToolType.Bomb, UndergroundToolType.Survey].includes($data.id) && $data.canUseTool() && Settings.getSetting('enableUndergroundModuleMineControls').observableValue() },
                 click: () => {
                     if ([UndergroundToolType.Bomb, UndergroundToolType.Survey].includes($data.id) && $data.canUseTool() && Settings.getSetting('enableUndergroundModuleMineControls').observableValue()) {
-                        App.game.underground.tools.useTool($data.id, 0, 0);
+                        UndergroundController.clickMineTool($data.id, 0, 0);
                     }
                 }
             ">
