@@ -9,15 +9,23 @@ class DungeonRunner {
 
     public static fighting: KnockoutObservable<boolean> = ko.observable(false);
     public static map: DungeonMap;
-    public static chestsOpened: KnockoutObservable<number> = ko.observable(0);
-    private static chestsOpenedPerFloor: number[];
     public static currentTileType;
-    public static encountersWon: KnockoutObservable<number> = ko.observable(0);
+    public static chestsOpened: KnockoutObservable<number> = ko.observable(0);
+    public static chestsOpenedThisFloor: KnockoutObservable<number> = ko.observable(0);
+    public static encountersWonThisFloor: KnockoutObservable<number> = ko.observable(0);
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
     public static defeatedBoss: KnockoutObservable<string> = ko.observable(null);
     public static dungeonFinished: KnockoutObservable<boolean> = ko.observable(false);
     public static fightingLootEnemy: boolean;
     public static continuousInteractionInput = false;
+
+    public static chestInfo: KnockoutComputed<string> = ko.pureComputed<string>(() => {
+        let t = `${DungeonRunner.chestsOpenedThisFloor()}/${DungeonRunner.map.chestsPerLevel[DungeonRunner.map.playerPosition().floor]}`;
+        if (DungeonRunner.map.floorSizes.length > 1) {
+            t += ` Total: ${DungeonRunner.chestsOpened()}`;
+        }
+        return t;
+    });
 
     public static initializeDungeon(dungeon: Dungeon) {
         if (!DungeonRunner.canStartDungeon(dungeon)) {
@@ -81,8 +89,8 @@ class DungeonRunner {
         DungeonRunner.map = new DungeonMap(dungeonSize, generateChestLoot, flash);
 
         DungeonRunner.chestsOpened(0);
-        DungeonRunner.encountersWon(0);
-        DungeonRunner.chestsOpenedPerFloor = new Array<number>(DungeonRunner.map.board().length).fill(0);
+        DungeonRunner.chestsOpenedThisFloor(0);
+        DungeonRunner.encountersWonThisFloor(0);
         DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;
         });
@@ -158,7 +166,7 @@ class DungeonRunner {
         }
 
         GameHelper.incrementObservable(DungeonRunner.chestsOpened);
-        DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor]++;
+        GameHelper.incrementObservable(DungeonRunner.chestsOpenedThisFloor);
 
         const { tier, loot } = tile.metadata;
 
@@ -191,10 +199,10 @@ class DungeonRunner {
 
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTileType.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
-        if (DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor] == Math.floor(DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor] / 3)) {
+        if (DungeonRunner.chestsOpenedThisFloor() == Math.floor(DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor] / 3)) {
             DungeonRunner.map.showChestTiles();
         }
-        if (DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor] == Math.ceil(DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor] / 2)) {
+        if (DungeonRunner.chestsOpenedThisFloor() == Math.ceil(DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor] / 2)) {
             DungeonRunner.map.showAllTiles();
         }
     }
@@ -284,6 +292,8 @@ class DungeonRunner {
         if (!DungeonGuides.hired()) {
             DungeonRunner.map.playerMoved(false);
         }
+        DungeonRunner.chestsOpenedThisFloor(0);
+        DungeonRunner.encountersWonThisFloor(0);
     }
 
     public static returnToTown() {

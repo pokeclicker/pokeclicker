@@ -35,7 +35,7 @@ class DungeonBattle extends Battle {
         if (DungeonRunner.fightingLootEnemy) {
             DungeonRunner.fightingLootEnemy = false;
         } else if (!DungeonRunner.fightingBoss()) {
-            GameHelper.incrementObservable(DungeonRunner.encountersWon);
+            GameHelper.incrementObservable(DungeonRunner.encountersWonThisFloor);
         }
 
         if (DungeonRunner.fightingBoss()) {
@@ -126,7 +126,7 @@ class DungeonBattle extends Battle {
             }
 
             DungeonRunner.fighting(false);
-            GameHelper.incrementObservable(DungeonRunner.encountersWon);
+            GameHelper.incrementObservable(DungeonRunner.encountersWonThisFloor);
             if (DungeonRunner.fightingBoss()) {
                 DungeonRunner.defeatedBoss(DungeonBattle.trainer().name);
             }
