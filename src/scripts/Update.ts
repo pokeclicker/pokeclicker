@@ -3012,6 +3012,13 @@ class Update implements Saveable {
                 }
             });
         },
+
+        '0.10.27': ({ saveData }) => {
+            const meltanQuestLine = saveData.quests.questLines.find(ql => ql.name == 'Let\'s Go, Meltan!');
+            if (meltanQuestLine && meltanQuestLine.quest == 5) {
+                meltanQuestLine.initial = [saveData.statistics.pokeballsPurchased[GameConstants.Pokeball.Ultraball]];
+            }
+        },
     };
 
     constructor() {

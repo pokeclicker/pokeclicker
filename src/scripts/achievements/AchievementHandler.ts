@@ -351,7 +351,7 @@ class AchievementHandler {
 
         AchievementHandler.addAchievement('The Ultimate Catching Device', 'Obtain your first Master Ball.', new PokeballRequirement(1, GameConstants.Pokeball.Masterball), 0.20);
         AchievementHandler.addAchievement('Legendaries Hate That Guy', 'Obtain 10 Master Balls.', new PokeballRequirement(10, GameConstants.Pokeball.Masterball), 0.30);
-        AchievementHandler.addAchievement('No Pokémon in the World Can Run Away From Me Now!', 'Obtain 100 Master Balls.', new PokeballRequirement(100, GameConstants.Pokeball.Masterball), 0.40);
+        AchievementHandler.addAchievement('No Pokémon in the World Can Run Away From Me Now!', 'Obtain 50 Master Balls.', new PokeballRequirement(50, GameConstants.Pokeball.Masterball), 0.40);
 
         AchievementHandler.addAchievement('Can You Do This for Me?', 'Complete your first quest.', new QuestRequirement(1), 0.05);
         AchievementHandler.addAchievement('One More Favor', 'Complete 10 quests.', new QuestRequirement(10), 0.15);
