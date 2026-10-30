@@ -23,7 +23,7 @@ import type AchievementCategory from './achievements/AchievementCategory';
 import type KeyItems from './keyItems/KeyItems';
 import type PokeballFilters from './pokeballs/PokeballFilters';
 import type { Underground } from './underground/Underground';
-import type SubRegion from './subRegion/SubRegion';
+import type Subregion from './subregion/Subregion';
 import type CssVariableSetting from './settings/CssVariableSetting';
 import type { EvoData } from './pokemons/evolutions/Base';
 import type { PokemonNameType } from './pokemons/PokemonNameType';
@@ -182,14 +182,14 @@ export type TmpPlayerType = {
     subregion: number;
     town: TmpTownType;
     regionStarters: Array<KnockoutObservable<GameConstants.Starter>>;
-    subregionObject: KnockoutObservable<SubRegion>;
+    subregionObject: KnockoutObservable<Subregion>;
     trainerId: string;
     itemList: Record<string, KnockoutObservable<number>>;
     _lastSeen: number;
     effectList: Record<string, KnockoutObservable<number>>;
     effectTimer: Record<string, KnockoutObservable<string>>;
     highestRegion: KnockoutObservable<GameConstants.Region>;
-    highestSubRegion: KnockoutObservable<number>;
+    highestSubregion: KnockoutObservable<number>;
     amountOfItem: (itemName: string) => number;
     itemMultipliers: Record<string, number>;
     gainItem: (itemName: string, amount: number) => void;
@@ -278,7 +278,7 @@ export type TmpPokemonLocationsType = {
 };
 
 export type TmpPokemonFactoryType = {
-    generateWildPokemon(route: number, region: GameConstants.Region, subRegion: SubRegion): BattlePokemon;
+    generateWildPokemon(route: number, region: GameConstants.Region, subregion: Subregion): BattlePokemon;
     routeDungeonTokens(route: number, region: GameConstants.Region): number;
     generateShiny(chance: number, skipBonus?: boolean): boolean;
     generateGenderById(id: number): GameConstants.BattlePokemonGender;
@@ -330,7 +330,7 @@ export type TmpPartyType = {
         overrideWeather?: WeatherType,
         ignoreLevel?: boolean,
         includeTempBonuses?: boolean,
-        subregion?: GameConstants.SubRegions
+        subregion?: GameConstants.Subregions
     ) => number;
     calculateOnePokemonAttack: (
         pokemon: TmpPartyPokemonType,
@@ -348,7 +348,7 @@ export type TmpPartyType = {
     calculateEffortPoints: (pokemon: TmpPartyPokemonType, shiny: boolean, shadow: GameConstants.ShadowStatus, number: number, ignore?: boolean) => number;
     getPokemon: (id: number) => TmpPartyPokemonType | undefined;
     getPokemonByName: (name: PokemonNameType) => TmpPartyPokemonType | undefined;
-    partyPokemonActiveInSubRegion: (region: GameConstants.Region, subregion: GameConstants.SubRegions) => Array<TmpPartyPokemonType>;
+    partyPokemonActiveInSubregion: (region: GameConstants.Region, subregion: GameConstants.Subregions) => Array<TmpPartyPokemonType>;
     alreadyCaughtPokemonByName: (name: PokemonNameType, shiny?: boolean) => boolean;
     alreadyCaughtPokemon: (id: number, shiny?: boolean, shadow?: boolean, purified?: boolean) => boolean;
     calculateClickAttack: (useItem?: boolean) => number;

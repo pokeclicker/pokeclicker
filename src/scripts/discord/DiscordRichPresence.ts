@@ -74,7 +74,7 @@ class DiscordRichPresence {
         },
         {
             key: 'current_subregion',
-            value: () => SubRegions.getSubRegionById(player.region, player.subregion)?.name,
+            value: () => Subregions.getSubregionById(player.region, player.subregion)?.name,
             default: 'Unknown Subregion',
         },
         {

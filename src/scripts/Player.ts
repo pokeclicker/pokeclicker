@@ -25,7 +25,7 @@ class Player implements TmpPlayerType {
     private _timeTraveller = false;
     private _origins: Array<any>;
     public regionStarters: Array<KnockoutObservable<GameConstants.Starter>>;
-    public subregionObject: KnockoutObservable<SubRegion>;
+    public subregionObject: KnockoutObservable<Subregion>;
     public trainerId: string;
     private _createdTime: number;
 
@@ -48,7 +48,7 @@ class Player implements TmpPlayerType {
         }
         this._region = ko.observable(savedPlayer._region);
         this._subregion = ko.observable(savedPlayer._subregion || 0);
-        this.subregionObject = ko.pureComputed(() => SubRegions.getSubRegionById(this.region, this.subregion));
+        this.subregionObject = ko.pureComputed(() => Subregions.getSubregionById(this.region, this.subregion));
         this._route = ko.observable(savedPlayer._route);
         // Check that the route is valid, otherwise set it to the regions starting route (route 0 means they are in a town)
         if (this.route > 0 && !MapHelper.validRoute(this.route, this.region)) {
@@ -60,7 +60,7 @@ class Player implements TmpPlayerType {
         this._town.subscribe(value => this._townName = value.name);
 
         this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
-        this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
+        this.highestSubregion = ko.observable(savedPlayer.highestSubregion || 0);
 
         this.regionStarters = new Array<KnockoutObservable<number>>();
         for (let i = 0; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
@@ -96,7 +96,7 @@ class Player implements TmpPlayerType {
     public effectTimer: { [name: string]: KnockoutObservable<string> } = {};
 
     public highestRegion: KnockoutObservable<GameConstants.Region>;
-    public highestSubRegion: KnockoutObservable<number>;
+    public highestSubregion: KnockoutObservable<number>;
 
     get itemList(): { [p: string]: KnockoutObservable<number> } {
         return this._itemList;
@@ -134,20 +134,20 @@ class Player implements TmpPlayerType {
 
     set subregion(value: number) {
         if (value < 0) {
-            value = Math.max(...SubRegions.getSubRegions(this.region).filter(sr => sr.unlocked()).map(sr => sr.id));
+            value = Math.max(...Subregions.getSubregions(this.region).filter(sr => sr.unlocked()).map(sr => sr.id));
         }
-        if (value > Math.max(...SubRegions.getSubRegions(this.region).filter(sr => sr.unlocked()).map(sr => sr.id))) {
+        if (value > Math.max(...Subregions.getSubregions(this.region).filter(sr => sr.unlocked()).map(sr => sr.id))) {
             value = 0;
         }
         const changedSubregions = value !== this.subregion;
 
         this._subregion(value);
-        if (value > this.highestSubRegion()) {
-            this.highestSubRegion(value);
+        if (value > this.highestSubregion()) {
+            this.highestSubregion(value);
         }
 
         if (changedSubregions) {
-            const subregion = SubRegions.getSubRegionById(this.region, value);
+            const subregion = Subregions.getSubregionById(this.region, value);
             if (subregion.startRoute && subregion.startRoute !== this.route) {
                 MapHelper.moveToRoute(subregion.startRoute, this.region);
             } else if (subregion.startTown && subregion.startTown !== this.town.name) {
@@ -227,7 +227,7 @@ class Player implements TmpPlayerType {
             '_origins',
             'effectList',
             'highestRegion',
-            'highestSubRegion',
+            'highestSubregion',
             'regionStarters',
             'trainerId',
             '_createdTime',

@@ -167,11 +167,11 @@ class Party implements Feature, TmpPartyType {
         overrideWeather?: WeatherType,
         ignoreLevel = false,
         includeTempBonuses = true,
-        subregion: GameConstants.SubRegions = player.subregion
+        subregion: GameConstants.Subregions = player.subregion
     ): number {
         let attack = 0;
-        const pokemon = this.partyPokemonActiveInSubRegion(region, subregion);
-        const ignoreRegionMultiplierOrMKJ = ignoreRegionMultiplier || region == GameConstants.Region.alola && subregion == GameConstants.AlolaSubRegions.MagikarpJump;
+        const pokemon = this.partyPokemonActiveInSubregion(region, subregion);
+        const ignoreRegionMultiplierOrMKJ = ignoreRegionMultiplier || region == GameConstants.Region.alola && subregion == GameConstants.AlolaSubregions.MagikarpJump;
 
         for (const p of pokemon) {
             attack += this.calculateOnePokemonAttack(p, type1, type2, region, ignoreRegionMultiplierOrMKJ, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeTempBonuses);
@@ -315,9 +315,9 @@ class Party implements Feature, TmpPartyType {
         }
     }
 
-    public partyPokemonActiveInSubRegion(region: GameConstants.Region, subregion: GameConstants.SubRegions): Array<PartyPokemon> {
+    public partyPokemonActiveInSubregion(region: GameConstants.Region, subregion: GameConstants.Subregions): Array<PartyPokemon> {
         let caughtPokemon = this.caughtPokemon as Array<PartyPokemon>;
-        if (region == GameConstants.Region.alola && subregion == GameConstants.AlolaSubRegions.MagikarpJump) {
+        if (region == GameConstants.Region.alola && subregion == GameConstants.AlolaSubregions.MagikarpJump) {
             // Only magikarps can attack in magikarp jump subregion
             caughtPokemon = caughtPokemon.filter((p) => Math.floor(p.id) == 129);
         }
@@ -404,7 +404,7 @@ class Party implements Feature, TmpPartyType {
     }
 
     get activePartyPokemon(): ReadonlyArray<PartyPokemon> {
-        return this.partyPokemonActiveInSubRegion(player.region, player.subregion);
+        return this.partyPokemonActiveInSubregion(player.region, player.subregion);
     }
 
 }

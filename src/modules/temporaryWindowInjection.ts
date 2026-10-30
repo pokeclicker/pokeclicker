@@ -90,8 +90,8 @@ import OakItemLoadouts from './oakItems/OakItemLoadouts';
 import {
     SpecialRoutePokemon, RoutePokemon, RegionRoute, Routes,
 } from './routes';
-import SubRegion from './subRegion/SubRegion';
-import SubRegions from './subRegion/SubRegions';
+import Subregion from './subregion/Subregion';
+import Subregions from './subregion/Subregions';
 import Requirement from './requirements/Requirement';
 import AchievementRequirement from './requirements/AchievementRequirement';
 import NullRequirement from './requirements/NullRequirement';
@@ -342,8 +342,8 @@ Object.assign(<any>window, {
     RoutePokemon,
     RegionRoute,
     Routes,
-    SubRegion,
-    SubRegions,
+    Subregion,
+    Subregions,
     Requirement,
     AchievementRequirement,
     NullRequirement,

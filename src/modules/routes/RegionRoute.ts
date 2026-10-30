@@ -10,7 +10,7 @@ export default class RegionRoute {
         public pokemon: RoutePokemon,
         public requirements: Requirement[] = [],
         public orderNumber = number,
-        public subRegion?: number,
+        public subregion?: number,
         public ignoreRouteInCalculations = false,
         public routeHealth?: number,
     ) {

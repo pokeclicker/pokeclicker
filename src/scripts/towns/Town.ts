@@ -23,13 +23,13 @@ class Town implements TmpTownType {
     public npcs?: NPC[];
     public startingTown: boolean;
     public content: TownContent[];
-    public subRegion: GameConstants.SubRegions;
+    public subregion: GameConstants.Subregions;
     public ignoreAreaStatus: boolean;
 
     constructor(
         name: string,
         region: GameConstants.Region,
-        subRegion: GameConstants.SubRegions,
+        subregion: GameConstants.Subregions,
         content: TownContent[] = [],
         // Optional arguments are in a named object, so that we don't need
         // to pass undefined to get to the one we want
@@ -41,7 +41,7 @@ class Town implements TmpTownType {
         this.npcs = optional.npcs;
         this.startingTown = GameConstants.StartingTowns.includes(this.name);
         this.content = content;
-        this.subRegion = subRegion;
+        this.subregion = subregion;
         this.ignoreAreaStatus = optional.ignoreAreaStatus ?? false;
 
         if (GymList[name]) {
@@ -70,7 +70,7 @@ class Town implements TmpTownType {
 class DungeonTown extends Town {
     dungeon: Dungeon
 
-    constructor(name: string, region: GameConstants.Region, subregion: GameConstants.SubRegions, requirements: Requirement[] = [], content: TownContent[] = [], optional: TownOptionalArgument = {}) {
+    constructor(name: string, region: GameConstants.Region, subregion: GameConstants.Subregions, requirements: Requirement[] = [], content: TownContent[] = [], optional: TownOptionalArgument = {}) {
         optional.requirements = requirements;
         super(name, region, subregion, content, optional);
         this.dungeon = dungeonList[name];

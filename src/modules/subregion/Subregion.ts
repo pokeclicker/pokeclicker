@@ -1,6 +1,6 @@
 import Requirement from '../requirements/Requirement';
 
-export default class SubRegion {
+export default class Subregion {
     constructor(
         public name: string,
         public id: number,

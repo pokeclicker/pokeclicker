@@ -48,8 +48,8 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         const elite = this.gymTown.includes('Elite') || this.gymTown.includes('Champion') || this.gymTown.includes('Supreme') || this.gymTown.includes('Challenge');
         const displayName = GymList[this.gymTown]?.displayName;
         const leaderName = GymList[this.gymTown].leaderName.replace(/\d+/g, '').trim();
-        const { region, subRegion } = GymList[this.gymTown].parent;
-        const subRegionName = SubRegions.getSubRegionById(region, subRegion).name;
+        const { region, subregion } = GymList[this.gymTown].parent;
+        const subregionName = Subregions.getSubregionById(region, subregion).name;
 
         let gymString;
         if (displayName) {
@@ -65,7 +65,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
             gymString = `${leaderName}'s Gym at ${this.gymTown}`;
         }
 
-        return `Defeat ${gymString} in ${subRegionName} ${this.amount.toLocaleString('en-US')} times.`;
+        return `Defeat ${gymString} in ${subregionName} ${this.amount.toLocaleString('en-US')} times.`;
     }
 
     toJSON() {

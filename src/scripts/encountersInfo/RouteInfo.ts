@@ -8,8 +8,8 @@ class RouteInfo {
         if (!route) {
             return false;
         }
-        const curSubRegionGroup = RoamingPokemonList.findGroup(route.region, route.subRegion || 0);
-        const boostedRoute = RoamingPokemonList.getIncreasedChanceRouteBySubRegionGroup(route.region, curSubRegionGroup)();
+        const curSubregionGroup = RoamingPokemonList.findGroup(route.region, route.subregion || 0);
+        const boostedRoute = RoamingPokemonList.getIncreasedChanceRouteBySubregionGroup(route.region, curSubregionGroup)();
         return boostedRoute === route;
     });
 
@@ -41,7 +41,7 @@ class RouteInfo {
         }
 
         const roamerArray =
-            RoamingPokemonList.getSubRegionalGroupRoamers(player.region, RoamingPokemonList.findGroup(player.region, player.subregion))
+            RoamingPokemonList.getSubregionalGroupRoamers(player.region, RoamingPokemonList.findGroup(player.region, player.subregion))
                 .map((roamer) => ({id: roamer.pokemon.id, name: roamer.pokemonName, type: 'roamer', requirement: roamer.unlockRequirement}))
                 .sort((a, b) => a.id - b.id);
 
