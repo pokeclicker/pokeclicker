@@ -48,6 +48,7 @@ import AttackGainConsumable from './AttackGainConsumable';
 import CollectibleItem from './CollectibleItem';
 import NullRequirement from '../requirements/NullRequirement';
 import VeteranUnlockRequirement from '../requirements/VeteranUnlockRequirement';
+import QuestLineCompletedRequirement from '../requirements/QuestLineCompletedRequirement';
 export const ItemList: { [name: string]: Item } = {};
 
 ItemList.xAttack         = new BattleItem(BattleItemType.xAttack, '+50% Bonus to Pokémon attack for 30 seconds', 600, undefined, 'X Attack', 'pokemonAttack', 1.5);
@@ -251,6 +252,24 @@ ItemList.CeruleanBerryShopPermit = new CollectibleItem('CeruleanBerryShopPermit'
         maxAmount: 1,
         visible: new VeteranUnlockRequirement(VeteranUnlock.CeruleanBerryShopPermit),
     });
+ItemList.Sacred_Blank_Plate = new QuestItem('Sacred_Blank_Plate', 'Sacred Blank Plate', 'A stone tablet imbued with the essence of normalcy. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Flame_Plate = new QuestItem('Sacred_Flame_Plate', 'Sacred Flame Plate', 'A stone tablet imbued with the essence of fire. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Splash_Plate = new QuestItem('Sacred_Splash_Plate', 'Sacred Splash Plate', 'A stone tablet imbued with the essence of water. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Zap_Plate = new QuestItem('Sacred_Zap_Plate', 'Sacred Zap Plate', 'A stone tablet imbued with the essence of electricity. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Meadow_Plate = new QuestItem('Sacred_Meadow_Plate', 'Sacred Meadow Plate', 'A stone tablet imbued with the essence of plants. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Icicle_Plate = new QuestItem('Sacred_Icicle_Plate', 'Sacred Icicle Plate', 'A stone tablet imbued with the essence of ice. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Fist_Plate = new QuestItem('Sacred_Fist_Plate', 'Sacred Fist Plate', 'A stone tablet imbued with the essence of fighting spirit. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Toxic_Plate = new QuestItem('Sacred_Toxic_Plate', 'Sacred Toxic Plate', 'A stone tablet imbued with the essence of poison. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Earth_Plate = new QuestItem('Sacred_Earth_Plate', 'Sacred Earth Plate', 'A stone tablet imbued with the essence of the earth. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Sky_Plate = new QuestItem('Sacred_Sky_Plate', 'Sacred Sky Plate', 'A stone tablet imbued with the essence of flight. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Mind_Plate = new QuestItem('Sacred_Mind_Plate', 'Sacred Mind Plate', 'A stone tablet imbued with the essence of psychic energy. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Insect_Plate = new QuestItem('Sacred_Insect_Plate', 'Sacred Insect Plate', 'A stone tablet imbued with the essence of bugs. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Stone_Plate = new QuestItem('Sacred_Stone_Plate', 'Sacred Stone Plate', 'A stone tablet imbued with the essence of rock. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Spooky_Plate = new QuestItem('Sacred_Spooky_Plate', 'Sacred Spooky Plate', 'A stone tablet imbued with the essence of ghosts. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Draco_Plate = new QuestItem('Sacred_Draco_Plate', 'Sacred Draco Plate', 'A stone tablet imbued with the essence of dragons. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Dread_Plate = new QuestItem('Sacred_Dread_Plate', 'Sacred Dread Plate', 'A stone tablet imbued with the essence of darkness. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Iron_Plate = new QuestItem('Sacred_Iron_Plate', 'Sacred Iron Plate', 'A stone tablet imbued with the essence of steel. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Pixie_Plate = new QuestItem('Sacred_Pixie_Plate', 'Sacred Pixie Plate', 'A stone tablet imbued with the essence of fairies. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
 
 // Vitamins
 ItemList.Protein   = new Vitamin(VitaminType.Protein, 1e4, Currency.money, {
@@ -479,8 +498,44 @@ ItemList['Silvally (Dragon) 2'] = new PokemonItem('Silvally (Dragon)', undefined
 ItemList.Dracozolt              = new PokemonItem('Dracozolt', 100000);
 ItemList.Arctozolt              = new PokemonItem('Arctozolt', 100000);
 ItemList.Dracovish              = new PokemonItem('Dracovish', 100000);
-ItemList.Arctovish              = new PokemonItem('Arctovish', 100000);
-ItemList['Zarude (Dada)']       = new PokemonItem('Zarude (Dada)', 500000);
+ItemList.Arctovish = new PokemonItem('Arctovish', 100000);
+ItemList['Zarude (Dada)'] = new PokemonItem('Zarude (Dada)', 500000);
+//Hisui
+ItemList['Arceus (Psychic)'] = new PokemonItem('Arceus (Psychic)', undefined, undefined, false, 'Arceus (Psychic)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Psychic)');
+ItemList['Arceus (Bug)'] = new PokemonItem('Arceus (Bug)', undefined, undefined, false, 'Arceus (Bug)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Bug)');
+ItemList['Arceus (Ground)'] = new PokemonItem('Arceus (Ground)', undefined, undefined, false, 'Arceus (Ground)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Ground)');
+ItemList['Arceus (Grass)'] = new PokemonItem('Arceus (Grass)', undefined, undefined, false, 'Arceus (Grass)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Grass)');
+ItemList['Arceus (Water)'] = new PokemonItem('Arceus (Water)', undefined, undefined, false, 'Arceus (Water)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Water)');
+ItemList['Arceus (Fire)'] = new PokemonItem('Arceus (Fire)', undefined, undefined, false, 'Arceus (Fire)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Fire)');
+ItemList['Arceus (Poison)'] = new PokemonItem('Arceus (Poison)', undefined, undefined, false, 'Arceus (Poison)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Poison)');
+ItemList['Arceus (Electric)'] = new PokemonItem('Arceus (Electric)', undefined, undefined, false, 'Arceus (Electric)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Electric)');
+ItemList['Arceus (Flying)'] = new PokemonItem('Arceus (Flying)', undefined, undefined, false, 'Arceus (Flying)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Flying)');
+ItemList['Arceus (Ice)'] = new PokemonItem('Arceus (Ice)', undefined, undefined, false, 'Arceus (Ice)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Ice)');
+ItemList['Arceus (Rock)'] = new PokemonItem('Arceus (Rock)', undefined, undefined, false, 'Arceus (Rock)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Rock)');
+ItemList['Arceus (Dragon)'] = new PokemonItem('Arceus (Dragon)', undefined, undefined, false, 'Arceus (Dragon)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Dragon)');
+ItemList['Arceus (Steel)'] = new PokemonItem('Arceus (Steel)', undefined, undefined, false, 'Arceus (Steel)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Steel)');
+ItemList['Arceus (Dark)'] = new PokemonItem('Arceus (Dark)', undefined, undefined, false, 'Arceus (Dark)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Dark)');
+ItemList['Arceus (Fighting)'] = new PokemonItem('Arceus (Fighting)', undefined, undefined, false, 'Arceus (Fighting)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Fighting)');
+ItemList['Arceus (Fairy)'] = new PokemonItem('Arceus (Fairy)', undefined, undefined, false, 'Arceus (Fairy)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Fairy)');
+ItemList['Arceus (Ghost)'] = new PokemonItem('Arceus (Ghost)', undefined, undefined, false, 'Arceus (Ghost)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Ghost)');
+
 // Dream orbs
 ItemList.Staryu  = new PokemonItem('Staryu');
 ItemList.Igglybuff  = new PokemonItem('Igglybuff');
@@ -497,6 +552,7 @@ ItemList.Sigilyph  = new PokemonItem('Sigilyph');
 ItemList['Tornadus (Therian)']  = new PokemonItem('Tornadus (Therian)');
 ItemList['Thundurus (Therian)']  = new PokemonItem('Thundurus (Therian)');
 ItemList['Landorus (Therian)']  = new PokemonItem('Landorus (Therian)');
+ItemList['Enamorus (Therian)']  = new PokemonItem('Enamorus (Therian)');
 // Contest
 ItemList['Dugtrio (Punk)'] = new PokemonItem('Dugtrio (Punk)', 1500, Currency.contestToken);
 ItemList['Gengar (Punk)'] = new PokemonItem('Gengar (Punk)', 3000, Currency.contestToken);

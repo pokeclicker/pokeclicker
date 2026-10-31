@@ -149,6 +149,10 @@ enum BadgeEnums {
     'Noble_Arcanine',
     'Noble_Electrode',
     'Noble_Avalugg',
+    'Elite_Kamado',
+    'Elite_Adaman',
+    'Elite_Irida',
+    'Elite_Ingo',
     'Azure',
     //Paldea Victory Road
     'Bug_Gym',
