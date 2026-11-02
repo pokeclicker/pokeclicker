@@ -463,11 +463,13 @@ class Plot implements Saveable {
 
             // Add to log book
             if (wanderer.shiny) {
-                App.game.logbook.newLog(
+                const shinyDupe = App.game.party.alreadyCaughtPokemonByName(wanderer.name, true);
+                App.game.logbook.newShinyLog(
                     LogBookTypes.SHINY,
-                    App.game.party.alreadyCaughtPokemonByName(wanderer.name, true)
+                    shinyDupe
                         ? createLogContent.shinyWanderDupe({ pokemon : wanderer.name })
-                        : createLogContent.shinyWander({ pokemon : wanderer.name })
+                        : createLogContent.shinyWander({ pokemon : wanderer.name }),
+                    shinyDupe
                 );
             } else {
                 App.game.logbook.newLog(

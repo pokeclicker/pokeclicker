@@ -121,9 +121,10 @@ export default class Battle {
         PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatisticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender, enemyPokemon.shadow);
         // Shiny
         if (enemyPokemon.shiny) {
-            App.game.logbook.newLog(
+            const shinyDupe = App.game.party.alreadyCaughtPokemon(enemyPokemon.id, true);
+            App.game.logbook.newShinyLog(
                 LogBookTypes.SHINY,
-                App.game.party.alreadyCaughtPokemon(enemyPokemon.id, true)
+                shinyDupe
                     ? createLogContent.encounterShinyDupe({
                         location: Routes.getRoute(player.region, player.route).routeName,
                         pokemon: enemyPokemon.name,
@@ -132,6 +133,7 @@ export default class Battle {
                         location: Routes.getRoute(player.region, player.route).routeName,
                         pokemon: enemyPokemon.name,
                     }),
+                shinyDupe,
             );
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id) && enemyPokemon.health()) {
             App.game.logbook.newLog(

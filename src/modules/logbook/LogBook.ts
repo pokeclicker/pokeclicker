@@ -27,6 +27,14 @@ export default class LogBook implements Feature {
         }
     }
 
+    // New shinies are also logged as NEW, so muting SHINY only hides duplicates
+    newShinyLog(type: LogBookType, content: LogContent, isDupe: boolean) {
+        this.newLog(type, content);
+        if (!isDupe) {
+            this.newLog(LogBookTypes.NEW, content);
+        }
+    }
+
     fromJSON(json: any): void {
         if (json == null) {
             return;

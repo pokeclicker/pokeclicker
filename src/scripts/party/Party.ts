@@ -124,7 +124,7 @@ class Party implements Feature, TmpPartyType {
         if (shiny) {
             // Both new and duplicate shinies get logged
             const shinyLogContent = newShiny ? createLogContent.capturedShiny : createLogContent.capturedShinyDupe;
-            App.game.logbook.newLog(LogBookTypes.CAUGHT, shinyLogContent({ pokemon: name }));
+            App.game.logbook.newShinyLog(LogBookTypes.CAUGHT, shinyLogContent({ pokemon: name }), !newShiny);
         }
         if (newShadow) {
             App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShadow({ pokemon: name }));

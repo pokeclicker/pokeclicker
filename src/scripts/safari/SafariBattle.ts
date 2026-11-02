@@ -30,9 +30,10 @@ class SafariBattle {
         // Shiny
         const location = `${GameConstants.camelCaseToString(GameConstants.Region[Safari.activeRegion()])} Safari`;
         if (enemy.shiny) {
-            App.game.logbook.newLog(
+            const shinyDupe = App.game.party.alreadyCaughtPokemon(enemy.id, true);
+            App.game.logbook.newShinyLog(
                 LogBookTypes.SHINY,
-                App.game.party.alreadyCaughtPokemon(enemy.id, true)
+                shinyDupe
                     ? createLogContent.encounterShinyDupe({
                         location: location,
                         pokemon: enemy.name,
@@ -40,7 +41,8 @@ class SafariBattle {
                     : createLogContent.encounterShiny({
                         location: location,
                         pokemon: enemy.name,
-                    })
+                    }),
+                shinyDupe
             );
         } else if (!App.game.party.alreadyCaughtPokemon(enemy.id)) {
             App.game.logbook.newLog(

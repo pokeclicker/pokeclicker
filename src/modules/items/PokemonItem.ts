@@ -60,11 +60,13 @@ export default class PokemonItem extends PokerusIndicatingItem {
             });
         }
         if (shiny) {
-            App.game.logbook.newLog(
+            const shinyDupe = App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true);
+            App.game.logbook.newShinyLog(
                 LogBookTypes.SHINY,
-                App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true)
+                shinyDupe
                     ? createLogContent.purchasedShinyDupe({ pokemon: pokemonName })
                     : createLogContent.purchasedShiny({ pokemon: pokemonName }),
+                shinyDupe,
             );
         }
 

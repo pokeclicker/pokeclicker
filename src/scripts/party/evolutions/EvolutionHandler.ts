@@ -31,11 +31,13 @@ class EvolutionHandler {
 
         // Add shiny to logbook
         if (shiny) {
-            App.game.logbook.newLog(
+            const shinyDupe = App.game.party.alreadyCaughtPokemonByName(evolvedPokemon, true);
+            App.game.logbook.newShinyLog(
                 LogBookTypes.SHINY,
-                App.game.party.alreadyCaughtPokemonByName(evolvedPokemon, true)
+                shinyDupe
                     ? createLogContent.evolvedShinyDupe({ basePokemon: data.basePokemon, evolvedPokemon})
-                    : createLogContent.evolvedShiny({ basePokemon: data.basePokemon, evolvedPokemon })
+                    : createLogContent.evolvedShiny({ basePokemon: data.basePokemon, evolvedPokemon }),
+                shinyDupe
             );
         }
 
