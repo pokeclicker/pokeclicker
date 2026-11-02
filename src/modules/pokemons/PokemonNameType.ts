@@ -346,6 +346,7 @@ export type PokemonNameType
     | 'Gigantamax Snorlax'
     | 'Santa Snorlax'
     | 'Snorlax (Snowman)'
+    | 'Mosslax'
     | 'Articuno'
     | 'Galarian Articuno'
     | 'Zapdos'
