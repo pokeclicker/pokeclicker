@@ -12,16 +12,9 @@ class PokemonFactory {
         if (!MapHelper.validRoute(route, region)) {
             return new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender, GameConstants.ShadowStatus.None, EncounterType.route);
         }
-        let name: PokemonNameType;
-
         const roaming = PokemonFactory.generateRoamingEncounter(route, region);
-        if (roaming) {
-            name = roaming;
-        } else {
-            name = Rand.fromWeightedArray(RouteHelper.getAvailablePokemonList(route, region), RouteHelper.getAvailablePokemonWeightList(route, region));
-        }
+        const name = roaming || PokemonFactory.generateRouteEncounter(route, region);
         const basePokemon = PokemonHelper.getPokemonByName(name);
-        const id = basePokemon.id;
         const routeAvgHp = (region, route) => {
             const poke = [...new Set(Object.values(Routes.getRoute(region, route).pokemon).flat().map(p => p.pokemon ?? p).flat())];
             const total = poke.map(p => pokemonMap[p].base.hitpoints).reduce((s, a) => s + a, 0);
@@ -35,43 +28,11 @@ class PokemonFactory {
         const exp: number = basePokemon.exp;
         const level: number = this.routeLevel(route, region);
         const money: number = this.routeMoney(route,region);
-        const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        const heldItem: BagItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROUTE_HELD_ITEM_MODIFIER, shiny);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
-        const encounterType = roaming ? EncounterType.roamer : EncounterType.route;
-
-        if (shiny) {
-            Notifier.notify({
-                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)}! ✨`,
-                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender, GameConstants.ShadowStatus.None),
-                type: NotificationConstants.NotificationOption.warning,
-                sound: NotificationConstants.NotificationSound.General.shiny_long,
-                setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
-            });
-        }
         if (roaming) {
-            Notifier.notify({
-                message: `You encountered a roaming ${name}!`,
-                pokemonImage: PokemonHelper.getImage(id, shiny, basePokemon.gender, GameConstants.ShadowStatus.None),
-                type: NotificationConstants.NotificationOption.warning,
-                sound: NotificationConstants.NotificationSound.General.roaming,
-                setting: NotificationConstants.NotificationSetting.General.encountered_roaming,
-            });
-            App.game.logbook.newLog(
-                LogBookTypes.ROAMER,
-                (shiny
-                    ? App.game.party.alreadyCaughtPokemon(id, true)
-                        ? createLogContent.roamerShinyDupe
-                        : createLogContent.roamerShiny
-                    : createLogContent.roamer
-                )({
-                    location: Routes.getRoute(player.region, player.route).routeName,
-                    pokemon: name,
-                })
-            );
+            return this.generateRoamerPokemon(name, basePokemon, maxHealth, catchRate, exp, level, money, gender, Routes.getRoute(region, route).routeName);
         }
-        const ep = GameConstants.BASE_EP_YIELD * (roaming ? GameConstants.ROAMER_EP_MODIFIER : 1);
-        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, 1, gender, GameConstants.ShadowStatus.None, encounterType, heldItem, ep);
+        return this.generateRoutePokemon(name, basePokemon, maxHealth, catchRate, exp, level, money, gender);
     }
 
     public static routeLevel(route: number, region: GameConstants.Region): number {
@@ -201,6 +162,10 @@ class PokemonFactory {
         return this.gymPokemonToBattlePokemon(pokemon, encounterType);
     }
 
+    private static generateRouteEncounter(route: number, region: GameConstants.Region): PokemonNameType {
+        return Rand.fromWeightedArray(RouteHelper.getAvailablePokemonList(route, region), RouteHelper.getAvailablePokemonWeightList(route, region));
+    }
+
     private static generateRoamingEncounter(routeNum: number, region: GameConstants.Region): false | PokemonNameType {
         // Map to the route numbers
         const route = Routes.getRoute(region, routeNum);
@@ -222,6 +187,53 @@ class PokemonFactory {
 
         // Double the chance of encountering a roaming Pokemon you have not yet caught
         return Rand.fromWeightedArray(roamingPokemon, roamingPokemon.map(r => App.game.party.alreadyCaughtPokemonByName(r.pokemon.name) ? 1 : 2)).pokemon.name;
+    }
+
+    private static generateRoutePokemon(name: PokemonNameType, basePokemon: DataPokemon, maxHealth: number, catchRate: number, exp: number, level: number, money: number, gender: GameConstants.BattlePokemonGender): BattlePokemon {
+        const shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROUTE_HELD_ITEM_MODIFIER, shiny);
+        this.notifyShinyEncounter(name, basePokemon, shiny);
+        return new BattlePokemon(name, basePokemon.id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, 1, gender, GameConstants.ShadowStatus.None, EncounterType.route, heldItem, GameConstants.BASE_EP_YIELD);
+    }
+
+    private static generateRoamerPokemon(name: PokemonNameType, basePokemon: DataPokemon, maxHealth: number, catchRate: number, exp: number, level: number, money: number, gender: GameConstants.BattlePokemonGender, location: string): BattlePokemon {
+        const shiny = this.generateShiny(GameConstants.SHINY_CHANCE_ROAMER);
+        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROAMER_HELD_ITEM_MODIFIER, shiny);
+        this.notifyShinyEncounter(name, basePokemon, shiny);
+        Notifier.notify({
+            message: `You encountered a roaming ${name}!`,
+            pokemonImage: PokemonHelper.getImage(basePokemon.id, shiny, basePokemon.gender, GameConstants.ShadowStatus.None),
+            type: NotificationConstants.NotificationOption.warning,
+            sound: NotificationConstants.NotificationSound.General.roaming,
+            setting: NotificationConstants.NotificationSetting.General.encountered_roaming,
+        });
+        App.game.logbook.newLog(
+            LogBookTypes.ROAMER,
+            (shiny
+                ? App.game.party.alreadyCaughtPokemon(basePokemon.id, true)
+                    ? createLogContent.roamerShinyDupe
+                    : createLogContent.roamerShiny
+                : createLogContent.roamer
+            )({
+                location,
+                pokemon: name,
+            })
+        );
+        const ep = GameConstants.BASE_EP_YIELD * GameConstants.ROAMER_EP_MODIFIER;
+        return new BattlePokemon(name, basePokemon.id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, 1, gender, GameConstants.ShadowStatus.None, EncounterType.roamer, heldItem, ep);
+    }
+
+    private static notifyShinyEncounter(name: PokemonNameType, basePokemon: DataPokemon, shiny: boolean): void {
+        if (!shiny) {
+            return;
+        }
+        Notifier.notify({
+            message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)}! ✨`,
+            pokemonImage: PokemonHelper.getImage(basePokemon.id, shiny, basePokemon.gender, GameConstants.ShadowStatus.None),
+            type: NotificationConstants.NotificationOption.warning,
+            sound: NotificationConstants.NotificationSound.General.shiny_long,
+            setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
+        });
     }
 
     private static roamingRate(curRoute: RegionRoute, max = GameConstants.ROAMING_MAX_CHANCE, min = GameConstants.ROAMING_MIN_CHANCE, skipBonus = false) : number {
