@@ -278,7 +278,7 @@ ItemList.Magikarp_Biscuit = new AttackGainConsumable(ConsumableType.Magikarp_Bis
 // Miscellaneous
 ItemList.Christmas_present = new ChristmasPresent();
 ItemList.Relic_gold = new EventCollectibleItem('Relic_gold', 'Pirate Coin', 'A gold coin used by pirates.', 'A Pirate\'s Life');
-ItemList.Pirate_receipt = new EventCollectibleItem('Pirate_receipt', 'Pirate Receipt', 'A proof you\'ve bought the most expensive Pirate Goods today.', 'A Pirate\'s Life');
+ItemList.Pirate_receipt = new CollectibleItem('Pirate_receipt', 'Pirate Receipt', 'Proof that you bought the most expensive Pirate Goods. Grants access to the Shady Fence in Celadon City.');
 
 // Underground Items
 // Sellable (Diamonds)
@@ -535,4 +535,3 @@ ItemList.Tyrunt = new PokemonItem('Tyrunt');
 ItemList.Tyrantrum = new PokemonItem('Tyrantrum');
 ItemList.Amaura = new PokemonItem('Amaura');
 ItemList.Aurorus = new PokemonItem('Aurorus');
-
