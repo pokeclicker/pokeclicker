@@ -1,0 +1,60 @@
+<div class="modal fade noselect" id="dailyDealForecastModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <!-- ko if: DisplayObservables.modalState.dailyDealForecastModal === 'show' -->
+            <div class="modal-header text-center">
+                <h4 class="modal-title">Trade Forecast</h4>
+                <div class="d-flex align-items-center" style="gap: 8px;">
+                    <select class="custom-select custom-select-sm" style="width: auto;"
+                            data-bind="options: DailyDealForecast.shopList,
+                                optionsText: 'displayName',
+                                value: DailyDealForecast.selectedShop">
+                    </select>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive" style="text-wrap: nowrap;">
+                    <table class="table table-sm m-0 table-generic-trader">
+                        <!-- ko foreach: { data: DailyDealForecast.forecast, as: 'day' } -->
+                        <tbody>
+                            <tr class="table-primary">
+                                <th class="border-top-0" colspan="3">
+                                    <knockout data-bind="text: GameConstants.DayOfWeek[day.date.getDay()]"></knockout>
+                                    <span class="small font-weight-normal ml-1"
+                                        data-bind="text: day.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })"></span>
+                                </th>
+                            </tr>
+                            <!-- ko foreach: { data: day.deals, as: 'deal' } -->
+                            <tr>
+                                <td class="align-middle text-center cost-section" style="width: 45%;">
+                                    <div class="d-flex flex-column pr-2" data-bind="foreach: deal.costs">
+                                        <div class="d-flex align-items-center" style="height: 24px; gap: 8px;"
+                                            data-bind="template: { name: 'traderCostProfitItemTemplate', data: { model: $data, tradeAmount: 1 } }"></div>
+                                    </div>
+                                </td>
+                                <td class="align-middle" style="width: 10%;">
+                                    <div class="px-2">→</div>
+                                </td>
+                                <td class="align-middle" style="width: 45%;">
+                                    <div class="d-flex flex-column px-2" data-bind="foreach: deal.profits">
+                                        <div class="d-flex align-items-center" style="height: 24px; gap: 8px;"
+                                            data-bind="template: { name: 'traderCostProfitItemTemplate', data: { model: $data, tradeAmount: 1 } }"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- /ko -->
+                        </tbody>
+                        <!-- /ko -->
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
