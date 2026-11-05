@@ -4263,7 +4263,7 @@ class QuestLineHelper {
     public static ensureSantasHelperQuestLine(): QuestLine {
         const currentQuestLine = App.game.quests.getQuestLine('Santa\'s Helper');
         const today = this.currentDateKey();
-        if (App.game.statistics.christmasQuestLastGenerated() === today && App.game.quests.questLines().filter((ql) => ql.name == "Santa\'s Helper" && ql.state() == 1).length > 0) {
+        if (App.game.statistics.christmasQuestLastGenerated() === today) {
             return currentQuestLine;
         }
 

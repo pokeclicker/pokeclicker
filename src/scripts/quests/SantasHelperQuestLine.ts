@@ -57,6 +57,7 @@ class SantasHelperQuestLine extends QuestLine {
             'Deliver the Presents to the friend you made along the way.'
         ).withCustomReward(() => {
             GameHelper.incrementObservable(App.game.statistics.christmasQuestsCompleted);
+            ItemList.Christmas_present.gain(10);
         });
         this.addQuest(deliverPresents);
     }
