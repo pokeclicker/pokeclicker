@@ -3027,10 +3027,10 @@ class Update implements Saveable {
                             : 0;
             saveData.statistics.christmasQuestLastGenerated = 0;
 
-            // All legacy Santa Jynx battles are retired; the remaining battle starts fresh.
-            for (let i = 15; i <= 18; i += 1) {
-                saveData.statistics.temporaryBattleDefeated[i] = 0;
-            }
+            // Remove Santa Jynx 2-4 and shift later battle counters down by three.
+            saveData.statistics.temporaryBattleDefeated.splice(16, 3);
+            // The remaining Santa Jynx battle starts fresh.
+            saveData.statistics.temporaryBattleDefeated[15] = 0;
         },
     };
 
