@@ -4251,8 +4251,8 @@ class QuestLineHelper {
         return questLine;
     }
 
-    public static createSantasHelperQuestLine() {
-        App.game.quests.questLines().push(new SantasHelperQuestLine());
+    public static createSantasHelperQuestLine(saved?: SantasHelperSave) {
+        App.game.quests.questLines().push(new SantasHelperQuestLine(saved));
     }
 
     private static currentDateKey(): number {
@@ -4263,7 +4263,7 @@ class QuestLineHelper {
     public static ensureSantasHelperQuestLine(): QuestLine {
         const currentQuestLine = App.game.quests.getQuestLine('Santa\'s Helper');
         const today = this.currentDateKey();
-        if (App.game.statistics.christmasQuestLastGenerated() === today) {
+        if (App.game.statistics.christmasQuestLastGenerated() === today && App.game.quests.questLines().filter((ql) => ql.name == "Santa\'s Helper" && ql.state() == 1).length > 0) {
             return currentQuestLine;
         }
 
@@ -4347,7 +4347,7 @@ class QuestLineHelper {
         this.createMeltanQuestLine();
         this.createRainbowRocketQuestLine();
         this.createTreasureMapQuestLine(savedQuestLines?.find(ql => ql.name === 'Pirate Treasure Map'));
-        this.createSantasHelperQuestLine();
+        this.createSantasHelperQuestLine(savedQuestLines?.find(ql => ql.name === 'Santa\'s Helper'));
         // Enforce unique questline names
         const numQuestLines = App.game.quests.questLines().length;
         if (numQuestLines != [...new Set(App.game.quests.questLines().map(ql => ql.name))].length) {

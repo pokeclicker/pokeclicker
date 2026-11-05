@@ -48,7 +48,7 @@ export default class ChristmasPresent extends EventCollectibleItem {
         }
 
         Notifier.notify({
-            message: `You opened ${amount.toLocaleString('en-US')} ${amount === 1 ? 'gift' : 'gifts'} and received ${rewardMessages.join(', ')}.`,
+            message: `You opened ${amount.toLocaleString('en-US')} ${amount === 1 ? 'Present' : 'Presents'} and received ${rewardMessages.join(', ')}.`,
             type: NotificationConstants.NotificationOption.success,
             image: this.image,
             setting: NotificationConstants.NotificationSetting.Items.dropped_item,
