@@ -944,27 +944,13 @@ const AnomalyMewtwo1 = new NPC('Anomaly Mewtwo', [
 });
 
 const BillGrandpaChristmas = new NPC('Bill\'s Grandpa', [
-    'Did you find all of the Santa Jynx?',
-    'I hope they don\'t come back!',
+    'The Santa Jynx Band keeps returning each day. Defeat them, then recover the presents they scattered across Kanto!',
+    'Check the Santa\'s Helper quest to see how many presents are still missing today.',
 ], {
     image: 'assets/images/npcs/Bill\'s Grandpa without Eevee.png',
-    requirement: new OneFromManyRequirement([
-        new MultiRequirement([
-            new ItemOwnedRequirement('Christmas_present', 11),
-            new TemporaryBattleRequirement('Santa Jynx 1'),
-        ]),
-        new MultiRequirement([
-            new ItemOwnedRequirement('Christmas_present', 27),
-            new TemporaryBattleRequirement('Santa Jynx 2'),
-        ]),
-        new MultiRequirement([
-            new ItemOwnedRequirement('Christmas_present', 49),
-            new TemporaryBattleRequirement('Santa Jynx 3'),
-        ]),
-        new MultiRequirement([
-            new ItemOwnedRequirement('Christmas_present', 150),
-            new TemporaryBattleRequirement('Santa Jynx 4'),
-        ]),
+    requirement: new MultiRequirement([
+        new SpecialEventRequirement('Merry Christmas!'),
+        new QuestLineStartedRequirement('Santa\'s Helper'),
     ]),
 });
 
@@ -1038,9 +1024,6 @@ TownList['Bill\'s House'] = new Town(
     [
         TemporaryBattleList['Bill\'s Grandpa'],
         TemporaryBattleList['Santa Jynx 1'],
-        TemporaryBattleList['Santa Jynx 2'],
-        TemporaryBattleList['Santa Jynx 3'],
-        TemporaryBattleList['Santa Jynx 4'],
     ],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 25)],

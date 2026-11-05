@@ -42,6 +42,7 @@ import { setPokemonMap } from './mapProvider';
 import DayCyclePart from '../dayCycle/DayCyclePart';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import BerryMutationPossibleRequirement from '../requirements/BerryMutationPossibleRequirement';
+import StatisticRequirement from '../requirements/StatisticRequirement';
 
 export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
@@ -5211,7 +5212,7 @@ export const pokemonList = createPokemonArray(
         'id': 124.01,
         'name': 'Santa Jynx',
         'catchRate': 45,
-        'type': [PokemonType.Ice, PokemonType.Psychic],
+        'type': [PokemonType.Ice, PokemonType.Fairy],
         'levelType': LevelType.mediumfast,
         'exp': 159,
         'eggCycles': 25,
@@ -6573,6 +6574,12 @@ export const pokemonList = createPokemonArray(
             'defense': 65,
             'specialDefense': 110,
             'speed': 30,
+        },
+        'heldItem': {
+            type: ItemType.item,
+            id: 'Christmas_present',
+            amount: 10,
+            requirement: new StatisticRequirement('christmasQuestsCompleted', 3, 'Complete Santa\'s Helper on 3 different days.'),
         },
         'gender': {
             'femaleRatio': 0.125,
@@ -9398,7 +9405,7 @@ export const pokemonList = createPokemonArray(
         'id': 234.01,
         'name': 'Reindeer Stantler',
         'catchRate': 45,
-        'type': [PokemonType.Normal],
+        'type': [PokemonType.Normal, PokemonType.Ice],
         'levelType': LevelType.slow,
         'exp': 163,
         'eggCycles': 20,
@@ -9409,6 +9416,11 @@ export const pokemonList = createPokemonArray(
             'defense': 62,
             'specialDefense': 65,
             'speed': 85,
+        },
+        'heldItem': {
+            type: ItemType.item,
+            id: 'Christmas_present',
+            requirement: new StatisticRequirement('christmasQuestsCompleted', 1, 'Complete Santa\'s Helper once.'),
         },
     },
     {

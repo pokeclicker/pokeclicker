@@ -76,4 +76,5 @@ export type QuestLineNameType
     | 'Dr. Splash\'s Research Project'
     | 'Let\'s Go, Meltan!'
     | 'Defeat Rainbow Rocket'
-    | 'Pirate Treasure Map';
+    | 'Pirate Treasure Map'
+    | 'Santa\'s Helper';
