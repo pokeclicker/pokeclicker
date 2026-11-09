@@ -108,10 +108,7 @@ class Gym extends TownContent implements TmpGymType {
     }
 
     private isAchievementsComplete() {
-        const gymIndex = GameConstants.getGymIndex(this.town);
-        return AchievementHandler.achievementList.every(achievement => {
-            return !(achievement.property instanceof ClearGymRequirement && achievement.property.gymIndex === gymIndex && !(achievement instanceof SecretAchievement) && !achievement.isCompleted());
-        });
+        return AchievementHandler.getGymAchievements(GameConstants.getGymIndex(this.town)).every(achievement => achievement.isCompleted());
     }
 
     private isThereQuestAtLocation() {
