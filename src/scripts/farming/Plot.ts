@@ -22,6 +22,9 @@ class Plot implements Saveable {
 
     _hasWarnedAboutToWither: boolean;
 
+    private static witherFlashingSetting = Settings.getSetting('farmBerryWitherFlashing');
+    private static witherWarningSecondsSetting = Settings.getSetting('farmBerryWitherWarningSeconds');
+
     formattedStageTimeLeft: KnockoutComputed<string>;
     formattedTimeLeft: KnockoutComputed<string>;
     calcTimeLeft: (includeGrowthMultiplier: boolean) => number;
@@ -44,6 +47,7 @@ class Plot implements Saveable {
     isMulched: KnockoutComputed<boolean>;
     stage: KnockoutComputed<number>;
     tooltip: KnockoutComputed<string>;
+    witherWarning: KnockoutComputed<boolean>;
     notifications: FarmNotificationType[];
 
     emittingAura: {
@@ -305,6 +309,14 @@ class Plot implements Saveable {
             return tooltip.join('<br/>');
         });
 
+        this.witherWarning = ko.pureComputed(() => {
+            if (!Plot.witherFlashingSetting.observableValue()) {
+                return false;
+            }
+
+            return this.isAboutToWither(Number(Plot.witherWarningSecondsSetting.observableValue()));
+        });
+
         this.notifications = [];
     }
 
@@ -339,7 +351,7 @@ class Plot implements Saveable {
                 change = true;
             }
 
-            if (!this._hasWarnedAboutToWither && !this.isAffectedByPetaya() && this.stage() == PlotStage.Berry && this.age + GameConstants.WITHER_WARNING_TIME >= this.berryData.growthTime[PlotStage.Berry]) {
+            if (!this._hasWarnedAboutToWither && this.isAboutToWither(Number(Plot.witherWarningSecondsSetting.value))) {
                 this.notifications.push(FarmNotificationType.AboutToWither);
                 this._hasWarnedAboutToWither = true;
             }
@@ -396,6 +408,8 @@ class Plot implements Saveable {
      */
     die(harvested = false): void {
         this.wanderer?.distract();
+        this._hasWarnedAboutToWither = false;
+
         if (!harvested) {
             // Withered Berry plant drops half of the berries
             const amount = Math.max(1, Math.ceil(this.harvestAmount() / 2));
@@ -577,6 +591,12 @@ class Plot implements Saveable {
 
     private isAffectedByPetaya(): boolean {
         return App.game.farming.berryInFarm(BerryType.Petaya, PlotStage.Berry, true) && this.berry !== BerryType.Petaya;
+    }
+
+    private isAboutToWither(warningSeconds: number): boolean {
+        return this.stage() === PlotStage.Berry
+            && this.calcTimeLeft(true) <= warningSeconds
+            && !this.isAffectedByPetaya();
     }
 
     fromJSON(json: Record<string, any>): void {
